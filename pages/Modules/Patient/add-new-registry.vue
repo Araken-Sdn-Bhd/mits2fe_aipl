@@ -1,0 +1,3484 @@
+<template>
+  <div id="layoutSidenav">
+    <PatientLoginSidebar />
+    <div id="layoutSidenav_content">
+      <PatientLoginHeader />
+      <main>
+         <Loader v-if="loader" />
+        <div class="container-fluid px-4 shharp">
+          <div class="page-title">
+            <h1>SHHARP REGISTRATION</h1>
+          </div>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="risk-factors-tab"
+                data-bs-toggle="tab"
+                href="#risk-factors"
+                role="tab"
+                aria-controls="risk-factors"
+                aria-selected="true"
+                >Risk Factors</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="protective-tab"
+                data-bs-toggle="tab"
+                href="#protective"
+                role="tab"
+                aria-controls="protective"
+                aria-selected="false"
+                >Protective Factors</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="selfharm-tab"
+                data-bs-toggle="tab"
+                href="#selfharm"
+                role="tab"
+                aria-controls="selfharm"
+                aria-selected="false"
+                >Self Harm</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="suicide-tab"
+                data-bs-toggle="tab"
+                href="#suicide"
+                role="tab"
+                aria-controls="suicide"
+                aria-selected="false"
+                >Suicide Risk</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="hospital-management-tab"
+                data-bs-toggle="tab"
+                href="#hospital-management"
+                role="tab"
+                aria-controls="hospital-management"
+                aria-selected="false"
+                >Hospital Management</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="data-producer-tab"
+                data-bs-toggle="tab"
+                href="#data-producer"
+                role="tab"
+                aria-controls="data-producer"
+                aria-selected="false"
+                >Data Producer</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content shharp" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="risk-factors"
+              role="tabpanel"
+              aria-labelledby="risk-factors-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>Risk Factors</h4>
+                    <p>Instruction : Please Tick (/) In The Box Provided</p>
+                  </div>
+                  <!-- <form class="step-form" method="post" @submit.prevent="Onriskfactor"> -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>1</span>Presence of psychiatric disorder</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no"
+                            name="Presence of psychiatric disorder" @click="onchange(1,0)"
+                          />
+                          <label class="form-check-label" for="no">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes"
+                            name="Presence of psychiatric disorder"
+                            value="permanent-resident" @click="onchange(1,1)"
+                          />
+                          <label class="form-check-label" for="yes">YES</label>
+                        </div>
+                        <div class="step-form-box box-01">
+                          <select
+                            class="form-select multiselect"
+                            
+                          >
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>2</span>Hopelessness or Despair</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no1"
+                            name="Hopelessness or Despair" @click="onchange(2,0)"
+                          />
+                          <label class="form-check-label" for="no1">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes1"
+                            name="Hopelessness or Despair" @click="onchange(2,1)"
+                          />
+                          <label class="form-check-label" for="yes1">YES</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>3</span>Previous suicide attempts</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box1">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no2"
+                            name="Previous suicide attempts" @click="onchange(3,0)"
+                          />
+                          <label class="form-check-label" for="no2">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box1">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes2"
+                            name="Previous suicide attempts" @click="onchange(3,1)"
+                          />
+                          <label class="form-check-label" for="yes2">YES</label>
+                        </div>
+                        <div class="step-form-box box-02">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Please Specify (times)"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>4</span>Prresence os substance use/abuse</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no3"
+                            name="Prresence os substance use/abuse" @click="onchange(4,0)"
+                          />
+                          <label class="form-check-label" for="no3">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes3"
+                            name="Prresence os substance use/abuse" @click="onchange(4,1)"
+                          />
+                          <label class="form-check-label" for="yes3">YES</label>
+                        </div>
+                        <div class="step-form-box box-03">
+                          <select
+                            class="form-select multiselect"
+                            
+                          >
+                            <option value="1">Alcohol</option>
+                            <option value="1">Opio ids</option>
+                            <option value="1">Cannabinoids</option>
+                            <option value="1">Sedatives or hypnotics</option>
+                            <option value="1">Cocaine</option>
+                            <option value="1">
+                              Other stimulants (including amphetamine-type)
+                            </option>
+                            <option value="1">Hallucinogens</option>
+                            <option value="1">Volatile solvents</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>5</span>Family history of suicidal
+                        behavior</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no4"
+                            name="family history of suicidal behavior" @click="onchange(5,0)"
+                          />
+                          <label class="form-check-label" for="no4">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes4"
+                            name="family history of suicidal behavior" @click="onchange(5,1)"
+                          />
+                          <label class="form-check-label" for="yes4">YES</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>6</span>Family history of psychiatric
+                        disorders</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box3">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no5"
+                            name="family history of psychiatric disorders" @click="onchange(6,0)"
+                          />
+                          <label class="form-check-label" for="no5">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box3">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes5"
+                            name="family history of psychiatric disorders" @click="onchange(6,1)"
+                          />
+                          <label class="form-check-label" for="yes5">YES</label>
+                        </div>
+                        <div class="step-form-box box-04">
+                          <select
+                            class="form-select multiselect"
+                            
+                          >
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>7</span>Family history of substance abuse</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no6"
+                            name="family history of substance abuse" @click="onchange(7,0)"
+                          />
+                          <label class="form-check-label" for="no6">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes6"
+                            name="family history of substance abuse" @click="onchange(7,1)"
+                          />
+                          <label class="form-check-label" for="yes6">YES</label>
+                        </div>
+                        <div class="step-form-box box-05">
+                          <select
+                            class="form-select multiselect"
+                            
+                          >
+                            <option value="1">Alcohol</option>
+                            <option value="1">Opio ids</option>
+                            <option value="1">Cannabinoids</option>
+                            <option value="1">Sedatives or hypnotics</option>
+                            <option value="1">Cocaine</option>
+                            <option value="1">
+                              Other stimulants (including amphetamine-type)
+                            </option>
+                            <option value="1">Hallucinogens</option>
+                            <option value="1">Volatile solvents</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>8</span>Stressful life events or loss</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box5">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no7"
+                            name="stressful life events or loss" @click="onchange(8,0)"
+                          />
+                          <label class="form-check-label" for="no7">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box5">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes7"
+                            name="stressful life events or loss" @click="onchange(8,1)"
+                          />
+                          <label class="form-check-label" for="yes7">YES</label>
+                        </div>
+                        <div class="step-form-box box-06">
+                          <select
+                            class="form-select multiselect"
+                            
+                          >
+                            <option value="1">
+                              Intimate relationship problems
+                            </option>
+                            <option value="1">
+                              Other relationship problems
+                            </option>
+                            <option value="1">Death of loved one</option>
+                            <option value="1">Job-related problems</option>
+                            <option value="1">Financial problems</option>
+                            <option value="1">Academic-related problems</option>
+                            <option value="1">Criminal/Legal problems</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>9</span>Isolation, rejection or feelings of
+                        shame</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no8"
+                            name="Isolation, rejection or feelings of shame" @click="onchange(9,0)"
+                          />
+                          <label class="form-check-label" for="no8">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes8"
+                            name="Isolation, rejection or feelings of shame" @click="onchange(9,1)"
+                          />
+                          <label class="form-check-label" for="yes8">YES</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>10</span>chronic physical illness or
+                        condition</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline no-box6">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no9"
+                            name="chronic physical illness or condition"  @click="onchange(10,0)"
+                          />
+                          <label class="form-check-label" for="no9">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline yes-box6">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes9"
+                            name="chronic physical illness or condition" @click="onchange(10,1)"
+                          />
+                          <label class="form-check-label" for="yes9">YES</label>
+                        </div>
+                        <div class="step-form-box box-07">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Please Specify (times)"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>11</span>History of physical , sexual or
+                        emotional abuse</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no10"
+                            name="History of physical , sexual or emotional abuse" @click="onchange(11,0)"
+                          />
+                          <label class="form-check-label" for="no10">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes10"
+                            name="History of physical , sexual or emotional abuse" @click="onchange(11,1)"
+                          />
+                          <label class="form-check-label" for="yes10"
+                            >YES</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                    <div class="row mb-3">
+                      <label class="col-sm-5 col-form-label"
+                        ><span>12</span>Access to lethal methods/weapons</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no11"
+                            name="access to lethal methods/weapons" @click="onchange(12,0)"
+                          />
+                          <label class="form-check-label" for="no11">NO</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes11"
+                            name="access to lethal methods/weapons"  @click="onchange(12,1)"
+                          />
+                          <label class="form-check-label" for="yes11"
+                            >YES</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <!-- row-close -->
+                      <Error :message="error" v-if="error" />
+                    <div class="d-flex">
+                      <div class="ml-auto">
+                        <button class="nexttab btn btn-success next-btn">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-text btn-warning"
+                          @click="Onriskfactor"
+                        >
+                          <i class="fad fa-save"></i> Save
+                        </button>
+                      </div>
+                    </div>
+                  <!-- </form> -->
+                </div>
+              </div>
+              <!-- card -->
+            </div>
+            <!-- tab-close -->
+            <div
+              class="tab-pane fade"
+              id="protective"
+              role="tabpanel"
+              aria-labelledby="protective-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>Protective Factors</h4>
+                    <p>Instruction : Please Tick (/) In The Box Provided</p>
+                  </div>
+            
+                    <div
+                      class="row mb-3 align-items-center"
+                      v-for="(pro, index) in protectivefactorlist"
+                      :key="index"
+                    >
+                      <label class="col-sm-5 col-form-label"
+                        ><span>{{ index+1 }}</span
+                        >{{ pro.Question }}</label
+                      >
+                      <div class="col-sm-7">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="no"
+                             v-bind:name="'pro' + index"
+                              @click="onchange(index+1,0)"
+                          />
+                          <label class="form-check-label" for="no">{{
+                            pro.Options1
+                          }}</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="yes"
+                             v-bind:name="'pro' + index"
+                            value="permanent-resident" @click="onchange(index+1,1)"
+                          />
+                          <label class="form-check-label" for="yes">{{
+                            pro.Options2
+                          }}</label>
+                        </div>
+                      </div>
+                    </div>
+                      <Error :message="error" v-if="error" />
+                     <div class="d-flex">
+                                            <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
+                                            <div class="ml-auto">
+                                                <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
+                                                <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                
+                </div>
+              </div>
+            </div>
+            <!-- tab-close -->
+            <div
+              class="tab-pane fade"
+              id="selfharm"
+              role="tabpanel"
+              aria-labelledby="selfharm-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>The Self-Harm Act &amp; Suicidal Intent</h4>
+                    <p>please fill the below form</p>
+                  </div>
+                  <form class="step-form accordion-form">
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                          >
+                            SECTION A : CURRENT SELF HARM ACT
+                            <small
+                              >(within past 2 weeks from time of
+                              presentation)</small
+                            >
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseOne"
+                          class="accordion-collapse collapse show"
+                          aria-labelledby="headingOne"
+                          data-bs-parent="#accordionExample"
+                          style=""
+                        >
+                          <div class="accordion-body">
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-control" v-model="Sdate" />
+                              </div>
+                              <div class="col-sm-4">
+                                <label class="form-label">Time</label>
+                                <input type="time" class="form-control" v-model="Stime" />
+                              </div>
+                              <div class="col-sm-4">
+                                <label class="form-label"
+                                  >Place of Occurrence</label
+                                >
+                                <select class="form-select select-others" v-model="place_id">
+                                  <option value="0">Please Select</option>
+                                 <option
+                        v-for="slt in placelist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.section_value }}
+                      </option>
+                                  <option value="others">
+                                    Other area (Please specify)
+                                  </option>
+                                </select>
+                              </div>
+                              <!-- SHOW_DIV -->
+                              <div
+                                class="col-sm-12 others selected-box mt-3"
+                                style="display: none"
+                              >
+                                <div class="mb-3">
+                                  <label class="form-label"
+                                    >Others (Please specify)</label
+                                  >
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Please Specify" v-model="place_other"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseTwo"
+                          >
+                            Section B: Method of Self-Harm
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseTwo"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="headingTwo"
+                          data-bs-parent="#accordionExample"
+                          style=""
+                        >
+                          <div class="accordion-body">
+                            <p>
+                              INSTRUCTION : PLEASE TICK (/) IN THE BOX PROVIDED
+                            </p>
+                            <div class="row mt-3">
+                              <div class="col-sm-6">
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input overdose-poisoning"
+                                    type="checkbox"
+                                    value="Overdose/Poisoning"
+                                    id="1"
+                                    v-model="overdose"
+                                  />
+                                  <label class="form-check-label" for="1">
+                                    Overdose/Poisoning
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <!-- SHOW_DIV -->
+                                <div
+                                  class="
+                                    col-sm-12
+                                    overdose-poisoning-div
+                                    mt-3
+                                    hide
+                                  "
+                                >
+                                  <div class="mb-3">
+                                    <select class="form-select" id="op-select" v-model="overdosevalue">
+                                      <option selected>Please select</option>
+                                      <option value="medication">
+                                        Medication
+                                      </option>
+                                      <option value="illicit-substance">
+                                        Illicit Substance
+                                      </option>
+                                      <option value="chemicals">
+                                        Chemicals
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <!-- SHOW_DIV -->
+                                  <div class="col-sm-12 medication op-box">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
+                                  <!-- SHOW_DIV -->
+                                  <div class="col-sm-12 chemicals op-box">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
+                                  <!-- SHOW_DIV -->
+                                  <div
+                                    class="col-sm-12 illicit-substance op-box"
+                                  >
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Hanging/Suffocation"
+                                    id="2"
+                                    v-model="Hanging"
+                                  />
+                                  <label class="form-check-label" for="2">
+                                    Hanging/Suffocation
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Drowning"
+                                    id="3" v-model="drowning"
+                                  />
+                                  <label class="form-check-label" for="3">
+                                    Drowning
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Firearms or explosives"
+                                    id="4" v-model="firearms"
+                                  />
+                                  <label class="form-check-label" for="4">
+                                    Firearms or explosives
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Fire/flames"
+                                    id="5" v-model="fireflames"
+                                  />
+                                  <label class="form-check-label" for="5">
+                                    Fire/flames
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Cutting or Piercing"
+                                    id="6" v-model="cutting"
+                                    
+                                  />
+                                  <label class="form-check-label" for="6">
+                                    Cutting or Piercing
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Jumping from height"
+                                    id="7" v-model="jumping"
+                                  />
+                                  <label class="form-check-label" for="7">
+                                    Jumping from height
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input selfharm-other"
+                                    type="checkbox"
+                                    value="Other"
+                                    id="8" v-model="methodother"
+                                  />
+                                  <label class="form-check-label" for="8">
+                                    Other
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <!-- SHOW_DIV -->
+                                <div
+                                  class="col-sm-12 selfharm-other-div mt-3 hide"
+                                >
+                                  <div class="mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Please Specify" v-model="selfharmother"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree"
+                            aria-expanded="false"
+                            aria-controls="collapseThree"
+                          >
+                            Section C: How did Patient Get Idea about Method
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseThree"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="headingThree"
+                          data-bs-parent="#accordionExample"
+                          style=""
+                        >
+                          <div class="accordion-body">
+                            <p>
+                              INSTRUCTION : PLEASE TICK (/) IN THE BOX PROVIDED
+                            </p>
+                            <div class="row mt-3">
+                              <div class="col-sm-6">
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input overdose-poisoning"
+                                    type="checkbox"
+                                    value=""
+                                    id="1.1"
+                                  />
+                                  <label class="form-check-label" for="1.1">
+                                    Family, friends, peer group
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="2.2"
+                                  />
+                                  <label class="form-check-label" for="2.2">
+                                    Internet (website, social media platform,
+                                    app, blogs, forum, video/photosharing)
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="3.3"
+                                  />
+                                  <label class="form-check-label" for="3.3">
+                                    Printed media (newspaper, books, magazine,
+                                    etc)
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="5.5"
+                                  />
+                                  <label class="form-check-label" for="5.5">
+                                    Broadcast media (television, radio)
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input specify-other"
+                                    type="checkbox"
+                                    value=""
+                                    id="6.6"
+                                  />
+                                  <label class="form-check-label" for="6.6">
+                                    Specify patient actual words
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <!-- SHOW_DIV -->
+                                <div
+                                  class="col-sm-12 specify-other-div mt-3 hide"
+                                >
+                                  <div class="mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Please Specify"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading4">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse4"
+                            aria-expanded="false"
+                            aria-controls="collapse4"
+                          >
+                            Section D: Suicidal Intent
+                          </button>
+                        </h2>
+                        <div
+                          id="collapse4"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="heading4"
+                          data-bs-parent="#accordionExample"
+                          style=""
+                        >
+                          <div class="accordion-body">
+                            <p>
+                              INSTRUCTION : PLEASE TICK (/) IN THE BOX PROVIDED
+                            </p>
+                            <div class="mb-3 mt-3">
+                              <label class="form-label"
+                                >Was there an intent?</label
+                              >
+                              <div class="mt-2">
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input intent"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    id="inlineRadio1"
+                                    value="option1"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="inlineRadio1"
+                                    >No</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input intent"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    id="inlineRadio2"
+                                    value="intent-yes"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="inlineRadio2"
+                                    >Yes</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input intent"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    id="inlineRadio3"
+                                    value="option3"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="inlineRadio3"
+                                    >Undetermined</label
+                                  >
+                                </div>
+                              </div>
+                              <!-- SHOW_DIV -->
+                              <div class="col-sm-12 intent-div mt-4 hide">
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="verbal"
+                                    value=""
+                                  />
+                                  <label class="form-check-label" for="verbal"
+                                    >Verbal</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="messaging"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="messaging"
+                                    >Messaging
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="rehearsing"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="rehearsing"
+                                    >Rehearsing</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="not-Expressed"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="not-Expressed"
+                                    >Not Expressed
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="handwritten"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="handwritten"
+                                    >Handwritten</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="social-media"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="social-media"
+                                    >Social Media</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="learn-more"
+                                    value=""
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="learn-more"
+                                    >Learn more</label
+                                  >
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input intent-other"
+                                    type="checkbox"
+                                    id="Other"
+                                    value=""
+                                  />
+                                  <label class="form-check-label" for="Other"
+                                    >Other</label
+                                  >
+                                  <!-- SHOW_DIV -->
+                                  <div class="intent-other-div hide">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Please Specify"
+                                    />
+                                  </div>
+                                  <!-- SHOW_DIV -->
+                                </div>
+                              </div>
+                              <!-- SHOW_DIV -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading5">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse5"
+                            aria-expanded="false"
+                            aria-controls="collapse5"
+                          >
+                            Section E: Level of Suicidal Intent
+                          </button>
+                        </h2>
+                        <div
+                          id="collapse5"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="heading5"
+                          data-bs-parent="#accordionExample"
+                          style=""
+                        >
+                          <div class="accordion-body">
+                            <div class="row mt-3">
+                              <div class="col-sm-6">
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>1</span> Isolation</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level"
+                                      id="level1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level1"
+                                    >
+                                      0 Somebody present
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level"
+                                      id="level2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level2"
+                                    >
+                                      1 Somebody nearby, or in visual or vocal
+                                      contact
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level"
+                                      id="level3"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level3"
+                                    >
+                                      2 No one nearby or in visual or vocal
+                                      contact
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>2</span> Timing</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level2"
+                                      id="level4"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level4"
+                                    >
+                                      0 Intervention is probable
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level2"
+                                      id="level5"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level5"
+                                    >
+                                      1 Intervention is not likely
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level2"
+                                      id="level6"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level6"
+                                    >
+                                      2 Intervention is highly unlikely
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>3</span> Precautions against
+                                    discvery/intervention</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level3"
+                                      id="level7"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level7"
+                                    >
+                                      0 No precautions
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level3"
+                                      id="level8"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level8"
+                                    >
+                                      2 Passive precautions (eg; alone in room
+                                      with unlocked door)
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level3"
+                                      id="level9"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level9"
+                                    >
+                                      3 Active precautions (as locked door)
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>4</span> Acting to get help
+                                    during/after attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level4"
+                                      id="level10"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level10"
+                                    >
+                                      0 Notified potential helper regarding
+                                      attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level4"
+                                      id="level11"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level11"
+                                    >
+                                      1 Contacted but did not specifically
+                                      notify regarding attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level4"
+                                      id="level12"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level12"
+                                    >
+                                      2 Did not contact or notify potential
+                                      helper
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>5</span> Final acts in anticipating
+                                    of death (will, gifts, insurance)</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level5"
+                                      id="level13"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level13"
+                                    >
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level5"
+                                      id="level14"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level14"
+                                    >
+                                      1 Thought about or made some arrangements
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level5"
+                                      id="level15"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level15"
+                                    >
+                                      2 Made definite plans or completed
+                                      arrangements
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>6</span> Active preparation for
+                                    attempt
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level6"
+                                      id="level16"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level16"
+                                    >
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level6"
+                                      id="level17"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level17"
+                                    >
+                                      1 Minimal to moderate
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level6"
+                                      id="level18"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level18"
+                                    >
+                                      2 Extensive
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>7</span> Suicide note</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level7"
+                                      id="level19"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level19"
+                                    >
+                                      0 Absence of note
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level7"
+                                      id="level19"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level19"
+                                    >
+                                      1 Note written, but torn up; note thought
+                                      about
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level7"
+                                      id="level20"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level20"
+                                    >
+                                      2 Presence of note
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>8</span> Overt communication of
+                                    intent before the attempt
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level8"
+                                      id="level21"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level21"
+                                    >
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level8"
+                                      id="level22"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level22"
+                                    >
+                                      1 Equivocal communication (ambiguous)
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level8"
+                                      id="level23"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level23"
+                                    >
+                                      2 Unequivocal communication (unambiguous)
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                              </div>
+                              <!-- col-sm-6 -->
+                              <div class="col-sm-6">
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>9</span> Allged purpose of attempt
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level9"
+                                      id="level9.1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level9.1"
+                                    >
+                                      0 To manipulate environment, get
+                                      attention, get revenge
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level9"
+                                      id="level9.2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level9.2"
+                                    >
+                                      1 Components of above and below
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level9"
+                                      id="level9.3"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level9.3"
+                                    >
+                                      2 To escape, surcease, solve problems
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>10</span> Expectations of
+                                    fatality</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level10"
+                                      id="level10.4"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level10.4"
+                                    >
+                                      0 Thought that death was unlikely
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level10"
+                                      id="level10.5"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level10.5"
+                                    >
+                                      1 Thought that death was possible but not
+                                      probable
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level10"
+                                      id="level10.6"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level10.6"
+                                    >
+                                      2 Thought that death was probable or
+                                      certain
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>11</span> Conception of method's
+                                    lethality
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level11"
+                                      id="level11.7"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level11.7"
+                                    >
+                                      0 Did less to self that s/he thought would
+                                      be lethal
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level11"
+                                      id="leve11.l8"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="leve11.l8"
+                                    >
+                                      1 Wasn't sure if what s/he did would be
+                                      lethal
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level11"
+                                      id="level11.9"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level11.9"
+                                    >
+                                      2 Equaled or exceed what s/he thought
+                                      would be lethal
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>12</span> Seriousness of attempt
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level12"
+                                      id="level12.1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level12.1"
+                                    >
+                                      0 Did not seriously attempt to end life
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level12"
+                                      id="level12.2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level12.2"
+                                    >
+                                      1 Uncertain about seriousness to end life
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level12"
+                                      id="level12.3"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level12.3"
+                                    >
+                                      2 Seriously attempted to end life
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>13</span> Attitude towards
+                                    living/dying
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level13"
+                                      id="level13.1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level13.1"
+                                    >
+                                      0 Did not want to die
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level13"
+                                      id="level13.2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level13.2"
+                                    >
+                                      1 Components of above and below
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level13"
+                                      id="level13.1"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level13.1"
+                                    >
+                                      2 Wanted to die
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>14</span> Conception of medical
+                                    rescuability
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level14"
+                                      id="level14.1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level14.1"
+                                    >
+                                      0 Thought death would be unlikely if
+                                      received medical attention
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level14"
+                                      id="level14.2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level14.2"
+                                    >
+                                      1 Was uncertain if death could be averted
+                                      by medical attention
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level14"
+                                      id="level14.3"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level14.3"
+                                    >
+                                      2 Was certain of death even if received
+                                      medical attention
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <!-- radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label
+                                    for="exampleFormControlInput1"
+                                    class="form-label"
+                                    ><span>15</span> Degree of premeditation
+                                  </label>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level15"
+                                      id="level15.1"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level15.1"
+                                    >
+                                      0 None; impulsive
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level15"
+                                      id="level15.2"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level15.2"
+                                    >
+                                      1 Suicide contemplated for 3 hours or less
+                                      prior to attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="level15"
+                                      id="level15.3"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="level15.3"
+                                    >
+                                      2 Suicide contemplated for more than 3
+                                      hours prior to attempt
+                                    </label>
+                                  </div>
+                                </div>
+                                <!-- radio-group -->
+                                <button
+                                  type="button"
+                                  class="btn btn-success btn-text"
+                                  id="calculate"
+                                >
+                                  <i class="fad fa-calculator"></i> Calculate
+                                </button>
+                                <table class="self-harm hide">
+                                  <tbody>
+                                    <tr>
+                                      <th>Score:</th>
+                                      <td>10</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Level of Suicidal Internt:</th>
+                                      <td>Low Intent</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <!-- col-sm-6 -->
+                            </div>
+                            <!-- row -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <button class="pre-2 btn btn-success mr-auto">
+                        <i class="fad fa-arrow-to-left"></i> Back
+                      </button>
+                      <div class="ml-auto">
+                        <button class="nex-2 btn btn-success next-btn">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-text btn-warning">
+                          <i class="fad fa-save"></i> Save
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- tab-close -->
+            <div
+              class="tab-pane fade"
+              id="suicide"
+              role="tabpanel"
+              aria-labelledby="suicide-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>Suicide Risk</h4>
+                    <p>Instruction : Please Tick (/) In The Box Provided</p>
+                  </div>
+               
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Level of Suicide Risk For Current Attempt</label
+                      >
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th width="20%">Risk Level</th>
+                            <th scope="col">
+                              Based on Risk Factor/Protective Factor/Suicidal
+                              Intent
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  name="risk-level"
+                                  id="High"
+                                  value="High"
+                                  v-model="result"
+                                />
+                                <label class="form-check-label" for="High">
+                                  High
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <p>
+                                Psychiatric diagnoses with severe symptoms or
+                                acute precipitating events; protective factors
+                                not relevant; high suicidal intent
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  name="risk-level"
+                                  id="moderate"
+                                     value="Moderate"
+                                  v-model="result"
+                                />
+                                <label class="form-check-label" for="moderate">
+                                  Moderate
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <p>
+                                Multiple risk factors, few protective factors,
+                                moderate suicidal intent
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  name="risk-level"
+                                  id="low"
+                                  value="Low"
+                                  v-model="result"
+                                />
+                                <label class="form-check-label" for="low">
+                                  Low
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <p>
+                                Modifiable risk factors, strong protective
+                                factors, no or low suicidal intent
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                     <p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
+                    <div class="d-flex">
+                      <button class="pre-3 btn btn-success mr-auto">
+                        <i class="fad fa-arrow-to-left"></i> Back
+                      </button>
+                      <div class="ml-auto">
+                        <button class="nex-3 btn btn-success next-btn">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                        <button type="submit" @click="Onsuciderisk" class="btn btn-text btn-warning">
+                          <i class="fad fa-save"></i> Save
+                        </button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- tab-close -->
+            <div
+              class="tab-pane fade"
+              id="hospital-management"
+              role="tabpanel"
+              aria-labelledby="hospital-management-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>Hospital Management</h4>
+                    <p>PLEASE FILL THE BELOW FORM</p>
+                  </div>
+               
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Referral or Contact point</label
+                      >
+                      <div class="col-sm-3">
+                          
+                        <select
+                          v-model="referral_or_contact"
+                          class="form-select referral-contact-point"
+                          aria-label="Default select example"
+                        >
+                        <option value="0">
+                           Please select
+                          </option>
+                          <option
+                            v-for="referal in referallist"
+                            v-bind:key="referal.id"
+                            v-bind:value="referal.id"
+                          >
+                            {{ referal.section_value }}
+                          </option>
+                          <option value="rcp">
+                            Other(Please Specfy)
+                          </option>
+                        </select>
+                      </div>
+                      <div
+                        class="
+                          col-sm-3
+                          contact-point-div
+                          rcp
+                          hide
+                        "
+                        style="display: none"
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Please Specfy" v-model="referral_or_contact_other"
+                        />
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Mode of Arrival</label
+                      >
+                      <div class="col-sm-3">
+                        <select
+                          v-model="arrival_mode"
+                          class="form-select mode-of-arrival"
+                          aria-label="Default select example"
+                        >
+                         <option value="0">
+                           Please select
+                          </option>
+                          <option
+                            v-for="mode in modelist"
+                            v-bind:key="mode.id"
+                            v-bind:value="mode.id"
+                          >
+                            {{ mode.section_value }}
+                          </option>
+                          <option value="am">
+                            Other(Please Specify)
+                          </option>
+                        </select>
+                      </div>
+                      <div
+                        class="
+                          col-sm-3
+                          mode-of-arrival-div am
+                          hide
+                        "
+                        style="display: none" 
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Please Specfy" v-model="arrival_mode_other"
+                        />
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >First psychiatry assessment after current
+                        attempt</label
+                      >
+                      <div class="col-sm-3">
+                        <label class="form-label">Date</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          placeholder="Please Specfy" v-model="date"
+                        />
+                      </div>
+                      <div class="col-sm-3">
+                        <label class="form-label">Time</label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          placeholder="Please Specfy" v-model="time"
+                        />
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Physical consequence of current attempt</label
+                      >
+                      <div class="col-sm-9">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input aborted-no"
+                            type="radio"
+                            name="physical consequence of current attempt"
+                            id="pcoca1" value=" No significant physical harm, No medical treatment required"
+                             v-model="physical_consequences"
+                          />
+                          <label class="form-check-label" for="pcoca1">
+                            No significant physical harm, No medical treatment
+                            required
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input aborted-no"
+                            type="radio"
+                            name="physical consequence of current attempt"
+                            id="pcoca2" value="Medical attention/Surgery required, but no danger to
+                            life" v-model="physical_consequences"
+                          />
+                          <label class="form-check-label" for="pcoca2">
+                            Medical attention/Surgery required, but no danger to
+                            life
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input aborted-no"
+                            type="radio"
+                            name="physical consequence of current attempt"
+                            id="pcoca3" value="Medical attention/Surgery required, had/has danger
+                            to life" v-model="physical_consequences"
+                          />
+                          <label class="form-check-label" for="pcoca3">
+                            Medical attention/Surgery required, had/has danger
+                            to life
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input aborted-no"
+                            type="radio"
+                            name="physical consequence of current attempt"
+                            id="pcoca4" value="Lethal" v-model="physical_consequences"
+                          />
+                          <label class="form-check-label" for="pcoca4">
+                            Lethal
+                          </label>
+                        </div>
+                        <div class="form-check other-show-div">
+                          <input
+                            class="form-check-input aborted-yes"
+                            type="radio"
+                            name="physical consequence of current attempt"
+                            id="pcoca5" value="Aborted" v-model="physical_consequences"
+                          />
+                          <label class="form-check-label" for="pcoca5">
+                            Aborted
+                          </label>
+                          <!-- SHOW_input -->
+                          <input
+                            type="text"
+                            class="form-control aborted-div hide"
+                            id="aborted"
+                            placeholder="Please Specify"
+                            style="display: none" v-model="physical_consequences_des"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >If patient admitted for current attempt</label
+                      >
+                      <div class="col-sm-9">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input pafca-no"
+                            type="radio"
+                            name="If patient admitted for current attempt"
+                            id="pafca1" value="No" v-model="patient_admitted"
+                          />
+                          <label class="form-check-label" for="pafca1">
+                            No
+                          </label>
+                        </div>
+                        <div class="form-check other-show-div">
+                          <input
+                            class="form-check-input pafca-yes"
+                            type="radio"
+                            name="If patient admitted for current attempt"
+                            id="pafca2"  value="Yes" v-model="patient_admitted"
+                          />
+                          <label class="form-check-label" for="pafca2">
+                            Yes
+                          </label>
+                          <!-- SHOW_input -->
+                          <input
+                            type="text"
+                            class="form-control pafca-other-div hide"
+                            id="attempt"
+                            style="display: none"
+                            placeholder="Please Specify" v-model="patient_admitted_des"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Status on Discharge</label
+                      >
+                      <div class="col-sm-9">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="Status on Discharge"
+                            id="sond1" value="Dead" v-model="discharge_status"
+                          />
+                          <label class="form-check-label" for="sond1">
+                            Dead
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="Status on Discharge"
+                            id="sond2" value="Dead" v-model="discharge_status"
+                          />
+                          <label class="form-check-label" for="sond2">
+                            Alive
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Discharge Details</label
+                      >
+                      <div class="col-sm-3">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" v-model="discharge_date"/>
+                      </div>
+                      <div class="col-sm-3">
+                        <label class="form-label">Number of days in ward</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Days" v-model="discharge_number_days_in_ward"
+                        />
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Discharge Diagnosis(ICD-10)</label
+                      >
+                      <div class="col-sm-4">
+                        <label class="form-label"
+                          >Main psychiatric diagnosis</label
+                        >
+                          <select
+                          v-model="main_psychiatric_diagnosis"
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                        <option value="0">Please Select</option>
+                          <option
+                            v-for="phy in psychiatrist"
+                            v-bind:key="phy.id"
+                            v-bind:value="phy.id"
+                          >
+                            {{ phy.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
+                        <label class="form-label"
+                          >External cause of injury</label
+                        >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example" v-model="external_cause_inquiry"
+                        >
+                          <option value="0">Please Select</option>
+                        <option
+                            v-for="ing in injurylist"
+                            v-bind:key="ing.id"
+                            v-bind:value="ing.id"
+                          >
+                            {{ ing.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- close-row -->
+                    <div class="row mb-0 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >PSY MX on Discharge</label
+                      >
+                      <div class="col-sm-9">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d1"
+                            @change="OnMxdischarge('Transferred to PSY ward')"
+                          />
+                          <label class="form-check-label" for="psy-d1">
+                            Transferred to PSY ward
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d2"
+                            @change="OnMxdischarge('Given appt to psy clinical')"
+                          />
+                          <label class="form-check-label" for="psy-d2">
+                            Given appt to psy clinical
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d3"
+                            @change="OnMxdischarge('Referred to counsellor')"
+                          />
+                          <label class="form-check-label" for="psy-d3">
+                            Referred to counsellor
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d4"
+                            @change="OnMxdischarge('Discharge without any PSY follow-up')"
+                          />
+                          <label class="form-check-label" for="psy-d4">
+                            Discharge without any PSY follow-up
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d6"
+                            @change="OnMxdischarge('Refer Community PSY Services')"
+                          />
+                          <label class="form-check-label" for="psy-d6">
+                            Refer Community PSY Services
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input PSY-other"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d5"
+                            @change="OnMxdischarge('Others')" 
+                          />
+                          <label class="form-check-label" for="psy-d5">
+                            Others
+                          </label>
+                        </div>
+                        <!-- SHOW_DIV -->
+                        <div class="col-sm-4 PSY-other-div mt-3 hide" style="display:none;">
+                          <div class="mb-3">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Please Specify" v-model="discharge_psy_mx_des"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                        <p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
+                    <!-- close-row -->
+                    <div class="d-flex">
+                      <button class="pre-4 btn btn-success mr-auto">
+                        <i class="fad fa-arrow-to-left"></i> Back
+                      </button>
+                      <div class="ml-auto">
+                        <button class="nex-4 btn btn-success next-btn">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-text btn-warning" @click="OnSavehospitalmanagement">
+                          <i class="fad fa-save"></i> Save
+                        </button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- tab-close -->
+            <div
+              class="tab-pane fade"
+              id="data-producer"
+              role="tabpanel"
+              aria-labelledby="data-producer-tab"
+            >
+              <div class="card">
+                <div class="card-body steps-form-body">
+                  <div class="text">
+                    <h4>Source Data Producer</h4>
+                    <p>PLEASE FILL THE BELOW FORM</p>
+                  </div>
+              
+                    <div class="row">
+                      <div class="col-sm-6 mb-3">
+                        <label for="" class="form-label"
+                          >Name of registering officer</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="officername"
+                        />
+                      </div>
+                      <!-- col-sm-6 -->
+                      <div class="col-sm-6 mb-3">
+                        <label for="" class="form-label"
+                          >Name of hospital</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="hospitalname"
+                        />
+                      </div>
+                      <!-- col-sm-6 -->
+                    </div>
+                    <!-- row -->
+                    <div class="row">
+                      <div class="col-sm-6 mb-3">
+                        <label for="" class="form-label">Designation</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="designation"
+                        />
+                      </div>
+                      <!-- col-sm-6 -->
+                      <div class="col-sm-6 mb-3">
+                        <label for="" class="form-label"
+                          >Name of Psychiatrist</label
+                        >
+                        <select
+                          v-model="psychiatristId"
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                        <option value="0">Select</option>
+                          <option
+                            v-for="phy in psychiatrist"
+                            v-bind:key="phy.id"
+                            v-bind:value="phy.id"
+                          >
+                            {{ phy.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- col-sm-6 -->
+                    </div>
+                    <!-- row -->
+                    <div class="row">
+                      <div class="col-sm-6 mb-3">
+                        <label for="" class="form-label"
+                          >Date of Reporting</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          v-model="reportingdate"
+                        />
+                      </div>
+                      <!-- col-sm-6 -->
+                    </div>
+                    <p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
+                    <!-- row -->
+                    <div class="d-flex">
+                      <button class="pre-5 btn btn-success mr-auto">
+                        <i class="fad fa-arrow-to-left"></i> Back
+                      </button>
+                      <div class="ml-auto">
+                        <button type="submit" class="btn btn-success ml-auto" @click="adddataproducer">
+                          <i class="fad fa-paper-plane"></i> Submit
+                        </button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- tab-close -->
+          </div>
+        </div>
+            <div
+      class="modal fade"
+      id="Riskfactorpopup"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Please Submit your Risk Factor First</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-ok"
+              data-bs-dismiss="modal"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+      </main>
+    </div>
+  </div>
+</template>
+<script>
+import PatientDetails from "../../../components/Patient/PatientDetails.vue";
+import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
+import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+export default {
+  components: { PatientLoginSidebar, PatientLoginHeader, PatientDetails },
+  name: "patient-summary",
+  data() {
+    return {
+      userdetails: null,
+      errors: [],
+      error: null,
+      loader: false,
+      protectivefactorlist: [],
+      referallist: [],
+      modelist: [],
+      psychiatrist: [],
+      injurylist: [],
+      placelist:[],
+      Id: 0,
+      referral_or_contact: 0,
+      arrival_mode: 0,
+      referral_or_contact_other: "",
+      arrival_mode_other: "",
+      date: "",
+      time: "",
+      physical_consequences: "",
+      physical_consequences_des: "",
+      patient_admitted: "",
+      patient_admitted_des: "",
+      discharge_status: "",
+      discharge_date: "",
+      discharge_number_days_in_ward: 0,
+      main_psychiatric_diagnosis: 0,
+      external_cause_inquiry: 0,
+      discharge_psy_mx: "",
+      discharge_psy_mx_des: "",
+      officername: "",
+      hospitalname: "",
+      designation: "",
+      reportingdate: "",
+      psychiatristId: 0,
+      user_ip_address: "",
+      result: "",
+      checkedList: {},
+      sharp_register_id: 0,
+    };
+  },
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
+    this.GetList();
+    this.GetUserIpAddress();
+    $(document).ready(function () {
+      $(".data-table").DataTable({
+        searching: false,
+        bLengthChange: false,
+      });
+
+      $(".multiselect").select2({
+        placeholder: "Please Select",
+      });
+
+      // Presence of psychiatric disorder
+      $('.yes-box input[type="radio"]').click(function () {
+        $(".box-01").css("display", "inline-block");
+      });
+
+      $('.no-box input[type="radio"]').click(function () {
+        $(".box-01").hide();
+      });
+
+      $('.yes-box1 input[type="radio"]').click(function () {
+        $(".box-02").css("display", "inline-block");
+      });
+
+      $('.no-box1 input[type="radio"]').click(function () {
+        $(".box-02").hide();
+      });
+
+      $('.yes-box2 input[type="radio"]').click(function () {
+        $(".box-03").css("display", "inline-block");
+      });
+
+      $('.no-box2 input[type="radio"]').click(function () {
+        $(".box-03").hide();
+      });
+
+      $('.yes-box3 input[type="radio"]').click(function () {
+        $(".box-04").css("display", "inline-block");
+      });
+
+      $('.no-box3 input[type="radio"]').click(function () {
+        $(".box-04").hide();
+      });
+
+      $('.yes-box4 input[type="radio"]').click(function () {
+        $(".box-05").css("display", "inline-block");
+      });
+
+      $('.no-box4 input[type="radio"]').click(function () {
+        $(".box-05").hide();
+      });
+
+      $('.yes-box5 input[type="radio"]').click(function () {
+        $(".box-06").css("display", "inline-block");
+      });
+
+      $('.no-box5 input[type="radio"]').click(function () {
+        $(".box-06").hide();
+      });
+
+      $('.yes-box6 input[type="radio"]').click(function () {
+        $(".box-07").css("display", "inline-block");
+      });
+
+      $('.no-box6 input[type="radio"]').click(function () {
+        $(".box-07").hide();
+      });
+
+      $(".select-others")
+        .change(function () {
+          $(this)
+            .find("option:selected")
+            .each(function () {
+              var optionValue = $(this).attr("value");
+              if (optionValue) {
+                $(".selected-box")
+                  .not("." + optionValue)
+                  .hide();
+                $("." + optionValue).show();
+              } else {
+                $(".selected-box").hide();
+              }
+            });
+        })
+        .change();
+
+      $(".selfharm-other").click(function () {
+        if ($(this).is(":checked")) {
+          $(".selfharm-other-div").show(300);
+        } else {
+          $(".selfharm-other-div").hide(200);
+        }
+      });
+
+      $(".overdose-poisoning").click(function () {
+        if ($(this).is(":checked")) {
+          $(".overdose-poisoning-div").show(300);
+        } else {
+          $(".overdose-poisoning-div").hide(200);
+        }
+      });
+
+      $(".specify-other").click(function () {
+        if ($(this).is(":checked")) {
+          $(".specify-other-div").show(300);
+        } else {
+          $(".specify-other-div").hide(200);
+        }
+      });
+
+      $(".intent-other").click(function () {
+        if ($(this).is(":checked")) {
+          $(".intent-other-div").show(300);
+        } else {
+          $(".intent-other-div").hide(200);
+        }
+      });
+
+      $(".intent").click(function () {
+        $(".intent-div").css(
+          "display",
+          $(this).val() === "intent-yes" ? "block" : "none"
+        );
+      });
+
+      $(".referral-contact-point")
+        .change(function () {
+          $(this)
+            .find("option:selected")
+            .each(function () {
+              var optionValue = $(this).attr("value");
+              if (optionValue) {
+                $(".contact-point-div")
+                  .not("." + optionValue)
+                  .hide();
+                $("." + optionValue).show();
+              } else {
+                $(".contact-point-div").hide();
+              }
+            });
+        })
+        .change();
+
+      $(".mode-of-arrival")
+        .change(function () {
+          $(this)
+            .find("option:selected")
+            .each(function () {
+              var optionValue = $(this).attr("value");
+              if (optionValue) {
+                $(".mode-of-arrival-div")
+                  .not("." + optionValue)
+                  .hide();
+                $("." + optionValue).show();
+              } else {
+                $(".mode-of-arrival-div").hide();
+              }
+            });
+        })
+        .change();
+
+      $(".PSY-other").click(function () {
+        if ($(this).is(":checked")) {
+          $(".PSY-other-div").show(300);
+        } else {
+          $(".PSY-other-div").hide(200);
+        }
+      });
+
+      $(".pafca-yes").click(function () {
+        $(".pafca-other-div").fadeIn(300);
+      });
+      $(".pafca-no").click(function () {
+        $(".pafca-other-div").fadeOut(300);
+      });
+
+      $(".aborted-yes").click(function () {
+        $(".aborted-div").fadeIn(300);
+      });
+      $(".aborted-no").click(function () {
+        $(".aborted-div").fadeOut(300);
+      });
+
+      $(".nexttab").click(function (e) {
+        if (this.sharp_register_id) {
+          e.preventDefault();
+          $('#myTab a[href="#protective"]').tab("show");
+        } else {
+          $("#Riskfactorpopup").modal("show");
+        }
+      });
+
+      // 2
+
+      $(".nex-1").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#selfharm"]').tab("show");
+      });
+
+      $(".pre-1").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#risk-factors"]').tab("show");
+      });
+
+      // 3
+
+      $(".nex-2").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#suicide"]').tab("show");
+      });
+
+      $(".pre-2").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#protective"]').tab("show");
+      });
+
+      // 4
+
+      $(".nex-3").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#hospital-management"]').tab("show");
+      });
+
+      $(".pre-3").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#selfharm"]').tab("show");
+      });
+
+      // 5
+
+      $(".nex-4").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#data-producer"]').tab("show");
+      });
+
+      $(".pre-4").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#suicide"]').tab("show");
+      });
+
+      // 6
+
+      $(".pre-5").click(function (e) {
+        e.preventDefault();
+        $('#myTab a[href="#hospital-management"]').tab("show");
+      });
+    });
+  },
+  methods: {
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "referral-or-contact-point",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.referallist = response.data.list;
+      } else {
+        this.referallist = [];
+      }
+      const response1 = await this.$axios.post(
+        "shharp-registration-risk-protective-questions/list",
+        { Type: "Protective Factors" },
+        { headers }
+      );
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.protectivefactorlist = response1.data.list;
+      } else {
+        this.protectivefactorlist = [];
+      }
+      const response2 = await this.$axios.get(
+        "general-setting/list?section=" + "mode-of-arrival",
+        { headers }
+      );
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.modelist = response2.data.list;
+      } else {
+        this.modelist = [];
+      }
+      const response3 = await this.$axios.get("psychiatrist/list", { headers });
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.psychiatrist = response3.data.list;
+      } else {
+        this.psychiatrist = [];
+      }
+      const response4 = await this.$axios.get("external-cause-injury/list", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.injurylist = response4.data.list;
+      } else {
+        this.injurylist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "place-of-occurrence",
+        { headers }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.placelist = response5.data.list;
+      } else {
+        this.placelist = [];
+      }
+    },
+    GetUserIpAddress() {
+      fetch("https://api.ipify.org?format=json")
+        .then((x) => x.json())
+        .then(({ ip }) => {
+          this.user_ip_address = ip;
+        });
+    },
+    OnMxdischarge(val) {
+      if (this.discharge_psy_mx) {
+        this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
+      } else {
+        this.discharge_psy_mx = val;
+      }
+    },
+
+    onchange(ind, val) {
+      this.checkedList[ind] = val;
+    },
+    async Onriskfactor() {
+      console.log("my check list", this.checkedList);
+      this.error = null;
+      if (Object.values(this.checkedList).length == 12) {
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/risk-factor",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              sharp_register_id: this.sharp_register_id,
+              result: JSON.stringify([this.checkedList]),
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.loader = false;
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#protective"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+          this.loader = false;
+          this.errors = e;
+        }
+      } else {
+        this.error = "Please attempt all question";
+      }
+    },
+    async Onprotectivefactor() {
+      if (
+        Object.values(this.checkedList).length ==
+        this.protectivefactorlist.length
+      ) {
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/protective-factor",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              sharp_register_id: this.sharp_register_id,
+              result: JSON.stringify([this.checkedList]),
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.loader = false;
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#selfharm"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+          this.loader = false;
+          this.errors = e;
+        }
+      } else {
+        this.error = "Please attempt all question";
+      }
+    },
+    async SelfHarm() {},
+    async Onsuciderisk() {
+      this.errors = [];
+      try {
+        if (!this.result) {
+          this.errors.push("Please select RISK LEVEL.");
+        }
+        if (this.result) {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/suicide-risk",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              result: this.result,
+              sharp_register_id: this.sharp_register_id,
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#hospital-management"]').tab("show");
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    },
+    async OnSavehospitalmanagement() {
+      this.errors = [];
+      try {
+        if (!this.referral_or_contact) {
+          this.errors.push("Referral or Contact point is required.");
+        }
+        if (!this.arrival_mode) {
+          this.errors.push("Mode of Arrival is required.");
+        }
+        if (!this.date) {
+          this.errors.push("Date is required.");
+        }
+        if (!this.time) {
+          this.errors.push("Time is required.");
+        }
+        if (!this.physical_consequences) {
+          this.errors.push("Physical consequence is required.");
+        }
+        if (!this.patient_admitted) {
+          this.errors.push("patient admitted for current is required.");
+        }
+        if (!this.discharge_status) {
+          this.errors.push("Status on Dischargeis required.");
+        }
+        if (!this.discharge_date) {
+          this.errors.push("Discharge Date is required.");
+        }
+        if (!this.discharge_number_days_in_ward) {
+          this.errors.push("Number of days in wardis required.");
+        }
+        if (!this.main_psychiatric_diagnosis) {
+          this.errors.push("Main psychiatric diagnosis is required.");
+        }
+        if (!this.external_cause_inquiry) {
+          this.errors.push("External cause of injury is required.");
+        }
+        if (!this.discharge_psy_mx) {
+          this.errors.push("PSY MX on Dischargeis required.");
+        }
+        if (
+          this.referral_or_contact &&
+          this.arrival_mode &&
+          this.date &&
+          this.time &&
+          this.physical_consequences &&
+          this.patient_admitted &&
+          this.discharge_status &&
+          this.discharge_date &&
+          this.discharge_number_days_in_ward &&
+          this.main_psychiatric_diagnosis &&
+          this.external_cause_inquiry &&
+          this.discharge_psy_mx
+        ) {
+          if (this.referral_or_contact == "rcp") {
+            this.referral_or_contact = 0;
+          }
+          if (this.arrival_mode == "am") {
+            this.arrival_mode = 0;
+          }
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/hospital-mgmt",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              referral_or_contact: this.referral_or_contact,
+              referral_or_contact_other: this.referral_or_contact_other,
+              arrival_mode: this.arrival_mode,
+              arrival_mode_other: this.arrival_mode_other,
+              date: this.date,
+              time: this.time,
+              physical_consequences: this.physical_consequences,
+              physical_consequences_des: this.physical_consequences_des,
+              patient_admitted: this.patient_admitted,
+              patient_admitted_des: this.patient_admitted_des,
+              discharge_status: this.discharge_status,
+              discharge_date: this.discharge_date,
+              discharge_number_days_in_ward: this.discharge_number_days_in_ward,
+              main_psychiatric_diagnosis: this.main_psychiatric_diagnosis,
+              external_cause_inquiry: this.external_cause_inquiry,
+              discharge_psy_mx: this.discharge_psy_mx,
+              discharge_psy_mx_des: this.discharge_psy_mx_des,
+              sharp_register_id: this.sharp_register_id,
+            },
+            { headers }
+          );
+
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#data-producer"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    },
+    async adddataproducer() {
+      this.errors = [];
+      try {
+        if (!this.officername) {
+          this.errors.push("Name of registering officer is required.");
+        }
+        if (!this.hospitalname) {
+          this.errors.push("Name of hospital is required.");
+        }
+        if (!this.designation) {
+          this.errors.push("Designation is required.");
+        }
+        if (!this.psychiatristId) {
+          this.errors.push("Name of Psychiatrist is required.");
+        }
+        if (!this.reportingdate) {
+          this.errors.push("Date of Reporting is required.");
+        }
+        if (
+          this.officername &&
+          this.hospitalname &&
+          this.designation &&
+          this.psychiatristId &&
+          this.reportingdate
+        ) {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "shharp-registration-data-producer/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              name_registering_officer: this.officername,
+              hospital_name: this.hospitalname,
+              designation: this.designation,
+              psychiatrist_name: this.psychiatristId.toString(),
+              reporting_date: this.reportingdate,
+              sharp_register_id: this.sharp_register_id,
+            },
+            { headers }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* #myTab .nav-item a {
+  pointer-events: none;
+} */
+.hide{
+  display: none;
+}
+</style>
