@@ -554,6 +554,7 @@ export default {
   },
   methods: {
     async Onphychologyreferral() {
+      this.validate = true;
       this.errorList = [];
       try {
         if (!this.diagnosis_id) {
