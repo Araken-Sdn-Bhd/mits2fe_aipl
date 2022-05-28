@@ -257,6 +257,14 @@ export default {
   mounted() {
     document.body.classList.add("sb-nav-fixed");
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (this.userdetails) {
+      if (this.userdetails.user.role == "Patient") {
+      } else {
+        this.$router.push("/");
+      }
+    } else {
+      this.$router.push("/");
+    }
     this.nav = localStorage.getItem("nav");
     if (this.nav == "patient") {
       this.$refs.patient.classList.add("active");

@@ -87,7 +87,8 @@ export default {
         }
         if (!this.password) {
           this.passerror = "Password is Required!";
-        } if(this.email && this.password) {
+        }
+        if (this.email && this.password) {
           this.loader = true;
           const response = await this.$axios.post("auth/login", {
             email: this.email,
@@ -100,7 +101,15 @@ export default {
               JSON.stringify(this.userdetail)
             );
             this.loader = false;
-            this.$router.push("/Modules/Admin/admin-dashboard");
+            if (this.userdetail.user.role == "Admin") {
+              this.$router.push("/Modules/Admin/admin-dashboard");
+            } else if (this.userdetail.user.role == "Intervention") {
+              this.$router.push("/Modules/Intervention/patient-list");
+            } else if (this.userdetail.user.role == "Patient") {
+              this.$router.push("/Modules/Patient/patient-list");
+            }else{
+              this.$router.push("/");
+            }
           } else {
             this.loader = false;
             this.emailerror = this.userdetail.message.email[0];
@@ -108,8 +117,8 @@ export default {
           }
         }
       } catch (e) {
-        console.log('my error',e);
-        console.log('api not working');
+        console.log("my error", e);
+        console.log("api not working");
         this.loader = false;
         this.emailerror = "Email and Password does not match"; //$user.message.email; //e.response.data.message;
       }

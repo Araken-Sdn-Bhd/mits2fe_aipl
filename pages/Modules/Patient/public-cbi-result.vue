@@ -40,7 +40,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">{{ personalText }}</h3>
+                          <h3 class="bg-color1">{{ personallevel }}</h3>
 
                           <div
                             class="arrow"
@@ -146,7 +146,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color3">{{workText}}</h3>
+                          <h3 class="bg-color3">{{ worklevel }}</h3>
 
                           <div
                             class="arrow"
@@ -251,7 +251,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color2">{{ clientText }}</h3>
+                          <h3 class="bg-color2">{{ clientlevel }}</h3>
 
                           <div
                             class="arrow"
@@ -374,7 +374,7 @@
 <script>
 import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
 import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
-import Publicnav from '../../../components/Patient/publicnav.vue';
+import Publicnav from "../../../components/Patient/publicnav.vue";
 export default {
   components: { PatientLoginSidebar, PatientLoginHeader, Publicnav },
   name: "cbi-result",
@@ -409,9 +409,9 @@ export default {
       personalScore: 0,
       workScore: 0,
       clientScore: 0,
-      personalText: "",
-      workText: "",
-      clientText: "",
+         personallevel: "",
+      worklevel: "",
+      clientlevel: "",
     };
   },
   beforeMount() {
@@ -421,6 +421,9 @@ export default {
       this.personalScore = this.cbiresult.PERSONAL_BURNOUT;
       this.workScore = this.cbiresult.WORK_BURNOUT;
       this.clientScore = this.cbiresult.CLIENT_RELATED_BURNOUT;
+      this.personallevel = this.cbiresult.PERSONAL_BURNOUT.level;
+      this.worklevel = this.cbiresult.WORK_BURNOUT.level;
+      this.clientlevel = this.cbiresult.CLIENT_RELATED_BURNOUT.level;
     }
     console.log("my cbi result", this.cbiresult);
   },

@@ -555,7 +555,7 @@
                             type="radio"
                             id="no"
                              v-bind:name="'pro' + index"
-                              @click="onchange(index+1,0)"
+                              @click="onchangeprotect(index+1,0)"
                           />
                           <label class="form-check-label" for="no">{{
                             pro.Options1
@@ -567,7 +567,7 @@
                             type="radio"
                             id="yes"
                              v-bind:name="'pro' + index"
-                            value="permanent-resident" @click="onchange(index+1,1)"
+                            value="permanent-resident" @click="onchangeprotect(index+1,1)"
                           />
                           <label class="form-check-label" for="yes">{{
                             pro.Options2
@@ -600,7 +600,7 @@
                     <h4>The Self-Harm Act &amp; Suicidal Intent</h4>
                     <p>please fill the below form</p>
                   </div>
-                  <form class="step-form accordion-form">
+                  <!-- <form class="step-form accordion-form"> -->
                     <div class="accordion" id="accordionExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
@@ -2078,12 +2078,13 @@
                         <button class="nex-2 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <button type="submit" class="btn btn-text btn-warning">
+                        <!-- <button type="submit" class="btn btn-text btn-warning">
                           <i class="fad fa-save"></i> Save
-                        </button>
+                        </button> -->
+                        <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
                       </div>
                     </div>
-                  </form>
+                  <!-- </form> -->
                 </div>
               </div>
             </div>
@@ -2809,7 +2810,7 @@ export default {
       modelist: [],
       psychiatrist: [],
       injurylist: [],
-      placelist:[],
+      placelist: [],
       Id: 0,
       referral_or_contact: 0,
       arrival_mode: 0,
@@ -2836,7 +2837,25 @@ export default {
       user_ip_address: "",
       result: "",
       checkedList: {},
+      procheckedList: {},
       sharp_register_id: 0,
+      Sdate: "",
+      Stime: "",
+      //dddd ad on
+      selfharmother: "",
+      methodother: "",
+      jumping: "",
+      cutting: "",
+      fireflames: "",
+      drowning: "",
+      Hanging: "",
+      overdosevalue: "",
+      overdose: "",
+      place_other: "",
+      place_id: "",
+      selfharmother: "",
+      methodother: "",
+      firearms: "",
     };
   },
   beforeMount() {
@@ -3165,7 +3184,9 @@ export default {
         this.discharge_psy_mx = val;
       }
     },
-
+    onchangeprotect(ind, val) {
+      this.procheckedList[ind] = val;
+    },
     onchange(ind, val) {
       this.checkedList[ind] = val;
     },
@@ -3209,8 +3230,12 @@ export default {
       }
     },
     async Onprotectivefactor() {
+      console.log(
+        Object.values(this.procheckedList).length,
+        this.protectivefactorlist.length
+      );
       if (
-        Object.values(this.checkedList).length ==
+        Object.values(this.procheckedList).length ==
         this.protectivefactorlist.length
       ) {
         try {
@@ -3248,7 +3273,9 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    async SelfHarm() {},
+    async SelfHarm() {
+      $('#myTab a[href="#suicide"]').tab("show");
+    },
     async Onsuciderisk() {
       this.errors = [];
       try {
@@ -3276,9 +3303,9 @@ export default {
             this.sharp_register_id = response.data.id;
             $('#myTab a[href="#hospital-management"]').tab("show");
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -3384,12 +3411,12 @@ export default {
             },
             { headers }
           );
-
-          if (response.data.code == 200 || response.data.code == "200") {
+          console.log("my data", response.data);
+          if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
             this.sharp_register_id = response.data.id;
             $('#myTab a[href="#data-producer"]').tab("show");
           } else {
@@ -3451,10 +3478,14 @@ export default {
             },
             { headers }
           );
-          if (response.data.code == 200 || response.data.code == "200") {
+          if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
+            });
+            this.$router.push({
+              path: "/Modules/Patient/patient-history",
+              query: { id: this.Id },
             });
           } else {
             this.loader = false;
@@ -3475,10 +3506,10 @@ export default {
 </script>
 
 <style scoped>
-/* #myTab .nav-item a {
+#myTab .nav-item a {
   pointer-events: none;
-} */
-.hide{
+}
+.hide {
   display: none;
 }
 </style>

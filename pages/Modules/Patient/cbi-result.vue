@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-      <PatientLoginSidebar />
+    <PatientLoginSidebar />
     <div id="layoutSidenav_content">
-        <PatientLoginHeader />
+      <PatientLoginHeader />
       <main>
         <div class="container-fluid px-4">
           <nav class="offline-form" v-if="!userdetails">
@@ -33,7 +33,11 @@
             <h1>Patient Screening and Appointment</h1>
           </div>
           <div class="card mb-4">
-            <div class="result" id="results" style="background:#fff !important;"> 
+            <div
+              class="result"
+              id="results"
+              style="background: #fff !important"
+            >
               <div class="result-header">
                 <h4>COPENHAGEN BURNOUT INVENTORY(CBI)</h4>
                 <p>Thank you for reaching out to MENTARI Self Test</p>
@@ -54,7 +58,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">NORMAL</h3>
+                          <h3 class="bg-color1">{{personallevel}}</h3>
 
                           <div
                             class="arrow"
@@ -145,7 +149,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">NORMAL</h3>
+                          <h3 class="bg-color1">{{worklevel}}</h3>
 
                           <div
                             class="arrow"
@@ -235,7 +239,7 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">NORMAL</h3>
+                          <h3 class="bg-color1">{{clientlevel}}</h3>
 
                           <div
                             class="arrow"
@@ -312,29 +316,26 @@
                     </div>
                   </div>
                   <!-- result-box -->
-
-                  
                 </div>
               </div>
             </div>
             <div class="row justify-content-center">
-            <div class="col-sm-8">
-            <div class="d-flex mt-3" >
-                    <button
-                      type="button"
-                      class="btn btn-secondary btn-text mr-auto"
-                      @click="demoFromHTML"
-                    >
-                      <i class="fad fa-download"></i> Download Result
-                    </button>
-                    <a
-                      href="/Modules/Patient/request-appointment-form"
-                      class="btn btn-success btn-text ml-auto"
-                      ><i class="fad fa-calendar-day"></i> Request
-                      Appointment</a
-                    >
-                  </div>
-            </div>
+              <div class="col-sm-8">
+                <div class="d-flex mt-3">
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-text mr-auto"
+                    @click="demoFromHTML"
+                  >
+                    <i class="fad fa-download"></i> Download Result
+                  </button>
+                  <a
+                    href="/Modules/Patient/request-appointment-form"
+                    class="btn btn-success btn-text ml-auto"
+                    ><i class="fad fa-calendar-day"></i> Request Appointment</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -379,15 +380,22 @@ export default {
       personalScore: 0,
       workScore: 0,
       clientScore: 0,
+      personallevel: "",
+      worklevel: "",
+      clientlevel: "",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.cbiresult = JSON.parse(localStorage.getItem("cbiresult"));
+    console.log("cbi result", this.cbiresult);
     if (this.cbiresult) {
-      this.personalScore = this.cbiresult.PERSONAL_BURNOUT;
-      this.workScore = this.cbiresult.WORK_BURNOUT;
-      this.clientScore = this.cbiresult.CLIENT_RELATED_BURNOUT;
+      this.personalScore = this.cbiresult.PERSONAL_BURNOUT.score;
+      this.workScore = this.cbiresult.WORK_BURNOUT.score;
+      this.clientScore = this.cbiresult.CLIENT_RELATED_BURNOUT.score;
+      this.personallevel = this.cbiresult.PERSONAL_BURNOUT.level;
+      this.worklevel = this.cbiresult.WORK_BURNOUT.level;
+      this.clientlevel = this.cbiresult.CLIENT_RELATED_BURNOUT.level;
     }
   },
   beforeDestroy() {
@@ -395,7 +403,7 @@ export default {
   },
   methods: {
     demoFromHTML() {
-      var pdf = new jsPDF('p','pt','a4');
+      var pdf = new jsPDF("p", "pt", "a4");
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
       });

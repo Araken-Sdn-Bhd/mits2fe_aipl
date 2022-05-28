@@ -197,6 +197,13 @@ export default {
       PIS: 0,
       SC: 0,
       UC: 0,
+      GAlevel: "",
+      GAWPlevel: "",
+      LAHlevel: "",
+      LASWlevel: "",
+      PISlevel: "",
+      SClevel: "",
+      UClevel: "",
       UserTotal: 0,
     };
   },
@@ -205,13 +212,20 @@ export default {
     this.whodasresult = JSON.parse(localStorage.getItem("whodasresult"));
     console.log("my res", this.whodasresult);
     if (this.whodasresult) {
-      this.GA = this.whodasresult.GA;
-      this.GAWP = this.whodasresult.GAWP;
-      this.LAH = this.whodasresult.LAH;
-      this.LASW = this.whodasresult.LASW;
-      this.PIS = this.whodasresult.PIS;
-      this.SC = this.whodasresult.SC;
-      this.UC = this.whodasresult.UC;
+      this.GA = this.whodasresult.GA.score;
+      this.GAWP = this.whodasresult.GAWP.score;
+      this.LAH = this.whodasresult.LAH.score;
+      this.LASW = this.whodasresult.LASW.score;
+      this.PIS = this.whodasresult.PIS.score;
+      this.SC = this.whodasresult.SC.score;
+      this.UC = this.whodasresult.UC.score;
+      this.GAlevel = this.whodasresult.GA.level;
+      this.GAWPlevel = this.whodasresult.GAWP.level;
+      this.LAHlevel = this.whodasresult.LAH.level;
+      this.LASWlevel = this.whodasresult.LASW.level;
+      this.PISlevel = this.whodasresult.PIS.level;
+      this.SClevel = this.whodasresult.SC.level;
+      this.UClevel = this.whodasresult.UC.level;
       this.UserTotal = this.whodasresult.UserTotal;
     }
   },

@@ -1,25 +1,80 @@
 <template>
-  <div class="individual notshow-box hide">
+  <div class="organization notshow-box hide">
     <div class="row">
       <div class="col-sm-12">
-        <h4 class="title-h4">Background</h4>
+        <h4 class="title-h4">Organization Background</h4>
       </div>
     </div>
 
-    <!-- <form class="form-padding" method="post" @submit.prevent="OnSubmit"> -->
+    <!-- <form class="form-padding"> -->
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
+        <label for="" class="col-sm-4 col-form-label"
+          >Name of organization or company<span>*</span></label
+        >
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="name" />
+          <input type="txet" class="form-control" id="" v-model="org_name"/>
         </div>
       </div>
 
       <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label"
-          >Date Of Birth<span>*</span></label
+          >Registration Number<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="date" class="form-control" id="" v-model="dob" />
+          <input type="txet" class="form-control" id="" v-model="org_reg_number"/>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="" class="col-sm-4 col-form-label"
+          >Brief description of the company/organization background<span
+            >*</span
+          ></label
+        >
+        <div class="col-sm-8">
+          <textarea class="form-control textarea" rows="3" v-model="org_desc"></textarea>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="" class="col-sm-4 col-form-label"
+          >Company/Organization Contact Details</label
+        >
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="" class="form-label">Email<span>*</span></label>
+                <input type="email" class="form-control" v-model="org_email"/>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="" class="form-label"
+                  >Phone Number<span>*</span></label
+                >
+                <input type="text" class="form-control" v-model="org_phone"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="title-h4">Representative Background</h4>
+
+      <div class="row mb-3">
+        <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
+        <div class="col-sm-8">
+          <input type="txet" class="form-control" id="" v-model="Oname" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="" class="col-sm-4 col-form-label"
+          >Position in Organization/Company<span>*</span></label
+        >
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="" v-model="Oposition_in_org" />
         </div>
       </div>
 
@@ -28,7 +83,7 @@
           >Email<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="" v-model="email" />
+          <input type="email" class="form-control" id="" v-model="Oemail"/>
         </div>
       </div>
 
@@ -37,39 +92,29 @@
           >Phone Number<span>*</span></label
         >
         <div class="col-sm-8">
-          <input
-            type="txet"
-            class="form-control"
-            id=""
-            v-model="phone_number"
-          />
+          <input type="txet" class="form-control" id="" v-model="Ophone_number"/>
         </div>
       </div>
 
       <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Address</label>
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="address" />
-          <input
-            type="txet"
-            class="form-control mt-2"
-            id=""
-            v-model="address1"
-          />
+          <input type="txet" class="form-control" id="" v-model="Oaddress"/>
+          <input type="txet" class="form-control mt-2" id="" v-model="Oaddress1"/>
         </div>
       </div>
 
-      <div class="row">
+     <div class="row">
         <div class="col-md-4 mb-3">
           <label class="form-label">State<span>*</span></label>
           <select
             class="form-select"
             @change="onCitybind($event)"
-            v-model="state_id"
+            v-model="Ostate_id"
           >
             <option value="0">Please Select</option>
             <option
-              v-for="state in StateList"
+              v-for="state in OStateList"
               v-bind:key="state.id"
               v-bind:value="state.id"
             >
@@ -79,10 +124,10 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select class="form-select" v-model="city_id">
+          <select class="form-select" v-model="Ocity_id">
             <option value="0">Please Select</option>
             <option
-              v-for="ctl in CityList"
+              v-for="ctl in OCityList"
               v-bind:key="ctl.postcode_id"
               v-bind:value="ctl.postcode_id"
             >
@@ -92,10 +137,10 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">Postcode<span>*</span></label>
-          <select class="form-select" v-model="postcode_id">
+          <select class="form-select" v-model="Opostcode_id">
             <option value="0">Please Select</option>
             <option
-              v-for="pst in PostCodeList"
+              v-for="pst in OPostCodeList"
               v-bind:key="pst.postcode_id"
               v-bind:value="pst.postcode_id"
             >
@@ -105,13 +150,13 @@
         </div>
       </div>
 
-      <div class="row">
+    <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">Highest Education<span>*</span></label>
-          <select class="form-select" v-model="education_id">
+          <select class="form-select" v-model="Oeducation_id">
             <option value="0">Please Select</option>
             <option
-              v-for="ed in EducationList"
+              v-for="ed in OEducationList"
               v-bind:key="ed.id"
               v-bind:value="ed.id"
             >
@@ -123,10 +168,10 @@
           <label class="form-label"
             >Current Occupation Sector<span>*</span></label
           >
-          <select class="form-select" v-model="occupation_sector_id">
+          <select class="form-select" v-model="Ooccupation_sector_id">
             <option value="0">Please Select</option>
             <option
-              v-for="os in OccupationList"
+              v-for="os in OOccupationList"
               v-bind:key="os.id"
               v-bind:value="os.id"
             >
@@ -139,10 +184,10 @@
       <div class="row mb-3 mt-2">
         <label for="" class="col-sm-4 col-form-label">Mentari</label>
         <div class="col-sm-8">
-          <select class="form-select" v-model="branch_id">
+          <select class="form-select" v-model="Obranch_id">
             <option value="0">Please Select</option>
             <option
-              v-for="brn in BranchList"
+              v-for="brn in OBranchList"
               v-bind:key="brn.id"
               v-bind:value="brn.id"
             >
@@ -162,11 +207,9 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="volunteerism"
-              v-model="area_of_involvement"
-              value="Volunteerism"
+              id="volunteerism2"  value="Volunteerism" v-model="Oarea_of_involvement"
             />
-            <label class="form-check-label" for="volunteerism">
+            <label class="form-check-label" for="volunteerism2">
               Volunteerism
             </label>
           </div>
@@ -175,11 +218,9 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="outreach-project"
-              v-model="area_of_involvement"
-              value="Outreach Project Collaboration"
+              id="outreach-project2" value="Outreach Project Collaboration" v-model="Oarea_of_involvement"
             />
-            <label class="form-check-label" for="outreach-project">
+            <label class="form-check-label" for="outreach-project2">
               Outreach Project Collaboration
             </label>
           </div>
@@ -188,104 +229,172 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="networking"
-              v-model="area_of_involvement"
-              value="Networking Make a Contribution"
+              id="networking2" value="Networking Make a Contribution" v-model="Oarea_of_involvement"
             />
-            <label class="form-check-label" for="networking">
+            <label class="form-check-label" for="networking2">
               Networking Make a Contribution
             </label>
           </div>
         </div>
       </div>
 
-      <div class="areas-involvement hide" id="volunteerismshow">
+      <div class="areas-involvement hide" id="volunteerism2show">
         <h4 class="title-h4">Volunteerism</h4>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Do you have volunteering experience?<span>*</span></label
+            Does your organization have any volunteering experience?</label
           >
           <div class="col-sm-8 radio-box">
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
-                name="experience"
-                id="experience-yes"
-                value="experience-yes"
-                v-model="is_voluneering_exp"
+                name="experience2"
+                id="experience2-yes"
+                value="experience2-yes"  v-model="Ois_voluneering_exp"
               />
-              <label class="form-check-label" for="experience-yes">Yes</label>
+              <label class="form-check-label" for="experience2-yes">Yes</label>
             </div>
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
-                name="experience"
-                id="experience-no"
-                value="0"
-                v-model="is_voluneering_exp"
+                name="experience2"
+                id="experience2-no"
+                value="option2"  v-model="Ois_voluneering_exp"
               />
-              <label class="form-check-label" for="experience-no">No</label>
+              <label class="form-check-label" for="experience2-no">No</label>
             </div>
+          </div>
+        </div>
 
-            <!-- hide-div -->
-            <div class="experience-yes experi-box hide">
-              <div class="mt-3">
-                <textarea
-                  class="form-control textarea"
-                  rows="3"
-                  placeholder="Please describe"
-                  v-model="exp_details"
-                ></textarea>
-              </div>
-            </div>
+        <!-- hide-div -->
+        <div class="experience2-yes experi-box hide">
+          <div class="mt-3">
+            <table class="note" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>NO</th>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <input type="text" class="form-control" name="" v-model="OYear" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" name=""  v-model="OLocation"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" name="" v-model="ODescription"/>
+                  </td>
+                  <!-- <td>
+                    <a href="#"><i class="far fa-plus"></i></a>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Are you a mental health professional?<span>*</span></label
+            Does your organization consist of mental health professional?<span
+              >*</span
+            ></label
           >
           <div class="col-sm-8 professional-box">
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
-                name="professional"
-                id="professional-yes"
-                value="professional-yes"
-                v-model="is_mental_health_professional"
+                name="professional2"
+                id="professional2-yes"
+                value="professional2-yes" v-model="Ois_mental_health_professional"
               />
-              <label class="form-check-label" for="professional-yes">Yes</label>
+              <label class="form-check-label" for="professional2-yes"
+                >Yes</label
+              >
             </div>
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
-                name="professional"
-                id="professional-no"
-                value="0"
-                v-model="is_mental_health_professional"
+                name="professional2"
+                id="professional2-no"
+                value="professional2-no" v-model="Ois_mental_health_professional"
               />
-              <label class="form-check-label" for="professional-no">No</label>
+              <label class="form-check-label" for="professional2-no">No</label>
             </div>
 
             <!-- hide-div -->
-            <div class="professional-yes profess-box hide">
+            <div class="professional2-yes profess-box hide">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Please Attach Your Latest Resume<span>*</span></label
                 >
-                <input
-                  class="form-control"
-                  type="file"
-                  id="formFile"
-                  @change="selectFile"
-                />
+                <input class="form-control" type="file" id="formFile" @change="OselectFile" />
               </div>
+              <div class="mt-3">
+                <label for="formFile" class="form-label"
+                  >Relevant Mentari Service That You Want To Be Involved<span
+                    >*</span
+                  ></label
+                >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation" @click="OOnreliventmentari('Work-based Rehabilitation')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Work-based Rehabilitation
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Psychoeducation" @click="OOnreliventmentari('Awareness Or Psychoeducation')"
+                  />
+                  <label class="form-check-label" for="Psychoeducation">
+                    Awareness Or Psychoeducation
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Therapy" @click="OOnreliventmentari('Recreational Therapy')"
+                  />
+                  <label class="form-check-label" for="Therapy">
+                    Recreational Therapy
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Others" @click="OOnreliventmentari('Others')"
+                  />
+                  <label class="form-check-label" for="Others">
+                    Others:<input type="text" name="" v-model="OVolOthers"/>
+                  </label>
+                </div>
+              </div>
+            </div>
 
+            <div class="professional2-no profess-box hide">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
@@ -298,7 +407,6 @@
                     type="checkbox"
                     value=""
                     id="Rehabilitation"
-                    @click="Onreliventmentari('Work-based Rehabilitation')"
                   />
                   <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
@@ -310,7 +418,6 @@
                     type="checkbox"
                     value=""
                     id="Psychoeducation"
-                    @click="Onreliventmentari('Awareness Or Psychoeducation')"
                   />
                   <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
@@ -322,7 +429,6 @@
                     type="checkbox"
                     value=""
                     id="Therapy"
-                    @click="Onreliventmentari('Recreational Therapy')"
                   />
                   <label class="form-check-label" for="Therapy">
                     Recreational Therapy
@@ -334,64 +440,9 @@
                     type="checkbox"
                     value=""
                     id="Others"
-                    @click="Onreliventmentari('Others')"
                   />
                   <label class="form-check-label" for="Others">
-                    Others:<input type="text" name="" v-model="VolOthers" />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="professional-no profess-box hide">
-              <div class="mt-3">
-                <label for="formFile" class="form-label"
-                  >Relevant Mentari Service That You Want To Be Involved<span
-                    >*</span
-                  ></label
-                >
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="Rehabilitation1"
-                  />
-                  <label class="form-check-label" for="Rehabilitation1">
-                    Work-based Rehabilitation
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="Psychoeducation1"
-                  />
-                  <label class="form-check-label" for="Psychoeducation1">
-                    Awareness Or Psychoeducation
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="Therapy1"
-                  />
-                  <label class="form-check-label" for="Therapy1">
-                    Recreational Therapy
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="Others1"
-                  />
-                  <label class="form-check-label" for="Others1">
-                    Others: <input type="text" name="" />
+                    Others:<input type="text" name="" />
                   </label>
                 </div>
               </div>
@@ -406,7 +457,7 @@
           <div class="col-sm-8">
             <div class="row">
               <div class="col-sm-6">
-                <select class="form-select" v-model="available_date">
+                <select class="form-select" v-model="Oavailable_date">
                   <option value="">Select Day</option>
                   <option value="Monday">Monday</option>
                   <option value="Tuesday">Tuesday</option>
@@ -416,7 +467,7 @@
                 </select>
               </div>
               <div class="col-sm-6">
-                <select class="form-select" v-model="available_time">
+                 <select class="form-select" v-model="Oavailable_time">
                   <option value="">Select Time</option>
                   <option value="8:00 AM">8:00 AM</option>
                   <option value="9:00 AM">9:00 AM</option>
@@ -433,16 +484,16 @@
 
       <!-- volunteerismshow -->
 
-      <div class="areas-involvement hide" id="outreach-projectshow">
+      <div class="areas-involvement hide" id="outreach-project2show">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
         <p>Please Provide a breief project description</p>
 
-        <div class="row mb-3 mt-2">
+         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
             >Project Name<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="project_name" />
+            <input type="text" class="form-control" name="" v-model="Oproject_name" />
           </div>
         </div>
         <!-- row-close -->
@@ -452,7 +503,7 @@
             >Project Background<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="project_background"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Oproject_background"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -462,7 +513,7 @@
             >Project Objectives<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="project_objectives"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Oproject_objectives"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -472,7 +523,7 @@
             >Target Audience<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="target_audience"/>
+            <input type="text" class="form-control" name="" v-model="Otarget_audience"/>
           </div>
         </div>
         <!-- row-close -->
@@ -482,7 +533,7 @@
             >Number of Participants<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="no_of_paricipants"/>
+            <input type="number" class="form-control" name="" v-model="Ono_of_paricipants"/>
           </div>
         </div>
         <!-- row-close -->
@@ -492,7 +543,7 @@
             >Time Frame<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="time_frame"/>
+            <input type="text" class="form-control" name="" v-model="Otime_frame"/>
           </div>
         </div>
         <!-- row-close -->
@@ -502,7 +553,7 @@
             >Estimated Budget<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="estimated_budget"/>
+            <input type="number" class="form-control" name="" v-model="Oestimated_budget"/>
           </div>
         </div>
         <!-- row-close -->
@@ -512,7 +563,7 @@
             >Project Scopes<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="project_scopes"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Oproject_scopes"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -527,10 +578,10 @@
                 class="form-check-input"
                 type="radio"
                 name="project-location"
-                id="project-location-mentari"
-                value="mentari" v-model="project_loaction"
+                id="location-mentari"
+                value="location-mentari" v-model="Oproject_loaction"
               />
-              <label class="form-check-label" for="project-location-mentari"
+              <label class="form-check-label" for="location-mentari"
                 >Mentari</label
               >
             </div>
@@ -540,21 +591,21 @@
                 class="form-check-input"
                 type="radio"
                 name="project-location"
-                id="project-location-others"
-                value="project-location-others" v-model="project_loaction"
+                id="location-others"
+                value="location-others" v-model="Oproject_loaction"
               />
-              <label class="form-check-label" for="project-location-others"
+              <label class="form-check-label" for="location-others"
                 >Others</label
               >
             </div>
 
             <!-- hide-div -->
-            <div class="mentari profess-box hide">
+            <div class="location-mentari profess-box hide">
               <div class="mt-3">
-                <select class="form-select" v-model="project_branch">
+              <select class="form-select" v-model="Oproject_branch">
                   <option value="">Please Select</option>
             <option
-              v-for="brn in BranchList"
+              v-for="brn in OBranchList"
               v-bind:key="brn.hospital_branch_name"
               v-bind:value="brn.hospital_branch_name"
             >
@@ -564,13 +615,13 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box hide">
+            <div class="location-others profess-box hide">
               <div class="mt-3">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Please Specify"
-                  name="" v-model="other_loaction"
+                  placeholder="Please Specify" v-model="Oother_loaction"
+                  name=""
                 />
               </div>
             </div>
@@ -584,7 +635,7 @@
             >How do you want to measure the target outcome?<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="target_outcome"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Otarget_outcome"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -594,7 +645,7 @@
             >Any planned follow up projects?<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="followup_projects"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Ofollowup_projects"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -605,13 +656,13 @@
               >*</span
             ></label
           >
-          <div class="col-sm-8">
+           <div class="col-sm-8">
             <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation" 
-                id="Rehabilitation2" @change="Onrelevatedmentari('Work-based Rehabilitation')"
+                id="Rehabilitation2" @change="OOnrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
                 Work-based Rehabilitation
@@ -622,7 +673,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation" 
-                id="Psychoeducation2" @change="Onrelevatedmentari('Awareness Or Psychoeducation')"
+                id="Psychoeducation2" @change="OOnrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -633,7 +684,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy" 
-                id="Therapy2" @change="Onrelevatedmentari('Recreational Therapy')"
+                id="Therapy2" @change="OOnrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -644,10 +695,10 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Others" 
-                id="Others2" @change="Onrelevatedmentari('Others')"
+                id="Others2" @change="OOnrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name=""  v-model="outreachother"/>
+                Others: <input type="text" name=""  v-model="Ooutreachother"/>
               </label>
             </div>
           </div>
@@ -657,7 +708,7 @@
 
       <!-- outreach-projectshow -->
 
-      <div class="areas-involvement hide" id="networkingshow">
+      <div class="areas-involvement hide" id="networking2show">
         <h4 class="title-h4">Networking-Make a Contribution</h4>
         <p>
           We encourage any participation from the community members in line with
@@ -671,7 +722,7 @@
             >How would you like contribute?</label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="contribution"></textarea>
+            <textarea class="form-control textarea" rows="3" v-model="Ocontribution"></textarea>
           </div>
         </div>
         <!-- row-close -->
@@ -681,7 +732,7 @@
             >Estimated Budget<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="budget"/>
+            <input type="number" class="form-control" name="" v-model="Obudget" />
           </div>
         </div>
         <!-- row-close -->
@@ -697,7 +748,7 @@
                 type="radio"
                 name="project-location"
                 id="project-location-mentari1"
-                value="project-location-mentari" v-model="netwotkproject_loaction"
+                value="project-location-mentari" v-model="Onetwotkproject_loaction"
               />
               <label class="form-check-label" for="project-location-mentari1"
                 >Mentari</label
@@ -710,7 +761,7 @@
                 type="radio"
                 name="project-location"
                 id="project-location-others1"
-                value="project-location-others" v-model="netwotkproject_loaction"
+                value="project-location-others" v-model="Onetwotkproject_loaction"
               />
               <label class="form-check-label" for="project-location-others1"
                 >Others</label
@@ -720,10 +771,10 @@
             <!-- hide-div -->
             <div class="project-location-mentari profess-box hide">
               <div class="mt-3">
-                <select class="form-select" v-model="networkbranch">
+                <select class="form-select" v-model="Onetworkbranch">
                   <option value="">Please Select</option>
             <option
-              v-for="brn in BranchList"
+              v-for="brn in OBranchList"
               v-bind:key="brn.hospital_branch_name"
               v-bind:value="brn.hospital_branch_name"
             >
@@ -739,7 +790,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Please Specify"
-                  name="" v-model="networkother"
+                  name="" v-model="Onetworkother"
                 />
               </div>
             </div>
@@ -747,12 +798,12 @@
         </div>
         <!-- row-close -->
 
-        <div class="row mb-3 mt-2">
+            <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
             >Number of Participants<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="networkno_of_paricipants" />
+            <input type="number" class="form-control" name="" v-model="Onetworkno_of_paricipants" />
           </div>
         </div>
         <!-- row-close -->
@@ -769,7 +820,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Rehabilitation2" @click="Onnetworkrelevatedmentari('Work-based Rehabilitation')"
+                id="Rehabilitation2" @click="OOnnetworkrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
                 Work-based Rehabilitation
@@ -780,7 +831,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Psychoeducation2" @click="Onnetworkrelevatedmentari('Awareness Or Psychoeducation')"
+                id="Psychoeducation2" @click="OOnnetworkrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -791,7 +842,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Therapy2" @click="Onnetworkrelevatedmentari('Recreational Therapy')"
+                id="Therapy2" @click="OOnnetworkrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -802,10 +853,10 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Others2" @click="Onnetworkrelevatedmentari('Other')"
+                id="Others2" @click="OOnnetworkrelevatedmentari('Other')"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name="" v-model="networkserviceother"/>
+                Others: <input type="text" name="" v-model="Onetworkserviceother"/>
               </label>
             </div>
           </div>
@@ -813,7 +864,7 @@
         <!-- row-close -->
       </div>
       <!-- networking -->
-  <p v-if="errors.length">
+<p v-if="errors.length">
 <ul>
         <li style="color:red"  v-for='err in errors'
     :key='err' >
@@ -822,90 +873,98 @@
       </ul>
         </p>
       <div class="d-flex align-items-center">
-        <div class="form-check mr-auto">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="gridCheck"
-            value="1"
-            v-model="is_agree"
-          />
-          <label class="form-check-label" for="gridCheck">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck12"  v-model="Ois_agree" />
+          <label class="form-check-label" for="gridCheck12">
             I agree to the terms and condition<span>*</span>
           </label>
         </div>
-        <button type="submit" class="btn btn-warning btn-text ml-auto" @click="OnSubmit">
-          <i class="far fa-save"></i> Save
-        </button>
+
+       <button
+        type="submit"
+        class="btn btn-warning btn-text ml-auto"
+        @click="OnSubmit"
+      >
+        <i class="far fa-save"></i> Save
+      </button>
       </div>
     <!-- </form> -->
   </div>
 </template>
 <script>
 export default {
-  name: "Individual",
+  name: "Organization",
   data() {
     return {
       userdetails: null,
       errors: [],
       loader: false,
-      StateList: [],
-      CityList: [],
-      PostCodeList: [],
-      EducationList: [],
-      OccupationList: [],
-      BranchList: [],
-      section: 0,
-      name: "",
-      dob: "",
-      email: "",
-      phone_number: "",
-      address: "",
-      address1: "",
-      postcode_id: 0,
-      city_id: 0,
-      state_id: 0,
-      education_id: 0,
-      occupation_sector_id: 0,
-      branch_id: 0,
-      area_of_involvement: "",
-      is_agree: 0,
-      is_voluneering_exp: 0,
-      exp_details: "",
-      is_mental_health_professional: 0,
-      mentari_services: "",
-      available_date: "",
-      available_time: "",
-      file: null,
-      Isvalid: false,
-      VolOthers: "",
-      //Outreach Project Collaboration
-      project_name: "",
-      project_background: "",
-      project_objectives: "",
-      mentari_services: "",
-      target_audience: "",
-      no_of_paricipants: 0,
-      time_frame: "",
-      estimated_budget: 0,
-      project_scopes: "",
-      project_loaction: "",
-      project_loaction_value: "",
-      target_outcome: "",
-      followup_projects: 0,
-      other_loaction: "",
-      project_branch: "",
-      outreachother: "",
-      outreachmentari_services: "",
-      networkmentari_services: "",
-      contribution: "",
-      budget: "",
-      networkno_of_paricipants: 0,
-      netwotkproject_loaction: "",
-      netwotkproject_loaction_value: "",
-      networkbranch: "",
-      networkother: "",
-      networkserviceother: "",
+      OStateList: [],
+      OCityList: [],
+      OPostCodeList: [],
+      OEducationList: [],
+      OOccupationList: [],
+      OBranchList: [],
+      Ois_agree: 0,
+      org_name: "",
+      org_reg_number: "",
+      org_desc: "",
+      org_email: "",
+      org_phone: "",
+      //VOLUNTEEM
+      Oname: "",
+      Oposition_in_org: "",
+      Odob: "",
+      Oemail: "",
+      Ophone_number: "",
+      Oaddress: "",
+      Oaddress1: "",
+      Opostcode_id: 0,
+      Ocity_id: 0,
+      Ostate_id: 0,
+      Oeducation_id: 0,
+      Ooccupation_sector_id: 0,
+      Obranch_id: 0,
+      Oarea_of_involvement: "",
+      Ois_voluneering_exp: 0,
+      Oexp_details: "",
+      Ois_mental_health_professional: 0,
+      Omentari_services: "",
+      Oavailable_date: "",
+      Oavailable_time: "",
+      Ofile: null,
+      OIsvalid: false,
+      OVolOthers: "",
+      OYear: "",
+      OLocation: "",
+      ODescription: "",
+      //OUTREACH
+      Oproject_name: "",
+      Oproject_background: "",
+      Oproject_objectives: "",
+      Omentari_services: "",
+      Otarget_audience: "",
+      Ono_of_paricipants: 0,
+      Otime_frame: "",
+      Oestimated_budget: 0,
+      Oproject_scopes: "",
+      Oproject_loaction: "",
+      Oproject_loaction_value: "",
+      Otarget_outcome: "",
+      Ofollowup_projects: 0,
+      Oother_loaction: "",
+      Oproject_branch: "",
+      Ooutreachother: "",
+      Ooutreachmentari_services: "",
+      Onetworkmentari_services: "",
+      Ocontribution: "",
+      Obudget: "",
+      Onetworkno_of_paricipants: 0,
+      Onetwotkproject_loaction: "",
+      Onetwotkproject_loaction_value: "",
+      Onetworkbranch: "",
+      Onetworkother: "",
+      Onetworkserviceother: "",
     };
   },
   beforeMount() {
@@ -979,8 +1038,31 @@ export default {
     this.GetList();
   },
   methods: {
-    selectFile(event) {
-      this.file = event.target.files[0];
+    OselectFile(event) {
+      this.Ofile = event.target.files[0];
+    },
+    OOnreliventmentari(val) {
+      if (this.Omentari_services) {
+        this.Omentari_services = this.Omentari_services + "," + val;
+      } else {
+        this.Omentari_services = val;
+      }
+    },
+    OOnrelevatedmentari(val) {
+      if (this.Ooutreachmentari_services) {
+        this.Ooutreachmentari_services =
+          this.Ooutreachmentari_services + "," + val;
+      } else {
+        this.Ooutreachmentari_services = val;
+      }
+    },
+    OOnnetworkrelevatedmentari(val) {
+      if (this.Onetworkmentari_services) {
+        this.Onetworkmentari_services =
+          this.Onetworkmentari_services + "," + val;
+      } else {
+        this.Onetworkmentari_services = val;
+      }
     },
     async onCitybind(event) {
       const headers = {
@@ -993,11 +1075,11 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        this.CityList = response.data.list;
-        this.PostCodeList = response.data.list;
+        this.OCityList = response.data.list;
+        this.OPostCodeList = response.data.list;
       } else {
-        this.CityList = [];
-        this.PostCodeList = [];
+        this.OCityList = [];
+        this.OPostCodeList = [];
       }
     },
     async GetList() {
@@ -1010,74 +1092,50 @@ export default {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
-        this.StateList = response.data.list;
+        this.OStateList = response.data.list;
       } else {
-        this.StateList = [];
+        this.OStateList = [];
       }
       const response1 = await this.$axios.get(
         "general-setting/list?section=" + "education-level",
         { headers }
       );
       if (response1.data.code == 200 || response1.data.code == "200") {
-        this.EducationList = response1.data.list;
+        this.OEducationList = response1.data.list;
       } else {
-        this.EducationList = [];
+        this.OEducationList = [];
       }
       const response2 = await this.$axios.get(
         "general-setting/list?section=" + "occupation-sector",
         { headers }
       );
       if (response2.data.code == 200 || response2.data.code == "200") {
-        this.OccupationList = response2.data.list;
+        this.OOccupationList = response2.data.list;
       } else {
-        this.OccupationList = [];
+        this.OOccupationList = [];
       }
       const response3 = await this.$axios.get("hospital/branch-list", {
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
-        this.BranchList = response3.data.list;
+        this.OBranchList = response3.data.list;
       } else {
-        this.BranchList = [];
+        this.OBranchList = [];
       }
     },
-    Onreliventmentari(val) {
-      if (this.mentari_services) {
-        this.mentari_services = this.mentari_services + "," + val;
-      } else {
-        this.mentari_services = val;
-      }
-    },
-    Onrelevatedmentari(val) {
-      if (this.outreachmentari_services) {
-        this.outreachmentari_services =
-          this.outreachmentari_services + "," + val;
-      } else {
-        this.outreachmentari_services = val;
-      }
-    },
-    Onnetworkrelevatedmentari(val) {
-      if (this.networkmentari_services) {
-        this.networkmentari_services = this.networkmentari_services + "," + val;
-      } else {
-        this.networkmentari_services = val;
-      }
-    },
-
     OnSubmit() {
-      window.alert(this.area_of_involvement);
       this.errors = [];
-      if (this.is_agree) {
-        if (this.area_of_involvement == "Volunteerism") {
-          this.OnIndividualVolunteerism();
+      if (this.Ois_agree) {
+        if (this.Oarea_of_involvement == "Volunteerism") {
+          this.OnOrganizationVolunteerism();
         } else if (
-          this.area_of_involvement == "Outreach Project Collaboration"
+          this.Oarea_of_involvement == "Outreach Project Collaboration"
         ) {
-          this.OnIndividualOutreachProjectCollaboration();
+          this.OnOrganizationOutreachProjectCollaboration();
         } else if (
-          this.area_of_involvement == "Networking Make a Contribution"
+          this.Oarea_of_involvement == "Networking Make a Contribution"
         ) {
-          this.OnIndividualNetworkingMakeaContribution();
+          this.OnOrganizationNetworkingMakeaContribution();
         } else {
           this.errors.push("Please select Areas of Involvement");
         }
@@ -1085,102 +1143,152 @@ export default {
         this.errors.push("Please agree to the terms and condition");
       }
     },
-    async OnIndividualVolunteerism() {
+    async OnOrganizationVolunteerism() {
       try {
-        this.Isvalid = true;
-        if (!this.name) {
+        this.OIsvalid = true;
+        if (!this.org_name) {
+          this.errors.push("Name of organization or company is required.");
+        }
+        if (!this.org_reg_number) {
+          this.errors.push("Registration Number is required.");
+        }
+        if (!this.org_desc) {
+          this.errors.push("company/organization background is required.");
+        }
+        if (!this.org_email) {
+          this.errors.push("Company Email is required.");
+        }
+        if (!this.org_phone) {
+          this.errors.push("Company Phone Number is required.");
+        }
+        if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
+        // if (!this.Odob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        if (!this.Oposition_in_org) {
+          this.errors.push("Position in Organization/Company is required.");
         }
-        if (!this.email) {
+        if (!this.Oemail) {
           this.errors.push("Email is required.");
         }
-        if (!this.phone_number) {
+        if (!this.Ophone_number) {
           this.errors.push("Phone Number is required.");
         }
-        if (!this.address) {
+        if (!this.Oaddress) {
           this.errors.push("Address  is required.");
         }
-        if (!this.state_id) {
+        if (!this.Ostate_id) {
           this.errors.push("State is required.");
         }
-        if (!this.city_id) {
+        if (!this.Ocity_id) {
           this.errors.push("City is required.");
         }
-        if (!this.postcode_id) {
+        if (!this.Opostcode_id) {
           this.errors.push("Postcode is required.");
         }
-        if (!this.education_id) {
+        if (!this.Oeducation_id) {
           this.errors.push("Highest Education is required.");
         }
-        if (!this.occupation_sector_id) {
+        if (!this.Ooccupation_sector_id) {
           this.errors.push("Current Occupation Sector is required.");
         }
-        if (!this.branch_id) {
+        if (!this.Obranch_id) {
           this.errors.push("Mentari Branch is required.");
         }
-        if (!this.area_of_involvement) {
+        if (!this.Oarea_of_involvement) {
           this.errors.push("Areas of Involvement is required.");
         }
-        if (this.is_voluneering_exp == "experience-yes") {
-          if (!this.exp_details) {
-            this.errors.push(
-              "volunteering experience description is required."
-            );
-            this.Isvalid = false;
+        if (!this.Ois_voluneering_exp) {
+          this.errors.push(
+            "Does your organization have any volunteering experience is required."
+          );
+        }
+        if (!this.Ois_mental_health_professional) {
+          this.errors.push(
+            "Does your organization consist of mental health professional is required."
+          );
+        }
+        if (this.Ois_voluneering_exp == "experience2-yes") {
+          if (!this.OYear) {
+            this.errors.push("Organization year is required.");
+            this.OIsvalid = false;
+          }
+          if (!this.OLocation) {
+            this.errors.push("Organization Location is required.");
+            this.OIsvalid = false;
+          }
+          if (!this.ODescription) {
+            this.errors.push("Organization Description is required.");
+            this.OIsvalid = false;
           }
         }
-        if (this.is_mental_health_professional == "professional-yes") {
-          if (!this.file) {
+        if (this.Ois_mental_health_professional == "professional2-yes") {
+          if (!this.Ofile) {
             this.errors.push("Latest Resume is required.");
-            this.Isvalid = false;
+            this.OIsvalid = false;
           }
-          if (!this.mentari_services) {
-            this.errors.push("Relevant Mentari Service is required.");
-            this.Isvalid = false;
-          }
+          // if (!this.Omentari_services) {
+          //   this.errors.push("Relevant Mentari Service is required.");
+          //   this.OIsvalid = false;
+          // }
+        } else {
+          // if (!this.Omentari_services) {
+          //   this.errors.push("Relevant Mentari Service is required.");
+          //   this.OIsvalid = false;
+          // }
         }
-        if (!this.available_date) {
+        if (!this.Oavailable_date) {
           this.errors.push("Available Day is required.");
         }
-        if (!this.available_time) {
+        if (!this.Oavailable_time) {
           this.errors.push("Available Time is required.");
         }
         if (
-          this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.available_date &&
-          this.available_time
+          this.org_reg_number &&
+          this.org_desc &&
+          this.org_email &&
+          this.org_phone &&
+          this.Oposition_in_org &&
+          this.OIsvalid &&
+          this.Oname &&
+          //    this.Odob &&
+          this.Oemail &&
+          this.Ophone_number &&
+          this.Oaddress &&
+          this.Ostate_id &&
+          this.Ocity_id &&
+          this.Opostcode_id &&
+          this.Oeducation_id &&
+          this.Ooccupation_sector_id &&
+          this.Obranch_id &&
+          this.Oarea_of_involvement &&
+          this.Oavailable_date &&
+          this.Oavailable_time &&
+          this.org_name &&
+          this.org_reg_number &&
+          this.org_desc &&
+          this.org_email &&
+          this.org_phone &&
+          this.Oposition_in_org
         ) {
-          if (this.mentari_services) {
-            this.mentari_services =
-              this.mentari_services + "," + this.VolOthers;
+          if (this.Omentari_services) {
+            this.Omentari_services =
+              this.Omentari_services + "," + this.OVolOthers;
           }
-          if (this.address1) {
-            this.address = this.address + "\n" + this.address1;
+          if (this.Oaddress1) {
+            this.Oaddress = this.Oaddress + "\n" + this.Oaddress1;
           }
-          if (this.is_voluneering_exp == "experience-yes") {
-            this.is_voluneering_exp = "1";
+          if (this.Ois_mental_health_professional == "professional2-yes") {
+            this.Ois_mental_health_professional = "1";
           } else {
-            this.is_voluneering_exp = "0";
+            this.Ois_mental_health_professional = "0";
           }
-          if (this.is_mental_health_professional == "professional-yes") {
-            this.is_mental_health_professional = "1";
+          if (this.Ois_voluneering_exp == "experience2-yes") {
+            this.Ois_voluneering_exp = "1";
           } else {
-            this.is_mental_health_professional = "0";
+            this.Ois_voluneering_exp = "0";
           }
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1189,30 +1297,45 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
-          body.append("section", "individual");
-          body.append("name", this.name);
-          body.append("dob", this.dob);
-          body.append("email", this.email);
-          body.append("phone_number", this.phone_number);
-          body.append("address", this.address);
-          body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
-          body.append("state_id", this.state_id);
-          body.append("education_id", this.education_id);
-          body.append("occupation_sector_id", this.occupation_sector_id);
-          body.append("branch_id", this.branch_id);
-          body.append("area_of_involvement", this.area_of_involvement);
+          body.append("section", "org");
+          body.append("org_name", this.org_name);
+          body.append("org_reg_number", this.org_reg_number);
+          body.append("org_desc", this.org_desc);
+          body.append("org_email", this.org_email);
+          body.append("org_phone", this.org_phone);
+          body.append("position_in_org", this.Oposition_in_org);
           body.append("is_agree", "1");
-          body.append("is_voluneering_exp", this.is_voluneering_exp);
-          body.append("exp_details", this.exp_details);
+          body.append("name", this.Oname);
+          body.append("dob", "");
+          body.append("email", this.Oemail);
+          body.append("phone_number", this.Ophone_number);
+          body.append("address", this.Oaddress);
+          body.append("postcode_id", this.Opostcode_id);
+          body.append("city_id", this.Ocity_id);
+          body.append("state_id", this.Ostate_id);
+          body.append("education_id", this.Oeducation_id);
+          body.append("occupation_sector_id", this.Ooccupation_sector_id);
+          body.append("branch_id", this.Obranch_id);
+          body.append("area_of_involvement", this.Oarea_of_involvement);
+          body.append("is_voluneering_exp", this.Ois_voluneering_exp);
+          body.append(
+            "exp_details",
+            JSON.stringify([
+              {
+                Year: this.OYear,
+                Location: this.OLocation,
+                Description: this.ODescription,
+              },
+            ])
+          );
           body.append(
             "is_mental_health_professional",
-            this.is_mental_health_professional
+            this.Ois_mental_health_professional
           );
-          body.append("mentari_services", this.mentari_services);
-          body.append("available_date", this.available_date);
-          body.append("available_time", this.available_time);
-          body.append("health_professional_resume", this.file);
+          body.append("mentari_services", this.Omentari_services);
+          body.append("available_date", this.Oavailable_date);
+          body.append("available_time", this.Oavailable_time);
+          body.append("health_professional_resume", this.Ofile);
           const response = await this.$axios.post("von/add", body, {
             headers,
           });
@@ -1221,7 +1344,8 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-            this.Reaload();
+            this.Reload();
+          console.log('my resut',response.data);
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
@@ -1229,133 +1353,158 @@ export default {
           }
         }
       } catch (e) {
+        console.log("my log", e);
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
         });
       }
     },
-    async OnIndividualOutreachProjectCollaboration() {
+    async OnOrganizationOutreachProjectCollaboration() {
       try {
-        this.Isvalid = true;
-        if (!this.name) {
+        this.OIsvalid = true;
+        if (!this.org_name) {
+          this.errors.push("Name of organization or company is required.");
+        }
+        if (!this.org_reg_number) {
+          this.errors.push("Registration Number is required.");
+        }
+        if (!this.org_desc) {
+          this.errors.push("company/organization background is required.");
+        }
+        if (!this.org_email) {
+          this.errors.push("Company Email is required.");
+        }
+        if (!this.org_phone) {
+          this.errors.push("Company Phone Number is required.");
+        }
+        if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
+        // if (!this.Odob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        if (!this.Oposition_in_org) {
+          this.errors.push("Position in Organization/Company is required.");
         }
-        if (!this.email) {
+        if (!this.Oemail) {
           this.errors.push("Email is required.");
         }
-        if (!this.phone_number) {
+        if (!this.Ophone_number) {
           this.errors.push("Phone Number is required.");
         }
-        if (!this.address) {
+        if (!this.Oaddress) {
           this.errors.push("Address  is required.");
         }
-        if (!this.state_id) {
+        if (!this.Ostate_id) {
           this.errors.push("State is required.");
         }
-        if (!this.city_id) {
+        if (!this.Ocity_id) {
           this.errors.push("City is required.");
         }
-        if (!this.postcode_id) {
+        if (!this.Opostcode_id) {
           this.errors.push("Postcode is required.");
         }
-        if (!this.education_id) {
+        if (!this.Oeducation_id) {
           this.errors.push("Highest Education is required.");
         }
-        if (!this.occupation_sector_id) {
+        if (!this.Ooccupation_sector_id) {
           this.errors.push("Current Occupation Sector is required.");
         }
-        if (!this.branch_id) {
+        if (!this.Obranch_id) {
           this.errors.push("Mentari Branch is required.");
         }
-        if (!this.project_name) {
+        if (!this.Oproject_name) {
           this.errors.push("Project Name is required.");
         }
-        if (!this.project_background) {
+        if (!this.Oproject_background) {
           this.errors.push("Project Background is required.");
         }
-        if (!this.project_objectives) {
+        if (!this.Oproject_objectives) {
           this.errors.push("Project Objectives is required.");
         }
-        if (!this.target_audience) {
+        if (!this.Otarget_audience) {
           this.errors.push("Target Audience is required.");
         }
-        if (!this.no_of_paricipants) {
+        if (!this.Ono_of_paricipants) {
           this.errors.push("Number of Participants is required.");
         }
-        if (!this.time_frame) {
+        if (!this.Otime_frame) {
           this.errors.push("Time Frame is required.");
         }
-        if (!this.estimated_budget) {
+        if (!this.Oestimated_budget) {
           this.errors.push("Estimated Budget is required.");
         }
-        if (!this.project_scopes) {
+        if (!this.Oproject_scopes) {
           this.errors.push("Project Scopes is required.");
         }
-        if (!this.project_loaction) {
+        if (!this.Oproject_loaction) {
           this.errors.push("Project Location is required.");
         } else {
-          if (this.project_loaction == "project-location-others") {
-            if (!this.other_loaction) {
+          if (this.Oproject_loaction == "project-location-others") {
+            if (!this.Oother_loaction) {
               this.errors.push("Please Enter Other Location");
-              this.Isvalid = false;
+              this.OIsvalid = false;
             } else {
-              this.project_loaction_value = this.project_other;
+              this.Oproject_loaction_value = this.Oproject_other;
             }
           } else {
-            if (!this.project_branch) {
+            if (!this.Oproject_branch) {
               this.errors.push("Please select Mentari Branch.");
-              this.Isvalid = false;
+              this.OIsvalid = false;
             } else {
-              this.project_loaction_value = this.project_branch;
+              this.Oproject_loaction_value = this.Oproject_branch;
             }
           }
         }
-        if (!this.target_outcome) {
+        if (!this.Otarget_outcome) {
           this.errors.push("target outcome is required.");
         }
-        if (!this.followup_projects) {
+        if (!this.Ofollowup_projects) {
           this.errors.push("Any planned follow up projects is required.");
         }
-        if (!this.outreachmentari_services) {
+        if (!this.Ooutreachmentari_services) {
           this.errors.push("Relevant Mentari Service is required.");
         }
         if (
-          this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.project_name &&
-          this.project_background &&
-          this.project_objectives &&
-          this.target_audience &&
-          this.no_of_paricipants &&
-          this.time_frame &&
-          this.estimated_budget &&
-          this.project_scopes &&
-          this.project_loaction &&
-          this.project_loaction_value &&
-          this.target_outcome &&
-          this.followup_projects &&
-          this.outreachmentari_services
+          this.OIsvalid &&
+          this.Oname &&
+          //  this.Odob &&
+          this.Oemail &&
+          this.Ophone_number &&
+          this.Oaddress &&
+          this.Ostate_id &&
+          this.Ocity_id &&
+          this.Opostcode_id &&
+          this.Oeducation_id &&
+          this.Ooccupation_sector_id &&
+          this.Obranch_id &&
+          this.Oarea_of_involvement &&
+          this.Oproject_name &&
+          this.Oproject_background &&
+          this.Oproject_objectives &&
+          this.Otarget_audience &&
+          this.Ono_of_paricipants &&
+          this.Otime_frame &&
+          this.Oestimated_budget &&
+          this.Oproject_scopes &&
+          this.Oproject_loaction &&
+          this.Oproject_loaction_value &&
+          this.Otarget_outcome &&
+          this.Ofollowup_projects &&
+          this.Ooutreachmentari_services &&
+          this.org_name &&
+          this.org_reg_number &&
+          this.org_desc &&
+          this.org_email &&
+          this.org_phone &&
+          this.Oposition_in_org
         ) {
-          if (this.outreachmentari_services) {
-            this.outreachmentari_services =
-              this.outreachmentari_services + "," + this.outreachother;
+          if (this.Ooutreachmentari_services) {
+            this.Ooutreachmentari_services =
+              this.Ooutreachmentari_services + "," + this.Ooutreachother;
           }
-          if (this.address1) {
-            this.address = this.address + "\n" + this.address1;
+          if (this.Oaddress1) {
+            this.Oaddress = this.address + "\n" + this.Oaddress1;
           }
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1364,33 +1513,39 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
-          body.append("section", "individual");
-          body.append("name", this.name);
-          body.append("dob", this.dob);
-          body.append("email", this.email);
-          body.append("phone_number", this.phone_number);
-          body.append("address", this.address);
-          body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
-          body.append("state_id", this.state_id);
-          body.append("education_id", this.education_id);
-          body.append("occupation_sector_id", this.occupation_sector_id);
-          body.append("branch_id", this.branch_id);
-          body.append("area_of_involvement", this.area_of_involvement);
-          body.append("project_name", this.project_name);
-          body.append("project_background", this.project_background);
-          body.append("project_objectives", this.project_objectives);
-          body.append("mentari_services", this.outreachmentari_services);
-          body.append("target_audience", this.target_audience);
-          body.append("no_of_paricipants", this.no_of_paricipants);
-          body.append("time_frame", this.time_frame);
-          body.append("estimated_budget", this.estimated_budget);
-          body.append("project_scopes", this.project_scopes);
-          body.append("project_loaction", this.project_loaction);
-          body.append("project_loaction_value", this.project_loaction_value);
-          body.append("target_outcome", this.target_outcome);
-          body.append("followup_projects", this.followup_projects);
+          body.append("section", "org");
+          body.append("org_name", this.org_name);
+          body.append("org_reg_number", this.org_reg_number);
+          body.append("org_desc", this.org_desc);
+          body.append("org_email", this.org_email);
+          body.append("org_phone", this.org_phone);
+          body.append("position_in_org", this.Oposition_in_org);
           body.append("is_agree", "1");
+          body.append("name", this.Oname);
+          body.append("dob", "");
+          body.append("email", this.Oemail);
+          body.append("phone_number", this.Ophone_number);
+          body.append("address", this.Oaddress);
+          body.append("postcode_id", this.Opostcode_id);
+          body.append("city_id", this.Ocity_id);
+          body.append("state_id", this.Ostate_id);
+          body.append("education_id", this.Oeducation_id);
+          body.append("occupation_sector_id", this.Ooccupation_sector_id);
+          body.append("branch_id", this.Obranch_id);
+          body.append("area_of_involvement", this.Oarea_of_involvement);
+          body.append("project_name", this.Oproject_name);
+          body.append("project_background", this.Oproject_background);
+          body.append("project_objectives", this.Oproject_objectives);
+          body.append("mentari_services", this.Ooutreachmentari_services);
+          body.append("target_audience", this.Otarget_audience);
+          body.append("no_of_paricipants", this.Ono_of_paricipants);
+          body.append("time_frame", this.Otime_frame);
+          body.append("estimated_budget", this.Oestimated_budget);
+          body.append("project_scopes", this.Oproject_scopes);
+          body.append("project_loaction", this.Gproject_loaction);
+          body.append("project_loaction_value", this.Oproject_loaction_value);
+          body.append("target_outcome", this.Otarget_outcome);
+          body.append("followup_projects", this.Ofollowup_projects);
           const response = await this.$axios.post("von/add", body, {
             headers,
           });
@@ -1399,7 +1554,7 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-            this.Reaload();
+            this.Reload();
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
@@ -1412,101 +1567,125 @@ export default {
         });
       }
     },
-    async OnIndividualNetworkingMakeaContribution() {
+    async OnOrganizationNetworkingMakeaContribution() {
       try {
-        this.Isvalid = true;
-        if (!this.name) {
+        this.OIsvalid = true;
+        if (!this.org_name) {
+          this.errors.push("Name of organization or company is required.");
+        }
+        if (!this.org_reg_number) {
+          this.errors.push("Registration Number is required.");
+        }
+        if (!this.org_desc) {
+          this.errors.push("company/organization background is required.");
+        }
+        if (!this.org_email) {
+          this.errors.push("Company Email is required.");
+        }
+        if (!this.org_phone) {
+          this.errors.push("Company Phone Number is required.");
+        }
+        if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
+        // if (!this.Odob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        if (!this.Oposition_in_org) {
+          this.errors.push("Position in Organization/Company is required.");
         }
-        if (!this.email) {
+        if (!this.Oemail) {
           this.errors.push("Email is required.");
         }
-        if (!this.phone_number) {
+        if (!this.Ophone_number) {
           this.errors.push("Phone Number is required.");
         }
-        if (!this.address) {
+        if (!this.Oaddress) {
           this.errors.push("Address  is required.");
         }
-        if (!this.state_id) {
+        if (!this.Ostate_id) {
           this.errors.push("State is required.");
         }
-        if (!this.city_id) {
+        if (!this.Ocity_id) {
           this.errors.push("City is required.");
         }
-        if (!this.postcode_id) {
+        if (!this.Opostcode_id) {
           this.errors.push("Postcode is required.");
         }
-        if (!this.education_id) {
+        if (!this.Oeducation_id) {
           this.errors.push("Highest Education is required.");
         }
-        if (!this.occupation_sector_id) {
+        if (!this.Ooccupation_sector_id) {
           this.errors.push("Current Occupation Sector is required.");
         }
-        if (!this.branch_id) {
+        if (!this.Obranch_id) {
           this.errors.push("Mentari Branch is required.");
         }
-        if (!this.contribution) {
+        if (!this.Ocontribution) {
           this.errors.push("How would you like contribute is required.");
         }
-        if (!this.budget) {
+        if (!this.Obudget) {
           this.errors.push("Estimated Budget is required.");
         }
-        if (!this.networkno_of_paricipants) {
+        if (!this.Onetworkno_of_paricipants) {
           this.errors.push("Number of Participants is required.");
         }
-        if (!this.netwotkproject_loaction) {
+        if (!this.Onetwotkproject_loaction) {
           this.errors.push("Project Location is required.");
         } else {
-          if (this.netwotkproject_loaction == "project-location-others") {
+          if (this.Onetwotkproject_loaction == "project-location-others") {
             if (!this.networkother) {
               this.errors.push("Please Enter Other Location");
-              this.Isvalid = false;
+              this.OIsvalid = false;
             } else {
-              this.netwotkproject_loaction_value = this.networkother;
+              this.Onetwotkproject_loaction_value = this.Onetworkother;
             }
           } else {
-            if (!this.networkbranch) {
+            if (!this.Onetworkbranch) {
               this.errors.push("Please select Mentari Branch.");
-              this.Isvalid = false;
+              this.OIsvalid = false;
             } else {
-              this.netwotkproject_loaction_value = this.networkbranch;
+              this.Onetwotkproject_loaction_value = this.Onetworkbranch;
             }
           }
         }
-        if (!this.networkmentari_services) {
+        if (!this.Onetworkmentari_services) {
           this.errors.push(
             "Relevant Mentari Service That You Want To Be Involved is required."
           );
         }
         if (
-          this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.contribution &&
-          this.budget &&
-          this.networkno_of_paricipants &&
-          this.netwotkproject_loaction &&
-          this.networkmentari_services
+          this.OIsvalid &&
+          this.Oname &&
+          // this.Odob &&
+          this.Oemail &&
+          this.Ophone_number &&
+          this.Oaddress &&
+          this.Ostate_id &&
+          this.Ocity_id &&
+          this.Opostcode_id &&
+          this.Oeducation_id &&
+          this.Ooccupation_sector_id &&
+          this.Obranch_id &&
+          this.Oarea_of_involvement &&
+          this.Ocontribution &&
+          this.Obudget &&
+          this.Onetworkno_of_paricipants &&
+          this.Onetwotkproject_loaction &&
+          this.Onetworkmentari_services &&
+          this.org_name &&
+          this.org_reg_number &&
+          this.org_desc &&
+          this.org_email &&
+          this.org_phone &&
+          this.Oposition_in_org
         ) {
-          if (this.networkmentari_services) {
-            this.networkmentari_services =
-              this.networkmentari_services + "," + this.networkserviceother;
+          if (this.Onetworkmentari_services) {
+            this.Onetworkmentari_services =
+              this.Onetworkmentari_services + "," + this.Onetworkserviceother;
           }
-          if (this.address1) {
-            this.address = this.address + "\n" + this.address1;
+          if (this.Oaddress1) {
+            this.Oaddress = this.Oaddress + "\n" + this.Oaddress1;
           }
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1515,29 +1694,35 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
-          body.append("section", "individual");
-          body.append("name", this.name);
-          body.append("dob", this.dob);
-          body.append("email", this.email);
-          body.append("phone_number", this.phone_number);
-          body.append("address", this.address);
-          body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
-          body.append("state_id", this.state_id);
-          body.append("education_id", this.education_id);
-          body.append("occupation_sector_id", this.occupation_sector_id);
-          body.append("branch_id", this.branch_id);
-          body.append("area_of_involvement", this.area_of_involvement);
-          body.append("contribution", this.contribution);
-          body.append("budget", this.budget);
-          body.append("mentari_services", this.networkmentari_services);
-          body.append("no_of_paricipants", this.networkno_of_paricipants);
-          body.append("project_loaction", this.netwotkproject_loaction);
+          body.append("section", "org");
+          body.append("org_name", this.org_name);
+          body.append("org_reg_number", this.org_reg_number);
+          body.append("org_desc", this.org_desc);
+          body.append("org_email", this.org_email);
+          body.append("org_phone", this.org_phone);
+          body.append("position_in_org", this.Oposition_in_org);
+          body.append("is_agree", "1");
+          body.append("name", this.Oname);
+          body.append("dob", "");
+          body.append("email", this.Oemail);
+          body.append("phone_number", this.Ophone_number);
+          body.append("address", this.Oaddress);
+          body.append("postcode_id", this.Opostcode_id);
+          body.append("city_id", this.Ocity_id);
+          body.append("state_id", this.Ostate_id);
+          body.append("education_id", this.Oeducation_id);
+          body.append("occupation_sector_id", this.Ooccupation_sector_id);
+          body.append("branch_id", this.Obranch_id);
+          body.append("area_of_involvement", this.Oarea_of_involvement);
+          body.append("contribution", this.Ocontribution);
+          body.append("budget", this.Obudget);
+          body.append("mentari_services", this.Onetworkmentari_services);
+          body.append("no_of_paricipants", this.Onetworkno_of_paricipants);
+          body.append("project_loaction", this.Onetwotkproject_loaction);
           body.append(
             "project_loaction_value",
-            this.netwotkproject_loaction_value
+            this.Onetwotkproject_loaction_value
           );
-          body.append("is_agree", "1");
           const response = await this.$axios.post("von/add", body, {
             headers,
           });
@@ -1546,7 +1731,8 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-            this.Reaload();
+            console.log('my resut',response.data);
+            this.Reload();
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
@@ -1559,7 +1745,7 @@ export default {
         });
       }
     },
-    Reaload() {
+    Reload() {
       this.$router.push("/Modules/Von/list-of-application");
       setTimeout(() => {
         window.location.reload();

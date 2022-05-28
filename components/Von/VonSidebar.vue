@@ -191,6 +191,14 @@ export default {
   mounted() {
     document.body.classList.add("sb-nav-fixed");
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (this.userdetails) {
+      if (this.userdetails.user.role == "Von") {
+      } else {
+        this.$router.push("/");
+      }
+    } else {
+      this.$router.push("/");
+    }
     this.nav = localStorage.getItem("nav");
     if (this.nav == "tab1") {
       this.$refs.tab1.classList.add("active");
@@ -202,7 +210,7 @@ export default {
       this.$refs.tab4.classList.add("active");
     } else if (this.nav == "tab5") {
       this.$refs.tab5.classList.add("active");
-    } 
+    }
   },
   methods: {
     changesidebar: function (val) {
@@ -222,7 +230,7 @@ export default {
         this.$refs.tab4.classList.add("active");
       } else if (val == "tab5") {
         this.$refs.tab5.classList.add("active");
-      } 
+      }
     },
   },
 };

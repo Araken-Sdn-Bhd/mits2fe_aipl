@@ -173,16 +173,16 @@
                               <option value="0">Select NRIC Type</option>
                                 <option v-bind:key="1"
                                   v-bind:value="1"> 
-                                  One
+                                  New NRIC 
                                 </option>
-                                <option v-bind:key="2"
+                                <!-- <option v-bind:key="2"
                                   v-bind:value="2"> 
                                   two
                                 </option>
                                 <option v-bind:key="3"
                                   v-bind:value="3"> 
                                   three
-                                </option>
+                                </option> -->
                               </select>
                             </div>
 

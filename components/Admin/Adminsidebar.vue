@@ -507,8 +507,13 @@ export default {
   mounted() {
     document.body.classList.add("sb-nav-fixed");
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    if (!this.userdetails) {
-      this.$router.push("/staff-login");
+    if (this.userdetails) {
+      if (this.userdetails.user.role == "Admin") {
+      } else {
+        this.$router.push("/");
+      }
+    } else {
+      this.$router.push("/");
     }
   },
   methods: {

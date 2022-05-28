@@ -23,6 +23,8 @@
                         type="text"
                         class="form-control"
                         placeholder="Search By Name/Company Name"
+                        v-model="search"
+                        @keyup="OnSearch"
                       />
                     </div>
                   </div>
@@ -48,26 +50,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><input type="checkbox" name="" /></td>
-                    <td>1</td>
-                    <td>Lee San Wei</td>
-                    <td>Group</td>
-                    <td>Outreach - Project Collaboration</td>
-                    <td>Awareness Or Psychoeducation</td>
-                    <td>013.7165780</td>
-                    <td>leesanwei@gmail.com</td>
-                    <td>Yes</td>
+                  <tr v-for="(app, index) in list" :key="index">
                     <td>
-                      <a href="von-management-edit.html" class="edit">
+                      <input
+                        type="checkbox"
+                        name=""
+                        v-on:click="Checkuser(app.id, $event)"
+                      />
+                    </td>
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ app.name }}</td>
+                    <td>{{ app.app_type }}</td>
+                    <td>{{ app.area_of_involvment }}</td>
+                    <td>{{ app.services }}</td>
+                    <td>{{ app.phone_number }}</td>
+                    <td>{{ app.email }}</td>
+                    <td>{{ app.screening }}</td>
+                    <td>
+                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit">
                         <i class="far fa-edit"></i>
                       </a>
 
-                      <a href="von-management-view.html" class="view">
+                      <a style="pointer:cursor;" @click="OnView(app)" class="view">
                         <i class="far fa-eye"></i>
                       </a>
 
-                      <a href="book-appointmen.html" class="add">
+                      <a @click="OnBook(app)" class="add">
                         <i class="far fa-plus"></i>
                       </a>
                     </td>
@@ -77,10 +85,14 @@
 
               <div class="d-flex">
                 <div class="ml-auto">
-                  <a href="#" class="btn btn-danger btn-text"
+                  <a
+                    v-on:click="OnApproverejectRequest(2)"
+                    class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
-                  <a href="#" class="btn btn-warning btn-green btn-text"
+                  <a
+                    v-on:click="OnApproverejectRequest(1)"
+                    class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
                 </div>
@@ -103,35 +115,170 @@ export default {
   data() {
     return {
       userdetails: null,
-      errors: [],
-      loader: false,
+      list: [],
+      alllist: [],
+      selected: [],
+      companyId: 0,
+      search: "",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    $(document).ready(function () {
-      $(".data-table").DataTable({
-        searching: false,
-        bLengthChange: false,
-        bInfo: false,
-        autoWidth: false,
-        responsive: true,
-        scrollX: true,
-        language: {
-          paginate: {
-            next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-            previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-          },
-        },
-      });
-    });
   },
-  methods: {},
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` + "von/list",
+
+        { headers }
+      )
+      .then((resp) => {
+        this.list = resp.data.list;
+        this.alllist = resp.data.list;
+        console.log("my lst", resp.data);
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            scrollX: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+  methods: {
+    OnSearch() {
+      if (this.search) {
+        this.list = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+          );
+        });
+      } else {
+        this.list = this.alllist;
+      }
+    },
+    GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(
+          `${this.$axios.defaults.baseURL}` + "von/list",
+
+          { headers }
+        )
+        .then((resp) => {
+          this.list = resp.data.list;
+          this.alllist = resp.data.list;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    Checkuser(value, event) {
+      if (event.target.checked) {
+        this.selected.push(value);
+      } else {
+        if (this.selected.indexOf(value) != -1)
+          this.selected.splice(this.selected.indexOf(value), 1);
+      }
+    },
+    async OnApproverejectRequest(status) {
+      try {
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        this.selected.forEach((value, index) => {
+          const axios = require("axios").default;
+          axios
+            .post(
+              `${this.$axios.defaults.baseURL}` + "von/set-status",
+              { id: value, status: status.toString() },
+              { headers }
+            )
+
+            .then((resp) => {
+              console.log("reuslt", resp);
+            });
+        });
+        this.loader = false;
+        this.GetList();
+        this.$nextTick(() => {
+          $("#updatepopup").modal("show");
+        });
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    },
+    OnEdit(data) {
+      if (data.app_type == "Individual") {
+        this.$router.push({
+          path: "/Modules/Von/edit-individual",
+          query: { id: data.id },
+        });
+      } else if (data.app_type == "Group") {
+         this.$router.push({
+          path: "/Modules/Von/edit-group",
+          query: { id: data.id },
+        });
+      } else {
+         this.$router.push({
+          path: "/Modules/Von/edit-organization",
+          query: { id: data.id },
+        });
+      }
+    },
+    OnView(data) {
+      if (data.app_type == "Individual") {
+        this.$router.push({
+          path: "/Modules/Von/view-individual",
+          query: { id: data.id },
+        });
+      } else if (data.app_type == "Group") {
+         this.$router.push({
+          path: "/Modules/Von/view-group",
+          query: { id: data.id },
+        });
+      } else {
+         this.$router.push({
+          path: "/Modules/Von/view-organization",
+          query: { id: data.id },
+        });
+      }
+    },
+    OnBook(data){
+      this.$router.push({
+          path: "/Modules/Von/book-appointment",
+          query: { section: data.id },
+        });
+    },
+  },
 };
 </script>
-
-<style scoped>
-.hide {
-  display: none;
-}
-</style>
