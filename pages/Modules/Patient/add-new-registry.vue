@@ -587,6 +587,8 @@
                 </div>
               </div>
             </div>
+           
+           <!-- start self -->
             <!-- tab-close -->
             <div
               class="tab-pane fade"
@@ -644,8 +646,8 @@
                                   <option value="0">Please Select</option>
                                  <option
                         v-for="slt in placelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
+                        v-bind:key="slt.section_value"
+                        v-bind:value="slt.section_value"
                       >
                         {{ slt.section_value }}
                       </option>
@@ -705,8 +707,7 @@
                                     class="form-check-input overdose-poisoning"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
-                                    id="1"
-                                    v-model="overdose"
+                                    id="1" v-model="overdose" @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="1">
                                     Overdose/Poisoning
@@ -724,7 +725,7 @@
                                 >
                                   <div class="mb-3">
                                     <select class="form-select" id="op-select" v-model="overdosevalue">
-                                      <option selected>Please select</option>
+                                      <option value="">Please select</option>
                                       <option value="medication">
                                         Medication
                                       </option>
@@ -783,8 +784,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Hanging/Suffocation"
-                                    id="2"
-                                    v-model="Hanging"
+                                    id="2" v-model="hanging"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="2">
                                     Hanging/Suffocation
@@ -796,7 +796,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Drowning"
-                                    id="3" v-model="drowning"
+                                    id="3" v-model="drowning"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="3">
                                     Drowning
@@ -808,7 +808,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Firearms or explosives"
-                                    id="4" v-model="firearms"
+                                    id="4" v-model="firearmsorexplosives"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="4">
                                     Firearms or explosives
@@ -822,7 +822,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Fire/flames"
-                                    id="5" v-model="fireflames"
+                                    id="5"   v-model="fire_flames"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="5">
                                     Fire/flames
@@ -834,7 +834,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Cutting or Piercing"
-                                    id="6" v-model="cutting"
+                                    id="6"  v-model="cuttingorpiercing"  @click="onSectionB('val')"
                                     
                                   />
                                   <label class="form-check-label" for="6">
@@ -847,7 +847,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Jumping from height"
-                                    id="7" v-model="jumping"
+                                    id="7"  v-model="jumpingfromheight"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="7">
                                     Jumping from height
@@ -859,7 +859,7 @@
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
                                     value="Other"
-                                    id="8" v-model="methodother"
+                                    id="8"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="8">
                                     Other
@@ -874,7 +874,7 @@
                                     <input
                                       type="text"
                                       class="form-control"
-                                      placeholder="Please Specify" v-model="selfharmother"
+                                      placeholder="Please Specify" v-model="selfharm_other"
                                     />
                                   </div>
                                 </div>
@@ -913,8 +913,8 @@
                                   <input
                                     class="form-check-input overdose-poisoning"
                                     type="checkbox"
-                                    value=""
-                                    id="1.1"
+                                    value="Family, friends, peer group"
+                                    id="1.1" v-model="family"  @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="1.1">
                                     Family, friends, peer group
@@ -925,8 +925,8 @@
                                   <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    value=""
-                                    id="2.2"
+                                    value="Internet (website, social media platform,app, blogs, forum, video/photosharing)"
+                                    id="2.2" v-model="internet" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="2.2">
                                     Internet (website, social media platform,
@@ -938,8 +938,8 @@
                                   <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    value=""
-                                    id="3.3"
+                                    value="Printed media (newspaper, books, magazine, etc)"
+                                    id="3.3" v-model="printed" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="3.3">
                                     Printed media (newspaper, books, magazine,
@@ -953,8 +953,8 @@
                                   <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    value=""
-                                    id="5.5"
+                                    value="Broadcast media (television, radio)"
+                                    id="5.5" v-model="broadcast" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="5.5">
                                     Broadcast media (television, radio)
@@ -965,8 +965,8 @@
                                   <input
                                     class="form-check-input specify-other"
                                     type="checkbox"
-                                    value=""
-                                    id="6.6"
+                                    value="Specify patient actual words"
+                                    id="6.6" v-model="patientactualword" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="6.6">
                                     Specify patient actual words
@@ -981,7 +981,7 @@
                                     <input
                                       type="text"
                                       class="form-control"
-                                      placeholder="Please Specify"
+                                      placeholder="Please Specify" v-model="patientactualword_other"
                                     />
                                   </div>
                                 </div>
@@ -1025,7 +1025,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
-                                    value="option1"
+                                    value="no" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1039,7 +1039,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
-                                    value="intent-yes"
+                                    value="intent-yes" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1053,7 +1053,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
-                                    value="option3"
+                                    value="Undetermined" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1069,7 +1069,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""
+                                    value=""  @change="OnpatientIntent('verbal',$event)"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1080,7 +1080,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Messaging',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1093,7 +1093,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="rehearsing"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Rehearsing',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1106,7 +1106,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="not-Expressed"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Not Expressed',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1119,7 +1119,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="handwritten"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Handwritten',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1132,7 +1132,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="social-media"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Social Media',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1145,7 +1145,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="learn-more"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Learn more',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1158,7 +1158,7 @@
                                     class="form-check-input intent-other"
                                     type="checkbox"
                                     id="Other"
-                                    value=""
+                                    value="" @change="OnpatientIntent('Other',$event)"
                                   />
                                   <label class="form-check-label" for="Other"
                                     >Other</label
@@ -1168,7 +1168,7 @@
                                     <input
                                       type="text"
                                       class="form-control"
-                                      placeholder="Please Specify"
+                                      placeholder="Please Specify" v-model="intent_other"
                                     />
                                   </div>
                                   <!-- SHOW_DIV -->
@@ -1201,875 +1201,87 @@
                         >
                           <div class="accordion-body">
                             <div class="row mt-3">
-                              <div class="col-sm-6">
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>1</span> Isolation</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level"
-                                      id="level1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level1"
-                                    >
-                                      0 Somebody present
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level"
-                                      id="level2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level2"
-                                    >
-                                      1 Somebody nearby, or in visual or vocal
-                                      contact
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level"
-                                      id="level3"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level3"
-                                    >
-                                      2 No one nearby or in visual or vocal
-                                      contact
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>2</span> Timing</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level2"
-                                      id="level4"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level4"
-                                    >
-                                      0 Intervention is probable
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level2"
-                                      id="level5"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level5"
-                                    >
-                                      1 Intervention is not likely
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level2"
-                                      id="level6"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level6"
-                                    >
-                                      2 Intervention is highly unlikely
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>3</span> Precautions against
-                                    discvery/intervention</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level3"
-                                      id="level7"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level7"
-                                    >
-                                      0 No precautions
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level3"
-                                      id="level8"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level8"
-                                    >
-                                      2 Passive precautions (eg; alone in room
-                                      with unlocked door)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level3"
-                                      id="level9"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level9"
-                                    >
-                                      3 Active precautions (as locked door)
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>4</span> Acting to get help
-                                    during/after attempt</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level4"
-                                      id="level10"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level10"
-                                    >
-                                      0 Notified potential helper regarding
-                                      attempt
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level4"
-                                      id="level11"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level11"
-                                    >
-                                      1 Contacted but did not specifically
-                                      notify regarding attempt
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level4"
-                                      id="level12"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level12"
-                                    >
-                                      2 Did not contact or notify potential
-                                      helper
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>5</span> Final acts in anticipating
-                                    of death (will, gifts, insurance)</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level5"
-                                      id="level13"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level13"
-                                    >
-                                      0 None
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level5"
-                                      id="level14"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level14"
-                                    >
-                                      1 Thought about or made some arrangements
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level5"
-                                      id="level15"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level15"
-                                    >
-                                      2 Made definite plans or completed
-                                      arrangements
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>6</span> Active preparation for
-                                    attempt
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level6"
-                                      id="level16"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level16"
-                                    >
-                                      0 None
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level6"
-                                      id="level17"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level17"
-                                    >
-                                      1 Minimal to moderate
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level6"
-                                      id="level18"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level18"
-                                    >
-                                      2 Extensive
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>7</span> Suicide note</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level7"
-                                      id="level19"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level19"
-                                    >
-                                      0 Absence of note
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level7"
-                                      id="level19"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level19"
-                                    >
-                                      1 Note written, but torn up; note thought
-                                      about
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level7"
-                                      id="level20"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level20"
-                                    >
-                                      2 Presence of note
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>8</span> Overt communication of
-                                    intent before the attempt
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level8"
-                                      id="level21"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level21"
-                                    >
-                                      0 None
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level8"
-                                      id="level22"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level22"
-                                    >
-                                      1 Equivocal communication (ambiguous)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level8"
-                                      id="level23"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level23"
-                                    >
-                                      2 Unequivocal communication (unambiguous)
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                              </div>
-                              <!-- col-sm-6 -->
-                              <div class="col-sm-6">
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>9</span> Allged purpose of attempt
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level9"
-                                      id="level9.1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level9.1"
-                                    >
-                                      0 To manipulate environment, get
-                                      attention, get revenge
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level9"
-                                      id="level9.2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level9.2"
-                                    >
-                                      1 Components of above and below
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level9"
-                                      id="level9.3"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level9.3"
-                                    >
-                                      2 To escape, surcease, solve problems
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>10</span> Expectations of
-                                    fatality</label
-                                  >
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level10"
-                                      id="level10.4"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level10.4"
-                                    >
-                                      0 Thought that death was unlikely
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level10"
-                                      id="level10.5"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level10.5"
-                                    >
-                                      1 Thought that death was possible but not
-                                      probable
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level10"
-                                      id="level10.6"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level10.6"
-                                    >
-                                      2 Thought that death was probable or
-                                      certain
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>11</span> Conception of method's
-                                    lethality
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level11"
-                                      id="level11.7"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level11.7"
-                                    >
-                                      0 Did less to self that s/he thought would
-                                      be lethal
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level11"
-                                      id="leve11.l8"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="leve11.l8"
-                                    >
-                                      1 Wasn't sure if what s/he did would be
-                                      lethal
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level11"
-                                      id="level11.9"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level11.9"
-                                    >
-                                      2 Equaled or exceed what s/he thought
-                                      would be lethal
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>12</span> Seriousness of attempt
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level12"
-                                      id="level12.1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level12.1"
-                                    >
-                                      0 Did not seriously attempt to end life
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level12"
-                                      id="level12.2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level12.2"
-                                    >
-                                      1 Uncertain about seriousness to end life
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level12"
-                                      id="level12.3"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level12.3"
-                                    >
-                                      2 Seriously attempted to end life
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>13</span> Attitude towards
-                                    living/dying
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level13"
-                                      id="level13.1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level13.1"
-                                    >
-                                      0 Did not want to die
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level13"
-                                      id="level13.2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level13.2"
-                                    >
-                                      1 Components of above and below
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level13"
-                                      id="level13.1"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level13.1"
-                                    >
-                                      2 Wanted to die
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>14</span> Conception of medical
-                                    rescuability
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level14"
-                                      id="level14.1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level14.1"
-                                    >
-                                      0 Thought death would be unlikely if
-                                      received medical attention
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level14"
-                                      id="level14.2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level14.2"
-                                    >
-                                      1 Was uncertain if death could be averted
-                                      by medical attention
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level14"
-                                      id="level14.3"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level14.3"
-                                    >
-                                      2 Was certain of death even if received
-                                      medical attention
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <!-- radio-group -->
-                                <div class="radio-group mb-3">
-                                  <label
-                                    for="exampleFormControlInput1"
-                                    class="form-label"
-                                    ><span>15</span> Degree of premeditation
-                                  </label>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level15"
-                                      id="level15.1"
-                                      value="option1"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level15.1"
-                                    >
-                                      0 None; impulsive
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level15"
-                                      id="level15.2"
-                                      value="option2"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level15.2"
-                                    >
-                                      1 Suicide contemplated for 3 hours or less
-                                      prior to attempt
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input
-                                      class="form-check-input"
-                                      type="radio"
-                                      name="level15"
-                                      id="level15.3"
-                                      value="option3"
-                                    />
-                                    <label
-                                      class="form-check-label"
-                                      for="level15.3"
-                                    >
-                                      2 Suicide contemplated for more than 3
-                                      hours prior to attempt
-                                    </label>
-                                  </div>
-                                </div>
-                                <!-- radio-group -->
-                                <button
-                                  type="button"
-                                  class="btn btn-success btn-text"
-                                  id="calculate"
-                                >
-                                  <i class="fad fa-calculator"></i> Calculate
-                                </button>
-                                <table class="self-harm hide">
-                                  <tbody>
-                                    <tr>
-                                      <th>Score:</th>
-                                      <td>10</td>
-                                    </tr>
-                                    <tr>
-                                      <th>Level of Suicidal Internt:</th>
-                                      <td>Low Intent</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <!-- col-sm-6 -->
+                        <div class="col-sm-6" v-for="(psp, index) in list" :key="index">
+                  <!-- radio-group -->
+                  <div class="radio-group mb-3">
+                    <label class="form-label"
+                      > {{ psp.Question }}</label
+                    >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        v-bind:name="'psp' + index"
+                        value="0"
+                        @change="onchangetest(index, 0)"
+                      />
+                      <label class="form-check-label" for="level1">
+                        {{ psp.Answer0 }}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        v-bind:name="'psp' + index"
+                        value="1"
+                        @change="onchangetest(index, 1)"
+                      />
+                      <label class="form-check-label" for="level2">
+                        {{ psp.Answer1 }}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        v-bind:name="'psp' + index"
+                        value="2"
+                        @change="onchangetest(index, 2)"
+                      />
+                      <label class="form-check-label" for="level3">
+                        {{ psp.Answer2 }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <Error :message="error" v-if="error" />
+                   <button
+                  type="button"
+                  class="btn btn-success btn-text"
+                  id="calculate" @click="OnsubmitTest"
+                >
+                  <i class="fad fa-calculator"></i> Calculate
+                </button>
+                <table class="self-harm" v-if="testresult">
+                  <tbody>
+                    <tr>
+                      <th>Score:</th>
+                      <td>{{testresult.siScore}}</td>
+                    </tr>
+                    <tr>
+                      <th>Level of Suicidal Internt:</th>
+                      <td>{{testresult.SI}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+                
                             </div>
                             <!-- row -->
                           </div>
                         </div>
                       </div>
                     </div>
+                       <p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
                     <div class="d-flex">
                       <button class="pre-2 btn btn-success mr-auto">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -2088,6 +1300,8 @@
                 </div>
               </div>
             </div>
+         
+          <!-- end self -->
             <!-- tab-close -->
             <div
               class="tab-pane fade"
@@ -2811,6 +2025,7 @@ export default {
       psychiatrist: [],
       injurylist: [],
       placelist: [],
+      list: [],
       Id: 0,
       referral_or_contact: 0,
       arrival_mode: 0,
@@ -2838,24 +2053,37 @@ export default {
       result: "",
       checkedList: {},
       procheckedList: {},
+      testcheckedList: {},
       sharp_register_id: 0,
+      //selfharm  ad on
+      selected: [],
+      testresult: "",
       Sdate: "",
       Stime: "",
-      //dddd ad on
-      selfharmother: "",
-      methodother: "",
-      jumping: "",
-      cutting: "",
-      fireflames: "",
-      drowning: "",
-      Hanging: "",
-      overdosevalue: "",
-      overdose: "",
-      place_other: "",
       place_id: "",
-      selfharmother: "",
-      methodother: "",
-      firearms: "",
+      place_other: "",
+      overdose: "",
+      overdosevalue: "",
+      hanging: "",
+      drowning: "",
+      firearmsorexplosives: "",
+      fire_flames: "",
+      cuttingorpiercing: "",
+      jumpingfromheight: "",
+      selfharm_other: "",
+      family: "",
+      internet: "",
+      printed: "",
+      broadcast: "",
+      patientactualword: "",
+      patientactualword_other: "",
+      patient_intent: "",
+      patient_intent_value: "",
+      intent_other: "",
+      SItestscore: "",
+      secB: "",
+      secC: "",
+      secD: "",
     };
   },
   beforeMount() {
@@ -3169,6 +2397,17 @@ export default {
       } else {
         this.placelist = [];
       }
+      const response6 = await this.$axios.post(
+        "patient-online-self-test/list-type",
+        { Type: "Suicidal Scale" },
+        { headers }
+      );
+      console.log("level-of-suicidal-intent", response6.data);
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.list = response6.data.list;
+      } else {
+        this.list = [];
+      }
     },
     GetUserIpAddress() {
       fetch("https://api.ipify.org?format=json")
@@ -3189,6 +2428,23 @@ export default {
     },
     onchange(ind, val) {
       this.checkedList[ind] = val;
+    },
+    onSectionB(val) {
+      this.secB = val;
+    },
+    onSectionC(val) {
+      this.secC = val;
+    },
+    onSectionD(val) {
+      this.secD = val;
+    },
+    OnpatientIntent(value, event) {
+      if (event.target.checked) {
+        this.selected.push(value);
+      } else {
+        if (this.selected.indexOf(value) != -1)
+          this.selected.splice(this.selected.indexOf(value), 1);
+      }
     },
     async Onriskfactor() {
       console.log("my check list", this.checkedList);
@@ -3274,7 +2530,168 @@ export default {
       }
     },
     async SelfHarm() {
-      $('#myTab a[href="#suicide"]').tab("show");
+      this.errors = [];
+      try {
+        if (!this.Sdate) {
+          this.errors.push("Date is required.");
+        }
+        if (!this.Stime) {
+          this.errors.push("Time is required.");
+        }
+        if (!this.place_id) {
+          this.errors.push("Place of Occurrence is required.");
+        }
+        if (!this.secB) {
+          this.errors.push("Please tick any box of Method of Self Harm.");
+        }
+        if (!this.secC) {
+          this.errors.push(
+            "Please tick any box of How did Patient Get Idea about Method."
+          );
+        }
+        if (!this.secD) {
+          this.errors.push("Please tick any box of Suicidal Intent required.");
+        }
+        if (
+          this.Sdate &&
+          this.Stime &&
+          this.place_id &&
+          this.secB &&
+          this.secC &&
+          this.secD
+        ) {
+          this.loader = true;
+          if (this.patient_intent == "intent-yes") {
+            this.selected.forEach((value, index) => {
+              if (!this.screenIds) {
+                this.patient_intent_value = value;
+              } else {
+                this.patient_intent_value = this.screenIds + "," + value;
+              }
+            });
+          } else if (this.patient_intent == "no") {
+            this.patient_intent_value = "no";
+          } else {
+            this.patient_intent_value = "Undetermined";
+          }
+
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/self-harm",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              result: JSON.stringify([
+                {
+                  "CURRENT SELF HARM ACT": {
+                    "Date": this.Sdate,
+                    "Time": this.Stime,
+                    "Place of Occurance": this.place_id,
+                  },
+                },
+                {
+                  "Method of Self-Harm": {
+                    "Overdose/Poisoning": this.overdosevalue,
+                    "Hanging/Suffocation": this.hanging,
+                    "Drowning": this.drowning,
+                    "Firearms or explosives": this.firearmsorexplosives,
+                    "Fire/flames": this.fire_flames,
+                    "Cutting or Piercing": this.cuttingorpiercing,
+                    "Jumping from height": this.jumpingfromheight,
+                    "Other": this.selfharm_other,
+                  },
+                },
+                {
+                  "How did Patient Get Idea about Method": {
+                    "Family, friends, peer group": this.family,
+                    "Internet (website, social media platform, app, blogs, forum, video/photosharing)":
+                      this.internet,
+                    "Printed media (newspaper, books, magazine, etc)":
+                      this.printed,
+                    "Broadcast media (television, radio)": this.broadcast,
+                    "Specify patient actual words":
+                      this.patientactualword_other,
+                  },
+                },
+                {
+                  "Suicidal Intent": {
+                    intent: this.patient_intent_value,
+                  },
+                },
+                { "Level of Suicidal Intent": this.SItestscore },
+              ]),
+              sharp_register_id: this.sharp_register_id,
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.loader = false;
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#suicide"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    },
+    onchangetest(ind, val) {
+      this.testcheckedList[ind + 1] = val;
+    },
+    async OnsubmitTest() {
+      this.error = null;
+      try {
+        if (this.list.length == Object.values(this.testcheckedList).length) {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "patient/online-test",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              test_name: "si",
+              test_section_name: "SI",
+              result: JSON.stringify([{ SI: this.testcheckedList }]),
+              user_ip_address: this.user_ip_address,
+            },
+            { headers }
+          );
+          console.log("my reslut", response.data);
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.loader = false;
+            this.testresult = response.data.result;
+            this.SItestscore = response.data.result.siScore;
+            this.$nextTick(() => {
+              $("#resultmodal").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } else {
+          this.error = "Please attempt all question";
+        }
+      } catch (e) {
+        this.loader = false;
+        this.errors = e;
+      }
     },
     async Onsuciderisk() {
       this.errors = [];
@@ -3303,9 +2720,6 @@ export default {
             this.sharp_register_id = response.data.id;
             $('#myTab a[href="#hospital-management"]').tab("show");
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
           } else {
             this.loader = false;
             this.$nextTick(() => {

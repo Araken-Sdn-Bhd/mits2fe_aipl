@@ -2,9 +2,9 @@
   <div id="layoutSidenav">
     <InterventionHeader />
     <div id="layoutSidenav_content">
-      <InterventionSidebar/>
+      <InterventionSidebar />
       <main>
-         <Loader v-if="loader" />
+        <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Patients</h1>
@@ -89,7 +89,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(patint, index) in list" :key="index">
-                    <td>#{{ index+1 }}</td>
+                    <td>#{{ index + 1 }}</td>
                     <td>{{ patint.patient_mrn }}</td>
                     <td>{{ patint.salutation }}</td>
                     <td>
@@ -116,8 +116,8 @@
   </div>
 </template>
 <script>
-import InterventionHeader from '../../../components/Intervention/InterventionHeader.vue';
-import InterventionSidebar from '../../../components/Intervention/InterventionSidebar.vue';
+import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
+import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
 export default {
   components: { InterventionHeader, InterventionSidebar },
   name: "patient-list",
@@ -132,7 +132,7 @@ export default {
       search: "",
       branch_id: 0,
       service_id: 0,
-      loader:true
+      loader: true,
     };
   },
   beforeMount() {
@@ -148,7 +148,8 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-registration/getPatientRegistrationList",
+        `${this.$axios.defaults.baseURL}` +
+          "patient-registration/getPatientRegistrationList",
         { headers }
       )
       .then((resp) => {
@@ -168,7 +169,7 @@ export default {
             },
           });
         });
-        this.loader=false;
+        this.loader = false;
       })
       .catch((err) => {
         console.error(err);

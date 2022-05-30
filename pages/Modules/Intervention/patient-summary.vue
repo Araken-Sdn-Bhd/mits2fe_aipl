@@ -661,7 +661,7 @@
                                   data-bs-parent="#sub-men-3"
                                 >
                                   <li>
-                                    <a href="#"
+                                    <a style="cursor:pointer;" @click="Onpatientcareplan"
                                       >Patient Care Plan And Case Review Form</a
                                     >
                                   </li>
@@ -739,7 +739,7 @@
                                 >
                               </li>
                               <li><a href="#">External Referral Form</a></li>
-                              <li><a href="#">CPS Referral Form</a></li>
+                              <li><a style="cursor:pointer;" @click="Oncpsreferal" >CPS Referral Form</a></li>
                               <li>
                                 <a style="cursor:pointer;" @click="Onocctreferralform"
                                   >OCCT Referral Form</a
@@ -881,11 +881,15 @@
   </div>
 </template>
 <script>
-import InterventionHeader from '../../../components/Intervention/InterventionHeader.vue';
-import InterventionSidebar from '../../../components/Intervention/InterventionSidebar.vue';
-import InterventionPatientDetails from '../../../components/Intervention/InterventionPatientDetails.vue';
+import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
+import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import InterventionPatientDetails from "../../../components/Intervention/InterventionPatientDetails.vue";
 export default {
-  components: { InterventionHeader, InterventionSidebar,  InterventionPatientDetails },
+  components: {
+    InterventionHeader,
+    InterventionSidebar,
+    InterventionPatientDetails,
+  },
   name: "patient-summary",
   data() {
     return {
@@ -929,16 +933,18 @@ export default {
         .change();
     });
   },
-   mounted() {
+  mounted() {
     const headers = {
- Authorization: "Bearer " + this.userdetails.access_token,
+      Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
       "Content-Type": "application/json",
     };
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-attachment/list?patient_id=" + this.Id,
+        `${this.$axios.defaults.baseURL}` +
+          "patient-attachment/list?patient_id=" +
+          this.Id,
         { headers }
       )
       .then((resp) => {
@@ -1132,9 +1138,21 @@ export default {
         query: { id: this.Id },
       });
     },
-     Onlaserform() {
+    Onlaserform() {
       this.$router.push({
         path: "/Modules/Intervention/laser-form",
+        query: { id: this.Id },
+      });
+    },
+    Oncpsreferal() {
+      this.$router.push({
+        path: "/Modules/Intervention/cps-referral-form",
+        query: { id: this.Id },
+      });
+    },
+      Onpatientcareplan() {
+      this.$router.push({
+        path: "/Modules/Intervention/patient-care-plan-and-case-review",
         query: { id: this.Id },
       });
     },

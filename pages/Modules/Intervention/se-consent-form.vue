@@ -347,16 +347,16 @@ export default {
         }
       } catch (e) {
         this.loader = false;
-        console.log('error',e);
+        console.log("error", e);
       }
     },
-    OnPrint () {
-      var newstr = document.getElementsByClassName('reslt')[0].innerHTML
-      document.body.innerHTML = newstr
-      window.print()
+    OnPrint() {
+      var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
+      document.body.innerHTML = newstr;
+      window.print();
       // Reload the page to refresh the data
-      window.location.reload()
-}
+      window.location.reload();
+    },
   },
 };
 </script>

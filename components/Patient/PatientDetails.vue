@@ -135,6 +135,15 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+      const response1 = await this.$axios.post(
+        "patient-alert/alertListbyPatientId",
+        {
+          patient_id: this.Id,
+          added_by: this.userdetails.user.id,
+        },
+        { headers }
+      );
+      this.alert = response1.data[0].message;
     },
     async AddAlert() {
       this.errorList = [];
@@ -160,7 +169,6 @@ export default {
           console.log("esponse", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.alert = "";
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });

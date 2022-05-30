@@ -20,9 +20,7 @@
                 <div class="col-sm-6" v-for="(psp, index) in list" :key="index">
                   <!-- radio-group -->
                   <div class="radio-group mb-3">
-                    <label class="form-label"
-                      ><span>01.</span> {{ psp.Question }}</label
-                    >
+                    <label class="form-label"> {{ psp.Question }}</label>
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -61,6 +59,7 @@
                     </div>
                   </div>
                 </div>
+               
                 <!-- col-sm-6 -->
               </div>
               <Error :message="error" v-if="error" />
@@ -95,10 +94,10 @@
                         <th scope="col">Total Scrore</th>
                       </tr>
                     </thead>
-                     <tbody>
+                    <tbody>
                       <tr class="active" v-if="result">
-                        <th scope="row">{{result.SI}}</th>
-                        <td>{{result.siScore}}</td>
+                        <th scope="row">{{ result.SI }}</th>
+                        <td>{{ result.siScore }}</td>
                       </tr>
                     </tbody>
                   </table>
