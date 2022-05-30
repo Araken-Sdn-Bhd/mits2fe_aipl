@@ -205,10 +205,10 @@ export default {
     document.body.classList.add("sb-nav-fixed");
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     if (this.userdetails) {
-      if (this.userdetails.user.role == "Intervention") {
-      } else {
-        this.$router.push("/");
-      }
+      // if (this.userdetails.user.role == "Intervention") {
+      // } else {
+      //   this.$router.push("/");
+      // }
     } else {
       this.$router.push("/");
     }

@@ -101,15 +101,16 @@ export default {
               JSON.stringify(this.userdetail)
             );
             this.loader = false;
-            if (this.userdetail.user.role == "Admin") {
-              this.$router.push("/Modules/Admin/admin-dashboard");
-            } else if (this.userdetail.user.role == "Intervention") {
-              this.$router.push("/Modules/Intervention/patient-list");
-            } else if (this.userdetail.user.role == "Patient") {
-              this.$router.push("/Modules/Patient/patient-list");
-            }else{
-              this.$router.push("/");
-            }
+            this.$router.push("/Modules/Admin/admin-dashboard");
+            // if (this.userdetail.user.role == "Admin") {
+            //   this.$router.push("/Modules/Admin/admin-dashboard");
+            // } else if (this.userdetail.user.role == "Intervention") {
+            //   this.$router.push("/Modules/Intervention/patient-list");
+            // } else if (this.userdetail.user.role == "Patient") {
+            //   this.$router.push("/Modules/Patient/patient-list");
+            // }else{
+            //   this.$router.push("/");
+            // }
           } else {
             this.loader = false;
             this.emailerror = this.userdetail.message.email[0];
