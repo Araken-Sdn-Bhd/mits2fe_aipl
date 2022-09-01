@@ -1,11 +1,11 @@
 <template>
   <div id="layoutSidenav">
     <div>
-      <PatientLoginSidebar />
+      <CommonSidebar />
     </div>
     <div id="layoutSidenav_content">
       <div>
-        <PatientLoginHeader />
+        <CommonHeader />
       </div>
       <main>
         <div class="container-fluid px-4">
@@ -57,7 +57,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Search By Name/NRIC/Passport/MRN"
-                        v-model="keyword"
+                        v-model="search"
                         @keyup="OnSearch"
                       />
                     </div>
@@ -87,7 +87,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(app, index) in list" :key="index">
-                    <td>{{ index+1 }}</td>
+                    <td>{{ index + 1 }}</td>
                     <td>{{ app.patient_mrn }}</td>
                     <td>{{ app.salutation }}</td>
                     <td>
@@ -104,11 +104,11 @@
                         class="badge bg-primary"
                         >Completed</span
                       >
-                      <span
+                      <!-- <span
                         v-if="app.appointment_status == 1"
                         class="badge bg-success"
                         >Ready</span
-                      >
+                      > -->
                       <span
                         v-if="app.appointment_status == 0"
                         class="badge bg-warning text-dark"
@@ -131,9 +131,7 @@
                         ><i class="fad fa-edit"></i
                       ></a>
                       <a
-                        @click="
-                          OnUpdateAppointmentStatus(1, app.appointment_id)
-                        "
+                        @click="OnAssignStaffPop(app.appointment_id)"
                         class="action-icon icon-info"
                         ><i class="fad fa-check"></i
                       ></a>
@@ -146,7 +144,7 @@
                       ></a>
                       <a
                         @click="
-                          OnUpdateAppointmentStatus(0, app.appointment_id)
+                          OnUpdateAppointmentStatus(3, app.appointment_id)
                         "
                         class="edit"
                         ><i class="far fa-power-off"></i
@@ -155,28 +153,83 @@
                   </tr>
                 </tbody>
               </table>
+              <p
+                v-show="!list.length"
+                style="
+                  padding: 0px;
+                  margin: 10px;
+                  color: red;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                No Record Found
+              </p>
             </div>
           </div>
         </div>
       </main>
+      <div
+        class="modal fade"
+        id="Assignstaffpopup"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm test-connection"
+        >
+          <div class="modal-content">
+            <div class="modal-body">
+              <select
+                v-model="assign_team"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="0">Please choose assigned staff</option>
+                <option
+                  v-for="team in teamlist"
+                  v-bind:key="team.id"
+                  v-bind:value="team.id"
+                >
+                  {{ team.team_name }}
+                </option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary btn-ok"
+                @click="OnAssignStaffSave()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "attendance-record",
   data() {
     return {
       userdetails: null,
       list: [],
       servicelist: [],
+      teamlist: [],
       token: "",
       date: "",
+      search: "",
       keyword: "",
       service_id: 0,
+      appId: 0,
+      assign_team: 0,
     };
   },
 
@@ -196,11 +249,13 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-appointment-details/list",
+        `${this.$axios.defaults.baseURL}` +
+          "patient-appointment-details/todaylist",
         { headers }
       )
       .then((resp) => {
         this.list = resp.data.list;
+        console.log("my list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -235,6 +290,32 @@ export default {
       } else {
         this.servicelist = [];
       }
+      const response = await this.$axios.get("hospital/branch-team-list", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.teamlist = response.data.list;
+      } else {
+        this.teamlist = [];
+      }
+    },
+    GetAppointmentlist() {
+      const headers = {
+        Authorization: "Bearer " + this.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(
+          `${this.$axios.defaults.baseURL}` +
+            "patient-appointment-details/list",
+          { headers }
+        )
+        .then((resp) => {
+          this.list = resp.data.list;
+          console.log("my applist", this.list);
+        });
     },
     oneditAppointment(Id) {
       this.$router.push({
@@ -259,10 +340,10 @@ export default {
         );
         console.log("my status", response.data);
         if (response.data.code == 200) {
+          this.GetAppointmentlist();
           this.$nextTick(() => {
             $("#updatepopup").modal("show");
           });
-          this.GetList();
         } else {
           this.loader = false;
           this.$nextTick(() => {
@@ -285,8 +366,10 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      if (!this.keyword) {
+      if (!this.search) {
         this.keyword = "no-keyword";
+      } else {
+        this.keyword = this.search;
       }
       const response = await this.$axios.post(
         "/patient-appointment-details/search",
@@ -299,9 +382,42 @@ export default {
       );
       console.log("my list", response.data);
       if (response.data.code == 200) {
-        this.list = response.data.list;
+        if (response.data.list.length > 0) {
+          this.list.splice(0, this.list.length);
+          if ($.fn.DataTable.isDataTable(".data-table")) {
+            $(".data-table").DataTable().clear().destroy();
+          }
+          this.list = response.data.list;
+        } else {
+          this.list = [];
+        }
       } else {
-        window.alert("Something went wrong");
+        this.list = [];
+      }
+    },
+    OnAssignStaffPop(appid) {
+      this.appId = appid;
+      $("#Assignstaffpopup").modal("show");
+    },
+    async OnAssignStaffSave() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-appointment-details/updateTeam",
+        {
+          added_by: this.userdetails.user.id,
+          appointment_id: this.appId,
+          assign_team: this.assign_team,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.assign_team = 0;
+        $("#Assignstaffpopup").modal("hide");
+        this.GetAppointmentlist();
       }
     },
   },

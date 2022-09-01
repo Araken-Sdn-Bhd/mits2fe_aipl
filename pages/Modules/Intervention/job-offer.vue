@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar/>
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4 height-100">
           <div
@@ -43,10 +43,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "job-offer",
 
   data() {

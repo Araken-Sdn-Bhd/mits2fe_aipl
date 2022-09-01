@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -74,7 +74,7 @@
                   <!-- row -->
 
                   <div class="row">
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Appointment Type</label>
                         <select
@@ -92,7 +92,7 @@
                           </option>
                         </select>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -119,17 +119,13 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label"
-                          >Areas Of On Involvement</label
-                        >
+                        <label class="form-label">Areas Of Involvement</label>
                         <select
                           class="form-select"
                           aria-label="Default select example"
                           v-model="area_of_involvement"
                         >
-                          <option value="0">
-                            Select Areas Of On Involvement
-                          </option>
+                          <option value="0">Select Areas Of Involvement</option>
                           <option
                             v-for="area in areaslist"
                             v-bind:key="area.id"
@@ -149,14 +145,20 @@
                           aria-label="Default select example"
                           v-model="services_type"
                         >
-                          <option value="0">Select Type of Servies</option>
-                          <option
-                            v-for="serv in servicelist"
-                            v-bind:key="serv.id"
-                            v-bind:value="serv.id"
-                          >
-                            {{ serv.service_name }}
+                          <option value="">Select Type of Servies</option>
+                          <option value="Consultation/Counselling">
+                            Consultation/Counselling
                           </option>
+                          <option value="Work-based Rehabilitation">
+                            Work-based Rehabilitation
+                          </option>
+                          <option value="Awareness or Psychoeducation">
+                            Awareness or Psychoeducation
+                          </option>
+                          <option value="Recreational Theraphy">
+                            Recreational Theraphy
+                          </option>
+                          <option value="Others">Others</option>
                         </select>
                       </div>
                     </div>
@@ -187,10 +189,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+  components: { VonFooter, CommonHeader, CommonSidebar },
   name: "book-appointment",
   data() {
     return {
@@ -208,7 +210,7 @@ export default {
       appointment_type: 0,
       interviewer_id: 0,
       area_of_involvement: 0,
-      services_type: 0,
+      services_type: "",
       section: "",
     };
   },
@@ -219,6 +221,8 @@ export default {
     this.Id = urlParams.get("id");
     let urlParams1 = new URLSearchParams(window.location.search);
     this.section = urlParams1.get("section");
+    let urlParams2 = new URLSearchParams(window.location.search);
+    this.name = urlParams2.get("name");
     if (this.Id) {
       this.GetAppointmentdetails();
     }
@@ -234,12 +238,12 @@ export default {
         headers,
       });
       this.teamlist = response.data;
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
+      // const response1 = await this.$axios.get("service/list", { headers });
+      // if (response1.data.code == 200 || response1.data.code == "200") {
+      //   this.servicelist = response1.data.list;
+      // } else {
+      //   this.servicelist = [];
+      // }
       const response2 = await this.$axios.get("areas-of-involvement/list", {
         headers,
       });
@@ -260,9 +264,9 @@ export default {
         if (!this.duration) {
           this.errorList.push("Duration is required");
         }
-        if (!this.appointment_type) {
-          this.errorList.push("Appointment Type is required");
-        }
+        // if (!this.appointment_type) {
+        //   this.errorList.push("Appointment Type is required");
+        // }
         if (!this.interviewer_id) {
           this.errorList.push("Assigned Interviewer is required");
         }
@@ -277,7 +281,7 @@ export default {
           this.booking_date &&
           this.booking_time &&
           this.duration &&
-          this.appointment_type &&
+          //   this.appointment_type &&
           this.interviewer_id &&
           this.area_of_involvement &&
           this.services_type
@@ -298,7 +302,7 @@ export default {
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
                 duration: this.duration,
-                appointment_type: this.appointment_type,
+                //  appointment_type: this.appointment_type,
                 interviewer_id: this.interviewer_id,
                 area_of_involvement: this.area_of_involvement,
                 services_type: this.services_type,
@@ -327,7 +331,7 @@ export default {
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
                 duration: this.duration,
-                appointment_type: this.appointment_type,
+                // appointment_type: this.appointment_type,
                 interviewer_id: this.interviewer_id,
                 area_of_involvement: this.area_of_involvement,
                 services_type: this.services_type,
@@ -368,7 +372,7 @@ export default {
       this.booking_date = response.data[0].booking_date;
       this.booking_time = response.data[0].booking_time;
       this.duration = response.data[0].duration;
-      this.appointment_type = response.data[0].appointment_type;
+      //  this.appointment_type = response.data[0].appointment_type;
       this.interviewer_id = response.data[0].interviewer_id;
       this.area_of_involvement = response.data[0].area_of_involvement;
       this.services_type = response.data[0].services_type;

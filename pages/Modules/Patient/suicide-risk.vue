@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -111,13 +111,12 @@
             <div class="modal-content">
               <div id="results" style="background:#fff;">
                 <div class="modal-header">
-                  <h5 class="modal-title">Suice Scores</h5>
-                  <p>
-                    The system will sum up the score for every question in each
-                    category. The scale are as follows:
+                  <h5 class="modal-title">Suicide Alert!</h5>
+                 <p>
+                    Your Test is successfully Submitted!
                   </p>
                 </div>
-                <div class="modal-body">
+                <!-- <div class="modal-body">
                   <table class="modal-table">
                     <thead>
                       <tr>
@@ -148,9 +147,9 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div> -->
               </div>
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
                   type="button"
@@ -159,12 +158,12 @@
                   <i class="fad fa-download"></i> Download Result
                 </button>
                 <a
-                  href="/Modules/Patient/request-appointment-form"
+                   @click="Gotorequestappointment"
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -173,10 +172,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "suicide-risk",
   data() {
     return {
@@ -238,13 +237,27 @@ export default {
         });
       }
     },
-      GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.user_ip_address = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.user_ip_address = ip;
     },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
+      });
+    }
   },
 };
 </script>

@@ -101,6 +101,34 @@
                   <span>Screening</span>
                 </a>
               </li>
+              <li class="divider">Imported Link</li>
+              <div v-show="userdetails">
+                <li>
+                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Admin Manag...
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Intervention Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Report/sharp" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Report Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Shharp Manag...
+                  </a>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
@@ -252,19 +280,19 @@ export default {
     return {
       userdetails: null,
       nav: "",
+      role: "",
     };
+  },
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetails) {
+      this.$router.push("/");
+    } else {
+      this.role = this.userdetails.user.role;
+    }
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    if (this.userdetails) {
-      // if (this.userdetails.user.role == "Patient") {
-      // } else {
-      //   this.$router.push("/");
-      // }
-    } else {
-      this.$router.push("/");
-    }
     this.nav = localStorage.getItem("nav");
     if (this.nav == "patient") {
       this.$refs.patient.classList.add("active");
@@ -276,10 +304,9 @@ export default {
       this.$refs.calender.classList.add("active");
     } else if (this.nav == "screen") {
       this.$refs.screen.classList.add("active");
+    } else if (this.nav == "test") {
+      this.$refs.test.classList.add("active");
     }
-     else if (this.nav == "test") {
-        this.$refs.test.classList.add("active");
-      }
   },
   methods: {
     changesidebar: function (val) {
@@ -300,8 +327,7 @@ export default {
         this.$refs.calender.classList.add("active");
       } else if (val == "screen") {
         this.$refs.screen.classList.add("active");
-      }
-      else if (val == "test") {
+      } else if (val == "test") {
         this.$refs.test.classList.add("active");
       }
     },

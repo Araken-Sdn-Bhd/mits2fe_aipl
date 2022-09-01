@@ -240,6 +240,34 @@
                   v-model="exp_details"
                 ></textarea>
               </div>
+            <!-- <div class="mt-3">
+            <table class="note" style="width: 100%" id="volexp">
+              <thead>
+                <tr>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="optionBox">
+                     <tr class="block">
+                  <td>
+                    <input type="text" class="form-control year" name="" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control location" name=""  />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control activity" name="" />
+                  </td>
+                  <td>
+                    <a class="add-td"><i class="far fa-plus"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
             </div>
           </div>
         </div>
@@ -266,7 +294,7 @@
                 type="radio"
                 name="professional"
                 id="professional-no"
-                value="0"
+                value="professional-no"
                 v-model="is_mental_health_professional"
               />
               <label class="form-check-label" for="professional-no">No</label>
@@ -292,6 +320,18 @@
                     >*</span
                   ></label
                 >
+                 <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="Onreliventmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -350,14 +390,27 @@
                     >*</span
                   ></label
                 >
+                   <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="Onreliventmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
                 <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Rehabilitation1"
+                    id="Rehabilitation"
+                    @click="Onreliventmentari('Work-based Rehabilitation')"
                   />
-                  <label class="form-check-label" for="Rehabilitation1">
+                  <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
                   </label>
                 </div>
@@ -366,9 +419,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Psychoeducation1"
+                    id="Psychoeducation"
+                    @click="Onreliventmentari('Awareness Or Psychoeducation')"
                   />
-                  <label class="form-check-label" for="Psychoeducation1">
+                  <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
                   </label>
                 </div>
@@ -377,9 +431,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Therapy1"
+                    id="Therapy"
+                    @click="Onreliventmentari('Recreational Therapy')"
                   />
-                  <label class="form-check-label" for="Therapy1">
+                  <label class="form-check-label" for="Therapy">
                     Recreational Therapy
                   </label>
                 </div>
@@ -388,10 +443,11 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Others1"
+                    id="Others"
+                    @click="Onreliventmentari('Others')"
                   />
-                  <label class="form-check-label" for="Others1">
-                    Others: <input type="text" name="" />
+                  <label class="form-check-label" for="Others">
+                    Others:<input type="text" name="" v-model="VolOthers" />
                   </label>
                 </div>
               </div>
@@ -606,6 +662,17 @@
             ></label
           >
           <div class="col-sm-8">
+            <!-- <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Work-based Rehabilitation" 
+                id="Rehabilitation2" @change="Onrelevatedmentari('Consultation/Counselling')"
+              />
+              <label class="form-check-label" for="Rehabilitation2">
+                Consultation/Counselling
+              </label>
+            </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -764,6 +831,17 @@
             ></label
           >
           <div class="col-sm-8">
+             <!-- <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="Rehabilitation2" @click="Onnetworkrelevatedmentari('Consultation/Counselling')"
+              />
+              <label class="form-check-label" for="Rehabilitation2">
+                Consultation/Counselling
+              </label>
+            </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -975,6 +1053,14 @@ export default {
       $("#change").click(function () {
         $(".select-others").val("organization").trigger("change");
       });
+      $(".add-td").click(function (i) {
+        $(".block:last").after(
+          '<tr class="block"> <td> <input type="text" class="form-control year" name="" /></td><td><input type="text" class="form-control location" name=""  /></td><td><input type="text" class="form-control activity" name="" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+        );
+      });
+      $(".optionBox").on("click", ".remove", function () {
+        $(this).closest(".block").remove();
+      });
     });
     this.GetList();
   },
@@ -1065,7 +1151,6 @@ export default {
     },
 
     OnSubmit() {
-      window.alert(this.area_of_involvement);
       this.errors = [];
       if (this.is_agree) {
         if (this.area_of_involvement == "Volunteerism") {
@@ -1087,6 +1172,14 @@ export default {
     },
     async OnIndividualVolunteerism() {
       try {
+        var explist = [];
+        // $("table#volexp > tbody > tr").each(function (i) {
+        //   var obj = {};
+        //   obj.year = $('td input[type="text"].year', this).val();
+        //   obj.location = $('td input[type="text"].location', this).val();
+        //   obj.activity = $('td input[type="text"].activity', this).val();
+        //   explist.push(obj);
+        // });
         this.Isvalid = true;
         if (!this.name) {
           this.errors.push("Name is required.");
@@ -1127,7 +1220,7 @@ export default {
         if (this.is_voluneering_exp == "experience-yes") {
           if (!this.exp_details) {
             this.errors.push(
-              "volunteering experience description is required."
+              "volunteering experience details is required."
             );
             this.Isvalid = false;
           }
@@ -1137,10 +1230,10 @@ export default {
             this.errors.push("Latest Resume is required.");
             this.Isvalid = false;
           }
-          if (!this.mentari_services) {
-            this.errors.push("Relevant Mentari Service is required.");
-            this.Isvalid = false;
-          }
+        }
+        if (!this.mentari_services) {
+          this.errors.push("Relevant Mentari Service is required.");
+          this.Isvalid = false;
         }
         if (!this.available_date) {
           this.errors.push("Available Day is required.");
@@ -1204,7 +1297,8 @@ export default {
           body.append("area_of_involvement", this.area_of_involvement);
           body.append("is_agree", "1");
           body.append("is_voluneering_exp", this.is_voluneering_exp);
-          body.append("exp_details", this.exp_details);
+         // body.append("exp_details",  JSON.stringify(explist));
+           body.append("exp_details",  this.exp_details);
           body.append(
             "is_mental_health_professional",
             this.is_mental_health_professional
@@ -1218,9 +1312,10 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");+
+             
+            // });
             this.Reaload();
           } else {
             this.$nextTick(() => {

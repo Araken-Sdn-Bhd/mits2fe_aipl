@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-      <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-        <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <nav class="offline-form" v-if="!userdetails">
@@ -54,8 +54,21 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color4">{{ PHQ9 }}</h3>
-
+                          <h3 class="bg-color1" v-if="PHQ9 == 'Minimal Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color2" v-if="PHQ9 == 'Mild Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color3" v-if="PHQ9 == 'Moderate Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color4" v-if="PHQ9 == 'Moderately severe depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color5" v-if="PHQ9 == 'Severe Depression'">
+                            {{ PHQ9 }}
+                          </h3>
                           <div
                             class="arrow"
                             style="left: 57%; border-bottom-color: #ed7d31"
@@ -162,7 +175,7 @@
                     <i class="fad fa-download"></i> Download Result
                   </button>
                   <a
-                    href="/Modules/Patient/request-appointment-form"
+                    @click="Gotorequestappointment"
                     class="btn btn-success btn-text ml-auto"
                     ><i class="fad fa-calendar-day"></i> Request Appointment</a
                   >
@@ -176,10 +189,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "dass-result",
   head: {
     script: [
@@ -211,6 +224,7 @@ export default {
       phq9result: null,
       PHQ9Score: 0,
       PHQ9: "",
+      Id: 0,
     };
   },
   beforeMount() {
@@ -220,8 +234,10 @@ export default {
     if (this.phq9result) {
       this.PHQ9Score = 10;
       this.PHQ9 = this.phq9result.PHQ9;
-      this.PHQ9Score=this.phq9result.PHQ9Score;
+      this.PHQ9Score = this.phq9result.PHQ9Score;
     }
+    let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
   },
   beforeDestroy() {
     localStorage.removeItem("phq9result");
@@ -231,6 +247,12 @@ export default {
       var pdf = new jsPDF("p", "pt", "a4");
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
+      });
+    },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
       });
     },
   },

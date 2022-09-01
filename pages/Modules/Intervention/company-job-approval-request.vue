@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -110,10 +110,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "job-offer",
 
   data() {
@@ -263,9 +263,10 @@ export default {
             )
             
             .then((resp) => {
+               this.GetList();
               console.log("reuslt", resp);
             });
-            this.GetList();
+           
         });
         
         this.loader = false;

@@ -1,0 +1,232 @@
+<template>
+  <div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+      <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu scrool">
+          <div class="nav">
+            <ul>
+              <div v-for="(menu, index) in navlist" :key="index">
+                <li class="sub-menu" v-if="menu.sub_module_id.length">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="collapse"
+                    v-bind:data-bs-target="'#demo' + index"
+                    aria-expanded="true"
+                  >
+                    <i v-bind:class="[menu.icon]"></i>
+                    {{ menu.screen_name }}
+                  </a>
+                  <ul
+                    class="collapse"
+                    v-bind:id="['demo' + index]"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion"
+                  >
+                    <li v-for="(submenu, ind) in menu.sub_module_id" :key="ind">
+                      <a class="nav-link" v-bind:href="submenu.screen_route">
+                        <i v-bind:class="[submenu.icon]"></i>
+                        {{ submenu.screen_name }}
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li v-if="!menu.sub_module_id.length">
+                  <a v-bind:href="menu.screen_route" class="nav-link">
+                    <i v-bind:class="[menu.icon]"></i>
+                    {{ menu.screen_name }}
+                  </a>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      class="modal fade"
+      id="insertpopup"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Successfully Created</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-ok"
+              data-bs-dismiss="modal"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="updatepopup"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Successfully Updated</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-ok"
+              data-bs-dismiss="modal"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="errorpopup"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Something went wrong!</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-ok"
+              data-bs-dismiss="modal"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="deletepopup"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Succesfully Deleted</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-ok"
+              data-bs-dismiss="modal"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- </html> -->
+</template>
+<script>
+export default {
+  name: "CommonSidebar",
+  head: {
+    script: [
+      {
+        src: "/js/bootstrap.bundle.min.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "/js/jquery-3.5.1.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "/js/scripts.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "/js/jquery.dataTables.min.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "/js/dataTables.bootstrap5.min.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js",
+        async: true,
+        crossorigin: "anonymous",
+      },
+    ],
+  },
+  data() {
+    return {
+      userdetails: null,
+      navlist: [],
+    };
+  },
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetails) {
+      this.$router.push("/");
+    } else {
+      this.role = this.userdetails.user.role;
+    }
+    this.GetList();
+  },
+  mounted() {
+    document.body.classList.add("sb-nav-fixed");
+  },
+  methods: {
+    changesidebar: function (event) {
+      event.target.className += " active";
+      // console.log(liid,index);
+      alert(event.target.className);
+    },
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "access/sidebar",
+        { staff_id: this.userdetails.user.id },
+        //this.userdetails.user.id 55
+        { headers }
+      );
+     
+      if (response.data.code == 200) {
+        this.navlist = response.data.list;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+  },
+};
+</script>

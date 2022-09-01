@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+   <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="card mb-4 mt-5">
@@ -266,7 +266,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Do you have volunteering experience?<span>*</span></label
+                      Does your group have any volunteering experience?<span>*</span></label
                     >
                     <div class="col-sm-8 radio-box">
                       <div class="form-check form-check-inline">
@@ -303,21 +303,47 @@
                         class="experience-yes experi-box"
                         v-if="volexp == 'y'"
                       >
-                        <div class="mt-3">
+                        <!-- <div class="mt-3">
                           <textarea
                             class="form-control textarea"
                             rows="3"
                             placeholder="Please describe"
                             v-model="exp_details"
                           ></textarea>
-                        </div>
+                        </div> -->
+                           <table class="note" style="width: 100%" id="volexp1">
+              <thead>
+                <tr>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="optionBox">
+                     <tr class="block" v-for="(exp,index) in expList" :key="index">
+                  <td>
+                    <input type="text" class="form-control year" v-model="exp.year" name="" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
+                  </td>
+                  <td>
+                    <a class="add-td"><i class="far fa-plus"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
                       </div>
                     </div>
                   </div>
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Are you a mental health professional?<span>*</span></label
+                     Does your group are mental health professionals?<span>*</span></label
                     >
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">
@@ -373,6 +399,19 @@
                             >Relevant Mentari Service That You Want To Be
                             Involved<span>*</span></label
                           >
+                           <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling2" v-model="Consultation"
+                   
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling2">
+                    Consultation/Counselling
+                  </label>
+                </div>
+                 
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -443,6 +482,18 @@
                             >Relevant Mentari Service That You Want To Be
                             Involved<span>*</span></label
                           >
+                          <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling2" v-model="Consultation"
+                   
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling2">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -730,6 +781,18 @@
             ></label
           >
           <div class="col-sm-8">
+            <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling2" v-model="Consultation"
+                   
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling2">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -898,6 +961,18 @@
             ></label
           >
           <div class="col-sm-8">
+            <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling2" v-model="Consultation"
+                   
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling2">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -1006,10 +1081,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+  components: { CommonHeader, CommonSidebar, VonFooter },
   name: "view-individual",
   data() {
     return {
@@ -1022,6 +1097,7 @@ export default {
       EducationList: [],
       OccupationList: [],
       BranchList: [],
+      expList: [],
       name: "",
       dob: "",
       email: "",
@@ -1049,6 +1125,7 @@ export default {
       section: "",
       volexp: "",
       menhelth: "",
+      Consultation:"",
       work: "",
       awareness: "",
       recreational: "",
@@ -1208,7 +1285,9 @@ export default {
         if (this.mentari_services) {
           var service = this.mentari_services.split(",");
           service.forEach((val) => {
-            if (val == "Work-based Rehabilitation") {
+            if (val == "Consultation/Counselling") {
+              this.Consultation = "Consultation/Counselling";
+            } else if (val == "Work-based Rehabilitation") {
               this.work = val;
             } else if (val == "Awareness Or Psychoeducation") {
               this.awareness = val;
@@ -1228,9 +1307,12 @@ export default {
             this.volexp = "y";
           }
           this.exp_details = response.data.list.exp_details;
+          if (this.exp_details) {
+            this.expList = JSON.parse(this.exp_details);
+          }
           this.is_mental_health_professional =
             response.data.list.is_mental_health_professional;
-          if (this.is_mental_health_professional) {
+          if (this.is_mental_health_professional==1) {
             this.is_mental_health_professional = "professional-yes";
             this.menhelth = "y";
           } else {

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
          <Loader v-if="loader" />
         <div class="container-fluid px-4 shharp">
@@ -123,9 +123,7 @@
                         </div>
                         <div class="step-form-box box-01">
                           <select
-                            class="form-select multiselect"
-                            
-                          >
+                            class="form-select multiselect">
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -221,16 +219,16 @@
                             class="form-select multiselect"
                             
                           >
-                            <option value="1">Alcohol</option>
-                            <option value="1">Opio ids</option>
-                            <option value="1">Cannabinoids</option>
-                            <option value="1">Sedatives or hypnotics</option>
-                            <option value="1">Cocaine</option>
-                            <option value="1">
+                            <option value="Alcohol">Alcohol</option>
+                            <option value="Opio ids">Opio ids</option>
+                            <option value="Cannabinoids">Cannabinoids</option>
+                            <option value="Sedatives or hypnotics">Sedatives or hypnotics</option>
+                            <option value="Cocaine">Cocaine</option>
+                            <option value="Other stimulants (including amphetamine-type)">
                               Other stimulants (including amphetamine-type)
                             </option>
-                            <option value="1">Hallucinogens</option>
-                            <option value="1">Volatile solvents</option>
+                            <option value="Hallucinogens">Hallucinogens</option>
+                            <option value="Volatile solvents">Volatile solvents</option>
                           </select>
                         </div>
                       </div>
@@ -328,16 +326,16 @@
                             class="form-select multiselect"
                             
                           >
-                            <option value="1">Alcohol</option>
-                            <option value="1">Opio ids</option>
-                            <option value="1">Cannabinoids</option>
-                            <option value="1">Sedatives or hypnotics</option>
-                            <option value="1">Cocaine</option>
-                            <option value="1">
+                            <option value="Alcohol">Alcohol</option>
+                            <option value="Opio ids">Opio ids</option>
+                            <option value="Cannabinoids">Cannabinoids</option>
+                            <option value="Sedatives or hypnotics">Sedatives or hypnotics</option>
+                            <option value="Cocaine">Cocaine</option>
+                            <option value="Other stimulants (including amphetamine-type)">
                               Other stimulants (including amphetamine-type)
                             </option>
-                            <option value="1">Hallucinogens</option>
-                            <option value="1">Volatile solvents</option>
+                            <option value="Hallucinogens">Hallucinogens</option>
+                            <option value="Volatile solvents">Volatile solvents</option>
                           </select>
                         </div>
                       </div>
@@ -371,17 +369,17 @@
                             class="form-select multiselect"
                             
                           >
-                            <option value="1">
+                             <option value="Intimate relationship problems">
                               Intimate relationship problems
                             </option>
-                            <option value="1">
+                            <option value="Other relationship problems">
                               Other relationship problems
                             </option>
-                            <option value="1">Death of loved one</option>
-                            <option value="1">Job-related problems</option>
-                            <option value="1">Financial problems</option>
-                            <option value="1">Academic-related problems</option>
-                            <option value="1">Criminal/Legal problems</option>
+                            <option value="Death of loved one">Death of loved one</option>
+                            <option value="Job-related problems">Job-related problems</option>
+                            <option value="Financial problems">Financial problems</option>
+                            <option value="Academic-related problems">Academic-related problems</option>
+                            <option value="Criminal/Legal problems">Criminal/Legal problems</option>
                           </select>
                         </div>
                       </div>
@@ -555,7 +553,7 @@
                             type="radio"
                             id="no"
                              v-bind:name="'pro' + index"
-                              @click="onchangeprotect(index+1,0)"
+                              @click="onchangeprotect(pro.id,0)"
                           />
                           <label class="form-check-label" for="no">{{
                             pro.Options1
@@ -567,7 +565,7 @@
                             type="radio"
                             id="yes"
                              v-bind:name="'pro' + index"
-                            value="permanent-resident" @click="onchangeprotect(index+1,1)"
+                            value="permanent-resident" @click="onchangeprotect(pro.id,1)"
                           />
                           <label class="form-check-label" for="yes">{{
                             pro.Options2
@@ -1727,11 +1725,11 @@
                         >
                         <option value="0">Please Select</option>
                           <option
-                            v-for="phy in psychiatrist"
+                            v-for="phy in diagonisislist"
                             v-bind:key="phy.id"
                             v-bind:value="phy.id"
                           >
-                            {{ phy.name }}
+                            {{ phy.icd_category_code }}
                           </option>
                         </select>
                       </div>
@@ -2008,10 +2006,10 @@
 </template>
 <script>
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader, PatientDetails },
+  components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
   data() {
     return {
@@ -2026,6 +2024,7 @@ export default {
       injurylist: [],
       placelist: [],
       list: [],
+      diagonisislist:[],
       Id: 0,
       referral_or_contact: 0,
       arrival_mode: 0,
@@ -2365,6 +2364,7 @@ export default {
       } else {
         this.protectivefactorlist = [];
       }
+      console.log('my protective lst',this.protectivefactorlist);
       const response2 = await this.$axios.get(
         "general-setting/list?section=" + "mode-of-arrival",
         { headers }
@@ -2374,7 +2374,7 @@ export default {
       } else {
         this.modelist = [];
       }
-      const response3 = await this.$axios.get("psychiatrist/list", { headers });
+      const response3 = await this.$axios.get("staff-management/getList", { headers });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.psychiatrist = response3.data.list;
       } else {
@@ -2408,13 +2408,29 @@ export default {
       } else {
         this.list = [];
       }
+      const response7 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response7.data.code == 200 || response7.data.code == "200") {
+        this.diagonisislist = response7.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.user_ip_address = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.user_ip_address = ip;
     },
     OnMxdischarge(val) {
       if (this.discharge_psy_mx) {
@@ -2428,6 +2444,13 @@ export default {
     },
     onchange(ind, val) {
       this.checkedList[ind] = val;
+      console.log("my list", this.checkedList);
+    },
+    OndropdownChange(val, event) {
+      //this.checkedList[ind] = val;
+      delete checkedList.val;
+      this.checkedList[val] = event.target.value;
+      console.log("my pushed array", this.checkedList);
     },
     onSectionB(val) {
       this.secB = val;
@@ -2486,10 +2509,7 @@ export default {
       }
     },
     async Onprotectivefactor() {
-      console.log(
-        Object.values(this.procheckedList).length,
-        this.protectivefactorlist.length
-      );
+      console.log(this.procheckedList);
       if (
         Object.values(this.procheckedList).length ==
         this.protectivefactorlist.length
@@ -2507,7 +2527,7 @@ export default {
               added_by: this.userdetails.user.id,
               patient_id: this.Id,
               sharp_register_id: this.sharp_register_id,
-              result: JSON.stringify([this.checkedList]),
+              result: JSON.stringify([this.procheckedList]),
             },
             { headers }
           );
@@ -2588,8 +2608,8 @@ export default {
               result: JSON.stringify([
                 {
                   "CURRENT SELF HARM ACT": {
-                    "Date": this.Sdate,
-                    "Time": this.Stime,
+                    Date: this.Sdate,
+                    Time: this.Stime,
                     "Place of Occurance": this.place_id,
                   },
                 },
@@ -2597,12 +2617,12 @@ export default {
                   "Method of Self-Harm": {
                     "Overdose/Poisoning": this.overdosevalue,
                     "Hanging/Suffocation": this.hanging,
-                    "Drowning": this.drowning,
+                    Drowning: this.drowning,
                     "Firearms or explosives": this.firearmsorexplosives,
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    "Other": this.selfharm_other,
+                    Other: this.selfharm_other,
                   },
                 },
                 {
@@ -2628,6 +2648,7 @@ export default {
             },
             { headers }
           );
+          console.log("my reslut", response.data);
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
             this.sharp_register_id = response.data.id;
@@ -2894,9 +2915,9 @@ export default {
           );
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
             this.$router.push({
               path: "/Modules/Patient/patient-history",
               query: { id: this.Id },

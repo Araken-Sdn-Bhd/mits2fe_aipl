@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -158,10 +158,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "email-setting",
   data() {
     return {
@@ -206,37 +206,45 @@ export default {
           this.emailerror.push("Security is required");
         } else {
           this.loader = true;
-          var variablevale =
-            this.emailfrom +
-            "," +
-            this.outgoingsmtpserver +
-            "," +
-            this.loginuserid +
-            "," +
-            this.loginpassword +
-            "," +
-            this.verifypassword +
-            "," +
-            this.smtpportno +
-            "," +
-            this.security;
+          // var variablevale =
+          //   this.emailfrom +
+          //   "," +
+          //   this.outgoingsmtpserver +
+          //   "," +
+          //   this.loginuserid +
+          //   "," +
+          //   this.loginpassword +
+          //   "," +
+          //   this.verifypassword +
+          //   "," +
+          //   this.smtpportno +
+          //   "," +
+          //   this.security;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "/system-settings/insertOrupdate",
+            "/email-setting/add",
             {
-              section: "email-setting",
-              variable_name: "send-email-from,outgoing-smtp-server,login-user-id,login-password,verify-password,smtp-port-number,security",
-              variable_value: variablevale,
-              status: "1,1,1,1,1,1,1",
+              send_email_from: this.emailfrom,
+              outgoing_smtp_server: this.outgoingsmtpserver,
+              login_user_id: this.loginuserid,
+              login_password: this.loginpassword,
+              verify_password: this.verifypassword,
+              smtp_port_number: this.smtpportno,
+              security: this.security,
+              // id:"1"
+              // section: "email-setting",
+              // variable_name: "send-email-from,outgoing-smtp-server,login-user-id,login-password,verify-password,smtp-port-number,security",
+              // variable_value: variablevale,
+              // status: "1,1,1,1,1,1,1",
             },
             { headers }
           );
-          console.log('my body',variablevale);
-          console.log('my resp',response.data);
+          // console.log("my body", variablevale);
+          console.log("my resp", response.data);
           if (response.data.code == 200) {
             this.loader = false;
             this.$nextTick(() => {
@@ -250,7 +258,7 @@ export default {
           }
         }
       } catch (e) {
-         console.log('my ERR',e);
+        console.log("my ERR", e);
         this.loader = false;
         this.$nextTick(() => {
           $("#errorpopup").modal("show");

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -51,7 +51,11 @@
                       v-model="service"
                       @change="Onseacrh"
                     >
+
                       <option value="">Select Services</option>
+                      <option value="Consultation/Counselling">
+                        Consultation/Counselling
+                      </option>
                       <option value="Work-based Rehabilitation">
                         Work-based Rehabilitation
                       </option>
@@ -109,7 +113,7 @@
                     <td>{{ app.phone_number }}</td>
                     <td>{{ app.email }}</td>
                     <td>
-                      <a href="von-management-view.html" class="view">
+                      <a style="pointer:cursor;" @click="OnView(app)" class="view">
                         <i class="far fa-eye"></i>
                       </a>
                     </td>
@@ -127,10 +131,10 @@
 <script>
 import Loader from "../../../components/loader.vue";
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter, Loader },
+  components: { CommonHeader, CommonSidebar, VonFooter, Loader },
   name: "list-of-application",
   data() {
     return {
@@ -215,6 +219,24 @@ export default {
         path: "/Modules/Intervention/update-new-job",
         query: { id: id },
       });
+    },
+      OnView(data) {
+      if (data.app_type == "Individual") {
+        this.$router.push({
+          path: "/Modules/Von/view-individual",
+          query: { id: data.id },
+        });
+      } else if (data.app_type == "Group") {
+         this.$router.push({
+          path: "/Modules/Von/view-group",
+          query: { id: data.id },
+        });
+      } else {
+         this.$router.push({
+          path: "/Modules/Von/view-organization",
+          query: { id: data.id },
+        });
+      }
     },
   },
 };

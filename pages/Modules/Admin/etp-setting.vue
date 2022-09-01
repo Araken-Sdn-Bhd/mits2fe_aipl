@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -64,15 +64,15 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Etpdivision from "../../../components/Admin/etpdivision.vue";
 import Etpregistration from "../../../components/Admin/etpregistration.vue";
 
 export default {
   components: {
-    Adminsidebar,
-    AdminHeader,
+    CommonHeader,
+    CommonSidebar,
     Etpregistration,
     Etpdivision,
   },

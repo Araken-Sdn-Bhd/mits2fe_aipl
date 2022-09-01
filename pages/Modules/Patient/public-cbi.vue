@@ -141,7 +141,7 @@
                                 type="radio"
                                 v-bind:name="'pb' + index"
                                 value="1"
-                                @change="onpersonalchange(index, 1)"
+                                @change="onpersonalchange(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -153,7 +153,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 2)"
+                                @change="onpersonalchange(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -165,7 +165,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 3)"
+                                @change="onpersonalchange(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -177,7 +177,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 4)"
+                                @change="onpersonalchange(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -189,7 +189,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 5)"
+                                @change="onpersonalchange(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -282,7 +282,7 @@
                                 type="radio"
                                 value="1"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 1)"
+                                @change="onworkchange(wr.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 wr.Answer1
@@ -294,7 +294,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 2)"
+                                @change="onworkchange(wr.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 wr.Answer2
@@ -306,7 +306,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 3)"
+                                @change="onworkchange(wr.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 wr.Answer3
@@ -318,7 +318,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 4)"
+                                @change="onworkchange(wr.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 wr.Answer4
@@ -330,7 +330,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 5)"
+                                @change="onworkchange(wr.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 wr.Answer5
@@ -432,7 +432,7 @@
                                 type="radio"
                                 value="1"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 1)"
+                                @change="onclientchange(cl.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 cl.Answer1
@@ -444,7 +444,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 2)"
+                                @change="onclientchange(cl.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 cl.Answer2
@@ -456,7 +456,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 3)"
+                                @change="onclientchange(cl.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 cl.Answer3
@@ -468,7 +468,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 4)"
+                                @change="onclientchange(cl.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 cl.Answer4
@@ -480,7 +480,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 5)"
+                                @change="onclientchange(cl.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 cl.Answer5
@@ -542,6 +542,28 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+#layoutSidenav #layoutSidenav_content{
+  margin-left: 0px;
+}
+@media (max-width: 768px) {
+  .form-table tr {
+    display: flex;
+    flex-direction: column;
+}
+.nav-tabs .nav-link {
+    white-space: nowrap;
+}
+.nav-tabs{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+}
+
+</style>
 <script>
 import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
 import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
@@ -763,21 +785,29 @@ export default {
       }
     },
     onpersonalchange(ind, val) {
-      this.checkedpersonalList[ind + 1] = val;
+      this.checkedpersonalList[ind] = val;
       // console.log(Object.values(this.checkedList).toString());
     },
     onworkchange(ind, val) {
-      this.checkedworkList[ind + 1] = val;
+      this.checkedworkList[ind] = val;
     },
     onclientchange(ind, val) {
-      this.checkedclientList[ind + 1] = val;
+      this.checkedclientList[ind] = val;
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+   async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
   },
 };

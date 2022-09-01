@@ -56,7 +56,7 @@
     <div class="table-title">
       <h3>List of State</h3>
     </div>
-    <table class="table table-striped data-table" style="width: 100%">
+    <table class="table table-striped data-table1" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -101,10 +101,44 @@ export default {
       loader: false,
     };
   },
+   created: function() {
+       console.log('my list call');
+    },
+  
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(`${this.$axios.defaults.baseURL}` + "address/list", { headers })
+      .then((resp) => {
+        this.StateList = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table1").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetCountryList();
-    this.GetStateList();
   },
   methods: {
     async GetCountryList() {
@@ -126,7 +160,8 @@ export default {
         }
         if (this.Stateindex <= 0) {
           this.errors.push("Index is required.");
-        } if(this.CountryId && this.State && this.Stateindex) {
+        }
+        if (this.CountryId && this.State && this.Stateindex) {
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -246,6 +281,7 @@ export default {
       this.stateId = 0;
       this.GetStateList();
     },
+    
   },
 };
 </script>

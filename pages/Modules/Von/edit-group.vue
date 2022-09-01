@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
        <div class="container-fluid px-4">
           <div class="card mb-4 mt-5">
@@ -328,7 +328,7 @@
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Do you have volunteering experience?<span>*</span></label
+            Does your group have any volunteering experience?<span>*</span></label
           >
           <div class="col-sm-8 radio-box">
             <div class="form-check form-check-inline">
@@ -357,12 +357,32 @@
             <!-- hide-div -->
             <div class="experience-yes experi-box" v-if="Gis_voluneering_exp=='1'">
               <div class="mt-3">
-                <textarea
-                  class="form-control textarea"
-                  rows="3"
-                  placeholder="Please describe"
-                  v-model="Gexp_details"
-                ></textarea>
+                  <table class="note" style="width: 100%" id="volexp1">
+              <thead>
+                <tr>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="optionBox">
+                     <tr class="block" v-for="(exp,index) in expList" :key="index">
+                  <td>
+                    <input type="text" class="form-control year" v-model="exp.year" name="" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
+                  </td>
+                  <td>
+                    <a class="add-td"><i class="far fa-plus"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
               </div>
             </div>
           </div>
@@ -370,7 +390,7 @@
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Are you a mental health professional?<span>*</span></label
+            Does your group are mental health professionals?<span>*</span></label
           >
           <div class="col-sm-8 professional-box">
             <div class="form-check form-check-inline">
@@ -416,6 +436,18 @@
                     >*</span
                   ></label
                 >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -467,8 +499,8 @@
               </div>
             </div>
 
-            <div class="professional-noG profess-box hide" >
-              <div class="mt-3">
+            <div class="professional-noG profess-box" v-if="Gis_mental_health_professional=='0'">
+               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
                     >*</span
@@ -478,10 +510,23 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
-                    id="Rehabilitation1"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
                   />
-                  <label class="form-check-label" for="Rehabilitation1">
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                   v-model="work"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
                   </label>
                 </div>
@@ -490,9 +535,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Psychoeducation1"
+                    id="Psychoeducation"
+                    v-model="awareness"
                   />
-                  <label class="form-check-label" for="Psychoeducation1">
+                  <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
                   </label>
                 </div>
@@ -501,9 +547,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Therapy1"
+                    id="Therapy"
+                    v-model="recreational"
                   />
-                  <label class="form-check-label" for="Therapy1">
+                  <label class="form-check-label" for="Therapy">
                     Recreational Therapy
                   </label>
                 </div>
@@ -512,10 +559,11 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Others1"
+                    id="Others"
+                   v-model="other"
                   />
-                  <label class="form-check-label" for="Others1">
-                    Others: <input type="text" name="" />
+                  <label class="form-check-label" for="Others">
+                    Others:<input type="text" name="" v-model="Others" />
                   </label>
                 </div>
               </div>
@@ -729,6 +777,18 @@
               >*</span
             ></label
           >
+          <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
           <div class="col-sm-8">
             <div class="form-check">
               <input
@@ -887,7 +947,20 @@
               >*</span
             ></label
           >
+          
           <div class="col-sm-8">
+            <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
            <div class="form-check">
               <input
                 class="form-check-input"
@@ -1009,10 +1082,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+  components: { CommonHeader, CommonSidebar, VonFooter },
   name: "edit-group",
   data() {
     return {
@@ -1025,6 +1098,7 @@ export default {
       GEducationList: [],
       GOccupationList: [],
       GBranchList: [],
+      expList: [],
       Gis_agree: 0,
       is_represent_org: 0,
       members_count: "",
@@ -1080,12 +1154,13 @@ export default {
       Gnetworkother: "",
       Gnetworkserviceother: "",
       screening_mode: 0,
+      Consultation: "",
       work: "",
       awareness: "",
       recreational: "",
       other: "",
       Others: "",
-      Id:0,
+      Id: 0,
     };
   },
   beforeMount() {
@@ -1159,6 +1234,14 @@ export default {
 
       $("#change").click(function () {
         $(".select-others").val("organization").trigger("change");
+      });
+      $(".add-td").click(function (i) {
+        $(".block:last").after(
+          '<tr class="block"> <td> <input type="text" class="form-control year" name="" /></td><td><input type="text" class="form-control location" name=""  /></td><td><input type="text" class="form-control activity" name="" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+        );
+      });
+      $(".optionBox").on("click", ".remove", function () {
+        $(this).closest(".block").remove();
       });
     });
     this.GetList();
@@ -1268,22 +1351,26 @@ export default {
     OnSubmit() {
       this.errors = [];
       if (this.Gis_agree) {
-        if (this.is_you_represenative) {
-          if (this.Garea_of_involvement == "Volunteerism") {
-            this.OnGroupVolunteerism();
-          } else if (
-            this.Garea_of_involvement == "Outreach Project Collaboration"
-          ) {
-            this.OnGroupOutreachProjectCollaboration();
-          } else if (
-            this.Garea_of_involvement == "Networking Make a Contribution"
-          ) {
-            this.OnGroupNetworkingMakeaContribution();
+        if (this.screening_mode) {
+          if (this.is_you_represenative) {
+            if (this.Garea_of_involvement == "Volunteerism") {
+              this.OnGroupVolunteerism();
+            } else if (
+              this.Garea_of_involvement == "Outreach Project Collaboration"
+            ) {
+              this.OnGroupOutreachProjectCollaboration();
+            } else if (
+              this.Garea_of_involvement == "Networking Make a Contribution"
+            ) {
+              this.OnGroupNetworkingMakeaContribution();
+            } else {
+              this.errors.push("Please select Areas of Involvement");
+            }
           } else {
-            this.errors.push("Please select Areas of Involvement");
+            this.OnRepresentNo();
           }
         } else {
-          this.OnRepresentNo();
+          this.errors.push("Please select screen mode");
         }
       } else {
         this.errors.push("Please agree to the terms and condition");
@@ -1336,6 +1423,14 @@ export default {
     },
     async OnGroupVolunteerism() {
       try {
+        var explist = [];
+        $("table#volexp1 > tbody > tr").each(function (i) {
+          var obj = {};
+          obj.year = $('td input[type="text"].year', this).val();
+          obj.location = $('td input[type="text"].location', this).val();
+          obj.activity = $('td input[type="text"].activity', this).val();
+          explist.push(obj);
+        });
         this.GIsvalid = true;
         if (!this.members_count) {
           this.errors.push("How many group members do you have is required.");
@@ -1381,14 +1476,14 @@ export default {
         if (!this.Garea_of_involvement) {
           this.errors.push("Areas of Involvement is required.");
         }
-        if (this.Gis_voluneering_exp == "1") {
-          if (!this.Gexp_details) {
-            this.errors.push(
-              "volunteering experience description is required."
-            );
-            this.GIsvalid = false;
-          }
-        }
+        // if (this.Gis_voluneering_exp == "1") {
+        //   if (!this.Gexp_details) {
+        //     this.errors.push(
+        //       "volunteering experience description is required."
+        //     );
+        //     this.GIsvalid = false;
+        //   }
+        // }
         if (this.Gis_mental_health_professional == "1") {
           if (!this.Gfile) {
             this.errors.push("Latest Resume is required.");
@@ -1455,14 +1550,16 @@ export default {
           body.append("branch_id", this.Gbranch_id);
           body.append("area_of_involvement", this.Garea_of_involvement);
           body.append("is_voluneering_exp", this.Gis_voluneering_exp);
-          body.append("exp_details", this.Gexp_details);
+          body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Gis_mental_health_professional
           );
           body.append(
             "mentari_services",
-            this.work +
+            this.Consultation +
+              "," +
+              this.work +
               "," +
               this.awareness +
               "," +
@@ -1472,7 +1569,7 @@ export default {
               "," +
               this.Others
           );
-          body.append("mentari_services", this.Gmentari_services);
+          //   body.append("mentari_services", this.Gmentari_services);
           body.append("available_date", this.Gavailable_date);
           body.append("available_time", this.Gavailable_time);
           body.append("health_professional_resume", this.Gfile);
@@ -1655,7 +1752,9 @@ export default {
           body.append("project_objectives", this.Gproject_objectives);
           body.append(
             "mentari_services",
-            this.work +
+            this.Consultation +
+              "," +
+              this.work +
               "," +
               this.awareness +
               "," +
@@ -1785,7 +1884,7 @@ export default {
           this.Gcontribution &&
           this.Gbudget &&
           this.Gnetworkno_of_paricipants &&
-          this.Gnetwotkproject_loaction 
+          this.Gnetwotkproject_loaction
         ) {
           if (this.Gaddress1) {
             this.Gaddress = this.Gaddress + "\n" + this.Gaddress1;
@@ -1822,7 +1921,9 @@ export default {
           body.append("budget", this.Gbudget);
           body.append(
             "mentari_services",
-            this.work +
+            this.Consultation +
+              "," +
+              this.work +
               "," +
               this.awareness +
               "," +
@@ -1912,7 +2013,9 @@ export default {
         if (this.Gmentari_services) {
           var service = this.Gmentari_services.split(",");
           service.forEach((val) => {
-            if (val == "Work-based Rehabilitation") {
+            if (val == "Consultation/Counselling") {
+              this.Consultation = "Consultation/Counselling";
+            } else if (val == "Work-based Rehabilitation") {
               this.work = val;
             } else if (val == "Awareness Or Psychoeducation") {
               this.awareness = val;
@@ -1928,8 +2031,16 @@ export default {
         if (response.data.list.area_of_involvement == "Volunteerism") {
           this.Gis_voluneering_exp = response.data.list.is_voluneering_exp;
           this.Gexp_details = response.data.list.exp_details;
+          if (this.Gexp_details) {
+            this.expList = JSON.parse(this.Gexp_details);
+          }
           this.Gis_mental_health_professional =
             response.data.list.is_mental_health_professional;
+          if (this.Gis_mental_health_professional == 1) {
+            // this.Gis_mental_health_professional = "professional-yes";
+          } else {
+            //   this.Gis_mental_health_professional = "professional-no";
+          }
           this.Gavailable_date = response.data.list.available_date;
           this.Gavailable_time = response.data.list.available_time;
         } else if (

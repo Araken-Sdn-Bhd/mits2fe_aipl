@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+     <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -107,10 +107,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+  components: { CommonHeader, CommonSidebar, VonFooter },
   name: "list-of-application",
   data() {
     return {
@@ -276,7 +276,7 @@ export default {
     OnBook(data){
       this.$router.push({
           path: "/Modules/Von/book-appointment",
-          query: { section: data.id },
+          query: { section: data.id,name:data.name },
         });
     },
   },

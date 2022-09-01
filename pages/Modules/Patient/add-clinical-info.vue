@@ -1,11 +1,11 @@
 <template>
   <div id="layoutSidenav">
     <div>
-      <PatientLoginSidebar />
+      <CommonSidebar />
     </div>
     <div id="layoutSidenav_content">
       <div>
-        <PatientLoginHeader />
+        <CommonHeader />
       </div>
       <main>
         <Loader v-if="loader" />
@@ -155,10 +155,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "add-clinical-info",
   data() {
     return {

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -23,7 +23,7 @@
                   >
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <label for="" class="form-label">Name</label>
+                        <label for="" class="form-label">Name<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -33,21 +33,23 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">NRIC NO</label>
+                        <label for="" class="form-label">NRIC NO<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
                           placeholder="Enter NRIC NO"
-                          v-model="nricno"
+                          v-model="nricno" @change="CheckNric($event)"
                         />
+                         <Error :message="nricerror" v-if="nricerror" />
                       </div>
+                      
                     </div>
                     <!-- close-row -->
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <label for="" class="form-label"
-                          >Profession Registration NO.</label
+                          >Profession Registration NO.<span style="color:red">*</span></label
                         >
                         <input
                           type="text"
@@ -58,7 +60,7 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">Role</label>
+                        <label for="" class="form-label">Role<span style="color:red">*</span></label>
                         <select
                           v-model="roleId"
                           class="form-select"
@@ -78,7 +80,7 @@
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <label for="" class="form-label">Email Address</label>
+                        <label for="" class="form-label">Email Address<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -88,7 +90,7 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">Team</label>
+                        <label for="" class="form-label">Team<span style="color:red">*</span></label>
                         <select
                           v-model="teamId"
                           class="form-select"
@@ -108,7 +110,7 @@
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <label for="" class="form-label">Contact NO.</label>
+                        <label for="" class="form-label">Contact NO.<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -121,7 +123,7 @@
 
                     <div class="row">
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">Designation</label>
+                        <label for="" class="form-label">Designation<span style="color:red">*</span></label>
                         <select
                           v-model="designationId"
                           class="form-select"
@@ -132,14 +134,14 @@
                             v-bind:key="des.id"
                             v-bind:value="des.id"
                           >
-                            {{ des.designation_name }}
+                            {{ des.section_value }}
                           </option>
                         </select>
                       </div>
 
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label"
-                          >Designation Period(Start Date)</label
+                          >Designation Period(Start Date)<span style="color:red">*</span></label
                         >
                         <input
                           type="date"
@@ -150,7 +152,7 @@
 
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label"
-                          >Designation Period(End Date)</label
+                          >Designation Period(End Date)<span style="color:red">*</span></label
                         >
                         <input
                           type="date"
@@ -164,7 +166,7 @@
                     <div class="row">
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label"
-                          >Mentari Location</label
+                          >Mentari Location<span style="color:red">*</span></label
                         >
                         <select
                           v-model="branchId"
@@ -203,7 +205,7 @@
 
                     <div class="row">
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">Start Date</label>
+                        <label for="" class="form-label">Start Date<span style="color:red">*</span></label>
                         <input
                           type="date"
                           class="form-control"
@@ -212,7 +214,7 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">End Date</label>
+                        <label for="" class="form-label">End Date<span style="color:red">*</span></label>
                         <input
                           type="date"
                           class="form-control"
@@ -222,7 +224,7 @@
 
                       <div class="col-md-4 mb-4">
                         <label for="formFile" class="form-label"
-                          >Supported Document</label
+                          >Supported Document<span style="color:red">*</span></label
                         >
                         <input
                           class="form-control"
@@ -265,10 +267,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "new-staff",
   data() {
     return {
@@ -293,6 +295,7 @@ export default {
       designationlist: [],
       branchlist: [],
       errors: [],
+      nricerror: null,
     };
   },
   beforeMount() {
@@ -348,9 +351,12 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("designation/getDesignationList", {
-        headers,
-      });
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "designation",
+        {
+          headers,
+        }
+      );
       if (response.data.code == 200 || response.data.code == "200") {
         this.designationlist = response.data.list;
       } else {
@@ -395,18 +401,21 @@ export default {
       if (this.branchId <= 0) {
         this.errors.push("Mentari Location is required.");
       }
-      if (!this.contactno) {
-        this.errors.push("Contact NO is required.");
-      }
       if (!this.startdate) {
         this.errors.push("Start Date   is required.");
       }
       if (!this.enddate) {
         this.errors.push("End Date is required.");
       }
-      if (!this.file) {
-        this.errors.push("Document is required.");
-      } else {
+      // if (!this.file) {
+      //   this.errors.push("Document is required.");
+      // }
+      console.log('this.name && this.nricno && this.professionregno && this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror',this.name , this.nricno , this.professionregno , this.Role , this.email ,
+      this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
+      this.branchId , this.startdate , this.enddate , !this.nricerror)
+      if(this.name , this.nricno , this.professionregno , this.roleId , this.email ,
+      this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
+      this.branchId , this.startdate , this.enddate , !this.nricerror) {
         if (this.personincharge > 0) {
           this.personincharge = 1;
         }
@@ -446,6 +455,25 @@ export default {
             $("#errorpopup").modal("show");
           });
         }
+      }
+    },
+    async CheckNric(event) {
+       console.log('my body',event.target.value);
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/checknricno",{ nric_no: event.target.value },
+        { headers }
+        
+      );
+      console.log('response',response.data);
+      if (response.data.code == 200) {
+        this.nricerror = "NRIC No already exists";
+      } else {
+        this.nricerror = null;
       }
     },
   },

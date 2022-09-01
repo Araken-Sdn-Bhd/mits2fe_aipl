@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -10,6 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
+            
               <a href="#"><i class="far fa-calendar-edit"></i></a>
               <h4>Announcement Details</h4>
             </div>
@@ -75,6 +76,7 @@
                   </tr>
                 </tbody>
               </table>
+             <a href="/Modules/Admin/announcement-management" class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
             </div>
           </div>
         </div>
@@ -83,10 +85,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "announcement-management",
   setup() {},
   data() {

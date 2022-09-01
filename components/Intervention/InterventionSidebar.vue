@@ -50,6 +50,35 @@
                   <span>Company Basic Information</span>
                 </a>
               </li>
+              <li class="divider">Imported Link</li>
+              <div v-show="userdetails">
+                <li>
+                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Patient Manag...
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Admin Manag...
+                  </a>
+                </li>
+               
+                <li >
+                  <a href="/Modules/Report/sharp" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Report Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Shharp Manag...
+                  </a>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
@@ -199,19 +228,19 @@ export default {
     return {
       userdetails: null,
       nav: "",
+      role: "",
     };
+  },
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetails) {
+      this.$router.push("/");
+    } else {
+      this.role = this.userdetails.user.role;
+    }
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    if (this.userdetails) {
-      // if (this.userdetails.user.role == "Intervention") {
-      // } else {
-      //   this.$router.push("/");
-      // }
-    } else {
-      this.$router.push("/");
-    }
     this.nav = localStorage.getItem("nav");
     if (this.nav == "tab1") {
       this.$refs.tab1.classList.add("active");

@@ -28,7 +28,7 @@
 
                 <tr>
                   <td>Gender:</td>
-                  <td>{{ patientdetails.gender[0].section_value }}</td>
+                  <td>{{ patientdetails.gender }}</td>
                 </tr>
 
                 <tr>
@@ -38,12 +38,12 @@
 
                 <tr>
                   <td>Marital Status:</td>
-                  <td>{{ patientdetails.maritialstatus[0].section_value }}</td>
+                  <td>{{ patientdetails.maritialstatus}}</td>
                 </tr>
 
                 <tr>
                   <td>Nationality:</td>
-                  <td>{{ patientdetails.citizenships[0].citizenship_name }}</td>
+                  <td>{{ patientdetails.citizenships }}</td>
                 </tr>
 
                 <tr>
@@ -67,11 +67,11 @@
         <div class="card mb-4">
           <div class="card-header">
             <h4>Alert</h4>
-            <a href="#"><i class="fal fa-edit"></i></a>
+            <a @click="FocusAlert"><i class="fal fa-edit"></i></a>
           </div>
           <div class="card-body">
             <form class="alert-box" method="post"  @submit.prevent="AddAlert">
-              <textarea class="form-control" v-model="alert"></textarea>
+              <textarea class="form-control" id="alert" v-model="alert"></textarea>
 <p v-if="errorList.length">
                           <ul>
                            <li style="color:red"  v-for='err in errorList' :key='err' >
@@ -80,7 +80,10 @@
                         </ul>
                        </p>
               <div class="d-flex mt-2">
-                <button type="submit" class="btn btn-success ml-auto">
+                <button type="submit" class="btn btn-success ml-auto" v-if="alert">
+                  Update ALERT
+                </button>
+                 <button type="submit" class="btn btn-success ml-auto" v-if="!alert">
                   <i class="far fa-plus"></i> Add ALERT
                 </button>
               </div>
@@ -109,6 +112,7 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetPatientdetails();
+   
   },
   methods: {
     oneditPatient() {
@@ -124,7 +128,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
+        "patient-registration/getPatientRegistrationByIdShortDetails", //getPatientRegistrationById
         {
           id: this.Id,
         },
@@ -139,10 +143,11 @@ export default {
         "patient-alert/alertListbyPatientId",
         {
           patient_id: this.Id,
-          added_by: this.userdetails.user.id,
         },
         { headers }
       );
+      console.log("my data", response1.data);
+       console.log('my details',this.userdetails);
       this.alert = response1.data[0].message;
     },
     async AddAlert() {
@@ -183,6 +188,9 @@ export default {
         this.loader = false;
       }
     },
+    FocusAlert(){
+      document.getElementById("alert").focus();
+    }
   },
 };
 </script>

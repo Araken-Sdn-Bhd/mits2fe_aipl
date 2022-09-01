@@ -135,28 +135,38 @@
         <div class="col-md-6">
           <div class="mb-3">
             <label for="" class="form-label">Contact No. (Office)</label>
-            <div class="add-box">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter Contact No."
-                v-model="ContactNoOffice"
-              />
-              <a href="#"><i class="far fa-plus"></i></a>
-            </div>
+            <table class="add-boxs" id="ContactNoOfficerow">
+              <tbody v-if="Contactlist.length">
+                <tr class="block-ui block-contact" v-for="(office,index) in Contactlist" :key="index">
+                  <td><input type="text" class="form-control contactoffice" v-model="office.ContactNoOffice" placeholder="Enter Contact No."  /></td>
+                  <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+                          <tbody v-if="!Contactlist.length">
+                <tr class="block-ui block-contact">
+                  <td><input type="text" class="form-control contactoffice"  placeholder="Enter Contact No."  /></td>
+                  <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label">Contact No. (Mobile)</label>
-            <div class="add-box">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter Contact No."
-                v-model="MobileOffice"
-              />
-              <a href="#"><i class="far fa-plus"></i></a>
-            </div>
+            <table class="add-boxs" id="ContactNoMobilerow">
+              <tbody v-if="Conntactmobilelist.length">
+                <tr class="block-mobile block-ui" v-for="(mobile,index) in Conntactmobilelist" :key="index">
+                  <td><input type="text" class="form-control conntactmobile" v-model="mobile.MobileOffice" placeholder="Enter Contact No."  /></td>
+                  <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+               <tbody v-if="!Conntactmobilelist.length">
+                <tr class="block-mobile block-ui">
+                  <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No."  /></td>
+                  <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -173,16 +183,22 @@
 
           <div class="mb-3">
             <label for="" class="form-label">Email</label>
-            <div class="add-box">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter Email"
-                v-model="Email"
-                 @blur="validateEmail"
-              />
-              <a href="#"><i class="far fa-plus"></i></a>
-            </div>
+            <table class="add-boxs" id="Emailrow">
+              <tbody v-if="Emaillist.length">
+                <tr class="block-ui block-email" >
+                  <!-- @blur="validateEmail" -->
+                  <td><input type="text" v-for="(email,index) in Emaillist" :key="index" class="form-control email" v-model="email.Email" placeholder="Enter Email"   /></td>
+                  <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+              <tbody v-if="!Emaillist.length">
+                <tr class="block-ui block-email">
+                  <!-- @blur="validateEmail" -->
+                  <td><input type="text" class="form-control email"  placeholder="Enter Email"/></td>
+                  <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
+                </tr>
+              </tbody>
+            </table>
              <Error :message="emailerror" v-if="emailerror" />
           </div>
         </div>
@@ -210,10 +226,10 @@
       <h3>List of Branch</h3>
       <div class="input-group">
         <span class="input-group-text"><i class="far fa-search"></i></span>
-        <input type="text" class="form-control" placeholder="Search" />
+        <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch"/>
       </div>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table1 font-13" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -233,7 +249,8 @@
           <td>
            {{brnc.branch_adrress_1}}
           </td>
-          <td>{{brnc.branch_contact_number_office}}</td>
+          <td>
+           <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile">{{mobile.ContactNoOffice}}</p></td>
         <td>{{brnc.branch_fax_no}}</td>
           <td>
             <a class="edit" @click="editbranch(brnc)"
@@ -277,12 +294,85 @@ export default {
       hospitallist: [],
       loader: false,
       emailerror: null,
+      search: "",
+      Contactlist: [],
+      Conntactmobilelist: [],
+      Emaillist: [],
     };
+  },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(`${this.$axios.defaults.baseURL}` + "hospital/branch-list", {
+        headers,
+      })
+      .then((resp) => {
+        this.branchlist = resp.data.list;
+        this.branchlist.forEach((element) => {
+          element.branch_contact_number_office = JSON.parse(
+            element.branch_contact_number_office
+          );
+          console.log("my data", element);
+        });
+        this.alllist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table1").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    $(".add-conatct-no").click(function (i) {
+      $(".block-contact:last").after(
+        '<tr class="block-contact"> <td><input type="text" class="form-control contactoffice" placeholder="Enter Contact No." v-model=" ContactNoOffice"/></td> <td><span class="remove remove-ui"><i class="fal fa-times"></i></span></td> </tr>'
+      );
+
+      $(".remove").click(function () {
+        $(this).closest(".block-contact").remove();
+      });
+    });
+
+    $(".add-mobile-no").click(function (i) {
+      $(".block-mobile:last").after(
+        '<tr class="block-mobile"> <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No." v-model=" ContactNoOffice"/></td> <td><span class="remove remove-ui"><i class="fal fa-times"></i></span></td> </tr>'
+      );
+
+      $(".remove").click(function () {
+        $(this).closest(".block-mobile").remove();
+      });
+    });
+
+    $(".add-email").click(function (i) {
+      $(".block-email:last").after(
+        '<tr class="block-email"> <td><input type="text" class="form-control email" placeholder="Enter Contact No." v-model=" ContactNoOffice"/></td> <td><span class="remove remove-ui"><i class="fal fa-times"></i></span></td> </tr>'
+      );
+
+      $(".remove").click(function () {
+        $(this).closest(".block-email").remove();
+      });
+    });
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetStateList();
-    this.GetBranchList();
     this.GethospitalList();
   },
   methods: {
@@ -321,6 +411,37 @@ export default {
     },
     async onAddbranch() {
       this.errors = [];
+      var Contactlist=[];
+      var Conntactmobilelist=[];
+      var Emaillist=[];
+      console.log('Contactlist,Conntactmobilelist,Emaillist',this.Contactlist,this.Conntactmobilelist,this.Emaillist);
+      $("table#ContactNoOfficerow > tbody > tr").each(function (i) {
+        var obj = {};
+        obj.ContactNoOffice = $(
+          'td input[type="text"].contactoffice',
+          this
+        ).val();
+        if (obj.ContactNoOffice) {
+          Contactlist.push(obj);
+        }
+      });
+      $("table#ContactNoMobilerow > tbody > tr").each(function (i) {
+        var obj = {};
+        obj.MobileOffice = $(
+          'td input[type="text"].conntactmobile',
+          this
+        ).val();
+        if (obj.MobileOffice) {
+          Conntactmobilelist.push(obj);
+        }
+      });
+      $("table#Emailrow > tbody > tr").each(function (i) {
+        var obj = {};
+        obj.Email = $('td input[type="text"].email', this).val();
+        if (obj.Email) {
+          Emaillist.push(obj);
+        }
+      });
       try {
         if (!this.HospitalCode) {
           this.errors.push("Hospital Code is required.");
@@ -349,16 +470,16 @@ export default {
         if (this.City <= 0) {
           this.errors.push("City is required.");
         }
-        if (!this.ContactNoOffice) {
+        if (!Contactlist.length) {
           this.errors.push("Contact No. (Office) is required.");
         }
-        if (!this.MobileOffice) {
+        if (!Conntactmobilelist.length) {
           this.errors.push("Contact No. (Mobile) is required.");
         }
         if (!this.FaxNo) {
           this.errors.push("Fax No is required.");
         }
-        if (!this.Email) {
+        if (!Emaillist.length) {
           this.errors.push("Email is required.");
         }
         if (
@@ -370,10 +491,10 @@ export default {
           this.State &&
           this.PostCode &&
           this.City &&
-          this.ContactNoOffice &&
-          this.MobileOffice &&
+          Contactlist.length &&
+          Conntactmobilelist.length &&
           this.FaxNo &&
-          this.Email
+          Emaillist.length
         ) {
           this.loader = true;
           const headers = {
@@ -396,9 +517,11 @@ export default {
                 branch_state: this.State,
                 branch_city: this.City,
                 branch_postcode: this.PostCode,
-                branch_contact_number_office: this.ContactNoOffice,
-                branch_contact_number_mobile: this.MobileOffice,
-                branch_email: this.Email,
+                branch_contact_number_office: JSON.stringify(Contactlist),
+                branch_contact_number_mobile: JSON.stringify(
+                  Conntactmobilelist
+                ),
+                branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
                 branch_status: 1,
               },
@@ -433,9 +556,11 @@ export default {
                 branch_state: this.State,
                 branch_city: this.City,
                 branch_postcode: this.PostCode,
-                branch_contact_number_office: this.ContactNoOffice,
-                branch_contact_number_mobile: this.MobileOffice,
-                branch_email: this.Email,
+                branch_contact_number_office: JSON.stringify(Contactlist),
+                branch_contact_number_mobile: JSON.stringify(
+                  Conntactmobilelist
+                ),
+                branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
                 branch_status: 1,
               },
@@ -491,6 +616,11 @@ export default {
       });
       if (response.data.code == 200 || response.data.code == "200") {
         this.branchlist = response.data.list;
+        this.branchlist.forEach((element) => {
+          element.branch_contact_number_office = JSON.parse(
+            element.branch_contact_number_office
+          );
+        });
       } else {
         this.branchlist = [];
       }
@@ -521,7 +651,11 @@ export default {
       });
       if (response.data.code == 200) {
         console.log("my edit", response.data);
-        this.HospitalCode = response.data.list.hospital_id;
+        // this.HospitalCode = response.data.list.hospital_id;
+        this.HospitalCode = {
+          id: response.data.list.hospital_id,
+          text: response.data.list.hospital_code,
+        };
         this.BranchName = response.data.list.hospital_branch_name;
         this.IsHeadquator = response.data.list.isHeadquator;
         this.BranchAddress1 = response.data.list.address1;
@@ -530,9 +664,13 @@ export default {
         this.State = response.data.list.branch_state;
         this.City = response.data.list.branch_city;
         this.PostCode = response.data.list.branch_postcode;
-        this.Email = response.data.list.branch_email;
-        this.ContactNoOffice = response.data.list.branch_contact_number_office;
-        this.MobileOffice = response.data.list.branch_contact_number_mobile;
+        this.Emaillist = JSON.parse(response.data.list.branch_email);
+        this.Contactlist = JSON.parse(
+          response.data.list.branch_contact_number_office
+        );
+        this.Conntactmobilelist = JSON.parse(
+          response.data.list.branch_contact_number_mobile
+        );
         this.FaxNo = response.data.list.branch_fax_no;
         this.Id = data.id;
         const response1 = await this.$axios.post(
@@ -578,12 +716,37 @@ export default {
         });
       }
     },
-    validateEmail() {
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.Email)) {
-        this.emailerror = null;
+    // validateEmail() {
+    //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.Email)) {
+    //     this.emailerror = null;
+    //   } else {
+    //     this.emailerror = "Please Enter Valid Email";
+    //     this.Email = "";
+    //   }
+    // },
+    OnSearch() {
+      if (this.search) {
+        this.branchlist = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.hospital_code
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hospital_branch_name
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.branch_adrress_1
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.branch_contact_number_office
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.branch_fax_no
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1
+          );
+        });
       } else {
-        this.emailerror = "Please Enter Valid Email";
-        this.Email = "";
+        this.branchlist = this.alllist;
       }
     },
   },

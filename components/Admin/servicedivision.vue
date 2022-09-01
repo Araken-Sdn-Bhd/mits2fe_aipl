@@ -9,6 +9,7 @@
             class="form-select"
             aria-label="Default select example"
           >
+          <option value="">Please Select</option>
             <option
               v-for="srvc in servicelist"
               v-bind:key="srvc.id"
@@ -27,6 +28,7 @@
             aria-label="Default select example"
             @change="onHospitalCodechange($event)"
           >
+          <option value="">Please Select</option>
             <option
               v-for="hst in hospitallist"
               v-bind:key="hst.id"
@@ -44,6 +46,7 @@
             class="form-select"
             aria-label="Default select example"
           >
+          <option value="">Please Select</option>
             <option
               v-for="bnch in branchlist"
               v-bind:key="bnch.id"
@@ -137,11 +140,43 @@ export default {
       Id: 0,
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(`${this.$axios.defaults.baseURL}` + "service/division-list", {
+        headers,
+      })
+      .then((resp) => {
+        this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetserviceList();
     this.GethospitalList();
-    this.GetList();
   },
   methods: {
     async GetList() {

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -21,7 +21,11 @@
                     <label for="" class="form-label"
                       >Profession Registrtion No.</label
                     >
-                    <input type="text" class="form-control" v-model="staffdetails.registration_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="staffdetails.registration_no"
+                    />
                   </div>
 
                   <div class="col-md-6 mb-4">
@@ -29,13 +33,17 @@
                     <input
                       type="text"
                       class="form-control"
-                     v-model="staffdetails.name"
+                      v-model="staffdetails.name"
                     />
                   </div>
 
                   <div class="col-md-3 mb-4">
                     <label for="" class="form-label">Mentari Branch</label>
-                    <input type="text" class="form-control" v-model="staffdetails.hospital_branch_name" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="staffdetails.hospital_branch_name"
+                    />
                   </div>
                 </div>
                 <!-- close-row -->
@@ -43,12 +51,20 @@
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" v-model="staffdetails.start_date" />
+                    <input
+                      type="date"
+                      class="form-control"
+                      v-model="staffdetails.start_date"
+                    />
                   </div>
 
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">End Date</label>
-                    <input type="date" class="form-control" v-model="staffdetails.end_date" />
+                    <input
+                      type="date"
+                      class="form-control"
+                      v-model="staffdetails.end_date"
+                    />
                   </div>
                 </div>
                 <!-- close-row -->
@@ -72,18 +88,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Outpatient</td>
-                    <td>12/10/2021 12:00:00</td>
-                    <td>2</td>
-                    <td>Clinical Work/Procedure</td>
-                    <td>Crisis Contact</td>
-                    <td>Other</td>
-                    <td>Selayang</td>
+                  <tr v-for="(staff, index) in list" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ staff.appointment_category_name }}</td>
+                    <td>
+                      {{ formatedate(staff.booking_date+' '+staff.booking_time) }}
+                      <!-- {{ staff.booking_time }} -->
+                    </td>
+                    <td>{{ staff.end_appointment_date }}</td>
+                    <td>{{ staff.category_services }}</td>
+                    <td>{{ staff.complexity_services }}</td>
+                    <td>{{ staff.outcome }}</td>
+                    <td>{{ staff.location_services }}</td>
                     <td>
                       <a
-                        href="occasion-of-service-editing-row.html"
+                        @click="edit(staff)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
                         class="edit"
                         ><i class="far fa-edit"></i
                       ></a>
@@ -96,28 +117,340 @@
         </div>
       </main>
     </div>
+    <!-- Modal -->
+    <div
+      class="modal modal-edit fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Category Of Services</label>
+                <div class="">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="assisstance-supervision"
+                      value="assisstance"
+                      v-model="category_services"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="assisstance-supervision"
+                      >Assisstance / Supervision</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="clinical"
+                      value="clinical-work"
+                      v-model="category_services"
+                    />
+                    <label class="form-check-label" for="clinical"
+                      >Clinical Work / Procedure</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="external"
+                      value="external"
+                      v-model="category_services"
+                    />
+                    <label class="form-check-label" for="external"
+                      >External</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">Location Of Services</label>
+                    <select class="form-select" v-model="location_services_id">
+                      <option value="0">Select location of services</option>
+                      <option
+                        v-for="loc in locationlist"
+                        v-bind:key="loc.id"
+                        v-bind:value="loc.id"
+                      >
+                        {{ loc.section_value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">Complexity Of Service</label>
+                    <select
+                      class="form-select"
+                      v-model="complexity_services_id"
+                    >
+                      <option value="0">Select Complexity Of Service</option>
+                      <option
+                        v-for="cm in comlexcitylist"
+                        v-bind:key="cm.id"
+                        v-bind:value="cm.id"
+                      >
+                        {{ cm.section_value }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">Outcome</label>
+                    <select class="form-select" v-model="outcome_id">
+                      <option value="0">Select Outcome</option>
+                      <option
+                        v-for="out in outcomelist"
+                        v-bind:key="out.id"
+                        v-bind:value="out.id"
+                      >
+                        {{ out.section_value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">PATIENT CATEGORY</label>
+                    <select class="form-select" v-model="patient_category">
+                      <option value="0">Please Select</option>
+                      <option
+                        v-for="cat in categorylist"
+                        v-bind:key="cat.id"
+                        v-bind:value="cat.id"
+                      >
+                        {{ cat.appointment_category_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">From Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      v-model="booking_date"
+                    />
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">From Time</label>
+                    <input
+                      type="time"
+                      class="form-control"
+                      v-model="booking_time"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">End Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      v-model="booking_enddate"
+                    />
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                    <label class="form-label">End Time</label>
+                    <input
+                      type="time"
+                      class="form-control"
+                      v-model="booking_endtime"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="updatestaffpatient"
+              >
+                Save changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
+import * as moment from "moment/moment";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "new-staff",
   data() {
     return {
       Id: 0,
       userdetails: null,
       staffdetails: null,
+      staffpatientlist: null,
+      list: [],
+      servicelist: [],
+      outcomelist: [],
+      comlexcitylist: [],
+      codelist: [],
+      icdcatcodelist: [],
+      diagonisislist: [],
+      locationlist: [],
+      assistancelist: [],
+      externallist: [],
+      categorylist: [],
+      patient_category: 0,
+      outcome_id: 0,
+      complexity_services_id: 0,
+      location_services_id: 0,
+      booking_date: "",
+      booking_time: "",
+      booking_enddate: "31-01-2022",
+      booking_endtime: "",
+      category_services: "",
+      enddate: "",
+      endtime: "",
+      apid:0,
+      tbid:0,
+      type:""
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.GetList();
     this.Getdetails();
+    this.Getstaffpatientlist();
   },
   methods: {
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const responsecat = await this.$axios.get(
+        "patient-appointment-category/list",
+        { headers }
+      );
+      if (responsecat.data.code == 200 || responsecat.data.code == "200") {
+        this.categorylist = responsecat.data.list;
+      } else {
+        this.categorylist = [];
+      }
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "complexity-of-service",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.comlexcitylist = response.data.list;
+      } else {
+        this.comlexcitylist = [];
+      }
+      const response1 = await this.$axios.get("service/list", { headers });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+      } else {
+        this.servicelist = [];
+      }
+      const response2 = await this.$axios.get(
+        "general-setting/list?section=" + "outcome",
+        { headers }
+      );
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.outcomelist = response2.data.list;
+      } else {
+        this.outcomelist = [];
+      }
+      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+        headers,
+      });
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.codelist = response3.data.list;
+      } else {
+        this.codelist = [];
+      }
+      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        console.log("list", response4.data.list);
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "location-of-services",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.locationlist = response5.data.list;
+      } else {
+        this.locationlist = [];
+      }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
+      const respon = await this.$axios.get(
+        "general-setting/list?section=" + "external",
+        { headers }
+      );
+      if (respon.data.code == 200 || respon.data.code == "200") {
+        this.externallist = respon.data.list;
+      } else {
+        this.externallist = [];
+      }
+    },
     async Getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -131,6 +464,116 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.staffdetails = response.data.list[0];
+      }
+    },
+    async Getstaffpatientlist() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .post(
+          `${this.$axios.defaults.baseURL}` +
+            "patient-appointment-details/fetchPatientStaffById",
+          { patient_id: this.Id },
+          { headers }
+        )
+        .then((resp) => {
+          this.list = resp.data.Data;
+          console.log("my staff", resp.data);
+          $(document).ready(function () {
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              autoWidth: false,
+              responsive: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              },
+            });
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async edit(data) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-appointment-details/fetchPatientListByStaffId",
+        { apid: data.patient_appointment_id, type: data.type, tbid: data.id },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.staffpatientlist = response.data.Data[0];
+        this.outcome_id = response.data.Data[0].outcome;
+        this.complexity_services_id =
+          response.data.Data[0].complexity_services_id;
+        this.location_services_id = response.data.Data[0].location_services_id;
+        this.category_services = response.data.Data[0].category_services;
+        this.booking_date = response.data.Data[0].booking_date;
+        this.booking_time = response.data.Data[0].booking_time;
+        this.patient_category = response.data.Data[0].patient_category;
+        // this.booking_enddate = moment(response.data.Data[0].end_appoitment_date, 'DD-MM-YYYY');
+        this.booking_endtime = response.data.Data[0].end_appoitment_date;
+        this.apid = response.data.Data[0].patient_appointment_id;
+        this.type = response.data.Data[0].type;
+        this.tbid = response.data.Data[0].id;
+        // console.log("my edit",this.booking_enddate);
+      }
+    },
+    formatedate(date) {
+      const local = moment.utc(date).local().format("YYYY-MM-DD h:mm");
+      return local;
+    },
+    formatetime(time) {
+      const local = moment.utc(time).local().format("h:mm A");
+      return local;
+    },
+    formatedateend(date) {
+      const local = moment.utc(date).local().format("YYYY-MM-DD");
+      return local;
+    },
+    formatetimeend(date) {
+      const local = moment.utc(date).local().format("h:mm A");
+      return local;
+    },
+    async updatestaffpatient() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-appointment-details/updatePatientListByStaffId",
+        {
+          apid: this.apid,
+          type: this.type,
+          tbid: this.tbid,
+          category_services:this.category_services,
+          complexity_services_id: this.complexity_services_id,
+          location_services_id: this.location_services_id,
+          outcome_id: this.outcome_id,
+          patient_category: this.patient_category,
+          booking_date: this.booking_date,
+          booking_time: this.booking_time,
+          end_appoitment_date:  moment(this.booking_enddate + ' ' + this.booking_endtime, 'YYYY/MM/DD HH:mm'),
+        },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+         $("#exampleModal").modal('hide');
+        $("#updatepopup").modal("show");
       }
     },
   },

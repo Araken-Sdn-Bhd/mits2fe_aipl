@@ -122,6 +122,15 @@
                       Announcement Management
                     </a>
                   </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/list-of-user-matrix"
+                    >
+                      <i class="far fa-sliders-h"></i>
+                      List of user matrix
+                    </a>
+                  </li>
                 </ul>
               </li>
               <!-- sub-menuc -->
@@ -322,6 +331,102 @@
                       Mode of Arrival
                     </a>
                   </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/designation">
+                      <i class="far fa-dot-circle"></i>
+                      Designation
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/citizenship">
+                      <i class="far fa-dot-circle"></i>
+                      Citizenship
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/type-of-nric">
+                      <i class="far fa-dot-circle"></i>
+                      Type-Of-NRIC
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/type-of-referral">
+                      <i class="far fa-dot-circle"></i>
+                      Type of Referral
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/occupation-sector">
+                      <i class="far fa-dot-circle"></i>
+                      Occupation-Sector
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/location-of-services"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Location of Services
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/assistance-or-supervision"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Assistance or Supervision
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/external">
+                      <i class="far fa-dot-circle"></i>
+                      External
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/current-interventionl"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Current Intervention
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/compliance-to-treatment"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Compliance To Treatment
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/medication-supervised-by"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Medication Supervised By
+                    </a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/Modules/Admin/employment-status">
+                      <i class="far fa-dot-circle"></i>
+                      Employment Status
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="/Modules/Admin/type-of-activities"
+                    >
+                      <i class="far fa-dot-circle"></i>
+                      Type of Activities
+                    </a>
+                  </li>
                 </ul>
               </li>
               <!-- sub-menuc -->
@@ -367,6 +472,34 @@
                   Occasion Of...
                 </a>
               </li>
+
+              <li class="divider">Imported Link</li>
+              <div v-show="userdetails">
+                <li>
+                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Patient Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Intervention Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Report/sharp" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Report Manag...
+                  </a>
+                </li>
+                <li>
+                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                    <i class="far fa-home-alt"></i>
+                    Shharp Manag...
+                  </a>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
@@ -504,17 +637,23 @@ export default {
       },
     ],
   },
+  data() {
+    return {
+      userdetails: null,
+      nav: "",
+      role: "",
+    };
+  },
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetails) {
+      this.$router.push("/");
+    } else {
+      this.role = this.userdetails.user.role;
+    }
+  },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    if (this.userdetails) {
-      // if (this.userdetails.user.role == "Admin") {
-      // } else {
-      //   this.$router.push("/");
-      // }
-    } else {
-      this.$router.push("/");
-    }
   },
   methods: {
     changesidebar: function (event) {

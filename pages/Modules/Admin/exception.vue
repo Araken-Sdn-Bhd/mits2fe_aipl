@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -54,6 +54,7 @@
                         class="form-select"
                         aria-label="Default select example"
                       >
+                         <option value="0">Please Select</option>
                         <option
                           v-for="state in StateList"
                           v-bind:key="state.id"
@@ -64,7 +65,25 @@
                       </select>
                     </div>
                   </div>
-
+    <div class="col-sm-6">
+                    <div class="mb-3">
+  <label for="" class="form-label">Branch</label>
+                <select
+            v-model="branch_id"
+            class="form-select"
+            aria-label="Default select example"
+          >
+           <option value="0">Please Select</option>
+            <option
+              v-for="bnch in branchlist"
+              v-bind:key="bnch.id"
+              v-bind:value="bnch.id"
+            >
+              {{ bnch.hospital_branch_name }}
+            </option>
+          </select>
+</div>
+</div>
                   <div class="col-sm-12">
                     <div class="mb-3">
                       <label class="form-label">Description</label>
@@ -85,7 +104,7 @@
                        </p>
                 <div class="d-flex">
                   <div class="ml-auto">
-                    <a class="btn btn-danger btn-text"
+                    <a href="/Modules/Admin/calendar-management" class="btn btn-danger btn-text"
                       ><i class="fad fa-times"></i> Cancel</a
                     >
                     <button type="submit" class="btn btn-success btn-text">
@@ -102,22 +121,24 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "new-staff",
   data() {
     return {
       userdetails: null,
       errorList: [],
       StateList: [],
+      branchlist: [],
       startdate: "",
       enddate: "",
       stateId: 0,
       description: "",
       name: "",
       Id: 0,
+      branch_id: 0,
     };
   },
   beforeMount() {
@@ -125,6 +146,9 @@ export default {
     this.GetStateList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    if (this.Id) {
+      this.editexception();
+    }
   },
   methods: {
     async GetStateList() {
@@ -138,6 +162,14 @@ export default {
         this.StateList = response.data.list;
       } else {
         this.StateList = [];
+      }
+      const response1 = await this.$axios.get("hospital/branch-list", {
+        headers,
+      });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.branchlist = response1.data.list;
+      } else {
+        this.branchlist = [];
       }
     },
     async onexception() {
@@ -154,6 +186,9 @@ export default {
         }
         if (!this.name) {
           this.errorList.push("Name is required");
+        }
+        if (!this.branch_id) {
+          this.errorList.push("Branch is required");
         }
         if (!this.description) {
           this.errorList.push("Description is required");
@@ -173,15 +208,14 @@ export default {
                 end_date: this.enddate,
                 description: this.description,
                 state: this.stateId.toString(),
+                branch_id: this.branch_id,
                 type: "update",
                 id: this.Id,
               },
               { headers }
             );
             if (response.data.code == 200) {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$router.push("/Modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -197,20 +231,13 @@ export default {
                 end_date: this.enddate,
                 description: this.description,
                 state: this.stateId.toString(),
+                branch_id: this.branch_id,
                 type: "add",
               },
               { headers }
             );
             if (response.data.code == 200) {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
-              this.startdate = "";
-              this.enddate = "";
-              this.description = "";
-              this.name = "";
-              this.stateId = 0;
-              this.Id = 0;
+              this.$router.push("/Modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -219,6 +246,31 @@ export default {
           }
         }
       } catch (e) {}
+    },
+    async editexception() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "calendar-management/getAnnouncementListById",
+        {
+          id: this.Id,
+        },
+        { headers }
+      );
+      console.log("response", response.data);
+      if (response.data.code == 200) {
+        this.startdate = response.data.list[0].start_date;
+        this.enddate = response.data.list[0].end_date;
+        this.stateId = response.data.list[0].state;
+        this.description = response.data.list[0].description;
+        this.name = response.data.list[0].name;
+        this.branch_id = response.data.list[0].branch_id;
+      } else {
+        window.alert("Something went wrong");
+      }
     },
   },
 };

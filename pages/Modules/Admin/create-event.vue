@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -78,7 +78,7 @@
 
                 <div class="row mb-5">
                   <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Mantari Branch</label
+                    >Mentari Branch</label
                   >
                   <div class="col-sm-9">
                     <select
@@ -86,6 +86,7 @@
                       class="form-select"
                       aria-label="Default select example"
                     >
+                    <option></option>
                       <option
                         v-for="brnch in list"
                         v-bind:key="brnch.id"
@@ -225,11 +226,11 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import $ from "jquery";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonHeader, CommonSidebar },
   name: "create-event",
   head: {
     script: [
@@ -305,81 +306,87 @@ export default {
       this.file = event.target.files[0];
     },
     async onCreateEvent(status) {
-      this.errors = [];
-      if (!this.title) {
-        this.errors.push("Title is required.");
-      }
-      if (!this.content) {
-        this.errors.push("Content is required.");
-      }
-      if (!this.startdate) {
-        this.errors.push("Start Date is required.");
-      }
-      if (!this.enddate) {
-        this.errors.push("End Date is required.");
-      }
-      if (this.branchId <= 0) {
-        this.errors.push("Branch  is required.");
-      }
-      if (!this.file) {
-        this.errors.push("Document is required.");
-      } else {
-        if (this.cat1 > 0) {
-          this.cat1 = 1;
+      try {
+        this.errors = [];
+        if (!this.title) {
+          this.errors.push("Title is required.");
         }
-        if (this.cat2 > 0) {
-          this.cat2 = 1;
+        if (!this.content) {
+          this.errors.push("Content is required.");
         }
-        if (this.cat3 > 0) {
-          this.cat3 = 1;
+        if (!this.startdate) {
+          this.errors.push("Start Date is required.");
         }
-        if (this.cat4 > 0) {
-          this.cat4 = 1;
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
         }
-        if (this.cat5 > 0) {
-          this.cat5 = 1;
+        if (this.branchId <= 0) {
+          this.errors.push("Branch  is required.");
         }
-        if (this.cat6 > 0) {
-          this.cat6 = 1;
-        }
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        let body = new FormData();
-        body.append("added_by", this.userdetails.user.id);
-        body.append("title", this.title);
-        body.append("content", this.content);
-        body.append("document", this.file);
-        body.append("start_date", this.startdate);
-        body.append("end_date", this.enddate);
-        body.append("branch_id", this.branchId);
-        body.append(
-          "audience_ids",
-          this.cat1 +
-            "," +
-            this.cat2 +
-            "," +
-            this.cat3 +
-            "," +
-            this.cat4 +
-            "," +
-            this.cat5 +
-            "," +
-            this.cat6
-        );
-        body.append("status", status);
-        const response = await this.$axios.post("announcement/add", body, {
-          headers,
-        });
-        if (response.data.code == 200 || response.data.code == "200") {
-          this.$router.push("/Modules/Admin/announcement-management");
+        if (!this.file) {
+          this.errors.push("Document is required.");
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
+          if (this.cat1 > 0) {
+            this.cat1 = 1;
+          }
+          if (this.cat2 > 0) {
+            this.cat2 = 1;
+          }
+          if (this.cat3 > 0) {
+            this.cat3 = 1;
+          }
+          if (this.cat4 > 0) {
+            this.cat4 = 1;
+          }
+          if (this.cat5 > 0) {
+            this.cat5 = 1;
+          }
+          if (this.cat6 > 0) {
+            this.cat6 = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          body.append("added_by", this.userdetails.user.id);
+          body.append("title", this.title);
+          body.append("content", this.content);
+          body.append("document", this.file);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          body.append("branch_id", this.branchId);
+          body.append(
+            "audience_ids",
+            this.cat1 +
+              "," +
+              this.cat2 +
+              "," +
+              this.cat3 +
+              "," +
+              this.cat4 +
+              "," +
+              this.cat5 +
+              "," +
+              this.cat6
+          );
+          body.append("status", status);
+          const response = await this.$axios.post("announcement/add", body, {
+            headers,
           });
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$router.push("/Modules/Admin/announcement-management");
+          } else {
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
         }
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
       }
     },
   },

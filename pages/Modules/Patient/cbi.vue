@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <Loader v-if="loader" />
@@ -84,7 +84,7 @@
                         Degree] [3: Sometimes/Somewhat] [4: Seldom/Low Degree]
                         [5: Never/Almost Never/Very Low Degree]
                       </p> -->
-                         <ul class="instruction">
+                      <ul class="instruction">
                         <li>
                           <span class="no">1</span>
                           <span class="text">
@@ -135,8 +135,10 @@
                       </thead>
                       <tbody>
                         <tr v-for="(pb, index) in peronallist" :key="index">
-                          <td>{{ pb.Question }}<span class="red-span">*</span>
-                            <i>{{ pb.question_ml }}</i></td>
+                          <td>
+                            {{ pb.Question }}<span class="red-span">*</span>
+                            <i>{{ pb.question_ml }}</i>
+                          </td>
                           <td>
                             <div class="form-check form-check-inline">
                               <input
@@ -144,7 +146,7 @@
                                 type="radio"
                                 v-bind:name="'pb' + index"
                                 value="1"
-                                @change="onpersonalchange(index, 1)"
+                                @change="onpersonalchange(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -156,7 +158,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 2)"
+                                @change="onpersonalchange(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -168,7 +170,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 3)"
+                                @change="onpersonalchange(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -180,7 +182,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 4)"
+                                @change="onpersonalchange(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -192,7 +194,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb' + index"
-                                @change="onpersonalchange(index, 5)"
+                                @change="onpersonalchange(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -223,7 +225,7 @@
                   <div class="content-subtab border-top-left">
                     <div class="form-title">
                       <h5>PART 2 - WORK-RELATED BURNOUT</h5>
-                         <ul class="instruction">
+                      <ul class="instruction">
                         <li>
                           <span class="no">1</span>
                           <span class="text">
@@ -274,8 +276,10 @@
                       </thead>
                       <tbody>
                         <tr v-for="(wr, index) in worklist" :key="index">
-                          <td>{{ wr.Question }}<span class="red-span">*</span>
-                            <i>{{ wr.question_ml }}</i></td>
+                          <td>
+                            {{ wr.Question }}<span class="red-span">*</span>
+                            <i>{{ wr.question_ml }}</i>
+                          </td>
                           <td>
                             <div class="form-check form-check-inline">
                               <input
@@ -283,7 +287,7 @@
                                 type="radio"
                                 value="1"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 1)"
+                                @change="onworkchange(wr.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 wr.Answer1
@@ -295,7 +299,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 2)"
+                                @change="onworkchange(wr.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 wr.Answer2
@@ -307,7 +311,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 3)"
+                                @change="onworkchange(wr.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 wr.Answer3
@@ -319,7 +323,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 4)"
+                                @change="onworkchange(wr.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 wr.Answer4
@@ -331,7 +335,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'wr' + index"
-                                @change="onworkchange(index, 5)"
+                                @change="onworkchange(wr.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 wr.Answer5
@@ -371,7 +375,7 @@
                   <div class="content-subtab border-top-left">
                     <div class="form-title">
                       <h5>PART 3 - CLIENT RELATED BURNOUT</h5>
-                        <ul class="instruction">
+                      <ul class="instruction">
                         <li>
                           <span class="no">1</span>
                           <span class="text">
@@ -422,8 +426,10 @@
                       </thead>
                       <tbody>
                         <tr v-for="(cl, index) in clientlist" :key="index">
-                          <td>{{ cl.Question }}<span class="red-span">*</span>
-                            <i>{{ cl.question_ml }}</i></td>
+                          <td>
+                            {{ cl.Question }}<span class="red-span">*</span>
+                            <i>{{ cl.question_ml }}</i>
+                          </td>
                           <td>
                             <div class="form-check form-check-inline">
                               <input
@@ -431,7 +437,7 @@
                                 type="radio"
                                 value="1"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 1)"
+                                @change="onclientchange(cl.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 cl.Answer1
@@ -443,7 +449,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 2)"
+                                @change="onclientchange(cl.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 cl.Answer2
@@ -455,7 +461,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 3)"
+                                @change="onclientchange(cl.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 cl.Answer3
@@ -467,7 +473,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 4)"
+                                @change="onclientchange(cl.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 cl.Answer4
@@ -479,7 +485,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'cl' + index"
-                                @change="onclientchange(index, 5)"
+                                @change="onclientchange(cl.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 cl.Answer5
@@ -516,10 +522,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "cbi",
   head: {
     script: [
@@ -716,7 +722,10 @@ export default {
               "cbiresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/Modules/Patient/cbi-result");
+            this.$router.push({
+              path: "/Modules/Patient/cbi-result",
+              query: { id: this.Id },
+            });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -734,7 +743,7 @@ export default {
       }
     },
     onpersonalchange(ind, val) {
-      this.checkedpersonalList[ind + 1] = val;
+      this.checkedpersonalList[ind] = val;
       // console.log(Object.values(this.checkedList).toString());
     },
     onworkchange(ind, val) {
@@ -743,12 +752,20 @@ export default {
     onclientchange(ind, val) {
       this.checkedclientList[ind + 1] = val;
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
   },
 };

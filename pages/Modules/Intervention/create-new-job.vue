@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar  />
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <Loader v-if="loader"/>
         <div class="container-fluid px-4">
@@ -310,6 +310,39 @@
                     </select>
                   </div>
                 </div>
+                   <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-4 col-form-label"
+                    >Job Availability</label
+                  >
+                  <div class="col-sm-8">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio111"
+                        value="1"
+                        v-model="job_availability"
+                      />
+                      <label class="form-check-label" for="inlineRadio111"
+                        >Availabilable</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio222"
+                        value="0"
+                        v-model="job_availability"
+                      />
+                      <label class="form-check-label" for="inlineRadio222"
+                        >Not Availabilable</label
+                      >
+                    </div>
+                  </div>
+                </div>
                  <p v-if="errorList.length">
                           <ul>
                            <li style="color:red"  v-for='err in errorList' :key='err' >
@@ -336,10 +369,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "create-new-job",
   data() {
     return {

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <PatientDetails />
@@ -26,14 +26,29 @@
                 </thead>
                 <tbody>
                   <tr v-for="(patint, index) in list" :key="index">
-                    <td>{{ index+1 }}</td>
+                    <td>{{ index + 1 }}</td>
                     <td>{{ patint.Date }}</td>
                     <td>{{ patint.Time }}</td>
-                    <td>{{ patint.status }}</td>
+                    <td>
+                      <p v-if="patint.status">Completed</p>
+                      <p v-if="!patint.status">Draft</p>
+                    </td>
                     <td>{{ patint.hospital_name }}</td>
                     <td>{{ patint.name_registering_officer }}</td>
                     <td>
-                      <a href="#" class="view"><i class="far fa-eye"></i></a>
+                      <a
+                        style="cursor: pointer"
+                        @click="onViewSharp(patint.id)"
+                        class="view"
+                        ><i class="far fa-eye"></i
+                      ></a>
+                      <a
+                        v-if="!patint.status"
+                        style="cursor: pointer"
+                        @click="onEditSharp(patint.id)"
+                        class="edit"
+                        ><i class="far fa-edit"></i
+                      ></a>
                     </td>
                   </tr>
                 </tbody>
@@ -48,10 +63,10 @@
 </template>
 <script>
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader, PatientDetails },
+  components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
   data() {
     return {
@@ -75,7 +90,7 @@ export default {
     const axios = require("axios").default;
     axios
       .post(
-        `${this.$axios.defaults.baseURL}`+"sharp-mgmt/list",
+        `${this.$axios.defaults.baseURL}` + "sharp-mgmt/list",
         {
           patient_id: this.Id,
         },
@@ -83,6 +98,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.Data;
+        console.log("list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -102,6 +118,20 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+  },
+  methods: {
+    onViewSharp(Id) {
+      this.$router.push({
+        path: "/Modules/Patient/view-registry",
+        query: { id: Id },
+      });
+    },
+    onEditSharp(Id) {
+      this.$router.push({
+        path: "/Modules/Intervention/update-registry",
+        query: { id: Id },
+      });
+    },
   },
 };
 </script>

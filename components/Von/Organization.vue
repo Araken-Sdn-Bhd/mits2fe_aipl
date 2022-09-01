@@ -272,31 +272,29 @@
         <!-- hide-div -->
         <div class="experience2-yes experi-box hide">
           <div class="mt-3">
-            <table class="note" style="width: 100%">
+            <table class="note" style="width: 100%" id="orgvolexp">
               <thead>
                 <tr>
-                  <th>NO</th>
                   <th width="100px">YEAR</th>
                   <th>Location</th>
                   <th>Brief Description of Activities</th>
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
+               <tbody class="orgoptionBox">
+                     <tr class="orgblock">
                   <td>
-                    <input type="text" class="form-control" name="" v-model="OYear" />
+                    <input type="text" class="form-control orgyear" name=""  />
                   </td>
                   <td>
-                    <input type="text" class="form-control" name=""  v-model="OLocation"/>
+                    <input type="text" class="form-control orglocation" name=""  />
                   </td>
                   <td>
-                    <input type="text" class="form-control" name="" v-model="ODescription"/>
+                    <input type="text" class="form-control orgactivity" name="" />
                   </td>
-                  <!-- <td>
-                    <a href="#"><i class="far fa-plus"></i></a>
-                  </td> -->
+                  <td>
+                    <a class="orgadd-td"><i class="far fa-plus"></i></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -352,6 +350,18 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
+                    id="Rehabilitation"
+                    @click="OOnreliventmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
                     id="Rehabilitation" @click="OOnreliventmentari('Work-based Rehabilitation')"
                   />
                   <label class="form-check-label" for="Rehabilitation">
@@ -401,12 +411,24 @@
                     >*</span
                   ></label
                 >
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
                     value=""
                     id="Rehabilitation"
+                    @click="OOnreliventmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation" @click="OOnreliventmentari('Work-based Rehabilitation')"
                   />
                   <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
@@ -417,7 +439,7 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Psychoeducation"
+                    id="Psychoeducation" @click="OOnreliventmentari('Awareness Or Psychoeducation')"
                   />
                   <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
@@ -428,7 +450,7 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Therapy"
+                    id="Therapy" @click="OOnreliventmentari('Recreational Therapy')"
                   />
                   <label class="form-check-label" for="Therapy">
                     Recreational Therapy
@@ -439,10 +461,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Others"
+                    id="Others" @click="OOnreliventmentari('Others')"
                   />
                   <label class="form-check-label" for="Others">
-                    Others:<input type="text" name="" />
+                    Others:<input type="text" name="" v-model="OVolOthers"/>
                   </label>
                 </div>
               </div>
@@ -657,6 +679,18 @@
             ></label
           >
            <div class="col-sm-8">
+             <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="OOnrelevatedmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -814,7 +848,20 @@
               >*</span
             ></label
           >
+          
           <div class="col-sm-8">
+             <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="OOnnetworkrelevatedmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -1035,6 +1082,14 @@ export default {
         $(".select-others").val("organization").trigger("change");
       });
     });
+    $(".orgadd-td").click(function (i) {
+      $(".orgblock:last").after(
+        '<tr class="orgblock"> <td> <input type="text" class="form-control orgyear" name="" /></td><td><input type="text" class="form-control orglocation" name=""  /></td><td><input type="text" class="form-control orgactivity" name="" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+      );
+    });
+    $(".orgoptionBox").on("click", ".remove", function () {
+      $(this).closest(".orgblock").remove();
+    });
     this.GetList();
   },
   methods: {
@@ -1145,6 +1200,14 @@ export default {
     },
     async OnOrganizationVolunteerism() {
       try {
+        var explist = [];
+        $("table#orgvolexp > tbody > tr").each(function (i) {
+          var obj = {};
+          obj.year = $('td input[type="text"].orgyear', this).val();
+          obj.location = $('td input[type="text"].orglocation', this).val();
+          obj.activity = $('td input[type="text"].orgactivity', this).val();
+          explist.push(obj);
+        });
         this.OIsvalid = true;
         if (!this.org_name) {
           this.errors.push("Name of organization or company is required.");
@@ -1210,20 +1273,20 @@ export default {
             "Does your organization consist of mental health professional is required."
           );
         }
-        if (this.Ois_voluneering_exp == "experience2-yes") {
-          if (!this.OYear) {
-            this.errors.push("Organization year is required.");
-            this.OIsvalid = false;
-          }
-          if (!this.OLocation) {
-            this.errors.push("Organization Location is required.");
-            this.OIsvalid = false;
-          }
-          if (!this.ODescription) {
-            this.errors.push("Organization Description is required.");
-            this.OIsvalid = false;
-          }
-        }
+        // if (this.Ois_voluneering_exp == "experience2-yes") {
+        //   if (!this.OYear) {
+        //     this.errors.push("Organization year is required.");
+        //     this.OIsvalid = false;
+        //   }
+        //   if (!this.OLocation) {
+        //     this.errors.push("Organization Location is required.");
+        //     this.OIsvalid = false;
+        //   }
+        //   if (!this.ODescription) {
+        //     this.errors.push("Organization Description is required.");
+        //     this.OIsvalid = false;
+        //   }
+        // }
         if (this.Ois_mental_health_professional == "professional2-yes") {
           if (!this.Ofile) {
             this.errors.push("Latest Resume is required.");
@@ -1320,13 +1383,7 @@ export default {
           body.append("is_voluneering_exp", this.Ois_voluneering_exp);
           body.append(
             "exp_details",
-            JSON.stringify([
-              {
-                Year: this.OYear,
-                Location: this.OLocation,
-                Description: this.ODescription,
-              },
-            ])
+            JSON.stringify(explist)
           );
           body.append(
             "is_mental_health_professional",
@@ -1345,7 +1402,7 @@ export default {
               $("#insertpopup").modal("show");
             });
             this.Reload();
-          console.log('my resut',response.data);
+            console.log("my resut", response.data);
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
@@ -1731,7 +1788,7 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-            console.log('my resut',response.data);
+            console.log("my resut", response.data);
             this.Reload();
           } else {
             this.$nextTick(() => {

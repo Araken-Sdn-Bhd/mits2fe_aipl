@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
-                    <td>#{{ index+1 }}</td>
+                    <td>#{{ index + 1 }}</td>
                     <td>{{ job.position_offered }}</td>
                     <td>{{ job.job_posted }}</td>
                     <td>
@@ -65,16 +65,17 @@
             </div>
           </div>
         </div>
+        <Loader v-if="loader" />
       </main>
       <intervention-footer></intervention-footer>
     </div>
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "job-offer",
 
   data() {
@@ -83,6 +84,7 @@ export default {
       list: [],
       alllist: [],
       search: "",
+      loader: false,
     };
   },
   beforeMount() {
@@ -128,12 +130,14 @@ export default {
   },
   methods: {
     OneditClick(id) {
+      this.loader = true;
       this.$router.push({
         path: "/Modules/Intervention/update-new-job",
         query: { id: id },
       });
     },
     OnviewClick(title) {
+      this.loader = true;
       this.$router.push({
         path: "/Modules/Intervention/same-job-offer-list",
         query: { title: title },

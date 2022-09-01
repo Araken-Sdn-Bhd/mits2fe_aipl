@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <main>
           <div class="container-fluid px-4">
@@ -103,10 +103,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "mentari-staff-transfer",
   data() {
     return {
@@ -156,9 +156,7 @@ export default {
       if (this.branchId <= 0) {
         this.errors.push("Branch  is required.");
       }
-      if (!this.file) {
-        this.errors.push("Document is required.");
-      } else {
+       if(this.startdate && this.enddate && this.branchId) {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",

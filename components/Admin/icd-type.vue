@@ -108,9 +108,43 @@ export default {
       typeId: 0,
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "icd-setting/icdtype/getIcdTypeCodeList",
+        { headers }
+      )
+      .then((resp) => {
+        this.icdtypelist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GeticdList();
   },
   methods: {
     async GeticdList() {

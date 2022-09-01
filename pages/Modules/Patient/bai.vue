@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -40,7 +40,7 @@
                           type="radio"
                           v-bind:name="'bai' + index"
                           value="0"
-                          @change="onchange(index, 0)"
+                          @change="onchange(bai.id, 0)"
                         />
                         <label class="form-check-label" for="4">0</label>
                       </div>
@@ -50,7 +50,7 @@
                           type="radio"
                           v-bind:name="'bai' + index"
                           value="1"
-                          @change="onchange(index, 1)"
+                          @change="onchange(bai.id, 1)"
                         />
                         <label class="form-check-label" for="1">1</label>
                       </div>
@@ -60,7 +60,7 @@
                           type="radio"
                           v-bind:name="'bai' + index"
                           value="2"
-                          @change="onchange(index, 2)"
+                          @change="onchange(bai.id, 2)"
                         />
                         <label class="form-check-label" for="2">2</label>
                       </div>
@@ -70,7 +70,7 @@
                           type="radio"
                           v-bind:name="'bai' + index"
                           value="3"
-                          @change="onchange(index, 3)"
+                          @change="onchange(bai.id, 3)"
                         />
                         <label class="form-check-label" for="3">3</label>
                       </div>
@@ -129,7 +129,7 @@
                   <i class="fad fa-download"></i> Download Result
                 </button>
                 <a
-                  href="/Modules/Patient/request-appointment-form"
+                  @click="Gotorequestappointment"
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
@@ -143,10 +143,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "bai",
   data() {
     return {
@@ -191,15 +191,23 @@ export default {
         this.list = [];
       }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
     onchange(ind, val) {
-      this.checkedList[ind + 1] = val;
+      this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
       this.error = null;
@@ -248,6 +256,12 @@ export default {
       var pdf = new jsPDF("p", "pt", "a4");
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
+      });
+    },
+       async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
       });
     },
   },

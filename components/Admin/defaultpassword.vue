@@ -12,9 +12,11 @@
               class="form-check-input"
               type="checkbox"
               value=""
-              id="flexCheckDefault"
+              id="flexCheckDefaults"
+              v-model="defaultpass"
+              @click="OnChangedefault($event)"
             />
-            <label class="form-check-label" for="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefaults">
               Set the default password value
             </label>
             <input
@@ -29,10 +31,11 @@
               class="form-check-input"
               type="checkbox"
               value=""
-              id="Maximum"
+              id="Maximums1"
               v-model="systemganrate"
+              @click="OnChangesystemganrate($event)"
             />
-            <label class="form-check-label" for="Maximum">
+            <label class="form-check-label" for="Maximums1">
               System Generate
             </label>
           </div>
@@ -55,6 +58,7 @@ export default {
       userdetails: null,
       passwordvalue: "",
       systemganrate: false,
+      defaultpass: false,
     };
   },
   mounted() {
@@ -112,6 +116,24 @@ export default {
         }
       } catch (e) {
         this.loader = false;
+      }
+    },
+    OnChangedefault(event) {
+      if (event.target.Checked) {
+        this.defaultpass = true;
+        this.systemganrate = false;
+      } else {
+        this.defaultpass = false;
+        this.systemganrate = false;
+      }
+    },
+    OnChangesystemganrate(event) {
+      if (event.target.Checked) {
+        this.defaultpass = false;
+        this.systemganrate = true;
+      } else {
+        this.defaultpass = false;
+        this.systemganrate = false;
       }
     },
   },

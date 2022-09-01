@@ -297,7 +297,7 @@
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Do you have volunteering experience?<span>*</span></label
+            Does your group have any volunteering experience?<span>*</span></label
           >
           <div class="col-sm-8 radio-box">
             <div class="form-check form-check-inline">
@@ -325,21 +325,49 @@
 
             <!-- hide-div -->
             <div class="experience-yes experi-box hide">
-              <div class="mt-3">
+              <!-- <div class="mt-3">
                 <textarea
                   class="form-control textarea"
                   rows="3"
                   placeholder="Please describe"
                   v-model="Gexp_details"
                 ></textarea>
-              </div>
+              </div> -->
+              <div class="mt-3">
+            <table class="note" style="width: 100%" id="groupvolexp">
+              <thead>
+                <tr>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="groupoptionBox">
+                     <tr class="groupblock">
+                  <td>
+                    <input type="text" class="form-control groupyear" name="" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control grouplocation" name=""  />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control groupactivity" name="" />
+                  </td>
+                  <td>
+                    <a class="groupadd-td"><i class="far fa-plus"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
             </div>
           </div>
         </div>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Are you a mental health professional?<span>*</span></label
+            Does your group are mental health professionals?<span>*</span></label
           >
           <div class="col-sm-8 professional-box">
             <div class="form-check form-check-inline">
@@ -359,7 +387,7 @@
                 type="radio"
                 name="professional"
                 id="professional-noG"
-                value="0"
+                value="professional-noG"
                 v-model="Gis_mental_health_professional"
               />
               <label class="form-check-label" for="professional-noG">No</label>
@@ -385,6 +413,19 @@
                     >*</span
                   ></label
                 >
+                    
+                  <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="GOnreliventmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -448,9 +489,22 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Rehabilitation1"
+                    id="Rehabilitation"
+                    @click="GOnreliventmentari('Consultation/Counselling')"
                   />
-                  <label class="form-check-label" for="Rehabilitation1">
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="GOnreliventmentari('Work-based Rehabilitation')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
                   </label>
                 </div>
@@ -459,9 +513,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Psychoeducation1"
+                    id="Psychoeducation"
+                    @click="GOnreliventmentari('Awareness Or Psychoeducation')"
                   />
-                  <label class="form-check-label" for="Psychoeducation1">
+                  <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
                   </label>
                 </div>
@@ -470,9 +525,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Therapy1"
+                    id="Therapy"
+                    @click="GOnreliventmentari('Recreational Therapy')"
                   />
-                  <label class="form-check-label" for="Therapy1">
+                  <label class="form-check-label" for="Therapy">
                     Recreational Therapy
                   </label>
                 </div>
@@ -481,10 +537,11 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Others1"
+                    id="Others"
+                    @click="GOnreliventmentari('Others')"
                   />
-                  <label class="form-check-label" for="Others1">
-                    Others: <input type="text" name="" />
+                  <label class="form-check-label" for="Others">
+                    Others:<input type="text" name="" v-model="GVolOthers" />
                   </label>
                 </div>
               </div>
@@ -699,6 +756,18 @@
             ></label
           >
           <div class="col-sm-8">
+             <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="GOnrelevatedmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -857,6 +926,18 @@
             ></label
           >
           <div class="col-sm-8">
+            <!-- <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Rehabilitation"
+                    @click="GOnnetworkrelevatedmentari('Consultation/Counselling')"
+                  />
+                  <label class="form-check-label" for="Rehabilitation">
+                    Consultation/Counselling
+                  </label>
+                </div> -->
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -1072,6 +1153,14 @@ export default {
       $("#change").click(function () {
         $(".select-others").val("organization").trigger("change");
       });
+       $(".groupadd-td").click(function (i) {
+        $(".groupblock:last").after(
+          '<tr class="groupblock"> <td> <input type="text" class="form-control groupyear" name="" /></td><td><input type="text" class="form-control grouplocation" name=""  /></td><td><input type="text" class="form-control groupactivity" name="" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+        );
+      });
+      $(".groupoptionBox").on("click", ".remove", function () {
+        $(this).closest(".groupblock").remove();
+      });
     });
     this.GetList();
   },
@@ -1233,6 +1322,14 @@ export default {
     async OnGroupVolunteerism() {
       try {
         this.GIsvalid = true;
+        var explist = [];
+        $("table#groupvolexp > tbody > tr").each(function (i) {
+          var obj = {};
+          obj.year = $('td input[type="text"].groupyear', this).val();
+          obj.location = $('td input[type="text"].grouplocation', this).val();
+          obj.activity = $('td input[type="text"].groupactivity', this).val();
+          explist.push(obj);
+        });
         if (!this.members_count) {
           this.errors.push("How many group members do you have is required.");
         }
@@ -1277,23 +1374,23 @@ export default {
         if (!this.Garea_of_involvement) {
           this.errors.push("Areas of Involvement is required.");
         }
-        if (this.Gis_voluneering_exp == "experience-yes") {
-          if (!this.Gexp_details) {
-            this.errors.push(
-              "volunteering experience description is required."
-            );
-            this.GIsvalid = false;
-          }
-        }
+        // if (this.Gis_voluneering_exp == "experience-yes") {
+        //   if (!this.Gexp_details) {
+        //     this.errors.push(
+        //       "volunteering experience description is required."
+        //     );
+        //     this.GIsvalid = false;
+        //   }
+        // }
         if (this.Gis_mental_health_professional == "professional-yesG") {
           if (!this.Gfile) {
             this.errors.push("Latest Resume is required.");
             this.GIsvalid = false;
           }
-          if (!this.Gmentari_services) {
-            this.errors.push("Relevant Mentari Service is required.");
-            this.GIsvalid = false;
-          }
+        }
+        if (!this.Gmentari_services) {
+          this.errors.push("Relevant Mentari Service is required.");
+          this.GIsvalid = false;
         }
         if (!this.Gavailable_date) {
           this.errors.push("Available Day is required.");
@@ -1368,7 +1465,7 @@ export default {
           body.append("branch_id", this.Gbranch_id);
           body.append("area_of_involvement", this.Garea_of_involvement);
           body.append("is_voluneering_exp", this.Gis_voluneering_exp);
-          body.append("exp_details", this.Gexp_details);
+          body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Gis_mental_health_professional

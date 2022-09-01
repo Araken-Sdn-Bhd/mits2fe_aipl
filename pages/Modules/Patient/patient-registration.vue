@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
           <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -146,12 +146,12 @@
                                 v-bind:id="'ct' + i"
                                  v-bind:value="ct.id"
                                 v-model="citizenship"
-                                @change="OnchangeCitizenship(ct.citizenship_name,ct.id)"
+                                @change="OnchangeCitizenship(ct.section_value,ct.id)"
                               />
                               <label
                                 class="form-check-label"
                                 v-bind:for="'ct' + i"
-                                >{{ ct.citizenship_name }}</label
+                                >{{ ct.section_value }}</label
                               >
                             </div>
                           </div>
@@ -170,19 +170,14 @@
                                 class="form-select"
                                 aria-label="Default select example"
                               >
-                              <option value="0">Select NRIC Type</option>
-                                <option v-bind:key="1"
-                                  v-bind:value="1"> 
-                                  New NRIC 
-                                </option>
-                                <!-- <option v-bind:key="2"
-                                  v-bind:value="2"> 
-                                  two
-                                </option>
-                                <option v-bind:key="3"
-                                  v-bind:value="3"> 
-                                  three
-                                </option> -->
+                                <option value="0">Please Select</option>
+                                <option
+                                v-for="mar in nrictypelist"
+                                v-bind:key="mar.id"
+                                v-bind:value="mar.id"
+                              >
+                                {{ mar.section_value }}
+                              </option>
                               </select>
                             </div>
 
@@ -726,7 +721,7 @@
                         <div class="col-sm-7">
                           <div class="mb-3">
                             <label class="form-label"
-                              >Name (As In NRIC)<small>*</small></label
+                              >Name (As In NRIC)<small></small></label
                             >
                             <input
                               type="text"
@@ -740,7 +735,7 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label"
-                              >Relationship<small>*</small></label
+                              >Relationship<small></small></label
                             >
                            <select
                               v-model="kin_relationship_id"
@@ -758,6 +753,18 @@
                             </select>
                           </div>
                         </div>
+                         <div class="row">
+                            <div class="col-sm-6">
+                              <label class="form-label">NRIC No<small>*</small></label>
+                              <input
+                                type="number"
+                                class="form-control"
+                                placeholder="xxxxxx-xx-xxxx" @keyup="kinOnnricNo1" v-model="kin_nric_no"
+                              />
+                                <Error :message="error" v-if="error" />
+                            </div>
+                          
+                          </div>
                       </div>
                       <!-- close-row -->
 
@@ -765,7 +772,7 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label"
-                              >Mobile Phone No.<small>*</small></label
+                              >Mobile Phone No.<small></small></label
                             >
                             <input
                               type="number"
@@ -864,7 +871,7 @@
                             <input
                               type="text"
                               class="form-control"
-                              placeholder="Enter Postcode"
+                              placeholder="Enter Postcode" @keyup="Onpostcodechange()"
                               name="" v-model="kin_postcode"
                             />
                           </div>
@@ -1036,8 +1043,57 @@
                           />
                         </div>
                       </div>
-                      <!-- close-row -->
 
+                       <div class="row align-items-center mb-3">
+                        <div class="col-sm-5">
+                          <label class="form-label mb-0">DOES THIS PATIENT NEED TRIAGE/SCREENING</label>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="patient-triage-yes"
+                              id="screen-yes"
+                              value="1" v-model="patient_need_triage_screening"
+                            />
+                            <label class="form-check-label" for="screen-yes"
+                              >Yes</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="patient-triage-yes"
+                              id="screen-no"
+                              value="0"  v-model="patient_need_triage_screening"
+                            />
+                            <label class="form-check-label" for="screen-no"
+                              >No</label
+                            >
+                          </div>
+                        </div>
+
+                        <!-- div-hide -->
+                        <!-- <div class="col-sm-5 oa-yes visibility-h">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id=""
+                            placeholder="To Specify"  v-model="other_description"
+                          />
+                        </div> -->
+                      </div>
+                      <!-- close-row -->
+<p v-if="errorList.length">
+<ul>
+        <li style="color:red"  v-for='err in errorList'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousThird"
@@ -1063,10 +1119,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "patient-registration",
   data() {
     return {
@@ -1087,6 +1143,7 @@ export default {
       feeexemptionlist: [],
       occupationsectorlist: [],
       relationshiplist: [],
+      nrictypelist: [],
       citizenship: "",
       salutation_id: 0,
       name_asin_nric: "",
@@ -1145,6 +1202,11 @@ export default {
       Id: 0,
       loader: false,
       error: null,
+      firstDob: "",
+      secondDob: "",
+      thirdDob: "",
+      patient_need_triage_screening: "",
+      kin_nric_no: "",
     };
   },
   beforeMount() {
@@ -1273,27 +1335,27 @@ export default {
       this.$refs.navdiv3.classList.add("show");
     },
     NextThird() {
-      this.errorList = [];
-      if (!this.kin_name_asin_nric) {
-        this.errorList.push("Name (As In NRIC) No is required.");
-      }
-      if (!this.kin_relationship_id) {
-        this.errorList.push("Relationship is required.");
-      }
-      if (!this.kin_mobile_no) {
-        this.errorList.push("Mobile Phone No is required.");
-      }
-      if (
-        this.kin_name_asin_nric &&
-        this.kin_mobile_no &&
-        this.kin_relationship_id
-      ) {
-        this.$refs.tab4.classList.add("active");
-        this.$refs.navdiv3.classList.remove("active");
-        this.$refs.navdiv3.classList.remove("show");
-        this.$refs.navdiv4.classList.add("active");
-        this.$refs.navdiv4.classList.add("show");
-      }
+      // this.errorList = [];
+      // if (!this.kin_name_asin_nric) {
+      //   this.errorList.push("Name (As In NRIC) No is required.");
+      // }
+      // if (!this.kin_relationship_id) {
+      //   this.errorList.push("Relationship is required.");
+      // }
+      // if (!this.kin_mobile_no) {
+      //   this.errorList.push("Mobile Phone No is required.");
+      // }
+      // if (
+      //   this.kin_name_asin_nric &&
+      //   this.kin_mobile_no &&
+      //   this.kin_relationship_id
+      // ) {
+      this.$refs.tab4.classList.add("active");
+      this.$refs.navdiv3.classList.remove("active");
+      this.$refs.navdiv3.classList.remove("show");
+      this.$refs.navdiv4.classList.add("active");
+      this.$refs.navdiv4.classList.add("show");
+      // }
     },
     PreviousFirst() {
       this.$refs.tab1.classList.add("active");
@@ -1336,7 +1398,7 @@ export default {
         this.salutationlist = [];
       }
       const response1 = await this.$axios.get(
-        "citizenship/getCitizenshipList",
+        "general-setting/list?section=" + "citizenship",
         { headers }
       );
       if (response1.data.code == 200 || response1.data.code == "200") {
@@ -1361,7 +1423,7 @@ export default {
         this.servicelist = [];
       }
       const response4 = await this.$axios.get(
-        "general-setting/list?section=" + "referral-or-contact-point",
+        "general-setting/list?section=" + "type-of-referral",
         {
           headers,
         }
@@ -1378,6 +1440,7 @@ export default {
       } else {
         this.statelist = [];
       }
+      console.log("state", this.statelist);
       const response7 = await this.$axios.get("address/country/list", {
         headers,
       });
@@ -1393,6 +1456,16 @@ export default {
         this.citylist = response6.data.list;
       } else {
         this.citylist = [];
+      }
+      console.log("citylist", this.citylist);
+      const response8 = await this.$axios.get(
+        "general-setting/list?section=" + "type-of-nric",
+        { headers }
+      );
+      if (response8.data.code == 200 || response8.data.code == "200") {
+        this.nrictypelist = response8.data.list;
+      } else {
+        this.nrictypelist = [];
       }
     },
     async GetTab2List() {
@@ -1503,114 +1576,134 @@ export default {
       }
     },
     async submitRegistration() {
-      try {
-        var no = this.nric_no.slice(0, 6);
-        var no1 = this.nric_no.slice(6, 8);
-        var no2 = this.nric_no.slice(8, 12);
-        this.nric_no = no + "-" + no1 + "-" + no2;
-        this.loader = true;
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        let body = new FormData();
-        body.append("added_by", this.userdetails.user.id);
-        body.append("citizenship", this.citizenship);
-        body.append("salutation_id", this.salutation_id);
-        body.append("name_asin_nric", this.name_asin_nric);
-        body.append("sex", this.sex);
-        body.append("birth_date", this.birth_date);
-        body.append("age", this.age);
-        body.append("mobile_no", this.mobile_no);
-        body.append("house_no", this.house_no);
-        body.append("hospital_mrn_no", this.hospital_mrn_no);
-        body.append("mintari_mrn_no", this.mintari_mrn_no);
-        body.append("services_type", this.services_type.id);
-        body.append("referral_type", this.referral_type);
-        body.append("referral_letter", this.referral_letter);
-        body.append("address1", this.address1);
-        body.append("address2", this.address2);
-        body.append("address3", this.address3);
-        body.append("state_id", this.state_id);
-        body.append("city_id", this.city_id);
-        body.append("postcode", this.postcode);
-        body.append("race_id", this.race_id);
-        body.append("religion_id", this.religion_id);
-        body.append("marital_id", this.marital_id);
-        body.append("accomodation_id", this.accomodation_id);
-        body.append("education_level", this.education_level);
-        body.append("occupation_status", this.occupation_status);
-        body.append("fee_exemption_status", this.fee_exemption_status);
-        body.append("occupation_sector", this.occupation_sector);
-        body.append("kin_name_asin_nric", this.kin_name_asin_nric);
-        body.append("kin_relationship_id", this.kin_relationship_id);
-        body.append("kin_mobile_no", this.kin_mobile_no);
-        body.append("kin_house_no", this.kin_house_no);
-        body.append("kin_address1", this.kin_address1);
-        body.append("kin_address2", this.kin_address2);
-        body.append("kin_address3", this.kin_address3);
-        body.append("kin_state_id", this.kin_state_id);
-        body.append("kin_city_id", this.kin_city_id);
-        body.append("kin_postcode", this.kin_postcode);
-        body.append("drug_allergy", this.drug_allergy);
-        body.append("drug_allergy_description", this.drug_allergy_description);
-        body.append("traditional_medication", this.traditional_medication);
-        body.append("traditional_description", this.traditional_description);
-        body.append("other_allergy", this.other_allergy);
-        body.append("other_description", this.other_description);
-        body.append("nric_type", this.nric_type);
-        body.append("nric_no", this.nric_no);
-        body.append("referral_letter", this.file);
-        body.append("passport_no", this.passport_no);
-        body.append("expiry_date", this.expiry_date);
-        body.append("country_id", this.country_id);
-        body.append("id", this.Id);
-        if (this.Id > 0) {
-          const response = await this.$axios.post(
-            "patient-registration/update",
-            body,
-            {
-              headers,
-            }
+      this.errorList = [];
+      if (!this.patient_need_triage_screening) {
+        this.errorList.push("Patient Need Triage Screening is required.");
+      }
+      if (this.patient_need_triage_screening) {
+        try {
+          var no = this.nric_no.slice(0, 6);
+          var no1 = this.nric_no.slice(6, 8);
+          var no2 = this.nric_no.slice(8, 12);
+          this.nric_no = no + "-" + no1 + "-" + no2;
+
+          var kno = this.kin_nric_no.slice(0, 6);
+          var kno1 = this.kin_nric_no.slice(6, 8);
+          var kno2 = this.kin_nric_no.slice(8, 12);
+          this.kin_nric_no = kno + "-" + kno1 + "-" + kno2;
+
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          body.append("added_by", this.userdetails.user.id);
+          body.append("citizenship", this.citizenship);
+          body.append("salutation_id", this.salutation_id==null ? 0 : this.salutation_id);
+          body.append("name_asin_nric", this.name_asin_nric);
+          body.append("sex", this.sex);
+          body.append("birth_date", this.birth_date);
+          body.append("age", this.age);
+          body.append("mobile_no", this.mobile_no);
+          body.append("house_no", this.house_no);
+          body.append("hospital_mrn_no", this.hospital_mrn_no);
+          body.append("mintari_mrn_no", this.mintari_mrn_no);
+          body.append("services_type", this.services_type.id);
+          body.append("referral_type", this.referral_type);
+          body.append("referral_letter", this.referral_letter);
+          body.append("address1", this.address1);
+          body.append("address2", this.address2);
+          body.append("address3", this.address3);
+          body.append("state_id", this.state_id==null ? 0 : this.state_id);
+          body.append("city_id", this.city_id==null ? 0 : this.city_id);
+          body.append("postcode", this.postcode);
+          body.append("race_id", this.race_id==null ? 0 : this.race_id);
+          body.append("religion_id", this.religion_id==null ? 0 : this.religion_id);
+          body.append("marital_id", this.marital_id==null ? 0 : this.marital_id);
+          body.append("accomodation_id", this.accomodation_id==null ? 0 : this.accomodation_id);
+          body.append("education_level", this.education_level==null ? 0 : this.education_level);
+          body.append("occupation_status", this.occupation_status==null ? 0 : this.occupation_status);
+          body.append("fee_exemption_status", this.fee_exemption_status==null ? 0 : this.fee_exemption_status);
+          body.append("occupation_sector", this.occupation_sector==null ? 0 : this.occupation_sector);
+          body.append("kin_name_asin_nric", this.kin_name_asin_nric);
+          body.append("kin_relationship_id", this.kin_relationship_id==null ? 0 : this.kin_relationship_id);
+          body.append("kin_nric_no", this.kin_nric_no);
+          body.append("kin_mobile_no", this.kin_mobile_no);
+          body.append("kin_house_no", this.kin_house_no);
+          body.append("kin_address1", this.kin_address1);
+          body.append("kin_address2", this.kin_address2);
+          body.append("kin_address3", this.kin_address3);
+          body.append("kin_state_id", this.kin_state_id==null ? 0 : this.kin_state_id);
+          body.append("kin_city_id", this.kin_city_id==null ? 0 : this.kin_city_id);
+          body.append("kin_postcode", this.kin_postcode);
+          body.append("drug_allergy", this.drug_allergy);
+          body.append(
+            "drug_allergy_description",
+            this.drug_allergy_description
           );
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#updatepopup").modal("show");
-            });
-            this.$router.push("/Modules/Patient/patient-list");
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        } else {
-          const response = await this.$axios.post(
-            "patient-registration/add",
-            body,
-            {
-              headers,
-            }
+          body.append("traditional_medication", this.traditional_medication);
+          body.append("traditional_description", this.traditional_description);
+          body.append("other_allergy", this.other_allergy);
+          body.append("other_description", this.other_description);
+          body.append("nric_type", this.nric_type);
+          body.append("nric_no", this.nric_no);
+          body.append("referral_letter", this.file);
+          body.append("passport_no", this.passport_no);
+          body.append("expiry_date", this.expiry_date);
+          body.append("country_id", this.country_id);
+          body.append(
+            "patient_need_triage_screening",
+            this.patient_need_triage_screening
           );
-          console.log("my data resuklt", response.data);
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-            this.$router.push("/Modules/Patient/patient-list");
+          body.append("id", this.Id);
+          if (this.Id > 0) {
+            const response = await this.$axios.post(
+              "patient-registration/update",
+              body,
+              {
+                headers,
+              }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$nextTick(() => {
+                $("#updatepopup").modal("show");
+              });
+              this.$router.push("/Modules/Patient/patient-list");
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
           } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            const response = await this.$axios.post(
+              "patient-registration/add",
+              body,
+              {
+                headers,
+              }
+            );
+            console.log("my data resuklt", response.data);
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$nextTick(() => {
+                $("#insertpopup").modal("show");
+              });
+              this.$router.push("/Modules/Patient/patient-list");
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
           }
+        } catch (e) {
+          this.loader = false;
+          this.$nextTick(() => {
+            $("#errorpopup").modal("show");
+          });
         }
-      } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
       }
     },
     async GetPatientdetails() {
@@ -1702,13 +1795,38 @@ export default {
     },
     OnnricNo() {
       if (this.nric_no.length == 12) {
+        this.firstDob = String(this.nric_no).slice(0, 4);
+        this.secondDob = String(this.nric_no).slice(4, 6);
+        this.thirdDob = String(this.nric_no).slice(6, 8);
+        // this.birth_date = this.firstDob+"-"+this.secondDob+"-"+this.thirdDob;
+        this.birth_date = this.getDate(this.nric_no);
         this.error = null;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
       }
     },
+    getDate(d) {
+      return (
+        (parseInt(d[0].toString() + d[1]) < 30 ? "20" : "19") +
+        d[0].toString() +
+        d[1] +
+        "-" +
+        d[2].toString() +
+        d[3]+
+        "-" +
+        d[4].toString() +
+        d[5] 
+      );
+    },
     OnnricNo1() {
       if (this.nric_no1.length == 12) {
+        this.error = null;
+      } else {
+        this.error = "Please Enter 12 Digit NRIC No";
+      }
+    },
+    kinOnnricNo1() {
+      if (this.kin_nric_no.length == 12) {
         this.error = null;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
@@ -1724,6 +1842,29 @@ export default {
       }
       this.age = age;
       //window.alert(age);
+    },
+    async Onpostcodechange() {
+      try {
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response1 = await this.$axios.post(
+          "address/getStateCityByPostcode",
+          {
+            postcode: this.kin_postcode,
+          },
+          { headers }
+        );
+        if (response1.data.code == 200) {
+          this.kin_state_id = response1.data.list[0].state_id;
+          this.kin_city_id = response1.data.list[0].id;
+        } else {
+          this.kin_state_id = 0;
+          this.kin_city_id = 0;
+        }
+      } catch (e) {}
     },
   },
 };

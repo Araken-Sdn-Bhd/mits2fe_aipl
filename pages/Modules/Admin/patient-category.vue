@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
          <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -109,10 +109,10 @@
   </div>
 </template>
   <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "patient-category",
   data() {
     return {
@@ -126,9 +126,44 @@ export default {
         loader: false,
     };
   },
+   mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "general-setting/list?section=" +
+          "patient-category",
+        { headers }
+      )
+      .then((resp) => {
+        this.settinglist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GetSettingList();
   },
   methods: {
     async insertcategory() {

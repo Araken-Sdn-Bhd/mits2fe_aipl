@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
        <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -69,12 +69,12 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Defaultpassword from '../../../components/Admin/defaultpassword.vue';
 import Passwordcharectersticks from '../../../components/Admin/passwordcharectersticks.vue';
 export default {
-  components: { Adminsidebar, AdminHeader, Passwordcharectersticks, Defaultpassword },
+  components: { CommonSidebar, CommonHeader, Passwordcharectersticks, Defaultpassword },
   name: "password",
 
 };

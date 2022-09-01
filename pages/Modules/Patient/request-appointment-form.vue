@@ -1,15 +1,15 @@
 <template>
   <div id="layoutSidenav">
-      <PatientLoginSidebar />
+      <CommonSidebar />
    
     <div id="layoutSidenav_content">
-        <PatientLoginHeader />
+        <CommonHeader />
       <main>
         <Loader v-if="loader" />
 
         <div class="container-fluid px-4">
           <div class="page-title">
-            <h1>Book Appointment</h1>
+            <h1>Request Appointment</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
@@ -117,10 +117,10 @@
   </div>
 </template>
   <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "request-appointment-form",
   head: {
     script: [
@@ -156,6 +156,7 @@ export default {
       BranchList: [],
       userId: 0,
       token: "",
+      Id: 0,
     };
   },
   beforeMount() {
@@ -164,6 +165,11 @@ export default {
     if (this.userdetails) {
       this.userId = this.userdetails.user.id;
       this.token = this.userdetails.access_token;
+    }
+    let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
+    if (this.Id) {
+      this.GetPatientdetails();
     }
   },
   methods: {
@@ -191,28 +197,28 @@ export default {
         if (!this.name) {
           this.errorList.push("Name is required");
         }
-        if (!this.nric) {
-          this.errorList.push("NRIC is required");
-        }
+        // if (!this.nric) {
+        //   this.errorList.push("NRIC is required");
+        // }
         if (!this.contactno) {
           this.errorList.push("Contact No is required");
         }
-        if (!this.address1) {
-          this.errorList.push("Address 1 No is required");
-        }
-        if (!this.address2) {
-          this.errorList.push("Address 2 No is required");
-        }
+        // if (!this.address1) {
+        //   this.errorList.push("Address 1 No is required");
+        // }
+        // if (!this.address2) {
+        //   this.errorList.push("Address 2 No is required");
+        // }
         if (!this.email) {
           this.errorList.push("Email is required");
         }
         if (
           this.branch &&
           this.name &&
-          this.nric &&
+          // this.nric &&
           this.contactno &&
-          this.address1 &&
-          this.address2 &&
+          // this.address1 &&
+          // this.address2 &&
           this.email
         ) {
           this.loader = true;
@@ -246,6 +252,26 @@ export default {
           }
         }
       } catch (e) {}
+    },
+    async GetPatientdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.Id,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.name = response.data.list[0].name_asin_nric;
+         this.nric = response.data.list[0].nric_no;
+      } else {
+        window.alert("Something went wrong");
+      }
     },
   },
 };

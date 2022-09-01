@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -81,7 +81,11 @@
 
                       <tr>
                         <td>Hospital Address</td>
-                        <td>{{ HospitalDetails.address }}</td>
+                        <td>
+                          <p v-if="HospitalDetails.address1">{{ HospitalDetails.address1 }}</p>
+                          <p v-if="HospitalDetails.address2">{{ HospitalDetails.address2 }}</p>
+                          <p v-if="HospitalDetails.address3">{{ HospitalDetails.address3 }}</p>
+                        </td>
                       </tr>
 
                       <tr>
@@ -143,7 +147,7 @@
 
                       <tr>
                         <td>Citizenship</td>
-                        <td>{{ Hoddetails.citizenship }}</td>
+                        <td>{{ Hoddetails.citizenship_name }}</td>
                       </tr>
 
                       <tr>
@@ -158,7 +162,7 @@
 
                       <tr>
                         <td>Designation</td>
-                        <td>{{ Hoddetails.designation }}</td>
+                        <td>{{ Hoddetails.designation_name }}</td>
                       </tr>
 
                       <tr>
@@ -186,10 +190,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "Hod-hospital-details",
   data() {
     return {
@@ -215,6 +219,7 @@ export default {
       const response = await this.$axios.get("/hospital/list/" + this.id, {
         headers,
       });
+      console.log("my data", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.HospitalDetails = response.data.list.hospital;
         this.Hoddetails = response.data.list.psychiatrist;

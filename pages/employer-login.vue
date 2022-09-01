@@ -2,7 +2,7 @@
   <div class="bg-login bg-login-2">
     <div class="row login-box">
       <img src="~/assets/images/mentari.png" />
-      <h4>Employer Login</h4>
+      <h4>Staff Login</h4>
       <Loader v-if="loader" />
       <form method="post" @submit.prevent="login">
         <div class="mb-3">
@@ -10,22 +10,24 @@
           <input
             class="form-control"
             id="inputEmail"
-            type="text"
             v-model="email"
+            type="text"
           />
         </div>
-        <Error :message="emailerror" v-if="emailerror" />
+
         <div class="mb-3 password">
           <label for="inputPassword">Password</label>
-          <a class="small ml-auto forgot-password" href="#">Forgot Password?</a>
+          <a class="small ml-auto forgot-password" href="/forget-password"
+            >Forgot Password?</a
+          >
           <input
             class="form-control"
             id="inputPassword"
-            type="password"
             v-model="password"
+            type="password"
           />
         </div>
-        <Error :message="passerror" v-if="passerror" />
+        <Error :message="emailerror" v-if="emailerror" />
         <div class="form-check d-flex align-items-center">
           <div class="">
             <input
@@ -41,15 +43,17 @@
         </div>
         <div class="d-flex align-items-center">
           <input type="submit" class="btn login-btn" value="Login" />
+          <!-- <a class="btn login-btn" href="">Login</a> -->
         </div>
       </form>
     </div>
   </div>
 </template>
-
 <script>
 import Error from "~/components/Error";
+import Loader from "../components/loader.vue";
 export default {
+  components: { Loader },
   name: "employer-login",
   head: {
     script: [
@@ -67,12 +71,12 @@ export default {
   },
   data() {
     return {
+      loader: false,
       email: "",
       password: "",
       emailerror: null,
       passerror: null,
       userdetail: null,
-      loader: false,
     };
   },
   methods: {
@@ -91,6 +95,7 @@ export default {
           const response = await this.$axios.post("auth/login", {
             email: this.email,
             password: this.password,
+            type:""
           });
           this.userdetail = response.data;
           if (this.userdetail.code == 200) {
@@ -98,18 +103,16 @@ export default {
               "userdetails",
               JSON.stringify(this.userdetail)
             );
-            localStorage.setItem("nav", "tab2");
-            this.$router.push("/Modules/Von/von-management");
-            setTimeout(() => {
-              window.location.reload();
-            }, 100);
+            this.loader = false;
+            this.$router.push(this.userdetail.route);
           } else {
             this.loader = false;
-            this.emailerror = this.userdetail.message.email[0];
-            this.passerror = this.userdetail.message.password[0];
+            this.emailerror = this.userdetail.message;
           }
         }
       } catch (e) {
+        console.log("my error", e);
+        console.log("api not working");
         this.loader = false;
         this.emailerror = "Email and Password does not match"; //$user.message.email; //e.response.data.message;
       }

@@ -83,7 +83,7 @@
     <div class="table-title">
       <h3>List of State</h3>
     </div>
-    <table class="table table-striped data-table" style="width: 100%">
+    <table class="table table-striped data-table3" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -135,10 +135,44 @@ export default {
       loader: false,
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "address/postcodelist",
+        { headers }
+      )
+      .then((resp) => {
+        this.CityList = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table3").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetCountryList();
-    this.PostcodeList();
   },
   methods: {
     async onstatebind(event) {

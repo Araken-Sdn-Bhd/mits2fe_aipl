@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -81,7 +81,7 @@
                           type="radio"
                           v-bind:name="'pb' + index"
                           value="1"
-                          @change="onchange(index, 0)"
+                          @change="onchange(pb.id, 0)"
                         />
                         <label class="form-check-label" for="1">{{
                           pb.Answer0
@@ -93,7 +93,7 @@
                           type="radio"
                           value="2"
                           v-bind:name="'pb' + index"
-                          @change="onchange(index, 1)"
+                          @change="onchange(pb.id, 1)"
                         />
                         <label class="form-check-label" for="2">{{
                           pb.Answer1
@@ -105,7 +105,7 @@
                           type="radio"
                           value="3"
                           v-bind:name="'pb' + index"
-                          @change="onchange(index, 2)"
+                          @change="onchange(pb.id, 2)"
                         />
                         <label class="form-check-label" for="3">{{
                           pb.Answer2
@@ -117,7 +117,7 @@
                           type="radio"
                           value="4"
                           v-bind:name="'pb' + index"
-                          @change="onchange(index, 3)"
+                          @change="onchange(pb.id, 3)"
                         />
                         <label class="form-check-label" for="4">{{
                           pb.Answer3
@@ -146,10 +146,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "phq-9",
   head: {
     script: [
@@ -216,15 +216,23 @@ export default {
         this.list = [];
       }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
     onchange(ind, val) {
-      this.checkedList[ind + 1] = val;
+      this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
       this.error = null;
@@ -254,7 +262,10 @@ export default {
               "phq9result",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/Modules/Patient/phq9-result");
+            this.$router.push({
+              path: "/Modules/Patient/phq9-result",
+              query: { id: this.Id },
+            });
           } else {
             this.loader = false;
             this.$nextTick(() => {

@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -78,13 +78,13 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Idletimeoutsession from '../../../components/Admin/Idletimeoutsession.vue';
 import Loginattempt from '../../../components/Admin/loginattempt.vue';
 import Systemblockduration from '../../../components/Admin/systemblockduration.vue';
 export default {
-  components: { Adminsidebar, AdminHeader, Loginattempt, Systemblockduration, Idletimeoutsession },
+  components: { CommonHeader, CommonSidebar, Loginattempt, Systemblockduration, Idletimeoutsession },
   name: "login-security",
 };
 </script>

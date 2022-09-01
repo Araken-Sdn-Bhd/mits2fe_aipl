@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -43,11 +43,11 @@
                     >
                       <option value="0">Select Service</option>
                       <option
-                        v-for="slt in servicelist"
+                        v-for="slt in assistancelist"
                         v-bind:key="slt.id"
                         v-bind:value="slt.id"
                       >
-                        {{ slt.service_name }}
+                        {{ slt.section_value }}
                       </option>
                     </select>
                   </div>
@@ -88,7 +88,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(patint, index) in list" :key="index">
-                    <td>{{ index+1 }}</td>
+                    <td>{{ index + 1 }}</td>
                     <td>{{ patint.patient_mrn }}</td>
                     <td>{{ patint.salutation }}</td>
                     <td>
@@ -104,23 +104,20 @@
                     <td>{{ patint.team_name }}</td>
                     <td>{{ patint.service }}</td>
                   </tr>
-
-                  <!-- <tr style="display: none">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <a href="patient-summary"></a>
-                    </td>
-                    <td></td>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr> -->
                 </tbody>
               </table>
+              <p
+                v-show="!list.length"
+                style="
+                  padding: 0px;
+                  margin: 10px;
+                  color: red;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                No Record Found
+              </p>
             </div>
           </div>
         </div>
@@ -129,10 +126,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "patient-list",
 
   data() {
@@ -147,6 +144,7 @@ export default {
       search: "",
       branch_id: 0,
       service_id: 0,
+      assistancelist: [],
     };
   },
   beforeMount() {
@@ -163,7 +161,8 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-registration/getPatientRegistrationList",
+        `${this.$axios.defaults.baseURL}` +
+          "patient-registration/getPatientRegistrationList",
         { headers }
       )
       .then((resp) => {
@@ -175,6 +174,7 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
+            // retrieve: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -209,10 +209,19 @@ export default {
       } else {
         this.branchlist = [];
       }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
     },
     oneditPatient(Id) {
       this.$router.push({
-        path: "/Modules/Patient/patient-summary",
+        path: "/Modules/Intervention/patient-summary",
         query: { id: Id },
       });
     },
@@ -236,9 +245,17 @@ export default {
         },
         { headers }
       );
-      console.log("my list", response.data);
       if (response.data.code == 200) {
-        this.list = response.data.list;
+        if (response.data.list.length > 0) {
+          this.list.splice(0, this.list.length);
+          this.list = response.data.list;
+        } else {
+          //this.list = [];
+          this.list.splice(0, this.list.length);
+          if ($.fn.DataTable.isDataTable(".data-table")) {
+            $(".data-table").DataTable().clear().destroy();
+          }
+        }
       } else {
         window.alert("Something went wrong");
       }

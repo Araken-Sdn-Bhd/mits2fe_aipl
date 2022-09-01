@@ -285,35 +285,33 @@
         <!-- hide-div -->
         <div class="experience2-yes experi-box hide">
           <div class="mt-3">
-            <table class="note" style="width: 100%">
+                         <table class="note" style="width: 100%" id="volexp1">
               <thead>
                 <tr>
-                  <th>NO</th>
                   <th width="100px">YEAR</th>
                   <th>Location</th>
                   <th>Brief Description of Activities</th>
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
+              <tbody class="optionBox">
+                     <tr class="block" v-for="(exp,index) in expList" :key="index">
                   <td>
-                    <input type="text" class="form-control" name="" v-model="OYear" />
+                    <input type="text" class="form-control year" v-model="exp.year" name="" />
                   </td>
                   <td>
-                    <input type="text" class="form-control" name=""  v-model="OLocation"/>
+                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
                   </td>
                   <td>
-                    <input type="text" class="form-control" name="" v-model="ODescription"/>
+                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
                   </td>
-                  <!-- <td>
-                    <a href="#"><i class="far fa-plus"></i></a>
-                  </td> -->
+                  <td>
+                    <a class="add-td"><i class="far fa-plus"></i></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
-          </div>
+                      </div>
         </div>
 
         <div class="row mb-3 mt-2">
@@ -1023,6 +1021,7 @@ export default {
       awareness: "",
       recreational: "",
       other: "",
+      expList: [],
     };
   },
   beforeMount() {
@@ -1096,6 +1095,14 @@ export default {
 
       $("#change").click(function () {
         $(".select-others").val("organization").trigger("change");
+      });
+      $(".add-td").click(function (i) {
+        $(".block:last").after(
+          '<tr class="block"> <td> <input type="text" class="form-control year" name="" /></td><td><input type="text" class="form-control location" name=""  /></td><td><input type="text" class="form-control activity" name="" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+        );
+      });
+      $(".optionBox").on("click", ".remove", function () {
+        $(this).closest(".block").remove();
       });
     });
     this.GetList();
@@ -1202,18 +1209,22 @@ export default {
     OnSubmit() {
       this.errors = [];
       if (this.Ois_agree) {
-        if (this.Oarea_of_involvement == "Volunteerism") {
-          this.OnOrganizationVolunteerism();
-        } else if (
-          this.Oarea_of_involvement == "Outreach Project Collaboration"
-        ) {
-          this.OnOrganizationOutreachProjectCollaboration();
-        } else if (
-          this.Oarea_of_involvement == "Networking Make a Contribution"
-        ) {
-          this.OnOrganizationNetworkingMakeaContribution();
+        if (this.screening_mode) {
+          if (this.Oarea_of_involvement == "Volunteerism") {
+            this.OnOrganizationVolunteerism();
+          } else if (
+            this.Oarea_of_involvement == "Outreach Project Collaboration"
+          ) {
+            this.OnOrganizationOutreachProjectCollaboration();
+          } else if (
+            this.Oarea_of_involvement == "Networking Make a Contribution"
+          ) {
+            this.OnOrganizationNetworkingMakeaContribution();
+          } else {
+            this.errors.push("Please select Areas of Involvement");
+          }
         } else {
-          this.errors.push("Please select Areas of Involvement");
+          this.errors.push("Please select screen mode");
         }
       } else {
         this.errors.push("Please agree to the terms and condition");
@@ -1222,6 +1233,13 @@ export default {
     async OnOrganizationVolunteerism() {
       try {
         this.OIsvalid = true;
+        $("table#volexp1 > tbody > tr").each(function (i) {
+          var obj = {};
+          obj.year = $('td input[type="text"].year', this).val();
+          obj.location = $('td input[type="text"].location', this).val();
+          obj.activity = $('td input[type="text"].activity', this).val();
+          explist.push(obj);
+        });
         if (!this.org_name) {
           this.errors.push("Name of organization or company is required.");
         }
@@ -1286,20 +1304,20 @@ export default {
             "Does your organization consist of mental health professional is required."
           );
         }
-        if (this.Ois_voluneering_exp == "experience2-yes") {
-          if (!this.OYear) {
-            this.errors.push("Organization year is required.");
-            this.OIsvalid = false;
-          }
-          if (!this.OLocation) {
-            this.errors.push("Organization Location is required.");
-            this.OIsvalid = false;
-          }
-          if (!this.ODescription) {
-            this.errors.push("Organization Description is required.");
-            this.OIsvalid = false;
-          }
-        }
+        // if (this.Ois_voluneering_exp == "experience2-yes") {
+        //   if (!this.OYear) {
+        //     this.errors.push("Organization year is required.");
+        //     this.OIsvalid = false;
+        //   }
+        //   if (!this.OLocation) {
+        //     this.errors.push("Organization Location is required.");
+        //     this.OIsvalid = false;
+        //   }
+        //   if (!this.ODescription) {
+        //     this.errors.push("Organization Description is required.");
+        //     this.OIsvalid = false;
+        //   }
+        // }
         if (this.Ois_mental_health_professional == "professional2-yes") {
           if (!this.Ofile) {
             this.errors.push("Latest Resume is required.");
@@ -1386,16 +1404,7 @@ export default {
           body.append("branch_id", this.Obranch_id);
           body.append("area_of_involvement", this.Oarea_of_involvement);
           body.append("is_voluneering_exp", this.Ois_voluneering_exp);
-          body.append(
-            "exp_details",
-            JSON.stringify([
-              {
-                Year: this.OYear,
-                Location: this.OLocation,
-                Description: this.ODescription,
-              },
-            ])
-          );
+          body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Ois_mental_health_professional
@@ -1861,12 +1870,7 @@ export default {
         this.Ois_agree = 1;
         this.Omentari_services = response.data.list.mentari_services;
         this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
-        this.Oposition_in_org = response.data.list.position_in_org;
+        this.screening_mode = response.data.list.screening_mode;
         if (this.Omentari_services) {
           var service = this.Omentari_services.split(",");
           service.forEach((val) => {
@@ -1890,6 +1894,10 @@ export default {
             this.volexp = "y";
           }
           this.Oexp_details = response.data.list.exp_details;
+          if (this.Oexp_details) {
+            this.expList = JSON.parse(this.Oexp_details);
+            console.log("my array", this.expList);
+          }
           this.Ois_mental_health_professional =
             response.data.list.is_mental_health_professional;
           if (this.Ois_mental_health_professional) {

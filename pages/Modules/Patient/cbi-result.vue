@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <nav class="offline-form" v-if="!userdetails">
@@ -58,42 +58,177 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">{{personallevel}}</h3>
-
-                          <div
-                            class="arrow"
-                            style="left: 33%; border-bottom-color: #8bdf25"
-                          ></div>
-                          <div class="progress">
-                            <div
+                          <h3
+                            class="bg-color1"
+                            v-if="personallevel == 'Normal'"
+                          >
+                            {{ personallevel }}
+                          </h3>
+                          <h3
+                            class="bg-color2"
+                            v-if="personallevel == 'Moderate'"
+                          >
+                            {{ personallevel }}
+                          </h3>
+                          <h3
+                            class="bg-color3"
+                            v-if="personallevel == 'High Depression'"
+                          >
+                            {{ personallevel }}
+                          </h3>
+                          <h3
+                            class="bg-color5"
+                            v-if="personallevel == 'Severe'"
+                          >
+                            {{ personallevel }}
+                          </h3>
+                           <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="personallevel == 'Normal'"></div>
+                          <div class="progress" v-if="personallevel == 'Normal'">
+                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
-                              style="width: 49%"
-                              aria-valuenow="37"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
                               class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 24%"
-                              aria-valuenow="24"
+                              style="width: 20%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
+
                             <div
                               class="progress-bar bg-color bg-color3"
                               role="progressbar"
                               style="width: 24%"
-                              aria-valuenow="24"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="personallevel == 'Moderate'"></div>
+                          <div class="progress" v-if="personallevel == 'Moderate'">
+                             <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
-                              class="progress-bar bg-color bg-color4"
+                              class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 3%"
-                              aria-valuenow="3"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="personallevel == 'High Depression'"></div>
+                          <div class="progress"  v-if="personallevel == 'High Depression'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="personallevel == 'Severe'"></div>
+                          <div class="progress" v-if="personallevel == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
@@ -121,12 +256,13 @@
 
                       <div class="result-footer">
                         <h6>
-                          Your score suggests a Normal level of Personal Burnout
+                          Your score suggests a {{ personallevel }} level of
+                          Personal Burnout
                         </h6>
                         <p>
                           Note: Personal burnout is a state of prolonged
-                          physical and psychological exhaustion. Let's find out
-                          more about self-care. For your information, self-care
+                          physical and psychological exhaustion. Lets find out
+                          more about self care. For your information, self-care
                           is taking steps to tend to your physical and emotional
                           health needs to the best of your ability.
                         </p>
@@ -149,42 +285,168 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">{{worklevel}}</h3>
-
-                          <div
-                            class="arrow"
-                            style="left: 29%; border-bottom-color: #8bdf25"
-                          ></div>
-                          <div class="progress">
-                            <div
+                          <h3 class="bg-color1" v-if="worklevel == 'Normal'">
+                            {{ worklevel }}
+                          </h3>
+                          <h3 class="bg-color2" v-if="worklevel == 'Moderate'">
+                            {{ worklevel }}
+                          </h3>
+                          <h3
+                            class="bg-color3"
+                            v-if="worklevel == 'High Depression'"
+                          >
+                            {{ worklevel }}
+                          </h3>
+                          <h3 class="bg-color5" v-if="worklevel == 'Severe'">
+                            {{ worklevel }}
+                          </h3>
+                           <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="worklevel == 'Normal'"></div>
+                          <div class="progress" v-if="worklevel == 'Normal'">
+                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
-                              style="width: 49%"
-                              aria-valuenow="37"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
                               class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 24%"
-                              aria-valuenow="24"
+                              style="width: 20%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
+
                             <div
                               class="progress-bar bg-color bg-color3"
                               role="progressbar"
                               style="width: 24%"
-                              aria-valuenow="24"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="worklevel == 'Moderate'"></div>
+                          <div class="progress" v-if="worklevel == 'Moderate'">
+                             <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
-                              class="progress-bar bg-color bg-color4"
+                              class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 3%"
-                              aria-valuenow="3"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="worklevel == 'High Depression'"></div>
+                          <div class="progress"  v-if="worklevel == 'High Depression'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="worklevel == 'Severe'"></div>
+                          <div class="progress" v-if="worklevel == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
@@ -212,8 +474,8 @@
 
                       <div class="result-footer">
                         <h6>
-                          Your score suggests a Normal level of Work Related
-                          Burnout
+                          Your score suggests a {{ worklevel }} level of Work
+                          Related Burnout
                         </h6>
                         <p>
                           Notes: Work-related burnout is a state of prolonged
@@ -239,45 +501,176 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color1">{{clientlevel}}</h3>
-
-                          <div
-                            class="arrow"
-                            style="left: 44%; border-bottom-color: #8bdf25"
-                          ></div>
-                          <div class="progress">
+                          <h3 class="bg-color1" v-if="clientlevel == 'Normal'">
+                            {{ clientlevel }}
+                          </h3>
+                          <h3
+                            class="bg-color2"
+                            v-if="clientlevel == 'Moderate'"
+                          >
+                            {{ clientlevel }}
+                          </h3>
+                          <h3
+                            class="bg-color3"
+                            v-if="clientlevel == 'High Depression'"
+                          >
+                            {{ clientlevel }}
+                          </h3>
+                          <h3 class="bg-color5" v-if="clientlevel == 'Severe'">
+                            {{ clientlevel }}
+                          </h3>
+                          <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="clientlevel == 'Normal'"></div>
+                          <div class="progress" v-if="clientlevel == 'Normal'">
                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
-                              style="width: 49%"
-                              aria-valuenow="37"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
                               class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 24%"
-                              aria-valuenow="24"
+                              style="width: 20%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
+
                             <div
                               class="progress-bar bg-color bg-color3"
                               role="progressbar"
                               style="width: 24%"
-                              aria-valuenow="24"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="clientlevel == 'Moderate'"></div>
+                          <div class="progress" v-if="clientlevel == 'Moderate'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
                             <div
-                              class="progress-bar bg-color bg-color4"
+                              class="progress-bar bg-color bg-color2"
                               role="progressbar"
-                              style="width: 3%"
-                              aria-valuenow="3"
+                              style="width: 20%"
+                              aria-valuenow=""
                               aria-valuemin="0"
                               aria-valuemax="100"
                             ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="clientlevel == 'High Depression'"></div>
+                          <div class="progress"  v-if="clientlevel == 'High Depression'">
+                           <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="clientlevel == 'Severe'"></div>
+                          <div class="progress" v-if="clientlevel == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 20%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 24%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
                           </div>
                           <div class="indicator">
                             <div class="dot normal">
@@ -302,8 +695,8 @@
 
                       <div class="result-footer">
                         <h6>
-                          Your score suggests a Normal level of Client Related
-                          Burnout
+                          Your score suggests a {{ clientlevel }} level of
+                          Client Related Burnout
                         </h6>
                         <p>
                           Note: Client related burnout is a state of prolonged
@@ -330,7 +723,7 @@
                     <i class="fad fa-download"></i> Download Result
                   </button>
                   <a
-                    href="/Modules/Patient/request-appointment-form"
+                    @click="Gotorequestappointment"
                     class="btn btn-success btn-text ml-auto"
                     ><i class="fad fa-calendar-day"></i> Request Appointment</a
                   >
@@ -344,10 +737,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "cbi-result",
   head: {
     script: [
@@ -383,6 +776,7 @@ export default {
       personallevel: "",
       worklevel: "",
       clientlevel: "",
+      Id: 0,
     };
   },
   beforeMount() {
@@ -397,6 +791,8 @@ export default {
       this.worklevel = this.cbiresult.WORK_BURNOUT.level;
       this.clientlevel = this.cbiresult.CLIENT_RELATED_BURNOUT.level;
     }
+    let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
   },
   beforeDestroy() {
     localStorage.removeItem("cbiresult");
@@ -406,6 +802,12 @@ export default {
       var pdf = new jsPDF("p", "pt", "a4");
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
+      });
+    },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
       });
     },
   },

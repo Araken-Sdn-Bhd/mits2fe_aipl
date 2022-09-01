@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -44,7 +44,7 @@
                     >
                       <option value="0">Select Service</option>
                       <option
-                        v-for="slt in servicelist"
+                        v-for="slt in assistancelist"
                         v-bind:key="slt.id"
                         v-bind:value="slt.id"
                       >
@@ -89,7 +89,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(patint, index) in list" :key="index">
-                    <td>#{{ index + 1 }}</td>
+                    <td>{{ index + 1 }}</td>
                     <td>{{ patint.patient_mrn }}</td>
                     <td>{{ patint.salutation }}</td>
                     <td>
@@ -116,10 +116,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "patient-list",
 
   data() {
@@ -133,6 +133,7 @@ export default {
       branch_id: 0,
       service_id: 0,
       loader: true,
+      assistancelist: [],
     };
   },
   beforeMount() {
@@ -182,7 +183,8 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response1 = await this.$axios.get("service/list", { headers });
+      const response1 = await this.$axios.get(
+        "service/list", { headers });
       if (response1.data.code == 200 || response1.data.code == "200") {
         this.servicelist = response1.data.list;
       } else {
@@ -195,6 +197,16 @@ export default {
         this.branchlist = response2.data.list;
       } else {
         this.branchlist = [];
+      }
+      const respons = await this.$axios.get(
+        "service/list",
+        // "general-setting/list?section=" + "category-of-service",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
       }
     },
     oneditPatient(Id) {

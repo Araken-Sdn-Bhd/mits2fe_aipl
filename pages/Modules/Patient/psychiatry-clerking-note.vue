@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -79,14 +79,16 @@
                     <tr>
                       <th>Diagnosis:</th>
                       <td>
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                          v-model="diagnosis_id"
-                        >
-                          <option selected>Select Diagnosis</option>
-                          <option value="1">..</option>
-                        </select>
+                         <select class="form-select" v-model="diagnosis_id">
+                                <option value="0">Select Diagnosis</option>
+                                <option
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            </option>
+                              </select>
                       </td>
                     </tr>
                     <tr>
@@ -172,15 +174,13 @@
                               <option value="0">
                                 Select location of services
                               </option>
-                              <option value="1">On-site (Mentari)</option>
-                              <option value="2">Home Visit</option>
-                              <option value="3">Workplace Visit</option>
-                              <option value="4">Telephone Or Virtual</option>
-                              <option value="5">Main Hospital</option>
-                              <option value="6">
-                                Correspondence (Memo , Online Platform)
-                              </option>
-                              <option value="7">External (Others)</option>
+                             <option
+              v-for="loc in locationlist"
+              v-bind:key="loc.id"
+              v-bind:value="loc.id"
+            >
+              {{ loc.section_value }}
+            </option>
                             </select>
                           </div>
                         </div>
@@ -190,15 +190,16 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="type_diagnosis_id"
-                            >
-                              <option selected>
-                                Select ICD 10/ICD 11 CODE
-                              </option>
-                              <option value="1">...</option>
-                            </select>
+                            <select class="form-select" v-model="type_diagnosis_id">
+                                <option value="0">Select Diagnosis</option>
+                                <option
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            </option>
+                              </select>
                           </div>
                         </div>
                         <!-- close-row -->
@@ -257,11 +258,11 @@
                               <select class="form-select" v-model="services_id">
                                  <option value="0">Select Service</option>
                       <option
-                        v-for="slt in servicelist"
+                        v-for="slt in assistancelist"
                         v-bind:key="slt.id"
                         v-bind:value="slt.id"
                       >
-                        {{ slt.service_name }}
+                        {{ slt.section_value }}
                       </option>
                               </select>
                             </div>
@@ -275,7 +276,7 @@
                               <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-              {{ type.icd_type_name }}
+             {{ type.icd_category_code }} {{type.icd_category_name}}
             </option>
                               </select>
                             </div>
@@ -288,7 +289,8 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }}
+               {{ catcode.icd_code }} 
+ {{catcode.icd_name}}
             </option>
                               </select>
                             </div>
@@ -302,11 +304,11 @@
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
                       <option
-                        v-for="slt in servicelist"
+                        v-for="slt in externallist"
                         v-bind:key="slt.id"
                         v-bind:value="slt.id"
                       >
-                        {{ slt.service_name }}
+                        {{ slt.section_value }}
                       </option>
                               </select>
                             </div>
@@ -411,11 +413,11 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
 import Physectristdetails from "../../../components/Patient/physectristdetails.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader, Physectristdetails },
+  components: { CommonSidebar, CommonHeader, Physectristdetails },
   name: "psychiatry-clerking-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -440,18 +442,20 @@ export default {
       comlexcitylist: [],
       codelist: [],
       icdcatcodelist: [],
+      diagonisislist: [],
+      locationlist: [],
       Id: 0,
       chief_complain: "",
       presenting_illness: "",
       background_history: "",
       general_examination: "",
       mental_state_examination: "",
-      diagnosis_id: "",
+      diagnosis_id: 0,
       management: "",
       discuss_psychiatrist_name: "",
       date: "",
       time: "",
-      location_services_id: "",
+      location_services_id: 0,
       type_diagnosis_id: 0,
       category_services: "",
       code_id: 0,
@@ -463,10 +467,13 @@ export default {
       services_id: 0,
       serviceid: 0,
       validate: true,
+      assistancelist: [],
+      externallist: [],
     };
   },
   methods: {
     async Onphychiatryclerkingnote() {
+      this.validate = true;
       console.log("services", this.category_services);
       this.errorList = [];
       try {
@@ -640,16 +647,51 @@ export default {
       } else {
         this.outcomelist = [];
       }
-      const response3 = await this.$axios.get(
-        "icd-setting/icdtype/getIcdTypeCodeList",
-        {
-          headers,
-        }
-      );
+      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+        headers,
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.codelist = response3.data.list;
       } else {
         this.codelist = [];
+      }
+      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        console.log("list", response4.data.list);
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "location-of-services",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.locationlist = response5.data.list;
+      } else {
+        this.locationlist = [];
+      }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
+      const respon = await this.$axios.get(
+        "general-setting/list?section=" + "external",
+        { headers }
+      );
+      if (respon.data.code == 200 || respon.data.code == "200") {
+        this.externallist = respon.data.list;
+      } else {
+        this.externallist = [];
       }
     },
     async onCategorycodebind(event) {
@@ -658,8 +700,10 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
+      console.log("my id", event);
       const response = await this.$axios.post(
-        "icd-setting/getIcdTypeWiseCategoryCodeList/" + event.target.value,
+        "diagnosis/getIcd9subcodeList",
+        { icd_category_code: event.target.value },
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {

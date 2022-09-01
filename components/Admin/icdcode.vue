@@ -10,12 +10,13 @@
             aria-label="Default select example"
             @change="onCategorycodebind($event)"
           >
+          <option value="0">Please Select</option>
             <option
               v-for="type in icdtypecodelist"
               v-bind:key="type.id"
               v-bind:value="type.id"
             >
-              {{ type.icd_type_name }}
+              {{ type.icd_type_code }}
             </option>
           </select>
         </div>
@@ -27,12 +28,13 @@
             class="form-select"
             aria-label="Default select example"
           >
+             <option value="0">Please Select</option>
             <option
               v-for="catcode in icdcatcodelist"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }}
+              {{ catcode.icd_category_code }} {{catcode.icd_category_name}} 
             </option>
           </select>
         </div>
@@ -104,7 +106,7 @@
     <div class="table-title">
       <h3>List of ICD Code</h3>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table2 font-13" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -158,10 +160,44 @@ export default {
       icdcodeId: 0,
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "icd-setting/getIcdcodeList",
+        { headers }
+      )
+      .then((resp) => {
+        this.codelist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table2").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GeticdcodeList();
-    this.Geticdcode();
   },
   methods: {
     async Geticdcode() {
@@ -205,6 +241,7 @@ export default {
         "icd-setting/getIcdTypeWiseCategoryCodeList/" + event.target.value,
         { headers }
       );
+      console.log('my catlist',response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.icdcatcodelist = response.data.list;
       } else {

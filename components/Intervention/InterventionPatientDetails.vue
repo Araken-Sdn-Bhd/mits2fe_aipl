@@ -28,7 +28,7 @@
 
                 <tr>
                   <td>Gender:</td>
-                  <td>{{ patientdetails.gender[0].section_value }}</td>
+                  <td>{{ patientdetails.gender }}</td>
                 </tr>
 
                 <tr>
@@ -38,12 +38,12 @@
 
                 <tr>
                   <td>Marital Status:</td>
-                  <td>{{ patientdetails.maritialstatus[0].section_value }}</td>
+                  <td>{{ patientdetails.maritialstatus }}</td>
                 </tr>
 
                 <tr>
                   <td>Nationality:</td>
-                  <td>{{ patientdetails.citizenships[0].citizenship_name }}</td>
+                  <td>{{ patientdetails.citizenships }}</td>
                 </tr>
 
                 <tr>
@@ -67,7 +67,7 @@
         <div class="card mb-4">
           <div class="card-header">
             <h4>Alert</h4>
-            <a href="#"><i class="fal fa-edit"></i></a>
+             <a><i class="fal fa-edit" style="cursor:pointer;" @click="AlertList"></i></a>
           </div>
           <div class="card-body">
             <form class="alert-box" method="post"  @submit.prevent="AddAlert">
@@ -80,7 +80,10 @@
                         </ul>
                        </p>
               <div class="d-flex mt-2">
-                <button type="submit" class="btn btn-success ml-auto">
+                <button type="submit" class="btn btn-success ml-auto" v-if="alert">
+                  Update ALERT
+                </button>
+                 <button type="submit" class="btn btn-success ml-auto" v-if="!alert">
                   <i class="far fa-plus"></i> Add ALERT
                 </button>
               </div>
@@ -102,6 +105,7 @@ export default {
       patientdetails: null,
       alert: "",
       loader: false,
+      alert_id:0,
     };
   },
   beforeMount() {
@@ -109,11 +113,20 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetPatientdetails();
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.alert_id = urlParams1.get("alert_id");
   },
   methods: {
     oneditPatient() {
       this.$router.push({
         path: "/Modules/Patient/patient-registration",
+        // path:"/Modules/Shharp/demographic",
+        query: { id: this.Id },
+      });
+    },
+     AlertList() {
+      this.$router.push({
+        path:"/Modules/Intervention/list-of-alert",
         query: { id: this.Id },
       });
     },
@@ -124,17 +137,28 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
+        "patient-registration/getPatientRegistrationByIdShortDetails",  //getPatientRegistrationById
         {
           id: this.Id,
         },
         { headers }
       );
+       console.log("my data intervention", response.data);
       if (response.data.code == 200) {
         this.patientdetails = response.data.list[0];
       } else {
         window.alert("Something went wrong");
       }
+      const response1 = await this.$axios.post(
+        "patient-alert/alertListbyPatientId",
+        {
+          alert_id: this.alert_id,
+        },
+        { headers }
+      );
+     
+      this.alert = response1.data[0].message;
+      console.log('my data66',this.alert);
     },
     async AddAlert() {
       this.errorList = [];
@@ -160,7 +184,6 @@ export default {
           console.log("esponse", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.alert = "";
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -174,6 +197,9 @@ export default {
       } catch (e) {
         this.loader = false;
       }
+    },
+    FocusAlert() {
+      document.getElementById("alert").focus();
     },
   },
 };

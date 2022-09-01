@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar/>
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4 height-100">
           <div
@@ -25,7 +25,7 @@
                 </p>
                 <div class="d-flex justify-content-center">
                   <a
-                    href="company-basic-information"
+                    href="/Modules/Intervention/company-basic-information"
                     class="btn btn-success next-btn"
                     >Next
                     <i class="fad fa-arrow-to-right"></i>
@@ -41,10 +41,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { InterventionHeader, InterventionSidebar },
+  components: { CommonSidebar, CommonHeader },
   name: "registration-info",
 
   data() {

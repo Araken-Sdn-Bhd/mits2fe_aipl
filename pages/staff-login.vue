@@ -14,10 +14,12 @@
             type="text"
           />
         </div>
-        <Error :message="emailerror" v-if="emailerror" />
+
         <div class="mb-3 password">
           <label for="inputPassword">Password</label>
-          <a class="small ml-auto forgot-password" href="#">Forgot Password?</a>
+          <a class="small ml-auto forgot-password" href="/forget-password"
+            >Forgot Password?</a
+          >
           <input
             class="form-control"
             id="inputPassword"
@@ -25,7 +27,7 @@
             type="password"
           />
         </div>
-        <Error :message="passerror" v-if="passerror" />
+        <Error :message="emailerror" v-if="emailerror" />
         <div class="form-check d-flex align-items-center">
           <div class="">
             <input
@@ -93,6 +95,7 @@ export default {
           const response = await this.$axios.post("auth/login", {
             email: this.email,
             password: this.password,
+            type:""
           });
           this.userdetail = response.data;
           if (this.userdetail.code == 200) {
@@ -101,20 +104,10 @@ export default {
               JSON.stringify(this.userdetail)
             );
             this.loader = false;
-            this.$router.push("/Modules/Admin/admin-dashboard");
-            // if (this.userdetail.user.role == "Admin") {
-            //   this.$router.push("/Modules/Admin/admin-dashboard");
-            // } else if (this.userdetail.user.role == "Intervention") {
-            //   this.$router.push("/Modules/Intervention/patient-list");
-            // } else if (this.userdetail.user.role == "Patient") {
-            //   this.$router.push("/Modules/Patient/patient-list");
-            // }else{
-            //   this.$router.push("/");
-            // }
+            this.$router.push(this.userdetail.route);
           } else {
             this.loader = false;
-            this.emailerror = this.userdetail.message.email[0];
-            this.passerror = this.userdetail.message.password[0];
+            this.emailerror = this.userdetail.message;
           }
         }
       } catch (e) {

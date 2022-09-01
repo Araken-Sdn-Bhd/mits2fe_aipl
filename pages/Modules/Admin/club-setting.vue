@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
-    <div id="layoutSidenav_content">
-      <AdminHeader />
+     <CommonSidebar />
+      <div id="layoutSidenav_content">
+        <CommonHeader/>
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -64,15 +64,15 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Clubdivition from '../../../components/Admin/clubdivition.vue';
 import Clubregistration from '../../../components/Admin/clubregistration.vue';
 
 export default {
   components: {
-    Adminsidebar,
-    AdminHeader,
+    CommonHeader,
+    CommonSidebar,
     Clubregistration,
     Clubdivition,
   },

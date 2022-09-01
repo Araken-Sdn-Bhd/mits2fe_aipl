@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+  <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -30,13 +30,19 @@
                       v-model="service"
                     >
                       <option value="">Select Service</option>
-                      <option
-                        v-for="slt in servicelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.service_name }}
+                      <option value="Consultation/Counselling">
+                        Consultation/Counselling
                       </option>
+                      <option value="Work-based Rehabilitation">
+                        Work-based Rehabilitation
+                      </option>
+                      <option value="Awareness or Psychoeducation">
+                        Awareness or Psychoeducation
+                      </option>
+                      <option value="Recreational Theraphy">
+                        Recreational Theraphy
+                      </option>
+                      <option value="Others">Others</option>
                     </select>
                   </div>
 
@@ -122,10 +128,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+   components: { VonFooter, CommonHeader, CommonSidebar },
   name: "von-list-of-appointment",
   data() {
     return {

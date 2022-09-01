@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
-    <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonSidebar />
+      <div id="layoutSidenav_content">
+        <CommonHeader/>
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -244,10 +244,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "new-staff",
   data() {
     return {
@@ -365,9 +365,12 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("designation/getDesignationList", {
-        headers,
-      });
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "designation",
+        {
+          headers,
+        }
+      );
       if (response.data.code == 200 || response.data.code == "200") {
         this.designationlist = response.data.list;
       } else {

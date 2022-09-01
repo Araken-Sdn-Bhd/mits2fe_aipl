@@ -29,7 +29,7 @@
                           type="radio"
                           v-bind:name="'bdi' + index"
                           value="0"
-                          @change="onchange(index, 0)"
+                          @change="onchange(bdi.id, 0)"
                         />
                         <label class="form-check-label" for="bdi1.0">
                           {{ bdi.Answer0 }}
@@ -41,7 +41,7 @@
                           type="radio"
                           v-bind:name="'bdi' + index"
                           value="1"
-                          @change="onchange(index, 1)"
+                          @change="onchange(bdi.id, 1)"
                         />
                         <label class="form-check-label" for="bdi1.1">
                           {{ bdi.Answer1 }}
@@ -53,7 +53,7 @@
                           type="radio"
                           v-bind:name="'bdi' + index"
                           value="2"
-                          @change="onchange(index, 2)"
+                          @change="onchange(bdi.id, 2)"
                         />
                         <label class="form-check-label" for="bdi1.2">
                           {{ bdi.Answer2 }}
@@ -65,7 +65,7 @@
                           type="radio"
                           v-bind:name="'bdi' + index"
                           value="3"
-                          @change="onchange(index, 3)"
+                          @change="onchange(bdi.id, 3)"
                         />
                         <label class="form-check-label" for="bdi1.3">
                           {{ bdi.Answer3 }}
@@ -94,7 +94,7 @@
             <div class="modal-content">
               <div id="results">
                 <div class="modal-header">
-                  <h5 class="modal-title">PHQ-9 Scores</h5>
+                  <h5 class="modal-title">BDI Scores</h5>
                   <p>
                     The system will sum up the score for every question in each
                     category. The scale are as follows:
@@ -126,7 +126,7 @@
                   <i class="fad fa-download"></i> Download Result
                 </button>
                 <a
-                  href="/Modules/Patient/request-appointment-form"
+                 @click="Gotorequestappointment"
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
@@ -184,15 +184,23 @@ export default {
         this.list = [];
       }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+   async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
     onchange(ind, val) {
-      this.checkedList[ind + 1] = val;
+      this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
       this.error = null;
@@ -243,6 +251,12 @@ export default {
         pdf.save("Result.pdf");
       });
     },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
+      });
+    }
   },
 };
 </script>

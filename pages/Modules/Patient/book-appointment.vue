@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
            <Loader v-if="loader" />
         <div class="container-fluid px-4">
@@ -58,7 +58,7 @@
                         class="form-select"
                         aria-label="Default select example" v-model="duration"
                       >
-                        <option selected>Select Duration</option>
+                        <option value="0">Select Duration</option>
                         <option value="15">15 Minutes</option>
                         <option value="30">30 Minutes</option>
                         <option value="60">60 Minutes</option>
@@ -78,6 +78,7 @@
                         class="form-select"
                         aria-label="Default select example"
                       >
+                        <option value="0">Please Select</option>
                         <option
                           v-for="serv in servicelist"
                           v-bind:key="serv.id"
@@ -97,6 +98,7 @@
                         class="form-select"
                         aria-label="Default select example"
                       >
+                      <option value="0">Please Select</option>
                         <option
                           v-for="vst in visitlist"
                           v-bind:key="vst.id"
@@ -119,6 +121,7 @@
                         class="form-select"
                         aria-label="Default select example"
                       >
+                      <option value="0">Please Select</option>
                         <option
                           v-for="cat in categorylist"
                           v-bind:key="cat.id"
@@ -138,6 +141,7 @@
                         class="form-select"
                         aria-label="Default select example"
                       >
+                      <option value="0">Please Select</option>
                         <option
                           v-for="team in teamlist"
                           v-bind:key="team.id"
@@ -178,10 +182,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "book-appointment",
   data() {
     return {
@@ -201,6 +205,7 @@ export default {
       loader: false,
       errorList: [],
       Id: 0,
+      PatientId:0,
     };
   },
   beforeMount() {
@@ -208,8 +213,13 @@ export default {
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.PatientId = urlParams1.get("pid");
     if (this.Id > 0) {
       this.GetAppointmentdetails();
+    }
+    if(this.PatientId > 0){
+this.GetPatientdetails();
     }
   },
   methods: {
@@ -379,6 +389,25 @@ export default {
         this.type_visit = response.data.list[0].type_visit;
         this.patient_category = response.data.list[0].patient_category;
         this.assign_team = response.data.list[0].assign_team;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+    async GetPatientdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.PatientId,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.nric_or_passportno = response.data.list[0].nric_no;
       } else {
         window.alert("Something went wrong");
       }

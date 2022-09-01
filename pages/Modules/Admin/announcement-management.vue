@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -28,7 +28,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Search"
+                        placeholder="Search" v-model="search" @keyup="OnSearch"
                       />
                     </div>
                   </div>
@@ -48,9 +48,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="ann in list" :key="ann.id">
-                    <td>{{ ann.id }}</td>
-                    <td>{{ ann.created_at }}</td>
+                  <tr v-for="(ann,index) in list" :key="index">
+                    <td>{{ index+1 }}</td>
+                    <td>{{ ann.created }}</td>
                     <td>{{ ann.title }}</td>
                     <td>{{ ann.start_date }}</td>
                     <td>{{ann.end_date }}</td>
@@ -84,22 +84,61 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 import moment from 'moment'
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "announcement-management",
   setup() {},
   data() {
     return {
       userdetails: null,
       list: [],
+      alllist:[],
+      search:""
     };
+  },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .post(
+        `${this.$axios.defaults.baseURL}` +
+          "announcement/list",
+        { headers }
+      )
+      .then((resp) => {
+        this.list = resp.data.list;
+        this.alllist=resp.data.list;
+        console.log('my aa',this.alllist);
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GetList();
   },
   
   methods: {
@@ -161,7 +200,28 @@ export default {
         return moment(String(value)).format("YYYYMMDD");
       }
     },
-    
+      OnSearch() {
+      if (this.search) {
+        this.list = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.created
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.title
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.start_date
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.end_date
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 
+          );
+        });
+      } else {
+        this.list = this.alllist;
+      }
+    },
   },
 };
 </script>

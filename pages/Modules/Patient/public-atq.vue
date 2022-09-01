@@ -38,7 +38,7 @@
                           type="radio"
                           v-bind:name="'atq' + index"
                           value="1"
-                          @change="onchange(index, 1)"
+                          @change="onchange(atq.id, 1)"
                         />
                         <label class="form-check-label" for="1">1</label>
                       </div>
@@ -48,7 +48,7 @@
                           type="radio"
                           v-bind:name="'atq' + index"
                           value="2"
-                          @change="onchange(index, 2)"
+                          @change="onchange(atq.id, 2)"
                         />
                         <label class="form-check-label" for="2">2</label>
                       </div>
@@ -58,7 +58,7 @@
                           type="radio"
                           v-bind:name="'atq' + index"
                           value="3"
-                          @change="onchange(index, 3)"
+                          @change="onchange(atq.id, 3)"
                         />
                         <label class="form-check-label" for="3">3</label>
                       </div>
@@ -68,7 +68,7 @@
                           type="radio"
                           v-bind:name="'atq' + index"
                           value="4"
-                          @change="onchange(index, 4)"
+                          @change="onchange(atq.id, 4)"
                         />
                         <label class="form-check-label" for="4">4</label>
                       </div>
@@ -78,7 +78,7 @@
                           type="radio"
                           v-bind:name="'atq' + index"
                           value="5"
-                          @change="onchange(index, 5)"
+                          @change="onchange(atq.id, 5)"
                         />
                         <label class="form-check-label" for="5">5</label>
                       </div>
@@ -104,13 +104,12 @@
             <div class="modal-content">
               <div id="results" style="background: #fff">
                 <div class="modal-header">
-                  <h5 class="modal-title">PHQ-9 Scores</h5>
+                  <h5 class="modal-title">ATQ Alert</h5>
                   <p>
-                    The system will sum up the score for every question in each
-                    category. The scale are as follows:
+                    Your Test is successfully Submitted!
                   </p>
                 </div>
-                <div class="modal-body">
+                <!-- <div class="modal-body">
                   <table class="modal-table">
                     <thead>
                       <tr>
@@ -125,9 +124,9 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div> -->
               </div>
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
                   type="button"
@@ -136,12 +135,12 @@
                   <i class="fad fa-download"></i> Download Result
                 </button>
                 <a
-                  href="/Modules/Patient/request-appointment-form"
+                   @click="Gotorequestappointment"
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -196,15 +195,23 @@ export default {
         this.list = [];
       }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+   async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
     onchange(ind, val) {
-      this.checkedList[ind + 1] = val;
+      this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
       this.error = null;
@@ -255,6 +262,12 @@ export default {
         pdf.save("Result.pdf");
       });
     },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
+      });
+    }
   },
 };
 </script>

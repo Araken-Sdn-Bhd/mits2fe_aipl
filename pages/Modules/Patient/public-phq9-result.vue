@@ -3,7 +3,7 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-            <publicnav></publicnav>
+          <publicnav></publicnav>
           <div class="offline-title">
             <h1>Patient Screening and Appointment</h1>
           </div>
@@ -18,7 +18,7 @@
                 <p>Thank you for reaching out to MENTARI Self Test</p>
               </div>
               <div class="row justify-content-center">
-                <div class="col-sm-8">
+                <div class="col-lg-8 col-sm-12">
                   <div class="result-box">
                     <div class="result-body">
                       <div class="d-flex">
@@ -29,7 +29,36 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3 class="bg-color4">{{ PHQ9 }}</h3>
+                          <h3
+                            class="bg-color1"
+                            v-if="PHQ9 == 'Minimal Depression'"
+                          >
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3
+                            class="bg-color2"
+                            v-if="PHQ9 == 'Mild Depression'"
+                          >
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3
+                            class="bg-color3"
+                            v-if="PHQ9 == 'Moderate Depression'"
+                          >
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3
+                            class="bg-color4"
+                            v-if="PHQ9 == 'Moderately severe depression'"
+                          >
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3
+                            class="bg-color5"
+                            v-if="PHQ9 == 'Severe Depression'"
+                          >
+                            {{ PHQ9 }}
+                          </h3>
 
                           <div
                             class="arrow"
@@ -127,7 +156,7 @@
               </div>
             </div>
             <div class="row justify-content-center">
-              <div class="col-sm-8">
+              <div class="col-lg-8 col-sm-12">
                 <div class="d-flex mt-3">
                   <button
                     type="button"
@@ -150,6 +179,48 @@
     </div>
   </div>
 </template>
+<style scoped>
+#layoutSidenav #layoutSidenav_content{
+  margin-left: 0px;
+}
+@media (max-width: 768px) {
+
+
+.result-body .d-flex {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.result-info {
+    margin-top: 20px;
+}
+.indicator {
+    flex-wrap: wrap;
+}
+.indicator .dot{
+  margin-bottom: 10px;
+}
+.result {
+    padding: 0;
+}
+.arrow {
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #cded4a;
+}
+}
+
+@media (max-width: 520px) {
+.d-flex.mt-3 {
+    flex-wrap: wrap;
+}
+.btn-text {
+    width: 100%;
+    margin-bottom: 10px;
+}
+}
+
+</style>
 <script>
 import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
 import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
@@ -195,7 +266,7 @@ export default {
     if (this.phq9result) {
       this.PHQ9Score = 10;
       this.PHQ9 = this.phq9result.PHQ9;
-      this.PHQ9Score=this.phq9result.PHQ9Score;
+      this.PHQ9Score = this.phq9result.PHQ9Score;
     }
   },
   beforeDestroy() {

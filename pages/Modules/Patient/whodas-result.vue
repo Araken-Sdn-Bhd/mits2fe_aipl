@@ -1,9 +1,9 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
 
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
 
       <main>
         <div class="container-fluid px-4">
@@ -48,7 +48,7 @@
                 <div class="col-sm-8">
                   <div class="whodas-result">
                     <p>Your general disability score</p>
-                    <h4>{{ UserTotal }} <span>/ 180</span></h4>
+                    <h4>{{ UserTotal }} <span>/ 190</span></h4>
                   </div>
 
                   <div class="row">
@@ -143,7 +143,7 @@
                     <i class="fad fa-download"></i> Download Result
                   </button>
                   <a
-                    href="/Modules/Patient/request-appointment-form"
+                   	 @click="Gotorequestappointment"
                     class="btn btn-success btn-text ml-auto"
                     ><i class="fad fa-calendar-day"></i> Request Appointment</a
                   >
@@ -157,10 +157,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "dass-result",
   head: {
     script: [
@@ -205,6 +205,7 @@ export default {
       SClevel: "",
       UClevel: "",
       UserTotal: 0,
+      Id:0
     };
   },
   beforeMount() {
@@ -228,6 +229,8 @@ export default {
       this.UClevel = this.whodasresult.UC.level;
       this.UserTotal = this.whodasresult.UserTotal;
     }
+     let urlParams = new URLSearchParams(window.location.search);
+       this.Id = urlParams.get("id");
   },
   beforeDestroy() {
     localStorage.removeItem("whodasresult");
@@ -239,6 +242,12 @@ export default {
         pdf.save("Result.pdf");
       });
     },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Patient/request-appointment-form",
+        query: { id: this.Id },
+      });
+    }
   },
 };
 </script>

@@ -73,7 +73,7 @@
     <div class="table-title">
       <h3>List of Team</h3>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table2 font-13" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -119,10 +119,44 @@ export default {
       errors: [],
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "hospital/branch-team-list",
+        { headers }
+      )
+      .then((resp) => {
+        this.taemlist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table2").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GethospitalList();
-    this.GetTeamList();
   },
   methods: {
     async GethospitalList() {

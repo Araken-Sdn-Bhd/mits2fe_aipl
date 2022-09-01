@@ -86,7 +86,7 @@
                       v-bind:key="ct.id"
                       v-bind:value="ct.id"
                     >
-                      {{ ct.citizenship_name }}
+                      {{ ct.section_value }}
                     </option>
                   </select>
                 </div>
@@ -135,7 +135,7 @@
                       v-bind:key="dsnt.id"
                       v-bind:value="dsnt.id"
                     >
-                      {{ dsnt.designation_name }}
+                      {{ dsnt.section_value }}
                     </option>
                   </select>
                 </div>
@@ -373,8 +373,11 @@
         </li>
       </ul>
         </p>
-         <button type="submit" class="btn btn-success bto-warning"
+         <button type="submit" class="btn btn-success bto-warning" v-if="!Id"
       ><i class="far fa-plus"></i> Add Parameter</button>
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+        <i class="far fa-save"></i> Save
+        </button>
       </form>
     </div>
     <!-- accordion -->
@@ -385,7 +388,7 @@
       <h3>List of Hospital</h3>
       <div class="input-group">
         <span class="input-group-text"><i class="far fa-search"></i></span>
-        <input type="text" class="form-control" placeholder="Search" />
+        <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch"/>
       </div>
     </div>
     <table class="table table-striped data-table font-13" style="width: 100%">
@@ -416,6 +419,9 @@
               class="action-icon icon-success"
               ><i class="far fa-eye"></i
             ></a>
+             <a  class="edit" @click="edithospital(hstl)"
+                            ><i class="far fa-edit"></i
+                          ></a>
           </td>
         </tr>
       </tbody>
@@ -425,7 +431,6 @@
 <script>
 export default {
   name: "hospital",
-  setup() {},
   data() {
     return {
       loader: false,
@@ -465,20 +470,48 @@ export default {
       loader: false,
       emailerror: null,
       hsptlemailerror: null,
+      search: "",
+      Id: 0,
     };
+  },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(`${this.$axios.defaults.baseURL}` + "hospital/list", { headers })
+      .then((resp) => {
+        this.hospitallist = resp.data.list;
+        this.alllist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GethospitalList();
-    this.GetsalutationList();
-    this.GetgenderList();
-    this.GetreligionList();
-    this.GetcitizenshipList();
-    this.GetdesignationList();
-    this.GetStateList();
+    this.GetList();
   },
   methods: {
-    async GetsalutationList() {
+    async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -493,80 +526,51 @@ export default {
       } else {
         this.salutationlist = [];
       }
-    },
-    async GetgenderList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
+      const response2 = await this.$axios.get(
         "general-setting/list?section=" + "gender",
         { headers }
       );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.genderlist = response.data.list;
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.genderlist = response2.data.list;
       } else {
         this.genderlist = [];
       }
-    },
-    async GetreligionList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
+      const response3 = await this.$axios.get(
         "general-setting/list?section=" + "religion",
         { headers }
       );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.religionlist = response.data.list;
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.religionlist = response3.data.list;
       } else {
         this.religionlist = [];
       }
-    },
-    async GetcitizenshipList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get("citizenship/getCitizenshipList", {
-        headers,
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.citizenshiplist = response.data.list;
+      const response4 = await this.$axios.get(
+        "general-setting/list?section=" + "citizenship",
+        {
+          headers,
+        }
+      );
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.citizenshiplist = response4.data.list;
       } else {
         this.citizenshiplist = [];
       }
-    },
-    async GetdesignationList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get("designation/getDesignationList", {
-        headers,
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.designationlist = response.data.list;
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "designation",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.designationlist = response5.data.list;
       } else {
         this.designationlist = [];
       }
-    },
-    async GetStateList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get("address/list", {
+      const response6 = await this.$axios.get("address/list", {
         headers,
       });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.statelist = response.data.list;
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.statelist = response6.data.list;
       } else {
         this.statelist = [];
       }
@@ -637,12 +641,12 @@ export default {
         if (!this.hospital_Adrress1) {
           this.errors.push("Hospital Adrress 1 is required.");
         }
-        if (!this.hospital_Adrress2) {
-          this.errors.push("Hospital Adrress 2 is required.");
-        }
-        if (!this.hospital_Adrress3) {
-          this.errors.push("Hospital Adrress 3 is required.");
-        }
+        // if (!this.hospital_Adrress2) {
+        //   this.errors.push("Hospital Adrress 2 is required.");
+        // }
+        // if (!this.hospital_Adrress3) {
+        //   this.errors.push("Hospital Adrress 3 is required.");
+        // }
         if (this.hospital_state <= 0 || !this.hospital_state) {
           this.errors.push("Hospital State is required.");
         }
@@ -674,8 +678,8 @@ export default {
           this.hospital_Prefix &&
           this.hospital_Name &&
           this.hospital_Adrress1 &&
-          this.hospital_Adrress2 &&
-          this.hospital_Adrress3 &&
+          // this.hospital_Adrress2 &&
+          // this.hospital_Adrress3 &&
           this.hospital_state &&
           this.hospital_postcode &&
           this.hospital_city &&
@@ -688,48 +692,95 @@ export default {
             Accept: "application/json",
             "Content-Type": "application/json",
           };
-          const response = await this.$axios.post(
-            "hospital/add",
-            {
-              added_by: this.userdetails.user.id,
-              salutation: this.salutation,
-              name: this.name,
-              gender: this.gender,
-              citizenship: this.citizenship,
-              passport_nric_no: this.passport,
-              religion: this.religion,
-              designation: this.designation,
-              email: this.email,
-              contact_mobile: this.mobile,
-              contact_office: this.Contact,
-              hospital_code: this.hospital_Code,
-              hospital_prefix: this.hospital_Prefix,
-              hospital_name: this.hospital_Name,
-              hospital_adrress_1: this.hospital_Adrress1,
-              hospital_adrress_2: this.hospital_Adrress1,
-              hospital_adrress_3: this.hospital_Adrress1,
-              hospital_state: this.hospital_state,
-              hospital_city: this.hospital_city,
-              hospital_postcode: this.hospital_postcode,
-              hospital_contact_number: this.hospital_Contact,
-              hospital_email: this.hospital_Email,
-              hospital_fax_no: this.fax_No,
-            },
-            { headers }
-          );
-          console.log("my resp", response.data);
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-            this.loader = false;
-            this.resetmodel();
-            this.GethospitalList();
+          if (this.Id) {
+            const response = await this.$axios.post(
+              "hospital/updatehospital",
+              {
+                id: this.Id,
+                added_by: this.userdetails.user.id,
+                salutation: this.salutation,
+                name: this.name,
+                gender: this.gender,
+                citizenship: this.citizenship,
+                passport_nric_no: this.passport,
+                religion: this.religion,
+                designation: this.designation,
+                email: this.email,
+                contact_mobile: this.mobile,
+                contact_office: this.Contact,
+                hospital_code: this.hospital_Code,
+                hospital_prefix: this.hospital_Prefix,
+                hospital_name: this.hospital_Name,
+                hospital_adrress_1: this.hospital_Adrress1,
+                hospital_adrress_2: this.hospital_Adrress2,
+                hospital_adrress_3: this.hospital_Adrress3,
+                hospital_state: this.hospital_state,
+                hospital_city: this.hospital_city,
+                hospital_postcode: this.hospital_postcode,
+                hospital_contact_number: this.hospital_Contact,
+                hospital_email: this.hospital_Email,
+                hospital_fax_no: this.fax_No,
+              },
+              { headers }
+            );
+            console.log("my resp", response.data);
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$nextTick(() => {
+                $("#updatepopup").modal("show");
+              });
+              this.loader = false;
+              this.resetmodel();
+              this.GethospitalList();
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
           } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            const response = await this.$axios.post(
+              "hospital/add",
+              {
+                added_by: this.userdetails.user.id,
+                salutation: this.salutation,
+                name: this.name,
+                gender: this.gender,
+                citizenship: this.citizenship,
+                passport_nric_no: this.passport,
+                religion: this.religion,
+                designation: this.designation,
+                email: this.email,
+                contact_mobile: this.mobile,
+                contact_office: this.Contact,
+                hospital_code: this.hospital_Code,
+                hospital_prefix: this.hospital_Prefix,
+                hospital_name: this.hospital_Name,
+                hospital_adrress_1: this.hospital_Adrress1,
+                hospital_adrress_2: this.hospital_Adrress2,
+                hospital_adrress_3: this.hospital_Adrress3,
+                hospital_state: this.hospital_state,
+                hospital_city: this.hospital_city,
+                hospital_postcode: this.hospital_postcode,
+                hospital_contact_number: this.hospital_Contact,
+                hospital_email: this.hospital_Email,
+                hospital_fax_no: this.fax_No,
+              },
+              { headers }
+            );
+            console.log("my resp", response.data);
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$nextTick(() => {
+                $("#insertpopup").modal("show");
+              });
+              this.loader = false;
+              this.resetmodel();
+              this.GethospitalList();
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
           }
         }
       } catch (e) {
@@ -738,6 +789,7 @@ export default {
       }
     },
     async resetmodel() {
+      this.Id = 0;
       this.salutation = "";
       this.name = "";
       this.gender = 0;
@@ -802,6 +854,85 @@ export default {
       } else {
         this.hsptlemailerror = "Please Enter Valid Email";
         this.hospital_Email = "";
+      }
+    },
+    OnSearch() {
+      if (this.search) {
+        this.hospitallist = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.hospital_prefix
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hospital_name
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hod_psychiatrist_name
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hospital_contact_number
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hospital_fax_no
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.hospital_code?.toString()
+              .toLowerCase()
+              .indexOf(this.search.toString().toLowerCase()) > -1
+          );
+        });
+        console.log('my list',this.alllist);
+      } else {
+        this.hospitallist = this.alllist;
+      }
+    },
+    async edithospital(data) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("/hospital/list/" + data.id, {
+        headers,
+      });
+      console.log("data", response.data);
+      if (response.data.code == 200) {
+        this.Id = data.id;
+        this.salutation = response.data.list.psychiatrist.salutation_id;
+        this.name = response.data.list.psychiatrist.name;
+        this.gender = response.data.list.psychiatrist.gender_id;
+        this.citizenship = response.data.list.psychiatrist.citizenship;
+        this.passport = response.data.list.psychiatrist.nric;
+        this.religion = response.data.list.psychiatrist.religion_id;
+        this.designation = response.data.list.psychiatrist.designation;
+        this.email = response.data.list.psychiatrist.email;
+        this.mobile = response.data.list.psychiatrist.contact_mobile;
+        this.Contact = response.data.list.psychiatrist.contact_office;
+
+        this.hospital_Code = response.data.list.hospital.code;
+        this.hospital_Prefix = response.data.list.hospital.prefix;
+        this.hospital_Name = response.data.list.hospital.name;
+        this.hospital_Adrress1 = response.data.list.hospital.address1;
+        this.hospital_Adrress2 = response.data.list.hospital.address2;
+        this.hospital_Adrress3 = response.data.list.hospital.address3;
+        this.hospital_state = response.data.list.hospital.state_id;
+        this.hospital_postcode = response.data.list.hospital.postcode_id;
+        this.hospital_city = response.data.list.hospital.city_id;
+        this.hospital_Contact = response.data.list.hospital.contact;
+        this.hospital_Email = response.data.list.hospital.email;
+        this.fax_No = response.data.list.hospital.fax;
+        const response1 = await this.$axios.post(
+          "address/" + this.hospital_state + "/stateWisePostcodeList",
+          { headers }
+        );
+        if (response1.data.code == 200 || response1.data.code == "200") {
+          this.citylist = response1.data.list;
+          this.postcodelist = response1.data.list;
+        } else {
+          this.citylist = [];
+          this.postcodelist = [];
+        }
+      } else {
+        window.alert("Something went wrong");
       }
     },
   },

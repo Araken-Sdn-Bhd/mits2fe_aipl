@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <Loader v-if="loader" />
@@ -209,7 +209,7 @@
                                 type="radio"
                                 v-bind:name="'pb' + index"
                                 value="1"
-                                @change="ontabchange(index, 1)"
+                                @change="ontabchange(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -221,7 +221,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb' + index"
-                                @change="ontabchange(index, 2)"
+                                @change="ontabchange(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -233,7 +233,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb' + index"
-                                @change="ontabchange(index, 3)"
+                                @change="ontabchange(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -245,7 +245,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb' + index"
-                                @change="ontabchange(index, 4)"
+                                @change="ontabchange(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -257,7 +257,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb' + index"
-                                @change="ontabchange(index, 5)"
+                                @change="ontabchange(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -355,7 +355,7 @@
                                 type="radio"
                                 v-bind:name="'pb1' + index"
                                 value="1"
-                                @change="ontabchange1(index, 1)"
+                                @change="ontabchange1(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -367,7 +367,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb1' + index"
-                                @change="ontabchange1(index, 2)"
+                                @change="ontabchange1(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -379,7 +379,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb1' + index"
-                                @change="ontabchange1(index, 3)"
+                                @change="ontabchange1(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -391,7 +391,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb1' + index"
-                                @change="ontabchange1(index, 4)"
+                                @change="ontabchange1(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -403,7 +403,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb1' + index"
-                                @change="ontabchange1(index, 5)"
+                                @change="ontabchange1(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -505,7 +505,7 @@
                                 type="radio"
                                 v-bind:name="'pb2' + index"
                                 value="1"
-                                @change="ontabchange2(index, 1)"
+                                @change="ontabchange2(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -517,7 +517,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb2' + index"
-                                @change="ontabchange2(index, 2)"
+                                @change="ontabchange2(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -529,7 +529,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb2' + index"
-                                @change="ontabchange2(index, 3)"
+                                @change="ontabchange2(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -541,7 +541,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb2' + index"
-                                @change="ontabchange2(index, 4)"
+                                @change="ontabchange2(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -553,7 +553,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb2' + index"
-                                @change="ontabchange2(index, 5)"
+                                @change="ontabchange2(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -655,7 +655,7 @@
                                 type="radio"
                                 v-bind:name="'pb3' + index"
                                 value="1"
-                                @change="ontabchange3(index, 1)"
+                                @change="ontabchange3(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -667,7 +667,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb3' + index"
-                                @change="ontabchange3(index, 2)"
+                                @change="ontabchange3(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -679,7 +679,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb3' + index"
-                                @change="ontabchange3(index, 3)"
+                                @change="ontabchange3(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -691,7 +691,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb3' + index"
-                                @change="ontabchange3(index, 4)"
+                                @change="ontabchange3(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -703,7 +703,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb3' + index"
-                                @change="ontabchange3(index, 5)"
+                                @change="ontabchange3(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -805,7 +805,7 @@
                                 type="radio"
                                 v-bind:name="'pb4' + index"
                                 value="1"
-                                @change="ontabchange4(index, 1)"
+                                @change="ontabchange4(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -817,7 +817,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb4' + index"
-                                @change="ontabchange4(index, 2)"
+                                @change="ontabchange4(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -829,7 +829,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb4' + index"
-                                @change="ontabchange4(index, 3)"
+                                @change="ontabchange4(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -841,7 +841,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb4' + index"
-                                @change="ontabchange4(index, 4)"
+                                @change="ontabchange4(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -853,7 +853,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb4' + index"
-                                @change="ontabchange4(index, 5)"
+                                @change="ontabchange4(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -960,7 +960,7 @@
                                 type="radio"
                                 v-bind:name="'pb5' + index"
                                 value="1"
-                                @change="ontabchange5(index, 1)"
+                                @change="ontabchange5(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -972,7 +972,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb5' + index"
-                                @change="ontabchange5(index, 2)"
+                                @change="ontabchange5(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -984,7 +984,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb5' + index"
-                                @change="ontabchange5(index, 3)"
+                                @change="ontabchange5(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -996,7 +996,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb5' + index"
-                                @change="ontabchange5(index, 4)"
+                                @change="ontabchange5(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -1008,7 +1008,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb5' + index"
-                                @change="ontabchange5(index, 5)"
+                                @change="ontabchange5(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -1107,7 +1107,7 @@
                                 type="radio"
                                 v-bind:name="'pb6' + index"
                                 value="1"
-                                @change="ontabchange6(index, 1)"
+                                @change="ontabchange6(pb.id, 1)"
                               />
                               <label class="form-check-label" for="1">{{
                                 pb.Answer1
@@ -1119,7 +1119,7 @@
                                 type="radio"
                                 value="2"
                                 v-bind:name="'pb6' + index"
-                                @change="ontabchange6(index, 2)"
+                                @change="ontabchange6(pb.id, 2)"
                               />
                               <label class="form-check-label" for="2">{{
                                 pb.Answer2
@@ -1131,7 +1131,7 @@
                                 type="radio"
                                 value="3"
                                 v-bind:name="'pb6' + index"
-                                @change="ontabchange6(index, 3)"
+                                @change="ontabchange6(pb.id, 3)"
                               />
                               <label class="form-check-label" for="3">{{
                                 pb.Answer3
@@ -1143,7 +1143,7 @@
                                 type="radio"
                                 value="4"
                                 v-bind:name="'pb6' + index"
-                                @change="ontabchange6(index, 4)"
+                                @change="ontabchange6(pb.id, 4)"
                               />
                               <label class="form-check-label" for="4">{{
                                 pb.Answer4
@@ -1155,7 +1155,7 @@
                                 type="radio"
                                 value="5"
                                 v-bind:name="'pb6' + index"
-                                @change="ontabchange6(index, 5)"
+                                @change="ontabchange6(pb.id, 5)"
                               />
                               <label class="form-check-label" for="5">{{
                                 pb.Answer5
@@ -1194,10 +1194,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "cbi",
   head: {
     script: [
@@ -1325,8 +1325,10 @@ export default {
         { Type: "LA-S/W" },
         { headers }
       );
+      
       if (response5.data.code == 200 || response5.data.code == "200") {
-        this.list5 = response.data.list;
+        this.list5 = response5.data.list;
+        console.log('6 list',this.list5);
       } else {
         this.list5 = [];
       }
@@ -1342,25 +1344,25 @@ export default {
       }
     },
     ontabchange(ind, val) {
-      this.checkedList[ind + 1] = val;
+      this.checkedList[ind] = val;
     },
     ontabchange1(ind, val) {
-      this.checkedList1[ind + 1] = val;
+      this.checkedList1[ind] = val;
     },
     ontabchange2(ind, val) {
-      this.checkedList2[ind + 1] = val;
+      this.checkedList2[ind] = val;
     },
     ontabchange3(ind, val) {
-      this.checkedList3[ind + 1] = val;
+      this.checkedList3[ind] = val;
     },
     ontabchange4(ind, val) {
-      this.checkedList4[ind + 1] = val;
+      this.checkedList4[ind] = val;
     },
     ontabchange5(ind, val) {
-      this.checkedList5[ind + 1] = val;
+      this.checkedList5[ind] = val;
     },
     ontabchange6(ind, val) {
-      this.checkedList6[ind + 1] = val;
+      this.checkedList6[ind] = val;
     },
     gototab2() {
       if (this.list.length == Object.values(this.checkedList).length) {
@@ -1572,7 +1574,11 @@ export default {
               "whodasresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/Modules/Patient/whodas-result");
+
+            this.$router.push({
+              path: "/Modules/Patient/whodas-result",
+              query: { id: this.Id },
+            });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -1589,12 +1595,20 @@ export default {
         window.alert("Please check All Module and attempt all question");
       }
     },
-    GetUserIpAddress() {
-      fetch("https://api.ipify.org?format=json")
-        .then((x) => x.json())
-        .then(({ ip }) => {
-          this.Ipaddress = ip;
-        });
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.Ipaddress = ip;
     },
   },
 };

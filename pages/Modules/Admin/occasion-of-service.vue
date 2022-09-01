@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -20,7 +20,7 @@
                       aria-label="Default select example"
                       @change="onbranchchange($event)"
                     >
-                     <option value="0">Select Branch</option>
+                      <option value="0">Select Branch</option>
                       <option
                         v-for="brnch in branchlist"
                         v-bind:key="brnch.id"
@@ -58,8 +58,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="staff in list" :key="staff.id">
-                    <td>{{ staff.id }}</td>
+                  <tr v-for="(staff,index) in list" :key="index">
+                    <td>{{ index+1 }}</td>
                     <td>{{ staff.name }}</td>
                     <td>{{ staff.designation_name }}</td>
                     <td>{{ staff.hospital_branch_name }}</td>
@@ -79,10 +79,10 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "occasion-of-service",
   setup() {},
   data() {
@@ -94,10 +94,45 @@ export default {
       branchlist: [],
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .post(
+        `${this.$axios.defaults.baseURL}` +
+          "staff-management/getStaffManagementListOrById",
+        { branch_id: this.Id, name: this.name },
+        { headers }
+      )
+      .then((resp) => {
+        this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
-    this.GetList();
   },
   methods: {
     async GetList() {
@@ -124,7 +159,7 @@ export default {
     async view(data) {
       this.$router.push({
         path: "/Modules/Admin/occasion-of-service-staff-info",
-        query: { id: data.id },
+        query: { id: data.users_id }, //id
       });
     },
     async onbranchchange(event) {

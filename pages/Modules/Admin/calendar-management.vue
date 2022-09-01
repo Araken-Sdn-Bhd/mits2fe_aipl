@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <Adminsidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <AdminHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -20,9 +20,9 @@
                 <div class="table-title d-flex align-items-center">
                   <h3>List of Event</h3>
                   <div class="btn-box ml-auto">
-                    <button type="submit" class="btn btn-primary mt-0">
+                    <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0">
                       <i class="far fa-download"></i> Excel Template
-                    </button>
+                    </a>
                     <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary mt-0">
                       <i class="far fa-file-excel"></i> Upload Excel
                     </button>
@@ -48,13 +48,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="cla in list" :key="cla.id">
-                      <td>{{ cla.id }}</td>
+                    <tr v-for="(cla, index) in list" :key="index" >
+                      <td>{{ index+1 }}</td>
                       <td>{{ cla.name }}</td>
                       <td>{{ cla.start_date }}</td>
                       <td>{{ cla.end_date }}</td>
                       <td>
-                        <a href="#" class="action-icon icon-success"
+                        <a @click="OnEditexception(cla)" class="action-icon icon-success"
                           ><i class="far fa-edit"></i
                         ></a>
                         <a style="cursor:pointer;" @click="Onremoveexception(cla)" class="action-icon icon-danger"
@@ -108,11 +108,11 @@
   </div>
 </template>
 <script>
-import Adminsidebar from "../../../components/Admin/Adminsidebar.vue";
-import AdminHeader from "../../../components/Admin/Admin_ToHeader.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 import "@/assets/css/fullcalendar.css";
 export default {
-  components: { Adminsidebar, AdminHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "calendar-management",
   head: {
     script: [
@@ -142,11 +142,27 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"calendar-management/getAnnouncementList",
+        `${this.$axios.defaults.baseURL}` +
+          "calendar-management/getAnnouncementList",
         { headers }
       )
       .then((resp) => {
         this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
         this.Calender();
       })
       .catch((err) => {
@@ -158,7 +174,7 @@ export default {
   },
   methods: {
     async Calender() {
-      this.eventslist=[];
+      this.eventslist = [];
       this.list.forEach((value, index) => {
         var obj = {};
         obj.start = value.start_date;
@@ -205,8 +221,8 @@ export default {
             "Content-Type": "application/json",
           };
           let body = new FormData();
-          body.append("login-user-ID", this.userdetails.user.id);
-          body.append("file", this.file);
+          body.append("added_by", this.userdetails.user.id);
+          body.append("exceptions", this.file);
           const response = await this.$axios.post(
             "calendar-management/upload-exception",
             body,
@@ -216,6 +232,20 @@ export default {
           );
           console.log("result", response);
           if (response.data.code == 200 || response.data.code == "200") {
+            const axios = require("axios").default;
+            axios
+              .get(
+                `${this.$axios.defaults.baseURL}` +
+                  "calendar-management/getAnnouncementList",
+                { headers }
+              )
+              .then((resp) => {
+                this.list = resp.data.list;
+                this.Calender();
+              })
+              .catch((err) => {
+                console.error(err);
+              });
             this.$nextTick(() => {
               $("#attachpopup").modal("hide");
               $("#insertpopup").modal("show");
@@ -253,7 +283,8 @@ export default {
         const axios = require("axios").default;
         axios
           .get(
-           `${this.$axios.defaults.baseURL}`+"calendar-management/getAnnouncementList",
+            `${this.$axios.defaults.baseURL}` +
+              "calendar-management/getAnnouncementList",
             { headers }
           )
           .then((resp) => {
@@ -268,6 +299,12 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    },
+    OnEditexception(data) {
+      this.$router.push({
+        path: "/Modules/Admin/exception",
+        query: { id: data.id },
+      });
     },
   },
 };

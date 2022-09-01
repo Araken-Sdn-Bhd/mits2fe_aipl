@@ -21,7 +21,7 @@
           </select>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" v-show="IsSubmodule">
           <label for="" class="form-label">Sub Module</label>
           <select
             v-model="SubmoduleId"
@@ -71,7 +71,35 @@
             v-model="description"
           />
         </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Icon</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Icon"
+            v-model="icon"
+          />
+        </div>
       </div>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="" class="form-label">Index</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Index"
+            v-model="index"
+          />
+        </div>
+      </div>
+        <p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p> 
       <div class="d-flex justify-content-center">
         <button
           type="submit"
@@ -88,7 +116,7 @@
     <div class="table-title">
       <h3>List of Modules</h3>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table6 font-13" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -101,8 +129,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="scn in list" :key="scn.id">
-          <td>{{ scn.screen_id }}</td>
+        <tr v-for="(scn,index) in list" :key="index">
+          <td>{{ index+1 }}</td>
           <td>{{ scn.module_name }}</td>
           <td>{{ scn.sub_module_name }}</td>
           <td>{{ scn.screen_name }}</td>
@@ -132,20 +160,57 @@ export default {
       screenname: "",
       pageroute: "",
       description: "",
+      icon: "",
+      index: 0,
       errors: [],
       userdetails: null,
       modulelist: [],
       submodulelist: [],
       list: [],
+      IsSubmodule: true,
     };
+  },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` + "screen-module/getScreenPageList",
+        { headers }
+      )
+      .then((resp) => {
+        this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table6").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetModuleList();
-    this.GetList();
   },
   methods: {
     async onsubmodelbind(event) {
+      this.IsSubmodule = true;
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -156,9 +221,11 @@ export default {
         { module_id: event.target.value },
         { headers }
       );
+     
       if (response.data.code == 200 || response.data.code == "200") {
         this.submodulelist = response.data.list;
       } else {
+        this.IsSubmodule = false;
         this.submodulelist = [];
       }
     },
@@ -168,9 +235,9 @@ export default {
         if (this.ModuleId <= 0) {
           this.errors.push("Module is required.");
         }
-        if (this.SubmoduleId <= 0) {
-          this.errors.push("Sub Module is required.");
-        }
+        // if (this.SubmoduleId <= 0) {
+        //   this.errors.push("Sub Module is required.");
+        // }
         if (!this.screenname) {
           this.errors.push("Screen Name is required.");
         }
@@ -179,7 +246,22 @@ export default {
         }
         if (!this.description) {
           this.errors.push("Description is required.");
-        } else {
+        }
+        if (!this.icon) {
+          this.errors.push("Icon is required.");
+        }
+        if (!this.index) {
+          this.errors.push("Index is required.");
+        }
+        if (
+          this.ModuleId &&
+        //  this.SubmoduleId &&
+          this.screenname &&
+          this.pageroute &&
+          this.description &&
+          this.icon &&
+          this.index
+        ) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -195,6 +277,8 @@ export default {
                 screen_name: this.screenname,
                 screen_route: this.pageroute,
                 screen_description: this.description,
+                icon: this.icon,
+                index: this.index,
               },
               { headers }
             );
@@ -245,6 +329,8 @@ export default {
       this.pageroute = "";
       this.description = "";
       this.Id = 0;
+      this.index=0;
+      this.icon="";
       this.errors = [];
       this.GetList();
     },

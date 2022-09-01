@@ -2,7 +2,7 @@
   <div class="card mb-4">
     <div class="card-header bg-transparent">
       <h4>Screen Access</h4>
-      <a href="#"><i class="far fa-edit"></i></a>
+      <!-- <a href="#"><i class="far fa-edit"></i></a> -->
     </div>
     <div class="card-body">
       <ul class="sub-tab">
@@ -33,7 +33,7 @@
                 </select>
               </div>
 
-              <div class="col-sm-6 mb-3">
+              <div class="col-sm-6 mb-3" v-show="IsSubmodule">
                 <label class="form-label">Sub Module Name</label>
                 <select
                   v-model="SubmoduleId"
@@ -70,8 +70,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="scrn in screenlist" :key="scrn.screen_id">
-                <td>{{ scrn.screen_id }}</td>
+              <tr v-for="(scrn,index) in screenlist" :key="index">
+                <td>{{ index+1 }}</td>
                 <td>{{ scrn.module_name }}</td>
                 <td>{{ scrn.sub_module_name }}</td>
                 <td>{{ scrn.screen_name }}</td>
@@ -158,8 +158,8 @@
                   <option value="0">Please Select</option>
                   <option
                     v-for="stf in stafflist"
-                    v-bind:key="stf.id"
-                    v-bind:value="stf.id"
+                    v-bind:key="stf.users_id"
+                    v-bind:value="stf.users_id"
                   >
                     {{ stf.name }}
                   </option>
@@ -167,7 +167,14 @@
               </div>
             </div>
             <!-- close-row -->
-
+<p v-if="errors.length">
+<ul>
+        <li style="color:red"  v-for='err in errors'
+    :key='err' >
+          {{ err }}
+        </li>
+      </ul>
+        </p>
             <button class="btn btn-success">
               Submit <i class="fal fa-arrow-from-left"></i>
             </button>
@@ -182,6 +189,7 @@ export default {
   setup() {},
   data() {
     return {
+      errors: [],
       ModuleId: 0,
       SubmoduleId: 0,
       HospitalId: 0,
@@ -198,13 +206,13 @@ export default {
       stafflist: [],
       teamlist: [],
       selected: [],
+      IsSubmodule: true,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetModuleList();
     this.GethospitalList();
-    this.GetstaffList();
   },
   methods: {
     async checkscreen(value, event) {
@@ -229,6 +237,7 @@ export default {
       }
     },
     async onsubmodelbind(event) {
+      this.IsSubmodule = true;
       this.selected = [];
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -240,9 +249,11 @@ export default {
         { module_id: event.target.value },
         { headers }
       );
+      console.log("my submod list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.submodulelist = response.data.list;
       } else {
+        this.IsSubmodule = false;
         this.submodulelist = [];
       }
     },
@@ -260,6 +271,7 @@ export default {
         },
         { headers }
       );
+      console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.screenlist = response.data.list;
       } else {
@@ -304,6 +316,18 @@ export default {
       } else {
         this.teamlist = [];
       }
+       const response1 = await this.$axios.post(
+        "staff-management/getUserlist", //getStaffManagementListOrById
+        { branch_id: event.target.value, name: "" },
+        {
+          headers,
+        }
+      );
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.stafflist = response1.data.list;
+      } else {
+        this.stafflist = [];
+      }
     },
     async GethospitalList() {
       const headers = {
@@ -320,61 +344,52 @@ export default {
         this.hospitallist = [];
       }
     },
-    async GetstaffList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "staff-management/getStaffManagementListOrById",
-        { branch_id: 0, name: "" },
-        {
-          headers,
-        }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.stafflist = response.data.list;
-      } else {
-        this.stafflist = [];
-      }
-    },
+    
     async onAddroles() {
       this.errors = [];
       try {
         if (this.ModuleId <= 0) {
           this.errors.push("Module Name  is required.");
         }
-        if (this.SubmoduleId <= 0) {
-          this.errors.push("Sub Module Name  is required.");
-        }
+        // if (this.SubmoduleId <= 0) {
+        //   this.errors.push("Sub Module Name  is required.");
+        // }
         if (this.HospitalId <= 0) {
           this.errors.push("Hospital Name  is required.");
         }
-        if (this.BranchId <= 0) {
-          this.errors.push("Branch Name  is required.");
-        }
-        if (this.teamId <= 0) {
-          this.errors.push("Team  is required.");
-        }
+        // if (this.BranchId <= 0) {
+        //   this.errors.push("Branch Name  is required.");
+        // }
+        // if (this.teamId <= 0) {
+        //   this.errors.push("Team  is required.");
+        // }
         if (this.staffId <= 0) {
           this.errors.push("Staff Name  is required.");
         }
-        if (this.selected.length <= 0) {
-          this.errors.push("Select atleast one screen.");
-        } else {
+        // if (this.selected.length <= 0) {
+        //   this.errors.push("Select atleast one screen.");
+        // }
+        if (
+          this.ModuleId &&
+          this.HospitalId &&
+          // this.BranchId &&
+          // this.teamId &&
+          this.staffId
+        ) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
-          this.selected.forEach((value, index) => {
-            if (!this.screenIds) {
-              this.screenIds = value;
-            } else {
-              this.screenIds = this.screenIds + "," + value;
-            }
-          });
+          if (this.selected.length > 0) {
+            this.selected.forEach((value, index) => {
+              if (!this.screenIds) {
+                this.screenIds = value;
+              } else {
+                this.screenIds = this.screenIds + "," + value;
+              }
+            });
+          }
           const response = await this.$axios.post(
             "screen-module/assign-screen",
             {
@@ -416,7 +431,7 @@ export default {
       this.staffId = 0;
       this.selected = [];
       this.screenIds = "";
-      this.screenlist=[];
+      this.screenlist = [];
     },
   },
 };

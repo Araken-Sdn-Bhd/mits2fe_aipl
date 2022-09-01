@@ -12,6 +12,7 @@
             class="form-select"
             aria-label="Default select example"
           >
+          <option value="0">Please Select</option>
             <option
               v-for="et in etplist"
               v-bind:key="et.id"
@@ -30,6 +31,7 @@
             aria-label="Default select example"
             @change="onHospitalCodechange($event)"
           >
+              <option value="0">Please Select</option>
             <option
               v-for="hst in hospitallist"
               v-bind:key="hst.id"
@@ -47,6 +49,7 @@
             class="form-select"
             aria-label="Default select example"
           >
+              <option value="0">Please Select</option>
             <option
               v-for="bnch in branchlist"
               v-bind:key="bnch.id"
@@ -86,7 +89,7 @@
           <div class="table-title">
             <h3>List of ETP</h3>
           </div>
-          <table class="table table-striped data-table" style="width: 100%">
+          <table class="table table-striped data-table1" style="width: 100%">
             <thead>
               <tr>
                 <th>No</th>
@@ -138,10 +141,40 @@ export default {
       userdetails: null,
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(`${this.$axios.defaults.baseURL}` + "etp/division-list", { headers })
+      .then((resp) => {
+        this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table1").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetETPList();
-    this.GetList();
     this.GethospitalList();
   },
   methods: {
@@ -169,7 +202,7 @@ export default {
       const response = await this.$axios.get("etp/division-list", {
         headers,
       });
-      console.log('myd',response.data);
+      console.log("myd", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.list = response.data.list;
       } else {
@@ -221,14 +254,14 @@ export default {
         { division_id: data.id },
         { headers }
       );
-      
+
       if (response.data.code == 200) {
         this.etp_id = response.data.list[0].etp_id;
         this.hospital_id = response.data.list[0].hospital_id;
         this.branch_id = response.data.list[0].branch_id;
         this.division_order = response.data.list[0].division_order;
         this.Id = data.id;
-         const response1 = await this.$axios.post(
+        const response1 = await this.$axios.post(
           "hospital/get-branch-by-hospital-code",
           {
             hospital_code: response.data.list[0].hospital_id.toString(),

@@ -1,8 +1,8 @@
 <template>
   <div class="card mb-4">
     <div class="card-header bg-transparent">
-      <h4>Hospital, Branch & Team</h4>
-      <a href="#"><i class="far fa-edit"></i></a>
+      <h4>Screen and Module Management</h4>
+      <!-- <a href="#"><i class="far fa-edit"></i></a> -->
     </div>
     <div class="card-body">
       <nav>

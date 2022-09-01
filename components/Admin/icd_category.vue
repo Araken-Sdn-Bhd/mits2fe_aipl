@@ -9,8 +9,9 @@
             class="form-select"
             aria-label="Default select example"
           >
+          <option value="0">Please Select</option>
             <option v-for="type in icdtypelist" v-bind:key="type.id" v-bind:value="type.id">
-              {{ type.icd_type_name }}
+              {{ type.icd_type_code }}
             </option>
           </select>
         </div>
@@ -74,7 +75,7 @@
     <div class="table-title">
       <h3>List of ICD Category</h3>
     </div>
-    <table class="table table-striped data-table" style="width: 100%">
+    <table class="table table-striped data-table1" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -122,10 +123,44 @@ export default {
       icdcatId: 0,
     };
   },
+    mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "icd-setting/getIcdCategoryList",
+        { headers }
+      )
+      .then((resp) => {
+        this.icdcatlist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table1").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GeticdList();
-    this.GeticdcatList();
   },
   methods: {
     async GeticdList() {

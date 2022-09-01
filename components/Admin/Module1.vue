@@ -65,7 +65,7 @@
     <div class="table-title">
       <h3>List of Modules</h3>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table4 font-13" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -77,8 +77,8 @@
         </tr>
       </thead>
       <tbody>
-     <tr v-for="mod in modulelist" :key="mod.id">
-          <td>{{mod.id}}</td>
+     <tr v-for="(mod,index) in modulelist" :key="index">
+          <td>{{index+1}}</td>
            <td>{{mod.module_code}}</td>
            <td>{{mod.module_name}}</td>
           <td>{{mod.module_short_name}}</td>
@@ -112,9 +112,43 @@ export default {
       modulelist: [],
     };
   },
+  mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "screen-module/list",
+        { headers }
+      )
+      .then((resp) => {
+        this.modulelist = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table4").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GetModuleList();
   },
   methods: {
     async onAddModule1() {

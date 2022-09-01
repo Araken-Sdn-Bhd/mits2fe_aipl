@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <PatientLoginSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <PatientLoginHeader />
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <PatientDetails />
@@ -30,7 +30,7 @@
                   >
                     <div class="accordion-body">
                       <table
-                        class="table table-striped data-table"
+                        class="table table-striped data-table1"
                         style="width: 100%"
                       >
                         <thead>
@@ -45,41 +45,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Phychiatry Clerking Note</td>
-                            <td>Completed</td>
-                            <td>19/8/2021</td>
-                            <td>10:00AM</td>
-                            <td>Dr. Zahidah</td>
+                          <tr v-for="(hst, index) in historylist" :key="index">
+                            <td>{{index+1}}</td>
+                            <td>{{hst.section_name}}</td>
                             <td>
-                              <a href="#" class="view"
-                                ><i class="fas fa-eye"></i
-                              ></a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                              <p v-if="hst.status">Completed</p>
+                                <p v-if="!hst.status">Pending</p>
+                              </td>
+                            <td>{{hst.date}}</td>
+                            <td>{{formatetime(hst.created_at)}}</td>
+                            <td>{{hst.name}}</td>
                             <td>
-                              <a href="#" class="view"
-                                ><i class="fas fa-eye"></i
-                              ></a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>
-                              <a href="#" class="view"
+                              <a style="cursor:pointer;" @click="OnHistoryview(hst)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
                             </td>
@@ -162,7 +139,7 @@
                               <tr>
                                 <td>Date/Time :</td>
                                 <td v-if="clinicalinfo">
-                                  - {{ clinicalinfo.date_time }}
+                                   {{ clinicalinfo.date_time }}
                                 </td>
                               </tr>
                               <tr>
@@ -171,21 +148,21 @@
                               <tr>
                                 <td>Temperature :</td>
                                 <td v-if="clinicalinfo">
-                                  - {{ clinicalinfo.temperature }}
+                                   {{ clinicalinfo.temperature }}
                                 </td>
                               </tr>
 
                               <tr>
                                 <td>Blood Pressure :</td>
                                 <td v-if="clinicalinfo">
-                                  - {{ clinicalinfo.blood_pressure }}
+                                   {{ clinicalinfo.blood_pressure }}
                                 </td>
                               </tr>
 
                               <tr>
                                 <td>Pulse Rate :</td>
                                 <td v-if="clinicalinfo">
-                                  - {{ clinicalinfo.pulse_rate }}
+                                   {{ clinicalinfo.pulse_rate }}
                                 </td>
                               </tr>
                             </tbody>
@@ -593,7 +570,7 @@
                                   <li>
                                     <a href="#">Photography Consent Form</a>
                                   </li>
-                                  <li><a href="#">SE Consent Form</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onseconsentreferral">SE Consent Form</a></li>
                                   <li><a href="#">ETP Consent Form</a></li>
                                   <li>
                                     <a href="#">Job Club Consent Form </a>
@@ -661,19 +638,19 @@
                                   data-bs-parent="#sub-men-3"
                                 >
                                   <li>
-                                    <a href="#"
+                                    <a style="cursor:pointer;" @click="Onpatientcareplan"
                                       >Patient Care Plan And Case Review Form</a
                                     >
                                   </li>
                                   <li><a href="#">Job Start Report</a></li>
                                   <li><a href="#">Job End Report</a></li>
-                                  <li>
+                                  <!-- <li>
                                     <a href="#">Job Commencement Report</a>
                                   </li>
-                                  <li><a href="#">Job Cessation Report</a></li>
+                                  <li><a href="#">Job Cessation Report</a></li> -->
                                   <li><a href="#">Job Transition Report</a></li>
                                   <li>
-                                    <a href="#">LA.S.E.R Form (Motivation) </a>
+                                    <a style="cursor:pointer;" @click="Onlaserform">LA.S.E.R Form (Motivation) </a>
                                   </li>
                                   <li>
                                     <a style="cursor:pointer;" @click="OnTriageform">Triage Form </a>
@@ -739,7 +716,7 @@
                                 >
                               </li>
                               <li><a href="#">External Referral Form</a></li>
-                              <li><a href="#">CPS Referral Form</a></li>
+                              <li><a style="cursor:pointer;" @click="Oncpsreferal">CPS Referral Form</a></li>
                               <li>
                                 <a style="cursor:pointer;" @click="Onocctreferralform"
                                   >OCCT Referral Form</a
@@ -785,7 +762,7 @@
                           >
                         </li>
                         <li>
-                          <a href="/Modules/Patient/book-appointment"
+                          <a style="cursor:pointer;" @click="OnBookAppointment"
                             >Book Appointment</a
                           >
                         </li>
@@ -833,7 +810,7 @@
                 </div>
               </div>
                 <div class="d-flex">
-                                    <a href="#" class="btn btn-danger btn-text ml-auto"><i class="far fa-power-off"></i> End Visit</a>
+                                    <a @click="endVisit" class="btn btn-danger btn-text ml-auto"><i class="far fa-power-off"></i> End Visit</a>
                                 </div>
             </div>
           </div>
@@ -882,16 +859,17 @@
 </template>
 <script>
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader, PatientDetails },
+  components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
   data() {
     return {
       userdetails: null,
       errorList: [],
       attachList: [],
+      historylist: [],
       clinicalinfo: null,
       Id: 0,
       file: "",
@@ -929,16 +907,18 @@ export default {
         .change();
     });
   },
-   mounted() {
+  mounted() {
     const headers = {
- Authorization: "Bearer " + this.userdetails.access_token,
+      Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
       "Content-Type": "application/json",
     };
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-attachment/list?patient_id=" + this.Id,
+        `${this.$axios.defaults.baseURL}` +
+          "patient-attachment/list?patient_id=" +
+          this.Id,
         { headers }
       )
       .then((resp) => {
@@ -962,8 +942,51 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+    this.GethistoryList();
   },
   methods: {
+     formatetime(time) {
+      const local = moment.utc(time).local().format('h:mm A');
+      return local;
+    },
+    GethistoryList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios1 = require("axios").default;
+      axios1
+        .post(
+          `${this.$axios.defaults.baseURL}` +
+            "patient-appointment-details/fetchViewHistoryList",
+          { patient_id: this.Id },
+          { headers }
+        )
+        .then((resp) => {
+          this.historylist = resp.data.Data;
+          console.log("my list", resp.data);
+          $(document).ready(function () {
+            $(".data-table1").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              autoWidth: false,
+              responsive: true,
+              scrollX: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              },
+            });
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
     onAddPatientClinicalinfo() {
       this.$router.push({
         path: "/Modules/Patient/add-clinical-info",
@@ -1126,6 +1149,36 @@ export default {
         query: { id: this.Id },
       });
     },
+    Onseconsentreferral() {
+      this.$router.push({
+        path: "/Modules/Patient/se-consent-form",
+        query: { id: this.Id },
+      });
+    },
+    Onlaserform() {
+      this.$router.push({
+        path: "/Modules/Patient/laser-form",
+        query: { id: this.Id },
+      });
+    },
+    Oncpsreferal() {
+      this.$router.push({
+        path: "/Modules/Patient/cps-referral-form",
+        query: { id: this.Id },
+      });
+    },
+    Onpatientcareplan() {
+      this.$router.push({
+        path: "/Modules/Patient/patient-care-plan-and-case-review",
+        query: { id: this.Id },
+      });
+    },
+    OnBookAppointment(){
+       this.$router.push({
+        path: "/Modules/Patient/book-appointment",
+        query: { pid: this.Id },
+      });
+    },
     async GetPatientClinicinfodetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1205,6 +1258,32 @@ export default {
           window.alert("Something went wrong");
         }
       } catch (e) {}
+    },
+     async endVisit() {
+      try {
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "patient-appointment-details/endappointmentDate",
+          { patient_id: this.Id },
+          { headers }
+        );
+        console.log("ff", response.data);
+        if (response.data.code == 200) {
+           $("#insertpopup").modal("show");
+        } else {
+          window.alert("Something went wrong");
+        }
+      } catch (e) {}
+    },
+    OnHistoryview(data) {
+      this.$router.push({
+        path: "/Modules/patient/history-view",
+        query: { id: data.id, type: data.type },
+      });
     },
   },
 };

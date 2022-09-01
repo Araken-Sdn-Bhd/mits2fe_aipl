@@ -58,7 +58,7 @@
     <div class="table-title">
       <h3>List of Service</h3>
     </div>
-    <table class="table table-striped data-table" style="width: 100%">
+    <table class="table table-striped data-table1" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -102,9 +102,43 @@ export default {
       Id: 0,
     };
   },
+   mounted() {
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const axios = require("axios").default;
+    axios
+      .get(
+        `${this.$axios.defaults.baseURL}` +
+          "service/list",
+        { headers }
+      )
+      .then((resp) => {
+        this.list = resp.data.list;
+        $(document).ready(function () {
+          $(".data-table1").DataTable({
+            searching: false,
+            bLengthChange: false,
+            bInfo: false,
+            autoWidth: false,
+            responsive: true,
+            language: {
+              paginate: {
+                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+              },
+            },
+          });
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GetList();
   },
   methods: {
     async GetList() {

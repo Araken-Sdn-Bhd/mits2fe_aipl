@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <InterventionHeader />
+    <CommonSidebar  />
     <div id="layoutSidenav_content">
-      <InterventionSidebar />
+      <CommonHeader />
        <!-- <Loader v-if="loader"/> -->
       <main>
         <div class="container-fluid px-4">
@@ -118,6 +118,7 @@
                   <label class="form-label">Medication </label>
                   <div class="col-sm-4">
                     <div class="mb-4">
+                      <div class="form-check">
                       <input
                         class="form-check-input"
                         type="checkbox"
@@ -125,6 +126,7 @@
                         id="Oral" v-model="oral"
                       />
                       <label class="form-label" for="Oral">Oral</label>
+                      </div>
                       <input
                         type="text"
                         class="form-control"
@@ -135,6 +137,7 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
+                      <div class="form-check">
                       <input
                         class="form-check-input"
                         type="checkbox"
@@ -142,6 +145,7 @@
                         id="Depot" v-model="depot"
                       />
                       <label class="form-label" for="Depot">Depot</label>
+                      </div>
                       <input
                         type="text"
                         class="form-control"
@@ -152,6 +156,7 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
+                      <div class="form-check">
                       <input
                         class="form-check-input"
                         type="checkbox"
@@ -159,6 +164,7 @@
                         id="IM" v-model="im"
                       />
                       <label class="form-label" for="IM">IM</label>
+                      </div>
                       <input
                         type="text"
                         class="form-control"
@@ -194,7 +200,33 @@
 
                 <div class="form-heading mt-3">Treatment Plan</div>
 
-                <table class="job-search-table">
+                <table class="job-search-table" v-if="!pid" id="treatmentplan">
+                  <thead>
+                    <tr>
+                      <!-- <th>No</th> -->
+                      <th>Issues/Current Status</th>
+                      <th>Goal(s)</th>
+                      <th>Management Strategies</th>
+                      <th>Who,By When</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="optionBox">
+                    <tr class="block"> 
+                      <!-- <td>-</td> -->
+                      <td><input type="text" class="issue" v-model="Issues" placeholder="Issues/Current Status"/></td>
+                      <td><input type="text" class="goal" v-model="Goal" placeholder="Goal(s)"/></td>
+                      <td><input type="text" class="management" v-model="Management" placeholder="Management Strategies"/></td>
+                      <td><input type="text" class="who" v-model="Who" placeholder="Who,By When"/></td>
+                      <td>
+                        <a class="add-row"
+                          ><i class="far fa-plus"></i
+                        ></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                 <table class="job-search-table" v-if="pid">
                   <thead>
                     <tr>
                       <!-- <th>No</th> -->
@@ -206,12 +238,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
                       <!-- <td>-</td> -->
-                      <td><input type="text" v-model="Issues" placeholder="Issues/Current Status"/></td>
-                      <td><input type="text" v-model="Goal" placeholder="Goal(s)"/></td>
-                      <td><input type="text" v-model="Management" placeholder="Management Strategies"/></td>
-                      <td><input type="text" v-model="Who" placeholder="Who,By When"/></td>
+                      <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status"/></td>
+                      <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)"/></td>
+                      <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies"/></td>
+                      <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When"/></td>
                       <td>
                         <a href="#" class="add-row"
                           ><i class="far fa-plus"></i
@@ -330,15 +362,13 @@
                               <option value="0">
                                 Select location of services
                               </option>
-                              <option value="1">On-site (Mentari)</option>
-                              <option value="2">Home Visit</option>
-                              <option value="3">Workplace Visit</option>
-                              <option value="4">Telephone Or Virtual</option>
-                              <option value="5">Main Hospital</option>
-                              <option value="6">
-                                Correspondence (Memo , Online Platform)
-                              </option>
-                              <option value="7">External (Others)</option>
+                             <option
+              v-for="loc in locationlist"
+              v-bind:key="loc.id"
+              v-bind:value="loc.id"
+            >
+              {{ loc.section_value }}
+            </option>
                             </select>
                           </div>
                         </div>
@@ -348,15 +378,16 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="type_diagnosis_id"
-                            >
-                              <option value="0">
-                                Select ICD 10/ICD 11 CODE
-                              </option>
-                              <option value="1">...</option>
-                            </select>
+                            <select class="form-select" v-model="type_diagnosis_id">
+                                <option value="0">Select Diagnosis</option>
+                                <option
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            </option>
+                              </select>
                           </div>
                         </div>
                         <!-- close-row -->
@@ -370,13 +401,11 @@
                                 class="form-check-input"
                                 type="radio"
                                 name="inlineRadioOptions"
-                                id="inlineRadio11"
+                                id="inlineRadio1"
                                 value="assisstance"
                                 v-model="category_services"
                               />
-                              <label
-                                class="form-check-label"
-                                for="inlineRadio11"
+                              <label class="form-check-label" for="inlineRadio1"
                                 >Assisstance / Supervision</label
                               >
                             </div>
@@ -385,13 +414,11 @@
                                 class="form-check-input"
                                 type="radio"
                                 name="inlineRadioOptions"
-                                id="inlineRadio22"
+                                id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
                               />
-                              <label
-                                class="form-check-label"
-                                for="inlineRadio22"
+                              <label class="form-check-label" for="inlineRadio2"
                                 >Clinical Work / Procedure
                               </label>
                             </div>
@@ -400,13 +427,11 @@
                                 class="form-check-input"
                                 type="radio"
                                 name="inlineRadioOptions"
-                                id="inlineRadio33"
+                                id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
                               />
-                              <label
-                                class="form-check-label"
-                                for="inlineRadio33"
+                              <label class="form-check-label" for="inlineRadio3"
                                 >External</label
                               >
                             </div>
@@ -419,14 +444,14 @@
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
                               <select class="form-select" v-model="services_id">
-                                <option value="0">Select Service</option>
-                                <option
-                                  v-for="slt in servicelist"
-                                  v-bind:key="slt.id"
-                                  v-bind:value="slt.id"
-                                >
-                                  {{ slt.service_name }}
-                                </option>
+                                 <option value="0">Select Service</option>
+                      <option
+                        v-for="slt in assistancelist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.section_value }}
+                      </option>
                               </select>
                             </div>
                           </div>
@@ -436,19 +461,11 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">ICD 9 CODE</label>
-                              <select
-                                class="form-select"
-                                v-model="code_id"
-                                @change="onCategorycodebind($event)"
-                              >
+                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
-                                <option
-                                  v-for="type in codelist"
-                                  v-bind:key="type.id"
-                                  v-bind:value="type.id"
-                                >
-                                  {{ type.icd_type_name }}
-                                </option>
+                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
+             {{ type.icd_category_code }} {{type.icd_category_name}}
+            </option>
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -456,12 +473,13 @@
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
                                 <option
-                                  v-for="catcode in icdcatcodelist"
-                                  v-bind:key="catcode.id"
-                                  v-bind:value="catcode.id"
-                                >
-                                  {{ catcode.icd_category_code }}
-                                </option>
+              v-for="catcode in icdcatcodelist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+               {{ catcode.icd_code }} 
+ {{catcode.icd_name}}
+            </option>
                               </select>
                             </div>
                           </div>
@@ -473,13 +491,13 @@
                               <label class="form-label">Services</label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
-                                <option
-                                  v-for="slt in servicelist"
-                                  v-bind:key="slt.id"
-                                  v-bind:value="slt.id"
-                                >
-                                  {{ slt.service_name }}
-                                </option>
+                      <option
+                        v-for="slt in externallist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.section_value }}
+                      </option>
                               </select>
                             </div>
                           </div>
@@ -498,26 +516,26 @@
                               <option value="0">
                                 Select Complexity Of Service
                               </option>
-                              <option
-                                v-for="cm in comlexcitylist"
-                                v-bind:key="cm.id"
-                                v-bind:value="cm.id"
-                              >
-                                {{ cm.section_value }}
-                              </option>
+                      <option
+                        v-for="cm in comlexcitylist"
+                        v-bind:key="cm.id"
+                        v-bind:value="cm.id"
+                      >
+                        {{ cm.section_value }}
+                      </option>
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome</label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
-                              <option
-                                v-for="out in outcomelist"
-                                v-bind:key="out.id"
-                                v-bind:value="out.id"
-                              >
-                                {{ out.section_value }}
-                              </option>
+                      <option
+                        v-for="out in outcomelist"
+                        v-bind:key="out.id"
+                        v-bind:value="out.id"
+                      >
+                        {{ out.section_value }}
+                      </option>
                             </select>
                           </div>
                         </div>
@@ -566,7 +584,7 @@
                              </li>
                         </ul>
                        </p>
-                <div class="d-flex">
+                <div class="d-flex" v-if="!pid">
                   <button class="btn btn-warning btn-text ml-auto">
                     <i class="far fa-save"></i> Save
                   </button>
@@ -583,13 +601,10 @@
   </div>
 </template>
 <script>
-import InterventionHeader from "../../../components/Intervention/InterventionHeader.vue";
-import InterventionSidebar from "../../../components/Intervention/InterventionSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: {
-    InterventionHeader,
-    InterventionSidebar,
-  },
+  components: { CommonSidebar, CommonHeader },
   name: "cps-referral-form",
   data() {
     return {
@@ -602,6 +617,8 @@ export default {
       comlexcitylist: [],
       codelist: [],
       icdcatcodelist: [],
+      diagonisislist: [],
+      locationlist: [],
       details: {},
       plan_date: "",
       reason_of_review: "",
@@ -637,7 +654,12 @@ export default {
       Who: "",
       oral: false,
       depot: false,
-      mi: false,
+      im: false,
+      assistancelist: [],
+      externallist: [],
+      pid: 0,
+      type: "",
+      jobsearchlist:[],
     };
   },
   beforeMount() {
@@ -648,6 +670,12 @@ export default {
       this.GetPatientdetails();
       this.GetList();
     }
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.pid = urlParams1.get("pid");
+    this.type = urlParams1.get("type");
+    if (this.pid) {
+      this.getdetails();
+    }
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -655,6 +683,16 @@ export default {
         $(".services").not(targetBox).hide();
         $(targetBox).show();
       });
+
+
+      $(".add-row").click(function (i) {
+          $(".block:last").after(
+            '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+          );
+        });
+        $(".optionBox").on("click", ".remove", function () {
+          $(this).closest(".block").remove();
+        });
     });
   },
   methods: {
@@ -688,8 +726,10 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
+      console.log("my id", event);
       const response = await this.$axios.post(
-        "icd-setting/getIcdTypeWiseCategoryCodeList/" + event.target.value,
+        "diagnosis/getIcd9subcodeList",
+        { icd_category_code: event.target.value },
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -729,16 +769,50 @@ export default {
       } else {
         this.outcomelist = [];
       }
-      const response3 = await this.$axios.get(
-        "icd-setting/icdtype/getIcdTypeCodeList",
-        {
-          headers,
-        }
-      );
+      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+        headers,
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.codelist = response3.data.list;
       } else {
         this.codelist = [];
+      }
+      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "location-of-services",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.locationlist = response5.data.list;
+      } else {
+        this.locationlist = [];
+      }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
+      const respon = await this.$axios.get(
+        "general-setting/list?section=" + "external",
+        { headers }
+      );
+      if (respon.data.code == 200 || respon.data.code == "200") {
+        this.externallist = respon.data.list;
+      } else {
+        this.externallist = [];
       }
     },
     async OnSubmit() {
@@ -859,10 +933,19 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        if (!this.medication_prescription) {
-          this.errorList.push("Medication is required");
-          this.validate = false;
-        }
+        var treatmentplan = [];
+      $("table#companydetail > tbody > tr").each(function () {
+        var obj = {};
+        obj.Issues = $('td input[type="text"].issue', this).val();
+        obj.Goal = $('td input[type="text"].goal', this).val();
+        obj.Management = $('td input[type="text"].management', this).val();
+        obj.Who = $('td input[type="text"].who', this).val();
+        treatmentplan.push(obj);
+      });
+        // if (!this.medication_prescription) {
+        //   this.errorList.push("Medication is required");
+        //   this.validate = false;
+        // }
         if (
           this.location_services_id &&
           this.type_diagnosis_id &&
@@ -908,20 +991,14 @@ export default {
               icd_9_code: this.code_id,
               icd_9_subcode: this.sub_code_id,
               medication_prescription: this.medication_prescription,
-              treatment_plan: JSON.stringify([
-                {
-                  Issues: this.Issues,
-                  Goal: this.Goal,
-                  Management: this.Management,
-                  Who: this.Who,
-                },
-              ]),
+              treatment_plan: JSON.stringify(treatmentplan),
             },
             { headers }
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
+            this.ResetModel();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -933,6 +1010,111 @@ export default {
           }
         }
       } catch (e) {}
+    },
+    ResetModel() {
+      this.plan_date = "";
+      this.reason_of_review = "";
+      this.diagnosis = "";
+      this.medication_oral = "";
+      this.medication_depot = "";
+      this.medication_im = "";
+      this.background_history = "";
+      this.staff_incharge_dr = "";
+      this.treatment_plan = "";
+      this.next_review_date = "";
+      this.case_manager_date = "";
+      this.case_manager_name = "";
+      this.case_manager_designation = "";
+      this.specialist_incharge_date = "";
+      this.specialist_incharge_name = "";
+      this.specialist_incharge_designation = "";
+      this.location_services_id = 0;
+      this.type_diagnosis_id = 0;
+      this.category_services = 0;
+      this.code_id = 0;
+      this.sub_code_id = 0;
+      this.complexity_services_id = 0;
+      this.outcome_id = 0;
+      this.medication_prescription = "";
+      this.patient_mrn_id = "";
+      this.services_id = 0;
+      this.serviceid = 0;
+      this.validate = true;
+      this.Issues = "";
+      this.Goal = "";
+      this.Management = "";
+      this.Who = "";
+      this.oral = false;
+      this.depot = false;
+      this.im = false;
+    },
+    async getdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "/patient-appointment-details/fetchViewHistoryListDetails",
+        {
+          id: this.pid,
+          type: "PatientCarePlanAndCaseReviewForm",
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        // window.alert(response.data.Data[0].patient_mrn_id);
+
+        this.Id = response.data.Data[0].patient_id;
+
+        this.plan_date = response.data.Data[0].plan_date;
+        this.reason_of_review = response.data.Data[0].reason_of_review;
+        this.diagnosis = response.data.Data[0].diagnosis;
+        this.medication_oral = response.data.Data[0].medication_oral;
+        this.medication_depot = response.data.Data[0].medication_depot;
+        this.medication_im = response.data.Data[0].medication_im;
+        this.background_history = response.data.Data[0].background_history;
+        this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
+        this.treatment_plan = response.data.Data[0].treatment_plan;
+        this.jobsearchlist=JSON.parse(response.data.Data[0].treatment_plan);
+        // this.jobsearchlist=this.treatment_plan;
+        // console.log('aaa',this.jobsearchlist);
+
+        this.next_review_date = response.data.Data[0].next_review_date;
+        this.case_manager_date = response.data.Data[0].case_manager_date;
+        this.case_manager_name = response.data.Data[0].case_manager_name;
+        this.case_manager_designation = response.data.Data[0].case_manager_designation;
+        this.specialist_incharge_date = response.data.Data[0].specialist_incharge_date;
+        this.specialist_incharge_name = response.data.Data[0].specialist_incharge_name;
+        this.specialist_incharge_designation =
+          response.data.Data[0].specialist_incharge_designation;
+        this.location_services_id = response.data.Data[0].location_of_service;
+        this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
+        this.category_services = response.data.Data[0].category_of_services;
+        this.services_id = response.data.Data[0].services;
+        this.complexity_services_id = response.data.Data[0].complexity_of_services;
+        this.outcome_id = response.data.Data[0].outcome;
+        this.code_id = response.data.Data[0].icd_9_code;
+        this.icd_9_subcode = response.data.Data[0].icd_9_subcode;
+        this.medication_prescription = response.data.Data[0].medication_prescription;
+
+        this.GetList();
+        this.GetPatientdetails();
+        const response2 = await this.$axios.post(
+          "diagnosis/getIcd9subcodeList",
+          { icd_category_code: this.code_id },
+          { headers }
+        );
+        if (response2.data.code == 200 || response2.data.code == "200") {
+          this.icdcatcodelist = response2.data.list;
+          console.log('my icd9data',this.icdcatcodelist);
+          
+        } else {
+          this.icdcatcodelist = [];
+        }
+      } else {
+        window.alert("Something went wrong");
+      }
     },
   },
 };

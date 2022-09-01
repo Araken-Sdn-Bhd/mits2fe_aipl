@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
        <div class="container-fluid px-4">
           <div class="card mb-4 mt-5">
@@ -357,12 +357,30 @@
             <!-- hide-div -->
             <div class="experience-yes experi-box" v-if="Gis_voluneering_exp=='1'">
               <div class="mt-3">
-                <textarea
-                  class="form-control textarea"
-                  rows="3"
-                  placeholder="Please describe"
-                  v-model="Gexp_details"
-                ></textarea>
+                  <table class="note" style="width: 100%" id="volexp1">
+              <thead>
+                <tr>
+                  <th width="100px">YEAR</th>
+                  <th>Location</th>
+                  <th>Brief Description of Activities</th>
+                  
+                </tr>
+              </thead>
+              <tbody class="optionBox">
+                     <tr class="block" v-for="(exp,index) in expList" :key="index">
+                  <td>
+                    <input type="text" class="form-control year" v-model="exp.year" name="" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
+                  </td>
+                 
+                </tr>
+              </tbody>
+            </table>
               </div>
             </div>
           </div>
@@ -416,6 +434,18 @@
                     >*</span
                   ></label
                 >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -474,6 +504,18 @@
                     >*</span
                   ></label
                 >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -731,6 +773,18 @@
           >
           <div class="col-sm-8">
             <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
+            <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -888,6 +942,18 @@
             ></label
           >
           <div class="col-sm-8">
+            <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="Consultation/Counselling"
+                    id="Consultation/Counselling"
+                   v-model="Consultation"
+                  />
+                  <label class="form-check-label" for="Consultation/Counselling">
+                    Consultation/Counselling
+                  </label>
+                </div>
            <div class="form-check">
               <input
                 class="form-check-input"
@@ -998,10 +1064,10 @@
 </template>
 <script>
 import VonFooter from "../../../components/Von/VonFooter.vue";
-import VonHeader from "../../../components/Von/VonHeader.vue";
-import VonSidebar from "../../../components/Von/VonSidebar.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { VonSidebar, VonHeader, VonFooter },
+  components: { CommonHeader, CommonSidebar, VonFooter },
   name: "edit-group",
   data() {
     return {
@@ -1014,6 +1080,7 @@ export default {
       GEducationList: [],
       GOccupationList: [],
       GBranchList: [],
+      expList:[],
       Gis_agree: 0,
       is_represent_org: 0,
       members_count: "",
@@ -1075,6 +1142,7 @@ export default {
       other: "",
       Others: "",
       Id:0,
+      Consultation:""
     };
   },
   beforeMount() {
@@ -1301,7 +1369,9 @@ export default {
         if (this.Gmentari_services) {
           var service = this.Gmentari_services.split(",");
           service.forEach((val) => {
-            if (val == "Work-based Rehabilitation") {
+            if (val == "Consultation/Counselling") {
+              this.Consultation = "Consultation/Counselling";
+            } else if (val == "Work-based Rehabilitation") {
               this.work = val;
             } else if (val == "Awareness Or Psychoeducation") {
               this.awareness = val;
@@ -1317,6 +1387,9 @@ export default {
         if (response.data.list.area_of_involvement == "Volunteerism") {
           this.Gis_voluneering_exp = response.data.list.is_voluneering_exp;
           this.Gexp_details = response.data.list.exp_details;
+          if (this.Gexp_details) {
+            this.expList = JSON.parse(this.Gexp_details);
+          }
           this.Gis_mental_health_professional =
             response.data.list.is_mental_health_professional;
           this.Gavailable_date = response.data.list.available_date;
