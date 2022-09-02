@@ -92,7 +92,7 @@
                     <td>{{ index + 1 }}</td>
                     <td>{{ staff.appointment_category_name }}</td>
                     <td>
-                      {{ formatedate(staff.booking_date+' '+staff.booking_time) }}
+                      {{ (staff.booking_date+' '+staff.booking_time) }}
                       <!-- {{ staff.booking_time }} -->
                     </td>
                     <td>{{ staff.end_appointment_date }}</td>
@@ -346,7 +346,7 @@ export default {
       location_services_id: 0,
       booking_date: "",
       booking_time: "",
-      booking_enddate: "31-01-2022",
+      booking_enddate: "",
       booking_endtime: "",
       category_services: "",
       enddate: "",
@@ -524,8 +524,8 @@ export default {
         this.booking_date = response.data.Data[0].booking_date;
         this.booking_time = response.data.Data[0].booking_time;
         this.patient_category = response.data.Data[0].patient_category;
-        // this.booking_enddate = moment(response.data.Data[0].end_appoitment_date, 'DD-MM-YYYY');
-        this.booking_endtime = response.data.Data[0].end_appoitment_date;
+        this.booking_enddate = this.formatedateend(response.data.Data[0].end_appoitment_date);
+        this.booking_endtime = this.formatetimeend(response.data.Data[0].end_appoitment_date);
         this.apid = response.data.Data[0].patient_appointment_id;
         this.type = response.data.Data[0].type;
         this.tbid = response.data.Data[0].id;
@@ -545,7 +545,11 @@ export default {
       return local;
     },
     formatetimeend(date) {
-      const local = moment.utc(date).local().format("h:mm A");
+      const local = moment.utc(date).local().format("hh:mm");
+      return local;
+    },
+    formatedatetimeappoint(date) {
+      const local = moment.utc(date).local().format("YYYY-MM-DD hh:mm");
       return local;
     },
     async updatestaffpatient() {
@@ -567,7 +571,7 @@ export default {
           patient_category: this.patient_category,
           booking_date: this.booking_date,
           booking_time: this.booking_time,
-          end_appoitment_date:  moment(this.booking_enddate + ' ' + this.booking_endtime, 'YYYY/MM/DD HH:mm'),
+          end_appoitment_date: this.formatedatetimeappoint(this.booking_enddate + ' ' + this.booking_endtime),
         },
         { headers }
       );

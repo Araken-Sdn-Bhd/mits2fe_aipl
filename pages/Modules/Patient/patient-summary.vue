@@ -861,6 +861,7 @@
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import * as moment from "moment/moment";
 export default {
   components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",

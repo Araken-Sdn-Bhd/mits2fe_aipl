@@ -27,7 +27,7 @@
                     <td>{{ log.date }}</td>
                     <td>{{ log.activity }}</td>
                     <td>{{ log.name }}</td>
-                    <td>{{ log.time }}</td>
+                    <td>{{ formatetime(log.time) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -41,6 +41,7 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import * as moment from "moment/moment";
 export default {
   components: { CommonSidebar, CommonHeader },
   name: "transaction-log",
@@ -95,5 +96,12 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
   },
+  methods:{
+    formatetime(date) {
+      const local = moment.utc(date).local().format("hh:mm a");
+      // const local = moment(date).local().format("hh:mm A");
+      return local;
+    },
+  }
 };
 </script>

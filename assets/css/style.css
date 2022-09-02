@@ -2865,7 +2865,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 
 .dataTables_scrollHeadInner,
 .table {
-    width: 100% !important
+    width: 100% 
 }
 
 
@@ -3753,4 +3753,8 @@ li.divider {
 .modal-edit .modal-content{
     border: 0px;
     background-color: #FFF;
+}
+
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+    white-space: nowrap;
 }

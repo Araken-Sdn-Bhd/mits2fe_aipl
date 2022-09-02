@@ -237,13 +237,6 @@ export default {
               $("#insertpopup").modal("show");
             });
            // this.$router.push("/Modules/Patient/list-of-appointment");
-           this.$swal.fire(
-              'Your appointment is submitted.',
-              'Please wait for us to contact you.',
-              'success',
-            )
-
-           window.location.href = 'https://mentari.moh.gov.my/self-test/';
           } else {
             this.loader = false;
             this.$nextTick(() => {

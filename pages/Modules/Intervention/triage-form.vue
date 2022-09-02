@@ -137,7 +137,7 @@
                                         <input class="form-check-input" type="checkbox" value="Yes"
                                             v-model="risk_social_has_no_family" id="1">
                                         <label class="form-check-label" for="1">
-                                            Has no family, Friends or Guardian
+                                            Has no hamily, Friends or Guardian
                                         </label>
                                     </div>
                                     <div class="form-check mb-3">
@@ -508,7 +508,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }}
+               {{ catcode.icd_code }} 
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -1132,7 +1132,7 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-
+          
         } else {
           this.icdcatcodelist = [];
         }

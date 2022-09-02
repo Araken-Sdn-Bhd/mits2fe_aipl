@@ -1,4 +1,5 @@
 <template>
+
   <div id="layoutSidenav">
     <div>
       <CommonSidebar />
@@ -65,9 +66,9 @@
                 </div>
               </div>
               <!-- search-table -->
+              <div class="table-responsive-ui">
               <table
-                class="table table-striped data-table font-13"
-                style="width: 100%"
+                class="table table-striped data-table font-13 display nowrap"
                 id="datatable"
               >
                 <thead>
@@ -97,7 +98,7 @@
                         >{{ app.name_asin_nric }}</a
                       >
                     </td>
-                    <td>{{ app.passport_no }} / {{ app.nric_no }}</td>
+                    <td>{{ app.nric_no }} / {{ app.passport_no }}</td>
                     <td>
                       <span
                         v-if="app.appointment_status == 3"
@@ -131,7 +132,7 @@
                         ><i class="fad fa-edit"></i
                       ></a>
                       <a
-                        @click="OnAssignStaffPop(app.appointment_id)"
+                        @click="OnAssignStaffPop(app.team_id)"
                         class="action-icon icon-info"
                         ><i class="fad fa-check"></i
                       ></a>
@@ -153,6 +154,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
               <p
                 v-show="!list.length"
                 style="
@@ -261,8 +263,6 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
             scrollX: true,
             language: {
               paginate: {
@@ -290,14 +290,15 @@ export default {
       } else {
         this.servicelist = [];
       }
-      const response = await this.$axios.get("hospital/branch-team-list", {
-        headers,
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.teamlist = response.data.list;
-      } else {
-        this.teamlist = [];
-      }
+      //  const response = await this.$axios.get("hospital/getServiceByTeamId", {     //branch-team-list
+      //   headers,
+      // },{team_id: this.appId}
+      // );
+      // if (response.data.code == 200 || response.data.code == "200") {
+      //   this.teamlist = response.data.list;
+      // } else {
+      //   this.teamlist = [];
+      // }
     },
     GetAppointmentlist() {
       const headers = {
@@ -316,6 +317,26 @@ export default {
           this.list = resp.data.list;
           console.log("my applist", this.list);
         });
+    },
+    GetServiceByTeamId(appid){
+      //  const headers = {
+      //   Authorization: "Bearer " + this.token,
+      //   Accept: "application/json",
+      //   "Content-Type": "application/json",
+      // };
+      // const axios = require("axios").default;
+      // axios
+      //   .get(
+      //     `${this.$axios.defaults.baseURL}` +
+      //       "hospital/getServiceByTeamId",
+      //     { headers },
+      //     { team_id: appid }
+      //   )
+      //   .then((resp) => {
+      //     // this.list = resp.data.list;
+      //     this.teamlist = resp.data.list;
+      //     console.log("my applist", this.list);
+      //   });
     },
     oneditAppointment(Id) {
       this.$router.push({
@@ -356,7 +377,7 @@ export default {
     },
     oneditPatient(Id) {
       this.$router.push({
-        path: "/Modules/Patient/patient-summary",
+        path: "/Modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
         query: { id: Id },
       });
     },
@@ -397,6 +418,24 @@ export default {
     },
     OnAssignStaffPop(appid) {
       this.appId = appid;
+       const headers = {
+        Authorization: "Bearer " + this.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(
+          `${this.$axios.defaults.baseURL}` +
+            "hospital/getServiceByTeamId?team_id="+appid,
+          
+          { headers }
+        )
+        .then((resp) => {
+          // this.list = resp.data.list;
+          this.teamlist = resp.data.list;
+          console.log("my applist", this.list);
+        });
       $("#Assignstaffpopup").modal("show");
     },
     async OnAssignStaffSave() {

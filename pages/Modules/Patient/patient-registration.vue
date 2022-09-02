@@ -188,6 +188,7 @@
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx"
                                 v-model="nric_no" @keyup="OnnricNo"
+                                @change="OnAgeCalculation"
                               />
                               <Error :message="error" v-if="error" />
                             </div>
@@ -206,6 +207,7 @@
                                 type="number"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1" v-model="nric_no1"
+                                @change="OnAgeCalculation"
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
@@ -1044,7 +1046,7 @@
                         </div>
                       </div>
 
-                       <div class="row align-items-center mb-3">
+                       <div class="row align-items-center mb-3"  v-if="!Id">
                         <div class="col-sm-5">
                           <label class="form-label mb-0">DOES THIS PATIENT NEED TRIAGE/SCREENING</label>
                         </div>
@@ -1101,10 +1103,15 @@
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
 
-                        <a
+                        <a v-if="!Id"
                           @click="submitRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
+                        >
+                        <a v-if="Id"
+                          @click="updateRegistration"
+                          class="btn btn-success btn-text ml-auto"
+                          ><i class="far fa-paper-plane"></i> Update</a
                         >
                       </div>
                     </form>
@@ -1187,7 +1194,7 @@ export default {
       traditional_description: "",
       other_allergy: "",
       other_description: "",
-      nric_type: 0,
+      nric_type: "",
       nric_no: "",
       referral_letter: "",
       passport_no: "",
@@ -1706,6 +1713,116 @@ export default {
         }
       }
     },
+     async updateRegistration() {
+      this.errorList = [];
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          body.append("added_by", this.userdetails.user.id);
+          body.append("citizenship", this.citizenship);
+          body.append("salutation_id", this.salutation_id);
+          body.append("name_asin_nric", this.name_asin_nric);
+          body.append("sex", this.sex);
+          body.append("birth_date", this.birth_date);
+          body.append("age", this.age);
+          body.append("mobile_no", this.mobile_no);
+          body.append("house_no", this.house_no);
+          body.append("hospital_mrn_no", this.hospital_mrn_no);
+          body.append("mintari_mrn_no", this.mintari_mrn_no);
+          body.append("services_type", this.services_type.id);
+          body.append("referral_type", this.referral_type);
+          body.append("referral_letter", this.referral_letter);
+          body.append("address1", this.address1);
+          body.append("address2", this.address2);
+          body.append("address3", this.address3);
+          body.append("state_id", this.state_id);
+          body.append("city_id", this.city_id);
+          body.append("postcode", this.postcode);
+          body.append("race_id", this.race_id);
+          body.append("religion_id", this.religion_id);
+          body.append("marital_id", this.marital_id);
+          body.append("accomodation_id", this.accomodation_id);
+          body.append("education_level", this.education_level);
+          body.append("occupation_status", this.occupation_status);
+          body.append("fee_exemption_status", this.fee_exemption_status);
+          body.append("occupation_sector", this.occupation_sector);
+          body.append("kin_name_asin_nric", this.kin_name_asin_nric);
+          body.append("kin_relationship_id", this.kin_relationship_id);
+          body.append("kin_nric_no", this.kin_nric_no);
+          body.append("kin_mobile_no", this.kin_mobile_no);
+          body.append("kin_house_no", this.kin_house_no);
+          body.append("kin_address1", this.kin_address1);
+          body.append("kin_address2", this.kin_address2);
+          body.append("kin_address3", this.kin_address3);
+          body.append("kin_state_id", this.kin_state_id);
+          body.append("kin_city_id", this.kin_city_id);
+          body.append("kin_postcode", this.kin_postcode);
+          body.append("drug_allergy", this.drug_allergy);
+          body.append(
+            "drug_allergy_description",
+            this.drug_allergy_description
+          );
+          body.append("traditional_medication", this.traditional_medication);
+          body.append("traditional_description", this.traditional_description);
+          body.append("other_allergy", this.other_allergy);
+          body.append("other_description", this.other_description);
+          body.append("nric_type", this.nric_type);
+          body.append("nric_no", this.nric_no);
+          body.append("referral_letter", this.file);
+          body.append("passport_no", this.passport_no);
+          body.append("expiry_date", this.expiry_date);
+          body.append("country_id", this.country_id);
+          body.append("id", this.Id);
+          body.append(
+            "patient_need_triage_screening",
+            this.patient_need_triage_screening
+          );
+          if (this.Id > 0) {
+            const response = await this.$axios.post(
+              "patient-registration/update",
+              body,
+              {
+                headers,
+              }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$router.push("/Modules/Intervention/patient-list");
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
+          } else {
+            const response = await this.$axios.post(
+              "patient-registration/add",
+              body,
+              {
+                headers,
+              }
+            );
+            console.log("my data resuklt", response.data);
+            if (response.data.code == 200 || response.data.code == "200") {
+              this.$router.push("/Modules/Intervention/patient-list");
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
+          }
+        } catch (e) {
+          this.loader = false;
+          this.$nextTick(() => {
+            $("#errorpopup").modal("show");
+          });
+        }
+    },
     async GetPatientdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1774,7 +1891,7 @@ export default {
         this.referral_type = response.data.list[0].referral_type;
         this.religion_id = response.data.list[0].religion_id;
         this.salutation_id = response.data.list[0].salutation_id;
-        this.services_type = response.data.list[0].services_type;
+        this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
         this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
@@ -1782,9 +1899,9 @@ export default {
           response.data.list[0].traditional_description;
         this.traditional_medication =
           response.data.list[0].traditional_medication;
-        if (response.data.list[0].citizenship == 1) {
+        if (response.data.list[0].citizenship == 430) {
           this.citizentype = "Malaysian";
-        } else if (response.data.list[0].citizenship == 2) {
+        } else if (response.data.list[0].citizenship == 450) {
           this.citizentype = "Permanent Resident";
         } else {
           this.citizentype = "Foreigner";
@@ -1800,6 +1917,7 @@ export default {
         this.thirdDob = String(this.nric_no).slice(6, 8);
         // this.birth_date = this.firstDob+"-"+this.secondDob+"-"+this.thirdDob;
         this.birth_date = this.getDate(this.nric_no);
+        this.birth_date = this.getDate(this.nric_no1);
         this.error = null;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
