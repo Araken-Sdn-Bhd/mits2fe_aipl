@@ -17,7 +17,7 @@ export default {
     { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css 
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "~/assets/css/dataTables.bootstrap5.min.css",
     "~/assets/css/styles.css",
@@ -43,10 +43,12 @@ export default {
     "bootstrap-vue/nuxt",
     "@nuxtjs/axios",
     "@nuxtjs/auth",
+    "vue-sweetalert2/nuxt",
   ],
   axios: {
-    baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
+    // baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
     //baseURL:"http://192.168.1.15:8080/api/"
+    baseURL:"http://localhost:8000/api/"
   },
 
 
