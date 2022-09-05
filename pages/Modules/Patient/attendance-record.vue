@@ -98,7 +98,7 @@
                         >{{ app.name_asin_nric }}</a
                       >
                     </td>
-                    <td>{{ app.nric_no }} / {{ app.passport_no }}</td>
+                    <td>{{ app.nric_no }}  {{ app.passport_no }}</td>
                     <td>
                       <span
                         v-if="app.appointment_status == 3"
@@ -111,7 +111,7 @@
                         >Ready</span
                       > -->
                       <span
-                        v-if="app.appointment_status == 0"
+                        v-if="app.appointment_status == 1"
                         class="badge bg-warning text-dark"
                         >Processing</span
                       >
@@ -132,7 +132,7 @@
                         ><i class="fad fa-edit"></i
                       ></a>
                       <a
-                        @click="OnAssignStaffPop(app.team_id)"
+                        @click="OnAssignStaffPop(app.team_id,app.appointment_id)"
                         class="action-icon icon-info"
                         ><i class="fad fa-check"></i
                       ></a>
@@ -232,6 +232,7 @@ export default {
       service_id: 0,
       appId: 0,
       assign_team: 0,
+      staff_id:0,
     };
   },
 
@@ -416,8 +417,8 @@ export default {
         this.list = [];
       }
     },
-    OnAssignStaffPop(appid) {
-      this.appId = appid;
+    OnAssignStaffPop(appid,aptId) {
+      this.appId = aptId;
        const headers = {
         Authorization: "Bearer " + this.token,
         Accept: "application/json",
