@@ -1,4 +1,4 @@
-# mintari
+# mintari version 0.10
 
 ## Build Setup
 
