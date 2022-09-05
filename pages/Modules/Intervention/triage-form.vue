@@ -137,7 +137,7 @@
                                         <input class="form-check-input" type="checkbox" value="Yes"
                                             v-model="risk_social_has_no_family" id="1">
                                         <label class="form-check-label" for="1">
-                                            Has no hamily, Friends or Guardian
+                                            Has no family, Friends or Guardian
                                         </label>
                                     </div>
                                     <div class="form-check mb-3">
