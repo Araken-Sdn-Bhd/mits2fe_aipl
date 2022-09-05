@@ -63,7 +63,7 @@
                                 ><i class="fas fa-edit"></i
                               ></a>
                             </td>
-                          
+
                           </tr>
                         </tbody>
                       </table>
@@ -727,7 +727,7 @@
                                 >
                               </li>
                               <li>
-                                <a style="cursor:pointer;" @click="Onpsychologyreferral" 
+                                <a style="cursor:pointer;" @click="Onpsychologyreferral"
                                   >Psychology Referral Form</a
                                 >
                               </li>
@@ -766,7 +766,9 @@
                           >
                         </li>
                         <li>
-                          <a href="/Modules/Patient/book-appointment"
+                          <a
+                            style="cursor: pointer"
+                            @click="OnBookAppointment"
                             >Book Appointment</a
                           >
                         </li>
@@ -1201,6 +1203,12 @@ export default {
           query: { pid: data.id, type: val },
         });
       }
+    },
+    OnBookAppointment(){
+      this.$router.push({
+        path: "/Modules/Patient/book-appointment",
+        query: { pid: this.Id},
+      });
     },
     onAddPatientClinicalinfo() {
       this.$router.push({
