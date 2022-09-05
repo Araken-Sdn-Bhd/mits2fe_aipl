@@ -17,6 +17,7 @@
               type="checkbox"
               value=""
               id="flexCheckDefault"
+              v-model="chkMin"
             />
             <label class="form-check-label" for="flexCheckDefault">
               Minimum Password Length
@@ -34,6 +35,7 @@
               type="checkbox"
               value=""
               id="Maximum"
+              v-model="chkMax"
             />
             <label class="form-check-label" for="Maximum">
               Maximum Password Length
@@ -104,6 +106,8 @@ export default {
       errors: [],
       minlen: "",
       maxlen: "",
+      chkMin:false,
+      chkMax:false,
       Includeuppercase: false,
       Includealphanumeric: false,
       Includespecial: false,
@@ -111,6 +115,7 @@ export default {
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.getCharacteristic();
   },
   methods: {
     async addcharectersticks() {
@@ -118,14 +123,14 @@ export default {
       this.errors = [];
       var variablename = "";
       var status = "";
-      if (!this.minlen) {
+      if (!this.chkMin) {
         variablename = 0;
         status = 0;
       } else {
         variablename = this.minlen;
         status = 1;
       }
-      if (!this.maxlen) {
+      if (!this.chkMax) {
         variablename = variablename + "," + 0;
         status = status + "," + 0;
       } else {
@@ -178,6 +183,8 @@ export default {
           this.$nextTick(() => {
             $("#insertpopup").modal("show");
           });
+
+          this.getCharacteristic();
         } else {
           this.loader = false;
           this.$nextTick(() => {
@@ -189,6 +196,49 @@ export default {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
         });
+      }
+    },
+    async getCharacteristic() {
+      this.errors = [];
+      try {
+        
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+
+        const response = await this.$axios.get(
+          "system-settings/get-setting/" + "password-characteristic" , { headers }
+        );
+
+        if (response.data.code == 200) {
+         
+        if (response.data.setting[0].variable_name == "minimum-password-length" && response.data.setting[0].status == 1){
+          this.chkMin= true;
+          this.minlen= response.data.setting[0].variable_value;
+        }
+
+        if (response.data.setting[1].variable_name == "maximum-password-length" && response.data.setting[1].status == 1){
+          this.chkMax= true;
+          this.maxlen= response.data.setting[1].variable_value;
+        }
+        if (response.data.setting[2].variable_name == "include-uppercase-and-lowercase-letters" && response.data.setting[2].status == 1){
+          this.Includeuppercase= true;
+        }
+        if (response.data.setting[3].variable_name == "include-alphanumeric" && response.data.setting[3].status == 1){
+          this.Includealphanumeric= true;
+        }
+        if (response.data.setting[4].variable_name == "include-special-characters" && response.data.setting[4].status == 1){
+          this.Includespecial= true;
+        }
+      
+      } else {
+        window.alert("Something went wrong");
+      }
+
+      } catch (e) {
+  
       }
     },
   },
