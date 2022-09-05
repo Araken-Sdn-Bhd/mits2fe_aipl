@@ -183,7 +183,7 @@ export default {
                 service_name: this.servicename,
                 //   hospital_code: this.,
                 service_description: this.servicedescription,
-                service_order: this.serviceindex,
+                service_order: this.serviceindex
               },
               { headers }
             );
