@@ -32,7 +32,7 @@
               type="checkbox"
               value=""
               id="Maximums1"
-              v-model="systemganrate"
+              v-model="systemgenerate"
               @click="OnChangesystemganrate($event)"
             />
             <label class="form-check-label" for="Maximums1">
@@ -57,26 +57,27 @@ export default {
       loader: false,
       userdetails: null,
       passwordvalue: "",
-      systemganrate: false,
+      systemgenerate: false,
       defaultpass: false,
     };
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.getDefault();
   },
   methods: {
     async insertdefault() {
       this.loader = true;
       var variablename = "";
       var status = "";
-      if (!this.passwordvalue) {
+      if (!this.defaultpass) {
         variablename = 0;
         status = 0;
       } else {
         variablename = this.passwordvalue;
         status = 1;
       }
-      if (!this.systemganrate) {
+      if (!this.systemgenerate) {
         variablename = variablename + "," + false;
         status = status + "," + 0;
       } else {
@@ -121,19 +122,53 @@ export default {
     OnChangedefault(event) {
       if (event.target.Checked) {
         this.defaultpass = true;
-        this.systemganrate = false;
+        this.systemgenerate = false;
       } else {
         this.defaultpass = false;
-        this.systemganrate = false;
+        this.systemgenerate = false;
       }
     },
     OnChangesystemganrate(event) {
       if (event.target.Checked) {
         this.defaultpass = false;
-        this.systemganrate = true;
+        this.systemgenerate = true;
       } else {
         this.defaultpass = false;
-        this.systemganrate = false;
+        this.systemgenerate = false;
+      }
+    },
+
+    async getDefault() {
+      this.errors = [];
+      try {
+        
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+
+        const response = await this.$axios.get(
+          "system-settings/get-setting/" + "default-password" , { headers }
+        );
+
+        if (response.data.code == 200) {
+         
+        if (response.data.setting[0].variable_name == "set-the-default-password-value" && response.data.setting[0].status == 1){
+          this.defaultpass= true;
+          this.passwordvalue= response.data.setting[0].variable_value;
+        }
+
+        if (response.data.setting[1].variable_name == "system-generate" && response.data.setting[1].status == 1){
+          this.systemgenerate= true;
+        }
+      
+      } else {
+        window.alert("Something went wrong");
+      }
+
+      } catch (e) {
+  
       }
     },
   },
