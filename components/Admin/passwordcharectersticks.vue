@@ -235,6 +235,7 @@ export default {
       
       } else {
         window.alert("Something went wrong");
+        
       }
 
       } catch (e) {
