@@ -268,7 +268,7 @@
                                 type="radio"
                                 name="Sex"
                                 v-bind:id="'gn' + i"
-                                v-bind:value="gn.id" 
+                                v-bind:value="gn.id"
                                 v-model="sex"
                               />
                               <label
@@ -449,6 +449,7 @@
                               v-model="state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onSelectedState"
                             >
                               <option value="0">Select</option>
                               <option
@@ -484,12 +485,20 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label">Postcode</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Enter Postcode"
-                              name="" v-model="postcode"
-                            />
+                            <select
+                              v-model="postcode"
+                              class="form-select"
+                              aria-label="Default Select example"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ct in citylist"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
+                              >
+                                {{ ct.postcode }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -690,7 +699,7 @@
                         </div>
                       </div>
                       <!-- close-row -->
- 
+
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousFirst"
@@ -762,7 +771,7 @@
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
-                          
+
                           </div>
                       </div>
                       <!-- close-row -->
@@ -789,7 +798,7 @@
                               type="number"
                               class="form-control"
                               placeholder="xx- xxxxxxxx"
-                              name=""  
+                              name=""
                                 v-model="kin_house_no"
                             />
                           </div>
@@ -867,12 +876,20 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label">Postcode</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Enter Postcode"
-                              name="" v-model="kin_postcode"
-                            />
+                            <select
+                              v-model="kin_postcode"
+                              class="form-select"
+                              aria-label="Default select example"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ct in citylist"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
+                              >
+                                {{ ct.postcode }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -1432,15 +1449,6 @@ export default {
       } else {
         this.statelist = [];
       }
-
-      const response6 = await this.$axios.get("address/postcodelist", {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
-      } else {
-        this.citylist = [];
-      }
       const response7 = await this.$axios.get("address/country/list", {
         headers,
       });
@@ -1457,6 +1465,21 @@ export default {
         this.nrictypelist = response8.data.list;
       } else {
         this.nrictypelist = [];
+      }
+    },
+    async onSelectedState(event){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
       }
     },
     async GetTab2List() {
@@ -1853,7 +1876,7 @@ export default {
         this.religion_id = response.data.list[0].religion_id;
         this.salutation_id = response.data.list[0].salutation_id;
         this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
-        
+
         this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
