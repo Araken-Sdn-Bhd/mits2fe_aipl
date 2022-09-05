@@ -12,9 +12,9 @@
           >
              <option value="0">Please Select</option>
             <option
-              v-for="hst in hospitallist"
-              v-bind:key="hst.id"
-              v-bind:value="{ id: hst.id, text: hst.hospital_code }"
+            v-for="hst in hospitallist"
+                  v-bind:key="hst.id"
+                  v-bind:value="{id: hst.id, text: hst.hospital_code} "
             >
               {{ hst.hospital_code }}
             </option>
@@ -32,9 +32,9 @@
             <option
               v-for="bnch in branchlist"
               v-bind:key="bnch.id"
-              v-bind:value="{ id: bnch.id, text: bnch.hospital_branch_name }"
+              v-bind:value="{id: bnch.id, text: bnch.hospital_branch_name}"
             >
-              {{ bnch.hospital_branch_name }}
+              {{bnch.hospital_branch_name}}
             </option>
           </select>
         </div>
@@ -306,8 +306,17 @@ export default {
         }
       );
       if (response.data.code == 200) {
-        this.hospital_code = response.data.list.hospital_id;
-        this.branceName = response.data.list.hospital_branch_id;
+        this.hospital_code = {
+          id: response.data.list.hospital_id,
+          text: response.data.list.hospital_code,
+        };
+
+        this.branceName =  {
+          id: response.data.list.hospital_branch_id,
+          text: response.data.list.hospital_branch_name
+        };
+       
+           
         this.team = response.data.list.team_name;
         this.Id = data.id;
         const response1 = await this.$axios.post(
