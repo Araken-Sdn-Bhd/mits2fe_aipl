@@ -43,6 +43,8 @@ export default {
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     // $("#insertpopup").modal("show");
+
+    this.getDefault();
   },
   methods: {
     async insertLoginAttempt() {
@@ -81,6 +83,35 @@ export default {
       } catch (e) {
         this.loader = false;
         this.error = e.error;
+      }
+    },
+
+    async getDefault() {
+      this.errors = [];
+      try {
+        
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+
+        const response = await this.$axios.get(
+          "system-settings/get-setting/" + "login-attempt" , { headers }
+        );
+
+        if (response.data.code == 200) {
+         
+        if (response.data.setting[0].variable_name == "number_of_invalid_sign_on_allowed" && response.data.setting[0].status == 1){
+          this.sign= response.data.setting[0].variable_value;
+        }
+      
+      } else {
+        window.alert("Something went wrong");
+      }
+
+      } catch (e) {
+  
       }
     },
   },

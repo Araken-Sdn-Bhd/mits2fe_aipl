@@ -449,7 +449,10 @@ export default {
         if (!this.BranchName) {
           this.errors.push("Branch Name is required.");
         }
-        if (this.IsHeadquator) {
+  
+        if (!this.IsHeadquator) {
+          this.IsHeadquator = 0;
+        }else{
           this.IsHeadquator = 1;
         }
         if (!this.BranchAddress1) {
@@ -541,6 +544,13 @@ export default {
               });
             }
           } else {
+            if (!this.IsHeadquator) {
+                this.IsHeadquator = 0;
+              }else{
+                this.IsHeadquator = 1;
+              }
+             
+           
             const response = await this.$axios.post(
               "hospital/updateHospitalBranch",
               {
@@ -602,7 +612,7 @@ export default {
       this.ContactNoOffice = "";
       this.MobileOffice = "";
       this.FaxNo = "";
-      this.Email = "";
+      this.email.Email = "";
       this.Id = 0;
     },
     async GetBranchList() {
@@ -737,12 +747,8 @@ export default {
             notChunk.branch_adrress_1
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.branch_contact_number_office
-              .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.branch_fax_no
-              .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1
+            notChunk.branch_contact_number_office.indexOf(this.search) > -1 ||
+            notChunk.branch_fax_no.indexOf(this.search) > -1
           );
         });
       } else {

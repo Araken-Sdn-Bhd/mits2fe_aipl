@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.getDefault();
   },
   methods: {
     async insertblockduration() {
@@ -59,7 +60,7 @@ export default {
             "system-settings/insertOrupdate",
             {
               section: "system-block-duration",
-              variable_name: "duration",
+              variable_name: "duration_block",
               variable_value: this.duration,
               status: "1",
             },
@@ -77,6 +78,35 @@ export default {
         }
       } catch (e) {
         //this.error=fff
+      }
+    },
+
+    async getDefault() {
+      this.errors = [];
+      try {
+        
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+
+        const response = await this.$axios.get(
+          "system-settings/get-setting/" + "system-block-duration" , { headers }
+        );
+
+        if (response.data.code == 200) {
+         
+        if (response.data.setting[0].variable_name == "duration_block" && response.data.setting[0].status == 1){
+          this.duration= response.data.setting[0].variable_value;
+        }
+      
+      } else {
+        window.alert("Something went wrong");
+      }
+
+      } catch (e) {
+  
       }
     },
   },
