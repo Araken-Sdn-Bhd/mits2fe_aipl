@@ -414,7 +414,7 @@
                   ></label
                 >
 
-                  <div class="form-check">
+                  <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -425,7 +425,7 @@
                   <label class="form-check-label" for="Rehabilitation">
                     Consultation/Counselling
                   </label>
-                </div>
+                </div> -->
                 <div class="form-check">
                   <input
                     class="form-check-input"

@@ -413,8 +413,8 @@
                     >*</span
                   ></label
                 >
-                    
-                  <div class="form-check">
+
+                  <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -425,7 +425,7 @@
                   <label class="form-check-label" for="Rehabilitation">
                     Consultation/Counselling
                   </label>
-                </div>
+                </div> -->
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -772,7 +772,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="GOnrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -783,7 +783,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2" @change="GOnrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -794,7 +794,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2" @change="GOnrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
@@ -805,7 +805,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2" @change="GOnrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
