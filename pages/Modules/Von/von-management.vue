@@ -17,7 +17,7 @@
               <p>
                 MENTARI encourages the participation of any individual, group,
                 or organization (government or private) to enhance service
-                delivery related to mental health. the information provided
+                delivery related to mental health. The information provided
                 through this form will be kept confidential and will help us
                 determine the most satisfying volunteer or networking
                 opportunity for you.
