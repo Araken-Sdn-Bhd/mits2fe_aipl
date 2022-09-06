@@ -436,7 +436,7 @@
                     >*</span
                   ></label
                 >
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -447,7 +447,7 @@
                   <label class="form-check-label" for="Consultation/Counselling">
                     Consultation/Counselling
                   </label>
-                </div>
+                </div> -->
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -794,7 +794,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -805,7 +805,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2"  v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -816,7 +816,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2"  v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
@@ -827,7 +827,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -947,7 +947,7 @@
               >*</span
             ></label
           >
-          
+
           <div class="col-sm-8">
             <!-- <div class="form-check">
                   <input
@@ -965,7 +965,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -976,7 +976,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2"  v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -987,7 +987,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2"  v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
@@ -998,7 +998,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -1027,7 +1027,7 @@
         </label>
       </div>
     <div class="d-flex align-items-center mt-4">
-        
+
                   <div class="row col-sm-9">
                     <label for="" class="col-sm-4 col-form-label"
                       >Screening Done</label

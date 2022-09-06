@@ -399,19 +399,19 @@
                             >Relevant Mentari Service That You Want To Be
                             Involved<span>*</span></label
                           >
-                           <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="Consultation/Counselling"
-                    id="Consultation/Counselling2" v-model="Consultation"
-                   
-                  />
-                  <label class="form-check-label" for="Consultation/Counselling2">
-                    Consultation/Counselling
-                  </label>
-                </div>
-                 
+                           <!-- <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value="Consultation/Counselling"
+                              id="Consultation/Counselling2" v-model="Consultation"
+
+                            />
+                            <label class="form-check-label" for="Consultation/Counselling2">
+                              Consultation/Counselling
+                            </label>
+                          </div> -->
+
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -488,7 +488,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling2" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling2">
                     Consultation/Counselling
@@ -787,7 +787,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling2" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling2">
                     Consultation/Counselling
@@ -797,7 +797,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -809,7 +809,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation" v-model="awareness"
-                id="Psychoeducation2" 
+                id="Psychoeducation2"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -820,7 +820,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"  v-model="recreational"
-                id="Therapy2" 
+                id="Therapy2"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -830,7 +830,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -967,7 +967,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling2" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling2">
                     Consultation/Counselling

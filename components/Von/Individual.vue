@@ -491,7 +491,7 @@
 
       <div class="areas-involvement hide" id="outreach-projectshow">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
-        <p>Please Provide a breief project description</p>
+        <p>Please Provide a brief project description</p>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
@@ -666,7 +666,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="Onrelevatedmentari('Consultation/Counselling')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -677,7 +677,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="Onrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -688,7 +688,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2" @change="Onrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -699,7 +699,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2" @change="Onrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
@@ -710,7 +710,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2" @change="Onrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
@@ -1314,7 +1314,7 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");+
-             
+
             // });
             this.Reaload();
           } else {
