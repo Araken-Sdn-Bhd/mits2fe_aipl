@@ -1861,7 +1861,9 @@ export default {
         this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
         this.mobile_no = response.data.list[0].mobile_no;
         this.name_asin_nric = response.data.list[0].name_asin_nric;
-        this.nric_no = response.data.list[0].nric_no;
+        var str = response.data.list[0].nric_no;
+        this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+        console.log('nric',this.nric_no);
         this.nric_type = response.data.list[0].nric_type;
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
