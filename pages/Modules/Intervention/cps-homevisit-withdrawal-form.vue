@@ -85,7 +85,7 @@
                         <tbody>
                           <tr>
                             <th>NRIC No:</th>
-                            <td>{{ consentdetails.nric_no }}</td>
+                            <td>{{ consentdetails.guardian_nric  }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -120,12 +120,12 @@
               <table class="notes" v-if="consentdetails">
                 <tbody>
                   <tr>
-                    <th>Doctor's Name/Case Manager:</th>
+                    <td style="width:16%">Doctor's Name/Case Manager:</td>
                <td>{{ consentdetails.designation }}</td>
                   </tr>
 
                   <tr>
-                    <th>Date:</th>
+                    <td>Date:</td>
                      <td>{{ consentdetails.date }}</td>
                   </tr>
                 </tbody>
@@ -232,7 +232,7 @@
                         <tbody>
                           <tr>
                             <th>NRIC No:</th>
-                            <td>{{ consentdetails.nric_no }}</td>
+                            <td>{{ consentdetails.guardian_nric}}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -263,7 +263,6 @@
                   </tr>
                 </tbody>
               </table>
-
               <table class="notes" v-if="consentdetails">
                 <tbody>
                     <tr>
@@ -276,13 +275,19 @@
                       <p class="text-align-center">Doctor</p> -->
                     </td> 
                   </tr>
+                </tbody>
+              </table>
+
+              <table class="notes" style="width:50%" v-if="consentdetails">
+                <tbody>
+                   
                   <tr>
-                    <th>Doctor's Name/Case Manager:</th>
+                    <td style="width:50%">Doctor's Name/Case Manager:</td>
                <td>{{ consentdetails.designation }}</td>
                   </tr>
 
                   <tr>
-                    <th>Date:</th>
+                    <td>Date:</td>
                      <td>{{ consentdetails.date }}</td>
                   </tr>
                 </tbody>
