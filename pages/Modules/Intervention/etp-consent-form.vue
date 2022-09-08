@@ -36,7 +36,7 @@
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
-                       <span style="text-transform: lowercase;color:#000;"> I hereby agree to participate in </span><span style="text-transform: uppercase;color:#000;">Employment Transition Program (ETP)</span>  [{{ consentdetails.hospital_branch_name }}]. <span style="text-transform: lowercase;color:#000;">I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.</span>
+                       <span style="color:#000;"> I hereby agree to participate in </span><span style="text-transform: uppercase;color:#000;">Employment Transition Program (ETP)</span>  [{{ consentdetails.hospital_branch_name }}]. <span style="color:#000;">I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.</span>
                           
                         </label>
                       </div>
