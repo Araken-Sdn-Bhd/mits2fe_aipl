@@ -94,7 +94,7 @@
                     <td>
                       <a
                         style="color: #18846f; cursor: pointer"
-                        @click="oneditPatient(app.patient_id)"
+                        @click="oneditPatient(app.patient_id,app.appointment_id)"
                         >{{ app.name_asin_nric }}</a
                       >
                     </td>
@@ -105,11 +105,11 @@
                         class="badge bg-primary"
                         >Completed</span
                       >
-                      <!-- <span
-                        v-if="app.appointment_status == 1"
+                      <span
+                        v-if="app.appointment_status == 4"
                         class="badge bg-success"
                         >Ready</span
-                      > -->
+                      >
                       <span
                         v-if="app.appointment_status == 1"
                         class="badge bg-warning text-dark"
@@ -376,7 +376,8 @@ export default {
         this.error = e;
       }
     },
-    oneditPatient(Id) {
+    oneditPatient(Id,appointment_id) {
+      localStorage.setItem("AppointmentId",appointment_id);
       this.$router.push({
         path: "/Modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
         query: { id: Id },

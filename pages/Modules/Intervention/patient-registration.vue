@@ -1893,6 +1893,14 @@ export default {
         } else {
           this.citizentype = "Foreigner";
         }
+          const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
+      }
       } else {
         window.alert("Something went wrong");
       }
