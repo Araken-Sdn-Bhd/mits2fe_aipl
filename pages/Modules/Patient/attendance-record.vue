@@ -105,11 +105,11 @@
                         class="badge bg-primary"
                         >Completed</span
                       >
-                      <!-- <span
-                        v-if="app.appointment_status == 1"
+                      <span
+                        v-if="app.appointment_status == 4"
                         class="badge bg-success"
                         >Ready</span
-                      > -->
+                      >
                       <span
                         v-if="app.appointment_status == 1"
                         class="badge bg-warning text-dark"
@@ -429,7 +429,7 @@ export default {
         .get(
           `${this.$axios.defaults.baseURL}` +
             "hospital/getServiceByTeamId?team_id="+appid,
-          
+
           { headers }
         )
         .then((resp) => {
@@ -451,6 +451,7 @@ export default {
           added_by: this.userdetails.user.id,
           appointment_id: this.appId,
           assign_team: this.assign_team,
+          service: this.service,
         },
         { headers }
       );
