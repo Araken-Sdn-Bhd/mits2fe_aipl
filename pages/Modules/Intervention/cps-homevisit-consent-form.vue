@@ -233,7 +233,7 @@
                         <tbody>
                           <tr>
                             <th>NRIC No:</th>
-                            <td>{{ consentdetails.nric_no }}</td>
+                            <td>{{ consentdetails.guardian_nric }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -265,7 +265,7 @@
                 </tbody>
               </table>
 
-              <table class="notes" style="width:50%" v-if="consentdetails">
+              <table class="notes" v-if="consentdetails">
                 <tbody>
                   <tr>
                     <td colspan="2">
@@ -284,6 +284,10 @@
                       </div>
                     </td>
                   </tr>
+                </tbody>
+              </table>
+              <table class="notes" style="width:47%" v-if="consentdetails">
+                <tbody>
                   <tr>
                     <td colspan="2">
                       <textarea class="signature" style="width: 100%;"></textarea>
