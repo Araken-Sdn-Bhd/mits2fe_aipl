@@ -325,7 +325,7 @@
                         v-model="job_availability"
                       />
                       <label class="form-check-label" for="inlineRadio111"
-                        >Availabilable</label
+                        >Available</label
                       >
                     </div>
                     <div class="form-check form-check-inline">
@@ -338,7 +338,7 @@
                         v-model="job_availability"
                       />
                       <label class="form-check-label" for="inlineRadio222"
-                        >Not Availabilable</label
+                        >Not Available</label
                       >
                     </div>
                   </div>
