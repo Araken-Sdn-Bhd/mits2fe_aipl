@@ -133,12 +133,11 @@
                   </tr>
 
                   <tr>
-                    <th>Doctor's Name/Case Manager:</th>
+                    <td style="width:16%">Doctor's Name/Case Manager:</td>
                     <td>{{ consentdetails.designation }}</td>
                   </tr>
-
                   <tr>
-                    <th>Date:</th>
+                    <td>Date:</td>
                     <td>{{ consentdetails.date }}</td>
                   </tr>
                 </tbody>
