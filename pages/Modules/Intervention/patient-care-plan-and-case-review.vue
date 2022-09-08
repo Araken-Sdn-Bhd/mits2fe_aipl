@@ -831,30 +831,30 @@ export default {
           this.errorList.push("Diagnosis is required");
           this.validate = false;
         }
-        if (!this.oral) {
-          this.errorList.push("Please check Oral");
-          this.validate = false;
-        }
-        if (!this.medication_oral) {
-          this.errorList.push("Oral Description is required");
-          this.validate = false;
-        }
-        if (!this.depot) {
-          this.errorList.push("Please check Depot");
-          this.validate = false;
-        }
-        if (!this.medication_depot) {
-          this.errorList.push("Depot Description is required");
-          this.validate = false;
-        }
-        if (!this.im) {
-          this.errorList.push("Please check IM");
-          this.validate = false;
-        }
-        if (!this.medication_im) {
-          this.errorList.push("IM Description is required");
-          this.validate = false;
-        }
+        //if (!this.oral) {
+        //  this.errorList.push("Please check Oral");
+        //  this.validate = false;
+        //}
+        //if (!this.medication_oral) {
+        //  this.errorList.push("Oral Description is required");
+        //  this.validate = false;
+        //}
+        //if (!this.depot) {
+        //  this.errorList.push("Please check Depot");
+        //  this.validate = false;
+        //}
+        //if (!this.medication_depot) {
+        //  this.errorList.push("Depot Description is required");
+        //  this.validate = false;
+        //}
+        //if (!this.im) {
+        //  this.errorList.push("Please check IM");
+        //  this.validate = false;
+        //}
+        //if (!this.medication_im) {
+        //  this.errorList.push("IM Description is required");
+        //  this.validate = false;
+        //}
 
         if (!this.background_history) {
           this.errorList.push("Background History is required");
