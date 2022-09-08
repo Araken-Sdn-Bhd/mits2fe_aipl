@@ -1443,7 +1443,7 @@
                   </tr>
 
                   <tr>
-                    <th>Changes in teratment at Current Visir:</th>
+                    <th>Changes in treatment at Current Visit:</th>
                     <td colspan="3">
                       <textarea
                         class="form-control textarea"
