@@ -192,7 +192,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            
+
                           </div>
                         </div>
 
@@ -207,11 +207,11 @@
                                 type="number"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1" v-model="nric_no1"
-                                @change="OnAgeCalculation"
+                                @change="validateIC"
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
-                          
+
                           </div>
                         </div>
 
@@ -271,7 +271,7 @@
                                 type="radio"
                                 name="Sex"
                                 v-bind:id="'gn' + i"
-                                v-bind:value="gn.id" 
+                                v-bind:value="gn.id"
                                 v-model="sex"
                               />
                               <label
@@ -693,7 +693,7 @@
                         </div>
                       </div>
                       <!-- close-row -->
- 
+
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousFirst"
@@ -765,7 +765,7 @@
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
-                          
+
                           </div>
                       </div>
                       <!-- close-row -->
@@ -792,7 +792,7 @@
                               type="number"
                               class="form-control"
                               placeholder="Enter House Phone No"
-                              name=""  
+                              name=""
                                 v-model="kin_house_no"
                             />
                           </div>
@@ -1216,6 +1216,7 @@ export default {
       kin_nric_no: "",
     };
   },
+
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetList();
@@ -1933,7 +1934,7 @@ export default {
         d[3]+
         "-" +
         d[4].toString() +
-        d[5] 
+        d[5]
       );
     },
     OnnricNo1() {
@@ -1984,6 +1985,29 @@ export default {
         }
       } catch (e) {}
     },
+    async validateIC(data){
+      try {
+        var no = this.nric_no1.slice(0, 6);
+        var no1 = this.nric_no1.slice(6, 8);
+        var no2 = this.nric_no1.slice(8, 12);
+        var validate = no + "-" + no1 + "-" + no2;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.get(
+        "patient-registration/validatePatientNric?ic=" + validate,
+        { headers }
+        );
+        if (response.data.code == 200) {
+          this.OnAgeCalculation();
+        } else {
+          this.error = "Patient with this NRIC is already registered.";
+        }
+      } catch (e) {}
+    }
+
   },
 };
 </script>
