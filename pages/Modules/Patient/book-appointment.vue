@@ -164,7 +164,7 @@
                 <div class="d-flex">
                   <div class="ml-auto">
                     <a
-                      href="/Modules/Patient/attendance-record"
+                      @click="OnCancelAppointment"
                       class="btn btn-danger btn-text"
                       ><i class="fad fa-times"></i> Cancel</a
                     >
@@ -408,6 +408,29 @@ this.GetPatientdetails();
       );
       if (response.data.code == 200) {
         this.nric_or_passportno = response.data.list[0].nric_no;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+    async OnCancelAppointment() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-appointment-details/updateappointmentstatus",
+        {
+          appointment_id: this.Id,
+          appointment_status: "10",
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        // this.nric_or_passportno = response.data.list[0].nric_no;
+        this.$router.push({
+        path: "/Modules/Patient/attendance-record",
+      });
       } else {
         window.alert("Something went wrong");
       }

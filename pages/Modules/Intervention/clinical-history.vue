@@ -42,7 +42,7 @@
                     <td>{{ clinic.height }}</td>
                     <td>{{ clinic.bmi }}</td>
                     <td>{{ clinic.waist_circumference }}</td>
-                    <td>Test</td>
+                    <td>{{ clinic.name }}</td>
                     <td>
                       <a
                         @click="deleteinfo(clinic)"
