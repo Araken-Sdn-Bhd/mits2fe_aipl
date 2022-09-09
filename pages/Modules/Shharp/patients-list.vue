@@ -95,6 +95,18 @@
                   </tr>
                 </tbody>
               </table>
+              <p
+                v-show="!list.length"
+                style="
+                  padding: 0px;
+                  margin: 10px;
+                  color: red;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                No Record Found
+              </p>
             </div>
           </div>
         </div>

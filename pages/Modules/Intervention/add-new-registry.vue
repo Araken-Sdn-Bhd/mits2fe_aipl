@@ -436,7 +436,7 @@
                           <input
                             type="text"
                             class="form-control" v-model="tenthbox"
-                            placeholder="Please Specify (times)"
+                            placeholder="Please Specify"
                           />
                         </div>
                       </div>
@@ -1773,7 +1773,7 @@
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >PSY MX on Discharge</label
+                        >Psychiatry MX on Discharge</label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1782,10 +1782,10 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1"
-                            @change="OnMxdischarge('Transferred to PSY ward')"
+                            @change="OnMxdischarge('Transferred to Psychiatry ward')"
                           />
                           <label class="form-check-label" for="psy-d1">
-                            Transferred to PSY ward
+                            Transferred to Psychiatry ward
                           </label>
                         </div>
                         <div class="form-check">
@@ -1797,7 +1797,7 @@
                             @change="OnMxdischarge('Given appt to psy clinical')"
                           />
                           <label class="form-check-label" for="psy-d2">
-                            Given appt to PSY clinical
+                            Given appt to Psychiatry clinical
                           </label>
                         </div>
                         <div class="form-check">
@@ -1818,10 +1818,10 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d4"
-                            @change="OnMxdischarge('Discharge without any PSY follow-up')"
+                            @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
                           />
                           <label class="form-check-label" for="psy-d4">
-                            Discharge without any PSY follow-up
+                            Discharge without any Psychiatry follow-up
                           </label>
                         </div>
                         <div class="form-check">
@@ -1830,10 +1830,10 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d6"
-                            @change="OnMxdischarge('Refer Community PSY Services')"
+                            @change="OnMxdischarge('Refer Community Psychiatry Services')"
                           />
                           <label class="form-check-label" for="psy-d6">
-                            Refer Community PSY Services
+                            Refer Community Psychiatry Services
                           </label>
                         </div>
                         <div class="form-check">
@@ -3229,7 +3229,7 @@ export default {
           this.errors.push("External cause of injury is required.");
         }
         if (!this.discharge_psy_mx) {
-          this.errors.push("PSY MX on Dischargeis required.");
+          this.errors.push("Psychiatry MX on Dischargeis required.");
         }
         if (
           this.referral_or_contact &&

@@ -28,7 +28,7 @@
 
                 <tr>
                   <td>Gender:</td>
-                  <td>{{ patientdetails.gender }}</td>
+                  <td>{{ patientdetails.gender[0].section_value }}</td>
                 </tr>
 
                 <tr>
@@ -38,7 +38,7 @@
 
                 <tr>
                   <td>Marital Status:</td>
-                  <td>{{ patientdetails.maritialstatus }}</td>
+                  <td>{{ patientdetails.maritialstatus[0].section_value }}</td>
                 </tr>
 
                 <tr>
