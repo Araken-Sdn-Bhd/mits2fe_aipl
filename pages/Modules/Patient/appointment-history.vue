@@ -34,12 +34,12 @@
                         >Completed</span
                       >
                       <span
-                        v-if="app.appointment_status == 1"
+                        v-if="app.appointment_status == 4"
                         class="badge bg-success"
                         >Ready</span
                       >
                       <span
-                        v-if="app.appointment_status == 0"
+                        v-if="app.appointment_status == 1"
                         class="badge bg-warning text-dark"
                         >Processing</span
                       >
