@@ -34,8 +34,8 @@
                           I hereby agree and consent to receive treatment at
                           home for me/as a guardian for psychiatry problem which
                           have been explained to me by doctor. I understand
-                          regarding the treatment will be given by <span style="color:#a6b1b7;text-transform: uppercase;">community
-                          psychiatry services (cps).</span>
+                          regarding the treatment will be given by <span style="color:#a6b1b7;">Community
+                          Psychiatry Services (cps).</span>
                         </label>
                       </div>
                     </td>
@@ -175,8 +175,8 @@
                           I hereby agree and consent to receive treatment at
                           home for me/as a guardian for psychiatry problem which
                           have been explained to me by doctor. I understand
-                          regarding the treatment will be given by <span style="color:#a6b1b7;text-transform: uppercase;">community
-                          psychiatry services (cps).</span>
+                          regarding the treatment will be given by <span style="color:#a6b1b7;">Community
+                          Psychiatry Services (cps).</span>
                         </label>
                       </div>
                     </td>
