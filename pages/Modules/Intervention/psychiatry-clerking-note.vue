@@ -79,7 +79,7 @@
                     <tr>
                       <th>Diagnosis:</th>
                       <td>
-                         <select class="form-select" v-model="diagnosis_id">
+                         <select class="form-select" v-model="type_diagnosis_id">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
@@ -514,9 +514,9 @@ export default {
         if (!this.mental_state_examination) {
           this.errorList.push("Mental State Examination is required");
         }
-        if (!this.diagnosis_id) {
-          this.errorList.push("Diagnosis is required");
-        }
+        // if (!this.diagnosis_id) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
         if (!this.management) {
           this.errorList.push("Management is required");
         }
@@ -577,7 +577,7 @@ export default {
           this.background_history &&
           this.general_examination &&
           this.mental_state_examination &&
-          this.diagnosis_id &&
+          // this.diagnosis_id &&
           this.management &&
           this.discuss_psychiatrist_name &&
           this.date &&
@@ -605,7 +605,7 @@ export default {
               background_history: this.background_history,
               general_examination: this.general_examination,
               mental_state_examination: this.mental_state_examination,
-              diagnosis_id: this.diagnosis_id,
+              diagnosis_id: this.type_diagnosis_id, //diagnosis_id
               management: this.management,
               discuss_psychiatrist_name: this.discuss_psychiatrist_name,
               date: this.date,

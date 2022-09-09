@@ -24,7 +24,7 @@
                                     <tr>
                                         <th>Diagnosis: </th>
                                         <td>
-                                             <select class="form-select" v-model="diagnosis_id">
+                                             <select class="form-select" v-model="type_diagnosis_id">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
@@ -396,9 +396,9 @@ export default {
       this.errorList = [];
       this.validate = true;
       try {
-        if (!this.diagnosis_id) {
-          this.errorList.push("Diagnosis is required");
-        }
+        // if (!this.diagnosis_id) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
         if (!this.clinical_summary) {
           this.errorList.push("Clinical Summary is required");
         }
@@ -454,7 +454,7 @@ export default {
         //   this.errorList.push("Medication is required");
         // }
         if (
-          this.diagnosis_id &&
+          // this.diagnosis_id &&
           this.clinical_summary &&
           this.background_history &&
           this.clinical_notes &&
@@ -477,7 +477,7 @@ export default {
             "patient-counsellor-clerkingnote/add",
             {
               added_by: this.userdetails.user.id.toString(),
-              diagnosis_id: this.diagnosis_id,
+              diagnosis_id: this.type_diagnosis_id,  //diagnosis_id
               clinical_summary: this.clinical_summary,
               background_history: this.background_history,
               clinical_notes: this.clinical_notes,

@@ -157,12 +157,12 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
+              v-bind:value="{id:catcode.id,text:catcode.icd_category_code+' '+catcode.icd_category_name}"
             >
               {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
             </option>
@@ -443,13 +443,14 @@ export default {
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-      this.GetPatientdetails();
-    if (this.pid) {
-      this.getdetails();
-    }
+    
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
   
+    this.GetPatientdetails();
+    if (this.pid) {
+      this.getdetails();
+    }
     const current = new Date();
     this.currentdate =
       current.getDate() +
@@ -464,9 +465,9 @@ export default {
     async Onphychiatryclerkingnote() {
       this.errorList = [];
       try {
-        if (!this.diagnosis) {
-          this.errorList.push("Diagnosis is required");
-        }
+        // if (!this.diagnosis) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
         if (!this.clinical_notes) {
           this.errorList.push("Clinical Notes is required");
         }
@@ -516,7 +517,7 @@ export default {
         //   this.errorList.push("Medication is required");
         // }
         if (
-          this.diagnosis &&
+          // this.diagnosis &&
           this.clinical_notes &&
           this.management &&
           this.location_services_id &&
@@ -537,11 +538,11 @@ export default {
             "progress-note/add",
             {
               added_by: this.userdetails.user.id.toString(),
-              diagnosis: this.diagnosis,
+              diagnosis: this.diagnosis,  //diagnosis
               clinical_notes: this.clinical_notes,
               management: this.management,
               location_services_id: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
+              type_diagnosis_id: this.type_diagnosis_id.id,
               category_services: this.category_services,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
@@ -568,6 +569,9 @@ export default {
           }
         }
       } catch (e) {}
+    },
+    BindDiagnosis(){
+      this.diagnosis=this.type_diagnosis_id.text;
     },
     async GetList() {
       const headers = {

@@ -69,7 +69,7 @@
                                             <tr>
                                               <th>Time Performed: </th>
                                               <td>
-                                                <input type="time" class="form-control" v-model="therapy_time">
+                                                <input type="time" name="time" class="form-control" v-model="therapy_time">
                                               </td>
                                             </tr>
                                             <tr>
@@ -94,7 +94,7 @@
                                                       <thead>
                                                           <tr>
                                                             <th>Frequency Of Session: </th>
-                                                            <th>Mode Of Therapy:  </th>
+                                                            <th>Model Of Therapy:  </th>
                                                             <th>Mode Of Therapy:</th>
                                                         </tr>
                                                       </thead>
@@ -647,11 +647,14 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import * as moment from "moment/moment";
 export default {
   components: { CommonSidebar, CommonHeader },
   name: "counseling-progress-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.therapy_date = moment.utc().local().format("YYYY-MM-DD");
+    this.therapy_time = moment.utc().local().format("HH:mm");
     $(document).ready(function () {
       $('.other-input input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
