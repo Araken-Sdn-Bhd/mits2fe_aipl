@@ -173,7 +173,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-4 col-form-label">Age</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" v-model="age"/>
+                    <input type="text" class="form-control" v-model="age" disabled/>
                   </div>
                 </div>
                 <!-- row-close -->
@@ -352,7 +352,7 @@
       </ul>
         </p>
                 <div class="d-flex align-items-center mt-3">
-                  <div class="form-check mr-auto">
+                  <!--<div class="form-check mr-auto">
                     <input
                       class="form-check-input"
                       type="checkbox"
@@ -361,7 +361,7 @@
                     <label class="form-check-label" for="gridCheck">
                       I agree to the terms and condition<span>*</span>
                     </label>
-                  </div>
+                  </div>-->
                 
                   <a v-if="!Id"
                   @click="submitRegistration"
@@ -426,7 +426,7 @@ export default {
       employstatuslist: [],
       Isvalidate: true,
       Id: 0,
-      IAgree: false,
+      //IAgree: false,
     };
   },
   beforeMount() {
@@ -575,7 +575,7 @@ export default {
     async submitRegistration() {
       this.Isvalidate = true;
       try {
-        if (this.IAgree) {
+        //if (this.IAgree) {
           if (!this.name_asin_nric) {
             this.errorList.push("Name (As In NRIC) is required.");
           }
@@ -750,9 +750,9 @@ export default {
               }
             }
           }
-        }else{
-           this.errorList.push("Please agree with term & condition");
-        }
+        //}else{
+        //   this.errorList.push("Please agree with term & condition");
+        //}
       } catch (e) {
         this.loader = false;
         this.$nextTick(() => {
