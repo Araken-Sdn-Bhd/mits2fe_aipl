@@ -205,7 +205,7 @@
                                 type="number"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
-                                v-model="nric_no1" @change="OnAgeCalculation"
+                                v-model="nric_no1" @change="validateIC"
                               />
                                <Error :message="error" v-if="error" />
                             </div>
@@ -1949,6 +1949,28 @@ export default {
       this.age = age;
       //window.alert(age);
     },
+    async validateIC(data){
+      try {
+        var no = this.nric_no1.slice(0, 6);
+        var no1 = this.nric_no1.slice(6, 8);
+        var no2 = this.nric_no1.slice(8, 12);
+        var validate = no + "-" + no1 + "-" + no2;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.get(
+        "patient-registration/validatePatientNric?ic=" + validate,
+        { headers }
+        );
+        if (response.data.code == 200) {
+          this.OnAgeCalculation();
+        } else {
+          this.error = "Patient with this NRIC is already registered.";
+        }
+      } catch (e) {}
+    }
   },
 };
 </script>
