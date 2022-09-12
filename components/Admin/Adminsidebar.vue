@@ -145,7 +145,7 @@
                   aria-controls="general-setting"
                 >
                   <i class="far fa-cog"></i>
-                  General Setting
+                  General Setting Master
                 </a>
                 <ul
                   class="collapse"
