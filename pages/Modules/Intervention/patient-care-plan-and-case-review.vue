@@ -10,6 +10,35 @@
             <h1>Patient Care Plan And Case Review</h1>
           </div>
           <div class="card mb-4">
+             <table class="notes">
+      <thead>
+        <tr>
+          <th colspan="2">STAFF DETAILS</th>
+        </tr>
+      </thead>
+      <tbody v-if="userdetails">
+        <tr>
+          <th>Staff Name / Seen By:</th>
+          <td>{{ userdetails.user.name }}</td>
+        </tr>
+        <tr>
+          <th>Designation:</th>
+          <td>{{ userdetails.user.role }}</td>
+        </tr>
+        <!-- <tr>
+          <th>Room:</th>
+          <td>-</td>
+        </tr> -->
+        <tr>
+          <th>Date:</th>
+          <td>{{ currentdate }}</td>
+        </tr>
+        <tr>
+          <th>Time:</th>
+          <td>{{ currenttime }}</td>
+        </tr>
+      </tbody>
+    </table>
             <div class="form-heading mb-2">Patient Care Plan</div>
             <div class="card-body">
               <form method="post" @submit.prevent="OnSubmit">
@@ -676,6 +705,15 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    const current = new Date();
+    this.currentdate =
+      current.getDate() +
+      "-" +
+      (current.getMonth() + 1) +
+      "-" +
+      current.getFullYear();
+
+    this.currenttime = current.getHours() + ":" + current.getMinutes();
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
