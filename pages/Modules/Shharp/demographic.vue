@@ -76,10 +76,12 @@
                             >NRIC No<small>*</small></label
                           >
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
+                            @keyup="OnnricNo"
                             placeholder="Enter NRIC No"  v-model="nric_no"
                           />
+                          
                         </div>
                       </div>
                     </div>
@@ -166,6 +168,7 @@
                   <label class="col-sm-4 col-form-label">Date of Birth</label>
                   <div class="col-sm-4">
                     <input type="date" @change="OnAgeCalculation" class="form-control" v-model="birth_date"/>
+                    <Error :message="yearError" v-if="yearError" />
                   </div>
                 </div>
                 <!-- row-close -->
@@ -632,6 +635,9 @@ export default {
           // if (!this.hospital_mrn_no) {
           //   this.errorList.push("Hospital MRN is required.");
           // }
+          if(this.birth_date.length > 10){
+            this.errorList.push("Year is Invalid.");
+          }
           if (!this.age) {
             this.errorList.push("Age is required.");
           }
@@ -741,6 +747,7 @@ export default {
               );
               console.log("my data result", response.data);
               if (response.data.code == 200 || response.data.code == "200") {
+                window.alert("Patient is successfully registered");
                 this.$router.push("/Modules/Shharp/patients-list");
               } else {
                 this.loader = false;
@@ -761,10 +768,10 @@ export default {
       }
     },
     OnnricNo() {
-      if (this.nric_no.length == 12) {
-        this.error = null;
-      } else {
-        this.error = "Please Enter 12 Digit NRIC No";
+      if (this.nric_no.length == 12) { 
+        this.errorNric = null;
+      } else{
+        this.errorNric = "Please Enter 12 Digit NRIC No";
       }
     },
     OnnricNo1() {
@@ -775,14 +782,24 @@ export default {
       }
     },
     OnAgeCalculation() {
+     
       var today = new Date();
       var birthDate = new Date(this.birth_date);
       var age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
+      if(this.birth_date.length > 10){
+        this.yearError = "Please Enter Valid Year";
+      }else if(this.birth_date.length <= 10){
+        this.yearError = null;
+        var m = today.getMonth() - birthDate.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+          }
       this.age = age;
+      }
+    
+
+      
+      
       //window.alert(age);
     },
     async GetPatientdetails() {
