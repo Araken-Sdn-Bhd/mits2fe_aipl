@@ -60,7 +60,7 @@
                                             <tr>
                                               <th>Diagnosis:</th>
                                               <td>
-                                                <select class="form-select" v-model="diagnosis_id">
+                                                <select class="form-select" v-model="type_diagnosis_id">
                                                  <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
@@ -472,9 +472,9 @@ export default {
       this.validate = true;
       this.errorList = [];
       try {
-        if (!this.diagnosis_id) {
-          this.errorList.push("Diagnosis is required");
-        }
+        // if (!this.diagnosis_id) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
         if (!this.category_discharge) {
           this.errorList.push("Category Of Discharge is required");
         }
@@ -530,7 +530,7 @@ export default {
         //   this.errorList.push("Medication is required");
         // }
         if (
-          this.diagnosis_id &&
+          // this.diagnosis_id &&
           this.category_discharge &&
           this.comment &&
           this.specialist_name_id &&
@@ -554,7 +554,7 @@ export default {
             {
               added_by: this.userdetails.user.id.toString(),
               patient_id: this.Id,
-              diagnosis_id: this.diagnosis_id,
+              diagnosis_id: this.type_diagnosis_id,
               category_discharge: this.category_discharge,
               comment: this.comment,
               specialist_name_id: this.specialist_name_id,

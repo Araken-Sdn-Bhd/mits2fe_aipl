@@ -40,7 +40,7 @@
                   </tr>
                   <tr>
                     <th>Gender:</th>
-                   <td>{{ patientdetails.gender[0].section_value }}</td>
+                   <td>{{ patientdetails.gender }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -61,7 +61,7 @@
                   </tr>
                   <tr>
                     <th>Relationship:</th>
-                             <td>{{ patientdetails.maritialstatus[0].section_value }}</td>
+                             <td>{{ patientdetails.maritialstatus }}</td>
                   </tr>
                   <tr>
                     <th>Contact No:</th>
@@ -1499,7 +1499,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
+        "patient-registration/getPatientRegistrationByIdShortDetails",
         {
           id: this.Id,
         },

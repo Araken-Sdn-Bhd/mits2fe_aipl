@@ -75,7 +75,7 @@
                                             <tr>
                                               <th>Diagnosis: </th>
                                               <td>
-                                                <select class="form-select" v-model="diagnosis_id" aria-label="Default select example">
+                                                <select class="form-select" v-model="type_diagnosis_id" aria-label="Default select example">
                                                   <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
@@ -768,9 +768,9 @@ export default {
         if (!this.therapy_time) {
           this.errorList.push("Time Performed is required");
         }
-        if (!this.diagnosis_id) {
-          this.errorList.push("Diagnosis is required");
-        }
+        // if (!this.diagnosis_id) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
         if (!this.frequency_session) {
           this.errorList.push("FREQUENCY OF SESSION is required");
         }
@@ -864,7 +864,7 @@ export default {
         if (
           this.therapy_date &&
           this.therapy_time &&
-          this.diagnosis_id &&
+          // this.diagnosis_id &&
           this.frequency_session &&
           this.model_therapy &&
           this.comment_therapy_session &&
@@ -900,7 +900,7 @@ export default {
               added_by: this.userdetails.user.id.toString(),
               therapy_date: this.therapy_date,
               therapy_time: this.therapy_time,
-              diagnosis_id: this.diagnosis_id,
+              diagnosis_id: this.type_diagnosis_id, //diagnosis_id
               frequency_session: this.frequency_session,
               frequency_session_other: this.frequency_session_other,
               model_therapy: this.model_therapy,
