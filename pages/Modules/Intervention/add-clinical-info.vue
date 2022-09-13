@@ -180,7 +180,7 @@ export default {
 
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.appointmentid = (localStorage.getItem("AppointmentId"));
+    this.appointmentid = (localStorage.getItem("appointmentId"));
     console.log('appointmentid',this.appointmentid);
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

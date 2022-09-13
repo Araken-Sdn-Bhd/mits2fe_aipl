@@ -376,8 +376,10 @@ export default {
         this.error = e;
       }
     },
-    oneditPatient(Id,appointment_id) {
-      localStorage.setItem("AppointmentId",appointment_id);
+    oneditPatient(Id,aptId) {
+      localStorage.setItem(
+        "appointmentId",aptId
+      );
       this.$router.push({
         path: "/Modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
         query: { id: Id },

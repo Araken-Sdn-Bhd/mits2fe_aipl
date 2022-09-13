@@ -1696,12 +1696,17 @@ export default {
         };
         const response = await this.$axios.post(
           "patient-appointment-details/endappointmentDate",
-          { patient_id: this.Id },
+          { patient_id: this.Id,
+            appointment_status: 3
+          },
           { headers }
         );
         console.log("ff", response.data);
         if (response.data.code == 200) {
            $("#updatepopup").modal("show");
+          //  this.$router.push({
+          //     path: "/Modules/Patient/attendance-record",
+          // });
         } else {
           window.alert("Something went wrong");
         }
