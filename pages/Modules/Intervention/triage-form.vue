@@ -232,7 +232,40 @@
                                         <h5>Screening</h5>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="new-form mb-3">
+                                      <table class="notes th-auto">
+                                        <thead>
+                                          <tr>
+                                            <th>Type of Screening</th>
+                                            <th>Score</th>
+                                            <th></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody class="optionBox">
+                                          <tr class="block">
+                                            <td>
+                                              <select class="form-select" v-model="screening_id">
+                                                  <option value="0">Please Select</option>
+                                                  <option v-for="spec in screenlist" v-bind:key="spec.id" v-bind:value="spec.id">
+                                                    {{ spec.name }}
+                                                    </option>
+                                              </select>
+                                            </td>
+                                            <td>
+                                              <input type="text" class="form-control" placeholder="" v-model="score">
+                                            </td>
+                                          
+                                            <td>
+                                              <span class="add-td"
+                                                ><i class="far fa-plus"></i
+                                              ></span>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+
+                                    <!-- <div class="row">
                                         <div class="col-sm-7">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Type of Screening</label>
@@ -254,12 +287,15 @@
                                                 <div class="add-box">
                                                     <input type="text" class="form-control" placeholder=""
                                                         v-model="score">
-                                                    <a href="#"><i class="far fa-plus"></i></a>
-                                                </div>
+                                                    <td> -->
+                                                    <!-- <span class="add-td"
+                                                      ><i class="far fa-plus"></i
+                                                    ></span> -->
+                                                  <!-- </td> -->
+                                                <!-- </div>
                                             </div>
-                                        </div>
-
-                                    </div>
+                                        </div> -->
+                                    <!-- </div> -->
                                 </section>
 
 
@@ -637,14 +673,6 @@ export default {
   name: "progress-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    $(document).ready(function () {
-      $('.form-accordion input[type="radio"]').click(function () {
-        var inputValue = $(this).attr("value");
-        var targetBox = $("." + inputValue);
-        $(".services").not(targetBox).hide();
-        $(targetBox).show();
-      });
-    });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetList();
@@ -654,6 +682,43 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    // const headers = {
+    //     Authorization: "Bearer " + this.userdetails.access_token,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   }
+    // const response10 = this.$axios.get("intervention/screening-types", {
+    //     headers,
+    //   });console.log('response10',response10);
+    //   if (response10.data.code == 200 || response10.data.code == "200") {
+    //     this.screenlist = response10.data.list;
+    //   } else {
+    //     this.screenlist = [];
+    //   }
+    // console.log('aaa',this.screenlist);
+    // $(document).ready(function () {
+    //   var aa =  "<select  v-model=''>";
+    //   this.screenlist.forEach(element => {
+    //     var myoption="<option value="+element.abc+">"+element.name+"</option>"
+    //     aa.concat(myoption);
+    //   });
+    //   var seldct="</select>"
+    //      aa.concat(seldct);
+    //   $('.form-accordion input[type="radio"]').click(function () {
+    //     var inputValue = $(this).attr("value");
+    //     var targetBox = $("." + inputValue);
+    //     $(".services").not(targetBox).hide();
+    //     $(targetBox).show();
+    //   });
+    //   $(".add-td").click(function (i) {
+    //     $(".block:last").after('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
+    //     );
+    //   });
+    //   $(".optionBox").on("click", ".remove", function () {
+    //     $(this).closest(".block").remove();
+    //     // num=num-1;
+    //   });
+    // });
   },
   data() {
     return {
@@ -1125,18 +1190,16 @@ export default {
         this.services_id = response.data.Data[0].services_id;
 
         this.GetList();
-         const response2 = await this.$axios.post(
+        const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
           { headers }
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
         } else {
           this.icdcatcodelist = [];
         }
-
       } else {
         window.alert("Something went wrong");
       }

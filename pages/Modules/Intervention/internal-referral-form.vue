@@ -3,7 +3,7 @@
     <CommonSidebar />
     <div id="layoutSidenav_content">
       <CommonHeader />
-      <main>
+      <main id="reslt" ref="reslt">
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>INTERNAL REFERRAL</h1>
@@ -11,7 +11,6 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
                  <table class="notes">
                                 <thead>
                                     <tr>
@@ -141,12 +140,12 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
+              v-bind:value="{id:catcode.id,text:catcode.icd_category_code+' '+catcode.icd_category_name}"
             >
               {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
             </option>
@@ -348,363 +347,16 @@
                         </ul>
                        </p>
                  <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
+                <div class="ml-auto btn-boxs">
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
                     <i class="far fa-download"></i> Download
                   </button>
-                  <button type="submit" class="btn btn-success btn-text">
+                  <button type="submit" class="btn btn-success btn-text" @click="Onphychiatryclerkingnote">
                     <i class="far fa-paper-plane"></i> Save
                   </button>
                 </div>
               </div>
-              </form>
-            </div>
-          </div>
-        </div>
-         <div class="container-fluid px-4 reslt" style="display:none;">
-          <div class="page-title">
-            <h1>INTERNAL REFERRAL</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
-          </div>
-          <div class="card mb-4">
-            <div class="card-body">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
-                 <table class="notes">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Patient Details</th>
-                                    </tr>
-                                </thead>
-                                <tbody v-if="patientdetails">
-                                    <tr>
-                                        <th>Patient Name:</th>
-                                       <td>{{ patientdetails.name_asin_nric }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>NRIC NO:</th>
-                                     <td>{{ patientdetails.nric_no }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Age:</th>
-                                    <td>{{ patientdetails.age }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact No:</th>
-                              <td>{{ patientdetails.mobile_no }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gender:</th>
-                                         <td>{{ patientdetails.gender[0].section_value }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address:</th>
-                                          <td>{{ patientdetails.address1 }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>From:</th>
-                                        <td>Mentari Address</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">
-                                            Dear Dr,<br> Thank you for seeing this patient. </th>
-                                    </tr>
-                                    <tr>
-                                        <th>Diagnosis: </th>
-                                        <td><input type="text" v-model="diagnosis" class="form-control max-width" name=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Reason For Referral: </th>
-                                        <td><textarea v-model="reason_for_referral" class="form-control textarea"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Summary: </th>
-                                        <td><textarea v-model="summary" class="form-control textarea"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Management: </th>
-                                        <td><input v-model="management" type="text" class="form-control max-width" name=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Medication: </th>
-                                        <td><input v-model="medication" type="text" class="form-control max-width" name=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">Thank You,</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Name: </th>
-                                        <td><input v-model="name" type="text" class="form-control" name=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Designation: </th>
-                                        <td><input v-model="designation" type="text" class="form-control" name=""></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Hospital: </th>
-                                        <td><input v-model="hospital" type="text" class="form-control" name=""></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-             <div
-                  class="accordion form-accordion mt-3"
-                  id="accordionExample"
-                >
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                      <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
-                        OCCASION OF SERVICES
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
-                          >
-                          <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="location_services"
-                            >
-                              <option value="0">
-                                Select location of services
-                              </option>
-                             <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
-                          >
-                          <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
-                                <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
-            </option>
-                              </select>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Category Of Services
-                          </label>
-                          <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio1"
-                                value="assisstance"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio1"
-                                >Assisstance / Supervision</label
-                              >
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio2"
-                                value="clinical-work"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio2"
-                                >Clinical Work / Procedure
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio3"
-                                value="external"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio3"
-                                >External</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                        <!-- hide-div -->
-                        <div class="assisstance services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              <select class="form-select" v-model="services_id">
-                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in assistancelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 01 -->
-                        <div class="clinical-work services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
-                                <option value="0">Select code</option>
-                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-             {{ type.icd_category_code }} {{type.icd_category_name}}
-            </option>
-                              </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
-                              <select class="form-select" v-model="sub_code_id">
-                                <option value="0">Select sub code</option>
-                                <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }} 
- {{catcode.icd_name}}
-            </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 02 -->
-                        <div class="external services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              <select class="form-select" v-model="serviceid">
-                                <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in externallist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 03 -->
-                        <!-- hide-div -->
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label class="form-label"
-                              >Complexity Of Service</label
-                            >
-                            <select
-                              class="form-select"
-                              v-model="complexity_services"
-                            >
-                              <option value="0">
-                                Select Complexity Of Service
-                              </option>
-                      <option
-                        v-for="cm in comlexcitylist"
-                        v-bind:key="cm.id"
-                        v-bind:value="cm.id"
-                      >
-                        {{ cm.section_value }}
-                      </option>
-                            </select>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
-                            <select class="form-select" v-model="outcome">
-                              <option value="0">Select outcome</option>
-                      <option
-                        v-for="out in outcomelist"
-                        v-bind:key="out.id"
-                        v-bind:value="out.id"
-                      >
-                        {{ out.section_value }}
-                      </option>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                      </div>
-                    </div>
-                  </div>
-                  <!--  -->
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button
-                        class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
-                        MEDICATION
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <div class="col-md-12 mb-3">
-                          <label class="form-label">Medication</label>
-                          <textarea
-                            class="form-control textarea"
-                            placeholder="Please Type Prescription Here"
-                            v-model="medication_des"
-                          ></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--  -->
-                </div>
- <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-              </form>
+             
             </div>
           </div>
         </div>
@@ -889,7 +541,7 @@ export default {
               services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              type_diagnosis_id: this.type_diagnosis_id,
+              type_diagnosis_id: this.type_diagnosis_id.id,
               category_services: this.category_services,
               complexity_services: this.complexity_services,
               outcome: this.outcome,
@@ -1100,11 +752,25 @@ export default {
       }
     },
       OnPrint() {
-      var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
-      document.body.innerHTML = newstr;
-      window.print();
-      // Reload the page to refresh the data
-      window.location.reload();
+      $('.btn-boxs').hide();
+      $('.btn-boxs').click(function(){
+        $('.form-accordion .collapse').show();
+      });
+    setTimeout(() => {
+       var pdf = new jsPDF("p", "px", [800, 1800]);
+      var options = {
+        format: "JPEG",
+        pagesplit: true,
+        background: "#FFF",
+      };
+      pdf.addHTML($("#reslt"), options, function () {
+        pdf.save("Internal_Referral_Form.pdf");
+        window.location.reload();
+      });
+    }, 1000);
+    },
+     BindDiagnosis(){
+      this.diagnosis=this.type_diagnosis_id.text;
     },
   },
 };

@@ -1216,7 +1216,8 @@ export default {
       error: null,
       patient_need_triage_screening: "",
       id:0,
-      text:""
+      text:"",
+      branch_id:0
     };
   },
   beforeMount() {
@@ -1255,6 +1256,7 @@ export default {
         }
       });
     });
+    this.GetStaffBranchId();
   },
   methods: {
     NextFirst() {
@@ -1467,6 +1469,31 @@ export default {
         this.nrictypelist = [];
       }
     },
+    async GetStaffBranchId() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staffDesignatioDetail/staffInchargeDetail",
+        {
+          added_by: this.userdetails.user.id, //this.userdetails.user.id
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        if(response.data.branch[0].branch_id){
+          this.branch_id = response.data.branch[0].branch_id;
+        }else{
+          this.branch_id =response.data.branch;
+          console.log('my branchid333',this.branch_id);
+        }
+        
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
     async onSelectedState(event){
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1657,6 +1684,7 @@ export default {
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
+          body.append("branch_id", this.branch_id);
           body.append(
             "patient_need_triage_screening",
             this.patient_need_triage_screening
@@ -1978,7 +2006,7 @@ export default {
           this.error = "Patient with this NRIC is already registered.";
         }
       } catch (e) {}
-    }
+    },
   },
 };
 </script>

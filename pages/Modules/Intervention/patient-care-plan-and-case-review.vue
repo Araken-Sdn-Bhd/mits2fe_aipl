@@ -407,12 +407,12 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
+              v-bind:value="{id:catcode.id,text:catcode.icd_category_code+' '+catcode.icd_category_name}"
             >
               {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
             </option>
@@ -776,6 +776,9 @@ export default {
         this.icdcatcodelist = [];
       }
     },
+    BindDiagnosis(){
+      this.diagnosis=this.type_diagnosis_id.text;
+    },
 
     async GetList() {
       const headers = {
@@ -1021,7 +1024,7 @@ export default {
               specialist_incharge_designation:
                 this.specialist_incharge_designation,
               location_of_service: this.location_services_id,
-              type_of_diagnosis: this.type_diagnosis_id,
+              type_of_diagnosis: this.type_diagnosis_id.id,
               category_of_services: this.category_services,
               services: this.services_id,
               complexity_of_services: this.complexity_services_id,

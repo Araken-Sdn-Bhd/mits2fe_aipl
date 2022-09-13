@@ -466,6 +466,7 @@ export default {
     if (this.Id) {
       this.GetPatientdetails();
     }
+    this.GetStaffBranchId();
   },
   methods: {
     async GetList() {
@@ -705,6 +706,7 @@ export default {
             body.append("id", this.Id);
             body.append("patient_need_triage_screening" ,"0");
             body.append("Sharp" ,"1");
+            body.append("branch_id", this.branch_id);
             if (this.Id > 0) {
               const response = await this.$axios.post(
                 "patient-registration/update",
@@ -841,6 +843,31 @@ export default {
         } else {
           this.citizentype = "Foreigner";
         }
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+     async GetStaffBranchId() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staffDesignatioDetail/staffInchargeDetail",
+        {
+          added_by: this.userdetails.user.id,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        if(response.data.branch[0].branch_id){
+          this.branch_id = response.data.branch[0].branch_id;
+        }else{
+          this.branch_id =response.data.branch;
+          console.log('my branchid333',this.branch_id);
+        }
+        
       } else {
         window.alert("Something went wrong");
       }
