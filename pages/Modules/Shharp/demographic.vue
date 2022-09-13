@@ -741,6 +741,7 @@ export default {
               );
               console.log("my data result", response.data);
               if (response.data.code == 200 || response.data.code == "200") {
+                window.alert("Patient is successfully registered");
                 this.$router.push("/Modules/Shharp/patients-list");
               } else {
                 this.loader = false;
