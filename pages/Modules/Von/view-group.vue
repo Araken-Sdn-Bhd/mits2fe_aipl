@@ -131,6 +131,11 @@
       <p>Please appoint a group representative to complete this form</p>
     </div>
     <div class="representative-yes represen-box" v-if="is_you_represenative">
+      <div>
+        <label for="" class="col-sm-4 font-italic"
+        >Please provide personal details below.</label
+        >
+      </div>
        <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
@@ -363,7 +368,7 @@
                   <th width="100px">YEAR</th>
                   <th>Location</th>
                   <th>Brief Description of Activities</th>
-                  
+
                 </tr>
               </thead>
               <tbody class="optionBox">
@@ -377,7 +382,7 @@
                   <td>
                     <input type="text" class="form-control activity" v-model="exp.activity" name="" />
                   </td>
-                 
+
                 </tr>
               </tbody>
             </table>
@@ -788,7 +793,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -799,7 +804,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2"  v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -810,7 +815,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2"  v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
@@ -821,7 +826,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -958,7 +963,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -969,7 +974,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2"  v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -980,7 +985,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2"  v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
@@ -991,7 +996,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -1013,9 +1018,9 @@
         </li>
       </ul>
         </p>
-    
+
     <div class="d-flex align-items-center mt-4">
-        
+
                   <div class="row col-sm-9">
                     <label for="" class="col-sm-4 col-form-label"
                       >Screening Done</label
@@ -1049,7 +1054,7 @@
                       </div>
                     </div>
                   </div>
-                 
+
                 </div>
     <!-- </form> -->
   </div>

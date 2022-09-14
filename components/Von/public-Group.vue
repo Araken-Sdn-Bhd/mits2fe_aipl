@@ -100,6 +100,11 @@
       <p>Please appoint a group representative to complete this form</p>
     </div>
     <div class="representative-yes represen-box hide">
+      <div>
+        <label for="" class="col-sm-4 font-italic"
+        >Please provide personal details below.</label
+        >
+      </div>
        <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
