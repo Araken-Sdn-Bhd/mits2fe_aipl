@@ -1037,7 +1037,7 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
+            // this.resetmodel();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -1288,7 +1288,7 @@ export default {
       };
       pdf.addHTML($("#reslt"), options, function () {
         pdf.save("Occt_Referral.pdf");
-        window.location.reload();
+         $('.btn-boxs').show();
       });
     }, 1000);
     },

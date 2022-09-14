@@ -241,10 +241,10 @@
                                             <th></th>
                                           </tr>
                                         </thead>
-                                        <tbody class="optionBox">
-                                          <tr class="block">
-                                            <td>
-                                              <select class="form-select" v-model="screening_id">
+                                        <tbody class="optionBox" id="replicatedList">
+                                          <tr class="block blocks">
+                                            <td id="cpyThis">
+                                              <select class="form-select selects" v-model="screening_id">
                                                   <option value="0">Please Select</option>
                                                   <option v-for="spec in screenlist" v-bind:key="spec.id" v-bind:value="spec.id">
                                                     {{ spec.name }}
@@ -252,19 +252,17 @@
                                               </select>
                                             </td>
                                             <td>
-                                              <input type="text" class="form-control" placeholder="" v-model="score">
+                                              <input type="text" class="form-control scores" placeholder="" v-model="score">
                                             </td>
                                           
-                                            <td>
-                                              <span class="add-td"
-                                                ><i class="far fa-plus"></i
-                                              ></span>
+                                            <td @click="test">
+                                              <span class="add-td"><i class="far fa-plus"></i></span>
                                             </td>
                                           </tr>
                                         </tbody>
                                       </table>
                                     </div>
-
+                                    
                                     <!-- <div class="row">
                                         <div class="col-sm-7">
                                             <div class="mb-3">
@@ -666,6 +664,8 @@
     </div>
 </template>
 <script>
+
+
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
@@ -695,30 +695,35 @@ export default {
     //   } else {
     //     this.screenlist = [];
     //   }
-    // console.log('aaa',this.screenlist);
-    // $(document).ready(function () {
-    //   var aa =  "<select  v-model=''>";
-    //   this.screenlist.forEach(element => {
-    //     var myoption="<option value="+element.abc+">"+element.name+"</option>"
-    //     aa.concat(myoption);
-    //   });
-    //   var seldct="</select>"
-    //      aa.concat(seldct);
-    //   $('.form-accordion input[type="radio"]').click(function () {
-    //     var inputValue = $(this).attr("value");
-    //     var targetBox = $("." + inputValue);
-    //     $(".services").not(targetBox).hide();
-    //     $(targetBox).show();
-    //   });
-    //   $(".add-td").click(function (i) {
-    //     $(".block:last").after('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
-    //     );
-    //   });
-    //   $(".optionBox").on("click", ".remove", function () {
-    //     $(this).closest(".block").remove();
-    //     // num=num-1;
-    //   });
-    // });
+    console.log('aaa',this.screenlist);
+    $(document).ready(function () {
+      $('.form-accordion input[type="radio"]').click(function () {
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".services").not(targetBox).hide();
+        $(targetBox).show();
+      });
+//       $(".add-td").click(function (i) {
+//                console.log('my dropdown',this.screenlist);
+//         if(this.screenlist){
+//            console.log('my if',this.screenlist);
+//  var aa =  "<select  v-model=''>";
+//       this.screenlist.forEach(element => {
+//         var myoption="<option value="+element.id+">"+element.name+"</option>"
+//         aa.concat(myoption);
+//       });
+//       var seldct="</select>"
+//          aa.concat(seldct);
+//         }
+        
+//         $(".block:last").after('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
+//         );
+//       });
+//       $(".optionBox").on("click", ".remove", function () {
+//         $(this).closest(".block").remove();
+//         // num=num-1;
+//       });
+    });
   },
   data() {
     return {
@@ -783,6 +788,19 @@ export default {
     };
   },
   methods: {
+    test(){
+
+        if(this.screenlist.length==0)return
+        var aa =  "<select class='form-select selects' v-model='' id='myNewDrp'>";
+        aa+="<option value='0'>Please Select</option>";
+        this.screenlist.forEach(element => {
+          aa+="<option value="+element.id+">"+element.name+"</option>";
+        });
+        aa+="</select>";          
+        $("#replicatedList").append('<tr class="block blocks"> <td> '+aa+'</td> <td> <input type="text" class="form-control scores" placeholder=""> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
+        )
+
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -873,10 +891,32 @@ export default {
       });
       if (response10.data.code == 200 || response10.data.code == "200") {
         this.screenlist = response10.data.list;
+        console.log('my screen',this.screenlist);
+        // debugger;
+
+        $(".optionBox").on("click", ".remove", function () {
+          $(this).closest(".block").remove();
+          // num=num-1;
+        });
+        // $(".add-td").click(function (i) {
+        //   debugger;
+          // var aa =  "<select  v-model='' id='myNewDrp'>";
+          // var dd = [{id:'1',value:'okay 1'},{id:'1',value:'okay 1'},];
+          // dd.forEach(element => {
+          //   aa+="<option value="+element.id+">"+element.name+"</option>";
+          // });
+          // aa+="</select>";          
+          // $("#replicatedList").append('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
+          // )
+          
+        // });
+
       } else {
         this.screenlist = [];
       }
-      const respons = await this.$axios.get(
+
+
+        const respons = await this.$axios.get(
         "general-setting/list?section=" + "assistance-or-supervision",
         { headers }
       );
@@ -914,6 +954,13 @@ export default {
       }
     },
     async Ontriageform() {
+      var screening_type = [];
+      $("table#selects > tbody > tr").each(function () {
+        var obj = {};
+        obj.duration = $('td select.selects', this).val();
+        obj.scores = $('td input[type="text"].scores', this).val();
+        screening_type.push(obj);
+      });
       this.errorList = [];
       try {
         if (!this.screening_id) {
@@ -1054,6 +1101,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
+              screening_type:screening_type
             },
             { headers }
           );
