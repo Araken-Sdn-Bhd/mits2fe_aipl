@@ -388,6 +388,7 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import moment from 'moment'
 export default {
   components: { CommonSidebar, CommonHeader },
   data() {
@@ -429,6 +430,7 @@ export default {
       employstatuslist: [],
       Isvalidate: true,
       Id: 0,
+      yearError:"",
       //IAgree: false,
     };
   },
@@ -577,6 +579,7 @@ export default {
       console.log("my val", this.citizentype);
     },
     async submitRegistration() {
+    
       this.Isvalidate = true;
       try {
         //if (this.IAgree) {
@@ -713,6 +716,7 @@ export default {
             body.append("patient_need_triage_screening" ,"0");
             body.append("Sharp" ,"1");
             body.append("branch_id", this.branch_id);
+            body.append("update_at",moment().format("YYYY-MM-DD HH:mm:ss"))
             if (this.Id > 0) {
               const response = await this.$axios.post(
                 "patient-registration/update",
