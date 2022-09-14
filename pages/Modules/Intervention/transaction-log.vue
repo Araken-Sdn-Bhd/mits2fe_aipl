@@ -98,8 +98,8 @@ export default {
   },
   methods:{
     formatetime(date) {
-      const local = moment.utc(date).local().format("hh:mm a");
-      // const local = moment(date).local().format("hh:mm A");
+      //const local = moment.utc(date).local().format("hh:mm a");
+       const local = moment(date).format("hh:mm:ss");
       return local;
     },
   }

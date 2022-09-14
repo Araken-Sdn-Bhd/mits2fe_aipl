@@ -132,7 +132,7 @@
                         ><i class="fad fa-edit"></i
                       ></a>
                       <a
-                        @click="OnAssignStaffPop(app.team_id,app.appointment_id)"
+                        @click="OnAssignStaffPop(app.team_id,app.appointment_id,app.service)"
                         class="action-icon icon-info"
                         ><i class="fad fa-check"></i
                       ></a>
@@ -233,6 +233,7 @@ export default {
       appId: 0,
       assign_team: 0,
       staff_id:0,
+      serviceType: "",
     };
   },
 
@@ -420,8 +421,9 @@ export default {
         this.list = [];
       }
     },
-    OnAssignStaffPop(appid,aptId) {
+    OnAssignStaffPop(appid,aptId,serviceType) {
       this.appId = aptId;
+      this.serviceType = serviceType;
        const headers = {
         Authorization: "Bearer " + this.token,
         Accept: "application/json",
@@ -454,7 +456,7 @@ export default {
           added_by: this.userdetails.user.id,
           appointment_id: this.appId,
           assign_team: this.assign_team,
-          service: this.service,
+          service: this.serviceType,
         },
         { headers }
       );

@@ -100,6 +100,11 @@
       <p>Please appoint a group representative to complete this form</p>
     </div>
     <div class="representative-yes represen-box hide">
+      <div>
+        <label for="" class="col-sm-4 font-italic"
+        >Please provide personal details below.</label
+        >
+      </div>
        <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
@@ -414,7 +419,7 @@
                   ></label
                 >
 
-                  <!-- <div class="form-check">
+                  <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -425,7 +430,7 @@
                   <label class="form-check-label" for="Rehabilitation">
                     Consultation/Counselling
                   </label>
-                </div> -->
+                </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
