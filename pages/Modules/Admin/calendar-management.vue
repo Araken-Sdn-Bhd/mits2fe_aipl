@@ -20,15 +20,15 @@
                 <div class="table-title d-flex align-items-center">
                   <h3>List of Event</h3>
                   <div class="btn-box ml-auto">
-                    <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0">
+                    <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0 text-white">
                       <i class="far fa-download"></i> Excel Template
                     </a>
-                    <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary mt-0">
+                    <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary text-white mt-0">
                       <i class="far fa-file-excel"></i> Upload Excel
                     </button>
                     <a
                       href="/Modules/Admin/exception"
-                      class="btn btn-primary mt-0"
+                      class="btn btn-primary mt-0 text-white"
                     >
                       <i class="far fa-plus"></i> Add Exception
                     </a>
