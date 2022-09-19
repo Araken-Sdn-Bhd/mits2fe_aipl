@@ -16,7 +16,7 @@
               <h4>BECK DEPRESSION INVENTORY (BDI)</h4>
             </div>
             <div class="card-body">
-           
+
                 <div class="row mr-0">
                   <div
                     class="col-sm-6"
@@ -119,7 +119,7 @@
                   </table>
                 </div>
               </div>
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
                   type="button"
@@ -133,7 +133,7 @@
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
