@@ -313,9 +313,10 @@
                               >Mobile Phone No.<small>*</small></label
                             >
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               name=""
+                              v-mask="'###-########'"
                               placeholder="Enter Mobile Phone No" v-model="mobile_no"
                             />
                           </div>
@@ -324,9 +325,10 @@
                           <div class="mb-3">
                             <label class="form-label">House Phone No.</label>
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               placeholder="Enter House Phone No"
+                              v-mask="'##-########'"
                               name="" v-model="house_no"
                             />
                           </div>
@@ -777,10 +779,11 @@
                               >Mobile Phone No.<small></small></label
                             >
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               name=""
                               placeholder="Enter Mobile Phone No"
+                              v-mask="'###-########'"
                               v-model="kin_mobile_no"
                             />
                           </div>
@@ -789,9 +792,10 @@
                           <div class="mb-3">
                             <label class="form-label">House Phone No.</label>
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               placeholder="Enter House Phone No"
+                              v-mask="'##-########'"
                               name=""
                                 v-model="kin_house_no"
                             />

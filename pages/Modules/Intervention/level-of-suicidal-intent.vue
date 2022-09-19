@@ -59,7 +59,7 @@
                     </div>
                   </div>
                 </div>
-               
+
                 <!-- col-sm-6 -->
               </div>
               <Error :message="error" v-if="error" />
@@ -80,7 +80,7 @@
             <div class="modal-content">
               <div id="results" style="background: #fff">
                 <div class="modal-header">
-                  <h5 class="modal-title">PHQ-9 Scores</h5>
+                  <h5 class="modal-title">SELF HARM & SUICIDAL INTENT Scores</h5>
                   <p>
                     The system will sum up the score for every question in each
                     category. The scale are as follows:
@@ -103,7 +103,7 @@
                   </table>
                 </div>
               </div>
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
                   type="button"
@@ -117,7 +117,7 @@
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

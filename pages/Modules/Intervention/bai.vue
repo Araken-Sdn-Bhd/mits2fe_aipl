@@ -115,12 +115,12 @@
                         <th scope="row">{{result.BAI}}</th>
                         <td>{{result.baiScore}}</td>
                       </tr>
-                    
+
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
                   type="button"
@@ -134,7 +134,7 @@
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
