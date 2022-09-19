@@ -76,11 +76,12 @@
                             >NRIC No<small>*</small></label
                           >
                           <input
-                            type="number"
-                            class="form-control"
-                            @keyup="OnnricNo"
-                            placeholder="Enter NRIC No"  v-model="nric_no"
-                          />
+                                type="number"
+                                class="form-control"
+                                placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo"
+                                v-model="nric_no"
+                              />
+                              <Error :message="error" v-if="error" />
                           
                         </div>
                       </div>
@@ -774,11 +775,29 @@ export default {
       }
     },
     OnnricNo() {
-      if (this.nric_no.length == 12) { 
-        this.errorNric = null;
-      } else{
-        this.errorNric = "Please Enter 12 Digit NRIC No";
+      if (this.nric_no.length == 12) {
+        this.firstDob = String(this.nric_no).slice(0, 4);
+        this.secondDob = String(this.nric_no).slice(4, 6);
+        this.thirdDob = String(this.nric_no).slice(6, 8);
+        this.birth_date = this.getDate(this.nric_no);
+        this.OnAgeCalculation();
+        this.error = null;
+      } else {
+        this.error = "Please Enter 12 Digit NRIC No";
       }
+    },
+    getDate(d) {
+      return (
+        (parseInt(d[0] + d[1]) < 30 ? "20" : "19") +
+        d[0] +
+        d[1] +
+        "-" +
+        d[2] +
+        d[3] +
+        "-" +
+        d[4] +
+        d[5]
+      );
     },
     OnnricNo1() {
       if (this.nric_no1.length == 12) {

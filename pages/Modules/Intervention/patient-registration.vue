@@ -310,10 +310,11 @@
                               >Mobile Phone No.<small>*</small></label
                             >
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               name=""
-                              placeholder="xxx- xxxxxxxx" v-model="mobile_no"
+                              v-mask="'###-########'"
+                              placeholder="xxx-xxxxxxxx" v-model="mobile_no"
                             />
                           </div>
                         </div>
@@ -321,9 +322,10 @@
                           <div class="mb-3">
                             <label class="form-label">House Phone No.</label>
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
-                              placeholder="xx- xxxxxxxx"
+                              v-mask="'##-########'"
+                              placeholder="xx-xxxxxxxx"
                               name="" v-model="house_no"
                             />
                           </div>
@@ -783,10 +785,11 @@
                               >Mobile Phone No.<small></small></label
                             >
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
                               name=""
-                              placeholder="xxx- xxxxxxxx"
+                              v-mask="'###-########'"
+                              placeholder="xxx-xxxxxxxx"
                               v-model="kin_mobile_no"
                             />
                           </div>
@@ -795,9 +798,10 @@
                           <div class="mb-3">
                             <label class="form-label">House Phone No.</label>
                             <input
-                              type="number"
+                              type="tel"
                               class="form-control"
-                              placeholder="xx- xxxxxxxx"
+                              v-mask="'##-########'"
+                              placeholder="xx-xxxxxxxx"
                               name=""
                                 v-model="kin_house_no"
                             />
@@ -1489,7 +1493,7 @@ export default {
           this.branch_id =response.data.branch;
           console.log('my branchid333',this.branch_id);
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
