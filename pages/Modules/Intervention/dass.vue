@@ -23,7 +23,7 @@
                   <span>There are no right or wrong answers. Do not spend too much time on any statement.</span>
                   <small>Sila baca setiap kenyataan di bawah dan pilih jawapan 0, 1, 2, or 3 bagi menggambarkan keadaan anda sepanjang minggu yang</small>
                   <span>lalu Tiada jawapan yang betul atau salah. Jangan mengambil masa yang terlalu lama untuk mana-mana kenyataan</span>
-                </p> 
+                </p>
                  <ul class="instruction">
                   <li>
                     <span class="no">0</span>
@@ -79,7 +79,7 @@
                           type="radio"
                           v-bind:name="'pb' + index"
                           value="1"
-                          @change="onchange(pb.id, 0)"
+                          @change="onchange(pb.question_order, 0)"
                         />
                         <label class="form-check-label" for="1">{{
                           pb.Answer0
@@ -91,7 +91,7 @@
                           type="radio"
                           value="2"
                           v-bind:name="'pb' + index"
-                          @change="onchange(pb.id, 1)"
+                          @change="onchange(pb.question_order, 1)"
                         />
                         <label class="form-check-label" for="2">{{
                           pb.Answer1
@@ -103,7 +103,7 @@
                           type="radio"
                           value="3"
                           v-bind:name="'pb' + index"
-                          @change="onchange(pb.id, 2)"
+                          @change="onchange(pb.question_order, 2)"
                         />
                         <label class="form-check-label" for="3">{{
                           pb.Answer2
@@ -115,7 +115,7 @@
                           type="radio"
                           value="4"
                           v-bind:name="'pb' + index"
-                          @change="onchange(pb.id, 3)"
+                          @change="onchange(pb.question_order, 3)"
                         />
                         <label class="form-check-label" for="4">{{
                           pb.Answer3
