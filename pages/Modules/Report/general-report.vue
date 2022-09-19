@@ -687,7 +687,7 @@ export default {
             if (this.list.length > 0) {
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("p", "pt", "a4");
+                var pdf = new jsPDF("l", "pt", "a2");
                 pdf.addHTML($("#result")[0], function () {
                   pdf.save("Sharp_Report.pdf");
                 });
@@ -763,17 +763,17 @@ export default {
 </script>
 <style scoped>
 .tdrow {
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 600;
 }
 .thhead {
   background: #ddd;
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 9px;
 }
 .table {
   border: 1px solid rgb(0, 0, 0);
@@ -782,15 +782,15 @@ export default {
 }
 .tabhead {
   background: #ddd;
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 9px;
 }
 .tabtd {
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 600;
 }
 .hide {
@@ -798,6 +798,6 @@ export default {
   display: none;
 }
 div#result {
-  padding: 35px;
+  padding: 5px;
 }
 </style>
