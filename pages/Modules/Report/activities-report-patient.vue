@@ -157,8 +157,8 @@
                   </div>
                 </div>
                 <!-- row -->
-
-                <div class="supported-employment selected-box hide">
+               
+                <div  v-if="this.appointment_type == 3" class="supported-employment selected-box ">
                   <div class="form-title">
                     <h4>Supported Employment Program</h4>
                   </div>
@@ -167,18 +167,30 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Employment Status:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select"  v-model="employement_status"> <!--test-->
+                          <option value="">Please Select</option><!--test-->
+                          <option   
+                          v-for="stat in employementstatlist"
+                          v-bind:key="stat.id"
+                          v-bind:value="stat.id"
+                          >
+                          {{ stat.section_value}}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Case Manager:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="case_manager">
+                          <option value="">Please Select</option>
+                          <option   
+                          v-for="listemp in cmanagerlist"
+                          v-bind:key="listemp.id"
+                          v-bind:value="listemp.id"
+                          >
+                          {{ listemp.case_manager }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
@@ -189,9 +201,15 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">List of Employer:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select"  v-model="employer_list"> <!--test-->
+                          <option value="">Please Select</option><!--test-->
+                          <option   
+                          v-for="employer in employerlist"
+                          v-bind:key="employer.id"
+                          v-bind:value="employer.id"
+                          >
+                          {{ employer.name_of_employer }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
@@ -200,7 +218,7 @@
                 </div>
                 <!-- Hide -->
 
-                <div class="etp selected-box hide">
+                <div v-if="this.appointment_type == 4" class="etp selected-box">
                   <div class="form-title">
                     <h4>ETP</h4>
                   </div>
@@ -209,18 +227,25 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Case Manager:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="case_manager">
+                          <option value="">Please Select</option>
+                          <option   
+                          v-for="listemp in cmanagerlist"
+                          v-bind:key="listemp.id"
+                          v-bind:value="listemp.id"
+                          >
+                          {{ listemp.case_manager }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Work Readiness:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="work_readiness">
+                        <option value="">Please Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                         </select>
                       </div>
                     </div>
@@ -229,7 +254,7 @@
                 </div>
                 <!-- Hide -->
 
-                <div class="job-club selected-box hide">
+                <div v-if="this.appointment_type == 5" class="job-club selected-box">
                   <div class="form-title">
                     <h4>Job Club</h4>
                   </div>
@@ -238,18 +263,25 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Case Manager:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="case_manager">
+                          <option value="">Please Select</option>
+                          <option   
+                          v-for="listemp in cmanagerlist"
+                          v-bind:key="listemp.id"
+                          v-bind:value="listemp.id"
+                          >
+                          {{ listemp.case_manager }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Work Readiness:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="work_readiness">
+                        <option value="">Please Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                         </select>
                       </div>
                     </div>
@@ -258,7 +290,7 @@
                 </div>
                 <!-- Hide -->
 
-                <div class="cps selected-box hide">
+                <div v-if="this.appointment_type == 6" class="cps selected-box">
                   <div class="form-title">
                     <h4>Community Psychiatric Services(CPS)</h4>
                   </div>
@@ -267,18 +299,30 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Current Intervention:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="current_intervention">
+                          <option value="">Please Select</option>
+                          <option   
+                          v-for="cintervention in currentinterventionlist"
+                          v-bind:key="cintervention.id"
+                          v-bind:value="cintervention.id"
+                          >
+                          {{ cintervention.section_value }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Case Manager:</label>
-                        <select class="form-select">
-                          <option selected>Please Select</option>
-                          <option value="">...</option>
+                        <select class="form-select" v-model="case_manager">
+                          <option value="">Please Select</option>
+                          <option   
+                          v-for="listemp in cmanagerlist"
+                          v-bind:key="listemp.id"
+                          v-bind:value="listemp.id"
+                          >
+                          {{ listemp.case_manager }}
+                        </option><!--test-->
                         </select>
                       </div>
                     </div>
@@ -303,6 +347,7 @@
                     <a @click="Ongenerateexel" class="btn btn-success btn-text"
                       ><i class="far fa-file-excel"></i> Generate Excel</a
                     >
+
                   </div>
                 </div>
               </div>
@@ -402,6 +447,10 @@ export default {
       visitlist: [],
       servicelist: [],
       diagonisislist: [],
+      employementstatlist: [],
+      cmanagerlist: [],
+      employerlist: [],
+      currentinterventionlist: [],
       fromDate: "",
       toDate: "",
       patient_category: "",
@@ -411,6 +460,10 @@ export default {
       appointment_type: "",
       diagnosis_id: "",
       gender: "",
+      employement_status: "",
+      case_manager: "", //test
+      employer_list: "",
+      current_intervention: "",
       Total_Days: 0,
       Total_Patient: 0,
       Attend: 0,
@@ -481,6 +534,40 @@ export default {
         } else {
           this.diagonisislist = [];
         }
+        const response17 = await this.$axios.get("intervention/job-start-form", {
+          headers,
+        });
+        if (response17.data.code == 200 || response17.data.code == "200") {
+          this.cmanagerlist = response17.data.list;
+        } else {
+          this.cmanagerlist = [];
+        }
+        const response18 = await this.$axios.get(
+          "general-setting/list?section=" + "employment-status",
+          { headers }
+        );
+        if (response18.data.code == 200 || response18.data.code == "200") {
+          this.employementstatlist = response18.data.list;
+        } else {
+          this.employementstatlist = [];
+        }    
+        const response19 = await this.$axios.get("intervention/job-start-form", {
+          headers,
+        });
+        if (response19.data.code == 200 || response19.data.code == "200") {
+          this.employerlist = response19.data.list;
+        } else {
+          this.employerlist = [];
+        }
+        const response20 = await this.$axios.get(
+          "general-setting/list?section=" + "current-intervention",
+          { headers }
+        );
+        if (response20.data.code == 200 || response20.data.code == "200") {
+          this.currentinterventionlist = response20.data.list;
+        } else {
+          this.currentinterventionlist = [];
+        }  
         this.loader = false;
       } catch (e) {
         console.log("my error", e);
@@ -513,6 +600,10 @@ export default {
             appointment_type: this.appointment_type,
             diagnosis_id: this.diagnosis_id,
             gender: this.gender,
+            employment_status: this.employement_status,
+            case_manager: this.case_manager,
+            employer_list: this.employer_list, //test
+            current_intervention: this.current_intervention,
             report_type: "pdf",
           },
           { headers }
@@ -570,8 +661,12 @@ export default {
               referral_type: this.referral_type,
               appointment_status: this.appointment_status,
               appointment_type: this.appointment_type,
-              diagnosis_id: this.diagnosis_id,
+              diagnosis_id: this.diagnosis_id, 
               gender: this.gender,
+              case_manager: this.case_manager,
+              employment_status: this.employement_status,
+              employer_list: this.employer_list,
+              current_intervention: this.current_intervention,
               report_type: "excel",
             },
             { headers }
