@@ -217,19 +217,19 @@
                           </div>
                          <div class="indicator">
                             <div class="dot normal">
-                              <span></span>
+                              <span class="bg-color1"></span>
                               <h5>Normal</h5>
                             </div>
                             <div class="dot moderate">
-                              <span></span>
+                              <span class="bg-color2"></span>
                               <h5>Moderate</h5>
                             </div>
                             <div class="dot high">
-                              <span></span>
+                              <span class="bg-color3"></span>
                               <h5>High</h5>
                             </div>
                             <div class="dot severe">
-                              <span></span>
+                              <span class="bg-color4"></span>
                               <h5>Severe</h5>
                             </div>
                           </div>
@@ -436,19 +436,19 @@
                           </div>
                           <div class="indicator">
                             <div class="dot normal">
-                              <span></span>
+                              <span class="bg-color1"></span>
                               <h5>Normal</h5>
                             </div>
                             <div class="dot moderate">
-                              <span></span>
+                              <span class="bg-color2"></span>
                               <h5>Moderate</h5>
                             </div>
                             <div class="dot high">
-                              <span></span>
+                              <span class="bg-color3"></span>
                               <h5>High</h5>
                             </div>
                             <div class="dot severe">
-                              <span></span>
+                              <span class="bg-color4"></span>
                               <h5>Severe</h5>
                             </div>
                           </div>
@@ -658,19 +658,19 @@
                           </div>
                           <div class="indicator">
                             <div class="dot normal">
-                              <span></span>
+                              <span class="bg-color1"></span>
                               <h5>Normal</h5>
                             </div>
                             <div class="dot moderate">
-                              <span></span>
+                              <span class="bg-color2"></span>
                               <h5>Moderate</h5>
                             </div>
                             <div class="dot high">
-                              <span></span>
+                              <span class="bg-color3"></span>
                               <h5>High</h5>
                             </div>
                             <div class="dot severe">
-                              <span></span>
+                              <span class="bg-color4"></span>
                               <h5>Severe</h5>
                             </div>
                           </div>
