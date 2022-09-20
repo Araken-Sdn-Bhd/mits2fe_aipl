@@ -22,7 +22,7 @@
                   aria-controls="system-setting"
                 >
                   <i class="far fa-file-chart-line"></i>
-                  TestWorkload Report
+                  Workload Report
                 </a>
                 <ul
                   class="collapse"
