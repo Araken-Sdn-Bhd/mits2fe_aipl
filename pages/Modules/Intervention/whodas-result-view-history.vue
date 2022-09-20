@@ -1,10 +1,37 @@
 <template>
   <div id="layoutSidenav">
+    <CommonSidebar />
+
     <div id="layoutSidenav_content">
+      <CommonHeader />
+
       <main>
         <div class="container-fluid px-4">
-           <publicnav></publicnav>
-          <div class="offline-title">
+          <nav class="offline-form" v-if="!userdetails">
+            <ul>
+              <li>
+                <a href="/Modules/Patient/cbi" class="nav-link"
+                  ><i class="far fa-file-contract"></i> <span>CBI</span></a
+                >
+              </li>
+              <li>
+                <a href="/Modules/Patient/dass" class="nav-link"
+                  ><i class="far fa-file-contract"></i> <span>DASS</span></a
+                >
+              </li>
+              <li>
+                <a href="/Modules/Patient/phq-9" class="nav-link"
+                  ><i class="far fa-file-contract"></i> <span>PHQ 9</span></a
+                >
+              </li>
+              <li>
+                <a href="/Modules/Patient/whodas" class="nav-link"
+                  ><i class="far fa-file-contract"></i> <span>WHODAS</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+          <div :class="userdetails ? 'page-title' : 'offline-title'">
             <h1>Patient Screening and Appointment</h1>
           </div>
           <div class="card mb-4">
@@ -116,7 +143,7 @@
                     <i class="fad fa-download"></i> Download Result
                   </button>
                   <a
-                    href="/Modules/Patient/public-request-appointment-form"
+                   	 @click="Gotorequestappointment"
                     class="btn btn-success btn-text ml-auto"
                     ><i class="fad fa-calendar-day"></i> Request Appointment</a
                   >
@@ -130,10 +157,10 @@
   </div>
 </template>
 <script>
-import PatientLoginSidebar from "../../../components/Patient/PatientLoginSidebar.vue";
-import PatientLoginHeader from "../../../components/Patient/PatientLogin_Header.vue";
+import CommonHeader from '../../../components/CommonHeader.vue';
+import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { PatientLoginSidebar, PatientLoginHeader },
+  components: { CommonSidebar, CommonHeader },
   name: "dass-result",
   head: {
     script: [
@@ -170,23 +197,58 @@ export default {
       PIS: 0,
       SC: 0,
       UC: 0,
+      GAlevel: "",
+      GAWPlevel: "",
+      LAHlevel: "",
+      LASWlevel: "",
+      PISlevel: "",
+      SClevel: "",
+      UClevel: "",
       UserTotal: 0,
+      Id:0
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.whodasresult = JSON.parse(localStorage.getItem("whodasresult"));
+    this.whodasresult = JSON.parse(localStorage.getItem("whodasresult_history"));
     console.log("my res", this.whodasresult);
     if (this.whodasresult) {
-      this.GA = this.whodasresult.GA.score;
-      this.GAWP = this.whodasresult.GAWP.score;
-      this.LAH = this.whodasresult.LAH.score;
-      this.LASW = this.whodasresult.LASW.score;
-      this.PIS = this.whodasresult.PIS.score;
-      this.SC = this.whodasresult.SC.score;
-      this.UC = this.whodasresult.UC.score;
-      this.UserTotal = this.whodasresult.UserTotal;
+      const Array=this.whodasresult.test_section_name.split(',');
+      console.log("my res", Array);
+      const Results=this.whodasresult.results.split(',');
+      console.log("my result", Results);
+      // const Levels=this.whodasresult.levels.split(',');
+      if(Array[0] =="UC"){
+        this.UC = Results[0];
+        // this.UClevel = Levels[0];
+      } if(Array[1] =="GA"){
+        this.GA = Results[1];
+        // this.GAlevel = Levels[1];
+      }
+       if(Array[2] =="SC"){
+        this.SC = Results[2];
+        // this.SClevel = Levels[2];
+      }
+      if(Array[3] =="GAWP"){
+        this.GAWP = Results[3];
+        // this.GAWPlevel = Levels[3];
+      }
+       if(Array[4] =="LAH"){
+        this.LAH = Results[4];
+        // this.LAHlevel = Levels[4];
+      }
+       if(Array[5] =="LASW"){
+        this.LASW = Results[5];
+        // this.LASWlevel = Levels[5];
+      }
+      if(Array[6] =="PIS"){
+        this.PIS = Results[6];
+        // this.PISlevel = Levels[6];
+      }
+      this.UserTotal = this.whodasresult.result;
     }
+     let urlParams = new URLSearchParams(window.location.search);
+       this.Id = urlParams.get("id");
   },
   beforeDestroy() {
     localStorage.removeItem("whodasresult");
@@ -198,6 +260,12 @@ export default {
         pdf.save("Result.pdf");
       });
     },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Intervention/request-appointment-form",
+        query: { id: this.Id },
+      });
+    }
   },
 };
 </script>

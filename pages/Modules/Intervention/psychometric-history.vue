@@ -32,10 +32,8 @@
                     <td>{{ test.result }}</td>
                     <td>
                       <a
-                        v-if="
-                          test.test_name == 'atq' || test.test_name == 'psp'
-                        "
-                        @click="OnTestView(test.id, test.test_name)"
+                      
+                        @click="OnTestView(test.id, test.test_name,test)"
                         class="edit"
                         ><i class="fad fa-eye"></i
                       ></a>
@@ -92,6 +90,52 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="resultmodalbdi" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-table-body">
+            <div class="modal-content">
+              <div id="resultsbdi" style="background-color:White">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{TitleName}}</h5>
+                  <p>
+                    The system will sum up the score for every question in each
+                    category. The scale are as follows:
+                  </p>
+                </div>
+                <div class="modal-body">
+                  <table class="modal-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Level</th>
+                        <th scope="col">Total Scrore</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="active" >
+                        <th scope="row">{{this.bdilevel}}</th>
+                        <td>{{this.bdiscore}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  @click="downloadresult"
+                  type="button"
+                  class="btn btn-secondary mr-auto"
+                >
+                  <i class="fad fa-download"></i> Download Result
+                </button>
+                <a
+                  @click="Gotorequestappointment"
+                  class="btn btn-primary ml-auto"
+                >
+                  <i class="fad fa-calendar-day"></i> Request Appointment
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -110,6 +154,9 @@ export default {
       Id: 0,
       TestName: "",
       result: null,
+      bdilevel:"",
+      bdiscore:"",
+      TitleName:"",
     };
   },
   beforeMount() {
@@ -155,15 +202,77 @@ export default {
       });
   },
   methods: {
-    async OnTestView(id, name) {
+    async OnTestView(id, name,test) {
+      console.log('my test name',name);
+      if(name=="cbi"){
+        localStorage.setItem("cbiresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/Modules/Intervention/patient-summary",
+        path: "/Modules/Intervention/cbi-result-view-history",
         query: { id: this.Id },
       });
+      }else if(name=="dass"){
+        localStorage.setItem("cbiresult_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/dass-result-view-history",
+        query: { id: this.Id },
+      });
+      }else if(name=="phq9"){
+        localStorage.setItem("phq9result_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/phq9-result-view-history",
+        query: { id: this.Id },
+      });
+      }else if(name=="whodas"){
+        localStorage.setItem("whodasresult_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/whodas-result-view-history",
+        query: { id: this.Id },
+      });
+      }
+      else if(name=="bdi"){
+        this.TitleName="BDI Scores";
+        $('#resultmodalbdi').modal('show');
+        console.log('my bdi respo',test);
+        this.bdilevel=test.levels[0];
+        this.bdiscore=test.levels[1];
+      }else if(name=="bai"){
+        this.TitleName="BAI Scores";
+        $('#resultmodalbdi').modal('show');
+        console.log('my bai respo',test);
+        this.bdilevel=test.levels[0];
+        this.bdiscore=test.levels[1];
+      }else if(name=="si"){
+        this.TitleName="Suicidal Intent";
+        $('#resultmodalbdi').modal('show');
+        console.log('suicidal intent respo',test);
+        this.bdilevel=test.levels[0];
+        this.bdiscore=test.levels[1];
+      }else if(name=="atq"){
+        localStorage.setItem("atqresult_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/atq-view-history",
+        query: { id: this.Id },
+      });
+      }
+      else if(name=="psp"){
+        localStorage.setItem("pspresult_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/psp-view-history",
+        query: { id: this.Id },
+      });
+      }
+      else if(name=="SR"){
+        localStorage.setItem("suicidalresult_history",JSON.stringify(test));
+        this.$router.push({
+        path: "/Modules/Intervention/suicide-risk-view-history",
+        query: { id: this.Id },
+      });
+      }
+       
     },
     downloadresult() {
       var pdf = new jsPDF("p", "pt", "a4");
-      pdf.addHTML($("#results")[0], function () {
+      pdf.addHTML($("#resultsbdi")[0], function () {
         pdf.save("Result.pdf");
       });
     },

@@ -717,7 +717,7 @@ export default {
         // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
-        this.diagnosis = response.data.Data[0].diagnosis;
+        // this.diagnosis = response.data.Data[0].type_diagnosis_id;
         this.reason_for_referral = response.data.Data[0].reason_for_referral;
         this.summary = response.data.Data[0].summary;
         this.management = response.data.Data[0].management;
@@ -729,7 +729,7 @@ export default {
         this.services_id = response.data.Data[0].services_id;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
-        this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
+        // this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
         this.category_services = response.data.Data[0].category_services;
         this.complexity_services = response.data.Data[0].complexity_services;
         this.outcome = response.data.Data[0].outcome;
@@ -747,6 +747,23 @@ export default {
         } else {
           this.icdcatcodelist = [];
         }
+
+        const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+
+      this.diagonisislist.forEach(element => {
+      if (element.id == response.data.Data[0].type_diagnosis_id) {
+        this.type_diagnosis_id = {id:element.id,text:element.icd_category_code+' '+element.icd_category_name};
+        this.diagnosis = element.icd_category_code+' '+element.icd_category_name;
+      }
+    });
+
       } else {
         window.alert("Something went wrong");
       }
