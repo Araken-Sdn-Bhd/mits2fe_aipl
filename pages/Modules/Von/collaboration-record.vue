@@ -207,6 +207,7 @@ export default {
       );
       console.log("search response", response.data);
       if (response.data.code == 200) {
+        this.list = [];
         this.loader = false;
         this.list = response.data.list;
       } else {
