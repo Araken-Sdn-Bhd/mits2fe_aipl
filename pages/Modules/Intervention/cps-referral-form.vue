@@ -129,7 +129,7 @@
                           class="form-check-input"
                           type="checkbox"
                           value=""
-                          id="depot-monitoring "
+                          id="depot-monitoring"
                           @change="checkMedication('Depot Monitoring', $event)"
                         />
                         <label class="form-check-label" for="depot-monitoring ">
@@ -192,7 +192,7 @@
                           {{indi}}
                         </label>
                       </div>
-                    
+
                     </td>
                   </tr>
                   <tr v-if="pid">
@@ -204,13 +204,13 @@
                           type="checkbox" checked
                           value=""
                           id="adherence"
-                         
+
                         />
                         <label class="form-check-label" for="adherence">
                           {{medi}}
                         </label>
                       </div>
-                     
+
                     </td>
                   </tr>
                   <tr v-if="pid">
@@ -221,13 +221,13 @@
                           class="form-check-input"
                           type="checkbox" checked
                           value=""
-                          id="identification" 
+                          id="identification"
                         />
                         <label class="form-check-label" for="identification">
                           {{supp}}
                         </label>
                       </div>
-                    
+
                     </td>
                   </tr>
                 </tbody>
@@ -384,7 +384,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -518,7 +518,7 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
         </div>
@@ -539,31 +539,31 @@
                 <tbody>
                   <tr>
                     <th>MRN:</th>
-                    <!-- <td>{{ details.patient_mrn }}</td> -->
+                    <td>{{ details.patient_mrn }}</td>
                   </tr>
                   <tr>
                     <th>Patient Name:</th>
-                    <!-- <td>{{ details.patient_name }}</td> -->
+                    <td>{{ details.patient_name }}</td>
                   </tr>
                   <tr>
                     <th>NRIC NO:</th>
-                    <!-- <td>{{ details.nric }}</td> -->
+                    <td>{{ details.nric }}</td>
                   </tr>
                   <tr>
                     <th>Age:</th>
-                    <!-- <td>{{ details.age }}</td> -->
+                    <td>{{ details.age }}</td>
                   </tr>
                   <tr>
                     <th>Contact No:</th>
-                    <!-- <td>{{ details.contact_no }}</td> -->
+                    <td>{{ details.contact_no }}</td>
                   </tr>
                   <tr>
                     <th>Gender:</th>
-                    <!-- <td>{{ details.gender }}</td> -->
+                    <td>{{ details.gender }}</td>
                   </tr>
                   <tr>
                     <th>DOB:</th>
-                    <!-- <td>{{ details.birth_date }}</td> -->
+                    <td>{{ details.birth_date }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -575,27 +575,37 @@
                   </tr>
                 </thead>
                 <tbody>
-               
+                  <tr v-if="!pid">
+                    <th>Individual:</th>
+                    <td>
+                      {{ this.selectedindividaul.join(', ').toString() }}
+                    </td>
+                  </tr>
+                  <tr v-if="!pid">
+                    <th>Medication:</th>
+                    <td>
+                      {{ this.selectedmedication.join(', ').toString() }}
+                    </td>
+                  </tr>
+                  <tr v-if="!pid">
+                    <th>Support:</th>
+                    <td>
+                      {{ this.selectedsupport.join(', ').toString() }}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
 
-           <div
-                  class="accordion form-accordion mt-3"
-                  id="accordionExample"
-                >
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                      <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
-                        OCCASION OF SERVICES
-                      </button>
-                    </h2>
+           <div class="card mb-4">
+                  <div class="card-body">
+                    <table class="notes" v-if="details">
+                    <thead>
+                      <tr>
+                        <th colspan="2">OCCASION OF SERVICES</th>
+                      </tr>
+                    </thead>
+                    </table>
+
                     <div
                       id="collapseOne"
                       class="accordion-collapse collapse show"
@@ -605,7 +615,7 @@
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
+                            >Location Of Services:</label
                           >
                           <div class="col-sm-8">
                             <select
@@ -616,12 +626,12 @@
                                 Select location of services
                               </option>
                              <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
+                                v-for="loc in locationlist"
+                                v-bind:key="loc.id"
+                                v-bind:value="loc.id"
+                              >
+                                {{ loc.section_value }}
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -634,12 +644,12 @@
                             <select class="form-select" v-model="type_diagnosis_id">
                                 <option value="0">Select Diagnosis</option>
                                 <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
-            </option>
+                                  v-for="catcode in diagonisislist"
+                                  v-bind:key="catcode.id"
+                                  v-bind:value="catcode.id"
+                                >
+                                  {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                                </option>
                               </select>
                           </div>
                         </div>
@@ -650,43 +660,13 @@
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio1"
-                                value="assisstance"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio1"
-                                >Assisstance / Supervision</label
-                              >
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio2"
-                                value="clinical-work"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio2"
+                              <label class="form-check-label" v-if="this.category_services == 'assisstance'"
+                                >Assisstance / Supervision</label>
+                                <label class="form-check-label" v-if="this.category_services == 'clinical-work'"
                                 >Clinical Work / Procedure
                               </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio3"
-                                value="external"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio3"
-                                >External</label
-                              >
+                              <label class="form-check-label" v-if="this.category_services == 'external'">
+                                External</label>
                             </div>
                           </div>
                         </div>
@@ -730,7 +710,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -797,36 +777,29 @@
                     </div>
                   </div>
                   <!--  -->
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button
-                        class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
-                        MEDICATION
-                      </button>
-                    </h2>
+                  <div class="card mb-4">
+                  <div class="card-body">
+                    <table class="notes">
+                      <thead>
+                        <tr>
+                          <th colspan="2">MEDICATION</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
                     <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div class="">
                         <div class="col-md-12 mb-3">
-                          <label class="form-label">Medication</label>
-                          <textarea
-                            class="form-control textarea"
-                            placeholder="Please Type Prescription Here"
-                            v-model="medication_des"
-                          ></textarea>
+                         <p>
+                          {{ this.medication_des }}
+                         </p>
                         </div>
                       </div>
                     </div>
+                  </div>
                   </div>
                   <!--  -->
                 </div>
@@ -836,23 +809,13 @@
                   <tr>
                     <th>Referrer Name:</th>
                     <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name=""
-                        v-model="referalname"
-                      />
+                      {{this.referalname}}
                     </td>
                   </tr>
                   <tr>
                     <th>Designation:</th>
                     <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name=""
-                        v-model="designation"
-                      />
+                      {{this.designation}}
                     </td>
                   </tr>
                 </tbody>
@@ -864,7 +827,7 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
         </div>
@@ -926,11 +889,11 @@ export default {
       validate: true,
       assistancelist: [],
       externallist: [],
-      indivisuallist:[],
-      medicationlist:[],
-      supportlist:[],
-      pid:0,
-      type:""
+      indivisuallist: [],
+      medicationlist: [],
+      supportlist: [],
+      pid: 0,
+      type: "",
     };
   },
   beforeMount() {
@@ -1298,11 +1261,9 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
         } else {
           this.icdcatcodelist = [];
         }
-        
       } else {
         window.alert("Something went wrong");
       }
