@@ -233,7 +233,7 @@
                                     </div>
 
                                     <div class="new-form mb-3">
-                                      <table class="notes th-auto">
+                                      <table class="notes th-auto" id="screentable">
                                         <thead>
                                           <tr>
                                             <th>Type of Screening</th>
@@ -955,7 +955,7 @@ export default {
     },
     async Ontriageform() {
       var screening_type = [];
-      $("table#selects > tbody > tr").each(function () {
+      $("table#screentable > tbody > tr").each(function () {
         var obj = {};
         obj.duration = $('td select.selects', this).val();
         obj.scores = $('td input[type="text"].scores', this).val();

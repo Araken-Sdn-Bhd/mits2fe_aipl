@@ -174,7 +174,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
 
-     this.pspresult_history = JSON.parse(localStorage.getItem("pspresult_history"));
+    this.pspresult_history = JSON.parse(localStorage.getItem("pspresult_history"));
     console.log("atq namesre", this.pspresult_history);
     if (this.pspresult_history) {
       this.test_name=this.pspresult_history.test_name;

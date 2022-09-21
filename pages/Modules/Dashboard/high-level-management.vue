@@ -861,7 +861,7 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
         };
-        const response = await this.$axios.post("announcement/list", {
+        const response = await this.$axios.post("announcement/publish-list", {
           headers,
         });
         console.log("my announcement", response.data);

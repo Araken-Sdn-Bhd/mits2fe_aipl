@@ -170,7 +170,7 @@ export default {
       });
     setTimeout(() => {
       this.Calender();
-    }, 500);
+    }, 1000);
   },
   methods: {
     async Calender() {

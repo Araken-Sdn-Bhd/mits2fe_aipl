@@ -159,7 +159,7 @@
                   <option
                     v-for="stf in stafflist"
                     v-bind:key="stf.users_id"
-                    v-bind:value="stf.users_id"
+                    v-bind:value="{id:stf.users_id,txt:stf.role}"
                   >
                     {{ stf.name }}
                   </option>
@@ -400,7 +400,8 @@ export default {
               hospital_id: this.HospitalId,
               branch_id: this.BranchId,
               team_id: this.teamId,
-              staff_id: this.staffId,
+              staff_id: this.staffId.id,
+              // type: this.staffId.txt,
             },
             { headers }
           );

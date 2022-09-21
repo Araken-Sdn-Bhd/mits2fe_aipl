@@ -125,7 +125,7 @@
                   <div class="d-flex">
                     <a href="/Modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
                     <div class="ml-auto">
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#test-connection"><i class="far fa-exchange"></i> Test Connection</a>
+                        <a href="#" class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
 
                         <button type="submit" class="btn btn-warning btn-text"><i class="far fa-save"></i> Save</button>
                     </div>
@@ -148,6 +148,25 @@
           <div class="modal-body">
             
             <p>Successful Connection</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div
+      class="modal fade"
+      id="test-connection-error"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+        <div class="modal-content">
+          <div class="modal-body">
+            
+            <p>No Connection</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">Ok</button>
@@ -179,6 +198,7 @@ export default {
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.GetEmail();
   },
   methods: {
     async insertemailsetting() {
@@ -248,7 +268,7 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.$nextTick(() => {
-              $("#insertpopup").modal("show");
+              $("#updatepopup").modal("show");
             });
           } else {
             this.loader = false;
@@ -265,6 +285,64 @@ export default {
         });
       }
     },
+     async GetEmail() {
+      const headers = {
+        Authorization: "Bearer " + this.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "email-setting/getEmail",
+        // { type: "psp",patient_id: this.patient_id,datetime: this.datetime },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.list = response.data.list;
+        console.log('psptestresult',this.list);
+        this.emailfrom =response.data.list[0].send_email_from;
+        this.outgoingsmtpserver=response.data.list[0].outgoing_smtp_server;
+        this.loginuserid=response.data.list[0].login_user_id;
+        this.loginpassword=response.data.list[0].login_password;
+        this.verifypassword=response.data.list[0].verify_password;
+        this.smtpportno=response.data.list[0].smtp_port_number;
+        this.security=response.data.list[0].security;
+      } else {
+        this.list = [];
+      }
+    },
+    async onTestConnection(){
+      const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "/email-setting/testEmail",
+            {
+              send_email_from: this.emailfrom,
+              outgoing_smtp_server: this.outgoingsmtpserver,
+              login_user_id: this.loginuserid,
+              login_password: this.loginpassword,
+              verify_password: this.verifypassword,
+              smtp_port_number: this.smtpportno,
+              security: this.security,
+            },
+            { headers }
+          );
+          // console.log("my body", variablevale);
+          console.log("my resp", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#test-connection").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#test-connection-error").modal("show");
+            });
+          }
+    }
   },
 };
 </script>

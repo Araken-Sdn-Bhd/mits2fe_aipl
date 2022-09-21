@@ -132,7 +132,7 @@ export default {
                     "Content-Type": "application/json",
                 };
                 const response = await this.$axios.post(
-                    "announcement/list",
+                    "announcement/publish-list",
                     { headers }
                 );
                 console.log('my announcement', response.data);

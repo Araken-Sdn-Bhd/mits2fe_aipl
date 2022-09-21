@@ -37,7 +37,8 @@
                       <div class="form-check form-check-inline">
                         <input
                           class="form-check-input"
-                          type="radio" value="true" 
+                          type="radio"
+                          value="true" 
                           v-model="atq.Answer1.value"
                           
                         />

@@ -1019,6 +1019,8 @@ export default {
         this.icddescription = response.data.list[0].icd_description;
         this.icdindex = response.data.list[0].icd_order;
         this.icdcodeId = data.id;
+        this.icdtypecodeforicdcode =response.data.list[0].icd_type_id;
+        this.icdcatcodeforicdcod =response.data.list[0].icd_category_id;
          const response1 = await this.$axios.post(
         "icd-setting/getIcdTypeWiseCategoryCodeList/" + this.icdtypecode,
         { headers }

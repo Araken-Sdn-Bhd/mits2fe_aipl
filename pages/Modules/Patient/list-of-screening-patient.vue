@@ -143,7 +143,7 @@ export default {
     },
     oneditPatient(Id) {
       this.$router.push({
-        path: "/Modules/Patient/patient-summary",
+        path: "/Modules/Intervention/patient-summary",
         query: { id: Id },
       });
     },

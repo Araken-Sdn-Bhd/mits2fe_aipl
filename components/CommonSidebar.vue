@@ -216,7 +216,8 @@ export default {
       };
       const response = await this.$axios.post(
         "access/sidebar",
-        { staff_id: this.userdetails.user.id },
+        { staff_id: this.userdetails.user.id,
+        type: this.userdetails.user.role },
         //this.userdetails.user.id 55
         { headers }
       );
