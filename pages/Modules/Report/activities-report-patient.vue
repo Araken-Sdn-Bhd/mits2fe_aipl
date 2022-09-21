@@ -167,15 +167,15 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Employment Status:</label>
-                        <select class="form-select"  v-model="employement_status"> <!--test-->
-                          <option value="">Please Select</option><!--test-->
+                        <select class="form-select"  v-model="employement_status"> 
+                          <option value="">Please Select</option>
                           <option   
                           v-for="stat in employementstatlist"
                           v-bind:key="stat.id"
                           v-bind:value="stat.id"
                           >
                           {{ stat.section_value}}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -190,7 +190,7 @@
                           v-bind:value="listemp.id"
                           >
                           {{ listemp.case_manager }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -201,15 +201,15 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">List of Employer:</label>
-                        <select class="form-select"  v-model="employer_list"> <!--test-->
-                          <option value="">Please Select</option><!--test-->
+                        <select class="form-select"  v-model="employer_list"> 
+                          <option value="">Please Select</option>
                           <option   
                           v-for="employer in employerlist"
                           v-bind:key="employer.id"
                           v-bind:value="employer.id"
                           >
                           {{ employer.name_of_employer }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -235,7 +235,7 @@
                           v-bind:value="listemp.id"
                           >
                           {{ listemp.case_manager }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -271,7 +271,7 @@
                           v-bind:value="listemp.id"
                           >
                           {{ listemp.case_manager }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -307,7 +307,7 @@
                           v-bind:value="cintervention.id"
                           >
                           {{ cintervention.section_value }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -322,7 +322,7 @@
                           v-bind:value="listemp.id"
                           >
                           {{ listemp.case_manager }}
-                        </option><!--test-->
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -560,7 +560,7 @@ export default {
           this.employerlist = [];
         }
         const response20 = await this.$axios.get(
-          "general-setting/list?section=" + "current-intervention",
+          "general-setting/list?section=" + "current-interventionl",
           { headers }
         );
         if (response20.data.code == 200 || response20.data.code == "200") {
