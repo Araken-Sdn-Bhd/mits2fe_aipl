@@ -169,6 +169,7 @@
                                 v-model="nric_type"
                                 class="form-select"
                                 aria-label="Default select example"
+                                v-on:change="resetModelValue"
                               >
                               <option value="">Please Select</option>
                                 <option
@@ -181,13 +182,43 @@
                               </select>
                             </div>
 
-                            <div class="col-sm-6">
-                              <label class="form-label">NRIC No<small>*</small></label>
+                            <div class="col-sm-6" v-if="this.nric_type == 432">
+                              <label class="form-label">Old NRIC No<small>*</small></label>
                               <input
-                                type="number"
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                placeholder="xxxxxxxx" @keyup="OnnricNo4"
+                                v-model="nric_no"
+                              />
+                              <Error :message="error" v-if="error" />
+                            </div>
+                            <div class="col-sm-6" v-if="this.nric_type == 433">
+                              <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
+                              <input
+                                type="tel"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo"
-                                v-model="nric_no" @change="OnAgeCalculation"
+                                v-model="nric_no" @change="validateIC" v-on:keypress="NumbersOnly"
+                              />
+                              <Error :message="error" v-if="error" />
+                            </div>
+                            <div class="col-sm-6" v-if="this.nric_type == 467">
+                              <label class="form-label">Police ID<small>*</small></label>
+                              <input
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                placeholder="xxxxxxxxx" @keyup="OnnricNo3"
+                                v-model="nric_no"
+                              />
+                              <Error :message="error" v-if="error" />
+                            </div>
+                            <div class="col-sm-6" v-if="this.nric_type == 468">
+                              <label class="form-label">Work Permit<small>*</small></label>
+                              <input
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                placeholder="xxxxxxxx"
+                                v-model="nric_no"
                               />
                               <Error :message="error" v-if="error" />
                             </div>
@@ -205,7 +236,7 @@
                                 type="number"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
-                                v-model="nric_no1" @change="validateIC"
+                                v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly"
                               />
                                <Error :message="error" v-if="error" />
                             </div>
@@ -767,9 +798,10 @@
                             <div class="col-sm-6">
                               <label class="form-label">NRIC No<small>*</small></label>
                               <input
-                                type="number"
-                                class="form-control"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="kinOnnricNo1" v-model="kin_nric_no"
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                placeholder="xxxxxx-xx-xxxx" @keyup="kinOnnricNo1" v-model.number="kin_nric_no"
+                                v-on:keypress="NumbersOnly"
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
@@ -1263,6 +1295,20 @@ export default {
     this.GetStaffBranchId();
   },
   methods: {
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+    resetModelValue()
+    {
+      this.nric_no = "";
+      this.error = null;
+    },
     NextFirst() {
       this.errorList = [];
       this.NextFirstval = true;
@@ -1978,6 +2024,20 @@ export default {
         this.error = "Please Enter 12 Digit NRIC No";
       }
     },
+    OnnricNo3(){
+      if (this.nric_no.length == 9 || this.nric_no.length == 8) {
+        this.error = null;
+      } else {
+        this.error = "Please Enter a Valid Police ID";
+      }
+    },
+    OnnricNo4(){
+      if (this.nric_no.length < 8 ) {
+        this.error = null;
+      } else {
+        this.error = "Please Enter a Valid Old NRIC No";
+      }
+    },
      OnAgeCalculation() {
       var today = new Date();
       var birthDate = new Date(this.birth_date);
@@ -2017,5 +2077,9 @@ export default {
 <style scoped>
 #pills-tab .nav-item a {
   pointer-events: none;
+}
+
+.toCapitalFirst {
+  text-transform: uppercase;
 }
 </style>
