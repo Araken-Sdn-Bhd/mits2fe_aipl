@@ -22,7 +22,7 @@
                   aria-controls="system-setting"
                 >
                   <i class="far fa-file-chart-line"></i>
-                  TestWorkload Report
+                  Workload Report
                 </a>
                 <ul
                   class="collapse"
@@ -33,7 +33,7 @@
                   <li class="">
                     <a class="nav-link" href="/Modules/Report/general-report">
                       <i class="far fa-file-chart-pie"></i>
-                      <span>sdfsdGeneral Report</span>
+                      <span>General Report</span>
                     </a>
                   </li>
                   <li>
