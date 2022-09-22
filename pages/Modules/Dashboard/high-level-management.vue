@@ -138,6 +138,24 @@
             </div>
             <div class="col-sm-6 mb-3">
               <div class="card">
+                <div class="row fliter-box">
+                  <div class="col-sm-5 ml-auto">
+                    <select
+                      class="form-select"
+                      v-model="tarmentari"
+                      @change="Getrecord"
+                    >
+                      <option value="0">Select State</option>
+                      <option
+                        v-for="state in StateList"
+                        v-bind:key="state.id"
+                        v-bind:value="state.id"
+                      >
+                        {{ state.state_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
                 <div class="card-details">
                   <img src="~/assets/images/location.png" />
                   <div class="text">
@@ -370,7 +388,9 @@
                     </select>
                   </div>
                   <div class="col-sm-3">
-                    <select class="form-select">
+                    <select class="form-select"
+                    v-model="sharprace"
+                      @change="Getrecord">
                       <option>Select Race</option>
                       <option>Race</option>
                       <option>Range of Age</option>
@@ -483,6 +503,7 @@ export default {
       totalmentarilocation: "",
       sharp_total_caseload: "",
       kpi_total_caseload: "",
+      sharprace:"",
       yearslist: [],
       monthlist: [
         {
@@ -540,18 +561,22 @@ export default {
       kpiUnemployement: "",
       kpiTerminated: "",
       summaryActivity: "",
-      diagnosisf0:"",
-      diagnosisf1:"",
-      diagnosisf2:"",
-      diagnosisf3:"",
-      diagnosisf4:"",
-      diagnosisf5:"",
-      diagnosisf6:"",
-      diagnosisf7:"",
-      diagnosisf8:"",
-      diagnosisf9:"",
-      diagnosisf10:"",
-      diagnosisf11:"",
+      diagnosisf0: "",
+      diagnosisf1: "",
+      diagnosisf2: "",
+      diagnosisf3: "",
+      diagnosisf4: "",
+      diagnosisf5: "",
+      diagnosisf6: "",
+      diagnosisf7: "",
+      diagnosisf8: "",
+      diagnosisf9: "",
+      diagnosisf10: "",
+      diagnosisf11: "",
+      service_name_list: [],
+      service_color_list: [],
+      service_patient_list: [],
+      StateList: [],
     };
   },
 
@@ -561,6 +586,7 @@ export default {
     this.GetYears();
     this.GetMentariList();
     this.Getannouncement();
+    this.GetStateList();
   },
   mounted() {
     // const headers = {
@@ -635,23 +661,6 @@ export default {
     // }).catch((err) => {
     //     console.error(err);
     //   });
-
-    var xValues = [];
-    var yValues1 = [55, 49];
-    var barColors = ["red", "green"];
-
-    new Chart("myChartsharp", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [
-          {
-            backgroundColor: barColors,
-            data: yValues1,
-          },
-        ],
-      },
-    });
   },
 
   methods: {
@@ -683,6 +692,7 @@ export default {
             sharpyear: this.sharpyear,
             sharpmonth: this.sharpmonth,
             sharpmentari: this.sharpmentari,
+            sharprace:this.sharprace
           },
           {
             headers,
@@ -702,44 +712,83 @@ export default {
           this.sharp_total_caseload = response.data.totalsharp[0].Sharptotal;
           this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
 
+          this.kpiEmployement =0;  this.kpiUnemployement =0;this.kpiTerminated =0;
           this.kpiEmployement = response.data.kpiEmployement[0].employed;
           this.kpiUnemployement = response.data.kpiUnemployement[0].unemployed;
           this.kpiTerminated = response.data.kpiTerminated[0].terminate;
 
           this.summaryActivity = response.data.summaryActivity;
-            if(response.data.diagnosis){
-                //  console.log('my six',response.data.diagnosis);
-          if (response.data.diagnosis[0]["icd_category_code"]=="F00-F07") {
-            this.diagnosisf0 = response.data.diagnosis[0].sum_;
-          } if(response.data.diagnosis[1]["icd_category_code"]=="F10-F18"){
-            this.diagnosisf1 = response.data.diagnosis[1].sum_;
-          }if(response.data.diagnosis[2]["icd_category_code"]=="F20-F25"){
-            this.diagnosisf2 = response.data.diagnosis[2].sum_;
-          }if(response.data.diagnosis[3]["icd_category_code"]=="F30-F39"){
-            this.diagnosisf3 = response.data.diagnosis[3].sum_;
-          } if(response.data.diagnosis[4]["icd_category_code"]=="F40-F45"){
-            this.diagnosisf4 = response.data.diagnosis[4].sum_;
-          } if(response.data.diagnosis[5]["icd_category_code"]=="F50-F55"){
-            this.diagnosisf5 = response.data.diagnosis[5].sum_;
-          } if(response.data.diagnosis[6]["icd_category_code"]=="F60-F66"){
-            this.diagnosisf6 = response.data.diagnosis[6].sum_;
-            console.log('my six',this.diagnosisf6);
-          } if(response.data.diagnosis[7]["icd_category_code"]=="F70-F73"){
-            this.diagnosisf7 = response.data.diagnosis[7].sum_;
-            
-          } if(response.data.diagnosis[8]["icd_category_code"]=="F80-F89"){
-            this.diagnosisf8 = response.data.diagnosis[8].sum_;
-           
-          } if(response.data.diagnosis[9]["icd_category_code"]=="F90-F98.5"){
-            this.diagnosisf9 = response.data.diagnosis[9].sum_;
-            
-          } if(response.data.diagnosis[10]["icd_category_code"]=="F99"){
-            this.diagnosisf10 = response.data.diagnosis[10].sum_;
-            
-          }if(response.data.diagnosis[10]["icd_category_code"]=="X60-X84"){
-            this.diagnosisf11 = response.data.diagnosis[11].sum_;
-            
-          }
+          console.log("my summaryActivity", this.summaryActivity);
+          // this.service_name_list =this.summaryActivity.filter(a=>a.service_name!=null);
+          this.service_name_list = [];
+          this.service_patient_list = [];
+          this.service_color_list = [];
+          this.summaryActivity.forEach((element) => {
+            if (element.service_name) {
+              this.service_name_list.push(element.service_name);
+            }
+          });
+          this.summaryActivity.forEach((element) => {
+            if (element.service_name) {
+              this.service_patient_list.push(element.TotalPatient);
+            }
+          });
+          this.summaryActivity.forEach((element) => {
+            if (element.service_name) {
+              this.service_color_list.push(element.color);
+            }
+          });
+          console.log("my service_name_list", this.service_name_list);
+          console.log("my service_patient_list", this.service_patient_list);
+          console.log("my service_color_list", this.service_color_list);
+          this.diagnosisf0 = "";
+          this.diagnosisf1 = "";
+          this.diagnosisf2 = "";
+          this.diagnosisf3 = "";
+          this.diagnosisf4 = "";
+          this.diagnosisf5 = "";
+          this.diagnosisf6 = "";
+          if (response.data.diagnosis) {
+            //  console.log('my six',response.data.diagnosis);
+            if (response.data.diagnosis[0]["icd_category_code"] == "F00-F07") {
+              this.diagnosisf0 = response.data.diagnosis[0].sum_;
+            }
+            if (response.data.diagnosis[1]["icd_category_code"] == "F10-F18") {
+              this.diagnosisf1 = response.data.diagnosis[1].sum_;
+            }
+            if (response.data.diagnosis[2]["icd_category_code"] == "F20-F25") {
+              this.diagnosisf2 = response.data.diagnosis[2].sum_;
+            }
+            if (response.data.diagnosis[3]["icd_category_code"] == "F30-F39") {
+              this.diagnosisf3 = response.data.diagnosis[3].sum_;
+            }
+            if (response.data.diagnosis[4]["icd_category_code"] == "F40-F45") {
+              this.diagnosisf4 = response.data.diagnosis[4].sum_;
+            }
+            if (response.data.diagnosis[5]["icd_category_code"] == "F50-F55") {
+              this.diagnosisf5 = response.data.diagnosis[5].sum_;
+            }
+            if (response.data.diagnosis[6]["icd_category_code"] == "F60-F66") {
+              this.diagnosisf6 = response.data.diagnosis[6].sum_;
+              console.log("my six", this.diagnosisf6);
+            }
+            if (response.data.diagnosis[7]["icd_category_code"] == "F70-F73") {
+              this.diagnosisf7 = response.data.diagnosis[7].sum_;
+            }
+            if (response.data.diagnosis[8]["icd_category_code"] == "F80-F89") {
+              this.diagnosisf8 = response.data.diagnosis[8].sum_;
+            }
+            if (
+              response.data.diagnosis[9]["icd_category_code"] == "F90-F98.5"
+            ) {
+              this.diagnosisf9 = response.data.diagnosis[9].sum_;
+            }
+            if (response.data.diagnosis[10]["icd_category_code"] == "F99") {
+              this.diagnosisf10 = response.data.diagnosis[10].sum_;
+            }
+            if (response.data.diagnosis[10]["icd_category_code"] == "X60-X84") {
+              this.diagnosisf11 = response.data.diagnosis[11].sum_;
+            }
           }
 
           var kpixValues = ["Employed", "Unemployed", "Terminated"];
@@ -762,9 +811,9 @@ export default {
             },
           });
 
-          var xValuescsa = ["Patient"];
-          var yValuescsa = [this.summaryActivity];
-          var barColors = ["red"];
+          var xValuescsa = this.service_name_list;
+          var yValuescsa = this.service_patient_list;
+          var barColors = this.service_color_list;
 
           new Chart("myChartSA", {
             type: "bar",
@@ -793,9 +842,20 @@ export default {
             "F99",
             "X60-X84",
           ];
-          var yValues = [this.diagnosisf0, this.diagnosisf1, this.diagnosisf2, this.diagnosisf3, this.diagnosisf4,
-           this.diagnosisf5, this.diagnosisf6, this.diagnosisf7, this.diagnosisf8, this.diagnosisf9,
-            this.diagnosisf10,this.diagnosisf11];
+          var yValues = [
+            this.diagnosisf0,
+            this.diagnosisf1,
+            this.diagnosisf2,
+            this.diagnosisf3,
+            this.diagnosisf4,
+            this.diagnosisf5,
+            this.diagnosisf6,
+            this.diagnosisf7,
+            this.diagnosisf8,
+            this.diagnosisf9,
+            this.diagnosisf10,
+            this.diagnosisf11,
+          ];
           var barColors = [
             "pink",
             "green",
@@ -823,6 +883,23 @@ export default {
               ],
             },
           });
+
+    var xValues = ["Sharp"];
+    var yValues1 = [this.sharp_total_caseload];
+    var barColors = ["red", "green"];
+
+    new Chart("myChartsharp", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: yValues1,
+          },
+        ],
+      },
+    });
         } else {
           window.alert("Something went wrong");
         }
@@ -874,6 +951,21 @@ export default {
           window.alert("Something went wrong");
         }
       } catch (e) {}
+    },
+    async GetStateList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("address/list", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.StateList = response.data.list;
+      } else {
+        this.StateList = [];
+      }
     },
   },
 };

@@ -353,13 +353,15 @@ export default {
       endtime: "",
       apid:0,
       tbid:0,
-      type:""
+      type:"",
+      users_id:0
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.users_id = urlParams.get("users_id");
     this.GetList();
     this.Getdetails();
     this.Getstaffpatientlist();
@@ -477,7 +479,7 @@ export default {
         .post(
           `${this.$axios.defaults.baseURL}` +
             "patient-appointment-details/fetchPatientStaffById",
-          { patient_id: this.Id },
+          { patient_id: this.users_id }, //patient_id is treated as usersid
           { headers }
         )
         .then((resp) => {
