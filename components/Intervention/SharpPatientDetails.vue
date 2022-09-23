@@ -43,7 +43,7 @@
 
                 <tr>
                   <td>Nationality:</td>
-                  <td>{{ patientdetails.citizenships}}</td>
+                  <td>{{ patientdetails.citizenships[0].section_value}}</td>
                 </tr>
 
                 <tr>

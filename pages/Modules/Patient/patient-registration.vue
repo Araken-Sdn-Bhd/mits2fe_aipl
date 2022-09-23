@@ -1947,13 +1947,15 @@ export default {
           response.data.list[0].traditional_description;
         this.traditional_medication =
           response.data.list[0].traditional_medication;
-        if (response.data.list[0].citizenship == 430) {
-          this.citizentype = "Malaysian";
-        } else if (response.data.list[0].citizenship == 450) {
-          this.citizentype = "Permanent Resident";
-        } else {
-          this.citizentype = "Foreigner";
-        }
+          
+          this.citizentype = response.data.list[0].citizenships[0].section_value;
+        //if (response.data.list[0].citizenship == 430) {
+        //  this.citizentype = "Malaysian";
+        //} else if (response.data.list[0].citizenship == 450) {
+        //  this.citizentype = "Permanent Resident";
+        //} else {
+        //  this.citizentype = "Foreigner";
+        //}
       } else {
         window.alert("Something went wrong");
       }
