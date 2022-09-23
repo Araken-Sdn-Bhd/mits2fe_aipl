@@ -8,7 +8,7 @@
           <Loader v-show="loader" />
           <div class="container-fluid px-4">
             <div class="page-title">
-              <h1>Activities Report</h1>
+              <h1>Activities Report </h1>
             </div>
 
             <div class="card mb-4">
@@ -189,7 +189,7 @@
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
                           >
-                          {{ listemp.case_manager }}
+                          {{ listemp.name }}
                         </option>
                         </select>
                       </div>
@@ -200,7 +200,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">List of Employer:</label>
+                        <label class="form-label">List of Employer: </label>
                         <select class="form-select"  v-model="employer_list"> 
                           <option value="">Please Select</option>
                           <option   
@@ -234,7 +234,7 @@
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
                           >
-                          {{ listemp.case_manager }}
+                          {{ listemp.name }}
                         </option>
                         </select>
                       </div>
@@ -270,7 +270,7 @@
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
                           >
-                          {{ listemp.case_manager }}
+                          {{ listemp.name }}
                         </option>
                         </select>
                       </div>
@@ -321,7 +321,7 @@
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
                           >
-                          {{ listemp.case_manager }}
+                          {{ listemp.name }}
                         </option>
                         </select>
                       </div>
@@ -473,6 +473,10 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetList();
+    if(this.userdetails){
+      this.id=this.userdetails.user.id; //faiz&amir
+      this.email=this.userdetails.user.email;//faiz&amir
+    }
   },
   methods: {
     async GetList() {
@@ -534,9 +538,10 @@ export default {
         } else {
           this.diagonisislist = [];
         }
-        const response17 = await this.$axios.get("intervention/job-start-form", {
-          headers,
-        });
+        const response17 = await this.$axios.get(
+          "hospital/getServiceByBranchTeamId?email="+ this.email, 
+          {headers }
+        );
         if (response17.data.code == 200 || response17.data.code == "200") {
           this.cmanagerlist = response17.data.list;
         } else {
