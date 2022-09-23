@@ -179,7 +179,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-     this.UsersId = urlParams.get("usersid"); 
+    this.UsersId = urlParams.get("usersid"); 
     this.GetList();
     this.GetModuleList();
   },
@@ -336,6 +336,7 @@ export default {
           "screen-module/updatescreenRole",
           {
             screen_idss: screen_idss,
+            userid:this.UsersId
           },
           { headers }
         );

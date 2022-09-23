@@ -18,7 +18,7 @@
           </div>
           <Error :message="error" v-if="error" />
           <div class="d-flex">
-            <button type="submit" class="btn btn-warning btn-text ml-auto">
+            <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="SidebarAccess==1">
               <i class="far fa-save"></i> Save
             </button>
           </div>
@@ -38,10 +38,12 @@ export default {
       sign: null,
       error: null,
       userdetails: null,
+      SidebarAccess:null
     };
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     // $("#insertpopup").modal("show");
 
     this.getDefault();

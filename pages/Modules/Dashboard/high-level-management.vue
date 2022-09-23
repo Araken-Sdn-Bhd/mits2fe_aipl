@@ -142,7 +142,7 @@
                   <div class="col-sm-5 ml-auto">
                     <select
                       class="form-select"
-                      v-model="tarmentari"
+                      v-model="branch_stateid"
                       @change="Getrecord"
                     >
                       <option value="0">Select State</option>
@@ -479,6 +479,7 @@ export default {
       taryear: 0,
       tarmonth: 0,
       tarmentari: 0,
+      branch_stateid: 0,
 
       scryear: 0,
       scrmonth: 0,
@@ -577,6 +578,8 @@ export default {
       service_color_list: [],
       service_patient_list: [],
       StateList: [],
+      sharp_total_caseloadfemale:0,
+      sharp_total_caseloadmale:0
     };
   },
 
@@ -680,6 +683,8 @@ export default {
             taryear: this.taryear,
             tarmonth: this.tarmonth,
             tarmentari: this.tarmentari,
+            tarmentari: this.tarmentari,
+            branch_stateid:this.branch_stateid,
 
             scryear: this.scryear,
             scrmonth: this.scrmonth,
@@ -709,7 +714,14 @@ export default {
           this.totalpatient = response.data.totalpatient[0].TotalPatient;
           this.totalmentarilocation =
             response.data.totalmentarilocation[0].TotalMentariLocation;
+            this.sharp_total_caseloadmale=0; this.sharp_total_caseloadfemale=0;this.sharp_total_caseload=0;
           this.sharp_total_caseload = response.data.totalsharp[0].Sharptotal;
+
+        if(response.data.male){
+        this.sharp_total_caseloadmale = response.data.male[0].Sharptotal;
+        this.sharp_total_caseloadfemale = response.data.female[0].Sharptotal;
+        }          
+          console.log('male',this.sharp_total_caseloadfemale);
           this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
 
           this.kpiEmployement =0;  this.kpiUnemployement =0;this.kpiTerminated =0;
@@ -883,7 +895,25 @@ export default {
               ],
             },
           });
+  
+  if(this.sharp_total_caseloadmale!=0 ||this.sharp_total_caseloadfemale!=0){
+var xValues = ["Male","Female"];
+    var yValues1 = [this.sharp_total_caseloadmale,this.sharp_total_caseloadfemale];
+    var barColors = ["red", "green"];
 
+    new Chart("myChartsharp", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: yValues1,
+          },
+        ],
+      },
+    });
+  }else{
     var xValues = ["Sharp"];
     var yValues1 = [this.sharp_total_caseload];
     var barColors = ["red", "green"];
@@ -900,6 +930,7 @@ export default {
         ],
       },
     });
+  }
         } else {
           window.alert("Something went wrong");
         }

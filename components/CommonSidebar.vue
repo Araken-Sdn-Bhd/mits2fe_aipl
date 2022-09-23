@@ -23,7 +23,7 @@
                     data-bs-parent="#sidenavAccordion"
                   >
                     <li v-for="(submenu, ind) in menu.sub_module_id" :key="ind">
-                      <a class="nav-link" v-bind:href="submenu.screen_route">
+                      <a class="nav-link" v-bind:href="submenu.screen_route" @click="SidebarAccess(submenu)">
                         <i v-bind:class="[submenu.icon]"></i>
                         {{ submenu.screen_name }}
                       </a>
@@ -31,7 +31,7 @@
                   </ul>
                 </li>
                 <li v-if="!menu.sub_module_id.length">
-                  <a v-bind:href="menu.screen_route" class="nav-link">
+                  <a v-bind:href="menu.screen_route" class="nav-link" @click="SidebarAccess(menu)">
                     <i v-bind:class="[menu.icon]"></i>
                     {{ menu.screen_name }}
                   </a>
@@ -207,6 +207,9 @@ export default {
       event.target.className += " active";
       // console.log(liid,index);
       alert(event.target.className);
+    },
+    SidebarAccess(val){
+    localStorage.setItem("SidebarAccess",val.read_writes);
     },
     async GetList() {
       const headers = {
