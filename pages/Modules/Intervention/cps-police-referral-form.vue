@@ -10,8 +10,7 @@
             <h1>CPS POLICE REFERRAL FORM</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
-
-          <div class="card mb-4 reslt">
+          <div class="card mb-4 hide reslt">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
               <h2 v-if="consentdetails">{{consentdetails.hospital_name}}</h2>
@@ -27,7 +26,7 @@
                       <br /><span v-if="consentdetails.hospital_name != null">{{ consentdetails.hospital_name }}</span>
                       <br /><span v-if="consentdetails.hospital_adrress_1 != null">{{ consentdetails.hospital_adrress_1 }}</span>
                       <br /><span v-if="consentdetails.hospital_adrress_2 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_2 }}</span>
-                      <br /><span v-if="consentdetails.hospital_adrress_3 != null || consentdetails.hospital_adrress_3 != ''">{{ consentdetails.hospital_adrress_3 }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_3 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_3 }}</span>
                       <br /><span v-if="consentdetails.postcode != null">{{ consentdetails.postcode }}</span>
                       <br /><span v-if="consentdetails.city_name != null">{{ consentdetails.city_name }}</span>
                       <br /><span v-if="consentdetails.state_name != null">{{ consentdetails.state_name }}</span>
@@ -38,7 +37,8 @@
                   <tr>
                     <th>To:</th>
                     <td>
-                      <input type="text" class="form-control" v-model="to" />
+                      <input type="text" class="form-control  d-print-none" v-model="to" />
+                      <span class="d-none d-print-block">{{ this.to }}</span>
                     </td>
                   </tr>
 
@@ -47,9 +47,10 @@
                     <td>
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control d-print-none"
                         v-model="officer_in_charge"
                       />
+                      <span class="d-none d-print-block">{{ this.officer_in_charge }}</span>
                     </td>
                   </tr>
 
@@ -95,9 +96,11 @@
                         department.</label
                       >
                       <textarea
-                        class="form-control textarea"
+                        class="form-control textarea d-print-none"
                         v-model="the_above_patient_ongoing"
                       ></textarea>
+
+                      <span class="d-none d-print-block">{{ this.the_above_patient_ongoing }}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -124,7 +127,8 @@
                   <tr>
                     <th>Name:</th>
                     <td>
-                      <input type="text" class="form-control" v-model="name" />
+                      <input type="text" class="form-control d-print-none" v-model="name" />
+                      <span class="d-none d-print-block">{{ this.name }}</span>
                     </td>
                   </tr>
                   <tr>
@@ -132,14 +136,15 @@
                     <td>
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control d-print-none"
                         v-model="designation"
                       />
+                      <span class="d-none d-print-block">{{ this.designation }}</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
-<p v-if="errorList.length">
+                      <p v-if="errorList.length">
                           <ul>
                            <li style="color:red"  v-for='err in errorList' :key='err' >
                            {{ err }}
