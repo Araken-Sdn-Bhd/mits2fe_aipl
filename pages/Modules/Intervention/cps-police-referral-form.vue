@@ -23,7 +23,15 @@
                   <tr>
                     <td colspan="2">
                       Psychiatry Department,
-                      <br /><span>[Hospital Incharge Address].</span>
+                      <div v-if="consentdetails">
+                      <br /><span v-if="consentdetails.hospital_name != null">{{ consentdetails.hospital_name }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_1 != null">{{ consentdetails.hospital_adrress_1 }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_2 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_2 }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_3 != null || consentdetails.hospital_adrress_3 != ''">{{ consentdetails.hospital_adrress_3 }}</span>
+                      <br /><span v-if="consentdetails.postcode != null">{{ consentdetails.postcode }}</span>
+                      <br /><span v-if="consentdetails.city_name != null">{{ consentdetails.city_name }}</span>
+                      <br /><span v-if="consentdetails.state_name != null">{{ consentdetails.state_name }}</span>
+                      </div>
                     </td>
                   </tr>
 
@@ -138,7 +146,7 @@
                              </li>
                         </ul>
                        </p>
-             
+
             </div>
           </div>
            <div class="d-flex" v-if="!pid">
@@ -198,7 +206,7 @@ export default {
       this.GetPatientdetails();
       this.GetPatientConnsentdetails();
     }
-   
+
   },
   methods: {
     async GetPatientdetails() {
