@@ -87,7 +87,6 @@
                       </div>
                     </div>
                     <!-- malaysian -->
-
                     <div
                       class="permanent-resident box"
                       v-if="citizentype == 'Permanent Resident'"
@@ -101,7 +100,7 @@
                             type="number"
                             class="form-control"
                             placeholder="xxxxxx-xx-xxxx"
-                            @keyup="OnnricNo1"
+                            @keyup="OnnricNo"
                             v-model="nric_no1"
                           />
                           <Error :message="error" v-if="error" />
@@ -109,7 +108,6 @@
                       </div>
                     </div>
                     <!-- permanent -->
-
                     <div
                       class="foreigner box"
                       v-if="citizentype == 'Foreigner'"
@@ -841,6 +839,7 @@ export default {
         { headers }
       );
       console.log("my pt details", response.data);
+      
       if (response.data.code == 200) {
         this.age = response.data.list[0].age;
         this.birth_date = response.data.list[0].birth_date;
@@ -876,13 +875,14 @@ export default {
 
         this.sex = response.data.list[0].sex;
 
-        if (response.data.list[0].citizenship == 1) {
-          this.citizentype = "Malaysian";
-        } else if (response.data.list[0].citizenship == 2) {
-          this.citizentype = "Permanent Resident";
-        } else {
-          this.citizentype = "Foreigner";
-        }
+        this.citizentype = response.data.list[0].citizenships[0].section_value;
+        //if (response.data.list[0].citizenship == 1) {
+        //  this.citizentype = "Malaysian";
+        //} else if (response.data.list[0].citizenship == 2) {
+        //  this.citizentype = "Permanent Resident";
+        //} else {
+        //  this.citizentype = "Foreigner";
+        //}
       } else {
         window.alert("Something went wrong");
       }
