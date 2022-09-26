@@ -423,6 +423,7 @@ export default {
       passport_no: "",
       expiry_date: "",
       errorList: [],
+      error: "",
       userdetails: null,
       citizentype: "",
       citizenshiplist: [],
