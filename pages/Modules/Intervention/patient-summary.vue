@@ -1123,9 +1123,11 @@ export default {
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "LaserAssessment") {
+        console.log("laser result", data);
+        localStorage.setItem("LaserResult",JSON.stringify(data));
         this.$router.push({
-          path: "/Modules/Intervention/laser-form",
-          query: { pid: data.id, type: val },
+          path: "/Modules/Intervention/laser-result-view-history", ///Modules/Intervention/laser-form
+          query: { pid: data.id, type: val, id:this.Id},
         });
       } else if (data.type == "TriageForm") {
         this.$router.push({

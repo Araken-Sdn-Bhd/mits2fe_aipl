@@ -1586,9 +1586,9 @@ export default {
         // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
-        this.pre_contemplation = response.data.Data[0].pre_contemplation;
+        var pre_contemplation = response.data.Data[0].pre_contemplation;
         // console.log('my json',JSON.stringify(response.data.Data[0].pre_contemplation));
-        this.pre_contemplationlist = JSON.stringify(this.pre_contemplation);
+        // var pre_contemplation1 = JSON.stringify(pre_contemplation);
         // console.log('my json',this.pre_contemplationlist);
         var myobj = JSON.parse(
           JSON.stringify(response.data.Data[0].pre_contemplation)
@@ -1596,8 +1596,25 @@ export default {
         // var ab =this.pre_contemplationlist[0];
         var tmp = JSON.parse(myobj);
         console.log("my json", tmp[0]);
-        // this.contemplation= response.data.Data[0].JSON.stringify([this.contemplation]);
-        // this.action= response.data.Data[0].JSON.stringify([this.action]);
+
+        var contemplation= response.data.Data[0].contemplation;
+        // this.contemplation = JSON.stringify(this.contemplation);
+        //  var myobj1 = JSON.parse(
+        //   JSON.stringify(response.data.Data[0].contemplation)
+        // );
+        // // var ab =this.pre_contemplationlist[0];
+        // var tmp1 = JSON.parse(myobj1);
+        console.log("my contemplation", contemplation);
+
+        var action= response.data.Data[0].action;
+        // this.action = JSON.stringify(this.action);
+        //  var myobj2 = JSON.parse(
+        //   JSON.stringify(response.data.Data[0].action)
+        // );
+        // // var ab =this.pre_contemplationlist[0];
+        // var tmp2 = JSON.parse(myobj2);
+        console.log("my action", action);
+
         this.location_services_id = response.data.Data[0].location_of_service;
         this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
         this.category_services = response.data.Data[0].category_of_services;
