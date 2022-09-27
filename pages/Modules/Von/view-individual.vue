@@ -154,6 +154,7 @@
                   <div class="col-sm-8">
                     <div class="form-check">
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -168,6 +169,7 @@
                     </div>
                     <div class="form-check" >
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -182,6 +184,7 @@
                     </div>
                     <div class="form-check">
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -290,6 +293,7 @@
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="professional"
@@ -304,6 +308,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="professional"
@@ -356,6 +361,7 @@
 
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Work-based Rehabilitation"
@@ -371,6 +377,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Awareness Or Psychoeducation"
@@ -386,6 +393,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Recreational Therapy"
@@ -398,6 +406,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Others"
@@ -438,6 +447,7 @@
                 </div> -->
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Work-based Rehabilitation"
@@ -453,6 +463,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Awareness Or Psychoeducation"
@@ -468,6 +479,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Recreational Therapy"
@@ -480,6 +492,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Others"
@@ -502,7 +515,7 @@
                     <div class="col-sm-8">
                       <div class="row">
                         <div class="col-sm-6">
-                          <select class="form-select" v-model="available_date">
+                          <select class="form-select" v-model="available_date" disabled>
                             <option value="">Select Day</option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
@@ -512,7 +525,7 @@
                           </select>
                         </div>
                         <div class="col-sm-6">
-                          <select class="form-select" v-model="available_time">
+                          <select class="form-select" v-model="available_time" disabled>
                             <option value="">Select Time</option>
                             <option value="8:00 AM">8:00 AM</option>
                             <option value="9:00 AM">9:00 AM</option>
@@ -629,6 +642,7 @@
                     <div class="col-sm-8 project-location-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -644,6 +658,7 @@
 
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input disabled"
                           type="radio"
                           name="project-location"
@@ -713,6 +728,7 @@
                 </div> -->
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -724,6 +740,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation" v-model="awareness"
@@ -735,6 +752,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"  v-model="recreational"
@@ -746,13 +764,14 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name=""  v-model="Others"/>
+                Others: <span type="text" name=""  >{{ this.Others }}</span>
               </label>
             </div>
           </div>
@@ -781,10 +800,7 @@
                       >How would you like contribute?</label
                     >
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea" v-model="contribution"
-                        rows="3"
-                      ></textarea>
+                      <span class="form-control textarea">{{ this.contribution }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -794,7 +810,7 @@
                       >Estimated Budget
                     </label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="budget"/>
+                      <span class="form-control">{{ this.budget }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -806,6 +822,7 @@
                     <div class="col-sm-8 project-location-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -821,6 +838,7 @@
 
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -837,27 +855,13 @@
                       <!-- hide-div -->
                       <div class="project-location-mentari profess-box " v-if="networkbranch1=='project-location-mentari'">
                         <div class="mt-3">
-                           <select class="form-select" v-model="networkbranch">
-                  <option value="">Please Select</option>
-            <option
-              v-for="brn in BranchList"
-              v-bind:key="brn.hospital_branch_name"
-              v-bind:value="brn.hospital_branch_name"
-            >
-              {{ brn.hospital_branch_name }}
-            </option>
-                </select>
+                           <span class="form-control">{{ this.networkbranch }}</span>
                         </div>
                       </div>
 
                       <div class="project-location-others profess-box" v-if="networkbranch1!='project-location-mentari'">
                         <div class="mt-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Please Specify"
-                            name="" v-model="networkother"
-                          />
+                          <span class="form-control">{{ this.networkother }}</span>
                         </div>
                       </div>
                     </div>
@@ -869,7 +873,7 @@
                       >Number of Participants</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="networkno_of_paricipants"/>
+                      <span class="form-control">{{ this.networkno_of_paricipants }}</span>
                     </div>
                   </div>
                    <div class="row mb-3 mt-2">
@@ -893,6 +897,7 @@
                 </div> -->
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -904,6 +909,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation"
@@ -915,6 +921,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"
@@ -926,6 +933,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
@@ -957,6 +965,7 @@
                     <div class="col-sm-8">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
@@ -970,6 +979,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
