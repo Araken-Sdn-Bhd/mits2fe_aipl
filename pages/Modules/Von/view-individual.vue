@@ -43,12 +43,7 @@
                     >Name<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="name"
-                    />
+                    <span class="form-control">{{ this.name }}</span>
                   </div>
                 </div>
 
@@ -57,12 +52,7 @@
                     >Date Of Birth<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="date"
-                      class="form-control"
-                      id=""
-                      v-model="dob"
-                    />
+                    <span class="form-control">{{ this.dob }}</span>
                   </div>
                 </div>
 
@@ -71,12 +61,7 @@
                     >Email<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id=""
-                      v-model="email"
-                    />
+                    <span class="form-control">{{ this.email }}</span>
                   </div>
                 </div>
 
@@ -85,76 +70,31 @@
                     >Phone Number<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="phone_number"
-                    />
+                    <span class="form-control">{{ this.phone_number }}</span>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="" class="col-sm-4 col-form-label">Address</label>
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="address"
-                    />
-                    <input
-                      type="txet"
-                      class="form-control mt-2"
-                      id=""
-                      v-model="address1"
-                    />
+                    <span class="form-control">{{ this.address }}</span>
+                    &nbsp;
+                    <span class="form-control">{{ this.address1 }}</span>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label class="form-label">State<span>*</span></label>
-                    <select
-                      class="form-select"
-                      @change="onCitybind($event)"
-                      v-model="state_id"
-                    >
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="state in StateList"
-                        v-bind:key="state.id"
-                        v-bind:value="state.id"
-                      >
-                        {{ state.state_name }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.state_id }}</span>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label class="form-label">City<span>*</span></label>
-                    <select class="form-select" v-model="city_id">
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="ctl in CityList"
-                        v-bind:key="ctl.postcode_id"
-                        v-bind:value="ctl.postcode_id"
-                      >
-                        {{ ctl.city_name }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.city_id }}</span>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label class="form-label">Postcode<span>*</span></label>
-                    <select class="form-select" v-model="postcode_id">
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="pst in PostCodeList"
-                        v-bind:key="pst.postcode_id"
-                        v-bind:value="pst.postcode_id"
-                      >
-                        {{ pst.postcode }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.postcode_id }}</span>
                   </div>
                 </div>
 
@@ -163,7 +103,7 @@
                     <label class="form-label"
                       >Highest Education<span>*</span></label
                     >
-                    <select class="form-select" v-model="education_id">
+                    <select class="form-select" v-model="education_id" disabled>
                       <option value="0">Please Select</option>
                       <option
                         v-for="ed in EducationList"
@@ -178,7 +118,7 @@
                     <label class="form-label"
                       >Current Occupation Sector<span>*</span></label
                     >
-                    <select class="form-select" v-model="occupation_sector_id">
+                    <select class="form-select" v-model="occupation_sector_id" disabled>
                       <option value="0">Please Select</option>
                       <option
                         v-for="os in OccupationList"
@@ -194,7 +134,7 @@
                 <div class="row mb-3 mt-2">
                   <label for="" class="col-sm-4 col-form-label">Mentari</label>
                   <div class="col-sm-8">
-                    <select class="form-select" v-model="branch_id">
+                    <select class="form-select" v-model="branch_id" disabled>
                       <option value="0">Please Select</option>
                       <option
                         v-for="brn in BranchList"
@@ -226,7 +166,7 @@
                         Volunteerism
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check" >
                       <input
                         class="form-check-input"
                         type="radio"
@@ -278,6 +218,7 @@
                           value="experience-yes"
                           v-model="is_voluneering_exp"
                           @change="Onvolexp('y')"
+                          disabled
                         />
                         <label class="form-check-label" for="experience-yes"
                           >Yes</label
@@ -292,6 +233,7 @@
                           value="0"
                           v-model="is_voluneering_exp"
                           @change="Onvolexp('n')"
+                          disabled
                         />
                         <label class="form-check-label" for="experience-no"
                           >No</label
@@ -600,7 +542,7 @@
                       >Project Name</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="project_name" />
+                      <span type="text" class="form-control" name="">{{ this.project_name }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -610,10 +552,10 @@
                       >Project Background</label
                     >
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea" v-model="project_background"
+                      <span
+                        class="form-control textarea"
                         rows="3"
-                      ></textarea>
+                      >{{ this.project_background }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -623,10 +565,9 @@
                       >Project Objectives</label
                     >
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea" v-model="project_objectives"
-                        rows="3"
-                      ></textarea>
+                      <span
+                        class="form-control textarea"
+                      >{{ this.project_objectives }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -636,7 +577,7 @@
                       >Target Audience</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="target_audience" />
+                      <span type="text" class="form-control">{{ this.target_audience }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -646,7 +587,7 @@
                       >Number of Participants</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="no_of_paricipants" />
+                      <span type="text" class="form-control">{{ this.no_of_paricipants }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -656,7 +597,7 @@
                       >Time Frame</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="time_frame" />
+                      <span type="text" class="form-control">{{ this.time_frame }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -666,7 +607,7 @@
                       >Estimated Budget (if any)
                     </label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="estimated_budget" />
+                      <span type="text" class="form-control">{{ this.estimated_budget }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -676,10 +617,7 @@
                       >Project Scopes</label
                     >
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea"
-                        rows="3" v-model="project_scopes"
-                      ></textarea>
+                      <span type="text" class="form-control textarea">{{ this.project_scopes }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -706,7 +644,7 @@
 
                       <div class="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          class="form-check-input disabled"
                           type="radio"
                           name="project-location"
                           id="project-location-others"
@@ -722,27 +660,13 @@
                       <!-- hide-div -->
                       <div class="mentari profess-box" v-if="projectlocation=='mentari'">
                         <div class="mt-3">
-                          <select class="form-select" v-model="project_branch">
-                  <option value="">Please Select</option>
-            <option
-              v-for="brn in BranchList"
-              v-bind:key="brn.hospital_branch_name"
-              v-bind:value="brn.hospital_branch_name"
-            >
-              {{ brn.hospital_branch_name }}
-            </option>
-                </select>
+                          <span type="text" class="form-control">{{ this.project_branch }}</span>
                         </div>
                       </div>
 
                       <div class="project-location-others profess-box" v-if="projectlocation!='mentari'">
                         <div class="mt-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Please Specify" v-model="other_loaction"
-                            name=""
-                          />
+                          <span type="text" class="form-control">{{ this.other_loaction }}</span>
                         </div>
                       </div>
                     </div>
@@ -755,10 +679,7 @@
                       >How do you want to measure the target outcome?
                     </label>
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea" v-model="target_outcome"
-                        rows="3"
-                      ></textarea>
+                      <span type="text" class="form-control">{{ this.target_outcome }}</span>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -768,10 +689,7 @@
                       >Any planned follow up projects?</label
                     >
                     <div class="col-sm-8">
-                      <textarea
-                        class="form-control textarea" v-model="followup_projects"
-                        rows="3"
-                      ></textarea>
+                      <span type="text" class="form-control">{{ this.followup_projects }}</span>
                     </div>
                   </div>
                    <div class="row mb-3 mt-2">
@@ -1104,9 +1022,9 @@ export default {
       phone_number: "",
       address: "",
       address1: "",
-      postcode_id: 0,
-      city_id: 0,
-      state_id: 0,
+      postcode_id: "",
+      city_id: "",
+      state_id: "",
       education_id: 0,
       occupation_sector_id: 0,
       branch_id: 0,
