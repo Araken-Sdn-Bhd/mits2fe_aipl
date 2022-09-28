@@ -540,7 +540,8 @@ export default {
         } else {
           this.visitlist = [];
         }
-        const response15 = await this.$axios.get("service/list", { headers });
+        const response15 = await this.$axios.get("service/servicelist", 
+        {headers, params: {email: this.email} });
         if (response15.data.code == 200 || response15.data.code == "200") {
           this.servicelist = response15.data.list;
         } else {
