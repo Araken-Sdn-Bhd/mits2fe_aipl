@@ -181,8 +181,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="ctl in GCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.id"
+              v-bind:value="ctl.id"
             >
               {{ ctl.city_name }}
             </option>
@@ -194,8 +194,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in GPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -1576,7 +1576,7 @@ export default {
               this.errors.push("Please Enter Other Location");
               this.GIsvalid = false;
             } else {
-              this.Gproject_loaction_value = this.Gproject_other;
+              this.Gproject_loaction_value = this.Gother_loaction;
             }
           } else {
             if (!this.Gproject_branch) {

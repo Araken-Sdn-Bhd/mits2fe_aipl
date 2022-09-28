@@ -128,8 +128,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="ctl in OCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.id"
+              v-bind:value="ctl.id"
             >
               {{ ctl.city_name }}
             </option>
@@ -141,8 +141,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in OPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -1467,6 +1467,7 @@ export default {
         if (!this.Ooccupation_sector_id) {
           this.errors.push("Current Occupation Sector is required.");
         }
+       
         if (!this.Obranch_id) {
           this.errors.push("Mentari Branch is required.");
         }
@@ -1497,12 +1498,12 @@ export default {
         if (!this.Oproject_loaction) {
           this.errors.push("Project Location is required.");
         } else {
-          if (this.Oproject_loaction == "project-location-others") {
+          if (this.Oproject_loaction == "location-others") {
             if (!this.Oother_loaction) {
               this.errors.push("Please Enter Other Location");
               this.OIsvalid = false;
             } else {
-              this.Oproject_loaction_value = this.Oproject_other;
+              this.Oproject_loaction_value = this.Oother_loaction;
             }
           } else {
             if (!this.Oproject_branch) {
@@ -1691,7 +1692,7 @@ export default {
           this.errors.push("Project Location is required.");
         } else {
           if (this.Onetwotkproject_loaction == "project-location-others") {
-            if (!this.networkother) {
+            if (!this.Onetworkother) {
               this.errors.push("Please Enter Other Location");
               this.OIsvalid = false;
             } else {
