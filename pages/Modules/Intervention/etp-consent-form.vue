@@ -58,13 +58,13 @@
                         <tbody>
                           <tr>
                             <th>Witness:</th>
-                            <!-- <td>{{ consentdetails.user_name }}</td> -->
-                             <td> <input
+                            <td>{{ consentdetails.user_name }}</td>
+                             <!--<td> <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="consentdetails.user_name"
-                            /></td>
+                            /></td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -86,13 +86,13 @@
                         <tbody>
                           <tr>
                             <th>Designation:</th>
-                            <!-- <td>{{ consentdetails.designation }}</td> -->
-                             <td> <input
+                            <td>{{ consentdetails.designation }}</td>
+                             <!--<td> <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="consentdetails.designation"
-                            /></td>
+                            /></td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -179,13 +179,13 @@
                         <tbody>
                           <tr>
                             <th>Witness:</th>
-                            <!-- <td>{{ consentdetails.user_name }}</td> -->
-                             <td> <input
+                            <td>{{ consentdetails.user_name }}</td>
+                             <!--<td> <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="user_name"
-                            /></td>
+                            /></td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -207,13 +207,13 @@
                         <tbody>
                           <tr>
                             <th>Designation:</th>
-                            <!-- <td>{{ consentdetails.designation }}</td> -->
-                             <td> <input
+                            <td>{{ consentdetails.designation }}</td>
+                             <!--<td> <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="designation"
-                            /></td>
+                            /></td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -312,15 +312,15 @@
                         <tbody>
                           <tr>
                             <th>Witness:</th>
-                            <!-- <td>{{ consentdetails.user_name }}</td> -->
-                             <td>
+                            <td>{{ consentdetails.user_name }}</td>
+                             <!--<td>
                                <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="consentdetails.user_name"
                             />
-                            </td>
+                            </td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -342,13 +342,13 @@
                         <tbody>
                           <tr>
                             <th>Designation:</th>
-                            <!-- <td>{{ consentdetails.designation }}</td> -->
-                             <td> <input
+                            <td>{{ consentdetails.designation }}</td>
+                             <!--<td> <input
                               type="text"
                               class="form-control"
                               name=""
                               v-model="consentdetails.designation"
-                            /></td>
+                            /></td>-->
                           </tr>
                         </tbody>
                       </table>
@@ -444,8 +444,9 @@
                         <tbody>
                           <tr>
                             <th>Witness:</th>
-                            <td><span style="max-width: 350px;     min-width: 230px; border: 1px solid #d7dce3; padding: 10px 25px; display: block; width: 100%; border-radius: 4px; ">{{ user_name }}</span></td>
-                             <!-- <td> <input
+                            <!--<td><span style="max-width: 350px;     min-width: 230px; border: 1px solid #d7dce3; padding: 10px 25px; display: block; width: 100%; border-radius: 4px; ">{{ user_name }}</span></td>-->
+                            <td>{{ consentdetails.user_name }}</td>
+                            <!-- <td> <input
                               type="text"
                               class="form-control"
                               name=""
@@ -472,7 +473,8 @@
                         <tbody>
                           <tr>
                             <th>Designation:</th>
-                            <td><span style="max-width: 350px;     min-width: 230px; border: 1px solid #d7dce3; padding: 10px 25px; display: block; width: 100%; border-radius: 4px; ">{{ designation }}</span></td>
+                            <td>{{ consentdetails.designation }}</td>
+                            <!--<td><span style="max-width: 350px;     min-width: 230px; border: 1px solid #d7dce3; padding: 10px 25px; display: block; width: 100%; border-radius: 4px; ">{{ designation }}</span></td>-->
                              <!-- <td> <input
                               type="text"
                               class="form-control"

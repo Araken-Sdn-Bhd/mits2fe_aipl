@@ -579,7 +579,8 @@
                         <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
                       </div>
                       <div class="ml-auto">
-                        <button class="btn btn-text btn-warning"><i class="fad fa-save" @click="OnDraftprotectivefactor"></i> Save as Draft</button>
+                     
+                        <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactordraft"><i class="fad fa-save"></i> Save as Draft</button>
                         <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
                        </div>
                       </div>
@@ -2712,42 +2713,6 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    async OnDraftprotectivefactor() {
-      console.log(this.procheckedList);
-
-      try {
-        this.loader = true;
-        const headers = {
-          Authorization: "Bearer " + this.token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "sharp-mgmt/store/protective-factor",
-          {
-            added_by: this.userdetails.user.id,
-            patient_id: this.Id,
-            sharp_register_id: this.sharp_register_id,
-            result: JSON.stringify([this.procheckedList]),
-            status: "0",
-          },
-          { headers }
-        );
-        if (response.data.code == 201 || response.data.code == "201") {
-          this.loader = false;
-          this.sharp_register_id = response.data.id;
-          $('#myTab a[href="#selfharm"]').tab("show");
-        } else {
-          this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.loader = false;
-        this.errors = e;
-      }
-    },
     async Onprotectivefactor() {
       console.log(this.procheckedList);
       if (
@@ -2790,6 +2755,44 @@ export default {
         this.error = "Please attempt all question";
       }
     },
+    async Onprotectivefactordraft() {
+      console.log(this.procheckedList);
+      
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/protective-factor",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              sharp_register_id: this.sharp_register_id,
+              result: JSON.stringify([this.procheckedList]),
+              status: "0",
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.loader = false;
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#selfharm"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+          this.loader = false;
+          this.errors = e;
+        }
+    
+    },
+    
 
     async DraftSelfHarm() {
       this.errors = [];

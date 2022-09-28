@@ -44,7 +44,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Appointment Type: </label>
-                      <select class="form-select" v-model="appointment_type">
+                      <select class="form-select" v-model="appointment_type" @change="getServiceByBranchTeamId()">
                         <option value="">Please Select</option>
                         <option
                           v-for="serv in servicelist"
@@ -479,6 +479,22 @@ export default {
     }
   },
   methods: {
+    async getServiceByBranchTeamId(){
+      const headers = {
+          Authorization: "Bearer " + this.token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+      const response17 = await this.$axios.get(
+          "hospital/getServiceByBranchTeamId",
+          {headers, params: {email: this.email, appointment_type: this.appointment_type} }
+        );
+        if (response17.data.code == 200 || response17.data.code == "200") {
+          this.cmanagerlist = response17.data.list;
+        } else {
+          this.cmanagerlist = [];
+        }
+    },
     async GetList() {
       try {
         this.loader = true;
@@ -524,7 +540,8 @@ export default {
         } else {
           this.visitlist = [];
         }
-        const response15 = await this.$axios.get("service/list", { headers });
+        const response15 = await this.$axios.get("service/servicelist", 
+        {headers, params: {email: this.email} });
         if (response15.data.code == 200 || response15.data.code == "200") {
           this.servicelist = response15.data.list;
         } else {
@@ -538,15 +555,15 @@ export default {
         } else {
           this.diagonisislist = [];
         }
-        const response17 = await this.$axios.get(
-          "hospital/getServiceByBranchTeamId?email="+ this.email, 
-          {headers }
-        );
-        if (response17.data.code == 200 || response17.data.code == "200") {
-          this.cmanagerlist = response17.data.list;
-        } else {
-          this.cmanagerlist = [];
-        }
+        // const response17 = await this.$axios.get(
+        //   "hospital/getServiceByBranchTeamId",
+        //   {headers, params: {email: this.email, appointment_type: this.appointment_type} }
+        // );
+        // if (response17.data.code == 200 || response17.data.code == "200") {
+        //   this.cmanagerlist = response17.data.list;
+        // } else {
+        //   this.cmanagerlist = [];
+        // }
         const response18 = await this.$axios.get(
           "general-setting/list?section=" + "employment-status",
           { headers }
