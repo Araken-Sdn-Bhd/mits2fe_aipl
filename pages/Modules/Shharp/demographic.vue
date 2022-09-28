@@ -82,7 +82,7 @@
                                 v-model="nric_no"
                               />
                               <Error :message="error" v-if="error" />
-                          
+
                         </div>
                       </div>
                     </div>
@@ -140,7 +140,7 @@
                               v-for="cnt in countrylist"
                               v-bind:key="cnt.id"
                               v-bind:value="cnt.id"
-                              
+
                             >
                               {{ cnt.country_name }}
                             </option>
@@ -240,7 +240,7 @@
                     </select>
                   </div>
                   <!-- SHOW_DIV -->
-                  <div class="col-sm-4 others selected-box">
+                  <div class="col-sm-4" v-if="race_id == 185">
                     <input
                       type="text"
                       class="form-control"
@@ -309,7 +309,7 @@
                     </select>
                   </div>
                   <!-- SHOW_DIV -->
-                  <div class="col-sm-4 marital-Others selected-box">
+                  <div class="col-sm-4" v-if="marital_id = 274">
                     <input
                       type="text"
                       class="form-control"
@@ -364,7 +364,7 @@
                       I agree to the terms and condition<span>*</span>
                     </label>
                   </div>-->
-                
+
                   <a v-if="!Id"
                   @click="submitRegistration"
                  class="btn btn-warning btn-text ml-auto"
@@ -579,7 +579,7 @@ export default {
       console.log("my val", this.citizentype);
     },
     async submitRegistration() {
-    
+
       this.Isvalidate = true;
       try {
         //if (this.IAgree) {
@@ -734,9 +734,9 @@ export default {
                  this.$router.push({
                   path: "/Modules/Shharp/patient-summary",
                   query: { id: this.Id },
-                }); 
+                });
                 }, 1000);
-                
+
               } else {
                 this.loader = false;
                 this.$nextTick(() => {
@@ -806,7 +806,7 @@ export default {
       }
     },
     OnAgeCalculation() {
-     
+
       var today = new Date();
       var birthDate = new Date(this.birth_date);
       var age = today.getFullYear() - birthDate.getFullYear();
@@ -820,10 +820,10 @@ export default {
           }
       this.age = age;
       }
-    
 
-      
-      
+
+
+
       //window.alert(age);
     },
     async GetPatientdetails() {
@@ -840,7 +840,7 @@ export default {
         { headers }
       );
       console.log("my pt details", response.data);
-      
+
       if (response.data.code == 200) {
         this.age = response.data.list[0].age;
         this.birth_date = response.data.list[0].birth_date;
@@ -908,7 +908,7 @@ export default {
           this.branch_id =response.data.branch;
           console.log('my branchid333',this.branch_id);
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
