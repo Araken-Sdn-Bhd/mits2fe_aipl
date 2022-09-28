@@ -106,6 +106,7 @@ export default {
       alert: "",
       loader: false,
       alert_id:0,
+      alertMessage: null,
     };
   },
   beforeMount() {
@@ -115,6 +116,7 @@ export default {
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.alert_id = urlParams1.get("alert_id");
+    this.GetLastupdatedAlert();
   },
   methods: {
     oneditPatient() {
@@ -200,6 +202,27 @@ export default {
     },
     FocusAlert() {
       document.getElementById("alert").focus();
+    },
+     async GetLastupdatedAlert() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-alert/alertLastbyPatientId",
+        {
+          patient_id: this.Id,
+          added_by: this.userdetails.user.id,
+        },
+        { headers }
+      );
+       console.log("my data intervention", response.data);
+      if (response.data.code == 200) {
+        this.alert = response.data.list[0].message;
+      } else {
+        window.alert("Something went wrong");
+      }
     },
   },
 };
