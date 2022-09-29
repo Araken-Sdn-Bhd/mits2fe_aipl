@@ -48,7 +48,7 @@
                 <div class="col-sm-8">
                   <div class="whodas-result">
                     <p>Your general disability score</p>
-                    <h4>{{ UserTotal }} <span>/ 190</span></h4>
+                    <h4>{{ UserTotal }} <span>/ 180</span></h4>
                   </div>
 
                   <div class="row">
