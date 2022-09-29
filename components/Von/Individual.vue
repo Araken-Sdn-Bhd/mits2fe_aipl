@@ -83,8 +83,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="ctl in CityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.id"
+              v-bind:value="ctl.id"
             >
               {{ ctl.city_name }}
             </option>
@@ -96,8 +96,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in PostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -619,7 +619,7 @@
                 </select>
               </div>
             </div>
-
+<!-- outreach other -->
             <div class="project-location-others profess-box hide">
               <div class="mt-3">
                 <input
@@ -799,7 +799,7 @@
                 </select>
               </div>
             </div>
-
+<!-- networking other -->
             <div class="project-location-others profess-box hide">
               <div class="mt-3">
                 <input
@@ -1079,6 +1079,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
+        //alert(JSON.stringify(response.data.list));
         this.CityList = response.data.list;
         this.PostCodeList = response.data.list;
       } else {
@@ -1330,6 +1331,7 @@ export default {
       }
     },
     async OnIndividualOutreachProjectCollaboration() {
+     
       try {
         this.Isvalid = true;
         if (!this.name) {
@@ -1397,7 +1399,7 @@ export default {
               this.errors.push("Please Enter Other Location");
               this.Isvalid = false;
             } else {
-              this.project_loaction_value = this.project_other;
+              this.project_loaction_value = this.other_loaction;
             }
           } else {
             if (!this.project_branch) {
@@ -1486,6 +1488,7 @@ export default {
           body.append("target_outcome", this.target_outcome);
           body.append("followup_projects", this.followup_projects);
           body.append("is_agree", "1");
+          
           const response = await this.$axios.post("von/add", body, {
             headers,
           });
@@ -1628,10 +1631,8 @@ export default {
           body.append("mentari_services", this.networkmentari_services);
           body.append("no_of_paricipants", this.networkno_of_paricipants);
           body.append("project_loaction", this.netwotkproject_loaction);
-          body.append(
-            "project_loaction_value",
-            this.netwotkproject_loaction_value
-          );
+          body.append("project_loaction_value",this.netwotkproject_loaction_value);
+          body.append("network_other",this.networkother);
           body.append("is_agree", "1");
           const response = await this.$axios.post("von/add", body, {
             headers,
