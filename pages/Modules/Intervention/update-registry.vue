@@ -561,12 +561,12 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes" @click="onchangeprotect(pro.questionId,1)"
+                            id="yes" value="Yes" @click="onchangeprotect(pro.questionId,1)"
                              v-bind:name="'pro' + index"
-                            value="Yes"  v-model="pro.answer"
+                              v-model="pro.answer"
                           />
                           <label class="form-check-label" for="yes">{{
-                            pro.Question_detail[0].Options1
+                            pro.Question_detail[0].Options2
                           }}</label>
                         </div>
                       </div>
@@ -1993,12 +1993,14 @@ export default {
       stresslist: [],
       overdoselist: [],
       hospitallist: [],
+      patient_id:0
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.patient_id = urlParams.get("patient_id");
     this.GetList();
 
     $(document).ready(function () {
@@ -2431,31 +2433,36 @@ export default {
           dropdownvalue.forEach((element) => {
             console.log("my event", element);
             if (element.Index == 1) {
+              const arr = element.Val.split(',');
               $("#firstbox")
-                .val([element.Val.replaceAll('^"|"$', "")])
+                .val(arr)   //[element.Val.replaceAll('^"|"$', "")]
                 .trigger("change");
             }
             if (element.Index == 3) {
               this.thirdbox = element.Val;
             }
             if (element.Index == 4) {
+              const arr = element.Val.split(',');
               $("#fourthbox")
-                .val([element.Val.replaceAll('^"|"$', "")])
+                .val(arr)
                 .trigger("change");
             }
             if (element.Index == 6) {
+              const arr = element.Val.split(',');
               $("#sixthbox")
-                .val([element.Val.replaceAll('^"|"$', "")])
+                .val(arr)
                 .trigger("change");
             }
             if (element.Index == 7) {
+              const arr = element.Val.split(',');
               $("#seventhbox")
-                .val([element.Val.replaceAll('^"|"$', "")])
+                .val(arr)
                 .trigger("change");
             }
             if (element.Index == 8) {
+              const arr = element.Val.split(',');
               $("#eightbox")
-                .val([element.Val.replaceAll('^"|"$', "")])
+                .val(arr)
                 .trigger("change");
             }
             if (element.Index == 10) {
@@ -2636,7 +2643,7 @@ export default {
             "sharp-mgmt/store/risk-factor",
             {
               added_by: this.userdetails.user.id,
-              //patient_id: this.Id,
+              patient_id: this.patient_id,
               sharp_register_id: this.Id,
               result: JSON.stringify([this.checkedList]),
               risk_factor_yes_value: JSON.stringify(Boxvalue),
@@ -2677,7 +2684,7 @@ export default {
             "sharp-mgmt/store/protective-factor",
             {
               added_by: this.userdetails.user.id,
-              //   patient_id: this.Id,
+              patient_id: this.patient_id,
               sharp_register_id: this.Id,
               result: JSON.stringify([this.procheckedList]),
               status: "1",
@@ -2766,7 +2773,7 @@ export default {
             "sharp-mgmt/store/self-harm",
             {
               added_by: this.userdetails.user.id,
-              // patient_id: this.Id,
+              patient_id: this.patient_id,
               result: JSON.stringify([
                 {
                   "CURRENT SELF HARM ACT": {
@@ -2845,7 +2852,7 @@ export default {
             "sharp-mgmt/store/suicide-risk",
             {
               added_by: this.userdetails.user.id,
-              // patient_id: this.Id,
+              patient_id: this.patient_id,
               result: this.result,
               sharp_register_id: this.Id,
               status: "1",
@@ -2940,7 +2947,7 @@ export default {
             "sharp-mgmt/store/hospital-mgmt",
             {
               added_by: this.userdetails.user.id,
-              //   patient_id: this.Id,
+              patient_id: this.patient_id,
               referral_or_contact: this.referral_or_contact,
               referral_or_contact_other: this.referral_or_contact_other,
               arrival_mode: this.arrival_mode,
@@ -3017,7 +3024,7 @@ export default {
             "shharp-registration-data-producer/add",
             {
               added_by: this.userdetails.user.id,
-              //    patient_id: this.Id,
+              patient_id: this.patient_id,
               name_registering_officer: this.officername,
               hospital_name: this.hospitalname,
               designation: this.designation,

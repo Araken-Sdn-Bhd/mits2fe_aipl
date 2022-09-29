@@ -2337,22 +2337,27 @@ export default {
         dropdownvalue.forEach((element) => {
           console.log("my event", element);
           if (element.Index == 1) {
-            $("#firstbox").val([element.Val]).trigger("change");
+            const arr = element.Val.split(',');
+            $("#firstbox").val(arr).trigger("change");
           }
           if (element.Index == 3) {
             this.thirdbox = element.Val;
           }
           if (element.Index == 4) {
-            $("#fourthbox").val([element.Val]).trigger("change");
+            const arr = element.Val.split(',');
+            $("#fourthbox").val(arr).trigger("change");
           }
           if (element.Index == 6) {
-            $("#sixthbox").val([element.Val]).trigger("change");
+            const arr = element.Val.split(',');
+            $("#sixthbox").val(arr).trigger("change");
           }
           if (element.Index == 7) {
-            $("#seventhbox").val([element.Val]).trigger("change");
+            const arr = element.Val.split(',');
+            $("#seventhbox").val(arr).trigger("change");
           }
           if (element.Index == 8) {
-            $("#eightbox").val([element.Val]).trigger("change");
+            const arr = element.Val.split(',');
+            $("#eightbox").val(arr).trigger("change");
           }
           if (element.Index == 10) {
             this.tenthbox = element.Val;
