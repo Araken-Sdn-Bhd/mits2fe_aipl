@@ -672,7 +672,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="OOnrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -683,7 +683,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2" @change="OOnrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -694,7 +694,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2" @change="OOnrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
@@ -705,7 +705,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2" @change="OOnrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
@@ -890,7 +890,7 @@
           </label>
         </div>
       <div class="d-flex align-items-center mt-4">
-        
+
                   <div class="row col-sm-9">
                     <label for="" class="col-sm-4 col-form-label"
                       >Screening Done</label
@@ -1845,7 +1845,13 @@ export default {
       );
       console.log("get detail", response.data);
       if (response.data.code == 200) {
+        this.org_name = response.data.list.org_name;
+
         this.Oname = response.data.list.name;
+        this.org_reg_number = response.data.list.org_reg_number;
+        this.org_desc = response.data.list.org_desc ;
+        this.org_email = response.data.list.org_email ;
+        this.org_phone = response.data.list.org_phone;
         this.Odob = response.data.list.dob;
         this.Oemail = response.data.list.email;
         this.Ophone_number = response.data.list.phone_number;
