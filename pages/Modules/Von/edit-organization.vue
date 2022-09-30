@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-    <VonSidebar />
+   <CommonSidebar />
     <div id="layoutSidenav_content">
-      <VonHeader />
+      <CommonHeader />
       <main>
        <div class="container-fluid px-4">
           <div class="card mb-4 mt-5">
@@ -942,7 +942,11 @@
   </div>
 </template>
 <script>
+import VonFooter from "../../../components/Von/VonFooter.vue";
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
+  components: {  CommonHeader, CommonSidebar , VonFooter },
   name: "edit-organization",
   data() {
     return {
