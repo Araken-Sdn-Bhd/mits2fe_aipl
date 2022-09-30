@@ -38,6 +38,62 @@
                 </li>
               </div>
             </ul>
+            <!-- Second UL for Report Module-->
+            <div v-for="(menu, index) in reportnavlist">
+              <ul>
+                <div v-if="menu.module_id == 29">
+                  <li class="sub-menu">
+                    <a class="nav-link"
+                      data-bs-toggle="collapse"
+                      v-bind:data-bs-target="'#demo'"
+                      aria-expanded="true"
+                      >
+                      <i class="far fa-file-chart-pie"></i>
+                      {{"Report"}}
+                    </a>
+                    <ul
+                      class="collapse"
+                      v-bind:id="['demo']"
+                      aria-labelledby="headingOne"
+                      data-bs-parent="#sidenavAccordion"
+                    >
+                      <div v-for="(menu, index) in reportnavlist" :key="index">
+                        <li class="sub-menu" v-if="menu.sub_module_id.length">
+                          <a
+                            class="nav-link"
+                            data-bs-toggle="collapse"
+                            v-bind:data-bs-target="'#demo1' + index"
+                            aria-expanded="true"
+                          >
+                            <i v-bind:class="[menu.icon]"></i>
+                            {{ menu.screen_name }}
+                          </a>
+                          <ul
+                            class="collapse"
+                            v-bind:id="['demo1' + index]"
+                            aria-labelledby="headingOne"
+                          >
+                            <li v-for="(submenu, ind) in menu.sub_module_id" :key="ind">
+                              <a class="nav-link" v-bind:href="submenu.screen_route" @click="SidebarAccess(submenu)">
+                                <i v-bind:class="[submenu.icon]"></i>
+                                {{ submenu.screen_name }}
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li v-if="!menu.sub_module_id.length">
+                          <a v-bind:href="menu.screen_route" class="nav-link" @click="SidebarAccess(menu)">
+                            <i v-bind:class="[menu.icon]"></i>
+                            {{ menu.screen_name }}
+                          </a>
+                        </li>
+                      </div>
+                    </ul>
+                  </li>
+                </div>
+              </ul>
+            </div>
+            <!-- Second UL for Report Module-->
           </div>
         </div>
       </nav>
@@ -187,7 +243,9 @@ export default {
   data() {
     return {
       userdetails: null,
+      userdetailsforReport: null,
       navlist: [],
+      reportnavlist: [],
     };
   },
   beforeMount() {
@@ -198,6 +256,14 @@ export default {
       this.role = this.userdetails.user.role;
     }
     this.GetList();
+
+    this.userdetailsforReport = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetailsforReport) {
+      this.$router.push("/");
+    } else {
+      this.role = this.userdetailsforReport.user.role;
+    }
+    this.GetListForReport();
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
@@ -217,7 +283,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.post(
+      const response1 = await this.$axios.post(
         "access/sidebar",
         { staff_id: this.userdetails.user.id,
         type: this.userdetails.user.role },
@@ -225,8 +291,29 @@ export default {
         { headers }
       );
      
-      if (response.data.code == 200) {
-        this.navlist = response.data.list;
+      if (response1.data.code == 200) {
+        this.navlist = response1.data.list;
+      } else {
+        window.alert("Something went wrong");
+      }
+
+    },
+    async GetListForReport() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetailsforReport.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+
+      const response2 = await this.$axios.post(
+        "access/sidebarReport",
+        { staff_id: this.userdetailsforReport.user.id,
+        type: this.userdetailsforReport.user.role },
+        { headers }
+      );
+     
+      if (response2.data.code == 200) {
+        this.reportnavlist = response2.data.list;
       } else {
         window.alert("Something went wrong");
       }
