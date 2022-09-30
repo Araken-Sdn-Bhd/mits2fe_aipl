@@ -543,16 +543,25 @@ export default {
       return local;
     },
     formatedateend(date) {
+      if(date){
       const local = moment.utc(date).local().format("YYYY-MM-DD");
       return local;
+      }return "";
+      
     },
     formatetimeend(date) {
+      if(date){
       const local = moment.utc(date).local().format("hh:mm");
       return local;
+      }return "";
+      
     },
     formatedatetimeappoint(date) {
+      if(date){
       const local = moment.utc(date).local().format("YYYY-MM-DD hh:mm");
       return local;
+      }return "";
+      
     },
     async updatestaffpatient() {
       const headers = {

@@ -662,7 +662,7 @@ export default {
         "/patient-appointment-details/fetchViewHistoryListDetails",
         {
           id: this.pid,
-          type: "CpsHomeVisitWithdrawalForm",
+          type: "ETPConsentForm", // CpsHomeVisitWithdrawalForm
         },
         { headers }
       );
@@ -670,7 +670,8 @@ export default {
         // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
-
+        this.participant =response.data.Data[0].consent_for_participation;
+        this.discloser =response.data.Data[0].consent_for_disclosure;
         // this.name = response.data.Data[0].name;
 
         // this.GetList();
