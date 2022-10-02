@@ -248,7 +248,7 @@ export default {
           path: "/Modules/Von/edit-group",
           query: { id: data.id },
         });
-      } else {
+      } else if (data.app_type == "Organization") {
          this.$router.push({
           path: "/Modules/Von/edit-organization",
           query: { id: data.id },

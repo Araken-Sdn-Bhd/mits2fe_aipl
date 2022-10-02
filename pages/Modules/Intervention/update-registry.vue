@@ -1061,7 +1061,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""  @change="OnpatientIntent('verbal',$event)"
+                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
+                                    v-model="verbal"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1072,7 +1073,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="" @change="OnpatientIntent('Messaging',$event)"
+                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
+                                    v-model="Messaging"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1085,7 +1087,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="rehearsing"
-                                    value="" @change="OnpatientIntent('Rehearsing',$event)"
+                                    value="Rehearsing" @change="OnpatientIntent('Rehearsing',$event)"
+                                    v-model="Rehearsing"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1098,7 +1101,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="not-Expressed"
-                                    value="" @change="OnpatientIntent('Not Expressed',$event)"
+                                    value="Not Expressed" @change="OnpatientIntent('Not Expressed',$event)"
+                                    v-model="Expressed"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1111,7 +1115,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="handwritten"
-                                    value="" @change="OnpatientIntent('Handwritten',$event)"
+                                    value="Handwritten" @change="OnpatientIntent('Handwritten',$event)"
+                                    v-model="Handwritten"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1124,7 +1129,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="social-media"
-                                    value="" @change="OnpatientIntent('Social Media',$event)"
+                                    value="Social Media" @change="OnpatientIntent('Social Media',$event)"
+                                    v-model="SocialMedia"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1137,7 +1143,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="learn-more"
-                                    value="" @change="OnpatientIntent('Learn more',$event)"
+                                    value="Learn more" @change="OnpatientIntent('Learn more',$event)"
+                                    v-model="Learnmore"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1150,7 +1157,8 @@
                                     class="form-check-input intent-other"
                                     type="checkbox"
                                     id="Other"
-                                    value="" @change="OnpatientIntent('Other',$event)"
+                                    value="Other" @change="OnpatientIntent('Other',$event)"
+                                    v-model="Other"
                                   />
                                   <label class="form-check-label" for="Other"
                                     >Other</label
@@ -1624,7 +1632,7 @@
                             class="form-check-input"
                             type="radio"
                             name="Status on Discharge"
-                            id="sond2" value="Dead" v-model="discharge_status"
+                            id="sond2" value="Alive" v-model="discharge_status"
                           />
                           <label class="form-check-label" for="sond2">
                             Alive
@@ -1903,6 +1911,7 @@ export default {
   name: "patient-summary",
   data() {
     return {
+      verbal:"",Messaging:"",Rehearsing:"",Expressed:"",Handwritten:"",SocialMedia:"",Learnmore:"",Other:"",
       userdetails: null,
       errors: [],
       error: null,
@@ -2515,8 +2524,45 @@ export default {
             response.data.result.selfharm[1].section_value.Jumping_from_height;
           this.selfharm_other =
             response.data.result.selfharm[1].section_value.Other;
-          this.patient_intent =
+            if(response.data.result.selfharm[3].section_value.intent=="no"||response.data.result.selfharm[3].section_value.intent=="Undetermined"){
+            this.patient_intent =
             response.data.result.selfharm[3].section_value.intent;
+            }else{
+              var intent=response.data.result.selfharm[3].section_value.intent.split(",");
+              this.patient_intent =intent[0];
+              //  verbal:"",Messaging:"",Rehearsing:"",Expressed:"",Handwritten:"",SocialMedia:"",Learnmore:"",Other:"",
+              $(".intent-div").css(
+          "display",
+          intent[0] === "intent-yes" ? "block" : "none"
+        );
+              intent.forEach(element => {
+                if(element=="verbal"){
+                this.verbal=element;
+                }
+                if(element=="Messaging"){
+                this.Messaging=element;
+                }
+                 if(element=="Rehearsing"){
+                this.Rehearsing=element;
+                }
+                 if(element=="Not Expressed"){
+                this.Expressed=element;
+                }
+                 if(element=="Handwritten"){
+                this.Handwritten=element;
+                }
+                 if(element=="Social Media"){
+                this.SocialMedia=element;
+                }
+                if(element=="Learn more"){
+                this.Learnmore=element;
+                }
+                if(element=="Other"){
+                this.Other=element;
+                }
+              });
+            }
+          
             this.family=response.data.result.selfharm[2].section_value.Family_friends_peer_group;
             this.internet=response.data.result.selfharm[2].section_value.Internet_website_social_media_platform_app_blogs_forum_video_photosharing;
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
@@ -2546,6 +2592,7 @@ export default {
             response.data.result.hospital[0].patient_admitted_des;
           this.discharge_status =
             response.data.result.hospital[0].discharge_status;
+            console.log('my live',this.discharge_status);
           this.discharge_date = response.data.result.hospital[0].discharge_date;
           this.discharge_number_days_in_ward =
             response.data.result.hospital[0].discharge_number_days_in_ward;
@@ -2566,6 +2613,14 @@ export default {
             response.data.result.dataSource[0].psychiatrist_name;
         }
       } catch (e) {}
+    },
+    OnpatientIntent(value, event) {
+      if (event.target.checked) {
+        this.selected.push(value);
+      } else {
+        if (this.selected.indexOf(value) != -1)
+          this.selected.splice(this.selected.indexOf(value), 1);
+      }
     },
     onchange(ind, val) {
       this.checkedList[ind] = val;
@@ -2752,10 +2807,10 @@ export default {
           this.loader = true;
           if (this.patient_intent == "intent-yes") {
             this.selected.forEach((value, index) => {
-              if (!this.screenIds) {
-                this.patient_intent_value = value;
+              if (!this.patient_intent_value) {
+                this.patient_intent_value = "intent-yes,"+value;
               } else {
-                this.patient_intent_value = this.screenIds + "," + value;
+                this.patient_intent_value = this.patient_intent_value + "," + value;
               }
             });
           } else if (this.patient_intent == "no") {
