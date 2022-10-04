@@ -33,7 +33,7 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">NRIC NO<span style="color:red">*</span></label>
+                        <label for="" class="form-label">NRIC No.<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -42,14 +42,14 @@
                         />
                          <Error :message="nricerror" v-if="nricerror" />
                       </div>
-                      
+
                     </div>
                     <!-- close-row -->
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <label for="" class="form-label"
-                          >Profession Registration NO.<span style="color:red">*</span></label
+                          >Profession Registration No.<span style="color:red">*</span></label
                         >
                         <input
                           type="text"
@@ -88,29 +88,8 @@
                           v-model="email"
                         />
                       </div>
-
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">Team<span style="color:red">*</span></label>
-                        <select
-                          v-model="teamId"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option
-                            v-for="team in teamlist"
-                            v-bind:key="team.id"
-                            v-bind:value="team.id"
-                          >
-                            {{ team.team_name }}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- close-row -->
-
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <label for="" class="form-label">Contact NO.<span style="color:red">*</span></label>
+                        <label for="" class="form-label">Contact No.<span style="color:red">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -166,39 +145,39 @@
                     <div class="row">
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label"
-                          >Mentari Location<span style="color:red">*</span></label
+                          >Location<span style="color:red">*</span></label
                         >
                         <select
                           v-model="branchId"
                           class="form-select"
                           aria-label="Default select example"
+                          @change="onSelectBranch($event)"
                         >
                           <option
                             v-for="brnch in branchlist"
                             v-bind:key="brnch.id"
                             v-bind:value="brnch.id"
+
                           >
                             {{ brnch.hospital_branch_name }}
                           </option>
                         </select>
                       </div>
-
-                      <div class="col-md-4 mt-5">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                            v-model="personincharge"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="flexCheckDefault"
+                      <div class="col-md-4 mb-4">
+                        <label for="" class="form-label">Team<span style="color:red">*</span></label>
+                        <select
+                          v-model="teamId"
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option
+                            v-for="team in teamlist"
+                            v-bind:key="team.id"
+                            v-bind:value="team.id"
                           >
-                            Set As Person In Charge Mentari
-                          </label>
-                        </div>
+                            {{ team.service_name }}
+                          </option>
+                        </select>
                       </div>
                     </div>
                     <!-- close-row -->
@@ -233,6 +212,25 @@
                           style="line-height: 32px"
                             @change="selectFile"
                         />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                            v-model="personincharge"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="flexCheckDefault"
+                          >
+                            Set As Person In Charge Mentari
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <!-- close-row -->
@@ -301,7 +299,6 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetroleList();
-    this.GetteamList();
     this.GetbranchList();
     this.GetdesignationList();
   },
@@ -315,13 +312,13 @@ export default {
       const response = await this.$axios.get("roles/list", { headers });
       this.rolelist = response.data;
     },
-    async GetteamList() {
+    async GetteamList(branchId) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-team-list", {
+      const response = await this.$axios.get("service/getServiceListByBranch?branchId=" + branchId, {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
@@ -365,6 +362,9 @@ export default {
     },
     selectFile(event) {
       this.file = event.target.files[0];
+    },
+    onSelectBranch(event) {
+      this.GetteamList(this.branchId);
     },
     async onCreateStaff() {
       this.errors = [];
@@ -470,7 +470,7 @@ export default {
       const response = await this.$axios.post(
         "staff-management/checknricno",{ nric_no: event.target.value },
         { headers }
-        
+
       );
       console.log('response',response.data);
       if (response.data.code == 200) {
