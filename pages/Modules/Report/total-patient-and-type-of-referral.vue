@@ -166,7 +166,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>1</td>
+                      <td>3</td>
                       <td>Type of Referral</td>
                       <td class="td-table">
                         <table class="patient-inner-table">
