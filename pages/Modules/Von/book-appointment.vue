@@ -168,7 +168,7 @@
                   <div class="d-flex">
                     <div class="ml-auto">
                       <a
-                        href="/Modules/Von/von-list-of-appointment"
+                      v-on:click="OnApproverejectRequest(2)"
                         class="btn btn-danger btn-text"
                         ><i class="fad fa-times"></i> Cancel</a
                       >
@@ -377,6 +377,42 @@ export default {
       this.area_of_involvement = response.data[0].area_of_involvement;
       this.services_type = response.data[0].services_type;
       this.section = response.data[0].parent_section_id;
+    },
+    async OnApproverejectRequest(status) {
+      try {
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        // this.selected.forEach((value, index) => {
+          const axios = require("axios").default;
+          axios
+            .post(
+              `${this.$axios.defaults.baseURL}` + "von-appointment/set-status",
+              { id: this.Id, status: status.toString() },
+              { headers }
+            )
+
+            .then((resp) => {
+              console.log("reuslt", resp);
+            });
+        // });
+        this.loader = false;
+        this.$nextTick(() => {
+          // $("#updatepopup").modal("show");
+          this.$router.push({
+          path: "/Modules/Von/von-list-of-appointment",
+        });
+          // href="/Modules/Von/von-list-of-appointment"
+        });
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
     },
   },
 };

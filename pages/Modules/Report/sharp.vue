@@ -399,7 +399,7 @@
                 id="result"
                 class="hide"
                 ref="result"
-                style="background: #fff"
+                style="background: #fff;"
               >
                 <table style="border: 1px solid #000; width: 50%">
                   <thead>
@@ -471,8 +471,8 @@
 
 </template>
 <script>
-import CommonHeader from '../../../components/CommonHeader.vue';
-import CommonSidebar from '../../../components/CommonSidebar.vue';
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
   components: { CommonSidebar, CommonHeader },
 
@@ -713,7 +713,9 @@ export default {
           if (this.list.length > 0) {
             setTimeout(() => {
               this.$refs.result.classList.remove("hide");
-              var pdf = new jsPDF("p", "pt", "a4");
+              var pdf = new jsPDF("p", "pt", "a4");     //new jsPDF("p", "pt", "a4");
+              // var pdf = new jsPDF("p", "px", [1500, 1500]);
+             
               pdf.addHTML($("#result")[0], function () {
                 pdf.save("Sharp_Report.pdf");
               });
@@ -796,35 +798,38 @@ export default {
 };
 </script>
 <style scoped>
+
 .tdrow {
-  padding: 5px 10px;
+  padding: 5px;
   border: 1px solid #000;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 .thhead {
   background: #ddd;
-  padding: 5px 10px;
+  padding: 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: normal;
 }
 .table {
   border: 1px solid rgb(0, 0, 0);
   width: 100%;
   margin-top: 50px;
+      line-height: normal;
 }
 .tabhead {
   background: #ddd;
-  padding: 5px 10px;
+  padding: 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 12px;
 }
 .tabtd {
-  padding: 5px 10px;
+  padding: 5px;
   border: 1px solid #000;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 .hide {
@@ -832,6 +837,6 @@ export default {
   display: none;
 }
 div#result {
-  padding: 35px;
+  padding: 35px 15px;
 }
 </style>

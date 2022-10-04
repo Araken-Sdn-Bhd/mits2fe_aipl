@@ -18,7 +18,7 @@
                     <th>No</th>
                     <th>Test Name</th>
                     <th>Taken Date</th>
-                    <th>Result</th>
+                    <!-- <th>Result</th> -->
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -29,7 +29,7 @@
                       {{ test.test_name }}
                     </td>
                     <td>{{ test.date }}</td>
-                    <td>{{ test.result }}</td>
+                    <!-- <td>{{ test.result }}</td> -->
                     <td>
                       <a
                       
