@@ -4,19 +4,20 @@
     <div id="layoutSidenav_content">
       <CommonHeader />
       <main>
+        <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Patients</h1>
             <a href="/Modules/Shharp/demographic" class="add-btn"
-              ><i class="far fa-plus"></i
+              ><i class="fal fa-plus"></i
             ></a>
           </div>
 
           <div class="card mb-4">
             <div class="card-body">
-              <div class="search-table">
-                <div class="row align-items-center">
-                  <div class="col-sm-4 mb-3 search-box">
+              <div class="search-table mt-2">
+                <div class="row">
+                  <div class="col-sm-3 mb-2 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
                         <i class="far fa-search"></i>
@@ -64,7 +65,10 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table class="table table-striped data-table" style="width: 100%">
+              <table
+                class="table table-striped data-table font-13"
+                style="width: 100%"
+              >
                 <thead>
                   <tr>
                     <th>No</th>
@@ -87,9 +91,8 @@
                       >
                     </td>
                     <td>{{ patint.age }}</td>
-
                     <td>{{ patint.nric_no }}</td>
-                    <td>{{patint.hospital_branch_name}}</td>
+                    <td>{{ patint.hospital_branch_name }}</td>
                     <td>{{ patint.harm_date }}</td>
                     <td>{{ patint.status }}</td>
                   </tr>
@@ -122,6 +125,7 @@ export default {
   data() {
     return {
       userdetails: null,
+      loader: true,
       list: [],
       branchlist: [],
       servicelist: [],
@@ -140,7 +144,17 @@ export default {
     //   this.GetList();
   },
   mounted() {
-    const headers = {
+    this.getData();
+    },
+  methods: {
+    oneditPatient(Id) {
+      this.$router.push({
+        path: "/Modules/Shharp/patient-summary",
+        query: { id: Id },
+      });
+    },
+    async getData() {
+      const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -158,7 +172,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
-        console.log('list',this.list);
+        console.log("list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -175,19 +189,17 @@ export default {
             },
           });
         });
+        this.loader = false;
       })
       .catch((err) => {
+        this.loader = false;
         console.error(err);
       });
-  },
-  methods: {
-    oneditPatient(Id) {
-      this.$router.push({
-        path: "/Modules/Shharp/patient-summary",
-        query: { id: Id },
-      });
+
     },
     async OnSearch() {
+      this.loader = true;
+      this.list = [];
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -208,29 +220,72 @@ export default {
       } else {
         this.toDate = this.toDate;
       }
-      const response = await this.$axios.post(
-        "shharp-patient-list/list",
-        {
-          keyword: this.keyword,
-          fromDate: this.fromDate,
-          toDate: this.toDate,
-          added_by:this.userdetails.added_by,
-        },
-        { headers }
-      );
-      console.log("sharrp data", response.data);
-      if (response.data.code == 200) {
-        if (response.data.list.length > 0) {
-          this.list.splice(0, this.list.length);
-          this.list = response.data.list;
-        } else {
-          this.list.splice(0, this.list.length);
-          if ($.fn.DataTable.isDataTable(".data-table")) {
-            $(".data-table").DataTable().clear().destroy();
-          }
-        }
+      if (this.toDate == "dd-mm-yyyy" && this.fromDate == "dd-mm-yyyy" && this.keyword == "no-keyword"){
+        this.getData();
       } else {
-        window.alert("Something went wrong");
+      const response = await this.$axios
+        .post(
+          "shharp-patient-list/list",
+          {
+            keyword: this.keyword,
+            fromDate: this.fromDate,
+            toDate: this.toDate,
+            added_by: this.userdetails.added_by,
+          },
+          { headers }
+        )
+        .then((resp) => {
+          if (resp.data.code == 200) {
+            if (resp.data.list.length > 0) {
+              $(document).ready(function () {
+
+                this.list = resp.data.list;
+                $(document).ready(function () {
+                  $(".data-table").DataTable({
+                    searching: false,
+                    bLengthChange: false,
+                    bInfo: false,
+                    autoWidth: false,
+                    responsive: true,
+                    // retrieve: true,
+                    language: {
+                      paginate: {
+                        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                      },
+                    },
+                  });
+                });
+              });
+              this.loader = true;
+            } else {
+              if ($.fn.DataTable.isDataTable(".data-table")) {
+                $(".data-table").DataTable().clear().destroy();
+              }
+              $(document).ready(function () {
+                $(".data-table").DataTable({
+                  searching: false,
+                  bLengthChange: false,
+                  bInfo: false,
+                  autoWidth: false,
+                  responsive: true,
+                  // retrieve: true,
+                  language: {
+                    paginate: {
+                      next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                      previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                    },
+                  },
+                });
+              });
+              this.loader = false;
+            }
+          } else {
+            this.loader = false;
+            window.alert("Something went wrong");
+          }
+          this.loader = false;
+        });
       }
     },
   },
