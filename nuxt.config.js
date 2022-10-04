@@ -28,7 +28,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
       // { src: '~/plugins/vue-html2pdf', mode: 'client' }
-      "~/plugins/vue-the-mask.js"
+      "~/plugins/vue-the-mask.js",
+      "~/plugins/vue-json-excel.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,9 +48,9 @@ export default {
     "vue-sweetalert2/nuxt",
   ],
   axios: {
-    baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
+    // baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
     //baseURL:"http://192.168.1.15:8080/api/"
-    // baseURL:"http://localhost:8000/api/"
+    baseURL:"http://localhost:8000/api/"
     // baseURL: "http://araken.asuscomm.com:8000/api/"
   },
 
