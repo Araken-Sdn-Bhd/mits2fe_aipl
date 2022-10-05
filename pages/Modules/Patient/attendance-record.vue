@@ -194,7 +194,7 @@
                   v-bind:key="team.id"
                   v-bind:value="team.id"
                 >
-                  {{ team.team_name }}
+                  {{ team.name }}
                 </option>
               </select>
             </div>
@@ -241,6 +241,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     if (this.userdetails) {
       this.token = this.userdetails.access_token;
+      this.email=this.userdetails.user.email;
     }
     this.GetList();
   },
@@ -433,9 +434,9 @@ export default {
       axios
         .get(
           `${this.$axios.defaults.baseURL}` +
-            "hospital/getServiceByTeamId?team_id="+appid,
+            "hospital/getServiceByTeamId",
 
-          { headers }
+          { headers, params: {team_id: this.appId, email: this.email}   }
         )
         .then((resp) => {
           // this.list = resp.data.list;
@@ -444,6 +445,7 @@ export default {
         });
       $("#Assignstaffpopup").modal("show");
     },
+    
     async OnAssignStaffSave() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
