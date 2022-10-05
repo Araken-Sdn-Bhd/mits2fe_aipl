@@ -1912,6 +1912,7 @@
                           type="text"
                           class="form-control"
                           v-model="officername"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1921,6 +1922,7 @@
                         >
                          <select
                 v-model="hospitalname"
+                disabled="false"
                 class="form-select"
                 aria-label="Default select example"
               >
@@ -1944,6 +1946,7 @@
                           type="text"
                           class="form-control"
                           v-model="designation"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1975,9 +1978,9 @@
                           >Date of Reporting</label
                         >
                         <input
-                          type="date"
                           class="form-control"
                           v-model="reportingdate"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -2040,6 +2043,7 @@
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import moment from 'moment'
 export default {
   components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
@@ -2122,10 +2126,18 @@ export default {
       secC: "",
       secD: "",
       Overdosespecify:"",
+      branch:"",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    //alert(JSON.stringify(this.userdetails));
+    //alert(this.userdetails.branch.branch_id);
+    this.officername = this.userdetails.user.name;
+    this.designation = this.userdetails.user.role;
+    this.reportingdate = moment().format("DD-MM-YYYY");
+    this.hospitalname = this.userdetails.branch.hospital_name;
+
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetList();
@@ -2413,7 +2425,14 @@ export default {
       } else {
         this.modelist = [];
       }
-      const response3 = await this.$axios.get("staff-management/getList", {
+
+      let body = new FormData();
+      this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+      //alert(this.userdetails.branch.branch_id);
+      this.branch = this.userdetails.branch.branch_id;
+      body.append("branch_id",this.branch);
+      //alert(this.branch);
+      const response3 = await this.$axios.get("staff-management/getListByBranchId",body,{
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -2423,6 +2442,7 @@ export default {
       }
       const response4 = await this.$axios.get("external-cause-injury/list", {
         headers,
+        
       });
       if (response4.data.code == 200 || response4.data.code == "200") {
         this.injurylist = response4.data.list;
