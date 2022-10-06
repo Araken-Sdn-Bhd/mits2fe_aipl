@@ -2432,7 +2432,7 @@ export default {
       this.branch = this.userdetails.branch.branch_id;
       body.append("branch_id",this.branch);
       //alert(this.branch);
-      const response3 = await this.$axios.get("staff-management/getListByBranchId",body,{
+      const response3 = await this.$axios.post("staff-management/getListByBranchId",body,{
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
