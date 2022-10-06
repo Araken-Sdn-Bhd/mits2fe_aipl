@@ -2127,6 +2127,7 @@ export default {
       secD: "",
       Overdosespecify:"",
       branch:"",
+      screenIds:""
     };
   },
   beforeMount() {
@@ -2820,10 +2821,10 @@ export default {
         this.loader = true;
         if (this.patient_intent == "intent-yes") {
           this.selected.forEach((value, index) => {
-            if (!this.screenIds) {
-              this.patient_intent_value = value;
+            if (!this.patient_intent_value) {
+              this.patient_intent_value = "intent-yes,"+value;
             } else {
-              this.patient_intent_value = this.screenIds + "," + value;
+              this.patient_intent_value = this.patient_intent_value + "," + value;
             }
           });
         } else if (this.patient_intent == "no") {
@@ -2935,13 +2936,14 @@ export default {
           this.secC &&
           this.secD
         ) {
+          console.log('intent yesss',this.selected);
           this.loader = true;
           if (this.patient_intent == "intent-yes") {
             this.selected.forEach((value, index) => {
-              if (!this.screenIds) {
-                this.patient_intent_value = value;
+              if (!this.patient_intent_value) {
+                this.patient_intent_value ="intent-yes,"+ value;
               } else {
-                this.patient_intent_value = this.screenIds + "," + value;
+                this.patient_intent_value = this.patient_intent_value + "," + value;
               }
             });
           } else if (this.patient_intent == "no") {

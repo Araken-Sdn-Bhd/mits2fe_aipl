@@ -45,17 +45,19 @@
       <div class="col-sm-8 organization-box">
         <div class="form-check form-check-inline" id="change">
           <input
+          disabled
             class="form-check-input"
             type="radio"
             name="organization"
             id="organization-yes"
             value="option1"
-            v-model="is_represent_org" disabled
+            v-model="is_represent_org"
           />
           <label class="form-check-label" for="organization-yes">Yes</label>
         </div>
         <div class="form-check form-check-inline">
           <input
+          disabled
             class="form-check-input"
             type="radio"
             name="organization"
@@ -73,23 +75,14 @@
             <label class="form-label"
               >How many group members do you have?</label
             >
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Please Specify"
-              name=""
-              v-model="members_count"
-            />
+            <span class="form-control">{{ this.members_count }}</span>
           </div>
 
           <div class="mb-3">
             <label class="form-label"
               >What is the background of your group member?</label
             >
-            <textarea
-              class="form-control textarea"
-              v-model="member_background"
-            ></textarea>
+            <span class="form-control">{{ this.member_background }}</span>
           </div>
         </div>
       </div>
@@ -102,6 +95,7 @@
       <div class="col-sm-8 representative-box">
         <div class="form-check form-check-inline">
           <input
+          disabled
             class="form-check-input"
             type="radio"
             name="representative"
@@ -113,6 +107,7 @@
         </div>
         <div class="form-check form-check-inline">
           <input
+          disabled
             class="form-check-input"
             type="radio"
             name="representative"
@@ -139,7 +134,7 @@
        <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Gname" />
+          <span class="form-control">{{ this.Gname }}</span>
         </div>
       </div>
 
@@ -148,7 +143,7 @@
           >Date Of Birth<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="date" class="form-control" id="" v-model="Gdob" />
+          <span class="form-control">{{ this.Gdob }}</span>
         </div>
       </div>
 
@@ -157,7 +152,7 @@
           >Email<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="" v-model="Gemail" />
+          <span class="form-control">{{ this.Gemail }}</span>
         </div>
       </div>
 
@@ -166,70 +161,31 @@
           >Phone Number<span>*</span></label
         >
         <div class="col-sm-8">
-          <input
-            type="txet"
-            class="form-control"
-            id=""
-            v-model="Gphone_number"
-          />
+          <span class="form-control">{{ this.Gphone_number }}</span>
         </div>
       </div>
 
       <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Address</label>
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Gaddress" />
-          <input
-            type="txet"
-            class="form-control mt-2"
-            id=""
-            v-model="Gaddress1"
-          />
+          <span class="form-control">{{ this.Gaddress }}</span>
+          <br/>
+          <span class="form-control">{{ this.Gaddress1 }}</span>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 mb-3">
           <label class="form-label">State<span>*</span></label>
-          <select
-            class="form-select"
-            @change="onCitybind($event)"
-            v-model="Gstate_id"
-          >
-            <option value="0">Please Select</option>
-            <option
-              v-for="state in GStateList"
-              v-bind:key="state.id"
-              v-bind:value="state.id"
-            >
-              {{ state.state_name }}
-            </option>
-          </select>
+          <span class="form-control">{{ this.Gstate_id }}</span>
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select class="form-select" v-model="Gcity_id">
-            <option value="0">Please Select</option>
-            <option
-              v-for="ctl in GCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
-            >
-              {{ ctl.city_name }}
-            </option>
-          </select>
+          <span class="form-control">{{ this.Gcity_id }}</span>
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">Postcode<span>*</span></label>
-          <select class="form-select" v-model="Gpostcode_id">
-            <option value="0">Please Select</option>
-            <option
-              v-for="pst in GPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
-            >
-              {{ pst.postcode }}
-            </option>
+          <span class="form-control">{{ this.Gpostcode_id }}</span>
           </select>
         </div>
       </div>
@@ -237,7 +193,7 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">Highest Education<span>*</span></label>
-          <select class="form-select" v-model="Geducation_id">
+          <select class="form-select" v-model="Geducation_id" disabled>
             <option value="0">Please Select</option>
             <option
               v-for="ed in GEducationList"
@@ -252,7 +208,7 @@
           <label class="form-label"
             >Current Occupation Sector<span>*</span></label
           >
-          <select class="form-select" v-model="Goccupation_sector_id">
+          <select class="form-select" v-model="Goccupation_sector_id" disabled>
             <option value="0">Please Select</option>
             <option
               v-for="os in GOccupationList"
@@ -268,7 +224,7 @@
       <div class="row mb-3 mt-2">
         <label for="" class="col-sm-4 col-form-label">Mentari</label>
         <div class="col-sm-8">
-          <select class="form-select" v-model="Gbranch_id">
+          <select class="form-select" v-model="Gbranch_id" disabled>
             <option value="0">Please Select</option>
             <option
               v-for="brn in GBranchList"
@@ -288,6 +244,7 @@
         <div class="col-sm-8">
           <div class="form-check">
             <input
+            disabled
               class="form-check-input"
               type="radio"
               name="involvement"
@@ -301,6 +258,7 @@
           </div>
           <div class="form-check">
             <input
+            disabled
               class="form-check-input"
               type="radio"
               name="involvement"
@@ -314,6 +272,7 @@
           </div>
           <div class="form-check">
             <input
+            disabled
               class="form-check-input"
               type="radio"
               name="involvement"
@@ -338,6 +297,7 @@
           <div class="col-sm-8 radio-box">
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="experience"
@@ -349,6 +309,7 @@
             </div>
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="experience"
@@ -374,13 +335,13 @@
               <tbody class="optionBox">
                      <tr class="block" v-for="(exp,index) in expList" :key="index">
                   <td>
-                    <input type="text" class="form-control year" v-model="exp.year" name="" />
+                    <input disabled type="text" class="form-control year" v-model="exp.year" name="" />
                   </td>
                   <td>
-                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
+                    <input disabled type="text" class="form-control location" v-model="exp.location" name=""  />
                   </td>
                   <td>
-                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
+                    <input disabled type="text" class="form-control activity" v-model="exp.activity" name="" />
                   </td>
 
                 </tr>
@@ -398,6 +359,7 @@
           <div class="col-sm-8 professional-box">
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="professional"
@@ -409,6 +371,7 @@
             </div>
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="professional"
@@ -441,6 +404,7 @@
                 >
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value="Consultation/Counselling"
@@ -453,6 +417,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -465,6 +430,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -477,6 +443,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -489,6 +456,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -496,7 +464,7 @@
                    v-model="other"
                   />
                   <label class="form-check-label" for="Others">
-                    Others:<input type="text" name="" v-model="Others" />
+                    Others: <span class="">{{ this.Others }}</span>
                   </label>
                 </div>
               </div>
@@ -511,6 +479,7 @@
                 >
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value="Consultation/Counselling"
@@ -523,6 +492,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -534,6 +504,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -545,6 +516,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -556,6 +528,7 @@
                 </div>
                 <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value=""
@@ -577,7 +550,7 @@
           <div class="col-sm-8">
             <div class="row">
               <div class="col-sm-6">
-                <select class="form-select" v-model="Gavailable_date">
+                <select disabled class="form-select" v-model="Gavailable_date">
                   <option value="">Select Day</option>
                   <option value="Monday">Monday</option>
                   <option value="Tuesday">Tuesday</option>
@@ -587,7 +560,7 @@
                 </select>
               </div>
               <div class="col-sm-6">
-                <select class="form-select" v-model="Gavailable_time">
+                <select disabled class="form-select" v-model="Gavailable_time">
                   <option value="">Select Time</option>
                   <option value="8:00 AM">8:00 AM</option>
                   <option value="9:00 AM">9:00 AM</option>
@@ -613,7 +586,7 @@
             >Project Name<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="Gproject_name" />
+            <span class="form-control">{{ this.Gproject_name }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -623,7 +596,7 @@
             >Project Background<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gproject_background"></textarea>
+            <span class="form-control">{{ this.Gproject_background }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -633,7 +606,7 @@
             >Project Objectives<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gproject_objectives"></textarea>
+            <span class="form-control">{{ this.Gproject_objectives }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -643,7 +616,7 @@
             >Target Audience<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="Gtarget_audience"/>
+            <span class="form-control">{{ this.Gtarget_audience }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -653,7 +626,7 @@
             >Number of Participants<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="Gno_of_paricipants"/>
+            <span class="form-control">{{ this.Gno_of_paricipants }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -663,7 +636,7 @@
             >Time Frame<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="" v-model="Gtime_frame"/>
+            <span class="form-control">{{ this.Gtime_frame }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -673,7 +646,7 @@
             >Estimated Budget<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="Gestimated_budget"/>
+            <span class="form-control">{{ this.Gestimated_budget }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -683,7 +656,7 @@
             >Project Scopes<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gproject_scopes"></textarea>
+            <span class="form-control">{{ this.Gproject_scopes }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -695,6 +668,7 @@
           <div class="col-sm-8 project-location-box">
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="project-location"
@@ -708,6 +682,7 @@
 
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="project-location"
@@ -722,7 +697,7 @@
             <!-- hide-div -->
             <div class="mentari profess-box" v-if="Gproject_loaction=='mentari'">
               <div class="mt-3">
-                <select class="form-select" v-model="Gproject_branch">
+                <select disabled class="form-select" v-model="Gproject_branch">
                   <option value="">Please Select</option>
             <option
               v-for="brn in GBranchList"
@@ -737,12 +712,7 @@
 
             <div class="project-location-others profess-box" v-if="Gproject_loaction!='mentari'">
               <div class="mt-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Please Specify"
-                  name="" v-model="Gother_loaction"
-                />
+                <span class="form-control">{{ this.Gother_loaction }}</span>
               </div>
             </div>
           </div>
@@ -755,7 +725,7 @@
             >How do you want to measure the target outcome?<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gtarget_outcome"></textarea>
+            <span class="form-control">{{ this.Gtarget_outcome }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -765,7 +735,7 @@
             >Any planned follow up projects?<span>*</span></label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gfollowup_projects"></textarea>
+            <span class="form-control">{{ this.Gfollowup_projects }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -779,6 +749,7 @@
           <div class="col-sm-8">
             <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value="Consultation/Counselling"
@@ -791,6 +762,7 @@
                 </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -802,6 +774,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation"
@@ -813,6 +786,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"
@@ -824,6 +798,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
@@ -854,7 +829,7 @@
             >How would you like contribute?</label
           >
           <div class="col-sm-8">
-            <textarea class="form-control textarea" rows="3" v-model="Gcontribution"></textarea>
+            <span class="form-control">{{ this.Gcontribution }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -864,7 +839,7 @@
             >Estimated Budget<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="Gbudget"/>
+            <span class="form-control">{{ this.Gbudget }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -876,6 +851,7 @@
           <div class="col-sm-8 project-location-box">
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="project-location"
@@ -889,6 +865,7 @@
 
             <div class="form-check form-check-inline">
               <input
+              disabled
                 class="form-check-input"
                 type="radio"
                 name="project-location"
@@ -903,7 +880,7 @@
             <!-- hide-div -->
             <div class="project-location-mentari profess-box" v-if="Gnetwotkproject_loaction=='project-location-mentari'">
               <div class="mt-3">
-                <select class="form-select" v-model="Gnetworkbranch">
+                <select disabled class="form-select" v-model="Gnetworkbranch">
                   <option value="">Please Select</option>
             <option
               v-for="brn in GBranchList"
@@ -918,12 +895,7 @@
 
             <div class="project-location-others profess-box" v-if="Gnetwotkproject_loaction!='project-location-mentari'">
               <div class="mt-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Please Specify"
-                  name="" v-model="Gnetworkother"
-                />
+                <span class="form-control">{{ this.Gnetworkother }}</span>
               </div>
             </div>
           </div>
@@ -935,7 +907,7 @@
             >Number of Participants<span>*</span></label
           >
           <div class="col-sm-8">
-            <input type="number" class="form-control" name="" v-model="Gnetworkno_of_paricipants" />
+            <span class="form-control">{{ this.Gnetworkno_of_paricipants }}</span>
           </div>
         </div>
         <!-- row-close -->
@@ -949,6 +921,7 @@
           <div class="col-sm-8">
             <div class="form-check">
                   <input
+                  disabled
                     class="form-check-input"
                     type="checkbox"
                     value="Consultation/Counselling"
@@ -961,6 +934,7 @@
                 </div>
            <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -972,6 +946,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation"
@@ -983,6 +958,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"
@@ -994,6 +970,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
@@ -1028,6 +1005,7 @@
                     <div class="col-sm-8">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
@@ -1041,6 +1019,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
