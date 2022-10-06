@@ -2429,11 +2429,8 @@ export default {
 
       let body = new FormData();
       this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-      //alert(this.userdetails.branch.branch_id);
-      this.branch = this.userdetails.branch.branch_id;
-      body.append("branch_id",this.branch);
-      //alert(this.branch);
-      const response3 = await this.$axios.post("staff-management/getListByBranchId",body,{
+      
+      const response3 = await this.$axios.get("staff-management/getListByBranchId/" + this.userdetails.branch.branch_id,{
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -3349,8 +3346,9 @@ export default {
             hospital_name: this.hospitalname,
             designation: this.designation,
             psychiatrist_name: this.psychiatristId.toString(),
-            reporting_date: this.reportingdate,
             sharp_register_id: this.sharp_register_id,
+            reporting_date:moment().format("YYYY-MM-DD HH:mm:ss"),
+           
             status:"0"
           },
           { headers }
@@ -3417,8 +3415,8 @@ export default {
               hospital_name: this.hospitalname,
               designation: this.designation,
               psychiatrist_name: this.psychiatristId.toString(),
-              reporting_date: this.reportingdate,
               sharp_register_id: this.sharp_register_id,
+              reporting_date: moment().format("YYYY-MM-DD HH:mm:ss"),
               status:"1"
             },
             { headers }
