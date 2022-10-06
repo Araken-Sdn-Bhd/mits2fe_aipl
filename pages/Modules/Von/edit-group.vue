@@ -1555,7 +1555,7 @@ export default {
           body.append("branch_id", this.Gbranch_id);
           body.append("area_of_involvement", this.Garea_of_involvement);
           body.append("is_voluneering_exp", this.Gis_voluneering_exp);
-          body.append("exp_details", JSON.stringify(explist));
+          // body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Gis_mental_health_professional
