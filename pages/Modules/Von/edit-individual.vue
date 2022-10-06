@@ -407,7 +407,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling">
                     Consultation/Counselling
@@ -489,7 +489,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling">
                     Consultation/Counselling
@@ -788,7 +788,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling1" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling1">
                     Consultation/Counselling
@@ -798,7 +798,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -810,7 +810,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation" v-model="awareness"
-                id="Psychoeducation2" 
+                id="Psychoeducation2"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -821,7 +821,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"  v-model="recreational"
-                id="Therapy2" 
+                id="Therapy2"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -831,7 +831,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
@@ -967,7 +967,7 @@
                     type="checkbox"
                     value="Consultation/Counselling"
                     id="Consultation/Counselling2" v-model="Consultation"
-                   
+
                   />
                   <label class="form-check-label" for="Consultation/Counselling2">
                     Consultation/Counselling
@@ -1530,42 +1530,42 @@ export default {
         //   obj.activity = $('td input[type="text"].activity', this).val();
         //   explist.push(obj);
         // });
-        if (!this.name) {
-          this.errors.push("Name is required.");
-        }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
-        }
-        if (!this.email) {
-          this.errors.push("Email is required.");
-        }
-        if (!this.phone_number) {
-          this.errors.push("Phone Number is required.");
-        }
-        if (!this.address) {
-          this.errors.push("Address  is required.");
-        }
-        if (!this.state_id) {
-          this.errors.push("State is required.");
-        }
-        if (!this.city_id) {
-          this.errors.push("City is required.");
-        }
-        if (!this.postcode_id) {
-          this.errors.push("Postcode is required.");
-        }
-        if (!this.education_id) {
-          this.errors.push("Highest Education is required.");
-        }
-        if (!this.occupation_sector_id) {
-          this.errors.push("Current Occupation Sector is required.");
-        }
-        if (!this.branch_id) {
-          this.errors.push("Mentari Branch is required.");
-        }
-        if (!this.area_of_involvement) {
-          this.errors.push("Areas of Involvement is required.");
-        }
+        // if (!this.name) {
+        //   this.errors.push("Name is required.");
+        // }
+        // if (!this.dob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        // if (!this.email) {
+        //   this.errors.push("Email is required.");
+        // }
+        // if (!this.phone_number) {
+        //   this.errors.push("Phone Number is required.");
+        // }
+        // if (!this.address) {
+        //   this.errors.push("Address  is required.");
+        // }
+        // if (!this.state_id) {
+        //   this.errors.push("State is required.");
+        // }
+        // if (!this.city_id) {
+        //   this.errors.push("City is required.");
+        // }
+        // if (!this.postcode_id) {
+        //   this.errors.push("Postcode is required.");
+        // }
+        // if (!this.education_id) {
+        //   this.errors.push("Highest Education is required.");
+        // }
+        // if (!this.occupation_sector_id) {
+        //   this.errors.push("Current Occupation Sector is required.");
+        // }
+        // if (!this.branch_id) {
+        //   this.errors.push("Mentari Branch is required.");
+        // }
+        // if (!this.area_of_involvement) {
+        //   this.errors.push("Areas of Involvement is required.");
+        // }
         if (this.is_voluneering_exp == "experience-yes") {
           if (!this.exp_details) {
             this.errors.push(
@@ -1584,12 +1584,12 @@ export default {
             this.Isvalid = false;
           }
         }
-        if (!this.available_date) {
-          this.errors.push("Available Day is required.");
-        }
-        if (!this.available_time) {
-          this.errors.push("Available Time is required.");
-        }
+        // if (!this.available_date) {
+        //   this.errors.push("Available Day is required.");
+        // }
+        // if (!this.available_time) {
+        //   this.errors.push("Available Time is required.");
+        // }
         if (
           this.Isvalid &&
           this.name &&
@@ -1645,7 +1645,7 @@ export default {
           body.append("is_agree", "1");
           body.append("is_voluneering_exp", this.is_voluneering_exp);
           // body.append("exp_details", JSON.stringify(explist));
-          body.append("exp_details", this.exp_details);
+          // body.append("exp_details", this.exp_details);
           body.append(
             "is_mental_health_professional",
             this.is_mental_health_professional
@@ -1691,63 +1691,63 @@ export default {
     async OnIndividualOutreachProjectCollaboration() {
       try {
         this.Isvalid = true;
-        if (!this.name) {
-          this.errors.push("Name is required.");
-        }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
-        }
-        if (!this.email) {
-          this.errors.push("Email is required.");
-        }
-        if (!this.phone_number) {
-          this.errors.push("Phone Number is required.");
-        }
-        if (!this.address) {
-          this.errors.push("Address  is required.");
-        }
-        if (!this.state_id) {
-          this.errors.push("State is required.");
-        }
-        if (!this.city_id) {
-          this.errors.push("City is required.");
-        }
-        if (!this.postcode_id) {
-          this.errors.push("Postcode is required.");
-        }
-        if (!this.education_id) {
-          this.errors.push("Highest Education is required.");
-        }
-        if (!this.occupation_sector_id) {
-          this.errors.push("Current Occupation Sector is required.");
-        }
-        if (!this.branch_id) {
-          this.errors.push("Mentari Branch is required.");
-        }
-        if (!this.project_name) {
-          this.errors.push("Project Name is required.");
-        }
-        if (!this.project_background) {
-          this.errors.push("Project Background is required.");
-        }
-        if (!this.project_objectives) {
-          this.errors.push("Project Objectives is required.");
-        }
-        if (!this.target_audience) {
-          this.errors.push("Target Audience is required.");
-        }
-        if (!this.no_of_paricipants) {
-          this.errors.push("Number of Participants is required.");
-        }
-        if (!this.time_frame) {
-          this.errors.push("Time Frame is required.");
-        }
-        if (!this.estimated_budget) {
-          this.errors.push("Estimated Budget is required.");
-        }
-        if (!this.project_scopes) {
-          this.errors.push("Project Scopes is required.");
-        }
+        // if (!this.name) {
+        //   this.errors.push("Name is required.");
+        // }
+        // if (!this.dob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        // if (!this.email) {
+        //   this.errors.push("Email is required.");
+        // }
+        // if (!this.phone_number) {
+        //   this.errors.push("Phone Number is required.");
+        // }
+        // if (!this.address) {
+        //   this.errors.push("Address  is required.");
+        // }
+        // if (!this.state_id) {
+        //   this.errors.push("State is required.");
+        // }
+        // if (!this.city_id) {
+        //   this.errors.push("City is required.");
+        // }
+        // if (!this.postcode_id) {
+        //   this.errors.push("Postcode is required.");
+        // }
+        // if (!this.education_id) {
+        //   this.errors.push("Highest Education is required.");
+        // }
+        // if (!this.occupation_sector_id) {
+        //   this.errors.push("Current Occupation Sector is required.");
+        // }
+        // if (!this.branch_id) {
+        //   this.errors.push("Mentari Branch is required.");
+        // }
+        // if (!this.project_name) {
+        //   this.errors.push("Project Name is required.");
+        // }
+        // if (!this.project_background) {
+        //   this.errors.push("Project Background is required.");
+        // }
+        // if (!this.project_objectives) {
+        //   this.errors.push("Project Objectives is required.");
+        // }
+        // if (!this.target_audience) {
+        //   this.errors.push("Target Audience is required.");
+        // }
+        // if (!this.no_of_paricipants) {
+        //   this.errors.push("Number of Participants is required.");
+        // }
+        // if (!this.time_frame) {
+        //   this.errors.push("Time Frame is required.");
+        // }
+        // if (!this.estimated_budget) {
+        //   this.errors.push("Estimated Budget is required.");
+        // }
+        // if (!this.project_scopes) {
+        //   this.errors.push("Project Scopes is required.");
+        // }
         if (!this.project_loaction) {
           this.errors.push("Project Location is required.");
         } else {
@@ -1767,12 +1767,12 @@ export default {
             }
           }
         }
-        if (!this.target_outcome) {
-          this.errors.push("target outcome is required.");
-        }
-        if (!this.followup_projects) {
-          this.errors.push("Any planned follow up projects is required.");
-        }
+        // if (!this.target_outcome) {
+        //   this.errors.push("target outcome is required.");
+        // }
+        // if (!this.followup_projects) {
+        //   this.errors.push("Any planned follow up projects is required.");
+        // }
         // if (!this.outreachmentari_services) {
         //   this.errors.push("Relevant Mentari Service is required.");
         // }
@@ -1880,48 +1880,48 @@ export default {
     async OnIndividualNetworkingMakeaContribution() {
       try {
         this.Isvalid = true;
-        if (!this.name) {
-          this.errors.push("Name is required.");
-        }
-        if (!this.dob) {
-          this.errors.push("Date Of Birth is required.");
-        }
-        if (!this.email) {
-          this.errors.push("Email is required.");
-        }
-        if (!this.phone_number) {
-          this.errors.push("Phone Number is required.");
-        }
-        if (!this.address) {
-          this.errors.push("Address  is required.");
-        }
-        if (!this.state_id) {
-          this.errors.push("State is required.");
-        }
-        if (!this.city_id) {
-          this.errors.push("City is required.");
-        }
-        if (!this.postcode_id) {
-          this.errors.push("Postcode is required.");
-        }
-        if (!this.education_id) {
-          this.errors.push("Highest Education is required.");
-        }
-        if (!this.occupation_sector_id) {
-          this.errors.push("Current Occupation Sector is required.");
-        }
-        if (!this.branch_id) {
-          this.errors.push("Mentari Branch is required.");
-        }
-        if (!this.contribution) {
-          this.errors.push("How would you like contribute is required.");
-        }
-        if (!this.budget) {
-          this.errors.push("Estimated Budget is required.");
-        }
-        if (!this.networkno_of_paricipants) {
-          this.errors.push("Number of Participants is required.");
-        }
+        // if (!this.name) {
+        //   this.errors.push("Name is required.");
+        // }
+        // if (!this.dob) {
+        //   this.errors.push("Date Of Birth is required.");
+        // }
+        // if (!this.email) {
+        //   this.errors.push("Email is required.");
+        // }
+        // if (!this.phone_number) {
+        //   this.errors.push("Phone Number is required.");
+        // }
+        // if (!this.address) {
+        //   this.errors.push("Address  is required.");
+        // }
+        // if (!this.state_id) {
+        //   this.errors.push("State is required.");
+        // }
+        // if (!this.city_id) {
+        //   this.errors.push("City is required.");
+        // }
+        // if (!this.postcode_id) {
+        //   this.errors.push("Postcode is required.");
+        // }
+        // if (!this.education_id) {
+        //   this.errors.push("Highest Education is required.");
+        // }
+        // if (!this.occupation_sector_id) {
+        //   this.errors.push("Current Occupation Sector is required.");
+        // }
+        // if (!this.branch_id) {
+        //   this.errors.push("Mentari Branch is required.");
+        // }
+        // if (!this.contribution) {
+        //   this.errors.push("How would you like contribute is required.");
+        // }
+        // if (!this.budget) {
+        //   this.errors.push("Estimated Budget is required.");
+        // }
+        // if (!this.networkno_of_paricipants) {
+        //   this.errors.push("Number of Participants is required.");
+        // }
         if (!this.netwotkproject_loaction) {
           this.errors.push("Project Location is required.");
         } else {
