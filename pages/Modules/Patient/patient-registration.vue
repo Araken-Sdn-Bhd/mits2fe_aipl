@@ -1655,6 +1655,10 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
+          body.append("branch_id",this.userdetails.branch.branch_id);
+          body.append("hospital_id",this.userdetails.branch.hospital_id);
+          body.append("hospital_branch_name",this.userdetails.branch.hospital_branch_name);
+          body.append("hospital_name",this.userdetails.branch.hospital_name);
           body.append("citizenship", this.citizenship);
           body.append("salutation_id", this.salutation_id==null ? 0 : this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
@@ -1772,6 +1776,10 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
+          body.append("branch_id",this.userdetails.branch.branch_id);
+          body.append("hospital_id",this.userdetails.branch.hospital_id);
+          body.append("hospital_branch_name",this.userdetails.branch.hospital_branch_name);
+          body.append("hospital_name",this.userdetails.branch.hospital_name);
           body.append("citizenship", this.citizenship);
           body.append("salutation_id", this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
@@ -1947,7 +1955,7 @@ export default {
           response.data.list[0].traditional_description;
         this.traditional_medication =
           response.data.list[0].traditional_medication;
-          
+
           this.citizentype = response.data.list[0].citizenships[0].section_value;
         //if (response.data.list[0].citizenship == 430) {
         //  this.citizentype = "Malaysian";
