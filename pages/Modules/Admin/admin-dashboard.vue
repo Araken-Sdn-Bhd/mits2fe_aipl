@@ -21,7 +21,7 @@
               <div class="card card-bg card-bg-1">
                 <div class="card-info">
                   <i class="fad fa-calendar-day"></i>
-                  <h1>{{ todays_appointments }}</h1>
+                  <h1>{{ today_appointment }}</h1>
                 </div>
 
                 <h4>Today's Appointment</h4>
@@ -32,7 +32,7 @@
               <div class="card card-bg card-bg-2">
                 <div class="card-info">
                   <i class="fad fa-user"></i>
-                  <h1>02</h1>
+                  <h1> 02  </h1>
                 </div>
 
                 <h4>Personal Task</h4>
@@ -47,6 +47,30 @@
                 </div>
 
                 <h4>Team Task</h4>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card mt-4 mb-3">
+                <div class="card-header dashboard-header">
+                  <h4>ANNOUNCEMENT:</h4>
+                </div>
+                <table class="announcement-table">
+                  <tbody>
+                    <tr v-for="(ann, index) in list" :key="index">
+                      <td>
+                        <span class="number">{{ index + 1 }}</span>
+                      </td>
+                      <td>{{ ann.title }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#/" class="btn btn-primary btn-text btn-seeall"
+                  >SEE ALL</a
+                >
               </div>
             </div>
           </div>
@@ -67,7 +91,7 @@ export default {
   data() {
         return {
             userdetails: null,
-            todays_appointments: "0",
+            today_appointment: "0",
             personal_task: "0",
             team_task: "0",
             list: [],
@@ -76,6 +100,18 @@ export default {
       beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         this.Getrecord();
+        if(this.userdetails){
+      this.id=this.userdetails.user.id; 
+      this.branch=this.userdetails.user.branch;
+      
+    }
+    this.GetTodayAppointment();
+    },
+
+    mounted(){
+      //this.GetTodayAppointment();
+      
+
     },
     methods: {
         async Getrecord() {
@@ -103,6 +139,31 @@ export default {
 
             }
         },
+
+        async GetTodayAppointment() {
+            try {
+                const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                };
+                const response = await this.$axios.get(
+                    "all-mentari-staff/get",
+                    { headers, params: {branch: this.branch}}
+                );
+
+                if (response.data.code == 200 || response.data.code == "200") {
+                    this.today_appointment = response.data.today_appointment[0].today_appointment;
+
+                  
+                } else {
+                    window.alert("Something went wrong");
+                }
+            } catch (e) {
+
+            }
+        },
+        
     }
 
 };

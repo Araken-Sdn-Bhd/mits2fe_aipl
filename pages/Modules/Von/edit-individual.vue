@@ -43,12 +43,7 @@
                     >Name<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="name"
-                    />
+                    <span class="form-control">{{ this.name }}</span>
                   </div>
                 </div>
 
@@ -57,12 +52,7 @@
                     >Date Of Birth<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="date"
-                      class="form-control"
-                      id=""
-                      v-model="dob"
-                    />
+                    <span class="form-control">{{ this.dob }}</span>
                   </div>
                 </div>
 
@@ -71,12 +61,7 @@
                     >Email<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id=""
-                      v-model="email"
-                    />
+                    <span class="form-control">{{ this.email }}</span>
                   </div>
                 </div>
 
@@ -85,76 +70,31 @@
                     >Phone Number<span>*</span></label
                   >
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="phone_number"
-                    />
+                    <span class="form-control">{{ this.phone_number }}</span>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="" class="col-sm-4 col-form-label">Address</label>
                   <div class="col-sm-8">
-                    <input
-                      type="txet"
-                      class="form-control"
-                      id=""
-                      v-model="address"
-                    />
-                    <input
-                      type="txet"
-                      class="form-control mt-2"
-                      id=""
-                      v-model="address1"
-                    />
+                    <span class="form-control">{{ this.address }}</span>
+                    <br/>
+                    <span class="form-control">{{ this.address1 }}</span>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label class="form-label">State<span>*</span></label>
-                    <select
-                      class="form-select"
-                      @change="onCitybind($event)"
-                      v-model="state_id"
-                    >
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="state in StateList"
-                        v-bind:key="state.id"
-                        v-bind:value="state.id"
-                      >
-                        {{ state.state_name }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.state_id }}</span>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label class="form-label">City<span>*</span></label>
-                    <select class="form-select" v-model="city_id">
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="ctl in CityList"
-                        v-bind:key="ctl.postcode_id"
-                        v-bind:value="ctl.postcode_id"
-                      >
-                        {{ ctl.city_name }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.city_id }}</span>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label class="form-label">Postcode<span>*</span></label>
-                    <select class="form-select" v-model="postcode_id">
-                      <option value="0">Please Select</option>
-                      <option
-                        v-for="pst in PostCodeList"
-                        v-bind:key="pst.postcode_id"
-                        v-bind:value="pst.postcode_id"
-                      >
-                        {{ pst.postcode }}
-                      </option>
-                    </select>
+                    <span class="form-control">{{ this.postcode_id }}</span>
                   </div>
                 </div>
 
@@ -163,7 +103,7 @@
                     <label class="form-label"
                       >Highest Education<span>*</span></label
                     >
-                    <select class="form-select" v-model="education_id">
+                    <select disabled class="form-select" v-model="education_id">
                       <option value="0">Please Select</option>
                       <option
                         v-for="ed in EducationList"
@@ -178,7 +118,7 @@
                     <label class="form-label"
                       >Current Occupation Sector<span>*</span></label
                     >
-                    <select class="form-select" v-model="occupation_sector_id">
+                    <select disabled class="form-select" v-model="occupation_sector_id">
                       <option value="0">Please Select</option>
                       <option
                         v-for="os in OccupationList"
@@ -194,7 +134,7 @@
                 <div class="row mb-3 mt-2">
                   <label for="" class="col-sm-4 col-form-label">Mentari</label>
                   <div class="col-sm-8">
-                    <select class="form-select" v-model="branch_id">
+                    <select disabled class="form-select" v-model="branch_id">
                       <option value="0">Please Select</option>
                       <option
                         v-for="brn in BranchList"
@@ -214,6 +154,7 @@
                   <div class="col-sm-8">
                     <div class="form-check">
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -228,6 +169,7 @@
                     </div>
                     <div class="form-check">
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -242,6 +184,7 @@
                     </div>
                     <div class="form-check">
                       <input
+                      disabled
                         class="form-check-input"
                         type="radio"
                         name="involvement"
@@ -271,6 +214,7 @@
                     <div class="col-sm-8 radio-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="experience"
@@ -285,6 +229,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="experience"
@@ -305,6 +250,7 @@
                       >
                         <div class="mt-3">
                           <textarea
+                          disabled
                             class="form-control textarea"
                             rows="3"
                             placeholder="Please describe"
@@ -350,6 +296,7 @@
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="professional"
@@ -364,6 +311,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="professional"
@@ -389,6 +337,7 @@
                             ></label
                           >
                           <input
+                          disabled
                             class="form-control"
                             type="file"
                             id="formFile"
@@ -415,6 +364,7 @@
                 </div> -->
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Work-based Rehabilitation"
@@ -430,6 +380,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Awareness Or Psychoeducation"
@@ -445,6 +396,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Recreational Therapy"
@@ -457,6 +409,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Others"
@@ -465,6 +418,7 @@
                             />
                             <label class="form-check-label" for="Others">
                               Others:<input
+                              disabled
                                 type="text"
                                 name=""
                                 v-model="Others"
@@ -497,6 +451,7 @@
                 </div> -->
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Work-based Rehabilitation"
@@ -512,6 +467,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Awareness Or Psychoeducation"
@@ -527,6 +483,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Recreational Therapy"
@@ -539,6 +496,7 @@
                           </div>
                           <div class="form-check">
                             <input
+                            disabled
                               class="form-check-input"
                               type="checkbox"
                               value="Others"
@@ -546,7 +504,7 @@
                               v-model="other"
                             />
                             <label class="form-check-label" for="Others1">
-                              Others: <input type="text" name="" v-model="Others" />
+                              Others: <input disabled type="text" name="" v-model="Others" />
                             </label>
                           </div>
                         </div>
@@ -561,7 +519,7 @@
                     <div class="col-sm-8">
                       <div class="row">
                         <div class="col-sm-6">
-                          <select class="form-select" v-model="available_date">
+                          <select disabled class="form-select" v-model="available_date">
                             <option value="">Select Day</option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
@@ -571,7 +529,7 @@
                           </select>
                         </div>
                         <div class="col-sm-6">
-                          <select class="form-select" v-model="available_time">
+                          <select disabled class="form-select" v-model="available_time">
                             <option value="">Select Time</option>
                             <option value="8:00 AM">8:00 AM</option>
                             <option value="9:00 AM">9:00 AM</option>
@@ -601,7 +559,7 @@
                       >Project Name</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="project_name" />
+                      <input disabled type="text" class="form-control" name="" v-model="project_name" />
                     </div>
                   </div>
                   <!-- row-close -->
@@ -612,6 +570,7 @@
                     >
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea" v-model="project_background"
                         rows="3"
                       ></textarea>
@@ -625,6 +584,7 @@
                     >
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea" v-model="project_objectives"
                         rows="3"
                       ></textarea>
@@ -637,7 +597,7 @@
                       >Target Audience</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="target_audience" />
+                      <input disabled type="text" class="form-control" name="" v-model="target_audience" />
                     </div>
                   </div>
                   <!-- row-close -->
@@ -647,7 +607,7 @@
                       >Number of Participants</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="no_of_paricipants" />
+                      <input disabled type="text" class="form-control" name="" v-model="no_of_paricipants" />
                     </div>
                   </div>
                   <!-- row-close -->
@@ -657,7 +617,7 @@
                       >Time Frame</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="time_frame" />
+                      <input disabled type="text" class="form-control" name="" v-model="time_frame" />
                     </div>
                   </div>
                   <!-- row-close -->
@@ -667,7 +627,7 @@
                       >Estimated Budget (if any)
                     </label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="estimated_budget" />
+                      <input disabled type="text" class="form-control" name="" v-model="estimated_budget" />
                     </div>
                   </div>
                   <!-- row-close -->
@@ -678,6 +638,7 @@
                     >
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea"
                         rows="3" v-model="project_scopes"
                       ></textarea>
@@ -692,6 +653,7 @@
                     <div class="col-sm-8 project-location-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -707,6 +669,7 @@
 
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -723,7 +686,7 @@
                       <!-- hide-div -->
                       <div class="mentari profess-box" v-if="projectlocation=='mentari'">
                         <div class="mt-3">
-                          <select class="form-select" v-model="project_branch">
+                          <select disabled class="form-select" v-model="project_branch">
                   <option value="">Please Select</option>
             <option
               v-for="brn in BranchList"
@@ -739,6 +702,7 @@
                       <div class="project-location-others profess-box" v-if="projectlocation!='mentari'">
                         <div class="mt-3">
                           <input
+                          disabled
                             type="text"
                             class="form-control"
                             placeholder="Please Specify" v-model="other_loaction"
@@ -757,6 +721,7 @@
                     </label>
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea" v-model="target_outcome"
                         rows="3"
                       ></textarea>
@@ -770,6 +735,7 @@
                     >
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea" v-model="followup_projects"
                         rows="3"
                       ></textarea>
@@ -796,6 +762,7 @@
                 </div> -->
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -807,6 +774,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation" v-model="awareness"
@@ -818,6 +786,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"  v-model="recreational"
@@ -829,13 +798,14 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name=""  v-model="Others"/>
+                Others: <input disabled type="text" name=""  v-model="Others"/>
               </label>
             </div>
           </div>
@@ -865,6 +835,7 @@
                     >
                     <div class="col-sm-8">
                       <textarea
+                      disabled
                         class="form-control textarea" v-model="contribution"
                         rows="3"
                       ></textarea>
@@ -877,7 +848,7 @@
                       >Estimated Budget
                     </label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="budget"/>
+                      <input disabled type="text" class="form-control" name="" v-model="budget"/>
                     </div>
                   </div>
                   <!-- row-close -->
@@ -889,6 +860,7 @@
                     <div class="col-sm-8 project-location-box">
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -904,6 +876,7 @@
 
                       <div class="form-check form-check-inline">
                         <input
+                        disabled
                           class="form-check-input"
                           type="radio"
                           name="project-location"
@@ -920,7 +893,7 @@
                       <!-- hide-div -->
                       <div class="project-location-mentari profess-box " v-if="networkbranch1=='project-location-mentari'">
                         <div class="mt-3">
-                           <select class="form-select" v-model="networkbranch">
+                           <select disabled class="form-select" v-model="networkbranch">
                   <option value="">Please Select</option>
             <option
               v-for="brn in BranchList"
@@ -936,6 +909,7 @@
                       <div class="project-location-others profess-box" v-if="networkbranch1!='project-location-mentari'">
                         <div class="mt-3">
                           <input
+                          disabled
                             type="text"
                             class="form-control"
                             placeholder="Please Specify"
@@ -952,7 +926,7 @@
                       >Number of Participants</label
                     >
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="" v-model="networkno_of_paricipants"/>
+                      <input disabled type="text" class="form-control" name="" v-model="networkno_of_paricipants"/>
                     </div>
                   </div>
                    <div class="row mb-3 mt-2">
@@ -976,6 +950,7 @@
           <div class="col-sm-8">
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
@@ -987,6 +962,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation"
@@ -998,6 +974,7 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"
@@ -1009,13 +986,14 @@
             </div>
             <div class="form-check">
               <input
+              disabled
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
                 id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name="" v-model="Others"/>
+                Others: <input disabled type="text" name="" v-model="Others"/>
               </label>
             </div>
           </div>
