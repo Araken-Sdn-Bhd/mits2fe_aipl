@@ -237,10 +237,12 @@ export default {
         .then((resp) => {
           if (resp.data.code == 200) {
             if (resp.data.list.length > 0) {
-              $(document).ready(function () {
+              // $(document).ready(function () {
+                console.log('my data',resp.data.list);
 
-                this.list = resp.data.list;
-                $(document).ready(function () {
+                  this.list = resp.data.list;
+                  $(".data-table").DataTable().clear().destroy();
+                  $(document).ready(function () {
                   $(".data-table").DataTable({
                     searching: false,
                     bLengthChange: false,
@@ -256,7 +258,7 @@ export default {
                     },
                   });
                 });
-              });
+              // });
               this.loader = true;
             } else {
               if ($.fn.DataTable.isDataTable(".data-table")) {
