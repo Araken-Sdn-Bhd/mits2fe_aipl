@@ -1,6 +1,6 @@
 <template>
   <div id="layoutSidenav">
-  <CommonSidebar />
+    <CommonSidebar />
     <div id="layoutSidenav_content">
       <CommonHeader />
       <main>
@@ -131,7 +131,7 @@ import VonFooter from "../../../components/Von/VonFooter.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-   components: { VonFooter, CommonHeader, CommonSidebar },
+  components: { VonFooter, CommonHeader, CommonSidebar },
   name: "von-list-of-appointment",
   data() {
     return {
@@ -169,21 +169,21 @@ export default {
         this.list = resp.data.list;
         console.log("my lst", resp.data);
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            autoWidth: false,
-            responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              autoWidth: false,
+              responsive: true,
+              scrollX: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              }, 
+            });
           });
-        });
       })
       .catch((err) => {
         console.error(err);
@@ -250,7 +250,25 @@ export default {
       );
       console.log("my list", response.data);
       if (response.data.code == 200) {
-        this.list = response.data.list;
+         this.list = response.data.list;
+         $('.data-table').DataTable().destroy();
+         $(document).ready(function () {
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              autoWidth: false,
+              responsive: true,
+              scrollX: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              }, 
+            });
+          });
+       
       } else {
         window.alert("Something went wrong");
       }
