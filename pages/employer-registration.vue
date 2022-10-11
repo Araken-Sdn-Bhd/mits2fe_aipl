@@ -138,20 +138,11 @@ export default {
               password: this.password,
               company_name: this.company_name,
               contact_number: this.contact_no,
-              type: "Von",
+              type: "employer",
             });
             this.userdetail = response.data;
             if (this.userdetail.code == 200) {
-              // window.alert("user Register Successfully");
-              // localStorage.setItem(
-              //   "userdetails",
-              //   JSON.stringify(this.userdetail)
-              // );
-              // localStorage.setItem("nav", "tab2");
               this.$router.push("/employer-login");
-              // setTimeout(() => {
-              //   window.location.reload();
-              // }, 100);
             } else if(this.userdetail.code == 201){
               this.loader = false;
               window.alert('User has not right to access any form. Please contact to Admin');
