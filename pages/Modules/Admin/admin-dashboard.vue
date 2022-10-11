@@ -21,7 +21,7 @@
               <div class="card card-bg card-bg-1">
                 <div class="card-info">
                   <i class="fad fa-calendar-day"></i>
-                  <h1>{{ today_appointment }}</h1>
+                  <h1>{{ todays_appointments }}</h1>
                 </div>
 
                 <h4>Today's Appointment</h4>
@@ -32,7 +32,7 @@
               <div class="card card-bg card-bg-2">
                 <div class="card-info">
                   <i class="fad fa-user"></i>
-                  <h1> 02  </h1>
+                  <h1> {{ personal_task }} </h1>
                 </div>
 
                 <h4>Personal Task</h4>
@@ -91,7 +91,7 @@ export default {
   data() {
         return {
             userdetails: null,
-            today_appointment: "0",
+            todays_appointments: "0",
             personal_task: "0",
             team_task: "0",
             list: [],
@@ -99,17 +99,19 @@ export default {
     },
       beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-        this.Getrecord();
+        //this.GetTodayAppointment();
+        //this.Getrecord();
         if(this.userdetails){
-      this.id=this.userdetails.user.id; 
-      this.branch=this.userdetails.user.branch;
+      this.id=this.userdetails.user.id;
+      this.email=this.userdetails.user.email; 
+      this.branch=this.userdetails.branch.branch_id;
       
     }
-    this.GetTodayAppointment();
+
     },
 
     mounted(){
-      //this.GetTodayAppointment();
+      this.GetTodayAppointment();
       
 
     },
@@ -148,12 +150,15 @@ export default {
                     "Content-Type": "application/json",
                 };
                 const response = await this.$axios.get(
-                    "all-mentari-staff/get",
-                    { headers, params: {branch: this.branch}}
+                    "user-admin-clerk/today_appointment",
+                    { headers, params: {branch: this.branch, email: this.email}}
                 );
 
                 if (response.data.code == 200 || response.data.code == "200") {
-                    this.today_appointment = response.data.today_appointment[0].today_appointment;
+                    this.todays_appointments = response.data.today_appointment;
+                    this.personal_task = response.data.personal_task;
+                    this.team_task = response.data.team_task;
+                    this.list = response.data.list;
 
                   
                 } else {

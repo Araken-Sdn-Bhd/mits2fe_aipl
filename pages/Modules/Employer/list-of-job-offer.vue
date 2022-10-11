@@ -1,13 +1,13 @@
 <template>
   <div id="layoutSidenav">
-    <CommonSidebar />
+    <CommonSidebarEmployer />
     <div id="layoutSidenav_content">
-      <CommonHeader />
+      <CommonHeaderEmployer />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Job Offer</h1>
-            <a href="/Modules/Intervention/create-new-job" class="add-btn"
+            <a href="/Modules/Employer/create-new-job" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -54,16 +54,10 @@
                       ></a>
                       <a
                         style="cursor: pointer"
-                        @click="OnaddClick(job.position_offered)"
-                        class="add"
-                        ><i class="far fa-plus"></i
-                      ></a>
-                      <!-- <a
-                        style="cursor: pointer"
                         @click="OneditClick(job.id)"
                         class="add"
                         ><i class="far fa-plus"></i
-                      ></a> -->
+                      ></a>
                     </td>
                   </tr>
                 </tbody>
@@ -78,10 +72,10 @@
   </div>
 </template>
 <script>
-import CommonHeader from "../../../components/CommonHeader.vue";
-import CommonSidebar from "../../../components/CommonSidebar.vue";
+import CommonSidebarEmployer from "../../../components/CommonSidebarEmployer.vue";
+import CommonHeaderEmployer from "../../../components/CommonHeaderEmployer.vue";
 export default {
-  components: { CommonSidebar, CommonHeader },
+  components: {CommonSidebarEmployer, CommonHeaderEmployer },
   name: "job-offer",
 
   data() {
@@ -135,34 +129,17 @@ export default {
       });
   },
   methods: {
-    OnaddClick(id){
-      this.loader = true;
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = this.$axios.post("intervention-job/addJob",
-      {
-        job_id: id,
-        user_id: this.userdetails.user.id
-      },
-      {
-        headers,
-      });
-      window.location.reload(true)
-    },
     OneditClick(id) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Intervention/update-new-job",
+        path: "/Modules/Employer/update-new-job",
         query: { id: id },
       });
     },
     OnviewClick(title) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Intervention/same-job-offer-list",
+        path: "/Modules/Employer/same-job-offer-list",
         query: { title: title },
       });
     },
