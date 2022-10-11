@@ -3942,21 +3942,13 @@
                   <tr>
                     <th>Others, specify</th>
                     <td colspan="3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name=""
-                        v-model="intervention_others"
-                      />
+                      {{ this.intervention_others }}
                     </td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
                     <td colspan="3">
-                      <textarea
-                        class="form-control textarea"
-                        v-model="remarks"
-                      ></textarea>
+                      {{ this.remarks }}
                     </td>
                   </tr>
 
@@ -4046,11 +4038,7 @@
                   <tr>
                     <th>Comments</th>
                     <td colspan="3">
-                      <textarea
-                        class="form-control textarea"
-                        v-model="comments"
-                      ></textarea>
-                    </td>
+                      <td>{{ this.comments }}</td>
                   </tr>
                 </tbody>
               </table>

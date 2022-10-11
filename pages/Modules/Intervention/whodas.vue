@@ -28,13 +28,9 @@
                       aria-controls="nav1"
                       aria-selected="true"
                       ref="tab1"
+                      title="Understanding & Communicating"
                     >
-                      1:
-                      {{
-                        this.tab1 == 1
-                          ? "Understanding & Communicating"
-                          : "U & C"
-                      }}
+                      1:{{this.tab1 == 1 ? "Understanding & Communicating" : "U & C"}}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -47,8 +43,10 @@
                       aria-controls="nav2"
                       aria-selected="false"
                       ref="tab2"
+                      title="Getting Around"
+                      
                     >
-                      2: {{ this.tab2 == 1 ? "Getting Around " : "GA" }}
+                      2: {{ this.tab2 == 1 ? "Getting Around" : "GA" }}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -61,6 +59,7 @@
                       aria-controls="nav3"
                       aria-selected="false"
                       ref="tab3"
+                      title="Self Care"
                     >
                       3: {{ this.tab3 == 1 ? "Self Care" : "SC" }}
                     </a>
@@ -75,11 +74,9 @@
                       aria-controls="nav4"
                       aria-selected="false"
                       ref="tab4"
+                      title="Getting Along With People"
                     >
-                      4:
-                      {{
-                        this.tab4 == 1 ? "Getting Along With People" : "GAWP"
-                      }}
+                      4:{{this.tab4 == 1 ? "Getting Along With People" : "GAWP"}}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -92,11 +89,9 @@
                       aria-controls="nav5"
                       aria-selected="false"
                       ref="tab5"
+                      title="Life Activities - Household"
                     >
-                      5:
-                      {{
-                        this.tab5 == 1 ? "Life Activities - Household" : "LA-H"
-                      }}
+                      5: {{this.tab5 == 1 ? "Life Activities - Household" : "LA-H"}}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -109,13 +104,9 @@
                       aria-controls="nav6"
                       aria-selected="false"
                       ref="tab6"
+                      title="Life Activities - School/Work"
                     >
-                      6:
-                      {{
-                        this.tab6 == 1
-                          ? "Life Activities - School/Work"
-                          : "LA-S/W"
-                      }}
+                      6: {{ this.tab6 == 1 ? "Life Activities - School/Work" : "LA-S/W"}}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -128,9 +119,9 @@
                       aria-controls="nav7"
                       aria-selected="false"
                       ref="tab7"
+                      title="Participation In Society"
                     >
-                      7:
-                      {{ this.tab7 == 1 ? " Participation In Society" : "PIS" }}
+                      7:{{ this.tab7 == 1 ? " Participation In Society" : "PIS" }}
                     </a>
                   </li>
                 </ul>

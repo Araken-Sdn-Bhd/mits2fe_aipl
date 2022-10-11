@@ -43,7 +43,6 @@
         </div>
         <div class="d-flex align-items-center">
           <input type="submit" class="btn login-btn" value="Login" />
-          <!-- <a class="btn login-btn" href="">Login</a> -->
         </div>
       </form>
     </div>
@@ -92,10 +91,10 @@ export default {
         }
         if (this.email && this.password) {
           this.loader = true;
-          const response = await this.$axios.post("auth/login", {
+          const response = await this.$axios.post("auth/loginEmployer", {
             email: this.email,
             password: this.password,
-            type:""
+            type:"employer"
           });
           this.userdetail = response.data;
           if (this.userdetail.code == 200) {
