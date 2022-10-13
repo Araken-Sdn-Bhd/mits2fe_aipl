@@ -2137,7 +2137,7 @@ export default {
     this.officername = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
     this.reportingdate = moment().format("DD-MM-YYYY");
-    this.hospitalname = this.userdetails.branch.hospital_name;
+    // this.hospitalname = this.userdetails.branch.hospital_name;
 
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

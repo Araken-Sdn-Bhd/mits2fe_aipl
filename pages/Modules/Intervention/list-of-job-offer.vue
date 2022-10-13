@@ -54,10 +54,16 @@
                       ></a>
                       <a
                         style="cursor: pointer"
-                        @click="OneditClick(job.id)"
+                        @click="OnaddClick(job.position_offered)"
                         class="add"
                         ><i class="far fa-plus"></i
                       ></a>
+                      <!-- <a
+                        style="cursor: pointer"
+                        @click="OneditClick(job.position_offered)"
+                        class="add"
+                        ><i class="far fa-plus"></i
+                      ></a> -->
                     </td>
                   </tr>
                 </tbody>
@@ -129,6 +135,33 @@ export default {
       });
   },
   methods: {
+    async OnaddClick(id){
+      this.loader = true;
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      try{
+        const response = await this.$axios.post("intervention-job/addJob",
+      {
+        job_id: id,
+        user_id: this.userdetails.user.id
+      },
+      {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200"){
+        this.loader = false;
+        window.location.reload(true)
+      } else {
+        window.location.reload(true)
+      }
+      } catch (e) {
+        alert(e);
+      }
+
+    },
     OneditClick(id) {
       this.loader = true;
       this.$router.push({
