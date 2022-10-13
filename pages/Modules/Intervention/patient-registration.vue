@@ -583,6 +583,17 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-sm-6" v-if="this.nric_type == 432">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_race"
+                            name=""
+                          />
+                        </div>
+                        </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
                             <label class="form-label">Religion</label>
@@ -601,6 +612,17 @@
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_religion"
+                            name=""
+                          />
+                        </div>
                         </div>
                       </div>
                       <!-- close-row -->
@@ -626,6 +648,17 @@
                           </div>
                         </div>
                         <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_marritalList"
+                            name=""
+                          />
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
                           <div class="mb-3">
                             <label class="form-label">Accommodation</label>
                              <select
@@ -643,6 +676,17 @@
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_accommodation"
+                            name=""
+                          />
+                        </div>
                         </div>
                       </div>
                       <!-- close-row -->
@@ -686,6 +730,17 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_occupationStatus"
+                            name=""
+                          />
+                        </div>
+                        </div>
                       </div>
                       <!-- close-row -->
 
@@ -710,6 +765,17 @@
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_feeExemptionStatus"
+                            name=""
+                          />
+                        </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
@@ -1253,7 +1319,13 @@ export default {
       patient_need_triage_screening: "",
       id:0,
       text:"",
-      branch_id:0
+      branch_id:0,
+      other_race:"",
+      other_religion:"",
+      other_accommodation:"",
+      other_marritalList:"",
+      other_feeExemptionStatus:"",
+      other_occupationStatus:"",
     };
   },
   beforeMount() {
