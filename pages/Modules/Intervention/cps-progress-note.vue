@@ -2248,25 +2248,25 @@
               <table class="notes width-eq">
                 <tbody>
                   <tr>
-                    <th>Date & Time Seen By :</th>
+                    <th>Date & Time Seen By : </th>
                     <td class="tdl-5">
                       {{ this.cps_date }} /
                       {{ this.cps_time }} /
-                      {{  this.cps_seen_by }}
+                      {{ this.cps_seenByName }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Date & Time Discussed with:</th>
+                    <th>Date & Time Discussed with : </th>
                     <td class="tdl-5">
                       {{ this.cps_date_discussed }} /
                       {{ this.cps_time_discussed }} /
-                      {{ this.cps_discussed_with }}
+                      {{ this.cps_discussedWithName}}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Visit Date & time</th>
+                    <th>Visit Date & time : </th>
                     <td class="tdl-5">
                       {{ this.visit_date }} /
                       {{ this.visit_time }}
@@ -2274,7 +2274,7 @@
                   </tr>
 
                   <tr>
-                    <th>Informants</th>
+                    <th>Informants : </th>
                     <td colspan="3">
                       <table>
                         <thead>
@@ -2309,14 +2309,14 @@
                   </tr>
 
                   <tr>
-                    <th>Case Manager</th>
+                    <th>Case Manager : </th>
                     <td colspan="3">
-                      {{ this.case_manager }}
+                      {{ this.case_managerName }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Visited By</th>
+                    <th>Visited By : </th>
                     <td colspan="2">
                       {{ this.visited_by }}
                     </td>
@@ -2326,30 +2326,30 @@
                   </tr>
 
                   <tr>
-                    <th>Visit Outcome</th>
+                    <th>Visit Outcome : </th>
                     <td colspan="3">
-                      {{ this.visit_outcome }}
+                      {{ this.visit_outcomeSectionValue }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Current Intervention</th>
+                    <th>Current Intervention : </th>
                     <td colspan="3">
-                      {{ this.current_intervention }}
+                      {{ this.current_interventionSectionValue }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Compliance To Treatment</th>
+                    <th>Compliance To Treatment : </th>
                     <td colspan="3">
-                      {{ this.compliance_treatment }}
+                      {{ this.compliance_treatmentSectionValue }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Medication Supervised By</th>
+                    <th>Medication Supervised By : </th>
                     <td colspan="3">
-                      {{ this.medication_supervised_by }}
+                      {{ this.medication_supervisedBySectionValue }}
                     </td>
                   </tr>
 
@@ -2363,7 +2363,7 @@
                             </th>
                           </tr>
                           <tr>
-                            <th>Delusions</th>
+                            <th>Delusions : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.delusions }}
@@ -2372,7 +2372,7 @@
                           </tr>
 
                           <tr>
-                            <th>Hallucination</th>
+                            <th>Hallucination : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.hallucination }}
@@ -2381,7 +2381,7 @@
                           </tr>
 
                           <tr>
-                            <th>Disorganized Speech /Behavior</th>
+                            <th>Disorganized Speech /Behavior : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.behavior }}
@@ -2390,7 +2390,7 @@
                           </tr>
 
                           <tr>
-                            <th>Blunted Affect</th>
+                            <th>Blunted Affect : </th>
                             <td>
                               <div class="form-check">
                                 {{this.blunted_affect}}
@@ -2399,7 +2399,7 @@
                           </tr>
 
                           <tr>
-                            <th>Depression</th>
+                            <th>Depression : </th>
                             <td>
                               <div class="form-check">
                                 {{this.depression}}
@@ -2408,7 +2408,7 @@
                           </tr>
 
                           <tr>
-                            <th>Anxiety</th>
+                            <th>Anxiety : </th>
                             <td>
                               <div class="form-check">
                                 {{this.anxiety}}
@@ -2417,7 +2417,7 @@
                           </tr>
 
                           <tr>
-                            <th>Disorientation</th>
+                            <th>Disorientation : </th>
                             <td>
                               <div class="form-check">
                                 {{this.disorientation}}
@@ -2426,7 +2426,7 @@
                           </tr>
 
                           <tr>
-                            <th>Uncooperativeness</th>
+                            <th>Uncooperativeness : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.uncooperativeness }}
@@ -2435,7 +2435,7 @@
                           </tr>
 
                           <tr>
-                            <th>Poor Impulse Control</th>
+                            <th>Poor Impulse Control : </th>
                             <td>
                               <div class="form-check">
                                 {{this.poor_impulse_control}}
@@ -2444,7 +2444,7 @@
                           </tr>
 
                           <tr>
-                            <th>Others, Please specify</th>
+                            <th>Others, Please specify : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.others }}
@@ -2457,7 +2457,7 @@
                   </tr>
 
                   <tr>
-                    <th>Remarks</th>
+                    <th>Remarks : </th>
                     <td colspan="3">
                       <span>{{ this.ipsychopathology_remarks }}</span>
                     </td>
@@ -2471,7 +2471,7 @@
                             <td colspan="5" class="black">Risk Assessment:</td>
                           </tr>
                           <tr>
-                            <th>Risk of violence/harm to others</th>
+                            <th>Risk of violence/harm to others : </th>
                             <td>
                               <div class="form-check">
                                 {{this.risk_of_violence}}
@@ -2480,7 +2480,7 @@
                           </tr>
 
                           <tr>
-                            <th>Risk Of Suicide</th>
+                            <th>Risk Of Suicide : </th>
                             <td>
                               <div class="form-check">
                                 {{this.risk_of_suicide}}
@@ -2489,7 +2489,7 @@
                           </tr>
 
                           <tr>
-                            <th>Risk Of Other Deliberate Self Harm</th>
+                            <th>Risk Of Other Deliberate Self Harm : </th>
                             <td>
                               <div class="form-check">
                                 {{this.risk_of_other_deliberate }}
@@ -2500,7 +2500,7 @@
                           <tr>
                             <th>
                               Risk Of Severe Self-neglect / Serious Accidental
-                              Self-harm
+                              Self-harm :
                             </th>
                             <td>
                               <div class="form-check">
@@ -2510,7 +2510,7 @@
                           </tr>
 
                           <tr>
-                            <th>Risk Of Harm From Others / Vulnerability</th>
+                            <th>Risk Of Harm From Others / Vulnerability : </th>
                             <td>
                               <div class="form-check">
                                 {{ this.risk_of_harm }}
@@ -2524,17 +2524,17 @@
                   </tr>
 
                   <tr>
-                    <th>Changes in treatment at Current Visit:</th>
+                    <th>Changes in treatment at Current Visit : </th>
                     <td colspan="3">
                       <span>{{this.changes_in_teratment}}</span>
                     </td>
                   </tr>
 
                   <tr>
-                    <td colspan="2" class="black">Side Effects:</td>
+                    <td colspan="2" class="black">Side Effects :</td>
                   </tr>
                   <tr>
-                    <th>Akathisia</th>
+                    <th>Akathisia : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.akathisia }}
@@ -2543,7 +2543,7 @@
                   </tr>
 
                   <tr>
-                    <th>Acute Dystonia</th>
+                    <th>Acute Dystonia : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{this.acute_dystonia}}
@@ -2553,7 +2553,7 @@
                   </tr>
 
                   <tr>
-                    <th>Parkinsonism</th>
+                    <th>Parkinsonism : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.parkinsonism }}
@@ -2562,7 +2562,7 @@
                   </tr>
 
                   <tr>
-                    <th>Tardive Dyskinesia</th>
+                    <th>Tardive Dyskinesia : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.tardive_dyskinesia }}
@@ -2571,7 +2571,7 @@
                   </tr>
 
                   <tr>
-                    <th>Tardive Dystonia</th>
+                    <th>Tardive Dystonia : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.tardive_dystonia }}
@@ -2580,14 +2580,14 @@
                   </tr>
 
                   <tr>
-                    <th>Others, specify</th>
+                    <th>Others, specify : </th>
                     <td colspan="3">
                       <span>{{this.others_specify}}</span>
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Remarks:</th>
+                    <th>Remarks : </th>
                     <td colspan="3">
                       <span>{{ this.side_effects_remarks }}</span>
                     </td>
@@ -2619,7 +2619,7 @@
                   </tr>
 
                   <tr>
-                    <th>Psychoeducation/Counseling</th>
+                    <th>Psychoeducation/Counseling : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.psychoeducation}}
@@ -2628,7 +2628,7 @@
                   </tr>
 
                   <tr>
-                    <th>Coping Skills Training</th>
+                    <th>Coping Skills Training : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.coping_skills }}
@@ -2636,7 +2636,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>ADL Training</th>
+                    <th>ADL Training : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.adl_training }}
@@ -2644,7 +2644,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Supported Employment</th>
+                    <th>Supported Employment : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.supported_employment }}
@@ -2652,7 +2652,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Family Intervention</th>
+                    <th>Family Intervention : </th>
                     <td>
                       <div class="form-check form-check-inline">
                         {{ this.family_intervention }}
@@ -2661,20 +2661,20 @@
                   </tr>
 
                   <tr>
-                    <th>Others, specify</th>
+                    <th>Others, specify : </th>
                     <td colspan="3">
                       {{ this.intervention_others }}
                     </td>
                   </tr>
                   <tr>
-                    <th>Remarks:</th>
+                    <th>Remarks : </th>
                     <td colspan="3">
                       {{ this.remarks }}
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Employment the past 6 month:</th>
+                    <th>Employment the past 6 month : </th>
                     <td colspan="3">
                       <div class="form-check form-check-inline">
                         {{ this.employment_past_months }}
@@ -2682,7 +2682,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>*If Yes,</th>
+                    <th>*If Yes, : </th>
                     <td colspan="3">
                       {{ this.if_employment_yes }}
                     </td>
@@ -2693,38 +2693,38 @@
                   </tr>
 
                   <tr>
-                    <th>Psychiatric clinic</th>
+                    <th>Psychiatric clinic : </th>
                     <td colspan="3">
 
-                      <div class="form-control">
+                      <div class="">
                       {{ this.psychiatric_clinic}}
                       </div>
                     </td>
                   </tr>
 
                   <tr>
-                    <th>IM depot in clinic</th>
+                    <th>IM depot in clinic : </th>
                     <td colspan="3">
 
-                      <div class="form-control">
+                      <div class="">
                       {{ this.im_depot_clinic }}
                       </div>
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Next community visit</th>
+                    <th>Next community visit : </th>
                     <td colspan="3">
-                      <div class="form-control">
+                      <div class="">
                       {{ this.next_community_visit }}
                       </div>
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Comments</th>
+                    <th>Comments : </th>
                     <td colspan="3">
-                      <div class="form-control">
+                      <div class="">
                       {{ this.comments }}
                       </div>
                     </td>
@@ -2755,25 +2755,25 @@
                     <div class="accordion-body">
                       <div class="row mb-3">
                         <label class="col-sm-4 col-form-label"
-                          >Location Of Services</label
+                          >Location Of Services : </label
                         >
                         <div class="col-sm-8">
-                          {{ this.location_services_id }}
+                          {{ this.location_servicesIdSectionValue }}
                         </div>
                       </div>
                       <!-- close-row -->
                       <div class="row mb-3">
                         <label class="col-sm-4 col-form-label"
-                          >Type Of Diagnosis</label
+                          >Type Of Diagnosis : </label
                         >
                         <div class="col-sm-8">
-                          {{ this.type_diagnosis_id }}
+                          {{ this.type_diagnosisIdSectionValue.icd_category_code }} {{this.type_diagnosisIdSectionValue.icd_category_name}}
                         </div>
                       </div>
                       <!-- close-row -->
                       <div class="row mb-3">
                         <label class="col-sm-4 col-form-label"
-                          >Category Of Services
+                          >Category Of Services :
                         </label>
                         <div class="col-sm-8">
                           {{ this.category_services }}
@@ -2784,8 +2784,8 @@
                       <div class="assisstance services hide mb-3">
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Services</label>
-                            <div>{{ this.services_id }}</div>
+                            <label class="form-label">Services : </label>
+                            <div>{{ this.services_idSectionValue }}</div>
                           </div>
                         </div>
                       </div>
@@ -2793,12 +2793,12 @@
                       <div class="clinical-work services hide mb-3">
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">ICD 9 CODE</label>
-                            {{ this.code_id }}
+                            <label class="form-label">ICD 9 CODE : </label>
+                            {{ this.code_idSectionValue.icd_category_code }} {{this.code_idSectionValue.icd_category_name}}
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">ICD 9 SUB CODE</label>
-                            {{ this.sub_code_id }}
+                            <label class="form-label">ICD 9 SUB CODE : </label>
+                            {{ this.sub_codeIdSectionValue.icd_code }} {{this.sub_codeIdSectionValue.icd_name}}
                           </div>
                         </div>
                       </div>
@@ -2806,8 +2806,8 @@
                       <div class="external services hide mb-3">
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Services</label>
-                            {{ this.serviceid }}
+                            <label class="form-label">Services : </label>
+                            {{ this.serviceid_sectionValue }}
                           </div>
                         </div>
                       </div>
@@ -2818,11 +2818,11 @@
                           <label class="form-label"
                             >Complexity Of Service</label
                           >
-                          {{ this.complexity_services_id }}
+                          {{ this.complexity_servicesIdSectionValue }}
                         </div>
                         <div class="col-md-6 mb-3">
-                          <label class="form-label">Outcome</label>
-                          {{ this.outcome_id }}
+                          <label class="form-label">Outcome : </label>
+                          {{ this.outcome_idSectionValue }}
                         </div>
                       </div>
                       <!-- close-row -->
@@ -2844,14 +2844,10 @@
                     </button>
                   </h2>
                   <div
-                    id="collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample"
                   >
                     <div class="accordion-body">
                       <div class="col-md-12 mb-3">
-                        <label class="form-label">Medication</label>
+                        <label class="form-label">Medication : </label>
                         {{this.medication_des}}
                       </div>
                     </div>
@@ -2866,13 +2862,13 @@
                     <td colspan="4" class="black">Signature</td>
                   </tr>
                   <tr>
-                    <th>Staff Name</th>
+                    <th>Staff Name : </th>
                     <td colspan="3">
                       <span>{{this.staff_name}}</span>
                     </td>
                   </tr>
                   <tr>
-                    <th>Designation</th>
+                    <th>Designation : </th>
                     <td colspan="3">
                       <span>{{ this.designation }}</span>
                     </td>
@@ -2883,7 +2879,7 @@
   <p v-if="errorList.length">
                           <ul>
                            <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
+                              {{ err }}
                              </li>
                         </ul>
                        </p>
@@ -2893,7 +2889,7 @@
                   <button @click="OnSubmit" class="btn btn-warning btn-text"
                     ><i class="far fa-save"></i> Save</button
                   >
-                  <button @click="print" class="btn btn-success btn-text"
+                  <button @click="setData" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</button
                   >
                 </div>
@@ -3016,8 +3012,14 @@ export default {
       compliance_treatmentSectionValue:"",
       medication_supervisedBySectionValue:"",
 
-
-
+      location_servicesIdSectionValue:"",
+      type_diagnosisIdSectionValue:[],
+      services_idSectionValue:"",
+      code_idSectionValue:"",
+      sub_codeIdSectionValue:"",
+      serviceid_sectionValue:"",
+      complexity_servicesIdSectionValue:"",
+      outcome_idSectionValue:"",
     };
   },
   beforeMount() {
@@ -3652,12 +3654,200 @@ export default {
       this.designation = "";
     },
     print() {
-      this.validate = false;
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
       // Reload the page to refresh the data
       window.location.reload();
+    },
+    async setData(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "staff-management/getStaffDetailById?id="+ this.cps_seen_by,
+        {
+          headers,
+        }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.cps_seenByName = response.data.list.name;
+      } else {
+        this.cps_seenByName = "";
+      }
+
+      const response2 = await this.$axios.get(
+        "staff-management/getStaffDetailById?id="+ this.cps_discussed_with,
+        {
+          headers,
+        }
+      );
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.cps_discussedWithName = response2.data.list.name;
+      } else {
+        this.cps_discussedWithName = "";
+      };
+
+      const response3 = await this.$axios.get(
+        "staff-management/getStaffDetailById?id="+ this.case_manager,
+        {
+          headers,
+        }
+      );
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.case_managerName = response3.data.list.name;
+      } else {
+        this.case_managerName = "";
+      };
+
+      const response4 = await this.$axios.post(
+        "general-setting/fetch", {setting_id:this.visit_outcome},
+        {
+          headers,
+        }
+      );
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.visit_outcomeSectionValue = response4.data.setting[0].section_value;
+      } else {
+        this.visit_outcomeSectionValue = "";
+      };
+
+      const response5 = await this.$axios.post(
+        "general-setting/fetch", {setting_id: this.current_intervention},
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.current_interventionSectionValue = response5.data.setting[0].section_value;
+      } else {
+        this.current_interventionSectionValue = "";
+      };
+
+      const response6 = await this.$axios.post(
+        "general-setting/fetch",{setting_id: this.compliance_treatment},
+        {
+          headers,
+        }
+      );
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.compliance_treatmentSectionValue = response6.data.setting[0].section_value;
+      } else {
+        this.compliance_treatmentSectionValue = "";
+      };
+
+      const response7 = await this.$axios.post(
+        "general-setting/fetch",{setting_id: this.medication_supervised_by},
+        {
+          headers,
+        }
+      );
+      if (response7.data.code == 200 || response7.data.code == "200") {
+        this.medication_supervisedBySectionValue = response7.data.setting[0].section_value;
+      } else {
+        this.medication_supervisedBySectionValue = "";
+      };
+
+      const response8 = await this.$axios.post(
+        "general-setting/fetch",
+        {setting_id: this.location_services_id},
+        {
+          headers,
+        }
+      );
+      if (response8.data.code == 200 || response8.data.code == "200") {
+        this.location_servicesIdSectionValue = response8.data.setting[0].section_value;
+      } else {
+        this.location_servicesIdSectionValue = "";
+      };
+
+      const response9 = await this.$axios.get(
+        "diagnosis/getIcd10codeById?id="+ this.type_diagnosis_id,
+        {
+          headers,
+        }
+      );
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.type_diagnosisIdSectionValue = response9.data.list[0];
+      } else {
+        this.type_diagnosisIdSectionValue = [];
+      };
+
+      const response10 = await this.$axios.post(
+        "general-setting/fetch",
+        {setting_id:this.services_id},
+        {
+          headers,
+        }
+      );
+      if (response10.data.code == 200 || response10.data.code == "200") {
+        this.services_idSectionValue = response10.data.setting[0].setting_value;
+      } else {
+        this.services_idSectionValue = "";
+      };
+
+      const response11 = await this.$axios.get(
+        "diagnosis/getIcd9codeById?id="+ this.code_id,
+        {
+          headers,
+        }
+      );
+      if (response11.data.code == 200 || response11.data.code == "200") {
+        this.code_idSectionValue = response11.data.list[0];
+      } else {
+        this.code_idSectionValue = "";
+      };
+
+      const response12 = await this.$axios.get(
+        "diagnosis/getIcd9subcodeById?id="+ this.sub_code_id,
+        {
+          headers,
+        }
+      );
+      if (response12.data.code == 200 || response12.data.code == "200") {
+        this.sub_codeIdSectionValue = response12.data.list.name;
+      } else {
+        this.sub_codeIdSectionValue = "";
+      };
+
+      const response13 = await this.$axios.post(
+        "general-setting/fetch", {setting_id: this.serviceid},
+        {
+          headers,
+        }
+      );
+      if (response13.data.code == 200 || response13.data.code == "200") {
+        this.serviceid_sectionValue = response13.data.setting[0].setting_value;
+      } else {
+        this.serviceid_sectionValue = "";
+      };
+
+      const response14 = await this.$axios.post(
+        "general-setting/fetch",{setting_id: this.complexity_services_id},
+        {
+          headers,
+        }
+      );
+      if (response14.data.code == 200 || response14.data.code == "200") {
+        this.complexity_servicesIdSectionValue = response14.data.setting[0].setting_value;
+      } else {
+        this.complexity_servicesIdSectionValue = "";
+      };
+
+      const response15 = await this.$axios.post(
+        "general-setting/fetch", {setting_id: this.outcome_id},
+        {
+          headers,
+        }
+      );
+      if (response15.data.code == 200 || response15.data.code == "200") {
+        this.outcome_idSectionValue = response15.data.setting[0].setting_value;
+      } else {
+        this.outcome_idSectionValue = "";
+      };
+      this.print();
     },
     async getdetails() {
       const headers = {
