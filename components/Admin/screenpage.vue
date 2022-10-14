@@ -168,6 +168,7 @@ export default {
       submodulelist: [],
       list: [],
       IsSubmodule: true,
+      SidebarAccess:null
     };
   },
   mounted() {
@@ -206,6 +207,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetModuleList();
   },
   methods: {
