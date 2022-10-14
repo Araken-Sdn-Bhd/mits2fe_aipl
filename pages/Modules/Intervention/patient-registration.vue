@@ -586,14 +586,15 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" v-if="otherRace">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
                             type="text"
                             class="form-control"
                             v-model="other_race"
-                            name=""
+                            placeholder="please specify other race"
+                            
                           />
                         </div>
                         </div>
@@ -604,6 +605,7 @@
                               v-model="religion_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeReligion($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -616,14 +618,14 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" v-if="otherReligion">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
                             type="text"
                             class="form-control"
                             v-model="other_religion"
-                            name=""
+                            placeholder="please specify other religion"
                           />
                         </div>
                         </div>
@@ -638,6 +640,7 @@
                               v-model="marital_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeMarital($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -650,14 +653,14 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" v-if="otherMarital">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
                             type="text"
                             class="form-control"
-                            v-model="other_marritalList"
-                            name=""
+                            v-model="other_maritalList"
+                            placeholder="please specify other marital status"
                           />
                         </div>
                         </div>
@@ -668,6 +671,7 @@
                               v-model="accomodation_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeAccommodation($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -680,14 +684,83 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" v-if="otherAccommodation">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
                             type="text"
                             class="form-control"
                             v-model="other_accommodation"
-                            name=""
+                            placeholder="please specify other accommodation"
+                          />
+                        </div>
+                        </div>
+                      </div>
+                      <!-- close-row -->
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label"
+                              >Fee Exemption Status</label
+                            >
+                             <select
+                              v-model="fee_exemption_status"
+                              class="form-select"
+                              aria-label="Default select example"
+                              @change="OnchangeFee($event)"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="fee in feeexemptionlist"
+                                v-bind:key="fee.id"
+                                v-bind:value="fee.id"
+                              >
+                                {{ fee.section_value }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherFeeExemStatus">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_feeExemptionStatus"
+                            placeholder="please specify other fee exemption status"
+                          />
+                        </div>
+                        </div>
+                       
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Occupation Status</label>
+                            <select
+                              v-model="occupation_status"
+                              class="form-select"
+                              aria-label="Default select example"
+                              @change="OnchangeOccStatus($event)"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ocu in occupationlist"
+                                v-bind:key="ocu.id"
+                                v-bind:value="ocu.id"
+                              >
+                                {{ ocu.section_value }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherOccStatus">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_occupationStatus"
+                            placeholder="please specify other occupation status"
                           />
                         </div>
                         </div>
@@ -713,72 +786,6 @@
                               </option>
                             </select>
                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="mb-3">
-                            <label class="form-label">Occupation Status</label>
-                            <select
-                              v-model="occupation_status"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="ocu in occupationlist"
-                                v-bind:key="ocu.id"
-                                v-bind:value="ocu.id"
-                              >
-                                {{ ocu.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="other_occupationStatus"
-                            name=""
-                          />
-                        </div>
-                        </div>
-                      </div>
-                      <!-- close-row -->
-
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div class="mb-3">
-                            <label class="form-label"
-                              >Fee Exemption Status</label
-                            >
-                             <select
-                              v-model="fee_exemption_status"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="fee in feeexemptionlist"
-                                v-bind:key="fee.id"
-                                v-bind:value="fee.id"
-                              >
-                                {{ fee.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="other_feeExemptionStatus"
-                            name=""
-                          />
-                        </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
@@ -865,12 +872,12 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                              <label class="form-label">NRIC No<small>*</small></label>
+                              <label class="form-label">NRIC ID<small>*</small></label>
                               <input
                                 type="tel"
                                 class="form-control toCapitalFirst"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="kinOnnricNo1" v-model.number="kin_nric_no"
-                                v-on:keypress="NumbersOnly"
+                                v-model.number="kin_nric_no"
+                                
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
@@ -1323,10 +1330,16 @@ export default {
       id:0,
       text:"",
       branch_id:0,
+      otherRace:false,
+      otherReligion:false,
+      otherAccommodation:false,
+      otherMarital:false,
+      otherFeeExemStatus:false,
+      otherOccStatus:false,
       other_race:"",
       other_religion:"",
       other_accommodation:"",
-      other_marritalList:"",
+      other_maritalList:"",
       other_feeExemptionStatus:"",
       other_occupationStatus:"",
       race_type:"",
@@ -1751,14 +1764,50 @@ export default {
       this.citizenship = id;
       this.citizentype = value;
     },
-    //OnchangeType(event) {
-    //  //alert(JSON.stringify(event.target.options[event.target.options.selectedIndex]));
-    //  this.nric_type_code = event.target.options[event.target.options.selectedIndex].code_attrib;
-    //  alert(this.nric_type_code);
-    //},
+  
     OnchangeRace(event) {
-      //alert("1");
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherRace = true;
+      }else{
+        this.otherRace = false;
+      }
     },
+    OnchangeReligion(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherReligion = true;
+      }else{
+        this.otherReligion = false;
+      }
+    },
+    OnchangeAccommodation(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherAccommodation = true;
+      }else{
+        this.otherAccommodation = false;
+      }
+    },
+    OnchangeMarital(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherMarital = true;
+      }else{
+        this.otherMarital = false;
+      }
+    },
+    OnchangeFee(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherFeeExemStatus = true;
+      }else{
+        this.otherFeeExemStatus = false;
+      }
+    },
+    OnchangeOccStatus(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherOccStatus = true;
+      }else{
+        this.otherOccStatus = false;
+      }
+    },
+
     selectFile(event) {
       this.file = event.target.files[0];
     },
@@ -1827,10 +1876,7 @@ export default {
           body.append("kin_city_id", this.kin_city_id);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
-          body.append(
-            "drug_allergy_description",
-            this.drug_allergy_description
-          );
+          body.append("drug_allergy_description",this.drug_allergy_description);
           body.append("traditional_medication", this.traditional_medication);
           body.append("traditional_description", this.traditional_description);
           body.append("other_allergy", this.other_allergy);
@@ -1843,10 +1889,15 @@ export default {
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
           body.append("branch_id", this.branch_id);
-          body.append(
-            "patient_need_triage_screening",
-            this.patient_need_triage_screening
-          );
+          body.append("patient_need_triage_screening",this.patient_need_triage_screening);
+          body.append("other_race", this.other_race);
+          body.append("other_religion", this.other_religion);
+          body.append("other_accommodation", this.other_accommodation);
+          body.append("other_maritalList", this.other_maritalList);
+          body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
+          body.append("other_occupationStatus", this.other_occupationStatus);
+
+
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -1873,6 +1924,9 @@ export default {
             );
             console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
+              this.$nextTick(() => {
+                $("#insertpopup").modal("show");
+              });
               this.$router.push("/Modules/Intervention/patient-list");
             } else {
               this.loader = false;
@@ -1958,6 +2012,12 @@ export default {
             "patient_need_triage_screening",
             this.patient_need_triage_screening
           );
+          body.append("other_race", this.other_race);
+          body.append("other_religion", this.other_religion);
+          body.append("other_accommodation", this.other_accommodation);
+          body.append("other_marital", this.other_maritalList);
+          body.append("other_feeExemStatus", this.other_feeExemptionStatus);
+          body.append("other_occupationStatus", this.other_occupationStatus);
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -2023,10 +2083,8 @@ export default {
         this.citizenship = response.data.list[0].citizenship;
         this.city_id = response.data.list[0].city_id;
         this.country_id = response.data.list[0].country_id;
-        //  this.created_at=response.data.list[0].created_at;
         this.drug_allergy = response.data.list[0].drug_allergy;
-        this.drug_allergy_description =
-          response.data.list[0].drug_allergy_description;
+        this.drug_allergy_description = response.data.list[0].drug_allergy_description;
         this.education_level = response.data.list[0].education_level;
         this.expiry_date = response.data.list[0].expiry_date;
         this.fee_exemption_status = response.data.list[0].fee_exemption_status;
@@ -2068,23 +2126,15 @@ export default {
         this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
-        this.traditional_description =
-          response.data.list[0].traditional_description;
-        this.traditional_medication =
-          response.data.list[0].traditional_medication;
+        this.traditional_description = response.data.list[0].traditional_description;
+        this.traditional_medication = response.data.list[0].traditional_medication;
 
 
         this.citizentype = response.data.list[0].citizenships[0].section_value;
-        //if (response.data.list[0].citizenships[0].section_value == 1) {
+
+        this.race
       
-        //if (response.data.list[0].citizenship == 430) {
-        //  this.citizentype = "Malaysian";
-        //} else if (response.data.list[0].citizenship == 450) {
-        //  this.citizentype = "Permanent Resident";
-        //} else {
-        //  this.citizentype = "Foreigner";
-        //}
-          const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
         headers,
       });
       if (response6.data.code == 200 || response6.data.code == "200") {
