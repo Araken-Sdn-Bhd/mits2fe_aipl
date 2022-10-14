@@ -97,9 +97,9 @@ export default {
     this.Id = urlParams.get("id");
   },
   methods:{
-    formatetime(date) {
+    formatetime(time) {
       //const local = moment.utc(date).local().format("hh:mm a");
-       const local = moment(date).format("hh:mm:ss");
+       const local = moment().format("hh:mm:ss a");
       return local;
     },
   }
