@@ -95,11 +95,11 @@
                       {{ (staff.booking_date+' '+staff.booking_time) }}
                       <!-- {{ staff.booking_time }} -->
                     </td>
-                    <td>{{ staff.end_appointment_date }}</td>
-                    <td>{{ staff.category_services }}</td>
-                    <td>{{ staff.complexity_services }}</td>
-                    <td>{{ staff.outcome }}</td>
-                    <td>{{ staff.location_services }}</td>
+                    <td>{{ staff.end_appoitment_date }}</td>
+                    <td>{{ staff.category_services_id }}</td>
+                    <td>{{ staff.csr_ }}</td>
+                    <td>{{ staff.oc_ }}</td>
+                    <td>{{ staff.ls_ }}</td>
                     <td>
                       <a
                         @click="edit(staff)"
@@ -513,11 +513,11 @@ export default {
       };
       const response = await this.$axios.post(
         "patient-appointment-details/fetchPatientListByStaffId",
-        { apid: data.patient_appointment_id, type: data.type, tbid: data.id },
+        { apid: data.patient_appointment_id, type: data.type, tbid: data.id_ },
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        this.staffpatientlist = response.data.Data[0];
+        if(this.staffpatientlist = response.data.Data[0]){
         this.outcome_id = response.data.Data[0].outcome;
         this.complexity_services_id =
           response.data.Data[0].complexity_services_id;
@@ -531,7 +531,13 @@ export default {
         this.apid = response.data.Data[0].patient_appointment_id;
         this.type = response.data.Data[0].type;
         this.tbid = response.data.Data[0].id;
+        }
         // console.log("my edit",this.booking_enddate);
+        //  <td>{{ staff.end_appoitment_date }}</td>
+        //             <td>{{ staff.category_services_id }}</td>
+        //             <td>{{ staff.csr_ }}</td>
+        //             <td>{{ staff.oc_ }}</td>
+        //             <td>{{ staff.ls_ }}</td>
       }
     },
     formatedate(date) {
@@ -589,7 +595,30 @@ export default {
       if (response.data.code == 200 || response.data.code == "200") {
          $("#exampleModal").modal('hide');
         $("#updatepopup").modal("show");
+        this.Getstaffpatientlist1();
       }
+    },
+     async Getstaffpatientlist1() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .post(
+          `${this.$axios.defaults.baseURL}` +
+            "patient-appointment-details/fetchPatientStaffById",
+          { patient_id: this.users_id }, //patient_id is treated as usersid
+          { headers }
+        )
+        .then((resp) => {
+          this.list = resp.data.Data;
+          console.log("my staff", resp.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };
