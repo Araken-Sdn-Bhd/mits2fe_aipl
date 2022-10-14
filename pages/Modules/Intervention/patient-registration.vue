@@ -171,18 +171,19 @@
                                 aria-label="Default select example"
                                 v-on:change="resetModelValue"
                               >
+                              <!--v-on:change="resetModelValue"-->
                               <option value="">Please Select</option>
                                 <option
                                 v-for="mar in nrictypelist"
                                 v-bind:key="mar.id"
                                 v-bind:value="mar.id"
                               >
-                                {{ mar.section_value }}
+                                {{ mar.section_value}}
                               </option>
                               </select>
                             </div>
 
-                            <div class="col-sm-6" v-if="this.nric_type == 432">
+                            <div class="col-sm-6" v-if="this.nric_type_code == 'OIC'">
                               <label class="form-label">Old NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -192,7 +193,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 433">
+                            <div class="col-sm-6" v-if="this.nric_type_code == 'NIC'">
                               <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -202,7 +203,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 467">
+                            <div class="col-sm-6" v-if="this.nric_type_code == 'POL'">
                               <label class="form-label">Police ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -212,8 +213,8 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 468">
-                              <label class="form-label">Work Permit<small>*</small></label>
+                            <div class="col-sm-6" v-if="this.nric_type_code == 'ARM'">
+                              <label class="form-label">Army ID<small>*</small></label>
                               <input
                                 type="tel"
                                 class="form-control toCapitalFirst"
@@ -571,19 +572,21 @@
                               v-model="race_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeRace($event)"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="rce in racelist"
                                 v-bind:key="rce.id"
                                 v-bind:value="rce.id"
+                                
                               >
                                 {{ rce.section_value }}
                               </option>
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="this.nric_type == 432">
+                        <div class="col-sm-6">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -1326,6 +1329,8 @@ export default {
       other_marritalList:"",
       other_feeExemptionStatus:"",
       other_occupationStatus:"",
+      race_type:"",
+      nric_type_code:"",
     };
   },
   beforeMount() {
@@ -1376,10 +1381,30 @@ export default {
         return true;
       }
     },
-    resetModelValue()
+    async resetModelValue()
     {
       this.nric_no = "";
       this.error = null;
+
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "/general-setting/fetch",
+        {
+          setting_id: this.nric_type,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.nric_type_code = response.data.setting[0].code;
+      } else {
+        window.alert("Something went wrong");
+      }
+
+
     },
     NextFirst() {
       this.errorList = [];
@@ -1411,23 +1436,25 @@ export default {
           if (!this.nric_no) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
-          } else {
-            if (this.nric_no.length != 12) {
-              this.errorList.push("Please Enter 12 Digit NRIC No.");
-              this.NextFirstval = false;
-            }
           }
+          //} else {
+          //  if (this.nric_no.length != 12) {
+          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
+          //    this.NextFirstval = false;
+          //  }
+          //}
         } else if (this.citizentype == "Permanent Resident") {
           if (!this.nric_no1) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
-          } else {
-            this.nric_no = this.nric_no1;
-            if (this.nric_no.length != 12) {
-              this.errorList.push("Please Enter 12 Digit NRIC No.");
-              this.NextFirstval = false;
-            }
-          }
+          } 
+          //else {
+          //  this.nric_no = this.nric_no1;
+          //  if (this.nric_no.length != 12) {
+          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
+          //    this.NextFirstval = false;
+          //  }
+          //}
         } else {
           if (!this.passport_no) {
             this.errorList.push("Passport No is required.");
@@ -1586,6 +1613,7 @@ export default {
         { headers }
       );
       if (response8.data.code == 200 || response8.data.code == "200") {
+     
         this.nrictypelist = response8.data.list;
       } else {
         this.nrictypelist = [];
@@ -1722,6 +1750,14 @@ export default {
     OnchangeCitizenship(value, id) {
       this.citizenship = id;
       this.citizentype = value;
+    },
+    //OnchangeType(event) {
+    //  //alert(JSON.stringify(event.target.options[event.target.options.selectedIndex]));
+    //  this.nric_type_code = event.target.options[event.target.options.selectedIndex].code_attrib;
+    //  alert(this.nric_type_code);
+    //},
+    OnchangeRace(event) {
+      //alert("1");
     },
     selectFile(event) {
       this.file = event.target.files[0];
