@@ -3206,222 +3206,222 @@ export default {
       this.validate = false;
       this.errorList = [];
       try {
-        // if (!this.cps_date || !this.cps_time || !this.cps_seen_by) {
-        //   this.errorList.push("Date & Time Seen By is required");
-        // }
-        // if (
-        //   !this.cps_date_discussed ||
-        //   !this.cps_time_discussed ||
-        //   !this.cps_discussed_with
-        // ) {
-        //   this.errorList.push("Date & Time Discussed with is required");
-        // }
-        // if (!this.visit_date || !this.visit_time) {
-        //   this.errorList.push("Visit Date & time is required");
-        // }
-        // if (!this.informants_name) {
-        //   this.errorList.push("Informants NAME is required");
-        // }
-        // if (!this.informants_relationship) {
-        //   this.errorList.push("Informants RELATIONSHIP is required");
-        // }
-        // if (!this.informants_contact) {
-        //   this.errorList.push("Informants CONTACT NO is required");
-        // }
-        // if (!this.case_manager) {
-        //   this.errorList.push("Case Manager	 is required");
-        // }
-        // if (!this.visited_by) {
-        //   this.errorList.push("Visited By	is required");
-        // }
-        // if (!this.visit_outcome) {
-        //   this.errorList.push("Visit Outcome is required");
-        // }
-        // if (!this.current_intervention) {
-        //   this.errorList.push("Current Intervention is required");
-        // }
-        // if (!this.compliance_treatment) {
-        //   this.errorList.push("Compliance To Treatment is required");
-        // }
-        // if (!this.medication_supervised_by) {
-        //   this.errorList.push("Medication Supervised By is required");
-        // }
-        // if (!this.delusions) {
-        //   this.errorList.push("Delusions is required");
-        // }
-        // if (!this.hallucination) {
-        //   this.errorList.push("Hallucination is required");
-        // }
-        // if (!this.behavior) {
-        //   this.errorList.push("Disorganized Speech /Behavior is required");
-        // }
-        // if (!this.blunted_affect) {
-        //   this.errorList.push("Blunted Affect	is required");
-        // }
-        // if (!this.depression) {
-        //   this.errorList.push("Depression	 is required");
-        // }
-        // if (!this.anxiety) {
-        //   this.errorList.push("Anxiety is required");
-        // }
-        // if (!this.disorientation) {
-        //   this.errorList.push("Disorientation is required");
-        // }
-        // if (!this.uncooperativeness) {
-        //   this.errorList.push("Uncooperativeness is required");
-        // }
-        // if (!this.poor_impulse_control) {
-        //   this.errorList.push("Poor Impulse Control is required");
-        // }
-        // if (!this.others) {
-        //   this.errorList.push("Others, Please specify is required");
-        // }
-        // if (!this.ipsychopathology_remarks) {
-        //   this.errorList.push(
-        //     "PSYCHOPATHOLOGY/MENTAL STATE Remarks is required"
-        //   );
-        // }
-        // if (!this.risk_of_violence) {
-        //   this.errorList.push("Risk of violence/harm to others is required");
-        // }
-        // if (!this.risk_of_suicide) {
-        //   this.errorList.push("Risk Of Suicide is required");
-        // }
-        // if (!this.risk_of_other_deliberate) {
-        //   this.errorList.push("Risk Of Other Deliberate Self Harm is required");
-        // }
-        // if (!this.risk_of_severe) {
-        //   this.errorList.push(
-        //     "Risk Of Severe Self-neglect / Serious Accidental Self-harm is required"
-        //   );
-        // }
-        // if (!this.risk_of_harm) {
-        //   this.errorList.push(
-        //     "Risk Of Harm From Others / Vulnerability is required"
-        //   );
-        // }
-        // if (!this.changes_in_teratment) {
-        //   this.errorList.push(
-        //     "Changes in teratment at Current Visit is required"
-        //   );
-        // }
-        // if (!this.akathisia) {
-        //   this.errorList.push("Akathisia is required");
-        // }
-        // if (!this.acute_dystonia) {
-        //   this.errorList.push("Acute Dystonia	 is required");
-        // }
-        // if (!this.parkinsonism) {
-        //   this.errorList.push("Parkinsonism is required");
-        // }
-        // if (!this.tardive_dyskinesia) {
-        //   this.errorList.push("Tardive Dyskinesia is required");
-        // }
-        // if (!this.tardive_dystonia) {
-        //   this.errorList.push("Tardive Dystonia	 is required");
-        // }
-        // if (!this.others_specify) {
-        //   this.errorList.push("Others, specify	 is required");
-        // }
-        // if (!this.side_effects_remarks) {
-        //   this.errorList.push("SIDE EFFECTS Remarks is required");
-        // }
-        // if (!this.social_performance) {
-        //   this.errorList.push(
-        //     "PERSONAL AND SOCIAL PERFORMANCE (PSP) SCALE is required"
-        //   );
-        // }
-        // if (!this.psychoeducation) {
-        //   this.errorList.push("Psychoeducation/Counseling	 is required");
-        // }
-        // if (!this.coping_skills) {
-        //   this.errorList.push("Coping Skills Training	 is required");
-        // }
-        // if (!this.adl_training) {
-        //   this.errorList.push("ADL Training is required");
-        // }
-        // if (!this.supported_employment) {
-        //   this.errorList.push("Supported Employment is required");
-        // }
-        // if (!this.family_intervention) {
-        //   this.errorList.push("Family Intervention is required");
-        // }
-        // if (!this.intervention_others) {
-        //   this.errorList.push("Others, specify is required");
-        // }
-        // if (!this.remarks) {
-        //   this.errorList.push("INTERVENTION Remarks is required");
-        // }
+        if (!this.cps_date || !this.cps_time || !this.cps_seen_by) {
+          this.errorList.push("Date & Time Seen By is required");
+        }
+        if (
+          !this.cps_date_discussed ||
+          !this.cps_time_discussed ||
+          !this.cps_discussed_with
+        ) {
+          this.errorList.push("Date & Time Discussed with is required");
+        }
+        if (!this.visit_date || !this.visit_time) {
+          this.errorList.push("Visit Date & time is required");
+        }
+        if (!this.informants_name) {
+          this.errorList.push("Informants NAME is required");
+        }
+        if (!this.informants_relationship) {
+          this.errorList.push("Informants RELATIONSHIP is required");
+        }
+        if (!this.informants_contact) {
+          this.errorList.push("Informants CONTACT NO is required");
+        }
+        if (!this.case_manager) {
+          this.errorList.push("Case Manager	 is required");
+        }
+        if (!this.visited_by) {
+          this.errorList.push("Visited By	is required");
+        }
+        if (!this.visit_outcome) {
+          this.errorList.push("Visit Outcome is required");
+        }
+        if (!this.current_intervention) {
+          this.errorList.push("Current Intervention is required");
+        }
+        if (!this.compliance_treatment) {
+          this.errorList.push("Compliance To Treatment is required");
+        }
+        if (!this.medication_supervised_by) {
+          this.errorList.push("Medication Supervised By is required");
+        }
+        if (!this.delusions) {
+          this.errorList.push("Delusions is required");
+        }
+        if (!this.hallucination) {
+          this.errorList.push("Hallucination is required");
+        }
+        if (!this.behavior) {
+          this.errorList.push("Disorganized Speech /Behavior is required");
+        }
+        if (!this.blunted_affect) {
+          this.errorList.push("Blunted Affect	is required");
+        }
+        if (!this.depression) {
+          this.errorList.push("Depression	 is required");
+        }
+        if (!this.anxiety) {
+          this.errorList.push("Anxiety is required");
+        }
+        if (!this.disorientation) {
+          this.errorList.push("Disorientation is required");
+        }
+        if (!this.uncooperativeness) {
+          this.errorList.push("Uncooperativeness is required");
+        }
+        if (!this.poor_impulse_control) {
+          this.errorList.push("Poor Impulse Control is required");
+        }
+        if (!this.others) {
+          this.errorList.push("Others, Please specify is required");
+        }
+        if (!this.ipsychopathology_remarks) {
+          this.errorList.push(
+            "PSYCHOPATHOLOGY/MENTAL STATE Remarks is required"
+          );
+        }
+        if (!this.risk_of_violence) {
+          this.errorList.push("Risk of violence/harm to others is required");
+        }
+        if (!this.risk_of_suicide) {
+          this.errorList.push("Risk Of Suicide is required");
+        }
+        if (!this.risk_of_other_deliberate) {
+          this.errorList.push("Risk Of Other Deliberate Self Harm is required");
+        }
+        if (!this.risk_of_severe) {
+          this.errorList.push(
+            "Risk Of Severe Self-neglect / Serious Accidental Self-harm is required"
+          );
+        }
+        if (!this.risk_of_harm) {
+          this.errorList.push(
+            "Risk Of Harm From Others / Vulnerability is required"
+          );
+        }
+        if (!this.changes_in_teratment) {
+          this.errorList.push(
+            "Changes in teratment at Current Visit is required"
+          );
+        }
+        if (!this.akathisia) {
+          this.errorList.push("Akathisia is required");
+        }
+        if (!this.acute_dystonia) {
+          this.errorList.push("Acute Dystonia	 is required");
+        }
+        if (!this.parkinsonism) {
+          this.errorList.push("Parkinsonism is required");
+        }
+        if (!this.tardive_dyskinesia) {
+          this.errorList.push("Tardive Dyskinesia is required");
+        }
+        if (!this.tardive_dystonia) {
+          this.errorList.push("Tardive Dystonia	 is required");
+        }
+        if (!this.others_specify) {
+          this.errorList.push("Others, specify	 is required");
+        }
+        if (!this.side_effects_remarks) {
+          this.errorList.push("SIDE EFFECTS Remarks is required");
+        }
+        if (!this.social_performance) {
+          this.errorList.push(
+            "PERSONAL AND SOCIAL PERFORMANCE (PSP) SCALE is required"
+          );
+        }
+        if (!this.psychoeducation) {
+          this.errorList.push("Psychoeducation/Counseling	 is required");
+        }
+        if (!this.coping_skills) {
+          this.errorList.push("Coping Skills Training	 is required");
+        }
+        if (!this.adl_training) {
+          this.errorList.push("ADL Training is required");
+        }
+        if (!this.supported_employment) {
+          this.errorList.push("Supported Employment is required");
+        }
+        if (!this.family_intervention) {
+          this.errorList.push("Family Intervention is required");
+        }
+        if (!this.intervention_others) {
+          this.errorList.push("Others, specify is required");
+        }
+        if (!this.remarks) {
+          this.errorList.push("INTERVENTION Remarks is required");
+        }
 
-        // if (!this.employment_past_months) {
-        //   this.errorList.push("Employment the past 6 month is required");
+        if (!this.employment_past_months) {
+          this.errorList.push("Employment the past 6 month is required");
+        }
+        if (this.employment_past_months == "Yes") {
+          if (!this.if_employment_yes) {
+            this.errorList.push("If Yes is required");
+            this.validate = false;
+          }
+        }
+        if (!this.psychiatric_clinic) {
+          this.errorList.push("Psychiatric clinic	 is required");
+        }
+        if (!this.im_depot_clinic) {
+          this.errorList.push("IM depot in clinic is required");
+        }
+        if (!this.next_community_visit) {
+          this.errorList.push("Next community visit	 is required");
+        }
+        if (!this.comments) {
+          this.errorList.push("Comments is required");
+        }
+        if (!this.location_services_id) {
+          this.errorList.push("Location Of Services is required");
+        }
+        if (!this.type_diagnosis_id) {
+          this.errorList.push("Type Of Diagnosis is required");
+        }
+        if (!this.category_services) {
+          this.errorList.push("Category Of Services is required");
+        }
+        if (!this.complexity_services_id) {
+          this.errorList.push("Complexity Of Service is required");
+        }
+        if (this.category_services) {
+          if (this.category_services == "assisstance") {
+            if (!this.services_id) {
+              this.errorList.push("Service is required");
+              this.validate = false;
+            }
+          } else if (this.category_services == "clinical-work") {
+            if (!this.code_id) {
+              this.errorList.push("ICD 9 CODE is required");
+              this.validate = false;
+            }
+            if (!this.sub_code_id) {
+              this.errorList.push("ICD 9 SUB CODE is required");
+              this.validate = false;
+            }
+          } else {
+            if (!this.serviceid) {
+              this.errorList.push("Services is required");
+              this.validate = false;
+            } else {
+              this.services_id = this.serviceid;
+            }
+          }
+        }
+        if (!this.outcome_id) {
+          this.errorList.push("Outcome is required");
+        }
+        // if (!this.medication_des) {
+        //   this.errorList.push("Medication is required");
         // }
-        // if (this.employment_past_months == "Yes") {
-        //   if (!this.if_employment_yes) {
-        //     this.errorList.push("If Yes is required");
-        //     this.validate = false;
-        //   }
-        // }
-        // if (!this.psychiatric_clinic) {
-        //   this.errorList.push("Psychiatric clinic	 is required");
-        // }
-        // if (!this.im_depot_clinic) {
-        //   this.errorList.push("IM depot in clinic is required");
-        // }
-        // if (!this.next_community_visit) {
-        //   this.errorList.push("Next community visit	 is required");
-        // }
-        // if (!this.comments) {
-        //   this.errorList.push("Comments is required");
-        // }
-        // if (!this.location_services_id) {
-        //   this.errorList.push("Location Of Services is required");
-        // }
-        // if (!this.type_diagnosis_id) {
-        //   this.errorList.push("Type Of Diagnosis is required");
-        // }
-        // if (!this.category_services) {
-        //   this.errorList.push("Category Of Services is required");
-        // }
-        // if (!this.complexity_services_id) {
-        //   this.errorList.push("Complexity Of Service is required");
-        // }
-        // if (this.category_services) {
-        //   if (this.category_services == "assisstance") {
-        //     if (!this.services_id) {
-        //       this.errorList.push("Service is required");
-        //       this.validate = false;
-        //     }
-        //   } else if (this.category_services == "clinical-work") {
-        //     if (!this.code_id) {
-        //       this.errorList.push("ICD 9 CODE is required");
-        //       this.validate = false;
-        //     }
-        //     if (!this.sub_code_id) {
-        //       this.errorList.push("ICD 9 SUB CODE is required");
-        //       this.validate = false;
-        //     }
-        //   } else {
-        //     if (!this.serviceid) {
-        //       this.errorList.push("Services is required");
-        //       this.validate = false;
-        //     } else {
-        //       this.services_id = this.serviceid;
-        //     }
-        //   }
-        // }
-        // if (!this.outcome_id) {
-        //   this.errorList.push("Outcome is required");
-        // }
-        // // if (!this.medication_des) {
-        // //   this.errorList.push("Medication is required");
-        // // }
-        // if (!this.staff_name) {
-        //   this.errorList.push("Staff Name	 is required");
-        // }
-        // if (!this.designation) {
-        //   this.errorList.push("Designation is required");
-        // }
+        if (!this.staff_name) {
+          this.errorList.push("Staff Name	 is required");
+        }
+        if (!this.designation) {
+          this.errorList.push("Designation is required");
+        }
 
         if (
           this.cps_date &&
