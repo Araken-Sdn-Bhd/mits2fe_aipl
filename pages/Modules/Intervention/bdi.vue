@@ -210,6 +210,7 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
+     
       this.error = null;
       try {
         if (this.list.length == Object.values(this.checkedList).length) {
