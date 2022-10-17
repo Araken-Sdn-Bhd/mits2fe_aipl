@@ -89,13 +89,13 @@
                 <div class="ml-auto">
                   <a
                     style="cursor: pointer"
-                    v-on:click="OnApproverejectRequest(0)"
+                    v-on:click="OnApproverejectRequest(0)" v-if="SidebarAccess==1"
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
                     style="cursor: pointer"
-                    v-on:click="OnApproverejectRequest(2)"
+                    v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
                     class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
@@ -126,10 +126,13 @@ export default {
       search: "",
       companyName: "",
       loader: false,
+      SidebarAccess:null,
+      
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.companyId = urlParams.get("id");
   },

@@ -351,7 +351,7 @@
                         </ul>
                        </p>
                 <!-- row -->
-                <div class="d-flex">
+                <div class="d-flex" v-if="SidebarAccess==1">
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -403,10 +403,12 @@ export default {
       reading: "",
       calculation: "",
       other: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $('.box-wr input[type="checkbox"]').click(function () {
       var inputValue = $(this).attr("value");
       $("." + inputValue).toggle();

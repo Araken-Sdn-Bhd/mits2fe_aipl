@@ -899,7 +899,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" v-if="SidebarAccess==1">
         <div class="form-check mr-auto">
           <input
             class="form-check-input"
@@ -984,10 +984,12 @@ export default {
       networkbranch: "",
       networkother: "",
       networkserviceother: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $(".data-table").DataTable({
         searching: false,

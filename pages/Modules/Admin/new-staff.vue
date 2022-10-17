@@ -248,7 +248,7 @@
                         class="btn btn-primary btn-text"
                         ><i class="far fa-arrow-alt-to-left"></i> Back</a
                       >
-                      <div class="btn-right">
+                      <div class="btn-right" v-if="SidebarAccess==1">
                         <button type="submit" class="btn btn-warning btn-text">
                           <i class="far fa-save"></i> Save
                         </button>
@@ -294,10 +294,12 @@ export default {
       branchlist: [],
       errors: [],
       nricerror: null,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetroleList();
     this.GetbranchList();
     this.GetdesignationList();

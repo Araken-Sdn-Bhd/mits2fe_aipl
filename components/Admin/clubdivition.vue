@@ -74,7 +74,7 @@
         </li>
       </ul>
         </p> 
-       <div class="d-flex justify-content-center" >
+       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -108,10 +108,10 @@
                 <td>{{etp.club.club_name}}</td>
                 <td>{{etp.division_order}}</td>
                 <td>
-                  <a class="edit" @click="editdiv(etp)"
+                  <a class="edit" @click="editdiv(etp)" v-if="SidebarAccess==1"
                     ><i class="far fa-edit"></i
                   ></a>
-                  <a @click="deletediv(etp)" class="action-icon icon-danger"
+                  <a @click="deletediv(etp)" class="action-icon icon-danger" v-if="SidebarAccess==1"
                     ><i class="far fa-trash-alt"></i
                   ></a>
                 </td>
@@ -139,6 +139,7 @@ export default {
       branchlist: [],
       errors: [],
       userdetails: null,
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -178,6 +179,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetclubList();
     this.GethospitalList();
   },

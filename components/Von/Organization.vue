@@ -919,7 +919,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" v-if="SidebarAccess==1">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck12"  v-model="Ois_agree" />
           <label class="form-check-label" for="gridCheck12">
@@ -1012,10 +1012,12 @@ export default {
       Onetworkbranch: "",
       Onetworkother: "",
       Onetworkserviceother: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $(".data-table").DataTable({
         searching: false,

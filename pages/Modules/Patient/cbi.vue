@@ -506,7 +506,7 @@
                       <button
                         type="submit"
                         class="btn btn-success ml-auto"
-                        @click="OnsubmitTest"
+                        @click="OnsubmitTest" v-if="SidebarAccess==1"
                       >
                         <i class="fad fa-paper-plane"></i> Submit
                       </button>
@@ -568,10 +568,12 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      SidebarAccess:null
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     if (this.userdetails) {
       this.userId = this.userdetails.user.id;
       this.token = this.userdetails.access_token;

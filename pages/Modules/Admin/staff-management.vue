@@ -78,7 +78,7 @@
               </table>
 
               <div class="d-flex">
-                <div class="ml-auto">
+                <div class="ml-auto" v-if="SidebarAccess==1">
                   <button
                     type="button"
                     class="btn btn-warning btn-text btn-green"
@@ -287,6 +287,7 @@ export default {
       userdetails: null,
       list: [],
       branchlist: [],
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -327,6 +328,8 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    
     this.GetBranchList();
   },
   methods: {

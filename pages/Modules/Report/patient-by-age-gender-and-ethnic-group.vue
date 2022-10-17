@@ -94,7 +94,7 @@
                   <!-- row -->
 
                   <div class="d-flex">
-                    <div class="ml-auto">
+                    <div class="ml-auto" v-if="SidebarAccess==1">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                         ><i class="far fa-file-pdf"></i> Generate PDF</a
                       >
@@ -236,10 +236,12 @@ export default {
       Gender: "",
       Age: "",
       race_id: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
   methods: {

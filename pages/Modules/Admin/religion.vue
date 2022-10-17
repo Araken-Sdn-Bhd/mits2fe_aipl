@@ -54,7 +54,7 @@
                              </li>
                         </ul>
                        </p>
-                        <div class="d-flex justify-content-center" >
+                        <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
         <i class="far fa-save"></i> Save
         </button>
@@ -85,7 +85,7 @@
                     <td>{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
-                        <td>
+                        <td v-if="SidebarAccess==1">
                           <a  class="edit" @click="editsetting(setting)"
                             ><i class="far fa-edit"></i
                           ></a>
@@ -120,6 +120,7 @@ export default {
       settingId: 0,
       requesttype: "insert",
       loader: false,
+      SidebarAccess:null,
     };
   },
     mounted() {
@@ -160,6 +161,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
    
   },
   methods: {

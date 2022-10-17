@@ -371,7 +371,7 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex">
+              <div class="d-flex" v-if="SidebarAccess==1">
                 <div class="ml-auto">
                   <button
                     @click="Ongeneratepdf"
@@ -522,10 +522,12 @@ export default {
       occupation_sector: "",
       age: "",
       count: 0,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
   methods: {

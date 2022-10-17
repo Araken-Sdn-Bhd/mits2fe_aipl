@@ -67,11 +67,11 @@
                     <td>{{ app.email }}</td>
                     <td>{{ app.screening }}</td>
                     <td>
-                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit">
+                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit" v-if="SidebarAccess==1">
                         <i class="far fa-edit"></i>
                       </a>
 
-                      <a style="pointer:cursor;" @click="OnView(app)" class="view">
+                      <a style="pointer:cursor;" @click="OnView(app)" class="view" v-if="SidebarAccess==1">
                         <i class="far fa-eye"></i>
                       </a>
 
@@ -86,12 +86,12 @@
               <div class="d-flex">
                 <div class="ml-auto">
                   <a
-                    v-on:click="OnApproverejectRequest(2)"
+                    v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
-                    v-on:click="OnApproverejectRequest(1)"
+                    v-on:click="OnApproverejectRequest(1)" v-if="SidebarAccess==1"
                     class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
@@ -120,10 +120,12 @@ export default {
       selected: [],
       companyId: 0,
       search: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   mounted() {
     const headers = {

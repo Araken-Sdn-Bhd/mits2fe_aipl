@@ -96,7 +96,7 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex">
+              <div class="d-flex" v-if="SidebarAccess==1">
                 <div class="ml-auto">
                   <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                     ><i class="far fa-file-pdf"></i> Generate PDF</a
@@ -253,10 +253,12 @@ export default {
       referral_type: 0,
       Total_Patient: 0,
       Total_Days: 0,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
   methods: {

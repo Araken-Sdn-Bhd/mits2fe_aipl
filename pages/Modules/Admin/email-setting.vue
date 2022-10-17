@@ -122,7 +122,7 @@
       </ul>
         </p>
                   <!-- row -->
-                  <div class="d-flex">
+                  <div class="d-flex" v-if="SidebarAccess==1">
                     <a href="/Modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
                     <div class="ml-auto">
                         <a href="#" class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
@@ -194,10 +194,12 @@ export default {
       userdetail: null,
       emailerror: [],
       loader: false,
+      SidebarAccess:null,
     };
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetEmail();
   },
   methods: {

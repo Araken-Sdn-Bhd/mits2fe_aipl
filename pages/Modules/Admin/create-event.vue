@@ -208,7 +208,7 @@
                     class="btn btn-primary btn-text"
                     ><i class="far fa-arrow-alt-to-left"></i> Back</a
                   >
-                  <div class="btn-right">
+                  <div class="btn-right" v-if="SidebarAccess==1">
                     <button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
                       <i class="far fa-save"></i> Save as draft
                     </button>
@@ -275,6 +275,7 @@ export default {
       cat4: 0,
       cat5: 0,
       cat6: 0,
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -284,6 +285,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetbranchList();
   },
   methods: {

@@ -1218,12 +1218,12 @@
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
 
-                        <a v-if="!Id"
+                        <a v-if="!Id && SidebarAccess==1"
                           @click="submitRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
                         >
-                        <a v-if="Id"
+                        <a v-if="Id && SidebarAccess==1"
                           @click="updateRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Update</a
@@ -1344,10 +1344,12 @@ export default {
       other_occupationStatus:"",
       race_type:"",
       nric_type_code:"",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

@@ -109,7 +109,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="typeId">
         <i class="far fa-save"></i> Save
         </button>
@@ -141,8 +141,8 @@
           <td>{{ icdtype.icd_type_description }}</td>
           <td>{{ icdtype.icd_type_order }}</td>
           <td>
-            <a class="edit" @click="edittype(icdtype)"><i class="far fa-edit"></i></a>
-            <a @click="deletetype(icdtype)" class="action-icon icon-danger"
+            <a class="edit" @click="edittype(icdtype)" v-if="SidebarAccess==1"><i class="far fa-edit"></i></a>
+            <a @click="deletetype(icdtype)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -221,7 +221,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcatId">
         <i class="far fa-save"></i> Save
         </button>
@@ -254,8 +254,8 @@
           <td>{{cat.icd_category_description}}</td>
       <td>{{cat.icd_category_order}}</td>
            <td>
-            <a class="edit" @click="editcat(cat)"><i class="far fa-edit"></i></a>
-            <a @click="deletecat(cat)" class="action-icon icon-danger"
+            <a class="edit" @click="editcat(cat)" v-if="SidebarAccess==1"><i class="far fa-edit"></i></a>
+            <a @click="deletecat(cat)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -362,7 +362,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcodeId">
         <i class="far fa-save"></i> Save
         </button>
@@ -400,10 +400,10 @@
           <td>{{ cat.icd_description }}</td>
           <td>{{ cat.icd_order }}</td>
           <td>
-            <a class="edit" @click="editcode(cat)"
+            <a class="edit" @click="editcode(cat)" v-if="SidebarAccess==1"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletecode(cat)" class="action-icon icon-danger"
+            <a @click="deletecode(cat)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -458,6 +458,7 @@ export default {
       icdcatcodelist: [],
       codelist: [],
       icdcodeId: 0,
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -499,6 +500,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   methods: {
     async GeticdList() {
