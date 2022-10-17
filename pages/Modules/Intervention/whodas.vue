@@ -883,7 +883,7 @@
                 >
                   <div class="content-subtab">
                     <div class="form-title">
-                      <h5>LIFE ACTIVMES - SCHOOL/WORK</h5>
+                      <h5>LIFE ACTIVITIES - SCHOOL/WORK</h5>
                       <ul class="instruction">
                         <li>
                           <span class="no">1</span>
