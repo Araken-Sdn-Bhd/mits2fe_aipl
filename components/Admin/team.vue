@@ -61,10 +61,10 @@
       </ul>
         </p>
       <div class="d-flex justify-content-center" >
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
         <i class="far fa-save"></i> Save
         </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
+         <button type="submit" class="btn btn-warning btn-text" v-if="!Id && SidebarAccess==1">
           <i class="far fa-plus"></i> Add Parameter
         </button>
       </div>
@@ -91,10 +91,10 @@
           <td>{{tem.team_name}}</td>
 
            <td>
-            <a class="edit" @click="editteam(tem)"
+            <a class="edit" @click="editteam(tem)" v-if="SidebarAccess==1"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deleteteam(tem)" class="action-icon icon-danger"
+            <a @click="deleteteam(tem)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -117,6 +117,7 @@ export default {
       branchlist: [],
       taemlist: [],
       errors: [],
+      SidebarAccess:null
     };
   },
   mounted() {
@@ -156,6 +157,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GethospitalList();
   },
   methods: {

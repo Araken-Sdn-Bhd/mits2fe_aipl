@@ -100,13 +100,25 @@
                       >
                     </td>
                     <td>{{ patint.age }}</td>
-                    <td>{{ patint.nric_no }}</td>
+                    <td>{{ patint.nric_id }}</td>
                     <td>{{ patint.appointments }}</td>
                     <td>{{ patint.team_name }}</td>
                     <td>{{ patint.service }}</td>
                   </tr>
                 </tbody>
               </table>
+              <p
+                v-show="!list.length"
+                style="
+                  padding: 0px;
+                  margin: 10px;
+                  color: red;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                No Record Found
+              </p>
             </div>
           </div>
         </div>

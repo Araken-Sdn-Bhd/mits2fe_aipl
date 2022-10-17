@@ -373,9 +373,9 @@
         </li>
       </ul>
         </p>
-         <button type="submit" class="btn btn-success bto-warning" v-if="!Id"
+         <button type="submit" class="btn btn-success bto-warning" v-if="!Id && SidebarAccess==1"
       ><i class="far fa-plus"></i> Add Parameter</button>
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
         <i class="far fa-save"></i> Save
         </button>
       </form>
@@ -472,6 +472,7 @@ export default {
       hsptlemailerror: null,
       search: "",
       Id: 0,
+      SidebarAccess:null
     };
   },
   mounted() {
@@ -508,6 +509,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
   methods: {

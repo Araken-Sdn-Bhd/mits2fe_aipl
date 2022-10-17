@@ -43,10 +43,10 @@
       </ul>
         </p>
       <div class="d-flex justify-content-center" >
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
         <i class="far fa-save"></i> Save
         </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
+         <button type="submit" class="btn btn-warning btn-text" v-if="!Id && SidebarAccess==1">
           <i class="far fa-plus"></i> Add Parameter
         </button>
       </div>
@@ -74,10 +74,10 @@
          <td>{{smod.sub_module_code}}</td>
          <td>{{smod.sub_module_name}}</td>
           <td>
-            <a class="edit" @click="editsubmodule(smod)"
+            <a class="edit" @click="editsubmodule(smod)" v-if="SidebarAccess==1"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletesubmodule(smod)" class="action-icon icon-danger"
+            <a @click="deletesubmodule(smod)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -100,6 +100,7 @@ export default {
       userdetails: null,
       modulelist: [],
       list: [],
+      SidebarAccess:null
     };
   },
   mounted() {
@@ -140,7 +141,8 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.GetModuleList();;
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.GetModuleList();
   },
   methods: {
     async onAddsubModule() {
