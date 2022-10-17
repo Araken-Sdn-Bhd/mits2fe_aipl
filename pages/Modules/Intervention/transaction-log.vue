@@ -27,7 +27,7 @@
                     <td>{{ log.date }}</td>
                     <td>{{ log.activity }}</td>
                     <td>{{ log.name }}</td>
-                    <td>{{ formatetime(log.time) }}</td>
+                    <td>{{ log.time }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -99,7 +99,7 @@ export default {
   methods:{
     formatetime(time) {
       //const local = moment.utc(date).local().format("hh:mm a");
-       const local = moment().format("hh:mm:ss a");
+       const local = moment(time).format("hh:mm a");
       return local;
     },
   }
