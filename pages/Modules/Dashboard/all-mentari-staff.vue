@@ -29,7 +29,7 @@
                                 <div class="card-details">
                                     <img src="~/assets/images/man.png">
                                     <div class="text">
-                                        <h1>{{ 2 }}</h1>
+                                        <h1>{{ personal_task }}</h1>
                                         <p>PERSONAL TASK</p>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <tbody>
                                         <tr  v-for="(ann,index) in list" :key="index">
                                             <td><span class="number">{{ index+1 }}</span></td>
-                                            <td>{{ ann.title }}</td>
+                                            <td><a v-bind:href="'/Modules/Admin/view-event?id='+ ann.id">{{ ann.title }} ({{ getFormattedDate(ann.start_date) }})</a></td>
                                         </tr>
                                         <!-- <tr>
                                             <td><span class="number">02</span></td>
@@ -78,6 +78,7 @@
     </div>
 </template>
 <script>
+import moment from 'moment';
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
@@ -94,8 +95,17 @@ export default {
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-        this.Getrecord();
-        this.Getannouncement();
+        if(this.userdetails){
+      this.id=this.userdetails.user.id;
+      this.email=this.userdetails.user.email; 
+      this.branch=this.userdetails.branch.branch_id;
+      
+    }
+    },
+    mounted(){
+      this.Getrecord();
+      
+
     },
 
     methods: {
@@ -108,13 +118,14 @@ export default {
                 };
                 const response = await this.$axios.get(
                     "all-mentari-staff/get",
-                    { headers }
+                    { headers, params: {branch: this.branch, email: this.email}}
                 );
                 // console.log('my res', response.data);
                 if (response.data.code == 200 || response.data.code == "200") {
-                    this.team_task = response.data.team_task[0].team_task;
-                    this.todays_appointments = response.data.today_appointment[0].todays_appointment;
-                    console.log('my teamtask',this.team_task);
+                    this.todays_appointments = response.data.today_appointment;
+                    this.personal_task = response.data.personal_task;
+                    this.team_task = response.data.team_task;
+                    this.list = response.data.list;
                     // this.personal_task = response.data.list1[0].PersonalTask;
                     
                 } else {
@@ -124,30 +135,9 @@ export default {
 
             }
         },
-         async Getannouncement() {
-            try {
-                const headers = {
-                    Authorization: "Bearer " + this.userdetails.access_token,
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                };
-                const response = await this.$axios.post(
-                    "announcement/publish-list",
-                    { headers }
-                );
-                console.log('my announcement', response.data);
-                // this.list = resp.data.list;
-                // console.log('my announcement1', this.list);
-                if (response.data.code == 200) {
-                    this.list = response.data.list;
-                    this.team_task = response.data.team_task[0].team_task;
-                    console.log('my announcement1', this.list);
-                } else {
-                    window.alert("Something went wrong");
-                }
-            } catch (e) {
 
-            }
+        getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
         },
     },
 };
