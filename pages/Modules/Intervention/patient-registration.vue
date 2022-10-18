@@ -1836,6 +1836,7 @@ export default {
       }
     },
     async submitRegistration() {
+      
       this.errorList = [];
       if (!this.patient_need_triage_screening) {
         this.errorList.push("Patient Need Triage Screening is required.");
@@ -1850,6 +1851,7 @@ export default {
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
           body.append("citizenship", this.citizenship);
+          body.append("citizentype", this.citizentype);
           body.append("salutation_id", this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);
@@ -1967,6 +1969,7 @@ export default {
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
           body.append("citizenship", this.citizenship);
+          body.append("citizentype", this.citizentype);
           body.append("salutation_id", this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);

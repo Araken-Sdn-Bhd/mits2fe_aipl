@@ -7,7 +7,7 @@
         <main>
         <div class="container-fluid px-4 dashboard">
           <div class="page-title dashboard-title">
-            <h1>Mentari Staff Dashboard</h1>
+            <h1>Admin and Specialist in Charge Dashboard</h1>
             <div class="input-group dashboard-search">
               <span class="input-group-text" id="basic-addon1"
                 ><i class="far fa-search"></i
@@ -49,7 +49,20 @@
                 <h4>Team Task</h4>
               </div>
             </div>
+
+            <div class="col-sm-3">
+              <div class="card card-bg card-bg-4">
+                <div class="card-info">
+                  <i class="fad fa-clock"></i>
+                 <h1>{{ request_appointment }}</h1>
+                </div>
+
+                <h4>Request Appointment</h4>
+              </div>
+            </div>
           </div>
+
+          
           <!-- row -->
 
           <div class="row">
@@ -60,11 +73,11 @@
                 </div>
                 <table class="announcement-table">
                   <tbody>
-                    <tr v-for="(ann, index) in list" :key="index">
+                    <tr v-for="(ann, index) in list" :key="index" v-if="index < 1">
                       <td>
                         <span class="number">{{ index + 1 }}</span>
                       </td>
-                      <td>{{ ann.title }}</td>
+                      <td><a v-bind:href="'/Modules/Admin/view-event?id='+ ann.id">{{ ann.title }} ({{ getFormattedDate(ann.start_date) }})</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -83,6 +96,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
@@ -91,9 +105,11 @@ export default {
   data() {
         return {
             userdetails: null,
+            request_appointment: "0",
             todays_appointments: "0",
             personal_task: "0",
             team_task: "0",
+            
             list: [],
         };
     },
@@ -112,35 +128,38 @@ export default {
 
     mounted(){
       this.GetTodayAppointment();
+      // this.Getrecord();
       
 
     },
     methods: {
-        async Getrecord() {
-            try {
-                const headers = {
-                    Authorization: "Bearer " + this.userdetails.access_token,
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                };
-                const response = await this.$axios.get(
-                    "all-mentari-staff/get",
-                    { headers }
-                );
-                // console.log('my res', response.data);
-                if (response.data.code == 200 || response.data.code == "200") {
-                    this.team_task = response.data.team_task[0].team_task;
-                    this.todays_appointments = response.data.today_appointment[0].todays_appointment;
-                    console.log('my teamtask',this.team_task);
-                    // this.personal_task = response.data.list1[0].PersonalTask;
+        // async Getrecord() {
+        //     try {
+        //         const headers = {
+        //             Authorization: "Bearer " + this.userdetails.access_token,
+        //             Accept: "application/json",
+        //             "Content-Type": "application/json",
+        //         };
+        //         const response = await this.$axios.get(
+        //             "all-mentari-staff/get",
+        //             { headers, params: {branch: this.branch}}
+        //         );
+        //         // console.log('my res', response.data);
+        //         if (response.data.code == 200 || response.data.code == "200") {
+        //             //this.team_task = response.data.team_task[0].team_task;
                     
-                } else {
-                    window.alert("Something went wrong");
-                }
-            } catch (e) {
+        //             this.todays_appointments = response.data.today_appointment[0].todays_appointment;
+                    
+        //             console.log('my teamtask',this.team_task);
+        //             // this.personal_task = response.data.list1[0].PersonalTask;
+                    
+        //         } else {
+        //             window.alert("Something went wrong");
+        //         }
+        //     } catch (e) {
 
-            }
-        },
+        //     }
+        // },
 
         async GetTodayAppointment() {
             try {
@@ -150,7 +169,7 @@ export default {
                     "Content-Type": "application/json",
                 };
                 const response = await this.$axios.get(
-                    "user-admin-clerk/today_appointment",
+                    "user-admin-clerk/get_data",
                     { headers, params: {branch: this.branch, email: this.email}}
                 );
 
@@ -158,6 +177,7 @@ export default {
                     this.todays_appointments = response.data.today_appointment;
                     this.personal_task = response.data.personal_task;
                     this.team_task = response.data.team_task;
+                    this.request_appointment = response.data.request_appointment;
                     this.list = response.data.list;
 
                   
@@ -167,6 +187,10 @@ export default {
             } catch (e) {
 
             }
+        },
+
+        getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
         },
         
     }
