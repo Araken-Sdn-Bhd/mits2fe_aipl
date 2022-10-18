@@ -175,7 +175,7 @@
         </li>
       </ul>
         </p>
-            <button class="btn btn-success" v-if="SidebarAccess==1">
+            <button class="btn btn-success">
               Submit <i class="fal fa-arrow-from-left"></i>
             </button>
           </div>

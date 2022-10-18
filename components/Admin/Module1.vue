@@ -51,10 +51,10 @@
       </ul>
         </p>
       <div class="d-flex justify-content-center" >
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id && SidebarAccess==1">
+         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
           <i class="far fa-plus"></i> Add Parameter
         </button>
       </div>
@@ -84,10 +84,10 @@
           <td>{{mod.module_short_name}}</td>
          <td>{{mod.module_order}}</td>
             <td>
-            <a class="edit" @click="editmodule(mod)" v-if="SidebarAccess==1"
+            <a class="edit" @click="editmodule(mod)"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletemodule(mod)" class="action-icon icon-danger" v-if="SidebarAccess==1"
+            <a @click="deletemodule(mod)" class="action-icon icon-danger"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>

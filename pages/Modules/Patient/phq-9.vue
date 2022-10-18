@@ -130,8 +130,8 @@
 
               <Error :message="error" v-if="error" />
               <div class="d-flex align-items-center mt-2">
-                <button
-                  @click="OnsubmitTest" v-if="SidebarAccess==1"
+                <button id="hidebutton" ref="hidebutton"
+                  @click="OnsubmitTest"
                   type="submit"
                   class="btn btn-success ml-auto"
                 >
@@ -183,6 +183,12 @@ export default {
       Id: 0,
       SidebarAccess:null,
     };
+  },
+  mounted(){
+    if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
+    }
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -285,3 +291,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide{
+  display: none !important;
+}
+</style>

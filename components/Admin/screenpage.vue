@@ -137,10 +137,10 @@
           <td>{{ scn.screen_route }}</td>
           <td>{{ scn.screen_description }}</td>
           <td>
-            <a class="edit" @click="editsscreen(scn)" v-if="SidebarAccess==1"
+            <a class="edit" @click="editsscreen(scn)" 
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletescreen(scn)" class="action-icon icon-danger" v-if="SidebarAccess==1"
+            <a @click="deletescreen(scn)" class="action-icon icon-danger"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
