@@ -1177,7 +1177,7 @@
 
                       <button
                         type="submit"
-                        @click="OnTestSubmit"
+                        @click="OnTestSubmit" v-if="SidebarAccess==1"
                         class="btn btn-success ml-auto"
                       >
                         <i class="fad fa-paper-plane"></i> Submit
@@ -1247,10 +1247,13 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      SidebarAccess:null
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    
     this.GetList();
     this.GetUserIpAddress();
     if (this.userdetails) {

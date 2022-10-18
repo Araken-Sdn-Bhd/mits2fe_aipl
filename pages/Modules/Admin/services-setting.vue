@@ -92,7 +92,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -123,8 +123,8 @@
           <td>{{rg.service_description}}</td>
           <td>{{rg.service_order}}</td>
           <td>
-            <a class="edit" @click="editreg(rg)"><i class="far fa-edit"></i></a>
-            <a @click="deletereg(rg)" class="action-icon icon-danger"
+            <a class="edit" @click="editreg(rg)"><i class="far fa-edit" v-if="SidebarAccess==1"></i></a>
+            <a @click="deletereg(rg)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -216,7 +216,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="dId">
         <i class="far fa-save"></i> Save
         </button>
@@ -250,10 +250,10 @@
           <td>{{ srvcdvsv.services.service_name }}</td>
           <td>{{ srvcdvsv.division_order }}</td>
           <td>
-            <a class="edit" @click="editdivison(srvcdvsv)"
+            <a class="edit" @click="editdivison(srvcdvsv)" v-if="SidebarAccess==1"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletedivison(srvcdvsv)" class="action-icon icon-danger"
+            <a @click="deletedivison(srvcdvsv)" class="action-icon icon-danger" v-if="SidebarAccess==1"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>
@@ -305,6 +305,7 @@ export default {
       branchlist: [],
       dlist: [],
       dId: 0,
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -367,6 +368,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GethospitalList();
   },
   methods: {

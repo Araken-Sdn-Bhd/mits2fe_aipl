@@ -339,7 +339,7 @@
                         </ul>
                        </p>
               <div class="d-flex">
-                <div class="ml-auto">
+                <div class="ml-auto" v-if="SidebarAccess==1">
                   <button
                     @click="Ongeneratepdf"
                     class="btn btn-danger btn-text"
@@ -495,10 +495,12 @@ export default {
       fee_exemption_status: "",
       occupation_sector: "",
       citizenship: "",
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
   methods: {

@@ -175,7 +175,7 @@
         </li>
       </ul>
         </p>
-            <button class="btn btn-success">
+            <button class="btn btn-success" v-if="SidebarAccess==1">
               Submit <i class="fal fa-arrow-from-left"></i>
             </button>
           </div>
@@ -207,10 +207,12 @@ export default {
       teamlist: [],
       selected: [],
       IsSubmodule: true,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetModuleList();
     this.GethospitalList();
   },

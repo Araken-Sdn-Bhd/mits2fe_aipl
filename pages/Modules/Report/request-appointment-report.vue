@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <Error :message="error" v-if="error" />
-                <div class="d-flex">
+                <div class="d-flex" v-if="SidebarAccess==1">
                   <div class="ml-auto">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="far fa-file-pdf"></i> Generate PDF</a
@@ -122,12 +122,14 @@ export default {
       error: null,
       list: [],
       total:'',
+       SidebarAccess:null,
 
         
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     if(this.userdetails){
       this.id=this.userdetails.user.id; 
       this.email=this.userdetails.user.email;

@@ -162,7 +162,7 @@
                         </ul>
                        </p>
                 <div class="d-flex">
-                  <div class="ml-auto">
+                  <div class="ml-auto" v-if="SidebarAccess==1">
                     <a
                       @click="OnCancelAppointment"
                       class="btn btn-danger btn-text"
@@ -206,10 +206,12 @@ export default {
       errorList: [],
       Id: 0,
       PatientId:0,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

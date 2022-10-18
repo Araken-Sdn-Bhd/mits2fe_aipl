@@ -54,7 +54,7 @@
                       ></a>
                       <a
                         style="cursor: pointer"
-                        @click="OnaddClick(job.position_offered)"
+                        @click="OnaddClick(job.position_offered)" v-if="SidebarAccess==1"
                         class="add"
                         ><i class="far fa-plus"></i
                       ></a>
@@ -91,10 +91,12 @@ export default {
       alllist: [],
       search: "",
       loader: false,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   mounted() {
     console.log(`${this.$axios.defaults.baseURL}`);

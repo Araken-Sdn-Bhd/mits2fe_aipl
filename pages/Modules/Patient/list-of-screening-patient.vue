@@ -100,7 +100,7 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}`+"patient-registration/getPatientRegistrationList",
+        `${this.$axios.defaults.baseURL}`+"patient-registration/getPatientRegistrationListByScreening",
         { headers }
       )
       .then((resp) => {

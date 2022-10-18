@@ -102,7 +102,7 @@
                     <td>{{ staff.ls_ }}</td>
                     <td>
                       <a
-                        @click="edit(staff)"
+                        @click="edit(staff)" v-if="SidebarAccess==1"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         class="edit"
@@ -305,7 +305,7 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                @click="updatestaffpatient"
+                @click="updatestaffpatient" v-if="SidebarAccess==1"
               >
                 Save changes
               </button>
@@ -354,11 +354,13 @@ export default {
       apid:0,
       tbid:0,
       type:"",
-      users_id:0
+      users_id:0,
+      SidebarAccess:null
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.users_id = urlParams.get("users_id");

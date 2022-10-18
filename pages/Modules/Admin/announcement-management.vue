@@ -54,18 +54,18 @@
                     <td>{{ ann.title }}</td>
                     <td>{{ ann.start_date }}</td>
                     <td>{{ann.end_date }}</td>
-                    <td>
+                    <td v-if="SidebarAccess==1">
                       <p v-if="ann.status == 0" style="margin: 1px">
                         Save as draft
                       </p>
                       <p v-if="ann.status == 1" style="margin: 1px">Publish</p>
                     </td>
                     <td>
-                      <a class="edit" @click="editannounce(ann)"
+                      <a class="edit" @click="editannounce(ann)" v-if="SidebarAccess==1"
                         ><i class="far fa-edit"></i
                       ></a>
                       <a
-                        @click="deleteannounce(ann)"
+                        @click="deleteannounce(ann)" v-if="SidebarAccess==1"
                         class="action-icon icon-danger"
                         ><i class="far fa-trash-alt"></i
                       ></a>
@@ -97,7 +97,8 @@ export default {
       userdetails: null,
       list: [],
       alllist:[],
-      search:""
+      search:"",
+      SidebarAccess:null,
     };
   },
   mounted() {
@@ -139,6 +140,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   
   methods: {

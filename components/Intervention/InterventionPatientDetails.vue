@@ -121,8 +121,8 @@ export default {
   methods: {
     oneditPatient() {
       this.$router.push({
-        path: "/Modules/Shharp/demographic",
-        // path:"/Modules/Shharp/demographic", 
+        path: "/Modules/Patient/patient-registration-update",
+        // path:"/Modules/Shharp/demographic",
         query: { id: this.Id },
       });
     },
@@ -158,7 +158,7 @@ export default {
         },
         { headers }
       );
-     
+
       this.alert = response1.data[0].message;
       console.log('my data66',this.alert);
     },

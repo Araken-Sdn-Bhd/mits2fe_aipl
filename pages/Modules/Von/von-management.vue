@@ -76,10 +76,12 @@ export default {
       userdetails: null,
       errors: [],
       loader: false,
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
 };
 </script>

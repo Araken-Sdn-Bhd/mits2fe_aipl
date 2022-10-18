@@ -56,7 +56,7 @@
                              </li>
                         </ul>
                        </p>
-                    <div class="d-flex justify-content-center" >
+                    <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
         <i class="far fa-save"></i> Save
         </button>
@@ -89,10 +89,10 @@
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
                         <td>
-                          <a  class="edit" @click="editsetting(setting)"
+                          <a  class="edit" @click="editsetting(setting)" v-if="SidebarAccess==1"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletesetting(setting)"
+                          <a class="action-icon icon-danger" @click="deletesetting(setting)" v-if="SidebarAccess==1"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -123,7 +123,8 @@ export default {
       settinglist: [],
       settingId: 0,
       requesttype: "insert",
-        loader: false,
+      loader: false,
+      SidebarAccess:null,
     };
   },
    mounted() {
@@ -164,6 +165,8 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    
   },
   methods: {
     async insertcategory() {

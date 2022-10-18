@@ -146,10 +146,12 @@ export default {
       service_id: 0,
       loader: true,
       assistancelist: [],
+      SidebarAccess:null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   mounted() {
     this.GetList();
@@ -222,10 +224,17 @@ export default {
       }
     },
     oneditPatient(Id) {
-      this.$router.push({
+      if(this.SidebarAccess==1){
+        this.$router.push({
         path: "/Modules/Intervention/patient-summary",
         query: { id: Id },
       });
+      }else{
+      // this.$router.push({
+      //   path: "/Modules/Intervention/patient-summary",
+      //   query: { id: Id },
+      // });
+      }
     },
     async OnSearch() {
       const headers = {

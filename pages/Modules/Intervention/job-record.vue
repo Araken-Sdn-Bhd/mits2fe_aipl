@@ -62,7 +62,7 @@
                       <a style="cursor:pointer;" @click="OneditClick(job.id)" class="view"
                         ><i class="far fa-eye"></i
                       ></a>
-                      <a style="cursor:pointer;" @click="OneditClick(job.id)" class="edit"
+                      <a style="cursor:pointer;" @click="OneditClick(job.id)" class="edit" v-if="SidebarAccess==1"
                         ><i class="far fa-edit"></i
                       ></a>
                     </td>
@@ -91,10 +91,13 @@ export default {
       alllist: [],
       companyId: 0,
       search: "",
+      SidebarAccess:null,
+      
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.companyId = urlParams.get("id");
   },

@@ -129,7 +129,7 @@
       </ul>
         </p>
       <!-- close-row -->
-       <div class="d-flex justify-content-center" >
+       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mycountryId">
         <i class="far fa-save"></i> Save
         </button>
@@ -161,10 +161,10 @@
           <td>{{country.country_code}}</td>
           <td>{{country.country_order}}</td>
           <td>
-                          <a  class="edit" @click="editcountry(country)"
+                          <a  class="edit" @click="editcountry(country)" v-if="SidebarAccess==1"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletecountry(country)"
+                          <a class="action-icon icon-danger" @click="deletecountry(country)" v-if="SidebarAccess==1"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -217,7 +217,7 @@
       </ul>
         </p>
       <!-- close-row -->
-       <div class="d-flex justify-content-center" >
+       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mystateId">
         <i class="far fa-save"></i> Save
         </button>
@@ -249,10 +249,10 @@
           <td>{{state.state_name}}</td>
           <td>{{state.state_order}}</td>
             <td>
-                          <a  class="action-icon icon-success" @click="editstate(state)"
+                          <a  class="action-icon icon-success" @click="editstate(state)" v-if="SidebarAccess==1"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletestate(state)"
+                          <a class="action-icon icon-danger" @click="deletestate(state)" v-if="SidebarAccess==1"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -332,7 +332,7 @@
       </ul>
         </p>
       <!-- close-row -->
-        <div class="d-flex justify-content-center" >
+        <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="cityId">
         <i class="far fa-save"></i> Save
         </button>
@@ -368,10 +368,10 @@
           <td>{{cty.postcode}}</td>
           <td>{{cty.postcode_order}}</td>
             <td>
-                          <a  class="action-icon icon-success" @click="editcity(cty)"
+                          <a  class="action-icon icon-success" @click="editcity(cty)" v-if="SidebarAccess==1"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletecity(cty)"
+                          <a class="action-icon icon-danger" @click="deletecity(cty)" v-if="SidebarAccess==1"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -445,6 +445,7 @@ export default {
       CityList: [],
       StateListforcity:[],
       cityId: 0,
+      SidebarAccess:null
     };
   },
   mounted() {
@@ -482,6 +483,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetCountryList();
   },
   methods: {

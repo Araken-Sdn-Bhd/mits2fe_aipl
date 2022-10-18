@@ -93,7 +93,7 @@
                     <td>{{ app.service }}</td>
                     <td>
                       <a
-                        style="cursor: pointer"
+                        style="cursor: pointer" v-if="SidebarAccess==1"
                         @click="Onedit(app)"
                         class="edit"
                       >
@@ -107,12 +107,12 @@
               <div class="d-flex">
                 <div class="ml-auto">
                   <a
-                    v-on:click="OnApproverejectRequest(2)"
+                    v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
-                    v-on:click="OnApproverejectRequest(1)"
+                    v-on:click="OnApproverejectRequest(1)" v-if="SidebarAccess==1"
                     class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
@@ -144,10 +144,13 @@ export default {
       service: "",
       name: "",
       date: "",
+      SidebarAccess:null,
+      
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetServicelist();
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,

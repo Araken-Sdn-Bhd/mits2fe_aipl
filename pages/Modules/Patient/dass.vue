@@ -128,7 +128,7 @@
               <Error :message="error" v-if="error" />
               <div class="d-flex align-items-center mt-2">
                 <button
-                  @click="OnsubmitTest"
+                  @click="OnsubmitTest" v-if="SidebarAccess==1"
                   type="submit"
                   class="btn btn-success ml-auto"
                 >
@@ -178,10 +178,13 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      SidebarAccess:null
+      
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
     this.GetUserIpAddress();
     if (this.userdetails) {
