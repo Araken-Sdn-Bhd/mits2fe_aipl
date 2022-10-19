@@ -483,7 +483,7 @@
                               v-model="state_id"
                               class="form-select"
                               aria-label="Default select example"
-                              @change="onSelectedState"
+                              @change="onSelectedState($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -501,14 +501,15 @@
                             <label class="form-label">City</label>
                             <select
                               v-model="city_id"
+                              @change="getPostcodeList($event)"
                               class="form-select"
                               aria-label="Default select example"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -526,7 +527,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in postcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -953,10 +954,11 @@
                               v-model="kin_state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onSelectedStateKin($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="st in statelist"
+                                v-for="st in kinstatelist"
                                 v-bind:key="st.id"
                                 v-bind:value="st.id"
                               >
@@ -972,12 +974,13 @@
                               v-model="kin_city_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="getkinPostcodeList($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-for="ct in kincitylist"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -995,7 +998,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in kinpostcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -1257,6 +1260,10 @@ export default {
       referallist: [],
       statelist: [],
       citylist: [],
+      postcodelist: [],
+      kinstatelist: [],
+      kincitylist: [],
+      kinpostcodelist: [],
       countrylist: [],
       racelist: [],
       religionlist: [],
@@ -1286,7 +1293,7 @@ export default {
       address3: "",
       state_id: 0,
       city_id: 0,
-      postcode: "",
+      postcode: 0,
       race_id: 0,
       religion_id: 0,
       marital_id: 0,
@@ -1304,7 +1311,7 @@ export default {
       kin_address3: "",
       kin_state_id: 0,
       kin_city_id: 0,
-      kin_postcode: "",
+      kin_postcode: 0,
       drug_allergy: "",
       drug_allergy_description: "",
       traditional_medication: "",
@@ -1622,8 +1629,12 @@ export default {
       const response5 = await this.$axios.get("address/list", { headers });
       if (response5.data.code == 200 || response5.data.code == "200") {
         this.statelist = response5.data.list;
+        this.citylist =[];
+        this.postcodelist = [];
       } else {
         this.statelist = [];
+        this.citylist =[];
+        this.postcodelist = [];
       }
       const response7 = await this.$axios.get("address/country/list", {
         headers,
@@ -1642,6 +1653,17 @@ export default {
         this.nrictypelist = response8.data.list;
       } else {
         this.nrictypelist = [];
+      }
+
+      const response9 = await this.$axios.get("address/list", { headers });
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.kinstatelist = response9.data.list;
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
+      } else {
+        this.kinstatelist = [];
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
       }
     },
     async GetStaffBranchId() {
@@ -1675,15 +1697,72 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.citylist = response.data.list;
+        this.postcodelist = [];
       } else {
         this.citylist = [];
+        this.postcodelist = [];
       }
     },
+    async getPostcodeList(event) {
+     
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+    
+    },
+    async onSelectedStateKin(event){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kincitylist = response.data.list;
+        this.kinpostcodelist = [];
+      } else {
+        this.kincitylist = [];
+        this.kinpostcodelist = [];
+      }
+    },
+    async getkinPostcodeList(event) {
+     
+     const headers = {
+       Authorization: "Bearer " + this.userdetails.access_token,
+       Accept: "application/json",
+       "Content-Type": "application/json",
+     };
+     const response = await this.$axios.post(
+       "address/" + event.target.value + "/getPostcodeListById",
+       { headers }
+     );
+     if (response.data.code == 200 || response.data.code == "200") {
+       this.kinpostcodelist = response.data.list;
+     } else {
+       this.kinpostcodelist = [];
+     }
+   
+   },
     async GetTab2List() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1897,6 +1976,7 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2018,6 +2098,7 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2177,6 +2258,15 @@ export default {
         // this.birth_date = this.getDate(this.nric_no);
         this.birth_date = this.getDate(this.nric_no);
         this.error = null;
+
+      var today = new Date();
+      var birthDate = new Date(this.birth_date);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      this.age = age;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
       }
