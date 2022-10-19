@@ -5,7 +5,7 @@
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <div class="page-title">
-            <h1>Book Appointment</h1>
+            <h1>Request Appointment</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
@@ -13,7 +13,7 @@
             <div class="card-body">
               <form class="mt-3" method="post" @submit.prevent="OnBookApointment">
                 <div class="row mb-3">
-                  <label class="col-sm-3 col-form-label">MENTARI</label>
+                  <label class="col-sm-3 col-form-label">MENTARI <span>*</span></label>
                   <div class="col-sm-9">
                     <select
                       v-model="branch"
@@ -187,28 +187,25 @@ export default {
         if (!this.name) {
           this.errorList.push("Name is required");
         }
-        if (!this.nric) {
-          this.errorList.push("NRIC is required");
-        }
+        //if (!this.nric) {
+        //  this.errorList.push("NRIC is required");
+        //}
         if (!this.contactno) {
           this.errorList.push("Contact No is required");
         }
-        if (!this.address1) {
-          this.errorList.push("Address 1 No is required");
-        }
-        if (!this.address2) {
-          this.errorList.push("Address 2 No is required");
-        }
+        //if (!this.address1) {
+        //  this.errorList.push("Address 1 No is required");
+        //}
+        //if (!this.address2) {
+        //  this.errorList.push("Address 2 No is required");
+        //}
         if (!this.email) {
           this.errorList.push("Email is required");
         }
         if (
           this.branch &&
           this.name &&
-          this.nric &&
           this.contactno &&
-          this.address1 &&
-          this.address2 &&
           this.email
         ) {
           this.loader = true;
