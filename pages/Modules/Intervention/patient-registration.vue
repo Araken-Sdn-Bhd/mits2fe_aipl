@@ -483,7 +483,7 @@
                               v-model="state_id"
                               class="form-select"
                               aria-label="Default select example"
-                              @change="onSelectedState"
+                              @change="onSelectedState($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -501,14 +501,15 @@
                             <label class="form-label">City</label>
                             <select
                               v-model="city_id"
+                              @change="getPostcodeList($event)"
                               class="form-select"
                               aria-label="Default select example"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -526,7 +527,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in postcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -579,14 +580,14 @@
                                 v-for="rce in racelist"
                                 v-bind:key="rce.id"
                                 v-bind:value="rce.id"
-                                
+
                               >
                                 {{ rce.section_value }}
                               </option>
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherRace">
+                        <div class="col-sm-6" v-if="otherRace || this.race_id == 79">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -594,7 +595,7 @@
                             class="form-control"
                             v-model="other_race"
                             placeholder="please specify other race"
-                            
+
                           />
                         </div>
                         </div>
@@ -618,7 +619,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherReligion">
+                        <div class="col-sm-6" v-if="otherReligion || this.religion_id == 90">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -653,7 +654,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherMarital">
+                        <div class="col-sm-6" v-if="otherMarital || this.marital_id == 112">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -684,7 +685,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherAccommodation">
+                        <div class="col-sm-6" v-if="otherAccommodation || this.accomodation_id == 118">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -721,7 +722,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherFeeExemStatus">
+                        <div class="col-sm-6" v-if="otherFeeExemStatus || this.fee_exemption_status == 106">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -732,7 +733,7 @@
                           />
                         </div>
                         </div>
-                       
+
                         <div class="col-sm-6">
                           <div class="mb-3">
                             <label class="form-label">Occupation Status</label>
@@ -753,7 +754,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherOccStatus">
+                        <div class="col-sm-6" v-if="otherOccStatus  || this.occupation_status == 239">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -877,7 +878,7 @@
                                 type="tel"
                                 class="form-control toCapitalFirst"
                                 v-model.number="kin_nric_no"
-                                
+
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
@@ -953,10 +954,11 @@
                               v-model="kin_state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onSelectedStateKin($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="st in statelist"
+                                v-for="st in kinstatelist"
                                 v-bind:key="st.id"
                                 v-bind:value="st.id"
                               >
@@ -972,12 +974,13 @@
                               v-model="kin_city_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="getkinPostcodeList($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-for="ct in kincitylist"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -995,7 +998,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in kinpostcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -1257,6 +1260,10 @@ export default {
       referallist: [],
       statelist: [],
       citylist: [],
+      postcodelist: [],
+      kinstatelist: [],
+      kincitylist: [],
+      kinpostcodelist: [],
       countrylist: [],
       racelist: [],
       religionlist: [],
@@ -1268,6 +1275,9 @@ export default {
       occupationsectorlist: [],
       relationshiplist: [],
       nrictypelist: [],
+      kinstatelist: [],
+      kincitylist:[],
+      kinpostcodelist:[],
       citizenship: "",
       salutation_id: 0,
       name_asin_nric: "",
@@ -1286,7 +1296,7 @@ export default {
       address3: "",
       state_id: 0,
       city_id: 0,
-      postcode: "",
+      postcode: 0,
       race_id: 0,
       religion_id: 0,
       marital_id: 0,
@@ -1304,7 +1314,7 @@ export default {
       kin_address3: "",
       kin_state_id: 0,
       kin_city_id: 0,
-      kin_postcode: "",
+      kin_postcode: 0,
       drug_allergy: "",
       drug_allergy_description: "",
       traditional_medication: "",
@@ -1389,12 +1399,12 @@ export default {
     this.GetStaffBranchId();
   },
   mounted(){
-    if(this.SidebarAccess!=1){ 
+    if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
   },
-  
+
   methods: {
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
@@ -1472,7 +1482,7 @@ export default {
           if (!this.nric_no1) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
-          } 
+          }
           //else {
           //  this.nric_no = this.nric_no1;
           //  if (this.nric_no.length != 12) {
@@ -1622,8 +1632,12 @@ export default {
       const response5 = await this.$axios.get("address/list", { headers });
       if (response5.data.code == 200 || response5.data.code == "200") {
         this.statelist = response5.data.list;
+        this.citylist =[];
+        this.postcodelist = [];
       } else {
         this.statelist = [];
+        this.citylist =[];
+        this.postcodelist = [];
       }
       const response7 = await this.$axios.get("address/country/list", {
         headers,
@@ -1638,10 +1652,21 @@ export default {
         { headers }
       );
       if (response8.data.code == 200 || response8.data.code == "200") {
-     
+
         this.nrictypelist = response8.data.list;
       } else {
         this.nrictypelist = [];
+      }
+
+      const response9 = await this.$axios.get("address/list", { headers });
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.kinstatelist = response9.data.list;
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
+      } else {
+        this.kinstatelist = [];
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
       }
     },
     async GetStaffBranchId() {
@@ -1671,19 +1696,76 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.citylist = response.data.list;
+        this.postcodelist = [];
+      } else {
+        this.citylist = [];
+        this.postcodelist = [];
+      }
+    },
+    async getPostcodeList(event) {
+     
+      const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
       } else {
-        this.citylist = [];
+        this.postcodelist = [];
+      }
+    
+    },
+    async onSelectedStateKin(event){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kincitylist = response.data.list;
+        this.kinpostcodelist = [];
+      } else {
+        this.kincitylist = [];
+        this.kinpostcodelist = [];
       }
     },
+    async getkinPostcodeList(event) {
+     
+     const headers = {
+       Authorization: "Bearer " + this.userdetails.access_token,
+       Accept: "application/json",
+       "Content-Type": "application/json",
+     };
+     const response = await this.$axios.post(
+       "address/" + event.target.value + "/getPostcodeListById",
+       { headers }
+     );
+     if (response.data.code == 200 || response.data.code == "200") {
+       this.kinpostcodelist = response.data.list;
+     } else {
+       this.kinpostcodelist = [];
+     }
+   
+   },
     async GetTab2List() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1776,7 +1858,7 @@ export default {
       this.citizenship = id;
       this.citizentype = value;
     },
-  
+
     OnchangeRace(event) {
       if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
         this.otherRace = true;
@@ -1836,7 +1918,7 @@ export default {
       }
     },
     async submitRegistration() {
-      
+
       this.errorList = [];
       if (!this.patient_need_triage_screening) {
         this.errorList.push("Patient Need Triage Screening is required.");
@@ -1897,6 +1979,7 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2018,6 +2101,7 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2148,7 +2232,15 @@ export default {
         this.citizentype = response.data.list[0].citizenships[0].section_value;
 
         this.race
-      
+
+
+        this.other_race = response.data.list[0].other_race;
+        this.other_religion= response.data.list[0].other_religion;
+        this.other_accommodation = response.data.list[0].other_accommodation;
+        this.other_maritalList = response.data.list[0].other_maritalList;
+        this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
+        this.other_occupationStatus = response.data.list[0].other_occupationStatus;
+
         const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
         headers,
       });
@@ -2177,6 +2269,15 @@ export default {
         // this.birth_date = this.getDate(this.nric_no);
         this.birth_date = this.getDate(this.nric_no);
         this.error = null;
+
+      var today = new Date();
+      var birthDate = new Date(this.birth_date);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      this.age = age;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
       }
