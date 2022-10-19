@@ -50,7 +50,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -83,7 +83,7 @@
            <td>{{mod.module_name}}</td>
           <td>{{mod.module_short_name}}</td>
          <td>{{mod.module_order}}</td>
-            <td>
+            <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editmodule(mod)"
               ><i class="far fa-edit"></i
             ></a>

@@ -175,7 +175,7 @@
         </li>
       </ul>
         </p>
-            <button class="btn btn-success">
+            <button class="btn btn-success" :class="SidebarAccess!=1?'hide':''">
               Submit <i class="fal fa-arrow-from-left"></i>
             </button>
           </div>
@@ -209,6 +209,9 @@ export default {
       IsSubmodule: true,
       SidebarAccess:null,
     };
+  },
+  mounted(){
+
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));

@@ -55,7 +55,7 @@
                              </li>
                         </ul>
                        </p>
-                       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+                       <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
         <i class="far fa-save"></i> Save
         </button>
@@ -84,11 +84,11 @@
                       </tr>
                     </thead>
                    <tbody>
-                     <tr v-for="(setting, index) in settinglist" :key="index">
+                     <tr v-for="(setting, index) in settinglist" :key="index" >
                        <td>{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
-                        <td v-if="SidebarAccess==1">
+                        <td class="td"  :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editsetting(setting)"
                             ><i class="far fa-edit"></i
                           ></a>
@@ -109,8 +109,8 @@
   </div>
 </template>
   <script>
-import CommonHeader from '../../../components/CommonHeader.vue';
-import CommonSidebar from '../../../components/CommonSidebar.vue';
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
   components: { CommonSidebar, CommonHeader },
   name: "occupation-status",
@@ -124,10 +124,10 @@ export default {
       settingId: 0,
       requesttype: "insert",
       loader: false,
-      SidebarAccess:null,
+      SidebarAccess: null,
     };
   },
-     mounted() {
+  mounted() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -162,6 +162,9 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+    if (this.SidebarAccess != 1) {
+      this.$refs.sidebar.classList.add("hide");
+    }
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -288,3 +291,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide {
+  display: none !important;
+}
+</style>

@@ -100,7 +100,7 @@
         </li>
       </ul>
         </p> 
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
         <button
           type="submit"
           class="btn btn-warning btn-text ml-auto"
@@ -136,7 +136,7 @@
           <td>{{ scn.screen_name }}</td>
           <td>{{ scn.screen_route }}</td>
           <td>{{ scn.screen_description }}</td>
-          <td>
+          <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editsscreen(scn)" 
               ><i class="far fa-edit"></i
             ></a>

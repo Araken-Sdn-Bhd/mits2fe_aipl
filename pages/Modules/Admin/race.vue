@@ -50,7 +50,7 @@
                              </li>
                         </ul>
                        </p>
-                        <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+                        <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
         <i class="far fa-save"></i> Save
         </button>
@@ -83,11 +83,11 @@
                        <td>{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
-                        <td v-if="SidebarAccess==1">
-                          <a  class="edit" @click="editsetting(setting)"
+                        <td>
+                          <a  class="edit" @click="editsetting(setting)" v-if="SidebarAccess==1"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletesetting(setting)"
+                          <a class="action-icon icon-danger" @click="deletesetting(setting)" v-if="SidebarAccess==1"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -157,6 +157,11 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+      if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
+          // this.$refs.hidebutton1.classList.add("hide");
+    }
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -284,3 +289,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide{
+  display: none !important;
+}
+</style>

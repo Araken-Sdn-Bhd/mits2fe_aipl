@@ -42,7 +42,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -73,7 +73,7 @@
           <td>{{smod.module_name}}</td>
          <td>{{smod.sub_module_code}}</td>
          <td>{{smod.sub_module_name}}</td>
-          <td>
+          <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editsubmodule(smod)"
               ><i class="far fa-edit"></i
             ></a>

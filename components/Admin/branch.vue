@@ -212,7 +212,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -250,9 +250,9 @@
            {{brnc.branch_adrress_1}}
           </td>
           <td>
-           <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile">{{mobile.ContactNoOffice}}</p></td>
+           <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile.id">{{mobile.ContactNoOffice}}</p></td>
         <td>{{brnc.branch_fax_no}}</td>
-          <td>
+          <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editbranch(brnc)"
               ><i class="far fa-edit"></i
             ></a>
