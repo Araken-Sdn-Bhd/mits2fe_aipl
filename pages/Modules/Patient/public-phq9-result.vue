@@ -29,40 +29,45 @@
                           </div>
                         </div>
                         <div class="result-info">
-                          <h3
-                            class="bg-color1"
+                          <h3 class="bg-color1" v-if="PHQ9 == 'Minimal Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color2" v-if="PHQ9 == 'Mild Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color3" v-if="PHQ9 == 'Moderate Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color4" v-if="PHQ9 == 'Moderately severe depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                          <h3 class="bg-color5" v-if="PHQ9 == 'Severe Depression'">
+                            {{ PHQ9 }}
+                          </h3>
+                         <div
                             v-if="PHQ9 == 'Minimal Depression'"
-                          >
-                            {{ PHQ9 }}
-                          </h3>
-                          <h3
-                            class="bg-color2"
-                            v-if="PHQ9 == 'Mild Depression'"
-                          >
-                            {{ PHQ9 }}
-                          </h3>
-                          <h3
-                            class="bg-color3"
-                            v-if="PHQ9 == 'Moderate Depression'"
-                          >
-                            {{ PHQ9 }}
-                          </h3>
-                          <h3
-                            class="bg-color4"
-                            v-if="PHQ9 == 'Moderately severe depression'"
-                          >
-                            {{ PHQ9 }}
-                          </h3>
-                          <h3
-                            class="bg-color5"
-                            v-if="PHQ9 == 'Severe Depression'"
-                          >
-                            {{ PHQ9 }}
-                          </h3>
-
-                          <div
                             class="arrow"
-                            style="left: 57%; border-bottom-color: #ed7d31"
+                            style="left: 5%; border-bottom: 10px solid #8bdf25; "
+                          ></div>
+                          <div
+                            v-if="PHQ9 == 'Mild Depression'"
+                            class="arrow"
+                            style="left: 25%; border-bottom: 10px solid #e8e800; "
+                          ></div>
+                          <div
+                            v-if="PHQ9 == 'Moderate Depression'"
+                            class="arrow"
+                            style="left: 46%; border-bottom: 10px solid #ffc000; "
+                          ></div>
+                          <div
+                            v-if="PHQ9 == 'Moderately severe depression'"
+                            class="arrow"
+                            style="left: 57%; border-bottom: 10px solid #ed7d31; "
+                          ></div>
+                          <div
+                            v-if="PHQ9 == 'Severe Depression'"
+                            class="arrow"
+                            style="left: 80%; border-bottom: 10px solid #ff0000;"
                           ></div>
                           <div class="progress">
                             <div
