@@ -503,7 +503,6 @@
                               v-model="city_id"
                               @change="getPostcodeList($event)"
                               class="form-select"
-                              @change="getPostcodeList($event)"
                               aria-label="Default select example"
                             >
                               <option value="0">Select</option>
