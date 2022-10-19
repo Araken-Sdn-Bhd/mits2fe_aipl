@@ -144,14 +144,35 @@
                           </div>
                         </div>
                       </div>
-
-                      <div class="result-footer">
+                      <!--Stress Normal  -->
+                      <div class="result-footer" v-if="stressFooter1">
                         <p>
-                          Based on your responses, you are currently
-                          experiencing low level of stress. Recommended for you,
-                          If you would like more information regarding mental
-                          health issue, please go to MENTARI Portal or reaching
-                          out to the nearest MENTARI in our directory.
+                          Based on your responses, you are currently experiencing  low level of stress.
+                          Recommended for you, If you would like more information regarding mental health issue, 
+                          please go to MENTARI Portal or reaching out to the nearest MENTARI in our directory.
+                        </p>
+                        <p><i>
+                          Berdasarkan jawapan anda, anda sedang mengalami tekanan yang rendah. 
+                          Cadangan kepada anda, sekiranya anda ingin mendapatkan maklumat lanjut berkaitan masalah kesihatan mental, 
+                          sila layari Portal MENTARI atau menghubungi MENTARI yang terdekat melalui direktori kami.
+                          </i>
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="stressFooter2">
+                        <p>
+                          Based on your responses, there is a chance that you are currently experiencing stress.
+                          Please note, this short questionnaire is just a guide and the feelings you may be experiencing could be something other than stress, 
+                          anxiety or depression.We suggest that you book an appointment with professionals, you can go either to MENTARI Consultation Clinic, 
+                          your GP or Public Health Clinic to discuss these results with them. Take a printed copy of this report with you and book an
+                          appointment so you can discuss your current symptoms and your future plan of management with them. 
+                        </p>
+                        <p><i>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami tekanan. Cadangan kepada anda, 
+                          sila dapatkan temujanji bersama professional,anda boleh mendapatkannya samaada di MENTARI, 
+                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan laporan ujian ini. 
+                          Dapatkan laporan ujian ini dan bawa semasa temujanji anda untuk membincangkan gejala yang anda yang terkini, 
+                          dan membincangkan rawatan lanjut bersama mereka.
+                          </i>
                         </p>
                       </div>
                     </div>
@@ -261,7 +282,7 @@
 
                       <div class="result-footer">
                         <p>
-                          Based on your responses, you are currently
+                          2. Based on your responses, you are currently
                           experiencing low level of anxiety. Recommended for
                           you, If you would like more information regarding
                           mental health issue, please go to MENTARI Portal or
@@ -375,7 +396,7 @@
 
                       <div class="result-footer">
                         <p>
-                          Based on your responses, you are currently
+                          3. Based on your responses, you are currently
                           experiencing low level of depression. Recommended for
                           you, If you would like more information regarding
                           mental health issue, please go to MENTARI Portal or
@@ -453,6 +474,10 @@ export default {
       Anxiety: "",
       Depression: "",
       Id: 0,
+      stressFooter1:false,
+      stressFooter2:false,
+
+
     };
   },
   beforeMount() {
@@ -466,6 +491,10 @@ export default {
       this.StressScore = this.dassresult.Stress_Value;
       this.AnxietyScore = this.dassresult.Anxiety_Value;
       this.DepressionScore = this.dassresult.Depression_Value;
+//buat sini smbung
+      if (this.StressScore < 8){
+
+      }
     }
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
