@@ -2128,7 +2128,7 @@ export default {
         this.salutation_id = response.data.list[0].salutation_id;
         this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
 
-        this.sex = response.data.list[0].gender;
+        this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
         this.traditional_description = response.data.list[0].traditional_description;
