@@ -162,7 +162,7 @@
           <label class="form-label">State<span>*</span></label>
           <select
             class="form-select"
-            @change="onCitybind($event)"
+            @change="getCityList($event)"
             v-model="Gstate_id"
           >
             <option value="0">Please Select</option>
@@ -177,12 +177,16 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select class="form-select" v-model="Gcity_id">
+          <select 
+          class="form-select"
+          v-model="Gcity_id"
+          @change="getPostcodeList($event)"
+          >Gpostcode_id
             <option value="0">Please Select</option>
             <option
               v-for="ctl in GCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.city_name"
+              v-bind:value="ctl.city_name"
             >
               {{ ctl.city_name }}
             </option>
@@ -194,8 +198,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in GPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -1227,8 +1231,12 @@ export default {
       console.log('my stat33',response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.GStateList = response.data.list;
+        this.GCityList= [];
+        this.GPostcodeList = [];
       } else {
         this.GStateList = [];
+        this.GCityList= [];
+        this.GPostCodeList = [];
       }
       const response1 = await this.$axios.get(
         "general-setting/list?section=" + "education-level",
@@ -1256,6 +1264,41 @@ export default {
       } else {
         this.GBranchList = [];
       }
+    },
+    async getCityList(event) {
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.GCityList = response.data.list;
+        this.GPostCodeList = [];
+      } else {
+        this.GCityList = [];
+        this.GPostCodeList = [];
+      }
+    
+    },
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.GPostCodeList = response.data.list;
+      } else {
+        this.GPostCodeList = [];
+      }
+    
     },
     OnSubmit() {
       this.errors = [];
@@ -1465,7 +1508,7 @@ export default {
           body.append("phone_number", this.Gphone_number);
           body.append("address", this.Gaddress);
           body.append("postcode_id", this.Gpostcode_id);
-          body.append("city_id", this.Gcity_id);
+          body.append("city_id", this.Gpostcode_id);
           body.append("state_id", this.Gstate_id);
           body.append("education_id", this.Geducation_id);
           body.append("occupation_sector_id", this.Goccupation_sector_id);
@@ -1659,7 +1702,7 @@ export default {
           body.append("phone_number", this.Gphone_number);
           body.append("address", this.Gaddress);
           body.append("postcode_id", this.Gpostcode_id);
-          body.append("city_id", this.Gcity_id);
+          body.append("city_id", this.Gpostcode_id);
           body.append("state_id", this.Gstate_id);
           body.append("education_id", this.Geducation_id);
           body.append("occupation_sector_id", this.Goccupation_sector_id);
@@ -1828,7 +1871,7 @@ export default {
           body.append("phone_number", this.Gphone_number);
           body.append("address", this.Gaddress);
           body.append("postcode_id", this.Gpostcode_id);
-          body.append("city_id", this.Gcity_id);
+          body.append("city_id", this.Gpostcode_id);
           body.append("state_id", this.Gstate_id);
           body.append("education_id", this.Geducation_id);
           body.append("occupation_sector_id", this.Goccupation_sector_id);
