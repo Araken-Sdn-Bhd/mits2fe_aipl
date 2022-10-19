@@ -483,7 +483,7 @@
                               v-model="state_id"
                               class="form-select"
                               aria-label="Default select example"
-                              @change="onSelectedState"
+                              @change="onSelectedState($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -502,13 +502,14 @@
                             <select
                               v-model="city_id"
                               class="form-select"
+                              @change="getPostcodeList($event)"
                               aria-label="Default select example"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -526,7 +527,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in postcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -953,6 +954,7 @@
                               v-model="kin_state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onKinSelectedState($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -972,12 +974,13 @@
                               v-model="kin_city_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="getKinPostcodeList($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-for="ct in kincitylist"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -995,7 +998,7 @@
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
+                                v-for="ct in kinpostcodelist"
                                 v-bind:key="ct.id"
                                 v-bind:value="ct.id"
                               >
@@ -1267,6 +1270,9 @@ export default {
       occupationsectorlist: [],
       relationshiplist: [],
       nrictypelist: [],
+      kinstatelist: [],
+      kincitylist:[],
+      kinpostcodelist:[],
       citizenship: "",
       salutation_id: 0,
       name_asin_nric: "",
@@ -1661,18 +1667,71 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
+        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.citylist = response.data.list;
+        this.postcodelist = [];
       } else {
         this.citylist = [];
+        this.postcodelist = [];
       }
+    },
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+
+    },
+    async onKinSelectedState(event){
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kincitylist = response.data.list;
+        this.kinpostcodelist = [];
+      } else {
+        this.kincitylist = [];
+        this.kinpostcodelist = [];
+      }
+    },
+    async getKinPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kinpostcodelist = response.data.list;
+      } else {
+        this.kinpostcodelist = [];
+      }
+
     },
     async GetTab2List() {
       const headers = {
