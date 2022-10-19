@@ -213,10 +213,10 @@
       </ul>
         </p>
       <div class="d-flex justify-content-center" >
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id && SidebarAccess==1">
+         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
           <i class="far fa-plus"></i> Add Parameter
         </button>
       </div>
@@ -253,10 +253,10 @@
            <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile">{{mobile.ContactNoOffice}}</p></td>
         <td>{{brnc.branch_fax_no}}</td>
           <td>
-            <a class="edit" @click="editbranch(brnc)" v-if="SidebarAccess==1"
+            <a class="edit" @click="editbranch(brnc)"
               ><i class="far fa-edit"></i
             ></a>
-            <a @click="deletebranch(brnc)" class="action-icon icon-danger" v-if="SidebarAccess==1"
+            <a @click="deletebranch(brnc)" class="action-icon icon-danger"
               ><i class="far fa-trash-alt"></i
             ></a>
           </td>

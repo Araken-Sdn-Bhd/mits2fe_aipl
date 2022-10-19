@@ -220,10 +220,13 @@ export default {
       }
     },
     oneditPatient(Id) {
-      this.$router.push({
+       if(this.SidebarAccess==1){
+        this.$router.push({
         path: "/Modules/Intervention/patient-summary",
         query: { id: Id },
       });
+      }else{
+      }
     },
     async OnSearch() {
       const headers = {

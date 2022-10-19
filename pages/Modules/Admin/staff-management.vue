@@ -77,8 +77,8 @@
                 </tbody>
               </table>
 
-              <div class="d-flex">
-                <div class="ml-auto" v-if="SidebarAccess==1">
+              <div class="d-flex" >
+                <div class="ml-auto" id="hidebutton" ref="hidebutton">
                   <button
                     type="button"
                     class="btn btn-warning btn-text btn-green"
@@ -325,6 +325,10 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+       if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
+    }
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -456,6 +460,6 @@ h4.form-sub-title {
   letter-spacing: 1px;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 </style>

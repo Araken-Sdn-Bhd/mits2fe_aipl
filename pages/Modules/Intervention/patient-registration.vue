@@ -183,7 +183,7 @@
                               </select>
                             </div>
 
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'OIC'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'Old IC'">
                               <label class="form-label">Old NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -193,7 +193,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'NIC'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'New IC'">
                               <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -203,7 +203,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'POL'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'Police'">
                               <label class="form-label">Police ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -213,7 +213,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'ARM'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'Army'">
                               <label class="form-label">Army ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -1217,17 +1217,18 @@
                           class="btn btn-primary btn-text"
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
-
-                        <a v-if="!Id && SidebarAccess==1"
+<div id="hidebutton" ref="hidebutton">
+                        <a v-if="!Id"
                           @click="submitRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
                         >
-                        <a v-if="Id && SidebarAccess==1"
+                        <a v-if="Id"
                           @click="updateRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Update</a
                         >
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -1350,6 +1351,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    console.log(this.SidebarAccess,'Sidebaraccess');
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
@@ -1386,6 +1388,13 @@ export default {
     });
     this.GetStaffBranchId();
   },
+  mounted(){
+    if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
+    }
+  },
+  
   methods: {
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
@@ -1414,7 +1423,8 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.nric_type_code = response.data.setting[0].code;
+        this.nric_type_code = response.data.setting[0].section_value;
+        console.log('manish',this.nric_type_code);
       } else {
         window.alert("Something went wrong");
       }
@@ -2249,5 +2259,8 @@ export default {
 
 .toCapitalFirst {
   text-transform: uppercase;
+}
+.hide{
+  display: none !important;
 }
 </style>

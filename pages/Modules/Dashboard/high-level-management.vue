@@ -579,7 +579,11 @@ export default {
       service_patient_list: [],
       StateList: [],
       sharp_total_caseloadfemale:0,
-      sharp_total_caseloadmale:0
+      sharp_total_caseloadmale:0,
+      sharpracetotal: "",
+      sharp_name_list: [],
+      sharp_color_list: [],
+      sharp_count_list: [],
     };
   },
 
@@ -730,11 +734,13 @@ export default {
           this.kpiTerminated = response.data.kpiTerminated[0].terminate;
 
           this.summaryActivity = response.data.summaryActivity;
+          this.sharpracetotal = response.data.race;
+          console.log("my sharpracetotal", this.sharpracetotal);
           console.log("my summaryActivity", this.summaryActivity);
-          // this.service_name_list =this.summaryActivity.filter(a=>a.service_name!=null);
-          this.service_name_list = [];
-          this.service_patient_list = [];
-          this.service_color_list = [];
+          // this.service_name_list =this.summaryActivity.filter(a=>a.service_name!=null); sharpracetotal
+          this.service_name_list = [];this.service_patient_list = []; this.service_color_list = [];
+          this.sharp_name_list = [];this.sharp_count_list = []; this.sharp_color_list = [];
+
           this.summaryActivity.forEach((element) => {
             if (element.service_name) {
               this.service_name_list.push(element.service_name);
@@ -746,20 +752,24 @@ export default {
             }
           });
           this.summaryActivity.forEach((element) => {
-            if (element.service_name) {
               this.service_color_list.push(element.color);
-            }
           });
-          console.log("my service_name_list", this.service_name_list);
-          console.log("my service_patient_list", this.service_patient_list);
-          console.log("my service_color_list", this.service_color_list);
-          this.diagnosisf0 = "";
-          this.diagnosisf1 = "";
-          this.diagnosisf2 = "";
-          this.diagnosisf3 = "";
-          this.diagnosisf4 = "";
-          this.diagnosisf5 = "";
-          this.diagnosisf6 = "";
+
+          if(this.sharpracetotal){
+              this.sharpracetotal.forEach((element) => {
+              this.sharp_name_list.push(element.service_name);
+          });
+          this.sharpracetotal.forEach((element) => {
+              this.sharp_count_list.push(element.cn);
+          });
+          this.sharpracetotal.forEach((element) => {
+              this.sharp_color_list.push(element.color);
+          });
+          }
+          console.log("my service_name_list", this.sharp_name_list);
+          console.log("my service_patient_list", this.sharp_count_list);
+          console.log("my service_color_list", this.sharp_color_list);
+          this.diagnosisf0 = "";this.diagnosisf1 = "";this.diagnosisf2 = "";this.diagnosisf3 = ""; this.diagnosisf4 = "";this.diagnosisf5 = "";this.diagnosisf6 = "";
           if (response.data.diagnosis) {
             //  console.log('my six',response.data.diagnosis);
             if (response.data.diagnosis[0]["icd_category_code"] == "F00-F07") {
@@ -914,22 +924,38 @@ var xValues = ["Male","Female"];
       },
     });
   }else{
-    var xValues = ["Sharp"];
-    var yValues1 = [this.sharp_total_caseload];
-    var barColors = ["red", "green"];
+    var xValuescsa = this.sharp_name_list;
+          var yValuescsa = this.sharp_count_list;
+          var barColors = this.sharp_color_list;
 
-    new Chart("myChartsharp", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [
-          {
-            backgroundColor: barColors,
-            data: yValues1,
-          },
-        ],
-      },
-    });
+          new Chart("myChartsharp", {
+            type: "bar",
+            data: {
+              labels: xValuescsa,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValuescsa,
+                },
+              ],
+            },
+          });
+    // var xValues = ["Sharp"];
+    // var yValues1 = [this.sharp_total_caseload];
+    // var barColors = ["red", "green"];
+
+    // new Chart("myChartsharp", {
+    //   type: "bar",
+    //   data: {
+    //     labels: xValues,
+    //     datasets: [
+    //       {
+    //         backgroundColor: barColors,
+    //         data: yValues1,
+    //       },
+    //     ],
+    //   },
+    // });
   }
         } else {
           window.alert("Something went wrong");

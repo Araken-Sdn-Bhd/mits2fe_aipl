@@ -1175,9 +1175,9 @@
                         <i class="fad fa-arrow-to-left"></i> Previous
                       </button>
 
-                      <button
+                      <button id="hidebutton" ref="hidebutton"
                         type="submit"
-                        @click="OnTestSubmit" v-if="SidebarAccess==1"
+                        @click="OnTestSubmit"
                         class="btn btn-success ml-auto"
                       >
                         <i class="fad fa-paper-plane"></i> Submit
@@ -1264,6 +1264,12 @@ export default {
     this.Id = urlParams.get("id");
     if (!this.Id) {
       this.Id = 0;
+    }
+  },
+  mounted(){
+    if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
     }
   },
   methods: {
@@ -1616,3 +1622,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide{
+  display: none !important;
+}
+</style>

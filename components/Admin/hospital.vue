@@ -373,9 +373,9 @@
         </li>
       </ul>
         </p>
-         <button type="submit" class="btn btn-success bto-warning" v-if="!Id && SidebarAccess==1"
+         <button type="submit" class="btn btn-success bto-warning" v-if="!Id"
       ><i class="far fa-plus"></i> Add Parameter</button>
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id && SidebarAccess==1">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
       </form>

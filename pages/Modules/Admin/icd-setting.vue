@@ -109,7 +109,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+      <div class="d-flex justify-content-center" id="hidebutton2" ref="hidebutton2">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="typeId">
         <i class="far fa-save"></i> Save
         </button>
@@ -221,7 +221,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+      <div class="d-flex justify-content-center" id="hidebutton1" ref="hidebutton1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcatId">
         <i class="far fa-save"></i> Save
         </button>
@@ -362,7 +362,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+      <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcodeId">
         <i class="far fa-save"></i> Save
         </button>
@@ -497,6 +497,12 @@ export default {
       });
     this.GetICDCategory();
     this.GetICDCODELIST();
+     if(this.SidebarAccess!=1){ 
+         console.log('this.$refs.hidebutton1',this.$refs.hidebutton1);
+          this.$refs.hidebutton.classList.add("hide");
+          this.$refs.hidebutton1.classList.add("hide");
+          this.$refs.hidebutton2.classList.add("hide");
+    }
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -1078,3 +1084,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide{
+  display: none !important;
+}
+</style>
