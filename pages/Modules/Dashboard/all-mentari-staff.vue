@@ -8,8 +8,8 @@
                     <div class="page-title dashboard-title">
                         <h1>All Mentari Staff</h1>
                         <div class="input-group dashboard-search">
-                            <span class="input-group-text" id="basic-addon1"><i class="far fa-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Search By Name/NRIC/Passport/MRN">
+                            <span class="input-group-text" id="basic-addon1"><i type="button" v-on:click="SearchPatient" class="far fa-search"></i></span>
+                            <input type="text" class="form-control" v-model="search"  placeholder="Search By Name/NRIC/Passport/MRN"/>
                         </div>
                     </div>
                      <div class="row">
@@ -57,17 +57,17 @@
                                 </div>
                                 <table class="announcement-table">
                                     <tbody>
-                                        <tr>
-                                            <div v-if="index < list.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">   
-                                                <td><span class="number">{{ index+1 }}</span></td>
-                                                <td><a v-bind:href="'/Modules/Admin/view-event?id='+ list[ann-1].id">{{ list[ann-1].title }} ({{ getFormattedDate(list[ann-1].start_date) }})</a></td>
-                                           </div>
-                                            <div v-if="AnnouncmentToShow< list.length || list.length > AnnouncmentToShow">
-                                                <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
-                                            </div>
+                                        <tr  v-for="(ann,index) in list" :key="index">
+                                            <td><span class="number">{{ index+1 }}</span></td>
+                                            <td><a v-bind:href="'/Modules/Admin/view-event?id='+ ann.id">{{ ann.title }} ({{ getFormattedDate(ann.start_date) }})</a></td>
                                         </tr>
+                                        <!-- <tr>
+                                            <td><span class="number">02</span></td>
+                                            <td>Hari Kesihatan Mental</td>
+                                        </tr> -->
                                     </tbody>
                                 </table>
+                                <a href="#/" class="btn btn-primary btn-text btn-seeall">SEE ALL</a>
                             </div>
                         </div>
                     </div>
@@ -90,9 +90,8 @@ export default {
             todays_appointments: "0",
             personal_task: "0",
             team_task: "0",
-            AnnouncmentToShow:3,
-            totalAnouncement:0,
             list: [],
+            search:'',
         };
     },
     beforeMount() {
@@ -140,6 +139,12 @@ export default {
 
         getFormattedDate(date) {
             return moment(date).format("DD-MM-YYYY")
+        },
+
+        SearchPatient() {
+            
+            localStorage.setItem('keyword',(this.search));
+            this.$router.push("/Modules/Patient/patient-list" );
         },
     },
 };
