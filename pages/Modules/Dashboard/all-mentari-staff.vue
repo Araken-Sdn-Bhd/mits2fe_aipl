@@ -57,9 +57,14 @@
                                 </div>
                                 <table class="announcement-table">
                                     <tbody>
-                                        <tr  v-for="(ann,index) in list" :key="index">
-                                            <td><span class="number">{{ index+1 }}</span></td>
-                                            <td><a v-bind:href="'/Modules/Admin/view-event?id='+ ann.id">{{ ann.title }} ({{ getFormattedDate(ann.start_date) }})</a></td>
+                                        <tr>
+                                            <div v-if="index < list.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">   
+                                                    <td><span class="number">{{ index+1 }}</span></td>
+                                                    <td><a v-bind:href="'/Modules/Admin/view-event?id='+ list[ann-1].id">{{ list[ann-1].title }} ({{ getFormattedDate(list[ann-1].start_date) }})</a></td>
+                                            </div>
+                                            <div v-if="AnnouncmentToShow< list.length || list.length > AnnouncmentToShow">
+                                                    <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
+                                            </div>
                                         </tr>
                                         <!-- <tr>
                                             <td><span class="number">02</span></td>
@@ -91,6 +96,8 @@ export default {
             personal_task: "0",
             team_task: "0",
             list: [],
+            AnnouncmentToShow:3,
+            totalAnouncement:0,
             search:'',
         };
     },
