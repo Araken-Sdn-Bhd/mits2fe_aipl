@@ -1931,8 +1931,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.hide {
-  display: none;
-}
-</style>

@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <Error :message="error" v-if="error" />
-                <div class="d-flex" v-if="SidebarAccess==1">
+                <div class="d-flex" :class="SidebarAccess!=1?'hide1':''">
                   <div class="ml-auto">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="far fa-file-pdf"></i> Generate PDF</a
@@ -249,7 +249,7 @@ export default {
   font-size: 13px;
   font-weight: 600;
 }
-.hide {
+.hide1 {
   background: #fff;
   display: none;
 }

@@ -96,7 +96,7 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex" v-if="SidebarAccess==1">
+              <div class="d-flex" :class="SidebarAccess!=1?'hide':''">
                 <div class="ml-auto">
                   <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                     ><i class="far fa-file-pdf"></i> Generate PDF</a
@@ -420,7 +420,7 @@ export default {
 };
 </script>
 <style scoped>
-.hide {
+.hide1 {
   background: #fff;
   display: none;
 }

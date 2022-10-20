@@ -371,8 +371,8 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex" v-if="SidebarAccess==1">
-                <div class="ml-auto">
+              <div class="d-flex">
+                <div class="ml-auto" :class="SidebarAccess!=1?'hide':''">
                   <button
                     @click="Ongeneratepdf"
                     class="btn btn-danger btn-text"

@@ -340,7 +340,7 @@
                         </ul>
                        </p>
                 <div class="d-flex">
-                  <div class="ml-auto" v-if="SidebarAccess==1">
+                  <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="far fa-file-pdf"></i> Generate PDF</a
                     >
@@ -749,7 +749,7 @@ export default {
 div#result {
   padding: 15px;
 }
-.hide {
+.hide1 {
   background: #fff;
   display: none;
 }

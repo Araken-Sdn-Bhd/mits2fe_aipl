@@ -899,7 +899,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex align-items-center" v-if="SidebarAccess==1">
+      <div class="d-flex align-items-center"  :class="SidebarAccess!=1?'hide1':''">
         <div class="form-check mr-auto">
           <input
             class="form-check-input"
@@ -1667,7 +1667,7 @@ export default {
 };
 </script>
 <style scoped>
-.hide {
-  display: none;
+.hide1 {
+  display: none !important;
 }
 </style>
