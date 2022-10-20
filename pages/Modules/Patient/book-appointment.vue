@@ -147,7 +147,7 @@
                           v-bind:key="team.id"
                           v-bind:value="team.id"
                         >
-                          {{ team.team_name }}
+                          {{ team.service_name }}
                         </option>
                       </select>
                     </div>
@@ -211,6 +211,9 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if(this.userdetails){
+      this.branch=this.userdetails.branch.branch_id;
+    }
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
@@ -231,8 +234,8 @@ this.GetPatientdetails();
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-team-list", {
-        headers,
+      const response = await this.$axios.get("hospital/assigned-team", {
+        headers, params: {branch: this.branch}
       });
       if (response.data.code == 200 || response.data.code == "200") {
         this.teamlist = response.data.list;
