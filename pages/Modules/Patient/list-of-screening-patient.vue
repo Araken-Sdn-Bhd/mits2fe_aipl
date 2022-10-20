@@ -88,6 +88,7 @@ export default {
     };
   },
   beforeMount() {
+    this.SidebarAccess = JSON.parse(localStorage.getItem("userdetails"));
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
   },
