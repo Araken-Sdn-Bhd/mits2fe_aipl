@@ -1412,7 +1412,7 @@ export default {
           body.append("phone_number", this.Ophone_number);
           body.append("address", this.Oaddress);
           body.append("postcode_id", this.Opostcode_id);
-          body.append("city_id", this.Ocity_id);
+          body.append("city_id", this.Opostcode_id);
           body.append("state_id", this.Ostate_id);
           body.append("education_id", this.Oeducation_id);
           body.append("occupation_sector_id", this.Ooccupation_sector_id);
