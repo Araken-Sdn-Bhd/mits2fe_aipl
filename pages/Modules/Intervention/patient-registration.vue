@@ -540,11 +540,10 @@
                       <!-- close-row -->
  <p v-if="errorList.length">
 <ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
+        <li style="color:red"  v-for='err in errorList' :key='err' >
           {{ err }}
         </li>
-      </ul>
+</ul>
         </p>
                       <div class="d-flex align-items-center">
                         <a
@@ -1220,10 +1219,10 @@
                           class="btn btn-primary btn-text"
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
-<div id="hidebutton" ref="hidebutton">
+                        <div id="hidebutton" ref="hidebutton">
                         <a v-if="!Id"
                           @click="submitRegistration"
-                          class="btn btn-success btn-text ml-auto"
+                          class="btn btn-success next-btn ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
                         >
                         <a v-if="Id"
@@ -1713,7 +1712,7 @@ export default {
       }
     },
     async getPostcodeList(event) {
-     
+
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -1728,7 +1727,7 @@ export default {
       } else {
         this.postcodelist = [];
       }
-    
+
     },
     async onSelectedStateKin(event){
       const headers = {
@@ -1749,7 +1748,7 @@ export default {
       }
     },
     async getkinPostcodeList(event) {
-     
+
      const headers = {
        Authorization: "Bearer " + this.userdetails.access_token,
        Accept: "application/json",
@@ -1764,7 +1763,7 @@ export default {
      } else {
        this.kinpostcodelist = [];
      }
-   
+
    },
     async GetTab2List() {
       const headers = {
@@ -1950,7 +1949,7 @@ export default {
           body.append("address2", this.address2);
           body.append("address3", this.address3);
           body.append("state_id", this.state_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode);
           body.append("postcode", this.postcode);
           body.append("race_id", this.race_id);
           body.append("religion_id", this.religion_id);
@@ -1969,7 +1968,7 @@ export default {
           body.append("kin_address2", this.kin_address2);
           body.append("kin_address3", this.kin_address3);
           body.append("kin_state_id", this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id);
+          body.append("kin_city_id", this.kin_postcode);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
           body.append("drug_allergy_description",this.drug_allergy_description);
@@ -2069,7 +2068,7 @@ export default {
           body.append("address2", this.address2);
           body.append("address3", this.address3);
           body.append("state_id", this.state_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode);
           body.append("postcode", this.postcode);
           body.append("race_id", this.race_id);
           body.append("religion_id", this.religion_id);
@@ -2088,7 +2087,7 @@ export default {
           body.append("kin_address2", this.kin_address2);
           body.append("kin_address3", this.kin_address3);
           body.append("kin_state_id", this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id);
+          body.append("kin_city_id", this.kin_postcode);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
           body.append(
