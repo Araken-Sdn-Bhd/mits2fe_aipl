@@ -60,7 +60,7 @@
         </li>
       </ul>
         </p>
-      <div class="d-flex justify-content-center" >
+      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
@@ -90,7 +90,7 @@
           <td>{{tem.hospital_branch_name}}</td>
           <td>{{tem.team_name}}</td>
 
-           <td>
+           <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editteam(tem)"
               ><i class="far fa-edit"></i
             ></a>

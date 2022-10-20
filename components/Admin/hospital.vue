@@ -373,11 +373,13 @@
         </li>
       </ul>
         </p>
+        <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
          <button type="submit" class="btn btn-success bto-warning" v-if="!Id"
       ><i class="far fa-plus"></i> Add Parameter</button>
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+        <button type="submit" class="btn btn-warning btn-text" v-if="Id">
         <i class="far fa-save"></i> Save
         </button>
+        </div>
       </form>
     </div>
     <!-- accordion -->
@@ -413,7 +415,7 @@
           <td>{{hstl.hod_psychiatrist_name}}</td>
           <td>{{hstl.hospital_contact_number}}</td>
              <td>{{hstl.hospital_fax_no}}</td>
-          <td>
+          <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a
               @click="profileview(hstl)"
               class="action-icon icon-success"
