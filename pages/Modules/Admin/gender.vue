@@ -51,7 +51,7 @@
                         </ul>
                        </p>
                     <!-- close-row -->
-                       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+                       <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
         <i class="far fa-save"></i> Save
         </button>
@@ -83,7 +83,7 @@
                           <td>{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
-                        <td v-if="SidebarAccess==1">
+                        <td class="td"  :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editsetting(setting)"
                             ><i class="far fa-edit"></i
                           ></a>
@@ -160,6 +160,10 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+      if (this.SidebarAccess != 1) {
+      this.$refs.sidebar.classList.add("hide");
+    }
+      
   },
   methods: {
     async insertgender() {
@@ -280,3 +284,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide{
+  display: none !important;
+}
+</style>
