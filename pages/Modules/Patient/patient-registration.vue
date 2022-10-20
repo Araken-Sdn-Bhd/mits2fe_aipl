@@ -1,6 +1,6 @@
 <template>
   <div id="layoutSidenav">
-    <CommonSidebar />
+    <CommonSidebar  />
     <div id="layoutSidenav_content">
       <CommonHeader />
       <main>
@@ -171,18 +171,19 @@
                                 aria-label="Default select example"
                                 v-on:change="resetModelValue"
                               >
+                              <!--v-on:change="resetModelValue"-->
                               <option value="">Please Select</option>
                                 <option
                                 v-for="mar in nrictypelist"
                                 v-bind:key="mar.id"
                                 v-bind:value="mar.id"
                               >
-                                {{ mar.section_value }}
+                                {{ mar.section_value}}
                               </option>
                               </select>
                             </div>
 
-                            <div class="col-sm-6" v-if="this.nric_type == 432">
+                            <div class="col-sm-6" v-if="nric_type_code == 'Old IC'">
                               <label class="form-label">Old NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -192,7 +193,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 433">
+                            <div class="col-sm-6" v-if="nric_type_code == 'New IC'">
                               <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -202,7 +203,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 467">
+                            <div class="col-sm-6" v-if="nric_type_code == 'Police'">
                               <label class="form-label">Police ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -212,8 +213,8 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="this.nric_type == 468">
-                              <label class="form-label">Work Permit<small>*</small></label>
+                            <div class="col-sm-6" v-if="nric_type_code == 'Army'">
+                              <label class="form-label">Army ID<small>*</small></label>
                               <input
                                 type="tel"
                                 class="form-control toCapitalFirst"
@@ -235,12 +236,11 @@
                               <input
                                 type="number"
                                 class="form-control"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1" v-model="nric_no1"
-                                @change="validateIC" v-on:keypress="NumbersOnly"
+                                placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
+                                v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly"
                               />
-                                <Error :message="error" v-if="error" />
+                               <Error :message="error" v-if="error" />
                             </div>
-
                           </div>
                         </div>
 
@@ -346,7 +346,7 @@
                               class="form-control"
                               name=""
                               v-mask="'###-########'"
-                              placeholder="Enter Mobile Phone No" v-model="mobile_no"
+                              placeholder="xxx-xxxxxxxx" v-model="mobile_no"
                             />
                           </div>
                         </div>
@@ -356,8 +356,8 @@
                             <input
                               type="tel"
                               class="form-control"
-                              placeholder="Enter House Phone No"
                               v-mask="'##-########'"
+                              placeholder="xx-xxxxxxxx"
                               name="" v-model="house_no"
                             />
                           </div>
@@ -483,6 +483,7 @@
                               v-model="state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onSelectedState($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -500,14 +501,15 @@
                             <label class="form-label">City</label>
                             <select
                               v-model="city_id"
+                              @change="getPostcodeList($event)"
                               class="form-select"
                               aria-label="Default select example"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -518,23 +520,30 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label">Postcode</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Enter Postcode"
-                              name="" v-model="postcode"
-                            />
+                            <select
+                              v-model="postcode"
+                              class="form-select"
+                              aria-label="Default Select example"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ct in postcodelist"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
+                              >
+                                {{ ct.postcode }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </div>
                       <!-- close-row -->
  <p v-if="errorList.length">
 <ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
+        <li style="color:red"  v-for='err in errorList' :key='err' >
           {{ err }}
         </li>
-      </ul>
+</ul>
         </p>
                       <div class="d-flex align-items-center">
                         <a
@@ -563,17 +572,31 @@
                               v-model="race_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeRace($event)"
                             >
                               <option value="0">Select</option>
                               <option
                                 v-for="rce in racelist"
                                 v-bind:key="rce.id"
                                 v-bind:value="rce.id"
+
                               >
                                 {{ rce.section_value }}
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherRace || this.race_id == 79">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_race"
+                            placeholder="please specify other race"
+
+                          />
+                        </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
@@ -582,6 +605,7 @@
                               v-model="religion_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeReligion($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -594,6 +618,17 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-sm-6" v-if="otherReligion || this.religion_id == 90">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_religion"
+                            placeholder="please specify other religion"
+                          />
+                        </div>
+                        </div>
                       </div>
                       <!-- close-row -->
 
@@ -605,6 +640,7 @@
                               v-model="marital_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeMarital($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -617,6 +653,17 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-sm-6" v-if="otherMarital || this.marital_id == 112">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_maritalList"
+                            placeholder="please specify other marital status"
+                          />
+                        </div>
+                        </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
                             <label class="form-label">Accommodation</label>
@@ -624,6 +671,7 @@
                               v-model="accomodation_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeAccommodation($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -635,6 +683,86 @@
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherAccommodation || this.accomodation_id == 118">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_accommodation"
+                            placeholder="please specify other accommodation"
+                          />
+                        </div>
+                        </div>
+                      </div>
+                      <!-- close-row -->
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label"
+                              >Fee Exemption Status</label
+                            >
+                             <select
+                              v-model="fee_exemption_status"
+                              class="form-select"
+                              aria-label="Default select example"
+                              @change="OnchangeFee($event)"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="fee in feeexemptionlist"
+                                v-bind:key="fee.id"
+                                v-bind:value="fee.id"
+                              >
+                                {{ fee.section_value }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherFeeExemStatus || this.fee_exemption_status == 106">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_feeExemptionStatus"
+                            placeholder="please specify other fee exemption status"
+                          />
+                        </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Occupation Status</label>
+                            <select
+                              v-model="occupation_status"
+                              class="form-select"
+                              aria-label="Default select example"
+                              @change="OnchangeOccStatus($event)"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ocu in occupationlist"
+                                v-bind:key="ocu.id"
+                                v-bind:value="ocu.id"
+                              >
+                                {{ ocu.section_value }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherOccStatus  || this.occupation_status == 239">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_occupationStatus"
+                            placeholder="please specify other occupation status"
+                          />
+                        </div>
                         </div>
                       </div>
                       <!-- close-row -->
@@ -655,50 +783,6 @@
                                 v-bind:value="edu.id"
                               >
                                 {{ edu.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="mb-3">
-                            <label class="form-label">Occupation Status</label>
-                            <select
-                              v-model="occupation_status"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="ocu in occupationlist"
-                                v-bind:key="ocu.id"
-                                v-bind:value="ocu.id"
-                              >
-                                {{ ocu.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- close-row -->
-
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div class="mb-3">
-                            <label class="form-label"
-                              >Fee Exemption Status</label
-                            >
-                             <select
-                              v-model="fee_exemption_status"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="fee in feeexemptionlist"
-                                v-bind:key="fee.id"
-                                v-bind:value="fee.id"
-                              >
-                                {{ fee.section_value }}
                               </option>
                             </select>
                           </div>
@@ -786,13 +870,14 @@
                             </select>
                           </div>
                         </div>
-                         <div class="row">
+                        <div class="row">
                             <div class="col-sm-6">
-                              <label class="form-label">NRIC No<small>*</small></label>
+                              <label class="form-label">NRIC ID<small>*</small></label>
                               <input
-                                type="number"
-                                class="form-control"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="kinOnnricNo1" v-model="kin_nric_no"
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                v-model.number="kin_nric_no"
+
                               />
                                 <Error :message="error" v-if="error" />
                             </div>
@@ -811,8 +896,8 @@
                               type="tel"
                               class="form-control"
                               name=""
-                              placeholder="Enter Mobile Phone No"
                               v-mask="'###-########'"
+                              placeholder="xxx-xxxxxxxx"
                               v-model="kin_mobile_no"
                             />
                           </div>
@@ -823,8 +908,8 @@
                             <input
                               type="tel"
                               class="form-control"
-                              placeholder="Enter House Phone No"
                               v-mask="'##-########'"
+                              placeholder="xx-xxxxxxxx"
                               name=""
                                 v-model="kin_house_no"
                             />
@@ -868,10 +953,11 @@
                               v-model="kin_state_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="onSelectedStateKin($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="st in statelist"
+                                v-for="st in kinstatelist"
                                 v-bind:key="st.id"
                                 v-bind:value="st.id"
                               >
@@ -887,12 +973,13 @@
                               v-model="kin_city_id"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="getkinPostcodeList($event)"
                             >
                               <option value="0">Select</option>
                               <option
-                                v-for="ct in citylist"
-                                v-bind:key="ct.id"
-                                v-bind:value="ct.id"
+                                v-for="ct in kincitylist"
+                                v-bind:key="ct.city_name"
+                                v-bind:value="ct.city_name"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -903,12 +990,20 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label">Postcode</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Enter Postcode" @keyup="Onpostcodechange()"
-                              name="" v-model="kin_postcode"
-                            />
+                            <select
+                              v-model="kin_postcode"
+                              class="form-select"
+                              aria-label="Default select example"
+                            >
+                              <option value="0">Select</option>
+                              <option
+                                v-for="ct in kinpostcodelist"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
+                              >
+                                {{ ct.postcode }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -1078,8 +1173,7 @@
                           />
                         </div>
                       </div>
-
-                       <div class="row align-items-center mb-3"  v-if="!Id">
+                      <div class="row align-items-center mb-3" v-if="!Id">
                         <div class="col-sm-5">
                           <label class="form-label mb-0">DOES THIS PATIENT NEED TRIAGE/SCREENING</label>
                         </div>
@@ -1109,16 +1203,6 @@
                             >
                           </div>
                         </div>
-
-                        <!-- div-hide -->
-                        <!-- <div class="col-sm-5 oa-yes visibility-h">
-                          <input
-                            type="email"
-                            class="form-control"
-                            id=""
-                            placeholder="To Specify"  v-model="other_description"
-                          />
-                        </div> -->
                       </div>
                       <!-- close-row -->
 <p v-if="errorList.length">
@@ -1135,10 +1219,10 @@
                           class="btn btn-primary btn-text"
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
-
+                        <div id="hidebutton" ref="hidebutton">
                         <a v-if="!Id"
                           @click="submitRegistration"
-                          class="btn btn-success btn-text ml-auto"
+                          class="btn btn-success next-btn ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
                         >
                         <a v-if="Id"
@@ -1146,6 +1230,7 @@
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Update</a
                         >
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -1155,6 +1240,7 @@
           </div>
         </div>
       </main>
+      <intervention-footer></intervention-footer>
     </div>
   </div>
 </template>
@@ -1173,6 +1259,10 @@ export default {
       referallist: [],
       statelist: [],
       citylist: [],
+      postcodelist: [],
+      kinstatelist: [],
+      kincitylist: [],
+      kinpostcodelist: [],
       countrylist: [],
       racelist: [],
       religionlist: [],
@@ -1184,6 +1274,9 @@ export default {
       occupationsectorlist: [],
       relationshiplist: [],
       nrictypelist: [],
+      kinstatelist: [],
+      kincitylist:[],
+      kinpostcodelist:[],
       citizenship: "",
       salutation_id: 0,
       name_asin_nric: "",
@@ -1202,7 +1295,7 @@ export default {
       address3: "",
       state_id: 0,
       city_id: 0,
-      postcode: "",
+      postcode: 0,
       race_id: 0,
       religion_id: 0,
       marital_id: 0,
@@ -1220,7 +1313,7 @@ export default {
       kin_address3: "",
       kin_state_id: 0,
       kin_city_id: 0,
-      kin_postcode: "",
+      kin_postcode: 0,
       drug_allergy: "",
       drug_allergy_description: "",
       traditional_medication: "",
@@ -1241,19 +1334,34 @@ export default {
       nric_no1: "",
       Id: 0,
       loader: false,
-      error: null,
-      firstDob: "",
-      secondDob: "",
-      thirdDob: "",
-      patient_need_triage_screening: "",
       kin_nric_no: "",
+      error: null,
+      patient_need_triage_screening: "",
+      id:0,
+      text:"",
+      branch_id:0,
+      otherRace:false,
+      otherReligion:false,
+      otherAccommodation:false,
+      otherMarital:false,
+      otherFeeExemStatus:false,
+      otherOccStatus:false,
+      other_race:"",
+      other_religion:"",
+      other_accommodation:"",
+      other_maritalList:"",
+      other_feeExemptionStatus:"",
+      other_occupationStatus:"",
+      race_type:"",
+      nric_type_code:"",
+      SidebarAccess:null,
     };
   },
-
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    console.log(this.SidebarAccess,'Sidebaraccess');
     this.GetList();
-    this.GetTab2List();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     if (this.Id > 0) {
@@ -1287,7 +1395,15 @@ export default {
         }
       });
     });
+    this.GetStaffBranchId();
   },
+  mounted(){
+    if(this.SidebarAccess!=1){
+         console.log('this.$refs.hidebutton',this.$refs.hidebutton);
+          this.$refs.hidebutton.classList.add("hide");
+    }
+  },
+
   methods: {
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
@@ -1298,19 +1414,52 @@ export default {
         return true;
       }
     },
-    resetModelValue()
+    async resetModelValue()
     {
       this.nric_no = "";
       this.error = null;
+
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "/general-setting/fetch",
+        {
+          setting_id: this.nric_type,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.nric_type_code = response.data.setting[0].section_value;
+        console.log('manish',this.nric_type_code);
+      } else {
+        window.alert("Something went wrong");
+      }
+
+
     },
     NextFirst() {
       this.errorList = [];
       this.NextFirstval = true;
+      if (!this.mobile_no) {
+        this.errorList.push("Mobile Phone No is required.");
+      }
       if (!this.name_asin_nric) {
         this.errorList.push("Name (As In NRIC) is required.");
       }
       if (!this.citizenship) {
         this.errorList.push("Citizenship is required.");
+      }
+      if (!this.sex) {
+        this.errorList.push("Gender is required.");
+      }
+      if (!this.services_type) {
+        this.errorList.push("Type of Services is required.");
+      }
+      if (!this.referral_type) {
+        this.errorList.push("Type of Referral is required.");
       }
       if (this.citizenship) {
         if (this.citizentype == "Malaysian") {
@@ -1321,23 +1470,25 @@ export default {
           if (!this.nric_no) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
-          } else {
-            if (this.nric_no.length != 12) {
-              this.errorList.push("Please Enter 12 Digit NRIC No.");
-              this.NextFirstval = false;
-            }
           }
+          //} else {
+          //  if (this.nric_no.length != 12) {
+          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
+          //    this.NextFirstval = false;
+          //  }
+          //}
         } else if (this.citizentype == "Permanent Resident") {
           if (!this.nric_no1) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
-          } else {
-            this.nric_no = this.nric_no1;
-            if (this.nric_no.length != 12) {
-              this.errorList.push("Please Enter 12 Digit NRIC No.");
-              this.NextFirstval = false;
-            }
           }
+          //else {
+          //  this.nric_no = this.nric_no1;
+          //  if (this.nric_no.length != 12) {
+          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
+          //    this.NextFirstval = false;
+          //  }
+          //}
         } else {
           if (!this.passport_no) {
             this.errorList.push("Passport No is required.");
@@ -1353,19 +1504,6 @@ export default {
           }
         }
       }
-      if (!this.sex) {
-        this.errorList.push("Gender is required.");
-      }
-      if (!this.mobile_no) {
-        this.errorList.push("Mobile Phone No is required.");
-      }
-      if (!this.services_type) {
-        this.errorList.push("Type of Services is required.");
-      }
-      if (!this.referral_type) {
-        this.errorList.push("Type of Referral is required.");
-      }
-
       if (
         this.mobile_no &&
         this.citizenship &&
@@ -1380,6 +1518,7 @@ export default {
         this.$refs.navdiv1.classList.remove("show");
         this.$refs.navdiv2.classList.add("active");
         this.$refs.navdiv2.classList.add("show");
+        this.GetTab2List();
       }
     },
     NextSecond() {
@@ -1492,10 +1631,13 @@ export default {
       const response5 = await this.$axios.get("address/list", { headers });
       if (response5.data.code == 200 || response5.data.code == "200") {
         this.statelist = response5.data.list;
+        this.citylist =[];
+        this.postcodelist = [];
       } else {
         this.statelist = [];
+        this.citylist =[];
+        this.postcodelist = [];
       }
-      console.log("state", this.statelist);
       const response7 = await this.$axios.get("address/country/list", {
         headers,
       });
@@ -1504,25 +1646,125 @@ export default {
       } else {
         this.countrylist = [];
       }
-      const response6 = await this.$axios.get("address/postcodelist", {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
-      } else {
-        this.citylist = [];
-      }
-      console.log("citylist", this.citylist);
       const response8 = await this.$axios.get(
         "general-setting/list?section=" + "type-of-nric",
         { headers }
       );
       if (response8.data.code == 200 || response8.data.code == "200") {
+
         this.nrictypelist = response8.data.list;
       } else {
         this.nrictypelist = [];
       }
+
+      const response9 = await this.$axios.get("address/list", { headers });
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.kinstatelist = response9.data.list;
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
+      } else {
+        this.kinstatelist = [];
+        this.kincitylist =[];
+        this.kinpostcodelist = [];
+      }
     },
+    async GetStaffBranchId() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staffDesignatioDetail/staffInchargeDetail",
+        {
+          added_by: this.userdetails.user.id, //this.userdetails.user.id
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        if(response.data.branch[0].branch_id){
+          this.branch_id = response.data.branch[0].branch_id;
+        }else{
+          this.branch_id =response.data.branch;
+          console.log('my branchid333',this.branch_id);
+        }
+
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+    async onSelectedState(event){
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.citylist = response.data.list;
+        this.postcodelist = [];
+      } else {
+        this.citylist = [];
+        this.postcodelist = [];
+      }
+    },
+    async getPostcodeList(event) {
+     
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+    
+    },
+    async onSelectedStateKin(event){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kincitylist = response.data.list;
+        this.kinpostcodelist = [];
+      } else {
+        this.kincitylist = [];
+        this.kinpostcodelist = [];
+      }
+    },
+    async getkinPostcodeList(event) {
+     
+     const headers = {
+       Authorization: "Bearer " + this.userdetails.access_token,
+       Accept: "application/json",
+       "Content-Type": "application/json",
+     };
+     const response = await this.$axios.post(
+       "address/" + event.target.value + "/getPostcodeListById",
+       { headers }
+     );
+     if (response.data.code == 200 || response.data.code == "200") {
+       this.kinpostcodelist = response.data.list;
+     } else {
+       this.kinpostcodelist = [];
+     }
+   
+   },
     async GetTab2List() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1615,6 +1857,50 @@ export default {
       this.citizenship = id;
       this.citizentype = value;
     },
+
+    OnchangeRace(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherRace = true;
+      }else{
+        this.otherRace = false;
+      }
+    },
+    OnchangeReligion(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherReligion = true;
+      }else{
+        this.otherReligion = false;
+      }
+    },
+    OnchangeAccommodation(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherAccommodation = true;
+      }else{
+        this.otherAccommodation = false;
+      }
+    },
+    OnchangeMarital(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherMarital = true;
+      }else{
+        this.otherMarital = false;
+      }
+    },
+    OnchangeFee(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherFeeExemStatus = true;
+      }else{
+        this.otherFeeExemStatus = false;
+      }
+    },
+    OnchangeOccStatus(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherOccStatus = true;
+      }else{
+        this.otherOccStatus = false;
+      }
+    },
+
     selectFile(event) {
       this.file = event.target.files[0];
     },
@@ -1631,22 +1917,12 @@ export default {
       }
     },
     async submitRegistration() {
+
       this.errorList = [];
       if (!this.patient_need_triage_screening) {
         this.errorList.push("Patient Need Triage Screening is required.");
-      }
-      if (this.patient_need_triage_screening) {
+      } else {
         try {
-          var no = this.nric_no.slice(0, 6);
-          var no1 = this.nric_no.slice(6, 8);
-          var no2 = this.nric_no.slice(8, 12);
-          this.nric_no = no + "-" + no1 + "-" + no2;
-
-          var kno = this.kin_nric_no.slice(0, 6);
-          var kno1 = this.kin_nric_no.slice(6, 8);
-          var kno2 = this.kin_nric_no.slice(8, 12);
-          this.kin_nric_no = kno + "-" + kno1 + "-" + kno2;
-
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1655,12 +1931,9 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
-          body.append("branch_id",this.userdetails.branch.branch_id);
-          body.append("hospital_id",this.userdetails.branch.hospital_id);
-          body.append("hospital_branch_name",this.userdetails.branch.hospital_branch_name);
-          body.append("hospital_name",this.userdetails.branch.hospital_name);
           body.append("citizenship", this.citizenship);
-          body.append("salutation_id", this.salutation_id==null ? 0 : this.salutation_id);
+          body.append("citizentype", this.citizentype);
+          body.append("salutation_id", this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);
           body.append("birth_date", this.birth_date);
@@ -1675,48 +1948,52 @@ export default {
           body.append("address1", this.address1);
           body.append("address2", this.address2);
           body.append("address3", this.address3);
-          body.append("state_id", this.state_id==null ? 0 : this.state_id);
-          body.append("city_id", this.city_id==null ? 0 : this.city_id);
+          body.append("state_id", this.state_id);
+          body.append("city_id", this.postcode);
           body.append("postcode", this.postcode);
-          body.append("race_id", this.race_id==null ? 0 : this.race_id);
-          body.append("religion_id", this.religion_id==null ? 0 : this.religion_id);
-          body.append("marital_id", this.marital_id==null ? 0 : this.marital_id);
-          body.append("accomodation_id", this.accomodation_id==null ? 0 : this.accomodation_id);
-          body.append("education_level", this.education_level==null ? 0 : this.education_level);
-          body.append("occupation_status", this.occupation_status==null ? 0 : this.occupation_status);
-          body.append("fee_exemption_status", this.fee_exemption_status==null ? 0 : this.fee_exemption_status);
-          body.append("occupation_sector", this.occupation_sector==null ? 0 : this.occupation_sector);
+          body.append("race_id", this.race_id);
+          body.append("religion_id", this.religion_id);
+          body.append("marital_id", this.marital_id);
+          body.append("accomodation_id", this.accomodation_id);
+          body.append("education_level", this.education_level);
+          body.append("occupation_status", this.occupation_status);
+          body.append("fee_exemption_status", this.fee_exemption_status);
+          body.append("occupation_sector", this.occupation_sector);
           body.append("kin_name_asin_nric", this.kin_name_asin_nric);
-          body.append("kin_relationship_id", this.kin_relationship_id==null ? 0 : this.kin_relationship_id);
+          body.append("kin_relationship_id", this.kin_relationship_id);
           body.append("kin_nric_no", this.kin_nric_no);
           body.append("kin_mobile_no", this.kin_mobile_no);
           body.append("kin_house_no", this.kin_house_no);
           body.append("kin_address1", this.kin_address1);
           body.append("kin_address2", this.kin_address2);
           body.append("kin_address3", this.kin_address3);
-          body.append("kin_state_id", this.kin_state_id==null ? 0 : this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id==null ? 0 : this.kin_city_id);
+          body.append("kin_state_id", this.kin_state_id);
+          body.append("kin_city_id", this.kin_postcode);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
-          body.append(
-            "drug_allergy_description",
-            this.drug_allergy_description
-          );
+          body.append("drug_allergy_description",this.drug_allergy_description);
           body.append("traditional_medication", this.traditional_medication);
           body.append("traditional_description", this.traditional_description);
           body.append("other_allergy", this.other_allergy);
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
-          body.append(
-            "patient_need_triage_screening",
-            this.patient_need_triage_screening
-          );
           body.append("id", this.Id);
+          body.append("branch_id", this.branch_id);
+          body.append("patient_need_triage_screening",this.patient_need_triage_screening);
+          body.append("other_race", this.other_race);
+          body.append("other_religion", this.other_religion);
+          body.append("other_accommodation", this.other_accommodation);
+          body.append("other_maritalList", this.other_maritalList);
+          body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
+          body.append("other_occupationStatus", this.other_occupationStatus);
+
+
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -1726,10 +2003,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
-              this.$router.push("/Modules/Patient/patient-list");
+              this.$router.push("/Modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -1749,7 +2023,7 @@ export default {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
-              this.$router.push("/Modules/Patient/patient-list");
+              this.$router.push("/Modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -1776,11 +2050,8 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
-          body.append("branch_id",this.userdetails.branch.branch_id);
-          body.append("hospital_id",this.userdetails.branch.hospital_id);
-          body.append("hospital_branch_name",this.userdetails.branch.hospital_branch_name);
-          body.append("hospital_name",this.userdetails.branch.hospital_name);
           body.append("citizenship", this.citizenship);
+          body.append("citizentype", this.citizentype);
           body.append("salutation_id", this.salutation_id);
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);
@@ -1797,7 +2068,7 @@ export default {
           body.append("address2", this.address2);
           body.append("address3", this.address3);
           body.append("state_id", this.state_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode);
           body.append("postcode", this.postcode);
           body.append("race_id", this.race_id);
           body.append("religion_id", this.religion_id);
@@ -1816,7 +2087,7 @@ export default {
           body.append("kin_address2", this.kin_address2);
           body.append("kin_address3", this.kin_address3);
           body.append("kin_state_id", this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id);
+          body.append("kin_city_id", this.kin_postcode);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
           body.append(
@@ -1829,6 +2100,7 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -1838,6 +2110,12 @@ export default {
             "patient_need_triage_screening",
             this.patient_need_triage_screening
           );
+          body.append("other_race", this.other_race);
+          body.append("other_religion", this.other_religion);
+          body.append("other_accommodation", this.other_accommodation);
+          body.append("other_marital", this.other_maritalList);
+          body.append("other_feeExemStatus", this.other_feeExemptionStatus);
+          body.append("other_occupationStatus", this.other_occupationStatus);
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -1903,10 +2181,8 @@ export default {
         this.citizenship = response.data.list[0].citizenship;
         this.city_id = response.data.list[0].city_id;
         this.country_id = response.data.list[0].country_id;
-        //  this.created_at=response.data.list[0].created_at;
         this.drug_allergy = response.data.list[0].drug_allergy;
-        this.drug_allergy_description =
-          response.data.list[0].drug_allergy_description;
+        this.drug_allergy_description = response.data.list[0].drug_allergy_description;
         this.education_level = response.data.list[0].education_level;
         this.expiry_date = response.data.list[0].expiry_date;
         this.fee_exemption_status = response.data.list[0].fee_exemption_status;
@@ -1927,13 +2203,9 @@ export default {
         this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
         this.mobile_no = response.data.list[0].mobile_no;
         this.name_asin_nric = response.data.list[0].name_asin_nric;
-        this.nric_no = response.data.list[0].nric_no;
-        if (this.nric_no) {
-          this.nric_no = this.nric_no.replace("-", "");
-          this.nric_no = this.nric_no.replace("-", "");
-          this.nric_no1 = this.nric_no.replace("-", "");
-          this.nric_no1 = this.nric_no.replace("-", "");
-        }
+        var str = response.data.list[0].nric_no;
+        this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+        console.log('nric',this.nric_no);
         this.nric_type = response.data.list[0].nric_type;
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
@@ -1948,24 +2220,43 @@ export default {
         this.religion_id = response.data.list[0].religion_id;
         this.salutation_id = response.data.list[0].salutation_id;
         this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
+
         this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
-        this.traditional_description =
-          response.data.list[0].traditional_description;
-        this.traditional_medication =
-          response.data.list[0].traditional_medication;
+        this.traditional_description = response.data.list[0].traditional_description;
+        this.traditional_medication = response.data.list[0].traditional_medication;
 
-          this.citizentype = response.data.list[0].citizenships[0].section_value;
-        //if (response.data.list[0].citizenship == 430) {
-        //  this.citizentype = "Malaysian";
-        //} else if (response.data.list[0].citizenship == 450) {
-        //  this.citizentype = "Permanent Resident";
-        //} else {
-        //  this.citizentype = "Foreigner";
-        //}
+
+        this.citizentype = response.data.list[0].citizenships[0].section_value;
+
+        this.race
+
+
+        this.other_race = response.data.list[0].other_race;
+        this.other_religion= response.data.list[0].other_religion;
+        this.other_accommodation = response.data.list[0].other_accommodation;
+        this.other_maritalList = response.data.list[0].other_maritalList;
+        this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
+        this.other_occupationStatus = response.data.list[0].other_occupationStatus;
+
+        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
+      }
       } else {
         window.alert("Something went wrong");
+      }
+    },
+    kinOnnricNo1() {
+      if (this.kin_nric_no.length == 12) {
+        this.error = null;
+      } else {
+        this.error = "Please Enter 12 Digit NRIC No";
       }
     },
     OnnricNo() {
@@ -1974,28 +2265,38 @@ export default {
         this.secondDob = String(this.nric_no).slice(4, 6);
         this.thirdDob = String(this.nric_no).slice(6, 8);
         // this.birth_date = this.firstDob+"-"+this.secondDob+"-"+this.thirdDob;
+        // this.birth_date = this.getDate(this.nric_no);
         this.birth_date = this.getDate(this.nric_no);
-        this.birth_date = this.getDate(this.nric_no1);
         this.error = null;
+
+      var today = new Date();
+      var birthDate = new Date(this.birth_date);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      this.age = age;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
       }
     },
     getDate(d) {
       return (
-        (parseInt(d[0].toString() + d[1]) < 30 ? "20" : "19") +
-        d[0].toString() +
+        (parseInt(d[0] + d[1]) < 30 ? "20" : "19") +
+        d[0] +
         d[1] +
         "-" +
-        d[2].toString() +
-        d[3]+
+        d[2] +
+        d[3] +
         "-" +
-        d[4].toString() +
+        d[4] +
         d[5]
       );
     },
     OnnricNo1() {
       if (this.nric_no1.length == 12) {
+        this.birth_date = this.getDate(this.nric_no1);
         this.error = null;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
@@ -2015,14 +2316,7 @@ export default {
         this.error = "Please Enter a Valid Old NRIC No";
       }
     },
-    kinOnnricNo1() {
-      if (this.kin_nric_no.length == 12) {
-        this.error = null;
-      } else {
-        this.error = "Please Enter 12 Digit NRIC No";
-      }
-    },
-    OnAgeCalculation() {
+     OnAgeCalculation() {
       var today = new Date();
       var birthDate = new Date(this.birth_date);
       var age = today.getFullYear() - birthDate.getFullYear();
@@ -2032,29 +2326,6 @@ export default {
       }
       this.age = age;
       //window.alert(age);
-    },
-    async Onpostcodechange() {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response1 = await this.$axios.post(
-          "address/getStateCityByPostcode",
-          {
-            postcode: this.kin_postcode,
-          },
-          { headers }
-        );
-        if (response1.data.code == 200) {
-          this.kin_state_id = response1.data.list[0].state_id;
-          this.kin_city_id = response1.data.list[0].id;
-        } else {
-          this.kin_state_id = 0;
-          this.kin_city_id = 0;
-        }
-      } catch (e) {}
     },
     async validateIC(data){
       try {
@@ -2077,13 +2348,19 @@ export default {
           this.error = "Patient with this NRIC is already registered.";
         }
       } catch (e) {}
-    }
-
+    },
   },
 };
 </script>
 <style scoped>
 #pills-tab .nav-item a {
   pointer-events: none;
+}
+
+.toCapitalFirst {
+  text-transform: uppercase;
+}
+.hide{
+  display: none !important;
 }
 </style>

@@ -109,7 +109,7 @@
           <label class="form-label">State<span>*</span></label>
           <select
             class="form-select"
-            @change="onCitybind($event)"
+            @change="getCityList($event)"
             v-model="Ostate_id"
           >
             <option value="0">Please Select</option>
@@ -124,12 +124,12 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select class="form-select" v-model="Ocity_id">
+          <select class="form-select" v-model="Ocity_id" @change="getPostcodeList($event)">
             <option value="0">Please Select</option>
             <option
               v-for="ctl in OCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.city_name"
+              v-bind:value="ctl.city_name"
             >
               {{ ctl.city_name }}
             </option>
@@ -141,8 +141,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in OPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -695,7 +695,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="OOnrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -706,7 +706,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2" @change="OOnrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -717,7 +717,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2" @change="OOnrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
@@ -728,7 +728,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2" @change="OOnrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
@@ -848,7 +848,7 @@
               >*</span
             ></label
           >
-          
+
           <div class="col-sm-8">
              <!-- <div class="form-check">
                   <input
@@ -1119,6 +1119,42 @@ export default {
         this.Onetworkmentari_services = val;
       }
     },
+
+    async getCityList(event) {
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.OCityList = response.data.list;
+        this.OPostCodeList = [];
+      } else {
+        this.OCityList = [];
+        this.OPostCodeList = [];
+      }
+
+    },
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.OPostCodeList = response.data.list;
+      } else {
+        this.OPostCodeList = [];
+      }
+
+    },
     async onCitybind(event) {
       const headers = {
         // Authorization: "Bearer " + this.userdetails.access_token,
@@ -1146,7 +1182,7 @@ export default {
       const response = await this.$axios.get("address/list", {
         headers,
       });
-      
+
       if (response.data.code == 200 || response.data.code == "200") {
         this.OStateList = response.data.list;
         console.log('my stat33org',this.OStateList);
@@ -1376,7 +1412,7 @@ export default {
           body.append("phone_number", this.Ophone_number);
           body.append("address", this.Oaddress);
           body.append("postcode_id", this.Opostcode_id);
-          body.append("city_id", this.Ocity_id);
+          body.append("city_id", this.Opostcode_id);
           body.append("state_id", this.Ostate_id);
           body.append("education_id", this.Oeducation_id);
           body.append("occupation_sector_id", this.Ooccupation_sector_id);

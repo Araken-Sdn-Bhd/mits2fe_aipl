@@ -142,6 +142,7 @@ export default {
       token: "",
       keyword: "",
       search: "",
+      search2: "",
       branch_id: 0,
       service_id: 0,
       assistancelist: [],
@@ -150,6 +151,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     //   this.GetList();
+
   },
   mounted() {
     this.GetList();
@@ -187,6 +189,12 @@ export default {
       .catch((err) => {
         console.error(err);
       });
+
+       if(localStorage.getItem("keyword")!=''){
+      this.search2=localStorage.getItem("keyword");
+      this.search=this.search2;
+      this.OnSearch();
+    }
   },
   methods: {
     async GetList() {
@@ -229,6 +237,7 @@ export default {
       }
     },
     async OnSearch() {
+      localStorage.removeItem('keyword');
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -252,6 +261,7 @@ export default {
         if (response.data.list.length > 0) {
           this.list.splice(0, this.list.length);
           this.list = response.data.list;
+ 
         } else {
           //this.list = [];
           this.list.splice(0, this.list.length);
