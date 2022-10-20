@@ -96,8 +96,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in PostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -1308,7 +1308,7 @@ export default {
           body.append("phone_number", this.phone_number);
           body.append("address", this.address);
           body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode_id);
           body.append("state_id", this.state_id);
           body.append("education_id", this.education_id);
           body.append("occupation_sector_id", this.occupation_sector_id);
