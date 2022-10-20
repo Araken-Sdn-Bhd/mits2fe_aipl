@@ -1259,6 +1259,7 @@ export default {
       referallist: [],
       statelist: [],
       citylist: [],
+      postcodelist:[],
       countrylist: [],
       racelist: [],
       religionlist: [],
