@@ -1308,7 +1308,7 @@ export default {
           body.append("phone_number", this.phone_number);
           body.append("address", this.address);
           body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode_id);
           body.append("state_id", this.state_id);
           body.append("education_id", this.education_id);
           body.append("occupation_sector_id", this.occupation_sector_id);
