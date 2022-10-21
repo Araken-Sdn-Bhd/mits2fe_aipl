@@ -346,8 +346,6 @@ export default {
             this.hasreportmodule = hasreport.module_id;
           }
         });
-      } else {
-        window.alert("Something went wrong");
       }
     },
   },
