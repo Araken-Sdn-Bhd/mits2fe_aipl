@@ -177,7 +177,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select 
+          <select
           class="form-select"
           v-model="Gcity_id"
           @change="getPostcodeList($event)"
@@ -1282,7 +1282,7 @@ export default {
         this.GCityList = [];
         this.GPostCodeList = [];
       }
-    
+
     },
     async getPostcodeList(event) {
       const headers = {
@@ -1298,21 +1298,24 @@ export default {
       } else {
         this.GPostCodeList = [];
       }
-    
+
     },
     OnSubmit() {
       this.errors = [];
       if (this.Gis_agree) {
         if (this.is_you_represenative != "representative-no") {
           if (this.Garea_of_involvement == "Volunteerism") {
+            this.loader = true;
             this.OnGroupVolunteerism();
           } else if (
             this.Garea_of_involvement == "Outreach Project Collaboration"
           ) {
+            this.loader = true;
             this.OnGroupOutreachProjectCollaboration();
           } else if (
             this.Garea_of_involvement == "Networking Make a Contribution"
           ) {
+            this.loader = true;
             this.OnGroupNetworkingMakeaContribution();
           } else {
             this.errors.push("Please select Areas of Involvement");
@@ -1529,14 +1532,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Your form is submitted");
             this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1727,14 +1728,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Your form is submitted");
             this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1891,14 +1890,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Your form is submitted");
             this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1908,9 +1905,8 @@ export default {
       }
     },
     Reload() {
-      this.$router.push("/Modules/Von/list-of-application");
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = 'https://mentari.moh.gov.my/';
       }, 100);
     },
      async GetUserIpAddress() {

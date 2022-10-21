@@ -85,6 +85,7 @@ export default {
       list: [],
       branchlist: [],
       branch: 0,
+      // SidebarAccess = 1,
     };
   },
   beforeMount() {
