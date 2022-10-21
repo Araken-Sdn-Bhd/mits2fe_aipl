@@ -1920,22 +1920,13 @@
                         <label for="" class="form-label"
                           >Name of hospital</label
                         >
-                         <select
+                         <input
                 v-model="hospitalname"
                 disabled="false"
-                class="form-select"
-                aria-label="Default select example"
+                class="form-control"
+                type="text"
               >
-                <option value="">Please Select</option>
-                <option
-                  v-for="hst in hospitallist"
-                  v-bind:key="hst.hospital_name"
-                  v-bind:value="hst.hospital_name"
-                >
-                  {{ hst.hospital_name }}
-                </option>
-              </select>
-                      </div>
+                                   </div>
                       <!-- col-sm-6 -->
                     </div>
                     <!-- row -->
@@ -2137,7 +2128,7 @@ export default {
     this.officername = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
     this.reportingdate = moment().format("DD-MM-YYYY");
-    // this.hospitalname = this.userdetails.branch.hospital_name;
+    this.hospitalname = this.userdetails.branch.hospital_name;
 
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

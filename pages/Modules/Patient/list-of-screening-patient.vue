@@ -85,10 +85,11 @@ export default {
       list: [],
       branchlist: [],
       branch: 0,
+      // SidebarAccess = 1,
     };
   },
   beforeMount() {
-    this.SidebarAccess = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
   },

@@ -136,10 +136,9 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}` + "von/list",
-
-        { headers }
-      )
+          `${this.$axios.defaults.baseURL}` + "von/listByBranchId",
+          { headers,params: {branch: this.userdetails.branch.branch_id} }
+        )
       .then((resp) => {
         this.list = resp.data.list;
         this.alllist = resp.data.list;
@@ -186,9 +185,8 @@ export default {
       const axios = require("axios").default;
       axios
         .get(
-          `${this.$axios.defaults.baseURL}` + "von/list",
-
-          { headers }
+          `${this.$axios.defaults.baseURL}` + "von/listByBranchId",
+          { headers,params: {branch: this.userdetails.branch.branch_id} }
         )
         .then((resp) => {
           this.list = resp.data.list;
