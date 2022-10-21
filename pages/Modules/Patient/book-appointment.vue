@@ -137,13 +137,14 @@
                     <div class="mb-3">
                       <label class="form-label">Assigned Team</label>
                       <select
-                        v-model="assign_team"
+                        disabled
+                        v-model="appointment_type"
                         class="form-select"
                         aria-label="Default select example"
                       >
                       <option value="0">Please Select</option>
                         <option
-                          v-for="team in teamlist"
+                          v-for="team in servicelist"
                           v-bind:key="team.id"
                           v-bind:value="team.id"
                         >
@@ -235,20 +236,6 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/getServiceByBranchId", {
-        headers, params: {branch: this.branch}
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.teamlist = response.data.list;
-      } else {
-        this.teamlist = [];
-      }
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
       const response2 = await this.$axios.get(
         "patient-appointment-visit/list",
         { headers }
@@ -267,6 +254,16 @@ export default {
         this.categorylist = response3.data.list;
       } else {
         this.categorylist = [];
+      }
+      const response1 = await this.$axios.get("hospital/assigned-team", {
+        headers, params: {branch: this.branch}
+      });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+        this.teamlist = response.data.list;
+      } else {
+        this.servicelist = [];
+        this.teamlist = [];
       }
     },
     async OnBookAppointment() {
@@ -293,9 +290,6 @@ export default {
         if (!this.patient_category) {
           this.errorList.push("Category of Patient is required");
         }
-        if (!this.assign_team) {
-          this.errorList.push("Assigned Team is required");
-        }
         if (
           this.nric_or_passportno &&
           this.booking_date &&
@@ -303,8 +297,7 @@ export default {
           this.duration &&
           this.appointment_type &&
           this.type_visit &&
-          this.patient_category &&
-          this.assign_team
+          this.patient_category
         ) {
           this.loader = true;
           const headers = {
@@ -326,7 +319,7 @@ export default {
                 appointment_type: this.appointment_type,
                 type_visit: this.type_visit,
                 patient_category: this.patient_category,
-                assign_team: this.assign_team,
+                assign_team: this.appointment_type,
               },
               { headers }
             );
@@ -353,7 +346,7 @@ export default {
                 appointment_type: this.appointment_type,
                 type_visit: this.type_visit,
                 patient_category: this.patient_category,
-                assign_team: this.assign_team,
+                assign_team: this.appointment_type,
               },
               { headers }
             );
