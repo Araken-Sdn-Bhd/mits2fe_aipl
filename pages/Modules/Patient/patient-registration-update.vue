@@ -2138,6 +2138,7 @@ export default {
       );
       console.log("my pt details", response.data);
       if (response.data.code == 200) {
+        //alert(JSON.stringify(response.data.list[0].typeic[0].code));
         this.accomodation_id = response.data.list[0].accomodation_id;
         this.address1 = response.data.list[0].address1;
         this.address2 = response.data.list[0].address2;
@@ -2145,8 +2146,8 @@ export default {
         this.age = response.data.list[0].age;
         this.birth_date = response.data.list[0].birth_date;
         this.citizenship = response.data.list[0].citizenship;
-        // this.citizentype =
-        this.city_id = response.data.list[0].city_id;
+       
+        this.city_id = response.data.list[0].city[0].city_name
         this.country_id = response.data.list[0].country_id;
         this.drug_allergy = response.data.list[0].drug_allergy;
         this.drug_allergy_description = response.data.list[0].drug_allergy_description;
@@ -2159,13 +2160,14 @@ export default {
         this.kin_address1 = response.data.list[0].kin_address1;
         this.kin_address2 = response.data.list[0].kin_address2;
         this.kin_address3 = response.data.list[0].kin_address3;
-        this.kin_city_id = response.data.list[0].kin_city_id;
+        this.kin_city_id = response.data.list[0].kincity[0].city_name;
         this.kin_house_no = response.data.list[0].kin_house_no;
         this.kin_mobile_no = response.data.list[0].kin_mobile_no;
         this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;
         this.kin_postcode = response.data.list[0].kin_postcode;
         this.kin_relationship_id = response.data.list[0].kin_relationship_id;
         this.kin_state_id = response.data.list[0].kin_state_id;
+        this.kin_nric_no = response.data.list[0].kin_nric_no;
         this.marital_id = response.data.list[0].marital_id;
         this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
         this.mobile_no = response.data.list[0].mobile_no;
@@ -2173,7 +2175,9 @@ export default {
         var str = response.data.list[0].nric_no;
         this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
         console.log('nric',this.nric_no);
+
         this.nric_type = response.data.list[0].nric_type;
+        this.nric_type_code = response.data.list[0].typeic[0].code;
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
         this.other_allergy = response.data.list[0].other_allergy;
