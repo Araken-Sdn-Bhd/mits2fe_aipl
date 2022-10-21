@@ -339,7 +339,7 @@
                         </ul>
                        </p>
               <div class="d-flex">
-                <div class="ml-auto" v-if="SidebarAccess==1">
+                <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                   <button
                     @click="Ongeneratepdf"
                     class="btn btn-danger btn-text"
@@ -795,7 +795,7 @@ export default {
   font-size: 9px;
   font-weight: 600;
 }
-.hide {
+.hide1 {
   background: #fff;
   display: none;
 }

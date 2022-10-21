@@ -1002,7 +1002,7 @@
         </li>
       </ul>
         </p>
-    <div class="d-flex align-items-center" v-if="SidebarAccess==1">
+    <div class="d-flex align-items-center"  :class="SidebarAccess!=1?'hide1':''">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="gridCheck1" v-model="Gis_agree" />
         <label class="form-check-label" for="gridCheck1">
@@ -1874,7 +1874,7 @@ export default {
 };
 </script>
 <style scoped>
-.hide {
-  display: none;
+.hide1 {
+  display: none !important;
 }
 </style>

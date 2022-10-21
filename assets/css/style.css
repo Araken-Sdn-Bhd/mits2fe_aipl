@@ -3758,6 +3758,6 @@ li.divider {
 table.dataTable.nowrap th, table.dataTable.nowrap td {
     white-space: nowrap;
 }
-/*.hide {
-    display: none !important;
-  }*/
+.hide {
+    display: none;
+  }

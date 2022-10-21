@@ -351,7 +351,7 @@
                         </ul>
                        </p>
                 <!-- row -->
-                <div class="d-flex" v-if="SidebarAccess==1">
+                <div class="d-flex"  :class="SidebarAccess!=1?'hide':''">
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -546,6 +546,6 @@ export default {
 </script>
 <style scoped>
 .hide {
-  display: none;
+  display: none !important;
 }
 </style>

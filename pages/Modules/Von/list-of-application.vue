@@ -66,12 +66,12 @@
                     <td>{{ app.phone_number }}</td>
                     <td>{{ app.email }}</td>
                     <td>{{ app.screening }}</td>
-                    <td>
-                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit" v-if="SidebarAccess==1">
+                    <td class="td"  :class="SidebarAccess!=1?'hide':''">
+                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit">
                         <i class="far fa-edit"></i>
                       </a>
 
-                      <a style="pointer:cursor;" @click="OnView(app)" class="view" v-if="SidebarAccess==1">
+                      <a style="pointer:cursor;" @click="OnView(app)" class="view">
                         <i class="far fa-eye"></i>
                       </a>
 
@@ -84,14 +84,14 @@
               </table>
 
               <div class="d-flex">
-                <div class="ml-auto">
+                <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                   <a
-                    v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
+                    v-on:click="OnApproverejectRequest(2)"
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
-                    v-on:click="OnApproverejectRequest(1)" v-if="SidebarAccess==1"
+                    v-on:click="OnApproverejectRequest(1)"
                     class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >

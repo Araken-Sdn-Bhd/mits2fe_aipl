@@ -91,9 +91,9 @@
                     <td>{{ app.dr_name }}</td>
                     <td>{{ app.aoi }}</td>
                     <td>{{ app.service }}</td>
-                    <td>
+                    <td class="td"  :class="SidebarAccess!=1?'hide1':''">
                       <a
-                        style="cursor: pointer" v-if="SidebarAccess==1"
+                        style="cursor: pointer"
                         @click="Onedit(app)"
                         class="edit"
                       >
@@ -105,14 +105,14 @@
               </table>
 
               <div class="d-flex">
-                <div class="ml-auto">
+                <div class="ml-auto"  :class="SidebarAccess!=1?'hide1':''">
                   <a
-                    v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
+                    v-on:click="OnApproverejectRequest(2)" 
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
-                    v-on:click="OnApproverejectRequest(1)" v-if="SidebarAccess==1"
+                    v-on:click="OnApproverejectRequest(1)"
                     class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
@@ -322,7 +322,7 @@ export default {
 </script>
 
 <style scoped>
-.hide {
+.hide1 {
   display: none;
 }
 </style>

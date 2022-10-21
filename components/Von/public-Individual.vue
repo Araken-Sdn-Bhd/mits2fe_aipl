@@ -64,7 +64,7 @@
           <label class="form-label">State<span>*</span></label>
           <select
             class="form-select"
-            @change="onCitybind($event)"
+            @change="getCityList($event)"
             v-model="state_id"
           >
             <option value="0">Please Select</option>
@@ -79,12 +79,12 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label">City<span>*</span></label>
-          <select class="form-select" v-model="city_id">
+          <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
             <option value="0">Please Select</option>
             <option
               v-for="ctl in CityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.city_name"
+              v-bind:value="ctl.city_name"
             >
               {{ ctl.city_name }}
             </option>
@@ -96,8 +96,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="pst in PostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -666,7 +666,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="Onrelevatedmentari('Consultation/Counselling')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -677,7 +677,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Work-based Rehabilitation" 
+                value="Work-based Rehabilitation"
                 id="Rehabilitation2" @change="Onrelevatedmentari('Work-based Rehabilitation')"
               />
               <label class="form-check-label" for="Rehabilitation2">
@@ -688,7 +688,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Awareness Or Psychoeducation" 
+                value="Awareness Or Psychoeducation"
                 id="Psychoeducation2" @change="Onrelevatedmentari('Awareness Or Psychoeducation')"
               />
               <label class="form-check-label" for="Psychoeducation2">
@@ -699,7 +699,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Recreational Therapy" 
+                value="Recreational Therapy"
                 id="Therapy2" @change="Onrelevatedmentari('Recreational Therapy')"
               />
               <label class="form-check-label" for="Therapy2">
@@ -710,7 +710,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                value="Others" 
+                value="Others"
                 id="Others2" @change="Onrelevatedmentari('Others')"
               />
               <label class="form-check-label" for="Others2">
@@ -988,7 +988,7 @@ export default {
     };
   },
   beforeMount() {
-   
+
     $(document).ready(function () {
       $(".data-table").DataTable({
         searching: false,
@@ -1070,23 +1070,40 @@ export default {
     selectFile(event) {
       this.file = event.target.files[0];
     },
-    async onCitybind(event) {
+    async getCityList(event) {
       const headers = {
         // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "address/" + event.target.value + "/stateWisePostcodeList",
+        "address/" + event.target.value + "/getCityList",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.CityList = response.data.list;
-        this.PostCodeList = response.data.list;
+        this.PostCodeList = [];
       } else {
         this.CityList = [];
         this.PostCodeList = [];
       }
+
+    },
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.PostCodeList = response.data.list;
+      } else {
+        this.PostCodeList = [];
+      }
+
     },
     async GetList() {
       const headers = {
@@ -1291,7 +1308,7 @@ export default {
           body.append("phone_number", this.phone_number);
           body.append("address", this.address);
           body.append("postcode_id", this.postcode_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode_id);
           body.append("state_id", this.state_id);
           body.append("education_id", this.education_id);
           body.append("occupation_sector_id", this.occupation_sector_id);
@@ -1316,7 +1333,7 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");+
-             
+
             // });
             this.Reaload();
           } else {
@@ -1680,8 +1697,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.hide {
-  display: none;
-}
-</style>

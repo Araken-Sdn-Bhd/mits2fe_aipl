@@ -166,7 +166,7 @@
                   <!-- row -->
 
                   <div class="d-flex">
-                    <div class="ml-auto">
+                    <div class="ml-auto"  :class="SidebarAccess!=1?'hide1':''">
                       <a
                       v-on:click="OnApproverejectRequest(2)"
                         class="btn btn-danger btn-text"
@@ -419,7 +419,7 @@ export default {
 </script>
 
 <style scoped>
-.hide {
+.hide1 {
   display: none;
 }
 </style>

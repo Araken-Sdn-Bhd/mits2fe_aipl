@@ -76,7 +76,7 @@
                   <!-- row -->
 
                   <div class="d-flex">
-                    <div class="ml-auto" v-if="SidebarAccess==1">
+                    <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                         ><i class="far fa-file-pdf"></i> Generate PDF</a
                       >
@@ -122,7 +122,7 @@
   }
 }
 
-.hide {
+.hide1 {
   background: #fff;
   display: none;
 }
@@ -316,7 +316,7 @@ export default {
                 maxMonth = year;
               }
               tmp2.forEach((month, i) => {
-                debugger;
+                // debugger;
                 // if (response.data.result[user][year][month]["month_name"]) {
                 if (i == 0) {
                   tblrow +=
@@ -361,14 +361,14 @@ export default {
             tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000;    border-bottom: 1px solid #000;float: left;width: 200px;'>${
               months[parseInt(month) - 1]
             }</td>`;
-            tab1.innerHTML += `<td style='-webkit-writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Newly Job Place(a)</td>
-                              <td style='-webkit-writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>ongoing Job Placement(b)</td>
-                              <td style='-webkit-writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Caseload(c)</td>
-                              <td style='-webkit-writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Dismissed(d)</td>
-                              <td style='-webkit-writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;' class='fifth-td'>KPI(%)</td>`;
+            tab1.innerHTML += `<td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Newly Job Place(a)</td>
+                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>ongoing Job Placement(b)</td>
+                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Caseload(c)</td>
+                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Dismissed(d)</td>
+                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;' class='fifth-td'>KPI(%)</td>`;
           });
 
-          if (response.data.code == 2001) {
+          if (response.data.code == 200) {
             setTimeout(() => {
               this.$refs.result.classList.remove("hide");
               var pdf = new jsPDF();

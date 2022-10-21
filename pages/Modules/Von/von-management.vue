@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.hide {
-  display: none;
+.hide1 {
+  display: none !important;
 }
 </style>

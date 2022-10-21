@@ -9,10 +9,8 @@
           <div class="page-title dashboard-title">
             <h1>Admin and Specialist in Charge Dashboard</h1>
             <div class="input-group dashboard-search">
-              <span class="input-group-text" id="basic-addon1"
-                ><i class="far fa-search"></i
-              ></span>
-              <input type="text" class="form-control" placeholder="Search" />
+              <span class="input-group-text" id="basic-addon1"><i type="button" v-on:click="SearchPatient" class="far fa-search"></i></span>
+                <input type="text" class="form-control" v-model="search"  placeholder="Search By Name/NRIC/Passport/MRN"/>
             </div>
           </div>
 
@@ -111,6 +109,7 @@ export default {
             team_task: "0",
             AnnouncmentToShow:3,
             totalAnouncement:0,
+            search:'',
             
             list: [],
         };
@@ -187,9 +186,12 @@ export default {
             return moment(date).format("DD-MM-YYYY")
         },
 
-        seeAll: function(){
-          alert('I am clicked');
+        SearchPatient() {
+            
+            localStorage.setItem('keyword',(this.search));
+            this.$router.push("/Modules/Patient/patient-list" );
         },
+
     }
 
 };

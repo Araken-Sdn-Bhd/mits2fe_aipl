@@ -1712,7 +1712,7 @@ export default {
       }
     },
     async getPostcodeList(event) {
-     
+
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -1727,7 +1727,7 @@ export default {
       } else {
         this.postcodelist = [];
       }
-    
+
     },
     async onSelectedStateKin(event){
       const headers = {
@@ -1748,7 +1748,7 @@ export default {
       }
     },
     async getkinPostcodeList(event) {
-     
+
      const headers = {
        Authorization: "Bearer " + this.userdetails.access_token,
        Accept: "application/json",
@@ -1763,7 +1763,7 @@ export default {
      } else {
        this.kinpostcodelist = [];
      }
-   
+
    },
     async GetTab2List() {
       const headers = {
