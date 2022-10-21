@@ -137,13 +137,14 @@
                     <div class="mb-3">
                       <label class="form-label">Assigned Team</label>
                       <select
-                        v-model="assign_team"
+                        disabled
+                        v-model="appointment_type"
                         class="form-select"
                         aria-label="Default select example"
                       >
                       <option value="0">Please Select</option>
                         <option
-                          v-for="team in teamlist"
+                          v-for="team in servicelist"
                           v-bind:key="team.id"
                           v-bind:value="team.id"
                         >
@@ -202,7 +203,7 @@ export default {
       type_visit: 0,
       patient_category: 0,
       assign_team: 0,
-      loader: false,
+      loader: true,
       errorList: [],
       Id: 0,
       PatientId:0,
@@ -224,8 +225,9 @@ export default {
       this.GetAppointmentdetails();
     }
     if(this.PatientId > 0){
-this.GetPatientdetails();
+      this.GetPatientdetails();
     }
+    this.loader = false;
   },
   methods: {
     async GetList() {
@@ -234,20 +236,6 @@ this.GetPatientdetails();
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/assigned-team", {
-        headers, params: {branch: this.branch}
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.teamlist = response.data.list;
-      } else {
-        this.teamlist = [];
-      }
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
       const response2 = await this.$axios.get(
         "patient-appointment-visit/list",
         { headers }
@@ -266,6 +254,16 @@ this.GetPatientdetails();
         this.categorylist = response3.data.list;
       } else {
         this.categorylist = [];
+      }
+      const response1 = await this.$axios.get("hospital/assigned-team", {
+        headers, params: {branch: this.branch}
+      });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+        this.teamlist = response.data.list;
+      } else {
+        this.servicelist = [];
+        this.teamlist = [];
       }
     },
     async OnBookAppointment() {
@@ -292,9 +290,6 @@ this.GetPatientdetails();
         if (!this.patient_category) {
           this.errorList.push("Category of Patient is required");
         }
-        if (!this.assign_team) {
-          this.errorList.push("Assigned Team is required");
-        }
         if (
           this.nric_or_passportno &&
           this.booking_date &&
@@ -302,8 +297,7 @@ this.GetPatientdetails();
           this.duration &&
           this.appointment_type &&
           this.type_visit &&
-          this.patient_category &&
-          this.assign_team
+          this.patient_category
         ) {
           this.loader = true;
           const headers = {
@@ -325,7 +319,7 @@ this.GetPatientdetails();
                 appointment_type: this.appointment_type,
                 type_visit: this.type_visit,
                 patient_category: this.patient_category,
-                assign_team: this.assign_team,
+                assign_team: this.appointment_type,
               },
               { headers }
             );
@@ -352,7 +346,7 @@ this.GetPatientdetails();
                 appointment_type: this.appointment_type,
                 type_visit: this.type_visit,
                 patient_category: this.patient_category,
-                assign_team: this.assign_team,
+                assign_team: this.appointment_type,
               },
               { headers }
             );
@@ -412,7 +406,11 @@ this.GetPatientdetails();
         { headers }
       );
       if (response.data.code == 200) {
-        this.nric_or_passportno = response.data.list[0].nric_no;
+        if (response.data.list[0].citizenships[0].section_value == "Foreigner"){
+          this.nric_or_passportno = response.data.list[0].passport_no;
+        } else {
+          this.nric_or_passportno = response.data.list[0].nric_no;
+        }
       } else {
         window.alert("Something went wrong");
       }
