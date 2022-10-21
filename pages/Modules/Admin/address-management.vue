@@ -129,7 +129,7 @@
       </ul>
         </p>
       <!-- close-row -->
-       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+       <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mycountryId">
         <i class="far fa-save"></i> Save
         </button>
@@ -160,11 +160,11 @@
           <td>{{country.country_name}}</td>
           <td>{{country.country_code}}</td>
           <td>{{country.country_order}}</td>
-          <td>
-                          <a  class="edit" @click="editcountry(country)" v-if="SidebarAccess==1"
+          <td class="td" :class="SidebarAccess!=1?'hide':''">
+                          <a  class="edit" @click="editcountry(country)"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletecountry(country)" v-if="SidebarAccess==1"
+                          <a class="action-icon icon-danger" @click="deletecountry(country)"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -217,7 +217,7 @@
       </ul>
         </p>
       <!-- close-row -->
-       <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+       <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mystateId">
         <i class="far fa-save"></i> Save
         </button>
@@ -248,11 +248,11 @@
           <td>{{state.country_name}}</td>
           <td>{{state.state_name}}</td>
           <td>{{state.state_order}}</td>
-            <td>
-                          <a  class="action-icon icon-success" @click="editstate(state)" v-if="SidebarAccess==1"
+            <td class="td" :class="SidebarAccess!=1?'hide':''">
+                          <a  class="action-icon icon-success" @click="editstate(state)"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletestate(state)" v-if="SidebarAccess==1"
+                          <a class="action-icon icon-danger" @click="deletestate(state)"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>
@@ -332,7 +332,7 @@
       </ul>
         </p>
       <!-- close-row -->
-        <div class="d-flex justify-content-center" v-if="SidebarAccess==1">
+        <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="cityId">
         <i class="far fa-save"></i> Save
         </button>
@@ -367,11 +367,11 @@
           <td>{{cty.city_name}}</td>
           <td>{{cty.postcode}}</td>
           <td>{{cty.postcode_order}}</td>
-            <td>
-                          <a  class="action-icon icon-success" @click="editcity(cty)" v-if="SidebarAccess==1"
+            <td class="td" :class="SidebarAccess!=1?'hide':''">
+                          <a  class="action-icon icon-success" @click="editcity(cty)"
                             ><i class="far fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletecity(cty)" v-if="SidebarAccess==1"
+                          <a class="action-icon icon-danger" @click="deletecity(cty)"
                             ><i class="far fa-trash-alt"></i
                           ></a>
                         </td>

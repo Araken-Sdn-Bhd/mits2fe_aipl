@@ -10,7 +10,7 @@
             <h1>CPS POLICE REFERRAL FORM</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
-          <div class="card mb-4 hide reslt">
+          <div class="card mb-4 reslt">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
               <h2 v-if="consentdetails">{{consentdetails.hospital_name}}</h2>
@@ -370,3 +370,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.hide {
+  display: none !important;
+}
+</style>

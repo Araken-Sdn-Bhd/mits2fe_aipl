@@ -162,7 +162,7 @@
                         </ul>
                        </p>
                 <div class="d-flex">
-                  <div class="ml-auto" v-if="SidebarAccess==1">
+                  <div class="ml-auto" :class="SidebarAccess!=1?'hide':''">
                     <a
                       @click="OnCancelAppointment"
                       class="btn btn-danger btn-text"
