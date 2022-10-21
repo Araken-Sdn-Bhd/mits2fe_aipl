@@ -346,6 +346,10 @@ export default {
             this.hasreportmodule = hasreport.module_id;
           }
         });
+      } if (response2.data.code == 400) {
+        console.log ("Not Valid User");
+      } else {
+        window.alert("Something went wrong");
       }
     },
   },
