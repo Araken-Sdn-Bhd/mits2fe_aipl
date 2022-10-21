@@ -1173,14 +1173,17 @@ export default {
       this.errors = [];
       if (this.is_agree) {
         if (this.area_of_involvement == "Volunteerism") {
+          this.loader = true;
           this.OnIndividualVolunteerism();
         } else if (
           this.area_of_involvement == "Outreach Project Collaboration"
         ) {
+          this.loader = true;
           this.OnIndividualOutreachProjectCollaboration();
         } else if (
           this.area_of_involvement == "Networking Make a Contribution"
         ) {
+          this.loader = true;
           this.OnIndividualNetworkingMakeaContribution();
         } else {
           this.errors.push("Please select Areas of Involvement");
@@ -1331,15 +1334,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");+
-
-            // });
-            this.Reaload();
+            this.loader = false;
+            window.alert("Your form is submitted");
+            this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1510,14 +1510,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-            this.Reaload();
+            this.loader = false;
+            window.alert("Your form is submitted");
+            this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1657,14 +1655,12 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-            this.Reaload();
+            this.loader = false;
+            window.alert("Your form is submitted");
+            this.Reload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+            window.alert("Something went wrong");
           }
         }
       } catch (e) {
@@ -1673,10 +1669,9 @@ export default {
         });
       }
     },
-    Reaload() {
-      this.$router.push("/Modules/Von/list-of-application");
+    Reload() {
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = 'https://mentari.moh.gov.my/';
       }, 100);
     },
      async GetUserIpAddress() {
