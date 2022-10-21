@@ -1213,7 +1213,7 @@
         </li>
       </ul>
         </p>
-                      <div class="d-flex align-items-center">
+                      <!--<div class="d-flex align-items-center">
                         <a
                           @click="PreviousThird"
                           class="btn btn-primary btn-text"
@@ -1231,6 +1231,20 @@
                           ><i class="far fa-paper-plane"></i> Update</a
                         >
                         </div>
+                      </div>-->
+                      <div class="d-flex align-items-center">
+                        <a
+                          @click="PreviousThird"
+                          class="btn btn-primary btn-text"
+                          ><i class="fad fa-arrow-to-left"></i> Previous</a
+                        >
+
+                        <a v-if="!Id && SidebarAccess==1"
+                          @click="submitRegistration"
+                          class="btn btn-success btn-text ml-auto"
+                          ><i class="far fa-paper-plane"></i> Submit</a
+                        >
+                       
                       </div>
                     </form>
                   </div>
@@ -1359,6 +1373,9 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if(this.userdetails){
+      this.branch=this.userdetails.branch.branch_id;
+    }
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     console.log(this.SidebarAccess,'Sidebaraccess');
     this.GetList();
@@ -1610,12 +1627,16 @@ export default {
         this.genderlist = [];
       }
 
-      const response3 = await this.$axios.get("service/list", { headers });
+      //const response3 = await this.$axios.get("service/list", { headers });
+      const response3 = await this.$axios.get("hospital/assigned-team", {
+        headers, params: {branch: this.branch}
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.servicelist = response3.data.list;
       } else {
         this.servicelist = [];
       }
+
       const response4 = await this.$axios.get(
         "general-setting/list?section=" + "type-of-referral",
         {

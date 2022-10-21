@@ -587,7 +587,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherRace || this.race_id == 79">
+                        <div class="col-sm-6" v-if="otherRace">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -619,7 +619,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherReligion || this.religion_id == 90">
+                        <div class="col-sm-6" v-if="otherReligion">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -654,7 +654,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherMarital || this.marital_id == 112">
+                        <div class="col-sm-6" v-if="otherMarital">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -685,7 +685,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherAccommodation || this.accomodation_id == 118">
+                        <div class="col-sm-6" v-if="otherAccommodation">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -722,7 +722,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherFeeExemStatus || this.fee_exemption_status == 106">
+                        <div class="col-sm-6" v-if="otherFeeExemStatus">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -754,7 +754,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-sm-6" v-if="otherOccStatus || this.occupation_status == 239">
+                        <div class="col-sm-6" v-if="otherOccStatus">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -1075,7 +1075,7 @@
                         </div>
 
                         <!-- div-hide -->
-                        <div class="col-sm-5 da-yes visibility-h">
+                        <div class="col-sm-5" v-if="this.drug_allergy == '0'">
                           <input
                             type="email"
                             class="form-control"
@@ -1122,7 +1122,7 @@
                         </div>
 
                         <!-- div-hide -->
-                        <div class="col-sm-5 tm-sa-yes visibility-h">
+                        <div class="col-sm-5" v-if="this.traditional_medication=='0'">
                           <input
                             type="email"
                             class="form-control"
@@ -1165,7 +1165,7 @@
                         </div>
 
                         <!-- div-hide -->
-                        <div class="col-sm-5 oa-yes visibility-h">
+                        <div class="col-sm-5" v-if="this.other_allergy=='0'">
                           <input
                             type="email"
                             class="form-control"
@@ -1221,11 +1221,11 @@
                           ><i class="fad fa-arrow-to-left"></i> Previous</a
                         >
 
-                        <a v-if="!Id && SidebarAccess==1"
+                        <!--<a v-if="!Id && SidebarAccess==1"
                           @click="submitRegistration"
                           class="btn btn-success btn-text ml-auto"
                           ><i class="far fa-paper-plane"></i> Submit</a
-                        >
+                        >-->
                         <a v-if="Id && SidebarAccess==1"
                           @click="updateRegistration"
                           class="btn btn-success btn-text ml-auto"
@@ -1357,6 +1357,9 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    if(this.userdetails){
+      this.branch=this.userdetails.branch.branch_id;
+    }
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
@@ -1391,7 +1394,7 @@ export default {
         }
       });
     });
-    this.GetStaffBranchId();
+    //this.GetStaffBranchId();
   },
   methods: {
     NumbersOnly(evt) {
@@ -1405,8 +1408,12 @@ export default {
     },
     async resetModelValue()
     {
+      if (this.nric_no != ""){
+      this.error = null;
+      }else{
       this.nric_no = "";
       this.error = null;
+      }
 
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1517,27 +1524,13 @@ export default {
       this.$refs.navdiv3.classList.add("show");
     },
     NextThird() {
-      // this.errorList = [];
-      // if (!this.kin_name_asin_nric) {
-      //   this.errorList.push("Name (As In NRIC) No is required.");
-      // }
-      // if (!this.kin_relationship_id) {
-      //   this.errorList.push("Relationship is required.");
-      // }
-      // if (!this.kin_mobile_no) {
-      //   this.errorList.push("Mobile Phone No is required.");
-      // }
-      // if (
-      //   this.kin_name_asin_nric &&
-      //   this.kin_mobile_no &&
-      //   this.kin_relationship_id
-      // ) {
+     
       this.$refs.tab4.classList.add("active");
       this.$refs.navdiv3.classList.remove("active");
       this.$refs.navdiv3.classList.remove("show");
       this.$refs.navdiv4.classList.add("active");
       this.$refs.navdiv4.classList.add("show");
-      // }
+      
     },
     PreviousFirst() {
       this.$refs.tab1.classList.add("active");
@@ -1598,7 +1591,10 @@ export default {
         this.genderlist = [];
       }
 
-      const response3 = await this.$axios.get("service/list", { headers });
+      //const response3 = await this.$axios.get("service/list", { headers });
+      const response3 = await this.$axios.get("hospital/assigned-team", {
+        headers, params: {branch: this.branch}
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.servicelist = response3.data.list;
       } else {
@@ -1641,32 +1637,7 @@ export default {
         this.nrictypelist = [];
       }
     },
-    async GetStaffBranchId() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "staffDesignatioDetail/staffInchargeDetail",
-        {
-          added_by: this.userdetails.user.id, //this.userdetails.user.id
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        if(response.data.branch[0].branch_id){
-          this.branch_id = response.data.branch[0].branch_id;
-        }else{
-          this.branch_id =response.data.branch;
-          console.log('my branchid333',this.branch_id);
-        }
-
-      } else {
-        window.alert("Something went wrong");
-      }
-    },
-    async onSelectedState(event){
+   async onSelectedState(event){
       const headers = {
         // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -1684,6 +1655,44 @@ export default {
         this.postcodelist = [];
       }
     },
+
+    async getCity(){
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.state_id + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        
+        this.citylist = response.data.list;
+        this.postcodelist = [];
+      } else {
+        this.citylist = [];
+        this.postcodelist = [];
+      }
+    },
+
+    async getPostcode() {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.city_id + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+
+    },
+    
     async getPostcodeList(event) {
       const headers = {
         Accept: "application/json",
@@ -1731,6 +1740,58 @@ export default {
         this.kinpostcodelist = response.data.list;
       } else {
         this.kinpostcodelist = [];
+      }
+
+    },
+     async getkinCity(){
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.kin_state_id + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        
+        this.kincitylist = response.data.list;
+        this.kinpostcodelist = [];
+      } else {
+        this.kincitylist = [];
+        this.kinpostcodelist = [];
+      }
+    },
+    async getkinPostcode() {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.kin_city_id + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.kinpostcodelist = response.data.list;
+      } else {
+        this.kinpostcodelist = [];
+      }
+
+    },
+    
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
       }
 
     },
@@ -1885,11 +1946,8 @@ export default {
         this.uploaddoc = false;
       }
     },
-    async submitRegistration() {
+   async updateRegistration() {
       this.errorList = [];
-      if (!this.patient_need_triage_screening) {
-        this.errorList.push("Patient Need Triage Screening is required.");
-      } else {
         try {
           this.loader = true;
           const headers = {
@@ -1917,7 +1975,7 @@ export default {
           body.append("address2", this.address2);
           body.append("address3", this.address3);
           body.append("state_id", this.state_id);
-          body.append("city_id", this.city_id);
+          body.append("city_id", this.postcode);
           body.append("postcode", this.postcode);
           body.append("race_id", this.race_id);
           body.append("religion_id", this.religion_id);
@@ -1936,7 +1994,7 @@ export default {
           body.append("kin_address2", this.kin_address2);
           body.append("kin_address3", this.kin_address3);
           body.append("kin_state_id", this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id);
+          body.append("kin_city_id", this.kin_postcode);
           body.append("kin_postcode", this.kin_postcode);
           body.append("drug_allergy", this.drug_allergy);
           body.append("drug_allergy_description",this.drug_allergy_description);
@@ -1946,12 +2004,12 @@ export default {
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
           body.append("nric_no", this.nric_no);
+          body.append("nric_no1", this.nric_no1);
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
-          body.append("branch_id", this.branch_id);
           body.append("patient_need_triage_screening",this.patient_need_triage_screening);
           body.append("other_race", this.other_race);
           body.append("other_religion", this.other_religion);
@@ -1960,128 +2018,9 @@ export default {
           body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
 
+          this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+          body.append("branch_id", this.userdetails.branch.branch_id);
 
-          if (this.Id > 0) {
-            const response = await this.$axios.post(
-              "patient-registration/update",
-              body,
-              {
-                headers,
-              }
-            );
-            if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
-            } else {
-              this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
-            }
-          } else {
-            const response = await this.$axios.post(
-              "patient-registration/add",
-              body,
-              {
-                headers,
-              }
-            );
-            console.log("my data resuklt", response.data);
-            if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
-              this.$router.push("/Modules/Intervention/patient-list");
-            } else {
-              this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
-            }
-          }
-        } catch (e) {
-          this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      }
-    },
-     async updateRegistration() {
-      this.errorList = [];
-        try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          let body = new FormData();
-          body.append("added_by", this.userdetails.user.id);
-          body.append("citizenship", this.citizenship);
-          body.append("citizentype", this.citizentype);
-          body.append("salutation_id", this.salutation_id);
-          body.append("name_asin_nric", this.name_asin_nric);
-          body.append("sex", this.sex);
-          body.append("birth_date", this.birth_date);
-          body.append("age", this.age);
-          body.append("mobile_no", this.mobile_no);
-          body.append("house_no", this.house_no);
-          body.append("hospital_mrn_no", this.hospital_mrn_no);
-          body.append("mintari_mrn_no", this.mintari_mrn_no);
-          body.append("services_type", this.services_type.id);
-          body.append("referral_type", this.referral_type);
-          body.append("referral_letter", this.referral_letter);
-          body.append("address1", this.address1);
-          body.append("address2", this.address2);
-          body.append("address3", this.address3);
-          body.append("state_id", this.state_id);
-          body.append("city_id", this.city_id);
-          body.append("postcode", this.postcode);
-          body.append("race_id", this.race_id);
-          body.append("religion_id", this.religion_id);
-          body.append("marital_id", this.marital_id);
-          body.append("accomodation_id", this.accomodation_id);
-          body.append("education_level", this.education_level);
-          body.append("occupation_status", this.occupation_status);
-          body.append("fee_exemption_status", this.fee_exemption_status);
-          body.append("occupation_sector", this.occupation_sector);
-          body.append("kin_name_asin_nric", this.kin_name_asin_nric);
-          body.append("kin_relationship_id", this.kin_relationship_id);
-          body.append("kin_nric_no", this.kin_nric_no);
-          body.append("kin_mobile_no", this.kin_mobile_no);
-          body.append("kin_house_no", this.kin_house_no);
-          body.append("kin_address1", this.kin_address1);
-          body.append("kin_address2", this.kin_address2);
-          body.append("kin_address3", this.kin_address3);
-          body.append("kin_state_id", this.kin_state_id);
-          body.append("kin_city_id", this.kin_city_id);
-          body.append("kin_postcode", this.kin_postcode);
-          body.append("drug_allergy", this.drug_allergy);
-          body.append(
-            "drug_allergy_description",
-            this.drug_allergy_description
-          );
-          body.append("traditional_medication", this.traditional_medication);
-          body.append("traditional_description", this.traditional_description);
-          body.append("other_allergy", this.other_allergy);
-          body.append("other_description", this.other_description);
-          body.append("nric_type", this.nric_type);
-          body.append("nric_no", this.nric_no);
-          body.append("referral_letter", this.file);
-          body.append("passport_no", this.passport_no);
-          body.append("expiry_date", this.expiry_date);
-          body.append("country_id", this.country_id);
-          body.append("id", this.Id);
-          body.append(
-            "patient_need_triage_screening",
-            this.patient_need_triage_screening
-          );
-          body.append("other_race", this.other_race);
-          body.append("other_religion", this.other_religion);
-          body.append("other_accommodation", this.other_accommodation);
-          body.append("other_marital", this.other_maritalList);
-          body.append("other_feeExemStatus", this.other_feeExemptionStatus);
-          body.append("other_occupationStatus", this.other_occupationStatus);
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -2138,7 +2077,8 @@ export default {
       );
       console.log("my pt details", response.data);
       if (response.data.code == 200) {
-        //alert(JSON.stringify(response.data.list[0].typeic[0].code));
+        
+        //alert(JSON.stringify(response.data.list[0].accomondation[0].section_value));
         this.accomodation_id = response.data.list[0].accomodation_id;
         this.address1 = response.data.list[0].address1;
         this.address2 = response.data.list[0].address2;
@@ -2147,8 +2087,15 @@ export default {
         this.birth_date = response.data.list[0].birth_date;
         this.citizenship = response.data.list[0].citizenship;
        
-        this.city_id = response.data.list[0].city[0].city_name
+        this.state_id = response.data.list[0].state_id;
+        this.city_id = response.data.list[0].city[0].city_name;
+        if (this.city_id !=""){
+          this.getCity();
+          this.getPostcode();
+        }
+
         this.country_id = response.data.list[0].country_id;
+        
         this.drug_allergy = response.data.list[0].drug_allergy;
         this.drug_allergy_description = response.data.list[0].drug_allergy_description;
         this.education_level = response.data.list[0].education_level;
@@ -2160,24 +2107,31 @@ export default {
         this.kin_address1 = response.data.list[0].kin_address1;
         this.kin_address2 = response.data.list[0].kin_address2;
         this.kin_address3 = response.data.list[0].kin_address3;
+        this.kin_state_id = response.data.list[0].kin_state_id;
         this.kin_city_id = response.data.list[0].kincity[0].city_name;
+
+        if (this.kin_city_id !=""){
+          this.getkinCity();
+          this.getkinPostcode();
+        }
         this.kin_house_no = response.data.list[0].kin_house_no;
         this.kin_mobile_no = response.data.list[0].kin_mobile_no;
         this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;
         this.kin_postcode = response.data.list[0].kin_postcode;
         this.kin_relationship_id = response.data.list[0].kin_relationship_id;
-        this.kin_state_id = response.data.list[0].kin_state_id;
+        
         this.kin_nric_no = response.data.list[0].kin_nric_no;
         this.marital_id = response.data.list[0].marital_id;
         this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
         this.mobile_no = response.data.list[0].mobile_no;
         this.name_asin_nric = response.data.list[0].name_asin_nric;
+
         var str = response.data.list[0].nric_no;
         this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
         console.log('nric',this.nric_no);
-
         this.nric_type = response.data.list[0].nric_type;
         this.nric_type_code = response.data.list[0].typeic[0].code;
+
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
         this.other_allergy = response.data.list[0].other_allergy;
@@ -2191,9 +2145,17 @@ export default {
         this.religion_id = response.data.list[0].religion_id;
         this.salutation_id = response.data.list[0].salutation_id;
         this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
+        if (response.data.list[0].service['service_name'] ==
+          "Community Psychiatric Service (CPS)" ||
+          response.data.list[0].service['service_name'] ==
+          "Rehabilitation"
+      ) {
+        this.uploaddoc = true;
+      } else {
+        this.uploaddoc = false;
+      }
 
         this.sex = response.data.list[0].sex;
-        this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
         this.traditional_description = response.data.list[0].traditional_description;
         this.traditional_medication = response.data.list[0].traditional_medication;
@@ -2201,7 +2163,6 @@ export default {
 
         this.citizentype = response.data.list[0].citizenships[0].section_value;
 
-        this.race
 
         this.other_race = response.data.list[0].other_race;
         this.other_religion= response.data.list[0].other_religion;
@@ -2210,14 +2171,43 @@ export default {
         this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
         this.other_occupationStatus = response.data.list[0].other_occupationStatus;
 
-        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
-        headers,
-      });
-      if (response6.data.code == 200 || response6.data.code == "200") {
-        this.citylist = response6.data.list;
-      } else {
-        this.citylist = [];
-      }
+     
+        if (response.data.list[0].race[0].section_value == "OTHERS"){
+            this.otherRace = true;
+          }else{
+            this.otherRace = false;
+          }
+
+        if (response.data.list[0].religion[0].section_value == "OTHERS"){
+          this.otherReligion = true;
+        }else{
+          this.otherReligion = false;
+        }
+        if (response.data.list[0].maritialstatus[0].section_value == "OTHERS"){
+          this.otherMarital = true;
+        }else{
+          this.otherMarital = false;
+        }
+
+        if (response.data.list[0].accomondation[0].section_value == "OTHERS"){
+          this.otherAccommodation = true;
+        }else{
+          this.otherAccommodation = false;
+        }
+        
+        if (response.data.list[0].fee[0].section_value == "OTHERS"){
+          this.otherFeeExemStatus = true;
+        }else{
+          this.otherFeeExemStatus = false;
+        }
+      
+        if (response.data.list[0].occupation[0].section_value == "OTHERS"){
+          this.otherOccStatus = true;
+        }else{
+          this.otherOccStatus = false;
+        }
+      
+
       this.loader = false;
       } else {
         window.alert("Something went wrong");
