@@ -202,7 +202,7 @@ export default {
       type_visit: 0,
       patient_category: 0,
       assign_team: 0,
-      loader: false,
+      loader: true,
       errorList: [],
       Id: 0,
       PatientId:0,
@@ -224,8 +224,9 @@ export default {
       this.GetAppointmentdetails();
     }
     if(this.PatientId > 0){
-this.GetPatientdetails();
+      this.GetPatientdetails();
     }
+    this.loader = false;
   },
   methods: {
     async GetList() {
@@ -234,7 +235,7 @@ this.GetPatientdetails();
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/assigned-team", {
+      const response = await this.$axios.get("hospital/getServiceByBranchId", {
         headers, params: {branch: this.branch}
       });
       if (response.data.code == 200 || response.data.code == "200") {
@@ -412,7 +413,11 @@ this.GetPatientdetails();
         { headers }
       );
       if (response.data.code == 200) {
-        this.nric_or_passportno = response.data.list[0].nric_no;
+        if (response.data.list[0].citizenships[0].section_value == "Foreigner"){
+          this.nric_or_passportno = response.data.list[0].passport_no;
+        } else {
+          this.nric_or_passportno = response.data.list[0].nric_no;
+        }
       } else {
         window.alert("Something went wrong");
       }
