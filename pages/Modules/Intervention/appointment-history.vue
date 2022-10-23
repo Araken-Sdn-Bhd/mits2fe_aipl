@@ -27,6 +27,7 @@
                     <td>{{ index+1 }}</td>
                     <td>{{ app.booking_date }}</td>
                     <td>{{ app.booking_time }}</td>
+                    <!-- refer status in patient/appointment-history.vue -->
                     <td>
                       <span
                         v-if="app.appointment_status == 3"
@@ -34,12 +35,12 @@
                         >Completed</span
                       >
                       <span
-                        v-if="app.appointment_status == 1"
+                        v-if="app.appointment_status == 4"
                         class="badge bg-success"
                         >Ready</span
                       >
                       <span
-                        v-if="app.appointment_status == 0"
+                        v-if="app.appointment_status == 1"
                         class="badge bg-warning text-dark"
                         >Processing</span
                       >
@@ -113,6 +114,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
+        //alert(JSON.stringify(this.list));
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,

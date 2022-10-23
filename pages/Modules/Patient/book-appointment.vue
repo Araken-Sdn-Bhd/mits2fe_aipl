@@ -18,6 +18,7 @@
                     <div class="mb-3">
                       <label class="form-label">NRIC/Passport NO.</label>
                       <input
+                        disabled="true"
                         type="text"
                         class="form-control"
                         placeholder="Enter NRIC/Passport NO."
@@ -425,7 +426,7 @@ export default {
         "patient-appointment-details/updateappointmentstatus",
         {
           appointment_id: this.Id,
-          appointment_status: "10",
+          appointment_status: "2",// original used status 10. but in attendance record cancel used status 2.
         },
         { headers }
       );
