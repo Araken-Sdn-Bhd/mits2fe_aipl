@@ -204,7 +204,7 @@ export default {
       type_visit: 0,
       patient_category: 0,
       assign_team: 0,
-      loader: true,
+      loader: false,
       errorList: [],
       Id: 0,
       PatientId:0,
@@ -212,6 +212,7 @@ export default {
     };
   },
   beforeMount() {
+    this.loader = true;
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     if(this.userdetails){
       this.branch=this.userdetails.branch.branch_id;
