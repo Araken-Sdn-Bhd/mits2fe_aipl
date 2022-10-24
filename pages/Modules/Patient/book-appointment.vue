@@ -426,7 +426,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-appointment-details/updateappointmentstatus",
+        "patient-appointment-details/cancelappointmentstatus",
         {
           appointment_id: this.Id,
           appointment_status: "2",// original used status 10. but in attendance record cancel used status 2.

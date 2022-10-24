@@ -410,10 +410,10 @@ export default {
       console.log("my list", response.data);
       if (response.data.code == 200) {
         if (response.data.list.length > 0) {
-          this.list.splice(0, this.list.length);
-          if ($.fn.DataTable.isDataTable(".data-table")) {
-            $(".data-table").DataTable().clear().destroy();
-          }
+          //this.list.splice(0, this.list.length);
+          // if ($.fn.DataTable.isDataTable(".data-table")) {
+          //   $(".data-table").DataTable().clear().destroy();
+          // }
           this.list = response.data.list;
         } else {
           this.list = [];
