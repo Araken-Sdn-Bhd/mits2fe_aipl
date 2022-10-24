@@ -18,7 +18,7 @@
                     <div class="mb-3">
                       <label class="form-label">NRIC/Passport NO.</label>
                       <input
-                        disabled="true"
+                        :disabled="validated == 1"
                         type="text"
                         class="form-control"
                         placeholder="Enter NRIC/Passport NO."
@@ -197,6 +197,7 @@ export default {
       visitlist: [],
       categorylist: [],
       nric_or_passportno: "",
+      disabled: 0,
       booking_date: "",
       booking_time: "",
       duration: 0,
@@ -226,7 +227,8 @@ export default {
     if (this.Id > 0) {
       this.GetAppointmentdetails();
     }
-    if(this.PatientId > 0){
+    if (this.PatientId > 0) {
+      this.disabled = 1;
       this.GetPatientdetails();
     }
     this.loader = false;
