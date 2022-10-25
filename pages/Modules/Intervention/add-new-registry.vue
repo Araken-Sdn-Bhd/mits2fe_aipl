@@ -129,7 +129,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                           </select>
                         </div>
@@ -294,7 +294,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                           </select>
                         </div>
@@ -1748,7 +1748,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                         </select>
                       </div>
@@ -1762,11 +1762,11 @@
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist"
+              v-for="catcode in diagonisislist_external"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                         </select>
                       </div>
@@ -2052,6 +2052,7 @@ export default {
       placelist: [],
       list: [],
       diagonisislist: [],
+      diagonisislist_external: [],
       typesofsubstance: [],
       stresslist: [],
       overdoselist: [],
@@ -2463,8 +2464,10 @@ export default {
       });
       if (response7.data.code == 200 || response7.data.code == "200") {
         this.diagonisislist = response7.data.list;
+        this.diagonisislist_external = response7.data.list_external;
       } else {
         this.diagonisislist = [];
+        this.diagonisislist_external = [];
       }
       const response8 = await this.$axios.get(
         "general-setting/list?section=" + "type-of-substance",
