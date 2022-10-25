@@ -12,7 +12,7 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{consentdetails.hospital_name}}]</h2>
+              <h2> [{{this.hospitalName}}]</h2>
               <p>CONSENT FOR JOB CLUB PROGRAM</p>
             </div>
             <div class="card-body new-form">
@@ -34,7 +34,7 @@
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
-                          I hereby agree to participate in Job Club Program [{{consentdetails.hospital_branch_name}}]. I also agree to
+                          I hereby agree to participate in Job Club Program [{{this.branchName}}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -123,7 +123,7 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{consentdetails.hospital_name}}]</h2>
+              <h2> [{{this.hospitalName}}]</h2>
               <p>CONSENT FOR JOB CLUB PROGRAM</p>
             </div>
             <div class="card-body new-form">
@@ -145,7 +145,7 @@
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
-                          I hereby agree to participate in Job Club Program [{{consentdetails.hospital_branch_name}}]. I also agree to
+                          I hereby agree to participate in Job Club Program [{{this.branchName}}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -268,8 +268,8 @@ export default {
       Id: 0,
       errorList: [],
       consentdetails: null,
-      hospitalName: "HOSPITAL TUANKU FAUZIAH",
-      branchName: "Mentari Kangar",
+      hospitalName: "",
+      branchName: "",
       loader: false,
       participant: 0,
       pid:0
@@ -278,6 +278,8 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalName = this.userdetails.branch.hospital_name;
+    this.branchName = this.userdetails.branch.hospital_branch_name;
     this.Id = urlParams.get("id");
     if (this.Id) {
       this.GetPatientConnsentdetails();

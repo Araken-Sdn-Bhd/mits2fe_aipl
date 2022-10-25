@@ -13,7 +13,7 @@
           <div class="card mb-4" v-if="consentdetails">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{ consentdetails.hospital_name }}]</h2>
+              <h2> [{{ this.hospitalName }}]</h2>
               <p>
                 Hospital Borang Persetujuan Menyertai Program Sokongan Pekerjaan
               </p>
@@ -38,7 +38,7 @@
                           for="flexCheckDefault"
                         >
                           I hereby agree to participate in supported employment
-                          program,[{{ consentdetails.hospital_branch_name }}]. I also agree to
+                          program,[{{ this.branchName }}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -127,7 +127,7 @@
                 <tbody>
                   <tr>
                     <td colspan="2">
-                      I agree and consent for  [{{ consentdetails.hospital_branch_name }}] to
+                      I agree and consent for  [{{ this.branchName }}] to
                       disclose my medical record to employee and will not
                       subjected to any act related uder the law.
                     </td>
@@ -255,7 +255,7 @@
            <div class="card mb-4 reslt" v-if="consentdetails" style="display:none;">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2>[{{ consentdetails.hospital_name }}]</h2>
+              <h2>[{{ this.hospitalName  }}]</h2>
               <p>
                 Hospital Borang Persetujuan Menyertai Program Sokongan Pekerjaan
               </p>
@@ -280,7 +280,7 @@
                           for="flexCheckDefault"
                         >
                           I hereby agree to participate in supported employment
-                          program, [{{ consentdetails.hospital_branch_name }}]. I also agree to
+                          program, [{{ this.branchName }}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -375,7 +375,7 @@
                 <tbody>
                   <tr>
                     <td colspan="2">
-                      I agree and consent for [{{ consentdetails.hospital_branch_name }}] to
+                      I agree and consent for [{{ this.branchName }}] to
                       disclose my medical record to employee and will not
                       subjected to any act related uder the law.
                     </td>
@@ -526,8 +526,8 @@ export default {
       Id: 0,
       errorList: [],
       consentdetails: null,
-      hospitalName: "HOSPITAL TUANKU FAUZIAH",
-      branchName: "Mentari Kangar",
+      hospitalName: "",
+      branchName: "",
       loader: false,
       participant: 0,
       discloser: 0,
@@ -536,6 +536,8 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalName = this.userdetails.branch.hospital_name;
+    this.branchName = this.userdetails.branch.hospital_branch_name;
     this.Id = urlParams.get("id");
     if (this.Id) {
       this.GetPatientConnsentdetails();
