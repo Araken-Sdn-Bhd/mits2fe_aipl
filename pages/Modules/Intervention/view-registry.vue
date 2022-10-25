@@ -1771,6 +1771,7 @@
                           type="text"
                           class="form-control"
                           v-model="officername"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1782,6 +1783,7 @@
                           type="text"
                           class="form-control"
                           v-model="hospitalname"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1794,6 +1796,7 @@
                           type="text"
                           class="form-control"
                           v-model="designation"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1825,9 +1828,9 @@
                           >Date of Reporting</label
                         >
                         <input
-                          type="date"
                           class="form-control"
                           v-model="reportingdate"
+                          disabled="false"
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -1889,6 +1892,7 @@
 import PatientDetails from "../../../components/Patient/PatientDetails.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import moment from 'moment';
 export default {
   components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
@@ -1990,6 +1994,10 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalname = this.userdetails.branch.hospital_name;
+    this.officername = this.userdetails.user.name;
+    this.designation = this.userdetails.user.role;
+    this.reportingdate = moment().format("DD-MM-YYYY");
     this.Id = urlParams.get("id");
     this.GetList();
 
@@ -2481,11 +2489,11 @@ export default {
         this.list1 =
           response.data.result.hospital[0].discharge_psy_mx.split(",");
         //Datasource
-        this.officername =
-          response.data.result.dataSource[0].name_registering_officer;
-        this.hospitalname = response.data.result.dataSource[0].hospital_name;
-        this.designation = response.data.result.dataSource[0].designation;
-        this.reportingdate = response.data.result.dataSource[0].reporting_date;
+        // this.officername =
+        //   response.data.result.dataSource[0].name_registering_officer;
+        //this.hospitalname = response.data.result.dataSource[0].hospital_name;
+        // this.designation = response.data.result.dataSource[0].designation;
+        // this.reportingdate = response.data.result.dataSource[0].reporting_date;
         this.psychiatristId =
           response.data.result.dataSource[0].psychiatrist_name;
       }
