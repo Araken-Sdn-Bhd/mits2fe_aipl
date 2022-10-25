@@ -145,9 +145,9 @@
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="{id:catcode.id,text:catcode.icd_category_code+' '+catcode.icd_category_name}"
+              v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -759,8 +759,8 @@ export default {
 
       this.diagonisislist.forEach(element => {
       if (element.id == response.data.Data[0].type_diagnosis_id) {
-        this.type_diagnosis_id = {id:element.id,text:element.icd_category_code+' '+element.icd_category_name};
-        this.diagnosis = element.icd_category_code+' '+element.icd_category_name;
+        this.type_diagnosis_id = {id:element.id,text:element.icd_code+' '+element.icd_name};
+        this.diagnosis = element.icd_code+' '+element.icd_name;
       }
     });
 
