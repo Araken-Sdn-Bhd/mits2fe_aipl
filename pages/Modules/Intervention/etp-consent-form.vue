@@ -12,7 +12,7 @@
           <div class="card mb-4" v-if="consentdetails">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{ consentdetails.hospital_name }}]</h2>
+              <h2> [{{ this.hospitalName }}]</h2>
               <p>
            CONSENT FOR EMPLOYMENT TRANSITION PROGRAM
               </p>
@@ -36,7 +36,7 @@
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
-                       <span style="color:#000;"> I hereby agree to participate in </span><span style="color:#000;">Employment Transition Program (ETP)</span>  [{{ consentdetails.hospital_branch_name }}]. <span style="color:#000;">I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.</span>
+                       <span style="color:#000;"> I hereby agree to participate in </span><span style="color:#000;">Employment Transition Program (ETP)</span>  [{{  this.branchName }}]. <span style="color:#000;">I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.</span>
                           
                         </label>
                       </div>
@@ -129,7 +129,7 @@
                 <tbody>
                   <tr>
                     <td colspan="2">
-                      I agree and consent for  [{{ consentdetails.hospital_branch_name }}] to
+                      I agree and consent for  [{{ this.branchName }}] to
                       disclose my medical record to employee and will not
                       subjected to any act related uder the law.
                     </td>
@@ -256,7 +256,7 @@
            <div class="card mb-4 reslt" v-if="consentdetails" style="display:none;">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2>[{{ consentdetails.hospital_name }}]</h2>
+              <h2>[{{ this.hospitalName }}]</h2>
               <p>
            CONSENT FOR EMPLOYMENT TRANSITION PROGRAM
               </p>
@@ -280,7 +280,7 @@
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
-                        I hereby agree to participate in supported <span style="color:#000;">Employment Transition Program (ETP)</span>  [{{ consentdetails.hospital_branch_name }}]. I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.
+                        I hereby agree to participate in supported <span style="color:#000;">Employment Transition Program (ETP)</span>  [{{ this.branchName }}]. I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.
                           
                         </label>
                       </div>
@@ -385,7 +385,7 @@
                 <tbody>
                   <tr>
                     <td colspan="2">
-                      I agree and consent for  [{{ consentdetails.hospital_branch_name }}] to
+                      I agree and consent for  [{{this.branchName }}] to
                       disclose my medical record to employee and will not
                       subjected to any act related uder the law.
                     </td>
@@ -550,18 +550,22 @@ export default {
       Id: 0,
       errorList: [],
       consentdetails: null,
-      hospitalName: "HOSPITAL TUANKU FAUZIAH",
-      branchName: "Mentari Kangar",
+      hospitalName: "",
+      branchName: "",
       loader: false,
       participant: 0,
       discloser: 0,
       designation: "",
       user_name: "",
+      pid:"",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalName = this.userdetails.branch.hospital_name;
+    this.branchName = this.userdetails.branch.hospital_branch_name;
+
     this.Id = urlParams.get("id");
     if (this.Id) {
       this.GetPatientConnsentdetails();
