@@ -72,7 +72,6 @@
                                         </tr> -->
                                     </tbody>
                                 </table>
-                                <a href="#/" class="btn btn-primary btn-text btn-seeall">SEE ALL</a>
                             </div>
                         </div>
                     </div>
