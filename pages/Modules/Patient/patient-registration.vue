@@ -183,7 +183,7 @@
                               </select>
                             </div>
 
-                            <div class="col-sm-6" v-if="nric_type_code == 'Old IC'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'OIC'">
                               <label class="form-label">Old NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -193,7 +193,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="nric_type_code == 'New IC'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'NIC'">
                               <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
                               <input
                                 type="tel"
@@ -203,7 +203,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="nric_type_code == 'Police'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'POL'">
                               <label class="form-label">Police ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -213,7 +213,7 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
-                            <div class="col-sm-6" v-if="nric_type_code == 'Army'">
+                            <div class="col-sm-6" v-if="nric_type_code == 'ARM'">
                               <label class="form-label">Army ID<small>*</small></label>
                               <input
                                 type="tel"
@@ -1432,8 +1432,8 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.nric_type_code = response.data.setting[0].section_value;
-        console.log('manish',this.nric_type_code);
+        this.nric_type_code = response.data.setting[0].code;
+       
       } else {
         window.alert("Something went wrong");
       }
@@ -2364,3 +2364,4 @@ export default {
   display: none !important;
 }
 </style>
+</script>
