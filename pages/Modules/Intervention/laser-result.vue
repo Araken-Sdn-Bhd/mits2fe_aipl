@@ -50,7 +50,7 @@
                           <td>Nationality:</td>
                           <td v-if="patientdetails.citizenships[0]">
                             {{
-                              patientdetails.citizenships[0].citizenship_name
+                              patientdetails.citizenships[0].section_value
                             }}
                           </td>
                         </tr>
@@ -156,7 +156,7 @@ export default {
     this.Id = urlParams.get("id");
     this.GetPatientdetails();
 
-  
+
     // let urlParams = new URLSearchParams(window.location.search);
     // this.Id = urlParams.get("id");
   },
