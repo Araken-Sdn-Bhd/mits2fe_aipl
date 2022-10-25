@@ -162,9 +162,9 @@
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="{id:catcode.id,text:catcode.icd_category_code+' '+catcode.icd_category_name}"
+              v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
