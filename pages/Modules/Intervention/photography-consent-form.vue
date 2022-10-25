@@ -14,7 +14,7 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2>[{{ patientdetails.hospital_name }}]</h2>
+              <h2>[{{ this.hospitalName }}]</h2>
               <p>Photography Consent Form</p>
             </div>
 
@@ -216,7 +216,7 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{patientdetails.hospital_name}}]</h2>
+              <h2> [{{ this.hospitalName }}]</h2>
               <p>Photography Consent Form</p>
             </div>
 
@@ -432,11 +432,13 @@ export default {
       pid:0,
       designation_guardian:"",
       witness_name:"",
+      hospitalName: "",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalName = this.userdetails.branch.hospital_name;
     this.Id = urlParams.get("id");
     if (this.Id) {
       this.GetPatientdetails();

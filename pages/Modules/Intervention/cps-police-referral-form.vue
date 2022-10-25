@@ -13,7 +13,7 @@
           <div class="card mb-4 reslt">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2 v-if="consentdetails">{{consentdetails.hospital_name}}</h2>
+              <h2 v-if="consentdetails">{{this.hospitalName}}</h2>
               <p>COMMUNITY PSYCHIATRY POLICE REFFERAL FORM</p>
             </div>
             <div class="card-body new-form">
@@ -23,7 +23,7 @@
                     <td colspan="2">
                       Psychiatry Department,
                       <div v-if="consentdetails">
-                      <br /><span v-if="consentdetails.hospital_name != null">{{ consentdetails.hospital_name }}</span>
+                      <br /><span>{{ this.hospitalName }}</span>
                       <br /><span v-if="consentdetails.hospital_adrress_1 != null">{{ consentdetails.hospital_adrress_1 }}</span>
                       <br /><span v-if="consentdetails.hospital_adrress_2 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_2 }}</span>
                       <br /><span v-if="consentdetails.hospital_adrress_3 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_3 }}</span>
@@ -191,6 +191,7 @@ export default {
       the_above_patient_ongoing: "",
       name: "",
       designation: "",
+      hospitalName: "",
       pid: 0,
       type: "",
     };
@@ -201,6 +202,8 @@ export default {
     this.Id = urlParams.get("id");
     this.name = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
+    this.hospitalName = this.userdetails.branch.hospital_name;
+    this.hospital_id = this.userdetails.branch.hospital_id;
      let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
@@ -242,9 +245,10 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "intervention/get-homevisit-consent-form",
+        "intervention/post-homevisit-consent-form",
         {
           added_by: this.userdetails.user.id,
+          hospital_id:this.hospital_id,
           patient_id: this.Id,
         },
         { headers }

@@ -12,10 +12,10 @@
             <div class="card-body new-form">
               <div class="form-header">
                 <img src="~/assets/images/form-logo.png" />
-                <h2>{{ consentdetails.hospital_name }}</h2>
+                <h2>{{ this.hospitalName }}</h2>
                 <p>
                   CONSENT FOR HOME VISIT BY COMMUNITY PSYCHIATRY SERVICES,
-                   [{{ consentdetails.hospital_name }}]
+                  {{ this.hospitalName }}
                 </p>
               </div>
               <table class="notes table-padding">
@@ -153,10 +153,9 @@
             <div class="card-body new-form">
               <div class="form-header">
                 <img src="~/assets/images/form-logo.png" />
-                <h2>{{ consentdetails.hospital_name }}</h2>
+                <h2>{{ this.hospitalName }}</h2>
                 <p>
                   CONSENT FOR HOME VISIT BY COMMUNITY PSYCHIATRY SERVICES,
-                   [{{ consentdetails.hospital_name }}]
                 </p>
               </div>
               <table class="notes table-padding">
@@ -341,8 +340,8 @@ export default {
       Id: 0,
       errorList: [],
       consentdetails: null,
-      hospitalName: "HOSPITAL TUANKU FAUZIAH",
-      branchName: "Mentari Kangar",
+      hospitalName: "",
+      branchName: "",
       loader: false,
       consent_for_homevisit: 0,
       consent_for_hereby_already_give_explanation: 0,
@@ -353,6 +352,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
+    this.hospitalName = this.userdetails.branch.hospital_name;
     this.Id = urlParams.get("id");
     if (this.Id) {
       this.GetPatientConnsentdetails();
