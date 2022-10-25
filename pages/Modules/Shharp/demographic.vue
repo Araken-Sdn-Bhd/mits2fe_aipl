@@ -591,7 +591,7 @@ export default {
       }
 
       const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "employment-status",
+        "general-setting/list?section=" + "occupation-status",
         { headers }
       );
       if (response9.data.code == 200 || response9.data.code == "200") {
