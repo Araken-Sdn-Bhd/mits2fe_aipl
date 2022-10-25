@@ -154,6 +154,7 @@ export default {
       });
     },
     async getData() {
+      this.loader = true;
       const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -198,7 +199,7 @@ export default {
 
     },
     async OnSearch() {
-      this.loader = true;
+      // this.loader = true;
       this.list = [];
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -223,6 +224,7 @@ export default {
       if (this.toDate == "dd-mm-yyyy" && this.fromDate == "dd-mm-yyyy" && this.keyword == "no-keyword"){
         this.getData();
       } else {
+        this.loader = true;
       const response = await this.$axios
         .post(
           "shharp-patient-list/list",
@@ -234,60 +236,13 @@ export default {
           },
           { headers }
         )
-        .then((resp) => {
-          if (resp.data.code == 200) {
-            if (resp.data.list.length > 0) {
-              // $(document).ready(function () {
-                console.log('my data',resp.data.list);
 
-                  this.list = resp.data.list;
-                  $(".data-table").DataTable().clear().destroy();
-                  $(document).ready(function () {
-                  $(".data-table").DataTable({
-                    searching: false,
-                    bLengthChange: false,
-                    bInfo: false,
-                    autoWidth: false,
-                    responsive: true,
-                    // retrieve: true,
-                    language: {
-                      paginate: {
-                        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                      },
-                    },
-                  });
-                });
-              // });
-              this.loader = true;
-            } else {
-              if ($.fn.DataTable.isDataTable(".data-table")) {
-                $(".data-table").DataTable().clear().destroy();
-              }
-              $(document).ready(function () {
-                $(".data-table").DataTable({
-                  searching: false,
-                  bLengthChange: false,
-                  bInfo: false,
-                  autoWidth: false,
-                  responsive: true,
-                  // retrieve: true,
-                  language: {
-                    paginate: {
-                      next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                      previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                    },
-                  },
-                });
-              });
-              this.loader = false;
-            }
-          } else {
-            this.loader = false;
-            window.alert("Something went wrong");
-          }
-          this.loader = false;
-        });
+      .then((resp) => {
+        this.list = resp.data.list;
+        console.log("list", this.list);
+
+        this.loader = false;
+      });
       }
     },
   },
