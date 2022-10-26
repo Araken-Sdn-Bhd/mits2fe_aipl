@@ -26,7 +26,6 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="1"
                           id="flexCheckDefault"
                           v-model="consent_for_homevisit"
                         />
@@ -120,7 +119,6 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="1"
                           id="flexCheckDefault1"
                           v-model="consent_for_hereby_already_give_explanation"
                         />
@@ -164,11 +162,18 @@
                     <td colspan="2">
                       <div class="form-check">
                         <input
+                        v-if="consent_for_homevisit == true"
                           class="form-check-input"
                           type="checkbox"
-                          value="1"
                           id="flexCheckDefault"
-                          v-model="consent_for_homevisit"
+                          checked
+                        />
+                        <input
+                        v-else
+                          class="form-check-input"
+                          type="checkbox"
+                          id="flexCheckDefault"
+                          value="false"
                         />
                         <label class="form-check-label" for="flexCheckDefault">
                           I hereby agree and consent to receive treatment at
@@ -269,11 +274,18 @@
                     <td colspan="2">
                       <div class="form-check">
                         <input
+                        v-if="consent_for_hereby_already_give_explanation == true"
                           class="form-check-input"
                           type="checkbox"
-                          value="1"
                           id="flexCheckDefault1"
-                          v-model="consent_for_hereby_already_give_explanation"
+                          checked
+                        />
+                        <input
+                        v-else
+                          class="form-check-input"
+                          type="checkbox"
+                          id="flexCheckDefault1"
+                          value="false"
                         />
                         <label class="form-check-label" for="flexCheckDefault1">
                           I hereby already give explanation regarding community
@@ -343,8 +355,10 @@ export default {
       hospitalName: "",
       branchName: "",
       loader: false,
-      consent_for_homevisit: 0,
-      consent_for_hereby_already_give_explanation: 0,
+      consent_for_homevisit: false,
+      consent_for_hereby_already_give_explanation: false,
+      consent_for_homevisit1: false,
+      consent_for_hereby_already_give_explanation1: false,
       pid: 0,
       type: "",
     };
@@ -434,6 +448,9 @@ export default {
       }
     },
     OnPrint() {
+
+      this.consent_for_hereby_already_give_explanation1 = this.consent_for_hereby_already_give_explanation1;
+      this.consent_for_homevisit = this.consent_for_homevisit1;
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
@@ -456,7 +473,6 @@ export default {
       );
       if (response.data.code == 200) {
         // window.alert(response.data.Data[0].patient_mrn_id);
-
         this.Id = response.data.Data[0].patient_id;
 
         this.consent_for_homevisit =
@@ -466,6 +482,7 @@ export default {
 
         // this.GetList();
         this.GetPatientConnsentdetails();
+
       } else {
         window.alert("Something went wrong");
       }
