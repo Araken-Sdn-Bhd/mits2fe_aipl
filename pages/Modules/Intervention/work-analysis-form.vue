@@ -61,7 +61,7 @@
                     <label class="form-label">State</label>
                      <select
             class="form-select"
-            @change="onCitybind($event)"
+            @change="getCityList($event)"
             v-model="state_id"
           >
             <option value="">Please Select</option>
@@ -78,12 +78,16 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City</label>
-                     <select class="form-select" v-model="city_id">
+                     <select
+                     class="form-select"
+                     v-model="city_id"
+                     @change="getPostcodeList($event)"
+                     >
             <option value="">Please Select</option>
             <option
               v-for="ctl in GCityList"
-              v-bind:key="ctl.postcode_id"
-              v-bind:value="ctl.postcode_id"
+              v-bind:key="ctl.city_name"
+              v-bind:value="ctl.city_name"
             >
               {{ ctl.city_name }}
             </option>
@@ -95,8 +99,8 @@
             <option value="">Please Select</option>
             <option
               v-for="pst in GPostCodeList"
-              v-bind:key="pst.postcode_id"
-              v-bind:value="pst.postcode_id"
+              v-bind:key="pst.id"
+              v-bind:value="pst.id"
             >
               {{ pst.postcode }}
             </option>
@@ -267,7 +271,7 @@
                     <div class="mb-3">
                       <label class="form-label">On Date</label>
                       <input
-                        type="text"
+                        type="date"
                         name=""
                         class="form-control"
                         v-model="on_date"
@@ -1773,7 +1777,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+              {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -1865,7 +1869,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -2566,6 +2570,41 @@ export default {
       } else {
         this.externallist = [];
       }
+    },
+    async getCityList(event) {
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.GCityList = response.data.list;
+        this.GPostCodeList = [];
+      } else {
+        this.GCityList = [];
+        this.GPostCodeList = [];
+      }
+
+    },
+    async getPostcodeList(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.GPostCodeList = response.data.list;
+      } else {
+        this.GPostCodeList = [];
+      }
+
     },
     async onCategorycodebind(event) {
       const headers = {
