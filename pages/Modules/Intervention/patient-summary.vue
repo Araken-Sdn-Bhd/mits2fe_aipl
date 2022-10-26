@@ -992,7 +992,7 @@ export default {
               bInfo: false,
               autoWidth: false,
               responsive: true,
-              scrollX: true,
+              scrollX: false,
               language: {
                 paginate: {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
