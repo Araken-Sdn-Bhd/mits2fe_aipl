@@ -381,7 +381,7 @@
                                                     <option value="0">Select Assigned Team</option>
                                                     <option v-for="team in teamlist" v-bind:key="team.id"
                                                         v-bind:value="team.id">
-                                                        {{ team.team_name }}
+                                                        {{ team.service_name }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -787,6 +787,17 @@ export default {
       type: "",
     };
   },
+
+  beforeMount() {
+    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (this.userdetails) {
+      this.token = this.userdetails.access_token;
+      this.branch=this.userdetails.branch.branch_id;
+      
+    }
+    this.GetList();
+  },
+
   methods: {
     test(){
 
@@ -840,8 +851,10 @@ export default {
         this.codelist = [];
       }
 
-      const response4 = await this.$axios.get("hospital/branch-team-list", {
-        headers,
+      const response4 = await this.$axios.get("hospital/assigned-team",
+
+      {
+        headers,  params: {branch: this.branch}
       });
       if (response4.data.code == 200 || response4.data.code == "200") {
         this.teamlist = response4.data.list;
