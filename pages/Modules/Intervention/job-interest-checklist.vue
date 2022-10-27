@@ -62,6 +62,12 @@
                               {{ patientdetails.address1 }}<br />{{
                                 patientdetails.address2
                               }}<br />{{ patientdetails.address3 }}
+                              <br/>
+                              {{ patientdetails.postcode }}
+                              <br/>
+                              {{ patientdetails.city[0].city_name }}
+                              <!-- <br>
+                              {{ patientdetails. }} -->
                             </td>
                           </tr>
 
@@ -75,10 +81,6 @@
                             <td>Diploma</td>
                           </tr>
 
-                          <tr>
-                            <th>Diagnosis:</th>
-                            <td>[diagnosis]</td>
-                          </tr>
                         </tbody>
                       </table>
                     </td>
@@ -411,7 +413,7 @@
                                 class="form-control job"
                                 name="" v-model="job1.type_of_job"
                               />
-                             
+
                             </td>
                             <td>
                               <input
@@ -597,7 +599,7 @@
                               v-bind:key="catcode.id"
                               v-bind:value="catcode.id"
                             >
-                              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                              {{ catcode.icd_code }} {{catcode.icd_name}}
                             </option>
                           </select>
                         </div>
@@ -697,7 +699,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                                 {{ catcode.icd_code }} 
+                                 {{ catcode.icd_code }}
  {{catcode.icd_name}}
                               </option>
                             </select>
@@ -1289,11 +1291,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
