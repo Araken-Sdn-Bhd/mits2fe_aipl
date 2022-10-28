@@ -957,7 +957,7 @@
         </li>
       </ul>
         </p>
-                <div class="d-flex align-items-center mt-4">
+                <!-- <div class="d-flex align-items-center mt-4">
                   <div class="row col-sm-9">
                     <label for="" class="col-sm-4 col-form-label"
                       >Screening Done</label
@@ -993,7 +993,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- row-close -->
                 <!-- </form> -->
