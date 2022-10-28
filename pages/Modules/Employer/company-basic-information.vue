@@ -6,142 +6,127 @@
       <main>
            <Loader v-if="loader" />
         <div class="container-fluid px-4">
-          <div class="page-title">
+          
+          <div class="card mb-4">
+            <div class="page-title">
             <h1>Company Basic Information</h1>
           </div>
-
           <div class="card mb-4">
             <div class="card-body">
-              <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a
-                    class="nav-link active"
-                    id="nav-cb-tab"
-                    data-bs-toggle="tab"
-                    href="#nav-cb"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-cb"
-                    aria-selected="true"
-                    >Company Background</a
-                  >
-                  <a
-                    class="nav-link"
-                    id="nav-cp-tab"
-                    data-bs-toggle="tab"
-                    href="#nav-cp"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-cp"
-                    aria-selected="false"
-                    >Contact Person</a
-                  >
+              <form class="ml-5">
+                    
+                <div class="row">
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Company Name<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Enter Company Name"
+                              v-model="company_name"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Company Registration Number<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Enter Company Name"
+                              v-model="company_registration_number"
+                            />
+                          </div>
+                        </div>
                 </div>
-              </nav>
-              <div class="tab-content" id="nav-tabContent">
-                <div
-                  class="tab-pane fade show active"
-                  id="nav-cb"
-                  role="tabpanel"
-                  aria-labelledby="nav-cb-tab"
-                >
-                  <form class="new-tabform" method="post" @submit.prevent="OnCompanyAdd">
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Company Name</label
-                      >
-                      <div class="col-sm-8">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="company_name"
-                        />
-                      </div>
+                <div class="row">
+                  <div class="col-sm-10">
+                    <div class="mb-3">
+                      <label class="form-label">Company Address</label>
+                      <input
+                        type="text"
+                        class="form-control mb-2"
+                        placeholder="Enter Street Address"
+                        name="" v-model="company_address_1"
+                      />
+                      <input
+                        type="text"
+                        class="form-control mb-2"
+                        placeholder="Enter Street Address"
+                        name="" v-model="company_address_2"
+                      />
+                      <input
+                        type="text"
+                        class="form-control mb-2"
+                        placeholder="Enter Street Address"
+                        name="" v-model="company_address_3"
+                      />
                     </div>
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Company Registration Number</label
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="mb-3">
+                      <label class="form-label">State</label>
+                      <select
+                        v-model="state_id"
+                        class="form-select"
+                        aria-label="Default select example"
+                        @change="onSelectedState($event)"
                       >
-                      <div class="col-sm-8">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="company_registration_number"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Company Registered Addres</label
-                      >
-                      <div class="col-sm-8">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="company_address_1"
-                        />
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="company_address_2"
-                        />
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="company_address_3"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-4 mb-3">
-                        <label class="form-label">State</label>
-                        <select
-                          v-model="state_id"
-                          class="form-select"
-                          aria-label="Default select example"
-                          @change="onCitybind($event)"
+                        <option value="0">Select</option>
+                        <option
+                          v-for="st in StateList"
+                          v-bind:key="st.id"
+                          v-bind:value="st.id"
                         >
-                          <option value="0">Please Select</option>
-                          <option
-                            v-for="state in StateList"
-                            v-bind:key="state.id"
-                            v-bind:value="state.id"
-                          >
-                            {{ state.state_name }}
-                          </option>
-                        </select>
-                      </div>
-
-                      <div class="col-md-4 mb-3">
-                        <label class="form-label">City</label>
-                        <select
-                          v-model="city_id"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option value="0">Please Select</option>
-                          <option
-                            v-for="ctl in CityList"
-                            v-bind:key="ctl.postcode_id"
-                            v-bind:value="ctl.postcode_id"
-                          >
-                            {{ ctl.city_name }}
-                          </option>
-                        </select>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                        <label class="form-label">Postcode</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="postcode"
-                        />
-                      </div>
+                          {{ st.state_name }}
+                        </option>
+                      </select>
                     </div>
-
-                    <div class="row mb-3">
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="mb-3">
+                      <label class="form-label">City</label>
+                      <select
+                        v-model="city_id"
+                        @change="getPostcodeList($event)"
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option value="0">Select</option>
+                        <option
+                          v-for="ct in CityList"
+                          v-bind:key="ct.city_name"
+                          v-bind:value="ct.city_name"
+                        >
+                          {{ ct.city_name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="mb-3">
+                      <label class="form-label">Postcode</label>
+                      <select
+                        v-model="postcode"
+                        class="form-select"
+                        aria-label="Default Select example"
+                      >
+                        <option value="0">Select</option>
+                        <option
+                          v-for="ct in postcodelist"
+                          v-bind:key="ct.id"
+                          v-bind:value="ct.id"
+                        >
+                          {{ ct.postcode }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 mt-3">
                       <label class="col-sm-4 col-form-label"
                         >Employment Sector</label
                       >
@@ -291,200 +276,183 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Corporate Body Sector</label
-                      >
-                      <div class="col-sm-8 cbs-box">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value="Government Sector"
-                            v-model="government"
-                            id="cbs-1"
-                          />
-                          <label class="form-check-label" for="cbs-1">
-                            Government Sector
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value="Private Sector"
-                            v-model="privatesector"
-                            id="cbs-2"
-                          />
-                          <label class="form-check-label" for="cbs-2">
-                            Private Sector
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value="Small and Medium Enterprises (SME)"
-                            v-model="small"
-                            id="cbs-3"
-                          />
-                          <label class="form-check-label" for="cbs-3">
-                            Small and Medium Enterprises (SME)
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value="others-cbs"
-                            id="cbs-5"
-                          />
-                          <label class="form-check-label" for="cbs-5">
-                            Others
-                          </label>
-                        </div>
-
-                        <div class="others-cbs hide">
-                          <input
-                            type="text"
-                            placeholder="Please specify"
-                            class="form-control"
-                            v-model="othersector"
-                            name=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Does your company have an existing training program in
-                        place?</label
-                      >
-                      <div class="col-sm-8">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
-                            value="1"
-                            v-model="is_existing_training_program"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="flexRadioDefault1"
-                          >
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input
-                            value="0"
-                            class="form-check-input"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
-                            v-model="is_existing_training_program"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="flexRadioDefault2"
-                          >
-                            No
-                          </label>
-                        </div>
-                      </div>
-                    </div>
- <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-                    <div class="d-flex">
-                      <button
-                        type="submit"
-                        class="next-1 btn btn-warning btn-text ml-auto"
-                      >
-                        <i class="far fa-save"></i> Save
-                      </button>
-                    </div>
-                  </form>
                 </div>
-                <!--  -->
 
-                <div
-                  class="tab-pane fade"
-                  id="nav-cp"
-                  role="tabpanel"
-                  aria-labelledby="nav-cp-tab"
-                >
-                  <form class="new-tabform" method="post" @submit.prevent="OnAddContactPerson">
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label">Name</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="contact_name" />
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Contact Number</label
-                      >
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="contact_number" />
-                      </div>
+                <div class="row mb-3 mt-3">
+                  <label class="col-sm-4 col-form-label">Corporate Body Sector</label>
+                  <div class="col-sm-8 cbs-box">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Government Sector"
+                        v-model="government"
+                        id="cbs-1"
+                      />
+                      <label class="form-check-label" for="cbs-1">
+                        Government Sector
+                      </label>
                     </div>
 
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label">Email</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="contact_email" />
-                      </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Private Sector"
+                        v-model="privatesector"
+                        id="cbs-2"
+                      />
+                      <label class="form-check-label" for="cbs-2">
+                        Private Sector
+                      </label>
                     </div>
 
-                    <div class="row mb-3">
-                      <label class="col-sm-4 col-form-label"
-                        >Position in Company</label
-                      >
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="contact_position" />
-                      </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Small and Medium Enterprises (SME)"
+                        v-model="small"
+                        id="cbs-3"
+                      />
+                      <label class="form-check-label" for="cbs-3">
+                        Small and Medium Enterprises (SME)
+                      </label>
                     </div>
-<p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-                    <div class="d-flex">
-                      <button
-                        type="button"
-                        class="pre-1 btn btn-primary btn-text"
-                      >
-                        <i class="far fa-arrow-alt-to-left"></i> Back
-                      </button>
-                      <button
-                        type="submit"
-                        class="btn btn-warning btn-text ml-auto"
-                      >
-                        <i class="far fa-save"></i> Save
-                      </button>
+
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="others-cbs"
+                        id="cbs-5"
+                      />
+                      <label class="form-check-label" for="cbs-5">
+                        Others
+                      </label>
                     </div>
-                  </form>
+
+                    <div class="others-cbs hide">
+                      <input
+                        type="text"
+                        placeholder="Please specify"
+                        class="form-control"
+                        v-model="othersector"
+                        name=""
+                      />
+                    </div>
+                  </div>
                 </div>
-                <!--  -->
-              </div>
+                <div class="row mb-3 mt-3">
+                  <div class="col-sm-4">
+                    <label class="form-label">Does your company have an existing training program in place?</label>
+                  </div>
+                  <div class="col-sm-5">
+                    <div  class="form-check form-check-inline col-sm-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                      value="1"
+                      v-model="is_existing_training_program"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="flexRadioDefault1"
+                    >
+                      Yes
+                    </label>
+                  </div>
+                  <div  class="form-check form-check-inline col-sm-2">
+                    <input
+                      value="0"
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      v-model="is_existing_training_program"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="flexRadioDefault2"
+                    >
+                      No
+                    </label>
+                  </div>
+                    
+                  </div>
+                </div>
+                      
+              </form>
+            
             </div>
           </div>
+          <div class="page-title">
+            <h1>Contact Information</h1>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <form class="ml-5">
+                      <div class="row">
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Name<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="contact_name"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Position in Company<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="contact_position"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Contact Number<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="contact_number"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Email<small>*</small></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="contact_email"
+                            />
+                          </div>
+                        </div>
+                      </div>
+              </form>
+            </div>
+          </div>
+          <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
+                    <div class="d-flex">
+                      <button type="submit" class="next-1 btn btn-warning btn-text ml-auto" @submit.prevent="OnAddContactPerson">
+                        <i class="far fa-save"></i> Save
+                      </button>
+                    </div>
         </div>
+        </div>
+
       </main>
       <intervention-footer></intervention-footer>
     </div>
@@ -501,6 +469,7 @@ export default {
       userdetails: null,
       CityList: [],
       StateList: [],
+      postcodelist: [],
       errorList: [],
       company_name: "",
       company_registration_number: "",
@@ -536,6 +505,8 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.company_name = this.userdetails.user.name;
+    this.contact_email = this.userdetails.user.email;
     this.GetStateList();
     $(document).ready(function () {
       $(".next-1").click(function (e) {
@@ -560,22 +531,6 @@ export default {
     });
   },
   methods: {
-    async onCitybind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "address/" + event.target.value + "/stateWisePostcodeList",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.CityList = response.data.list;
-      } else {
-        this.CityList = [];
-      }
-    },
     async GetStateList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -587,9 +542,49 @@ export default {
       });
       if (response.data.code == 200 || response.data.code == "200") {
         this.StateList = response.data.list;
+        this.CityList =[];
+        this.postcodelist = [];
       } else {
         this.StateList = [];
+        this.CityList =[];
+        this.postcodelist = [];
       }
+    },
+    async onSelectedState(event){
+      const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.CityList = response.data.list;
+        this.postcodelist = [];
+      } else {
+        this.CityList = [];
+        this.postcodelist = [];
+      }
+    },
+    async getPostcodeList(event) {
+
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+
     },
     async OnCompanyAdd() {
       this.errorList = [];
