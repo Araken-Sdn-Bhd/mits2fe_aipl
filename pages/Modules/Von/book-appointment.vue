@@ -108,7 +108,7 @@
                             v-bind:key="team.id"
                             v-bind:value="team.id"
                           >
-                            {{ team.contact_name }}
+                            {{ team.name }}
                           </option>
                         </select>
                       </div>
@@ -166,7 +166,7 @@
                   <!-- row -->
 
                   <div class="d-flex">
-                    <div class="ml-auto"  :class="SidebarAccess!=1?'hide1':''">
+                    <div class="ml-auto">
                       <a
                       v-on:click="OnApproverejectRequest(2)"
                         class="btn btn-danger btn-text"
@@ -234,10 +234,10 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("assigned-interviwer/list", {
+      const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
         headers,
       });
-      this.teamlist = response.data;
+      this.teamlist = response.data.list;
       // const response1 = await this.$axios.get("service/list", { headers });
       // if (response1.data.code == 200 || response1.data.code == "200") {
       //   this.servicelist = response1.data.list;

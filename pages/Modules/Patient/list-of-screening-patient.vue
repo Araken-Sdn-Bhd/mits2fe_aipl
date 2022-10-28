@@ -60,7 +60,7 @@
                       >
                     </td>
                     <td>{{ patint.age }}</td>
-                    <td>{{ patint.nric_no }}</td>
+                    <td>{{ patint.nric_id }}</td>
                     <td>{{ patint.team_name }}</td>
                     <td>{{ patint.service }}</td>
                   </tr>
