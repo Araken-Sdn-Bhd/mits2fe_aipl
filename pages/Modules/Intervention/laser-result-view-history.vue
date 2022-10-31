@@ -23,7 +23,7 @@
                           <th width="60%"></th>
                         </tr>
                       </thead>
-                      <tbody v-if="patientdetails">
+                       <tbody v-if="patientdetails">
                         <tr>
                           <td>MRN:</td>
                           <td>{{ patientdetails.patient_mrn }}</td>
@@ -31,7 +31,7 @@
 
                         <tr>
                           <td>Gender:</td>
-                          <td>{{ patientdetails.gender[0].section_value }}</td>
+                          <td>{{ patientdetails.gender }}</td>
                         </tr>
 
                         <tr>
@@ -42,15 +42,15 @@
                         <tr>
                           <td>Marital Status:</td>
                           <td>
-                            {{ patientdetails.maritialstatus[0].section_value }}
+                            {{ patientdetails.maritialstatus }}
                           </td>
                         </tr>
 
                         <tr>
                           <td>Nationality:</td>
-                          <td v-if="patientdetails.citizenships[0]">
+                          <td>
                             {{
-                              patientdetails.citizenships[0].citizenship_name
+                              patientdetails.citizenships
                             }}
                           </td>
                         </tr>
@@ -161,7 +161,7 @@ export default {
     this.GetPatientdetails();
     this.GetLaserResult();
 
-  
+
     // let urlParams = new URLSearchParams(window.location.search);
     // this.Id = urlParams.get("id");
   },
@@ -174,7 +174,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
+        "patient-registration/getPatientRegistrationByIdShortDetails",
         {
           id: this.Id,
         },
