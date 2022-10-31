@@ -123,7 +123,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                              {{ catcode.icd_code }} {{catcode.icd_name}}
+                                 {{ catcode.icd_code }} {{ catcode.icd_name }}
                               </option>
                             </select>
                           </div>
@@ -398,10 +398,10 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetList();
-    this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+    this.GetPatientdetails();
     if (this.pid) {
       this.getdetails();
     }
@@ -484,9 +484,9 @@ export default {
               services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_of_services: this.complexity_services_id,
+              complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
+              medication_des: this.medication_des,
             },
             { headers }
           );
@@ -512,7 +512,8 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.post(
+      if (this.Id) {
+        const response = await this.$axios.post(
         "patient-registration/getPatientRegistrationById",
         {
           id: this.Id,
@@ -524,6 +525,23 @@ export default {
         console.log("my details", this.patientdetails);
       } else {
         window.alert("Something went wrong");
+      }   
+      }
+      
+      else if(this.pid) {
+        const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.pid,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.patientdetails = response.data.list[0];
+        console.log("my details", this.patientdetails);
+      } else {
+        window.alert("Something went wrong");
+      }   
       }
     },
     async GetList() {

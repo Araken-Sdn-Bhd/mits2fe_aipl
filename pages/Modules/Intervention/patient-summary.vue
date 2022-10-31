@@ -1147,12 +1147,12 @@ export default {
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
           path: "/Modules/Intervention/list-for-job-club",
-          query: { pid: data.id, type: val },
+          query: { pid: this.Id, type: val },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
           path: "/Modules/Intervention/list-of-etp",
-          query: { pid: data.id, type: val },
+          query: { pid: this.Id, type: val },
         });
       } else if (data.type == "ListofJobSearch" && val != "edit") {
         this.$router.push({
@@ -1167,7 +1167,7 @@ export default {
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/Modules/Intervention/log-meeting-with-employer",
-          query: { pid: data.id, type: val },
+          query: { pid: this.Id, type: val },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
