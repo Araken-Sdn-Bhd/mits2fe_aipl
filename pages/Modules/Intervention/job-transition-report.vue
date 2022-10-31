@@ -72,7 +72,7 @@
                           <td>My Case Manager</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="my_case_manager_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="my_case_manager_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -86,7 +86,7 @@
                           <td>My Therapist</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="my_therapist_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="my_therapist_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -100,7 +100,7 @@
                           <td>My Family</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="my_family_yes_no"/>
+                              <input class="form-check-input" type="checkbox" v-model="my_family_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -114,7 +114,7 @@
                           <td>My Friend</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="my_friend_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="my_friend_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -128,7 +128,7 @@
                           <td>My Significant Other</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="my_significant_other_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="my_significant_other_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -142,7 +142,7 @@
                           <td>Clergy</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="clergy_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="clergy_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -156,7 +156,7 @@
                           <td>Benefit Planner</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="benefit_planner_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="benefit_planner_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -170,7 +170,7 @@
                           <td>Other</td>
                           <td>
                             <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" v-model="other_yes_no" />
+                              <input class="form-check-input" type="checkbox" v-model="other_yes_no" value="Yes" unchecked/>
                             </div>
                           </td>
                           <td>
@@ -364,7 +364,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                              {{ catcode.icd_code }} {{catcode.icd_name}}
+                              {{ catcode.icd_code }} {{ catcode.icd_name }}
                               </option>
                             </select>
                           </div>
