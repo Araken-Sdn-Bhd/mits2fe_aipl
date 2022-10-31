@@ -57,7 +57,7 @@
                   </tr>
                   <tr>
                     <th>NRIC NO:</th>
-                          <td>{{ patientdetails.nric_no }}</td>
+                          <td>{{ patientdetails.kin_nric_no }}</td>
                   </tr>
                   <tr>
                     <th>Relationship:</th>
@@ -69,7 +69,7 @@
                   </tr>
                 </tbody>
               </table>
-             
+
               <table class="notes notes-sub">
                 <thead>
                   <tr>
@@ -871,7 +871,7 @@
                                   type="radio"
                                   name="alcohol"
                                   id="alcohol-previous-history" value="Previous History" v-model="alcohol"
-                                /> 
+                                />
                                 <label
                                   class="form-check-label"
                                   for="alcohol-previous-history"
@@ -1239,7 +1239,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
