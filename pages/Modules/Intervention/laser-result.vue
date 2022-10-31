@@ -31,7 +31,7 @@
 
                         <tr>
                           <td>Gender:</td>
-                          <td>{{ patientdetails.gender[0].section_value }}</td>
+                          <td>{{ patientdetails.gender }}</td>
                         </tr>
 
                         <tr>
@@ -42,15 +42,15 @@
                         <tr>
                           <td>Marital Status:</td>
                           <td>
-                            {{ patientdetails.maritialstatus[0].section_value }}
+                            {{ patientdetails.maritialstatus }}
                           </td>
                         </tr>
 
                         <tr>
                           <td>Nationality:</td>
-                          <td v-if="patientdetails.citizenships[0]">
+                          <td>
                             {{
-                              patientdetails.citizenships[0].section_value
+                              patientdetails.citizenships
                             }}
                           </td>
                         </tr>
@@ -169,7 +169,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
+        "patient-registration/getPatientRegistrationByIdShortDetails",
         {
           id: this.Id,
         },
