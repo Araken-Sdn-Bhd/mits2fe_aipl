@@ -224,7 +224,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                                {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                              {{ catcode.icd_code }} {{catcode.icd_name}}
                               </option>
                             </select>
                           </div>
@@ -324,7 +324,7 @@
                                   v-bind:key="catcode.id"
                                   v-bind:value="catcode.id"
                                 >
-                                   {{ catcode.icd_code }} 
+                                   {{ catcode.icd_code }}
  {{catcode.icd_name}}
                                 </option>
                               </select>
@@ -675,7 +675,7 @@ export default {
               staff_name: this.staff_name,
               date: this.date,
               type_of_diagnosis: this.type_diagnosis_id,
-              category_of_services: this.cate,
+              category_of_services: this.category_services,
               location_services_id: this.location_services_id,
               services: this.services_id,
               icd_9_code: this.code_id,

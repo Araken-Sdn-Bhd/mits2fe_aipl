@@ -59,7 +59,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                       </select>
                     </div>
@@ -75,7 +75,7 @@
                           class="form-check-input"
                           type="radio"
                           id="inlineCheckbox1"
-                          value="Supported Employment"
+                          value="supportedEmployment"
                           name="inlineRadioOptions" v-model="intervention"
                         />
                         <label class="form-check-label" for="inlineCheckbox1"
@@ -99,7 +99,7 @@
                           class="form-check-input"
                           type="radio"
                           id="inlineCheckbox3"
-                          value="Job Club"
+                          value="jobClub"
                           name="inlineRadioOptions" v-model="intervention"
                         />
                         <label class="form-check-label" for="inlineCheckbox3"
@@ -196,7 +196,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -288,7 +288,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -388,7 +388,7 @@
                   </div>
                   <!--  -->
                 </div>
- 
+
                 <h4 class="sub-title form-heading">Verification</h4>
                 <div class="row">
                   <div class="col-sm-6">
@@ -863,8 +863,14 @@ export default {
         this.date = response.data.Data[0].date;
         this.staff_name = response.data.Data[0].staff_name;
         this.diagnosis_id = response.data.Data[0].diagnosis_id;
-        this.intervention = response.data.Data[0].intervention;
-         this.discharge_category = response.data.Data[0].discharge_category;
+        if (response.data.Data[0].intervention == "Supported Employment"){
+          this.intervention = "supportedEmployment"
+        }else if (response.data.Data[0].intervention == "ETP"){
+          this.intervention = "ETP"
+        }else if (response.data.Data[0].intervention == "Job Club"){
+          this.intervention = "jobClub"
+        }
+        this.discharge_category = response.data.Data[0].discharge_category;
         this.location_services = response.data.Data[0].location_services;
         this.type_diagnosis_id = response.data.Data[0].diagnosis_type;
         this.category_services = response.data.Data[0].service_category;
@@ -888,7 +894,7 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }

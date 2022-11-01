@@ -115,7 +115,7 @@
                         v-bind:key="catcode.id"
                         v-bind:value="catcode.id"
                       >
-                        {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                      {{ catcode.icd_code }} {{catcode.icd_name}}
                       </option>
                     </select>
                   </div>
@@ -364,13 +364,13 @@
                 ref="result"
                 style="background: #fff"
               >
-                <table class="table" id="datatable">
+                <table  class="table"  >
                   <thead>
                     <tr>
                       <th class="thhead">No</th>
-                      <th class="thhead">Registration Date</th>
-                      <th class="thhead">Registration Time</th>
-                      <th class="thhead">NRIC Number</th>
+                      <th class="thhead">Reg Date</th>
+                      <th class="thhead">Reg Time</th>
+                      <th class="thhead">NRIC/ID</th>
                       <th class="thhead">Name</th>
                       <th class="thhead">Address</th>
                       <th class="thhead">City</th>
@@ -378,26 +378,26 @@
                       <th class="thhead">PostCode</th>
                       <th class="thhead">Citizenship</th>
                       <th class="thhead">Phone Number</th>
-                      <th class="thhead">Date of Birth</th>
+                      <th class="thhead">DOB</th>
                       <th class="thhead">Age</th>
-                      <th class="thhead">Gender</th>
+                      <th class="thhead">SEX</th>
                       <th class="thhead">Race</th>
                       <th class="thhead">Religion</th>
-                      <th class="thhead">Marital Status</th>
-                      <th class="thhead">Occupation Status</th>
-                      <th class="thhead">Occupation Sector</th>
-                      <th class="thhead">Accommodation</th>
-                      <th class="thhead">Education Level</th>
+                      <th class="thhead">MARITAL STATUS</th>
+                      <th class="thhead-occu-sector">Occu Status</th>
+                      <th class="thhead">Occu Sector</th>
+                      <th class="thhead">ACCOM</th>
+                      <th class="thhead">Education</th>
                       <th class="thhead">Fee Exemption Status</th>
-                      <th class="thhead">Type of referral</th>
-                      <th class="thhead">Category of Patient</th>
-                      <th class="thhead">Type of visit</th>
-                      <th class="thhead">Appointment Type</th>
+                      <th class="thhead">Referral Category</th>
+                      <th class="thhead">Patient Category</th>
+                      <th class="thhead">visit Category</th>
+                      <th class="thhead">Appointment</th>
                       <th class="thhead">Outcome</th>
                       <th class="thhead">Diagnosis Code</th>
                       <th class="thhead">Diagnosis</th>
-                      <th class="thhead">Category of Services</th>
-                      <th class="thhead">Attending Doctor/Staff</th>
+                      <th class="thhead">Service</th>
+                      <th class="thhead">Staff</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -405,33 +405,42 @@
                       <td class="tdrow">{{ index + 1 }}</td>
                       <td class="tdrow">{{ rp.Registration_date }}</td>
                       <td class="tdrow">{{ rp.Registration_Time }}</td>
-                      <td class="tdrow">{{ rp.nric_no }}</td>
-                      <td class="tdrow">{{ rp.Name }}</td>
-                      <td class="tdrow">{{ rp.ADDRESS }}</td>
-                      <td class="tdrow">{{ rp.CITY }}</td>
+                      <td class="tdrow-num">{{ rp.nric_no }}</td>
+                      <td class="tdrow-limit">{{ rp.Name }}</td>
+                      <td class="tdrow-num">{{ rp.ADDRESS }}</td>
+                      <!-- <td class="tdrow">{{ rp.CITY }}</td> -->
+                      <td class="tdrow-limit">BANDAR TUN ABDUL RAZAK</td> <!--TESTING-->
                       <td class="tdrow">{{ rp.STATE }}</td>
-                      <td class="tdrow">{{ rp.POSTCODE }}</td>
-                      <td class="tdrow">{{ rp.PHONE_NUMBER }}</td>
-                      <td class="tdrow">{{ rp.DATE_OF_BIRTH }}</td>
-                      <td class="tdrow">{{ rp.AGE }}</td>
-                      <td class="tdrow">{{ rp.GENDER }}</td>
+                      <!-- <td class="tdrow">{{ rp.POSTCODE }}</td> -->
+                      <td class="tdrow-num"> 26900 </td> <!--TESTING-->
+                      <td class="tdrow">{{ rp.citizenship }}</td>
+                      <td class="tdrow-num">{{ rp.PHONE_NUMBER }}</td>
+                      <td class="tdrow-num">{{ rp.DATE_OF_BIRTH }}</td>
+                      <td class="tdrow-num">{{ rp.AGE }}</td>
+                      <td class="tdrow">{{ rp.GENDER | short}}</td>
                       <td class="tdrow">{{ rp.race }}</td>
                       <td class="tdrow">{{ rp.religion }}</td>
                       <td class="tdrow">{{ rp.marital }}</td>
                       <td class="tdrow">{{ rp.occupation_status }}</td>
-                      <td class="tdrow">{{ rp.occupation_sector }}</td>
+                      <td class="tdrow-occu-sector">{{ rp.occupation_sector }}</td>
                       <td class="tdrow">{{ rp.accomodation }}</td>
                       <td class="tdrow">{{ rp.education_level }}</td>
                       <td class="tdrow">{{ rp.fee_exemption_status }}</td>
                       <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
                       <td class="tdrow">{{ rp.CATEGORY_OF_PATIENTS }}</td>
-                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
-                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
-                      <td class="tdrow">{{ rp.outcome }}</td>
-                      <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td>
-                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
-                      <td class="tdrow">{{ rp.category_of_services }}</td>
-                      <td class="tdrow">{{ rp.Attending_staff }}</td>
+                      <!-- <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td> -->
+                      <td class="tdrow"> Assistance / Supervision </td>      <!--TESTING-->                       
+                      <!-- <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td> -->
+                      <td class="tdrow-limit">Community Psychiatric Service (CPS)</td>  <!--TESTING-->
+                      <!-- <td class="tdrow">{{ rp.outcome }}</td> -->   
+                      <td class="tdrow-limit">Ongoing Therapeutic Intervention</td><!--TESTING-->
+                      <!-- <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td> -->
+                      <td class="tdrow">F20.4</td>
+                      <td class="tdrow-limit-diagnosis">ISP by and exposure to antiepileptics, sedative-hypnotic, antiparkisonism and psychotropic drugs, not elsewhere classified</td>
+                      <!-- <td class="tdrow">{{ rp.DIAGNOSIS }}</td> -->
+                      <!-- <td class="tdrow">{{ rp.category_of_services }}</td> -->
+                      <td class="tdrow-limit">Assistance / Supervision</td><!--TESTING-->
+                      <td class="tdrow-limit">{{ rp.Attending_staff }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -503,6 +512,11 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
   },
+  filters: {
+  short: function (value) {
+    return value.substr(0, 1); // just an example
+  }
+},
   methods: {
     async GetList() {
       try {
@@ -688,13 +702,25 @@ export default {
             console.log("my report", response.data);
             if (this.list.length > 0) {
               setTimeout(() => {
+
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "pt", "a2");
-                pdf.addHTML($("#result")[0], function () {
-                  pdf.save("Sharp_Report.pdf");
+                var pdf = new jsPDF("l", "pt", "A3");
+                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                //pdf.internal.scaleFactor =30;
+                var options = {
+                pagesplit: true
+
+            };
+
+                pdf.addHTML($("#result")[0],options, function () {
+                  pdf.save("Report.pdf");
                 });
+              
               }, 100);
+
               setTimeout(() => {
+
                 this.$refs.result.classList.add("hide");
               }, 100);
             } else {
@@ -767,32 +793,79 @@ export default {
 .tdrow {
   padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 9px;
+  font-size: 8.0px;
+  font-weight: 600;
+  }
+.tdrow-num{
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 9.0px;
   font-weight: 600;
 }
+  .tdrow-limit {
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 8.0px;
+  font-weight: 600;
+  word-wrap:break-word;
+  max-width:70px;
+
+  }
+  .tdrow-limit-diagnosis{
+    padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 8.0px;
+  font-weight: 600;
+  word-wrap:break-word;
+  max-width:80px;
+
+  }
+  .tdrow-occu-sector {
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 8.0px;
+  font-weight: 600;
+  word-wrap:break-word;
+  max-width:80px;
+
+  }
 .thhead {
   background: #ddd;
   padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 9px;
+  font-size: 8.0px;
+  line-height: normal;
+}
+.thhead-occu-sector{
+  background: #ddd;
+  padding: 5px 5px;
+  border: 1px solid #000;
+  text-transform: uppercase;
+  font-size: 8.0px;
+  max-width:80px;
+  line-height: normal;
+
 }
 .table {
   border: 1px solid rgb(0, 0, 0);
-  width: 100%;
+  width:fit-content;
   margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  
 }
 .tabhead {
   background: #ddd;
   padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 9px;
+  font-size: 6.5px;
 }
 .tabtd {
   padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 9px;
+  font-size: 6.5px;
   font-weight: 600;
 }
 .hide1 {
@@ -801,5 +874,6 @@ export default {
 }
 div#result {
   padding: 5px;
+
 }
 </style>
