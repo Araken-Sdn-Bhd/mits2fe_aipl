@@ -373,9 +373,7 @@ export default {
               }
             }            
           }
-          // tmp2 = tmp2.map(e=>e.toString());
-          console.log('tmpppp',tmp2);
-          // debugger;
+          
           tmp2.forEach((month) => {
             tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000; width: 200px;'>${
               months[parseInt(month) - 1]

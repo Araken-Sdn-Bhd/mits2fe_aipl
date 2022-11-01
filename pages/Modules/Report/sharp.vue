@@ -409,9 +409,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="tabtd">{{ currentDate() }}</td>
-                      <td class="tabtd">{{ count }}</td>
+                    <tr v-for="(tr, index) in totalResultlist" :key="index">
+                      <td class="tabtd">{{ tr.month }}</td>
+                      <td class="tabtd">{{ tr.total }}</td>
                     </tr>
                   </tbody>
                   <tfoot>
@@ -523,6 +523,7 @@ export default {
       age: "",
       count: 0,
       SidebarAccess:null,
+      totalResultlist: [],
     };
   },
   beforeMount() {
@@ -711,16 +712,27 @@ export default {
         console.log("my report", response.data);
         if (response.data.code == 200) {
           this.list = response.data.result;
-          this.count = response.data.result.length;
+          this.totalResultlist=response.data.Totalreport;
+          // this.count = response.data.result.length;
           if (this.list.length > 0) {
+            this.totalResultlist.forEach(element => {
+              this.count=this.count+element.total;
+            });
             setTimeout(() => {
               this.$refs.result.classList.remove("hide");
-              var pdf = new jsPDF("p", "pt", "a4");     //new jsPDF("p", "pt", "a4");
-              // var pdf = new jsPDF("p", "px", [1500, 1500]);
-             
-              pdf.addHTML($("#result")[0], function () {
-                pdf.save("Sharp_Report.pdf");
-              });
+               this.$refs.result.classList.remove("hide");
+                var pdf = new jsPDF("l", "pt", "A3");
+                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                //pdf.internal.scaleFactor =30;
+                var options = {
+                pagesplit: true
+
+            };
+
+                pdf.addHTML($("#result")[0],options, function () {
+                  pdf.save("Sharp_Report.pdf");
+                });
             }, 100);
             setTimeout(() => {
               this.$refs.result.classList.add("hide");
