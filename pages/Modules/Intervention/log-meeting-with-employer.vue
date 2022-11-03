@@ -65,7 +65,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Staff Name</label>
-                      <input type="text" class="form-control" v-model="staff_name" />
+                      <input type="text" class="form-control" v-model="staff_name" disabled/>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                                {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                              {{ catcode.icd_code }} {{catcode.icd_name}}
                               </option>
                             </select>
                           </div>
@@ -401,6 +401,8 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    //window.alert(JSON.stringify(this.userdetails.user.name));
+    this.staff_name = this.userdetails.user.name;
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -530,7 +532,7 @@ export default {
               sub_code_id: this.sub_code_id,
               complexity_of_services: this.complexity_services_id,
               outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
+              medication_des: this.medication_des,
             },
             { headers }
           );
@@ -699,7 +701,7 @@ export default {
       if (response.data.code == 200) {
         // window.alert(response.data.Data[0].patient_mrn_id);
 
-        this.Id = response.data.Data[0].patient_id;
+        this.pid = response.data.Data[0].patient_id;
         this.date = response.data.Data[0].date;
         this.employee_name = response.data.Data[0].employee_name;
         this.company_name = response.data.Data[0].company_name;
@@ -714,7 +716,7 @@ export default {
         this.services_id = response.data.Data[0].services_id;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
-        this.complexity_of_services_id =
+        this.complexity_services_id =
           response.data.Data[0].complexity_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.medication_des = response.data.Data[0].medication_des;

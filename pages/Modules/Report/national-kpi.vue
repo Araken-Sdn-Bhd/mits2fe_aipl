@@ -8,6 +8,11 @@
           <div class="container-fluid px-4">
             <div class="page-title">
               <h1>Report</h1>
+               <img src="~/assets/images/tab1.jpg" style="display: none">
+               <img src="~/assets/images/tab2.jpg" style="display: none">
+               <img src="~/assets/images/tab3.jpg" style="display: none">
+               <img src="~/assets/images/tab4.jpg" style="display: none">
+               <img src="~/assets/images/tab5.jpg" style="display: none">
             </div>
 
             <div class="card mb-4">
@@ -95,9 +100,9 @@
             <table id="datatable">
               <thead>
                 <tr class="bg">
-                  <td rowspan="3">Bil</td>
-                  <td rowspan="3">Mentari</td>
-                  <td colspan="15">2022</td>
+                  <td rowspan="3" style="border-right: 0.1em solid #000;">Bil</td>
+                  <td rowspan="3" style="border-left: 1px solid #000;">Mentari</td>
+                  <td colspan="45">2022</td>
                 </tr>
 
                 <tr class="bg" id="tableMonths"></tr>
@@ -186,8 +191,8 @@ export default {
   data() {
     return {
       userdetails: null,
-      fromDate: "2022-04-12", //2022-04-12
-      toDate: "2022-08-30", //2022-07-30
+      fromDate: "", //2022-04-12
+      toDate: "", //2022-08-30
       error: null,
       listKey: [],
       list: {},
@@ -330,23 +335,23 @@ export default {
                 }
 
                 tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500;display: block;float: left;width: 40px;'>" +
+                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
                   response.data.result[user][year][month]["new_job"] +
                   "</td>";
                 tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500;display: block;float: left;width: 40px;'>" +
+                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
                   response.data.result[user][year][month]["ongoing_job"] +
                   "</td>";
                 tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500;display: block;float: left;width: 40px;'>" +
+                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
                   response.data.result[user][year][month]["total_caseload"] +
                   "</td>";
                 tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500;display: block;float: left;width: 40px;'>" +
+                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
                   response.data.result[user][year][month]["total_dismissed"] +
                   "</td>";
                 tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500;display: block;float: left;width: 40px;'>" +
+                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
                   response.data.result[user][year][month]["kpi"] +
                   "</td>";
 
@@ -357,15 +362,27 @@ export default {
           });
 
           var tmp2 = Object.keys(response.data.result[maxUser][maxMonth]);
+          console.log('result22',response.data.result[maxUser]);
+          // tmp2 = tmp2.map(e=>int.parse(e));
+          for (let ii = 0; ii < tmp2.length; ii++) {
+            for (let jj = 0; jj < tmp2.length; jj++) {
+              if(parseInt(tmp2[ii])<parseInt(tmp2[jj])){
+                var tmp = tmp2[ii];
+                tmp2[ii]=tmp2[jj];
+                tmp2[jj]=tmp;
+              }
+            }            
+          }
+          
           tmp2.forEach((month) => {
-            tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000;    border-bottom: 1px solid #000;float: left;width: 200px;'>${
+            tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000; width: 200px;'>${
               months[parseInt(month) - 1]
             }</td>`;
-            tab1.innerHTML += `<td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Newly Job Place(a)</td>
-                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>ongoing Job Placement(b)</td>
-                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Caseload(c)</td>
-                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;'>Total Dismissed(d)</td>
-                              <td style='writing-mode :vertical-lr;text-orientation: mixed;    border-bottom: 1px solid #000; border-right: 1px solid #000;padding: 5px;font-weight: 500;display: block;float: left;width: 40px;height: 240px;' class='fifth-td'>KPI(%)</td>`;
+            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 249px;'> <img src="/_nuxt/assets/images/tab5.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab1.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab2.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab3.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;' class='fifth-td'><img src="/_nuxt/assets/images/tab4.jpg" style='width: 40px;'/></td>`;
           });
 
           if (response.data.code == 200) {

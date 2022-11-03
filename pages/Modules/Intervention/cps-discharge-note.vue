@@ -44,7 +44,7 @@
                           v-bind:key="catcode.id"
                           v-bind:value="catcode.id"
                         >
-                          {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
                         </option>
                       </select>
                     </td>
@@ -103,9 +103,9 @@
                     </td>
                   </tr>
 
-                 
 
-              
+
+
                      <tr v-if="!pid">
                     <th class="vertical-align-top">Psychopathology</th>
                     <td>
@@ -340,7 +340,7 @@
                       </div>
                     </td>
                   </tr>
-              
+
                      <tr v-if="pid">
                     <th class="vertical-align-top">Psychopathology</th>
                     <td v-for="(phys,index) in phylist" :key="index">
@@ -402,7 +402,7 @@
 
                     </td>
                   </tr>
-                
+
                   <tr >
                     <th>Category Of Discharge:</th>
                     <td>
@@ -433,7 +433,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                       </select>
                     </td>
@@ -506,7 +506,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -598,7 +598,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -775,7 +775,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-    
+
     if (this.Id) {
       this.staff_name = this.userdetails.user.name;
       this.GetList();
@@ -787,7 +787,7 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
-    
+
   },
   data() {
     return {
@@ -955,7 +955,7 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-       
+
         if (!this.specialist_name) {
           this.errorList.push("Specialist Name is required");
         }
@@ -1289,7 +1289,7 @@ export default {
         this.mrn = response.data.Data[0].mrn;
         this.cps_discharge_date = response.data.Data[0].cps_discharge_date;
         this.staff_name = response.data.Data[0].staff_name;
-        this.diagnosis_id = response.data.Data[0].diagnosis;
+        this.diagnosis_id = parseInt(response.data.Data[0].diagnosis);
         this.post_intervention = response.data.Data[0].post_intervention;
         this.psychopathology = response.data.Data[0].psychopathology;
         this.phylist = this.psychopathology.split(",");
@@ -1317,8 +1317,8 @@ export default {
         this.date = response.data.Data[0].date;
         this.case_manager = response.data.Data[0].case_manager;
         this.GetList();
-        
-    
+
+
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
@@ -1326,11 +1326,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }

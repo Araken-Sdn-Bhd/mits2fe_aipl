@@ -138,7 +138,7 @@
                           v-bind:key="catcode.id"
                           v-bind:value="catcode.id"
                         >
-                          {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
                         </option>
                       </select>
                     </td>
@@ -166,7 +166,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>NO. of Admission :</th>
+                    <th>No. Of Admission :</th>
                     <td>
                       <input
                         type="text"
@@ -205,7 +205,7 @@
                           type="checkbox"
                           id="inlineCheckbox1"
                           value="NMS"
-                          @click="OnAlert('NMS')" 
+                          @click="OnAlert('NMS')"
                         />
                         <label class="form-check-label" for="inlineCheckbox1"
                           >NMS</label
@@ -1000,7 +1000,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -1092,7 +1092,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -1220,9 +1220,9 @@
                     <i class="far fa-paper-plane"></i> Submit
                   </button>
                 </div>
-              
-              
-              
+
+
+
               </div>
             </div>
           </div>
@@ -1270,7 +1270,7 @@
                           id="exampleRadios1"
                           v-model="patient_referred_for"
                           value="Consultation/Screening"
-                          
+
                         />
                         <label class="form-check-label" for="exampleRadios1">
                           Consultation/Screening
@@ -1355,7 +1355,7 @@
                           v-bind:key="catcode.id"
                           v-bind:value="catcode.id"
                         >
-                          {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
                         </option>
                       </select>
                     </td>
@@ -1422,7 +1422,7 @@
                           type="checkbox"
                           id="inlineCheckbox1"
                           value="NMS"
-                          @click="OnAlert('NMS')" 
+                          @click="OnAlert('NMS')"
                         />
                         <label class="form-check-label" for="inlineCheckbox1"
                           >NMS</label
@@ -2217,7 +2217,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -2309,7 +2309,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -2437,9 +2437,9 @@
                     <i class="far fa-paper-plane"></i> Submit
                   </button>
                 </div>
-              
-              
-              
+
+
+
               </div>
             </div>
           </div>
@@ -2988,11 +2988,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
 
       } else {
         window.alert("Something went wrong");
