@@ -135,7 +135,7 @@
                         v-bind:key="des.id"
                         v-bind:value="des.id"
                       >
-                        {{ des.designation_name }}
+                        {{ des.section_value }}
                       </option>
                     </select>
                   </div>
