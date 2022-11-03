@@ -5,6 +5,7 @@
       <CommonHeaderEmployer />
       <main>
            <Loader v-if="loader" />
+          
         <div class="container-fluid px-4">
           
           <div class="card mb-4">
@@ -13,7 +14,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form class="ml-5">
+              
                     
                 <div class="row">
                         <div class="col-sm-5">
@@ -384,7 +385,7 @@
                   </div>
                 </div>
                       
-              </form>
+            
             
             </div>
           </div>
@@ -394,7 +395,7 @@
 
           <div class="card mb-4">
             <div class="card-body">
-              <form class="ml-5">
+              
                       <div class="row">
                         <div class="col-sm-5">
                           <div class="mb-3">
@@ -441,18 +442,63 @@
                           </div>
                         </div>
                       </div>
-              </form>
+           
             </div>
           </div>
           <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
                     <div class="d-flex">
-                      <button type="submit" class="next-1 btn btn-warning btn-text ml-auto" @submit.prevent="OnAddContactPerson">
-                        <i class="far fa-save"></i> Save
+                      <button type="submit" class="next-1 btn btn-warning btn-text ml-auto" v-on:click="OnUpdateCompany">
+                        <i class="far fa-save"></i> update
                       </button>
                     </div>
         </div>
         </div>
 
+        <div class="container-fluid px-4">
+          
+          <div class="card mb-4">
+            <div class="page-title"><h1>Login Information</h1></div>
+
+            <div class="card mb-4">
+            <div class="card-body">
+              <form class="ml-5">
+                <div class="row">
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Enter Email for login"
+                              v-model="email_login"
+                            />
+                          </div>
+                        </div>
+                  
+                        <div class="col-sm-5">
+                          <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Enter New Password"
+                              v-model="newpwd_login"
+                            />
+                          </div>
+                        </div>
+                </div>
+                <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
+                    <div class="d-flex">
+                      <button type="submit" class="next-1 btn btn-warning btn-text ml-auto">
+                        <i class="far fa-save"></i> update
+                      </button>
+                    </div>
+                </form>
+                </div>
+                </div>
+
+          </div>
+          </div>
       </main>
       <intervention-footer></intervention-footer>
     </div>
@@ -500,13 +546,17 @@ export default {
       contact_name:"",
       contact_number:"",
       contact_email:"",
-      contact_position:""
+      contact_position:"",
+
+      email_login:"",
+      newpwd_login:"",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+   
     this.company_name = this.userdetails.user.name;
-    this.contact_email = this.userdetails.user.email;
+    this.email_login = this.userdetails.user.email;
     this.GetStateList();
     $(document).ready(function () {
       $(".next-1").click(function (e) {
@@ -586,7 +636,7 @@ export default {
       }
 
     },
-    async OnCompanyAdd() {
+    async OnUpdateCompany() {
       this.errorList = [];
       try {
         if (!this.company_name) {
@@ -600,9 +650,6 @@ export default {
         }
         if (!this.state_id) {
           this.errorList.push("State is required");
-        }
-        if (!this.city_id) {
-          this.errorList.push("City is required");
         }
         if (!this.postcode) {
           this.errorList.push("Postcode is required");
@@ -622,9 +669,8 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "intervention-company/add",
+            "intervention-company/update",
             {
-              type: "add",
               added_by: this.userdetails.user.id,
               company_name: this.company_name,
               company_registration_number: this.company_registration_number,
@@ -632,7 +678,7 @@ export default {
               company_address_2: this.company_address_2,
               company_address_3: this.company_address_3,
               state_id: this.state_id,
-              city_id: this.city_id,
+              city_id: this.postcode, // city share same id with postcode
               postcode: this.postcode,
               corporate_body_sector: JSON.stringify([
                 {
