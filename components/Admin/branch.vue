@@ -92,6 +92,25 @@
 
           <div class="row mt-4">
             <div class="col-md-6">
+              <label for="" class="form-label">City</label>
+              <select
+                v-model="City"
+                class="form-select"
+                aria-label="Default select example"
+                @change="onPostbind($event)"
+              >
+                 <option value="0">Please Select</option>
+                <option
+                  v-for="ctl in CityList"
+                  v-bind:key="ctl.city_name"
+                  v-bind:value="ctl.city_name"
+                >
+                  {{ ctl.city_name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
               <label for="" class="form-label">Post Code</label>
               <select
                 v-model="PostCode"
@@ -105,24 +124,6 @@
                   v-bind:value="pst.postcode_id"
                 >
                   {{ pst.postcode }}
-                </option>
-              </select>
-            </div>
-
-            <div class="col-md-6">
-              <label for="" class="form-label">City</label>
-              <select
-                v-model="City"
-                class="form-select"
-                aria-label="Default select example"
-              >
-                 <option value="0">Please Select</option>
-                <option
-                  v-for="ctl in CityList"
-                  v-bind:key="ctl.postcode_id"
-                  v-bind:value="ctl.postcode_id"
-                >
-                  {{ ctl.city_name }}
                 </option>
               </select>
             </div>
@@ -385,7 +386,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "address/" + event.target.value + "/stateWisePostcodeList",
+        "address/" + event.target.value + "/getCityList",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -393,6 +394,21 @@ export default {
         this.PostCodeList = response.data.list;
       } else {
         this.CityList = [];
+        this.PostCodeList = [];
+      }
+    },
+    async onPostbind(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.PostCodeList = response.data.list;
+      } else {
         this.PostCodeList = [];
       }
     },
@@ -451,7 +467,7 @@ export default {
         if (!this.BranchName) {
           this.errors.push("Branch Name is required.");
         }
-  
+
         if (!this.IsHeadquator) {
           this.IsHeadquator = 0;
         }else{
@@ -551,8 +567,8 @@ export default {
               }else{
                 this.IsHeadquator = 1;
               }
-             
-           
+
+
             const response = await this.$axios.post(
               "hospital/updateHospitalBranch",
               {

@@ -151,7 +151,7 @@
                   />
                   <Error :message="emailerror" v-if="emailerror" />
                 </div>
-                  
+
               </div>
               <!-- close-row -->
 
@@ -278,6 +278,25 @@
 
                   <div class="row mt-4">
                     <div class="col-md-6">
+                      <label for="" class="form-label">City</label>
+                      <select
+                        v-model="hospital_city"
+                        class="form-select"
+                        aria-label="Default select example"
+                        @change="onpostCodebind($event)"
+                      >
+                        <option value="0">Please Select</option>
+                        <option
+                          v-for="ctl in citylist"
+                          v-bind:key="ctl.city_name"
+                          v-bind:value="ctl.city_name"
+                        >
+                          {{ ctl.city_name }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
                       <label for="" class="form-label">Post Code</label>
                       <select
                         v-model="hospital_postcode"
@@ -291,24 +310,6 @@
                           v-bind:value="pst.postcode_id"
                         >
                           {{ pst.postcode }}
-                        </option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label for="" class="form-label">City</label>
-                      <select
-                        v-model="hospital_city"
-                        class="form-select"
-                        aria-label="Default select example"
-                      >
-                        <option value="0">Please Select</option>
-                        <option
-                          v-for="ctl in citylist"
-                          v-bind:key="ctl.postcode_id"
-                          v-bind:value="ctl.postcode_id"
-                        >
-                          {{ ctl.city_name }}
                         </option>
                       </select>
                     </div>
@@ -342,7 +343,7 @@
                       @blur="validateHospitalEmail"
                     />
                     <!-- <a href="#"><i class="far fa-plus"></i></a> -->
-                    
+
                   </div>
                    <Error :message="hsptlemailerror" v-if="hsptlemailerror" />
                 </div>
@@ -384,7 +385,7 @@
     </div>
     <!-- accordion -->
 
-   
+
 
     <div class="table-title">
       <h3>List of Hospital</h3>
@@ -586,7 +587,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "address/" + event.target.value + "/stateWisePostcodeList",
+        "address/" + event.target.value + "/getCityList",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -594,6 +595,21 @@ export default {
         this.postcodelist = response.data.list;
       } else {
         this.citylist = [];
+        this.postcodelist = [];
+      }
+    },
+    async onpostCodebind(event) {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + event.target.value + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
         this.postcodelist = [];
       }
     },
