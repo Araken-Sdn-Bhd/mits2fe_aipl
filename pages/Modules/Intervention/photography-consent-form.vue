@@ -231,6 +231,7 @@
                           type="checkbox"
                           value="1"
                           id="flexCheckDefault"
+                          checked
                           v-model="photography_consent_form_agree"
                         />
                         <label class="form-check-label" for="flexCheckDefault">
@@ -324,7 +325,16 @@
                     <th>Applicant:</th>
                     <th>Witness:</th>
                   </tr>
-
+                  <tr>
+                    <td>
+                      <textarea class="signature"></textarea>
+                      <p class="text-align-center">Signature Patient/Guardian</p>
+                    </td>
+                    <td>
+                     <textarea class="signature"></textarea>
+                      <p class="text-align-center">Signature Witness</p>
+                      </td>
+                  </tr>
                   <tr>
                     <td>
                       <table>
