@@ -306,8 +306,8 @@
                         <option value="0">Please Select</option>
                         <option
                           v-for="pst in postcodelist"
-                          v-bind:key="pst.postcode_id"
-                          v-bind:value="pst.postcode_id"
+                          v-bind:key="pst.id"
+                          v-bind:value="pst.id"
                         >
                           {{ pst.postcode }}
                         </option>
