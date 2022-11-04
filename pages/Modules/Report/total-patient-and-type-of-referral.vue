@@ -159,7 +159,7 @@
                             <tbody>
                               <tr v-if="Visit_Type">
                                 <td class="bottom-border-0">{{ Visit_Type.New }}</td>
-                                <td class="bottom-border-0">0</td>
+                                <td class="bottom-border-0">{{ Visit_Type.Follow_Up }}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -349,10 +349,22 @@ export default {
               this.Total_Patient = response.data.Total_Patient;
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("p", "pt", "a4");
-                pdf.addHTML($("#result")[0], function () {
+                var pdf = new jsPDF("l", "pt", "A3");
+                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                //pdf.internal.scaleFactor =30;
+                var options = {
+                pagesplit: true
+
+            };
+
+                pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("Report.pdf");
                 });
+                // var pdf = new jsPDF("p", "pt", "a4");
+                // pdf.addHTML($("#result")[0], function () {
+                //   pdf.save("Report.pdf");
+                // });
               }, 100);
               setTimeout(() => {
                   this.$refs.result.classList.add("hide");
