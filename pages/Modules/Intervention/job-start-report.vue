@@ -41,11 +41,21 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Case Manager</label>
-                      <input
-                        type="text"
-                        class="form-control"
+                      <select
+                        class="form-select"
                         v-model="case_manager"
-                      />
+                      >
+                        <option value="0">
+                          Select Case Manager
+                        </option>
+                        <option
+                          v-for="cm in casemanagerlist"
+                          v-bind:key="cm.id"
+                          v-bind:value="cm.id"
+                        >
+                          {{ cm.name }}
+                        </option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -69,16 +79,11 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Job Title</label>
-                      <select class="form-select" v-model="job_title">
-                        <option value="">Select Job Title</option>
-                        <option
-                          v-for="title in titlelist"
-                          v-bind:key="title.id"
-                          v-bind:value="title.id"
-                        >
-                          {{ title.job_title }}
-                        </option>
-                      </select>
+                      <input
+                        type="date"
+                        class="form-control"
+                        v-model="job_title"
+                      />
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -169,16 +174,27 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Name of Employer </label>
-                      <input
-                        type="text"
-                        class="form-control"
+                      <select
+                        class="form-select"
                         v-model="name_of_employer"
-                      />
+                        @change="getAddress($event)"
+                      >
+                        <option value="0">
+                          Select Case Manager
+                        </option>
+                        <option
+                          v-for="emp in employerlist"
+                          v-bind:key="emp.id"
+                          v-bind:value="emp.id"
+                        >
+                          {{ emp.contact_name }}
+                        </option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Name of Superviser </label>
+                      <label class="form-label">Name of Supervisor </label>
                       <input
                         type="text"
                         class="form-control"
@@ -195,6 +211,7 @@
                       <textarea
                         class="form-control textarea"
                         v-model="address"
+                        disabled
                       ></textarea>
                     </div>
                   </div>
@@ -363,7 +380,7 @@
                                   v-bind:key="catcode.id"
                                   v-bind:value="catcode.id"
                                 >
-                                   {{ catcode.icd_code }} 
+                                   {{ catcode.icd_code }}
  {{catcode.icd_name}}
                                 </option>
                               </select>
@@ -504,6 +521,8 @@ export default {
       diagonisislist: [],
       locationlist: [],
       titlelist: [],
+      casemanagerlist: [],
+      employerlist:[],
       Id: 0,
       client: "",
       employment_specialist: "",
@@ -517,7 +536,7 @@ export default {
       disclosure: "",
       name_of_employer: "",
       name_of_superviser: "",
-      address: "",
+      address: "-",
       location_services_id: 0,
       type_diagnosis_id: 0,
       category_services: "",
@@ -548,7 +567,7 @@ export default {
     if(this.Id){
 this.GetPatientdetails();
     }
-    
+
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -573,6 +592,23 @@ this.GetPatientdetails();
       );
       if (response.data.code == 200) {
         this.client = response.data.list[0].name_asin_nric;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+    async getAddress(event){
+        const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "job-companies/getListById?id="+this.name_of_employer,
+        { headers }
+      );
+      alert (JSON.stringify(response));
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.address = response.data.list;
       } else {
         window.alert("Something went wrong");
       }
@@ -822,6 +858,16 @@ this.GetPatientdetails();
       } else {
         this.externallist = [];
       }
+      const response7 = await this.$axios.get(
+        "staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
+        headers,
+      });
+      this.casemanagerlist = response7.data.list;
+      const response8 = await this.$axios.get(
+        "job-companies/list", {
+        headers,
+      });
+      this.employerlist = response8.data.list;
     },
     async onCategorycodebind(event) {
       const headers = {
