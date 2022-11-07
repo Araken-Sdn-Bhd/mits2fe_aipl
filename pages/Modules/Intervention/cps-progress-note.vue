@@ -75,7 +75,7 @@
                         aria-label="Default select example"
                         v-model="cps_discussed_with"
                       >
-                        <option value="">Please Select1</option>
+                        <option value="">Please Select</option>
                         <option
                           v-for="role in rolelist"
                           v-bind:key="role.id"
@@ -162,7 +162,7 @@
                         aria-label="Default select example"
                         v-model="case_manager"
                       >
-                        <option value="">Please Select2</option>
+                        <option value="">Please Select</option>
                         <option
                           v-for="stf in stafflist"
                           v-bind:key="stf.id"
@@ -3157,7 +3157,7 @@ export default {
     },
     async GetstaffList() {
       const headers = {
-        Authorization: "Bearer " + this.token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
