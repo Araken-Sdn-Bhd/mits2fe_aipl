@@ -41,11 +41,21 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Case Manager</label>
-                      <input
-                        type="text"
-                        class="form-control"
+                      <select
+                        class="form-select"
                         v-model="case_manager"
-                      />
+                      >
+                        <option value="0">
+                          Select Case Manager
+                        </option>
+                        <option
+                          v-for="cm in casemanagerlist"
+                          v-bind:key="cm.id"
+                          v-bind:value="cm.id"
+                        >
+                          {{ cm.name }}
+                        </option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -69,16 +79,11 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Job Title</label>
-                      <select class="form-select" v-model="job_title">
-                        <option value="">Select Job Title</option>
-                        <option
-                          v-for="title in titlelist"
-                          v-bind:key="title.id"
-                          v-bind:value="title.id"
-                        >
-                          {{ title.job_title }}
-                        </option>
-                      </select>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="job_title"
+                      />
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -128,8 +133,44 @@
                   </div>
                 </div>
                 <!-- close-row -->
-
+                <div v-if=" this.type == 'view' ">
                 <div class="row mb-3">
+                  <label class="form-label">Disclosure</label>
+                  <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio11"
+                        value="Yes"
+                        v-model="disclosure"
+                        checked
+                      />
+                      <label class="form-check-label" for="inlineRadio11"
+                        >Yes - worker has agreed to employer contact and has
+                        signed a release</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio22"
+                        value="No"
+                        v-model="disclosure"
+                      />
+                      <label class="form-check-label" for="inlineRadio22"
+                        >No - worker does not want employer contact
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="row mb-3" v-if="this.type != 'view'">
                   <label class="form-label">Disclosure</label>
                   <div class="col-sm-6">
                     <div class="form-check form-check-inline">
@@ -178,7 +219,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Name of Superviser </label>
+                      <label class="form-label">Name of Supervisor </label>
                       <input
                         type="text"
                         class="form-control"
@@ -363,7 +404,7 @@
                                   v-bind:key="catcode.id"
                                   v-bind:value="catcode.id"
                                 >
-                                   {{ catcode.icd_code }} 
+                                   {{ catcode.icd_code }}
  {{catcode.icd_name}}
                                 </option>
                               </select>
@@ -504,6 +545,8 @@ export default {
       diagonisislist: [],
       locationlist: [],
       titlelist: [],
+      casemanagerlist: [],
+      employerlist:[],
       Id: 0,
       client: "",
       employment_specialist: "",
@@ -548,7 +591,7 @@ export default {
     if(this.Id){
 this.GetPatientdetails();
     }
-    
+
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -573,6 +616,22 @@ this.GetPatientdetails();
       );
       if (response.data.code == 200) {
         this.client = response.data.list[0].name_asin_nric;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+    async getAddress(event){
+        const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "job-companies/getListById?id="+this.name_of_employer,
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.address = JSON.stringify(response.data.list[0].company_address_1+response.data.list[0].company_address_2+response.data.list[0].company_address_3+","+response.data.list[0].postcode);
       } else {
         window.alert("Something went wrong");
       }
@@ -822,6 +881,16 @@ this.GetPatientdetails();
       } else {
         this.externallist = [];
       }
+      const response7 = await this.$axios.get(
+        "staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
+        headers,
+      });
+      this.casemanagerlist = response7.data.list;
+      const response8 = await this.$axios.get(
+        "job-companies/list", {
+        headers,
+      });
+      this.employerlist = response8.data.list;
     },
     async onCategorycodebind(event) {
       const headers = {

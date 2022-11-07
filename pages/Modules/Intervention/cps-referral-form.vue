@@ -731,6 +731,8 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    this.referalname = this.userdetails.user.name;
+    this.designation = this.userdetails.user.role;
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");

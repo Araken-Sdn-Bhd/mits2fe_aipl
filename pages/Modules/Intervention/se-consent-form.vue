@@ -38,7 +38,7 @@
                           for="flexCheckDefault"
                         >
                           I hereby agree to participate in supported employment
-                          program,[{{ this.branchName }}]. I also agree to
+                          program,<strong>[{{ this.branchName }}]</strong>. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -127,13 +127,14 @@
                 <tbody>
                   <tr>
                     <td colspan="2">
-                      I agree and consent for  [{{ this.branchName }}] to
+                      I agree and consent for  <strong>[{{ this.branchName }}]</strong> to
                       disclose my medical record to employee and will not
                       subjected to any act related uder the law.
                     </td>
                   </tr>
                   <tr>
                     <td colspan="2">
+                      <div v-if="this.type != 'view'">
                       <div class="form-check form-check-inline mt-2">
                         <input
                           class="form-check-input"
@@ -157,6 +158,63 @@
                         <label class="form-check-label" for="inlineRadio2"
                           >No
                         </label>
+                      </div>
+                      </div>
+                      <div v-if="this.type == 'view'">
+                        <div v-if="this.discloser == 1">
+                          <div class="form-check form-check-inline mt-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio1"
+                            value="1" v-model="discloser"
+                            true
+                          />
+                          <label class="form-check-label" for="inlineRadio1"
+                            >Yes
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline mt-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio2"
+                            value="0" v-model="discloser"
+                          />
+                          <label class="form-check-label" for="inlineRadio2"
+                            >No
+                          </label>
+                        </div>
+                        </div>
+                        <div v-if="this.discloser == 0">
+                        <div class="form-check form-check-inline mt-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio1"
+                            value="1" v-model="discloser"
+                          />
+                          <label class="form-check-label" for="inlineRadio1"
+                            >Yes
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline mt-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio2"
+                            value="0" v-model="discloser"
+                            true
+                          />
+                          <label class="form-check-label" for="inlineRadio2"
+                            >No
+                          </label>
+                        </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -248,7 +306,7 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
 
@@ -273,6 +331,7 @@
                           class="form-check-input"
                           type="checkbox"
                           value=""
+                          checked
                           id="flexCheckDefault" v-model="participant"
                         />
                         <label
@@ -299,7 +358,7 @@
                       </td>
                   </tr>
                   <tr>
-                    
+
                     <td>
                       <table class="mt-3">
                         <tbody>
@@ -316,7 +375,7 @@
                           <tr>
                             <th>Witness:</th>
                             <td>{{ consentdetails.user_name }}</td>
-                            
+
                           </tr>
                         </tbody>
                       </table>
@@ -382,6 +441,34 @@
                   </tr>
                   <tr>
                     <td colspan="2">
+                      <div v-if="this.discloser == 1">
+                        <div class="form-check form-check-inline mt-2">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="1" v-model="discloser"
+                          checked
+                        />
+                        <label class="form-check-label" for="inlineRadio1"
+                          >Yes
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline mt-2">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="0" v-model="discloser"
+                        />
+                        <label class="form-check-label" for="inlineRadio2"
+                          >No
+                        </label>
+                      </div>
+                      </div>
+                      <div v-if="this.discloser == 0">
                       <div class="form-check form-check-inline mt-2">
                         <input
                           class="form-check-input"
@@ -401,10 +488,12 @@
                           name="inlineRadioOptions"
                           id="inlineRadio2"
                           value="0" v-model="discloser"
+                          checked
                         />
                         <label class="form-check-label" for="inlineRadio2"
                           >No
                         </label>
+                      </div>
                       </div>
                     </td>
                   </tr>
@@ -493,7 +582,7 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
             <div class="d-flex" v-if="!pid">

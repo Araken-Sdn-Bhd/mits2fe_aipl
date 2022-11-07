@@ -53,7 +53,6 @@
                           id="exampleRadios1"
                           v-model="patient_referred_for"
                           value="Consultation/Screening"
-                          checked
                         />
                         <label class="form-check-label" for="exampleRadios1">
                           Consultation/Screening
@@ -131,7 +130,7 @@
                   <tr>
                     <th>Diagnosis:</th>
                     <td>
-                      <select class="form-select" v-model="diagnosis">
+                      <select class="form-select" v-model="diagnosis" :disabled = "isDisabled">
                         <option value="">Please Select</option>
                         <option
                           v-for="catcode in diagonisislist"
@@ -151,6 +150,7 @@
                         class="form-control"
                         name=""
                         v-model="date_onset"
+                        :disabled = "isDisabled"
                       />
                     </td>
                   </tr>
@@ -162,6 +162,7 @@
                         class="form-control"
                         name=""
                         v-model="date_of_referral"
+                        :disabled = "isDisabled"
                       />
                     </td>
                   </tr>
@@ -173,6 +174,7 @@
                         class="form-control"
                         name=""
                         v-model="no_of_admission"
+                        :disabled = "isDisabled"
                       />
                     </td>
                   </tr>
@@ -184,6 +186,7 @@
                         class="form-control"
                         name=""
                         v-model="latest_admission_date"
+                        :disabled = "isDisabled"
                       />
                     </td>
                   </tr>
@@ -201,6 +204,7 @@
                     <td v-if="!pid">
                       <div class="form-check form-check-inline">
                         <input
+                        :disabled = "isDisabled"
                           class="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox1"
@@ -213,6 +217,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        :disabled = "isDisabled"
                           class="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
@@ -225,6 +230,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input
+                        :disabled = "isDisabled"
                           class="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox3"
@@ -254,7 +260,7 @@
                   <tr>
                     <th>Education Level:</th>
                     <td>
-                      <select class="form-select" v-model="education_level">
+                      <select class="form-select" v-model="education_level" :disabled = "isDisabled">
                         <option value="">Please Select</option>
                         <option
                           v-for="edu in settinglist"
@@ -500,7 +506,7 @@
                   <tr>
                     <th>Age First Started:</th>
                     <td>
-                      <input type="text" class="form-control" name="" v-model="age_first_started" />
+                      <input type="text" class="form-control" name="" v-model="age_first_started" :disabled = "isDisabled"/>
                     </td>
                   </tr>
                   <tr>
@@ -973,17 +979,18 @@
                             <select
                               class="form-select"
                               v-model="location_services_id"
+                              :disabled = "isDisabled"
                             >
                               <option value="0">
                                 Select location of services
                               </option>
                              <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
+                                v-for="loc in locationlist"
+                                v-bind:key="loc.id"
+                                v-bind:value="loc.id"
+                              >
+                                {{ loc.section_value }}
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -993,15 +1000,15 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" :disabled = "isDisabled">
                                 <option value="0">Select Diagnosis</option>
                                 <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                                  v-for="catcode in diagonisislist"
+                                  v-bind:key="catcode.id"
+                                  v-bind:value="catcode.id"
+                                >
+                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                </option>
                               </select>
                           </div>
                         </div>
@@ -1058,15 +1065,15 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
-                              <select class="form-select" v-model="services_id">
+                              <select class="form-select" v-model="services_id" :disabled = "isDisabled">
                                  <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in assistancelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
+                                  <option
+                                    v-for="slt in assistancelist"
+                                    v-bind:key="slt.id"
+                                    v-bind:value="slt.id"
+                                  >
+                                    {{ slt.section_value }}
+                                  </option>
                               </select>
                             </div>
                           </div>
@@ -1076,7 +1083,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">ICD 9 CODE</label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
+                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)" :disabled = "isDisabled">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
              {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -1085,16 +1092,16 @@
                             </div>
                             <div class="col-md-6 mb-3">
                               <label class="form-label">ICD 9 SUB CODE</label>
-                              <select class="form-select" v-model="sub_code_id">
+                              <select class="form-select" v-model="sub_code_id" :disabled = "isDisabled">
                                 <option value="0">Select sub code</option>
                                 <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }}
- {{catcode.icd_name}}
-            </option>
+                                    v-for="catcode in icdcatcodelist"
+                                    v-bind:key="catcode.id"
+                                    v-bind:value="catcode.id"
+                                  >
+                                    {{ catcode.icd_code }}
+                                      {{catcode.icd_name}}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -1104,15 +1111,15 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
-                              <select class="form-select" v-model="serviceid">
+                              <select class="form-select" v-model="serviceid" :disabled = "isDisabled">
                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in externallist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
+                                <option
+                                  v-for="slt in externallist"
+                                  v-bind:key="slt.id"
+                                  v-bind:value="slt.id"
+                                >
+                                  {{ slt.section_value }}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -1127,30 +1134,31 @@
                             <select
                               class="form-select"
                               v-model="complexity_services"
+                              :disabled = "isDisabled"
                             >
                               <option value="0">
                                 Select Complexity Of Service
                               </option>
-                      <option
-                        v-for="cm in comlexcitylist"
-                        v-bind:key="cm.id"
-                        v-bind:value="cm.id"
-                      >
-                        {{ cm.section_value }}
-                      </option>
+                              <option
+                                v-for="cm in comlexcitylist"
+                                v-bind:key="cm.id"
+                                v-bind:value="cm.id"
+                              >
+                                {{ cm.section_value }}
+                              </option>
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome</label>
-                            <select class="form-select" v-model="outcome_id">
+                            <select class="form-select" v-model="outcome_id" :disabled = "isDisabled">
                               <option value="0">Select outcome</option>
-                      <option
-                        v-for="out in outcomelist"
-                        v-bind:key="out.id"
-                        v-bind:value="out.id"
-                      >
-                        {{ out.section_value }}
-                      </option>
+                              <option
+                                v-for="out in outcomelist"
+                                v-bind:key="out.id"
+                                v-bind:value="out.id"
+                              >
+                                {{ out.section_value }}
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -1184,6 +1192,7 @@
                         <textarea v-model="medication_prescription"
                           class="form-control textarea"
                           placeholder="Please Type Prescription Here"
+                          :disabled = "isDisabled"
                         ></textarea>
                       </div>
                     </div>
@@ -1195,11 +1204,11 @@
                 <tbody>
                   <tr>
                     <th>Referrer Name:</th>
-                    <td><input type="text" class="form-control" name="" v-model="referral_name"/></td>
+                    <td><input type="text" class="form-control" name="" v-model="referral_name" :disabled = "isDisabled"/></td>
                   </tr>
                   <tr>
                     <th>Designation:</th>
-                    <td><input type="text" class="form-control" name="" v-model="designation"/></td>
+                    <td><input type="text" class="form-control" name="" v-model="designation" :disabled = "isDisabled"/></td>
                   </tr>
                 </tbody>
               </table>
@@ -1261,7 +1270,7 @@
                   </tr>
                   <tr>
                     <th>Referred For:</th>
-                    <td>
+                    <td v-if="this.type != 'view'">
                       <div class="form-check">
                         <input
                           class="form-check-input"
@@ -1328,6 +1337,9 @@
                           ETP*
                         </label>
                       </div>
+                    </td>
+                    <td v-else-if="this.type == 'view'">
+                      {{ this.patient_referred_for }}
                     </td>
                   </tr>
                   <tr>
@@ -2153,6 +2165,7 @@
                       <textarea
                         class="form-control textarea"
                         placeholder="Please type here.." v-model="other_information"
+                        :disabled = "isDisabled"
                       ></textarea>
                     </td>
                   </tr>
@@ -2511,6 +2524,7 @@ export default {
       pid: 0,
       type: "",
       alertlist: [],
+      isDisabled: false,
     };
   },
   beforeMount() {
@@ -2534,6 +2548,10 @@ export default {
     this.type = urlParams1.get("type");
     if (this.pid) {
       this.getdetails();
+    }
+    if (this.type == "view") {
+      this.isDisabled = true;
+      // alert(this.isDisabled);
     }
     const current = new Date();
     this.todaydate =
@@ -2945,6 +2963,8 @@ export default {
         this.Id = response.data.Data[0].patient_mrn_id;
 
         this.patient_referred_for = response.data.Data[0].patient_referred_for;
+        this.category_services = response.data.Data[0].category_services;
+        alert(this.category_services);
         this.diagnosis = response.data.Data[0].diagnosis;
         this.date_onset = response.data.Data[0].date_onset;
         this.date_of_referral = response.data.Data[0].date_of_referral;
@@ -2969,7 +2989,6 @@ export default {
         this.other_information = response.data.Data[0].other_information;
         this.location_services = response.data.Data[0].location_services_id;
         this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
-        this.category_services = response.data.Data[0].category_services;
         this.services_id = response.data.Data[0].services_id;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;

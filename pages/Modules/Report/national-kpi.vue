@@ -378,11 +378,11 @@ export default {
             tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000; width: 200px;'>${
               months[parseInt(month) - 1]
             }</td>`;
-            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 249px;'> <img src="/_nuxt/assets/images/tab5.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab1.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab2.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/assets/images/tab3.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;' class='fifth-td'><img src="/_nuxt/assets/images/tab4.jpg" style='width: 40px;'/></td>`;
+            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 249px;'> <img src="/_nuxt/images/tab5.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab1.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab2.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab3.jpg" style='width: 40px;'/></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 249px;' class='fifth-td'><img src="/_nuxt/images/tab4.jpg" style='width: 40px;'/></td>`;
           });
 
           if (response.data.code == 200) {
