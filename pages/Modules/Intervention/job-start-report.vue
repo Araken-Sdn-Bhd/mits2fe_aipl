@@ -210,22 +210,11 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Name of Employer </label>
-                      <select
-                        class="form-select"
+                      <input
+                        type="text"
+                        class="form-control"
                         v-model="name_of_employer"
-                        @change="getAddress($event)"
-                      >
-                        <option value="0">
-                          Select Case Manager
-                        </option>
-                        <option
-                          v-for="emp in employerlist"
-                          v-bind:key="emp.id"
-                          v-bind:value="emp.id"
-                        >
-                          {{ emp.contact_name }}
-                        </option>
-                      </select>
+                      />
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -247,7 +236,6 @@
                       <textarea
                         class="form-control textarea"
                         v-model="address"
-                        disabled
                       ></textarea>
                     </div>
                   </div>
@@ -572,7 +560,7 @@ export default {
       disclosure: "",
       name_of_employer: "",
       name_of_superviser: "",
-      address: "-",
+      address: "",
       location_services_id: 0,
       type_diagnosis_id: 0,
       category_services: "",
