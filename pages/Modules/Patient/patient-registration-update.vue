@@ -1591,7 +1591,6 @@ export default {
         this.genderlist = [];
       }
 
-      //const response3 = await this.$axios.get("service/list", { headers });
       const response3 = await this.$axios.get("hospital/assigned-team", {
         headers, params: {branch: this.branch}
       });
@@ -1639,7 +1638,7 @@ export default {
     },
    async onSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -1658,7 +1657,7 @@ export default {
 
     async getCity(){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -1711,7 +1710,7 @@ export default {
     },
     async onKinSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -1745,7 +1744,7 @@ export default {
     },
      async getkinCity(){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
