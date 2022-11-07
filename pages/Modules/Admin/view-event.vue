@@ -10,7 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
-            
+
               <a href="#"><i class="far fa-calendar-edit"></i></a>
               <h4>Announcement Details</h4>
             </div>
@@ -57,8 +57,8 @@
                   </tr>
 
                   <tr>
-                    <td>Mantari Branch</td>
-                    <td>{{ hospital_branch_id }}</td>
+                    <td>Mentari Branch</td>
+                    <td>{{ branchId }}</td>
                   </tr>
 
                   <tr>
@@ -140,7 +140,7 @@ export default {
         this.startdate = response.data.list[0].start_date;
         this.enddate = response.data.list[0].end_date;
         this.catIds = response.data.list[0].audience_ids;
-        this.branchId = response.data.list[0].hospital_branch_id;
+        this.branchId = response.data.list[0].hospital_name;
         this.document = response.data.list[0].document;
         var ctsplt = this.catIds.split(",");
         this.cat1 = ctsplt[0];

@@ -133,44 +133,25 @@
                   </div>
                 </div>
                 <!-- close-row -->
-                <div v-if=" this.type == 'view' ">
+                <div>
                 <div class="row mb-3">
                   <label class="form-label">Disclosure</label>
                   <div class="col-sm-6">
                     <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio11"
-                        value="Yes"
-                        v-model="disclosure"
-                        checked
-                      />
-                      <label class="form-check-label" for="inlineRadio11"
+                      <b-form-group v-slot="{ ariaDescribedby }">
+                        <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="Yes"><span class="form-check-label" for="inlineRadio11"
                         >Yes - worker has agreed to employer contact and has
-                        signed a release</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio22"
-                        value="No"
-                        v-model="disclosure"
-                      />
-                      <label class="form-check-label" for="inlineRadio22"
-                        >No - worker does not want employer contact
-                      </label>
+                        signed a release</span></b-form-radio>
+                      </b-form-group>
+                      <b-form-group>
+                        <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="No"><span class="form-check-label" for="inlineRadio12"
+                        >No - worker does not want employer contact</span></b-form-radio>
+                      </b-form-group>
                     </div>
                   </div>
                 </div>
                 </div>
-                <div class="row mb-3" v-if="this.type != 'view'">
+                <!-- <div class="row mb-3" v-if="this.type != 'view'">
                   <label class="form-label">Disclosure</label>
                   <div class="col-sm-6">
                     <div class="form-check form-check-inline">
@@ -203,7 +184,7 @@
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- close-row -->
 
                 <div class="row">
