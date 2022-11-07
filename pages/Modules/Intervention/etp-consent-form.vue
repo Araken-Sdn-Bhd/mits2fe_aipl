@@ -37,7 +37,7 @@
                           for="flexCheckDefault"
                         >
                        <span style="color:#000;"> I hereby agree to participate in </span><span style="color:#000;">Employment Transition Program (ETP)</span>  [{{  this.branchName }}]. <span style="color:#000;">I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.</span>
-                          
+
                         </label>
                       </div>
                     </td>
@@ -250,7 +250,7 @@
                              </li>
                         </ul>
                        </p>
-             
+
             </div>
           </div>
            <div class="card mb-4 reslt" v-if="consentdetails" style="display:none;">
@@ -275,13 +275,14 @@
                           type="checkbox"
                           value=""
                           id="flexCheckDefault" v-model="participant"
+                          checked
                         />
                         <label
                           class="form-check-label label-balck"
                           for="flexCheckDefault"
                         >
                         I hereby agree to participate in supported <span style="color:#000;">Employment Transition Program (ETP)</span>  [{{ this.branchName }}]. I also agree to follow the rules and give my full commitment. I fully understand if any rules was not follow, I deemed to be terminated from this program.
-                          
+
                         </label>
                       </div>
                     </td>
@@ -392,7 +393,35 @@
                   </tr>
                   <tr>
                     <td colspan="2">
+                      <div v-if="this.discloser == '1'">
                       <div class="form-check form-check-inline mt-2">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="1" v-model="discloser"
+                          checked
+                        />
+                        <label class="form-check-label" for="inlineRadio1"
+                          >Yes
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline mt-2">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="0" v-model="discloser"
+                        />
+                        <label class="form-check-label" for="inlineRadio2"
+                          >No
+                        </label>
+                      </div>
+                      </div>
+                      <div v-if="this.discloser == '0'">
+                         <div class="form-check form-check-inline mt-2">
                         <input
                           class="form-check-input"
                           type="radio"
@@ -411,10 +440,12 @@
                           name="inlineRadioOptions"
                           id="inlineRadio2"
                           value="0" v-model="discloser"
+                          checked
                         />
                         <label class="form-check-label" for="inlineRadio2"
                           >No
                         </label>
+                      </div>
                       </div>
                     </td>
                   </tr>
@@ -517,7 +548,7 @@
                              </li>
                         </ul>
                        </p>
-             
+
             </div>
           </div>
            <div class="d-flex" v-if="!pid">
