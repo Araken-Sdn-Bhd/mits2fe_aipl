@@ -80,7 +80,7 @@
                     <div class="mb-3">
                       <label class="form-label">Job Title</label>
                       <input
-                        type="date"
+                        type="text"
                         class="form-control"
                         v-model="job_title"
                       />
@@ -133,8 +133,44 @@
                   </div>
                 </div>
                 <!-- close-row -->
-
+                <div v-if=" this.type == 'view' ">
                 <div class="row mb-3">
+                  <label class="form-label">Disclosure</label>
+                  <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio11"
+                        value="Yes"
+                        v-model="disclosure"
+                        checked
+                      />
+                      <label class="form-check-label" for="inlineRadio11"
+                        >Yes - worker has agreed to employer contact and has
+                        signed a release</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio22"
+                        value="No"
+                        v-model="disclosure"
+                      />
+                      <label class="form-check-label" for="inlineRadio22"
+                        >No - worker does not want employer contact
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="row mb-3" v-if="this.type != 'view'">
                   <label class="form-label">Disclosure</label>
                   <div class="col-sm-6">
                     <div class="form-check form-check-inline">
@@ -606,9 +642,8 @@ this.GetPatientdetails();
         "job-companies/getListById?id="+this.name_of_employer,
         { headers }
       );
-      alert (JSON.stringify(response));
       if (response.data.code == 200 || response.data.code == "200") {
-        this.address = response.data.list;
+        this.address = JSON.stringify(response.data.list[0].company_address_1+response.data.list[0].company_address_2+response.data.list[0].company_address_3+","+response.data.list[0].postcode);
       } else {
         window.alert("Something went wrong");
       }
