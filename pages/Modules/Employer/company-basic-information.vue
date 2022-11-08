@@ -554,9 +554,10 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-   
+    
     this.company_name = this.userdetails.user.name;
     this.email_login = this.userdetails.user.email;
+    this.getCompanyDetails();
     this.GetStateList();
     $(document).ready(function () {
       $(".next-1").click(function (e) {
@@ -659,7 +660,6 @@ export default {
           this.company_registration_number &&
           this.company_address_1 &&
           this.state_id &&
-          this.city_id &&
           this.postcode
         ) {
           this.loader = true;
@@ -680,6 +680,9 @@ export default {
               state_id: this.state_id,
               city_id: this.postcode, // city share same id with postcode
               postcode: this.postcode,
+              contact_name: this.contact_name,
+              contact_email: this.contact_email,
+              contact_position:this.contact_position,
               corporate_body_sector: JSON.stringify([
                 {
                   "Government Sector": this.government,
@@ -726,61 +729,91 @@ export default {
               $("#errorpopup").modal("show");
             });}
     },
-    async OnAddContactPerson() {
-      this.errorList = [];
-      try {
-        if (!this.contact_name) {
-          this.errorList.push("Name is required");
-        }
-        if (!this.contact_number) {
-          this.errorList.push("Contact Number is required");
-        }
-        if (!this.contact_email) {
-          this.errorList.push("Email is required");
-        }
-        if (!this.contact_position) {
-          this.errorList.push("Position in Company is required");
-        }
-        if (
-          this.contact_name &&
-          this.contact_number &&
-          this.contact_email &&
-          this.contact_position 
-        ) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "intervention-company/add-person",
-            {
-              company_id: this.Id,
-              contact_name: this.contact_name,
-              contact_number: this.contact_number,
-              contact_email: this.contact_email,
-              contact_position: this.contact_position,
-            },
-            { headers }
-          );
-          console.log('my result',response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+   
+    async getCompanyDetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "intervention-company/company-details",
+        { added_by: this.userdetails.user.id,},
+        { headers }
+      );
+    alert(JSON.stringify(response.data));
+      console.log("my result", response.data);
+      if (response.data) {
+       
+        this.company_name = response.data[0].company_name;
+        this.company_registration_number=response.data[0].company_registration_number;
+        this.company_address_1= response.data[0].company_address_1;
+        this.company_address_2=response.data[0].company_address_2;
+        this.company_address_3=response.data[0].company_address_3;
+        this.state_id=response.data[0].state_id;
+        this.city_id = response.data[0].city[0].city_name;
+        if (this.city_id !=""){
+          this.getCity();
+          this.getPostcode();
+        }// city share same id with postcode
+        this.postcode = response.data[0].postcode;
+        this.contact_name = response.data[0].contact_name;
+        this.contact_email =response.data[0].contact_email,
+        this.contact_position=response.data[0].contact_position;
+        this.is_existing_training_program = response.data[0].is_existing_training_program;
+        var jdata1 = JASON.parse(response.data[0].corporate_body_sector);
+        jdata1.forEach((ele) => {
+         this.corporate_body_sector="val";
+         if (ele["Government Sector"]==true) {
+            this.government = "Government Sector";
           }
-        }
-      } catch (e) { 
-        this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });}
+          if (ele["Private Sector"]==true) {
+            this.privatesector = "Private Sector";
+          }
+          if (ele["Small and Medium Enterprises (SME)"]==true) {
+            this.small = "Small and Medium Enterprises (SME)";
+          }
+          if (ele["Other"]) {
+            this.othersector= "Other";
+          }
+        });
+      } else {
+        window.alert("Something went wrong");
+      }
+      var jdata2 = JASON.parse(response.data[0].employment_sector);
+      //  jdata2.forEach((ele) => {
+      //   this.employment_sector="val";
+      //   if (ele["Manufacturing"]==true) {
+      //      this.manufacturing = "Manufacturing";
+      //    }
+      //    if (ele["Business"]==true) {
+      //      this.business = "Business";
+      //    }
+      //    if (ele["Information Technology"]==true) {
+      //      this.telecommunication = "Information Technology";
+      //    }
+      //    if (ele["Telecommunication"]==true) {
+      //      this.education = "Telecommunication";
+      //    }
+      //    if (ele["Building Contruction"]==true) {
+      //      this.building= "Building Contruction";
+      //    }
+      //    if (ele[ "Transportation"]==true) {
+      //      this.transportation = "Transportation";
+      //    }
+      //    if (ele["Service"]==true) {
+      //      this.service = "Service";
+      //    }
+      //    if (ele["Other"]) {
+      //      this.other= "Other";
+      //    }
+      //  });
+      //} else {
+      //  window.alert("Something went wrong");
+      //}
+
+
+      
     },
   },
 };
