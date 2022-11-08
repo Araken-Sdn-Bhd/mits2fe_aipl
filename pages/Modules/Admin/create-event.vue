@@ -259,6 +259,7 @@ export default {
   setup() {},
   data() {
     return {
+      Id: null,
       title: "",
       content: "",
       startdate: "",
@@ -286,6 +287,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.Id = urlParams.get("id");
     this.GetbranchList();
   },
   methods: {
@@ -352,6 +354,8 @@ export default {
             "Content-Type": "application/json",
           };
           let body = new FormData();
+          if (this.Id != null)
+          body.append("id",this.Id);
           body.append("added_by", this.userdetails.user.id);
           body.append("title", this.title);
           body.append("content", this.content);
