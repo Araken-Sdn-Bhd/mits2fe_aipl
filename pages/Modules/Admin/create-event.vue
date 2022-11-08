@@ -287,7 +287,6 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    this.Id = urlParams.get("id");
     this.GetbranchList();
   },
   methods: {
