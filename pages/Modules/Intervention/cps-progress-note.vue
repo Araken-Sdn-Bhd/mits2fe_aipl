@@ -1893,7 +1893,7 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
+                  <tr v-if="this.employment_past_months == 'Yes'">
                     <th>*If Yes,</th>
                     <td colspan="3">
                       <select class="form-select" v-model="if_employment_yes">
