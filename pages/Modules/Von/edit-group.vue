@@ -2020,20 +2020,21 @@ export default {
           });
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
+          this.Gavailable_date = response.data.list.available_date;
+          this.Gavailable_time = response.data.list.available_time;
           this.Gis_voluneering_exp = response.data.list.is_voluneering_exp;
-          this.Gexp_details = response.data.list.exp_details;
-          if (this.Gexp_details) {
-            this.expList = JSON.parse(this.Gexp_details);
-          }
           this.Gis_mental_health_professional =
             response.data.list.is_mental_health_professional;
+          this.Gexp_details = response.data.list.exp_details;
           if (this.Gis_mental_health_professional == 1) {
             // this.Gis_mental_health_professional = "professional-yes";
           } else {
             //   this.Gis_mental_health_professional = "professional-no";
           }
-          this.Gavailable_date = response.data.list.available_date;
-          this.Gavailable_time = response.data.list.available_time;
+          if (this.Gexp_details) {
+            this.expList = JSON.parse(this.Gexp_details);
+          }
+
         } else if (
           response.data.list.area_of_involvement ==
           "Outreach Project Collaboration"

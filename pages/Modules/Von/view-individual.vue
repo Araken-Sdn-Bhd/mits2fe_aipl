@@ -514,26 +514,13 @@
                     >
                     <div class="col-sm-8">
                       <div class="row">
-                        <div class="col-sm-6">
-                          <select class="form-select" v-model="available_date" disabled>
-                            <option value="">Select Day</option>
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                          </select>
+                        <div class="col-md-4 mb-3">
+                          <label class="form-label">Day</label>
+                          <span class="form-control">{{ this.available_date }}</span>
                         </div>
-                        <div class="col-sm-6">
-                          <select class="form-select" v-model="available_time" disabled>
-                            <option value="">Select Time</option>
-                            <option value="8:00 AM">8:00 AM</option>
-                            <option value="9:00 AM">9:00 AM</option>
-                            <option value="10:00 AM">10:00 AM</option>
-                            <option value="11:00 AM">11:00 AM</option>
-                            <option value="02:00 AM">02:00 PM</option>
-                            <option value="03:00 AM">03:00 PM</option>
-                          </select>
+                        <div class="col-md-4 mb-3">
+                          <label class="form-label">Time</label>
+                          <span class="form-control">{{ this.available_time }}</span>
                         </div>
                       </div>
                     </div>
@@ -1229,7 +1216,17 @@ export default {
           });
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
+          this.available_date = response.data.list.available_date;
+          this.available_time = response.data.list.available_time;
           this.is_voluneering_exp = response.data.list.is_voluneering_exp;
+          this.is_mental_health_professional = response.data.list.is_mental_health_professional;
+          if (this.is_mental_health_professional==1) {
+            this.is_mental_health_professional = "professional-yes";
+            this.menhelth = "y";
+          } else {
+            this.is_mental_health_professional = "professional-no";
+            this.menhelth = "n";
+          }
           if (this.is_voluneering_exp) {
             this.is_voluneering_exp = "experience-yes";
             this.volexp = "y";
@@ -1238,17 +1235,6 @@ export default {
           if (this.exp_details) {
             this.expList = JSON.parse(this.exp_details);
           }
-          this.is_mental_health_professional =
-            response.data.list.is_mental_health_professional;
-          if (this.is_mental_health_professional==1) {
-            this.is_mental_health_professional = "professional-yes";
-            this.menhelth = "y";
-          } else {
-            this.is_mental_health_professional = "professional-no";
-            this.menhelth = "n";
-          }
-          this.available_date = response.data.list.available_date;
-          this.available_time = response.data.list.available_time;
           this.section = response.data.list.section;
         } else if (
           response.data.list.area_of_involvement ==

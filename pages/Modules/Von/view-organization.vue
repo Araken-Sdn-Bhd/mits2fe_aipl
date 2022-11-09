@@ -449,26 +449,13 @@
           >
           <div class="col-sm-8">
             <div class="row">
-              <div class="col-sm-6">
-                <select disabled class="form-select" v-model="Oavailable_date">
-                  <option value="">Select Day</option>
-                  <option value="Monday">Monday</option>
-                  <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday">Wednesday</option>
-                  <option value="Thursday">Thursday</option>
-                  <option value="Friday">Friday</option>
-                </select>
+             <div class="col-md-4 mb-3">
+              <label class="form-label">Day</label>
+                <span class="form-control">{{ this.Oavailable_date }}</span>
               </div>
-              <div class="col-sm-6">
-                 <select disabled class="form-select" v-model="Oavailable_time">
-                  <option value="">Select Time</option>
-                  <option value="8:00 AM">8:00 AM</option>
-                  <option value="9:00 AM">9:00 AM</option>
-                  <option value="10:00 AM">10:00 AM</option>
-                  <option value="11:00 AM">11:00 AM</option>
-                  <option value="02:00 AM">02:00 PM</option>
-                  <option value="03:00 AM">03:00 PM</option>
-                </select>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Time</label>
+                <span class="form-control">{{ this.Oavailable_time }}</span>
               </div>
             </div>
           </div>
@@ -1251,12 +1238,9 @@ export default {
           });
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
+          this.Oavailable_date = response.data.list.available_date;
+          this.Oavailable_time = response.data.list.available_time;
           this.Ois_voluneering_exp = response.data.list.is_voluneering_exp;
-          if (this.Ois_voluneering_exp) {
-            this.Ois_voluneering_exp = "experience-yes";
-            this.volexp = "y";
-          }
-         // this.Oexp_details = response.data.list.exp_details;
           this.Ois_mental_health_professional =
             response.data.list.is_mental_health_professional;
           if (this.Ois_mental_health_professional) {
@@ -1266,8 +1250,11 @@ export default {
             this.Ois_mental_health_professional = "professional-no";
             this.menhelth = "n";
           }
-          this.Oavailable_date = response.data.list.available_date;
-          this.Oavailable_time = response.data.list.available_time;
+          if (this.Ois_voluneering_exp) {
+            this.Ois_voluneering_exp = "experience-yes";
+            this.volexp = "y";
+          }
+         // this.Oexp_details = response.data.list.exp_details;
           this.section = response.data.list.section;
         } else if (
           response.data.list.area_of_involvement ==
