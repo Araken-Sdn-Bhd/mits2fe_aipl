@@ -45,7 +45,7 @@
                       </tr>
 
                       <tr>
-                        <td>deterioration of clinical condition</td>
+                        <td>Deterioration of clinical condition</td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes"
@@ -134,7 +134,7 @@
                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_social_has_no_family"
                       id="1">
                     <label class="form-check-label" for="1">
-                      Has no family, Friends or Guardian
+                      Has no family, friends or guardian
                     </label>
                   </div>
                   <div class="form-check mb-3">
@@ -566,7 +566,7 @@ import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
   components: { CommonSidebar, CommonHeader },
   name: "progress-note",
-  
+
   data() {
     return {
       userdetails: null,
@@ -684,7 +684,7 @@ export default {
     async onSubmitForm(){
       this.Ontriageform();
       this.OnBookAppointment();
-     
+
     },
     async GetList() {
       const headers = {
@@ -792,7 +792,7 @@ export default {
         // dd.forEach(element => {
         //   aa+="<option value="+element.id+">"+element.name+"</option>";
         // });
-        // aa+="</select>";          
+        // aa+="</select>";
         // $("#replicatedList").append('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
         // )
 
@@ -1121,7 +1121,7 @@ export default {
         },
         { headers }
       );
-      
+
       if (response.data.code == 200) {
         // window.alert(response.data.Data[0].patient_mrn_id);
         this.Id = response.data.Data[0].patient_mrn_id;

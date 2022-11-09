@@ -56,7 +56,7 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+
                                             <tr>
                                               <th>Diagnosis:</th>
                                               <td>
@@ -101,7 +101,7 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+
                                             <tr>
                                               <th>Specialist Name :</th>
                                               <td>
@@ -126,7 +126,7 @@
                                           </tbody>
                                         </table>
 
-                                        
+
                   <div
                   class="accordion form-accordion mt-3"
                   id="accordionExample"
@@ -278,7 +278,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -386,6 +386,11 @@
                         </ul>
                        </p>
                 <div class="d-flex">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -728,6 +733,12 @@ export default {
       }
       console.log("my details", this.patientdetails);
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

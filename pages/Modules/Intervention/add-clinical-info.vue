@@ -249,7 +249,7 @@ export default {
               $("#insertpopup").modal("show");
             });
             this.$router.push({
-              path: "/Modules/Patient/clinical-history",
+              path: "/Modules/Intervention/clinical-history",
               query: { id: this.Id },
             });
             setTimeout(() => {

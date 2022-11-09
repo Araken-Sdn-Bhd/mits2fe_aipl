@@ -16,7 +16,7 @@
                                           <thead>
                                             <tr>
                                               <th colspan="2">Patient Details</th>
-                                              
+
                                             </tr>
                                           </thead>
                                           <tbody v-if="patientdetails">
@@ -56,7 +56,7 @@
                                           <thead>
                                             <tr>
                                               <th colspan="2">Psychotherapy Progress Note </th>
-                                              
+
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -118,7 +118,7 @@
                                                                     <div class="form-check">
                                                                       <input class="form-check-input" value="Once In Two  Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="3">
                                                                       <label class="form-check-label" for="3">
-                                                                        Once In Two Weeks 
+                                                                        Once In Two Weeks
                                                                       </label>
                                                                     </div>
                                                                     <div class="form-check">
@@ -130,7 +130,7 @@
                                                                     <div class="form-check">
                                                                       <input class="form-check-input" v-model="frequency_session" type="radio" name="frequency-of-session" id="5" value="therapy-1">
                                                                       <label class="form-check-label" for="5">
-                                                                        Others 
+                                                                        Others
                                                                       </label>
                                                                     </div>
                                                                     <div class="therapy-1 hide others1">
@@ -175,7 +175,7 @@
                                                                 <div class="form-check">
                                                                   <input class="form-check-input" value="Eclectic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="11">
                                                                   <label class="form-check-label" for="11">
-                                                                    Eclectic 
+                                                                    Eclectic
                                                                   </label>
                                                                 </div>
 
@@ -200,7 +200,7 @@
                                                                 <div class="form-check">
                                                                   <input class="form-check-input" value="Group" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.2">
                                                                   <label class="form-check-label" for="1.2">
-                                                                    Group 
+                                                                    Group
                                                                   </label>
                                                                 </div>
 
@@ -213,13 +213,13 @@
                                                                 <div class="form-check">
                                                                   <input class="form-check-input" value="Family" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.4">
                                                                   <label class="form-check-label" for="1.4">
-                                                                    Family 
+                                                                    Family
                                                                   </label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                   <input class="form-check-input"  v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.5" value="therapy-3">
                                                                   <label class="form-check-label" for="1.5">
-                                                                    Others 
+                                                                    Others
                                                                   </label>
                                                                 </div>
                                                                 <div class="therapy-3 hide others3">
@@ -235,7 +235,7 @@
                                               <th></th>
                                               <td>
                                                   <table class="sub-table">
-                                                     
+
                                                       <tbody>
                                                           <tr>
                                                             <td>
@@ -282,7 +282,7 @@
                                                                     <div class="form-check">
                                                                       <input class="form-check-input"  v-model="patent_condition" type="radio" name="condition" id="4.5" value="condition-others">
                                                                       <label class="form-check-label" for="4.5">
-                                                                        Others 
+                                                                        Others
                                                                       </label>
                                                                     </div>
                                                                     <div class="condition-others hide others">
@@ -298,7 +298,7 @@
                                               <th></th>
                                               <td>
                                                   <table class="sub-table">
-                                                     
+
                                                       <tbody>
                                                           <tr>
                                                             <td>
@@ -310,7 +310,7 @@
                                                   </table>
                                               </td>
                                             </tr>
-                                            
+
 
                                           </tbody>
                                         </table>
@@ -319,30 +319,30 @@
                                           <thead>
                                             <tr>
                                               <th colspan="2">Session Details </th>
-                                              
+
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+
                                             <!-- <tr>
                                               <th>Session Details :</th>
                                               <td><input type="text" class="form-control mt-3" v-model="session_details"></td>
                                             </tr> -->
                                             <tr>
                                               <th>Issues/Problems Dealt With Today:</th>
-                                              <td><input type="text" class="form-control" v-model="session_issues"></td>
+                                              <td><textarea class="form-control textarea" rows="2" v-model="session_issues"></textarea></td>
                                             </tr>
                                             <tr>
                                               <th>Conduct Of Session:</th>
-                                              <td><input type="text" class="form-control" v-model="conduct_session"></td>
+                                              <td><textarea class="form-control textarea" rows="2" v-model="conduct_session"></textarea></td>
                                             </tr>
                                             <tr>
                                               <th>Outcome Of Session:</th>
-                                              <td><input type="text" class="form-control" v-model="outcome_session"></td>
+                                              <td><textarea class="form-control textarea" rows="2" v-model="outcome_session"></textarea></td>
                                             </tr>
                                             <tr>
                                               <th>Transference/countertransference:</th>
-                                              <td><input type="text" class="form-control" v-model="transference_session"></td>
+                                              <td><textarea class="form-control textarea" rows="2" v-model="transference_session"></textarea></td>
                                             </tr>
                                             <tr>
                                               <th>Duration Of Session:</th>
@@ -368,7 +368,7 @@
                                           </tbody>
                                         </table>
 
-                                       
+
 
                <div
                   class="accordion form-accordion mt-3"
@@ -521,7 +521,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -629,6 +629,11 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -1165,7 +1170,7 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
@@ -1174,6 +1179,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

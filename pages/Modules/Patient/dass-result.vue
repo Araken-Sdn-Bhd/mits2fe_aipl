@@ -258,7 +258,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Stress == 'Extreme'"></div>
                           <div class="progress" v-if="Stress == 'Extreme'">
                             <div
@@ -330,7 +330,7 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="Stress == 'Normal' || Stress == 'Mild'">
                         <p>
                           Based on your responses, you are currently
                           experiencing low level of stress. Recommended for you,
@@ -345,6 +345,31 @@
                           masalah kesihatan mental, sila layari Portal MENTARI
                           atau menghubungi MENTARI yang terdekat melalui
                           direktori kami.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="Stress == 'Moderate' ||Stress == 'Severe'  ||Stress == 'Extreme' ">
+                        <p>
+                          Based on your responses, there is a chance that 
+                          you are currently experiencing stress. Please note, 
+                          this short questionnaire is just a guide and the 
+                          feelings you may be experiencing could be something 
+                          other than stress, anxiety or depression.We suggest 
+                          that you book an appointment with professionals, you 
+                          can go either to MENTARI Consultation Clinic, your GP 
+                          or Public Health Clinic to discuss these results with 
+                          them. Take a printed copy of this report with you and 
+                          book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
+                        </p>
+                        <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang 
+                          mengalami tekanan. Cadangan kepada anda, sila dapatkan 
+                          temujanji bersama professional, anda boleh mendapatkannya 
+                          samaada di MENTARI, doktor (GP) anda atau di Klinik 
+                          Kesihatan yang berhampiran untuk membincangkan laporan 
+                          ujian ini. Dapatkan laporan ujian ini dan bawa semasa 
+                          temujanji anda untuk membincangkan gejala yang anda yang 
+                          terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
                     </div>
@@ -565,7 +590,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Anxiety == 'Extreme'"></div>
                           <div class="progress" v-if="Anxiety == 'Extreme'">
                             <div
@@ -637,7 +662,7 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="Anxiety == 'Normal' ||Anxiety == 'Mild'">
                         <p>
                           Based on your responses, you are currently
                           experiencing low level of anxiety. Recommended for
@@ -652,6 +677,30 @@
                           berkaitan masalah kesihatan mental, sila layari Portal
                           MENTARI atau menghubungi MENTARI yang terdekat melalui
                           direktori kami.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="Anxiety == 'Moderate' ||Anxiety == 'Severe' ||Anxiety == 'Extreme'">
+                        <p>
+                          Based on your responses, there is a chance that you are 
+                          currently experiencing anxiety. Please note, this short 
+                          questionnaire is just a guide and the feelings you may 
+                          be experiencing could be something other than stress, 
+                          anxiety or depression. We suggest that you book an appointment 
+                          with professionals, you can go either to MENTARI Consultation 
+                          Clinic, your GP or Public Health Clinic to discuss these 
+                          results with them. Take a printed copy of this report with 
+                          you and book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
+
+                        </p>
+                        <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
+                          kegelisahan. Cadangan kepada anda, sila dapatkan temujanji 
+                          bersama professional, anda boleh mendapatkannya samaada di MENTARI, 
+                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk 
+                          membincangkan laporan ujian ini. Dapatkan laporan ujian ini dan 
+                          bawa semasa temujanji anda untuk membincangkan gejala yang anda 
+                          yang terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
                     </div>
@@ -872,7 +921,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Depression == 'Extreme'"></div>
                           <div class="progress" v-if="Depression == 'Extreme'">
                             <div
@@ -944,7 +993,7 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="Depression == 'Normal' ||Depression == 'Mild'">
                         <p>
                           Based on your responses, you are currently
                           experiencing low level of depression. Recommended for
@@ -961,6 +1010,29 @@
                           direktori kami.
                         </p>
                       </div>
+                      <div class="result-footer" v-if="Depression == 'Moderate' ||Depression == 'Severe' ||Depression == 'Extreme'">
+                        <p>
+                          Based on your responses, there is a chance that you are 
+                          currently experiencing depression. Please note, this short 
+                          questionnaire is just a guide and the feelings you may be 
+                          experiencing could be something other than stress, anxiety 
+                          or depression. We suggest that you book an appointment with 
+                          professionals, you can go either to MENTARI Consultation 
+                          Clinic, your GP or Public Health Clinic to discuss these 
+                          results with them. Take a printed copy of this report with 
+                          you and book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
+                        </p>
+                         <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
+                          kemurungan. Cadangan kepada anda, sila dapatkan temujanji bersama 
+                          professional, anda boleh mendapatkannya samaada di MENTARI, doktor 
+                          (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan 
+                          laporan ujian ini. Dapatkan laporan ujian ini dan bawa semasa temujanji 
+                          anda untuk membincangkan gejala yang anda yang terkini, dan membincangkan 
+                          rawatan lanjut bersama mereka.
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <!-- result-box -->
@@ -970,6 +1042,11 @@
             <div class="row justify-content-center">
               <div class="col-sm-8">
                 <div class="d-flex mt-3">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"
@@ -1065,6 +1142,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

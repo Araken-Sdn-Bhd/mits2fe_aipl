@@ -3,16 +3,14 @@
     <CommonSidebar />
     <div id="layoutSidenav_content">
       <CommonHeader />
-      <main>
+      <main id="reslt" ref="reslt">
         <div class="container-fluid px-4">
           <div class="page-title">
-            <h1>Progress Notes</h1>
+            <h1>INTERNAL REFERRAL</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
-          <div class="card mb-4 reslt"
-          >
-            <div class="card-body" id="results" style="background-color:#fff; padding:10px">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
+          <div class="card mb-4">
+            <div class="card-body">
                  <table class="notes">
                                 <thead>
                                     <tr>
@@ -142,14 +140,14 @@
                             >Type Of Diagnosis</label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
+              v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+            {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
                               </select>
                           </div>
@@ -241,7 +239,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -348,30 +346,23 @@
                              </li>
                         </ul>
                        </p>
-                <!-- <div class="d-flex">
-                   <button type="button" class="btn btn-success" @click="demoFromHTML">
-                    <i class="far fa-print"></i> Print 
+                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+                <div class="ml-auto btn-boxs">
+                  <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
+                    <i class="far fa-download"></i> Download
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="far fa-save"></i> Save
-                  </button>
-                </div> -->
-              </form>
-            </div>
-             <div class="d-flex">
-                   <button type="button" class="btn btn-success" @click="demoFromHTML">
-                    <i class="far fa-print"></i> Print 
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="far fa-save"></i> Save
+                  <button type="submit" class="btn btn-success btn-text" @click="Onphychiatryclerkingnote">
+                    <i class="far fa-paper-plane"></i> Save
                   </button>
                 </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </main>
@@ -379,21 +370,11 @@
   </div>
 </template>
 <script>
-import Physectristdetails from "../../../components/Patient/physectristdetails.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { CommonSidebar, CommonHeader, Physectristdetails },
+  components: { CommonSidebar, CommonHeader },
   name: "progress-note",
-   head: {
-    script: [
-      {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js",
-        async: true,
-        crossorigin: "anonymous",
-      },
-    ],
-  },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     $(document).ready(function () {
@@ -408,6 +389,12 @@ export default {
     this.Id = urlParams.get("id");
     this.GetList();
     this.GetPatientdetails();
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.pid = urlParams1.get("pid");
+    this.type = urlParams1.get("type");
+    if (this.pid) {
+      this.getdetails();
+    }
   },
   data() {
     return {
@@ -444,6 +431,8 @@ export default {
       validate: true,
       assistancelist: [],
       externallist: [],
+      pid: 0,
+      type: "",
     };
   },
   methods: {
@@ -514,9 +503,9 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-        if (!this.medication_des) {
-          this.errorList.push("Medication is required");
-        }
+        // if (!this.medication_des) {
+        //   this.errorList.push("Medication is required");
+        // }
         if (
           this.diagnosis &&
           this.reason_for_referral &&
@@ -531,7 +520,7 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          this.medication_des &&
+          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -557,7 +546,7 @@ export default {
               services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              type_diagnosis_id: this.type_diagnosis_id,
+              type_diagnosis_id: this.type_diagnosis_id.id,
               category_services: this.category_services,
               complexity_services: this.complexity_services,
               outcome: this.outcome,
@@ -568,7 +557,7 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
+            // this.resetmodel();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -715,25 +704,102 @@ export default {
       }
       console.log("my details", this.patientdetails);
     },
-      demoFromHTML() {
-      var pdf = new jsPDF("p", "pt", "a4");
-      pdf.addHTML($("#results")[0], function () {
-        pdf.save("Result.pdf");
+    async getdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "/patient-appointment-details/fetchViewHistoryListDetails",
+        {
+          id: this.pid,
+          type: "InternalRefferalForm",
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        // window.alert(response.data.Data[0].patient_mrn_id);
+
+        this.Id = response.data.Data[0].patient_mrn_id;
+        // this.diagnosis = response.data.Data[0].type_diagnosis_id;
+        this.reason_for_referral = response.data.Data[0].reason_for_referral;
+        this.summary = response.data.Data[0].summary;
+        this.management = response.data.Data[0].management;
+        this.medication = response.data.Data[0].medication;
+        this.name = response.data.Data[0].name;
+        this.designation = response.data.Data[0].designation;
+        this.hospital = response.data.Data[0].hospital;
+        this.location_services = response.data.Data[0].location_services;
+        this.services_id = response.data.Data[0].services_id;
+        this.code_id = response.data.Data[0].code_id;
+        this.sub_code_id = response.data.Data[0].sub_code_id;
+        // this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
+        this.category_services = response.data.Data[0].category_services;
+        this.complexity_services = response.data.Data[0].complexity_services;
+        this.outcome = response.data.Data[0].outcome;
+        this.medication_des = response.data.Data[0].medication_des;
+
+        this.GetList();
+        this.GetPatientdetails();
+        const response2 = await this.$axios.post(
+          "diagnosis/getIcd9subcodeList",
+          { icd_category_code: this.code_id },
+          { headers }
+        );
+        if (response2.data.code == 200 || response2.data.code == "200") {
+          this.icdcatcodelist = response2.data.list;
+        } else {
+          this.icdcatcodelist = [];
+        }
+
+        const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
       });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+
+      this.diagonisislist.forEach(element => {
+      if (element.id == response.data.Data[0].type_diagnosis_id) {
+        this.type_diagnosis_id = {id:element.id,text:element.icd_code+' '+element.icd_name};
+        this.diagnosis = element.icd_code+' '+element.icd_name;
+      }
+    });
+
+      } else {
+        window.alert("Something went wrong");
+      }
     },
-    OnPrint() {
-      var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
-      // document.body.innerHTML = newstr;
-      // window.print();
-      // // Reload the page to refresh the data
-      // window.location.reload();
-      var a = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-      a.document.write("<html>");
-      a.document.write("<body>");
-      a.document.write(newstr);
-      a.document.write("</body></html>");
-      a.document.close();
-      a.print();
+      OnPrint() {
+      $('.btn-boxs').hide();
+      $('.btn-boxs').click(function(){
+        $('.form-accordion .collapse').show();
+      });
+    setTimeout(() => {
+       var pdf = new jsPDF("p", "px", [800, 1800]);
+      var options = {
+        format: "JPEG",
+        pagesplit: true,
+        background: "#FFF",
+      };
+      pdf.addHTML($("#reslt"), options, function () {
+        pdf.save("Internal_Referral_Form.pdf");
+        // window.location.reload();
+        $('.btn-boxs').show();
+      });
+    }, 1000);
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    },
+    BindDiagnosis(){
+      this.diagnosis=this.type_diagnosis_id.text;
     },
   },
 };

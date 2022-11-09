@@ -11,7 +11,6 @@
                     </div>
                     <div class="card mb-4">
                         <div class="card-body">
-                           
                                 <table class="notes">
                                     <thead>
                                         <tr>
@@ -106,7 +105,7 @@
                                                                 </div>
 
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Behavior Assessment')"  
+                                                                    <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Behavior Assessment')"
                                                                          id="2">
                                                                     <label class="form-check-label" for="2">
                                                                         Behavior Assessment
@@ -114,7 +113,7 @@
                                                                 </div>
 
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Cognitive And Perceptual Assessment')"  
+                                                                    <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Cognitive And Perceptual Assessment')"
                                                                          id="3">
                                                                     <label class="form-check-label" for="3">
                                                                         Cognitive And Perceptual Assessment
@@ -252,7 +251,7 @@
                                                         <tr v-if="!pid">
                                                             <td>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Activity Of Daily Living Training')" 
+                                                                    <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Activity Of Daily Living Training')"
                                                                         name="" id="1.11">
                                                                     <label class="form-check-label" for="1.11">
                                                                         Activity Of Daily Living Training
@@ -260,7 +259,7 @@
                                                                 </div>
 
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" @click="Onchangeintervention('AIDS Adaptation/Assistive Devices')" 
+                                                                    <input class="form-check-input" type="checkbox" @click="Onchangeintervention('AIDS Adaptation/Assistive Devices')"
                                                                         name="" id="1.11">
                                                                     <label class="form-check-label" for="1.11">
                                                                         AIDS Adaptation/Assistive Devices
@@ -700,7 +699,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -808,6 +807,11 @@
                                 </ul>
                                 </p>
                                 <div class="d-flex" v-if="!pid">
+                                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                 <div class="ml-auto btn-boxs">
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
                     <i class="far fa-download"></i> Download
@@ -817,11 +821,11 @@
                   </button>
                 </div>
               </div>
-                           
+
                         </div>
                     </div>
                 </div>
-               
+
             </main>
         </div>
     </div>
@@ -1280,7 +1284,7 @@ export default {
         $('.form-accordion .collapse').show();
       });
     setTimeout(() => {
-       var pdf = new jsPDF("p", "px", [800, 1800]);
+      var pdf = new jsPDF("p", "px", [800, 1800]);
       var options = {
         format: "JPEG",
         pagesplit: true,
@@ -1288,10 +1292,16 @@ export default {
       };
       pdf.addHTML($("#reslt"), options, function () {
         pdf.save("Occt_Referral.pdf");
-         $('.btn-boxs').show();
+        $('.btn-boxs').show();
       });
     }, 1000);
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

@@ -56,7 +56,7 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+
                                             <tr>
                                               <th>Diagnosis:</th>
                                               <td>
@@ -101,7 +101,7 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+
                                             <tr>
                                               <th>Specialist Name :</th>
                                               <td>
@@ -126,7 +126,7 @@
                                           </tbody>
                                         </table>
 
-                                        
+
                   <div
                   class="accordion form-accordion mt-3"
                   id="accordionExample"
@@ -278,7 +278,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -386,6 +386,11 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -442,7 +447,7 @@ export default {
       locationlist: [],
       dischargelist:[],
       specialistlist:[],
-    
+
       Id: 0,
       diagnosis_id: 0,
       category_discharge: 0,
@@ -754,7 +759,7 @@ export default {
         this.comment = response.data.Data[0].comment;
         this.specialist_name_id = response.data.Data[0].specialist_name_id;
         this.date = response.data.Data[0].date;
-        
+
         this.location_services = response.data.Data[0].location_services;
         this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
         this.category_services = response.data.Data[0].category_services;
@@ -774,15 +779,21 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

@@ -165,7 +165,20 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="PHQ9 == 'Minimal Depression'||PHQ9 == 'Mild Depression'">
+                        <p>
+                          Good news. Your current symptom levels suggest that 
+                          it is unlikely you are suffering from depressive disorder.
+
+                        </p>
+
+                        <p>
+                          If you feel you need additional support, consider to print 
+                          out this report and to book an appointment with the nearest 
+                          MENTARI to discuss this and any other concerns you may have.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="PHQ9 == 'Moderate Depression'||PHQ9 == 'Moderately severe depression' ||PHQ9 == 'Severe Depression'">
                         <p>
                           Your results show some symptoms, so let’s look a
                           little closer & see what to do next. As you can see
@@ -189,6 +202,11 @@
             <div class="row justify-content-center">
               <div class="col-sm-8">
                 <div class="d-flex mt-3">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"
@@ -277,6 +295,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>
