@@ -61,15 +61,15 @@
                       <p v-if="ann.status == 1" style="margin: 1px">Publish</p>
                     </td>
                     <td>
-                      <a class="edit" @click="editannounce(ann)" v-if="SidebarAccess==1"
-                        ><i class="far fa-edit"></i
-                      ></a>
                       <a
                         @click="deleteannounce(ann)" v-if="SidebarAccess==1"
                         class="action-icon icon-danger"
                         ><i class="far fa-trash-alt"></i
                       ></a>
-                      <a @click="viewannounce(ann)" class="view"
+                      <a class="edit" @click="editannounce(ann)" v-if="SidebarAccess==1 && ann.status == 0"
+                        ><i class="far fa-edit"></i
+                      ></a>
+                      <a @click="viewannounce(ann)" class="view" v-if="ann.status == 1"
                         ><i class="far fa-eye"></i
                       ></a>
                     </td>
@@ -142,7 +142,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
-  
+
   methods: {
     async GetList() {
       const headers = {
@@ -217,7 +217,7 @@ export default {
               .indexOf(this.search.toLowerCase()) > -1 ||
             notChunk.end_date
               .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1 
+              .indexOf(this.search.toLowerCase()) > -1
           );
         });
       } else {
