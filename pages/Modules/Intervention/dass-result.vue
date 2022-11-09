@@ -148,12 +148,12 @@
                       <div class="result-footer" v-if="stressFooter1">
                         <p>
                           Based on your responses, you are currently experiencing  low level of stress.
-                          Recommended for you, If you would like more information regarding mental health issue, 
+                          Recommended for you, If you would like more information regarding mental health issue,
                           please go to MENTARI Portal or reaching out to the nearest MENTARI in our directory.
                         </p>
                         <p><i>
-                          Berdasarkan jawapan anda, anda sedang mengalami tekanan yang rendah. 
-                          Cadangan kepada anda, sekiranya anda ingin mendapatkan maklumat lanjut berkaitan masalah kesihatan mental, 
+                          Berdasarkan jawapan anda, anda sedang mengalami tekanan yang rendah.
+                          Cadangan kepada anda, sekiranya anda ingin mendapatkan maklumat lanjut berkaitan masalah kesihatan mental,
                           sila layari Portal MENTARI atau menghubungi MENTARI yang terdekat melalui direktori kami.
                           </i>
                         </p>
@@ -161,16 +161,16 @@
                       <div class="result-footer" v-if="stressFooter2">
                         <p>
                           Based on your responses, there is a chance that you are currently experiencing stress.
-                          Please note, this short questionnaire is just a guide and the feelings you may be experiencing could be something other than stress, 
-                          anxiety or depression.We suggest that you book an appointment with professionals, you can go either to MENTARI Consultation Clinic, 
+                          Please note, this short questionnaire is just a guide and the feelings you may be experiencing could be something other than stress,
+                          anxiety or depression.We suggest that you book an appointment with professionals, you can go either to MENTARI Consultation Clinic,
                           your GP or Public Health Clinic to discuss these results with them. Take a printed copy of this report with you and book an
-                          appointment so you can discuss your current symptoms and your future plan of management with them. 
+                          appointment so you can discuss your current symptoms and your future plan of management with them.
                         </p>
                         <p><i>
-                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami tekanan. Cadangan kepada anda, 
-                          sila dapatkan temujanji bersama professional,anda boleh mendapatkannya samaada di MENTARI, 
-                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan laporan ujian ini. 
-                          Dapatkan laporan ujian ini dan bawa semasa temujanji anda untuk membincangkan gejala yang anda yang terkini, 
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami tekanan. Cadangan kepada anda,
+                          sila dapatkan temujanji bersama professional,anda boleh mendapatkannya samaada di MENTARI,
+                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan laporan ujian ini.
+                          Dapatkan laporan ujian ini dan bawa semasa temujanji anda untuk membincangkan gejala yang anda yang terkini,
                           dan membincangkan rawatan lanjut bersama mereka.
                           </i>
                         </p>
@@ -412,6 +412,11 @@
             <div class="row justify-content-center">
               <div class="col-sm-8">
                 <div class="d-flex mt-3">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"
@@ -502,6 +507,12 @@ export default {
   beforeDestroy() {
     localStorage.removeItem("dassresult");
   },
+  async Gotopreviouspage() {
+      this.$router.push({
+        path: "/Modules/Intervention/patient-summary",
+        // query: { id: this.Id },
+      });
+    },
   methods: {
     demoFromHTML() {
       var pdf = new jsPDF("p", "pt", "a4");
@@ -509,12 +520,12 @@ export default {
         pdf.save("Result.pdf");
       });
     },
-    async Gotorequestappointment() {
+    GoBack(){
       this.$router.push({
-        path: "/Modules/Intervention/request-appointment-form",
-        query: { id: this.Id },
-      });
-    },
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

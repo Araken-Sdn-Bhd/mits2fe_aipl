@@ -8,7 +8,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Job Offer Form</h1>
-            <a class="add-btn"><i class="fal fa-plus"></i></a>
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
@@ -541,6 +540,7 @@ export default {
     },
   },
 };
+</script>
 </script>
 <style scoped>
 .hide {

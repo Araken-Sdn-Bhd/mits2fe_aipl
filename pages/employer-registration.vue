@@ -144,7 +144,7 @@ export default {
             });
             this.userdetail = response.data;
             if (this.userdetail.code == 200) {
-              alert('Verification Email will be send shortly. Thank You');
+              alert('Thank You for your registration. Please Login to continue');
               this.$router.push("/employer-login");
               
             } else if(this.userdetail.code == 201){
