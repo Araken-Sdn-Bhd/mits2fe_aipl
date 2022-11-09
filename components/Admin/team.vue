@@ -10,11 +10,11 @@
             aria-label="Default select example"
             @change="onHospitalCodechange($event)"
           >
-             <option value="0">Please Select</option>
+             <option value="">Please Select</option>
             <option
             v-for="hst in hospitallist"
                   v-bind:key="hst.id"
-                  v-bind:value="{id: hst.id, text: hst.hospital_code} "
+                  v-bind:value="hst.id"
             >
               {{ hst.hospital_code }}
             </option>
@@ -28,11 +28,11 @@
             class="form-select"
             aria-label="Default select example"
           >
-             <option value="0">Please Select</option>
+             <option value="">Please Select</option>
             <option
               v-for="bnch in branchlist"
               v-bind:key="bnch.id"
-              v-bind:value="{id: bnch.id, text: bnch.hospital_branch_name}"
+              v-bind:value="bnch.id"
             >
               {{bnch.hospital_branch_name}}
             </option>
@@ -44,12 +44,20 @@
       <div class="row mb-4">
         <div class="col-md-9">
           <label for="" class="form-label">Team</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Team."
-            v-model="team"
-          />
+          <select
+                v-model="team"
+                class="form-select"
+                aria-label="Default select example"
+              >
+              <option value="0">Please Select</option>
+                <option
+                  v-for="team in teams"
+                  v-bind:key="team.id"
+                  v-bind:value="team.id"
+                >
+                  {{ team.service_name }}
+                </option>
+              </select>
         </div>
       </div>
       <p v-if="errors.length">
@@ -86,9 +94,9 @@
       <tbody>
         <tr v-for="(tem, index) in taemlist" :key="index">
           <td>{{index+1}}</td>
-          <td>{{tem.hospital_code}}</td>
-          <td>{{tem.hospital_branch_name}}</td>
-          <td>{{tem.team_name}}</td>
+          <td>{{tem.branchs.hospital_code}}</td>
+          <td>{{tem.branchs.hospital_branch_name}}</td>
+          <td>{{tem.services.service_name}}</td>
 
            <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editteam(tem)"
@@ -116,6 +124,7 @@ export default {
       hospitallist: [],
       branchlist: [],
       taemlist: [],
+      teams: [],
       errors: [],
       SidebarAccess:null
     };
@@ -130,7 +139,7 @@ export default {
     axios
       .get(
         `${this.$axios.defaults.baseURL}` +
-          "hospital/branch-team-list",
+          "service/division-list",
         { headers }
       )
       .then((resp) => {
@@ -159,6 +168,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GethospitalList();
+    this.GetTeamList();
   },
   methods: {
     async GethospitalList() {
@@ -185,8 +195,7 @@ export default {
       const response = await this.$axios.post(
         "hospital/get-branch-by-hospital-code",
         {
-          hospital_code:
-            event.target.options[event.target.options.selectedIndex].text,
+          hospital_code: event.target.value,
         },
         { headers }
       );
@@ -215,15 +224,13 @@ export default {
           };
           if (this.Id <= 0) {
             const response = await this.$axios.post(
-              "hospital/add-branch-team",
+              "service/insertOrupdate-division",
               {
                 added_by: this.userdetails.user.id,
-                hospital_id: this.hospital_code.id,
-                hospital_code: this.hospital_code.text,
-                hospital_branch_name: this.branceName.text,
-                hospital_branch_id: this.branceName.id,
-                team_name: this.team,
-                status: 1,
+                service_id: this.serviceName,
+                hospital_id: this.hospitalName,
+                branch_id: this.branceName,
+                division_order: this.servicedindex,
               },
               { headers }
             );
@@ -286,13 +293,13 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-team-list", {
+      const response = await this.$axios.get("service/list", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
-        this.taemlist = response.data.list;
+        this.teams = response.data.list;
       } else {
-        this.taemlist = [];
+        this.teams = [];
       }
     },
     async editteam(data) {
@@ -301,34 +308,26 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get(
-        "hospital/get_team_by_id/" + data.id,
+      const response = await this.$axios.post(
+        "service/get-division",
         {
-          headers,
-        }
+          division_id: data.id,
+        },
+        { headers }
       );
       if (response.data.code == 200) {
-        this.hospital_code = {
-          id: response.data.list.hospital_id,
-          text: response.data.list.hospital_code,
-        };
-
-        this.branceName =  {
-          id: response.data.list.hospital_branch_id,
-          text: response.data.list.hospital_branch_name
-        };
-       
-           
-        this.team = response.data.list.team_name;
+        this.team = response.data.list[0].service_id;
+        this.hospital_code = response.data.list[0].hospital_id;
+        this.branceName = response.data.list[0].branch_id;
+        this.servicedindex = response.data.list[0].division_order;
         this.Id = data.id;
         const response1 = await this.$axios.post(
           "hospital/get-branch-by-hospital-code",
           {
-            hospital_code: response.data.list.hospital_id.toString(),
+            hospital_code: response.data.list[0].hospital_code,
           },
           { headers }
         );
-        console.log("my response", response1.data);
         if (response1.data.code == 200 || response1.data.code == "200") {
           this.branchlist = response1.data.branches;
         } else {

@@ -259,6 +259,7 @@ export default {
   setup() {},
   data() {
     return {
+      Id: null,
       title: "",
       content: "",
       startdate: "",
@@ -352,6 +353,8 @@ export default {
             "Content-Type": "application/json",
           };
           let body = new FormData();
+          if (this.Id != null)
+          body.append("id",this.Id);
           body.append("added_by", this.userdetails.user.id);
           body.append("title", this.title);
           body.append("content", this.content);
