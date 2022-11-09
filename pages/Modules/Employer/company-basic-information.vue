@@ -257,7 +257,8 @@
                               <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value="others-es"
+                                value="Otheres"
+                                v-model="otheres"
                                 id="es-7"
                               />
                               <label class="form-check-label" for="es-7">
@@ -265,7 +266,7 @@
                               </label>
                             </div>
 
-                            <div class="others-es hide">
+                            <div class="Otheres hide">
                               <input
                                 type="text"
                                 placeholder="Please specify"
@@ -325,7 +326,8 @@
                       <input
                         class="form-check-input"
                         type="checkbox"
-                        value="others-cbs"
+                        value="Othercbs"
+                        v-model="othercbs"
                         id="cbs-5"
                       />
                       <label class="form-check-label" for="cbs-5">
@@ -333,7 +335,7 @@
                       </label>
                     </div>
 
-                    <div class="others-cbs hide">
+                    <div class="Othercbs hide">
                       <input
                         type="text"
                         placeholder="Please specify"
@@ -471,6 +473,7 @@
                               class="form-control"
                               placeholder="Enter Email for login"
                               v-model="email_login"
+                              disabled="true"
                             />
                           </div>
                         </div>
@@ -547,6 +550,8 @@ export default {
       contact_number:"",
       contact_email:"",
       contact_position:"",
+      otheres:"",
+      othercbs:"",
 
       email_login:"",
       newpwd_login:"",
@@ -637,7 +642,44 @@ export default {
       }
 
     },
+    async getCity(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.state_id + "/getCityList",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        
+        this.CityList = response.data.list;
+        this.postcodelist = [];
+      } else {
+        this.CityList = [];
+        this.postcodelist = [];
+      }
+    },
+
+    async getPostcode() {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "address/" + this.city_id + "/getPostcodeListById",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.postcodelist = response.data.list;
+      } else {
+        this.postcodelist = [];
+      }
+
+    },
     async OnUpdateCompany() {
+      
       this.errorList = [];
       try {
         if (!this.company_name) {
@@ -688,7 +730,7 @@ export default {
                   "Government Sector": this.government,
                   "Private Sector": this.privatesector,
                   "Small and Medium Enterprises (SME)": this.small,
-                  "Others": this.othersector,
+                  "Othercbs": this.othercbs,
                 },
               ]),
               is_existing_training_program: this.is_existing_training_program,
@@ -703,7 +745,7 @@ export default {
                   "Building Contruction": this.building,
                   "Transportation": this.transportation,
                   "Service": this.service,
-                  "Others": this.other,
+                  "Otheres": this.otheres,
                 },
               ]),
             },
@@ -713,10 +755,9 @@ export default {
           if (response.data.code == 200) {
             this.Id=response.data.id;
             this.loader = false;
-            $('#nav-tab a[href="#nav-cp"]').tab("show");
             this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+                $("#insertpopup").modal("show");
+              });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -741,27 +782,28 @@ export default {
         { added_by: this.userdetails.user.id,},
         { headers }
       );
-    alert(JSON.stringify(response.data));
+    //alert(JSON.stringify(response.data));
       console.log("my result", response.data);
       if (response.data) {
-       
         this.company_name = response.data[0].company_name;
         this.company_registration_number=response.data[0].company_registration_number;
         this.company_address_1= response.data[0].company_address_1;
         this.company_address_2=response.data[0].company_address_2;
         this.company_address_3=response.data[0].company_address_3;
         this.state_id=response.data[0].state_id;
-        this.city_id = response.data[0].city[0].city_name;
-        if (this.city_id !=""){
-          this.getCity();
-          this.getPostcode();
-        }// city share same id with postcode
         this.postcode = response.data[0].postcode;
         this.contact_name = response.data[0].contact_name;
         this.contact_email =response.data[0].contact_email,
         this.contact_position=response.data[0].contact_position;
+        this.contact_number=response.data[0].contact_number;
         this.is_existing_training_program = response.data[0].is_existing_training_program;
-        var jdata1 = JASON.parse(response.data[0].corporate_body_sector);
+        this.city_id = response.data[0].city.city_name;
+        if (this.city_id !=""){
+          this.getCity();
+          this.getPostcode();
+        }// city share same id with postcode
+
+        var jdata1 = JSON.parse(response.data[0].corporate_body_sector);
         jdata1.forEach((ele) => {
          this.corporate_body_sector="val";
          if (ele["Government Sector"]==true) {
@@ -773,47 +815,48 @@ export default {
           if (ele["Small and Medium Enterprises (SME)"]==true) {
             this.small = "Small and Medium Enterprises (SME)";
           }
-          if (ele["Other"]) {
-            this.othersector= "Other";
+          if (ele["Othercbs"]) {
+            this.othercbs= "Othercbs";
           }
         });
-      } else {
-        window.alert("Something went wrong");
-      }
-      var jdata2 = JASON.parse(response.data[0].employment_sector);
-      //  jdata2.forEach((ele) => {
-      //   this.employment_sector="val";
-      //   if (ele["Manufacturing"]==true) {
-      //      this.manufacturing = "Manufacturing";
-      //    }
-      //    if (ele["Business"]==true) {
-      //      this.business = "Business";
-      //    }
-      //    if (ele["Information Technology"]==true) {
-      //      this.telecommunication = "Information Technology";
-      //    }
-      //    if (ele["Telecommunication"]==true) {
-      //      this.education = "Telecommunication";
-      //    }
-      //    if (ele["Building Contruction"]==true) {
-      //      this.building= "Building Contruction";
-      //    }
-      //    if (ele[ "Transportation"]==true) {
-      //      this.transportation = "Transportation";
-      //    }
-      //    if (ele["Service"]==true) {
-      //      this.service = "Service";
-      //    }
-      //    if (ele["Other"]) {
-      //      this.other= "Other";
-      //    }
-      //  });
-      //} else {
-      //  window.alert("Something went wrong");
-      //}
 
+        var jdata2 = JSON.parse(response.data[0].employment_sector);
+        jdata2.forEach((ele) => {
+         this.employment_sector="val";
+         if (ele["Manufacturing"]==true) {
+            this.manufacturing = "Manufacturing";
+          }
+          if (ele["Oil and Gas"]==true) {
+            this.oil = "Oil and Gas";
+          }
+          if (ele["Education"]==true) {
+            this.education = "Education";
+          }
+          if (ele["Business"]==true) {
+            this.business = "Business";
+          }
+          if (ele["Information Technology"]==true) {
+            this.information = "Information Technology";
+          }
+          if (ele["Telecommunication"]==true) {
+            this.telecommunication = "Telecommunication";
+          }
+          if (ele["Building Contruction"]==true) {
+            this.building= "Building Contruction";
+          }
+          if (ele[ "Transportation"]==true) {
+            this.transportation = "Transportation";
+          }
+          if (ele["Service"]==true) {
+            this.service = "Service";
+          }
+          if (ele["Otheres"]) {
+            this.otheres= "Otheres";
+          }
+        });
 
-      
+    };
+ 
     },
   },
 };
