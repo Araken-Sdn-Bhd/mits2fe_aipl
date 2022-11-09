@@ -59,7 +59,7 @@
                     </div>
                   </div>
                 </div>
-               
+
                 <!-- col-sm-6 -->
               </div>
               <Error :message="error" v-if="error" />
@@ -80,7 +80,7 @@
             <div class="modal-content">
               <div id="results" style="background: #fff">
                 <div class="modal-header">
-                  <h5 class="modal-title">PHQ-9 Scores</h5>
+                  <h5 class="modal-title">SELF HARM & SUICIDAL INTENT Scores</h5>
                   <p>
                     The system will sum up the score for every question in each
                     category. The scale are as follows:
@@ -104,7 +104,12 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+                <!-- <button
                   @click="downloadresult"
                   type="button"
                   class="btn btn-secondary mr-auto"
@@ -116,7 +121,7 @@
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
-                </a>
+                </a> -->
               </div>
             </div>
           </div>
@@ -247,7 +252,14 @@ export default {
         path: "/Modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+       this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
     }
+
   },
 };
 </script>
