@@ -87,19 +87,19 @@
                                     <tr>
                                         <th>Diagnosis: </th>
                                         <td>
-                                            <input type="text" class="form-control"  v-model="diagnosis">
+                                            <input type="text" class="form-control" v-model="diagnosis">
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Clinical Notes:</th>
                                         <td>
-                                            <input type="text" class="form-control" v-model="clinical_notes">
+                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Clinical Notes" v-model="clinical_notes"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Management:</th>
                                         <td>
-                                            <input type="text" class="form-control" v-model="management">
+                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Management" v-model="management"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -256,7 +256,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -364,6 +364,11 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -437,16 +442,16 @@ export default {
         $(targetBox).show();
       });
     });
-   
+
     this.GetList();
 
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-    
+
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-  
+
     this.GetPatientdetails();
     if (this.pid) {
       this.getdetails();
@@ -744,11 +749,17 @@ export default {
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

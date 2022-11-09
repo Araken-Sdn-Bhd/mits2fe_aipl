@@ -43,6 +43,11 @@
                   </tr>
                 </tbody>
               </table>
+              <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
             </div>
           </div>
         </div>
@@ -173,6 +178,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>
