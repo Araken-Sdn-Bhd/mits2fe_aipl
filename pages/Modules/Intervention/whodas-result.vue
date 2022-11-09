@@ -109,7 +109,7 @@
 
                     <div class="col-sm-6">
                       <div class="whodas-box">
-                        <h5>LIFE ACTIVMES - SCHOOL/WORK</h5>
+                        <h5>LIFE ACTIVITIES - SCHOOL/WORK</h5>
                         <div class="score-box">
                           <h4>{{ LASW }}</h4>
                           <span>Domain Score</span>
@@ -135,6 +135,12 @@
             <div class="row justify-content-center">
               <div class="col-sm-8">
                 <div class="d-flex mt-3">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"
@@ -247,6 +253,12 @@ export default {
         path: "/Modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
     }
   },
 };

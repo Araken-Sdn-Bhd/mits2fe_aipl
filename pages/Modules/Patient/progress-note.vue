@@ -93,13 +93,13 @@
                                     <tr>
                                         <th>Clinical Notes:</th>
                                         <td>
-                                            <input type="text" class="form-control" v-model="clinical_notes">
+                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Clinical Notes" v-model="clinical_notes"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Management:</th>
                                         <td>
-                                            <input type="text" class="form-control" v-model="management">
+                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Management" v-model="management"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -256,7 +256,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -364,6 +364,11 @@
                         </ul>
                        </p>
                 <div class="d-flex">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -544,6 +549,10 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -678,6 +687,12 @@ export default {
       }
       console.log("my details", this.patientdetails);
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

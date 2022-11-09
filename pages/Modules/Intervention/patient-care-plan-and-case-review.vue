@@ -241,7 +241,7 @@
                     </tr>
                   </thead>
                   <tbody class="optionBox">
-                    <tr class="block"> 
+                    <tr class="block">
                       <!-- <td>-</td> -->
                       <td><input type="text" class="issue" v-model="Issues" placeholder="Issues/Current Status"/></td>
                       <td><input type="text" class="goal" v-model="Goal" placeholder="Goal(s)"/></td>
@@ -506,7 +506,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -614,6 +614,12 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+
                   <button class="btn btn-warning btn-text ml-auto">
                     <i class="far fa-save"></i> Save
                   </button>
@@ -1149,7 +1155,7 @@ export default {
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
           console.log('my icd9data',this.icdcatcodelist);
-          
+
         } else {
           this.icdcatcodelist = [];
         }
@@ -1157,6 +1163,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

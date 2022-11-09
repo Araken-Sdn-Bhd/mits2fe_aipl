@@ -258,7 +258,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Stress == 'Extreme'"></div>
                           <div class="progress" v-if="Stress == 'Extreme'">
                             <div
@@ -590,7 +590,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Anxiety == 'Extreme'"></div>
                           <div class="progress" v-if="Anxiety == 'Extreme'">
                             <div
@@ -921,7 +921,7 @@
                               aria-valuemax="100"
                             ></div>
                           </div>
-                  
+
                           <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Depression == 'Extreme'"></div>
                           <div class="progress" v-if="Depression == 'Extreme'">
                             <div
@@ -1042,6 +1042,11 @@
             <div class="row justify-content-center">
               <div class="col-sm-8">
                 <div class="d-flex mt-3">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"
@@ -1137,6 +1142,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

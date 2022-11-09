@@ -239,7 +239,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -347,6 +347,11 @@
                         </ul>
                        </p>
                  <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                 <div class="ml-auto btn-boxs">
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
                     <i class="far fa-download"></i> Download
@@ -356,7 +361,7 @@
                   </button>
                 </div>
               </div>
-             
+
             </div>
           </div>
         </div>
@@ -787,7 +792,13 @@ export default {
       });
     }, 1000);
     },
-     BindDiagnosis(){
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    },
+    BindDiagnosis(){
       this.diagnosis=this.type_diagnosis_id.text;
     },
   },

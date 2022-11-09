@@ -364,6 +364,11 @@
             </div>
             <div class="row justify-content-center">
               <div class="col-sm-8">
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
                 <div class="d-flex mt-3">
                   <button
                     type="button"
@@ -460,6 +465,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

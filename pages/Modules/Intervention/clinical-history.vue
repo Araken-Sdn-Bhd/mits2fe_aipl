@@ -9,7 +9,7 @@
           <!-- card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h4>Clinical History Record</h4>
+              <h4>Clinical History Record </h4>
             </div>
             <div class="card-body">
               <table
@@ -51,9 +51,14 @@
                       ></a>
                     </td>
                   </tr>
-                
+
                 </tbody>
               </table>
+              <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
             </div>
           </div>
           <!-- card -->
@@ -119,6 +124,7 @@ export default {
   },
   methods: {
     async deleteinfo(data) {
+      if (confirm("Are you sure you want to delete")) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -142,6 +148,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
      async GetList() {
       const headers = {
@@ -156,6 +163,12 @@ export default {
         this.list = [];
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>
