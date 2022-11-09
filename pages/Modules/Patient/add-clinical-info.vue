@@ -82,6 +82,7 @@
                         class="form-control"
                         placeholder="Enter Height "
                         v-model="height"
+                        @change="calculateBMI"
                       />
                     </div>
                   </div>
@@ -173,11 +174,14 @@ export default {
       waist_circumference: "",
       loader: false,
       errorList: [],
+      appointmentid: null,
     };
   },
 
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.appointmentid = (localStorage.getItem("appointmentId"));
+    console.log('appointmentid',this.appointmentid);
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
   },
@@ -234,6 +238,7 @@ export default {
               bmi: this.bmi,
               waist_circumference: this.waist_circumference,
               patient_mrn_id: 0,
+              appointmentid:this.appointmentid,
             },
             { headers }
           );
@@ -272,10 +277,16 @@ export default {
       this.waist_circumference = "";
     },
     OnBack(){
-       this.$router.push({
+      this.$router.push({
               path: "/Modules/Patient/patient-summary",
               query: { id: this.Id },
             });
+    },
+    calculateBMI(){
+      var heightInMeter = this.height/100;
+      var val = this.weight/(heightInMeter*heightInMeter);
+      this.bmi = val.toFixed(2);
+      console.log('Bmivalue',this.bmi);
     }
   },
 };
