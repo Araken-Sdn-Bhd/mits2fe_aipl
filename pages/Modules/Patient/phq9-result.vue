@@ -165,7 +165,20 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="PHQ9 == 'Minimal Depression'||PHQ9 == 'Mild Depression'">
+                        <p>
+                          Good news. Your current symptom levels suggest that 
+                          it is unlikely you are suffering from depressive disorder.
+
+                        </p>
+
+                        <p>
+                          If you feel you need additional support, consider to print 
+                          out this report and to book an appointment with the nearest 
+                          MENTARI to discuss this and any other concerns you may have.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="PHQ9 == 'Moderate Depression'||PHQ9 == 'Moderately severe depression' ||PHQ9 == 'Severe Depression'">
                         <p>
                           Your results show some symptoms, so let’s look a
                           little closer & see what to do next. As you can see
