@@ -120,6 +120,11 @@
                   </table>
                 </div>
               </div>
+              <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
               <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
@@ -264,6 +269,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

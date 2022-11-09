@@ -119,6 +119,11 @@
                   </table>
                 </div>
               </div>
+              <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
               <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
@@ -210,7 +215,7 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
-     
+
       this.error = null;
       try {
         if (this.list.length == Object.values(this.checkedList).length) {
@@ -264,6 +269,12 @@ export default {
         path: "/Modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
     }
   },
 };
