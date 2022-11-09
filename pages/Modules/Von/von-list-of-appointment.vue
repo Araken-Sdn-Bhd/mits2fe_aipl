@@ -99,6 +99,9 @@
                       >
                         <i class="far fa-edit"></i>
                       </a>
+                      <!-- <a style="pointer:cursor;" @click="OnView(app)" class="view">
+                        <i class="far fa-eye"></i>
+                      </a> -->
                     </td>
                   </tr>
                 </tbody>
@@ -107,7 +110,7 @@
               <div class="d-flex">
                 <div class="ml-auto"  :class="SidebarAccess!=1?'hide1':''">
                   <a
-                    v-on:click="OnApproverejectRequest(2)" 
+                    v-on:click="OnApproverejectRequest(2)"
                     class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
@@ -145,7 +148,7 @@ export default {
       name: "",
       date: "",
       SidebarAccess:null,
-      
+
     };
   },
   beforeMount() {
@@ -184,7 +187,7 @@ export default {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                   previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
                 },
-              }, 
+              },
             });
           });
       })
@@ -222,6 +225,24 @@ export default {
         path: "/Modules/Von/book-appointment",
         query: { id: data.id },
       });
+    },
+    OnView(data) {
+      if (data.app_type == "Individual") {
+        this.$router.push({
+          path: "/Modules/Von/view-individual",
+          query: { id: data.id },
+        });
+      } else if (data.app_type == "Group") {
+         this.$router.push({
+          path: "/Modules/Von/view-group",
+          query: { id: data.id },
+        });
+      } else {
+         this.$router.push({
+          path: "/Modules/Von/view-organization",
+          query: { id: data.id },
+        });
+      }
     },
     async GetServicelist() {
       const headers = {
@@ -268,10 +289,10 @@ export default {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                   previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
                 },
-              }, 
+              },
             });
           });
-       
+
       } else {
         window.alert("Something went wrong");
       }
