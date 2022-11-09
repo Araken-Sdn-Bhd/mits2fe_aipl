@@ -245,6 +245,10 @@ export default {
             this.$nextTick(() => {
               $("#resultmodal").modal("show");
             });
+            this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
           } else {
             this.loader = false;
             this.$nextTick(() => {
