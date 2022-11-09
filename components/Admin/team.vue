@@ -171,6 +171,22 @@ export default {
     this.GetTeamList();
   },
   methods: {
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("service/division-list", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.taemlist = response.data.list;
+      } else {
+        this.taemlist = [];
+      }
+    },
+
     async GethospitalList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -227,10 +243,11 @@ export default {
               "service/insertOrupdate-division",
               {
                 added_by: this.userdetails.user.id,
-                service_id: this.serviceName,
-                hospital_id: this.hospitalName,
+                division_id: this.Id,
+                service_id: this.team,
+                hospital_id: this.hospital_code,
                 branch_id: this.branceName,
-                division_order: this.servicedindex,
+                division_order: 0,
               },
               { headers }
             );
@@ -240,7 +257,6 @@ export default {
                 $("#insertpopup").modal("show");
               });
               this.ResetModel();
-              this.GetTeamList();
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -248,16 +264,14 @@ export default {
             }
           } else {
             const response = await this.$axios.post(
-              "hospital/updateHospitalBranchTeam",
+              "service/update-division",
               {
-                id: this.Id,
                 added_by: this.userdetails.user.id,
-                hospital_id: this.hospital_code.id,
-                hospital_code: this.hospital_code.text,
-                hospital_branch_name: this.branceName.text,
-                hospital_branch_id: this.branceName.id,
-                team_name: this.team,
-                status: 1,
+                division_id: this.Id,
+                service_id: this.team,
+                hospital_id: this.hospital_code,
+                branch_id: this.branceName,
+                division_order: 0,
               },
               { headers }
             );
@@ -266,7 +280,6 @@ export default {
                 $("#updatepopup").modal("show");
               });
               this.ResetModel();
-              this.GetTeamList();
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -285,6 +298,7 @@ export default {
       this.hospital_code = "";
       this.branceName = "";
       this.team = "";
+      this.GetList();
       this.Id=0;
     },
     async GetTeamList() {
@@ -345,15 +359,15 @@ export default {
           "Content-Type": "application/json",
         };
         const response = await this.$axios.post(
-          "hospital/removeBranchTeam",
-          { added_by: this.userdetails.user.id, id: data.id },
+          "service/remove-division",
+          { added_by: this.userdetails.user.id, division_id: data.id },
           { headers }
         );
         if (response.data.code == 200) {
           this.$nextTick(() => {
             $("#deletepopup").modal("show");
           });
-          this.GetTeamList();
+          this.GetList();
         } else {
           this.$nextTick(() => {
             $("#errorpopup").modal("show");
