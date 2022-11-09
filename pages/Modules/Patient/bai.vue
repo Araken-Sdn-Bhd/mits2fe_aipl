@@ -115,13 +115,18 @@
                         <th scope="row">{{result.BAI}}</th>
                         <td>{{result.baiScore}}</td>
                       </tr>
-                    
+
                     </tbody>
                   </table>
                 </div>
               </div>
               <div class="modal-footer">
-                <button
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+                <!-- <button
                   @click="downloadresult"
                   type="button"
                   class="btn btn-secondary mr-auto"
@@ -133,7 +138,7 @@
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
-                </a>
+                </a> -->
               </div>
             </div>
           </div>
@@ -264,6 +269,13 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
+    }
+
   },
 };
 </script>

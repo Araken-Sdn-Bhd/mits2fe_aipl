@@ -16,7 +16,7 @@
               <h4>BECK DEPRESSION INVENTORY (BDI)</h4>
             </div>
             <div class="card-body">
-           
+
                 <div class="row mr-0">
                   <div
                     class="col-sm-6"
@@ -118,7 +118,14 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
+                <div class="modal-footer">
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+                  </div>
+              <!-- </div>
               <div class="modal-footer">
                 <button
                   @click="downloadresult"
@@ -131,8 +138,8 @@
                   @click="Gotorequestappointment"
                   class="btn btn-primary ml-auto"
                 >
-                  <i class="fad fa-calendar-day"></i> Request Appointment
-                </a>
+                  <i class="fad fa-calendar-day"></i> Request Appointment -->
+                <!-- </a> -->
               </div>
             </div>
           </div>
@@ -263,7 +270,14 @@ export default {
         path: "/Modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Patient/patient-summary",
+              query: { id: this.Id },
+            });
     }
+
   },
 };
 </script>
