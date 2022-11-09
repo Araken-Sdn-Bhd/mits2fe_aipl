@@ -1309,18 +1309,15 @@ export default {
           });
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
+          this.available_date = response.data.list.available_date;
+          this.available_time = response.data.list.available_time;
           this.is_voluneering_exp = response.data.list.is_voluneering_exp;
+          this.is_mental_health_professional =
+            response.data.list.is_mental_health_professional;
           if (this.is_voluneering_exp) {
             this.is_voluneering_exp = "experience-yes";
             this.volexp = "y";
           }
-          this.exp_details = response.data.list.exp_details;
-          if (this.exp_details) {
-            this.expList = JSON.parse(this.exp_details);
-            console.log("my array", this.expList);
-          }
-          this.is_mental_health_professional =
-            response.data.list.is_mental_health_professional;
           if (this.is_mental_health_professional == 1) {
             this.is_mental_health_professional = "professional-yes";
             this.menhelth = "y";
@@ -1328,8 +1325,12 @@ export default {
             this.is_mental_health_professional = "professional-no";
             this.menhelth = "n";
           }
-          this.available_date = response.data.list.available_date;
-          this.available_time = response.data.list.available_time;
+          this.exp_details = response.data.list.exp_details;
+          if (this.exp_details) {
+            this.expList = JSON.parse(this.exp_details);
+            console.log("my array", this.expList);
+          }
+
           this.section = response.data.list.section;
         } else if (
           response.data.list.area_of_involvement ==

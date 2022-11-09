@@ -549,27 +549,18 @@
           >
           <div class="col-sm-8">
             <div class="row">
-              <div class="col-sm-6">
-                <select disabled class="form-select" v-model="Gavailable_date">
-                  <option value="">Select Day</option>
-                  <option value="Monday">Monday</option>
-                  <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday">Wednesday</option>
-                  <option value="Thursday">Thursday</option>
-                  <option value="Friday">Friday</option>
-                </select>
-              </div>
-              <div class="col-sm-6">
-                <select disabled class="form-select" v-model="Gavailable_time">
-                  <option value="">Select Time</option>
-                  <option value="8:00 AM">8:00 AM</option>
-                  <option value="9:00 AM">9:00 AM</option>
-                  <option value="10:00 AM">10:00 AM</option>
-                  <option value="11:00 AM">11:00 AM</option>
-                  <option value="02:00 AM">02:00 PM</option>
-                  <option value="03:00 AM">03:00 PM</option>
-                </select>
-              </div>
+              <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label">Day</label>
+                      <span class="form-control">{{ this.Gavailable_date }}</span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label">Time</label>
+                      <span class="form-control">{{ this.Gavailable_time }}</span>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -1370,14 +1361,14 @@ export default {
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
           this.Gis_voluneering_exp = response.data.list.is_voluneering_exp;
-          this.Gexp_details = response.data.list.exp_details;
-          if (this.Gexp_details) {
-            this.expList = JSON.parse(this.Gexp_details);
-          }
           this.Gis_mental_health_professional =
             response.data.list.is_mental_health_professional;
           this.Gavailable_date = response.data.list.available_date;
           this.Gavailable_time = response.data.list.available_time;
+          this.Gexp_details = response.data.list.exp_details;
+          if (this.Gexp_details) {
+            this.expList = JSON.parse(this.Gexp_details);
+          }
         } else if (
           response.data.list.area_of_involvement ==
           "Outreach Project Collaboration"
