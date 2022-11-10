@@ -833,7 +833,7 @@ export default {
       sub_code_id: 0,
       complexity_services: 0,
       outcome: 0,
-      medication_des: "",
+      medication_des: "None.",
       patient_mrn_id: "",
       services_id: 0,
       serviceid: 0,
@@ -1036,16 +1036,19 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
-            this.loader = false;
+            window.alert("Data are saved successfully!");
+            // this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+            this.resetmodel();
+            // this.loader = false;
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) {}
@@ -1229,7 +1232,7 @@ export default {
       this.category_services = 0;
       this.complexity_services = 0;
       this.outcome = 0;
-      this.medication_des = "";
+      this.medication_des = "None.";
     },
     OnPsychopathology(val, event) {
       if (event.target.checked) {
