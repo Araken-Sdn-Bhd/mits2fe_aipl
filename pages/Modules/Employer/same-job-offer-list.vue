@@ -7,15 +7,13 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Same Job Offer List</h1>
-            <!-- <a href="create-new-job.html"><i class="fal fa-plus"></i> Add</a> -->
+            <!--<a href="/Modules/Employer/create-same-job" class=" add-btn" title="create same job offer"><i class="fal fa-plus"></i></a>-->
           </div>
 
-          <div class="card mb-4">
+
+          <div class="card mb-4 col-12">
             <div class="card-body">
-              <table
-                class="table table-striped data-table font-13"
-                style="width: 100%"
-              >
+              <table class="table table-striped data-table font-13">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -25,6 +23,7 @@
                     <th>Employment Duration</th>
                     <th>Average Salary</th>
                     <th>Work Schedule</th>
+                    <th>Education</th>
                     <th>Transport</th>
                     <th>Accommodation</th>
                     <th>Work Requirement</th>
@@ -35,13 +34,14 @@
                 </thead>
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
-                    <td>#{{ index + 1 }}</td>
-                    <td>{{ job.created_at }}</td>
+                    <td style="width:5%">#{{ index + 1 }}</td>
+                    <td style="width:10%">{{ job.created_at }}</td>
                     <td>{{ job.position }}</td>
                     <td>{{ job.location_address_1 }} {{ job.location_address_2 }} {{ job.location_address_3 }}</td>
                     <td>{{ job.duration_of_employment }}</td>
-                    <td>{{ job.salary_offered }}</td>
+                    <td>RM {{ job.salary_offered }}</td>
                     <td>{{ job.work_schedule }}</td>
+                    <td>{{ job.section_value }}</td>
                     <td>
                       <p v-if="job.is_transport">Yes</p>
                       <p v-if="!job.is_transport">No</p>
@@ -90,20 +90,28 @@ export default {
       userdetails: null,
       list: [],
       title: "",
+      jobdetail:[],
+      jobposition:"",
+      workrequirement:"",
+      education:"",
+      result:[],
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.job_id = urlParams.get("job_id");
+    //this.position = urlParams.get("job_id");
   },
   mounted() {
    this.getList();
+   
   },
   methods: {
     back() {
       this.$router.go(-1);
     },
+  
     async getList(){
       const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,

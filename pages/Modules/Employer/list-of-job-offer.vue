@@ -7,9 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Job Offer</h1>
-            <a href="/Modules/Employer/create-new-job" class="add-btn"
-              ><i class="fal fa-plus"></i
-            ></a>
+            <a href="/Modules/Employer/create-new-job" class="  add-btn" title="create new job offer"><i class="fal fa-plus"></i></a>
           </div>
 
           <div class="card mb-4">
@@ -34,28 +32,28 @@
               >
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th style="width:5%">No</th>
+                    <th style="width:15%" >Job Posted</th>
                     <th>Position</th>
-                    <th>Job Posted</th>
-                    <th>Action</th>
+                    <th style="width:10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
                     <td>#{{ index + 1 }}</td>
-                    <td>{{ job.position }}</td>
                     <td>{{ job.created_at }}</td>
+                    <td>{{ job.position }}</td>
+                   
                     
                     <td>
                       <a
                         style="cursor: pointer"
                         @click="OnviewClick(job.id)"
-                        class="view"
-                        ><i class="far fa-eye"></i
-                      ></a>
+                        class="view" title="View all list">
+                        <i class="far fa-eye"></i></a>
                       <a
                         style="cursor: pointer"
-                        @click="OneditClick(job.id)"
+                        @click="OneditClick(job.id,job.position,job.section_value,job.work_requirement)"
                         class="add"
                         ><i class="far fa-plus"></i
                       ></a>
@@ -140,11 +138,11 @@ export default {
 
 
 
-    OneditClick(id) {
+    OneditClick(id,position,education,requirement) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Employer/update-new-job",
-        query: { id: id },
+        path: "/Modules/Employer/create-same-job",
+        query: { id: id, position:position, education:education,requirement:requirement},
       });
     },
     OnviewClick(id) {
