@@ -9,26 +9,57 @@
             <h1>Same Job Offer List</h1>
             <!--<a href="/Modules/Employer/create-same-job" class=" add-btn" title="create same job offer"><i class="fal fa-plus"></i></a>-->
           </div>
-
-
+        
           <div class="card mb-4 col-12">
+            <div class="card-body">
+              <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td style="width: 15%">Position Offered</td>
+                <td style="width: 2%;">:</td>
+                <td>{{ this.position }}</td>
+              </tr>
+              <tr>
+                <td>Education Level</td>
+                <td>:</td>
+                <td>{{ this.education }}</td>
+              </tr>
+              <tr>
+                <td>Work Requirement</td>
+                <td>:</td>
+                <td>{{GetWorkRequiremnet(this.requirement)}}</td>
+              </tr>
+              <tr>
+                <td>Approval Status</td>
+                <td>:</td>
+                <td>
+                  <span v-if="this.status == 1">Pending</span>
+                  <span v-if="this.status == 0">Rejected</span>
+                  <span v-if="this.status == 2">Approved</span>
+                  
+                  </td>
+              </tr>
+              </tbody>
+              </table>
+
+            </div>
             <div class="card-body">
               <table class="table table-striped data-table font-13">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>Posted Date</th>
-                    <th>Position</th>
+                    <!--<th>Position</th>-->
                     <th>Job Location</th>
                     <th>Employment Duration</th>
                     <th>Average Salary</th>
                     <th>Work Schedule</th>
-                    <th>Education</th>
+                    <!--<th>Education</th>-->
                     <th>Transport</th>
                     <th>Accommodation</th>
-                    <th>Work Requirement</th>
+                    <!--<th>Work Requirement</th>-->
                     <th>Mentari</th>
-                    <th>Status</th>
+                    <!--<th>Status</th>-->
                     
                   </tr>
                 </thead>
@@ -36,12 +67,12 @@
                   <tr v-for="(job, index) in list" :key="index">
                     <td style="width:5%">#{{ index + 1 }}</td>
                     <td style="width:10%">{{ job.created_at }}</td>
-                    <td>{{ job.position }}</td>
+                    <!--<td>{{ job.position }}</td>-->
                     <td>{{ job.location_address_1 }} {{ job.location_address_2 }} {{ job.location_address_3 }}</td>
                     <td>{{ job.duration_of_employment }}</td>
                     <td>RM {{ job.salary_offered }}</td>
                     <td>{{ job.work_schedule }}</td>
-                    <td>{{ job.section_value }}</td>
+                    <!--<td>{{ job.section_value }}</td>-->
                     <td>
                       <p v-if="job.is_transport">Yes</p>
                       <p v-if="!job.is_transport">No</p>
@@ -50,13 +81,13 @@
                       <p v-if="job.is_accommodation">Yes</p>
                       <p v-if="!job.is_accommodation">No</p>
                     </td>
-                    <td> {{GetWorkRequiremnet(job.work_requirement)}}</td>
+                    <!--<td> {{GetWorkRequiremnet(job.work_requirement)}}</td>-->
                     <td>{{ job.hospital_branch_name }}</td>
-                    <td>
+                    <!--<td>
                       <p v-if="job.approval_status == 1">Pending</p>
                       <p v-if="job.approval_status == 0">Rejected</p>
                       <p v-if="job.approval_status == 2">Approved</p>
-                    </td>
+                    </td>-->
                     
                   </tr>
                 </tbody>
@@ -95,13 +126,21 @@ export default {
       workrequirement:"",
       education:"",
       result:[],
+      position:"",
+      job_id:"",
+      education:"",
+      requirement:"",
+      status:"",
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.job_id = urlParams.get("job_id");
-    //this.position = urlParams.get("job_id");
+    this.position = urlParams.get("position");
+    this.education = urlParams.get("education");
+    this.requirement = urlParams.get("requirement");
+    this.status = urlParams.get("status");
   },
   mounted() {
    this.getList();
