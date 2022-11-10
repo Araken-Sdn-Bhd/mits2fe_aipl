@@ -114,7 +114,7 @@
                   </tr>
                   <tr>
                     <th colspan="2">
-                      *Only applicable for those who has been review by hospital
+                      *Only applicable for those who has been reviewed by hospital
                       psychiatry team.
                     </th>
                   </tr>
@@ -1111,7 +1111,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
-                              <select class="form-select" v-model="serviceid" :disabled = "isDisabled">
+                              <select class="form-select" v-model="services_id" :disabled = "isDisabled">
                                 <option value="0">Select Service</option>
                                 <option
                                   v-for="slt in externallist"
@@ -1231,7 +1231,6 @@
                 </div>
 
 
-
               </div>
             </div>
           </div>
@@ -1246,27 +1245,27 @@
                 <tbody>
                   <tr>
                     <th>MRN:</th>
-                    <!-- <td>{{ patientdetails.patient_mrn }}</td> -->
+                    <td>{{ patientdetails.patient_mrn }}</td>
                   </tr>
                   <tr>
                     <th>Patient Name:</th>
-                    <!-- <td>{{ patientdetails.name_asin_nric }}</td> -->
+                    <td>{{ patientdetails.name_asin_nric }}</td>
                   </tr>
                   <tr>
                     <th>NRIC NO:</th>
-                    <!-- <td>{{ patientdetails.nric_no }}</td> -->
+                    <td>{{ patientdetails.nric_no }}</td>
                   </tr>
                   <tr>
                     <th>Age:</th>
-                    <!-- <td>{{ patientdetails.age }}</td> -->
+                    <td>{{ patientdetails.age }}</td>
                   </tr>
                   <tr>
                     <th>Contact No:</th>
-                    <!-- <td>{{ patientdetails.mobile_no }}</td> -->
+                    <td>{{ patientdetails.mobile_no }}</td>
                   </tr>
                   <tr>
                     <th>Gender:</th>
-                    <!-- <td>{{ patientdetails.gender[0].section_value }}</td> -->
+                    <td>{{ patientdetails.gender[0].section_value }}</td>
                   </tr>
                   <tr>
                     <th>Referred For:</th>
@@ -1344,7 +1343,7 @@
                   </tr>
                   <tr>
                     <th colspan="2">
-                      *Only applicable for those who has been review by hospital
+                      *Only applicable for those who has been reviewed by hospital
                       psychiatry team.
                     </th>
                   </tr>
@@ -2656,7 +2655,7 @@ export default {
               this.errorList.push("ICD 9 SUB CODE is required");
               this.validate = false;
             }
-          } else {
+          } else if (this.category_services == "external") {
             if (!this.services_id) {
               this.errorList.push("Services is required");
               this.validate = false;
@@ -2757,16 +2756,18 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            window.alert("Data are saved successfully!");
+            // this.loader = false;
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+            this.resetmodel();
+            // this.loader = false;
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) {}
