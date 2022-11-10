@@ -49,7 +49,7 @@
                     <td>
                       <a
                         style="cursor: pointer"
-                        @click="OnviewClick(job.position_offered)"
+                        @click="OnviewClick(job.id)"
                         class="view"
                         ><i class="far fa-eye"></i
                       ></a>
@@ -147,11 +147,11 @@ export default {
         query: { id: id },
       });
     },
-    OnviewClick(title) {
+    OnviewClick(id) {
       this.loader = true;
       this.$router.push({
         path: "/Modules/Employer/same-job-offer-list",
-        query: { title: title },
+        query: { job_id: id},
       });
     },
     OnSearch() {
