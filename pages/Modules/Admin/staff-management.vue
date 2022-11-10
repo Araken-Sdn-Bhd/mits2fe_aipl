@@ -44,7 +44,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Search"
+                        placeholder="Search Staff Name"
                         @keyup="onnamechange"
                       />
                     </div>
@@ -325,7 +325,7 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-       if(this.SidebarAccess!=1){ 
+       if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
@@ -333,7 +333,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    
+
     this.GetBranchList();
   },
   methods: {
