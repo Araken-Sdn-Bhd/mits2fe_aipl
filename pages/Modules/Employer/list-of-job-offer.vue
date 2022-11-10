@@ -48,11 +48,13 @@
                     <td>
                       <a
                         style="cursor: pointer"
-                        @click="OnviewClick(job.id)"
+                        @click="OnviewClick(job.id,job.position,job.section_value,job.work_requirement,job.approval_status)"
                         class="view" title="View all list">
                         <i class="far fa-eye"></i></a>
                       <a
+                      v-if="job.approval_status == 2"
                         style="cursor: pointer"
+                        title="create same job offer"
                         @click="OneditClick(job.id,job.position,job.section_value,job.work_requirement)"
                         class="add"
                         ><i class="far fa-plus"></i
@@ -145,11 +147,11 @@ export default {
         query: { id: id, position:position, education:education,requirement:requirement},
       });
     },
-    OnviewClick(id) {
+    OnviewClick(id,position,education,requirement,status) {
       this.loader = true;
       this.$router.push({
         path: "/Modules/Employer/same-job-offer-list",
-        query: { job_id: id},
+        query: { job_id: id,position:position, education:education,requirement:requirement,status:status},
       });
     },
     OnSearch() {
