@@ -37,7 +37,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer0.value"
                       />
                     </td>
@@ -45,7 +45,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer1.value"
                       />
                     </td>
@@ -53,7 +53,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer2.value"
                       />
                     </td>
@@ -61,7 +61,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer3.value"
                       />
                     </td>
@@ -69,7 +69,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer4.value"
                       />
                     </td>
@@ -77,9 +77,9 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        value="true" 
+                        value="true"
                         v-model="psp.Answer5.value"
-                        
+
                       />
                     </td>
                   </tr>
@@ -125,8 +125,13 @@
                   </table>
                 </div> -->
               </div>
-              <!-- <div class="modal-footer">
-                <button
+              <div class="modal-footer">
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    >
+                <!-- <button
                   @click="downloadresult"
                   type="button"
                   class="btn btn-secondary mr-auto"
@@ -138,8 +143,8 @@
                   class="btn btn-primary ml-auto"
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
-                </a>
-              </div> -->
+                </a> -->
+              </div>
             </div>
           </div>
         </div>
@@ -301,7 +306,14 @@ export default {
         path: "/Modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/Modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
     }
+
   },
 };
 </script>
