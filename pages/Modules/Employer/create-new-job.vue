@@ -694,6 +694,7 @@ export default {
                 $("#insertpopup").modal("show");
               });
               this.reset();
+              this.$router.push("/Modules/Employer/list-of-job-offer");
           } else {
             this.loader = false;
             this.$nextTick(() => {
