@@ -7,7 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Job Record</h1>
-            <!-- <a href="create-new-job.html"><i class="fal fa-plus"></i> Add</a> -->
+   
           </div>
           <div class="card mb-4">
             <div class="card-body">
@@ -27,13 +27,10 @@
                   </div>
                 </div>
               </div>
-              <table
-                class="table table-striped data-table font-13"
-                style="width: 100%"
-              >
+              <table class="table table-striped data-table font-13" style="width: 100%">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th></th>
                     <th>Position</th>
                     <th>Job Location</th>
                     <th>Employment Duration</th>
@@ -48,27 +45,47 @@
                 </thead>
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
-                    <td>#{{ index+1 }}</td>
-                    <td>{{ job.position_offered }}</td>
-                    <td>{{ job.position_location_1 }}</td>
+                    <!--<td style="width:5%">#{{ index + 1 }}</td>-->
+                    <td><input type="checkbox" name="" v-on:click="Checkcompany(job.jobofferId, $event)"/></td>
+                    <td>{{ job.position }}</td>
+                    <td>{{ job.location_address_1 }} {{ job.location_address_2 }} {{ job.location_address_3 }}</td>
                     <td>{{ job.duration_of_employment }}</td>
                     <td>{{ job.salary_offered }}</td>
                     <td>{{ job.work_schedule }}</td>
                     <td>{{ job.company_name }}</td>
                     <td>{{ job.contact_name }}</td>
                     <td>{{ job.contact_number }}</td>
-                    <td>{{job.job_availability}}</td>
                     <td>
-                      <a style="cursor:pointer;" @click="OneditClick(job.id)" class="view"
-                        ><i class="far fa-eye"></i
-                      ></a>
-                      <a style="cursor:pointer;" @click="OneditClick(job.id)" class="edit" v-if="SidebarAccess==1"
+                      <span v-if="job.job_availability == 0">Yes</span>
+                      <span v-if="job.job_availability == 1">No</span>
+                    </td>
+                    <td>
+                      <a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="view"><i class="far fa-eye"></i></a>
+                      <!--<a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="edit" v-if="SidebarAccess==1"
                         ><i class="far fa-edit"></i
-                      ></a>
+                      ></a>-->
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <div class="d-flex">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                <div class="ml-auto">
+                  <a
+                    style="cursor: pointer"
+                    v-on:click="OnApproverejectRequest(1)" v-if="SidebarAccess==1"
+                    class="btn btn-danger btn-fill btn-md"
+                    ><i class="fad fa-vote-nay"></i> Not Available</a
+                  >
+                  <a
+                    style="cursor: pointer"
+                    v-on:click="OnApproverejectRequest(0)" v-if="SidebarAccess==1"
+                    class="btn btn-warning btn-green btn-fill btn-md">
+                    <i class="fad fa-check"></i> Available</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,6 +106,7 @@ export default {
       userdetails: null,
       list: [],
       alllist: [],
+      selected: [],
       companyId: 0,
       search: "",
       SidebarAccess:null,
@@ -98,26 +116,29 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    let urlParams = new URLSearchParams(window.location.search);
-    this.companyId = urlParams.get("id");
+   
   },
   mounted() {
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
+    this.getList();
+   
+  },
+  methods: {
+    back() {
+      this.$router.go(-1);
+    },
+    async getList(){
+      const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
     };
-    const axios = require("axios").default;
-    axios
-      .get(
-        `${this.$axios.defaults.baseURL}` + "intervention/job-record",
-
-        { headers }
-      )
+    const response = await this.$axios.get(
+            "employer-job/job-list",
+            { headers }
+          )
       .then((resp) => {
-        this.list = resp.data.list;
-        this.alllist = resp.data.list;
-        console.log("my lst", resp.data);
+        this.list = resp.data;
+        this.alllist = resp.data;
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -125,7 +146,7 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
-            scrollX: true,
+
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -138,13 +159,12 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-  },
-  methods: {
+    },
     OnSearch() {
       if (this.search) {
         this.list = this.alllist.filter((notChunk) => {
           return (
-            notChunk.position_offered
+            notChunk.position
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 || notChunk.company_name
               .toLowerCase()
@@ -155,9 +175,60 @@ export default {
         this.list = this.alllist;
       }
     },
+    Checkcompany(value, event) {
+      if (event.target.checked) {
+        this.selected.push(value);
+      } else {
+        if (this.selected.indexOf(value) != -1)
+          this.selected.splice(this.selected.indexOf(value), 1);
+      }
+      console.log('my id',value);
+    },
+    async OnApproverejectRequest(status) {
+    
+      if (confirm("Are you sure you want to perform this action")) {
+      try {
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        this.selected.forEach((value, index) => {
+          const axios = require("axios").default;
+          axios
+            .post(
+              `${this.$axios.defaults.baseURL}` +
+                "employer-job/setAvailable",
+              {  id: value, status: status.toString() },
+              { headers }
+            )
+            
+            .then((resp) => {
+              console.log("reuslt", resp);
+            });
+           
+            this.getList();
+            
+           
+        });
+        
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#updatepopup").modal("show");
+        });
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
+    
+    },
     OneditClick(id) {
       this.$router.push({
-        path: "/Modules/Intervention/update-new-job",
+        path: "/Modules/Intervention/view-job-details",
         query: { id: id },
       });
     },

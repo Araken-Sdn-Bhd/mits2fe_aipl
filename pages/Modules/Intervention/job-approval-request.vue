@@ -31,7 +31,7 @@
                     <td >{{ job.job_posted }}</td>
                     <td >{{ job.NewJobs }}</td>
                     <td style="width:5%">
-                      <a style="cursor:pointer;" @click="OnviewClick(job.company_id)" class="view"
+                      <a style="cursor:pointer;" @click="OnviewClick(job.company_id,job.company_name)" class="view"
                         ><i class="far fa-eye"></i
                       ></a>
                     </td>
@@ -102,10 +102,10 @@ export default {
       });
     },
 
-    OnviewClick(id) {
+    OnviewClick(id,company) {
       this.$router.push({
         path: "/Modules/Intervention/company-job-approval-request",
-        query: { id: id },
+        query: { id: id ,company:company},
       });
     },
   },
