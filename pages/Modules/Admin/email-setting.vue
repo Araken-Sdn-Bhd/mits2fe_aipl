@@ -121,11 +121,25 @@
         </li>
       </ul>
         </p>
+        <hr class="rounded">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="mb-3">
+                        <label class="form-label">Test Send Email</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Target Email"
+                          v-model="target_email"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <!-- row -->
                   <div class="d-flex" v-if="SidebarAccess==1">
                     <a href="/Modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
                     <div class="ml-auto">
-                        <a href="#" class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
+                        <a class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
 
                         <button type="submit" class="btn btn-warning btn-text"><i class="far fa-save"></i> Save</button>
                     </div>
@@ -146,7 +160,7 @@
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
-            
+
             <p>Successful Connection</p>
           </div>
           <div class="modal-footer">
@@ -165,8 +179,9 @@
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
-            
+
             <p>No Connection</p>
+            <p>{{ this.message }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">Ok</button>
@@ -194,12 +209,14 @@ export default {
       userdetail: null,
       emailerror: [],
       loader: false,
-      SidebarAccess:null,
+      SidebarAccess: null,
+      message: "",
+      target_email: "",
     };
   },
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetEmail();
   },
   methods: {
@@ -287,7 +304,7 @@ export default {
         });
       }
     },
-     async GetEmail() {
+    async GetEmail() {
       const headers = {
         Authorization: "Bearer " + this.token,
         Accept: "application/json",
@@ -300,51 +317,54 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.list = response.data.list;
-        console.log('psptestresult',this.list);
-        this.emailfrom =response.data.list[0].send_email_from;
-        this.outgoingsmtpserver=response.data.list[0].outgoing_smtp_server;
-        this.loginuserid=response.data.list[0].login_user_id;
-        this.loginpassword=response.data.list[0].login_password;
-        this.verifypassword=response.data.list[0].verify_password;
-        this.smtpportno=response.data.list[0].smtp_port_number;
-        this.security=response.data.list[0].security;
+        console.log("psptestresult", this.list);
+        this.emailfrom = response.data.list[0].send_email_from;
+        this.outgoingsmtpserver = response.data.list[0].outgoing_smtp_server;
+        this.loginuserid = response.data.list[0].login_user_id;
+        this.loginpassword = response.data.list[0].login_password;
+        this.verifypassword = response.data.list[0].verify_password;
+        this.smtpportno = response.data.list[0].smtp_port_number;
+        this.security = response.data.list[0].security;
       } else {
         this.list = [];
       }
     },
-    async onTestConnection(){
+    async onTestConnection() {
+      this.loader = true;
       const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "/email-setting/testEmail",
-            {
-              send_email_from: this.emailfrom,
-              outgoing_smtp_server: this.outgoingsmtpserver,
-              login_user_id: this.loginuserid,
-              login_password: this.loginpassword,
-              verify_password: this.verifypassword,
-              smtp_port_number: this.smtpportno,
-              security: this.security,
-            },
-            { headers }
-          );
-          // console.log("my body", variablevale);
-          console.log("my resp", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#test-connection").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#test-connection-error").modal("show");
-            });
-          }
-    }
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "/email-setting/testEmail",
+        {
+          send_email_from: this.emailfrom,
+          outgoing_smtp_server: this.outgoingsmtpserver,
+          login_user_id: this.loginuserid,
+          login_password: this.loginpassword,
+          verify_password: this.verifypassword,
+          smtp_port_number: this.smtpportno,
+          security: this.security,
+          target_email:this.target_email,
+        },
+        { headers }
+      );
+      // console.log("my body", variablevale);
+      // console.log("my resp", response.data);
+      if (response.data.code == 200) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#test-connection").modal("show");
+        });
+      } else {
+        this.loader = false;
+        this.message = response.data.message;
+        this.$nextTick(() => {
+          $("#test-connection-error").modal("show");
+        });
+      }
+    },
   },
 };
 </script>
