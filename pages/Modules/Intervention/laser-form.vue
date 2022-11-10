@@ -982,7 +982,7 @@
                 </tbody>
               </table>
 
-                <div
+                      <div
                   class="accordion form-accordion mt-3"
                   id="accordionExample"
                 >
@@ -1133,8 +1133,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
- {{catcode.icd_name}}
+              {{ catcode.icd_code }}{{catcode.icd_name}}
             </option>
                               </select>
                             </div>
@@ -1232,14 +1231,13 @@
                     </div>
                   </div>
                   <!--  -->
-                </div>
- <p v-if="errorList.length">
+                </div><p v-if="errorList.length">
                           <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
+                          <li style="color:red"  v-for='err in errorList' :key='err' >
+                          {{ err }}
+                            </li>
                         </ul>
-                       </p>
+                      </p>
               <div class="d-flex" v-if="!pid">
                 <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
                   <i class="fad fa-paper-plane"></i> Submit
@@ -1635,11 +1633,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }
