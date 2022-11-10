@@ -211,7 +211,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio1"
                                 value="assisstance"
                                 v-model="category_services"
@@ -224,7 +224,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
@@ -237,7 +237,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
@@ -503,7 +503,7 @@ export default {
       sub_code_id: 0,
       complexity_services: 0,
       outcome: 0,
-      medication_des: "",
+      medication_des: "None.",
       patient_mrn_id: "",
       services_id: 0,
       serviceid: 0,
@@ -589,9 +589,6 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (!this.specialist_name) {
           this.errorList.push("Specialist Name is required");
         }
@@ -619,7 +616,6 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          // this.medication_des &&
           this.validate &&
           this.specialist_name &&
           this.case_manager &&
@@ -665,16 +661,19 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
-            this.loader = false;
+            window.alert("Data are saved successfully!");
+            // this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+            this.resetmodel();
+            // this.loader = false;
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) {}
