@@ -16,24 +16,29 @@
       </div>
 
       <div class="mb-1">
-        <label for="inputEmail">Password</label>
-        <input
-          class="form-control"
-          id="inputEmail"
-          type="text"
-          v-model="password"
-        />
-      </div>
-      <div class="mb-1">
         <label for="inputEmail">New Password</label>
         <input
           class="form-control"
           id="inputEmail"
-          type="text"
+          type="password"
+          v-model="password"
+        />
+      </div>
+      <div class="mb-1">
+        <label for="inputEmail">Confirm Password</label>
+        <input
+          class="form-control"
+          id="inputEmail"
+          type="password"
           v-model="Cnfpassword"
         />
       </div>
       <Error :message="emailerror" v-if="emailerror" />
+      <Error :message="minPwdError" v-if="minPwdError" />
+      <Error :message="maxPwdError" v-if="maxPwdError" />
+      <Error :message="letterCaseError" v-if="letterCaseError" />
+      <Error :message="alphaNumericError" v-if="alphaNumericError" />
+      <Error :message="specialCharError" v-if="specialCharError" />
       <div class="d-flex align-items-center mt-3 mb-2">
         <button class="btn login-btn" @click="OnSubmit">Change Password</button>
       </div>
@@ -49,10 +54,10 @@
         <div class="modal-content">
           <div class="modal-body">
             
-            <p>Successful Changed</p>
+            <p>Successfully Changed.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">Ok</button>
+            <button type="button" class="btn btn-secondary btn-ok"  v-on:click="redirectPage" data-bs-dismiss="modal">Ok</button>
           </div>
         </div>
       </div>
@@ -90,15 +95,69 @@ export default {
       userid: "",
       password: "",
       Cnfpassword: "",
+      minPwd: false,
+      minPwdLength: "",
+      maxPwd: false,
+      maxPwdLength: "",
+      letterCase: false,
+      alphaNumeric: "",
+      specialChar: "",
+      settinglist: [],
       emailerror: null,
+      minPwdError: null,
+      maxPwdError: null,
+      letterCaseError: null,
+      alphaNumericError: null,
+      specialCharError: null,
       validate: false,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     console.log('my userdeatila',this.userdetails);
+    this.PasswordCharacteristic();
   },
   methods: {
+    async PasswordCharacteristic(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+          "system-settings/get-setting/" + "password-characteristic" , { headers }
+        );
+
+        if (response.data.code == 200) {
+         
+         if (response.data.setting[0].variable_name == "minimum-password-length" && response.data.setting[0].status == 1){
+            this.minPwd= true;
+            this.minPwdLength= response.data.setting[0].variable_value;
+         }
+ 
+         if (response.data.setting[1].variable_name == "maximum-password-length" && response.data.setting[1].status == 1){
+            this.maxPwd= true;
+            this.maxPwdLength= response.data.setting[1].variable_value;
+         }
+
+         if (response.data.setting[2].variable_name == "include-uppercase-and-lowercase-letters" && response.data.setting[2].status == 1){
+            this.letterCase= true;
+         }
+
+         if (response.data.setting[3].variable_name == "include-alphanumeric" && response.data.setting[3].status == 1){
+            this.alphaNumeric= true;
+         }
+
+         if (response.data.setting[4].variable_name == "include-special-characters" && response.data.setting[4].status == 1){
+            this.specialChar= true;
+         }
+       
+       } else {
+         window.alert("Something went wrong");
+       }
+      
+    },
+
     async OnSubmit() {
       this.emailerror = null;
       this.validate = true;
@@ -107,9 +166,17 @@ export default {
           this.emailerror = "Password is Required!";
         }
         if (this.password != this.Cnfpassword) {
-          this.emailerror = "Password and confirm password does't match";
+          this.emailerror = "Entered Password doesn't match";
           this.validate = false;
         }
+
+        this.minPwdError = null;
+        this.maxPwdError = null;
+        this.letterCaseError = null;
+        this.alphaNumericError = null;
+        this.specialCharError = null;
+        this.checkPasswords();
+
         if (this.password && this.validate) {
           this.loader = true;
           const response = await this.$axios.post("reset/changePassword", {
@@ -118,13 +185,11 @@ export default {
           });
           if (response.data.code == 200 || response.data.code == '200') {
             // this.$router.push("/");
-            this.loader = false;
-            // this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#password-change").modal("show");
-            // });
-          localStorage.removeItem('userdetails');
-          this.$router.push("/staff-login");
+            //this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+               $("#password-change").modal("show");
+             });
           } else {
            this.loader = false;
             this.$nextTick(() => {
@@ -140,6 +205,53 @@ export default {
      resetmodel() {
       this.password = "";
       this.Cnfpassword = "";
+    },
+
+    checkPasswords(){
+      if(this.minPwd)
+      {
+        if(this.password.length<this.minPwdLength){
+        this.minPwdError = "Password must contain at least " + this.minPwdLength + " character(s).";
+        this.validate = false;
+        }
+      }
+
+      if(this.maxPwd)
+      {
+        if(this.password.length>this.maxPwdLength){
+        this.minPwdError = "Password must not exceed " + this.maxPwdLength + " character(s).";
+        this.validate = false;
+        }
+      }
+
+      if(this.letterCase)
+      {
+        if(!(this.password.match(new RegExp("[a-z]")) && this.password.match(new RegExp("[A-Z]")))){
+            this.letterCaseError = "Password must contain both uppercase and lowercase letters";
+            this.validate = false;
+        }
+      }
+
+      if(this.alphaNumeric)
+      {
+        if(!(this.password.match(new RegExp("[0-9]")) && this.password.match(new RegExp("[a-zA-Z]")))){
+            this.alphaNumericError = "Password must contain alphanumeric characters";
+            this.validate = false;
+        }
+      }
+
+      if(this.specialChar)
+      {
+        if(!this.password.match(new RegExp("[#?!@$%^&*-]"))){
+            this.specialCharError = "Password must contain special characters, e.g., [#?!@$%^&*-]";
+            this.validate = false;
+        }
+      }
+    },
+
+    redirectPage(){
+      localStorage.removeItem('userdetails');
+      this.$router.push("/staff-login");
     },
   },
 };

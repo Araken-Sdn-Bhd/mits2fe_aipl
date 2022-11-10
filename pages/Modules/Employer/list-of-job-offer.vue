@@ -43,12 +43,13 @@
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
                     <td>#{{ index + 1 }}</td>
-                    <td>{{ job.position_offered }}</td>
-                    <td>{{ job.job_posted }}</td>
+                    <td>{{ job.position }}</td>
+                    <td>{{ job.created_at }}</td>
+                    
                     <td>
                       <a
                         style="cursor: pointer"
-                        @click="OnviewClick(job.position_offered)"
+                        @click="OnviewClick(job.id)"
                         class="view"
                         ><i class="far fa-eye"></i
                       ></a>
@@ -74,6 +75,7 @@
 <script>
 import CommonSidebarEmployer from "../../../components/CommonSidebarEmployer.vue";
 import CommonHeaderEmployer from "../../../components/CommonHeaderEmployer.vue";
+
 export default {
   components: {CommonSidebarEmployer, CommonHeaderEmployer },
   name: "job-offer",
@@ -92,18 +94,25 @@ export default {
   },
   mounted() {
     console.log(`${this.$axios.defaults.baseURL}`);
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
+    this.getList();
+   
+  },
+
+  
+  methods: {
+    async getList(){
+      const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
     };
-    const axios = require("axios").default;
-    axios
-      .post(
-        `${this.$axios.defaults.baseURL}` + "intervention-job/list",
-        { added_by: this.userdetails.user.id },
-        { headers }
-      )
+    const response = await this.$axios.post(
+            "employer-job/list",
+            {
+              user_id: this.userdetails.user.id, 
+            },
+            { headers }
+          )
       .then((resp) => {
         this.list = resp.data;
         this.alllist = resp.data;
@@ -127,8 +136,10 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-  },
-  methods: {
+    },
+
+
+
     OneditClick(id) {
       this.loader = true;
       this.$router.push({
@@ -136,18 +147,18 @@ export default {
         query: { id: id },
       });
     },
-    OnviewClick(title) {
+    OnviewClick(id) {
       this.loader = true;
       this.$router.push({
         path: "/Modules/Employer/same-job-offer-list",
-        query: { title: title },
+        query: { job_id: id},
       });
     },
     OnSearch() {
       if (this.search) {
         this.list = this.alllist.filter((notChunk) => {
           return (
-            notChunk.position_offered
+            notChunk.position
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1
           );
