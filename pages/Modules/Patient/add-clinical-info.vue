@@ -278,7 +278,7 @@ export default {
     },
     OnBack(){
       this.$router.push({
-              path: "/Modules/Patient/patient-summary",
+              path: "/Modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     },
