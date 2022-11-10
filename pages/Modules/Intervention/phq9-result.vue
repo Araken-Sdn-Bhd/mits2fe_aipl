@@ -72,28 +72,28 @@
 
                           <div
                             v-if="PHQ9 == 'Minimal Depression'"
-                            class="arrow"
-                            style="left: 5%; border-bottom: 10px solid #8bdf25; "
+                            class="arrow bg-color1"
+                            style="left: 5%; "
                           ></div>
                           <div
                             v-if="PHQ9 == 'Mild Depression'"
-                            class="arrow"
-                            style="left: 25%; border-bottom: 10px solid #e8e800; "
+                            class="arrow bg-color2"
+                            style="left: 25%; "
                           ></div>
                           <div
                             v-if="PHQ9 == 'Moderate Depression'"
-                            class="arrow"
-                            style="left: 46%; border-bottom: 10px solid #ffc000; "
+                            class="arrow bg-color3"
+                            style="left: 46%; "
                           ></div>
                           <div
                             v-if="PHQ9 == 'Moderately severe depression'"
-                            class="arrow"
-                            style="left: 57%; border-bottom: 10px solid #ed7d31; "
+                            class="arrow bg-color4"
+                            style="left: 57%; "
                           ></div>
                           <div
                             v-if="PHQ9 == 'Severe Depression'"
-                            class="arrow"
-                            style="left: 80%; border-bottom: 10px solid #ff0000;"
+                            class="arrow bg-color5"
+                            style="left: 80%; "
                           ></div>
                           <div class="progress">
                             <div
@@ -165,7 +165,20 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="PHQ9 == 'Minimal Depression'||PHQ9 == 'Mild Depression'">
+                        <p>
+                          Good news. Your current symptom levels suggest that 
+                          it is unlikely you are suffering from depressive disorder.
+
+                        </p>
+
+                        <p>
+                          If you feel you need additional support, consider to print 
+                          out this report and to book an appointment with the nearest 
+                          MENTARI to discuss this and any other concerns you may have.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="PHQ9 == 'Moderate Depression'||PHQ9 == 'Moderately severe depression' ||PHQ9 == 'Severe Depression'">
                         <p>
                           Your results show some symptoms, so let’s look a
                           little closer & see what to do next. As you can see

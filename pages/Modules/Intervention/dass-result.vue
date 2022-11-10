@@ -71,11 +71,196 @@
                           <h3 class="bg-color5" v-if="Stress == 'Extreme'">
                             {{ Stress }}
                           </h3>
-                          <div
-                            class="arrow"
-                            style="left: 33%; border-bottom-color: #8bdf25"
-                          ></div>
-                          <div class="progress">
+                          <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="Stress == 'Normal'"></div>
+                          <div class="progress" v-if="Stress == 'Normal'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="Stress == 'Mild'"></div>
+                          <div class="progress" v-if="Stress == 'Mild'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="Stress == 'Moderate'"></div>
+                          <div class="progress"  v-if="Stress == 'Moderate'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 70%; border-bottom-color: #ed7d31" v-if="Stress == 'Severe'"></div>
+                          <div class="progress" v-if="Stress == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Stress == 'Extreme'"></div>
+                          <div class="progress" v-if="Stress == 'Extreme'">
                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
@@ -144,35 +329,47 @@
                           </div>
                         </div>
                       </div>
-                      <!--Stress Normal  -->
-                      <div class="result-footer" v-if="stressFooter1">
+
+                      <div class="result-footer" v-if="Stress == 'Normal' || Stress == 'Mild'">
                         <p>
-                          Based on your responses, you are currently experiencing  low level of stress.
-                          Recommended for you, If you would like more information regarding mental health issue,
-                          please go to MENTARI Portal or reaching out to the nearest MENTARI in our directory.
+                          Based on your responses, you are currently
+                          experiencing low level of stress. Recommended for you,
+                          If you would like more information regarding mental
+                          health issue, please go to MENTARI Portal or reaching
+                          out to the nearest MENTARI in our directory.
                         </p>
-                        <p><i>
-                          Berdasarkan jawapan anda, anda sedang mengalami tekanan yang rendah.
-                          Cadangan kepada anda, sekiranya anda ingin mendapatkan maklumat lanjut berkaitan masalah kesihatan mental,
-                          sila layari Portal MENTARI atau menghubungi MENTARI yang terdekat melalui direktori kami.
-                          </i>
+                        <p>
+                          Berdasarkan jawapan anda, anda sedang mengalami
+                          tekanan yang rendah. Cadangan kepada anda, sekiranya
+                          anda ingin mendapatkan maklumat lanjut berkaitan
+                          masalah kesihatan mental, sila layari Portal MENTARI
+                          atau menghubungi MENTARI yang terdekat melalui
+                          direktori kami.
                         </p>
                       </div>
-                      <div class="result-footer" v-if="stressFooter2">
+                      <div class="result-footer" v-if="Stress == 'Moderate' ||Stress == 'Severe'  ||Stress == 'Extreme' ">
                         <p>
-                          Based on your responses, there is a chance that you are currently experiencing stress.
-                          Please note, this short questionnaire is just a guide and the feelings you may be experiencing could be something other than stress,
-                          anxiety or depression.We suggest that you book an appointment with professionals, you can go either to MENTARI Consultation Clinic,
-                          your GP or Public Health Clinic to discuss these results with them. Take a printed copy of this report with you and book an
-                          appointment so you can discuss your current symptoms and your future plan of management with them.
+                          Based on your responses, there is a chance that 
+                          you are currently experiencing stress. Please note, 
+                          this short questionnaire is just a guide and the 
+                          feelings you may be experiencing could be something 
+                          other than stress, anxiety or depression.We suggest 
+                          that you book an appointment with professionals, you 
+                          can go either to MENTARI Consultation Clinic, your GP 
+                          or Public Health Clinic to discuss these results with 
+                          them. Take a printed copy of this report with you and 
+                          book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
                         </p>
-                        <p><i>
-                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami tekanan. Cadangan kepada anda,
-                          sila dapatkan temujanji bersama professional,anda boleh mendapatkannya samaada di MENTARI,
-                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan laporan ujian ini.
-                          Dapatkan laporan ujian ini dan bawa semasa temujanji anda untuk membincangkan gejala yang anda yang terkini,
-                          dan membincangkan rawatan lanjut bersama mereka.
-                          </i>
+                        <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang 
+                          mengalami tekanan. Cadangan kepada anda, sila dapatkan 
+                          temujanji bersama professional, anda boleh mendapatkannya 
+                          samaada di MENTARI, doktor (GP) anda atau di Klinik 
+                          Kesihatan yang berhampiran untuk membincangkan laporan 
+                          ujian ini. Dapatkan laporan ujian ini dan bawa semasa 
+                          temujanji anda untuk membincangkan gejala yang anda yang 
+                          terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
                     </div>
@@ -206,11 +403,196 @@
                           <h3 class="bg-color5" v-if="Anxiety == 'Extreme'">
                             {{ Anxiety }}
                           </h3>
-                          <div
-                            class="arrow"
-                            style="left: 52%; border-bottom-color: #ffc000"
-                          ></div>
-                          <div class="progress">
+                           <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="Anxiety == 'Normal'"></div>
+                          <div class="progress" v-if="Anxiety == 'Normal'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="Anxiety == 'Mild'"></div>
+                          <div class="progress" v-if="Anxiety == 'Mild'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="Anxiety == 'Moderate'"></div>
+                          <div class="progress"  v-if="Anxiety == 'Moderate'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 70%; border-bottom-color: #ed7d31" v-if="Anxiety == 'Severe'"></div>
+                          <div class="progress" v-if="Anxiety == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Anxiety == 'Extreme'"></div>
+                          <div class="progress" v-if="Anxiety == 'Extreme'">
                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
@@ -280,13 +662,45 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="Anxiety == 'Normal' ||Anxiety == 'Mild'">
                         <p>
-                          2. Based on your responses, you are currently
+                          Based on your responses, you are currently
                           experiencing low level of anxiety. Recommended for
                           you, If you would like more information regarding
                           mental health issue, please go to MENTARI Portal or
                           reaching out to the nearest MENTARI in our directory.
+                        </p>
+                        <p>
+                          Berdasarkan jawapan anda, anda sedang mengalami
+                          kegelisahan yang rendah. Cadangan kepada anda,
+                          sekiranya anda ingin mendapatkan maklumat lanjut
+                          berkaitan masalah kesihatan mental, sila layari Portal
+                          MENTARI atau menghubungi MENTARI yang terdekat melalui
+                          direktori kami.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="Anxiety == 'Moderate' ||Anxiety == 'Severe' ||Anxiety == 'Extreme'">
+                        <p>
+                          Based on your responses, there is a chance that you are 
+                          currently experiencing anxiety. Please note, this short 
+                          questionnaire is just a guide and the feelings you may 
+                          be experiencing could be something other than stress, 
+                          anxiety or depression. We suggest that you book an appointment 
+                          with professionals, you can go either to MENTARI Consultation 
+                          Clinic, your GP or Public Health Clinic to discuss these 
+                          results with them. Take a printed copy of this report with 
+                          you and book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
+
+                        </p>
+                        <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
+                          kegelisahan. Cadangan kepada anda, sila dapatkan temujanji 
+                          bersama professional, anda boleh mendapatkannya samaada di MENTARI, 
+                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk 
+                          membincangkan laporan ujian ini. Dapatkan laporan ujian ini dan 
+                          bawa semasa temujanji anda untuk membincangkan gejala yang anda 
+                          yang terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
                     </div>
@@ -320,11 +734,196 @@
                           <h3 class="bg-color5" v-if="Depression == 'Extreme'">
                             {{ Depression }}
                           </h3>
-                          <div
-                            class="arrow"
-                            style="left: 42%; border-bottom-color: #e8e800"
-                          ></div>
-                          <div class="progress">
+                          <div class="arrow" style="left: 25%; border-bottom-color: #8bdf25" v-if="Depression == 'Normal'"></div>
+                          <div class="progress" v-if="Depression == 'Normal'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 45%; border-bottom-color: #e8e800" v-if="Depression == 'Mild'"></div>
+                          <div class="progress" v-if="Depression == 'Mild'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 55%; border-bottom-color: #ffc000"  v-if="Depression == 'Moderate'"></div>
+                          <div class="progress"  v-if="Depression == 'Moderate'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 70%; border-bottom-color: #ed7d31" v-if="Depression == 'Severe'"></div>
+                          <div class="progress" v-if="Depression == 'Severe'">
+                            <div
+                              class="progress-bar bg-color bg-color1"
+                              role="progressbar"
+                              style="width: 40%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                            <div
+                              class="progress-bar bg-color bg-color2"
+                              role="progressbar"
+                              style="width: 9%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color3"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color4"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+
+                            <div
+                              class="progress-bar bg-color bg-color5"
+                              role="progressbar"
+                              style="width: 17%"
+                              aria-valuenow=""
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <div class="arrow" style="left: 90%; border-bottom-color: #ff0000" v-if="Depression == 'Extreme'"></div>
+                          <div class="progress" v-if="Depression == 'Extreme'">
                             <div
                               class="progress-bar bg-color bg-color1"
                               role="progressbar"
@@ -394,13 +993,44 @@
                         </div>
                       </div>
 
-                      <div class="result-footer">
+                      <div class="result-footer" v-if="Depression == 'Normal' ||Depression == 'Mild'">
                         <p>
-                          3. Based on your responses, you are currently
+                          Based on your responses, you are currently
                           experiencing low level of depression. Recommended for
                           you, If you would like more information regarding
                           mental health issue, please go to MENTARI Portal or
                           reaching out to the nearest MENTARI in our directory.
+                        </p>
+                         <p>
+                          Berdasarkan jawapan anda, anda sedang mengalami
+                          kemurungan yang rendah. Cadangan kepada anda,
+                          sekiranya anda ingin mendapatkan maklumat lanjut
+                          berkaitan masalah kesihatan mental, sila layari Portal
+                          MENTARI atau menghubungi MENTARI yang terdekat melalui
+                          direktori kami.
+                        </p>
+                      </div>
+                      <div class="result-footer" v-if="Depression == 'Moderate' ||Depression == 'Severe' ||Depression == 'Extreme'">
+                        <p>
+                          Based on your responses, there is a chance that you are 
+                          currently experiencing depression. Please note, this short 
+                          questionnaire is just a guide and the feelings you may be 
+                          experiencing could be something other than stress, anxiety 
+                          or depression. We suggest that you book an appointment with 
+                          professionals, you can go either to MENTARI Consultation 
+                          Clinic, your GP or Public Health Clinic to discuss these 
+                          results with them. Take a printed copy of this report with 
+                          you and book an appointment so you can discuss your current 
+                          symptoms and your future plan of management with them. 
+                        </p>
+                         <p>
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
+                          kemurungan. Cadangan kepada anda, sila dapatkan temujanji bersama 
+                          professional, anda boleh mendapatkannya samaada di MENTARI, doktor 
+                          (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan 
+                          laporan ujian ini. Dapatkan laporan ujian ini dan bawa semasa temujanji 
+                          anda untuk membincangkan gejala yang anda yang terkini, dan membincangkan 
+                          rawatan lanjut bersama mereka.
                         </p>
                       </div>
                     </div>
@@ -479,10 +1109,6 @@ export default {
       Anxiety: "",
       Depression: "",
       Id: 0,
-      stressFooter1:false,
-      stressFooter2:false,
-
-
     };
   },
   beforeMount() {
@@ -496,10 +1122,6 @@ export default {
       this.StressScore = this.dassresult.Stress_Value;
       this.AnxietyScore = this.dassresult.Anxiety_Value;
       this.DepressionScore = this.dassresult.Depression_Value;
-//buat sini smbung
-      if (this.StressScore < 8){
-
-      }
     }
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
@@ -507,17 +1129,17 @@ export default {
   beforeDestroy() {
     localStorage.removeItem("dassresult");
   },
-  async Gotopreviouspage() {
-      this.$router.push({
-        path: "/Modules/Intervention/patient-summary",
-        // query: { id: this.Id },
-      });
-    },
   methods: {
     demoFromHTML() {
       var pdf = new jsPDF("p", "pt", "a4");
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
+      });
+    },
+    async Gotorequestappointment() {
+      this.$router.push({
+        path: "/Modules/Intervention/request-appointment-form",
+        query: { id: this.Id },
       });
     },
     GoBack(){
