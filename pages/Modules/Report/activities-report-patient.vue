@@ -134,7 +134,7 @@
                           v-bind:key="catcode.id"
                           v-bind:value="catcode.id"
                         >
-                          {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
                         </option>
                       </select>
                     </div>
@@ -344,9 +344,24 @@
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="far fa-file-pdf"></i> Generate PDF</a
                     >
-                    <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                      ><i class="far fa-file-excel"></i> Generate Excel</a
-                    >
+                    <!-- <a @click="Ongenerateexel" class="btn btn-success btn-text"
+                      ><i class="far fa-file-excel"></i> Generate Excel</a> -->
+
+                      <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"           
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="Activity Patient"
+                       :name=excelname
+                      >
+                      <i class="far fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
 
                   </div>
                 </div>
@@ -380,7 +395,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <table class="table main-data-table" id="datatable">
+                <table class="table" id="datatable">
                   <thead>
                     <tr>
                       <th class="thhead">No</th>
@@ -430,12 +445,45 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import Vue from "vue";
+import downloadexcel from "vue-json-excel";
+import JsonExcel from "vue-json-excel";
+
+Vue.component("downloadExcel", JsonExcel);
 export default {
   components: { CommonSidebar, CommonHeader },
 
+  name: "App",
+  components: {
+    downloadexcel,
+  },
   name: "sharp",
   data() {
     return {
+
+      json_fields: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no",
+        "PROCEDURE":"Procedure",
+        "NEXT VISIT":"Next_visit",
+        "TIME REGISTERED" :"time_registered",
+        "TIME SEEN":"time_seen",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      excelname: "",
+      sheetname: "PATIENT ACTIVITY",
+      header:"",
+            
       userdetails: null,
       error: null,
       loader: false,
@@ -468,7 +516,12 @@ export default {
       Total_Patient: 0,
       Attend: 0,
       No_Show: 0,
+      filepath:'',
       SidebarAccess:null,
+      ReportList:[],
+      No:0,
+
+      
     };
   },
   beforeMount() {
@@ -659,6 +712,12 @@ export default {
         }
       }
     },
+    startDownload(){
+        alert('show loading');
+    },
+    finishDownload(){
+        alert('hide loading');
+    },
     async Ongenerateexel() {
       this.errorList = [];
       this.error = null;
@@ -694,11 +753,17 @@ export default {
               report_type: "excel",
             },
             { headers }
-          );
+          )
+
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data.filepath) {
-              window.open(response.data.filepath, "_blank");
+            if (response.data) {
+
+              this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
+
             } else {
               this.error = "No Record Found";
             }
@@ -729,7 +794,7 @@ export default {
   padding: 0px !important;
 }
 .patient-inner-table th {
-  background: #bbf2eb;
+  background: #bbf2eb;  /*  need to be sync with other report  */
   border-left: 1px solid #000;
   padding: 4px 10px;
   width: 50%;
