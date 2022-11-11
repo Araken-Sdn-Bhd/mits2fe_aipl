@@ -7,16 +7,17 @@
         <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <div class="page-title">
-            <h1>{{ this.companyName }} : List of Pending Company Job Approval Request</h1>
+            <h1>Company Job Approval Request</h1>
+            <!-- <a href="create-new-job.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
             <div class="card-body">
               <div class="search-table mt-3">
                 <div class="row align-items-center">
-                  <!--<div class="col-sm-5">
-                    <h5>Company: {{ this.companyName }}</h5>
-                  </div>-->
+                  <div class="col-sm-5">
+                    <h5>Company: {{ companyName }}</h5>
+                  </div>
 
                   <div class="col-sm-5 ml-auto mb-2">
                     <input
@@ -30,22 +31,24 @@
                 </div>
               </div>
 
-              <table class="table table-striped data-table font-13" style="width: 100%">
+              <table
+                class="table table-striped data-table font-13"
+                style="width: 100%"
+              >
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Posted Date</th>
                     <th>Position</th>
                     <th>Job Location</th>
                     <th>Employment Duration</th>
                     <th>Average Salary</th>
                     <th>Work Schedule</th>
-                    <th>Education</th>
                     <th>Transport</th>
                     <th>Accommodation</th>
                     <th>Work Requirement</th>
                     <th>Mentari</th>
                     <th>Status</th>
+                    <th>Posted Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -54,16 +57,14 @@
                       <input
                         type="checkbox"
                         name=""
-                        v-on:click="Checkcompany(job.joboffersId, $event)"
+                        v-on:click="Checkcompany(job.id, $event)"
                       />
                     </td>
-                    <td style="width:10%">{{ job.created_at }}</td>
-                    <td>{{ job.position }}</td>
-                    <td>{{ job.location_address_1 }} {{ job.location_address_2 }} {{ job.location_address_3 }}</td>
+                    <td>{{ job.position_offered }}</td>
+                    <td>{{ job.position_location_1 }}</td>
                     <td>{{ job.duration_of_employment }}</td>
                     <td>{{ job.salary_offered }}</td>
                     <td>{{ job.work_schedule }}</td>
-                    <td>{{ job.section_value }}</td>
                     <td>
                       <p v-if="job.is_transport">Yes</p>
                       <p v-if="!job.is_transport">No</p>
@@ -75,29 +76,27 @@
                     <td>{{ GetWorkRequiremnet(job.work_requirement) }}</td>
                     <td>{{ job.hospital_branch_name }}</td>
                     <td>
-                      <span v-if="job.approval_status == 1">Pending</span>
-                      <span v-if="job.approval_status == 0">Rejected</span>
-                      <span v-if="job.approval_status == 2">Approved</span>
+                      <p v-if="job.status == 1">Pending</p>
+                      <p v-if="job.status == 0">Rejected</p>
+                      <p v-if="job.status == 2">Approved</p>
                     </td>
+                    <td>{{ job.posted_at }}</td>
                   </tr>
                 </tbody>
               </table>
 
               <div class="d-flex">
-                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
-                    <i class="fa fa-step-backward"/> &nbsp; Back
-                </button>
                 <div class="ml-auto">
                   <a
                     style="cursor: pointer"
                     v-on:click="OnApproverejectRequest(0)" v-if="SidebarAccess==1"
-                    class="btn btn-danger btn-fill btn-md"
+                    class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i> Reject</a
                   >
                   <a
                     style="cursor: pointer"
                     v-on:click="OnApproverejectRequest(2)" v-if="SidebarAccess==1"
-                    class="btn btn-warning btn-green btn-fill btn-md"
+                    class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Approve</a
                   >
                 </div>
@@ -129,7 +128,6 @@ export default {
       loader: false,
       SidebarAccess:null,
       
-      
     };
   },
   beforeMount() {
@@ -137,33 +135,29 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.companyId = urlParams.get("id");
-    this.companyName = urlParams.get("company");
   },
   mounted() {
-
-    this.getList();
-    
-  },
-  methods: {
-    back() {
-      this.$router.go(-1);
-    },
-    async getList(){
-      const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
     };
-    const response = await this.$axios.post(
-            "employer-job/pending-approval",
-            {
-              company_id: this.companyId 
-            },
-            { headers }
-          )
+    const axios = require("axios").default;
+    axios
+      .post(
+        `${this.$axios.defaults.baseURL}` +
+          "intervention-job/getCompanyJobApprovalList",
+        {
+          added_by: this.userdetails.user.id,
+          company_id: this.companyId,
+        },
+        { headers }
+      )
       .then((resp) => {
-        this.list = resp.data;
-        this.alllist = resp.data;
+        this.list = resp.data.list;
+        this.alllist = resp.data.list;
+        this.companyName = resp.data.companyname.company_name;
+        console.log('list',this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -171,9 +165,7 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
-        
-
-
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -186,14 +178,15 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-    },
+  },
+  methods: {
     OnSearch() {
       if (this.search) {
         this.list = this.alllist.filter((notChunk) => {
           return (
-            notChunk.position
+            notChunk.position_offered
               .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1 
+              .indexOf(this.search.toLowerCase()) > -1
           );
         });
       } else {
@@ -204,38 +197,38 @@ export default {
       var requirement = "";
       var jdata = JSON.parse(data);
       jdata.forEach((ele) => {
-        if (ele["Labour (Heavy Lifting)"] == true) {
+        if (ele["WorkRequirement"]["Labour (Heavy Lifting)"] == true) {
           requirement = "Labour (Heavy Lifting)";
         }
-        if (ele["Good Focus/Concentration"] == true) {
+        if (ele["WorkRequirement"]["Good Focus/Concentration"] == true) {
           if (requirement) {
             requirement = requirement + "," + "Good Focus/Concentration";
           } else {
             requirement = "Good Focus/Concentration";
           }
         }
-        if (ele["Communication Skills"] == true) {
+        if (ele["WorkRequirement"]["Communication Skills"] == true) {
           if (requirement) {
             requirement = requirement + "," + "Communication Skills";
           } else {
             requirement = "Communication Skills";
           }
         }
-        if (ele["Reading"] == true) {
+        if (ele["WorkRequirement"]["Reading"] == true) {
           if (requirement) {
             requirement = requirement + "," + "Reading";
           } else {
             requirement = "Reading";
           }
         }
-        if (ele["Calculation"] == true) {
+        if (ele["WorkRequirement"]["Calculation"] == true) {
           if (requirement) {
             requirement = requirement + "," + "Calculation";
           } else {
             requirement = "Calculation";
           }
         }
-        if (ele["Other"]) {
+        if (ele["WorkRequirement"]["Other"]) {
           if (requirement) {
             requirement = requirement + "," + "Other";
           } else {
@@ -255,9 +248,6 @@ export default {
       console.log('my id',value);
     },
     async OnApproverejectRequest(status) {
-    
-      if (confirm("Are you sure you want to perform this action")) {
-      
       try {
         this.loader = true;
         const headers = {
@@ -276,10 +266,9 @@ export default {
             )
             
             .then((resp) => {
+               this.GetList();
               console.log("reuslt", resp);
             });
-           
-            this.getList();
            
         });
         
@@ -293,11 +282,33 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
-    }
-    
     },
-  
-   
+    GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .post(
+          `${this.$axios.defaults.baseURL}` +
+            "intervention-job/getCompanyJobApprovalList",
+          {
+            added_by: this.userdetails.user.id,
+            company_id: this.companyId,
+          },
+          { headers }
+        )
+        .then((resp) => {
+          console.log('my list call',resp.data.list);
+          this.list = resp.data.list;
+          this.alllist = resp.data.list;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
 };
 </script>
