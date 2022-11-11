@@ -209,7 +209,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Does your group have any volunteering experience?<span>*</span></label
+                      Do you have volunteering experience?<span>*</span></label
                     >
                     <div class="col-sm-8 radio-box">
                       <div class="form-check form-check-inline">
@@ -291,7 +291,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Does your group are mental health professionals?<span>*</span></label
+                      Are you a mental health professional?<span>*</span></label
                     >
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">

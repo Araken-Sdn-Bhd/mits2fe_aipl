@@ -209,7 +209,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Does your group have any volunteering experience?<span>*</span></label
+                      Do you have volunteering experience?<span>*</span></label
                     >
                     <div class="col-sm-8 radio-box">
                       <div class="form-check form-check-inline">
@@ -257,14 +257,14 @@
                           ></textarea>
                         </div> -->
                            <table class="note" style="width: 100%" id="volexp1">
-              <thead>
+              <!-- <thead>
                 <tr>
                   <th width="100px">YEAR</th>
                   <th>Location</th>
                   <th>Brief Description of Activities</th>
                   <th></th>
                 </tr>
-              </thead>
+              </thead> -->
               <tbody class="optionBox">
                      <tr class="block" v-for="(exp,index) in expList" :key="index">
                   <td>
@@ -288,7 +288,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                     Does your group are mental health professionals?<span>*</span></label
+                    Are you a mental health professionals?<span>*</span></label
                     >
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">
