@@ -305,7 +305,7 @@ export default {
     this.GetdesignationList();
   },
   mounted(){
-     if(this.SidebarAccess!=1){ 
+     if(this.SidebarAccess!=1){
           this.$refs.hidebutton.classList.add("hide");
     }
   },
@@ -381,9 +381,9 @@ export default {
       if (!this.nricno) {
         this.errors.push("NRIC NO is required.");
       }
-      if (!this.professionregno) {
-        this.errors.push("Profession Registration NO is required.");
-      }
+      // if (!this.professionregno) {
+      //   this.errors.push("Profession Registration NO is required.");
+      // }
       if (this.Role <= 0) {
         this.errors.push("Role  is required.");
       }
@@ -417,10 +417,10 @@ export default {
       // if (!this.file) {
       //   this.errors.push("Document is required.");
       // }
-      console.log('this.name && this.nricno && this.professionregno && this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror',this.name , this.nricno , this.professionregno , this.Role , this.email ,
+      console.log('this.name && this.nricno &&  this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror',this.name , this.nricno , this.Role , this.email ,
       this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
       this.branchId , this.startdate , this.enddate , !this.nricerror)
-      if(this.name , this.nricno , this.professionregno , this.roleId , this.email ,
+      if(this.name , this.nricno , this.roleId , this.email ,
       this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
       this.branchId , this.startdate , this.enddate , !this.nricerror) {
         if (this.personincharge > 0) {
