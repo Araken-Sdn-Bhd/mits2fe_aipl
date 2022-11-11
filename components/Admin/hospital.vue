@@ -592,10 +592,8 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.citylist = response.data.list;
-        this.postcodelist = response.data.list;
       } else {
         this.citylist = [];
-        this.postcodelist = [];
       }
     },
     async onpostCodebind(event) {
@@ -735,7 +733,7 @@ export default {
                 hospital_adrress_2: this.hospital_Adrress2,
                 hospital_adrress_3: this.hospital_Adrress3,
                 hospital_state: this.hospital_state,
-                hospital_city: this.hospital_city,
+                hospital_city: this.hospital_postcode,
                 hospital_postcode: this.hospital_postcode,
                 hospital_contact_number: this.hospital_Contact,
                 hospital_email: this.hospital_Email,
@@ -779,7 +777,7 @@ export default {
                 hospital_adrress_2: this.hospital_Adrress2,
                 hospital_adrress_3: this.hospital_Adrress3,
                 hospital_state: this.hospital_state,
-                hospital_city: this.hospital_city,
+                hospital_city: this.hospital_postcode,
                 hospital_postcode: this.hospital_postcode,
                 hospital_contact_number: this.hospital_Contact,
                 hospital_email: this.hospital_Email,
@@ -936,19 +934,29 @@ export default {
         this.hospital_Adrress3 = response.data.list.hospital.address3;
         this.hospital_state = response.data.list.hospital.state_id;
         this.hospital_postcode = response.data.list.hospital.postcode_id;
-        this.hospital_city = response.data.list.hospital.city_id;
+        this.hospital_city = response.data.list.hospital.city;
         this.hospital_Contact = response.data.list.hospital.contact;
         this.hospital_Email = response.data.list.hospital.email;
         this.fax_No = response.data.list.hospital.fax;
+
         const response1 = await this.$axios.post(
-          "address/" + this.hospital_state + "/stateWisePostcodeList",
-          { headers }
+        "address/" + this.hospital_state + "/getCityList",
+        { headers }
         );
         if (response1.data.code == 200 || response1.data.code == "200") {
           this.citylist = response1.data.list;
-          this.postcodelist = response1.data.list;
         } else {
           this.citylist = [];
+        }
+
+        const response2 = await this.$axios.post(
+          "address/" + this.hospital_city + "/getPostcodeListById",
+          { headers }
+        );
+        
+        if (response2.data.code == 200 || response2.data.code == "200") {
+          this.postcodelist = response2.data.list;
+        } else {
           this.postcodelist = [];
         }
       } else {
