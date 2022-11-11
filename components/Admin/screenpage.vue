@@ -4,18 +4,10 @@
       <div class="row mb-4">
         <div class="col-md-6">
           <label for="" class="form-label">Module</label>
-          <select
-            v-model="ModuleId"
-            class="form-select"
-            aria-label="Default select example"
-            @change="onsubmodelbind($event)"
-          >
+          <select v-model="ModuleId" class="form-select" aria-label="Default select example"
+            @change="onsubmodelbind($event)">
             <option value="0">Please Select</option>
-            <option
-              v-for="mod in modulelist"
-              v-bind:key="mod.id"
-              v-bind:value="mod.id"
-            >
+            <option v-for="mod in modulelist" v-bind:key="mod.id" v-bind:value="mod.id">
               {{ mod.module_name }}
             </option>
           </select>
@@ -23,17 +15,9 @@
 
         <div class="col-md-6" v-show="IsSubmodule">
           <label for="" class="form-label">Sub Module</label>
-          <select
-            v-model="SubmoduleId"
-            class="form-select"
-            aria-label="Default select example"
-          >
+          <select v-model="SubmoduleId" class="form-select" aria-label="Default select example">
             <option value="0">Please Select</option>
-            <option
-              v-for="submod in submodulelist"
-              v-bind:key="submod.id"
-              v-bind:value="submod.id"
-            >
+            <option v-for="submod in submodulelist" v-bind:key="submod.id" v-bind:value="submod.id">
               {{ submod.sub_module_name }}
             </option>
           </select>
@@ -43,69 +27,39 @@
       <div class="row mb-4">
         <div class="col-md-6">
           <label for="" class="form-label">Screen Name</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Screen Name"
-            v-model="screenname"
-          />
+          <input type="text" class="form-control" placeholder="Enter Screen Name" v-model="screenname" />
         </div>
 
         <div class="col-md-6">
           <label for="" class="form-label">Page Route</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Page Route"
-            v-model="pageroute"
-          />
+          <input type="text" class="form-control" placeholder="Enter Page Route" v-model="pageroute" />
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-6">
           <label for="" class="form-label">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Description"
-            v-model="description"
-          />
+          <input type="text" class="form-control" placeholder="Enter Description" v-model="description" />
         </div>
         <div class="col-md-6">
           <label for="" class="form-label">Icon</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Icon"
-            v-model="icon"
-          />
+          <input type="text" class="form-control" placeholder="Enter Icon" v-model="icon" />
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-6">
           <label for="" class="form-label">Index</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Index"
-            v-model="index"
-          />
+          <input type="text" class="form-control" placeholder="Enter Index" v-model="index" />
         </div>
       </div>
-        <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
+      <p v-if="errors.length">
+      <ul>
+        <li style="color:red" v-for='err in errors' :key='err'>
           {{ err }}
         </li>
       </ul>
-        </p> 
-      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
-        <button
-          type="submit"
-          class="btn btn-warning btn-text ml-auto"
-          v-if="Id"
-        >
+      </p>
+      <div class="d-flex justify-content-center" :class="SidebarAccess != 1 ? 'hide' : ''">
+        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
           <i class="far fa-save"></i> Save
         </button>
         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
@@ -129,24 +83,55 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(scn,index) in list" :key="index">
-          <td>{{ index+1 }}</td>
+        <tr v-for="(scn, index) in list" :key="index">
+          <td>{{ index + 1 }}</td>
           <td>{{ scn.module_name }}</td>
           <td>{{ scn.sub_module_name }}</td>
           <td>{{ scn.screen_name }}</td>
           <td>{{ scn.screen_route }}</td>
           <td>{{ scn.screen_description }}</td>
-          <td class="td"  :class="SidebarAccess!=1?'hide':''">
-            <a class="edit" @click="editsscreen(scn)" 
-              ><i class="far fa-edit"></i
-            ></a>
-            <a @click="deletescreen(scn)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
-            ></a>
+          <td class="td" :class="SidebarAccess != 1 ? 'hide' : ''">
+            <a class="edit" @click="editsscreen(scn)"><i class="far fa-edit"></i></a>
+            <a @click="deletescreen(scn)" class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
           </td>
         </tr>
       </tbody>
     </table>
+    <div>
+      <div class="modal fade" id="errorpopupscreen" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Something went wrong!</p>
+              <a>
+                {{ this.message }}
+              </a>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deletepopupscreen" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Succesfully Deleted</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -168,7 +153,8 @@ export default {
       submodulelist: [],
       list: [],
       IsSubmodule: true,
-      SidebarAccess:null
+      SidebarAccess: null,
+      message: "The screen route has already been taken.",
     };
   },
   mounted() {
@@ -223,7 +209,7 @@ export default {
         { module_id: event.target.value },
         { headers }
       );
-     
+
       if (response.data.code == 200 || response.data.code == "200") {
         this.submodulelist = response.data.list;
       } else {
@@ -257,7 +243,7 @@ export default {
         }
         if (
           this.ModuleId &&
-        //  this.SubmoduleId &&
+          //  this.SubmoduleId &&
           this.screenname &&
           this.pageroute &&
           this.description &&
@@ -286,12 +272,13 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
               this.$nextTick(() => {
-                $("#insertpopup").modal("show");
+                $("#insertpopupscreen").modal("show");
               });
               this.resetmodel();
             } else {
               this.$nextTick(() => {
-                $("#errorpopup").modal("show");
+                this.message = JSON.stringify(response.data.message);
+                $("#errorpopupscreen").modal("show");
               });
             }
           } else {
@@ -308,14 +295,16 @@ export default {
               },
               { headers }
             );
+            console.log(response.data.message);
             if (response.data.code == 200 || response.data.code == "200") {
               this.$nextTick(() => {
-                $("#updatepopup").modal("show");
+                $("#updatepopupscreen").modal("show");
               });
               this.resetmodel();
             } else {
+              this.message = JSON.stringify(response.data.message);
               this.$nextTick(() => {
-                $("#errorpopup").modal("show");
+                $("#errorpopupscreen").modal("show");
               });
             }
           }
@@ -331,8 +320,8 @@ export default {
       this.pageroute = "";
       this.description = "";
       this.Id = 0;
-      this.index=0;
-      this.icon="";
+      this.index = 0;
+      this.icon = "";
       this.errors = [];
       this.GetList();
     },
@@ -415,17 +404,19 @@ export default {
         console.log("my delete resp", response.data);
         if (response.data.code == 200) {
           this.$nextTick(() => {
-            $("#deletepopup").modal("show");
+            $("#deletepopupscreen").modal("show");
           });
           this.GetList();
         } else {
           this.$nextTick(() => {
-            $("#errorpopup").modal("show");
+            this.message = JSON.stringify(response.data.message);
+            $("#errorpopupscreen").modal("show");
           });
         }
       } catch (e) {
         this.$nextTick(() => {
-          $("#errorpopup").modal("show");
+          this.message = JSON.stringify(response.data.message);
+          $("#errorpopupscreen").modal("show");
         });
       }
     },

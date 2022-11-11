@@ -1,44 +1,27 @@
 <template>
   <div class="content-subtab border-top-left">
-     <Loader v-if="loader" />
+    <Loader v-if="loader" />
     <form class="g-3 mt-3" method="post" @submit.prevent="onAddbranch">
       <div class="row mb-4 align-items-center">
         <div class="col-md-3">
           <label for="" class="form-label">Hospital Code</label>
-          <select
-                v-model="HospitalCode"
-                class="form-select"
-                aria-label="Default select example"
-              >
-                <option value="0">Please Select</option>
-                <option
-                  v-for="hst in hospitallist"
-                  v-bind:key="hst.id"
-                  v-bind:value="{id: hst.id, text: hst.hospital_code} "
-                >
-                  {{ hst.hospital_code }}
-                </option>
-              </select>
+          <select v-model="HospitalCode" class="form-select" aria-label="Default select example">
+            <option value="0">Please Select</option>
+            <option v-for="hst in hospitallist" v-bind:key="hst.id"
+              v-bind:value="{ id: hst.id, text: hst.hospital_code }">
+              {{ hst.hospital_code }}
+            </option>
+          </select>
         </div>
 
         <div class="col-md-6">
           <label class="form-label">Branch Name</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Branch Name"
-            v-model="BranchName"
-          />
+          <input type="text" class="form-control" placeholder="Enter Branch Name" v-model="BranchName" />
         </div>
 
         <div class="col-md-3">
           <div class="form-check mt-4">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="set-as-headquarters"
-              v-model="IsHeadquator"
-            />
+            <input class="form-check-input" type="checkbox" id="set-as-headquarters" v-model="IsHeadquator" />
             <label class="form-check-label" for="set-as-headquarters">
               Set as headquarters
             </label>
@@ -50,42 +33,18 @@
       <div class="row mb-4">
         <div class="col-md-6">
           <label for="" class="form-label">Branch Adrress</label>
-          <input
-            type="text"
-            class="form-control mb-3"
-            placeholder="Enter Street Adrress"
-            v-model="BranchAddress1"
-          />
+          <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress1" />
 
-          <input
-            type="text"
-            class="form-control mb-3"
-            placeholder="Enter Street Adrress"
-            v-model="BranchAddress2"
-          />
+          <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress2" />
 
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Street Adrress"
-            v-model="BranchAddress3"
-          />
+          <input type="text" class="form-control" placeholder="Enter Street Adrress" v-model="BranchAddress3" />
         </div>
 
         <div class="col-md-6">
           <label for="" class="form-label">State</label>
-          <select
-            v-model="State"
-            class="form-select"
-            aria-label="Default select example"
-            @change="onCitybind($event)"
-          >
-             <option value="0">Please Select</option>
-            <option
-              v-for="state in StateList"
-              v-bind:key="state.id"
-              v-bind:value="state.id"
-            >
+          <select v-model="State" class="form-select" aria-label="Default select example" @change="onCitybind($event)">
+            <option value="0">Please Select</option>
+            <option v-for="state in StateList" v-bind:key="state.id" v-bind:value="state.id">
               {{ state.state_name }}
             </option>
           </select>
@@ -93,18 +52,10 @@
           <div class="row mt-4">
             <div class="col-md-6">
               <label for="" class="form-label">City</label>
-              <select
-                v-model="City"
-                class="form-select"
-                aria-label="Default select example"
-                @change="onPostbind($event)"
-              >
-                 <option value="0">Please Select</option>
-                <option
-                  v-for="ctl in CityList"
-                  v-bind:key="ctl.city_name"
-                  v-bind:value="ctl.city_name"
-                >
+              <select v-model="City" class="form-select" aria-label="Default select example"
+                @change="onPostbind($event)">
+                <option value="0">Please Select</option>
+                <option v-for="ctl in CityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
                   {{ ctl.city_name }}
                 </option>
               </select>
@@ -112,17 +63,9 @@
 
             <div class="col-md-6">
               <label for="" class="form-label">Post Code</label>
-              <select
-                v-model="PostCode"
-                class="form-select"
-                aria-label="Default select example"
-              >
-                 <option value="0">Please Select</option>
-                <option
-                  v-for="pst in PostCodeList"
-                  v-bind:key="pst.id"
-                  v-bind:value="pst.id"
-                >
+              <select v-model="PostCode" class="form-select" aria-label="Default select example">
+                <option value="0">Please Select</option>
+                <option v-for="pst in PostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
                   {{ pst.postcode }}
                 </option>
               </select>
@@ -138,14 +81,15 @@
             <label for="" class="form-label">Contact No. (Office)</label>
             <table class="add-boxs" id="ContactNoOfficerow">
               <tbody v-if="Contactlist.length">
-                <tr class="block-ui block-contact" v-for="(office,index) in Contactlist" :key="index">
-                  <td><input type="text" class="form-control contactoffice" v-model="office.ContactNoOffice" placeholder="Enter Contact No."  /></td>
+                <tr class="block-ui block-contact" v-for="(office, index) in Contactlist" :key="index">
+                  <td><input type="text" class="form-control contactoffice" v-model="office.ContactNoOffice"
+                      placeholder="Enter Contact No." /></td>
                   <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
-                          <tbody v-if="!Contactlist.length">
+              <tbody v-if="!Contactlist.length">
                 <tr class="block-ui block-contact">
-                  <td><input type="text" class="form-control contactoffice"  placeholder="Enter Contact No."  /></td>
+                  <td><input type="text" class="form-control contactoffice" placeholder="Enter Contact No." /></td>
                   <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
@@ -156,14 +100,15 @@
             <label for="" class="form-label">Contact No. (Mobile)</label>
             <table class="add-boxs" id="ContactNoMobilerow">
               <tbody v-if="Conntactmobilelist.length">
-                <tr class="block-mobile block-ui" v-for="(mobile,index) in Conntactmobilelist" :key="index">
-                  <td><input type="text" class="form-control conntactmobile" v-model="mobile.MobileOffice" placeholder="Enter Contact No."  /></td>
+                <tr class="block-mobile block-ui" v-for="(mobile, index) in Conntactmobilelist" :key="index">
+                  <td><input type="text" class="form-control conntactmobile" v-model="mobile.MobileOffice"
+                      placeholder="Enter Contact No." /></td>
                   <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
-               <tbody v-if="!Conntactmobilelist.length">
+              <tbody v-if="!Conntactmobilelist.length">
                 <tr class="block-mobile block-ui">
-                  <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No."  /></td>
+                  <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No." /></td>
                   <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
@@ -174,50 +119,45 @@
         <div class="col-md-6">
           <div class="mb-3">
             <label for="" class="form-label">FAX NO.</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter FAX NO."
-              v-model="FaxNo"
-            />
+            <input type="text" class="form-control" placeholder="Enter FAX NO." v-model="FaxNo" />
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label">Email</label>
             <table class="add-boxs" id="Emailrow">
               <tbody v-if="Emaillist.length">
-                <tr class="block-ui block-email" >
+                <tr class="block-ui block-email">
                   <!-- @blur="validateEmail" -->
-                  <td><input type="text" v-for="(email,index) in Emaillist" :key="index" class="form-control email" v-model="email.Email" placeholder="Enter Email"   /></td>
+                  <td><input type="text" v-for="(email, index) in Emaillist" :key="index" class="form-control email"
+                      v-model="email.Email" placeholder="Enter Email" /></td>
                   <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Emaillist.length">
                 <tr class="block-ui block-email">
                   <!-- @blur="validateEmail" -->
-                  <td><input type="text" class="form-control email"  placeholder="Enter Email"/></td>
+                  <td><input type="text" class="form-control email" placeholder="Enter Email" /></td>
                   <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
                 </tr>
               </tbody>
             </table>
-             <Error :message="emailerror" v-if="emailerror" />
+            <Error :message="emailerror" v-if="emailerror" />
           </div>
         </div>
       </div>
       <!-- close-row -->
-       <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
+      <p v-if="errors.length">
+      <ul>
+        <li style="color:red" v-for='err in errors' :key='err'>
           {{ err }}
         </li>
       </ul>
-        </p>
-      <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
+      </p>
+      <div class="d-flex justify-content-center" :class="SidebarAccess != 1 ? 'hide' : ''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-        <i class="far fa-save"></i> Save
+          <i class="far fa-save"></i> Save
         </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
+        <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
           <i class="far fa-plus"></i> Add Parameter
         </button>
       </div>
@@ -227,7 +167,7 @@
       <h3>List of Branch</h3>
       <div class="input-group">
         <span class="input-group-text"><i class="far fa-search"></i></span>
-        <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch"/>
+        <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch" />
       </div>
     </div>
     <table class="table table-striped data-table1 font-13" style="width: 100%">
@@ -243,23 +183,20 @@
         </tr>
       </thead>
       <tbody>
-            <tr v-for="(brnc, index) in branchlist" :key="index">
-          <td>{{index+1}}</td>
-          <td>{{brnc.hospital_code}}</td>
-          <td>{{brnc.hospital_branch_name}}</td>
+        <tr v-for="(brnc, index) in branchlist" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ brnc.hospital_code }}</td>
+          <td>{{ brnc.hospital_branch_name }}</td>
           <td>
-           {{brnc.branch_adrress_1}}
+            {{ brnc.branch_adrress_1 }}
           </td>
           <td>
-           <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile.id">{{mobile.ContactNoOffice}}</p></td>
-        <td>{{brnc.branch_fax_no}}</td>
-          <td class="td"  :class="SidebarAccess!=1?'hide':''">
-            <a class="edit" @click="editbranch(brnc)"
-              ><i class="far fa-edit"></i
-            ></a>
-            <a @click="deletebranch(brnc)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
-            ></a>
+            <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile.id">{{ mobile.ContactNoOffice }}</p>
+          </td>
+          <td>{{ brnc.branch_fax_no }}</td>
+          <td class="td" :class="SidebarAccess != 1 ? 'hide' : ''">
+            <a class="edit" @click="editbranch(brnc)"><i class="far fa-edit"></i></a>
+            <a @click="deletebranch(brnc)" class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
           </td>
         </tr>
       </tbody>
@@ -269,7 +206,7 @@
 <script>
 export default {
   name: "branch",
-  setup() {},
+  setup() { },
   data() {
     return {
       Id: 0,
@@ -299,7 +236,9 @@ export default {
       Contactlist: [],
       Conntactmobilelist: [],
       Emaillist: [],
-      SidebarAccess:null
+      SidebarAccess: null,
+      alllist: [],
+      branchlist: [],
     };
   },
   mounted() {
@@ -429,10 +368,10 @@ export default {
     },
     async onAddbranch() {
       this.errors = [];
-      var Contactlist=[];
-      var Conntactmobilelist=[];
-      var Emaillist=[];
-      console.log('Contactlist,Conntactmobilelist,Emaillist',this.Contactlist,this.Conntactmobilelist,this.Emaillist);
+      var Contactlist = [];
+      var Conntactmobilelist = [];
+      var Emaillist = [];
+      console.log('Contactlist,Conntactmobilelist,Emaillist', this.Contactlist, this.Conntactmobilelist, this.Emaillist);
       $("table#ContactNoOfficerow > tbody > tr").each(function (i) {
         var obj = {};
         obj.ContactNoOffice = $(
@@ -470,7 +409,7 @@ export default {
 
         if (!this.IsHeadquator) {
           this.IsHeadquator = 0;
-        }else{
+        } else {
           this.IsHeadquator = 1;
         }
         if (!this.BranchAddress1) {
@@ -563,10 +502,10 @@ export default {
             }
           } else {
             if (!this.IsHeadquator) {
-                this.IsHeadquator = 0;
-              }else{
-                this.IsHeadquator = 1;
-              }
+              this.IsHeadquator = 0;
+            } else {
+              this.IsHeadquator = 1;
+            }
 
 
             const response = await this.$axios.post(

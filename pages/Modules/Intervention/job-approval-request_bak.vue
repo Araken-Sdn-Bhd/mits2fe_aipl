@@ -7,6 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Job Approval Request</h1>
+            <!-- <a href="create-new-job.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -26,12 +27,12 @@
                 </thead>
                 <tbody>
                   <tr v-for="(job, index) in list" :key="index">
-                    <td style="width:5%">#{{ index+1 }}</td>
-                    <td style="width:40%">{{ job.company_name }}</td>
-                    <td >{{ job.job_posted }}</td>
-                    <td >{{ job.NewJobs }}</td>
-                    <td style="width:5%">
-                      <a style="cursor:pointer;" @click="OnviewClick(job.company_id,job.company_name)" class="view"
+                    <td>#{{ index+1 }}</td>
+                    <td>{{ job.company_name }}</td>
+                    <td>{{ job.job_posted }}</td>
+                    <td>{{ job.NewJobs }}</td>
+                    <td>
+                      <a style="cursor:pointer;" @click="OnviewClick(job.company_id)" class="view"
                         ><i class="far fa-eye"></i
                       ></a>
                     </td>
@@ -63,23 +64,21 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
   },
   mounted() {
-    this.getList();
-
-  },
-  methods: {
-    async getList(){
-      const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
+    const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
     };
-    const response = await this.$axios.post(
-            "intervention-company/approval-list",
-            { headers }
-          )
+    const axios = require("axios").default;
+    axios
+      .post(
+        `${this.$axios.defaults.baseURL}` +
+          "intervention-job/getJobApprovalRequest",
+
+        { headers }
+      )
       .then((resp) => {
-        this.list = resp.data;
-        this.alllist = resp.data;
+        this.list = resp.data.list;
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -87,7 +86,6 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
-
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -100,12 +98,12 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-    },
-
-    OnviewClick(id,company) {
+  },
+  methods: {
+    OnviewClick(id) {
       this.$router.push({
         path: "/Modules/Intervention/company-job-approval-request",
-        query: { id: id ,company:company},
+        query: { id: id },
       });
     },
   },
