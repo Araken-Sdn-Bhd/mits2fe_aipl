@@ -10,7 +10,7 @@
             <h1>CPS POLICE REFERRAL FORM</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
-          <div class="card mb-4 reslt">
+          <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
               <h2 v-if="consentdetails">{{this.hospitalName}}</h2>
@@ -151,9 +151,159 @@
                              </li>
                         </ul>
                        </p>
+            </div>
+          </div>
+<!-- Print form -->
+          <div class="card mb-4 reslt" style="display:none;">
+            <div class="form-header">
+              <img src="~/assets/images/form-logo.png" />
+              <h2 v-if="consentdetails">{{this.hospitalName}}</h2>
+              <p>COMMUNITY PSYCHIATRY POLICE REFFERAL FORM</p>
+            </div>
+            <div class="card-body new-form">
+              <table class="notes">
+                <tbody v-if="patientdetails">
+                  <tr>
+                    <td colspan="2">
+                      Psychiatry Department,
+                      <div v-if="consentdetails">
+                      <br /><span>{{ this.hospitalName }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_1 != null">{{ consentdetails.hospital_adrress_1 }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_2 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_2 }}</span>
+                      <br /><span v-if="consentdetails.hospital_adrress_3 != null || consentdetails.hospital_adrress_2 != ''">{{ consentdetails.hospital_adrress_3 }}</span>
+                      <br /><span v-if="consentdetails.postcode != null">{{ consentdetails.postcode }}</span>
+                      <br /><span v-if="consentdetails.city_name != null">{{ consentdetails.city_name }}</span>
+                      <br /><span v-if="consentdetails.state_name != null">{{ consentdetails.state_name }}</span>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>To:</th>
+                    <td>
+                      <input type="text" class="form-control  d-print-none" v-model="to" />
+                      <span class="d-none d-print-block">{{ this.to }}</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>Officer in charge:</th>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control d-print-none"
+                        v-model="officer_in_charge"
+                      />
+                      <span class="d-none d-print-block">{{ this.officer_in_charge }}</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="2">Sir/Madam,</td>
+                  </tr>
+
+                  <tr>
+                    <th colspan="2">PATIENT DETAILS</th>
+                  </tr>
+                  <tr>
+                    <th>Patient Name:</th>
+                    <td>{{ patientdetails.name_asin_nric }}</td>
+                  </tr>
+
+                  <tr>
+                    <th>NRIC No:</th>
+                    <td>{{ patientdetails.nric_no }}</td>
+                  </tr>
+
+                  <tr>
+                    <th>Age:</th>
+                    <td>{{ patientdetails.age }}</td>
+                  </tr>
+
+                  <tr>
+                    <th>Contact No:</th>
+                    <td>{{ patientdetails.mobile_no }}</td>
+                  </tr>
+
+                  <tr>
+                    <th>Address:</th>
+                    <td>
+                      {{ patientdetails.address1 }}
+                      {{ patientdetails.address2 }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="2">
+                      <label class="form-label"
+                        >The above patient ongoing/history of treatment at our
+                        department.</label
+                      >
+                      <textarea
+                        class="form-control textarea d-print-none"
+                        v-model="the_above_patient_ongoing"
+                      ></textarea>
+
+                      <span class="d-none d-print-block">{{ this.the_above_patient_ongoing }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="notes">
+                <tbody>
+                  <tr>
+                    <th colspan="2">
+                      The patient has potential to harm him/herself or public
+                      therefore we request help to facilitate family to bring
+                      this patient to nearest hospital for further treatment.
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <td colspan="2">Thank you,</td>
+                  </tr>
+
+                  <td>
+                      <textarea class="signature"></textarea>
+                      <p class="text-align-center">Signature Witness</p>
+                    </td>
+
+                  <tr>
+                    <td colspan="2">Regards,</td>
+                  </tr>
+
+                  <tr>
+                    <th>Name:</th>
+                    <td>
+                      <input type="text" class="form-control d-print-none" v-model="name" />
+                      <span class="d-none d-print-block">{{ this.name }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Designation:</th>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control d-print-none"
+                        v-model="designation"
+                      />
+                      <span class="d-none d-print-block">{{ this.designation }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                      <p v-if="errorList.length">
+                          <ul>
+                           <li style="color:red"  v-for='err in errorList' :key='err' >
+                           {{ err }}
+                             </li>
+                        </ul>
+                       </p>
 
             </div>
           </div>
+
            <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <a @click="OnSubmit" class="btn btn-warning btn-text"
@@ -377,5 +527,12 @@ export default {
 <style scoped>
 .hide {
   display: none !important;
+}
+
+.signature {
+  width: 90%;
+  resize: none;
+  height: 95px;
+  margin-top: 30px;
 }
 </style>
