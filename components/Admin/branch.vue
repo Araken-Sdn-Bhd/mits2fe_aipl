@@ -188,7 +188,7 @@
           <td>{{ brnc.hospital_code }}</td>
           <td>{{ brnc.hospital_branch_name }}</td>
           <td>
-            {{ brnc.branch_adrress_1 }}
+            {{ brnc.branch_adrress_1 }} {{ brnc.branch_adrress_2 }} {{ brnc.branch_adrress_3 }}
           </td>
           <td>
             <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile.id">{{ mobile.ContactNoOffice }}</p>
@@ -239,6 +239,7 @@ export default {
       SidebarAccess: null,
       alllist: [],
       branchlist: [],
+      branch_contact_number_office: [],
     };
   },
   mounted() {
