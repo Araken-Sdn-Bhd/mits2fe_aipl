@@ -1,6 +1,9 @@
 import webpack from 'webpack'
 
 export default {
+  router: {
+    base: '/app/'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "MITS 2.0",
@@ -35,11 +38,11 @@ export default {
       // { src: '~/plugins/vue-html2pdf', mode: 'client' }
       "~/plugins/vue-the-mask.js",
       "~/plugins/vue-json-excel.js",
-    //   new webpack.ProvidePlugin({
-    //     jQuery: 'jquery',
-    //     $: 'jquery',
-    //     jquery: 'jquery'
-    // })
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery'
+    })
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
