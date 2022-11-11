@@ -209,7 +209,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Does your group have any volunteering experience?<span>*</span></label
+                      Do you have volunteering experience?<span>*</span></label
                     >
                     <div class="col-sm-8 radio-box">
                       <div class="form-check form-check-inline">
@@ -291,7 +291,7 @@
 
                   <div class="row mb-3 mt-2">
                     <label for="" class="col-sm-4 col-form-label">
-                      Does your group are mental health professionals?<span>*</span></label
+                      Are you a mental health professional?<span>*</span></label
                     >
                     <div class="col-sm-8 professional-box">
                       <div class="form-check form-check-inline">
@@ -1571,20 +1571,8 @@ export default {
         // }
         if (
           this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.available_date &&
-          this.available_time
+          this.screening_mode &&
+          this.is_agree
         ) {
           if (this.address1) {
             this.address = this.address + "\n" + this.address1;
@@ -1757,30 +1745,8 @@ export default {
         // }
         if (
           this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.project_name &&
-          this.project_background &&
-          this.project_objectives &&
-          this.target_audience &&
-          this.no_of_paricipants &&
-          this.time_frame &&
-          this.estimated_budget &&
-          this.project_scopes &&
-          this.project_loaction &&
-          this.project_loaction_value &&
-          this.target_outcome &&
-          this.followup_projects
+          this.screening_mode &&
+          this.is_agree
         ) {
           if (this.address1) {
             this.address = this.address + "\n" + this.address1;
@@ -1927,22 +1893,8 @@ export default {
         // }
         if (
           this.Isvalid &&
-          this.name &&
-          this.dob &&
-          this.email &&
-          this.phone_number &&
-          this.address &&
-          this.state_id &&
-          this.city_id &&
-          this.postcode_id &&
-          this.education_id &&
-          this.occupation_sector_id &&
-          this.branch_id &&
-          this.area_of_involvement &&
-          this.contribution &&
-          this.budget &&
-          this.networkno_of_paricipants &&
-          this.netwotkproject_loaction
+          this.screening_mode &&
+          this.is_agree
         ) {
           if (this.address1) {
             this.address = this.address + "\n" + this.address1;

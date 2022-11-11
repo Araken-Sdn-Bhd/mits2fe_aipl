@@ -1493,22 +1493,8 @@ export default {
         }
         if (
           this.GIsvalid &&
-          this.Gname &&
-          this.Gdob &&
-          this.Gemail &&
-          this.Gphone_number &&
-          this.Gaddress &&
-          this.Gstate_id &&
-          this.Gcity_id &&
-          this.Gpostcode_id &&
-          this.Geducation_id &&
-          this.Goccupation_sector_id &&
-          this.Gbranch_id &&
-          this.Garea_of_involvement &&
-          this.Gavailable_date &&
-          this.Gavailable_time &&
-          this.members_count &&
-          this.member_background
+          this.screening_mode &&
+          this.Gis_agree
         ) {
           if (this.Gaddress1) {
             this.Gaddress = this.Gaddress + "\n" + this.Gaddress1;
@@ -1680,32 +1666,8 @@ export default {
         }
         if (
           this.GIsvalid &&
-          this.Gname &&
-          this.Gdob &&
-          this.Gemail &&
-          this.Gphone_number &&
-          this.Gaddress &&
-          this.Gstate_id &&
-          this.Gcity_id &&
-          this.Gpostcode_id &&
-          this.Geducation_id &&
-          this.Goccupation_sector_id &&
-          this.Gbranch_id &&
-          this.Garea_of_involvement &&
-          this.Gproject_name &&
-          this.Gproject_background &&
-          this.Gproject_objectives &&
-          this.Gtarget_audience &&
-          this.Gno_of_paricipants &&
-          this.Gtime_frame &&
-          this.Gestimated_budget &&
-          this.Gproject_scopes &&
-          this.Gproject_loaction &&
-          this.Gproject_loaction_value &&
-          this.Gtarget_outcome &&
-          this.Gfollowup_projects &&
-          this.members_count &&
-          this.member_background
+          this.screening_mode &&
+          this.Gis_agree
         ) {
           if (this.Gaddress1) {
             this.Gaddress = this.address + "\n" + this.Gaddress1;
@@ -1860,22 +1822,8 @@ export default {
         }
         if (
           this.GIsvalid &&
-          this.Gname &&
-          this.Gdob &&
-          this.Gemail &&
-          this.Gphone_number &&
-          this.Gaddress &&
-          this.Gstate_id &&
-          this.Gcity_id &&
-          this.Gpostcode_id &&
-          this.Geducation_id &&
-          this.Goccupation_sector_id &&
-          this.Gbranch_id &&
-          this.Garea_of_involvement &&
-          this.Gcontribution &&
-          this.Gbudget &&
-          this.Gnetworkno_of_paricipants &&
-          this.Gnetwotkproject_loaction
+          this.screening_mode &&
+          this.Gis_agree
         ) {
           if (this.Gaddress1) {
             this.Gaddress = this.Gaddress + "\n" + this.Gaddress1;
