@@ -7,27 +7,15 @@
             <ul>
               <div v-for="(menu, index) in navlist" :key="index">
                 <li class="sub-menu" v-if="menu.sub_module_id.length">
-                  <a
-                    class="nav-link"
-                    data-bs-toggle="collapse"
-                    v-bind:data-bs-target="'#demo' + index"
-                    aria-expanded="true"
-                  >
+                  <a class="nav-link" data-bs-toggle="collapse" v-bind:data-bs-target="'#demo' + index"
+                    aria-expanded="true">
                     <i v-bind:class="[menu.icon]"></i>
                     {{ menu.screen_name }}
                   </a>
-                  <ul
-                    class="collapse"
-                    v-bind:id="['demo' + index]"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#sidenavAccordion"
-                  >
+                  <ul class="collapse" v-bind:id="['demo' + index]" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
                     <li v-for="(submenu, ind) in menu.sub_module_id" :key="ind">
-                      <a
-                        class="nav-link"
-                        v-bind:href="submenu.screen_route"
-                        @click="SidebarAccess(submenu)"
-                      >
+                      <a class="nav-link" v-bind:href="submenu.screen_route" @click="SidebarAccess(submenu)">
                         <i v-bind:class="[submenu.icon]"></i>
                         {{ submenu.screen_name }}
                       </a>
@@ -35,11 +23,7 @@
                   </ul>
                 </li>
                 <li v-if="!menu.sub_module_id.length">
-                  <a
-                    v-bind:href="menu.screen_route"
-                    class="nav-link"
-                    @click="SidebarAccess(menu)"
-                  >
+                  <a v-bind:href="menu.screen_route" class="nav-link" @click="SidebarAccess(menu)">
                     <i v-bind:class="[menu.icon]"></i>
                     {{ menu.screen_name }}
                   </a>
@@ -49,46 +33,22 @@
               <div v-for="menu in reportnavlist">
                 <div v-if="menu.module_id == hasreportmodule">
                   <li class="sub-menu">
-                    <a
-                      class="nav-link"
-                      data-bs-toggle="collapse"
-                      v-bind:data-bs-target="'#demo'"
-                      aria-expanded="true"
-                    >
+                    <a class="nav-link" data-bs-toggle="collapse" v-bind:data-bs-target="'#demo'" aria-expanded="true">
                       <i class="far fa-file-chart-pie"></i>
                       {{ "Report" }}
                     </a>
-                    <ul
-                      class="collapse"
-                      v-bind:id="['demo']"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#sidenavAccordion"
-                    >
+                    <ul class="collapse" v-bind:id="['demo']" aria-labelledby="headingOne"
+                      data-bs-parent="#sidenavAccordion">
                       <div v-for="(menu, index) in reportnavlist" :key="index">
                         <li class="sub-menu" v-if="menu.sub_module_id.length">
-                          <a
-                            class="nav-link"
-                            data-bs-toggle="collapse"
-                            v-bind:data-bs-target="'#demo1' + index"
-                            aria-expanded="true"
-                          >
+                          <a class="nav-link" data-bs-toggle="collapse" v-bind:data-bs-target="'#demo1' + index"
+                            aria-expanded="true">
                             <i v-bind:class="[menu.icon]"></i>
                             {{ menu.screen_name }}
                           </a>
-                          <ul
-                            class="collapse"
-                            v-bind:id="['demo1' + index]"
-                            aria-labelledby="headingOne"
-                          >
-                            <li
-                              v-for="(submenu, ind) in menu.sub_module_id"
-                              :key="ind"
-                            >
-                              <a
-                                class="nav-link"
-                                v-bind:href="submenu.screen_route"
-                                @click="SidebarAccess(submenu)"
-                              >
+                          <ul class="collapse" v-bind:id="['demo1' + index]" aria-labelledby="headingOne">
+                            <li v-for="(submenu, ind) in menu.sub_module_id" :key="ind">
+                              <a class="nav-link" v-bind:href="submenu.screen_route" @click="SidebarAccess(submenu)">
                                 <i v-bind:class="[submenu.icon]"></i>
                                 {{ submenu.screen_name }}
                               </a>
@@ -96,11 +56,7 @@
                           </ul>
                         </li>
                         <li v-if="!menu.sub_module_id.length">
-                          <a
-                            v-bind:href="menu.screen_route"
-                            class="nav-link"
-                            @click="SidebarAccess(menu)"
-                          >
+                          <a v-bind:href="menu.screen_route" class="nav-link" @click="SidebarAccess(menu)">
                             <i v-bind:class="[menu.icon]"></i>
                             {{ menu.screen_name }}
                           </a>
@@ -116,96 +72,59 @@
         </div>
       </nav>
     </div>
-    <div
-      class="modal fade"
-      id="insertpopup"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="insertpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
             <p>Successfully Created</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary btn-ok"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
               Ok
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="updatepopup"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="updatepopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
             <p>Successfully Updated</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary btn-ok"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
               Ok
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="errorpopup"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="errorpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
             <p>Something went wrong!</p>
+            <a>
+              {{ message }}
+            </a>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary btn-ok"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
               Ok
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="deletepopup"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="deletepopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
         <div class="modal-content">
           <div class="modal-body">
             <p>Succesfully Deleted</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary btn-ok"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary btn-ok" data-bs-dismiss="modal">
               Ok
             </button>
           </div>
@@ -265,6 +184,7 @@ export default {
       navlist: [],
       reportnavlist: [],
       hasreportmodule: 0,
+      message: null,
     };
   },
   beforeMount() {
