@@ -7,7 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Job Offer</h1>
-            <a href="/Modules/Intervention/create-new-job" class="add-btn"
+            <a href="/app/modules/Intervention/create-new-job" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -167,14 +167,14 @@ export default {
     OneditClick(id) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Intervention/update-new-job",
+        path: "/app/modules/Intervention/update-new-job",
         query: { id: id },
       });
     },
     OnviewClick(title) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Intervention/same-job-offer-list",
+        path: "/app/modules/Intervention/same-job-offer-list",
         query: { title: title },
       });
     },

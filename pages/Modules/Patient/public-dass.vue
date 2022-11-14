@@ -185,7 +185,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -288,7 +288,7 @@ export default {
               "dassresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/Modules/Patient/public-dass-result");
+            this.$router.push("/app/modules/Patient/public-dass-result");
           } else {
             this.loader = false;
             this.$nextTick(() => {

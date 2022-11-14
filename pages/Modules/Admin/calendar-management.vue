@@ -27,7 +27,7 @@
                       <i class="far fa-file-excel"></i> Upload Excel
                     </button>
                     <a
-                      href="/Modules/Admin/exception"
+                      href="/app/modules/Admin/exception"
                       class="btn btn-primary mt-0 text-white"
                     >
                       <i class="far fa-plus"></i> Add Exception
@@ -302,7 +302,7 @@ export default {
     },
     OnEditexception(data) {
       this.$router.push({
-        path: "/Modules/Admin/exception",
+        path: "/app/modules/Admin/exception",
         query: { id: data.id },
       });
     },

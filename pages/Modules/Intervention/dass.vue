@@ -151,7 +151,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -260,7 +260,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/Modules/Intervention/dass-result",
+              path: "/app/modules/Intervention/dass-result",
               query: { id: this.Id },
             });
           } else {

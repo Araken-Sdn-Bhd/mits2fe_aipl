@@ -221,14 +221,14 @@
                         <div class="step-form-box" v-show="fourth=='Yes'">
                           <select id="fourthbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in typesofsubstance"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -311,7 +311,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no6" @click="onchange(7,0)"
-                            name="family history of substance abuse" value="No" v-model="seventh" 
+                            name="family history of substance abuse" value="No" v-model="seventh"
                           />
                           <label class="form-check-label" for="no6">NO</label>
                         </div>
@@ -320,21 +320,21 @@
                             class="form-check-input"
                             type="radio"
                             id="yes6" @click="onchange(7,1)"
-                            name="family history of substance abuse" value="Yes" v-model="seventh" 
+                            name="family history of substance abuse" value="Yes" v-model="seventh"
                           />
                           <label class="form-check-label" for="yes6">YES</label>
                         </div>
                         <div class="step-form-box" v-show="seventh=='Yes'">
                           <select id="seventhbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in typesofsubstance"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -367,14 +367,14 @@
                         <div class="step-form-box" v-show="eight=='Yes'">
                           <select id="eightbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in stresslist"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -401,7 +401,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(9,1)"
                             id="yes8" value="Yes" v-model="nine"
-                            name="Isolation, rejection or feelings of shame" 
+                            name="Isolation, rejection or feelings of shame"
                           />
                           <label class="form-check-label" for="yes8">YES</label>
                         </div>
@@ -419,7 +419,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(10,0)"
                             id="no9" value="No" v-model="tenth"
-                            name="chronic physical illness or condition"  
+                            name="chronic physical illness or condition"
                           />
                           <label class="form-check-label" for="no9">NO</label>
                         </div>
@@ -428,7 +428,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(10,1)"
                             id="yes9" value="Yes" v-model="tenth"
-                            name="chronic physical illness or condition" 
+                            name="chronic physical illness or condition"
                           />
                           <label class="form-check-label" for="yes9">YES</label>
                         </div>
@@ -453,7 +453,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(11,0)"
                             id="no10" value="No" v-model="eleven"
-                            name="History of physical , sexual or emotional abuse" 
+                            name="History of physical , sexual or emotional abuse"
                           />
                           <label class="form-check-label" for="no10">NO</label>
                         </div>
@@ -462,7 +462,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(11,1)"
                             id="yes10" value="Yes" v-model="eleven"
-                            name="History of physical , sexual or emotional abuse" 
+                            name="History of physical , sexual or emotional abuse"
                           />
                           <label class="form-check-label" for="yes10"
                             >YES</label
@@ -481,7 +481,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(12,0)"
                             id="no11" value="No" v-model="twelth"
-                            name="access to lethal methods/weapons" 
+                            name="access to lethal methods/weapons"
                           />
                           <label class="form-check-label" for="no11">NO</label>
                         </div>
@@ -490,7 +490,7 @@
                             class="form-check-input"
                             type="radio" @click="onchange(12,1)"
                             id="yes11" value="Yes" v-model="twelth"
-                            name="access to lethal methods/weapons" 
+                            name="access to lethal methods/weapons"
                           />
                           <label class="form-check-label" for="yes11"
                             >YES</label
@@ -534,7 +534,7 @@
                     <h4>Protective Factors</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-            
+
                     <div
                       class="row mb-3 align-items-center"
                       v-for="(pro, index) in protectivefactorlist"
@@ -551,7 +551,7 @@
                             type="radio"
                             id="No" value="No" @click="onchangeprotect(pro.questionId,0)"
                              v-bind:name="'pro' + index" v-model="pro.answer"
-                           
+
                           />
                           <label class="form-check-label" for="no">{{
                             pro.Question_detail[0].Options1
@@ -571,7 +571,7 @@
                         </div>
                       </div>
                     </div>
-                 
+
                      <div class="d-flex">
                                             <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
                                             <div class="ml-auto">
@@ -579,11 +579,11 @@
                                                 <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
                                             </div>
                                         </div>
-                
+
                 </div>
               </div>
             </div>
-           
+
            <!-- start self -->
             <!-- tab-close -->
             <div
@@ -776,7 +776,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Hanging/Suffocation"
-                                    id="2" v-model="hanging"  
+                                    id="2" v-model="hanging"
                                   />
                                   <label class="form-check-label" for="2">
                                     Hanging/Suffocation
@@ -788,7 +788,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Drowning"
-                                    id="3" v-model="drowning"  
+                                    id="3" v-model="drowning"
                                   />
                                   <label class="form-check-label" for="3">
                                     Drowning
@@ -800,7 +800,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Firearms or explosives"
-                                    id="4" v-model="firearmsorexplosives"  
+                                    id="4" v-model="firearmsorexplosives"
                                   />
                                   <label class="form-check-label" for="4">
                                     Firearms or explosives
@@ -814,7 +814,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Fire/flames"
-                                    id="5"   v-model="fire_flames"  
+                                    id="5"   v-model="fire_flames"
                                   />
                                   <label class="form-check-label" for="5">
                                     Fire/flames
@@ -826,8 +826,8 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Cutting or Piercing"
-                                    id="6"  v-model="cuttingorpiercing"  
-                                    
+                                    id="6"  v-model="cuttingorpiercing"
+
                                   />
                                   <label class="form-check-label" for="6">
                                     Cutting or Piercing
@@ -839,7 +839,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Jumping from height"
-                                    id="7"  v-model="jumpingfromheight"  
+                                    id="7"  v-model="jumpingfromheight"
                                   />
                                   <label class="form-check-label" for="7">
                                     Jumping from height
@@ -851,7 +851,7 @@
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
                                     value="Other"
-                                    id="8"  
+                                    id="8"
                                   />
                                   <label class="form-check-label" for="8">
                                     Other
@@ -1017,7 +1017,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
-                                    value="no" v-model="patient_intent" 
+                                    value="no" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1031,7 +1031,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
-                                    value="intent-yes" v-model="patient_intent" 
+                                    value="intent-yes" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1045,7 +1045,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
-                                    value="Undetermined" v-model="patient_intent" 
+                                    value="Undetermined" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1201,9 +1201,9 @@
                         >
                           <div class="accordion-body">
                             <div class="row mt-3">
-                        
+
                 <div class="col-sm-6">
-                  
+
                 <table class="self-harm" v-if="testresult">
                   <tbody>
                     <tr>
@@ -1217,7 +1217,7 @@
                   </tbody>
                 </table>
                 </div>
-                
+
                             </div>
                             <!-- row -->
                           </div>
@@ -1250,7 +1250,7 @@
                 </div>
               </div>
             </div>
-         
+
           <!-- end self -->
             <!-- tab-close -->
             <div
@@ -1265,7 +1265,7 @@
                     <h4>Suicide Risk</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-               
+
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
                         >Level of Suicide Risk For Current Attempt</label
@@ -1391,13 +1391,13 @@
                     <h4>Hospital Management</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-               
+
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >Referral or Contact point</label
                       >
                       <div class="col-sm-3">
-                          
+
                         <select
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
@@ -1464,7 +1464,7 @@
                           mode-of-arrival-div am
                           hide
                         "
-                        style="display: none" 
+                        style="display: none"
                       >
                         <input
                           type="text"
@@ -1718,7 +1718,7 @@
                             {{pb}}
                           </label>
                         </div>
-                        
+
                         <!-- SHOW_DIV -->
                         <div class="col-sm-4 PSY-other-div mt-3" v-show="discharge_psy_mx_des">
                           <div class="mb-3">
@@ -1769,7 +1769,7 @@
                     <h4>Source Data Producer</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-              
+
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
@@ -1780,7 +1780,7 @@
                           class="form-control"
                           v-model="officername"
                           disabled="false"
-                          
+
                         />
                       </div>
                       <!-- col-sm-6 -->
@@ -2562,14 +2562,14 @@ export default {
                 }
               });
             }
-          
+
             this.family=response.data.result.selfharm[2].section_value.Family_friends_peer_group;
             this.internet=response.data.result.selfharm[2].section_value.Internet_website_social_media_platform_app_blogs_forum_video_photosharing;
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-   
+
           //Suicide Risk
           this.result = response.data.result.suicideRisk[0].result;
           //Hospital
@@ -3096,7 +3096,7 @@ export default {
             //   $("#insertpopup").modal("show");
             // });
             this.$router.push({
-              path: "/Modules/Intervention/patient-history",
+              path: "/app/modules/Intervention/patient-history",
               query: { id: this.Id },
             });
           } else {

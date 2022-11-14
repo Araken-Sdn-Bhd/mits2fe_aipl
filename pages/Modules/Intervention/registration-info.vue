@@ -25,7 +25,7 @@
                 </p>
                 <div class="d-flex justify-content-center">
                   <a
-                    href="/Modules/Intervention/company-basic-information"
+                    href="/app/modules/Intervention/company-basic-information"
                     class="btn btn-success next-btn"
                     >Next
                     <i class="fad fa-arrow-to-right"></i>

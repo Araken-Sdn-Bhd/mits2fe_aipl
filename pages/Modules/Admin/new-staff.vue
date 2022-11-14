@@ -244,7 +244,7 @@
         </p>
                     <div class="form-foter mt-3">
                       <a
-                        href="/Modules/Admin/staff-management"
+                        href="/app/modules/Admin/staff-management"
                         class="btn btn-primary btn-text"
                         ><i class="far fa-arrow-alt-to-left"></i> Back</a
                       >
@@ -456,7 +456,7 @@ export default {
           }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          // this.$router.push("/Modules/Admin/staff-management");
+          // this.$router.push("/app/modules/Admin/staff-management");
           this.$nextTick(() => {
             $("#updatepopup").modal("show");
           });

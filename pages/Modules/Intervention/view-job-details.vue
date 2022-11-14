@@ -372,7 +372,7 @@
                   <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
                 </button>
-                 
+
                 </div>
               </form>
             </div>
@@ -608,7 +608,7 @@ export default {
             this.$nextTick(() => {
               $("#updatepopup").modal("show");
             });
-            this.$router.push("/Modules/Intervention/list-of-job-offer");
+            this.$router.push("/app/modules/Intervention/list-of-job-offer");
           } else {
             this.loader = false;
             this.$nextTick(() => {

@@ -222,24 +222,24 @@ export default {
     },
     Onedit(data) {
       this.$router.push({
-        path: "/Modules/Von/book-appointment",
+        path: "/app/modules/Von/book-appointment",
         query: { id: data.id },
       });
     },
     OnView(data) {
       if (data.app_type == "Individual") {
         this.$router.push({
-          path: "/Modules/Von/view-individual",
+          path: "/app/modules/Von/view-individual",
           query: { id: data.id },
         });
       } else if (data.app_type == "Group") {
          this.$router.push({
-          path: "/Modules/Von/view-group",
+          path: "/app/modules/Von/view-group",
           query: { id: data.id },
         });
       } else {
          this.$router.push({
-          path: "/Modules/Von/view-organization",
+          path: "/app/modules/Von/view-organization",
           query: { id: data.id },
         });
       }

@@ -119,15 +119,15 @@ export default {
   methods: {
     oneditPatient() {
       this.$router.push({
-        // path: "/Modules/Patient/patient-registration",
-        path:"/Modules/Shharp/demographic",
+        // path: "/app/modules/Patient/patient-registration",
+        path:"/app/modules/Shharp/demographic",
         query: { id: this.Id },
       });
     },
      AlertList() {
       this.$router.push({
-        // path: "/Modules/Patient/patient-registration",
-        path:"/Modules/Intervention/list-of-alert",
+        // path: "/app/modules/Patient/patient-registration",
+        path:"/app/modules/Intervention/list-of-alert",
         query: { id: this.Id },
       });
     },
@@ -157,7 +157,7 @@ export default {
         },
         { headers }
       );
-     
+
       this.alert = response1.data[0].message;
       console.log('my data66',this.alert);
     },

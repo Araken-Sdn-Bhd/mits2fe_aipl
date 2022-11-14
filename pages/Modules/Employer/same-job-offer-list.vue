@@ -7,9 +7,9 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Same Job Offer List</h1>
-            <!--<a href="/Modules/Employer/create-same-job" class=" add-btn" title="create same job offer"><i class="fal fa-plus"></i></a>-->
+            <!--<a href="/app/modules/Employer/create-same-job" class=" add-btn" title="create same job offer"><i class="fal fa-plus"></i></a>-->
           </div>
-        
+
           <div class="card mb-4 col-12">
             <div class="card-body">
               <table class="table table-striped">
@@ -36,7 +36,7 @@
                   <span v-if="this.status == 1">Pending</span>
                   <span v-if="this.status == 0">Rejected</span>
                   <span v-if="this.status == 2">Approved</span>
-                  
+
                   </td>
               </tr>
               </tbody>
@@ -60,7 +60,7 @@
                     <!--<th>Work Requirement</th>-->
                     <th>Mentari</th>
                     <!--<th>Status</th>-->
-                    
+
                   </tr>
                 </thead>
                 <tbody>
@@ -88,18 +88,18 @@
                       <p v-if="job.approval_status == 0">Rejected</p>
                       <p v-if="job.approval_status == 2">Approved</p>
                     </td>-->
-                    
+
                   </tr>
                 </tbody>
               </table>
               <br>
                 <br>
-               
+
                 <div class="d-flex">
                   <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
                 </button>
-              
+
                 </div>
             </div>
           </div>
@@ -144,13 +144,13 @@ export default {
   },
   mounted() {
    this.getList();
-   
+
   },
   methods: {
     back() {
       this.$router.go(-1);
     },
-  
+
     async getList(){
       const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -160,8 +160,8 @@ export default {
     const response = await this.$axios.post(
             "employer-job/repeat-list",
             {
-              user_id: this.userdetails.user.id, 
-              job_id: this.job_id 
+              user_id: this.userdetails.user.id,
+              job_id: this.job_id
             },
             { headers }
           )

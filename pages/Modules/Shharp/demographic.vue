@@ -267,7 +267,7 @@
                       </div>
                       <!-- close-row -->
 
-                      
+
                       <div class="row">
                         <div class="col-sm-5">
                           <div class="mb-3">
@@ -276,7 +276,7 @@
                               v-model="religion_id"
                               class="form-select"
                               aria-label="Default select example"
-                             
+
                             >
                               <option value="0">Select</option>
                               <option
@@ -342,7 +342,7 @@
                           />
                         </div>
                         </div>
-                      
+
                       </div>
                       <div class="row">
                         <div class="col-sm-5">
@@ -391,7 +391,7 @@
       </ul>
         </p>
                 <div class="d-flex align-items-center mt-3">
-               
+
                   <a v-if="!Id"
                   @click="submitRegistration"
                  class="btn btn-warning btn-text ml-auto"
@@ -444,7 +444,7 @@ export default {
       userdetails: null,
       Isvalidate: true,
       otherMarital:false,
-      
+
       name_asin_nric: "",
       citizenship: "",
       sex: "",
@@ -464,7 +464,7 @@ export default {
       race_type:"",
       nric_type_code:"",
       other_maritalList:"",
-      
+
     };
   },
   beforeMount() {
@@ -513,7 +513,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-     
+
       const response1 = await this.$axios.get(
         "general-setting/list?section=" + "citizenship",
         { headers }
@@ -574,7 +574,7 @@ export default {
         { headers }
       );
       if (response7.data.code == 200 || response7.data.code == "200") {
-        
+
         this.educationlist = response7.data.list;
       } else {
         this.educationlist = [];
@@ -607,7 +607,7 @@ export default {
       } else {
         this.countrylist = [];
       }
-     
+
     },
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
@@ -652,7 +652,7 @@ export default {
       this.citizentype = value;
       console.log("my val", this.citizentype);
     },
-   
+
     async submitRegistration() {
 
       this.Isvalidate = true;
@@ -673,7 +673,7 @@ export default {
               if (!this.nric_no) {
                 this.errorList.push("NRIC No is required.");
                 this.Isvalidate = false;
-              } 
+              }
             } else if (this.citizentype == "Permanent Resident") {
               if (!this.nric_no1) {
                 this.errorList.push("NRIC No is required.");
@@ -740,7 +740,7 @@ export default {
             //this.religion_id &&
             //this.marital_id &&
             //this.education_level &&
-            //this.employment_id && 
+            //this.employment_id &&
           ) {
             //var no = this.nric_no.slice(0, 6);
             //var no1 = this.nric_no.slice(6, 8);
@@ -760,7 +760,7 @@ export default {
             body.append("sex", this.sex);
             body.append("birth_date", this.birth_date);
             body.append("age", this.age);
-            
+
             body.append("employment_status", this.employment_id);
 
             body.append("hospital_mrn_no", this.hospital_mrn_no);
@@ -801,7 +801,7 @@ export default {
                 setTimeout(() => {
                    $("#updatepopup").modal("hide");
                  this.$router.push({
-                  path: "/Modules/Shharp/patient-summary",
+                  path: "/app/modules/Shharp/patient-summary",
                   query: { id: this.Id },
                 });
                 }, 1000);
@@ -825,7 +825,7 @@ export default {
                 this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
-                this.$router.push("/Modules/Shharp/patients-list");
+                this.$router.push("/app/modules/Shharp/patients-list");
               } else {
                 this.loader = false;
                 this.$nextTick(() => {
@@ -834,7 +834,7 @@ export default {
               }
             }
           }
-       
+
       } catch (e) {
         this.loader = false;
         this.$nextTick(() => {
@@ -948,7 +948,7 @@ export default {
       console.log("my pt details", response.data);
 
       if (response.data.code == 200) {
-       
+
         this.citizentype = response.data.list[0].citizenships[0].section_value;
         this.passport_no = response.data.list[0].passport_no;
         this.age = response.data.list[0].age;
@@ -970,12 +970,12 @@ export default {
         }else{
           this.otherMarital = false;
         }
-        
+
         this.sex = response.data.list[0].sex;
         this.race_id = response.data.list[0].race_id;
         this.religion_id = response.data.list[0].religion_id;
-        
-       
+
+
 
         this.name_asin_nric = response.data.list[0].name_asin_nric;
         this.nric_no = response.data.list[0].nric_no;
@@ -987,8 +987,8 @@ export default {
         }
         this.nric_type = response.data.list[0].nric_type;
         this.nric_type_code = response.data.list[0].typeic[0].code;
-        
-      
+
+
       } else {
         window.alert("Something went wrong");
       }

@@ -1333,7 +1333,7 @@ export default {
       }
     },
     async OnIndividualOutreachProjectCollaboration() {
-     
+
       try {
         this.Isvalid = true;
         if (!this.name) {
@@ -1490,7 +1490,7 @@ export default {
           body.append("target_outcome", this.target_outcome);
           body.append("followup_projects", this.followup_projects);
           body.append("is_agree", "1");
-          
+
           const response = await this.$axios.post("von/add", body, {
             headers,
           });
@@ -1658,7 +1658,7 @@ export default {
       }
     },
     Reaload() {
-      this.$router.push("/Modules/Von/list-of-application");
+      this.$router.push("/app/modules/Von/list-of-application");
       setTimeout(() => {
         window.location.reload();
       }, 100);

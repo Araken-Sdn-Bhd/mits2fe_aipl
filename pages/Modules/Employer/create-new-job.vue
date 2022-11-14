@@ -15,7 +15,7 @@
               <h4>Create New Job</h4>
             </div>
             <div class="card-body">
-              
+
                 <div class="row">
                         <div class="col-sm-10">
                           <div class="mb-3">
@@ -412,7 +412,7 @@
                 <!-- row -->
                 <br>
                 <br>
-               
+
                 <div class="d-flex">
                   <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
@@ -421,7 +421,7 @@
                     <i class="fa fa-save"></i> Save
                   </button>
                 </div>
-              
+
             </div>
           </div>
         </div>
@@ -574,7 +574,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        
+
         this.CityList = response.data.list;
         this.postcodelist = [];
       } else {
@@ -638,13 +638,13 @@ export default {
           this.location_address_1 &&
           this.education_id &&
           this.duration_of_employment &&
-          this.salary_offered && 
+          this.salary_offered &&
           this.work_schedule &&
           this.work_requirement &&
           this.branch_id &&
           this.state_id &&
           this.postcode
-        ) 
+        )
         {
           this.loader = true;
           const headers = {
@@ -694,7 +694,7 @@ export default {
                 $("#insertpopup").modal("show");
               });
               this.reset();
-              this.$router.push("/Modules/Employer/list-of-job-offer");
+              this.$router.push("/app/modules/Employer/list-of-job-offer");
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -702,7 +702,7 @@ export default {
             });
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });}
@@ -732,7 +732,7 @@ export default {
       this.workrequirementother="";
 
     },
-    
+
     changeschedule(val) {
       this.work_schedule = val;
     },

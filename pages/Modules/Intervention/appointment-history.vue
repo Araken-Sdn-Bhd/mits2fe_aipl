@@ -138,7 +138,7 @@ export default {
   methods: {
     oneditAppointment(Id) {
       this.$router.push({
-        path: "/Modules/Patient/book-appointment",
+        path: "/app/modules/Patient/book-appointment",
         query: { id: Id },
       });
     },

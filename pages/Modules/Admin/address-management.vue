@@ -81,7 +81,7 @@
              <div class="content-subtab">
     <Loader v-if="loader" />
     <form class="g-3 mt-3" method="post" @submit.prevent="addcountry">
-    
+
 
       <div class="row">
         <div class="col-md-6 mb-3">
@@ -139,7 +139,7 @@
       </div>
     </form>
 
-   
+
 
     <div class="table-title">
       <h3>List of Country</h3>
@@ -227,7 +227,7 @@
       </div>
     </form>
 
-   
+
 
     <div class="table-title">
       <h3>List of State</h3>
@@ -342,7 +342,7 @@
       </div>
     </form>
 
-   
+
 
     <div class="table-title">
       <h3>List of Postcode</h3>
@@ -402,7 +402,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -795,7 +795,7 @@ export default {
        this.StateListforcity = [];
       this.mystateId = 0;
       this.GetStateList();
-     
+
     },
     //EndState
     //City

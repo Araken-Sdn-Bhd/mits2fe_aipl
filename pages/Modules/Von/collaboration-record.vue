@@ -217,24 +217,24 @@ export default {
     },
     OneditClick(id) {
       this.$router.push({
-        path: "/Modules/Intervention/update-new-job",
+        path: "/app/modules/Intervention/update-new-job",
         query: { id: id },
       });
     },
       OnView(data) {
       if (data.app_type == "Individual") {
         this.$router.push({
-          path: "/Modules/Von/view-individual",
+          path: "/app/modules/Von/view-individual",
           query: { id: data.id },
         });
       } else if (data.app_type == "Group") {
          this.$router.push({
-          path: "/Modules/Von/view-group",
+          path: "/app/modules/Von/view-group",
           query: { id: data.id },
         });
       } else {
          this.$router.push({
-          path: "/Modules/Von/view-organization",
+          path: "/app/modules/Von/view-organization",
           query: { id: data.id },
         });
       }

@@ -197,10 +197,10 @@ export default {
       alert(event.target.className);
     },
     SidebarAccessCompany() {
-      this.$router.push("/Modules/Employer/company-basic-information");;
+      this.$router.push("/app/modules/Employer/company-basic-information");;
     },
     SidebarAccessJob() {
-      this.$router.push("/Modules/Employer/list-of-job-offer");;
+      this.$router.push("/app/modules/Employer/list-of-job-offer");;
     },
 
   },

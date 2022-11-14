@@ -52,7 +52,7 @@
                     <td>{{ app.created }}</td>
                     <td>
                       <a
-                       href="/Modules/Intervention/patient-registration"
+                       href="/app/modules/Intervention/patient-registration"
                         class="view"
                         ><i class="fas fa-eye"></i
                       ></a>

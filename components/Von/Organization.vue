@@ -1469,7 +1469,7 @@ export default {
         if (!this.Ooccupation_sector_id) {
           this.errors.push("Current Occupation Sector is required.");
         }
-       
+
         if (!this.Obranch_id) {
           this.errors.push("Mentari Branch is required.");
         }
@@ -1806,7 +1806,7 @@ export default {
       }
     },
     Reload() {
-      this.$router.push("/Modules/Von/list-of-application");
+      this.$router.push("/app/modules/Von/list-of-application");
       setTimeout(() => {
         window.location.reload();
       }, 100);

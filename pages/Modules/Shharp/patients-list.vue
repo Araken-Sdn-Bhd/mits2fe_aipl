@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Patients</h1>
-            <a href="/Modules/Shharp/demographic" class="add-btn"
+            <a href="/app/modules/Shharp/demographic" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -149,7 +149,7 @@ export default {
   methods: {
     oneditPatient(Id) {
       this.$router.push({
-        path: "/Modules/Shharp/patient-summary",
+        path: "/app/modules/Shharp/patient-summary",
         query: { id: Id },
       });
     },

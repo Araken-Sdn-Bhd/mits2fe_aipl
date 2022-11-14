@@ -1,7 +1,7 @@
 <template>
   <div id="layoutSidenav">
       <CommonSidebar />
-   
+
     <div id="layoutSidenav_content">
         <CommonHeader />
       <main>
@@ -125,7 +125,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -243,7 +243,7 @@ export default {
           );
           if (response.data.code == 200) {
             this.loader = false;
-            this.$router.push("/Modules/Patient/list-of-appointment");
+            this.$router.push("/app/modules/Patient/list-of-appointment");
           } else {
             this.loader = false;
             this.$nextTick(() => {

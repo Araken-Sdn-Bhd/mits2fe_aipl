@@ -124,7 +124,7 @@
                         <div class="step-form-box box-01">
                           <select
                             class="form-select multiselect"
-                            
+
                           >
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -219,7 +219,7 @@
                         <div class="step-form-box box-03">
                           <select
                             class="form-select multiselect"
-                            
+
                           >
                             <option value="Alcohol">Alcohol</option>
                             <option value="Opio ids">Opio ids</option>
@@ -290,7 +290,7 @@
                         <div class="step-form-box box-04">
                           <select
                             class="form-select multiselect"
-                            
+
                           >
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -326,7 +326,7 @@
                         <div class="step-form-box box-05">
                           <select
                             class="form-select multiselect"
-                            
+
                           >
                            <option value="Alcohol">Alcohol</option>
                             <option value="Opio ids">Opio ids</option>
@@ -369,7 +369,7 @@
                         <div class="step-form-box box-06">
                           <select
                             class="form-select multiselect"
-                            
+
                           >
                             <option value="Intimate relationship problems">
                               Intimate relationship problems
@@ -538,7 +538,7 @@
                     <h4>Protective Factors</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-            
+
                     <div
                       class="row mb-3 align-items-center"
                       v-for="(pro, index) in protectivefactorlist"
@@ -583,11 +583,11 @@
                                                 <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
                                             </div>
                                         </div>
-                
+
                 </div>
               </div>
             </div>
-           
+
            <!-- start self -->
             <!-- tab-close -->
             <div
@@ -835,7 +835,7 @@
                                     type="checkbox"
                                     value="Cutting or Piercing"
                                     id="6"  v-model="cuttingorpiercing"  @click="onSectionB('val')"
-                                    
+
                                   />
                                   <label class="form-check-label" for="6">
                                     Cutting or Piercing
@@ -1267,7 +1267,7 @@
                   </tbody>
                 </table>
                 </div>
-                
+
                             </div>
                             <!-- row -->
                           </div>
@@ -1300,7 +1300,7 @@
                 </div>
               </div>
             </div>
-         
+
           <!-- end self -->
             <!-- tab-close -->
             <div
@@ -1315,7 +1315,7 @@
                     <h4>Suicide Risk</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-               
+
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
                         >Level of Suicide Risk For Current Attempt</label
@@ -1441,13 +1441,13 @@
                     <h4>Hospital Management</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-               
+
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >Referral or Contact point</label
                       >
                       <div class="col-sm-3">
-                          
+
                         <select
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
@@ -1516,7 +1516,7 @@
                           mode-of-arrival-div am
                           hide
                         "
-                        style="display: none" 
+                        style="display: none"
                       >
                         <input
                           type="text"
@@ -1826,7 +1826,7 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d5"
-                            @change="OnMxdischarge('Others')" 
+                            @change="OnMxdischarge('Others')"
                           />
                           <label class="form-check-label" for="psy-d5">
                             Others
@@ -1882,7 +1882,7 @@
                     <h4>Source Data Producer</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-              
+
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
@@ -2922,7 +2922,7 @@ export default {
               $("#insertpopup").modal("show");
             });
             this.$router.push({
-              path: "/Modules/Patient/patient-history",
+              path: "/app/modules/Patient/patient-history",
               query: { id: this.Id },
             });
           } else {

@@ -14,7 +14,7 @@
               <h4>BECK DEPRESSION INVENTORY (BDI)</h4>
             </div>
             <div class="card-body">
-           
+
                 <div class="row mr-0">
                   <div
                     class="col-sm-6"
@@ -253,7 +253,7 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Patient/request-appointment-form",
+        path: "/app/modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
     }

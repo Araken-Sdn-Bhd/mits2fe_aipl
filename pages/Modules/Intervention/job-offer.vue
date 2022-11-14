@@ -27,7 +27,7 @@
                 </p>
                 <div class="d-flex justify-content-center">
                   <a
-                    href="/Modules/Intervention/list-of-job-offer"
+                    href="/app/modules/Intervention/list-of-job-offer"
                     class="btn btn-success next-btn"
                     >Next
                     <i class="fad fa-arrow-to-right"></i>

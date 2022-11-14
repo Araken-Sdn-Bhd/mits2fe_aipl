@@ -23,7 +23,7 @@
                   <span>There are no right or wrong answers. Do not spend too much time on any statement.</span>
                   <small>Sila baca setiap kenyataan di bawah dan pilih jawapan 0, 1, 2, or 3 bagi menggambarkan keadaan anda sepanjang minggu yang</small>
                   <span>lalu Tiada jawapan yang betul atau salah. Jangan mengambil masa yang terlalu lama untuk mana-mana kenyataan</span>
-                </p> 
+                </p>
                  <ul class="instruction">
                   <li>
                     <span class="no">0</span>
@@ -151,7 +151,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -179,7 +179,7 @@ export default {
       token: "",
       Id: 0,
       SidebarAccess:null
-      
+
     };
   },
   beforeMount() {
@@ -198,7 +198,7 @@ export default {
     }
   },
   mounted(){
-    if(this.SidebarAccess!=1){ 
+    if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
@@ -269,7 +269,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/Modules/Patient/dass-result",
+              path: "/app/modules/Patient/dass-result",
               query: { id: this.Id },
             });
           } else {

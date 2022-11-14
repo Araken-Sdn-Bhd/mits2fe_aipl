@@ -12,27 +12,27 @@
                 </a>
               </li>
               <li ref="tab2" @click="changesidebar('tab2')">
-                <a class="nav-link" href="/Modules/Von/von-management">
+                <a class="nav-link" href="/app/modules/Von/von-management">
                   <i class="fal fa-user-injured"></i>
                   <span>VON Manag...</span>
                 </a>
               </li>
               <li ref="tab3" @click="changesidebar('tab3')">
-                <a class="nav-link" href="/Modules/Von/list-of-application">
+                <a class="nav-link" href="/app/modules/Von/list-of-application">
                   <i class="fal fa-user-injured"></i>
                   <span>VON Application</span>
                 </a>
               </li>
 
               <li ref="tab4" @click="changesidebar('tab4')">
-                <a class="nav-link" href="/Modules/Von/von-list-of-appointment">
+                <a class="nav-link" href="/app/modules/Von/von-list-of-appointment">
                   <i class="fal fa-user-injured"></i>
                   <span>Appointment</span>
                 </a>
               </li>
 
               <li ref="tab5" @click="changesidebar('tab5')">
-                <a class="nav-link" href="/Modules/Von/collaboration-record">
+                <a class="nav-link" href="/app/modules/Von/collaboration-record">
                   <i class="fal fa-user-injured"></i>
                   <span>Collaboration Record</span>
                 </a>
@@ -146,7 +146,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },

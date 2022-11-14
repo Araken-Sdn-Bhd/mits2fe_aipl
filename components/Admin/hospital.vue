@@ -850,7 +850,7 @@ export default {
     },
     async profileview(data) {
       this.$router.push({
-        path: "/Modules/Admin/Hod-hospital-details",
+        path: "/app/modules/Admin/Hod-hospital-details",
         query: { id: data.id },
       });
     },
@@ -953,7 +953,7 @@ export default {
           "address/" + this.hospital_city + "/getPostcodeListById",
           { headers }
         );
-        
+
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.postcodelist = response2.data.list;
         } else {

@@ -8,7 +8,7 @@
           <div class="page-title">
             <h1>List of Mentari Staff</h1>
             <div class="btn-group-a">
-              <a href="/Modules/Admin/new-staff" class="add-btn"
+              <a href="/app/modules/Admin/new-staff" class="add-btn"
                 ><i class="far fa-plus"></i
               ></a>
             </div>
@@ -259,7 +259,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -360,7 +360,7 @@ export default {
     },
     async view(data) {
       this.$router.push({
-        path: "/Modules/Admin/staff-view",
+        path: "/app/modules/Admin/staff-view",
         query: { id: data.id },
       });
     },

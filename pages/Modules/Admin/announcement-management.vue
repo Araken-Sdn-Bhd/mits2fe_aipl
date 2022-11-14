@@ -10,7 +10,7 @@
             <div class="btn-group-a">
               <!-- <a href="#" class="add-btn"><i class="far fa-cog"></i></a>
               <a href="#" class="add-btn"><i class="far fa-search"></i></a> -->
-              <a href="/Modules/Admin/create-event" class="add-btn"
+              <a href="/app/modules/Admin/create-event" class="add-btn"
                 ><i class="far fa-plus"></i
               ></a>
             </div>
@@ -159,13 +159,13 @@ export default {
     },
     async editannounce(data) {
       this.$router.push({
-        path: "/Modules/Admin/update-event",
+        path: "/app/modules/Admin/update-event",
         query: { id: data.id },
       });
     },
     async viewannounce(data) {
       this.$router.push({
-        path: "/Modules/Admin/view-event",
+        path: "/app/modules/Admin/view-event",
         query: { id: data.id },
       });
     },

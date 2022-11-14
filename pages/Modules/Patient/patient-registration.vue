@@ -1433,7 +1433,7 @@ export default {
       );
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].code;
-       
+
       } else {
         window.alert("Something went wrong");
       }
@@ -1712,7 +1712,7 @@ export default {
       }
     },
     async getPostcodeList(event) {
-     
+
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -1727,7 +1727,7 @@ export default {
       } else {
         this.postcodelist = [];
       }
-    
+
     },
     async onSelectedStateKin(event){
       const headers = {
@@ -1748,7 +1748,7 @@ export default {
       }
     },
     async getkinPostcodeList(event) {
-     
+
      const headers = {
        Authorization: "Bearer " + this.userdetails.access_token,
        Accept: "application/json",
@@ -1763,7 +1763,7 @@ export default {
      } else {
        this.kinpostcodelist = [];
      }
-   
+
    },
     async GetTab2List() {
       const headers = {
@@ -2003,7 +2003,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2023,7 +2023,7 @@ export default {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2125,7 +2125,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2142,7 +2142,7 @@ export default {
             );
             console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {

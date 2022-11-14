@@ -204,7 +204,7 @@
         </p>
                 <div class="form-foter">
                   <a
-                    href="/Modules/Admin/announcement-management"
+                    href="/app/modules/Admin/announcement-management"
                     class="btn btn-primary btn-text"
                     ><i class="far fa-arrow-alt-to-left"></i> Back</a
                   >
@@ -235,7 +235,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -381,7 +381,7 @@ export default {
             headers,
           });
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$router.push("/Modules/Admin/announcement-management");
+            this.$router.push("/app/modules/Admin/announcement-management");
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");

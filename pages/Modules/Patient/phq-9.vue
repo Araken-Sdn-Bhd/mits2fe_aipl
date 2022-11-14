@@ -154,7 +154,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -185,7 +185,7 @@ export default {
     };
   },
   mounted(){
-    if(this.SidebarAccess!=1){ 
+    if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
@@ -271,7 +271,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/Modules/Patient/phq9-result",
+              path: "/app/modules/Patient/phq9-result",
               query: { id: this.Id },
             });
           } else {
