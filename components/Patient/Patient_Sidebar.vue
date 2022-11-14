@@ -82,7 +82,7 @@
               </li>
 
               <li>
-                <a class="nav-link" href="/Modules/Patient/calendar-view"> 
+                <a class="nav-link" href="/Modules/Patient/calendar-view">
                   <i class="far fa-calendar-star"></i>
                   <span>Calendar</span>
                 </a>
@@ -96,7 +96,7 @@
               </li>
             </ul>
           </div>
-          
+
         </div>
       </nav>
     </div>
@@ -206,27 +206,27 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/jquery-3.5.1.js",
+        src: "/app/js/jquery-3.5.1.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/jquery.dataTables.min.js",
+        src: "/app/js/jquery.dataTables.min.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/dataTables.bootstrap5.min.js",
+        src: "/app/js/dataTables.bootstrap5.min.js",
         body: true,
         crossorigin: "anonymous",
       },
