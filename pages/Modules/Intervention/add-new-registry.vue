@@ -3353,7 +3353,7 @@ export default {
           //   $("#insertpopup").modal("show");
           // });
           this.$router.push({
-            path: "/app/modules/Intervention/patient-history",
+            path: "/modules/Intervention/patient-history",
             query: { id: this.Id },
           });
         } else {
@@ -3421,7 +3421,7 @@ export default {
             //   $("#insertpopup").modal("show");
             // });
             this.$router.push({
-              path: "/app/modules/Intervention/patient-history",
+              path: "/modules/Intervention/patient-history",
               query: { id: this.Id },
             });
           } else {

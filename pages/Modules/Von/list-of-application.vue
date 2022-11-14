@@ -240,17 +240,17 @@ export default {
     OnEdit(data) {
       if (data.app_type == "Individual") {
         this.$router.push({
-          path: "/app/modules/Von/edit-individual",
+          path: "/modules/Von/edit-individual",
           query: { id: data.id },
         });
       } else if (data.app_type == "Group") {
          this.$router.push({
-          path: "/app/modules/Von/edit-group",
+          path: "/modules/Von/edit-group",
           query: { id: data.id },
         });
       } else if (data.app_type == "Organization") {
          this.$router.push({
-          path: "/app/modules/Von/edit-organization",
+          path: "/modules/Von/edit-organization",
           query: { id: data.id },
         });
       }
@@ -258,24 +258,24 @@ export default {
     OnView(data) {
       if (data.app_type == "Individual") {
         this.$router.push({
-          path: "/app/modules/Von/view-individual",
+          path: "/modules/Von/view-individual",
           query: { id: data.id },
         });
       } else if (data.app_type == "Group") {
          this.$router.push({
-          path: "/app/modules/Von/view-group",
+          path: "/modules/Von/view-group",
           query: { id: data.id },
         });
       } else {
          this.$router.push({
-          path: "/app/modules/Von/view-organization",
+          path: "/modules/Von/view-organization",
           query: { id: data.id },
         });
       }
     },
     OnBook(data){
       this.$router.push({
-          path: "/app/modules/Von/book-appointment",
+          path: "/modules/Von/book-appointment",
           query: { section: data.id,name:data.name },
         });
     },

@@ -188,7 +188,7 @@ export default {
     },
     async gotoedit() {
       this.$router.push({
-        path: "/app/modules/Admin/edit-staff",
+        path: "/modules/Admin/edit-staff",
         query: { id: this.Id },
       });
     },

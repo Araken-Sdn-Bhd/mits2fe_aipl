@@ -146,7 +146,7 @@ export default {
     oneditPatient(Id) {
       if(this.SidebarAccess==1){
         this.$router.push({
-        path: "/app/modules/Intervention/patient-summary",
+        path: "/modules/Intervention/patient-summary",
         query: { id: Id },
       });
       }else{

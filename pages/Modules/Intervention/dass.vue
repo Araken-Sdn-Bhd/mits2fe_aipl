@@ -260,7 +260,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Intervention/dass-result",
+              path: "/modules/Intervention/dass-result",
               query: { id: this.Id },
             });
           } else {

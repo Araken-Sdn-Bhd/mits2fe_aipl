@@ -731,7 +731,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Patient/cbi-result",
+              path: "/modules/Patient/cbi-result",
               query: { id: this.Id },
             });
           } else {

@@ -2919,7 +2919,7 @@ export default {
             //   $("#insertpopup").modal("show");
             // });
             this.$router.push({
-              path: "/app/modules/Patient/patient-history",
+              path: "/modules/Patient/patient-history",
               query: { id: this.Id },
             });
           } else {

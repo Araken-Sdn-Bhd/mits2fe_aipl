@@ -159,13 +159,13 @@ export default {
     },
     async editannounce(data) {
       this.$router.push({
-        path: "/app/modules/Admin/update-event",
+        path: "/modules/Admin/update-event",
         query: { id: data.id },
       });
     },
     async viewannounce(data) {
       this.$router.push({
-        path: "/app/modules/Admin/view-event",
+        path: "/modules/Admin/view-event",
         query: { id: data.id },
       });
     },

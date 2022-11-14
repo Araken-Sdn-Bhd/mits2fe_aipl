@@ -119,14 +119,14 @@ export default {
   methods: {
     oneditPatient() {
       this.$router.push({
-        // path: "/app/modules/Patient/patient-registration",
+        // path: "/modules/Patient/patient-registration",
         path:"/app/modules/Shharp/demographic",
         query: { id: this.Id },
       });
     },
      AlertList() {
       this.$router.push({
-        // path: "/app/modules/Patient/patient-registration",
+        // path: "/modules/Patient/patient-registration",
         path:"/app/modules/Intervention/list-of-alert",
         query: { id: this.Id },
       });

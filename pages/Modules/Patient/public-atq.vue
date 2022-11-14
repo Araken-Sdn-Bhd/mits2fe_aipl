@@ -264,7 +264,7 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/app/modules/Patient/request-appointment-form",
+        path: "/modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
     }

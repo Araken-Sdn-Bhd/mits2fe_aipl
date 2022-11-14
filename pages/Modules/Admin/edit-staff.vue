@@ -465,7 +465,7 @@ export default {
     },
     async gototransfer() {
       this.$router.push({
-        path: "/app/modules/Admin/mentari-staff-transfer",
+        path: "/modules/Admin/mentari-staff-transfer",
         query: { id: this.Id },
       });
     },

@@ -336,7 +336,7 @@ export default {
     Onview(data) {
 
       this.$router.push({
-        path: "/app/modules/Admin/list-of-user-matrix-view",
+        path: "/modules/Admin/list-of-user-matrix-view",
        query: { id: data.team_id,usersid:data.id },
       });
     },

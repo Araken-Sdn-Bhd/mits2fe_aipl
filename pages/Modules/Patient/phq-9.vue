@@ -271,7 +271,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Patient/phq9-result",
+              path: "/modules/Patient/phq9-result",
               query: { id: this.Id },
             });
           } else {

@@ -167,14 +167,14 @@ export default {
     OneditClick(id) {
       this.loader = true;
       this.$router.push({
-        path: "/app/modules/Intervention/update-new-job",
+        path: "/modules/Intervention/update-new-job",
         query: { id: id },
       });
     },
     OnviewClick(title) {
       this.loader = true;
       this.$router.push({
-        path: "/app/modules/Intervention/same-job-offer-list",
+        path: "/modules/Intervention/same-job-offer-list",
         query: { title: title },
       });
     },

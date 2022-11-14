@@ -212,25 +212,25 @@ export default {
       if(name=="cbi"){
         localStorage.setItem("cbiresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/cbi-result-view-history",
+        path: "/modules/Intervention/cbi-result-view-history",
         query: { id: this.Id },
       });
       }else if(name=="dass"){
         localStorage.setItem("cbiresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/dass-result-view-history",
+        path: "/modules/Intervention/dass-result-view-history",
         query: { id: this.Id },
       });
       }else if(name=="phq9"){
         localStorage.setItem("phq9result_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/phq9-result-view-history",
+        path: "/modules/Intervention/phq9-result-view-history",
         query: { id: this.Id },
       });
       }else if(name=="whodas"){
         localStorage.setItem("whodasresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/whodas-result-view-history",
+        path: "/modules/Intervention/whodas-result-view-history",
         query: { id: this.Id },
       });
       }
@@ -255,21 +255,21 @@ export default {
       }else if(name=="atq"){
         localStorage.setItem("atqresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/atq-view-history",
+        path: "/modules/Intervention/atq-view-history",
         query: { id: this.Id },
       });
       }
       else if(name=="psp"){
         localStorage.setItem("pspresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/psp-view-history",
+        path: "/modules/Intervention/psp-view-history",
         query: { id: this.Id },
       });
       }
       else if(name=="SR"){
         localStorage.setItem("suicidalresult_history",JSON.stringify(test));
         this.$router.push({
-        path: "/app/modules/Intervention/suicide-risk-view-history",
+        path: "/modules/Intervention/suicide-risk-view-history",
         query: { id: this.Id },
       });
       }
@@ -282,13 +282,13 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/app/modules/Patient/request-appointment-form",
+        path: "/modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
     },
     GoBack(){
       this.$router.push({
-              path: "/app/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

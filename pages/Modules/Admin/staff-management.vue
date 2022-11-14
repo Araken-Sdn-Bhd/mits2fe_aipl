@@ -360,7 +360,7 @@ export default {
     },
     async view(data) {
       this.$router.push({
-        path: "/app/modules/Admin/staff-view",
+        path: "/modules/Admin/staff-view",
         query: { id: data.id },
       });
     },

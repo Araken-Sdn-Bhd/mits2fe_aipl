@@ -723,7 +723,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Intervention/cbi-result",
+              path: "/modules/Intervention/cbi-result",
               query: { id: this.Id },
             });
           } else {

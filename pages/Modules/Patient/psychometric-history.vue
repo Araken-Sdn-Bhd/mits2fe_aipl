@@ -162,7 +162,7 @@ export default {
   methods: {
     async OnTestView(id, name) {
         this.$router.push({
-        path: "/app/modules/Intervention/patient-summary",
+        path: "/modules/Intervention/patient-summary",
         query: { id: this.Id },
       });
     },
@@ -174,13 +174,13 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/app/modules/Patient/request-appointment-form",
+        path: "/modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
     },
     GoBack(){
       this.$router.push({
-              path: "/app/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

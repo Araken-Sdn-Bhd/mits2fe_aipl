@@ -990,193 +990,193 @@ export default {
     },
     onAddPatientClinicalinfo() {
       this.$router.push({
-        path: "/app/modules/Patient/add-clinical-info",
+        path: "/modules/Patient/add-clinical-info",
         query: { id: this.Id },
       });
     },
     onclinicalhistory() {
       this.$router.push({
-        path: "/app/modules/Patient/clinical-history",
+        path: "/modules/Patient/clinical-history",
         query: { id: this.Id },
       });
     },
     OnAppointmenthistory() {
       this.$router.push({
-        path: "/app/modules/Patient/appointment-history",
+        path: "/modules/Patient/appointment-history",
         query: { id: this.Id },
       });
     },
     OnSharphistory() {
       this.$router.push({
-        path: "/app/modules/Patient/patient-history",
+        path: "/modules/Patient/patient-history",
         query: { id: this.Id },
       });
     },
     OnAddSharphistory() {
       this.$router.push({
-        path: "/app/modules/Patient/add-new-registry",
+        path: "/modules/Patient/add-new-registry",
         query: { id: this.Id },
       });
     },
     Onpsychometrichistory() {
       this.$router.push({
-        path: "/app/modules/Patient/psychometric-history",
+        path: "/modules/Patient/psychometric-history",
         query: { id: this.Id },
       });
     },
     Oncbitest() {
       this.$router.push({
-        path: "/app/modules/Patient/cbi",
+        path: "/modules/Patient/cbi",
         query: { id: this.Id },
       });
     },
     Ondasstest() {
       this.$router.push({
-        path: "/app/modules/Patient/dass",
+        path: "/modules/Patient/dass",
         query: { id: this.Id },
       });
     },
     Onphqtest() {
       this.$router.push({
-        path: "/app/modules/Patient/phq-9",
+        path: "/modules/Patient/phq-9",
         query: { id: this.Id },
       });
     },
     Onwhodasstest() {
       this.$router.push({
-        path: "/app/modules/Patient/whodas",
+        path: "/modules/Patient/whodas",
         query: { id: this.Id },
       });
     },
     Onbditest() {
       this.$router.push({
-        path: "/app/modules/Patient/bdi",
+        path: "/modules/Patient/bdi",
         query: { id: this.Id },
       });
     },
     Onpsptest() {
       this.$router.push({
-        path: "/app/modules/Patient/psp",
+        path: "/modules/Patient/psp",
         query: { id: this.Id },
       });
     },
     Onbaitest() {
       this.$router.push({
-        path: "/app/modules/Patient/bai",
+        path: "/modules/Patient/bai",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/app/modules/Patient/atq",
+        path: "/modules/Patient/atq",
         query: { id: this.Id },
       });
     },
     Onsuiciderisktest() {
       this.$router.push({
-        path: "/app/modules/Patient/suicide-risk",
+        path: "/modules/Patient/suicide-risk",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/app/modules/Patient/atq",
+        path: "/modules/Patient/atq",
         query: { id: this.Id },
       });
     },
     Onsuicidescaletest() {
       this.$router.push({
-        path: "/app/modules/Patient/level-of-suicidal-intent",
+        path: "/modules/Patient/level-of-suicidal-intent",
         query: { id: this.Id },
       });
     },
     Ontransactionlog() {
       this.$router.push({
-        path: "/app/modules/Patient/transaction-log",
+        path: "/modules/Patient/transaction-log",
         query: { id: this.Id },
       });
     },
     OnPsychiatryclerkingnote() {
       this.$router.push({
-        path: "/app/modules/Patient/psychiatry-clerking-note",
+        path: "/modules/Patient/psychiatry-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncounsellorclerkingnote() {
       this.$router.push({
-        path: "/app/modules/Patient/counsellor-clerking-note",
+        path: "/modules/Patient/counsellor-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncprogressnote() {
       this.$router.push({
-        path: "/app/modules/Patient/progress-note",
+        path: "/modules/Patient/progress-note",
         query: { id: this.Id },
       });
     },
     Oncounselingprogressnote() {
       this.$router.push({
-        path: "/app/modules/Patient/counseling-progress-note",
+        path: "/modules/Patient/counseling-progress-note",
         query: { id: this.Id },
       });
     },
     Oncounsaltationdischargenote() {
       this.$router.push({
-        path: "/app/modules/Patient/consultation-discharge-note",
+        path: "/modules/Patient/consultation-discharge-note",
         query: { id: this.Id },
       });
     },
     OnTriageform() {
       this.$router.push({
-        path: "/app/modules/Patient/triage-form",
+        path: "/modules/Patient/triage-form",
         query: { id: this.Id },
       });
     },
     Oninternalreferralform() {
       this.$router.push({
-        path: "/app/modules/Patient/internal-referral-form",
+        path: "/modules/Patient/internal-referral-form",
         query: { id: this.Id },
       });
     },
     Onocctreferralform() {
       this.$router.push({
-        path: "/app/modules/Patient/occt-referral-form",
+        path: "/modules/Patient/occt-referral-form",
         query: { id: this.Id },
       });
     },
     Onpsychologyreferral() {
       this.$router.push({
-        path: "/app/modules/Patient/psychology-referral",
+        path: "/modules/Patient/psychology-referral",
         query: { id: this.Id },
       });
     },
     Onseconsentreferral() {
       this.$router.push({
-        path: "/app/modules/Patient/se-consent-form",
+        path: "/modules/Patient/se-consent-form",
         query: { id: this.Id },
       });
     },
     Onlaserform() {
       this.$router.push({
-        path: "/app/modules/Patient/laser-form",
+        path: "/modules/Patient/laser-form",
         query: { id: this.Id },
       });
     },
     Oncpsreferal() {
       this.$router.push({
-        path: "/app/modules/Patient/cps-referral-form",
+        path: "/modules/Patient/cps-referral-form",
         query: { id: this.Id },
       });
     },
     Onpatientcareplan() {
       this.$router.push({
-        path: "/app/modules/Patient/patient-care-plan-and-case-review",
+        path: "/modules/Patient/patient-care-plan-and-case-review",
         query: { id: this.Id },
       });
     },
     OnBookAppointment(){
        this.$router.push({
-        path: "/app/modules/Patient/book-appointment",
+        path: "/modules/Patient/book-appointment",
         query: { pid: this.Id },
       });
     },
@@ -1282,7 +1282,7 @@ export default {
     },
     OnHistoryview(data) {
       this.$router.push({
-        path: "/app/modules/patient/history-view",
+        path: "/modules/patient/history-view",
         query: { id: data.id, type: data.type },
       });
     },

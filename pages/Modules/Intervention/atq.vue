@@ -246,7 +246,7 @@ export default {
               $("#resultmodal").modal("show");
             });
             this.$router.push({
-              path: "/app/modules/Intervention/psychometric-history",
+              path: "/modules/Intervention/psychometric-history",
               query: { id: this.Id },
             });
           } else {
@@ -272,7 +272,7 @@ export default {
     },
       async Gotorequestappointment() {
       this.$router.push({
-        path: "/app/modules/Intervention/request-appointment-form",
+        path: "/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     },
