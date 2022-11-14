@@ -2537,7 +2537,7 @@ export default {
     },
     OndropdownChange(val, event) {
       //this.checkedList[ind] = val;
-      delete checkedList.val;
+      // delete checkedList.val;
       this.checkedList[val] = event.target.value;
       console.log("my pushed array", this.checkedList);
     },
