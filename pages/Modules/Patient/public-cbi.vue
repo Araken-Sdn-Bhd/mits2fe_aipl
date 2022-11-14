@@ -765,7 +765,7 @@ export default {
               "cbiresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/app/modules/Patient/public-cbi-result");
+            this.$router.push("/modules/Patient/public-cbi-result");
           } else {
             this.loader = false;
             this.$nextTick(() => {

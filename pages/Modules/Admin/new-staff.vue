@@ -456,7 +456,7 @@ export default {
           }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          // this.$router.push("/app/modules/Admin/staff-management");
+          // this.$router.push("/modules/Admin/staff-management");
           this.$nextTick(() => {
             $("#updatepopup").modal("show");
           });

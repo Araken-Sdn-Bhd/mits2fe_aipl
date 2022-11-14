@@ -593,7 +593,7 @@ export default {
             this.$nextTick(() => {
               $("#updatepopup").modal("show");
             });
-            this.$router.push("/app/modules/Intervention/list-of-job-offer");
+            this.$router.push("/modules/Intervention/list-of-job-offer");
           } else {
             this.loader = false;
             this.$nextTick(() => {

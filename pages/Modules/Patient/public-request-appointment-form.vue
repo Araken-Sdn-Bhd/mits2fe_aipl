@@ -233,7 +233,7 @@ export default {
               this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-           // this.$router.push("/app/modules/Patient/list-of-appointment");
+           // this.$router.push("/modules/Patient/list-of-appointment");
              this.$swal.fire(
               'Your appointment is submitted.',
               'Please wait for us to contact you.',

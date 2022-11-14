@@ -1865,7 +1865,7 @@ export default {
       }
     },
     Reload() {
-      this.$router.push("/app/modules/Von/list-of-application");
+      this.$router.push("/modules/Von/list-of-application");
       setTimeout(() => {
         window.location.reload();
       }, 100);

@@ -1556,7 +1556,7 @@ export default {
               "whodasresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/app/modules/Patient/public-whodass-result");
+            this.$router.push("/modules/Patient/public-whodass-result");
           } else {
             this.loader = false;
             this.$nextTick(() => {

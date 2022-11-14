@@ -215,7 +215,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200) {
-              this.$router.push("/app/modules/Admin/calendar-management");
+              this.$router.push("/modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -237,7 +237,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200) {
-              this.$router.push("/app/modules/Admin/calendar-management");
+              this.$router.push("/modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");

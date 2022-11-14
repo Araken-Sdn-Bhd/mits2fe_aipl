@@ -850,7 +850,7 @@ export default {
     },
     async profileview(data) {
       this.$router.push({
-        path: "/app/modules/Admin/Hod-hospital-details",
+        path: "/modules/Admin/Hod-hospital-details",
         query: { id: data.id },
       });
     },

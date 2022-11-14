@@ -243,7 +243,7 @@ export default {
           );
           if (response.data.code == 200) {
             this.loader = false;
-            this.$router.push("/app/modules/Intervention/list-of-appointment");
+            this.$router.push("/modules/Intervention/list-of-appointment");
           } else {
             this.loader = false;
             this.$nextTick(() => {
