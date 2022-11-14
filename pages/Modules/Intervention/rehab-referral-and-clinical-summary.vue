@@ -1235,6 +1235,7 @@
             </div>
           </div>
             <div class="card mb-4 reslt" style="display:none;">
+            <h1>Rehab Referral and Clinical Summary</h1>
             <div class="card-body">
               <table class="notes notes-sub" v-if="patientdetails">
                 <thead>
@@ -1269,83 +1270,11 @@
                   </tr>
                   <tr>
                     <th>Referred For:</th>
-                    <td v-if="this.type != 'view'">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios1"
-                          v-model="patient_referred_for"
-                          value="Consultation/Screening"
-
-                        />
-                        <label class="form-check-label" for="exampleRadios1">
-                          Consultation/Screening
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios2"
-                          v-model="patient_referred_for"
-                          value="Counselling"
-                        />
-                        <label class="form-check-label" for="exampleRadios2">
-                          Counselling
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios3"
-                          v-model="patient_referred_for"
-                          value="Supported Employment"
-                        />
-                        <label class="form-check-label" for="exampleRadios3">
-                          Supported Employment*
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios4"
-                          v-model="patient_referred_for"
-                          value="Job Club"
-                        />
-                        <label class="form-check-label" for="exampleRadios4">
-                          Job Club*
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios5"
-                          v-model="patient_referred_for"
-                          value="ETP"
-                        />
-                        <label class="form-check-label" for="exampleRadios5">
-                          ETP*
-                        </label>
-                      </div>
-                    </td>
-                    <td v-else-if="this.type == 'view'">
+                    <td>
                       {{ this.patient_referred_for }}
                     </td>
                   </tr>
                   <tr>
-                    <th colspan="2">
-                      *Only applicable for those who has been reviewed by hospital
-                      psychiatry team.
-                    </th>
                   </tr>
                 </tbody>
               </table>
@@ -1359,139 +1288,49 @@
                   <tr>
                     <th>Diagnosis:</th>
                     <td>
-                      <select class="form-select" v-model="diagnosis">
-                        <option value="">Please Select</option>
-                        <option
-                          v-for="catcode in diagonisislist"
-                          v-bind:key="catcode.id"
-                          v-bind:value="catcode.id"
-                        >
-                        {{ catcode.icd_code }} {{catcode.icd_name}}
-                        </option>
-                      </select>
+                        {{ this.diagnosis }}
                     </td>
                   </tr>
                   <tr>
                     <th>Date Onset:</th>
                     <td>
-                      <input
-                        type="date"
-                        class="form-control"
-                        name=""
-                        v-model="date_onset"
-                      />
+                      {{ this.date_onset }}
                     </td>
                   </tr>
                   <tr>
                     <th>Date Of Referral:</th>
                     <td>
-                      <input
-                        type="date"
-                        class="form-control"
-                        name=""
-                        v-model="date_of_referral"
-                      />
+                      {{ this.date_of_referral }}
                     </td>
                   </tr>
                   <tr>
                     <th>NO. of Admission :</th>
                     <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name=""
-                        v-model="no_of_admission"
-                      />
+                      {{ this.no_of_admission }}
                     </td>
                   </tr>
                   <tr>
                     <th>Latest Admission Date:</th>
                     <td>
-                      <input
-                        type="date"
-                        class="form-control"
-                        name=""
-                        v-model="latest_admission_date"
-                      />
+                      {{ this.latest_admission_date }}
                     </td>
                   </tr>
                   <tr>
                     <th>Current Medication:</th>
                     <td>
-                      <textarea
-                        class="form-control textarea"
-                        v-model="current_medication"
-                      ></textarea>
+                      {{ this.current_medication }}
                     </td>
                   </tr>
                   <tr>
                     <th>Alerts:</th>
-                    <td v-if="!pid">
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="inlineCheckbox1"
-                          value="NMS"
-                          @click="OnAlert('NMS')"
-                        />
-                        <label class="form-check-label" for="inlineCheckbox1"
-                          >NMS</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="inlineCheckbox2"
-                          value="SUICIDE"
-                          @click="OnAlert('SUICIDE')"
-                        />
-                        <label class="form-check-label" for="inlineCheckbox2"
-                          >SUICIDE</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="inlineCheckbox3"
-                          value="FORENSIC"
-                          @click="OnAlert('FORENSIC')"
-                        />
-                        <label class="form-check-label" for="inlineCheckbox3"
-                          >FORENSIC</label
-                        >
-                      </div>
-                    </td>
-                     <td v-if="pid">
-                      <div class="form-check form-check-inline" v-for="(alert,index) in alertlist" :key="index">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="inlineCheckbox1"
-                          value="NMS"
-                          checked
-                        />
-                        <label class="form-check-label" for="inlineCheckbox1"
-                          > {{alert}} </label
-                        >
-                      </div>
+                    <td>
+                      {{this.alerts}} 
                     </td>
                   </tr>
                   <tr>
                     <th>Education Level:</th>
                     <td>
-                      <select class="form-select" v-model="education_level">
-                        <option value="">Please Select</option>
-                        <option
-                          v-for="edu in settinglist"
-                          v-bind:key="edu.id"
-                          v-bind:value="edu.id"
-                        >
-                          {{ edu.section_value }}
-                        </option>
-                      </select>
+                      {{ this.education_level }}
                     </td>
                   </tr>
                   <tr>
@@ -1504,68 +1343,7 @@
                           <tr>
                             <th>Aggresion</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Aggresion"
-                                  id="aggresion-none" value="None" v-model="aggresion"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="aggresion-none"
-                                >
-                                  None
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Aggresion"
-                                  id="aggresion-low" value="Low" v-model="aggresion"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="aggresion-low"
-                                >
-                                  Low
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Aggresion"
-                                  id="aggresion-medium" value="Medium" v-model="aggresion"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="aggresion-medium"
-                                >
-                                  Medium
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="Aggresion"
-                                  id="aggresion-high" value="High" v-model="aggresion"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="aggresion-high"
-                                >
-                                  High
-                                </label>
-                              </div>
+                              {{ this.aggresion }}
                             </td>
                           </tr>
                         </tbody>
@@ -1579,68 +1357,7 @@
                           <tr>
                             <th>Suicidality</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="suicidality"
-                                  id="suicidality-none" value="None" v-model="suicidality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="suicidality-none"
-                                >
-                                  None
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="suicidality"
-                                  id="suicidality-low" value="Low" v-model="suicidality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="suicidality-low"
-                                >
-                                  Low
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="suicidality"
-                                  id="suicidality-medium" value="Medium" v-model="suicidality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="suicidality-medium"
-                                >
-                                  Medium
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="suicidality"
-                                  id="suicidality-high" value="High" v-model="suicidality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="suicidality-high"
-                                >
-                                  High
-                                </label>
-                              </div>
+                              {{ this.suicidality }}
                             </td>
                           </tr>
                         </tbody>
@@ -1654,68 +1371,7 @@
                           <tr>
                             <th>Criminality</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="criminality"
-                                  id="criminality-none" value="None" v-model="criminality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="criminality-none"
-                                >
-                                  None
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="criminality"
-                                  id="criminality-low" value="Low" v-model="criminality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="criminality-low"
-                                >
-                                  Low
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="criminality"
-                                  id="criminality-medium" value="Medium" v-model="criminality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="criminality-medium"
-                                >
-                                  Medium
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="criminality"
-                                  id="criminality-high" value="High" v-model="criminality"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="criminality-high"
-                                >
-                                  High
-                                </label>
-                              </div>
+                              {{ this.criminality }}
                             </td>
                           </tr>
                         </tbody>
@@ -1728,7 +1384,7 @@
                   <tr>
                     <th>Age First Started:</th>
                     <td>
-                      <input type="text" class="form-control" name="" v-model="age_first_started" />
+                      {{ this.age_first_started }}
                     </td>
                   </tr>
                   <tr>
@@ -1738,54 +1394,8 @@
                           <tr>
                             <th>Heroin/Opiate</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="heroin-opiate"
-                                  id="heroin-opiate-none" value="None" v-model="heroin"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="heroin-opiate-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.heroin }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="heroin-opiate"
-                                  id="heroin-opiate-previous-history" value="Previous History" v-model="heroin"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="heroin-opiate-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="heroin-opiate"
-                                  id="heroin-opiate-current-use" value="Current Use" v-model="heroin"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="heroin-opiate-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1798,54 +1408,8 @@
                           <tr>
                             <th>Cannabis</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="cannabis"
-                                  id="cannabis-none" value="None" v-model="cannabis"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="cannabis-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.cannabis }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="cannabis"
-                                  id="cannabis-previous-history" value="Previous History" v-model="cannabis"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="cannabis-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="cannabis"
-                                  id="cannabis-current-use" value="Current Use" v-model="cannabis"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="cannabis-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1858,51 +1422,8 @@
                           <tr>
                             <th>ATS</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="ats"
-                                  id="ats-none" value="None" v-model="ats"
-                                />
-                                <label class="form-check-label" for="ats-none">
-                                  None
-                                </label>
-                              </div>
+                              {{ this.ats }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="ats"
-                                  id="ats-previous-history" value="Previous History" v-model="ats"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="ats-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="ats"
-                                  id="ats-current-use" value="Current Use" v-model="ats"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="ats-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1915,54 +1436,8 @@
                           <tr>
                             <th>Inhalant</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="inhalant"
-                                  id="inhalant-none" value="None" v-model="inhalant"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="inhalant-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.inhalant }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="inhalant"
-                                  id="inhalant-previous-history" value="Previous History" v-model="inhalant"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="inhalant-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="inhalant"
-                                  id="inhalant-current-use" value="Current Use" v-model="inhalant"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="inhalant-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1975,54 +1450,8 @@
                           <tr>
                             <th>Alcohol</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="alcohol"
-                                  id="alcohol-none" value="None" v-model="alcohol"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="alcohol-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.alcohol }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="alcohol"
-                                  id="alcohol-previous-history" value="Previous History" v-model="alcohol"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="alcohol-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="alcohol"
-                                  id="alcohol-current-use" value="Current Use" v-model="alcohol"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="alcohol-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -2035,54 +1464,8 @@
                           <tr>
                             <th>Tobacco</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="tobacco"
-                                  id="tobacco-none" value="None" v-model="tobacco"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="tobacco-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.tobacco }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="tobacco"
-                                  id="tobacco-previous-history" value="Previous History" v-model="tobacco"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="tobacco-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="tobacco"
-                                  id="tobacco-current-use" value="Current Use" v-model="tobacco"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="tobacco-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -2095,54 +1478,8 @@
                           <tr>
                             <th>Others</th>
                             <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="others"
-                                  id="others-none" value="None" v-model="others"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="others-none"
-                                >
-                                  None
-                                </label>
-                              </div>
+                              {{ this.others }}
                             </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="others"
-                                  id="others-previous-history" value="Previous History" v-model="others"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="others-previous-history"
-                                >
-                                  Previous History
-                                </label>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="others"
-                                  id="others-current-use" value="Current Use" v-model="others"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="others-current-use"
-                                >
-                                  Current Use
-                                </label>
-                              </div>
-                            </td>
-                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -2151,21 +1488,9 @@
                   <tr>
                     <th>
                       Other Information:<br />
-                      <em
-                        ><i
-                          ><small
-                            >That you feel will help this person reach his
-                            employment goal, if any</small
-                          ></i
-                        ></em
-                      >
                     </th>
                     <td>
-                      <textarea
-                        class="form-control textarea"
-                        placeholder="Please type here.." v-model="other_information"
-                        :disabled = "isDisabled"
-                      ></textarea>
+                      {{ this.other_information }}
                     </td>
                   </tr>
                 </tbody>
@@ -2176,127 +1501,37 @@
               >
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOne">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
                       OCCASION OF SERVICES
-                    </button>
                   </h2>
-                   <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
+                   <div>
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
                             >Location Of Services</label
                           >
-                          <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="location_services_id"
-                            >
-                              <option value="0">
-                                Select location of services
-                              </option>
-                             <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
-                            </select>
-                          </div>
+                          {{ this.location_services_id }}
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
                             >Type Of Diagnosis</label
                           >
-                          <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
-                                <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                              </select>
-                          </div>
+                          {{ this.type_diagnosis_id }}
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
                             >Category Of Services
                           </label>
-                          <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio1"
-                                value="assisstance"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio1"
-                                >Assisstance / Supervision</label
-                              >
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio2"
-                                value="clinical-work"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio2"
-                                >Clinical Work / Procedure
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio3"
-                                value="external"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio3"
-                                >External</label
-                              >
-                            </div>
-                          </div>
+                          {{ this.category_services }}
                         </div>
                         <!-- close-row -->
                         <!-- hide-div -->
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              <select class="form-select" v-model="services_id">
-                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in assistancelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
+                              <label class="form-label">Services:</label>
+                              {{ this.services_id }}
                             </div>
                           </div>
                         </div>
@@ -2304,27 +1539,12 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
-                                <option value="0">Select code</option>
-                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-             {{ type.icd_category_code }} {{type.icd_category_name}}
-            </option>
-                              </select>
+                              <label class="form-label">ICD 9 CODE:</label>
+                              {{ this.code_id }}
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
-                              <select class="form-select" v-model="sub_code_id">
-                                <option value="0">Select sub code</option>
-                                <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }}
- {{catcode.icd_name}}
-            </option>
-                              </select>
+                              <label class="form-label">ICD 9 SUB CODE:</label>
+                              {{ this.sub_code_id }}
                             </div>
                           </div>
                         </div>
@@ -2333,16 +1553,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
-                              <select class="form-select" v-model="serviceid">
-                                <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in externallist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
+                              {{ this.services_id }}
                             </div>
                           </div>
                         </div>
@@ -2351,36 +1562,13 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label"
-                              >Complexity Of Service</label
+                              >Complexity Of Service: </label
                             >
-                            <select
-                              class="form-select"
-                              v-model="complexity_services"
-                            >
-                              <option value="0">
-                                Select Complexity Of Service
-                              </option>
-                      <option
-                        v-for="cm in comlexcitylist"
-                        v-bind:key="cm.id"
-                        v-bind:value="cm.id"
-                      >
-                        {{ cm.section_value }}
-                      </option>
-                            </select>
+                            {{ this.complexity_services }}
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
-                            <select class="form-select" v-model="outcome_id">
-                              <option value="0">Select outcome</option>
-                      <option
-                        v-for="out in outcomelist"
-                        v-bind:key="out.id"
-                        v-bind:value="out.id"
-                      >
-                        {{ out.section_value }}
-                      </option>
-                            </select>
+                            <label class="form-label">Outcome: </label>
+                            {{ this.outcome_id }}
                           </div>
                         </div>
                         <!-- close-row -->
@@ -2390,30 +1578,13 @@
                 <!--  -->
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingTwo">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
                       MEDICATION
-                    </button>
                   </h2>
-                  <div
-                    id="collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample"
-                  >
+                  <div>
                     <div class="accordion-body">
                       <div class="col-md-12 mb-3">
-                        <label class="form-label">Medication</label>
-                        <textarea v-model="medication_prescription"
-                          class="form-control textarea"
-                          placeholder="Please Type Prescription Here"
-                        ></textarea>
+                        <label class="form-label">Medication: </label>
+                        {{ this.medication_prescription }}
                       </div>
                     </div>
                   </div>
@@ -2424,11 +1595,11 @@
                 <tbody>
                   <tr>
                     <th>Referrer Name:</th>
-                    <td><input type="text" class="form-control" name="" v-model="referral_name"/></td>
+                    <td>{{ this.referral_name }}</td>
                   </tr>
                   <tr>
                     <th>Designation:</th>
-                    <td><input type="text" class="form-control" name="" v-model="designation"/></td>
+                    <td>{{ this.designation }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -2440,19 +1611,6 @@
         </li>
       </ul>
         </p>
-              <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                  <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
-                    <i class="far fa-download"></i> Download
-                  </button>
-                  <button @click="OnSubmit" type="submit" class="btn btn-success btn-text">
-                    <i class="far fa-paper-plane"></i> Submit
-                  </button>
-                </div>
-
-
-
-              </div>
             </div>
           </div>
         </div>
@@ -2514,10 +1672,15 @@ export default {
       medication_prescription: "",
       services_id: 0,
       serviceid: 0,
+      icd_category_code: "",
+      icd_category_name: "",
+      loc_service: "",
       validate: true,
       name: "",
       designation: "",
       hospital: "",
+      icd_code: "",
+      icd_name: "",
       assistancelist: [],
       externallist: [],
       pid: 0,
@@ -2744,9 +1907,9 @@ export default {
               type_diagnosis_id: this.type_diagnosis_id,
               category_services: this.category_services,
               services_id: this.services_id,
-              icd_9_code: this.code_id,
-              icd_9_subcode: this.sub_code_id,
-              complexity_of_services: this.complexity_services,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services: this.complexity_services,
               outcome: this.outcome_id,
               medication_des: this.medication_prescription,
               referral_name: this.referral_name,
@@ -2965,7 +2128,6 @@ export default {
 
         this.patient_referred_for = response.data.Data[0].patient_referred_for;
         this.category_services = response.data.Data[0].category_services;
-        alert(this.category_services);
         this.diagnosis = response.data.Data[0].diagnosis;
         this.date_onset = response.data.Data[0].date_onset;
         this.date_of_referral = response.data.Data[0].date_of_referral;
