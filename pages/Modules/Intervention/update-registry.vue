@@ -1838,7 +1838,7 @@
                         >
                         <input
                           class="form-control"
-                          v-model="reportingdate"
+                          v-model="reportingdateFE"
                           disabled="false"
                         />
                       </div>
@@ -2009,7 +2009,9 @@ export default {
     this.hospitalname = this.userdetails.branch.hospital_name;
     this.officername = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
-    this.reportingdate = moment().format("DD-MM-YYYY");
+    this.reportingdateFE = moment().format("DD-MM-YYYY");
+    this.reportingdate = moment().format("YYYY-MM-DD");
+  
     this.GetList();
 
     $(document).ready(function () {
