@@ -1288,7 +1288,7 @@
                   <tr>
                     <th>Diagnosis:</th>
                     <td>
-                        {{ this.icd_code }} {{this.icd_name}}
+                        {{ this.diagnosis }}
                     </td>
                   </tr>
                   <tr>
@@ -1324,7 +1324,7 @@
                   <tr>
                     <th>Alerts:</th>
                     <td>
-                      {{this.alert}} 
+                      {{this.alerts}} 
                     </td>
                   </tr>
                   <tr>
@@ -1501,23 +1501,9 @@
               >
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOne">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
                       OCCASION OF SERVICES
-                    </button>
                   </h2>
-                   <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
+                   <div>
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
@@ -1530,7 +1516,7 @@
                           <label class="col-sm-4 col-form-label"
                             >Type Of Diagnosis</label
                           >
-                          {{ this.icd_code }} {{this.icd_name}}
+                          {{ this.type_diagnosis_id }}
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
@@ -1544,7 +1530,7 @@
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services:</label>
                               {{ this.services_id }}
                             </div>
                           </div>
@@ -1553,12 +1539,12 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
-                              {{ this.icd_category_code }} {{this.icd_category_name}}
+                              <label class="form-label">ICD 9 CODE:</label>
+                              {{ this.code_id }}
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
-                              {{ this.icd_code }}
+                              <label class="form-label">ICD 9 SUB CODE:</label>
+                              {{ this.sub_code_id }}
                             </div>
                           </div>
                         </div>
@@ -1567,7 +1553,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
-                              {{ this.serviceid }}
+                              {{ this.services_id }}
                             </div>
                           </div>
                         </div>
@@ -1576,12 +1562,12 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label"
-                              >Complexity Of Service</label
+                              >Complexity Of Service: </label
                             >
                             {{ this.complexity_services }}
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome: </label>
                             {{ this.outcome_id }}
                           </div>
                         </div>
@@ -1592,26 +1578,12 @@
                 <!--  -->
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingTwo">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
                       MEDICATION
-                    </button>
                   </h2>
-                  <div
-                    id="collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample"
-                  >
+                  <div>
                     <div class="accordion-body">
                       <div class="col-md-12 mb-3">
-                        <label class="form-label">Medication</label>
+                        <label class="form-label">Medication: </label>
                         {{ this.medication_prescription }}
                       </div>
                     </div>
@@ -1639,13 +1611,6 @@
         </li>
       </ul>
         </p>
-              <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                </div>
-
-
-
-              </div>
             </div>
           </div>
         </div>
@@ -1707,10 +1672,15 @@ export default {
       medication_prescription: "",
       services_id: 0,
       serviceid: 0,
+      icd_category_code: "",
+      icd_category_name: "",
+      loc_service: "",
       validate: true,
       name: "",
       designation: "",
       hospital: "",
+      icd_code: "",
+      icd_name: "",
       assistancelist: [],
       externallist: [],
       pid: 0,
@@ -1937,9 +1907,9 @@ export default {
               type_diagnosis_id: this.type_diagnosis_id,
               category_services: this.category_services,
               services_id: this.services_id,
-              icd_9_code: this.code_id,
-              icd_9_subcode: this.sub_code_id,
-              complexity_of_services: this.complexity_services,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services: this.complexity_services,
               outcome: this.outcome_id,
               medication_des: this.medication_prescription,
               referral_name: this.referral_name,
@@ -2158,7 +2128,6 @@ export default {
 
         this.patient_referred_for = response.data.Data[0].patient_referred_for;
         this.category_services = response.data.Data[0].category_services;
-        alert(this.category_services);
         this.diagnosis = response.data.Data[0].diagnosis;
         this.date_onset = response.data.Data[0].date_onset;
         this.date_of_referral = response.data.Data[0].date_of_referral;
