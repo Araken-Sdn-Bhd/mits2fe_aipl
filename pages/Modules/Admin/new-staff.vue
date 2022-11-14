@@ -49,7 +49,7 @@
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <label for="" class="form-label"
-                          >Profession Registration No.<span style="color:red">*</span></label
+                          >Profession Registration No.</label
                         >
                         <input
                           type="text"

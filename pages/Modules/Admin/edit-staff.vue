@@ -102,7 +102,7 @@
                         v-bind:key="team.id"
                         v-bind:value="team.id"
                       >
-                        {{ team.team_name }}
+                        {{ team.service_name }}
                       </option>
                     </select>
                   </div>
@@ -335,7 +335,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-team-list", {
+      const response = await this.$axios.get("service/list", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {

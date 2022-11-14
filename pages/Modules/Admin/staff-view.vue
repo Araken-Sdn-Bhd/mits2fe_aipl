@@ -71,7 +71,7 @@
 
                   <tr>
                     <td>Team</td>
-                    <td>{{ staffdetail.team_name }}</td>
+                    <td>{{ staffdetail.service_name }}</td>
                   </tr>
 
                   <tr>
@@ -81,7 +81,8 @@
 
                   <tr>
                     <td>Person In Charge</td>
-                    <td>{{ staffdetail.is_incharge }}</td>
+                    <td v-if="staffdetail.is_incharge==1">Yes</td>
+                    <td v-if="staffdetail.is_incharge==0">No</td>
                   </tr>
 
                   <tr>
@@ -96,7 +97,8 @@
 
                   <tr>
                     <td>Account Active</td>
-                    <td>{{ staffdetail.status }}</td>
+                    <td v-if="staffdetail.status==1">Active</td>
+                    <td v-if="staffdetail.status==0">Non-active account</td>
                   </tr>
 
                   <tr>
