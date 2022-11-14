@@ -1,6 +1,9 @@
 import webpack from 'webpack'
 
 export default {
+  ssr: true,
+  target: 'development',
+  // target: 'server',
   router: {
     base: '/app/'
   },
@@ -11,8 +14,22 @@ export default {
       lang: "en",
     },
     script:[
-      {src:'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'},
-      {src:'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'}
+      // {src:'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'},
+      // {src:'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'}
+      {
+        src: "https://code.jquery.com/jquery-3.3.1.slim.min.js",
+        type: "text/javascript"
+      },
+      {
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js",
+        type: "text/javascript"
+      },
+      {
+        src:
+          "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
+        type: "text/javascript"
+      }
     ],
     meta: [
       { charset: "utf-8" },
@@ -22,27 +39,28 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
     { rel: 'stylesheet', href: 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' },
-    { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' }],
+    // { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' }
+    {
+      rel: "stylesheet",
+      href:
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    }
+  ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/assets/css/dataTables.bootstrap5.min.css",
-    "~/assets/css/styles.css",
-    "~/assets/css/style.css",
-    "~/assets/css/richtext.min.css",
+    "@/assets/css/dataTables.bootstrap5.min.css",
+    "@/assets/css/styles.css",
+    "@/assets/css/style.css",
+    "@/assets/css/richtext.min.css",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
       // { src: '~/plugins/vue-html2pdf', mode: 'client' }
-      "~/plugins/vue-the-mask.js",
-      "~/plugins/vue-json-excel.js",
-      new webpack.ProvidePlugin({
-        jQuery: 'jquery',
-        $: 'jquery',
-        jquery: 'jquery'
-    })
+      { src: "@/plugins/vue-the-mask.js"},
+      { src: "@/plugins/vue-json-excel.js"},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,6 +83,8 @@ export default {
     //baseURL:"http://192.168.1.15:8080/api/"
     baseURL:"http://localhost:8000/api/"
     // baseURL: "http://araken.asuscomm.com:8000/api/"
+    // baseURL: "https://mentari.moh.gov.my/point/api/"
+
   },
 
 
@@ -75,6 +95,12 @@ export default {
     },
   },
   server: {
-    host:"0.0.0.0"
-  }
+    host:"0.0.0.0",
+    timing: {
+      total:true
+    },
+  },
+  ssr: true,
+  target: 'development',
+  // target: 'server',
 };
