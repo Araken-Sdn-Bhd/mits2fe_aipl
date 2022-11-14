@@ -1375,6 +1375,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     if(this.userdetails){
       this.branch=this.userdetails.branch.branch_id;
+      this.role= this.userdetails.user.role;
     }
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     console.log(this.SidebarAccess,'Sidebaraccess');
@@ -1952,6 +1953,7 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
+          body.append("role", this.userdetails.user.role);
           body.append("citizenship", this.citizenship);
           body.append("citizentype", this.citizentype);
           body.append("salutation_id", this.salutation_id);
@@ -2071,6 +2073,7 @@ export default {
           };
           let body = new FormData();
           body.append("added_by", this.userdetails.user.id);
+          body.append("added_by", this.userdetails.user.role);
           body.append("citizenship", this.citizenship);
           body.append("citizentype", this.citizentype);
           body.append("salutation_id", this.salutation_id);
