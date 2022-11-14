@@ -26,7 +26,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="dot"></span>
+            <span v-if="notification_count>0" class="dot"></span>
             <i class="fas fa-bell"></i>
           </a>
           <div
@@ -39,9 +39,10 @@
             </div>
             <div class="notification-body scrool">
               <div class="notification-text" v-for="(notifi,index) in notificationlist" :key="index">
-                <a href="#">{{notifi.message}}</a>
+                <!-- <a v-on:click="RemoveNotification(notifi)" v-bind:href="'/'+ notifi.url_route">{{ notifi.message }} ({{ getFormattedDate(notifi.created_at) }})</a> -->
+                <a @click="RemoveNotification(notifi)" href="">{{ notifi.message }}({{ getFormattedDate(notifi.created_at) }})</a>
                 <span><i class="fal fa-clock"></i> {{notifi.time}}</span>
-              </div>
+              </div>                      
             </div>
             <div class="notification-footer">
               <a href="/Modules/notification">View All Notifications</a>
@@ -82,6 +83,7 @@
   </nav>
 </template>
 <script>
+import moment from 'moment';
 export default {
   name: "CommonHeader",
   data() {
@@ -92,6 +94,7 @@ export default {
       notificationlist:[],
       message:"",
       notification_count:"",
+      notifi_id:"",
     };
   },
    beforeMount() {
@@ -99,6 +102,8 @@ export default {
     if(this.userdetails){
       this.name=this.userdetails.user.name;
       this.id=this.userdetails.user.id;
+      this.role=this.userdetails.user.role;
+      this.branch_id=this.userdetails.branch.branch_id;
     }
     this.GetNotificationList();
   },
@@ -114,17 +119,39 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post("Notification/get",
-      {added_by:this.id},
+      {added_by:this.id,role:this.role},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
         this.notificationlist = response.data.list;
         this.notification_count = response.data.notification_count;
+        this.notifi_id= response.data.id;
          console.log('my notification',this.notification_count);
 
       } else {
         this.notificationlist = [];
       }
     },
+
+    async RemoveNotification(notifi) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post("Notification/delete",
+      {notifi_id:notifi.id},
+       { headers });
+      if (response.data.code == 200 || response.data.code == "200") {
+        router.push('/'+ notifi.url_route);
+      } else {
+        this.notificationlist = [];
+      }
+    },
+
+    
+    getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
+        },
   },
 };
 </script>
