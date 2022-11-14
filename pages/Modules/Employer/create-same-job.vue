@@ -557,7 +557,7 @@ export default {
               this.reset();
 
 
-              //this.$router.push("/app/modules/Employer/same-job-offer-list);
+              //this.$router.push("/modules/Employer/same-job-offer-list);
           } else {
             this.loader = false;
             this.$nextTick(() => {

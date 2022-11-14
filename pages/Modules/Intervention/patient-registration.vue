@@ -2024,7 +2024,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/app/modules/Intervention/patient-list");
+              this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2044,7 +2044,7 @@ export default {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
-              this.$router.push("/app/modules/Intervention/patient-list");
+              this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2146,7 +2146,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/app/modules/Intervention/patient-list");
+              this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2163,7 +2163,7 @@ export default {
             );
             console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/app/modules/Intervention/patient-list");
+              this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {

@@ -381,7 +381,7 @@ export default {
             headers,
           });
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$router.push("/app/modules/Admin/announcement-management");
+            this.$router.push("/modules/Admin/announcement-management");
           } else {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");

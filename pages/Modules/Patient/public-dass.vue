@@ -288,7 +288,7 @@ export default {
               "dassresult",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/app/modules/Patient/public-dass-result");
+            this.$router.push("/modules/Patient/public-dass-result");
           } else {
             this.loader = false;
             this.$nextTick(() => {

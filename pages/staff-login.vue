@@ -63,7 +63,7 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },

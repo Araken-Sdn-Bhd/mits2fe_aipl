@@ -313,7 +313,7 @@ export default {
             console.log("my rs", response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/app/modules/Von/von-list-of-appointment");
+              this.$router.push("/modules/Von/von-list-of-appointment");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
@@ -340,7 +340,7 @@ export default {
             );
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/app/modules/Von/von-list-of-appointment");
+              this.$router.push("/modules/Von/von-list-of-appointment");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);

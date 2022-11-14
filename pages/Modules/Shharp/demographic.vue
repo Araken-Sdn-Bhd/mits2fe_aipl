@@ -825,7 +825,7 @@ export default {
                 this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
-                this.$router.push("/app/modules/Shharp/patients-list");
+                this.$router.push("/modules/Shharp/patients-list");
               } else {
                 this.loader = false;
                 this.$nextTick(() => {

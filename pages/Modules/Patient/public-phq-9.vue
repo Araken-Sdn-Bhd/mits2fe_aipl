@@ -277,7 +277,7 @@ export default {
               "phq9result",
               JSON.stringify(response.data.result)
             );
-            this.$router.push("/app/modules/Patient/public-phq9-result");
+            this.$router.push("/modules/Patient/public-phq9-result");
           } else {
             this.loader = false;
             this.$nextTick(() => {

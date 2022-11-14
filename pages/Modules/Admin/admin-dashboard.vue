@@ -189,7 +189,7 @@ export default {
         SearchPatient() {
 
             localStorage.setItem('keyword',(this.search));
-            this.$router.push("/app/modules/Patient/patient-list" );
+            this.$router.push("/modules/Patient/patient-list" );
         },
 
     }

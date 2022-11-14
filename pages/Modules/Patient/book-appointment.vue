@@ -329,7 +329,7 @@ export default {
             );
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/app/modules/Patient/attendance-record");
+              this.$router.push("/modules/Patient/attendance-record");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
@@ -357,7 +357,7 @@ export default {
             console.log('my rs',response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/app/modules/Patient/attendance-record");
+              this.$router.push("/modules/Patient/attendance-record");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
