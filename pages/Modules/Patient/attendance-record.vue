@@ -343,7 +343,7 @@ export default {
     },
     oneditAppointment(Id) {
       this.$router.push({
-        path: "/app/modules/Patient/book-appointment",
+        path: "/modules/Patient/book-appointment",
         query: { id: Id },
       });
     },
@@ -383,7 +383,7 @@ export default {
         "appointmentId",aptId
       );
       this.$router.push({
-        path: "/app/modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
+        path: "/modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
         query: { id: Id },
       });
     },

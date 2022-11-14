@@ -801,7 +801,7 @@ export default {
                 setTimeout(() => {
                    $("#updatepopup").modal("hide");
                  this.$router.push({
-                  path: "/app/modules/Shharp/patient-summary",
+                  path: "/modules/Shharp/patient-summary",
                   query: { id: this.Id },
                 });
                 }, 1000);

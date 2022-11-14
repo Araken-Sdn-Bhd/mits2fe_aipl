@@ -679,7 +679,7 @@ export default {
     },
     GoBack(){
       this.$router.push({
-              path: "/app/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

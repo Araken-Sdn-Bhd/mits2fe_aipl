@@ -263,7 +263,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Intervention/phq9-result",
+              path: "/modules/Intervention/phq9-result",
               query: { id: this.Id },
             });
           } else {

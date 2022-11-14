@@ -224,7 +224,7 @@ export default {
               $("#resultmodal").modal("show");
             });
             this.$router.push({
-              path: "/app/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
           } else {
@@ -258,7 +258,7 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/app/modules/Intervention/request-appointment-form",
+        path: "/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     }

@@ -269,7 +269,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/app/modules/Patient/dass-result",
+              path: "/modules/Patient/dass-result",
               query: { id: this.Id },
             });
           } else {

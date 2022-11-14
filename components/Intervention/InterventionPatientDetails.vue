@@ -121,7 +121,7 @@ export default {
   methods: {
     oneditPatient() {
       this.$router.push({
-        path: "/app/modules/Patient/patient-registration-update",
+        path: "/modules/Patient/patient-registration-update",
         // path:"/app/modules/Shharp/demographic",
         query: { id: this.Id },
       });

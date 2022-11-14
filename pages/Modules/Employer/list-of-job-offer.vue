@@ -143,14 +143,14 @@ export default {
     OneditClick(id,position,education,requirement) {
       this.loader = true;
       this.$router.push({
-        path: "/app/modules/Employer/create-same-job",
+        path: "/modules/Employer/create-same-job",
         query: { id: id, position:position, education:education,requirement:requirement},
       });
     },
     OnviewClick(id,position,education,requirement,status) {
       this.loader = true;
       this.$router.push({
-        path: "/app/modules/Employer/same-job-offer-list",
+        path: "/modules/Employer/same-job-offer-list",
         query: { job_id: id,position:position, education:education,requirement:requirement,status:status},
       });
     },

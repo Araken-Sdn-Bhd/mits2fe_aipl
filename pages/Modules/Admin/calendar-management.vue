@@ -302,7 +302,7 @@ export default {
     },
     OnEditexception(data) {
       this.$router.push({
-        path: "/app/modules/Admin/exception",
+        path: "/modules/Admin/exception",
         query: { id: data.id },
       });
     },

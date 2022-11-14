@@ -249,7 +249,7 @@ export default {
               $("#insertpopup").modal("show");
             });
             this.$router.push({
-              path: "/app/modules/Patient/clinical-history",
+              path: "/modules/Patient/clinical-history",
               query: { id: this.Id },
             });
             setTimeout(() => {
@@ -278,7 +278,7 @@ export default {
     },
     OnBack(){
       this.$router.push({
-              path: "/app/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     },

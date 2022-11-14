@@ -149,7 +149,7 @@ export default {
   methods: {
     oneditPatient(Id) {
       this.$router.push({
-        path: "/app/modules/Shharp/patient-summary",
+        path: "/modules/Shharp/patient-summary",
         query: { id: Id },
       });
     },

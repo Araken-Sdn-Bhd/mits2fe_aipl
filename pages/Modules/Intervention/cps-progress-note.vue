@@ -3209,7 +3209,7 @@ export default {
     },
     Openpsptest() {
       let route = this.$router.resolve({
-        path: "/app/modules/Intervention/psp?id=" + this.Id,
+        path: "/modules/Intervention/psp?id=" + this.Id,
       });
       window.open(route.href);
     },

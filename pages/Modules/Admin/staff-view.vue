@@ -171,13 +171,13 @@ export default {
     },
     async gotoedit(){
      this.$router.push({
-        path: "/app/modules/Admin/edit-staff",
+        path: "/modules/Admin/edit-staff",
         query: { id: this.Id },
       });
     },
     async gototransfer(){
      this.$router.push({
-        path: "/app/modules/Admin/mentari-staff-transfer",
+        path: "/modules/Admin/mentari-staff-transfer",
         query: { id: this.Id },
       });
     },

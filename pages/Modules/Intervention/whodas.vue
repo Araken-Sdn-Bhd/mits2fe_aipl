@@ -1567,7 +1567,7 @@ export default {
             );
 
             this.$router.push({
-              path: "/app/modules/Intervention/whodas-result",
+              path: "/modules/Intervention/whodas-result",
               query: { id: this.Id },
             });
           } else {

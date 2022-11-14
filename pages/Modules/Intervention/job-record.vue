@@ -228,7 +228,7 @@ export default {
     },
     OneditClick(id) {
       this.$router.push({
-        path: "/app/modules/Intervention/view-job-details",
+        path: "/modules/Intervention/view-job-details",
         query: { id: id },
       });
     },

@@ -403,7 +403,7 @@ export default {
         this.$nextTick(() => {
           // $("#updatepopup").modal("show");
           this.$router.push({
-          path: "/app/modules/Von/von-list-of-appointment",
+          path: "/modules/Von/von-list-of-appointment",
         });
           // href="/app/modules/Von/von-list-of-appointment"
         });
