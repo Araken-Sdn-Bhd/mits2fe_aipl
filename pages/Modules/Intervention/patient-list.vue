@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Patients</h1>
-            <a href="/Modules/Intervention/patient-registration" class="add-btn"
+            <a href="/app/modules/Intervention/patient-registration" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -226,12 +226,12 @@ export default {
     oneditPatient(Id) {
       if(this.SidebarAccess==1){
         this.$router.push({
-        path: "/Modules/Intervention/patient-summary",
+        path: "/app/modules/Intervention/patient-summary",
         query: { id: Id },
       });
       }else{
       // this.$router.push({
-      //   path: "/Modules/Intervention/patient-summary",
+      //   path: "/app/modules/Intervention/patient-summary",
       //   query: { id: Id },
       // });
       }

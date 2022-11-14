@@ -113,7 +113,7 @@
 
               <div class="form-foter mt-3">
                 <a
-                  href="/Modules/Admin/staff-management"
+                  href="/app/modules/Admin/staff-management"
                   class="btn btn-primary btn-text"
                   ><i class="far fa-arrow-alt-to-left"></i> Back</a
                 >
@@ -169,13 +169,13 @@ export default {
     },
     async gotoedit(){
      this.$router.push({
-        path: "/Modules/Admin/edit-staff",
+        path: "/app/modules/Admin/edit-staff",
         query: { id: this.Id },
       });
     },
     async gototransfer(){
      this.$router.push({
-        path: "/Modules/Admin/mentari-staff-transfer",
+        path: "/app/modules/Admin/mentari-staff-transfer",
         query: { id: this.Id },
       });
     },
@@ -194,7 +194,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.$router.push("/Modules/Admin/staff-management");
+        this.$router.push("/app/modules/Admin/staff-management");
       } else {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");

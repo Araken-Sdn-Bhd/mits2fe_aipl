@@ -122,13 +122,13 @@ export default {
   methods: {
     onViewSharp(Id) {
       this.$router.push({
-        path: "/Modules/Patient/view-registry",
+        path: "/app/modules/Patient/view-registry",
         query: { id: Id },
       });
     },
     onEditSharp(Id) {
       this.$router.push({
-        path: "/Modules/Intervention/update-registry",
+        path: "/app/modules/Intervention/update-registry",
         query: { id: Id },
       });
     },

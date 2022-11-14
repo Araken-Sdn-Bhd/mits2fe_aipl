@@ -334,9 +334,9 @@ export default {
       }
     },
     Onview(data) {
-        
+
       this.$router.push({
-        path: "/Modules/Admin/list-of-user-matrix-view",
+        path: "/app/modules/Admin/list-of-user-matrix-view",
        query: { id: data.team_id,usersid:data.id },
       });
     },

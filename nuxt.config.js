@@ -27,7 +27,7 @@ export default {
       },
       {
         src:
-          "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
+          "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js",
         type: "text/javascript"
       }
     ],
@@ -43,7 +43,7 @@ export default {
     {
       rel: "stylesheet",
       href:
-        "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     }
   ],
   },

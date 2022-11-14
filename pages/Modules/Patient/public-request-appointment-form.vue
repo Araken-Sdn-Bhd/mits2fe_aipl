@@ -121,7 +121,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -233,7 +233,7 @@ export default {
               this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-           // this.$router.push("/Modules/Patient/list-of-appointment");
+           // this.$router.push("/app/modules/Patient/list-of-appointment");
              this.$swal.fire(
               'Your appointment is submitted.',
               'Please wait for us to contact you.',

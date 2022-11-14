@@ -171,7 +171,7 @@
                     <i class="fad fa-download"></i> Download Result
                   </button>
                   <a
-                    href="/Modules/Patient/public-request-appointment-form"
+                    href="/app/modules/Patient/public-request-appointment-form"
                     class="btn btn-success btn-text ml-auto"
                     ><i class="fad fa-calendar-day"></i> Request Appointment</a
                   >
@@ -235,7 +235,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },

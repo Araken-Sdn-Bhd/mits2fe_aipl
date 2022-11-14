@@ -12,7 +12,7 @@
                 </a>
               </li>
               <li class="active">
-                <a class="nav-link" href="/Modules/Patient/patient-list">
+                <a class="nav-link" href="/app/modules/Patient/patient-list">
                   <i class="fal fa-user-injured"></i>
                   <span>Patients</span>
                 </a>
@@ -37,25 +37,25 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/cbi">
+                    <a class="nav-link" href="/app/modules/Patient/cbi">
                       <i class="far fa-file-contract"></i>
                       <span>CBI</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/dass">
+                    <a class="nav-link" href="/app/modules/Patient/dass">
                       <i class="far fa-file-contract"></i>
                       <span>DASS</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/phq-9">
+                    <a class="nav-link" href="/app/modules/Patient/phq-9">
                       <i class="far fa-file-contract"></i>
                       <span>PHQ 9</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/whodas">
+                    <a class="nav-link" href="/app/modules/Patient/whodas">
                       <i class="far fa-file-contract"></i>
                       <span>WHODAS</span>
                     </a>
@@ -64,7 +64,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Patient/list-of-appointment"
+                      href="/app/modules/Patient/list-of-appointment"
                     >
                       <i class="far fa-calendar-alt"></i>
                       <span>Appointment</span>
@@ -75,21 +75,21 @@
               <!-- sub-menuc -->
 
               <li>
-                <a class="nav-link" href="/Modules/Patient/attendance-record">
+                <a class="nav-link" href="/app/modules/Patient/attendance-record">
                   <i class="far fa-calendar-alt"></i>
                   <span>Appointment</span>
                 </a>
               </li>
 
               <li>
-                <a class="nav-link" href="/Modules/Patient/calendar-view">
+                <a class="nav-link" href="/app/modules/Patient/calendar-view">
                   <i class="far fa-calendar-star"></i>
                   <span>Calendar</span>
                 </a>
               </li>
 
               <li>
-                <a class="nav-link" href="/Modules/Patient/list-of-screening-patient">
+                <a class="nav-link" href="/app/modules/Patient/list-of-screening-patient">
                   <i class="far fa-file-search"></i>
                   <span>Screening</span>
                 </a>

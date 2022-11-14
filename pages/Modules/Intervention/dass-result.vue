@@ -8,22 +8,22 @@
           <nav class="offline-form" v-if="!userdetails">
             <ul>
               <li>
-                <a href="/Modules/Patient/cbi" class="nav-link"
+                <a href="/app/modules/Patient/cbi" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>CBI</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/dass" class="nav-link"
+                <a href="/app/modules/Patient/dass" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>DASS</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/phq-9" class="nav-link"
+                <a href="/app/modules/Patient/phq-9" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>PHQ 9</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/whodas" class="nav-link"
+                <a href="/app/modules/Patient/whodas" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>WHODAS</span></a
                 >
               </li>
@@ -349,26 +349,26 @@
                       </div>
                       <div class="result-footer" v-if="Stress == 'Moderate' ||Stress == 'Severe'  ||Stress == 'Extreme' ">
                         <p>
-                          Based on your responses, there is a chance that 
-                          you are currently experiencing stress. Please note, 
-                          this short questionnaire is just a guide and the 
-                          feelings you may be experiencing could be something 
-                          other than stress, anxiety or depression.We suggest 
-                          that you book an appointment with professionals, you 
-                          can go either to MENTARI Consultation Clinic, your GP 
-                          or Public Health Clinic to discuss these results with 
-                          them. Take a printed copy of this report with you and 
-                          book an appointment so you can discuss your current 
-                          symptoms and your future plan of management with them. 
+                          Based on your responses, there is a chance that
+                          you are currently experiencing stress. Please note,
+                          this short questionnaire is just a guide and the
+                          feelings you may be experiencing could be something
+                          other than stress, anxiety or depression.We suggest
+                          that you book an appointment with professionals, you
+                          can go either to MENTARI Consultation Clinic, your GP
+                          or Public Health Clinic to discuss these results with
+                          them. Take a printed copy of this report with you and
+                          book an appointment so you can discuss your current
+                          symptoms and your future plan of management with them.
                         </p>
                         <p>
-                          Berdasarkan jawapan anda, berkemungkinan anda sedang 
-                          mengalami tekanan. Cadangan kepada anda, sila dapatkan 
-                          temujanji bersama professional, anda boleh mendapatkannya 
-                          samaada di MENTARI, doktor (GP) anda atau di Klinik 
-                          Kesihatan yang berhampiran untuk membincangkan laporan 
-                          ujian ini. Dapatkan laporan ujian ini dan bawa semasa 
-                          temujanji anda untuk membincangkan gejala yang anda yang 
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang
+                          mengalami tekanan. Cadangan kepada anda, sila dapatkan
+                          temujanji bersama professional, anda boleh mendapatkannya
+                          samaada di MENTARI, doktor (GP) anda atau di Klinik
+                          Kesihatan yang berhampiran untuk membincangkan laporan
+                          ujian ini. Dapatkan laporan ujian ini dan bawa semasa
+                          temujanji anda untuk membincangkan gejala yang anda yang
                           terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
@@ -681,25 +681,25 @@
                       </div>
                       <div class="result-footer" v-if="Anxiety == 'Moderate' ||Anxiety == 'Severe' ||Anxiety == 'Extreme'">
                         <p>
-                          Based on your responses, there is a chance that you are 
-                          currently experiencing anxiety. Please note, this short 
-                          questionnaire is just a guide and the feelings you may 
-                          be experiencing could be something other than stress, 
-                          anxiety or depression. We suggest that you book an appointment 
-                          with professionals, you can go either to MENTARI Consultation 
-                          Clinic, your GP or Public Health Clinic to discuss these 
-                          results with them. Take a printed copy of this report with 
-                          you and book an appointment so you can discuss your current 
-                          symptoms and your future plan of management with them. 
+                          Based on your responses, there is a chance that you are
+                          currently experiencing anxiety. Please note, this short
+                          questionnaire is just a guide and the feelings you may
+                          be experiencing could be something other than stress,
+                          anxiety or depression. We suggest that you book an appointment
+                          with professionals, you can go either to MENTARI Consultation
+                          Clinic, your GP or Public Health Clinic to discuss these
+                          results with them. Take a printed copy of this report with
+                          you and book an appointment so you can discuss your current
+                          symptoms and your future plan of management with them.
 
                         </p>
                         <p>
-                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
-                          kegelisahan. Cadangan kepada anda, sila dapatkan temujanji 
-                          bersama professional, anda boleh mendapatkannya samaada di MENTARI, 
-                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk 
-                          membincangkan laporan ujian ini. Dapatkan laporan ujian ini dan 
-                          bawa semasa temujanji anda untuk membincangkan gejala yang anda 
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami
+                          kegelisahan. Cadangan kepada anda, sila dapatkan temujanji
+                          bersama professional, anda boleh mendapatkannya samaada di MENTARI,
+                          doktor (GP) anda atau di Klinik Kesihatan yang berhampiran untuk
+                          membincangkan laporan ujian ini. Dapatkan laporan ujian ini dan
+                          bawa semasa temujanji anda untuk membincangkan gejala yang anda
                           yang terkini, dan membincangkan rawatan lanjut bersama mereka.
                         </p>
                       </div>
@@ -1012,24 +1012,24 @@
                       </div>
                       <div class="result-footer" v-if="Depression == 'Moderate' ||Depression == 'Severe' ||Depression == 'Extreme'">
                         <p>
-                          Based on your responses, there is a chance that you are 
-                          currently experiencing depression. Please note, this short 
-                          questionnaire is just a guide and the feelings you may be 
-                          experiencing could be something other than stress, anxiety 
-                          or depression. We suggest that you book an appointment with 
-                          professionals, you can go either to MENTARI Consultation 
-                          Clinic, your GP or Public Health Clinic to discuss these 
-                          results with them. Take a printed copy of this report with 
-                          you and book an appointment so you can discuss your current 
-                          symptoms and your future plan of management with them. 
+                          Based on your responses, there is a chance that you are
+                          currently experiencing depression. Please note, this short
+                          questionnaire is just a guide and the feelings you may be
+                          experiencing could be something other than stress, anxiety
+                          or depression. We suggest that you book an appointment with
+                          professionals, you can go either to MENTARI Consultation
+                          Clinic, your GP or Public Health Clinic to discuss these
+                          results with them. Take a printed copy of this report with
+                          you and book an appointment so you can discuss your current
+                          symptoms and your future plan of management with them.
                         </p>
                          <p>
-                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami 
-                          kemurungan. Cadangan kepada anda, sila dapatkan temujanji bersama 
-                          professional, anda boleh mendapatkannya samaada di MENTARI, doktor 
-                          (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan 
-                          laporan ujian ini. Dapatkan laporan ujian ini dan bawa semasa temujanji 
-                          anda untuk membincangkan gejala yang anda yang terkini, dan membincangkan 
+                          Berdasarkan jawapan anda, berkemungkinan anda sedang mengalami
+                          kemurungan. Cadangan kepada anda, sila dapatkan temujanji bersama
+                          professional, anda boleh mendapatkannya samaada di MENTARI, doktor
+                          (GP) anda atau di Klinik Kesihatan yang berhampiran untuk membincangkan
+                          laporan ujian ini. Dapatkan laporan ujian ini dan bawa semasa temujanji
+                          anda untuk membincangkan gejala yang anda yang terkini, dan membincangkan
                           rawatan lanjut bersama mereka.
                         </p>
                       </div>
@@ -1077,7 +1077,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -1138,13 +1138,13 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Intervention/request-appointment-form",
+        path: "/app/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     },
     GoBack(){
       this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

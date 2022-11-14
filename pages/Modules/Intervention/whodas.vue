@@ -44,7 +44,7 @@
                       aria-selected="false"
                       ref="tab2"
                       title="Getting Around"
-                      
+
                     >
                       2: {{ this.tab2 == 1 ? "Getting Around" : "GA" }}
                     </a>
@@ -1193,7 +1193,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -1316,7 +1316,7 @@ export default {
         { Type: "LA-S/W" },
         { headers }
       );
-      
+
       if (response5.data.code == 200 || response5.data.code == "200") {
         this.list5 = response5.data.list;
         console.log('6 list',this.list5);
@@ -1567,7 +1567,7 @@ export default {
             );
 
             this.$router.push({
-              path: "/Modules/Intervention/whodas-result",
+              path: "/app/modules/Intervention/whodas-result",
               query: { id: this.Id },
             });
           } else {

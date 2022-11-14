@@ -63,7 +63,7 @@
                                 ><i class="fas fa-edit"></i
                               ></a>
                             </td>
-                          
+
                           </tr>
                         </tbody>
                       </table>
@@ -727,7 +727,7 @@
                                 >
                               </li>
                               <li>
-                                <a style="cursor:pointer;" @click="Onpsychologyreferral" 
+                                <a style="cursor:pointer;" @click="Onpsychologyreferral"
                                   >Psychology Referral Form</a
                                 >
                               </li>
@@ -766,7 +766,7 @@
                           >
                         </li>
                         <li>
-                          <a href="/Modules/Patient/book-appointment"
+                          <a href="/app/modules/Patient/book-appointment"
                             >Book Appointment</a
                           >
                         </li>
@@ -918,7 +918,7 @@ export default {
         })
         .change();
     });
-    
+
   },
   mounted() {
     const headers = {
@@ -1007,536 +1007,536 @@ export default {
     OnHistoryview(data, val) {
       if (data.type == "PsychiatryClerkingNote") {
         this.$router.push({
-          path: "/Modules/Intervention/psychiatry-clerking-note",
+          path: "/app/modules/Intervention/psychiatry-clerking-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CounsellorClerkingNote") {
         this.$router.push({
-          path: "/Modules/Intervention/counsellor-clerking-note",
+          path: "/app/modules/Intervention/counsellor-clerking-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "PatientIndexForm") {
         this.$router.push({
-          path: "/Modules/Intervention/patient-index-form",
+          path: "/app/modules/Intervention/patient-index-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "PsychiatricProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/progress-note",
+          path: "/app/modules/Intervention/progress-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CPSProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-progress-note",
+          path: "/app/modules/Intervention/cps-progress-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "SEProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/se-progress-notes",
+          path: "/app/modules/Intervention/se-progress-notes",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CounsellingProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/counseling-progress-note",
+          path: "/app/modules/Intervention/counseling-progress-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "EtpProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/etp-progress-note",
+          path: "/app/modules/Intervention/etp-progress-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
-          path: "/Modules/Intervention/job-club-progress-note",
+          path: "/app/modules/Intervention/job-club-progress-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
-          path: "/Modules/Intervention/consultation-discharge-note",
+          path: "/app/modules/Intervention/consultation-discharge-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "RehabDischargeNote") {
         this.$router.push({
-          path: "/Modules/Intervention/rehab-discharge",
+          path: "/app/modules/Intervention/rehab-discharge",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CpsDischargeNote") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-discharge-note",
+          path: "/app/modules/Intervention/cps-discharge-note",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CpsHomeVisitConsentForm") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-homevisit-consent-form",
+          path: "/app/modules/Intervention/cps-homevisit-consent-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CpsHomeVisitWithdrawalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-homevisit-withdrawal-form",
+          path: "/app/modules/Intervention/cps-homevisit-withdrawal-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CpsPoliceReferralForm") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-police-referral-form",
+          path: "/app/modules/Intervention/cps-police-referral-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "PhotographyConsentForm") {
         this.$router.push({
-          path: "/Modules/Intervention/photography-consent-form",
+          path: "/app/modules/Intervention/photography-consent-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "SEConsentForm") {
         this.$router.push({
-          path: "/Modules/Intervention/se-consent-form",
+          path: "/app/modules/Intervention/se-consent-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ETPConsentForm") {
         this.$router.push({
-          path: "/Modules/Intervention/etp-consent-form",
+          path: "/app/modules/Intervention/etp-consent-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobClubConsentForm") {
         this.$router.push({
-          path: "/Modules/Intervention/job-club-consent-form",
+          path: "/app/modules/Intervention/job-club-consent-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
         this.$router.push({
-          path: "/Modules/Intervention/patient-care-plan-and-case-review",
+          path: "/app/modules/Intervention/patient-care-plan-and-case-review",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobStartReport") {
         this.$router.push({
-          path: "/Modules/Intervention/job-start-report",
+          path: "/app/modules/Intervention/job-start-report",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobEndReport") {
         this.$router.push({
-          path: "/Modules/Intervention/job-end-report",
+          path: "/app/modules/Intervention/job-end-report",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobTransitionReport") {
         this.$router.push({
-          path: "/Modules/Intervention/job-transition-report",
+          path: "/app/modules/Intervention/job-transition-report",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "LaserAssessment") {
         this.$router.push({
-          path: "/Modules/Intervention/laser-form",
+          path: "/app/modules/Intervention/laser-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "TriageForm") {
         this.$router.push({
-          path: "/Modules/Intervention/triage-form",
+          path: "/app/modules/Intervention/triage-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "JobInterestCheckList") {
         this.$router.push({
-          path: "/Modules/Intervention/job-interest-checklist",
+          path: "/app/modules/Intervention/job-interest-checklist",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "WorkAnalysisForm") {
         this.$router.push({
-          path: "/Modules/Intervention/work-analysis-form",
+          path: "/app/modules/Intervention/work-analysis-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
-          path: "/Modules/Intervention/list-for-job-club",
+          path: "/app/modules/Intervention/list-for-job-club",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
-          path: "/Modules/Intervention/list-of-etp",
+          path: "/app/modules/Intervention/list-of-etp",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ListofJobSearch") {
         this.$router.push({
-          path: "/Modules/Intervention/list-of-job-search",
+          path: "/app/modules/Intervention/list-of-job-search",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
-          path: "/Modules/Intervention/log-meeting-with-employer",
+          path: "/app/modules/Intervention/log-meeting-with-employer",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
-          path: "/Modules/Intervention/list-of-previous-or-current-job",
+          path: "/app/modules/Intervention/list-of-previous-or-current-job",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "InternalRefferalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/internal-referral-form",
+          path: "/app/modules/Intervention/internal-referral-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "ExternalRefferalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/external-referral-form",
+          path: "/app/modules/Intervention/external-referral-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "CpsRefferalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/cps-referral-form",
+          path: "/app/modules/Intervention/cps-referral-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "OcctRefferalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/occt-referral-form",
+          path: "/app/modules/Intervention/occt-referral-form",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "PsychologyRefferalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/psychology-referral",
+          path: "/app/modules/Intervention/psychology-referral",
           query: { pid: data.id, type: val },
         });
       } else if (data.type == "RehabRefferalAndClinicalForm") {
         this.$router.push({
-          path: "/Modules/Intervention/rehab-referral-and-clinical-summary",
+          path: "/app/modules/Intervention/rehab-referral-and-clinical-summary",
           query: { pid: data.id, type: val },
         });
       }
     },
     onAddPatientClinicalinfo() {
       this.$router.push({
-        path: "/Modules/Intervention/add-clinical-info",
+        path: "/app/modules/Intervention/add-clinical-info",
         query: { id: this.Id },
       });
     },
     onclinicalhistory() {
       this.$router.push({
-        path: "/Modules/Intervention/clinical-history",
+        path: "/app/modules/Intervention/clinical-history",
         query: { id: this.Id },
       });
     },
     OnAppointmenthistory() {
       this.$router.push({
-        path: "/Modules/Intervention/appointment-history",
+        path: "/app/modules/Intervention/appointment-history",
         query: { id: this.Id },
       });
     },
     OnSharphistory() {
       this.$router.push({
-        path: "/Modules/Intervention/patient-history",
+        path: "/app/modules/Intervention/patient-history",
         query: { id: this.Id },
       });
     },
     OnAddSharphistory() {
       this.$router.push({
-        path: "/Modules/Intervention/add-new-registry",
+        path: "/app/modules/Intervention/add-new-registry",
         query: { id: this.Id },
       });
     },
     Onpsychometrichistory() {
       this.$router.push({
-        path: "/Modules/Intervention/psychometric-history",
+        path: "/app/modules/Intervention/psychometric-history",
         query: { id: this.Id },
       });
     },
     Oncbitest() {
       this.$router.push({
-        path: "/Modules/Intervention/cbi",
+        path: "/app/modules/Intervention/cbi",
         query: { id: this.Id },
       });
     },
     Ondasstest() {
       this.$router.push({
-        path: "/Modules/Intervention/dass",
+        path: "/app/modules/Intervention/dass",
         query: { id: this.Id },
       });
     },
     Onphqtest() {
       this.$router.push({
-        path: "/Modules/Intervention/phq-9",
+        path: "/app/modules/Intervention/phq-9",
         query: { id: this.Id },
       });
     },
     Onwhodasstest() {
       this.$router.push({
-        path: "/Modules/Intervention/whodas",
+        path: "/app/modules/Intervention/whodas",
         query: { id: this.Id },
       });
     },
     Onbditest() {
       this.$router.push({
-        path: "/Modules/Intervention/bdi",
+        path: "/app/modules/Intervention/bdi",
         query: { id: this.Id },
       });
     },
     Onpsptest() {
       this.$router.push({
-        path: "/Modules/Intervention/psp",
+        path: "/app/modules/Intervention/psp",
         query: { id: this.Id },
       });
     },
     Onbaitest() {
       this.$router.push({
-        path: "/Modules/Intervention/bai",
+        path: "/app/modules/Intervention/bai",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/Modules/Intervention/atq",
+        path: "/app/modules/Intervention/atq",
         query: { id: this.Id },
       });
     },
     Onsuiciderisktest() {
       this.$router.push({
-        path: "/Modules/Intervention/suicide-risk",
+        path: "/app/modules/Intervention/suicide-risk",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/Modules/Intervention/atq",
+        path: "/app/modules/Intervention/atq",
         query: { id: this.Id },
       });
     },
     Onsuicidescaletest() {
       this.$router.push({
-        path: "/Modules/Intervention/level-of-suicidal-intent",
+        path: "/app/modules/Intervention/level-of-suicidal-intent",
         query: { id: this.Id },
       });
     },
     Ontransactionlog() {
       this.$router.push({
-        path: "/Modules/Intervention/transaction-log",
+        path: "/app/modules/Intervention/transaction-log",
         query: { id: this.Id },
       });
     },
     OnPsychiatryclerkingnote() {
       this.$router.push({
-        path: "/Modules/Intervention/psychiatry-clerking-note",
+        path: "/app/modules/Intervention/psychiatry-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncounsellorclerkingnote() {
       this.$router.push({
-        path: "/Modules/Intervention/counsellor-clerking-note",
+        path: "/app/modules/Intervention/counsellor-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncprogressnote() {
       this.$router.push({
-        path: "/Modules/Intervention/progress-note",
+        path: "/app/modules/Intervention/progress-note",
         query: { id: this.Id },
       });
     },
     Oncounselingprogressnote() {
       this.$router.push({
-        path: "/Modules/Intervention/counseling-progress-note",
+        path: "/app/modules/Intervention/counseling-progress-note",
         query: { id: this.Id },
       });
     },
     Oncounsaltationdischargenote() {
       this.$router.push({
-        path: "/Modules/Intervention/consultation-discharge-note",
+        path: "/app/modules/Intervention/consultation-discharge-note",
         query: { id: this.Id },
       });
     },
     OnTriageform() {
       this.$router.push({
-        path: "/Modules/Intervention/triage-form",
+        path: "/app/modules/Intervention/triage-form",
         query: { id: this.Id },
       });
     },
     Oninternalreferralform() {
       this.$router.push({
-        path: "/Modules/Intervention/internal-referral-form",
+        path: "/app/modules/Intervention/internal-referral-form",
         query: { id: this.Id },
       });
     },
     Onocctreferralform() {
       this.$router.push({
-        path: "/Modules/Intervention/occt-referral-form",
+        path: "/app/modules/Intervention/occt-referral-form",
         query: { id: this.Id },
       });
     },
     Onpsychologyreferral() {
       this.$router.push({
-        path: "/Modules/Intervention/psychology-referral",
+        path: "/app/modules/Intervention/psychology-referral",
         query: { id: this.Id },
       });
     },
     Onrehabreferralandclinicalsummary() {
       this.$router.push({
-        path: "/Modules/Intervention/rehab-referral-and-clinical-summary",
+        path: "/app/modules/Intervention/rehab-referral-and-clinical-summary",
         query: { id: this.Id },
       });
     },
     Onseconsentreferral() {
       this.$router.push({
-        path: "/Modules/Intervention/se-consent-form",
+        path: "/app/modules/Intervention/se-consent-form",
         query: { id: this.Id },
       });
     },
     Onlaserform() {
       this.$router.push({
-        path: "/Modules/Intervention/laser-form",
+        path: "/app/modules/Intervention/laser-form",
         query: { id: this.Id },
       });
     },
     Onexternalreferralform() {
       this.$router.push({
-        path: "/Modules/Intervention/external-referral-form",
+        path: "/app/modules/Intervention/external-referral-form",
         query: { id: this.Id },
       });
     },
     Oncpsreferal() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-referral-form",
+        path: "/app/modules/Intervention/cps-referral-form",
         query: { id: this.Id },
       });
     },
     Onpatientcareplan() {
       this.$router.push({
-        path: "/Modules/Intervention/patient-care-plan-and-case-review",
+        path: "/app/modules/Intervention/patient-care-plan-and-case-review",
         query: { id: this.Id },
       });
     },
     Onpatientcareplan() {
       this.$router.push({
-        path: "/Modules/Intervention/patient-care-plan-and-case-review",
+        path: "/app/modules/Intervention/patient-care-plan-and-case-review",
         query: { id: this.Id },
       });
     },
     OnSeprogressnotes() {
       this.$router.push({
-        path: "/Modules/Intervention/se-progress-notes",
+        path: "/app/modules/Intervention/se-progress-notes",
         query: { id: this.Id },
       });
     },
     Onpatientindexform() {
       this.$router.push({
-        path: "/Modules/Intervention/patient-index-form",
+        path: "/app/modules/Intervention/patient-index-form",
         query: { id: this.Id },
       });
     },
     Oncpsprogressnote() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-progress-note",
+        path: "/app/modules/Intervention/cps-progress-note",
         query: { id: this.Id },
       });
     },
     Onetpprogressnote() {
       this.$router.push({
-        path: "/Modules/Intervention/etp-progress-note",
+        path: "/app/modules/Intervention/etp-progress-note",
         query: { id: this.Id },
       });
     },
     Onjobclubprogressnote() {
       this.$router.push({
-        path: "/Modules/Intervention/job-club-progress-note",
+        path: "/app/modules/Intervention/job-club-progress-note",
         query: { id: this.Id },
       });
     },
     OnRehabDischargeNote() {
       this.$router.push({
-        path: "/Modules/Intervention/rehab-discharge",
+        path: "/app/modules/Intervention/rehab-discharge",
         query: { id: this.Id },
       });
     },
     Oncpsdischargenote() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-discharge-note",
+        path: "/app/modules/Intervention/cps-discharge-note",
         query: { id: this.Id },
       });
     },
     Oncpshomevisitconsentform() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-homevisit-consent-form",
+        path: "/app/modules/Intervention/cps-homevisit-consent-form",
         query: { id: this.Id },
       });
     },
     Oncpshomevisitwithdrawalform() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-homevisit-withdrawal-form",
+        path: "/app/modules/Intervention/cps-homevisit-withdrawal-form",
         query: { id: this.Id },
       });
     },
     Oncpspolicereferralform() {
       this.$router.push({
-        path: "/Modules/Intervention/cps-police-referral-form",
+        path: "/app/modules/Intervention/cps-police-referral-form",
         query: { id: this.Id },
       });
     },
     Onphotographyconsentform() {
       this.$router.push({
-        path: "/Modules/Intervention/photography-consent-form",
+        path: "/app/modules/Intervention/photography-consent-form",
         query: { id: this.Id },
       });
     },
     Onetpconsentform() {
       this.$router.push({
-        path: "/Modules/Intervention/etp-consent-form",
+        path: "/app/modules/Intervention/etp-consent-form",
         query: { id: this.Id },
       });
     },
     Onjobclubconsentform() {
       this.$router.push({
-        path: "/Modules/Intervention/job-club-consent-form",
+        path: "/app/modules/Intervention/job-club-consent-form",
         query: { id: this.Id },
       });
     },
 
     Onjobstartreport() {
       this.$router.push({
-        path: "/Modules/Intervention/job-start-report",
+        path: "/app/modules/Intervention/job-start-report",
         query: { id: this.Id },
       });
     },
     Onjobendreport() {
       this.$router.push({
-        path: "/Modules/Intervention/job-end-report",
+        path: "/app/modules/Intervention/job-end-report",
         query: { id: this.Id },
       });
     },
     Onjobtransitionreport() {
       this.$router.push({
-        path: "/Modules/Intervention/job-transition-report",
+        path: "/app/modules/Intervention/job-transition-report",
         query: { id: this.Id },
       });
     },
     OnListforJobClub() {
       this.$router.push({
-        path: "/Modules/Intervention/list-for-job-club",
+        path: "/app/modules/Intervention/list-for-job-club",
         query: { id: this.Id },
       });
     },
     Onlistofetp() {
       this.$router.push({
-        path: "/Modules/Intervention/list-of-etp",
+        path: "/app/modules/Intervention/list-of-etp",
         query: { id: this.Id },
       });
     },
     Onlogmeetingwithemployer() {
       this.$router.push({
-        path: "/Modules/Intervention/log-meeting-with-employer",
+        path: "/app/modules/Intervention/log-meeting-with-employer",
         query: { id: this.Id },
       });
     },
     Onjobinterestchecklist() {
       this.$router.push({
-        path: "/Modules/Intervention/job-interest-checklist",
+        path: "/app/modules/Intervention/job-interest-checklist",
         query: { id: this.Id },
       });
     },
     Onworkanalysisform() {
       this.$router.push({
-        path: "/Modules/Intervention/work-analysis-form",
+        path: "/app/modules/Intervention/work-analysis-form",
         query: { id: this.Id },
       });
     },
     Onlistofjobsearch() {
       this.$router.push({
-        path: "/Modules/Intervention/list-of-job-search",
+        path: "/app/modules/Intervention/list-of-job-search",
         query: { id: this.Id },
       });
     },
     Onlistofpreviousorcurrentjob() {
       this.$router.push({
-        path: "/Modules/Intervention/list-of-previous-or-current-job",
+        path: "/app/modules/Intervention/list-of-previous-or-current-job",
         query: { id: this.Id },
       });
     },

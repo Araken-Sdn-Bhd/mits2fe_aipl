@@ -44,7 +44,7 @@
               </div>
             </div>
             <div class="notification-footer">
-              <a href="/Modules/notification">View All Notifications</a>
+              <a href="/app/modules/notification">View All Notifications</a>
             </div>
           </div>
         </li>
@@ -74,7 +74,7 @@
             <li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" @click="Logout()">Logout</a></li>
-            <li><a href="/Modules/change-password" class="dropdown-item">Change Password</a></li>
+            <li><a href="/app/modules/change-password" class="dropdown-item">Change Password</a></li>
           </ul>
         </li>
       </ul>

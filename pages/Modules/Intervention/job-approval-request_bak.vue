@@ -102,7 +102,7 @@ export default {
   methods: {
     OnviewClick(id) {
       this.$router.push({
-        path: "/Modules/Intervention/company-job-approval-request",
+        path: "/app/modules/Intervention/company-job-approval-request",
         query: { id: id },
       });
     },

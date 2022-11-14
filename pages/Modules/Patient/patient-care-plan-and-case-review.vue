@@ -1002,7 +1002,7 @@ export default {
     },
     GoBack(){
       this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

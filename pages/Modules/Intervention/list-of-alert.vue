@@ -139,7 +139,7 @@
                               ></a> -->
                     </td>
                   </tr>
-                
+
                 </tbody>
               </table>
             </div>
@@ -260,7 +260,7 @@ export default {
       this.alert_id = data.id;
       console.log("myalertid1", this.alert);
       this.$router.push({
-        // path: "/Modules/Intervention/add-new-registry",
+        // path: "/app/modules/Intervention/add-new-registry",
         query: { alert_id: data.id },
       });
     },

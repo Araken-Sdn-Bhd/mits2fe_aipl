@@ -40,7 +40,7 @@
                   <tr>
                     <td>Document</td>
                     <td>
-                      <a target="_blank" v-bind:href="document" class="btn btn-warning btn-text btn-green"
+                      <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
                         ><i class="fad fa-download"></i> Download File</a
                       >
                     </td>
@@ -76,7 +76,7 @@
                   </tr>
                 </tbody>
               </table>
-             <a href="/Modules/Admin/announcement-management" class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
+             <a href="/app/modules/Admin/announcement-management" class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
             </div>
           </div>
         </div>
@@ -121,6 +121,20 @@ export default {
     this.getdetails();
   },
   methods: {
+    async onDownloadFile() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "announcement/downloadFile",
+        { document: this.document },
+        {
+          headers,
+        }
+      );
+    },
     async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

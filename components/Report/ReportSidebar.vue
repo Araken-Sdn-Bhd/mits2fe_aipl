@@ -31,7 +31,7 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li class="">
-                    <a class="nav-link" href="/Modules/Report/general-report">
+                    <a class="nav-link" href="/app/modules/Report/general-report">
                       <i class="far fa-file-chart-pie"></i>
                       <span>General Report</span>
                     </a>
@@ -39,7 +39,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Report/total-patient-and-type-of-referral"
+                      href="/app/modules/Report/total-patient-and-type-of-referral"
                     >
                       <i class="far fa-file-chart-pie"></i>
                       <span>Total Patient & Type Of Referral</span>
@@ -48,14 +48,14 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Report/patient-by-age-gender-and-ethnic-group"
+                      href="/app/modules/Report/patient-by-age-gender-and-ethnic-group"
                     >
                       <i class="far fa-file-chart-pie"></i>
                       <span>Patient By Age/gender & Ethnic Group</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Report/request-appointment-report">
+                    <a class="nav-link" href="/app/modules/Report/request-appointment-report">
                       <i class="far fa-file-chart-pie"></i>
                       <span>Request Appointment Report</span>
                     </a>
@@ -83,13 +83,13 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li>
-                    <a class="nav-link" href="/Modules/Report/activities-report-patient">
+                    <a class="nav-link" href="/app/modules/Report/activities-report-patient">
                       <i class="far fa-file-chart-pie"></i>
                       <span>Patient</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Report/activities-report-VON">
+                    <a class="nav-link" href="/app/modules/Report/activities-report-VON">
                       <i class="far fa-file-chart-pie"></i>
                       <span>VON</span>
                     </a>
@@ -99,14 +99,14 @@
               <!-- sub-menuc -->
 
               <li>
-                <a class="nav-link" href="/Modules/Report/national-kpi">
+                <a class="nav-link" href="/app/modules/Report/national-kpi">
                   <i class="far fa-file-chart-line"></i>
                   <span>National KPI</span>
                 </a>
               </li>
 
               <li class="active">
-                <a class="nav-link" href="/Modules/Report/sharp">
+                <a class="nav-link" href="/app/modules/Report/sharp">
                   <i class="far fa-file-chart-line"></i>
                   <span>SHHARP</span>
                 </a>
@@ -114,27 +114,27 @@
               <li class="divider">Imported Link</li>
               <div>
                 <li>
-                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                  <a href="/app/modules/Patient/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                  <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                  <a href="/app/modules/Intervention/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                  <a href="/app/modules/Shharp/patients-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Shharp Manag...
                   </a>
@@ -249,7 +249,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },

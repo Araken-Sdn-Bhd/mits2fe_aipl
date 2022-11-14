@@ -158,7 +158,7 @@ export default {
     },
     async view(data) {
       this.$router.push({
-        path: "/Modules/Admin/occasion-of-service-staff-info",
+        path: "/app/modules/Admin/occasion-of-service-staff-info",
         query: { id: data.id,users_id: data.users_id }, //id
       });
     },

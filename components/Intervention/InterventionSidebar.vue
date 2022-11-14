@@ -12,14 +12,14 @@
                 </a>
               </li>
               <li ref="tab2" class="" @click="changesidebar('tab2')">
-                <a class="nav-link" href="/Modules/Intervention/patient-list">
+                <a class="nav-link" href="/app/modules/Intervention/patient-list">
                   <i class="fal fa-user-injured"></i>
                   <span>Patients</span>
                 </a>
               </li>
 
               <li ref="tab3" class="" @click="changesidebar('tab3')">
-                <a class="nav-link" href="/Modules/Intervention/job-offer">
+                <a class="nav-link" href="/app/modules/Intervention/job-offer">
                   <i class="fal fa-user-injured"></i>
                   <span>Job Offer</span>
                 </a>
@@ -28,7 +28,7 @@
               <li ref="tab4" class="" @click="changesidebar('tab4')">
                 <a
                   class="nav-link"
-                  href="/Modules/Intervention/job-approval-request"
+                  href="/app/modules/Intervention/job-approval-request"
                 >
                   <i class="fal fa-user-injured"></i>
                   <span>Job Approval Request</span>
@@ -36,7 +36,7 @@
               </li>
 
               <li ref="tab5" class="" @click="changesidebar('tab5')">
-                <a class="nav-link" href="/Modules/Intervention/job-record">
+                <a class="nav-link" href="/app/modules/Intervention/job-record">
                   <i class="fal fa-user-injured"></i>
                   <span>Job Record</span>
                 </a>
@@ -44,7 +44,7 @@
               <li ref="tab6" class="" @click="changesidebar('tab6')">
                 <a
                   class="nav-link"
-                  href="/Modules/Intervention/registration-info"
+                  href="/app/modules/Intervention/registration-info"
                 >
                   <i class="fal fa-user-injured"></i>
                   <span>Company Basic Information</span>
@@ -53,27 +53,27 @@
               <li class="divider">Imported Link</li>
               <div v-show="userdetails">
                 <li>
-                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                  <a href="/app/modules/Patient/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                  <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li >
-                  <a href="/Modules/Report/sharp" class="nav-link">
+                  <a href="/app/modules/Report/sharp" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                  <a href="/app/modules/Shharp/patients-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Shharp Manag...
                   </a>

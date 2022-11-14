@@ -11,7 +11,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Calendar</h1>
-            <a href="/Modules/Patient/book-appointment" class="add-btn"
+            <a href="/app/modules/Patient/book-appointment" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -186,7 +186,7 @@ export default {
         });
         this.Calender();
       } else if (!this.search && this.team) {
-      
+
         this.list = this.alllist.filter((notChunk) => {
           return (
             notChunk.team_name.toLowerCase().indexOf(this.team.toLowerCase()) >
@@ -197,7 +197,7 @@ export default {
           console.log('this.list',this.list);
            this.Calender();
         }, 200);
-       
+
       } else {
          this.Calender();
         this.list = this.alllist;

@@ -1554,7 +1554,7 @@ export default {
               JSON.stringify(response.data.result)
             );
             this.$router.push({
-              path: "/Modules/Intervention/laser-result",
+              path: "/app/modules/Intervention/laser-result",
               query: { id: this.Id },
             });
           } else {

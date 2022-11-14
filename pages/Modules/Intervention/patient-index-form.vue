@@ -1662,7 +1662,7 @@ export default {
                   $("#updatepopup").modal("show");
                 });
                 this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
               } else {
@@ -1997,7 +1997,7 @@ export default {
     },
     OnWhodassTest() {
       let route = this.$router.resolve({
-        path: "/Modules/Intervention/whodas?id=" + this.Id,
+        path: "/app/modules/Intervention/whodas?id=" + this.Id,
       });
       window.open(route.href);
     },

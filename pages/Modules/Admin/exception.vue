@@ -104,7 +104,7 @@
                        </p>
                 <div class="d-flex">
                   <div class="ml-auto">
-                    <a href="/Modules/Admin/calendar-management" class="btn btn-danger btn-text"
+                    <a href="/app/modules/Admin/calendar-management" class="btn btn-danger btn-text"
                       ><i class="fad fa-times"></i> Cancel</a
                     >
                     <button type="submit" class="btn btn-success btn-text">
@@ -215,7 +215,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200) {
-              this.$router.push("/Modules/Admin/calendar-management");
+              this.$router.push("/app/modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");
@@ -237,7 +237,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200) {
-              this.$router.push("/Modules/Admin/calendar-management");
+              this.$router.push("/app/modules/Admin/calendar-management");
             } else {
               this.$nextTick(() => {
                 $("#errorpopup").modal("show");

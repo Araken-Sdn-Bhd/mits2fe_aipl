@@ -7,7 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Job Record</h1>
-   
+
           </div>
           <div class="card mb-4">
             <div class="card-body">
@@ -110,17 +110,17 @@ export default {
       companyId: 0,
       search: "",
       SidebarAccess:null,
-      
+
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-   
+
   },
   mounted() {
     this.getList();
-   
+
   },
   methods: {
     back() {
@@ -185,7 +185,7 @@ export default {
       console.log('my id',value);
     },
     async OnApproverejectRequest(status) {
-    
+
       if (confirm("Are you sure you want to perform this action")) {
       try {
         this.loader = true;
@@ -203,16 +203,16 @@ export default {
               {  id: value, status: status.toString() },
               { headers }
             )
-            
+
             .then((resp) => {
               console.log("reuslt", resp);
             });
-           
+
             this.getList();
-            
-           
+
+
         });
-        
+
         this.loader = false;
         this.$nextTick(() => {
           $("#updatepopup").modal("show");
@@ -224,11 +224,11 @@ export default {
         });
       }
     }
-    
+
     },
     OneditClick(id) {
       this.$router.push({
-        path: "/Modules/Intervention/view-job-details",
+        path: "/app/modules/Intervention/view-job-details",
         query: { id: id },
       });
     },

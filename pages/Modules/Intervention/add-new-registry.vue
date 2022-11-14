@@ -221,14 +221,14 @@
                         <div class="step-form-box box-03">
                           <select id="fourthbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in typesofsubstance"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -327,14 +327,14 @@
                         <div class="step-form-box box-05">
                           <select id="seventhbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in typesofsubstance"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -367,14 +367,14 @@
                         <div class="step-form-box box-06">
                           <select id="eightbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-                            
+
                           >
                            <option
               v-for="catcode in stresslist"
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.section_value }} 
+              {{ catcode.section_value }}
             </option>
                           </select>
                         </div>
@@ -535,7 +535,7 @@
                     <h4>Protective Factors</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-            
+
                     <div
                       class="row mb-3 align-items-center"
                       v-for="(pro, index) in protectivefactorlist"
@@ -579,16 +579,16 @@
                         <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
                       </div>
                       <div class="ml-auto">
-                     
+
                         <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactordraft"><i class="fad fa-save"></i> Save as Draft</button>
                         <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
                        </div>
                       </div>
-                
+
                 </div>
               </div>
             </div>
-           
+
            <!-- start self -->
             <!-- tab-close -->
             <div
@@ -846,7 +846,7 @@
                                     type="checkbox"
                                     value="Cutting or Piercing"
                                     id="6"  v-model="cuttingorpiercing"  @click="onSectionB('val')"
-                                    
+
                                   />
                                   <label class="form-check-label" for="6">
                                     Cutting or Piercing
@@ -1278,7 +1278,7 @@
                   </tbody>
                 </table>
                 </div>
-                
+
                             </div>
                             <!-- row -->
                           </div>
@@ -1304,7 +1304,7 @@
                       </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
-                       
+
                         <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
                       </div>
                     </div>
@@ -1312,7 +1312,7 @@
                 </div>
               </div>
             </div>
-         
+
           <!-- end self -->
             <!-- tab-close -->
             <div
@@ -1327,7 +1327,7 @@
                     <h4>Suicide Risk</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-               
+
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
                         >Level of Suicide Risk For Current Attempt</label
@@ -1434,7 +1434,7 @@
                         </button>
                       </div>
                       <div class="ml-auto">
-                        
+
                         <button class="btn btn-text btn-warning" @click="OnDraftsuciderisk"><i class="fad fa-save"></i> Save as Draft</button>
                         <button type="submit" @click="Onsuciderisk" class="btn btn-text btn-warning">
                           <i class="fad fa-save"></i> Save
@@ -1457,13 +1457,13 @@
                     <h4>Hospital Management</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-               
+
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >Referral or Contact point</label
                       >
                       <div class="col-sm-3">
-                          
+
                         <select
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
@@ -1532,7 +1532,7 @@
                           mode-of-arrival-div am
                           hide
                         "
-                        style="display: none" 
+                        style="display: none"
                       >
                         <input
                           type="text"
@@ -1669,7 +1669,7 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <p style="display: none;font-size: 8px;margin-top: -20px; margin-left: 40px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> 
+                          <p style="display: none;font-size: 8px;margin-top: -20px; margin-left: 40px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p>
                           <input
                             type="text"
                             class="form-control pafca-other-div hide"
@@ -1843,7 +1843,7 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d5"
-                            @change="OnMxdischarge('Others')" 
+                            @change="OnMxdischarge('Others')"
                           />
                           <label class="form-check-label" for="psy-d5">
                             Others
@@ -1902,7 +1902,7 @@
                     <h4>Source Data Producer</h4>
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
-              
+
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
@@ -2421,7 +2421,7 @@ export default {
 
       let body = new FormData();
       this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-      
+
       const response3 = await this.$axios.get("staff-management/getListByBranchId/" + this.userdetails.branch.branch_id,{
         headers,
       });
@@ -2432,7 +2432,7 @@ export default {
       }
       const response4 = await this.$axios.get("external-cause-injury/list", {
         headers,
-        
+
       });
       if (response4.data.code == 200 || response4.data.code == "200") {
         this.injurylist = response4.data.list;
@@ -2769,7 +2769,7 @@ export default {
     },
     async Onprotectivefactordraft() {
       console.log(this.procheckedList);
-      
+
         try {
           this.loader = true;
           const headers = {
@@ -2802,9 +2802,9 @@ export default {
           this.loader = false;
           this.errors = e;
         }
-    
+
     },
-    
+
 
     async DraftSelfHarm() {
       this.errors = [];
@@ -3342,7 +3342,7 @@ export default {
             psychiatrist_name: this.psychiatristId.toString(),
             sharp_register_id: this.sharp_register_id,
             reporting_date:moment().format("YYYY-MM-DD HH:mm:ss"),
-           
+
             status:"0"
           },
           { headers }
@@ -3353,7 +3353,7 @@ export default {
           //   $("#insertpopup").modal("show");
           // });
           this.$router.push({
-            path: "/Modules/Intervention/patient-history",
+            path: "/app/modules/Intervention/patient-history",
             query: { id: this.Id },
           });
         } else {
@@ -3421,7 +3421,7 @@ export default {
             //   $("#insertpopup").modal("show");
             // });
             this.$router.push({
-              path: "/Modules/Intervention/patient-history",
+              path: "/app/modules/Intervention/patient-history",
               query: { id: this.Id },
             });
           } else {

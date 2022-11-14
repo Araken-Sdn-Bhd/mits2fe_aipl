@@ -8,22 +8,22 @@
           <nav class="offline-form" v-if="!userdetails">
             <ul>
               <li>
-                <a href="/Modules/Patient/cbi" class="nav-link"
+                <a href="/app/modules/Patient/cbi" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>CBI</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/dass" class="nav-link"
+                <a href="/app/modules/Patient/dass" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>DASS</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/phq-9" class="nav-link"
+                <a href="/app/modules/Patient/phq-9" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>PHQ 9</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/whodas" class="nav-link"
+                <a href="/app/modules/Patient/whodas" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>WHODAS</span></a
                 >
               </li>
@@ -167,14 +167,14 @@
 
                       <div class="result-footer" v-if="PHQ9 == 'Minimal Depression'||PHQ9 == 'Mild Depression'">
                         <p>
-                          Good news. Your current symptom levels suggest that 
+                          Good news. Your current symptom levels suggest that
                           it is unlikely you are suffering from depressive disorder.
 
                         </p>
 
                         <p>
-                          If you feel you need additional support, consider to print 
-                          out this report and to book an appointment with the nearest 
+                          If you feel you need additional support, consider to print
+                          out this report and to book an appointment with the nearest
                           MENTARI to discuss this and any other concerns you may have.
                         </p>
                       </div>
@@ -237,7 +237,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -291,13 +291,13 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Intervention/request-appointment-form",
+        path: "/app/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     },
     GoBack(){
       this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

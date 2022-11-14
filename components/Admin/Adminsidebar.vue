@@ -29,7 +29,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/admin-dashboard"
+                      href="/app/modules/Admin/admin-dashboard"
                       id="Mentari Staff"
                     >
                       <i class="far fa-users"></i>
@@ -37,13 +37,13 @@
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/admin-dashboard">
+                    <a class="nav-link" href="/app/modules/Admin/admin-dashboard">
                       <i class="far fa-user-friends"></i>
                       Admin & Specialist in Charge
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/admin-dashboard">
+                    <a class="nav-link" href="/app/modules/Admin/admin-dashboard">
                       <i class="far fa-users-crown"></i>
                       All High-Level Management
                     </a>
@@ -71,25 +71,25 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/login-security">
+                    <a class="nav-link" href="/app/modules/Admin/login-security">
                       <i class="far fa-shield-alt"></i>
                       Login & Security
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/password">
+                    <a class="nav-link" href="/app/modules/Admin/password">
                       <i class="far fa-key"></i>
                       Password
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/access-control">
+                    <a class="nav-link" href="/app/modules/Admin/access-control">
                       <i class="far fa-laptop"></i>
                       Access Control
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/email-setting">
+                    <a class="nav-link" href="/app/modules/Admin/email-setting">
                       <i class="far fa-envelope-open-text"></i>
                       Email Setting
                     </a>
@@ -97,7 +97,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/address-management"
+                      href="/app/modules/Admin/address-management"
                     >
                       <i class="far fa-map-marker-alt"></i>
                       Address Management
@@ -106,7 +106,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/calendar-management"
+                      href="/app/modules/Admin/calendar-management"
                     >
                       <i class="far fa-calendar-alt"></i>
                       Calendar Management
@@ -116,7 +116,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/announcement-management"
+                      href="/app/modules/Admin/announcement-management"
                     >
                       <i class="far fa-bullhorn"></i>
                       Announcement Management
@@ -125,7 +125,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/list-of-user-matrix"
+                      href="/app/modules/Admin/list-of-user-matrix"
                     >
                       <i class="far fa-sliders-h"></i>
                       List of user matrix
@@ -154,33 +154,33 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/salutation">
+                    <a class="nav-link" href="/app/modules/Admin/salutation">
                       <i class="far fa-adjust"></i>
                       Salutation
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/gender">
+                    <a class="nav-link" href="/app/modules/Admin/gender">
                       <i class="fas fa-venus-mars"></i>
                       Gender
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/race">
+                    <a class="nav-link" href="/app/modules/Admin/race">
                       <i class="far fa-adjust"></i>
                       Race
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/religion">
+                    <a class="nav-link" href="/app/modules/Admin/religion">
                       <i class="far fa-praying-hands"></i>
                       Religion
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/occupation-status">
+                    <a class="nav-link" href="/app/modules/Admin/occupation-status">
                       <i class="far fa-user-tie"></i>
                       Occupation Status
                     </a>
@@ -188,7 +188,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/fee-exemption-status"
+                      href="/app/modules/Admin/fee-exemption-status"
                     >
                       <i class="far fa-sack-dollar"></i>
                       Fee Exemption Status
@@ -196,26 +196,26 @@
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/marital-status">
+                    <a class="nav-link" href="/app/modules/Admin/marital-status">
                       <i class="far fa-rings-wedding"></i>
                       Marital Status
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/accommodation">
+                    <a class="nav-link" href="/app/modules/Admin/accommodation">
                       <i class="far fa-bed"></i>
                       Accommodation
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/education-level">
+                    <a class="nav-link" href="/app/modules/Admin/education-level">
                       <i class="far fa-user-graduate"></i>
                       Education Level
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/relationship">
+                    <a class="nav-link" href="/app/modules/Admin/relationship">
                       <i class="far fa-heart"></i>
                       Relationship
                     </a>
@@ -224,7 +224,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/category-of-service"
+                      href="/app/modules/Admin/category-of-service"
                     >
                       <i class="far fa-layer-group"></i>
                       Category Of Service
@@ -234,35 +234,35 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/complexity-of-service"
+                      href="/app/modules/Admin/complexity-of-service"
                     >
                       <i class="far fa-layer-group"></i>
                       Complexity of Service
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/outcome">
+                    <a class="nav-link" href="/app/modules/Admin/outcome">
                       <i class="far fa-layer-group"></i>
                       Outcome
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/patient-category">
+                    <a class="nav-link" href="/app/modules/Admin/patient-category">
                       <i class="far fa-user-injured"></i>
                       Patient Category
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/type-of-visit">
+                    <a class="nav-link" href="/app/modules/Admin/type-of-visit">
                       <i class="far fa-layer-group"></i>
                       Type of Visit
                     </a>
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/range-of-age">
+                    <a class="nav-link" href="/app/modules/Admin/range-of-age">
                       <i class="far fa-male"></i>
                       Range of Age
                     </a>
@@ -271,7 +271,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/household-income-status"
+                      href="/app/modules/Admin/household-income-status"
                     >
                       <i class="far fa-badge-dollar"></i>
                       Household Income Status
@@ -279,7 +279,7 @@
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/type-of-substance">
+                    <a class="nav-link" href="/app/modules/Admin/type-of-substance">
                       <i class="far fa-layer-group"></i>
                       Type of Substance
                     </a>
@@ -288,7 +288,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/stressful-life-events"
+                      href="/app/modules/Admin/stressful-life-events"
                     >
                       <i class="far fa-calendar-day"></i>
                       Stressful Life Events
@@ -298,7 +298,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/place-of-occurrence"
+                      href="/app/modules/Admin/place-of-occurrence"
                     >
                       <i class="far fa-location"></i>
                       Place of Occurrence
@@ -308,7 +308,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/overdose-poisoning"
+                      href="/app/modules/Admin/overdose-poisoning"
                     >
                       <i class="far fa-capsules"></i>
                       Overdose / Poisoning
@@ -318,7 +318,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/referral-or-contact-point"
+                      href="/app/modules/Admin/referral-or-contact-point"
                     >
                       <i class="far fa-bullseye-pointer"></i>
                       Referral or Contact Point
@@ -326,37 +326,37 @@
                   </li>
 
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/mode-of-arrival">
+                    <a class="nav-link" href="/app/modules/Admin/mode-of-arrival">
                       <i class="far fa-dot-circle"></i>
                       Mode of Arrival
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/designation">
+                    <a class="nav-link" href="/app/modules/Admin/designation">
                       <i class="far fa-dot-circle"></i>
                       Designation
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/citizenship">
+                    <a class="nav-link" href="/app/modules/Admin/citizenship">
                       <i class="far fa-dot-circle"></i>
                       Citizenship
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/type-of-nric">
+                    <a class="nav-link" href="/app/modules/Admin/type-of-nric">
                       <i class="far fa-dot-circle"></i>
                       Type-Of-NRIC
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/type-of-referral">
+                    <a class="nav-link" href="/app/modules/Admin/type-of-referral">
                       <i class="far fa-dot-circle"></i>
                       Type of Referral
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/occupation-sector">
+                    <a class="nav-link" href="/app/modules/Admin/occupation-sector">
                       <i class="far fa-dot-circle"></i>
                       Occupation-Sector
                     </a>
@@ -364,7 +364,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/location-of-services"
+                      href="/app/modules/Admin/location-of-services"
                     >
                       <i class="far fa-dot-circle"></i>
                       Location of Services
@@ -373,14 +373,14 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/assistance-or-supervision"
+                      href="/app/modules/Admin/assistance-or-supervision"
                     >
                       <i class="far fa-dot-circle"></i>
                       Assistance or Supervision
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/external">
+                    <a class="nav-link" href="/app/modules/Admin/external">
                       <i class="far fa-dot-circle"></i>
                       External
                     </a>
@@ -388,7 +388,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/current-interventionl"
+                      href="/app/modules/Admin/current-interventionl"
                     >
                       <i class="far fa-dot-circle"></i>
                       Current Intervention
@@ -397,7 +397,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/compliance-to-treatment"
+                      href="/app/modules/Admin/compliance-to-treatment"
                     >
                       <i class="far fa-dot-circle"></i>
                       Compliance To Treatment
@@ -406,14 +406,14 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/medication-supervised-by"
+                      href="/app/modules/Admin/medication-supervised-by"
                     >
                       <i class="far fa-dot-circle"></i>
                       Medication Supervised By
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Admin/employment-status">
+                    <a class="nav-link" href="/app/modules/Admin/employment-status">
                       <i class="far fa-dot-circle"></i>
                       Employment Status
                     </a>
@@ -421,7 +421,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Admin/type-of-activities"
+                      href="/app/modules/Admin/type-of-activities"
                     >
                       <i class="far fa-dot-circle"></i>
                       Type of Activities
@@ -432,42 +432,42 @@
               <!-- sub-menuc -->
 
               <li>
-                <a href="/Modules/Admin/icd-setting" class="nav-link">
+                <a href="/app/modules/Admin/icd-setting" class="nav-link">
                   <i class="far fa-cog"></i>
                   ICD Setting
                 </a>
               </li>
 
               <li>
-                <a href="/Modules/Admin/services-setting" class="nav-link">
+                <a href="/app/modules/Admin/services-setting" class="nav-link">
                   <i class="far fa-cog"></i>
                   Services Setting
                 </a>
               </li>
 
               <li>
-                <a href="/Modules/Admin/etp-setting" class="nav-link">
+                <a href="/app/modules/Admin/etp-setting" class="nav-link">
                   <i class="far fa-sliders-h"></i>
                   ETP Setting
                 </a>
               </li>
 
               <li>
-                <a href="/Modules/Admin/club-setting" class="nav-link">
+                <a href="/app/modules/Admin/club-setting" class="nav-link">
                   <i class="far fa-cog"></i>
                   Club Setting
                 </a>
               </li>
 
               <li>
-                <a href="/Modules/Admin/staff-management" class="nav-link">
+                <a href="/app/modules/Admin/staff-management" class="nav-link">
                   <i class="far fa-users"></i>
                   Staff Manag...
                 </a>
               </li>
 
               <li class="">
-                <a href="/Modules/Admin/occasion-of-service" class="nav-link">
+                <a href="/app/modules/Admin/occasion-of-service" class="nav-link">
                   <i class="far fa-gift"></i>
                   Occasion Of...
                 </a>
@@ -476,25 +476,25 @@
               <li class="divider">Imported Link</li>
               <div v-show="userdetails">
                 <li>
-                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                  <a href="/app/modules/Patient/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                  <a href="/app/modules/Intervention/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Report/sharp" class="nav-link">
+                  <a href="/app/modules/Report/sharp" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                  <a href="/app/modules/Shharp/patients-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Shharp Manag...
                   </a>

@@ -303,13 +303,13 @@ export default {
     },
       async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Intervention/request-appointment-form",
+        path: "/app/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     },
     GoBack(){
       this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     }

@@ -12,7 +12,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Appointment</h1>
-            <a href="/Modules/Patient/book-appointment" class="add-btn"
+            <a href="/app/modules/Patient/book-appointment" class="add-btn"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
@@ -343,7 +343,7 @@ export default {
     },
     oneditAppointment(Id) {
       this.$router.push({
-        path: "/Modules/Patient/book-appointment",
+        path: "/app/modules/Patient/book-appointment",
         query: { id: Id },
       });
     },
@@ -383,7 +383,7 @@ export default {
         "appointmentId",aptId
       );
       this.$router.push({
-        path: "/Modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
+        path: "/app/modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
         query: { id: Id },
       });
     },
@@ -445,7 +445,7 @@ export default {
         });
       $("#Assignstaffpopup").modal("show");
     },
-    
+
     async OnAssignStaffSave() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

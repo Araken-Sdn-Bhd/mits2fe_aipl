@@ -113,7 +113,7 @@
                         <th scope="row">{{result.BAI}}</th>
                         <td>{{result.baiScore}}</td>
                       </tr>
-                    
+
                     </tbody>
                   </table>
                 </div>
@@ -253,7 +253,7 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Patient/request-appointment-form",
+        path: "/app/modules/Patient/request-appointment-form",
         query: { id: this.Id },
       });
     }

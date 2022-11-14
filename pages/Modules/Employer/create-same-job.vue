@@ -126,7 +126,7 @@
 
 
                 <!-- row -->
-              
+
                 <!-- row -->
                 <div class="row mb-3 align-items-center">
                   <label class="col-sm-4 form-label">Duration of Employment<small>*</small></label
@@ -254,7 +254,7 @@
                     </div>
                   </div>
                 </div>
-               
+
                 <!-- row -->
                 <div class="row mb-3">
                   <label class="col-sm-4 form-label">MENTARI <small>*</small></label>
@@ -271,7 +271,7 @@
                     </select>
                   </div>
                 </div>
-                
+
                  <p v-if="errorList.length">
                           <ul>
                            <li style="color:red"  v-for='err in errorList' :key='err' >
@@ -282,7 +282,7 @@
                 <!-- row -->
                 <br>
                 <br>
-               
+
                 <div class="d-flex">
                   <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
@@ -291,7 +291,7 @@
                     <i class="fa fa-save"></i> Save
                   </button>
                 </div>
-              
+
             </div>
           </div>
         </div>
@@ -453,7 +453,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        
+
         this.CityList = response.data.list;
         this.postcodelist = [];
       } else {
@@ -482,11 +482,11 @@ export default {
       if (confirm("Are you sure you want to submit this entry")) {
       this.errorList = [];
       try {
-       
+
         if (!this.location_address_1) {
           this.errorList.push("Location of Position Offered is required");
         }
-        
+
         if (!this.duration_of_employment) {
           this.errorList.push("Duration of Employment is required");
         }
@@ -496,7 +496,7 @@ export default {
         if (!this.work_schedule) {
           this.errorList.push("Work Schedule is required");
         }
-      
+
         if (!this.branch_id) {
           this.errorList.push("MENTARI is required");
         }
@@ -507,15 +507,15 @@ export default {
           this.errorList.push("Postcode is required");
         }
         if (
-          
+
           this.location_address_1 &&
           this.duration_of_employment &&
-          this.salary_offered && 
+          this.salary_offered &&
           this.work_schedule &&
           this.branch_id &&
           this.state_id &&
           this.postcode
-        ) 
+        )
         {
           this.loader = true;
           const headers = {
@@ -527,11 +527,11 @@ export default {
             "employer-job/repeat",
             {
               user_id: this.userdetails.user.id,
-             
+
               location_address_1: this.location_address_1,
               location_address_2: this.location_address_2,
               location_address_3: this.location_address_3,
-              
+
               duration_of_employment: this.duration_of_employment,
               salary_offered: this.salary_offered,
               work_schedule: this.work_schedule,
@@ -543,7 +543,7 @@ export default {
               postcode: this.postcode,
               job_availability: this.job_availability,
               job_id: this.job_id,
-             
+
             },
             { headers }
           );
@@ -556,8 +556,8 @@ export default {
               });
               this.reset();
 
-             
-              //this.$router.push("/Modules/Employer/same-job-offer-list);
+
+              //this.$router.push("/app/modules/Employer/same-job-offer-list);
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -565,7 +565,7 @@ export default {
             });
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });}
@@ -641,7 +641,7 @@ export default {
       this.workrequirementother="";
 
     },
-    
+
     changeschedule(val) {
       this.work_schedule = val;
     },

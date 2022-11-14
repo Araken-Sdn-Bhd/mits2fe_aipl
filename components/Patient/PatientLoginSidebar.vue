@@ -12,7 +12,7 @@
                 </a>
               </li>
               <li ref="patient" class="" @click="changesidebar('patient')">
-                <a class="nav-link" href="/Modules/Patient/patient-list">
+                <a class="nav-link" href="/app/modules/Patient/patient-list">
                   <i class="fal fa-user-injured"></i>
                   <span>Patients</span>
                 </a>
@@ -37,25 +37,25 @@
                   data-bs-parent="#sidenavAccordion"
                 >
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/cbi">
+                    <a class="nav-link" href="/app/modules/Patient/cbi">
                       <i class="far fa-file-contract"></i>
                       <span>CBI</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/dass">
+                    <a class="nav-link" href="/app/modules/Patient/dass">
                       <i class="far fa-file-contract"></i>
                       <span>DASS</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/phq-9">
+                    <a class="nav-link" href="/app/modules/Patient/phq-9">
                       <i class="far fa-file-contract"></i>
                       <span>PHQ 9</span>
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="/Modules/Patient/whodas">
+                    <a class="nav-link" href="/app/modules/Patient/whodas">
                       <i class="far fa-file-contract"></i>
                       <span>WHODAS</span>
                     </a>
@@ -64,7 +64,7 @@
                   <li>
                     <a
                       class="nav-link"
-                      href="/Modules/Patient/list-of-appointment"
+                      href="/app/modules/Patient/list-of-appointment"
                     >
                       <i class="far fa-calendar-alt"></i>
                       <span>Appointment</span>
@@ -79,14 +79,14 @@
                 class=""
                 @click="changesidebar('appointment')"
               >
-                <a class="nav-link" href="/Modules/Patient/attendance-record">
+                <a class="nav-link" href="/app/modules/Patient/attendance-record">
                   <i class="far fa-calendar-alt"></i>
                   <span>Appointment</span>
                 </a>
               </li>
 
               <li ref="calender" class="" @click="changesidebar('calender')">
-                <a class="nav-link" href="/Modules/Patient/calendar-view">
+                <a class="nav-link" href="/app/modules/Patient/calendar-view">
                   <i class="far fa-calendar-star"></i>
                   <span>Calendar</span>
                 </a>
@@ -95,7 +95,7 @@
               <li ref="screen" class="" @click="changesidebar('screen')">
                 <a
                   class="nav-link"
-                  href="/Modules/Patient/list-of-screening-patient"
+                  href="/app/modules/Patient/list-of-screening-patient"
                 >
                   <i class="far fa-file-search"></i>
                   <span>Screening</span>
@@ -104,26 +104,26 @@
               <li class="divider">Imported Link</li>
               <div v-show="userdetails">
                 <li>
-                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                  <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                  <a href="/app/modules/Intervention/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Report/sharp" class="nav-link">
+                  <a href="/app/modules/Report/sharp" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Shharp/patients-list" class="nav-link">
+                  <a href="/app/modules/Shharp/patients-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Shharp Manag...
                   </a>
@@ -240,7 +240,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },

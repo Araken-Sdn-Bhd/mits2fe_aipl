@@ -313,7 +313,7 @@ export default {
             console.log("my rs", response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/Modules/Von/von-list-of-appointment");
+              this.$router.push("/app/modules/Von/von-list-of-appointment");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
@@ -340,7 +340,7 @@ export default {
             );
             if (response.data.code == 200) {
               this.loader = false;
-              this.$router.push("/Modules/Von/von-list-of-appointment");
+              this.$router.push("/app/modules/Von/von-list-of-appointment");
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
@@ -403,9 +403,9 @@ export default {
         this.$nextTick(() => {
           // $("#updatepopup").modal("show");
           this.$router.push({
-          path: "/Modules/Von/von-list-of-appointment",
+          path: "/app/modules/Von/von-list-of-appointment",
         });
-          // href="/Modules/Von/von-list-of-appointment"
+          // href="/app/modules/Von/von-list-of-appointment"
         });
       } catch (e) {
         this.loader = false;

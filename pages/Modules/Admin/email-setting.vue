@@ -137,7 +137,7 @@
                   </div>
                   <!-- row -->
                   <div class="d-flex" v-if="SidebarAccess==1">
-                    <a href="/Modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
+                    <a href="/app/modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
                     <div class="ml-auto">
                         <a class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
 

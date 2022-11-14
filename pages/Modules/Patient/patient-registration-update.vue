@@ -1524,13 +1524,13 @@ export default {
       this.$refs.navdiv3.classList.add("show");
     },
     NextThird() {
-     
+
       this.$refs.tab4.classList.add("active");
       this.$refs.navdiv3.classList.remove("active");
       this.$refs.navdiv3.classList.remove("show");
       this.$refs.navdiv4.classList.add("active");
       this.$refs.navdiv4.classList.add("show");
-      
+
     },
     PreviousFirst() {
       this.$refs.tab1.classList.add("active");
@@ -1666,7 +1666,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        
+
         this.citylist = response.data.list;
         this.postcodelist = [];
       } else {
@@ -1691,7 +1691,7 @@ export default {
       }
 
     },
-    
+
     async getPostcodeList(event) {
       const headers = {
         Accept: "application/json",
@@ -1753,7 +1753,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        
+
         this.kincitylist = response.data.list;
         this.kinpostcodelist = [];
       } else {
@@ -1777,7 +1777,7 @@ export default {
       }
 
     },
-    
+
     async getPostcodeList(event) {
       const headers = {
         Accept: "application/json",
@@ -2029,7 +2029,7 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2046,7 +2046,7 @@ export default {
             );
             console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$router.push("/Modules/Intervention/patient-list");
+              this.$router.push("/app/modules/Intervention/patient-list");
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -2076,7 +2076,7 @@ export default {
       );
       console.log("my pt details", response.data);
       if (response.data.code == 200) {
-        
+
         //alert(JSON.stringify(response.data.list[0].accomondation[0].section_value));
         this.accomodation_id = response.data.list[0].accomodation_id;
         this.address1 = response.data.list[0].address1;
@@ -2085,7 +2085,7 @@ export default {
         this.age = response.data.list[0].age;
         this.birth_date = response.data.list[0].birth_date;
         this.citizenship = response.data.list[0].citizenship;
-       
+
         this.state_id = response.data.list[0].state_id;
         this.city_id = response.data.list[0].city[0].city_name;
         if (this.city_id !=""){
@@ -2094,7 +2094,7 @@ export default {
         }
 
         this.country_id = response.data.list[0].country_id;
-        
+
         this.drug_allergy = response.data.list[0].drug_allergy;
         this.drug_allergy_description = response.data.list[0].drug_allergy_description;
         this.education_level = response.data.list[0].education_level;
@@ -2118,7 +2118,7 @@ export default {
         this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;
         this.kin_postcode = response.data.list[0].kin_postcode;
         this.kin_relationship_id = response.data.list[0].kin_relationship_id;
-        
+
         this.kin_nric_no = response.data.list[0].kin_nric_no;
         this.marital_id = response.data.list[0].marital_id;
         this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
@@ -2170,7 +2170,7 @@ export default {
         this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
         this.other_occupationStatus = response.data.list[0].other_occupationStatus;
 
-     
+
         if (response.data.list[0].race[0].section_value == "OTHERS"){
             this.otherRace = true;
           }else{
@@ -2193,19 +2193,19 @@ export default {
         }else{
           this.otherAccommodation = false;
         }
-        
+
         if (response.data.list[0].fee[0].section_value == "OTHERS"){
           this.otherFeeExemStatus = true;
         }else{
           this.otherFeeExemStatus = false;
         }
-      
+
         if (response.data.list[0].occupation[0].section_value == "OTHERS"){
           this.otherOccStatus = true;
         }else{
           this.otherOccStatus = false;
         }
-      
+
 
       this.loader = false;
       } else {

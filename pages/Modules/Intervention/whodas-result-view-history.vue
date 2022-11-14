@@ -10,22 +10,22 @@
           <nav class="offline-form" v-if="!userdetails">
             <ul>
               <li>
-                <a href="/Modules/Patient/cbi" class="nav-link"
+                <a href="/app/modules/Patient/cbi" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>CBI</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/dass" class="nav-link"
+                <a href="/app/modules/Patient/dass" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>DASS</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/phq-9" class="nav-link"
+                <a href="/app/modules/Patient/phq-9" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>PHQ 9</span></a
                 >
               </li>
               <li>
-                <a href="/Modules/Patient/whodas" class="nav-link"
+                <a href="/app/modules/Patient/whodas" class="nav-link"
                   ><i class="far fa-file-contract"></i> <span>WHODAS</span></a
                 >
               </li>
@@ -170,7 +170,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -261,7 +261,7 @@ export default {
   methods: {
     GoBack(){
       this.$router.push({
-              path: "/Modules/Intervention/patient-summary",
+              path: "/app/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
     },
@@ -273,7 +273,7 @@ export default {
     },
     async Gotorequestappointment() {
       this.$router.push({
-        path: "/Modules/Intervention/request-appointment-form",
+        path: "/app/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
     }

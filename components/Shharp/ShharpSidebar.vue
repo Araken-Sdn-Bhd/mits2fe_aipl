@@ -12,7 +12,7 @@
                 </a>
               </li>
               <li class="active">
-                <a class="nav-link" href="/Modules/Shharp/patients-list">
+                <a class="nav-link" href="/app/modules/Shharp/patients-list">
                   <i class="fad fa-user"></i>
                   <span>Patients</span>
                 </a>
@@ -20,27 +20,27 @@
               <li class="divider">Imported Link</li>
               <div>
                 <li>
-                  <a href="/Modules/Patient/patient-list" class="nav-link">
+                  <a href="/app/modules/Patient/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Admin/admin-dashboard" class="nav-link">
+                  <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
-                  <a href="/Modules/Intervention/patient-list" class="nav-link">
+                  <a href="/app/modules/Intervention/patient-list" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
-                  <a href="/Modules/Report/sharp" class="nav-link">
+                  <a href="/app/modules/Report/sharp" class="nav-link">
                     <i class="far fa-home-alt"></i>
                     Report Manag...
                   </a>
@@ -155,7 +155,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/bootstrap.bundle.min.js",
+        src: "/app/js/bootstrap.bundle.min.js",
         body: true,
         crossorigin: "anonymous",
       },

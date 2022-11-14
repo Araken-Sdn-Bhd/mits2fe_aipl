@@ -7,7 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Job Offer</h1>
-            <a href="/Modules/Employer/create-new-job" class="  add-btn" title="create new job offer"><i class="fal fa-plus"></i></a>
+            <a href="/app/modules/Employer/create-new-job" class="  add-btn" title="create new job offer"><i class="fal fa-plus"></i></a>
           </div>
 
           <div class="card mb-4">
@@ -43,8 +43,8 @@
                     <td>#{{ index + 1 }}</td>
                     <td>{{ job.created_at }}</td>
                     <td>{{ job.position }}</td>
-                   
-                    
+
+
                     <td>
                       <a
                         style="cursor: pointer"
@@ -95,10 +95,10 @@ export default {
   mounted() {
     console.log(`${this.$axios.defaults.baseURL}`);
     this.getList();
-   
+
   },
 
-  
+
   methods: {
     async getList(){
       const headers = {
@@ -109,7 +109,7 @@ export default {
     const response = await this.$axios.post(
             "employer-job/list",
             {
-              user_id: this.userdetails.user.id, 
+              user_id: this.userdetails.user.id,
             },
             { headers }
           )
@@ -143,14 +143,14 @@ export default {
     OneditClick(id,position,education,requirement) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Employer/create-same-job",
+        path: "/app/modules/Employer/create-same-job",
         query: { id: id, position:position, education:education,requirement:requirement},
       });
     },
     OnviewClick(id,position,education,requirement,status) {
       this.loader = true;
       this.$router.push({
-        path: "/Modules/Employer/same-job-offer-list",
+        path: "/app/modules/Employer/same-job-offer-list",
         query: { job_id: id,position:position, education:education,requirement:requirement,status:status},
       });
     },

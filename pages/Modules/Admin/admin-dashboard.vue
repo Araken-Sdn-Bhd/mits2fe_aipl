@@ -1,5 +1,5 @@
 <template>
- 
+
     <div id="layoutSidenav">
       <CommonSidebar />
       <div id="layoutSidenav_content">
@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          
+
           <!-- row -->
 
           <div class="row">
@@ -72,7 +72,7 @@
                 <table class="announcement-table">
                   <tbody>
                     <tr>
-                      <div v-if="index < list.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">   
+                      <div v-if="index < list.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
                             <td><span class="number">{{ index+1 }}</span></td>
                             <td><a v-bind:href="'/Modules/Admin/view-event?id='+ list[ann-1].id">{{ list[ann-1].title }} ({{ getFormattedDate(list[ann-1].start_date) }})</a></td>
                       </div>
@@ -90,7 +90,7 @@
         </main>
       </div>
     </div>
-  
+
 </template>
 
 <script>
@@ -110,7 +110,7 @@ export default {
             AnnouncmentToShow:3,
             totalAnouncement:0,
             search:'',
-            
+
             list: [],
         };
     },
@@ -118,7 +118,7 @@ export default {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         if(this.userdetails){
           this.id=this.userdetails.user.id;
-          this.email=this.userdetails.user.email; 
+          this.email=this.userdetails.user.email;
           this.branch=this.userdetails.branch.branch_id;
         }
         this.GetTodayAppointment();
@@ -140,12 +140,12 @@ export default {
         //         // console.log('my res', response.data);
         //         if (response.data.code == 200 || response.data.code == "200") {
         //             //this.team_task = response.data.team_task[0].team_task;
-                    
+
         //             this.todays_appointments = response.data.today_appointment[0].todays_appointment;
-                    
+
         //             console.log('my teamtask',this.team_task);
         //             // this.personal_task = response.data.list1[0].PersonalTask;
-                    
+
         //         } else {
         //             window.alert("Something went wrong");
         //         }
@@ -173,7 +173,7 @@ export default {
                     this.request_appointment = response.data.request_appointment;
                     this.list = response.data.list;
 
-                  
+
                 } else {
                     window.alert("Something went wrong");
                 }
@@ -187,9 +187,9 @@ export default {
         },
 
         SearchPatient() {
-            
+
             localStorage.setItem('keyword',(this.search));
-            this.$router.push("/Modules/Patient/patient-list" );
+            this.$router.push("/app/modules/Patient/patient-list" );
         },
 
     }
