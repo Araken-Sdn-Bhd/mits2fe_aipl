@@ -314,11 +314,11 @@ export default {
               "patient-appointment-details/update",
               {
                 added_by: this.userdetails.user.id,
+                branch_id: this.branch,
                 id: this.Id,
                 nric_or_passportno: this.nric_or_passportno,
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
-                patient_mrn_id: this.userdetails.user.id,
                 duration: this.duration,
                 appointment_type: this.appointment_type,
                 type_visit: this.type_visit,
@@ -342,6 +342,7 @@ export default {
               "patient-appointment-details/add",
               {
                 added_by: this.userdetails.user.id,
+                branch_id: this.branch,
                 nric_or_passportno: this.nric_or_passportno,
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
