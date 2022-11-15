@@ -124,15 +124,17 @@ export default {
   },
   methods: {
     searchText2() {
-      this.list = this.alllist.filter((notChunk) => {
-        return (
-          notChunk.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
-          notChunk.nric_or_passportno
-            .toLowerCase()
-            .indexOf(this.search.toLowerCase()) > -1
-        );
-      });
-    },
-  },
+      if (this.search) {
+        this.list = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.nric_or_passportno?.toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1
+          );
+        });
+      } else {
+        this.list = this.alllist;
+      }
+    }
+  }
 };
 </script>
