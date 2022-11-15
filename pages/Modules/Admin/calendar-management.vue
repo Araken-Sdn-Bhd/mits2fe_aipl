@@ -117,7 +117,7 @@ export default {
   head: {
     script: [
       {
-        src: "/js/fullcalendar.js",
+        src: "/app/js/fullcalendar.js",
         body: true,
         crossorigin: "anonymous",
       },
