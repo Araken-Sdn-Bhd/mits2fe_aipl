@@ -42,7 +42,7 @@
                 <!-- <a v-on:click="RemoveNotification(notifi)" v-bind:href="'/'+ notifi.url_route">{{ notifi.message }} ({{ getFormattedDate(notifi.created_at) }})</a> -->
                 <div type="button" @click="RemoveNotification(notifi)">
                   <p>{{ notifi.message }}({{ getFormattedDate(notifi.created_at) }})
-                  <span><i class="fal fa-clock"></i> {{notifi.time}}</span>
+                  <span><i class="fal fa-clock"></i> {{notifi.time}} ago</span>
                   </p>
                 </div>
                 <!-- <a @click="RemoveNotification(notifi)" href="">{{ notifi.message }}({{ getFormattedDate(notifi.created_at) }})</a>
@@ -50,7 +50,7 @@
               </div>                      
             </div>
             <div class="notification-footer">
-              <a href="/app/modules/notification">View All Notifications</a>
+              <!-- <a href="/app/modules/notification">View All Notifications</a> -->
             </div>
           </div>
         </li>
