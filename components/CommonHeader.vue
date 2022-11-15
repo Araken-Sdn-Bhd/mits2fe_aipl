@@ -119,7 +119,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post("Notification/get",
-      {added_by:this.id,role:this.role},
+      {added_by:this.id,role:this.role,branch_id:this.branch_id},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
         this.notificationlist = response.data.list;
@@ -142,7 +142,7 @@ export default {
       {notifi_id:notifi.id},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
-        router.push('/'+ notifi.url_route);
+        router.push(notifi.url_route);
       } else {
         this.notificationlist = [];
       }
