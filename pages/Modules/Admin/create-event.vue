@@ -228,7 +228,7 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
-import $ from "jquery";
+//import $ from "jquery";
 export default {
   components: { CommonHeader, CommonSidebar },
   name: "create-event",
@@ -390,7 +390,7 @@ export default {
         }
       } catch (e) {
         this.$nextTick(() => {
-          $("#errorpopup").modal("show");
+          $("#insertpopup").modal("show");
         });
       }
     },
