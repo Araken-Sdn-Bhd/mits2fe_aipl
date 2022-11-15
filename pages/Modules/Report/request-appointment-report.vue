@@ -45,9 +45,21 @@
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="far fa-file-pdf"></i> Generate PDF</a
                     >
-                    <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                      ><i class="far fa-file-excel"></i> Generate Excel</a
-                    >
+                    <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"           
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="Request Appointment Report"
+                       :name=excelname
+                      >
+                      <i class="far fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
                   </div>
                 </div>
               </form>
@@ -100,9 +112,14 @@ import moment from 'moment';
 
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import downloadexcel from "vue-json-excel";
 export default {
  
   components: { CommonSidebar, CommonHeader },
+  name: "App",
+  components: {
+    downloadexcel,
+  },
 
   name: "sharp",
    head: {
@@ -116,6 +133,23 @@ export default {
   },
   data() {
     return {
+
+      json_fields:{
+        'No':'No',
+        'Name':'name',
+        'NRIC/Passport':'nric_or_passportno',
+        'Address':'address',
+        'Phone Number':'contact_number',
+        'Email':'email',
+        'Request Date':'created_at',
+      },
+      excelname: "",
+      sheetname: "Request Appointment Report",
+      header:"",
+      ReportList:[],
+      No:0,
+      filename:'',
+
       userdetails: null,
       fromDate: "",
       toDate: "",
@@ -132,7 +166,7 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     if(this.userdetails){
       this.id=this.userdetails.user.id; 
-      this.email=this.userdetails.user.email;
+      this.branch_id=this.userdetails.branch.branch_id;
     }
   },
   methods: {
@@ -148,21 +182,34 @@ export default {
         {
           fromDate: this.fromDate,
           toDate: this.toDate,
+          report_type: "pdf"
         },
-        { headers, params: {email: this.email}  }
+        { headers, params: {branch_id: this.branch_id}  }
       );
       console.log("my report", response.data);
       if (response.data.code == 200) {
         this.list = response.data.result;
         this.total = this.list.length;
         console.log("my report", response.data);
-        if (response.data.filepath) {
+        if (this.total!=0) {
           setTimeout(() => {
             this.$refs.result.classList.remove("hide");
-            var pdf = new jsPDF("p", "pt", "a4");
-            pdf.addHTML($("#result")[0], function () {
-              pdf.save("Report.pdf");
-            });
+            var pdf = new jsPDF("p", "pt", "A4");
+                 pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                //pdf.internal.scaleFactor =30;
+                var options = {
+                pagesplit: true
+
+            };
+              // this.filename=response.data.filename;
+
+                pdf.addHTML($("#result")[0],options, function () {
+                  pdf.save("RequestAppointmentReport.pdf");
+                });
+
+
+            
           }, 100);
           setTimeout(() => {
             this.$refs.result.classList.add("hide");
@@ -187,18 +234,28 @@ export default {
           {
             fromDate: this.fromDate,
             toDate: this.toDate,
+            report_type: "excel"
           },
-          { headers }
+          { headers,params: {branch_id: this.branch_id} }
         );
         console.log("my report", response.data);
         if (response.data.code == 200) {
-          if (response.data.filepath) {
-            window.open(response.data.filepath, "_blank");
+          if (response.data) {
+            this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
           } else {
             this.error = "No Record Found";
           }
         }
       } catch (e) {}
+    },
+    startDownload(){
+        alert('show loading');
+    },
+    finishDownload(){
+        alert('hide loading');
     },
     getFormattedDate(date) {
             return moment(date).format("YYYY-MM-DD hh:mm:ss A")
@@ -225,7 +282,7 @@ export default {
   font-weight: 600;
 }
 .thhead {
-  background: #ddd;
+  background: #bbf2eb;
   padding: 5px 10px;
   border: 1px solid #000;
   text-transform: uppercase;
