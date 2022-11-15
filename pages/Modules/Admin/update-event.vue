@@ -238,12 +238,12 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/jquery.richtext.js",
+        src: "/app/js/jquery.richtext.js",
         body: true,
         crossorigin: "anonymous",
       },

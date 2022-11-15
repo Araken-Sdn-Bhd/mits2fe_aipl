@@ -53,7 +53,7 @@
       <div class="modal-dialog modal-dialog-centered modal-sm password-change">
         <div class="modal-content">
           <div class="modal-body">
-            
+
             <p>Successfully Changed.</p>
           </div>
           <div class="modal-footer">
@@ -83,7 +83,7 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -129,12 +129,12 @@ export default {
         );
 
         if (response.data.code == 200) {
-         
+
          if (response.data.setting[0].variable_name == "minimum-password-length" && response.data.setting[0].status == 1){
             this.minPwd= true;
             this.minPwdLength= response.data.setting[0].variable_value;
          }
- 
+
          if (response.data.setting[1].variable_name == "maximum-password-length" && response.data.setting[1].status == 1){
             this.maxPwd= true;
             this.maxPwdLength= response.data.setting[1].variable_value;
@@ -151,11 +151,11 @@ export default {
          if (response.data.setting[4].variable_name == "include-special-characters" && response.data.setting[4].status == 1){
             this.specialChar= true;
          }
-       
+
        } else {
          window.alert("Something went wrong");
        }
-      
+
     },
 
     async OnSubmit() {

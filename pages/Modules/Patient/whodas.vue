@@ -1207,12 +1207,12 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/jquery-3.5.1.js",
+        src: "/app/js/jquery-3.5.1.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -1253,7 +1253,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    
+
     this.GetList();
     this.GetUserIpAddress();
     if (this.userdetails) {
@@ -1267,7 +1267,7 @@ export default {
     }
   },
   mounted(){
-    if(this.SidebarAccess!=1){ 
+    if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
@@ -1334,7 +1334,7 @@ export default {
         { Type: "LA-S/W" },
         { headers }
       );
-      
+
       if (response5.data.code == 200 || response5.data.code == "200") {
         this.list5 = response5.data.list;
         console.log('6 list',this.list5);

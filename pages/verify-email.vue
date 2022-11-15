@@ -44,7 +44,7 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     async OnSubmit() {
-      
+
       this.emailerror = null;
       this.validate = true;
       try {
@@ -77,7 +77,7 @@ export default {
             userid: this.userid,
           });
           if (response.data.code == 200) {
-            
+
             this.loader = false;
           } else {
             window.alert(response.data.message);

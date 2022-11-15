@@ -407,12 +407,12 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
       {
-        src: "/js/jquery.dataTables.min.js",
+        src: "/app/js/jquery.dataTables.min.js",
         body: true,
         crossorigin: "anonymous",
       },

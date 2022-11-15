@@ -84,7 +84,7 @@ export default {
         crossorigin: "anonymous",
       },
       {
-        src: "/js/scripts.js",
+        src: "/app/js/scripts.js",
         body: true,
         crossorigin: "anonymous",
       },
@@ -106,9 +106,9 @@ export default {
       loader: false,
     };
   },
- 
+
   methods: {
-  
+
     async register() {
       this.emailerror = null;
       this.passerror = null;
@@ -146,7 +146,7 @@ export default {
             if (this.userdetail.code == 200) {
               alert('Thank You for your registration. Please Login to continue');
               this.$router.push("/employer-login");
-              
+
             } else if(this.userdetail.code == 201){
               this.loader = false;
               window.alert('User has not right to access any form. Please contact to Admin');
