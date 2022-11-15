@@ -1,9 +1,6 @@
 import webpack from 'webpack'
 
 export default {
-  ssr: true,
-  target: 'development',
-  // target: 'server',
   router: {
     base: '/app/'
   },
@@ -39,7 +36,7 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
     { rel: 'stylesheet', href: 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' },
-    // { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' }
+    { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' },
     {
       rel: "stylesheet",
       href:
