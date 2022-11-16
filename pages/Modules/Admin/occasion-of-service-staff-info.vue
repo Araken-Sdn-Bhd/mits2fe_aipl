@@ -525,6 +525,7 @@ export default {
         });
     },
     async edit(data) {
+    //alert(JSON.stringify(data));
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -552,17 +553,28 @@ export default {
         this.type = response.data.Data[0].type;
         this.tbid = response.data.Data[0].id;
         }
-        // console.log("my edit",this.booking_enddate);
-        //  <td>{{ staff.end_appoitment_date }}</td>
-        //             <td>{{ staff.category_services_id }}</td>
-        //             <td>{{ staff.csr_ }}</td>
-        //             <td>{{ staff.oc_ }}</td>
-        //             <td>{{ staff.ls_ }}</td>
+       
       }
     },
     async delRow(data) {
       if (confirm("Are you sure you want to delete this record ? ")) {
-
+        const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-appointment-details/deletePatientListByStaffId",
+        {
+          type: data.type,
+          tbid: data.id_,
+        },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        $("#updatepopup").modal("show");
+        this.Getstaffpatientlist1();
+      }
       }
     },
     formatedate(date) {
