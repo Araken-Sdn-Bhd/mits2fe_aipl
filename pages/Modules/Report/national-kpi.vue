@@ -17,7 +17,7 @@
 
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="fad fa-file-chart-line"></i></a>
+                <a href="#"><i class="fa fa-file-chart-line"></i></a>
                 <h4>NATIONAL KPI</h4>
               </div>
               <div class="card-body">
@@ -83,12 +83,12 @@
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                        ><i class="far fa-file-pdf"></i> Generate PDF</a
+                        ><i class="fa fa-file-pdf"></i> Generate PDF</a
                       >
                       <a
                         @click="Ongenerateexel"
                         class="btn btn-success btn-text"
-                        ><i class="far fa-file-excel"></i> Generate Excel</a
+                        ><i class="fa fa-file-excel"></i> Generate Excel</a
                       >
                       <!-- <downloadexcel
                        class="btn btn-success btn-text"
@@ -103,7 +103,7 @@
                         worksheet="National KPI"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel> -->
                     </div>
                   </div>

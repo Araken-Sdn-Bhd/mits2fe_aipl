@@ -9,7 +9,7 @@
             <div class="card-header">
               <h4>Volunteer, Outreach, And Networking Application Form</h4>
               <a href="#" class="visibility-h"
-                ><i class="far fa-user-edit"></i
+                ><i class="fa fa-user-edit"></i
               ></a>
             </div>
             <div class="card-body mt-3">

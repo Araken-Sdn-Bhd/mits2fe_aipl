@@ -377,18 +377,18 @@
                     @click="Ongeneratepdf"
                     class="btn btn-danger btn-text"
                   >
-                    <i class="far fa-file-pdf"></i> Generate PDF
+                    <i class="fa fa-file-pdf"></i> Generate PDF
                   </button>
                   <button
                     @click="Ongenerateexel"
                     class="btn btn-success btn-text"
                   >
-                    <i class="far fa-file-excel"></i> Generate Excel
+                    <i class="fa fa-file-excel"></i> Generate Excel
                   </button>
                 </div>
               </div>
               <!-- </form> -->
-             
+
             </div>
           </div>
         </div>

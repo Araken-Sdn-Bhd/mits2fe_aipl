@@ -145,7 +145,7 @@
                           <tr>
                             <td colspan="3" style="padding: 0">
                               <!-- <a href="#" class="add"
-                                ><i class="far fa-plus"></i
+                                ><i class="fa fa-plus"></i
                               ></a> -->
                             </td>
                           </tr>
@@ -184,7 +184,7 @@
                       />
                     </td>
                     <td>
-                      <!-- <a href="#" class="add"><i class="far fa-plus"></i></a> -->
+                      <!-- <a href="#" class="add"><i class="fa fa-plus"></i></a> -->
                     </td>
                   </tr>
 
@@ -1663,7 +1663,7 @@
                         class="btn btn-warning btn-text ml-10"
                         @click="Openpsptest"
                       >
-                        <i class="far fa-file-alt"></i> Assessment Test
+                        <i class="fa fa-file-alt"></i> Assessment Test
                       </button>
                     </td>
                   </tr>
@@ -2288,7 +2288,7 @@
                           <tr>
                             <td colspan="3" style="padding: 0">
                               <!-- <a href="#" class="add"
-                                ><i class="far fa-plus"></i
+                                ><i class="fa fa-plus"></i
                               ></a> -->
                             </td>
                           </tr>
@@ -2310,7 +2310,7 @@
                       {{ this.visited_by }}
                     </td>
                     <td>
-                      <!-- <a href="#" class="add"><i class="far fa-plus"></i></a> -->
+                      <!-- <a href="#" class="add"><i class="fa fa-plus"></i></a> -->
                     </td>
                   </tr>
 
@@ -2598,7 +2598,7 @@
                         class="btn btn-warning btn-text ml-10"
                         @click="Openpsptest"
                       >
-                        <i class="far fa-file-alt"></i> Assessment Test
+                        <i class="fa fa-file-alt"></i> Assessment Test
                       </button>
                     </td> -->
                   </tr>
@@ -2876,7 +2876,7 @@
               <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button @click="OnSubmit" class="btn btn-warning btn-text"
-                    ><i class="far fa-save"></i> Save</button
+                    ><i class="fa fa-save"></i> Save</button
                   >
                   <button @click="setData" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</button

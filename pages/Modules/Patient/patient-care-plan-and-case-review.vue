@@ -214,7 +214,7 @@
                       <td><input type="text" v-model="Who" placeholder="Who,By When"/></td>
                       <td>
                         <a href="#" class="add-row"
-                          ><i class="far fa-plus"></i
+                          ><i class="fa fa-plus"></i
                         ></a>
                       </td>
                     </tr>
@@ -556,10 +556,10 @@
                   <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
                   <button class="btn btn-warning btn-text ml-auto">
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>

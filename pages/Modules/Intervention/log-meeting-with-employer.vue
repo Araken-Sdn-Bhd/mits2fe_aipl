@@ -233,7 +233,7 @@
                                   v-bind:key="catcode.id"
                                   v-bind:value="catcode.id"
                                 >
-                                   {{ catcode.icd_code }} 
+                                   {{ catcode.icd_code }}
  {{catcode.icd_name}}
                                 </option>
                               </select>
@@ -345,7 +345,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>
@@ -728,11 +728,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }

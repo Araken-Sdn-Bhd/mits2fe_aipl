@@ -328,7 +328,7 @@
                       placeholder="Enter Contact No."
                       v-model="hospital_Contact"
                     />
-                    <!-- <a href="#"><i class="far fa-plus"></i></a> -->
+                    <!-- <a href="#"><i class="fa fa-plus"></i></a> -->
                   </div>
                 </div>
 
@@ -342,7 +342,7 @@
                       v-model="hospital_Email"
                       @blur="validateHospitalEmail"
                     />
-                    <!-- <a href="#"><i class="far fa-plus"></i></a> -->
+                    <!-- <a href="#"><i class="fa fa-plus"></i></a> -->
 
                   </div>
                    <Error :message="hsptlemailerror" v-if="hsptlemailerror" />
@@ -376,9 +376,9 @@
         </p>
         <div class="d-flex justify-content-center" :class="SidebarAccess!=1?'hide':''">
          <button type="submit" class="btn btn-success bto-warning" v-if="!Id"
-      ><i class="far fa-plus"></i> Add Parameter</button>
+      ><i class="fa fa-plus"></i> Add Parameter</button>
         <button type="submit" class="btn btn-warning btn-text" v-if="Id">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
         </div>
       </form>
@@ -390,7 +390,7 @@
     <div class="table-title">
       <h3>List of Hospital</h3>
       <div class="input-group">
-        <span class="input-group-text"><i class="far fa-search"></i></span>
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
         <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch"/>
       </div>
     </div>
@@ -420,10 +420,10 @@
             <a
               @click="profileview(hstl)"
               class="action-icon icon-success"
-              ><i class="far fa-eye"></i
+              ><i class="fa fa-eye"></i
             ></a>
              <a  class="edit" @click="edithospital(hstl)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
           </td>
         </tr>

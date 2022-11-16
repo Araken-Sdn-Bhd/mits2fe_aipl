@@ -97,10 +97,10 @@
                         @click="Onedit(app)"
                         class="edit"
                       >
-                        <i class="far fa-edit"></i>
+                        <i class="fa fa-edit"></i>
                       </a>
                       <!-- <a style="pointer:cursor;" @click="OnView(app)" class="view">
-                        <i class="far fa-eye"></i>
+                        <i class="fa fa-eye"></i>
                       </a> -->
                     </td>
                   </tr>

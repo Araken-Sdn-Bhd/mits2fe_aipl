@@ -137,10 +137,10 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
-           
+
         </div>
           <div class="container-fluid px-4 reslt" v-if="consentdetails" style="display:none;">
           <div class="page-title">
@@ -273,14 +273,14 @@
                     <td>
                       <!-- <textarea class="signature"></textarea>
                       <p class="text-align-center">Doctor</p> -->
-                    </td> 
+                    </td>
                   </tr>
                 </tbody>
               </table>
 
               <table class="notes" style="width:50%" v-if="consentdetails">
                 <tbody>
-                   
+
                   <tr>
                     <td style="width:50%">Doctor's Name/Case Manager:</td>
                <td>{{ consentdetails.designation }}</td>
@@ -299,10 +299,10 @@
                              </li>
                         </ul>
                        </p>
-            
+
             </div>
           </div>
-           
+
         </div>
 
          <div class="d-flex" v-if="!pid">
@@ -312,7 +312,7 @@
                     class="btn btn-warning btn-text"
                     @click="OnSubmit"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                   <a @click="OnPrint" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</a

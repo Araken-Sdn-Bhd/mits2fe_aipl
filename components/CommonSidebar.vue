@@ -34,7 +34,7 @@
                 <div v-if="menu.module_id == hasreportmodule">
                   <li class="sub-menu">
                     <a class="nav-link" data-bs-toggle="collapse" v-bind:data-bs-target="'#demo'" aria-expanded="true">
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       {{ "Report" }}
                     </a>
                     <ul class="collapse" v-bind:id="['demo']" aria-labelledby="headingOne"

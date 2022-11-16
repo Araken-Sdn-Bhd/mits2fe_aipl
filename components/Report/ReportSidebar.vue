@@ -7,7 +7,7 @@
             <ul>
               <li>
                 <a class="nav-link" href="#">
-                  <i class="far fa-home-alt"></i>
+                  <i class="fa fa-home-alt"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
@@ -21,7 +21,7 @@
                   aria-expanded="true"
                   aria-controls="system-setting"
                 >
-                  <i class="far fa-file-chart-line"></i>
+                  <i class="fa fa-file-chart-line"></i>
                   Workload Report
                 </a>
                 <ul
@@ -32,7 +32,7 @@
                 >
                   <li class="">
                     <a class="nav-link" href="/app/modules/Report/general-report">
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>General Report</span>
                     </a>
                   </li>
@@ -41,7 +41,7 @@
                       class="nav-link"
                       href="/app/modules/Report/total-patient-and-type-of-referral"
                     >
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>Total Patient & Type Of Referral</span>
                     </a>
                   </li>
@@ -50,13 +50,13 @@
                       class="nav-link"
                       href="/app/modules/Report/patient-by-age-gender-and-ethnic-group"
                     >
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>Patient By Age/gender & Ethnic Group</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Report/request-appointment-report">
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>Request Appointment Report</span>
                     </a>
                   </li>
@@ -73,7 +73,7 @@
                   aria-expanded="true"
                   aria-controls="activities-report"
                 >
-                  <i class="far fa-file-chart-line"></i>
+                  <i class="fa fa-file-chart-line"></i>
                   <span>Activities Report</span>
                 </a>
                 <ul
@@ -84,13 +84,13 @@
                 >
                   <li>
                     <a class="nav-link" href="/app/modules/Report/activities-report-patient">
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>Patient</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Report/activities-report-VON">
-                      <i class="far fa-file-chart-pie"></i>
+                      <i class="fa fa-file-chart-pie"></i>
                       <span>VON</span>
                     </a>
                   </li>
@@ -100,14 +100,14 @@
 
               <li>
                 <a class="nav-link" href="/app/modules/Report/national-kpi">
-                  <i class="far fa-file-chart-line"></i>
+                  <i class="fa fa-file-chart-line"></i>
                   <span>National KPI</span>
                 </a>
               </li>
 
               <li class="active">
                 <a class="nav-link" href="/app/modules/Report/sharp">
-                  <i class="far fa-file-chart-line"></i>
+                  <i class="fa fa-file-chart-line"></i>
                   <span>SHHARP</span>
                 </a>
               </li>
@@ -115,27 +115,27 @@
               <div>
                 <li>
                   <a href="/app/modules/Patient/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Intervention/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
                   <a href="/app/modules/Shharp/patients-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Shharp Manag...
                   </a>
                 </li>

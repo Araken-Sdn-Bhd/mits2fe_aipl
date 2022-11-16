@@ -8,14 +8,14 @@
                     <div class="page-title dashboard-title">
                         <h1>SHHARP</h1>
                         <div class="input-group dashboard-search">
-                            <span class="input-group-text" id="basic-addon1"><i class="far fa-search"></i></span>
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                             <input type="text" class="form-control" placeholder="Search By Name/NRIC/Passport/MRN">
                         </div>
                     </div>
                      <div class="row">
                         <div class="col-sm-4 mb-3">
                             <div class="card">
-                              
+
                                 <div class="card-details">
                                     <img src="~/assets/images/notepad.png">
                                     <div class="text">

@@ -7,7 +7,7 @@
             <ul>
               <li ref="tab1" class="" @click="changesidebar('tab1')">
                 <a class="nav-link" href="#">
-                  <i class="far fa-home-alt"></i>
+                  <i class="fa fa-home-alt"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
@@ -54,27 +54,27 @@
               <div v-show="userdetails">
                 <li>
                   <a href="/app/modules/Patient/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li >
                   <a href="/app/modules/Report/sharp" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>
                 <li>
                   <a href="/app/modules/Shharp/patients-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Shharp Manag...
                   </a>
                 </li>

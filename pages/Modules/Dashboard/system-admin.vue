@@ -9,7 +9,7 @@
                         <h1>System Admin</h1>
                         <!--
                         <div class="input-group dashboard-search">
-                            <span class="input-group-text" id="basic-addon1"><i class="far fa-search"></i></span>
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                             <input type="text" class="form-control" placeholder="Search By Name/NRIC/Passport/MRN">
                         </div>
                         -->
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-sm-6 mb-3">
                             <div class="card">
-                                
+
                                 <div class="card-details">
                                     <img src="~/assets/images/man.png">
                                     <div class="text">

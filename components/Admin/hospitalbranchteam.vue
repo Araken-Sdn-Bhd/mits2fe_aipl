@@ -2,7 +2,7 @@
   <div class="card mb-4">
     <div class="card-header bg-transparent">
       <h4>Hospital, Branch & Team</h4>
-      <!-- <a href="#"><i class="far fa-edit"></i></a> -->
+      <!-- <a href="#"><i class="fa fa-edit"></i></a> -->
     </div>
     <div class="card-body">
       <nav>
@@ -14,7 +14,7 @@
             role="tab"
             aria-controls="nav-home"
             aria-selected="true"
-            ><i class="far fa-user-lock"></i> Setting 1: Hospital</a
+            ><i class="fa fa-user-lock"></i> Setting 1: Hospital</a
           >
           <a
             class="nav-link"
@@ -24,7 +24,7 @@
             role="tab"
             aria-controls="nav-profile2"
             aria-selected="false"
-            ><i class="far fa-ban"></i> Setting 2: Branch</a
+            ><i class="fa fa-ban"></i> Setting 2: Branch</a
           >
           <a
             class="nav-link"
@@ -34,7 +34,7 @@
             role="tab"
             aria-controls="nav-contact3"
             aria-selected="false"
-            ><i class="far fa-clock"></i> Setting 3: Team</a
+            ><i class="fa fa-clock"></i> Setting 3: Team</a
           >
         </div>
       </nav>

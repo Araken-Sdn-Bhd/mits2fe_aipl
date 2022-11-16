@@ -79,7 +79,7 @@
             >
               {{ act.section_value }}
                       </option>
-                     
+
                     </select>
                   </div>
                 </div>
@@ -249,7 +249,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -359,9 +359,9 @@
                 <div class="d-flex" v-if="!pid">
                   <button
                     type="submit"
-                    class="btn btn-warning btn-text ml-auto" 
+                    class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>

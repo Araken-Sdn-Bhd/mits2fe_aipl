@@ -3,7 +3,7 @@
   <div class="content-subtab">
     <Loader v-if="loader" />
     <form class="g-3 mt-3" method="post" @submit.prevent="addcountry">
-    
+
 
       <div class="row">
         <div class="col-md-6 mb-3">
@@ -53,15 +53,15 @@
       <!-- close-row -->
        <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="countryId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!countryId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
 
-   
+
 
     <div class="table-title">
       <h3>List of Country</h3>
@@ -84,10 +84,10 @@
           <td>{{country.country_order}}</td>
           <td>
                           <a  class="edit" @click="editcountry(country)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletecountry(country)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
         </tr>

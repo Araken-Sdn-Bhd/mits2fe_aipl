@@ -307,7 +307,7 @@
            <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <a @click="OnSubmit" class="btn btn-warning btn-text"
-                    ><i class="far fa-save"></i> Save</a
+                    ><i class="fa fa-save"></i> Save</a
                   >
                   <a @click="OnPrint" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</a

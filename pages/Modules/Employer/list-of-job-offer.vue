@@ -50,14 +50,14 @@
                         style="cursor: pointer"
                         @click="OnviewClick(job.id,job.position,job.section_value,job.work_requirement,job.approval_status)"
                         class="view" title="View all list">
-                        <i class="far fa-eye"></i></a>
+                        <i class="fa fa-eye"></i></a>
                       <a
                       v-if="job.approval_status == 2"
                         style="cursor: pointer"
                         title="create same job offer"
                         @click="OneditClick(job.id,job.position,job.section_value,job.work_requirement)"
                         class="add"
-                        ><i class="far fa-plus"></i
+                        ><i class="fa fa-plus"></i
                       ></a>
                     </td>
                   </tr>

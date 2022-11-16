@@ -72,7 +72,7 @@
                   <div class="col-sm-3">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
-                        ><i class="far fa-search"></i
+                        ><i class="fa fa-search"></i
                       ></span>
                       <input
                         type="text"
@@ -103,7 +103,7 @@
                     <td>{{ roles.team_name }}</td>
                     <td>{{ roles.status }}</td>
                     <td>
-                      <a class="edit" @click="Onview(roles)"><i class="far fa-eye"></i></a>
+                      <a class="edit" @click="Onview(roles)"><i class="fa fa-eye"></i></a>
                     </td>
                   </tr>
                 </tbody>

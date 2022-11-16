@@ -55,7 +55,7 @@
                         @click="oneditAppointment(app.id)"
                         style="cursor: pointer"
                         class="edit"
-                        ><i class="far fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>
                     </td>
                   </tr>
@@ -65,7 +65,7 @@
                     <td>11:00AM</td>
                     <td>No Show</td>
                     <td>
-                      <a href="#" class="edit"><i class="far fa-edit"></i></a>
+                      <a href="#" class="edit"><i class="fa fa-edit"></i></a>
                     </td>
                   </tr>
                 </tbody>

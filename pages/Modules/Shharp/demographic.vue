@@ -395,12 +395,12 @@
                   <a v-if="!Id"
                   @click="submitRegistration"
                  class="btn btn-warning btn-text ml-auto"
-                    ><i class="far fa-save"></i> Save</a
+                    ><i class="fa fa-save"></i> Save</a
                   >
                   <a v-if="Id"
                   @click="submitRegistration"
                  class="btn btn-warning btn-text ml-auto"
-                    ><i class="far fa-save"></i> Update</a
+                    ><i class="fa fa-save"></i> Update</a
                   >
                 </div>
                     </form>

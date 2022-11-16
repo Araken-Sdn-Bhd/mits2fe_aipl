@@ -11,7 +11,7 @@
           <div class="card mb-4">
             <div class="card-header icon-title">
 
-              <a href="#"><i class="far fa-calendar-edit"></i></a>
+              <a href="#"><i class="fa fa-calendar-edit"></i></a>
               <h4>Announcement Details</h4>
             </div>
             <div class="card-body">
@@ -41,7 +41,7 @@
                     <td>Document</td>
                     <td>
                       <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
-                        ><i class="fad fa-download"></i> Download File</a
+                        ><i class="fa fa-download"></i> Download File</a
                       >
                     </td>
                   </tr>
@@ -76,7 +76,7 @@
                   </tr>
                 </tbody>
               </table>
-             <a href="/app/modules/Admin/announcement-management" class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
+             <a href="/app/modules/Admin/announcement-management" class="pre-1 btn btn-success mr-auto"><i class="fa fa-arrow-to-left"></i> Back</a>
             </div>
           </div>
         </div>
@@ -134,6 +134,30 @@ export default {
           headers,
         }
       );
+      if (response.data.code == 200) {
+            if (response.data.filepath) {
+              const link = document.createElement('a');
+              window.open(response.data.filepath, "_blank");
+              // try {
+              //   const response = await fetch(response.data.filepath)
+              //   const blob = await response.blob();
+              //   const url = await URL.createObjectURL(blob)
+
+              //   const a = document.createElement("a");
+              //   a.href = url;
+              //   a.download = "tet.png";
+              //   document.body.appendChild(a);
+              //   a.click();
+              //   document.body.removeChild(a);
+              // } catch(err) {
+              //   console.log({ err })
+              // }
+            } else {
+              this.error = "No Record Found";
+            }
+          } else {
+            this.error = "No Record Found";
+          }
     },
     async getdetails() {
       const headers = {

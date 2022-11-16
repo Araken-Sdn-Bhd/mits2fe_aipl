@@ -7,7 +7,7 @@
             <ul>
               <li>
                 <a class="nav-link" href="#">
-                  <i class="far fa-home-alt"></i>
+                  <i class="fa fa-home-alt"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
@@ -27,7 +27,7 @@
                   aria-expanded="true"
                   aria-controls="system-setting"
                 >
-                  <i class="far fa-file-alt"></i>
+                  <i class="fa fa-file-alt"></i>
                   <span>Online Self Test</span>
                 </a>
                 <ul
@@ -38,25 +38,25 @@
                 >
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/cbi">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>CBI</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/dass">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>DASS</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/phq-9">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>PHQ 9</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/whodas">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>WHODAS</span>
                     </a>
                   </li>
@@ -66,7 +66,7 @@
                       class="nav-link"
                       href="/app/modules/Patient/list-of-appointment"
                     >
-                      <i class="far fa-calendar-alt"></i>
+                      <i class="fa fa-calendar-alt"></i>
                       <span>Appointment</span>
                     </a>
                   </li>
@@ -76,21 +76,21 @@
 
               <li>
                 <a class="nav-link" href="/app/modules/Patient/attendance-record">
-                  <i class="far fa-calendar-alt"></i>
+                  <i class="fa fa-calendar-alt"></i>
                   <span>Appointment</span>
                 </a>
               </li>
 
               <li>
                 <a class="nav-link" href="/app/modules/Patient/calendar-view">
-                  <i class="far fa-calendar-star"></i>
+                  <i class="fa fa-calendar-star"></i>
                   <span>Calendar</span>
                 </a>
               </li>
 
               <li>
                 <a class="nav-link" href="/app/modules/Patient/list-of-screening-patient">
-                  <i class="far fa-file-search"></i>
+                  <i class="fa fa-file-search"></i>
                   <span>Screening</span>
                 </a>
               </li>

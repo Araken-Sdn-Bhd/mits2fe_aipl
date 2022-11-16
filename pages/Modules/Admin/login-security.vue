@@ -11,7 +11,7 @@
           </div>
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-shield-alt"></i></a>
+                <a href="#"><i class="fa fa-shield-alt"></i></a>
                 <h4>Login & Security</h4>
               </div>
               <div class="card-body">
@@ -24,7 +24,7 @@
                       role="tab"
                       aria-controls="nav-home"
                       aria-selected="true"
-                      ><i class="far fa-user-lock"></i> Login Attempt</a
+                      ><i class="fa fa-user-lock"></i> Login Attempt</a
                     ></li>
                     <li class="nav-item"><a
                       class="nav-link"
@@ -34,7 +34,7 @@
                       role="tab"
                       aria-controls="nav-profile"
                       aria-selected="false"
-                      ><i class="far fa-ban"></i> System Block Duration</a
+                      ><i class="fa fa-ban"></i> System Block Duration</a
                     ></li>
                     <li class="nav-item"><a
                       class="nav-link"
@@ -44,7 +44,7 @@
                       role="tab"
                       aria-controls="nav-contact"
                       aria-selected="false"
-                      ><i class="far fa-clock"></i> Idle Session Timeout</a
+                      ><i class="fa fa-clock"></i> Idle Session Timeout</a
                     ></li>
                   </ul>
                 </nav>
@@ -65,7 +65,7 @@
                 <!-- 02-tab -->
                    <Systemblockduration/>
               </div>
-             
+
 
               <div class="tab-pane fade" id="nav-contact" role="tabpanel">
                  <!-- 03-tab -->

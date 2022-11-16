@@ -262,7 +262,7 @@
                     <input type="text" class="form-control activity" name="" />
                   </td>
                   <td>
-                    <a class="add-td"><i class="far fa-plus"></i></a>
+                    <a class="add-td"><i class="fa fa-plus"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -913,7 +913,7 @@
           </label>
         </div>
         <button type="submit" class="btn btn-warning btn-text ml-auto" @click="OnSubmit">
-          <i class="far fa-save"></i> Save
+          <i class="fa fa-save"></i> Save
         </button>
       </div>
     <!-- </form> -->

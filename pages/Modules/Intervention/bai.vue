@@ -123,7 +123,7 @@
               <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
               <!-- <div class="modal-footer">
                 <button

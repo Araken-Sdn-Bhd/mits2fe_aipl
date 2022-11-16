@@ -13,7 +13,7 @@
 
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-shield-alt"></i></a>
+                <a href="#"><i class="fa fa-shield-alt"></i></a>
                 <h4>Patient Category</h4>
               </div>
               <div class="card-body">
@@ -58,15 +58,15 @@
                        </p>
                     <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
                   </form>
 
-                 
+
 
                   <div class="table-title">
                     <h3>List of Patient Category</h3>
@@ -90,10 +90,10 @@
                         <td>{{setting.section_order}}</td>
                         <td class="td"  :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editsetting(setting)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletesetting(setting)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
                       </tr>
@@ -102,7 +102,7 @@
                 </div>
               </div>
             </div>
-      
+
         </div>
       </main>
     </div>
@@ -169,7 +169,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    
+
   },
   methods: {
     async insertcategory() {

@@ -53,10 +53,10 @@
         </p>
       <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="typeId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!typeId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -83,9 +83,9 @@
           <td>{{ icdtype.icd_type_description }}</td>
           <td>{{ icdtype.icd_type_order }}</td>
           <td>
-            <a class="edit" @click="edittype(icdtype)"><i class="far fa-edit"></i></a>
+            <a class="edit" @click="edittype(icdtype)"><i class="fa fa-edit"></i></a>
             <a @click="deletetype(icdtype)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>

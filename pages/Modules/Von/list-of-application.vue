@@ -17,7 +17,7 @@
                   <div class="col-sm-4 mb-3 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
-                        <i class="far fa-search"></i>
+                        <i class="fa fa-search"></i>
                       </span>
                       <input
                         type="text"
@@ -68,15 +68,15 @@
                     <td>{{ app.screening }}</td>
                     <td class="td"  :class="SidebarAccess!=1?'hide':''">
                       <a style="pointer:cursor;" @click="OnEdit(app)" class="edit">
-                        <i class="far fa-edit"></i>
+                        <i class="fa fa-edit"></i>
                       </a>
 
                       <a style="pointer:cursor;" @click="OnView(app)" class="view">
-                        <i class="far fa-eye"></i>
+                        <i class="fa fa-eye"></i>
                       </a>
 
                       <a @click="OnBook(app)" class="add">
-                        <i class="far fa-plus"></i>
+                        <i class="fa fa-plus"></i>
                       </a>
                     </td>
                   </tr>

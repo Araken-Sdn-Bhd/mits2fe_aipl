@@ -12,7 +12,7 @@
           <div class="row">
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-calendar-alt"></i></a>
+                <a href="#"><i class="fa fa-calendar-alt"></i></a>
                 <h4>Calendar Management</h4>
               </div>
               <div class="card-body">
@@ -21,16 +21,16 @@
                   <h3>List of Event</h3>
                   <div class="btn-box ml-auto">
                     <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0 text-white">
-                      <i class="far fa-download"></i> Excel Template
+                      <i class="fa fa-download"></i> Excel Template
                     </a>
                     <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary text-white mt-0">
-                      <i class="far fa-file-excel"></i> Upload Excel
+                      <i class="fa fa-file-excel"></i> Upload Excel
                     </button>
                     <a
                       href="/app/modules/Admin/exception"
                       class="btn btn-primary mt-0 text-white"
                     >
-                      <i class="far fa-plus"></i> Add Exception
+                      <i class="fa fa-plus"></i> Add Exception
                     </a>
                   </div>
                 </div>
@@ -55,10 +55,10 @@
                       <td>{{ cla.end_date }}</td>
                       <td>
                         <a @click="OnEditexception(cla)" class="action-icon icon-success"
-                          ><i class="far fa-edit"></i
+                          ><i class="fa fa-edit"></i
                         ></a>
                         <a style="cursor:pointer;" @click="Onremoveexception(cla)" class="action-icon icon-danger"
-                          ><i class="far fa-trash-alt"></i
+                          ><i class="fa fa-trash-alt"></i
                         ></a>
                       </td>
                     </tr>

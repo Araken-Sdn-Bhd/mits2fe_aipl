@@ -21,27 +21,27 @@
               <div>
                 <li>
                   <a href="/app/modules/Patient/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Patient Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Intervention/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
                   <a href="/app/modules/Report/sharp" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>

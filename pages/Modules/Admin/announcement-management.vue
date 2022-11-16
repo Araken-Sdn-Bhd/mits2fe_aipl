@@ -8,10 +8,10 @@
           <div class="page-title">
             <h1>Announcement Management</h1>
             <div class="btn-group-a">
-              <!-- <a href="#" class="add-btn"><i class="far fa-cog"></i></a>
-              <a href="#" class="add-btn"><i class="far fa-search"></i></a> -->
+              <!-- <a href="#" class="add-btn"><i class="fa fa-cog"></i></a>
+              <a href="#" class="add-btn"><i class="fa fa-search"></i></a> -->
               <a href="/app/modules/Admin/create-event" class="add-btn"
-                ><i class="far fa-plus"></i
+                ><i class="fa fa-plus"></i
               ></a>
             </div>
           </div>
@@ -23,7 +23,7 @@
                   <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
-                        ><i class="far fa-search"></i
+                        ><i class="fa fa-search"></i
                       ></span>
                       <input
                         type="text"
@@ -64,13 +64,13 @@
                       <a
                         @click="deleteannounce(ann)" v-if="SidebarAccess==1"
                         class="action-icon icon-danger"
-                        ><i class="far fa-trash-alt"></i
+                        ><i class="fa fa-trash-alt"></i
                       ></a>
                       <a class="edit" @click="editannounce(ann)" v-if="SidebarAccess==1 && ann.status == 0"
-                        ><i class="far fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>
                       <a @click="viewannounce(ann)" class="view" v-if="ann.status == 1"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
                     </td>
                   </tr>

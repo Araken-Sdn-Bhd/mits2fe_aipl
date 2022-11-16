@@ -34,7 +34,7 @@
                   <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
-                        ><i class="far fa-search"></i
+                        ><i class="fa fa-search"></i
                       ></span>
                       <input
                         type="text"
@@ -65,7 +65,7 @@
                     <td>{{ staff.hospital_branch_name }}</td>
                     <td>
                       <a @click="view(staff)" class="view"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
                     </td>
                   </tr>

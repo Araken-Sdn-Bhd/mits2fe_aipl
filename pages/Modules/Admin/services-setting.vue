@@ -94,10 +94,10 @@
         </p>
       <div class="d-flex justify-content-center" id="hidebutton1" ref="hidebutton1">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -123,9 +123,9 @@
           <td>{{rg.service_description}}</td>
           <td>{{rg.service_order}}</td>
           <td>
-            <a class="edit" @click="editreg(rg)"><i class="far fa-edit" v-if="SidebarAccess==1"></i></a>
+            <a class="edit" @click="editreg(rg)"><i class="fa fa-edit" v-if="SidebarAccess==1"></i></a>
             <a @click="deletereg(rg)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>
@@ -218,15 +218,15 @@
         </p>
       <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="dId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!dId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
 
-    
+
 
     <div class="table-title">
       <h3>List of Service</h3>
@@ -251,10 +251,10 @@
           <td>{{ srvcdvsv.division_order }}</td>
           <td>
             <a class="edit" @click="editdivison(srvcdvsv)" v-if="SidebarAccess==1"
-              ><i class="far fa-edit"></i
+              ><i class="fa fa-edit"></i
             ></a>
             <a @click="deletedivison(srvcdvsv)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>
@@ -365,7 +365,7 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-       if(this.SidebarAccess!=1){ 
+       if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
           this.$refs.hidebutton1.classList.add("hide");
@@ -542,7 +542,7 @@ export default {
         this.dlist = [];
       }
     },
-    
+
     async GethospitalList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

@@ -10,7 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
-              <a><i class="far fa-calendar-alt"></i></a>
+              <a><i class="fa fa-calendar-alt"></i></a>
               <h4>Add New Announcement</h4>
             </div>
             <div class="card-body">
@@ -205,11 +205,11 @@
                   <a
                     href="/app/modules/Admin/announcement-management"
                     class="btn btn-primary btn-text"
-                    ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                   >
                   <div class="btn-right">
                     <button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
-                      <i class="far fa-save"></i> Save as draft
+                      <i class="fa fa-save"></i> Save as draft
                     </button>
                     <button v-on:click="onCreateEvent('1')" class="btn btn-success btn-text">
                       <i class="fad fa-paper-plane"></i> Publish

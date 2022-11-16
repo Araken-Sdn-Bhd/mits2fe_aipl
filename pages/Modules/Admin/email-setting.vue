@@ -11,7 +11,7 @@
           </div>
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-shield-alt"></i></a>
+                <a href="#"><i class="fa fa-shield-alt"></i></a>
                 <h4>Email Notification</h4>
               </div>
               <div class="card-body">
@@ -139,9 +139,9 @@
                   <div class="d-flex" v-if="SidebarAccess==1">
                     <a href="/app/modules/Admin/admin-dashboard" class="prev-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</a>
                     <div class="ml-auto">
-                        <a class="btn btn-success"  @click="onTestConnection"><i class="far fa-exchange"></i> Test Connection</a>
+                        <a class="btn btn-success"  @click="onTestConnection"><i class="fa fa-exchange"></i> Test Connection</a>
 
-                        <button type="submit" class="btn btn-warning btn-text"><i class="far fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-warning btn-text"><i class="fa fa-save"></i> Save</button>
                     </div>
                 </div>
                 </form>
