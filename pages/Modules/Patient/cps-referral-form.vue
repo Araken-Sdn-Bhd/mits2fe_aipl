@@ -330,7 +330,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -467,10 +467,10 @@
               <div class="d-flex">
                 <div class="ml-auto">
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
-                    <i class="far fa-download"></i> Download
+                    <i class="fa fa-download"></i> Download
                   </button>
                   <button type="submit" class="btn btn-success btn-text" @click="OnSubmit">
-                    <i class="far fa-paper-plane"></i> Submit
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
               </div>

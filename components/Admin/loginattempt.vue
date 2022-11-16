@@ -19,7 +19,7 @@
           <Error :message="error" v-if="error" />
           <div class="d-flex">
             <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="SidebarAccess==1">
-              <i class="far fa-save"></i> Save
+              <i class="fa fa-save"></i> Save
             </button>
           </div>
         </form>
@@ -91,7 +91,7 @@ export default {
     async getDefault() {
       this.errors = [];
       try {
-        
+
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -103,17 +103,17 @@ export default {
         );
 
         if (response.data.code == 200) {
-         
+
         if (response.data.setting[0].variable_name == "number_of_invalid_sign_on_allowed" && response.data.setting[0].status == 1){
           this.sign= response.data.setting[0].variable_value;
         }
-      
+
       } else {
         window.alert("Something went wrong");
       }
 
       } catch (e) {
-  
+
       }
     },
   },

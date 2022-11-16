@@ -47,7 +47,7 @@
                       <a
                         @click="deleteinfo(clinic)"
                         class="action-icon icon-danger"
-                        ><i class="far fa-trash-alt"></i
+                        ><i class="fa fa-trash-alt"></i
                       ></a>
                     </td>
                   </tr>
@@ -57,7 +57,7 @@
               <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
             </div>
           </div>

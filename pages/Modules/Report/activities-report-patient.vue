@@ -157,7 +157,7 @@
                   </div>
                 </div>
                 <!-- row -->
-               
+
                 <div  v-if="this.appointment_type == 3" class="supported-employment selected-box ">
                   <div class="form-title">
                     <h4>Supported Employment Program</h4>
@@ -167,9 +167,9 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Employment Status:</label>
-                        <select class="form-select"  v-model="employement_status"> 
+                        <select class="form-select"  v-model="employement_status">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="stat in employementstatlist"
                           v-bind:key="stat.id"
                           v-bind:value="stat.id"
@@ -184,7 +184,7 @@
                         <label class="form-label">Case Manager:</label>
                         <select class="form-select" v-model="case_manager">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="listemp in cmanagerlist"
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
@@ -201,9 +201,9 @@
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">List of Employer: </label>
-                        <select class="form-select"  v-model="employer_list"> 
+                        <select class="form-select"  v-model="employer_list">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="employer in employerlist"
                           v-bind:key="employer.id"
                           v-bind:value="employer.id"
@@ -229,7 +229,7 @@
                         <label class="form-label">Case Manager:</label>
                         <select class="form-select" v-model="case_manager">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="listemp in cmanagerlist"
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
@@ -265,7 +265,7 @@
                         <label class="form-label">Case Manager:</label>
                         <select class="form-select" v-model="case_manager">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="listemp in cmanagerlist"
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
@@ -301,7 +301,7 @@
                         <label class="form-label">Current Intervention:</label>
                         <select class="form-select" v-model="current_intervention">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="cintervention in currentinterventionlist"
                           v-bind:key="cintervention.id"
                           v-bind:value="cintervention.id"
@@ -316,7 +316,7 @@
                         <label class="form-label">Case Manager:</label>
                         <select class="form-select" v-model="case_manager">
                           <option value="">Please Select</option>
-                          <option   
+                          <option
                           v-for="listemp in cmanagerlist"
                           v-bind:key="listemp.id"
                           v-bind:value="listemp.id"
@@ -342,16 +342,16 @@
                 <div class="d-flex">
                   <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                      ><i class="far fa-file-pdf"></i> Generate PDF</a
+                      ><i class="fa fa-file-pdf"></i> Generate PDF</a
                     >
                     <!-- <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                      ><i class="far fa-file-excel"></i> Generate Excel</a> -->
+                      ><i class="fa fa-file-excel"></i> Generate Excel</a> -->
 
                       <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"           
+                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -360,14 +360,14 @@
                         worksheet="Activity Patient"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
 
                   </div>
                 </div>
               </div>
             </div>
-            
+
           </div>
         </main>
       </div>
@@ -383,9 +383,9 @@
 
                 <table class="total-patient-table">
                    <thead>
-                    <tr>   
+                    <tr>
                        <th class="thhead">ATTEND</th>
-                        <th class="thhead">No SHOW</th> 
+                        <th class="thhead">No SHOW</th>
                         </tr>
                             </thead>
                   <tbody>
@@ -435,7 +435,7 @@
                       <td class="tdrow">{{ rp.time_registered }}</td>
                       <td class="tdrow">{{ rp.time_seen }}</td>
                       <td class="tdrow">{{ rp.Attendance_status }}</td>
-                      <td class="tdrow">{{ rp.Attending_staff }}</td>    
+                      <td class="tdrow">{{ rp.Attending_staff }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -483,7 +483,7 @@ export default {
       excelname: "",
       sheetname: "PATIENT ACTIVITY",
       header:"",
-            
+
       userdetails: null,
       error: null,
       loader: false,
@@ -521,7 +521,7 @@ export default {
       ReportList:[],
       No:0,
 
-      
+
     };
   },
   beforeMount() {
@@ -595,7 +595,7 @@ export default {
         } else {
           this.visitlist = [];
         }
-        const response15 = await this.$axios.get("service/servicelist", 
+        const response15 = await this.$axios.get("service/servicelist",
         {headers, params: {email: this.email} });
         if (response15.data.code == 200 || response15.data.code == "200") {
           this.servicelist = response15.data.list;
@@ -627,7 +627,7 @@ export default {
           this.employementstatlist = response18.data.list;
         } else {
           this.employementstatlist = [];
-        }    
+        }
         const response19 = await this.$axios.get("intervention/job-start-form", {
           headers,
         });
@@ -644,7 +644,7 @@ export default {
           this.currentinterventionlist = response20.data.list;
         } else {
           this.currentinterventionlist = [];
-        }  
+        }
         this.loader = false;
       } catch (e) {
         console.log("my error", e);
@@ -744,7 +744,7 @@ export default {
               referral_type: this.referral_type,
               appointment_status: this.appointment_status,
               appointment_type: this.appointment_type,
-              diagnosis_id: this.diagnosis_id, 
+              diagnosis_id: this.diagnosis_id,
               gender: this.gender,
               case_manager: this.case_manager,
               employment_status: this.employement_status,

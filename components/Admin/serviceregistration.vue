@@ -48,10 +48,10 @@
         </p>
       <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -77,9 +77,9 @@
           <td>{{rg.service_description}}</td>
           <td>{{rg.service_order}}</td>
           <td>
-            <a class="edit" @click="editreg(rg)"><i class="far fa-edit"></i></a>
+            <a class="edit" @click="editreg(rg)"><i class="fa fa-edit"></i></a>
             <a @click="deletereg(rg)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>

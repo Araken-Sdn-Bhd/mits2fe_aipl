@@ -60,10 +60,10 @@
       </p>
       <div class="d-flex justify-content-center" :class="SidebarAccess != 1 ? 'hide' : ''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-          <i class="far fa-save"></i> Save
+          <i class="fa fa-save"></i> Save
         </button>
         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -91,8 +91,8 @@
           <td>{{ scn.screen_route }}</td>
           <td>{{ scn.screen_description }}</td>
           <td class="td" :class="SidebarAccess != 1 ? 'hide' : ''">
-            <a class="edit" @click="editsscreen(scn)"><i class="far fa-edit"></i></a>
-            <a @click="deletescreen(scn)" class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
+            <a class="edit" @click="editsscreen(scn)"><i class="fa fa-edit"></i></a>
+            <a @click="deletescreen(scn)" class="action-icon icon-danger"><i class="fa fa-trash-alt"></i></a>
           </td>
         </tr>
       </tbody>

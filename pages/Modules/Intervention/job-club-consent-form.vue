@@ -110,7 +110,7 @@
                   </tr>
                 </tbody>
               </table>
-              
+
             </div>
           </div>
         </div>
@@ -231,7 +231,7 @@
                   </tr>
                 </tbody>
               </table>
-              
+
             </div>
           </div>
         </div>
@@ -242,7 +242,7 @@
                     class="btn btn-warning btn-text"
                     @click="OnSubmit"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                   <a @click="OnPrint" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</a
@@ -387,7 +387,7 @@ export default {
         this.Id = response.data.Data[0].patient_id;
 
         // this.name = response.data.Data[0].name;
-       
+
         // this.GetList();
         this.GetPatientConnsentdetails();
       } else {

@@ -611,7 +611,7 @@
            <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button type="button" class="btn btn-warning btn-text" @click="OnSubmit"
-                    ><i class="far fa-save"></i> Save</button
+                    ><i class="fa fa-save"></i> Save</button
                   >
                   <a @click="OnPrint" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</a

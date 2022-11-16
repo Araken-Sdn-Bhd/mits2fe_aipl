@@ -152,12 +152,12 @@
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                        ><i class="far fa-file-pdf"></i> Generate PDF</a
+                        ><i class="fa fa-file-pdf"></i> Generate PDF</a
                       >
                       <a
                         @click="Ongenerateexel"
                         class="btn btn-success btn-text"
-                        ><i class="far fa-file-excel"></i> Generate Excel</a
+                        ><i class="fa fa-file-excel"></i> Generate Excel</a
                       >
                     </div>
                   </div>

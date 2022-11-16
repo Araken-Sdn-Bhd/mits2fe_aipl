@@ -389,7 +389,7 @@
                             </td>
                             <td>
                               <span class="add-td"
-                                ><i class="far fa-plus"></i
+                                ><i class="fa fa-plus"></i
                               ></span>
                             </td>
                           </tr>
@@ -431,7 +431,7 @@
                             </td>
                             <td>
                               <span class="add-td"
-                                ><i class="far fa-plus"></i
+                                ><i class="fa fa-plus"></i
                               ></span>
                             </td>
                           </tr>
@@ -812,7 +812,7 @@
                     type="submit" @click="OnSubmit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
             </div>

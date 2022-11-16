@@ -12,7 +12,7 @@
           <div class="row">
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-shield-alt"></i></a>
+                <a href="#"><i class="fa fa-shield-alt"></i></a>
                 <h4>Screen Management & Access Control</h4>
               </div>
               <div class="card-body">
@@ -25,7 +25,7 @@
                       role="tab"
                       aria-controls="nav-home"
                       aria-selected="true"
-                      ><i class="far fa-hospital-user"></i>Hospital, Branch &
+                      ><i class="fa fa-hospital-user"></i>Hospital, Branch &
                       Team</a
                     >
                     <a
@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="nav-profile"
                       aria-selected="false"
-                      ><i class="far fa-laptop-code"></i> Screen Management</a
+                      ><i class="fa fa-laptop-code"></i> Screen Management</a
                     >
                     <a
                       class="nav-link"
@@ -46,7 +46,7 @@
                       role="tab"
                       aria-controls="nav-contact"
                       aria-selected="false"
-                      ><i class="far fa-user"></i> Roles & Matrix</a
+                      ><i class="fa fa-user"></i> Roles & Matrix</a
                     >
                   </div>
                 </nav>

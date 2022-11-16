@@ -364,7 +364,7 @@
                     <input type="text" class="form-control groupactivity" name="" />
                   </td>
                   <td>
-                    <a class="groupadd-td"><i class="far fa-plus"></i></a>
+                    <a class="groupadd-td"><i class="fa fa-plus"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -1019,7 +1019,7 @@
         class="btn btn-warning btn-text ml-auto"
         @click="OnSubmit"
       >
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
       </button>
     </div>
     <!-- </form> -->

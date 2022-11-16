@@ -5,17 +5,17 @@
       <CommonHeaderEmployer />
       <main>
            <Loader v-if="loader" />
-          
+
         <div class="container-fluid px-4">
-          
+
           <div class="card mb-4">
             <div class="page-title">
             <h1>Company Basic Information</h1>
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              
-                    
+
+
                 <div class="row">
                         <div class="col-sm-5">
                           <div class="mb-3">
@@ -383,12 +383,12 @@
                       No
                     </label>
                   </div>
-                    
+
                   </div>
                 </div>
-                      
-            
-            
+
+
+
             </div>
           </div>
           <div class="page-title">
@@ -397,7 +397,7 @@
 
           <div class="card mb-4">
             <div class="card-body">
-              
+
                       <div class="row">
                         <div class="col-sm-5">
                           <div class="mb-3">
@@ -444,20 +444,20 @@
                           </div>
                         </div>
                       </div>
-           
+
             </div>
           </div>
           <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
                     <div class="d-flex">
                       <button type="submit" class="next-1 btn btn-warning btn-text ml-auto" v-on:click="OnUpdateCompany">
-                        <i class="far fa-save"></i> update
+                        <i class="fa fa-save"></i> update
                       </button>
                     </div>
         </div>
         </div>
 
         <div class="container-fluid px-4">
-          
+
           <div class="card mb-4">
             <div class="page-title"><h1>Login Information</h1></div>
 
@@ -477,7 +477,7 @@
                             />
                           </div>
                         </div>
-                  
+
                         <div class="col-sm-5">
                           <div class="mb-3">
                             <label class="form-label">New Password</label>
@@ -493,7 +493,7 @@
                 <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
                     <div class="d-flex">
                       <button type="submit" class="next-1 btn btn-warning btn-text ml-auto">
-                        <i class="far fa-save"></i> update
+                        <i class="fa fa-save"></i> update
                       </button>
                     </div>
                 </form>
@@ -559,7 +559,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    
+
     this.company_name = this.userdetails.user.name;
     this.email_login = this.userdetails.user.email;
     this.getCompanyDetails();
@@ -653,7 +653,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        
+
         this.CityList = response.data.list;
         this.postcodelist = [];
       } else {
@@ -679,7 +679,7 @@ export default {
 
     },
     async OnUpdateCompany() {
-      
+
       this.errorList = [];
       try {
         if (!this.company_name) {
@@ -765,12 +765,12 @@ export default {
             });
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });}
     },
-   
+
     async getCompanyDetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -856,7 +856,7 @@ export default {
         });
 
     };
- 
+
     },
   },
 };

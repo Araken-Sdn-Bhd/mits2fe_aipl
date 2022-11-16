@@ -245,7 +245,7 @@
                           </td>
 
                           <td @click="test">
-                            <span class="add-td"><i class="far fa-plus"></i></span>
+                            <span class="add-td"><i class="fa fa-plus"></i></span>
                           </td>
                         </tr>
                       </tbody>
@@ -276,7 +276,7 @@
                                                         v-model="score">
                                                     <td> -->
                   <!-- <span class="add-td"
-                                                      ><i class="far fa-plus"></i
+                                                      ><i class="fa fa-plus"></i
                                                     ></span> -->
                   <!-- </td> -->
                   <!-- </div>
@@ -547,7 +547,7 @@
                 </p>
                 <div class="d-flex" v-if="!pid">
                   <button type="submit" class="btn btn-warning btn-text ml-auto">
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>

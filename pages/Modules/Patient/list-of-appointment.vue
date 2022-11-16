@@ -16,7 +16,7 @@
                   <div class="col-sm-5 mt-2 mb-3 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
-                        <i class="far fa-search"></i>
+                        <i class="fa fa-search"></i>
                       </span>
                       <input
                         type="text"

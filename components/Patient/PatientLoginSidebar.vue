@@ -7,7 +7,7 @@
             <ul>
               <li ref="dashboard" class="" @click="changesidebar('dashboard')">
                 <a class="nav-link" href="#">
-                  <i class="far fa-home-alt"></i>
+                  <i class="fa fa-home-alt"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
@@ -27,7 +27,7 @@
                   aria-expanded="true"
                   aria-controls="system-setting"
                 >
-                  <i class="far fa-file-alt"></i>
+                  <i class="fa fa-file-alt"></i>
                   <span>Online Self Test</span>
                 </a>
                 <ul
@@ -38,25 +38,25 @@
                 >
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/cbi">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>CBI</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/dass">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>DASS</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/phq-9">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>PHQ 9</span>
                     </a>
                   </li>
                   <li>
                     <a class="nav-link" href="/app/modules/Patient/whodas">
-                      <i class="far fa-file-contract"></i>
+                      <i class="fa fa-file-contract"></i>
                       <span>WHODAS</span>
                     </a>
                   </li>
@@ -66,7 +66,7 @@
                       class="nav-link"
                       href="/app/modules/Patient/list-of-appointment"
                     >
-                      <i class="far fa-calendar-alt"></i>
+                      <i class="fa fa-calendar-alt"></i>
                       <span>Appointment</span>
                     </a>
                   </li>
@@ -80,14 +80,14 @@
                 @click="changesidebar('appointment')"
               >
                 <a class="nav-link" href="/app/modules/Patient/attendance-record">
-                  <i class="far fa-calendar-alt"></i>
+                  <i class="fa fa-calendar-alt"></i>
                   <span>Appointment</span>
                 </a>
               </li>
 
               <li ref="calender" class="" @click="changesidebar('calender')">
                 <a class="nav-link" href="/app/modules/Patient/calendar-view">
-                  <i class="far fa-calendar-star"></i>
+                  <i class="fa fa-calendar-star"></i>
                   <span>Calendar</span>
                 </a>
               </li>
@@ -97,7 +97,7 @@
                   class="nav-link"
                   href="/app/modules/Patient/list-of-screening-patient"
                 >
-                  <i class="far fa-file-search"></i>
+                  <i class="fa fa-file-search"></i>
                   <span>Screening</span>
                 </a>
               </li>
@@ -105,26 +105,26 @@
               <div v-show="userdetails">
                 <li>
                   <a href="/app/modules/Admin/admin-dashboard" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Admin Manag...
                   </a>
                 </li>
 
                 <li>
                   <a href="/app/modules/Intervention/patient-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Intervention Manag...
                   </a>
                 </li>
                 <li>
                   <a href="/app/modules/Report/sharp" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Report Manag...
                   </a>
                 </li>
                 <li>
                   <a href="/app/modules/Shharp/patients-list" class="nav-link">
-                    <i class="far fa-home-alt"></i>
+                    <i class="fa fa-home-alt"></i>
                     Shharp Manag...
                   </a>
                 </li>

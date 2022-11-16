@@ -9,7 +9,7 @@
             <div class="card-header">
               <h4>Volunteer, Outreach, And Networking Application Form</h4>
               <a href="#" class="visibility-h"
-                ><i class="far fa-user-edit"></i
+                ><i class="fa fa-user-edit"></i
               ></a>
             </div>
             <div class="card-body mt-3">
@@ -279,7 +279,7 @@
                     <input type="text" class="form-control activity" v-model="exp.activity" name="" />
                   </td>
                   <td>
-                    <a class="add-td"><i class="far fa-plus"></i></a>
+                    <a class="add-td"><i class="fa fa-plus"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -1062,7 +1062,7 @@
                     @click="OnSubmit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
 

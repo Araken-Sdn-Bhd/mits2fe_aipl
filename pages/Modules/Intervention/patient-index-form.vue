@@ -1374,7 +1374,7 @@
               <div class="d-flex">
                 <div class="ml-auto">
                   <button v-if="!pid" class="btn btn-warning btn-text" @click="OnSubmit('0')"
-                    ><i class="far fa-save"></i> Save as Draft</button
+                    ><i class="fa fa-save"></i> Save as Draft</button
                   >
                   <button v-if="!pid" @click="OnSubmit('1')" class="btn btn-success btn-text"
                     ><i class="fad fa-paper-plane"></i> Submit</button

@@ -11,7 +11,7 @@
                     class="nav-link"
                     @click="SidebarAccessCompany()"
                   >
-                  <i class="far fa-building"></i>
+                  <i class="fa fa-building"></i>
                       Company Basic Information
                   </a>
                 </li>
@@ -20,7 +20,7 @@
                     class="nav-link"
                     @click="SidebarAccessJob()"
                   >
-                  <i class="far fa-users"></i>
+                  <i class="fa fa-users"></i>
                       Job Offers
                   </a>
                 </li>

@@ -11,22 +11,22 @@
             <ul>
               <li>
                 <a href="/app/modules/Patient/cbi" class="nav-link"
-                  ><i class="far fa-file-contract"></i> <span>CBI</span></a
+                  ><i class="fa fa-file-contract"></i> <span>CBI</span></a
                 >
               </li>
               <li>
                 <a href="/app/modules/Patient/dass" class="nav-link"
-                  ><i class="far fa-file-contract"></i> <span>DASS</span></a
+                  ><i class="fa fa-file-contract"></i> <span>DASS</span></a
                 >
               </li>
               <li>
                 <a href="/app/modules/Patient/phq-9" class="nav-link"
-                  ><i class="far fa-file-contract"></i> <span>PHQ 9</span></a
+                  ><i class="fa fa-file-contract"></i> <span>PHQ 9</span></a
                 >
               </li>
               <li>
                 <a href="/app/modules/Patient/whodas" class="nav-link"
-                  ><i class="far fa-file-contract"></i> <span>WHODAS</span></a
+                  ><i class="fa fa-file-contract"></i> <span>WHODAS</span></a
                 >
               </li>
             </ul>
@@ -138,7 +138,7 @@
                   <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
                   <button
                     type="button"

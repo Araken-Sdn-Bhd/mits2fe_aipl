@@ -11,7 +11,7 @@
           <div class="card mb-4" v-if="staffdetails">
             <div class="card-body">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-user-tie"></i></a>
+                <a href="#"><i class="fa fa-user-tie"></i></a>
                 <h4>Staff Detail</h4>
               </div>
 
@@ -106,12 +106,12 @@
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         class="edit"
-                        ><i class="far fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>
                       <a
                         @click="delRow(staff)" v-if="SidebarAccess==1"
-                        class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
-                     
+                        class="action-icon icon-danger"><i class="fa fa-trash-alt"></i></a>
+
                     </td>
                   </tr>
                 </tbody>
@@ -578,21 +578,21 @@ export default {
       const local = moment.utc(date).local().format("YYYY-MM-DD");
       return local;
       }return "";
-      
+
     },
     formatetimeend(date) {
       if(date){
       const local = moment.utc(date).local().format("hh:mm");
       return local;
       }return "";
-      
+
     },
     formatedatetimeappoint(date) {
       if(date){
       const local = moment.utc(date).local().format("YYYY-MM-DD hh:mm");
       return local;
       }return "";
-      
+
     },
     async updatestaffpatient() {
       const headers = {

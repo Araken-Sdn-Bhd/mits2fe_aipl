@@ -50,19 +50,19 @@
                         style="cursor: pointer"
                         @click="OnviewClick(job.position_offered)"
                         class="view"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
                       <a
                         style="cursor: pointer"
                         @click="OnaddClick(job.position_offered)" v-if="SidebarAccess==1"
                         class="add"
-                        ><i class="far fa-plus"></i
+                        ><i class="fa fa-plus"></i
                       ></a>
                       <!-- <a
                         style="cursor: pointer"
                         @click="OneditClick(job.position_offered)"
                         class="add"
-                        ><i class="far fa-plus"></i
+                        ><i class="fa fa-plus"></i
                       ></a> -->
                     </td>
                   </tr>

@@ -12,7 +12,7 @@
           </div>
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-shield-alt"></i></a>
+                <a href="#"><i class="fa fa-shield-alt"></i></a>
                 <h4>Religion</h4>
               </div>
               <div class="card-body">
@@ -56,10 +56,10 @@
                        </p>
                         <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
                     <!-- close-row -->
@@ -87,10 +87,10 @@
                         <td>{{setting.section_order}}</td>
                         <td>
                           <a  class="edit" @click="editsetting(setting)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletesetting(setting)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
                       </tr>
@@ -162,7 +162,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-   
+
   },
   methods: {
     async insertreligion() {

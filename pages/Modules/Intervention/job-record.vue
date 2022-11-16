@@ -16,7 +16,7 @@
                   <div class="col-sm-5 mb-2 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
-                        <i class="far fa-search"></i>
+                        <i class="fa fa-search"></i>
                       </span>
                       <input
                         type="text"
@@ -60,9 +60,9 @@
                       <span v-if="job.job_availability == 1">No</span>
                     </td>
                     <td>
-                      <a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="view"><i class="far fa-eye"></i></a>
+                      <a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="view"><i class="fa fa-eye"></i></a>
                       <!--<a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="edit" v-if="SidebarAccess==1"
-                        ><i class="far fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>-->
                     </td>
                   </tr>

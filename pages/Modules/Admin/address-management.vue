@@ -10,7 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
-              <a href="#"><i class="far fa-map-marker-alt"></i></a>
+              <a href="#"><i class="fa fa-map-marker-alt"></i></a>
               <h4>Address Management</h4>
             </div>
             <div class="card-body">
@@ -18,7 +18,7 @@
                 <ul class="nav nav-tab">
                   <li class="nav-item">
                     <a class="nav-link active" href="#">
-                      <i class="far fa-hospital-user"></i> Country, State &
+                      <i class="fa fa-hospital-user"></i> Country, State &
                       Postcode</a
                     >
                   </li>
@@ -131,10 +131,10 @@
       <!-- close-row -->
        <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mycountryId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!mycountryId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -162,10 +162,10 @@
           <td>{{country.country_order}}</td>
           <td class="td" :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editcountry(country)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletecountry(country)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
         </tr>
@@ -219,10 +219,10 @@
       <!-- close-row -->
        <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="mystateId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!mystateId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -250,10 +250,10 @@
           <td>{{state.state_order}}</td>
             <td class="td" :class="SidebarAccess!=1?'hide':''">
                           <a  class="action-icon icon-success" @click="editstate(state)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletestate(state)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
         </tr>
@@ -334,10 +334,10 @@
       <!-- close-row -->
         <div class="d-flex justify-content-center"  :class="SidebarAccess!=1?'hide':''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="cityId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!cityId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -369,10 +369,10 @@
           <td>{{cty.postcode_order}}</td>
             <td class="td" :class="SidebarAccess!=1?'hide':''">
                           <a  class="action-icon icon-success" @click="editcity(cty)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletecity(cty)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
         </tr>
