@@ -217,7 +217,7 @@ export default {
           const response = await this.$axios.post(
             "/appointment-request/add",
             {
-              patient_mrn_id: this.userId,
+              added_by: this.userId,
               branch_id: this.branch,
               name: this.name,
               nric_or_passportno: this.nric,
