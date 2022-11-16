@@ -108,10 +108,25 @@
                         class="edit"
                         ><i class="far fa-edit"></i
                       ></a>
+                      <a
+                        @click="delRow(staff)" v-if="SidebarAccess==1"
+                        class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
+                     
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <p
+                v-show="!list.length"
+                style=" padding: 0px;
+                  margin: 10px;
+                  color: red;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                No Record Found
+              </p>
             </div>
           </div>
         </div>
@@ -139,6 +154,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <!-- modal -->
           <div class="modal-body">
             <form>
               <div class="mb-3">
@@ -520,7 +536,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        alert(JSON.stringify(response.data.Data));
+        //alert(JSON.stringify(response.data.Data));
         if(this.staffpatientlist = response.data.Data[0]){
         this.outcome_id = response.data.Data[0].outcome;
         this.complexity_services_id =
@@ -542,6 +558,11 @@ export default {
         //             <td>{{ staff.csr_ }}</td>
         //             <td>{{ staff.oc_ }}</td>
         //             <td>{{ staff.ls_ }}</td>
+      }
+    },
+    async delRow(data) {
+      if (confirm("Are you sure you want to delete this record ? ")) {
+
       }
     },
     formatedate(date) {
