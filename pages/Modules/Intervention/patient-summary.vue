@@ -888,6 +888,7 @@ export default {
       nextappointmentdetails: {},
       historylist: [],
       date: "2022-08-01T09:40:32Z",
+      appId:"",
     };
   },
   beforeMount() {
@@ -895,6 +896,7 @@ export default {
     console.log("my details", this.userdetails);
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientClinicinfodetails();
     this.Getnextpreviousappointment();
     $(document).ready(function () {
@@ -1323,19 +1325,19 @@ export default {
     OnPsychiatryclerkingnote() {
       this.$router.push({
         path: "/modules/Intervention/psychiatry-clerking-note",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId  },
       });
     },
     Oncounsellorclerkingnote() {
       this.$router.push({
         path: "/modules/Intervention/counsellor-clerking-note",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oncprogressnote() {
       this.$router.push({
         path: "/modules/Intervention/progress-note",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oncounselingprogressnote() {

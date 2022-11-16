@@ -234,6 +234,7 @@ export default {
       assign_team: 0,
       staff_id:0,
       serviceType: "",
+      
     };
   },
 
@@ -384,7 +385,7 @@ export default {
       );
       this.$router.push({
         path: "/modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
-        query: { id: Id },
+        query: { id: Id , appId: aptId},
       });
     },
     async OnSearch() {

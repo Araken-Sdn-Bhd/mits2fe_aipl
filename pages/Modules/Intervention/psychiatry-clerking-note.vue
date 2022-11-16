@@ -396,6 +396,8 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                       <br>
                 <div class="d-flex" v-if="!pid">
                   <a
                       @click="GoBack"
@@ -449,6 +451,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
@@ -470,6 +473,7 @@ export default {
       diagonisislist: [],
       locationlist: [],
       Id: 0,
+      appId:0,
       pid:0,
       type:"",
       chief_complain: "",
@@ -500,6 +504,8 @@ export default {
   },
   methods: {
     async Onphychiatryclerkingnote() {
+      
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       console.log("services", this.category_services);
       this.errorList = [];
@@ -519,9 +525,7 @@ export default {
         if (!this.mental_state_examination) {
           this.errorList.push("Mental State Examination is required");
         }
-        // if (!this.diagnosis_id) {
-        //   this.errorList.push("Diagnosis is required");
-        // }
+        
         if (!this.management) {
           this.errorList.push("Management is required");
         }
@@ -573,9 +577,7 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
+      
         if (
           this.chief_complain &&
           this.presenting_illness &&
@@ -626,6 +628,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               id:this.pid,
+              appId: this.appId,
             },
             { headers }
           );
@@ -644,7 +647,7 @@ export default {
           }
         }
       } catch (e) {}
-    },
+  }},
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
