@@ -148,17 +148,35 @@
                     </div>
                   </div>
                   <!-- row -->
+                  <Error :message="error" v-if="error" />
+                    <p v-if="errorList.length">
+                      <ul>
+                        <li style="color:red"  v-for='err in errorList' :key='err' >
+                           {{ err }}
+                        </li>
+                      </ul>
+                    </p>
 
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                         ><i class="far fa-file-pdf"></i> Generate PDF</a
                       >
-                      <a
-                        @click="Ongenerateexel"
-                        class="btn btn-success btn-text"
-                        ><i class="far fa-file-excel"></i> Generate Excel</a
+                      <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"           
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="General Report"
+                       :name=excelname
                       >
+                      <i class="far fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
                     </div>
                   </div>
                 </form>
@@ -169,10 +187,11 @@
       </div>
     </div>
     <div id="result" class="hide" ref="result" style="background: #fff">
-      <div>Total Days: {{ Total_Days }}</div>
-      <div>Total Patient: {{ Total_Patient }}</div>
+      <div><h2>REPORT OF VOLUNTEER, OUTREACH AND NETWORKING</h2></div>
+      <div><br><b> TOTAL DAYS:</b> {{ Total_Days }}</div>
+      <div><b>TOTAL PATIENTS:</b> {{ Total_Patient }}</div>
 
-      <table class="total-patient-table">
+      <br><table class="total-patient-table">
         <thead>
           <tr>
             <th class="thhead">VOLUNTEER</th>
@@ -182,9 +201,9 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ Volunteer }}</td>
-            <td>{{ Outreach }}</td>
-            <td>{{ Networking }}</td>
+            <td class="tdrow">{{ Volunteer }}</td>
+            <td class="tdrow">{{ Outreach }}</td>
+            <td class="tdrow">{{ Networking }}</td>
           </tr>
         </tbody>
       </table>
@@ -226,12 +245,31 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import downloadexcel from "vue-json-excel";
 export default {
-  components: { CommonSidebar, CommonHeader },
+  components: { CommonSidebar, CommonHeader, downloadexcel },
 
   name: "activities-report-VON",
   data() {
     return {
+      json_fields: {
+        "No":'No',
+        "Name":'Name',
+        "Type of Collaboration":'Type_of_Collaboration',
+        "Area of Involvement":'Type_of_Involvement',
+        "Cost":'Cost',
+        "Location":'Location',
+        "Mentari Centre":'Mentari',
+        "Others":'Others',
+        "Screening Done":'Screening_Done',
+        "No. of Participants":'No_of_Participants',
+        "Contact Number":'Contact_Number',
+
+      },
+      excelname: "",
+      sheetname: "VON Report",
+      header:"",
+
       userdetails: null,
       error: null,
       loader: false,
@@ -335,8 +373,10 @@ export default {
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
                 var pdf = new jsPDF("p", "pt", "a4");
-                pdf.addHTML($("#result")[0], function () {
-                  pdf.save("Report.pdf");
+                pdf.internal.scaleFactor =2.50; 
+                var options = {pagesplit: true};
+                pdf.addHTML($("#result")[0],options, function () {
+                  pdf.save("VONReport.pdf");
                 });
               }, 100);
               setTimeout(() => {
@@ -384,9 +424,14 @@ export default {
           );
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data.filepath) {
-              window.open(response.data.filepath, "_blank");
-            } else {
+            if (response.data) {
+
+              this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
+
+              } else {
               this.error = "No Record Found";
             }
           }
