@@ -346,9 +346,24 @@
                   >
                     <i class="far fa-file-pdf"></i> Generate PDF
                   </button>
-                  <a @click="Ongenerateexel" class="btn btn-success btn-text"
+                  <!-- <a @click="Ongenerateexel" class="btn btn-success btn-text"
                     ><i class="far fa-file-excel"></i> Generate Excel</a
-                  >
+                  > -->
+                  <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"           
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="General Report"
+                       :name=excelname
+                      >
+                      <i class="far fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
                 </div>
               </div>
 
@@ -404,7 +419,7 @@
                     <tr v-for="(rp, index) in list" :key="index">
                       <td class="tdrow">{{ index + 1 }}</td>
                       <td class="tdrow">{{ rp.Registration_date }}</td>
-                      <td class="tdrow">{{ rp.Registration_Time }}</td>
+                      <td class="tdrow-limit">{{ rp.Registration_Time }}</td>
                       <td class="tdrow-num">{{ rp.nric_no }}</td>
                       <td class="tdrow-limit">{{ rp.Name }}</td>
                       <td class="tdrow-num">{{ rp.ADDRESS }}</td>
@@ -435,7 +450,7 @@
                       <!-- <td class="tdrow">{{ rp.outcome }}</td> -->   
                       <td class="tdrow-limit">Ongoing Therapeutic Intervention</td><!--TESTING-->
                       <!-- <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td> -->
-                      <td class="tdrow">F20.4</td>
+                      <td class="tdrow-num">F20.4</td>
                       <td class="tdrow-limit-diagnosis">ISP by and exposure to antiepileptics, sedative-hypnotic, antiparkisonism and psychotropic drugs, not elsewhere classified</td>
                       <!-- <td class="tdrow">{{ rp.DIAGNOSIS }}</td> -->
                       <!-- <td class="tdrow">{{ rp.category_of_services }}</td> -->
@@ -450,8 +465,15 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import Vue from "vue";
+import downloadexcel from "vue-json-excel";
+import JsonExcel from "vue-json-excel";
 export default {
   components: { CommonSidebar, CommonHeader },
+  name: "App",
+  components: {
+    downloadexcel,
+  },
   name: "sharp",
    head: {
     script: [
@@ -464,6 +486,47 @@ export default {
   },
   data() {
     return {
+
+      json_fields: {
+        "No":'No',
+        "Reg Date":'Registration_date',
+        "Reg Time":'Registration_Time',
+        "NRIC/ID":'nric_no',
+        "Name":'Name',
+        "Address":'ADDRESS',
+        "City":'CITY',
+        "State":'STATE',
+        "PostCode":'POSTCODE',
+        "Citizenship":'citizenship',
+        "Phone Number":'PHONE_NUMBER',
+        "DOB":'DATE_OF_BIRTH',
+        "Age":'AGE',
+        "SEX":'GENDER',
+        "Race":'race',
+        "Religion":'religion',
+        "MARITAL STATUS":'marital',
+        "Occu Status":'occupation_status',
+        "Occu Sector":'occupation_sector',
+        "ACCOM":'accomodation',
+        "Education":'education_level',
+        "Fee Exemption Status":'fee_exemption_status',
+        "Referral Category":'TYPE_OF_Refferal',
+        "Patient Category":'CATEGORY_OF_PATIENTS',
+        "visit Category":'TYPE_OF_Visit',
+        "Appointment":'APPOINTMENT_TYPE',
+        "Outcome":'outcome',
+        "Diagnosis Code":'DIAGNOSIS_CODE',
+        "Diagnosis":'DIAGNOSIS',
+        "Service":'category_of_services',
+        "Staff":'Attending_staff',
+      },
+      excelname: "",
+      sheetname: "General Report",
+      header:"",
+      ReportList:[],
+      No:0,
+      filename:'',
+
       userdetails: null,
       error: null,
       loader: false,
@@ -712,9 +775,10 @@ export default {
                 pagesplit: true
 
             };
+              // this.filename=response.data.filename;
 
                 pdf.addHTML($("#result")[0],options, function () {
-                  pdf.save("Report.pdf");
+                  pdf.save("GeneralReport.pdf");
                 });
               
               }, 100);
@@ -731,6 +795,12 @@ export default {
           }
         } catch (e) {}
       }
+    },
+    startDownload(){
+        alert('show loading');
+    },
+    finishDownload(){
+        alert('hide loading');
     },
     async Ongenerateexel() {
       this.errorList = [];
@@ -775,16 +845,19 @@ export default {
           );
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data.filepath) {
-              window.open(response.data.filepath, "_blank");
+            if (response.data) {
+
+              this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
+
             } else {
               this.error = "No Record Found";
             }
-          } else {
-            this.error = "No Record Found";
           }
-        } catch (e) {}
-      }
+          } catch (e) {}
+        }
     },
   },
 };
@@ -793,7 +866,7 @@ export default {
 .tdrow {
   padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 8.0px;
+  font-size: 7.0px;
   font-weight: 600;
   }
 .tdrow-num{
@@ -830,7 +903,7 @@ export default {
 
   }
 .thhead {
-  background: #ddd;
+  background: #bbf2eb;
   padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
@@ -838,7 +911,7 @@ export default {
   line-height: normal;
 }
 .thhead-occu-sector{
-  background: #ddd;
+  background: #bbf2eb;
   padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
