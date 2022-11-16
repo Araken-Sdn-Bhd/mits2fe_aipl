@@ -90,13 +90,28 @@
                         class="btn btn-success btn-text"
                         ><i class="far fa-file-excel"></i> Generate Excel</a
                       >
+                      <!-- <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="National KPI"
+                       :name=excelname
+                      >
+                      <i class="far fa-file-excel"></i> Generate Excel
+                      </downloadexcel> -->
                     </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <div id="result" class="hide_" ref="result" style="background: #fff">
+          <div id="result" class="hide" ref="result" style="background: #fff">
             <table id="datatable">
               <thead>
                 <tr class="bg">
@@ -107,7 +122,7 @@
 
                 <tr class="bg" id="tableMonths"></tr>
 
-                <tr class="vertical bg" id="tableHeadKeys"></tr>
+                <tr class="vertical bg text-justify" id="tableHeadKeys"></tr>
               </thead>
               <tbody id="tablebody_"></tbody>
             </table>
@@ -170,15 +185,28 @@ table {
 
   text-orientation: mixed;
 }
+.vertical-text {
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+}
 </style>
 <script>
 import { max } from "moment";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import Vue from "vue";
+import downloadexcel from "vue-json-excel";
+import JsonExcel from "vue-json-excel";
+
+Vue.component("downloadExcel", JsonExcel);
+
 export default {
   components: { CommonSidebar, CommonHeader },
 
-  name: "sharp",
+  name: "national-kpi-report",
+  components: {
+    downloadexcel,
+  },
   head: {
     script: [
       {
@@ -190,6 +218,28 @@ export default {
   },
   data() {
     return {
+      json_fields: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no",
+        "PROCEDURE":"Procedure",
+        "NEXT VISIT":"Next_visit",
+        "TIME REGISTERED" :"time_registered",
+        "TIME SEEN":"time_seen",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      excelname: "",
+      sheetname: "NATIONAL KPI",
+      header:"",
       userdetails: null,
       fromDate: "", //2022-04-12
       toDate: "", //2022-08-30
@@ -199,6 +249,7 @@ export default {
       agelist: [],
       genderlist: [],
       racelist: [],
+      ReportList:[],
       Gender: "",
       Age: "",
       race_id: "",
@@ -297,6 +348,9 @@ export default {
             "November",
             "Disember",
           ];
+          var tableHeads = [
+            "KPI(%)","KPI(%)","KPI(%)","KPI(%)","KPI(%)",
+          ]
 
           var tab1 = document.getElementById("tableHeadKeys");
           var tab2 = document.getElementById("tableMonths");
@@ -371,18 +425,18 @@ export default {
                 tmp2[ii]=tmp2[jj];
                 tmp2[jj]=tmp;
               }
-            }            
+            }
           }
-          
+
           tmp2.forEach((month) => {
             tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000; width: 200px;'>${
               months[parseInt(month) - 1]
             }</td>`;
-            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 249px;'> <img src="/_nuxt/images/tab5.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab1.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab2.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;'><img src="/_nuxt/images/tab3.jpg" style='width: 40px;'/></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 249px;' class='fifth-td'><img src="/_nuxt/images/tab4.jpg" style='width: 40px;'/></td>`;
+            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 459px;'> <a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Newly Job Placed (a)</a></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Ongoing Job Placement (b)</a></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Total Caseload (c)</a></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Total Dismissed (d)</a></td>
+                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'class='fifth-td'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>KPI (%)</a></td>`;
           });
 
           if (response.data.code == 200) {
@@ -444,6 +498,12 @@ export default {
           }
         } catch (e) {}
       }
+    },
+    startDownload(){
+        this.loader = true;
+    },
+    finishDownload(){
+        this.loader = false;
     },
     async Ongenerateexel() {
       this.errorList = [];
