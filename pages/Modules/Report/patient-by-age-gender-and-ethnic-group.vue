@@ -209,6 +209,10 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import Vue from "vue";
+import downloadexcel from "vue-json-excel";
+import JsonExcel from "vue-json-excel";
+
 export default {
   components: { CommonSidebar, CommonHeader },
 
