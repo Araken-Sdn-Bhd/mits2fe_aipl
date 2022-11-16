@@ -810,14 +810,14 @@
                                 <a
                     @click="GoBack"
                     class="btn btn-primary btn-text"
-                    ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                   >
               <div class="ml-auto btn-boxs">
                 <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
-                  <i class="far fa-download"></i> Download
+                  <i class="fa fa-download"></i> Download
                 </button>
                 <button type="submit" class="btn btn-success btn-text" @click="Onoctreferalform">
-                  <i class="far fa-paper-plane"></i> Save
+                  <i class="fa fa-paper-plane"></i> Save
                 </button>
               </div>
             </div>

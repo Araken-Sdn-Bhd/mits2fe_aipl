@@ -43,13 +43,13 @@
                 <div class="d-flex" :class="SidebarAccess!=1?'hide1':''">
                   <div class="ml-auto">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                      ><i class="far fa-file-pdf"></i> Generate PDF</a
+                      ><i class="fa fa-file-pdf"></i> Generate PDF</a
                     >
                     <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"           
+                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -58,12 +58,12 @@
                         worksheet="Request Appointment Report"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
                   </div>
                 </div>
               </form>
-            
+
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
                 style="background: #fff"
               >
               <div class="topnav"> <div>PERIOD OF SERVICES:  {{ fromDate }}</div> <p class='to'>TO</p> <div>{{ toDate }}</div> </div>
-              
+
                 <div>TOTAL REQUEST:  {{ total }}</div>
 
                 <table class="table" id="datatable">
@@ -114,7 +114,7 @@ import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import downloadexcel from "vue-json-excel";
 export default {
- 
+
   components: { CommonSidebar, CommonHeader },
   name: "App",
   components: {
@@ -158,14 +158,14 @@ export default {
       total:'',
        SidebarAccess:null,
 
-        
+
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     if(this.userdetails){
-      this.id=this.userdetails.user.id; 
+      this.id=this.userdetails.user.id;
       this.branch_id=this.userdetails.branch.branch_id;
     }
   },
@@ -209,7 +209,7 @@ export default {
                 });
 
 
-            
+
           }, 100);
           setTimeout(() => {
             this.$refs.result.classList.add("hide");

@@ -33,7 +33,7 @@
 
             </div>
             <div class="card-header icon-title">
-              <a href="#"><i class="far fa-shield-alt"></i></a>
+              <a href="#"><i class="fa fa-shield-alt"></i></a>
               <h4>Create New Job</h4>
             </div>
             <div class="card-body">

@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
-              <a href="#"><i class="far fa-info"></i></a>
+              <a href="#"><i class="fa fa-info"></i></a>
               <h4>HOD PSYCHIATRIST & HOSPITAL DETAILS</h4>
             </div>
             <div class="card-body">
@@ -25,7 +25,7 @@
                       role="tab"
                       aria-controls="nav-home"
                       aria-selected="true"
-                      ><i class="far fa-user-lock"></i> Hospital Details</a
+                      ><i class="fa fa-user-lock"></i> Hospital Details</a
                     >
                   </li>
                   <li class="nav-item">
@@ -37,7 +37,7 @@
                       role="tab"
                       aria-controls="nav-profile"
                       aria-selected="false"
-                      ><i class="far fa-ban"></i> HOD Psychiatrist Details</a
+                      ><i class="fa fa-ban"></i> HOD Psychiatrist Details</a
                     >
                   </li>
                 </ul>

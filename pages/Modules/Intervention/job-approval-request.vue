@@ -32,7 +32,7 @@
                     <td >{{ job.NewJobs }}</td>
                     <td style="width:5%">
                       <a style="cursor:pointer;" @click="OnviewClick(job.company_id,job.company_name)" class="view"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
                     </td>
                   </tr>

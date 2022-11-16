@@ -13,9 +13,9 @@
               <h4>Edit Mentari Staff</h4>
               <div class="icon-set">
                 <a @click="gototransfer"
-                  ><i class="far fa-share-square"></i
+                  ><i class="fa fa-share-square"></i
                 ></a>
-                <!-- <a href="#"><i class="far fa-trash-alt"></i></a> -->
+                <!-- <a href="#"><i class="fa fa-trash-alt"></i></a> -->
               </div>
             </div>
             <div class="card-body">
@@ -227,11 +227,11 @@
                   <a
                     href="/app/modules/Admin/staff-management"
                     class="btn btn-primary btn-text"
-                    ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                   >
                   <div class="btn-right">
                     <button type="submit" class="btn btn-warning btn-text">
-                      <i class="far fa-save"></i> Save
+                      <i class="fa fa-save"></i> Save
                     </button>
                   </div>
                 </div>

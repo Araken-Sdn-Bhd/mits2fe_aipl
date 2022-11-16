@@ -160,13 +160,13 @@
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                        ><i class="far fa-file-pdf"></i> Generate PDF</a
+                        ><i class="fa fa-file-pdf"></i> Generate PDF</a
                       >
                       <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"           
+                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -175,7 +175,7 @@
                         worksheet="General Report"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
                     </div>
                   </div>
@@ -373,7 +373,7 @@ export default {
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
                 var pdf = new jsPDF("p", "pt", "a4");
-                pdf.internal.scaleFactor =2.50; 
+                pdf.internal.scaleFactor =2.50;
                 var options = {pagesplit: true};
                 pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("VONReport.pdf");

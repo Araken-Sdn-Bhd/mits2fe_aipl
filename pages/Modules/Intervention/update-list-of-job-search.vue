@@ -92,7 +92,7 @@
                       </td>
                       <td><input type="date" class="form-control intdate" v-model="job1.interview_date"/></td>
                       <td>
-                        <a class="add-row"><i class="far fa-plus"></i></a>
+                        <a class="add-row"><i class="fa fa-plus"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -248,7 +248,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -360,7 +360,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>
@@ -431,7 +431,7 @@ export default {
         $(".services").not(targetBox).hide();
         $(targetBox).show();
       });
-    
+
     });
   },
   methods: {

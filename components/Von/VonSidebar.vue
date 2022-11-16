@@ -7,7 +7,7 @@
             <ul>
               <li ref="tab1" @click="changesidebar('tab1')">
                 <a class="nav-link" href="#">
-                  <i class="far fa-home-alt"></i>
+                  <i class="fa fa-home-alt"></i>
                   <span>Dashboard</span>
                 </a>
               </li>

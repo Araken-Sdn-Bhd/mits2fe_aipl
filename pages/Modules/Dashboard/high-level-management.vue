@@ -9,7 +9,7 @@
             <h1>High Level Management</h1>
             <div class="input-group dashboard-search">
               <span class="input-group-text" id="basic-addon1"
-                ><i class="far fa-search"></i
+                ><i class="fa fa-search"></i
               ></span>
               <input
                 type="text"
@@ -724,7 +724,7 @@ export default {
         if(response.data.male){
         this.sharp_total_caseloadmale = response.data.male[0].Sharptotal;
         this.sharp_total_caseloadfemale = response.data.female[0].Sharptotal;
-        }          
+        }
           console.log('male',this.sharp_total_caseloadfemale);
           this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
 
@@ -905,7 +905,7 @@ export default {
               ],
             },
           });
-  
+
   if(this.sharp_total_caseloadmale!=0 ||this.sharp_total_caseloadfemale!=0){
 var xValues = ["Male","Female"];
     var yValues1 = [this.sharp_total_caseloadmale,this.sharp_total_caseloadfemale];

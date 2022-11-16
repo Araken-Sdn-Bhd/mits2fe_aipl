@@ -65,7 +65,7 @@
                       </td>
                       <td><input type="text" class="form-control reason" /></td>
                       <td>
-                        <a class="add-row"><i class="far fa-plus"></i></a>
+                        <a class="add-row"><i class="fa fa-plus"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -89,7 +89,7 @@
                       </td>
                       <td><input type="text" class="form-control reason" v-model="job1.reason_for_quit"/></td>
                       <td>
-                        <a class="add-row"><i class="far fa-plus"></i></a>
+                        <a class="add-row"><i class="fa fa-plus"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -245,7 +245,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -357,7 +357,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>
@@ -711,11 +711,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }

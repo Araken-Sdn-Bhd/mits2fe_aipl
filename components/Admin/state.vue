@@ -43,15 +43,15 @@
       <!-- close-row -->
        <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="stateId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!stateId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
 
-   
+
 
     <div class="table-title">
       <h3>List of State</h3>
@@ -74,10 +74,10 @@
           <td>{{state.state_order}}</td>
             <td>
                           <a  class="action-icon icon-success" @click="editstate(state)"
-                            ><i class="far fa-edit"></i
+                            ><i class="fa fa-edit"></i
                           ></a>
                           <a class="action-icon icon-danger" @click="deletestate(state)"
-                            ><i class="far fa-trash-alt"></i
+                            ><i class="fa fa-trash-alt"></i
                           ></a>
                         </td>
         </tr>
@@ -104,7 +104,7 @@ export default {
    created: function() {
        console.log('my list call');
     },
-  
+
   mounted() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -281,7 +281,7 @@ export default {
       this.stateId = 0;
       this.GetStateList();
     },
-    
+
   },
 };
 </script>

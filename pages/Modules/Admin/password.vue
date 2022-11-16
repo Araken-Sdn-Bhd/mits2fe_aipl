@@ -11,7 +11,7 @@
           </div>
             <div class="card mb-4">
               <div class="card-header icon-title">
-                <a href="#"><i class="far fa-key"></i></a>
+                <a href="#"><i class="fa fa-key"></i></a>
                 <h4>PASSWORD SETUP</h4>
               </div>
               <div class="card-body">
@@ -25,7 +25,7 @@
                       role="tab"
                       aria-controls="nav-home"
                       aria-selected="true"
-                      ><i class="far fa-font-case"></i>Password Characteristic</a
+                      ><i class="fa fa-font-case"></i>Password Characteristic</a
                     >
                     </li>
                     <li class="nav-item">
@@ -37,7 +37,7 @@
                       role="tab"
                       aria-controls="nav-profile"
                       aria-selected="false"
-                      ><i class="far fa-lock"></i>Default Password</a
+                      ><i class="fa fa-lock"></i>Default Password</a
                     >
                     </li>
                   </ul>
@@ -59,9 +59,9 @@
                 <!-- 02-tab -->
                     <Defaultpassword/>
               </div>
-             
 
-              
+
+
             </div>
         </div>
       </main>

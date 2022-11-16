@@ -65,10 +65,10 @@
         </p>
       <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcatId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!icdcatId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -96,9 +96,9 @@
           <td>{{cat.icd_category_description}}</td>
       <td>{{cat.icd_category_order}}</td>
            <td>
-            <a class="edit" @click="editcat(cat)"><i class="far fa-edit"></i></a>
+            <a class="edit" @click="editcat(cat)"><i class="fa fa-edit"></i></a>
             <a @click="deletecat(cat)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>

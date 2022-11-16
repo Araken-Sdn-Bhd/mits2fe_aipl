@@ -227,7 +227,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                         
+
 
                  <div
                   class="accordion form-accordion mt-3"
@@ -380,7 +380,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -492,7 +492,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
               </form>

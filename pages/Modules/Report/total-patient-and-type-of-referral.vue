@@ -99,13 +99,13 @@
               <div class="d-flex" :class="SidebarAccess!=1?'hide':''">
                 <div class="ml-auto">
                   <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                    ><i class="far fa-file-pdf"></i> Generate PDF</a
+                    ><i class="fa fa-file-pdf"></i> Generate PDF</a
                   >
                   <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"           
+                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -114,12 +114,12 @@
                         worksheet="TOTAL PATIENT AND TYPE OF REFERRAL"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
                 </div>
               </div>
-           
-             
+
+
             </div>
           </div>
         </div>

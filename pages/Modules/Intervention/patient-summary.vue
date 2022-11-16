@@ -816,7 +816,7 @@
                 </div>
               </div>
                 <div class="d-flex">
-                                    <a @click="endVisit" class="btn btn-danger btn-text ml-auto"><i class="far fa-power-off"></i> End Visit</a>
+                                    <a @click="endVisit" class="btn btn-danger btn-text ml-auto"><i class="fa fa-power-off"></i> End Visit</a>
                                 </div>
             </div>
           </div>

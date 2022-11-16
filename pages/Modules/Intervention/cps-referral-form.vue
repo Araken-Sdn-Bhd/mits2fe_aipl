@@ -655,10 +655,10 @@
           <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
-                    <i class="far fa-download"></i> Download
+                    <i class="fa fa-download"></i> Download
                   </button>
                   <button type="submit" class="btn btn-success btn-text" @click="OnSubmit">
-                    <i class="far fa-paper-plane"></i> Submit
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
               </div>

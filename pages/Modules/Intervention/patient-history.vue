@@ -40,14 +40,14 @@
                         style="cursor: pointer"
                         @click="onViewSharp(patint.id)"
                         class="view"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
 
                       <a v-if="patint.status=='0'"
                         style="cursor: pointer"
                         @click="onEditSharp(patint.id)"
                         class="edit"
-                        ><i class="far fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>
                     </td>
                   </tr>

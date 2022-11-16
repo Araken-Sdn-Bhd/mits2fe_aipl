@@ -96,12 +96,12 @@
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                        ><i class="far fa-file-pdf"></i> Generate PDF</a
+                        ><i class="fa fa-file-pdf"></i> Generate PDF</a
                       >
                       <a
                         @click="Ongenerateexel"
                         class="btn btn-success btn-text"
-                        ><i class="far fa-file-excel"></i> Generate Excel</a
+                        ><i class="fa fa-file-excel"></i> Generate Excel</a
                       >
                     </div>
                   </div>
@@ -154,7 +154,7 @@
             <td class="tdrow">{{list[rp]["total"]['male']}}</td>
             <td class="tdrow">{{list[rp]["total"]['female']}}</td>
              <td class="tdrow">{{list[rp]["jumlah_besar"]}}</td>
-           
+
           </tr>
 
           <!-- <tr class="tr-box">
@@ -315,7 +315,7 @@ export default {
           if (response.data.code == 200) {
 
             // response.result[0]['group_name'];
-            
+
             this.list = response.data.result[0]['group_name'];
             this.listKey = Object.keys(this.list);
             console.log("my list", this.list);

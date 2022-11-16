@@ -52,7 +52,7 @@
                   <div class="col-sm-5 ml-auto mb-2 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
-                        <i class="far fa-search"></i>
+                        <i class="fa fa-search"></i>
                       </span>
                       <input
                         type="text"
@@ -148,7 +148,7 @@
                           OnUpdateAppointmentStatus(3, app.appointment_id)
                         "
                         class="edit"
-                        ><i class="far fa-power-off"></i
+                        ><i class="fa fa-power-off"></i
                       ></a>
                     </td>
                   </tr>

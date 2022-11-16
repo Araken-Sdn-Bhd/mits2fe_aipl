@@ -71,7 +71,7 @@
                   <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
-                        ><i class="far fa-search"></i
+                        ><i class="fa fa-search"></i
                       ></span>
                       <input
                         type="text"
@@ -179,7 +179,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-    this.UsersId = urlParams.get("usersid"); 
+    this.UsersId = urlParams.get("usersid");
     this.GetList();
     this.GetModuleList();
   },

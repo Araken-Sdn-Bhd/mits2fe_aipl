@@ -9,7 +9,7 @@
             <h1>List of Mentari Staff</h1>
             <div class="btn-group-a">
               <a href="/app/modules/Admin/new-staff" class="add-btn"
-                ><i class="far fa-plus"></i
+                ><i class="fa fa-plus"></i
               ></a>
             </div>
           </div>
@@ -39,7 +39,7 @@
                   <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
-                        ><i class="far fa-search"></i
+                        ><i class="fa fa-search"></i
                       ></span>
                       <input
                         type="text"
@@ -70,7 +70,7 @@
                     <td>{{ staff.hospital_branch_name }}</td>
                     <td>
                       <a @click="view(staff)" class="view"
-                        ><i class="far fa-eye"></i
+                        ><i class="fa fa-eye"></i
                       ></a>
                     </td>
                   </tr>
@@ -84,14 +84,14 @@
                     class="btn btn-warning btn-text btn-green"
                     @click="downloadform"
                   >
-                    <i class="far fa-download"></i> User Id Request Form
+                    <i class="fa fa-download"></i> User Id Request Form
                   </button>
                   <button
                     type="button"
                     class="btn btn-success"
                     @click="OnPrint"
                   >
-                    <i class="far fa-print"></i> Print List
+                    <i class="fa fa-print"></i> Print List
                   </button>
                 </div>
               </div>

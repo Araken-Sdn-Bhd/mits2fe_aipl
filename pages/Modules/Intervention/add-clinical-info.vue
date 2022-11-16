@@ -129,21 +129,21 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div> -->
                  <div class="form-foter mt-3">
                     <a
                       @click="OnBack"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
                     <div class="btn-right">
                       <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="fa fa-save"></i> Save
                   </button>
                     </div>
                   </div>

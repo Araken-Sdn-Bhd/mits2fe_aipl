@@ -51,10 +51,10 @@
         </p>
       <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
           </form>
@@ -81,10 +81,10 @@
                 <td>{{ etp.club_order }}</td>
                 <td>
                   <a  v-if="SidebarAccess==1" class="edit" @click="editreg(etp)"
-                    ><i class="far fa-edit"></i
+                    ><i class="fa fa-edit"></i
                   ></a>
                   <a  v-if="SidebarAccess==1" @click="deletereg(etp)" class="action-icon icon-danger"
-                    ><i class="far fa-trash-alt"></i
+                    ><i class="fa fa-trash-alt"></i
                   ></a>
                 </td>
               </tr>
@@ -145,7 +145,7 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-      if(this.SidebarAccess!=1){ 
+      if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton',this.$refs.hidebutton1);
           this.$refs.hidebutton.classList.add("hide");
           // this.$refs.hidebutton1.classList.add("hide");

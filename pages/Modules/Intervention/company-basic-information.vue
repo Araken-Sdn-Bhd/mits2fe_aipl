@@ -413,7 +413,7 @@
                         type="submit"
                         class="next-1 btn btn-warning btn-text ml-auto"
                       >
-                        <i class="far fa-save"></i> Save
+                        <i class="fa fa-save"></i> Save
                       </button>
                     </div>
                   </form>
@@ -469,13 +469,13 @@
                         type="button"
                         class="pre-1 btn btn-primary btn-text"
                       >
-                        <i class="far fa-arrow-alt-to-left"></i> Back
+                        <i class="fa fa-arrow-alt-to-left"></i> Back
                       </button>
                       <button
                         type="submit"
                         class="btn btn-warning btn-text ml-auto"
                       >
-                        <i class="far fa-save"></i> Save
+                        <i class="fa fa-save"></i> Save
                       </button>
                     </div>
                   </form>
@@ -680,7 +680,7 @@ export default {
             });
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });}
@@ -704,7 +704,7 @@ export default {
           this.contact_name &&
           this.contact_number &&
           this.contact_email &&
-          this.contact_position 
+          this.contact_position
         ) {
           this.loader = true;
           const headers = {
@@ -736,7 +736,7 @@ export default {
             });
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });}

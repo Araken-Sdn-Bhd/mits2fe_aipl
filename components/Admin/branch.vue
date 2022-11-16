@@ -84,13 +84,13 @@
                 <tr class="block-ui block-contact" v-for="(office, index) in Contactlist" :key="index">
                   <td><input type="text" class="form-control contactoffice" v-model="office.ContactNoOffice"
                       placeholder="Enter Contact No." /></td>
-                  <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-conatct-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Contactlist.length">
                 <tr class="block-ui block-contact">
                   <td><input type="text" class="form-control contactoffice" placeholder="Enter Contact No." /></td>
-                  <td><span class="add-conatct-no add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-conatct-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
             </table>
@@ -103,13 +103,13 @@
                 <tr class="block-mobile block-ui" v-for="(mobile, index) in Conntactmobilelist" :key="index">
                   <td><input type="text" class="form-control conntactmobile" v-model="mobile.MobileOffice"
                       placeholder="Enter Contact No." /></td>
-                  <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-mobile-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Conntactmobilelist.length">
                 <tr class="block-mobile block-ui">
                   <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No." /></td>
-                  <td><span class="add-mobile-no add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-mobile-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
             </table>
@@ -130,14 +130,14 @@
                   <!-- @blur="validateEmail" -->
                   <td><input type="text" v-for="(email, index) in Emaillist" :key="index" class="form-control email"
                       v-model="email.Email" placeholder="Enter Email" /></td>
-                  <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-email add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Emaillist.length">
                 <tr class="block-ui block-email">
                   <!-- @blur="validateEmail" -->
                   <td><input type="text" class="form-control email" placeholder="Enter Email" /></td>
-                  <td><span class="add-email add-ui"><i class="far fa-plus"></i></span></td>
+                  <td><span class="add-email add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
             </table>
@@ -155,10 +155,10 @@
       </p>
       <div class="d-flex justify-content-center" :class="SidebarAccess != 1 ? 'hide' : ''">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-          <i class="far fa-save"></i> Save
+          <i class="fa fa-save"></i> Save
         </button>
         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
@@ -166,7 +166,7 @@
     <div class="table-title">
       <h3>List of Branch</h3>
       <div class="input-group">
-        <span class="input-group-text"><i class="far fa-search"></i></span>
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
         <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch" />
       </div>
     </div>
@@ -195,8 +195,8 @@
           </td>
           <td>{{ brnc.branch_fax_no }}</td>
           <td class="td" :class="SidebarAccess != 1 ? 'hide' : ''">
-            <a class="edit" @click="editbranch(brnc)"><i class="far fa-edit"></i></a>
-            <a @click="deletebranch(brnc)" class="action-icon icon-danger"><i class="far fa-trash-alt"></i></a>
+            <a class="edit" @click="editbranch(brnc)"><i class="fa fa-edit"></i></a>
+            <a @click="deletebranch(brnc)" class="action-icon icon-danger"><i class="fa fa-trash-alt"></i></a>
           </td>
         </tr>
       </tbody>

@@ -344,16 +344,16 @@
                     @click="Ongeneratepdf"
                     class="btn btn-danger btn-text"
                   >
-                    <i class="far fa-file-pdf"></i> Generate PDF
+                    <i class="fa fa-file-pdf"></i> Generate PDF
                   </button>
                   <!-- <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                    ><i class="far fa-file-excel"></i> Generate Excel</a
+                    ><i class="fa fa-file-excel"></i> Generate Excel</a
                   > -->
                   <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"           
+                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -362,7 +362,7 @@
                         worksheet="General Report"
                        :name=excelname
                       >
-                      <i class="far fa-file-excel"></i> Generate Excel
+                      <i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
                 </div>
               </div>
@@ -444,10 +444,10 @@
                       <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
                       <td class="tdrow">{{ rp.CATEGORY_OF_PATIENTS }}</td>
                       <!-- <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td> -->
-                      <td class="tdrow"> Assistance / Supervision </td>      <!--TESTING-->                       
+                      <td class="tdrow"> Assistance / Supervision </td>      <!--TESTING-->
                       <!-- <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td> -->
                       <td class="tdrow-limit">Community Psychiatric Service (CPS)</td>  <!--TESTING-->
-                      <!-- <td class="tdrow">{{ rp.outcome }}</td> -->   
+                      <!-- <td class="tdrow">{{ rp.outcome }}</td> -->
                       <td class="tdrow-limit">Ongoing Therapeutic Intervention</td><!--TESTING-->
                       <!-- <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td> -->
                       <td class="tdrow-num">F20.4</td>
@@ -780,7 +780,7 @@ export default {
                 pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("GeneralReport.pdf");
                 });
-              
+
               }, 100);
 
               setTimeout(() => {
@@ -926,7 +926,7 @@ export default {
   margin-top: 50px;
   margin-left: 50px;
   margin-right: 50px;
-  
+
 }
 .tabhead {
   background: #ddd;

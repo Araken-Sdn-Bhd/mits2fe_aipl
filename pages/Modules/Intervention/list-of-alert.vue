@@ -90,7 +90,7 @@
                   Update ALERT
                 </button>
                  <button type="submit" class="btn btn-success ml-auto" v-if="!alert">
-                  <i class="far fa-plus"></i> Add ALERT
+                  <i class="fa fa-plus"></i> Add ALERT
                 </button>
               </div>
             </form>

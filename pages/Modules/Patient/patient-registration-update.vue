@@ -1224,12 +1224,12 @@
                         <!--<a v-if="!Id && SidebarAccess==1"
                           @click="submitRegistration"
                           class="btn btn-success btn-text ml-auto"
-                          ><i class="far fa-paper-plane"></i> Submit</a
+                          ><i class="fa fa-paper-plane"></i> Submit</a
                         >-->
                         <a v-if="Id && SidebarAccess==1"
                           @click="updateRegistration"
                           class="btn btn-success btn-text ml-auto"
-                          ><i class="far fa-paper-plane"></i> Update</a
+                          ><i class="fa fa-paper-plane"></i> Update</a
                         >
                       </div>
                     </form>

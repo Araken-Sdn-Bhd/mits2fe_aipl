@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-             
+
               <table class="notes">
                 <thead>
                                     <tr>
@@ -229,7 +229,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -355,13 +355,13 @@
         </li>
       </ul>
         </p>
-             
-           
+
+
             </div>
           </div>
            <div class="card mb-4 reslt" style="display:none;">
             <div class="card-body">
-             
+
               <table class="notes">
                 <thead>
                                     <tr>
@@ -579,7 +579,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -705,22 +705,22 @@
         </li>
       </ul>
         </p>
-             
-           
+
+
             </div>
           </div>
            <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
-                    <i class="far fa-download"></i> Download
+                    <i class="fa fa-download"></i> Download
                   </button>
                   <button @click="OnSubmit" type="submit" class="btn btn-success btn-text">
-                    <i class="far fa-paper-plane"></i> Submit
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
-              
-              
-              
+
+
+
               </div>
         </div>
       </main>
@@ -1142,11 +1142,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
-          
+
         } else {
           this.icdcatcodelist = [];
         }
-        
+
       } else {
         window.alert("Something went wrong");
       }

@@ -13,7 +13,7 @@
               <div class="card-header">
                 <h4>Transfer Mentari Staff</h4>
                 <div class="icon-set">
-                  <a @click="gotoedit"><i class="far fa-edit"></i></a>
+                  <a @click="gotoedit"><i class="fa fa-edit"></i></a>
                 </div>
               </div>
               <div class="card-body">
@@ -82,7 +82,7 @@
                     <a
                       href="/app/modules/Admin/staff-management"
                       class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
                     <div class="btn-right">
                       <button

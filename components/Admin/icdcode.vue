@@ -34,7 +34,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-              {{ catcode.icd_category_code }} {{catcode.icd_category_name}} 
+              {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
             </option>
           </select>
         </div>
@@ -93,15 +93,15 @@
         </p>
       <div class="d-flex justify-content-center" >
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="icdcodeId">
-        <i class="far fa-save"></i> Save
+        <i class="fa fa-save"></i> Save
         </button>
          <button type="submit" class="btn btn-warning btn-text" v-if="!icdcodeId">
-          <i class="far fa-plus"></i> Add Parameter
+          <i class="fa fa-plus"></i> Add Parameter
         </button>
       </div>
     </form>
 
-    
+
 
     <div class="table-title">
       <h3>List of ICD Code</h3>
@@ -130,10 +130,10 @@
           <td>{{ cat.icd_order }}</td>
           <td>
             <a class="edit" @click="editcode(cat)"
-              ><i class="far fa-edit"></i
+              ><i class="fa fa-edit"></i
             ></a>
             <a @click="deletecode(cat)" class="action-icon icon-danger"
-              ><i class="far fa-trash-alt"></i
+              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>

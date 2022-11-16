@@ -7,10 +7,10 @@
         <main>
           <div class="container-fluid px-4">
             <div class="page-title"><h1>Notification</h1></div>
-            
+
             <div class="notification-box">
                 <div class="notification-inner" v-for="(notifi,index) in notificationlist" :key="index">
-                    <div class="icon"><i class="far fa-bell"></i></div>
+                    <div class="icon"><i class="fa fa-bell"></i></div>
                     <div class="text">
                         <h1>{{notifi.message}}</h1>
                         <span><i class="fal fa-clock"></i> {{notifi.time}}</span>
@@ -18,7 +18,7 @@
                 </div>
 
                 <!-- <div class="notification-inner">
-                    <div class="icon"><i class="far fa-bell"></i></div>
+                    <div class="icon"><i class="fa fa-bell"></i></div>
                     <div class="text">
                         <h1>upcoming review for Patient Care Plan</h1>
                         <span><i class="fal fa-clock"></i> 0 days 2 hours 50 minutes</span>

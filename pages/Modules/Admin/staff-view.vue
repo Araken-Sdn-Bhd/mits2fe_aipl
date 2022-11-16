@@ -13,12 +13,12 @@
               <h4>Mentari Staff Detail</h4>
               <div class="icon-set">
                 <a  @click="gotoedit"
-                  ><i class="far fa-edit"></i
+                  ><i class="fa fa-edit"></i
                 ></a>
                 <a @click="gototransfer"
-                  ><i class="far fa-share-square"></i
+                  ><i class="fa fa-share-square"></i
                 ></a>
-                <a @click="deletestaff"><i class="far fa-trash-alt"></i></a>
+                <a @click="deletestaff"><i class="fa fa-trash-alt"></i></a>
               </div>
             </div>
             <div class="card-body">
@@ -117,7 +117,7 @@
                 <a
                   href="/app/modules/Admin/staff-management"
                   class="btn btn-primary btn-text"
-                  ><i class="far fa-arrow-alt-to-left"></i> Back</a
+                  ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                 >
               </div>
             </div>

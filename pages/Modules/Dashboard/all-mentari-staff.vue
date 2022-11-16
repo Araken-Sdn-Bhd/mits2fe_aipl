@@ -8,7 +8,7 @@
                     <div class="page-title dashboard-title">
                         <h1>All Mentari Staff</h1>
                         <div class="input-group dashboard-search">
-                            <span class="input-group-text" id="basic-addon1"><i type="button" v-on:click="SearchPatient" class="far fa-search"></i></span>
+                            <span class="input-group-text" id="basic-addon1"><i type="button" v-on:click="SearchPatient" class="fa fa-search"></i></span>
                             <input type="text" class="form-control" v-model="search"  placeholder="Search By Name/NRIC/Passport/MRN"/>
                         </div>
                     </div>

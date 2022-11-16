@@ -1223,10 +1223,10 @@
               <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
-                    <i class="far fa-download"></i> Download
+                    <i class="fa fa-download"></i> Download
                   </button>
                   <button @click="OnSubmit" type="submit" class="btn btn-success btn-text">
-                    <i class="far fa-paper-plane"></i> Submit
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
 
@@ -1324,7 +1324,7 @@
                   <tr>
                     <th>Alerts:</th>
                     <td>
-                      {{this.alerts}} 
+                      {{this.alerts}}
                     </td>
                   </tr>
                   <tr>
