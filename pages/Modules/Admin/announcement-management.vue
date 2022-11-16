@@ -8,9 +8,7 @@
           <div class="page-title">
             <h1>Announcement Management</h1>
             <div class="btn-group-a">
-              <!-- <a href="#" class="add-btn"><i class="fa fa-cog"></i></a>
-              <a href="#" class="add-btn"><i class="fa fa-search"></i></a> -->
-              <a href="/app/modules/Admin/create-event" class="add-btn"
+              <a href="/app/modules/Admin/create-event" class="add-btn" title="create new announcement"
                 ><i class="fa fa-plus"></i
               ></a>
             </div>
@@ -56,21 +54,21 @@
                     <td>{{ann.end_date }}</td>
                     <td v-if="SidebarAccess==1">
                       <p v-if="ann.status == 0" style="margin: 1px">
-                        Save as draft
+                        Draft
                       </p>
                       <p v-if="ann.status == 1" style="margin: 1px">Publish</p>
                     </td>
                     <td>
-                      <a
-                        @click="deleteannounce(ann)" v-if="SidebarAccess==1"
-                        class="action-icon icon-danger"
-                        ><i class="fa fa-trash-alt"></i
+                      <a @click="viewannounce(ann)" title="view record" class="view" v-if="ann.status == 1"
+                        ><i class="fa fa-eye"></i
                       ></a>
-                      <a class="edit" @click="editannounce(ann)" v-if="SidebarAccess==1 && ann.status == 0"
+                      <a class="edit" title="edit record" @click="editannounce(ann)" v-if="SidebarAccess==1 && ann.status == 0"
                         ><i class="fa fa-edit"></i
                       ></a>
-                      <a @click="viewannounce(ann)" class="view" v-if="ann.status == 1"
-                        ><i class="fa fa-eye"></i
+                      <a
+                        @click="deleteannounce(ann)" v-if="SidebarAccess==1" title="delete record"
+                        class="action-icon icon-danger"
+                        ><i class="fa fa-trash-alt"></i
                       ></a>
                     </td>
                   </tr>
@@ -170,7 +168,8 @@ export default {
       });
     },
     async deleteannounce(data) {
-      try {
+      if (confirm("Are you sure you want to delete this record ? ")) {
+        try {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -196,6 +195,8 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+      }
+     
     },
    async format_date(value) {
       if (value) {

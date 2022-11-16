@@ -15,77 +15,64 @@
             </div>
             <div class="card-body">
               <form class="mt-3" method="post" @submit.prevent="onCreateEvent">
-                <div class="row mb-5">
+                <div class="row mb-5 col-sm-12">
                   <label class="col-sm-3 col-form-label">Title</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" v-model="title" />
                   </div>
                 </div>
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
+                <div class="row mb-5 col-sm-12">
+                  <label class="col-sm-3 col-form-label"
                     >Content</label
                   >
                   <div class="col-sm-9">
-                    <textarea
-                      class="content"
-                      name="example"
-                      v-model="content"
-                    ></textarea>
+                    <textarea  class="form-control" v-model="content" rows="10"></textarea>
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Document</label
+                <div class="row mb-5 col-sm-12">
+                  <label class="col-sm-3 col-form-label">Document</label
                   >
                   <div class="col-sm-9">
                     <input
                       type="file"
                       class="form-control"
-                      id="inputPassword3"
                       @change="selectFile"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Start Date</label
-                  >
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label">Start Date</label>
                   <div class="col-sm-4">
                     <input
                       type="date"
                       class="form-control"
-                      id="inputPassword3"
                       v-model="startdate"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >End Date</label
-                  >
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label">End Date</label>
                   <div class="col-sm-4">
                     <input
                       type="date"
                       class="form-control"
-                      id="inputPassword3"
                       v-model="enddate"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Mentari Branch</label
-                  >
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label">Mentari Branch</label>
                   <div class="col-sm-9">
                     <select
                       v-model="branchId"
                       class="form-select"
                       aria-label="Default select example"
                     >
+                    <option value="0">Please Select</option>
                     <option></option>
                       <option
                         v-for="brnch in list"
@@ -98,10 +85,8 @@
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Set Audience Category</label
-                  >
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label">Set Audience Category</label>
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-sm-6">
@@ -202,6 +187,8 @@
         </li>
       </ul>
         </p>
+        <br>
+      <br>
                 <div class="form-foter">
                   <a
                     href="/app/modules/Admin/announcement-management"
@@ -213,7 +200,7 @@
                       <i class="fa fa-save"></i> Save as draft
                     </button>
                     <button v-on:click="onCreateEvent('1')" class="btn btn-success btn-text">
-                      <i class="fad fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Publish
                     </button>
                   </div>
                 </div>
@@ -310,6 +297,8 @@ export default {
     },
     async onCreateEvent(status) {
       try {
+      if (confirm("Are you sure you want to proceed this action ? ")) {
+     
         this.errors = [];
         if (!this.title) {
           this.errors.push("Title is required.");
@@ -388,11 +377,13 @@ export default {
             });
           }
         }
+      }
       } catch (e) {
         this.$nextTick(() => {
           $("#insertpopup").modal("show");
         });
       }
+    
     },
   },
 };
