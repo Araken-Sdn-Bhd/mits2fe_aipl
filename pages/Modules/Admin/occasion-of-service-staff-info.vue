@@ -79,7 +79,7 @@
                     <th>No</th>
                     <th>Patient Category</th>
                     <th>From Time</th>
-                    <th>HRS</th>
+                    <th>Duration</th>
                     <th>Category Of Service</th>
                     <th>Complexity Of Service</th>
                     <th>Outcome</th>
@@ -95,7 +95,7 @@
                       {{ (staff.booking_date+' '+staff.booking_time) }}
                       <!-- {{ staff.booking_time }} -->
                     </td>
-                    <td>{{ staff.end_appoitment_date }}</td>
+                    <td>{{ staff.duration }}</td>
                     <td>{{ staff.category_services_id }}</td>
                     <td>{{ staff.csr_ }}</td>
                     <td>{{ staff.oc_ }}</td>
