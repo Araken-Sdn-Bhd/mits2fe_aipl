@@ -378,31 +378,31 @@
                 ref="result"
                 style="background: #fff"
               >
-                <div>Total Days:  {{ Total_Days }}</div>
-                <div>Total Patient:  {{ Total_Patient }}</div>
+                <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
+                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div><br>
 
-                <table class="total-patient-table">
+                <table class="table main-data-tabl" id="datatable">
                    <thead>
                     <tr>
                        <th class="thhead">ATTEND</th>
-                        <th class="thhead">No SHOW</th>
+                        <th class="thhead">NO SHOW</th>
                         </tr>
                             </thead>
                   <tbody>
                     <tr>
-                      <td>{{Attend}}</td>
-                      <td>{{No_Show}}</td>
+                      <td class="tdrow">{{Attend}}</td>
+                      <td class="tdrow">{{No_Show}}</td>
                     </tr>
                   </tbody>
                 </table>
-                <table class="table" id="datatable">
+                <table class="table main-data-tabl" id="datatable">
                   <thead>
                     <tr>
                       <th class="thhead">No</th>
                            <th class="thhead">NAME</th>
                       <th class="thhead">APPOINTMENT TYPE</th>
-                      <th class="thhead">TYPE OF Visit</th>
-                      <th class="thhead">TYPE OF Refferal</th>
+                      <th class="thhead">TYPE OF VISIT</th>
+                      <th class="thhead">TYPE OF REFERRAL</th>
                       <th class="thhead">IC NO</th>
                       <th class="thhead">GENDER</th>
                       <th class="thhead">AGE</th>
@@ -410,17 +410,17 @@
                       <th class="thhead">MEDICATIONS</th>
                       <th class="thhead">APPOINTMENT NO</th>
                       <th class="thhead">PROCEDURE</th>
-                      <th class="thhead">Next Visit</th>
+                      <th class="thhead">NEXT VISIT</th>
                       <th class="thhead">TIME REGISTERED</th>
                       <th class="thhead">TIME SEEN</th>
-                      <th class="thhead">Attendance Status</th>
-                      <th class="thhead">Attending Staff</th>
+                      <th class="thhead">ATTENDANCE STATUS</th>
+                      <th class="thhead">ATTENDING DOCTOR/ STAFF</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(rp, index) in list" :key="index">
                       <td class="tdrow">{{ index + 1 }}</td>
-                      <td class="tdrow">{{ rp.NAME }}</td>
+                      <td class="tdrow">{{ rp.Name }}</td>
                       <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
                       <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
                       <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
@@ -514,6 +514,8 @@ export default {
       current_intervention: "",
       Total_Days: 0,
       Total_Patient: 0,
+      Total_DaysPDF: 0,
+      Total_PatientsPDF: 0,
       Attend: 0,
       No_Show: 0,
       filepath:'',
@@ -690,14 +692,17 @@ export default {
           this.list = response.data.result;
           console.log("my report", response.data);
           if (this.list.length > 0) {
-            this.Total_Days = response.data.Total_Days;
-            this.Total_Patient = response.data.Total_Patient;
+            this.Total_DaysPDF = response.data.Total_DaysPDF;
+            this.Total_PatientsPDF = response.data.Total_PatientsPDF;
             this.Attend = response.data.Attend;
             this.No_Show = response.data.No_Show;
             setTimeout(() => {
               this.$refs.result.classList.remove("hide");
-              var pdf = new jsPDF("p", "pt", "a4");
-              pdf.addHTML($("#result")[0], function () {
+              var pdf = new jsPDF("l", "pt", "a4");
+              pdf.internal.scaleFactor =2;
+              var options = {pagesplit: true};
+
+              pdf.addHTML($("#result")[0],options, function () {
                 pdf.save("Report.pdf");
               });
             }, 100);
@@ -713,10 +718,14 @@ export default {
       }
     },
     startDownload(){
-        alert('show loading');
+        if (this.fromDate) {
+          this.loader=true;
+        }
     },
     finishDownload(){
-        alert('hide loading');
+      if (this.fromDate) {
+        this.loader=false;
+      }
     },
     async Ongenerateexel() {
       this.errorList = [];
@@ -794,11 +803,13 @@ export default {
   padding: 0px !important;
 }
 .patient-inner-table th {
-  background: #bbf2eb;  /*  need to be sync with other report  */
+  background: #bbf2eb;   /*need to be sync with other report  */
   border-left: 1px solid #000;
-  padding: 4px 10px;
-  width: 50%;
+  text-transform: uppercase;
   text-align: center;
+  margin-top: 50px;
+  word-wrap:break-word;
+  line-height: normal;
 }
 .patient-inner-table th:last-child {
   border-right: 0;
@@ -807,6 +818,8 @@ export default {
   text-align: center;
   border-bottom: 0px !important;
   border-left: 0px !important;
+  margin-top: 50px;
+  word-wrap:break-word;
 }
 .patient-inner-table td:last-child {
   border-right: 0;
@@ -814,8 +827,46 @@ export default {
 div#result {
   padding: 15px;
 }
+/* .thhead {
+  background: #bbf2eb;;
+  border: 1px solid #000;
+  text-transform: uppercase;
+  width:fit-content;
+  font-size: 8.0px;
+  line-height: normal;
+  font-weight: bold;
+  text-align: center;
+}
+.tdrow {
+  border: 1px solid #000;
+  font-size: 8.0px;
+  line-height: normal;
+  text-align: center;
+}
+.table {
+  border: 1px solid rgb(0, 0, 0);
+  width: 100%;
+  word-wrap: break-word;
+  table-layout: fixed;
+} */
 .hide1 {
   background: #fff;
   display: none;
+}
+.table {
+  border: 1px solid rgb(0, 0, 0);
+  width:fit-content;
+  margin-top: 50px;
+  margin-left: 50px;
+  word-wrap:break-word;
+
+}
+.thhead {
+  background: #bbf2eb;
+  padding: 5px 5px;
+  border: 1px solid #000;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: normal;
 }
 </style>

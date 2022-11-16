@@ -101,9 +101,21 @@
                   <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                     ><i class="fa fa-file-pdf"></i> Generate PDF</a
                   >
-                  <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                    ><i class="fa fa-file-excel"></i> Generate Excel</a
-                  >
+                  <downloadexcel
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fields"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="TOTAL PATIENT AND TYPE OF REFERRAL"
+                       :name=excelname
+                      >
+                      <i class="fa fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
                 </div>
               </div>
 
@@ -229,12 +241,37 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import downloadexcel from "vue-json-excel";
 export default {
   components: { CommonSidebar, CommonHeader },
-
+  name: "App",
+  components: {
+    downloadexcel,
+  },
   name: "sharp",
   data() {
     return {
+      json_fields: {
+        "NO":'No',
+        "DATE" : 'DATE',
+        "TIME" :"TIME",
+        "NRIC NO/PASSPORT NO": "NRIC_NO_PASSPORT_NO",
+        "NAME" :"Name",
+        "ADDRESS": "ADDRESS",
+        "CITY": "CITY",
+        "STATE": "STATE",
+        "POSTCODE" : "POSTCODE",
+        "TELEPHONE NUMBER" : "PHONE_NUMBER",
+        "DATE OF BIRTH" :"DATE_OF_BIRTH",
+        "CATEGORIES OF PATIENT":"CATEGORY_OF_PATIENTS",
+        "TYPE OF REFERAL":"TYPE_OF_REFERRAL",
+        "TIME REGISTERED" :"time_registered",
+      },
+      excelname: "",
+      sheetname: "TOTAL PATIENT AND TYPE OF REFERRAL",
+      header:"",
+
+
       userdetails: null,
       loader: false,
       error: null,
@@ -349,9 +386,9 @@ export default {
               this.Total_Patient = response.data.Total_Patient;
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "pt", "A3");
-                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
-                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                var pdf = new jsPDF("p", "pt", "A4");
+                 pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
                 //pdf.internal.scaleFactor =30;
                 var options = {
                 pagesplit: true
@@ -408,9 +445,12 @@ export default {
           );
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data.filepath) {
-              //  let route = this.$router.resolve({ path: response.data.filepath });
-              window.open(response.data.filepath, "_blank");
+            if (response.data) {
+              this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
+
             } else {
               this.error = "No Record Found";
             }
