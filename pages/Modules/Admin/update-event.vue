@@ -15,40 +15,39 @@
             </div>
             <div class="card-body">
               <form class="mt-3">
-                <div class="row mb-5">
+                <div class="row mb-5 col-sm-12">
                   <label class="col-sm-3 col-form-label">Title</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" v-model="title" />
                   </div>
                 </div>
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
+                <div class="row mb-5 col-sm-12">
+                  <label col-sm-3 class="col-sm-3 col-form-label"
                     >Content</label
                   >
                   <div class="col-sm-9">
-                    <textarea
-                      class="content"
-                      name="example"
+                    <textarea rows="10"
+                    class="form-control"
                       v-model="content"
                     ></textarea>
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label"
                     >Document</label
                   >
                   <div class="col-sm-9">
                     <input
                       type="file"
                       class="form-control"
-                      id="inputPassword3"
+                     
                       @change="selectFile"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
+                <div class="row mb-5 col-sm-12">
                   <label for="inputPassword3" class="col-sm-3 col-form-label"
                     >Start Date</label
                   >
@@ -56,13 +55,13 @@
                     <input
                       type="date"
                       class="form-control"
-                      id="inputPassword3"
+                     
                       v-model="startdate"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
+                <div class="row mb-5 col-sm-12">
                   <label for="inputPassword3" class="col-sm-3 col-form-label"
                     >End Date</label
                   >
@@ -70,14 +69,14 @@
                     <input
                       type="date"
                       class="form-control"
-                      id="inputPassword3"
+                     
                       v-model="enddate"
                     />
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label"
                     >Mentari Branch</label
                   >
                   <div class="col-sm-9">
@@ -86,6 +85,7 @@
                       class="form-select"
                       aria-label="Default select example"
                     >
+                    <option value="0">Please Select</option>
                       <option
                         v-for="brnch in list"
                         v-bind:key="brnch.id"
@@ -97,8 +97,8 @@
                   </div>
                 </div>
 
-                <div class="row mb-5">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
+                <div class="row mb-5 col-sm-12">
+                  <label  class="col-sm-3 col-form-label"
                     >Set Audience Category</label
                   >
                   <div class="col-sm-9">
@@ -304,12 +304,25 @@ export default {
         this.catIds = response.data.list[0].audience_ids;
         this.branchId = response.data.list[0].hospital_branch_id;
         var ctsplt = this.catIds.split(",");
-        this.cat1 = ctsplt[0];
-        this.cat2 = ctsplt[1];
-        this.cat3 = ctsplt[2];
-        this.cat4 = ctsplt[3];
-        this.cat5 = ctsplt[4];
-        this.cat6 = ctsplt[5];
+        if (ctsplt[0] == 1){
+          this.cat1 = 'Psychiatrist';
+        }
+        if (ctsplt[1] == 1){
+          this.cat2 = 'medical-officer';
+        }
+        if (ctsplt[2] == 1){
+          this.cat3 = 'Counsellor';
+        }
+        if (ctsplt[3] == 1){
+          this.cat4 = 'Occupational-Therapist';
+        }
+        if (ctsplt[4] == 1){
+          this.cat5 = 'Staff-Nurse';
+        }
+        if (ctsplt[5] == 1){
+          this.cat6 = 'Healthcare-Assistant';
+        }
+       
       } else {
         window.alert("Something went wrong");
       }
