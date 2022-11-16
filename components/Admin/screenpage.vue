@@ -292,6 +292,8 @@ export default {
                 screen_name: this.screenname,
                 screen_route: this.pageroute,
                 screen_description: this.description,
+                icon: this.icon,
+                index: this.index,
               },
               { headers }
             );
@@ -374,6 +376,8 @@ export default {
         this.description = response.data.list[0].screen_description;
         this.ModuleId = response.data.list[0].module_id;
         this.SubmoduleId = response.data.list[0].sub_module_id;
+        this.icon = response.data.list[0].icon;
+        this.index = response.data.list[0].index_val;
         this.Id = data.screen_id;
         const response1 = await this.$axios.post(
           "screen-module/sub-module-list-by-module-id",
