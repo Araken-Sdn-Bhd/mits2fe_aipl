@@ -81,6 +81,11 @@
                 </tbody>
               </table>
               <Error :message="error" v-if="error" />
+              <br><br>
+              <div class="d-flex align-items-center mt-2">
+                <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button></div>
               <!-- <div class="d-flex align-items-center mt-2">
                 <button
                   type="submit"
@@ -93,7 +98,7 @@
             </div>
           </div>
         </div>
-        <div class="modal fade" id="resultmodal" tabindex="-1">
+        <!-- <div class="modal fade" id="resultmodal" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered modal-table-body">
             <div class="modal-content">
               <div id="results" style="background: #fff">
@@ -102,7 +107,7 @@
                   <p>
                     Your Test is successfully Submitted!
                   </p>
-                </div>
+                </div> -->
                 <!-- <div class="modal-body">
                   <table class="modal-table">
                     <thead>
@@ -119,13 +124,13 @@
                     </tbody>
                   </table>
                 </div> -->
-              </div>
+              <!-- </div>
               <div class="modal-footer">
                 <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="far fa-arrow-alt-to-left"></i> Back</a
-                    >
+                    > -->
                 <!-- <button
                   @click="downloadresult"
                   type="button"
@@ -139,10 +144,10 @@
                 >
                   <i class="fad fa-calendar-day"></i> Request Appointment
                 </a> -->
-              </div>
+              <!-- </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
       </main>
     </div>
   </div>
@@ -302,7 +307,7 @@ export default {
     },
     GoBack(){
       this.$router.push({
-              path: "/modules/Intervention/patient-summary",
+              path: "/modules/Intervention/psychometric-history",
               query: { id: this.Id },
             });
     }
