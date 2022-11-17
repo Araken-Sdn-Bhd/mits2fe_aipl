@@ -50,7 +50,7 @@
                             <td>{{hst.section_name}}</td>
                             <td>
                               <p v-if="hst.status==1">Completed</p>
-                                <p v-if="hst.status==0">Save as Draft</p>
+                                <p v-if="hst.status==0">Draft</p>
                               </td>
                             <td>{{hst.date}}</td>
                             <td>{{formatetime(hst.created_at)}}</td>
@@ -59,11 +59,10 @@
                               <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
-                                <a v-if="hst.editstatus==1" style="cursor:pointer;" @click="OnHistoryview(hst,edit)"  class="edit"
+                                <a v-if="hst.editstatus==0" style="cursor:pointer;" @click="OnHistoryview(hst,edit)"  class="edit"
                                 ><i class="fas fa-edit"></i
                               ></a>
                             </td>
-
                           </tr>
                         </tbody>
                       </table>
