@@ -100,7 +100,7 @@
                   </div>
                 </div>
                 <!-- row -->
-test
+
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -129,7 +129,10 @@ test
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="fa fa-save"></i> Save
+                    <i class="far fa-save"></i> Save
+                  </button>
+                </div> -->
+                <br><br                    <i class="fa fa-save"></i> Save
                   </button>
                 </div> -->
                  <div class="form-foter mt-3">
@@ -137,7 +140,7 @@ test
                       @click="OnBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >test
+                    >
                     <div class="btn-right">
                       <button
                     type="submit"
@@ -277,15 +280,7 @@ export default {
       this.waist_circumference = "";
     },
     OnBack(){
-       this.$router.push({
-              path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
-            });
-    },
-    calculateBMI(){
-      var heightInMeter = this.height/100;
-      var val = this.weight/(heightInMeter*heightInMeter);
-      this.bmi = val.toFixed(2);
+s.bmi = val.toFixed(2);
       console.log('Bmivalue',this.bmi);
     }
   },
