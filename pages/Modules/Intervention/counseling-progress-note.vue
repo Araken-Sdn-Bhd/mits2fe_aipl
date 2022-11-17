@@ -628,14 +628,14 @@
                              </li>
                         </ul>
                        </p>
+                       <br><br>
                 <div class="d-flex" v-if="!pid">
-                  <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
-                    >
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                   <button
                     type="submit"
+                    title="Save Form"
                     class="btn btn-warning btn-text ml-auto"
                   >
                     <i class="far fa-save"></i> Save
@@ -764,6 +764,7 @@ export default {
   },
   methods: {
     async Oncounsellingprogressnote() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.errorList = [];
       this.validate = true;
       try {
@@ -954,6 +955,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async GetList() {
       const headers = {

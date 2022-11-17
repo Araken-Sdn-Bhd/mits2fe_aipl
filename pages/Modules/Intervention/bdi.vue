@@ -79,9 +79,14 @@
                   <!-- col-sm-6 -->
                 </div>
                 <Error :message="error" v-if="error" />
+                <br><br>
                 <div class="d-flex align-items-center">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                   <button
                     type="submit"
+                    title="Submit"
                     @click="OnsubmitTest"
                     class="btn btn-success ml-auto"
                   >
@@ -215,7 +220,7 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
-
+      if (confirm("Are you sure you want to submit this entry")) {
       this.error = null;
       try {
         if (this.list.length == Object.values(this.checkedList).length) {
@@ -257,6 +262,7 @@ export default {
         this.loader = false;
         this.errors = e;
       }
+    }
     },
     downloadresult() {
       var pdf = new jsPDF("p", "pt", "a4");

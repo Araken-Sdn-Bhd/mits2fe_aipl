@@ -806,17 +806,16 @@
                                     </li>
                                 </ul>
                                 </p>
+                                <br><br>
                                 <div class="d-flex" v-if="!pid">
-                                  <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
-                    >
+                                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                 <div class="ml-auto btn-boxs">
-                  <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
+                  <button type="submit" title="Download Form" class="btn btn-green btn-text" @click="OnPrint">
                     <i class="far fa-download"></i> Download
                   </button>
-                  <button type="submit" class="btn btn-success btn-text" @click="Onoctreferalform">
+                  <button type="submit" title="Save Form" class="btn btn-success btn-text" @click="Onoctreferalform">
                     <i class="far fa-paper-plane"></i> Save
                   </button>
                 </div>
@@ -915,6 +914,7 @@ export default {
   },
   methods: {
     async Onoctreferalform() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -1053,6 +1053,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async GetList() {
       const headers = {

@@ -41,11 +41,10 @@
                   </tr>
                 </tbody>
               </table>
-              <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
-                    >
+              <br><br>
+              <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
             </div>
           </div>
         </div>

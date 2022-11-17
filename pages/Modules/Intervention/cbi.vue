@@ -204,11 +204,11 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         @click="onburnout"
-                        class="btn btn-success next-btn ml-auto"
+                        class="btn btn-success next-btn ml-auto" title="Next Page"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
                       </button>
@@ -345,7 +345,7 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         class="prev-1 btn btn-success mr-auto"
@@ -353,10 +353,9 @@
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
                       </button>
-
                       <button
                         @click="nextclient"
-                        class="btn btn-success next-btn ml-auto"
+                        class="btn btn-success next-btn ml-auto" title="Next Page"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
                       </button>
@@ -495,7 +494,7 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         @click="backworkburnout"
@@ -505,6 +504,7 @@
                       </button>
                       <button
                         type="submit"
+                        title="Submit"
                         class="btn btn-success ml-auto"
                         @click="OnsubmitTest"
                       >
@@ -687,6 +687,7 @@ export default {
       this.$refs.navprofile.classList.add("show");
     },
     async OnsubmitTest() {
+      if (confirm("Are you sure you want to submit this entry")){
       try {
         if (
           this.peronallist.length ==
@@ -741,6 +742,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     onpersonalchange(ind, val) {
       this.checkedpersonalList[ind] = val;

@@ -94,9 +94,14 @@
                 </tbody>
               </table>
               <Error :message="error" v-if="error" />
+              <br><br>
               <div class="d-flex align-items-center mt-2">
+                <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                 <button
                   type="submit"
+                  title="Submit"
                   class="btn btn-success ml-auto"
                   @click="Onsuciderisk"
                 >
@@ -195,6 +200,7 @@ export default {
   },
   methods: {
     async Onsuciderisk() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.error = null;
       try {
         if (!this.result) {
@@ -240,6 +246,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     async GetUserIpAddress() {
       const {
@@ -261,6 +268,12 @@ export default {
         path: "/modules/Intervention/request-appointment-form",
         query: { id: this.Id },
       });
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
     }
   },
 };

@@ -262,6 +262,7 @@
                     <div class="d-flex align-items-center mt-2">
                       <button
                         class="btn btn-success next-btn ml-auto"
+                        title="Next Page"
                         @click="gototab2"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -416,6 +417,7 @@
 
                       <button
                         type="submit"
+                        title="Next Page"
                         @click="gototab3"
                         class="btn btn-success next-btn ml-auto"
                       >
@@ -566,6 +568,7 @@
 
                       <button
                         type="submit"
+                        title="Next Page"
                         @click="gototab4"
                         class="btn btn-success next-btn ml-auto"
                       >
@@ -716,6 +719,7 @@
 
                       <button
                         type="submit"
+                        title="Next Page"
                         @click="gototab5"
                         class="btn btn-success next-btn ml-auto"
                       >
@@ -866,6 +870,7 @@
 
                       <button
                         type="submit"
+                        title="Next Page"
                         @click="gototab6"
                         class="btn btn-success next-btn ml-auto"
                       >
@@ -1021,6 +1026,7 @@
 
                       <button
                         type="submit"
+                        title="Next Page"
                         @click="gototab7"
                         class="btn btn-success next-btn ml-auto"
                       >
@@ -1168,6 +1174,7 @@
 
                       <button
                         type="submit"
+                        title="Submit"
                         @click="OnTestSubmit"
                         class="btn btn-success ml-auto"
                       >
@@ -1522,6 +1529,7 @@ export default {
       this.tab7 = 0;
     },
     async OnTestSubmit() {
+      if (confirm("Are you sure you want to submit this entry")) {
       if (
         this.list.length == Object.values(this.checkedList).length &&
         this.list1.length == Object.values(this.checkedList1).length &&
@@ -1585,6 +1593,7 @@ export default {
       } else {
         window.alert("Please check All Module and attempt all question");
       }
+    }
     },
     async GetUserIpAddress() {
       const {

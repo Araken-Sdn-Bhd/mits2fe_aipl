@@ -132,15 +132,15 @@
                     <i class="far fa-save"></i> Save
                   </button>
                 </div> -->
-                 <div class="form-foter mt-3">
-                    <a
-                      @click="OnBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
-                    >
+                <br><br>
+                <div class="form-foter mt-3">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                     <div class="btn-right">
                       <button
                     type="submit"
+                    title="Save"
                     class="btn btn-warning btn-text ml-auto"
                   >
                     <i class="far fa-save"></i> Save
@@ -187,6 +187,7 @@ export default {
   },
   methods: {
     async OnAddClinicalInfo() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.errorList = [];
       try {
         if (!this.temperature) {
@@ -265,7 +266,7 @@ export default {
         }
       } catch (e) {
         this.loader = false;
-      }
+      }}
     },
     resetform() {
       this.temperature = "";
@@ -276,7 +277,7 @@ export default {
       this.bmi = "";
       this.waist_circumference = "";
     },
-    OnBack(){
+    GoBack(){
        this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
