@@ -14,7 +14,7 @@
               <h4>Add New Announcement</h4>
             </div>
             <div class="card-body">
-              <form class="mt-3" method="post" @submit.prevent="onCreateEvent">
+            
                 <div class="row mb-5 col-sm-12">
                   <label class="col-sm-3 col-form-label">Title</label>
                   <div class="col-sm-9">
@@ -26,7 +26,7 @@
                     >Content</label
                   >
                   <div class="col-sm-9">
-                    <textarea  class="form-control" v-model="content" rows="10"></textarea>
+                    <textarea  class="form-control" v-model="content" rows="20"></textarea>
                   </div>
                 </div>
 
@@ -190,21 +190,20 @@
         <br>
       <br>
                 <div class="form-foter">
-                  <a
-                    href="/app/modules/Admin/announcement-management"
-                    class="btn btn-primary btn-text"
-                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                  >
-                  <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
+                  <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                  <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button v-on:click="onCreateEvent('1')" class="btn btn-success btn-text">
+                    
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Publish
                     </button>
                   </div>
                 </div>
-              </form>
+            
             </div>
           </div>
         </div>
@@ -277,6 +276,11 @@ export default {
     this.GetbranchList();
   },
   methods: {
+
+    back() {
+      this.$router.go(-1);
+    },
+
     async GetbranchList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -295,10 +299,9 @@ export default {
     selectFile(event) {
       this.file = event.target.files[0];
     },
-    async onCreateEvent(status) {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
       try {
-      if (confirm("Are you sure you want to proceed this action ? ")) {
-     
         this.errors = [];
         if (!this.title) {
           this.errors.push("Title is required.");
@@ -365,11 +368,14 @@ export default {
               "," +
               this.cat6
           );
-          body.append("status", status);
+          body.append("status", 0);
           const response = await this.$axios.post("announcement/add", body, {
             headers,
           });
           if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+       $("#insertpopup").modal("show");
+     });
             this.$router.push("/modules/Admin/announcement-management");
           } else {
             this.$nextTick(() => {
@@ -377,14 +383,108 @@ export default {
             });
           }
         }
-      }
+      
       } catch (e) {
         this.$nextTick(() => {
-          $("#insertpopup").modal("show");
+          $("#errorpopup").modal("show");
         });
       }
-    
+              }
     },
+    async onPublishEvent() {
+     
+     if (confirm("Are you sure you want to publish this entry ? ")) {
+  
+   try {
+     this.errors = [];
+     if (!this.title) {
+       this.errors.push("Title is required.");
+     }
+     if (!this.content) {
+       this.errors.push("Content is required.");
+     }
+     if (!this.startdate) {
+       this.errors.push("Start Date is required.");
+     }
+     if (!this.enddate) {
+       this.errors.push("End Date is required.");
+     }
+     if (this.branchId <= 0) {
+       this.errors.push("Branch  is required.");
+     }
+     if (!this.file) {
+       this.errors.push("Document is required.");
+     } else {
+       if (this.cat1 > 0) {
+         this.cat1 = 1;
+       }
+       if (this.cat2 > 0) {
+         this.cat2 = 1;
+       }
+       if (this.cat3 > 0) {
+         this.cat3 = 1;
+       }
+       if (this.cat4 > 0) {
+         this.cat4 = 1;
+       }
+       if (this.cat5 > 0) {
+         this.cat5 = 1;
+       }
+       if (this.cat6 > 0) {
+         this.cat6 = 1;
+       }
+       const headers = {
+         Authorization: "Bearer " + this.userdetails.access_token,
+         Accept: "application/json",
+         "Content-Type": "application/json",
+       };
+       let body = new FormData();
+       if (this.Id != null)
+       body.append("id",this.Id);
+       body.append("added_by", this.userdetails.user.id);
+       body.append("title", this.title);
+       body.append("content", this.content);
+       body.append("document", this.file);
+       body.append("start_date", this.startdate);
+       body.append("end_date", this.enddate);
+       body.append("branch_id", this.branchId);
+       body.append(
+         "audience_ids",
+         this.cat1 +
+           "," +
+           this.cat2 +
+           "," +
+           this.cat3 +
+           "," +
+           this.cat4 +
+           "," +
+           this.cat5 +
+           "," +
+           this.cat6
+       );
+       body.append("status", 1);
+       const response = await this.$axios.post("announcement/add", body, {
+         headers,
+       });
+       if (response.data.code == 200 || response.data.code == "200") {
+        this.$nextTick(() => {
+       $("#insertpopup").modal("show");
+     });
+         this.$router.push("/modules/Admin/announcement-management");
+       } else {
+         this.$nextTick(() => {
+           $("#errorpopup").modal("show");
+         });
+       }
+     }
+   
+   } catch (e) {
+     this.$nextTick(() => {
+       $("#errorpopup").modal("show");
+     });
+   }
+           }
+ },
   },
 };
 </script>
