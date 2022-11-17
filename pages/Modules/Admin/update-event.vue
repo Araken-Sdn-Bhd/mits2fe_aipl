@@ -14,7 +14,6 @@
               <h4>Add New Announcement</h4>
             </div>
             <div class="card-body">
-              <form class="mt-3">
                 <div class="row mb-5 col-sm-12">
                   <label class="col-sm-3 col-form-label">Title</label>
                   <div class="col-sm-9">
@@ -22,63 +21,54 @@
                   </div>
                 </div>
                 <div class="row mb-5 col-sm-12">
-                  <label col-sm-3 class="col-sm-3 col-form-label"
+                  <label class="col-sm-3 col-form-label"
                     >Content</label
                   >
                   <div class="col-sm-9">
-                    <textarea rows="10"
-                    class="form-control"
-                      v-model="content"
-                    ></textarea>
+                    <textarea  class="form-control" v-model="content" rows="20"></textarea>
                   </div>
                 </div>
 
                 <div class="row mb-5 col-sm-12">
-                  <label  class="col-sm-3 col-form-label"
-                    >Document</label
+                  <label class="col-sm-3 col-form-label">Document</label
                   >
                   <div class="col-sm-9">
                     <input
                       type="file"
                       class="form-control"
-                     
                       @change="selectFile"
                     />
+                    <br>
+                    <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
+                        ><i class="fa fa-download"></i> Download File</a
+                      >
                   </div>
                 </div>
 
                 <div class="row mb-5 col-sm-12">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >Start Date</label
-                  >
+                  <label  class="col-sm-3 col-form-label">Start Date</label>
                   <div class="col-sm-4">
                     <input
                       type="date"
                       class="form-control"
-                     
                       v-model="startdate"
                     />
                   </div>
                 </div>
 
                 <div class="row mb-5 col-sm-12">
-                  <label for="inputPassword3" class="col-sm-3 col-form-label"
-                    >End Date</label
-                  >
+                  <label  class="col-sm-3 col-form-label">End Date</label>
                   <div class="col-sm-4">
                     <input
                       type="date"
                       class="form-control"
-                     
                       v-model="enddate"
                     />
                   </div>
                 </div>
 
                 <div class="row mb-5 col-sm-12">
-                  <label  class="col-sm-3 col-form-label"
-                    >Mentari Branch</label
-                  >
+                  <label  class="col-sm-3 col-form-label">Mentari Branch</label>
                   <div class="col-sm-9">
                     <select
                       v-model="branchId"
@@ -86,6 +76,7 @@
                       aria-label="Default select example"
                     >
                     <option value="0">Please Select</option>
+                    <option></option>
                       <option
                         v-for="brnch in list"
                         v-bind:key="brnch.id"
@@ -98,9 +89,7 @@
                 </div>
 
                 <div class="row mb-5 col-sm-12">
-                  <label  class="col-sm-3 col-form-label"
-                    >Set Audience Category</label
-                  >
+                  <label  class="col-sm-3 col-form-label">Set Audience Category</label>
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-sm-6">
@@ -201,22 +190,26 @@
         </li>
       </ul>
         </p>
+        <br>
+      <br>
                 <div class="form-foter">
-                  <a
-                    href="/app/modules/Admin/announcement-management"
-                    class="btn btn-primary btn-text"
-                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                  >
-                  <div class="btn-right">
-                    <button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
+                  <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                  <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <!--<button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>-->
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button v-on:click="onCreateEvent('1')" class="btn btn-success btn-text">
-                      <i class="fad fa-paper-plane"></i> Publish
+                    
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Publish
                     </button>
                   </div>
                 </div>
-              </form>
+           
             </div>
           </div>
         </div>
@@ -228,7 +221,7 @@
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { CommonSidebar, CommonHeader },
+  components: { CommonHeader, CommonSidebar },
   name: "create-event",
   head: {
     script: [
@@ -243,6 +236,11 @@ export default {
         crossorigin: "anonymous",
       },
       {
+        src: "/app/js/jquery-3.5.1.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+      {
         src: "/app/js/jquery.richtext.js",
         body: true,
         crossorigin: "anonymous",
@@ -252,7 +250,7 @@ export default {
   setup() {},
   data() {
     return {
-      Id: 0,
+      Id: null,
       title: "",
       content: "",
       startdate: "",
@@ -269,21 +267,56 @@ export default {
       cat4: 0,
       cat5: 0,
       cat6: 0,
-      catIds: "",
+      SidebarAccess:null,
     };
   },
-  beforeMount() {
-    let urlParams = new URLSearchParams(window.location.search);
-    this.Id = urlParams.get("id");
+  mounted() {
     $(document).ready(function () {
       $(".content").richText();
     });
+  },
+  beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
     this.GetbranchList();
     this.getdetails();
   },
   methods: {
+    async onDownloadFile() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "announcement/downloadFile",
+        { document: this.document },
+        {
+          headers,
+        }
+      );
+      if (response.data.code == 200) {
+            if (response.data.filepath) {
+              const link = document.createElement('a');
+              window.open(response.data.filepath, "_blank");
+            } else {
+              this.error = "No Record Found";
+            }
+          } else {
+            this.error = "No Record Found";
+          }
+    },
+   
+
+    back() {
+      this.$router.go(-1);
+    },
+
     async getdetails() {
+      let urlParams = new URLSearchParams(window.location.search);
+    this.Id = urlParams.get("id");
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -303,6 +336,7 @@ export default {
         this.enddate = response.data.list[0].end_date;
         this.catIds = response.data.list[0].audience_ids;
         this.branchId = response.data.list[0].hospital_branch_id;
+        this.document = response.data.list[0].document;
         var ctsplt = this.catIds.split(",");
         if (ctsplt[0] == 1){
           this.cat1 = 'Psychiatrist';
@@ -327,6 +361,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
+
     async GetbranchList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -345,87 +380,187 @@ export default {
     selectFile(event) {
       this.file = event.target.files[0];
     },
-    async onCreateEvent(status) {
-      var value = status;
-      this.errors = [];
-      if (!this.title) {
-        this.errors.push("Title is required.");
-      }
-      if (!this.content) {
-        this.errors.push("Content is required.");
-      }
-      if (!this.startdate) {
-        this.errors.push("Start Date is required.");
-      }
-      if (!this.enddate) {
-        this.errors.push("End Date is required.");
-      }
-      if (this.branchId <= 0) {
-        this.errors.push("Branch  is required.");
-      }
-      //   if (!this.file) {
-      //     this.errors.push("Document is required.");
-      //   }
-      else {
-        if (this.cat1 > 0) {
-          this.cat1 = 1;
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+        try {
+        this.errors = [];
+        if (!this.title) {
+          this.errors.push("Title is required.");
         }
-        if (this.cat2 > 0) {
-          this.cat2 = 1;
+        if (!this.content) {
+          this.errors.push("Content is required.");
         }
-        if (this.cat3 > 0) {
-          this.cat3 = 1;
+        if (!this.startdate) {
+          this.errors.push("Start Date is required.");
         }
-        if (this.cat4 > 0) {
-          this.cat4 = 1;
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
         }
-        if (this.cat5 > 0) {
-          this.cat5 = 1;
+        if (this.branchId <= 0) {
+          this.errors.push("Branch  is required.");
         }
-        if (this.cat6 > 0) {
-          this.cat6 = 1;
-        }
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        let body = new FormData();
-        body.append("added_by", this.userdetails.user.id);
-        body.append("title", this.title);
-        body.append("content", this.content);
-        body.append("document", this.file);
-        body.append("start_date", this.startdate);
-        body.append("end_date", this.enddate);
-        body.append("branch_id", this.branchId);
-        body.append("id", this.Id);
-        body.append(
-          "audience_ids",
-          this.cat1 +
-            "," +
-            this.cat2 +
-            "," +
-            this.cat3 +
-            "," +
-            this.cat4 +
-            "," +
-            this.cat5 +
-            "," +
-            this.cat6
-        );
-        body.append("status", value);
-        const response = await this.$axios.post("announcement/update", body, {
-          headers,
-        });
-        console.log('my response',response.data);
-        if (response.data.code == 200 || response.data.code == "200") {
-          this.$router.push("/modules/Admin/announcement-management");
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
+         else {
+          if (this.cat1 > 0) {
+            this.cat1 = 1;
+          }
+          if (this.cat2 > 0) {
+            this.cat2 = 1;
+          }
+          if (this.cat3 > 0) {
+            this.cat3 = 1;
+          }
+          if (this.cat4 > 0) {
+            this.cat4 = 1;
+          }
+          if (this.cat5 > 0) {
+            this.cat5 = 1;
+          }
+          if (this.cat6 > 0) {
+            this.cat6 = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          if (this.Id != null)
+          body.append("id",this.Id);
+          body.append("added_by", this.userdetails.user.id);
+          body.append("title", this.title);
+          body.append("content", this.content);
+          body.append("document", this.file);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          body.append("branch_id", this.branchId);
+          body.append(
+            "audience_ids",
+            this.cat1 +
+              "," +
+              this.cat2 +
+              "," +
+              this.cat3 +
+              "," +
+              this.cat4 +
+              "," +
+              this.cat5 +
+              "," +
+              this.cat6
+          );
+          body.append("status", 0);
+          const response = await this.$axios.post("announcement/update", body, {
+            headers,
           });
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+       $("#insertpopup").modal("show");
+     });
+            this.$router.push("/modules/Admin/announcement-management");
+          } else {
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
         }
+      
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
       }
+    }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to publish this entry? ")) {
+      try {
+        this.errors = [];
+        if (!this.title) {
+          this.errors.push("Title is required.");
+        }
+        if (!this.content) {
+          this.errors.push("Content is required.");
+        }
+        if (!this.startdate) {
+          this.errors.push("Start Date is required.");
+        }
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
+        }
+        if (this.branchId <= 0) {
+          this.errors.push("Branch  is required.");
+        }
+         else {
+          if (this.cat1 > 0) {
+            this.cat1 = 1;
+          }
+          if (this.cat2 > 0) {
+            this.cat2 = 1;
+          }
+          if (this.cat3 > 0) {
+            this.cat3 = 1;
+          }
+          if (this.cat4 > 0) {
+            this.cat4 = 1;
+          }
+          if (this.cat5 > 0) {
+            this.cat5 = 1;
+          }
+          if (this.cat6 > 0) {
+            this.cat6 = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          if (this.Id != null)
+          body.append("id",this.Id);
+          body.append("added_by", this.userdetails.user.id);
+          body.append("title", this.title);
+          body.append("content", this.content);
+         
+          body.append("document", this.file);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          body.append("branch_id", this.branchId);
+          body.append(
+            "audience_ids",
+            this.cat1 +
+              "," +
+              this.cat2 +
+              "," +
+              this.cat3 +
+              "," +
+              this.cat4 +
+              "," +
+              this.cat5 +
+              "," +
+              this.cat6
+          );
+          body.append("status", 1);
+          const response = await this.$axios.post("announcement/update", body, {
+            headers,
+          });
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+
+            this.$router.push("/modules/Admin/announcement-management");
+          } else {
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
     },
   },
 };
