@@ -1363,7 +1363,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/internal-referral-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1438,7 +1438,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/patient-index-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId},
         });
       }
     },
@@ -1565,7 +1565,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/list-of-etp",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1573,7 +1573,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1597,7 +1597,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/list-of-job-search",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1605,7 +1605,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/list-of-previous-or-current-job",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },

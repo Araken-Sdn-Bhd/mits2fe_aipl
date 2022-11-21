@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
+              <form method="post">
                 <Interventionphysectristdetails />
 
                 <table class="notes">
@@ -399,18 +399,23 @@
                        <br>
                        <br>
                 <div class="d-flex" v-if="!pid">
-                  <a
+                    <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Publish
+                    </button>
+                  </div>
                 </div>
+
+
                  <!-- <div class="d-flex" v-if="pid">
                   <button
                     type="submit"
@@ -441,6 +446,7 @@ export default {
   name: "psychiatry-clerking-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -500,11 +506,163 @@ export default {
       validate: true,
       assistancelist: [],
       externallist: [],
+      SidebarAccess:null,
     };
   },
   methods: {
-    async Onphychiatryclerkingnote() {
-      
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      this.validate = true;
+      console.log("services", this.category_services);
+      this.errorList = [];
+        try {
+          if (!this.chief_complain) {
+            this.errorList.push("Chief Complaint is required");
+          }
+          if (!this.presenting_illness) {
+            this.errorList.push("History Of Presenting Illness is required");
+          }
+          if (!this.background_history) {
+            this.errorList.push("Background History is required");
+          }
+          if (!this.general_examination) {
+            this.errorList.push("General Examination is required");
+          }
+          if (!this.mental_state_examination) {
+            this.errorList.push("Mental State Examination is required");
+          }
+
+          if (!this.management) {
+            this.errorList.push("Management is required");
+          }
+          if (!this.discuss_psychiatrist_name) {
+            this.errorList.push("Discussed With is required");
+          }
+          if (!this.date) {
+            this.errorList.push("Date is required");
+          }
+          if (!this.time) {
+            this.errorList.push("Time is required");
+          }
+          if (!this.location_services_id) {
+            this.errorList.push("Location Of Services is required");
+          }
+          if (!this.type_diagnosis_id) {
+            this.errorList.push("Type Of Diagnosis is required");
+          }
+          if (!this.category_services) {
+            this.errorList.push("Category Of Services is required");
+          }
+          if (!this.complexity_services_id) {
+            this.errorList.push("Complexity Of Service is required");
+          }
+          if (this.category_services) {
+            if (this.category_services == "assisstance") {
+              if (!this.services_id) {
+                this.errorList.push("Service is required");
+                this.validate = false;
+              }
+            } else if (this.category_services == "clinical-work") {
+              if (!this.code_id) {
+                this.errorList.push("ICD 9 CODE is required");
+                this.validate = false;
+              }
+              if (!this.sub_code_id) {
+                this.errorList.push("ICD 9 SUB CODE is required");
+                this.validate = false;
+              }
+            } else {
+              if (!this.serviceid) {
+                this.errorList.push("Services is required");
+                this.validate = false;
+              } else {
+                this.services_id = this.serviceid;
+              }
+            }
+          }
+          if (!this.outcome_id) {
+            this.errorList.push("Outcome is required");
+          }
+
+          if (
+            this.chief_complain &&
+            this.presenting_illness &&
+            this.background_history &&
+            this.general_examination &&
+            this.mental_state_examination &&
+            // this.diagnosis_id &&
+            this.management &&
+            this.discuss_psychiatrist_name &&
+            this.date &&
+            this.time &&
+            this.location_services_id &&
+            this.type_diagnosis_id &&
+            this.category_services &&
+            this.complexity_services_id &&
+            this.outcome_id &&
+            //this.medication_des &&
+            this.validate
+          ) {
+            this.loader = true;
+            const headers = {
+              Authorization: "Bearer " + this.userdetails.access_token,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+              "patient-psychiatry-clerkingnote/add",
+              {
+                added_by: this.userdetails.user.id.toString(),
+                chief_complain: this.chief_complain,
+                presenting_illness: this.presenting_illness,
+                background_history: this.background_history,
+                general_examination: this.general_examination,
+                mental_state_examination: this.mental_state_examination,
+                diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                management: this.management,
+                discuss_psychiatrist_name: this.discuss_psychiatrist_name,
+                date: this.date,
+                time: this.time,
+                location_services_id: this.location_services_id,
+                type_diagnosis_id: this.type_diagnosis_id,
+                category_services: this.category_services,
+                code_id: this.code_id,
+                sub_code_id: this.sub_code_id,
+                complexity_services_id: this.complexity_services_id,
+                outcome_id: this.outcome_id,
+                medication_des: this.medication_des,
+                patient_mrn_id: this.Id,
+                services_id: this.services_id,
+                id:this.pid,
+                appId: this.appId,
+                status: "0",
+              },
+              { headers }
+            );
+            console.log("response", response.data);
+            if (response.data.code == 200) {
+              this.loader = false;
+              this.resetmodel();
+              this.$nextTick(() => {
+                $("#insertpopup").modal("show");
+              });
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
+          }
+        } catch (e) {
+          this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+        }
+    }
+    },
+    async onPublishEvent() {
+
       if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       console.log("services", this.category_services);
@@ -525,7 +683,7 @@ export default {
         if (!this.mental_state_examination) {
           this.errorList.push("Mental State Examination is required");
         }
-        
+
         if (!this.management) {
           this.errorList.push("Management is required");
         }
@@ -577,7 +735,7 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-      
+
         if (
           this.chief_complain &&
           this.presenting_illness &&
@@ -646,8 +804,14 @@ export default {
             });
           }
         }
-      } catch (e) {}
-  }},
+      } catch (e) {
+        this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+      }
+  }
+  },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -820,11 +984,12 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     }
   },
 };
+</script>
 </script>
 <style scoped>
 .hide {

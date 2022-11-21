@@ -400,13 +400,13 @@
                   <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
+                      ><i class="far fa-arrow-alt-to-left"></i> Back</a
                     >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="fa fa-save"></i> Save
+                    <i class="far fa-save"></i> Submit
                   </button>
                 </div>
               </form>
@@ -741,7 +741,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id,appId: this.appId  },
             });
     }
   },

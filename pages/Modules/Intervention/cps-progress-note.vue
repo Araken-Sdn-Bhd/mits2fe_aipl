@@ -2872,17 +2872,26 @@
                              </li>
                         </ul>
                        </p>
-
+                       <br/><br/>
               <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                  <button @click="OnSubmit" class="btn btn-warning btn-text"
-                    ><i class="fa fa-save"></i> Save</button
-                  >
-                  <button @click="setData" class="btn btn-success btn-text"
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+
+                    <button @click="setData" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</button
-                  >
+                    >
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -2992,6 +3001,7 @@ export default {
       status: 1,
       pid: 0,
       type: "",
+      appId: null,
 
       // for print data based on dropdown
 
@@ -3015,6 +3025,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.designation = this.userdetails.user.role;
     let urlParams = new URLSearchParams(window.location.search);
     this.email = this.userdetails.user.email;
@@ -3029,6 +3040,7 @@ export default {
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+    this.appId = urlParams.get("appId");
     if (this.pid) {
       this.getdetails();
     }
@@ -3042,178 +3054,125 @@ export default {
     });
   },
   methods: {
-    async GetList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
-        "general-setting/list?section=" + "complexity-of-service",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.comlexcitylist = response.data.list;
-      } else {
-        this.comlexcitylist = [];
-      }
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
-      const response2 = await this.$axios.get(
-        "general-setting/list?section=" + "outcome",
-        { headers }
-      );
-      if (response2.data.code == 200 || response2.data.code == "200") {
-        this.outcomelist = response2.data.list;
-      } else {
-        this.outcomelist = [];
-      }
-      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
-        headers,
-      });
-      if (response3.data.code == 200 || response3.data.code == "200") {
-        this.codelist = response3.data.list;
-      } else {
-        this.codelist = [];
-      }
-      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
-        headers,
-      });
-      if (response4.data.code == 200 || response4.data.code == "200") {
-        this.diagonisislist = response4.data.list;
-      } else {
-        this.diagonisislist = [];
-      }
-      const response5 = await this.$axios.get(
-        "general-setting/list?section=" + "location-of-services",
-        {
-          headers,
-        }
-      );
-      if (response5.data.code == 200 || response5.data.code == "200") {
-        this.locationlist = response5.data.list;
-      } else {
-        this.locationlist = [];
-      }
-      const response8 = await this.$axios.get(
-        "general-setting/list?section=" + "current-interventionl",
-        {
-          headers,
-        }
-      );
-      if (response8.data.code == 200 || response8.data.code == "200") {
-        this.currentinterventionlist = response8.data.list;
-      } else {
-        this.currentinterventionlist = [];
-      }
-
-      const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "compliance-to-treatment",
-
-        {
-          headers,
-        }
-      );
-      if (response9.data.code == 200 || response9.data.code == "200") {
-        this.compliancetotreatment = response9.data.list;
-      } else {
-        this.compliancetotreatment = [];
-      }
-
-      const response10 = await this.$axios.get(
-        "general-setting/list?section=" + "medication-supervised-by",
-
-        {
-          headers,
-        }
-      );
-      if (response10.data.code == 200 || response10.data.code == "200") {
-        this.medicationsupervised = response10.data.list;
-      } else {
-        this.medicationsupervised = [];
-      }
-      const respons = await this.$axios.get(
-        "general-setting/list?section=" + "assistance-or-supervision",
-        { headers }
-      );
-      if (respons.data.code == 200 || respons.data.code == "200") {
-        this.assistancelist = respons.data.list;
-      } else {
-        this.assistancelist = [];
-      }
-      const respon = await this.$axios.get(
-        "general-setting/list?section=" + "external",
-        { headers }
-      );
-      if (respon.data.code == 200 || respon.data.code == "200") {
-        this.externallist = respon.data.list;
-      } else {
-        this.externallist = [];
-      }
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "cps-progress-note/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_mrn_id: this.Id,
+              cps_date: this.cps_date,
+              cps_time: this.cps_time,
+              cps_seen_by: this.cps_seen_by,
+              cps_date_discussed: this.cps_date_discussed,
+              cps_time_discussed: this.cps_time_discussed,
+              cps_discussed_with: this.cps_discussed_with,
+              visit_date: this.visit_date,
+              visit_time: this.visit_time,
+              informants_name: this.informants_name,
+              informants_relationship: this.informants_relationship,
+              informants_contact: this.informants_contact,
+              case_manager: this.case_manager,
+              visited_by: this.visited_by,
+              visit_outcome: this.visit_outcome,
+              current_intervention: this.current_intervention,
+              compliance_treatment: this.compliance_treatment,
+              medication_supervised_by: this.medication_supervised_by,
+              delusions: this.delusions,
+              hallucination: this.hallucination,
+              behavior: this.behavior,
+              blunted_affect: this.blunted_affect,
+              depression: this.depression,
+              anxiety: this.anxiety,
+              disorientation: this.disorientation,
+              uncooperativeness: this.uncooperativeness,
+              poor_impulse_control: this.poor_impulse_control,
+              others: this.others,
+              ipsychopathology_remarks: this.ipsychopathology_remarks,
+              risk_of_violence: this.risk_of_violence,
+              risk_of_suicide: this.risk_of_suicide,
+              risk_of_other_deliberate: this.risk_of_other_deliberate,
+              risk_of_severe: this.risk_of_severe,
+              risk_of_harm: this.risk_of_harm,
+              changes_in_teratment: this.changes_in_teratment,
+              akathisia: this.akathisia,
+              acute_dystonia: this.acute_dystonia,
+              parkinsonism: this.parkinsonism,
+              tardive_dyskinesia: this.tardive_dyskinesia,
+              tardive_dystonia: this.tardive_dystonia,
+              others_specify: this.others_specify,
+              side_effects_remarks: this.side_effects_remarks,
+              social_performance: this.social_performance,
+              psychoeducation: this.psychoeducation,
+              coping_skills: this.coping_skills,
+              adl_training: this.adl_training,
+              supported_employment: this.supported_employment,
+              family_intervention: this.family_intervention,
+              intervention_others: this.intervention_others,
+              remarks: this.remarks,
+              employment_past_months: this.employment_past_months,
+              if_employment_yes: this.if_employment_yes,
+              psychiatric_clinic: this.psychiatric_clinic,
+              im_depot_clinic: this.im_depot_clinic,
+              next_community_visit: this.next_community_visit,
+              comments: this.comments,
+              location_service: this.location_services_id,
+              diagnosis_type: this.type_diagnosis_id,
+              service_category: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication: this.medication_des,
+              staff_name: this.staff_name,
+              designation: this.designation,
+              status: "0",
+              appId: this.appId,
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        //}
+      } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        // }
+  }
     },
-    async GetstaffList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const axios = require("axios").default;
-      axios
-        .get(
-          `${this.$axios.defaults.baseURL}` +
-            "hospital/getServiceByTeamId",
+    async onPublishEvent() {
 
-          { headers, params: {team_id: this.appId, email: this.email}   }
-        )
-        .then((resp) => {
-          // this.list = resp.data.list;
-          this.stafflist = resp.data.list;
-          this.teamlist = resp.data.stafflist;
-          this.rolelist = resp.data.rolelist;
-        });
-    },
-
-    // async GetteamList(){
-    //   const headers = {
-    //     Authorization: "Bearer " + this.userdetails.access_token,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   };
-    //   const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
-    //     headers,
-    //   });
-    //   //this.teamlist = response.data.list;
-
-    // },
-
-    async onCategorycodebind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "diagnosis/getIcd9subcodeList",
-        { icd_category_code: event.target.value },
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.icdcatcodelist = response.data.list;
-      } else {
-        this.icdcatcodelist = [];
-      }
-    },
-    Openpsptest() {
-      let route = this.$router.resolve({
-        path: "/modules/Intervention/psp?id=" + this.Id,
-      });
-      window.open(route.href);
-    },
-    async OnSubmit() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = false;
       this.errorList = [];
       try {
@@ -3577,6 +3536,7 @@ export default {
               staff_name: this.staff_name,
               designation: this.designation,
               status: "1",
+              appId: this.appId,
             },
             { headers }
           );
@@ -3595,6 +3555,192 @@ export default {
           }
         //}
       } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        // }
+  }
+  },
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "complexity-of-service",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.comlexcitylist = response.data.list;
+      } else {
+        this.comlexcitylist = [];
+      }
+      const response1 = await this.$axios.get("service/list", { headers });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+      } else {
+        this.servicelist = [];
+      }
+      const response2 = await this.$axios.get(
+        "general-setting/list?section=" + "outcome",
+        { headers }
+      );
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.outcomelist = response2.data.list;
+      } else {
+        this.outcomelist = [];
+      }
+      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+        headers,
+      });
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.codelist = response3.data.list;
+      } else {
+        this.codelist = [];
+      }
+      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "location-of-services",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.locationlist = response5.data.list;
+      } else {
+        this.locationlist = [];
+      }
+      const response8 = await this.$axios.get(
+        "general-setting/list?section=" + "current-interventionl",
+        {
+          headers,
+        }
+      );
+      if (response8.data.code == 200 || response8.data.code == "200") {
+        this.currentinterventionlist = response8.data.list;
+      } else {
+        this.currentinterventionlist = [];
+      }
+
+      const response9 = await this.$axios.get(
+        "general-setting/list?section=" + "compliance-to-treatment",
+
+        {
+          headers,
+        }
+      );
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.compliancetotreatment = response9.data.list;
+      } else {
+        this.compliancetotreatment = [];
+      }
+
+      const response10 = await this.$axios.get(
+        "general-setting/list?section=" + "medication-supervised-by",
+
+        {
+          headers,
+        }
+      );
+      if (response10.data.code == 200 || response10.data.code == "200") {
+        this.medicationsupervised = response10.data.list;
+      } else {
+        this.medicationsupervised = [];
+      }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
+      const respon = await this.$axios.get(
+        "general-setting/list?section=" + "external",
+        { headers }
+      );
+      if (respon.data.code == 200 || respon.data.code == "200") {
+        this.externallist = respon.data.list;
+      } else {
+        this.externallist = [];
+      }
+    },
+    async GetstaffList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(
+          `${this.$axios.defaults.baseURL}` +
+            "hospital/getServiceByTeamId",
+
+          { headers, params: {team_id: this.appId, email: this.email}   }
+        )
+        .then((resp) => {
+          // this.list = resp.data.list;
+          this.stafflist = resp.data.list;
+          this.teamlist = resp.data.stafflist;
+          this.rolelist = resp.data.rolelist;
+        });
+    },
+
+    // async GetteamList(){
+    //   const headers = {
+    //     Authorization: "Bearer " + this.userdetails.access_token,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   };
+    //   const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
+    //     headers,
+    //   });
+    //   //this.teamlist = response.data.list;
+
+    // },
+
+    async onCategorycodebind(event) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "diagnosis/getIcd9subcodeList",
+        { icd_category_code: event.target.value },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.icdcatcodelist = response.data.list;
+      } else {
+        this.icdcatcodelist = [];
+      }
+    },
+    Openpsptest() {
+      let route = this.$router.resolve({
+        path: "/modules/Intervention/psp?id=" + this.Id,
+      });
+      window.open(route.href);
     },
     resetmodel() {
       this.cps_date = "";
@@ -3969,6 +4115,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId },
+            });
+    }
   },
 };
 </script>

@@ -363,18 +363,22 @@
                              </li>
                         </ul>
                        </p>
+                                              <br>
+                       <br>
                 <div class="d-flex" v-if="!pid">
-                  <a
+                    <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -430,10 +434,12 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
+      appId: null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -449,6 +455,7 @@ export default {
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
 
+    this.appId = urlParams.get("appId");
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
 
@@ -467,8 +474,60 @@ export default {
     this.currenttime = current.getHours() + ":" + current.getMinutes();
   },
   methods: {
-    async Onphychiatryclerkingnote() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "progress-note/add",
+            {
+              added_by: this.userdetails.user.id.toString(),
+              diagnosis: this.diagnosis,  //diagnosis
+              clinical_notes: this.clinical_notes,
+              management: this.management,
+              location_services_id: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id.id,
+              category_services: this.category_services,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services_id: this.complexity_services_id,
+              outcome_id: this.outcome_id,
+              medication_des: this.medication_des,
+              patient_mrn_id: this.Id,
+              services_id: this.services_id,
+              status: "0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+              }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.errorList = [];
+      this.validate = true;
       try {
         // if (!this.diagnosis) {
         //   this.errorList.push("Diagnosis is required");
@@ -556,6 +615,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
+              status: "1",
             },
             { headers }
           );
@@ -573,7 +633,12 @@ export default {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
     },
     BindDiagnosis(){
       this.diagnosis=this.type_diagnosis_id.text;
@@ -757,7 +822,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id,appId: this.appId },
             });
     }
   },
