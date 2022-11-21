@@ -3001,6 +3001,7 @@ export default {
       status: 1,
       pid: 0,
       type: "",
+      appId: null,
 
       // for print data based on dropdown
 
@@ -3039,6 +3040,7 @@ export default {
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+    this.appId = urlParams.get("appId");
     if (this.pid) {
       this.getdetails();
     }
@@ -3055,370 +3057,84 @@ export default {
     async onCreateEvent() {
       if (confirm("Are you sure you want to save this as draft ? ")) {
       try {
-        this.errors = [];
-        if (!this.title) {
-          this.errors.push("Title is required.");
-        }
-        if (!this.content) {
-          this.errors.push("Content is required.");
-        }
-        if (!this.startdate) {
-          this.errors.push("Start Date is required.");
-        }
-        if (!this.enddate) {
-          this.errors.push("End Date is required.");
-        }
-        if (this.branchId <= 0) {
-          this.errors.push("Branch  is required.");
-        }
-        if (!this.file) {
-          this.errors.push("Document is required.");
-        } else {
-          if (this.cat1 > 0) {
-            this.cat1 = 1;
-          }
-          if (this.cat2 > 0) {
-            this.cat2 = 1;
-          }
-          if (this.cat3 > 0) {
-            this.cat3 = 1;
-          }
-          if (this.cat4 > 0) {
-            this.cat4 = 1;
-          }
-          if (this.cat5 > 0) {
-            this.cat5 = 1;
-          }
-          if (this.cat6 > 0) {
-            this.cat6 = 1;
-          }
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          let body = new FormData();
-          if (this.Id != null)
-          body.append("id",this.Id);
-          body.append("added_by", this.userdetails.user.id);
-          body.append("title", this.title);
-          body.append("content", this.content);
-          body.append("document", this.file);
-          body.append("start_date", this.startdate);
-          body.append("end_date", this.enddate);
-          body.append("branch_id", this.branchId);
-          body.append(
-            "audience_ids",
-            this.cat1 +
-              "," +
-              this.cat2 +
-              "," +
-              this.cat3 +
-              "," +
-              this.cat4 +
-              "," +
-              this.cat5 +
-              "," +
-              this.cat6
-          );
-          body.append("status", 0);
-          const response = await this.$axios.post("announcement/add", body, {
-            headers,
-          });
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-       $("#insertpopup").modal("show");
-     });
-            this.$router.push("/modules/Admin/announcement-management");
-          } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        }
-
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-              }
-    },
-    async onPublishEvent() {
-
-      if (confirm("Are you sure you want to save this entry ? ")) {
-      this.validate = true;
-      console.log("services", this.category_services);
-      this.validate = false;
-      this.errorList = [];
-      try {
-        if (!this.cps_date || !this.cps_time || !this.cps_seen_by) {
-          this.errorList.push("Date & Time Seen By is required");
-        }
-        if (
-          !this.cps_date_discussed ||
-          !this.cps_time_discussed ||
-          !this.cps_discussed_with
-        ) {
-          this.errorList.push("Date & Time Discussed with is required");
-        }
-        if (!this.visit_date || !this.visit_time) {
-          this.errorList.push("Visit Date & time is required");
-        }
-        if (!this.informants_name) {
-          this.errorList.push("Informants NAME is required");
-        }
-        if (!this.informants_relationship) {
-          this.errorList.push("Informants RELATIONSHIP is required");
-        }
-        if (!this.informants_contact) {
-          this.errorList.push("Informants CONTACT NO is required");
-        }
-        if (!this.case_manager) {
-          this.errorList.push("Case Manager	 is required");
-        }
-        if (!this.visited_by) {
-          this.errorList.push("Visited By	is required");
-        }
-        if (!this.visit_outcome) {
-          this.errorList.push("Visit Outcome is required");
-        }
-        if (!this.current_intervention) {
-          this.errorList.push("Current Intervention is required");
-        }
-        if (!this.compliance_treatment) {
-          this.errorList.push("Compliance To Treatment is required");
-        }
-        if (!this.medication_supervised_by) {
-          this.errorList.push("Medication Supervised By is required");
-        }
-        if (!this.delusions) {
-          this.errorList.push("Delusions is required");
-        }
-        if (!this.hallucination) {
-          this.errorList.push("Hallucination is required");
-        }
-        if (!this.behavior) {
-          this.errorList.push("Disorganized Speech /Behavior is required");
-        }
-        if (!this.blunted_affect) {
-          this.errorList.push("Blunted Affect	is required");
-        }
-        if (!this.depression) {
-          this.errorList.push("Depression	 is required");
-        }
-        if (!this.anxiety) {
-          this.errorList.push("Anxiety is required");
-        }
-        if (!this.disorientation) {
-          this.errorList.push("Disorientation is required");
-        }
-        if (!this.uncooperativeness) {
-          this.errorList.push("Uncooperativeness is required");
-        }
-        if (!this.poor_impulse_control) {
-          this.errorList.push("Poor Impulse Control is required");
-        }
-        if (!this.others) {
-          this.errorList.push("Others, Please specify is required");
-        }
-        if (!this.ipsychopathology_remarks) {
-          this.errorList.push(
-            "PSYCHOPATHOLOGY/MENTAL STATE Remarks is required"
-          );
-        }
-        if (!this.risk_of_violence) {
-          this.errorList.push("Risk of violence/harm to others is required");
-        }
-        if (!this.risk_of_suicide) {
-          this.errorList.push("Risk Of Suicide is required");
-        }
-        if (!this.risk_of_other_deliberate) {
-          this.errorList.push("Risk Of Other Deliberate Self Harm is required");
-        }
-        if (!this.risk_of_severe) {
-          this.errorList.push(
-            "Risk Of Severe Self-neglect / Serious Accidental Self-harm is required"
-          );
-        }
-        if (!this.risk_of_harm) {
-          this.errorList.push(
-            "Risk Of Harm From Others / Vulnerability is required"
-          );
-        }
-        if (!this.changes_in_teratment) {
-          this.errorList.push(
-            "Changes in teratment at Current Visit is required"
-          );
-        }
-        if (!this.akathisia) {
-          this.errorList.push("Akathisia is required");
-        }
-        if (!this.acute_dystonia) {
-          this.errorList.push("Acute Dystonia	 is required");
-        }
-        if (!this.parkinsonism) {
-          this.errorList.push("Parkinsonism is required");
-        }
-        if (!this.tardive_dyskinesia) {
-          this.errorList.push("Tardive Dyskinesia is required");
-        }
-        if (!this.tardive_dystonia) {
-          this.errorList.push("Tardive Dystonia	 is required");
-        }
-        if (!this.others_specify) {
-          this.errorList.push("Others, specify	 is required");
-        }
-        if (!this.side_effects_remarks) {
-          this.errorList.push("SIDE EFFECTS Remarks is required");
-        }
-        if (!this.social_performance) {
-          this.errorList.push(
-            "PERSONAL AND SOCIAL PERFORMANCE (PSP) SCALE is required"
-          );
-        }
-        if (!this.psychoeducation) {
-          this.errorList.push("Psychoeducation/Counseling	 is required");
-        }
-        if (!this.coping_skills) {
-          this.errorList.push("Coping Skills Training	 is required");
-        }
-        if (!this.adl_training) {
-          this.errorList.push("ADL Training is required");
-        }
-        if (!this.supported_employment) {
-          this.errorList.push("Supported Employment is required");
-        }
-        if (!this.family_intervention) {
-          this.errorList.push("Family Intervention is required");
-        }
-        if (!this.intervention_others) {
-          this.errorList.push("Others, specify is required");
-        }
-        if (!this.remarks) {
-          this.errorList.push("INTERVENTION Remarks is required");
-        }
-
-        if (!this.employment_past_months) {
-          this.errorList.push("Employment the past 6 month is required");
-        }
-        if (this.employment_past_months == "Yes") {
-          if (!this.if_employment_yes) {
-            this.errorList.push("If Yes is required");
-            this.validate = false;
-          }
-        }
-        if (!this.psychiatric_clinic) {
-          this.errorList.push("Psychiatric clinic	 is required");
-        }
-        if (!this.im_depot_clinic) {
-          this.errorList.push("IM depot in clinic is required");
-        }
-        if (!this.next_community_visit) {
-          this.errorList.push("Next community visit	 is required");
-        }
-        if (!this.comments) {
-          this.errorList.push("Comments is required");
-        }
-        if (!this.location_services_id) {
-          this.errorList.push("Location Of Services is required");
-        }
-        if (!this.type_diagnosis_id) {
-          this.errorList.push("Type Of Diagnosis is required");
-        }
-        if (!this.category_services) {
-          this.errorList.push("Category Of Services is required");
-        }
-        if (!this.complexity_services_id) {
-          this.errorList.push("Complexity Of Service is required");
-        }
-        if (this.category_services) {
-          if (this.category_services == "assisstance") {
-            if (!this.services_id) {
-              this.errorList.push("Service is required");
-              this.validate = false;
-            }
-          } else if (this.category_services == "clinical-work") {
-            if (!this.code_id) {
-              this.errorList.push("ICD 9 CODE is required");
-              this.validate = false;
-            }
-            if (!this.sub_code_id) {
-              this.errorList.push("ICD 9 SUB CODE is required");
-              this.validate = false;
-            }
-          } else {
-            if (!this.serviceid) {
-              this.errorList.push("Services is required");
-              this.validate = false;
-            } else {
-              this.services_id = this.serviceid;
-            }
-          }
-        }
-        if (!this.outcome_id) {
-          this.errorList.push("Outcome is required");
-        }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
-        if (!this.staff_name) {
-          this.errorList.push("Staff Name	 is required");
-        }
-        if (!this.designation) {
-          this.errorList.push("Designation is required");
-        }
-
-        // if (
-        //   this.chief_complain &&
-        //   this.presenting_illness &&
-        //   this.background_history &&
-        //   this.general_examination &&
-        //   this.mental_state_examination &&
-        //   // this.diagnosis_id &&
-        //   this.management &&
-        //   this.discuss_psychiatrist_name &&
-        //   this.date &&
-        //   this.time &&
-        //   this.location_services_id &&
-        //   this.type_diagnosis_id &&
-        //   this.category_services &&
-        //   this.complexity_services_id &&
-        //   this.outcome_id &&
-        //   //this.medication_des &&
-        //   this.validate
-        // ) {
-          this.loader = true;
+        this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "patient-psychiatry-clerkingnote/add",
+            "cps-progress-note/add",
             {
-              added_by: this.userdetails.user.id.toString(),
-              chief_complain: this.chief_complain,
-              presenting_illness: this.presenting_illness,
-              background_history: this.background_history,
-              general_examination: this.general_examination,
-              mental_state_examination: this.mental_state_examination,
-              diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-              management: this.management,
-              discuss_psychiatrist_name: this.discuss_psychiatrist_name,
-              date: this.date,
-              time: this.time,
-              location_services_id: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
+              added_by: this.userdetails.user.id,
+              patient_mrn_id: this.Id,
+              cps_date: this.cps_date,
+              cps_time: this.cps_time,
+              cps_seen_by: this.cps_seen_by,
+              cps_date_discussed: this.cps_date_discussed,
+              cps_time_discussed: this.cps_time_discussed,
+              cps_discussed_with: this.cps_discussed_with,
+              visit_date: this.visit_date,
+              visit_time: this.visit_time,
+              informants_name: this.informants_name,
+              informants_relationship: this.informants_relationship,
+              informants_contact: this.informants_contact,
+              case_manager: this.case_manager,
+              visited_by: this.visited_by,
+              visit_outcome: this.visit_outcome,
+              current_intervention: this.current_intervention,
+              compliance_treatment: this.compliance_treatment,
+              medication_supervised_by: this.medication_supervised_by,
+              delusions: this.delusions,
+              hallucination: this.hallucination,
+              behavior: this.behavior,
+              blunted_affect: this.blunted_affect,
+              depression: this.depression,
+              anxiety: this.anxiety,
+              disorientation: this.disorientation,
+              uncooperativeness: this.uncooperativeness,
+              poor_impulse_control: this.poor_impulse_control,
+              others: this.others,
+              ipsychopathology_remarks: this.ipsychopathology_remarks,
+              risk_of_violence: this.risk_of_violence,
+              risk_of_suicide: this.risk_of_suicide,
+              risk_of_other_deliberate: this.risk_of_other_deliberate,
+              risk_of_severe: this.risk_of_severe,
+              risk_of_harm: this.risk_of_harm,
+              changes_in_teratment: this.changes_in_teratment,
+              akathisia: this.akathisia,
+              acute_dystonia: this.acute_dystonia,
+              parkinsonism: this.parkinsonism,
+              tardive_dyskinesia: this.tardive_dyskinesia,
+              tardive_dystonia: this.tardive_dystonia,
+              others_specify: this.others_specify,
+              side_effects_remarks: this.side_effects_remarks,
+              social_performance: this.social_performance,
+              psychoeducation: this.psychoeducation,
+              coping_skills: this.coping_skills,
+              adl_training: this.adl_training,
+              supported_employment: this.supported_employment,
+              family_intervention: this.family_intervention,
+              intervention_others: this.intervention_others,
+              remarks: this.remarks,
+              employment_past_months: this.employment_past_months,
+              if_employment_yes: this.if_employment_yes,
+              psychiatric_clinic: this.psychiatric_clinic,
+              im_depot_clinic: this.im_depot_clinic,
+              next_community_visit: this.next_community_visit,
+              comments: this.comments,
+              location_service: this.location_services_id,
+              diagnosis_type: this.type_diagnosis_id,
+              service_category: this.category_services,
+              services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_services_id: this.complexity_services_id,
-              outcome_id: this.outcome_id,
-              medication_des: this.medication_des,
-              patient_mrn_id: this.Id,
-              services_id: this.services_id,
-              id:this.pid,
+              complexity_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication: this.medication_des,
+              staff_name: this.staff_name,
+              designation: this.designation,
+              status: "0",
               appId: this.appId,
             },
             { headers }
@@ -3436,187 +3152,27 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        // }
-      } catch (e) {
-        this.loader = false;
+        //}
+      } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
-      }
+          }
+        // }
   }
-  },
-    async GetList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
-        "general-setting/list?section=" + "complexity-of-service",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.comlexcitylist = response.data.list;
-      } else {
-        this.comlexcitylist = [];
-      }
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
-      const response2 = await this.$axios.get(
-        "general-setting/list?section=" + "outcome",
-        { headers }
-      );
-      if (response2.data.code == 200 || response2.data.code == "200") {
-        this.outcomelist = response2.data.list;
-      } else {
-        this.outcomelist = [];
-      }
-      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
-        headers,
-      });
-      if (response3.data.code == 200 || response3.data.code == "200") {
-        this.codelist = response3.data.list;
-      } else {
-        this.codelist = [];
-      }
-      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
-        headers,
-      });
-      if (response4.data.code == 200 || response4.data.code == "200") {
-        this.diagonisislist = response4.data.list;
-      } else {
-        this.diagonisislist = [];
-      }
-      const response5 = await this.$axios.get(
-        "general-setting/list?section=" + "location-of-services",
-        {
-          headers,
-        }
-      );
-      if (response5.data.code == 200 || response5.data.code == "200") {
-        this.locationlist = response5.data.list;
-      } else {
-        this.locationlist = [];
-      }
-      const response8 = await this.$axios.get(
-        "general-setting/list?section=" + "current-interventionl",
-        {
-          headers,
-        }
-      );
-      if (response8.data.code == 200 || response8.data.code == "200") {
-        this.currentinterventionlist = response8.data.list;
-      } else {
-        this.currentinterventionlist = [];
-      }
-
-      const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "compliance-to-treatment",
-
-        {
-          headers,
-        }
-      );
-      if (response9.data.code == 200 || response9.data.code == "200") {
-        this.compliancetotreatment = response9.data.list;
-      } else {
-        this.compliancetotreatment = [];
-      }
-
-      const response10 = await this.$axios.get(
-        "general-setting/list?section=" + "medication-supervised-by",
-
-        {
-          headers,
-        }
-      );
-      if (response10.data.code == 200 || response10.data.code == "200") {
-        this.medicationsupervised = response10.data.list;
-      } else {
-        this.medicationsupervised = [];
-      }
-      const respons = await this.$axios.get(
-        "general-setting/list?section=" + "assistance-or-supervision",
-        { headers }
-      );
-      if (respons.data.code == 200 || respons.data.code == "200") {
-        this.assistancelist = respons.data.list;
-      } else {
-        this.assistancelist = [];
-      }
-      const respon = await this.$axios.get(
-        "general-setting/list?section=" + "external",
-        { headers }
-      );
-      if (respon.data.code == 200 || respon.data.code == "200") {
-        this.externallist = respon.data.list;
-      } else {
-        this.externallist = [];
-      }
     },
-    async GetstaffList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const axios = require("axios").default;
-      axios
-        .get(
-          `${this.$axios.defaults.baseURL}` +
-            "hospital/getServiceByTeamId",
+    async onPublishEvent() {
 
-          { headers, params: {team_id: this.appId, email: this.email}   }
-        )
-        .then((resp) => {
-          // this.list = resp.data.list;
-          this.stafflist = resp.data.list;
-          this.teamlist = resp.data.stafflist;
-          this.rolelist = resp.data.rolelist;
-        });
-    },
-
-    // async GetteamList(){
-    //   const headers = {
-    //     Authorization: "Bearer " + this.userdetails.access_token,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   };
-    //   const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
-    //     headers,
-    //   });
-    //   //this.teamlist = response.data.list;
-
-    // },
-
-    async onCategorycodebind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "diagnosis/getIcd9subcodeList",
-        { icd_category_code: event.target.value },
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.icdcatcodelist = response.data.list;
-      } else {
-        this.icdcatcodelist = [];
-      }
-    },
-    Openpsptest() {
-      let route = this.$router.resolve({
-        path: "/modules/Intervention/psp?id=" + this.Id,
-      });
-      window.open(route.href);
-    },
-    async OnSubmit() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = false;
       this.errorList = [];
       try {
@@ -3980,6 +3536,7 @@ export default {
               staff_name: this.staff_name,
               designation: this.designation,
               status: "1",
+              appId: this.appId,
             },
             { headers }
           );
@@ -3998,6 +3555,192 @@ export default {
           }
         //}
       } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        // }
+  }
+  },
+    async GetList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "general-setting/list?section=" + "complexity-of-service",
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.comlexcitylist = response.data.list;
+      } else {
+        this.comlexcitylist = [];
+      }
+      const response1 = await this.$axios.get("service/list", { headers });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+      } else {
+        this.servicelist = [];
+      }
+      const response2 = await this.$axios.get(
+        "general-setting/list?section=" + "outcome",
+        { headers }
+      );
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.outcomelist = response2.data.list;
+      } else {
+        this.outcomelist = [];
+      }
+      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+        headers,
+      });
+      if (response3.data.code == 200 || response3.data.code == "200") {
+        this.codelist = response3.data.list;
+      } else {
+        this.codelist = [];
+      }
+      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+        headers,
+      });
+      if (response4.data.code == 200 || response4.data.code == "200") {
+        this.diagonisislist = response4.data.list;
+      } else {
+        this.diagonisislist = [];
+      }
+      const response5 = await this.$axios.get(
+        "general-setting/list?section=" + "location-of-services",
+        {
+          headers,
+        }
+      );
+      if (response5.data.code == 200 || response5.data.code == "200") {
+        this.locationlist = response5.data.list;
+      } else {
+        this.locationlist = [];
+      }
+      const response8 = await this.$axios.get(
+        "general-setting/list?section=" + "current-interventionl",
+        {
+          headers,
+        }
+      );
+      if (response8.data.code == 200 || response8.data.code == "200") {
+        this.currentinterventionlist = response8.data.list;
+      } else {
+        this.currentinterventionlist = [];
+      }
+
+      const response9 = await this.$axios.get(
+        "general-setting/list?section=" + "compliance-to-treatment",
+
+        {
+          headers,
+        }
+      );
+      if (response9.data.code == 200 || response9.data.code == "200") {
+        this.compliancetotreatment = response9.data.list;
+      } else {
+        this.compliancetotreatment = [];
+      }
+
+      const response10 = await this.$axios.get(
+        "general-setting/list?section=" + "medication-supervised-by",
+
+        {
+          headers,
+        }
+      );
+      if (response10.data.code == 200 || response10.data.code == "200") {
+        this.medicationsupervised = response10.data.list;
+      } else {
+        this.medicationsupervised = [];
+      }
+      const respons = await this.$axios.get(
+        "general-setting/list?section=" + "assistance-or-supervision",
+        { headers }
+      );
+      if (respons.data.code == 200 || respons.data.code == "200") {
+        this.assistancelist = respons.data.list;
+      } else {
+        this.assistancelist = [];
+      }
+      const respon = await this.$axios.get(
+        "general-setting/list?section=" + "external",
+        { headers }
+      );
+      if (respon.data.code == 200 || respon.data.code == "200") {
+        this.externallist = respon.data.list;
+      } else {
+        this.externallist = [];
+      }
+    },
+    async GetstaffList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(
+          `${this.$axios.defaults.baseURL}` +
+            "hospital/getServiceByTeamId",
+
+          { headers, params: {team_id: this.appId, email: this.email}   }
+        )
+        .then((resp) => {
+          // this.list = resp.data.list;
+          this.stafflist = resp.data.list;
+          this.teamlist = resp.data.stafflist;
+          this.rolelist = resp.data.rolelist;
+        });
+    },
+
+    // async GetteamList(){
+    //   const headers = {
+    //     Authorization: "Bearer " + this.userdetails.access_token,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   };
+    //   const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
+    //     headers,
+    //   });
+    //   //this.teamlist = response.data.list;
+
+    // },
+
+    async onCategorycodebind(event) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "diagnosis/getIcd9subcodeList",
+        { icd_category_code: event.target.value },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.icdcatcodelist = response.data.list;
+      } else {
+        this.icdcatcodelist = [];
+      }
+    },
+    Openpsptest() {
+      let route = this.$router.resolve({
+        path: "/modules/Intervention/psp?id=" + this.Id,
+      });
+      window.open(route.href);
     },
     resetmodel() {
       this.cps_date = "";
@@ -4372,6 +4115,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId },
+            });
+    }
   },
 };
 </script>
