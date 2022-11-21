@@ -383,10 +383,13 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
+      appId: null,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -401,6 +404,7 @@ export default {
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     if (this.pid) {
       this.getdetails();
@@ -487,6 +491,7 @@ export default {
               complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_des: this.medication_des,
+              appId: this.appId,
             },
             { headers }
           );
