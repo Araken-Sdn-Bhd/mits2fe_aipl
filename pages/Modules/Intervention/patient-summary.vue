@@ -1356,7 +1356,7 @@ export default {
     OnTriageform() {
       this.$router.push({
         path: "/modules/Intervention/triage-form",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oninternalreferralform() {
