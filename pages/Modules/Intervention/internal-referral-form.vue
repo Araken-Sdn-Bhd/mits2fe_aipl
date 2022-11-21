@@ -356,8 +356,11 @@
                   <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
-                  <button type="submit" class="btn btn-success btn-text" @click="Onphychiatryclerkingnote">
-                    <i class="fa fa-paper-plane"></i> Save
+                 <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <i class="fa fa-save"></i> Save as draft
+                  </button>
+                  <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
               </div>
@@ -440,8 +443,76 @@ export default {
     };
   },
   methods: {
-    async Onphychiatryclerkingnote() {
-      this.errorList = [];
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "internal-referral/add",
+            {
+              added_by: this.userdetails.user.id.toString(),
+              patient_mrn_id: this.Id,
+              diagnosis: this.diagnosis,
+              reason_for_referral: this.reason_for_referral,
+              summary: this.summary,
+              management: this.management,
+              medication: this.medication,
+              name: this.name,
+              designation: this.designation,
+              hospital: this.hospital,
+              location_services: this.location_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              type_diagnosis_id: this.type_diagnosis_id.id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
+              medication_des: this.medication_des,
+              appId: this.appId,
+              status: "0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        //}
+      } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        // }
+  }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
+        this.errorList = [];
       this.validate = true;
       try {
         if (!this.diagnosis) {
@@ -556,6 +627,7 @@ export default {
               outcome: this.outcome,
               medication_des: this.medication_des,
               appId: this.appId,
+              status: "1",
             },
             { headers }
           );
@@ -574,7 +646,8 @@ export default {
           }
         }
       } catch (e) {}
-    },
+      }
+  },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -800,7 +873,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     },
     BindDiagnosis(){

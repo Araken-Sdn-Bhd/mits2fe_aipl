@@ -341,12 +341,19 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -427,8 +434,76 @@ export default {
     }
   },
   methods: {
-    async OnSubmit() {
-      this.validate = true;
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "log-employer-meeting/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              date: this.date,
+              employee_name: this.employee_name,
+              company_name: this.company_name,
+              purpose_of_meeting: this.purpose_of_meeting,
+              discussion_start_time: this.discussion_start_time,
+              discussion_end_time: this.discussion_end_time,
+              staff_name: this.staff_name,
+              location_services: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication_des: this.medication_des,
+              appId: this.appId,
+              status: "0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        //}
+      } catch (e) {}
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        // }
+  }
+    },
+    async onPublishEvent() {
+
+      if (confirm("Are you sure you want to save this entry ? ")) {
+      this.validate = false;
       this.errorList = [];
       try {
         if (!this.date) {
@@ -538,6 +613,7 @@ export default {
               outcome: this.outcome_id,
               medication_des: this.medication_des,
               appId: this.appId,
+              status: "1",
             },
             { headers }
           );
@@ -555,7 +631,22 @@ export default {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+      }
+    }
     },
     async GetPatientdetails() {
       const headers = {
@@ -742,6 +833,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId },
+            });
+    }
   },
 };
 </script>
