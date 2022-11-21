@@ -317,6 +317,8 @@
                         </li>
                         </ul>
                       </p>
+                                             <br>
+                       <br>
                 <div class="d-flex">
                     <button
                       @click="GoBack"
