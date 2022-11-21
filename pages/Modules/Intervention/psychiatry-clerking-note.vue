@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
+              <form method="post">
                 <Interventionphysectristdetails />
 
                 <table class="notes">
@@ -399,18 +399,23 @@
                        <br>
                        <br>
                 <div class="d-flex" v-if="!pid">
-                  <a
+                    <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Publish
+                    </button>
+                  </div>
                 </div>
+
+
                  <!-- <div class="d-flex" v-if="pid">
                   <button
                     type="submit"
@@ -441,6 +446,7 @@ export default {
   name: "psychiatry-clerking-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -500,11 +506,104 @@ export default {
       validate: true,
       assistancelist: [],
       externallist: [],
+      SidebarAccess:null,
     };
   },
   methods: {
-    async Onphychiatryclerkingnote() {
-      
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.errors = [];
+        if (!this.title) {
+          this.errors.push("Title is required.");
+        }
+        if (!this.content) {
+          this.errors.push("Content is required.");
+        }
+        if (!this.startdate) {
+          this.errors.push("Start Date is required.");
+        }
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
+        }
+        if (this.branchId <= 0) {
+          this.errors.push("Branch  is required.");
+        }
+        if (!this.file) {
+          this.errors.push("Document is required.");
+        } else {
+          if (this.cat1 > 0) {
+            this.cat1 = 1;
+          }
+          if (this.cat2 > 0) {
+            this.cat2 = 1;
+          }
+          if (this.cat3 > 0) {
+            this.cat3 = 1;
+          }
+          if (this.cat4 > 0) {
+            this.cat4 = 1;
+          }
+          if (this.cat5 > 0) {
+            this.cat5 = 1;
+          }
+          if (this.cat6 > 0) {
+            this.cat6 = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          if (this.Id != null)
+          body.append("id",this.Id);
+          body.append("added_by", this.userdetails.user.id);
+          body.append("title", this.title);
+          body.append("content", this.content);
+          body.append("document", this.file);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          body.append("branch_id", this.branchId);
+          body.append(
+            "audience_ids",
+            this.cat1 +
+              "," +
+              this.cat2 +
+              "," +
+              this.cat3 +
+              "," +
+              this.cat4 +
+              "," +
+              this.cat5 +
+              "," +
+              this.cat6
+          );
+          body.append("status", 0);
+          const response = await this.$axios.post("announcement/add", body, {
+            headers,
+          });
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+       $("#insertpopup").modal("show");
+     });
+            this.$router.push("/modules/Admin/announcement-management");
+          } else {
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+              }
+    },
+    async onPublishEvent() {
+
       if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       console.log("services", this.category_services);
@@ -525,7 +624,7 @@ export default {
         if (!this.mental_state_examination) {
           this.errorList.push("Mental State Examination is required");
         }
-        
+
         if (!this.management) {
           this.errorList.push("Management is required");
         }
@@ -577,7 +676,7 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-      
+
         if (
           this.chief_complain &&
           this.presenting_illness &&
@@ -646,8 +745,14 @@ export default {
             });
           }
         }
-      } catch (e) {}
-  }},
+      } catch (e) {
+        this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+      }
+  }
+  },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
