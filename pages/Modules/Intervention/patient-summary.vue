@@ -1438,7 +1438,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/patient-index-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId},
         });
       }
     },

@@ -826,6 +826,7 @@ export default {
   },
 };
 </script>
+</script>
 <style scoped>
 .hide {
   display: none;

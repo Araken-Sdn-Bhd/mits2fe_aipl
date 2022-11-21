@@ -1371,8 +1371,15 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                       <br>
               <div class="d-flex">
+                <a @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                  </a >
                 <div class="ml-auto">
+                  
                   <button v-if="!pid" class="btn btn-warning btn-text" @click="OnSubmit('0')"
                     ><i class="fa fa-save"></i> Save as Draft</button
                   >
@@ -1464,12 +1471,14 @@ export default {
       assistancelist: [],
       externallist: [],
       type: "",
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     console.log("my index", this.Id);
     if (this.Id) {
     }
@@ -1492,6 +1501,12 @@ export default {
     });
   },
   methods: {
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
+    },
     async GetPatientdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1589,6 +1604,7 @@ export default {
       }
     },
     async OnSubmit(status) {
+      if (confirm("Are you sure you want to proceed this action? ")) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -1646,6 +1662,7 @@ export default {
               date: this.date,
               status: status,
               id: this.pid,
+              appId: this.appId,
             },
             { headers }
           );
@@ -1908,6 +1925,7 @@ export default {
                 date: this.date,
                 status: status,
                 id: this.pid,
+                appId: this.appId,
               },
               { headers }
             );
@@ -1933,6 +1951,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async onCategorycodebind(event) {
       const headers = {

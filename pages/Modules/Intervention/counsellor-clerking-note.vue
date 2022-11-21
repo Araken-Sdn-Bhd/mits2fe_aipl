@@ -290,8 +290,7 @@
                       id="collapseTwo"
                       class="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
+                      data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div class="col-md-12 mb-3">
                           <label class="form-label">Medication</label>
@@ -304,25 +303,19 @@
                       </div>
                     </div>
                   </div>
-                  <!--  -->
                 </div>
- <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
+                <p v-if="errorList.length">
+                    <ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul>
+                </p>
+                <br>
+                <br>
+                
                 <div class="d-flex" v-if="!pid">
-                  <a
-                      @click="GoBack"
+                  <a @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                  </a >
+                  <button type="submit" class="btn btn-warning btn-text ml-auto">
                     <i class="fa fa-save"></i> Save
                   </button>
                 </div>
@@ -353,6 +346,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
@@ -373,6 +367,7 @@ export default {
       diagonisislist: [],
       locationlist: [],
       Id: 0,
+      appId:0,
       diagnosis_id: 0,
       clinical_summary: "",
       background_history: "",
@@ -398,12 +393,10 @@ export default {
   },
   methods: {
     async Onphychiatryclerkingnote() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.errorList = [];
       this.validate = true;
       try {
-        // if (!this.diagnosis_id) {
-        //   this.errorList.push("Diagnosis is required");
-        // }
         if (!this.clinical_summary) {
           this.errorList.push("Clinical Summary is required");
         }
@@ -455,11 +448,8 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
-          // this.diagnosis_id &&
+       
           this.clinical_summary &&
           this.background_history &&
           this.clinical_notes &&
@@ -469,7 +459,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -498,6 +487,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               status: 1,
+              appId: this.appId,
             },
             { headers }
           );
@@ -516,6 +506,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async GetList() {
       const headers = {
@@ -645,11 +636,6 @@ export default {
         this.background_history = response.data.Data[0].background_history;
         this.management = response.data.Data[0].management;
         this.clinical_notes = response.data.Data[0].clinical_notes;
-        // this.diagnosis_id = response.data.Data[0].diagnosis_id;
-        // this.management = response.data.Data[0].management;
-        // this.discuss_psychiatrist_name = response.data.Data[0].discuss_psychiatrist_name;
-        // this.date = response.data.Data[0].date;
-        // this.time = response.data.Data[0].time;
         this.location_services_id = response.data.Data[0].location_services_id;
         this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
         this.category_services = response.data.Data[0].category_services;
@@ -683,7 +669,9 @@ export default {
               query: { id: this.Id },
             });
     }
-  },
+  
+  
+},
 };
 </script>
 <style scoped>
