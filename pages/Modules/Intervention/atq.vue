@@ -89,14 +89,14 @@
                 </tbody>
               </table>
               <Error :message="error" v-if="error" />
+              <br><br>
               <div class="d-flex align-items-center mt-2">
-                <button
-                  type="submit"
-                  class="btn btn-success ml-auto"
-                @click="OnsubmitTest"
-                >
-                  <i class="fad fa-paper-plane"></i> Submit
+                <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
                 </button>
+                <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" title="Save" @click="OnsubmitTest">
+                    <i class="fa fa-save"></i> Save
+                  </button>
               </div>
             </div>
           </div>
@@ -218,6 +218,7 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.error = null;
       try {
         if (this.list.length == Object.values(this.checkedList).length) {
@@ -263,6 +264,7 @@ export default {
         this.errors = e;
         console;
       }
+    }
     },
     downloadresult() {
       var pdf = new jsPDF("p", "pt", "a4");
@@ -276,6 +278,12 @@ export default {
         query: { id: this.Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>

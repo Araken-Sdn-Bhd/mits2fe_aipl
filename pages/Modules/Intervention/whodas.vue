@@ -258,10 +258,11 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         class="btn btn-success next-btn ml-auto"
+                        title="Next Page"
                         @click="gototab2"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -404,11 +405,12 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         @click="Backtab1"
+                        title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
@@ -417,6 +419,7 @@
                       <button
                         type="submit"
                         @click="gototab3"
+                        title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -554,11 +557,12 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         @click="Backtab2"
+                        title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
@@ -567,6 +571,7 @@
                       <button
                         type="submit"
                         @click="gototab4"
+                        title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -704,11 +709,12 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         @click="Backtab3"
+                        title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
@@ -717,6 +723,7 @@
                       <button
                         type="submit"
                         @click="gototab5"
+                        title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -854,11 +861,12 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         @click="Backtab4"
+                        title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
@@ -867,6 +875,7 @@
                       <button
                         type="submit"
                         @click="gototab6"
+                        title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -1009,11 +1018,12 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         @click="Backtab5"
+                        title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
@@ -1022,6 +1032,7 @@
                       <button
                         type="submit"
                         @click="gototab7"
+                        title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -1156,12 +1167,13 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         type="submit"
                         class="prev-1 btn btn-success mr-auto"
                         @click="Backtab6"
+                        title="Previous Page"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
                       </button>
@@ -1169,6 +1181,7 @@
                       <button
                         type="submit"
                         @click="OnTestSubmit"
+                        title="Submit"
                         class="btn btn-success ml-auto"
                       >
                         <i class="fad fa-paper-plane"></i> Submit
@@ -1522,6 +1535,7 @@ export default {
       this.tab7 = 0;
     },
     async OnTestSubmit() {
+      if (confirm("Are you sure you want to submit this entry")) {
       if (
         this.list.length == Object.values(this.checkedList).length &&
         this.list1.length == Object.values(this.checkedList1).length &&
@@ -1585,6 +1599,7 @@ export default {
       } else {
         window.alert("Please check All Module and attempt all question");
       }
+    }
     },
     async GetUserIpAddress() {
       const {

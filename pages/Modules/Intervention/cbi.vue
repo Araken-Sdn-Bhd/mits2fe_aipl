@@ -204,11 +204,11 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
                         @click="onburnout"
-                        class="btn btn-success next-btn ml-auto"
+                        class="btn btn-success next-btn ml-auto" title="Next Page"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
                       </button>
@@ -345,17 +345,17 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
-                        class="prev-1 btn btn-success mr-auto"
+                        class="prev-1 btn btn-success mr-auto" title="Previous Page"
                         @click="backpersonal"
                       >
-                        <i class="fad fa-arrow-to-left"></i> Previous
+                        <i class="fad fa-arrow-to-left" title="Previous Page"></i> Previous
                       </button>
 
                       <button
-                        @click="nextclient"
+                        @click="nextclient" title="Next Page"
                         class="btn btn-success next-btn ml-auto"
                       >
                         Next <i class="fad fa-arrow-to-right"></i>
@@ -495,21 +495,17 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <br><br>
                     <div class="d-flex align-items-center mt-2">
                       <button
-                        @click="backworkburnout"
+                        @click="backworkburnout" title="Previous Page"
                         class="prev-1 btn btn-success mr-auto"
                       >
                         <i class="fad fa-arrow-to-left"></i> Previous
                       </button>
-                      <button
-                        type="submit"
-                        class="btn btn-success ml-auto"
-                        @click="OnsubmitTest"
-                      >
-                        <i class="fad fa-paper-plane"></i> Submit
-                      </button>
+                      <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" title="Save" @click="OnsubmitTest">
+                    <i class="fa fa-save"></i> Save
+                  </button>
                     </div>
                   </div>
                 </div>
@@ -687,6 +683,7 @@ export default {
       this.$refs.navprofile.classList.add("show");
     },
     async OnsubmitTest() {
+      if (confirm("Are you sure you want to submit this entry")) {
       try {
         if (
           this.peronallist.length ==
@@ -741,6 +738,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     onpersonalchange(ind, val) {
       this.checkedpersonalList[ind] = val;

@@ -129,27 +129,18 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
-                  </button>
-                </div> -->
-                <br><br                    <i class="fa fa-save"></i> Save
-                  </button>
-                </div> -->
-                 <div class="form-foter mt-3">
-                    <a
-                      @click="OnBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                    <div class="btn-right">
-                      <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
                     <i class="fa fa-save"></i> Save
                   </button>
-                    </div>
-                  </div>
+                </div> -->
+                <br><br>
+                <div class="d-flex">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                  <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" title="Save">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -190,6 +181,7 @@ export default {
   },
   methods: {
     async OnAddClinicalInfo() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.errorList = [];
       try {
         if (!this.temperature) {
@@ -252,7 +244,7 @@ export default {
               $("#insertpopup").modal("show");
             });
             this.$router.push({
-              path: "/modules/Intervention/clinical-history",
+              path: "/modules/Patient/clinical-history",
               query: { id: this.Id },
             });
             setTimeout(() => {
@@ -269,6 +261,7 @@ export default {
       } catch (e) {
         this.loader = false;
       }
+    }
     },
     resetform() {
       this.temperature = "";
@@ -279,8 +272,16 @@ export default {
       this.bmi = "";
       this.waist_circumference = "";
     },
-    OnBack(){
-s.bmi = val.toFixed(2);
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
+    },
+    calculateBMI(){
+      var heightInMeter = this.height/100;
+      var val = this.weight/(heightInMeter*heightInMeter);
+      this.bmi = val.toFixed(2);
       console.log('Bmivalue',this.bmi);
     }
   },

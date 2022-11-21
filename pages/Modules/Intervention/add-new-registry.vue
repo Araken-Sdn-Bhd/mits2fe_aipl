@@ -500,20 +500,22 @@
                     </div>
                     <!-- row-close -->
                      <Error :message="error" v-if="error" />
+                     <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
-                        <button class="nexttab btn btn-success next-btn">
+                        <button class="nexttab btn btn-success next-btn" title="Next Page">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
                       </div>
                       <div class="ml-auto">
-                        <button class="btn btn-text btn-warning" @click="OnDraftriskfactor"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftriskfactor"><i class="fad fa-save"></i> Save as Draft</button>
                         <button
                           type="submit"
                           class="btn btn-text btn-warning"
                           @click="Onriskfactor"
+                          title="Save"
                         >
-                          <i class="fad fa-save"></i> Save
+                          <i class="fa fa-save"></i> Save
                         </button>
                       </div>
                     </div>
@@ -573,15 +575,16 @@
                       </div>
                     </div>
                       <Error :message="error" v-if="error" />
+                      <br><br>
                      <div class="d-flex">
                       <div class=" mr-auto">
-                        <button class="pre-1 btn btn-success"><i class="fad fa-arrow-to-left"></i> Back</button>
-                        <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
+                        <button class="pre-1 btn btn-success" title="Back" ><i class="fad fa-arrow-to-left"></i> Back</button>
+                        <button class="nex-1 btn btn-success next-btn" title="Next Page" >Next <i class="fad fa-arrow-alt-to-right"></i></button>
                       </div>
                       <div class="ml-auto">
 
-                        <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactordraft"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-text btn-warning" title="Draft" @click="Onprotectivefactordraft"><i class="fad fa-save" ></i> Save as Draft</button>
+                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
                        </div>
                       </div>
 
@@ -1293,19 +1296,20 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
-                      <button class="pre-2 btn btn-success">
+                      <button class="pre-2 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
-                      <button class="nex-2 btn btn-success next-btn">
+                      <button class="nex-2 btn btn-success next-btn" title="Next Page">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
                       </div>
                       <div class="ml-auto">
-                        <button class="btn btn-text btn-warning" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button class="btn btn-text btn-warning" title="Draft" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
 
-                        <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
                       </div>
                     </div>
                   <!-- </form> -->
@@ -1424,19 +1428,20 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
-                      <button class="pre-3 btn btn-success">
+                      <button class="pre-3 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
-                      <button class="nex-3 btn btn-success next-btn">
+                      <button class="nex-3 btn btn-success next-btn" title="Next Page">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
                       </div>
                       <div class="ml-auto">
 
-                        <button class="btn btn-text btn-warning" @click="OnDraftsuciderisk"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" @click="Onsuciderisk" class="btn btn-text btn-warning">
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftsuciderisk"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button type="submit" title="Save" @click="Onsuciderisk" class="btn btn-text btn-warning">
                           <i class="fad fa-save"></i> Save
                         </button>
                       </div>
@@ -1870,18 +1875,19 @@
       </ul>
         </p>
                     <!-- close-row -->
+                    <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
-                      <button class="pre-4 btn btn-success">
+                      <button class="pre-4 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
-                      <button class="nex-4 btn btn-success next-btn">
+                      <button class="nex-4 btn btn-success next-btn" title="Next Page">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
                       </div>
                       <div class="ml-auto">
-                        <button class="btn btn-text btn-warning" @click="OnDraftSavehospitalmanagement"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-text btn-warning" @click="OnSavehospitalmanagement">
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftSavehospitalmanagement"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="OnSavehospitalmanagement">
                           <i class="fad fa-save"></i> Save
                         </button>
                       </div>
@@ -1985,13 +1991,14 @@
       </ul>
         </p>
                     <!-- row -->
+                    <br><br>
                     <div class="d-flex">
-                      <button class="pre-5 btn btn-success mr-auto">
+                      <button class="pre-5 btn btn-success mr-auto" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
                       <div class="ml-auto">
-                        <button class="btn btn-text btn-warning" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-success ml-auto" @click="adddataproducer">
+                        <button class="btn btn-text btn-warning" title="Draft" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button type="submit" class="btn btn-success ml-auto" title="Submit" @click="adddataproducer">
                           <i class="fad fa-paper-plane"></i> Submit
                         </button>
                       </div>
@@ -3370,6 +3377,7 @@ export default {
       }
     },
     async adddataproducer() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.errors = [];
       try {
         if (!this.officername) {
@@ -3437,6 +3445,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
   },
 };

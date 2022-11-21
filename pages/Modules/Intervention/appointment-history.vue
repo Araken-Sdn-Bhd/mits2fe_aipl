@@ -71,6 +71,11 @@
                   </tr>
                 </tbody>
               </table>
+              <br><br>
+              <div class="d-flex">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button></div>
             </div>
           </div>
           <!-- card -->
@@ -142,6 +147,12 @@ export default {
         query: { id: Id },
       });
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
+    }
   },
 };
 </script>
