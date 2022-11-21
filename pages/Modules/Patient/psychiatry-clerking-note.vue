@@ -406,7 +406,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="far fa-save"></i> Save
+                    <i class="far fa-save"></i> Submit
                   </button>
                 </div>
               </form>

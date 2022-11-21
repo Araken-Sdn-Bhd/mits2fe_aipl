@@ -2872,22 +2872,23 @@
                              </li>
                         </ul>
                        </p>
+                       <br/><br/>
               <div class="d-flex" v-if="!pid">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+
                     <button @click="setData" class="btn btn-success btn-text"
                     ><i class="fad fa-print"></i>Print</button
                     >
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                 </div>

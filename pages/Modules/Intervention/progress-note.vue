@@ -373,7 +373,7 @@
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
                   >
-                    <i class="fa fa-save"></i> Save
+                    <i class="fa fa-save"></i> Submit
                   </button>
                 </div>
               </form>
