@@ -355,7 +355,24 @@
         </li>
       </ul>
         </p>
+        <br>
+        <br>
+              <div class="d-flex" v-if="!pid">
 
+                    <button @click="GoBack" class="btn btn-primary btn-text">
+                      <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+
+                <div class="ml-auto">
+                  <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
+                    <i class="fa fa-download"></i> Download
+                  </button>
+                  <button @click="OnSubmit" type="submit" class="btn btn-success btn-text">
+                    <i class="fa fa-paper-plane"></i> Submit
+                  </button>
+                </div>
+              
+           </div>
 
             </div>
           </div>
@@ -698,18 +715,17 @@
                 </tbody>
               </table>
               <p v-if="errorList.length">
-<ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
+          <ul>
+        <li style="color:red"  v-for='err in errorList' :key='err' >
           {{ err }}
-        </li>
-      </ul>
-        </p>
-
-
+          </li>
+          </ul>
+            </p>
+            <br>
+            <br> 
             </div>
-          </div>
-           <div class="d-flex" v-if="!pid">
+              </div>
+           <!-- <div class="d-flex" v-if="!pid">
                 <div class="ml-auto">
                   <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
                     <i class="fa fa-download"></i> Download
@@ -718,10 +734,8 @@
                     <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
-
-
-
-              </div>
+              
+           </div> -->
         </div>
       </main>
     </div>
@@ -748,6 +762,7 @@ export default {
       locationlist: [],
       titlelist: [],
       Id: 0,
+      appId:0,
       history: "",
       examination: "",
       diagnosis: "",
@@ -786,6 +801,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
@@ -923,6 +939,7 @@ export default {
               name: this.name,
               designation: this.designation,
               hospital: this.hospital,
+              appId: this.appId,
             },
             { headers }
           );
@@ -1150,6 +1167,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
   },
 };

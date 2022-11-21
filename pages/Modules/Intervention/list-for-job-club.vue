@@ -331,10 +331,12 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
+
+                    <button @click="GoBack" class="btn btn-primary btn-text">
+                      <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+
+                  <button type="submit" class="btn btn-warning btn-text ml-auto">
                     <i class="fa fa-save"></i> Save
                   </button>
                 </div>
@@ -367,6 +369,7 @@ export default {
       locationlist: [],
       joblist: [],
       Id: 0,
+      appId:0,
       job_club: "",
       location_services_id: 0,
       type_diagnosis_id: 0,
@@ -397,6 +400,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -487,6 +491,7 @@ export default {
               complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_des: this.medication_des,
+              appId: this.appId,
             },
             { headers }
           );
@@ -700,6 +705,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
   },
 };
