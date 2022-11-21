@@ -4115,6 +4115,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId },
+            });
+    }
   },
 };
 </script>
