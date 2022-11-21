@@ -363,6 +363,8 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                       <br>
                 <div class="d-flex" v-if="!pid">
                   <a
                       @click="GoBack"
@@ -430,6 +432,7 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
+      appId:0,
     };
   },
   beforeMount() {
@@ -451,6 +454,7 @@ export default {
 
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
 
     this.GetPatientdetails();
     if (this.pid) {
@@ -556,6 +560,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
+              appId: this.appId,
             },
             { headers }
           );
@@ -757,7 +762,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id,appId: this.appId  },
             });
     }
   },

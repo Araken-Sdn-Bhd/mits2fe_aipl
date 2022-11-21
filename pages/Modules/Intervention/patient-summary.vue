@@ -1430,7 +1430,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/se-progress-notes",
-          query: { id: this.Id },
+          query: { id: this.Id , appId: this.appId},
         });
       }
     },
@@ -1446,7 +1446,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-progress-note",
-          query: { id: this.Id },
+          query: { id: this.Id , appId: this.appId},
         });
       }
     },
