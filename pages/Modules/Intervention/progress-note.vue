@@ -363,7 +363,7 @@
                              </li>
                         </ul>
                        </p>
-                                              <br>
+                       <br>
                        <br>
                 <div class="d-flex" v-if="!pid">
                     <button
@@ -434,7 +434,7 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
-      appId: null,
+      appId:0,
     };
   },
   beforeMount() {
@@ -458,6 +458,7 @@ export default {
     this.appId = urlParams.get("appId");
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
 
     this.GetPatientdetails();
     if (this.pid) {
@@ -615,6 +616,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
+              appId: this.appId,
               status: "1",
             },
             { headers }

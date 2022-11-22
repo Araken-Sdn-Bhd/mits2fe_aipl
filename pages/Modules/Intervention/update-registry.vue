@@ -3099,7 +3099,7 @@ export default {
             // });
             this.$router.push({
               path: "/modules/Intervention/patient-history",
-              query: { id: this.Id },
+              query: { id: this.patient_id },
             });
           } else {
             this.loader = false;
