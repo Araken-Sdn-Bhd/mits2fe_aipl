@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post">
+              <form>
                 <Interventionphysectristdetails />
 
                 <table class="notes">
@@ -512,97 +512,7 @@ export default {
   methods: {
     async onCreateEvent() {
       if (confirm("Are you sure you want to save this as draft ? ")) {
-      this.validate = true;
-      console.log("services", this.category_services);
-      this.errorList = [];
         try {
-          if (!this.chief_complain) {
-            this.errorList.push("Chief Complaint is required");
-          }
-          if (!this.presenting_illness) {
-            this.errorList.push("History Of Presenting Illness is required");
-          }
-          if (!this.background_history) {
-            this.errorList.push("Background History is required");
-          }
-          if (!this.general_examination) {
-            this.errorList.push("General Examination is required");
-          }
-          if (!this.mental_state_examination) {
-            this.errorList.push("Mental State Examination is required");
-          }
-
-          if (!this.management) {
-            this.errorList.push("Management is required");
-          }
-          if (!this.discuss_psychiatrist_name) {
-            this.errorList.push("Discussed With is required");
-          }
-          if (!this.date) {
-            this.errorList.push("Date is required");
-          }
-          if (!this.time) {
-            this.errorList.push("Time is required");
-          }
-          if (!this.location_services_id) {
-            this.errorList.push("Location Of Services is required");
-          }
-          if (!this.type_diagnosis_id) {
-            this.errorList.push("Type Of Diagnosis is required");
-          }
-          if (!this.category_services) {
-            this.errorList.push("Category Of Services is required");
-          }
-          if (!this.complexity_services_id) {
-            this.errorList.push("Complexity Of Service is required");
-          }
-          if (this.category_services) {
-            if (this.category_services == "assisstance") {
-              if (!this.services_id) {
-                this.errorList.push("Service is required");
-                this.validate = false;
-              }
-            } else if (this.category_services == "clinical-work") {
-              if (!this.code_id) {
-                this.errorList.push("ICD 9 CODE is required");
-                this.validate = false;
-              }
-              if (!this.sub_code_id) {
-                this.errorList.push("ICD 9 SUB CODE is required");
-                this.validate = false;
-              }
-            } else {
-              if (!this.serviceid) {
-                this.errorList.push("Services is required");
-                this.validate = false;
-              } else {
-                this.services_id = this.serviceid;
-              }
-            }
-          }
-          if (!this.outcome_id) {
-            this.errorList.push("Outcome is required");
-          }
-
-          if (
-            this.chief_complain &&
-            this.presenting_illness &&
-            this.background_history &&
-            this.general_examination &&
-            this.mental_state_examination &&
-            // this.diagnosis_id &&
-            this.management &&
-            this.discuss_psychiatrist_name &&
-            this.date &&
-            this.time &&
-            this.location_services_id &&
-            this.type_diagnosis_id &&
-            this.category_services &&
-            this.complexity_services_id &&
-            this.outcome_id &&
-            //this.medication_des &&
-            this.validate
-          ) {
             this.loader = true;
             const headers = {
               Authorization: "Bearer " + this.userdetails.access_token,
@@ -652,7 +562,6 @@ export default {
                 $("#errorpopup").modal("show");
               });
             }
-          }
         } catch (e) {
           this.loader = false;
               this.$nextTick(() => {
@@ -660,6 +569,7 @@ export default {
               });
         }
     }
+    this.goback
     },
     async onPublishEvent() {
 
@@ -811,6 +721,7 @@ export default {
             });
       }
   }
+  this.GoBack();
   },
     async GetList() {
       const headers = {

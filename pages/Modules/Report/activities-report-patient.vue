@@ -46,8 +46,9 @@
                       <label class="form-label">Appointment Type: </label>
                       <select class="form-select" v-model="appointment_type" @change="getServiceByBranchTeamId()">
                         <option value="">Please Select</option>
-                        <option
+                        <option 
                           v-for="serv in servicelist"
+                          v-if="serv.service_name != 'Rehabilitation'"
                           v-bind:key="serv.id"
                           v-bind:value="serv.id"
                         >
@@ -340,7 +341,7 @@
                         </ul>
                        </p>
                 <div class="d-flex">
-                  <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
+                  <div v-if="this.appointment_type" class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="fa fa-file-pdf"></i> Generate PDF</a
                     >
@@ -348,6 +349,7 @@
                       ><i class="fa fa-file-excel"></i> Generate Excel</a> -->
 
                       <downloadexcel
+                        v-if="this.appointment_type == 1"
                        class="btn btn-success btn-text"
                        :header="header"
                        :before-generate = "startDownload"
@@ -357,7 +359,73 @@
                        :fields ="json_fields"
                        :excelname="excelname"
                        :sheetname="sheetname"
-                        worksheet="Activity Patient"
+                        worksheet="CONSULTATION_CLINIC_REPORT"
+                       :name=excelname
+                      >
+                      <i class="fa fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
+
+                      <downloadexcel
+                       v-if="this.appointment_type == 3"
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fieldsSE"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="SE_REPORT"
+                       :name=excelname
+                      >
+                      <i class="fa fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
+
+                      <downloadexcel
+                       v-if="this.appointment_type == 4"
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fieldsETP"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="ETP_REPORT"
+                       :name=excelname
+                      ><i class="fa fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
+                      
+                      <downloadexcel
+                       v-if="this.appointment_type == 5"
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fieldsJC"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="JOB_CLUB_REPORT"
+                       :name=excelname
+                      ><i class="fa fa-file-excel"></i> Generate Excel
+                      </downloadexcel>
+
+                      <downloadexcel
+                       v-if="this.appointment_type == 6"
+                       class="btn btn-success btn-text"
+                       :header="header"
+                       :before-generate = "startDownload"
+                       :before-finish   = "finishDownload"
+                       :json_data="ReportList"
+                       :fetch = "Ongenerateexel"
+                       :fields ="json_fieldsCPS"
+                       :excelname="excelname"
+                       :sheetname="sheetname"
+                        worksheet="CPS_REPORT"
                        :name=excelname
                       >
                       <i class="fa fa-file-excel"></i> Generate Excel
@@ -377,9 +445,11 @@
                 class="hide"
                 ref="result"
                 style="background: #fff"
+                v-if="this.appointment_type == 1"
               >
+                <h3>REPORT OF CONSULTATION CLINIC</h3><br>
                 <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
-                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div><br>
+                <div><b>Total Patients:</b>  {{ Total_PatientsPDF }}</div>
 
                 <table class="table main-data-tabl" id="datatable">
                    <thead>
@@ -439,7 +509,279 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
+     </div>
+     <div
+                id="result"
+                class="hide"
+                ref="result"
+                style="background: #fff"
+                v-if="this.appointment_type == 3"
+              >
+                <h3>REPORT OF SUPPORTED EMPLOYMENT</h3><br>
+                <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
+                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div>
+
+                <table class="table main-data-tabl" id="datatable">
+                   <thead>
+                    <tr>
+                       <th class="thhead">ATTEND</th>
+                        <th class="thhead">NO SHOW</th>
+                        </tr>
+                            </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tdrow">{{Attend}}</td>
+                      <td class="tdrow">{{No_Show}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table main-data-tabl" id="datatable">
+                  <thead>
+                    <tr>
+                      <th class="thhead">No</th>
+                      <th class="thhead">NAME</th>
+                      <th class="thhead">APPOINTMENT TYPE</th>
+                      <th class="thhead">TYPE OF VISIT</th>
+                      <th class="thhead">TYPE OF REFERRAL</th>
+                      <th class="thhead">IC NO</th>
+                      <th class="thhead">GENDER</th>
+                      <th class="thhead">AGE</th>
+                      <th class="thhead">DIAGNOSIS</th>
+                      <th class="thhead">MEDICATIONS</th>
+                      <th class="thhead">APPOINTMENT NO</th>
+                      <th class="thhead">NO. OF JOB SEARCH</th>
+                      <th class="thhead">NO. OF JOB VISIT</th>
+                      <th class="thhead">EMPLOYMENT STATUS</th>
+                      <th class="thhead">EMPLOYER</th>
+                      <th class="thhead">DATE OF EMPLOYMENT</th>
+                      <th class="thhead">EMPLOYER CONTACT</th>
+                      <th class="thhead">ATTENDANCE STATUS</th>
+                      <th class="thhead">ATTENDING DOCTOR/STAFF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(rp, index) in list" :key="index">
+                      <td class="tdrow">{{ index + 1 }}</td>
+                      <td class="tdrow">{{ rp.Name }}</td>
+                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
+                      <td class="tdrow">{{ rp.IC_NO }}</td>
+                      <td class="tdrow">{{ rp.GENDER }}</td>
+                      <td class="tdrow">{{ rp.AGE }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
+                      <td class="tdrow">{{ rp.MEDICATIONS }}</td>
+                      <td class="tdrow">{{ rp.app_no_se }}</td>
+                      <td class="tdrow">{{ rp.no_job_search }}</td>
+                      <td class="tdrow">{{ rp.no_job_visit }}</td>
+                      <td class="tdrow">{{ rp.EMPSTATUS }}</td>
+                      <td class="tdrow">{{ rp.EMPLOYER }}</td>
+                      <td class="tdrow">{{ rp.JOBSTARTDATE }}</td>
+                      <td class="tdrow">{{ rp.ADDRESS }}</td>
+                      <td class="tdrow">{{ rp.Attendance_status }}</td>
+                      <td class="tdrow">{{ rp.Attending_staff }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+     </div>
+     <div
+                id="result"
+                class="hide"
+                ref="result"
+                style="background: #fff"
+                v-if="this.appointment_type == 4"
+              >
+                <h3>REPORT OF ETP</h3><br>
+                <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
+                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div>
+
+                <table class="table main-data-tabl" id="datatable">
+                   <thead>
+                    <tr>
+                       <th class="thhead">ATTEND</th>
+                        <th class="thhead">NO SHOW</th>
+                        </tr>
+                            </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tdrow">{{Attend}}</td>
+                      <td class="tdrow">{{No_Show}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table main-data-tabl" id="datatable">
+                  <thead>
+                    <tr>
+                      <th class="thhead">No</th>
+                      <th class="thhead">NAME</th>
+                      <th class="thhead">APPOINTMENT TYPE</th>
+                      <th class="thhead">TYPE OF VISIT</th>
+                      <th class="thhead">TYPE OF REFERRAL</th>
+                      <th class="thhead">IC NO</th>
+                      <th class="thhead">GENDER</th>
+                      <th class="thhead">AGE</th>
+                      <th class="thhead">DIAGNOSIS</th>
+                      <th class="thhead">MEDICATIONS</th>
+                      <th class="thhead">APPOINTMENT NO</th>
+                      <th class="thhead">WORK READINESS</th>
+                      <th class="thhead">NEXT VISIT</th>
+                      <th class="thhead">ATTENDANCE STATUS</th>
+                      <th class="thhead">ATTENDING DOCTOR/ STAFF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(rp, index) in list" :key="index">
+                      <td class="tdrow">{{ index + 1 }}</td>
+                      <td class="tdrow">{{ rp.Name }}</td>
+                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
+                      <td class="tdrow">{{ rp.IC_NO }}</td>
+                      <td class="tdrow">{{ rp.GENDER }}</td>
+                      <td class="tdrow">{{ rp.AGE }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
+                      <td class="tdrow">{{ rp.MEDICATIONS }}</td>
+                      <td class="tdrow">{{ rp.app_no_etp }}</td>
+                      <td class="tdrow">{{ rp.WORKREADY }}</td>
+                      <td class="tdrow">{{ rp.Next_visit }}</td>
+                      <td class="tdrow">{{ rp.Attendance_status }}</td>
+                      <td class="tdrow">{{ rp.Attending_staff }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+     </div>
+     <div
+                id="result"
+                class="hide"
+                ref="result"
+                style="background: #fff"
+                v-if="this.appointment_type == 5"
+              >
+                <h3>REPORT OF JOB CLUB</h3><br>
+                <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
+                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div>
+
+                <table class="table main-data-tabl" id="datatable">
+                   <thead>
+                    <tr>
+                       <th class="thhead">ATTEND</th>
+                        <th class="thhead">NO SHOW</th>
+                        </tr>
+                            </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tdrow">{{Attend}}</td>
+                      <td class="tdrow">{{No_Show}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table main-data-tabl" id="datatable">
+                  <thead>
+                    <tr>
+                      <th class="thhead">No</th>
+                      <th class="thhead">NAME</th>
+                      <th class="thhead">APPOINTMENT TYPE</th>
+                      <th class="thhead">TYPE OF VISIT</th>
+                      <th class="thhead">TYPE OF REFERRAL</th>
+                      <th class="thhead">IC NO</th>
+                      <th class="thhead">GENDER</th>
+                      <th class="thhead">AGE</th>
+                      <th class="thhead">DIAGNOSIS</th>
+                      <th class="thhead">MEDICATIONS</th>
+                      <th class="thhead">APPOINTMENT NO</th>
+                      <th class="thhead">WORK READINESS</th>
+                      <th class="thhead">NEXT VISIT</th>
+                      <th class="thhead">ATTENDANCE STATUS</th>
+                      <th class="thhead">ATTENDING DOCTOR/ STAFF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(rp, index) in list" :key="index">
+                      <td class="tdrow">{{ index + 1 }}</td>
+                      <td class="tdrow">{{ rp.Name }}</td>
+                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
+                      <td class="tdrow">{{ rp.IC_NO }}</td>
+                      <td class="tdrow">{{ rp.GENDER }}</td>
+                      <td class="tdrow">{{ rp.AGE }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
+                      <td class="tdrow">{{ rp.MEDICATIONS }}</td>
+                      <td class="tdrow">{{ rp.app_no_jc }}</td>
+                      <td class="tdrow">{{ rp.WORKREADY }}</td>
+                      <td class="tdrow">{{ rp.Next_visit }}</td>
+                      <td class="tdrow">{{ rp.Attendance_status }}</td>
+                      <td class="tdrow">{{ rp.Attending_staff }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+     </div>
+     <div
+                id="result"
+                class="hide"
+                ref="result"
+                style="background: #fff"
+                v-if="this.appointment_type == 6"
+              >
+                <h3>REPORT OF CPS</h3><br>
+                <div><b>Total Days:</b>  {{ Total_DaysPDF }}</div>
+                <div><b>Total Patient:</b>  {{ Total_PatientsPDF }}</div>
+
+                <table class="table main-data-tabl" id="datatable">
+                   <thead>
+                    <tr>
+                       <th class="thhead">ATTEND</th>
+                        <th class="thhead">NO SHOW</th>
+                        </tr>
+                            </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tdrow">{{Attend}}</td>
+                      <td class="tdrow">{{No_Show}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table main-data-tabl" id="datatable">
+                  <thead>
+                    <tr>
+                      <th class="thhead">No</th>
+                      <th class="thhead">NAME</th>
+                      <th class="thhead">APPOINTMENT TYPE</th>
+                      <th class="thhead">TYPE OF VISIT</th>
+                      <th class="thhead">CURRENT INTERVENTION</th>
+                      <th class="thhead">IC NO</th>
+                      <th class="thhead">GENDER</th>
+                      <th class="thhead">AGE</th>
+                      <th class="thhead">DIAGNOSIS</th>
+                      <th class="thhead">MEDICATIONS</th>
+                      <th class="thhead">APPOINTMENT NO</th>
+                      <th class="thhead">CONTACT NUMBER</th>
+                      <th class="thhead">NEXT VISIT</th>
+                      <th class="thhead">ATTENDANCE STATUS</th>
+                      <th class="thhead">ATTENDING DOCTOR/ STAFF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(rp, index) in list" :key="index">
+                      <td class="tdrow">{{ index + 1 }}</td>
+                      <td class="tdrow">{{ rp.Name }}</td>
+                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
+                      <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
+                      <td class="tdrow">{{ rp.IC_NO }}</td>
+                      <td class="tdrow">{{ rp.GENDER }}</td>
+                      <td class="tdrow">{{ rp.AGE }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
+                      <td class="tdrow">{{ rp.MEDICATIONS }}</td>
+                      <td class="tdrow">{{ rp.app_no_cps }}</td>
+                      <td class="tdrow">{{ rp.CONTACT }}</td>
+                      <td class="tdrow">{{ rp.Next_visit }}</td>
+                      <td class="tdrow">{{ rp.Attendance_status }}</td>
+                      <td class="tdrow">{{ rp.Attending_staff }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+     </div>
   </div>
 </template>
 <script>
@@ -477,6 +819,78 @@ export default {
         "NEXT VISIT":"Next_visit",
         "TIME REGISTERED" :"time_registered",
         "TIME SEEN":"time_seen",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      json_fieldsSE: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no_se",
+        "NO. OF JOB SEARCH":"no_job_search",
+        "NO. OF JOB VISIT":"no_job_visit",
+        "EMPLOYMENT STATUS" :"EMPSTATUS",
+        "EMPLOYER":"EMPLOYER",
+        "DATE OF EMPLOYMENT":"JOBSTARTDATE",
+        "EMPLOYER CONTACT":"ADDRESS",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      json_fieldsETP: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no_etp",
+        "WORK READINESS" :"WORKREADY",
+        "NEXT VISIT":"Next_visit",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      json_fieldsJC: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no_jc",
+        "WORK READINESS" :"WORKREADY",
+        "NEXT VISIT":"Next_visit",
+        "ATTENDANCE STATUS":"Attendance_status",
+        "ATTENDING DOCTOR/STAFF":"Attending_staff",
+      },
+      json_fieldsCPS: {
+        "NO":'No',
+        "NAME" : 'Name',
+        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
+        "TYPE OF VISIT": "TYPE_OF_Visit",
+        "CURRENT INTERVENTION" :"CURRENTINTERV",
+        "IC NO": "IC_NO",
+        "GENDER": "GENDER",
+        "AGE": "AGE",
+        "DIAGNOSIS" : "DIAGNOSIS",
+        "MEDICATIONS" : "MEDICATIONS",
+        "APPOINTMENT NO" :"app_no_cps",
+        "CONTACT NO" :"CONTACT",
+        "NEXT VISIT":"Next_visit",
         "ATTENDANCE STATUS":"Attendance_status",
         "ATTENDING DOCTOR/STAFF":"Attending_staff",
       },
@@ -653,7 +1067,8 @@ export default {
       }
     },
     async Ongeneratepdf() {
-      this.errorList = [];
+      try {
+        this.errorList = [];
       this.error = null;
       if (!this.fromDate) {
         this.errorList.push("From date is Required!");
@@ -662,6 +1077,7 @@ export default {
         this.errorList.push("To date is Required!");
       }
       if (this.fromDate && this.toDate) {
+        this.loader=true;
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -715,15 +1131,27 @@ export default {
         } else {
           this.error = "No Record Found";
         }
+        this.loader=false;
+      }
+      } catch (e) {
+        console.log("my error", e);
       }
     },
     startDownload(){
-        if (this.fromDate) {
+        this.errorList = [];
+        this.error = null;
+        if (!this.fromDate) {
+          this.errorList.push("From date is Required!");
+        }
+        if (!this.toDate) {
+          this.errorList.push("To date is Required!");
+        }
+        if (this.fromDate && this.toDate) {
           this.loader=true;
         }
     },
     finishDownload(){
-      if (this.fromDate) {
+      if (this.fromDate && this.toDate) {
         this.loader=false;
       }
     },
@@ -784,89 +1212,90 @@ export default {
 };
 </script>
 <style scoped>
-.total-patient-table {
-  width: 50%;
-
-  margin-bottom: 10px;
-}
-.total-patient-table td[data-v-1b54f771] {
+.tdrow {
+  padding: 5px 5px;
   border: 1px solid #000;
-  padding: 0px 20px;
-  font-size: 13px;
+  font-size: 10.0px;
+  font-weight: 600;
+  }
+.tdrow-num{
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 12.0px;
   font-weight: 600;
 }
+  .tdrow-limit {
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 12.0px;
+  font-weight: 600;
+  word-wrap:break-word;
+  max-width:70px;
 
-.patient-inner-table {
-  width: 100%;
-}
-.td-table {
-  padding: 0px !important;
-}
-.patient-inner-table th {
-  background: #bbf2eb;   /*need to be sync with other report  */
-  border-left: 1px solid #000;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 50px;
+  }
+  .tdrow-limit-diagnosis{
+    padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 12.0px;
+  font-weight: 600;
   word-wrap:break-word;
-  line-height: normal;
-}
-.patient-inner-table th:last-child {
-  border-right: 0;
-}
-.patient-inner-table td {
-  text-align: center;
-  border-bottom: 0px !important;
-  border-left: 0px !important;
-  margin-top: 50px;
+  max-width:80px;
+
+  }
+  .tdrow-occu-sector {
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 12.0px;
+  font-weight: 600;
   word-wrap:break-word;
-}
-.patient-inner-table td:last-child {
-  border-right: 0;
-}
-div#result {
-  padding: 15px;
-}
-/* .thhead {
-  background: #bbf2eb;;
+  max-width:80px;
+
+  }
+.thhead {
+  background: #bbf2eb;
+  padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  width:fit-content;
-  font-size: 8.0px;
+  font-size: 12.0px;
   line-height: normal;
-  font-weight: bold;
-  text-align: center;
 }
-.tdrow {
+.thhead-occu-sector{
+  background: #bbf2eb;
+  padding: 5px 5px;
   border: 1px solid #000;
-  font-size: 8.0px;
+  text-transform: uppercase;
+  font-size: 12.0px;
+  max-width:80px;
   line-height: normal;
-  text-align: center;
-}
-.table {
-  border: 1px solid rgb(0, 0, 0);
-  width: 100%;
-  word-wrap: break-word;
-  table-layout: fixed;
-} */
-.hide1 {
-  background: #fff;
-  display: none;
+
 }
 .table {
   border: 1px solid rgb(0, 0, 0);
   width:fit-content;
   margin-top: 50px;
   margin-left: 50px;
-  word-wrap:break-word;
+  margin-right: 50px;
 
 }
-.thhead {
-  background: #bbf2eb;
+.tabhead {
+  background: #ddd;
   padding: 5px 5px;
   border: 1px solid #000;
   text-transform: uppercase;
-  font-size: 13px;
-  line-height: normal;
+  font-size: 6.5px;
+}
+.tabtd {
+  padding: 5px 5px;
+  border: 1px solid #000;
+  font-size: 12.0px;
+  font-weight: 600;
+}
+.hide1 {
+  background: #fff;
+  display: none;
+}
+div#result {
+  padding: 5px;
+
 }
 </style>
