@@ -268,16 +268,13 @@
               <tbody class="optionBox">
                      <tr class="block" v-for="(exp,index) in expList" :key="index">
                   <td>
-                    <input type="text" class="form-control year" v-model="exp.year" name="" />
+                    <input disabled type="text" class="form-control year" v-model="exp.year" name="" />
                   </td>
                   <td>
-                    <input type="text" class="form-control location" v-model="exp.location" name=""  />
+                    <input disabled type="text" class="form-control location" v-model="exp.location" name=""  />
                   </td>
                   <td>
-                    <input type="text" class="form-control activity" v-model="exp.activity" name="" />
-                  </td>
-                  <td>
-                    <a class="add-td"><i class="fa fa-plus"></i></a>
+                    <input disabled type="text" class="form-control activity" v-model="exp.activity" name="" />
                   </td>
                 </tr>
               </tbody>
@@ -327,18 +324,13 @@
                         class="professional-yes profess-box"
                         v-if="menhelth == 'y'"
                       >
-                        <div class="mt-3">
+                        <div class="mt-3" v-if="this.resume != null || this.resume != ''">
                           <label for="formFile" class="form-label"
-                            >Please Attach Your Latest Resume<span
-                              >*</span
-                            ></label
+                            >Mental Health Professional Resume</label
                           >
-                          <input
-                            class="form-control"
-                            type="file"
-                            id="formFile"
-                            @change="selectFile"
-                          />
+                          <br/>
+                          <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
+                        ><i class="fad fa-download"></i> Download File</a>
                         </div>
 
                         <div class="mt-3">
@@ -1046,6 +1038,7 @@ export default {
       recreational: "",
       other: "",
       screening_mode: 0,
+      resume: "",
       //OUTREACH
       project_name: "",
       project_background: "",
@@ -1223,6 +1216,7 @@ export default {
           if (this.is_mental_health_professional==1) {
             this.is_mental_health_professional = "professional-yes";
             this.menhelth = "y";
+            this.resume = response.data.list.resume;
           } else {
             this.is_mental_health_professional = "professional-no";
             this.menhelth = "n";
@@ -1271,6 +1265,10 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    async onDownloadFile() {
+      const link = document.createElement('a');
+      window.open(this.resume, "_blank");
     },
     Onchangelocation(val) {
       this.projectlocation = val;
