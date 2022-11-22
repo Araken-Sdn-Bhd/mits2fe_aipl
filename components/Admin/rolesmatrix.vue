@@ -2,7 +2,6 @@
   <div class="card mb-4">
     <div class="card-header bg-transparent">
       <h4>Screen Access</h4>
-      <!-- <a href="#"><i class="fa fa-edit"></i></a> -->
     </div>
     <div class="card-body">
       <ul class="sub-tab">

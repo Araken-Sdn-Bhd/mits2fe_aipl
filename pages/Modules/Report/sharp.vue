@@ -379,12 +379,21 @@
                   >
                     <i class="fa fa-file-pdf"></i> Generate PDF
                   </button>
-                  <button
-                    @click="Ongenerateexel"
-                    class="btn btn-success btn-text"
-                  >
-                    <i class="fa fa-file-excel"></i> Generate Excel
-                  </button>
+                  <downloadexcel
+                           class="btn btn-success btn-text"
+                           :header="header"
+                           :before-generate = "startDownload"
+                           :before-finish   = "finishDownload"
+                           :json_data="ReportList"
+                           :fetch = "Ongenerateexel"
+                           :fields ="json_fields"
+                           :excelname="excelname"
+                           :sheetname="sheetname"
+                            worksheet="Sharp Report"
+                           :name=excelname
+                          >
+                          <i class="fa fa-file-excel"></i> Generate Excel
+                          </downloadexcel>
                 </div>
               </div>
               <!-- </form> -->
@@ -404,32 +413,24 @@
                 <table style="border: 1px solid #000; width: 50%">
                   <thead>
                     <tr>
-                      <th class="tabhead">Month</th>
-                      <th class="tabhead">No of shharp report generated</th>
+                      <th class="tabhead">Period of Services</th>
+                      <td class="tabtd">{{periodofservices}}</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(tr, index) in totalResultlist" :key="index">
-                      <td class="tabtd">{{ tr.month }}</td>
-                      <td class="tabtd">{{ tr.total }}</td>
+                    <tr>
+                      <th class="tabhead">Total Report</th>
+                      <td class="tabtd">{{ totalResultlist }}</td>
                     </tr>
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <td class="tabtd">
-                        <b>Total</b>
-                      </td>
-                      <td class="tabtd">{{ count }}</td>
-                    </tr>
-                  </tfoot>
                 </table>
 
                 <table class="table" id="datatable">
                   <thead>
                     <tr>
                       <th class="thhead">No</th>
-                      <th class="thhead">Date</th>
-                      <th class="thhead">Time</th>
+                      <th class="thhead">Harm Date</th>
+                      <th class="thhead">Harm Time</th>
                       <th class="thhead">NRIC/Passport</th>
                       <th class="thhead">Name</th>
                       <th class="thhead">Address</th>
@@ -451,18 +452,57 @@
                       <td class="tdrow">{{ rp.DATE }}</td>
                       <td class="tdrow">{{ rp.TIME }}</td>
                       <td class="tdrow">{{ rp.NRIC_NO_PASSPORT_NO }}</td>
-                      <td class="tdrow">{{ rp.Name }}</td>
+                      <td class="tdrow">{{ rp.NAME }}</td>
                       <td class="tdrow">{{ rp.ADDRESS }}</td>
                       <td class="tdrow">{{ rp.CITY }}</td>
                       <td class="tdrow">{{ rp.STATE }}</td>
                       <td class="tdrow">{{ rp.POSTCODE }}</td>
                       <td class="tdrow">{{ rp.PHONE_NUMBER }}</td>
                       <td class="tdrow">{{ rp.DATE_OF_BIRTH }}</td>
-                      <td class="tdrow">{{ rp.RISK_FACTOR }}</td>
-                      <td class="tdrow">{{ rp.PROTECTIVE_FACTOR }}</td>
-                      <td class="tdrow">{{ rp.METHOD_OF_SELF_HARM }}</td>
-                      <td class="tdrow">{{ rp.IDEA_OF_METHOD }}</td>
-                      <td class="tdrow">{{ rp.SUCIDAL_INTENT }}</td>
+                      <td class="tdrow">
+                        <p v-if=rp.RISK_FACTOR1 >{{ rp.RISK_FACTOR1 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR2 >{{ rp.RISK_FACTOR2 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR3 >{{ rp.RISK_FACTOR3 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR4 >{{ rp.RISK_FACTOR4 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR5 >{{ rp.RISK_FACTOR5 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR6 >{{ rp.RISK_FACTOR6 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR7 >{{ rp.RISK_FACTOR7 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR8 >{{ rp.RISK_FACTOR8 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR9 >{{ rp.RISK_FACTOR9 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR10 >{{ rp.RISK_FACTOR10 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR11 >{{ rp.RISK_FACTOR11 }} <br></p>
+                        <p v-if=rp.RISK_FACTOR12 >{{ rp.RISK_FACTOR12 }} <br></p>
+                      </td>
+                      <td class="tdrow">
+                      <p v-if=rp.PROTECTIVE_FACTOR13 >{{ rp.PROTECTIVE_FACTOR13 }} <br></p>
+                      <p v-if=rp.PROTECTIVE_FACTOR14 >{{ rp.PROTECTIVE_FACTOR14 }} <br></p>
+                      <p v-if=rp.PROTECTIVE_FACTOR15 >{{ rp.PROTECTIVE_FACTOR15 }} <br></p>
+                      <p v-if=rp.PROTECTIVE_FACTOR16 >{{ rp.PROTECTIVE_FACTOR16 }} <br></p>
+                      <p v-if=rp.PROTECTIVE_FACTOR17 >{{ rp.PROTECTIVE_FACTOR17 }} <br></p>
+                      <p v-if=rp.PROTECTIVE_FACTOR18 >{{ rp.PROTECTIVE_FACTOR18 }} <br></p>                
+                      </td>
+                      <td class="tdrow">
+                        <p v-if=rp.METHOD_OF_SELF_HARM1 >{{ rp.METHOD_OF_SELF_HARM1 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM2 >{{ rp.METHOD_OF_SELF_HARM2 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM3 >{{ rp.METHOD_OF_SELF_HARM3 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM4 >{{ rp.METHOD_OF_SELF_HARM4 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM5 >{{ rp.METHOD_OF_SELF_HARM5 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM6 >{{ rp.METHOD_OF_SELF_HARM6 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM7 >{{ rp.METHOD_OF_SELF_HARM7 }} <br></p>
+                        <p v-if=rp.METHOD_OF_SELF_HARM8 >{{ rp.METHOD_OF_SELF_HARM8 }} <br></p>                        
+                      </td>
+                      <td class="tdrow">
+                        <p v-if=rp.IDEA_OF_METHOD1 >{{ rp.IDEA_OF_METHOD1 }} <br></p>
+                        <p v-if=rp.IDEA_OF_METHOD2 >{{ rp.IDEA_OF_METHOD2 }} <br></p> 
+                        <p v-if=rp.IDEA_OF_METHOD3 >{{ rp.IDEA_OF_METHOD3 }} <br></p> 
+                        <p v-if=rp.IDEA_OF_METHOD4 >{{ rp.IDEA_OF_METHOD4 }} <br></p> 
+                        <p v-if=rp.IDEA_OF_METHOD5 >{{ rp.IDEA_OF_METHOD5 }} <br></p>  
+                      </td>
+                      <td class="tdrow">
+                        <p v-if=rp.SUCIDAL_INTENT1 >{{ rp.SUCIDAL_INTENT1 }} <br></p>
+                        <p v-if=rp.SUCIDAL_INTENT2 >{{ rp.SUCIDAL_INTENT2 }} <br></p>
+                        <p v-if=rp.SUCIDAL_INTENT3 >{{ rp.SUCIDAL_INTENT3 }} <br></p>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -473,12 +513,45 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+
+import downloadexcel from "vue-json-excel";
+
 export default {
   components: { CommonSidebar, CommonHeader },
-
+  name: "App",
+      components: {
+        downloadexcel,
+      },
   name: "sharp",
   data() {
     return {
+      json_fields: {
+            "No":'NO',
+            "Harm Date":'DATE',
+            "Harm Time":'TIME',
+            "NRIC No/PASSPORT No":'NRIC_NO_PASSPORT_NO',
+            "Name":'NAME',
+            "Address":'ADDRESS',
+            "City":'CITY',
+            "State":'STATE',
+            "PostCode":'POSTCODE',
+            "Telephone Number":'PHONE_NUMBER',
+            "Date of Birth":'DATE_OF_BIRTH',
+            "Risk Factor":'RISK_FACTOR',
+            "Protective Factors":'PROTECTIVE_FACTOR',
+            "Method of Self Harm":'METHOD_OF_SELF_HARM',
+            "Idea of Method":'IDEA_OF_METHOD',
+            "Suicidal Intent":'SUCIDAL_INTENT',
+          },
+      excelname: "",
+      sheetname: "Sharp Report",
+      header:"",
+      ReportList:[],
+      No:0,
+      filename:'',
+      TotalReport:0,
+      periodofservices:'',
+
       userdetails: null,
       errorList: [],
       list: [],
@@ -523,12 +596,13 @@ export default {
       age: "",
       count: 0,
       SidebarAccess:null,
-      totalResultlist: [],
+      totalResultlist:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.branch_id=this.userdetails.branch.branch_id;
     this.GetList();
   },
   methods: {
@@ -686,6 +760,7 @@ export default {
           "report/shharp",
           {
             added_by: this.userdetails.user.id,
+            branch_id: this.branch_id,
             fromDate: this.fromDate,
             toDate: this.toDate,
             diagnosis: this.diagnosis,
@@ -712,18 +787,16 @@ export default {
         console.log("my report", response.data);
         if (response.data.code == 200) {
           this.list = response.data.result;
-          this.totalResultlist=response.data.Totalreport;
-          // this.count = response.data.result.length;
+          this.totalResultlist=response.data.TotalReport;
+          this.periodofservices = response.data.periodofservices;
           if (this.list.length > 0) {
-            this.totalResultlist.forEach(element => {
-              this.count=this.count+element.total;
-            });
+
             setTimeout(() => {
               this.$refs.result.classList.remove("hide");
                this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "pt", "A3");
-                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
-                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                var pdf = new jsPDF("l", "pt", "A4");
+                 pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
+                  //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
                 //pdf.internal.scaleFactor =30;
                 var options = {
                 pagesplit: true
@@ -790,14 +863,17 @@ export default {
           );
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data.filepath) {
-              window.open(response.data.filepath, "_blank");
+            if (response.data) {
+
+              this.ReportList = response.data.result;
+              this.excelname = response.data.filename;
+              this.header = response.data.header;
+              return response.data.result;
+
             } else {
               this.error = "No Record Found";
             }
-          } else {
-            this.error = "No Record Found";
-          }
+          } 
         } catch (e) {}
       }
     },
@@ -814,13 +890,14 @@ export default {
 <style scoped>
 
 .tdrow {
-  padding: 5px;
+  padding: 5px 5px;
   border: 1px solid #000;
   font-size: 12px;
   font-weight: 600;
+  text-align:center
 }
 .thhead {
-  background: #ddd;
+  background: #bbf2eb;
   padding: 5px;
   border: 1px solid #000;
   text-transform: uppercase;
@@ -829,9 +906,11 @@ export default {
 }
 .table {
   border: 1px solid rgb(0, 0, 0);
-  width: 100%;
+  width: fit-content;
   margin-top: 50px;
-      line-height: normal;
+  margin-right:50px;
+  margin-left:50px;
+  line-height: normal;
 }
 .tabhead {
   background: #ddd;

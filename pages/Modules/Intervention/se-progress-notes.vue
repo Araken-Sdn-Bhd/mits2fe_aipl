@@ -356,7 +356,14 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                       <br>
                 <div class="d-flex" v-if="!pid">
+                  <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
+                    >
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -425,12 +432,14 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     if (this.Id) {
       this.staff_name = this.userdetails.user.name;
@@ -672,6 +681,7 @@ export default {
               sub_code_id: this.sub_code_id,
               services_id: this.services_id,
               patient_id: this.Id,
+              appId: this.appId,
             },
             { headers }
           );
@@ -680,7 +690,7 @@ export default {
             this.loader = false;
             this.resetmodel();
             this.$nextTick(() => {
-              $("#updatepopup").modal("show");
+              $("#insertpopup").modal("show");
             });
           } else {
             this.loader = false;
@@ -805,6 +815,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId  },
+            });
+    }
   },
 };
 </script>
