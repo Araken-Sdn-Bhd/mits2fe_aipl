@@ -3139,7 +3139,6 @@ export default {
             },
             { headers }
           );
-          console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
@@ -3152,22 +3151,11 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        //}
       } catch (e) {}
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
-          }
-        // }
   }
     },
     async onPublishEvent() {
@@ -3555,20 +3543,10 @@ export default {
           }
         //}
       } catch (e) {}
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
-            });
-          }
-        // }
+          });
   }
   },
     async GetList() {
