@@ -493,6 +493,11 @@
                         </ul>
                        </p>
                 <div class="d-flex" v-if="!pid">
+
+                    <button @click="GoBack" class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -529,6 +534,7 @@ export default {
       casemanagerlist: [],
       employerlist:[],
       Id: 0,
+      appId:0,
       client: "",
       employment_specialist: "",
       case_manager: "",
@@ -569,6 +575,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if(this.Id){
 this.GetPatientdetails();
     }
@@ -757,6 +764,7 @@ this.GetPatientdetails();
               complexity_of_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_prescription: this.medication_des,
+              appId: this.appId,
             },
             { headers }
           );
@@ -976,6 +984,18 @@ this.GetPatientdetails();
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
+    }
   },
 };
 </script>
+
+<style scoped>
+.hide {
+  display: none;
+}
+</style>
