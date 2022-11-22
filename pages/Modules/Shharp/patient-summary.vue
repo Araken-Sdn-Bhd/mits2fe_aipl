@@ -293,7 +293,7 @@
                 </div>
                 <div class="card-body">
                   <ul class="accordion" id="accordionExample">
-                    <li class="accordion-item sub-nav">
+                    <!--<li class="accordion-item sub-nav">
                       <a
                         href="#"
                         class="accordion-button collapsed"
@@ -451,7 +451,7 @@
                                   aria-labelledby=""
                                   data-bs-parent="#sub-men-1"
                                 >
-                                  <!-- <li><a href="notes-form.html">Clerking Notes</a></li> -->
+                                
                                   <li>
                                     <a style="cursor:pointer;" @click="OnPsychiatryclerkingnote"
                                       >Psychiatry Clerking Note</a
@@ -776,7 +776,7 @@
                       >
                         Attachment
                       </a>
-                    </li>
+                    </li>-->
                     <li class="accordion-item sub-nav">
                       <a
                         class="accordion-button collapsed"
@@ -810,8 +810,8 @@
                 </div>
               </div>
                 <div class="d-flex">
-                                    <a href="#" class="btn btn-danger btn-text ml-auto"><i class="fa fa-power-off"></i> End Visit</a>
-                                </div>
+                 <a href="#" class="btn btn-danger btn-text ml-auto"><i class="fa fa-power-off"></i> End Visit</a>
+                </div>
             </div>
           </div>
         </div>

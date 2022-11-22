@@ -1,8 +1,7 @@
 <template>
   <div class="card mb-4">
     <div class="card-header bg-transparent">
-      <h4>Screen and Module Management</h4>
-      <!-- <a href="#"><i class="fa fa-edit"></i></a> -->
+      <h4>Screen and Module Management (<span style="color:red">*Please contact your system administrator for assistant</span>)</h4>
     </div>
     <div class="card-body">
       <nav>
