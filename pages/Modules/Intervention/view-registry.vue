@@ -98,48 +98,35 @@
                   </div>
                   <!-- <form class="step-form" method="post" @submit.prevent="Onriskfactor"> -->
                     <div class="row mb-3">
-                      <label class="col-sm-5 col-form-label"
-                        ><span>1</span>Presence of psychiatric disorder</label
-                      >
+                      <!-- 1. -->
+                      <label class="col-sm-5 col-form-label"><span>1</span>Presence of psychiatric disorder</label>
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            id="no" value="No"
-                            name="Presence of psychiatric disorder"  v-model="first"
-                          />
-                          <label class="form-check-label" for="no">NO</label>
+                        <input class="form-check-input" type="radio" id="no" value="No" name="Presence of psychiatric disorder"  
+                         v-model="first"/>
+                        <label class="form-check-label" for="no">NO</label>
                         </div>
                         <div class="form-check form-check-inline yes-box">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            id="yes"
-                            name="Presence of psychiatric disorder"
-                            value="Yes" v-model="first"
-                          />
-                          <label class="form-check-label" for="yes">YES</label>
+                        <input class="form-check-input" type="radio" id="yes" name="Presence of psychiatric disorder"
+                         value="Yes" v-model="first"/>
+                        <label class="form-check-label" for="yes">YES</label>
                         </div>
                          <div class="step-form-box1 box-01" v-show="first=='Yes'">
                           <select id="firstbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple">
-                         <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            <option
+                              v-for="catcode in diagonisislist"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id">
+                            {{ catcode.icd_code }} {{catcode.icd_name}}
+                            </option>
                           </select>
                         </div>
                       </div>
                     </div>
                     <!-- row-close -->
                     <div class="row mb-3">
-                      <label class="col-sm-5 col-form-label"
-                        ><span>2</span>Hopelessness or despair</label
-                      >
+                      <label class="col-sm-5 col-form-label"><span>2</span>Hopelessness or despair</label>
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
@@ -2316,10 +2303,15 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
+        
         this.riskfactorlist = response.data.result.risk;
+        //alert(JSON.stringify(this.riskfactorlist));
+      
         this.protectivefactorlist = response.data.result.protective;
         this.riskfactorlist.forEach((element) => {
+       
           if (element.questionId == 1) {
+            
             this.first = element.answer;
           }
           if (element.questionId == 2) {
