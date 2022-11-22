@@ -433,6 +433,10 @@
                        </p>
 
                 <div class="d-flex" v-if="!pid">
+                    <button @click="GoBack" class="btn btn-primary btn-text">
+                      <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    
                     <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -467,6 +471,7 @@ export default {
       locationlist: [],
       titlelist: [],
       Id: 0,
+      appId:0,
       name: "",
       job_title: "",
       employer_name: "",
@@ -511,6 +516,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     if (this.Id) {
       this.staff_name = this.userdetails.user.name;
@@ -683,6 +689,7 @@ export default {
               complexity_of_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_prescription: this.medication_des,
+              appId: this.appId,
             },
             { headers }
           );
@@ -915,6 +922,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
   },
 };

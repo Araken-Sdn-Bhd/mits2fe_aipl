@@ -545,7 +545,12 @@
                   </li>
                 </ul>
                 </p>
+                <br>
+                <br>
                 <div class="d-flex" v-if="!pid">
+                  <a @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
                   <button type="submit" class="btn btn-warning btn-text ml-auto">
                     <i class="fa fa-save"></i> Save
                   </button>
@@ -583,6 +588,7 @@ export default {
       categorylist: [],
       screenlist: [],
       Id: 0,
+      appId:0,
       risk_history_assressive: "",
       risk_history_criminal: "",
       risk_history_detereotation: "",
@@ -649,6 +655,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -904,6 +911,8 @@ export default {
       } catch (e) {}
     },
     async Ontriageform() {
+
+      if (confirm("Are you sure you want to save this entry ? ")) {
       var screening_type = [];
       $("table#screentable > tbody > tr").each(function () {
         var obj = {};
@@ -1047,7 +1056,8 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              screening_type: screening_type
+              screening_type: screening_type,
+              appId: this.appId,
             },
             { headers }
           );
@@ -1066,7 +1076,8 @@ export default {
           }
         }
       } catch (e) { }
-    },
+    }},
+    
     resetmodel() {
       this.risk_history_assressive = "";
       this.risk_history_criminal = "";
@@ -1198,6 +1209,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
     },
   },
 };
