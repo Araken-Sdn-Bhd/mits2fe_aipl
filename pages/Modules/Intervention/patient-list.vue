@@ -227,14 +227,11 @@ export default {
     oneditPatient(Id) {
       if(this.SidebarAccess==1){
         this.$router.push({
-        path: "/modules/Intervention/patient-summary",
+        path: "/modules/Intervention/patient-summary-patient",
         query: { id: Id },
       });
       }else{
-      // this.$router.push({
-      //   path: "/modules/Intervention/patient-summary",
-      //   query: { id: Id },
-      // });
+   
       }
     },
     async OnSearch() {
