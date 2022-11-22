@@ -1397,7 +1397,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/laser-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1405,7 +1405,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/external-referral-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1535,7 +1535,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-start-report",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1543,7 +1543,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-end-report",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
@@ -1551,14 +1551,14 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-transition-report",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId, },
         });
       }
     },
     OnListforJobClub() {
       this.$router.push({
         path: "/modules/Intervention/list-for-job-club",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId, },
       });
     },
     Onlistofetp() {
