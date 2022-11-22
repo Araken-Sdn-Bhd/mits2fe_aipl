@@ -173,6 +173,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
+       
         console.log("list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({

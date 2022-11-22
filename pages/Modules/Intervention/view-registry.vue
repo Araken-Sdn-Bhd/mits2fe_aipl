@@ -96,7 +96,7 @@
                     <h4>Risk Factors</h4>
                     <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
-                  <!-- <form class="step-form" method="post" @submit.prevent="Onriskfactor"> -->
+                  
                     <div class="row mb-3">
                       <!-- 1. -->
                       <label class="col-sm-5 col-form-label"><span>1</span>Presence of psychiatric disorder</label>
@@ -555,8 +555,7 @@
                                             <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
                                             <div class="ml-auto">
                                                 <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
-                                                <!-- <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button> -->
-                                            </div>
+                                           </div>
                                         </div>
                 
                 </div>
@@ -1219,13 +1218,9 @@
                         <button class="nex-2 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <!-- <button type="submit" class="btn btn-text btn-warning">
-                          <i class="fad fa-save"></i> Save
-                        </button> -->
-                        <!-- <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button> -->
                       </div>
                     </div>
-                  <!-- </form> -->
+                
                 </div>
               </div>
             </div>
@@ -1349,9 +1344,7 @@
                         <button class="nex-3 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <!-- <button type="submit" @click="Onsuciderisk" class="btn btn-text btn-warning">
-                          <i class="fad fa-save"></i> Save
-                        </button> -->
+                      
                       </div>
                     </div>
                 </div>
@@ -1727,9 +1720,7 @@
                         <button class="nex-4 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <!-- <button type="submit" class="btn btn-text btn-warning" @click="OnSavehospitalmanagement">
-                          <i class="fad fa-save"></i> Save
-                        </button> -->
+                      
                       </div>
                     </div>
                 </div>
@@ -1835,11 +1826,7 @@
                       <button class="pre-5 btn btn-success mr-auto">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
-                      <!-- <div class="ml-auto">
-                        <button type="submit" class="btn btn-success ml-auto" @click="adddataproducer">
-                          <i class="fad fa-paper-plane"></i> Submit
-                        </button>
-                      </div> -->
+                    
                     </div>
                 </div>
               </div>
@@ -2494,6 +2481,7 @@ export default {
 };
 </script>
 
+</script>
 <style scoped>
 .hide {
   display: none;

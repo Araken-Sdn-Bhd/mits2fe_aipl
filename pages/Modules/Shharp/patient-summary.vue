@@ -648,10 +648,6 @@
                                   </li>
                                   <li><a style="cursor:pointer;" @click="Onjobstartreport">Job Start Report</a></li>
                                   <li><a style="cursor:pointer;" @click="Onjobendreport">Job End Report</a></li>
-                                  <!-- <li>
-                                    <a href="#">Job Commencement Report</a>
-                                  </li>
-                                  <li><a href="#">Job Cessation Report</a></li> -->
                                   <li><a style="cursor:pointer;" @click="Onjobtransitionreport">Job Transition Report</a></li>
                                   <li>
                                     <a style="cursor:pointer;" @click="Onlaserform">LA.S.E.R Form (Motivation) </a>
@@ -839,13 +835,8 @@
                 />
               </div>
                <p v-if="errorList.length">
-<ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
+                  <ul><li style="color:red"  v-for='err in errorList' :key='err'>{{ err }}</li></ul>
+               </p>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-ok" @click="onAttachdoc">
                   Submit
@@ -855,9 +846,7 @@
           </div>
         </div>
       </main>
-        <footer>
-                   <p>© MENTARI MALAYSIA MOH</p>
-                </footer>
+        <footer><p>© MENTARI MALAYSIA MOH</p></footer>
     </div>
   </div>
 </template>
