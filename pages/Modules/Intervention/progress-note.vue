@@ -363,7 +363,7 @@
                              </li>
                         </ul>
                        </p>
-                                              <br>
+                       <br>
                        <br>
                 <div class="d-flex" v-if="!pid">
                     <button
@@ -615,6 +615,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
+              appId: this.appId,
               status: "1",
             },
             { headers }
