@@ -3,7 +3,7 @@
     <form class="g-3 mt-3" method="post" @submit.prevent="onAddserviceregistration">
       <div class="row">
         <div class="col-md-3 mb-4">
-          <label for="" class="form-label">Service Code</label>
+          <label for="" class="form-label">Service Code 1</label>
           <input
             type="text"
             class="form-control"
