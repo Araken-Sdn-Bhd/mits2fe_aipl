@@ -1,16 +1,7 @@
 <template>
   <div class="card mb-4">
-    <div class="card-header bg-transparent">
-      <h4>Screen Access</h4>
-    </div>
     <div class="card-body">
-      <ul class="sub-tab">
-        <li class="active">
-          <a>Setting 1: Access Screen</a>
-        </li>
-      </ul>
       <form method="post" @submit.prevent="onAddroles">
-        <div class="content-subtab">
           <div class="filter-form">
             <div class="row mt-3">
               <div class="col-sm-6 mb-3">
@@ -89,19 +80,15 @@
 
             </div>
           
-<p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
-            <button class="btn btn-success" :class="SidebarAccess!=1?'hide':''">
-              Submit <i class="fal fa-arrow-from-left"></i>
-            </button>
+            <p v-if="errors.length">
+                <ul><li style="color:red"  v-for='err in errors' :key='err' >{{ err }}</li></ul>
+            </p>
+          
+            <div class="d-flex">
+             <button class="next-1 btn btn-primary btn-text ml-auto"><i class="fa fa-save"></i>Save</button>
+            </div>
           </div>
-        </div>
+        
       </form>
     </div>
   </div>
@@ -113,14 +100,13 @@ export default {
     return {
       errors: [],
       ModuleId: 0,
-      SubmoduleId: 0,
+      submoduleId: '',
       roleId:0,
       screenIds: "",
       screendetail: null,
       modulelist: [],
       roleList: [],
       screenlist: [],
-     
       selected: [],
       SidebarAccess:null,
     };
@@ -172,6 +158,7 @@ export default {
       );
       console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
+        //alert(JSON.stringify(response.data.list));
         this.screenlist = response.data.list;
       } else {
         this.screenlist = [];
@@ -195,35 +182,15 @@ export default {
     },
 
     async onAddroles() {
+      if (confirm("Are you sure you want to save this selection ? ")) {
       this.errors = [];
       try {
         if (this.ModuleId <= 0) {
-          this.errors.push("Module Name  is required.");
+          this.errors.push("Module is required.");
         }
-        // if (this.SubmoduleId <= 0) {
-        //   this.errors.push("Sub Module Name  is required.");
-        // }
-        if (this.HospitalId <= 0) {
-          this.errors.push("Hospital Name  is required.");
-        }
-        // if (this.BranchId <= 0) {
-        //   this.errors.push("Branch Name  is required.");
-        // }
-        // if (this.teamId <= 0) {
-        //   this.errors.push("Team  is required.");
-        // }
-        if (this.staffId <= 0) {
-          this.errors.push("Staff Name  is required.");
-        }
-        // if (this.selected.length <= 0) {
-        //   this.errors.push("Select atleast one screen.");
-        // }
+        
         if (
-          this.ModuleId &&
-          this.HospitalId &&
-          // this.BranchId &&
-          // this.teamId &&
-          this.staffId
+          this.ModuleId 
         ) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -231,7 +198,7 @@ export default {
             "Content-Type": "application/json",
           };
           if (this.selected.length > 0) {
-            this.selected.forEach((value, index) => {
+            this.selected.forEach((value,index) => {
               if (!this.screenIds) {
                 this.screenIds = value;
               } else {
@@ -240,17 +207,11 @@ export default {
             });
           }
           const response = await this.$axios.post(
-            "screen-module/assign-screen",
+            "default-role-access/add",
             {
               module_id: this.ModuleId,
               screen_ids: this.screenIds.toString(),
-              sub_module_id: this.SubmoduleId,
-              added_by: this.userdetails.user.id,
-              hospital_id: this.HospitalId,
-              branch_id: this.BranchId,
-              team_id: this.teamId,
-              staff_id: this.staffId.id,
-              // type: this.staffId.txt,
+              roles_id: this.roleId,
             },
             { headers }
           );
@@ -271,6 +232,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     async ResetModel() {
       this.ModuleId = 0;
