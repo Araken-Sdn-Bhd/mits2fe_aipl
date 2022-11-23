@@ -389,7 +389,7 @@
   </div>
 </template>
 <script>
-import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
+// import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 
@@ -397,7 +397,6 @@ export default {
   components: {
     CommonHeader,
     CommonSidebar,
-    Interventionphysectristdetails,
   },
   name: "progress-note",
   data() {
@@ -434,7 +433,7 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
-      appId:0,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -458,12 +457,6 @@ export default {
     this.appId = urlParams.get("appId");
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-    this.appId = urlParams.get("appId");
-
-    this.GetPatientdetails();
-    if (this.pid) {
-      this.getdetails();
-    }
     const current = new Date();
     this.currentdate =
       current.getDate() +
@@ -473,6 +466,12 @@ export default {
       current.getFullYear();
 
     this.currenttime = current.getHours() + ":" + current.getMinutes();
+  },
+  mounted() {
+    this.GetPatientdetails();
+    if (this.pid) {
+      this.getdetails();
+    }
   },
   methods: {
     async onCreateEvent() {

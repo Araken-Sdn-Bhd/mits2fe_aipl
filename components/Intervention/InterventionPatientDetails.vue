@@ -113,9 +113,11 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
-    this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.alert_id = urlParams1.get("alert_id");
+  },
+  mounted() {
+    this.GetPatientdetails();
     this.GetLastupdatedAlert();
   },
   methods: {

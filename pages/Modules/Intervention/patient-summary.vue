@@ -4,6 +4,7 @@
     <div id="layoutSidenav_content">
       <CommonHeader />
       <main>
+        <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <InterventionPatientDetails />
           <div class="row">
@@ -59,7 +60,7 @@
                               <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
-                                <a v-if="hst.editstatus==0" style="cursor:pointer;" @click="OnHistoryview(hst,edit)"  class="edit"
+                                <a v-if="hst.status==0" style="cursor:pointer;" @click="OnHistoryEdit(hst,edit)"  class="edit"
                                 ><i class="fas fa-edit"></i
                               ></a>
                             </td>
@@ -876,6 +877,7 @@ export default {
   name: "patient-summary",
   data() {
     return {
+      loader: true,
       userdetails: null,
       errorList: [],
       attachList: [],
@@ -959,6 +961,7 @@ export default {
         console.error(err);
       });
     this.GethistoryList();
+    this.loader = false;
   },
   methods: {
     getFile(file) {
@@ -1203,6 +1206,206 @@ export default {
       } else if (data.type == "RehabRefferalAndClinicalForm") {
         this.$router.push({
           path: "/modules/Intervention/rehab-referral-and-clinical-summary",
+          query: { pid: data.id, type: val },
+        });
+      }
+    },
+    OnHistoryEdit(data, val) {
+      if (data.type == "PsychiatryClerkingNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-psychiatry-clerking-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CounsellorClerkingNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-counsellor-clerking-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PatientIndexForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-patient-index-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PsychiatricProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CPSProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "SEProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-edit-se-progress-notes",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CounsellingProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-counseling-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "EtpProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-etp-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobClubProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-club-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ConsultationDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-consultation-discharge-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "RehabDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-rehab-discharge",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-discharge-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsHomeVisitConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-homevisit-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsHomeVisitWithdrawalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-homevisit-withdrawal-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsPoliceReferralForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-police-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PhotographyConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-photography-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "SEConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-se-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ETPConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-etp-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobClubConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-club-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-patient-care-plan-and-case-review",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobStartReport") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-start-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobEndReport") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-end-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobTransitionReport") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-transition-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "LaserAssessment") {
+        console.log("laser result", data);
+        localStorage.setItem("LaserResult",JSON.stringify(data));
+        this.$router.push({
+          path: "/modules/Intervention/edit-laser-result-view-history", ///Modules/Intervention/laser-form
+          query: { pid: data.id, type: val, id:this.Id},
+        });
+      } else if (data.type == "TriageForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-triage-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobInterestCheckList") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-job-interest-checklist",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "WorkAnalysisForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-work-analysis-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofJobClub") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-list-for-job-club",
+          query: { pid: this.Id, type: val },
+        });
+      } else if (data.type == "ListofEtp") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-list-of-etp",
+          query: { pid: this.Id, type: val },
+        });
+      } else if (data.type == "ListofJobSearch" && val != "edit") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-list-of-job-search",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofJobSearch" && val == "edit") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-update-list-of-job-search",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "LogMeetingWithEmployer") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-log-meeting-with-employer",
+          query: { pid: this.Id, type: val },
+        });
+      } else if (data.type == "ListofPreviousCurrentJob") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-list-of-previous-or-current-job",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "InternalRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-internal-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ExternalRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-external-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-cps-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "OcctRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-occt-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PsychologyRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-psychology-referral",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "RehabRefferalAndClinicalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/edit-rehab-referral-and-clinical-summary",
           query: { pid: data.id, type: val },
         });
       }

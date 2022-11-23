@@ -191,9 +191,12 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="volunteerism2"  value="Volunteerism" v-model="Oarea_of_involvement"
+              id="volunteerism"
+              value="Volunteerism"
+              v-model="area_of_involvement"
+              @change="OnAreas('individual')"
             />
-            <label class="form-check-label" for="volunteerism2">
+            <label class="form-check-label" for="volunteerism">
               Volunteerism
             </label>
           </div>
@@ -203,7 +206,10 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="outreach-project2" value="Outreach Project Collaboration" v-model="Oarea_of_involvement"
+              id="outreach-project2"
+              value="Outreach Project Collaboration"
+              v-model="area_of_involvement"
+              @change="OnAreas('group')"
             />
             <label class="form-check-label" for="outreach-project2">
               Outreach Project Collaboration
@@ -215,7 +221,10 @@
               class="form-check-input"
               type="radio"
               name="involvement"
-              id="networking2" value="Networking Make a Contribution" v-model="Oarea_of_involvement"
+              id="networking2"
+              value="Networking Make a Contribution"
+              v-model="area_of_involvement"
+              @change="OnAreas('org')"
             />
             <label class="form-check-label" for="networking2">
               Networking Make a Contribution
@@ -224,7 +233,7 @@
         </div>
       </div>
 
-      <div class="areas-involvement hide" id="volunteerism2show">
+      <div class="areas-involvement" id="volunteerismshow" v-if="area_of_involvement == 'Volunteerism'">
         <h4 class="title-h4">Volunteerism</h4>
 
         <div class="row mb-3 mt-2">
@@ -237,9 +246,11 @@
               disabled
                 class="form-check-input"
                 type="radio"
-                name="experience2"
-                id="experience2-yes"
-                value="experience2-yes"  v-model="Ois_voluneering_exp"
+                name="experience"
+                id="experience-yes"
+                value="experience-yes"  v-model="Ois_voluneering_exp"
+                @change="Onvolexp('y')"
+
               />
               <label class="form-check-label" for="experience2-yes">Yes</label>
             </div>
@@ -248,9 +259,10 @@
               disabled
                 class="form-check-input"
                 type="radio"
-                name="experience2"
-                id="experience2-no"
-                value="option2"  v-model="Ois_voluneering_exp"
+                name="experience"
+                id="experience-no"
+                value="0"  v-model="Ois_voluneering_exp"
+                @change="Onvolexp('n')"
               />
               <label class="form-check-label" for="experience2-no">No</label>
             </div>
@@ -258,7 +270,7 @@
         </div>
 
         <!-- hide-div -->
-        <div class="experience2-yes experi-box hide">
+        <div class="experience2-yes experi-box" v-if="volexp == 'y'">
            <div class="mt-3">
                          <table class="note" style="width: 100%" id="volexp1">
               <thead>
@@ -298,11 +310,12 @@
               disabled
                 class="form-check-input"
                 type="radio"
-                name="professional2"
-                id="professional2-yes"
-                value="professional2-yes" v-model="Ois_mental_health_professional"
+                name="professional"
+                id="professional-yes"
+                value="professional-yes" v-model="Ois_mental_health_professional"
+                @change="Onmentalhealth('y')"
               />
-              <label class="form-check-label" for="professional2-yes"
+              <label class="form-check-label" for="professional-yes"
                 >Yes</label
               >
             </div>
@@ -311,21 +324,27 @@
               disabled
                 class="form-check-input"
                 type="radio"
-                name="professional2"
-                id="professional2-no"
-                value="professional2-no" v-model="Ois_mental_health_professional"
+                name="professional"
+                id="professional-no"
+                value="professional-no" v-model="Ois_mental_health_professional"
+                @change="Onmentalhealth('n')"
               />
-              <label class="form-check-label" for="professional2-no">No</label>
+              <label class="form-check-label" for="professional-no">No</label>
             </div>
 
             <!-- hide-div -->
-            <div class="professional2-yes profess-box hide">
-              <div class="mt-3">
-                <label for="formFile" class="form-label"
-                  >Please Attach Your Latest Resume<span>*</span></label
-                >
-                <input class="form-control" type="file" id="formFile" @change="OselectFile" />
-              </div>
+            <div
+                        class="professional-yes profess-box"
+                        v-if="menhelth == 'y'"
+                      >
+              <div class="mt-3" v-if="this.resume != null || this.resume != ''">
+                          <label for="formFile" class="form-label"
+                            >Mental Health Professional Resume</label
+                          >
+                          <br/>
+                          <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
+                        ><i class="fad fa-download"></i> Download File</a>
+                        </div>
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
@@ -464,7 +483,7 @@
 
       <!-- volunteerismshow -->
 
-      <div class="areas-involvement hide" id="outreach-project2show">
+      <div class="areas-involvement" id="outreach-project2show" v-if="area_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
         <p>Please Provide a breief project description</p>
 
@@ -695,7 +714,8 @@
 
       <!-- outreach-projectshow -->
 
-      <div class="areas-involvement hide" id="networking2show">
+      <div class="areas-involvement" id="networking2show"
+      v-if="area_of_involvement == 'Networking Make a Contribution'">
         <h4 class="title-h4">Networking-Make a Contribution</h4>
         <p>
           We encourage any participation from the community members in line with
@@ -922,6 +942,7 @@ export default {
       userdetails: null,
       errors: [],
       loader: false,
+      sections: "",
       OStateList: [],
       OCityList: [],
       OPostCodeList: [],
@@ -948,7 +969,7 @@ export default {
       Oeducation_id: 0,
       Ooccupation_sector_id: 0,
       Obranch_id: 0,
-      Oarea_of_involvement: "",
+      area_of_involvement: "",
       Ois_voluneering_exp: 0,
       Oexp_details: "",
       Ois_mental_health_professional: 0,
@@ -994,7 +1015,10 @@ export default {
       awareness: "",
       recreational: "",
       other: "",
+      resume: "",
       expList: [],
+      volexp: "",
+      menhelth: "",
     };
   },
   beforeMount() {
@@ -1073,6 +1097,16 @@ export default {
     this.GetList();
   },
   methods: {
+    async onDownloadFile() {
+      const link = document.createElement('a');
+      window.open(this.resume, "_blank");
+    },
+    Onvolexp(val) {
+      this.volexp = val;
+    },
+    Onmentalhealth(val) {
+      this.menhelth = val;
+    },
     OselectFile(event) {
       this.Ofile = event.target.files[0];
     },
@@ -1212,7 +1246,7 @@ export default {
         this.Oeducation_id = response.data.list.education;
         this.Ooccupation_sector_id = response.data.list.occupation_sector;
         this.Obranch_id = response.data.list.branch_id;
-        this.Oarea_of_involvement = response.data.list.area_of_involvement;
+        this.area_of_involvement = response.data.list.area_of_involvement;
         this.Ois_agree = 1;
         this.Omentari_services = response.data.list.mentari_services;
         this.Oposition_in_org = response.data.list.position_in_org;
@@ -1246,6 +1280,7 @@ export default {
           if (this.Ois_mental_health_professional) {
             this.Ois_mental_health_professional = "professional-yes";
             this.menhelth = "y";
+            this.resume = response.data.list.resume;
           } else {
             this.Ois_mental_health_professional = "professional-no";
             this.menhelth = "n";
@@ -1291,6 +1326,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    OnAreas(val) {
+      this.section = val;
+    },
+    Onnetworkchange(val) {
+      this.networkbranch1 = val;
     },
   },
 };

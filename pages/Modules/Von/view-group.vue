@@ -384,17 +384,14 @@
 
             <!-- hide-div -->
             <div class="professional-yesG profess-box" v-if="Gis_mental_health_professional=='1'">
-              <div class="mt-3">
-                <label for="formFile" class="form-label"
-                  >Please Attach Your Latest Resume<span>*</span></label
-                >
-                <input
-                  class="form-control"
-                  type="file"
-                  id="formFile"
-                  @change="GselectFile"
-                />
-              </div>
+              <div class="mt-3" v-if="this.resume != null || this.resume != ''">
+                          <label for="formFile" class="form-label"
+                            >Mental Health Professional Resume</label
+                          >
+                          <br/>
+                          <a target="_blank" @click="onDownloadFile" class="btn btn-warning btn-text btn-green"
+                        ><i class="fad fa-download"></i> Download File</a>
+                        </div>
 
               <div class="mt-3">
                 <label for="formFile" class="form-label"
@@ -1117,7 +1114,8 @@ export default {
       other: "",
       Others: "",
       Id:0,
-      Consultation:""
+      Consultation:"",
+      resume: "",
     };
   },
   beforeMount() {
@@ -1196,6 +1194,10 @@ export default {
     this.GetList();
   },
   methods: {
+    async onDownloadFile() {
+      const link = document.createElement('a');
+      window.open(this.resume, "_blank");
+    },
     OnchangeIsrepresent(val) {
       this.is_you_represenative = val;
     },
@@ -1366,6 +1368,7 @@ export default {
           this.Gavailable_date = response.data.list.available_date;
           this.Gavailable_time = response.data.list.available_time;
           this.Gexp_details = response.data.list.exp_details;
+          this.resume = response.data.list.resume;
           if (this.Gexp_details) {
             this.expList = JSON.parse(this.Gexp_details);
           }
