@@ -461,6 +461,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     if (this.Id) {
       this.staff_name=this.userdetails.user.name;
@@ -515,7 +516,8 @@ export default {
       assistancelist: [],
       externallist: [],
       pid:0,
-      type:""
+      type:"",
+      appId: 0,
     };
   },
   methods: {
@@ -656,11 +658,13 @@ export default {
               verification_date_1: this.verification_date_1,
               verification_date_2: this.verification_date_2,
               status: "1",
+              id:this.pid,
+              appId:this.appId,
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200") {
             window.alert("Data are saved successfully!");
             // this.loader = false;
             this.resetmodel();
@@ -804,7 +808,7 @@ export default {
         },
         { headers }
       );
-      if (response.data.code == 200) {
+      if (response.data.code == 200 || response.data.code == "200") {
         this.mrn= response.data.list[0].patient_mrn;
         this.name= response.data.list[0].name_asin_nric;
         console.log("my details", this.patientdetails);
@@ -850,7 +854,7 @@ export default {
         },
         { headers }
       );
-      if (response.data.code == 200) {
+      if (response.data.code == 200 || response.data.code == "200") {
         // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
