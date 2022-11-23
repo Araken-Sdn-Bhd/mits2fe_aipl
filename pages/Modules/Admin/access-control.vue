@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>System Setting</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
           <div class="row">
             <div class="card mb-4">
