@@ -501,7 +501,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: "0",
+              status: 0,
             },
             { headers }
           );
@@ -617,7 +617,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               appId: this.appId,
-              status: "1",
+              status: 1,
             },
             { headers }
           );

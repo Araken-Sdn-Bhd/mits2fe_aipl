@@ -437,9 +437,8 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: 1,
               appId: this.appId,
-              status: "0",
+              status: 0,
             },
             { headers }
           );
