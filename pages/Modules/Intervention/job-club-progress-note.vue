@@ -165,7 +165,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions"
+                              name="inlineRadioOptions1"
                               id="inlineRadio1"
                               value="assisstance"
                               v-model="category_services"
@@ -178,7 +178,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions"
+                              name="inlineRadioOptions1"
                               id="inlineRadio2"
                               value="clinical-work"
                               v-model="category_services"
@@ -191,7 +191,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions"
+                              name="inlineRadioOptions1"
                               id="inlineRadio3"
                               value="external"
                               v-model="category_services"
@@ -418,12 +418,14 @@ export default {
       validate: true,
       assistancelist: [],
       externallist: [],
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     if (this.Id) {
       this.staff_name=this.userdetails.user.name;
@@ -656,6 +658,7 @@ export default {
               complexity_service: this.complexity_services_id,
               outcome: this.outcome_id,
               medication: this.medication_des,
+              appId:this.appId,
               status: "1",
             },
             { headers }

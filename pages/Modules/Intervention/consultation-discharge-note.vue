@@ -424,6 +424,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
@@ -469,7 +470,8 @@ export default {
       assistancelist:[],
       externallist:[],
       pid:0,
-      type:""
+      type:"",
+      appId:0,
     };
   },
   methods: {
@@ -573,11 +575,13 @@ export default {
               complexity_services: this.complexity_services,
               outcome: this.outcome,
               medication_des: this.medication_des,
+              id:this.pid,
+              appId: this.appId,
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
             this.$nextTick(() => {
@@ -791,7 +795,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     }
   },
