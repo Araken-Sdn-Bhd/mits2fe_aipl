@@ -118,6 +118,14 @@
                       </tr>
                     </tbody>
                   </table>
+                  <p
+                v-show="!roleListbyId.length" style=" padding: 0px;
+                margin: 10px;
+                color: red;
+                display: flex;
+                justify-content: center;">
+                No Record Found
+              </p>
 
     </div>
   </div>
@@ -213,13 +221,41 @@ export default {
       if (response.data.code == 200 || response.data.code == "200") {
       
         this.roleListbyId = response.data.list;
-        this.alllist = response.data.list;
+        this.alllist = this.roleListbyId;
       } else {
-        this.roleListbyId = [];
         this.alllist=[];
+        this.roleListbyId = [];
+        
       }
 
     },
+
+    async getAlllist() {
+      
+      const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const response = await this.$axios.post(
+        "default-role-access/listbyId",
+        {
+          role_id: this.roleId,
+        },
+        { headers }
+    ); 
+    console.log("my screen list", response.data);
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.roleListbyId = response.data.list;
+        this.alllist = this.roleListbyId;
+      } else {
+        this.alllist=[];
+        this.roleListbyId = [];
+        
+      }
+
+    },
+
     async GetRoleList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -295,25 +331,33 @@ export default {
       this.screenlist = [];
     },
     async delRecord(data) {
+      if (confirm("Are you sure you want to delete this access ? ")) {
+        try {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "roles/role-byId",
+        "default-role-access/" + data.id + "/delete",
         {
           id: data.id,
         },
         { headers }
       );
-      if (response.data.code == 200) {
-        this.rolename = response.data.list[0].role_name;
-        this.rolestatus = response.data.list[0].status;
-        this.Id = data.id;
-      } else {
-        window.alert("Something went wrong");
+      console.log("my delete response", response.data);
+        if (response.data.code == 200) {
+          this.$nextTick(() => {
+            $("#deletepopup").modal("show");
+          });
+          this.getAlllist();
+        } 
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
       }
+    }
     },
     OnSearch() {
       if (this.search) {
