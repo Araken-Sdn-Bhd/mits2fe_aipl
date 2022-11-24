@@ -521,7 +521,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio1"
                                 value="assisstance"
                                 v-model="category_services"
@@ -534,7 +534,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
@@ -547,7 +547,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions1"
                                 id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
@@ -775,6 +775,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
 
     if (this.Id) {
       this.staff_name = this.userdetails.user.name;
@@ -843,6 +844,7 @@ export default {
       phylist: [],
       psycholist: [],
       potentiallist: [],
+      appId:0,
     };
   },
   methods: {
@@ -1031,11 +1033,13 @@ export default {
               case_manager: this.case_manager,
               date: this.date,
               status: "1",
+              id:this.pid,
+              appId: this.appId,
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200" ) {
             window.alert("Data are saved successfully!");
             // this.loader = false;
             this.resetmodel();
