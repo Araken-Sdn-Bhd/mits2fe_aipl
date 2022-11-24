@@ -435,6 +435,7 @@ export default {
       type: "",
       appId: 0,
     };
+    // test
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
