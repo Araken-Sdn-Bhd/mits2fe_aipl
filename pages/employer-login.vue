@@ -103,7 +103,7 @@ export default {
               JSON.stringify(this.userdetail)
             );
             this.loader = false;
-            this.$router.push(this.userdetail.route);
+            this.$router.push(this.userdetail.route_alt);
           } else {
             this.loader = false;
             this.emailerror = this.userdetail.message;
