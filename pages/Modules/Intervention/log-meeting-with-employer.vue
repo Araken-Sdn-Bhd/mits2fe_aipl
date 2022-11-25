@@ -465,7 +465,7 @@ export default {
               outcome: this.outcome_id,
               medication_des: this.medication_des,
               appId: this.appId,
-              status: "0",
+              status: 0,
             },
             { headers }
           );
@@ -613,7 +613,7 @@ export default {
               outcome: this.outcome_id,
               medication_des: this.medication_des,
               appId: this.appId,
-              status: "1",
+              status: 1,
             },
             { headers }
           );

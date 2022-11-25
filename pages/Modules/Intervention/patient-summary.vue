@@ -57,7 +57,7 @@
                             <td>{{formatetime(hst.created_at)}}</td>
                             <td>{{hst.name}}</td>
                             <td>
-                              <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
+                              <a v-if="hst.status!=0" style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
                                 <a v-if="hst.status==0" style="cursor:pointer;" @click="OnHistoryEdit(hst,edit)"  class="edit"

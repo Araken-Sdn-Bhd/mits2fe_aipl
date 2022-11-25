@@ -87,7 +87,16 @@
                                     <tr>
                                         <th>Diagnosis: </th>
                                         <td>
-                                            <input type="text" class="form-control" v-model="diagnosis">
+                                            <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
+                                              <option value="0">Select Diagnosis</option>
+                                              <option
+                                                v-for="catcode in diagonisislist"
+                                                v-bind:key="catcode.id"
+                                                v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
+                                              >
+                                              {{ catcode.icd_code }} {{catcode.icd_name}}
+                                              </option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -389,7 +398,7 @@
   </div>
 </template>
 <script>
-// import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
+import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 
@@ -435,6 +444,7 @@ export default {
       type: "",
       appId: 0,
     };
+    // test
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -450,13 +460,15 @@ export default {
 
     this.GetList();
 
+
+    let urlParams = new URLSearchParams(window.location.search);
+    this.appId = urlParams.get("appId");
+    this.Id = urlParams.get("id");
+
+
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-
-    this.appId = urlParams.get("appId");
-    let urlParams = new URLSearchParams(window.location.search);
-    this.Id = urlParams.get("id");
     const current = new Date();
     this.currentdate =
       current.getDate() +
@@ -487,7 +499,7 @@ export default {
             "progress-note/add",
             {
               added_by: this.userdetails.user.id.toString(),
-              diagnosis: this.diagnosis,  //diagnosis
+              diagnosis: this.type_diagnosis_id.id,  //diagnosis
               clinical_notes: this.clinical_notes,
               management: this.management,
               location_services_id: this.location_services_id,
@@ -500,7 +512,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: "0",
+              status: 0,
             },
             { headers }
           );
@@ -511,16 +523,19 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.GoBack();
           } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
+            this.resetmodel();
           }
       } catch (e) {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
         });
+            this.GoBack();
       }
               }
     },
@@ -616,7 +631,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               appId: this.appId,
-              status: "1",
+              status: 1,
             },
             { headers }
           );
@@ -627,11 +642,13 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.GoBack();
           } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
+            this.resetmodel();
           }
         }
       } catch (e) {
