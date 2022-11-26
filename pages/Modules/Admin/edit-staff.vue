@@ -326,7 +326,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("roles/list", { headers });
+      const response = await this.$axios.get("roles/branch-viewlist", { headers });
       this.rolelist = response.data;
     },
     async GetteamList() {
