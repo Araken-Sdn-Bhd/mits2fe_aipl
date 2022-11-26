@@ -380,7 +380,7 @@ export default {
       this.GetteamList(this.branchId);
     },
     async onCreateStaff() {
-      if (confirm("Are you sure you want to save this selection ? ")) {
+      if (confirm("Are you sure you want to save this record ? ")) {
       this.errors = [];
       if (!this.name) {
         this.errors.push("Name is required.");
