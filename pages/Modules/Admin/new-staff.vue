@@ -66,6 +66,7 @@
                           class="form-select"
                           aria-label="Default select example"
                         >
+                        <option value="0">Please Select</option>
                           <option
                             v-for="role in rolelist"
                             v-bind:key="role.id"
@@ -108,6 +109,7 @@
                           class="form-select"
                           aria-label="Default select example"
                         >
+                        <option value="0">Please Select</option>
                           <option
                             v-for="des in designationlist"
                             v-bind:key="des.id"
@@ -153,6 +155,7 @@
                           aria-label="Default select example"
                           @change="onSelectBranch($event)"
                         >
+                        <option value="0">Please Select</option>
                           <option
                             v-for="brnch in branchlist"
                             v-bind:key="brnch.id"
@@ -170,6 +173,7 @@
                           class="form-select"
                           aria-label="Default select example"
                         >
+                        <option value="0">Please Select</option>
                           <option
                             v-for="team in teamlist"
                             v-bind:key="team.id"
@@ -242,6 +246,8 @@
         </li>
       </ul>
         </p>
+        <br>
+        <br>
                     <div class="form-foter mt-3">
                       <a
                         href="/app/modules/Admin/staff-management"
@@ -317,7 +323,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get("roles/list", { headers });
-      this.rolelist = response.data;
+      this.rolelist = response.data.list;
     },
     async GetteamList(branchId) {
       const headers = {
@@ -374,6 +380,7 @@ export default {
       this.GetteamList(this.branchId);
     },
     async onCreateStaff() {
+      if (confirm("Are you sure you want to save this selection ? ")) {
       this.errors = [];
       if (!this.name) {
         this.errors.push("Name is required.");
@@ -381,9 +388,7 @@ export default {
       if (!this.nricno) {
         this.errors.push("NRIC NO is required.");
       }
-      // if (!this.professionregno) {
-      //   this.errors.push("Profession Registration NO is required.");
-      // }
+    
       if (this.Role <= 0) {
         this.errors.push("Role  is required.");
       }
@@ -414,9 +419,7 @@ export default {
       if (!this.enddate) {
         this.errors.push("End Date is required.");
       }
-      // if (!this.file) {
-      //   this.errors.push("Document is required.");
-      // }
+  
       console.log('this.name && this.nricno &&  this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror',this.name , this.nricno , this.Role , this.email ,
       this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
       this.branchId , this.startdate , this.enddate , !this.nricerror)
@@ -456,15 +459,15 @@ export default {
           }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          // this.$router.push("/modules/Admin/staff-management");
           this.$nextTick(() => {
-            $("#updatepopup").modal("show");
+            $("#insertpopup").modal("show");
           });
         } else {
           this.$nextTick(() => {
             $("#errorpopup").modal("show");
           });
         }
+      }
       }
     },
     async CheckNric(event) {
