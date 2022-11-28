@@ -766,37 +766,65 @@ export default {
     },
     async onPublishEvent() {
       if (confirm("Are you sure you want to save this entry ? ")) {
-        this.validate = true;
-        console.log("services", this.category_services);
         this.errorList = [];
+        this.validate = true;
         try {
-          if (!this.chief_complain) {
-            this.errorList.push("Chief Complaint is required");
+          if (!this.therapy_date) {
+            this.errorList.push("Date Performed is required");
           }
-          if (!this.presenting_illness) {
-            this.errorList.push("History Of Presenting Illness is required");
+          if (!this.therapy_time) {
+            this.errorList.push("Time Performed is required");
           }
-          if (!this.background_history) {
-            this.errorList.push("Background History is required");
+          // if (!this.diagnosis_id) {
+          //   this.errorList.push("Diagnosis is required");
+          // }
+          if (!this.frequency_session) {
+            this.errorList.push("FREQUENCY OF SESSION is required");
           }
-          if (!this.general_examination) {
-            this.errorList.push("General Examination is required");
+          if (!this.model_therapy) {
+            this.errorList.push("	MODE OF THERAPY is required");
           }
-          if (!this.mental_state_examination) {
-            this.errorList.push("Mental State Examination is required");
+          if (!this.mode_therapy) {
+            this.errorList.push("MODE OF THERAPY is required");
           }
-
-          if (!this.management) {
-            this.errorList.push("Management is required");
+          if (!this.comment_therapy_session) {
+            this.errorList.push("Comments On Therapy Sessions is required");
           }
-          if (!this.discuss_psychiatrist_name) {
-            this.errorList.push("Discussed With is required");
+          if (!this.patent_condition) {
+            this.errorList.push("Patent's Condition is required");
           }
-          if (!this.date) {
+          if (!this.comment_patent_condition) {
+            this.errorList.push("Comments On Patent's Condition is required");
+          }
+          // if (!this.session_details) {
+          //   this.errorList.push("Session Details is required");
+          // }
+          if (!this.session_issues) {
+            this.errorList.push("Issues/Problems  is required");
+          }
+          if (!this.conduct_session) {
+            this.errorList.push("Conduct Of Session is required");
+          }
+          if (!this.outcome_session) {
+            this.errorList.push("Outcome Of Session is required");
+          }
+          if (!this.transference_session) {
+            this.errorList.push("Transference/countertransference is required");
+          }
+          if (!this.duration_session) {
+            this.errorList.push("Duration Of Session is required");
+          }
+          if (!this.other_comment_session) {
+            this.errorList.push("Other Comments is required");
+          }
+          if (!this.name) {
+            this.errorList.push("Name is required");
+          }
+          if (!this.designation) {
+            this.errorList.push("Designation is required");
+          }
+          if (!this.date_session) {
             this.errorList.push("Date is required");
-          }
-          if (!this.time) {
-            this.errorList.push("Time is required");
           }
           if (!this.location_services_id) {
             this.errorList.push("Location Of Services is required");
@@ -837,24 +865,34 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-
+          // if (!this.medication_des) {
+          //   this.errorList.push("Medication is required");
+          // }
           if (
-            this.chief_complain &&
-            this.presenting_illness &&
-            this.background_history &&
-            this.general_examination &&
-            this.mental_state_examination &&
+            this.therapy_date &&
+            this.therapy_time &&
             // this.diagnosis_id &&
-            this.management &&
-            this.discuss_psychiatrist_name &&
-            this.date &&
-            this.time &&
+            this.frequency_session &&
+            this.model_therapy &&
+            this.comment_therapy_session &&
+            this.patent_condition &&
+            this.comment_patent_condition &&
+            //   this.session_details &&
+            this.session_issues &&
+            this.conduct_session &&
+            this.outcome_session &&
+            this.transference_session &&
+            this.duration_session &&
+            this.other_comment_session &&
+            this.name &&
+            this.designation &&
+            this.date_session &&
             this.location_services_id &&
             this.type_diagnosis_id &&
             this.category_services &&
             this.complexity_services_id &&
             this.outcome_id &&
-            //this.medication_des &&
+            // this.medication_des &&
             this.validate
           ) {
             this.loader = true;
@@ -864,19 +902,32 @@ export default {
               "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-              "patient-psychiatry-clerkingnote/add",
+              "counselling-progress-note/add",
               {
                 added_by: this.userdetails.user.id.toString(),
-                chief_complain: this.chief_complain,
-                presenting_illness: this.presenting_illness,
-                background_history: this.background_history,
-                general_examination: this.general_examination,
-                mental_state_examination: this.mental_state_examination,
+                therapy_date: this.therapy_date,
+                therapy_time: this.therapy_time,
                 diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                management: this.management,
-                discuss_psychiatrist_name: this.discuss_psychiatrist_name,
-                date: this.date,
-                time: this.time,
+                frequency_session: this.frequency_session,
+                frequency_session_other: this.frequency_session_other,
+                model_therapy: this.model_therapy,
+                model_therapy_other: this.model_therapy_other,
+                mode_therapy: this.mode_therapy,
+                mode_therapy_other: this.mode_therapy_other,
+                comment_therapy_session: this.comment_therapy_session,
+                patent_condition: this.patent_condition,
+                patent_condition_other: this.patent_condition_other,
+                comment_patent_condition: this.comment_patent_condition,
+                session_details: this.session_details,
+                session_issues: this.session_issues,
+                conduct_session: this.conduct_session,
+                outcome_session: this.outcome_session,
+                transference_session: this.transference_session,
+                duration_session: this.duration_session,
+                other_comment_session: this.other_comment_session,
+                name: this.name,
+                designation: this.designation,
+                date_session: this.date_session,
                 location_services_id: this.location_services_id,
                 type_diagnosis_id: this.type_diagnosis_id,
                 category_services: this.category_services,
@@ -887,9 +938,6 @@ export default {
                 medication_des: this.medication_des,
                 patient_mrn_id: this.Id,
                 services_id: this.services_id,
-                id: this.pid,
-                appId: this.appId,
-                status: "1"
               },
               { headers }
             );
@@ -900,6 +948,7 @@ export default {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");
               });
+              this.GoBack();
             } else {
               this.loader = false;
               this.$nextTick(() => {
