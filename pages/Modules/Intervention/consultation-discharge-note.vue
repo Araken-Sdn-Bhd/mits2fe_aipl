@@ -10,7 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="Ondischargegnote">
+              <form>
                 <table class="notes">
                                           <thead>
                                             <tr>
@@ -385,18 +385,21 @@
                              </li>
                         </ul>
                        </p>
-                <div class="d-flex" v-if="!pid">
-                  <a
+                <div class="d-flex">
+                    <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -414,6 +417,7 @@ export default {
   name: "consultation-discharge-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -475,9 +479,65 @@ export default {
     };
   },
   methods: {
-    async Ondischargegnote() {
-      this.validate = true;
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "consultation-discharge-note/add",
+            {
+              added_by: this.userdetails.user.id.toString(),
+              patient_id: this.Id,
+              diagnosis_id: this.type_diagnosis_id,
+              category_discharge: this.category_discharge,
+              comment: this.comment,
+              specialist_name_id: this.specialist_name_id,
+              date: this.date,
+              location_services: this.location_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
+              medication_des: this.medication_des,
+              id:this.pid,
+              appId: this.appId,
+              status: "0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.GoBack();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+              }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.errorList = [];
+      this.validate = true;
       try {
         // if (!this.diagnosis_id) {
         //   this.errorList.push("Diagnosis is required");
@@ -577,6 +637,7 @@ export default {
               medication_des: this.medication_des,
               id:this.pid,
               appId: this.appId,
+              status: "0",
             },
             { headers }
           );
@@ -584,6 +645,7 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
+            this.GoBack();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -595,6 +657,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async GetList() {
       const headers = {
