@@ -310,6 +310,7 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.getAlllist();
             this.ResetModel();
           } else {
             this.$nextTick(() => {
