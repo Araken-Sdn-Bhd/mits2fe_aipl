@@ -518,7 +518,26 @@
                              </li>
                         </ul>
                        </p>
-
+                       <br>
+                       <br>
+                <div class="d-flex" v-if="!pid">
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                      <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
+                    <i class="fa fa-download"></i> Download
+                  </button>
+                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Publish
+                    </button>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -648,20 +667,9 @@
                              </li>
                         </ul>
                        </p>
-
             </div>
           </div>
         </div>
-          <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                  <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
-                    <i class="fa fa-download"></i> Download
-                  </button>
-                  <button type="submit" class="btn btn-success btn-text" @click="OnSubmit">
-                    <i class="fa fa-paper-plane"></i> Submit
-                  </button>
-                </div>
-              </div>
       </main>
       <footer>
         <p>© MENTARI MALAYSIA MOH</p>
@@ -715,12 +723,16 @@ export default {
       supportlist: [],
       pid: 0,
       type: "",
+      SidebarAccess:null,
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.GetPatientdetails();
       this.GetList();
@@ -898,7 +910,62 @@ export default {
           this.selectedsupport.splice(this.selectedsupport.indexOf(value), 1);
       }
     },
-    async OnSubmit() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save s draft?")) {
+      try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "intervention/cps-form",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              treatment_needs_individual: this.Individual,
+              treatment_needs_medication: this.Medication,
+              treatment_needs_support: this.Support,
+              location_of_service: this.location_services_id,
+              type_of_diagnosis: this.type_diagnosis_id,
+              category_of_services: this.category_services,
+              services: this.services_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              icd_9_code: this.code_id,
+              icd_9_subcode: this.sub_code_id,
+              medication_des: this.medication_des,
+              medication_referrer_name: this.referalname,
+              medication_referrer_designation: this.designation,
+              id:this.pid,
+              appId: this.appId,
+              status:"0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+        this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.errorList = [];
       this.validate = true;
       try {
@@ -1019,6 +1086,9 @@ export default {
               medication_des: this.medication_des,
               medication_referrer_name: this.referalname,
               medication_referrer_designation: this.designation,
+              id:this.pid,
+              appId: this.appId,
+              status:"1",
             },
             { headers }
           );
@@ -1035,7 +1105,19 @@ export default {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
     async getdetails() {
       const headers = {

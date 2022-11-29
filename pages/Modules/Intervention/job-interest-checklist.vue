@@ -65,7 +65,7 @@
                               <br/>
                               {{ patientdetails.postcode }}
                               <br/>
-                              {{ patientdetails.city[0].city_name }}
+                              {{ patientdetails.city.city_name }}
                               <!-- <br>
                               {{ patientdetails. }} -->
                             </td>
@@ -807,13 +807,22 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                      <br>
                 <div class="d-flex" v-if="!pid">
-                  <button
-                    type="submit" @click="OnSubmit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text" title="Back"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
             </div>
           </div>
@@ -885,11 +894,14 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
+      SidebarAccess:null,
+      appId:0,
       // jobs1:[],
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -914,6 +926,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
@@ -931,7 +944,93 @@ export default {
       current.getFullYear();
   },
   methods: {
-    async OnSubmit() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save as draft?")) {
+        var jobs = [];
+      $("table#job > tbody > tr").each(function () {
+        var obj = {};
+        obj.job = $('td input[type="text"].job', this).val();
+        obj.duration = $('td input[type="text"].duration', this).val();
+        obj.reason = $('td input[type="text"].reason', this).val();
+        jobs.push(obj);
+      });
+        try{
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "job-interest-checklist/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              interest_to_work: this.interest_to_work,
+              agree_if_mentari_find_job_for_you:
+                this.agree_if_mentari_find_job_for_you,
+              clerk_job_interester: this.clerk_job_interester,
+              clerk_job_notes: this.clerk_job_notes.toString(),
+              factory_worker_job_interested: this.factory_worker_job_interested,
+              factory_worker_notes: this.factory_worker_notes,
+              cleaner_job_interested: this.cleaner_job_interested,
+              cleaner_job_notes: this.cleaner_job_notes,
+              security_guard_job_interested: this.security_guard_job_interested,
+              security_guard_notes: this.security_guard_notes,
+              laundry_worker_job_interested: this.laundry_worker_job_interested,
+              laundry_worker_notes: this.laundry_worker_notes,
+              car_wash_worker_job: this.car_wash_worker_job,
+              car_wash_worker_notes: this.car_wash_worker_notes,
+              kitchen_helper_job: this.kitchen_helper_job,
+              kitchen_helper_notes: this.kitchen_helper_notes,
+              waiter_job_interested: this.waiter_job_interested,
+              waiter_job_notes: this.waiter_job_notes,
+              chef_job_interested: this.chef_job_interested,
+              chef_job_notes: this.chef_job_notes,
+              others_job_specify: this.others_job_specify,
+              others_job_notes: this.others_job_notes,
+              note: this.note,
+              planning: this.planning,
+              patient_consent_interested: this.patient_consent_interested,
+              location_services: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication_prescription: this.medication_des,
+              jobs: jobs,
+              status: "0",
+              id:this.pid,
+              appId: this.appId,
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+        // this.loader = false;
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
+      }
+    }
+  },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to submit this entry?")) {
       var jobs = [];
       $("table#job > tbody > tr").each(function () {
         var obj = {};
@@ -1041,6 +1140,9 @@ export default {
               outcome: this.outcome_id,
               medication_prescription: this.medication_des,
               jobs: jobs,
+              status: "1",
+              id:this.pid,
+              appId: this.appId,
             },
             { headers }
           );
@@ -1064,7 +1166,8 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
-    },
+    }
+  },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1215,6 +1318,12 @@ export default {
       this.outcome_id = 0;
       this.medication_des = "";
       this.services_id = 0;
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
     async getdetails() {
       const headers = {
