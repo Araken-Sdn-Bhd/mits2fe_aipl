@@ -79,13 +79,13 @@
                   <!-- col-sm-6 -->
                 </div>
                 <Error :message="error" v-if="error" />
-                <div class="d-flex align-items-center">
-                  <button
-                    type="submit"
-                    @click="OnsubmitTest"
-                    class="btn btn-success ml-auto"
-                  >
-                    <i class="fad fa-paper-plane"></i> Submit
+                <br><br>
+              <div class="d-flex">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                  <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" title="Save" @click="OnsubmitTest">
+                    <i class="fa fa-save"></i> Save
                   </button>
                 </div>
             </div>
@@ -119,11 +119,6 @@
                   </table>
                 </div>
               </div>
-              <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
               <!-- <div class="modal-footer">
                 <button
                   @click="downloadresult"
@@ -215,7 +210,7 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
-
+      if (confirm("Are you sure you want to submit this entry")) {
       this.error = null;
       try {
         if (this.list.length == Object.values(this.checkedList).length) {
@@ -257,6 +252,7 @@ export default {
         this.loader = false;
         this.errors = e;
       }
+    }
     },
     downloadresult() {
       var pdf = new jsPDF("p", "pt", "a4");

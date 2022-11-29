@@ -54,11 +54,11 @@
 
                 </tbody>
               </table>
-              <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
+              <br><br>
+              <div class="d-flex">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button></div>
             </div>
           </div>
           <!-- card -->
