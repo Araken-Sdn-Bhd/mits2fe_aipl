@@ -806,21 +806,26 @@
                                     </li>
                                 </ul>
                                 </p>
-                                <div class="d-flex" v-if="!pid">
-                                  <a
+                                <br>
+                       <br>
+                <div class="d-flex" v-if="!pid">
+                    <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                <div class="ml-auto btn-boxs">
-                  <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
-                  <button type="submit" class="btn btn-success btn-text" @click="Onoctreferalform">
-                    <i class="fa fa-paper-plane"></i> Save
-                  </button>
+                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
-              </div>
 
                         </div>
                     </div>
@@ -847,6 +852,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -857,6 +863,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.GetList();
       this.GetPatientdetails();
@@ -911,10 +918,77 @@ export default {
       clinicallist: [],
       interventionlist: [],
       promotivelist: [],
+      SidebarAccess:null,
+      appId:0,
     };
   },
   methods: {
-    async Onoctreferalform() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save as draft?")) {
+      try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "occt-referral/add",
+            {
+              added_by: this.userdetails.user.id.toString(),
+              patient_mrn_id: this.Id,
+              referral_location: this.referral_location,
+              date: this.date,
+              diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+              referral_clinical_assessment: this.referral_clinical_assessment,
+              referral_clinical_assessment_other:
+                this.referral_clinical_assessment_other,
+              referral_clinical_intervention:
+                this.referral_clinical_intervention,
+              referral_clinical_intervention_other:
+                this.referral_clinical_intervention_other,
+              referral_clinical_promotive_program:
+                this.referral_clinical_promotive_program,
+              referral_name: this.referral_name,
+              referral_designation: this.referral_designation,
+              location_services: this.location_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
+              medication_des: this.medication_des,
+              id:this.pid,
+              appId: this.appId,
+              status: "0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            // this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -1035,6 +1109,9 @@ export default {
               complexity_services: this.complexity_services,
               outcome: this.outcome,
               medication_des: this.medication_des,
+              id:this.pid,
+              appId: this.appId,
+              status: "1",
             },
             { headers }
           );
@@ -1052,7 +1129,13 @@ export default {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
     },
     async GetList() {
       const headers = {
@@ -1299,7 +1382,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     }
   },

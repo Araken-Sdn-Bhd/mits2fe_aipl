@@ -1976,15 +1976,23 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex" v-if="!pid">
-                <button
-                  type="submit"
-                  @click="OnSubmit"
-                  class="btn btn-warning btn-text ml-auto"
-                >
-                  <i class="fa fa-save"></i> Save
-                </button>
-              </div>
+                       <br>
+                      <br>
+                <div class="d-flex" v-if="!pid">
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text" title="Back"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -2061,10 +2069,13 @@ export default {
       pid: 0,
       type: "",
       job_des: [],
+      SidebarAccess:null,
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -2094,6 +2105,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -2103,7 +2115,87 @@ export default {
     }
   },
   methods: {
-    async OnSubmit() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save as draft?")) {
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "work-analysis/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              company_name: this.company_name,
+              company_address1: this.company_address1,
+              company_address2: this.company_address2,
+              company_address3: this.company_address3,
+              state_id: this.state_id,
+              city_id: this.city_id,
+              postcode_id: this.postcode_id,
+              supervisor_name: this.supervisor_name,
+              email: this.email,
+              position: this.position,
+              client_name: this.client_name,
+              job_position: this.job_position,
+              current_wage: this.current_wage,
+              wage_specify: this.wage_specify,
+              wage_change_occur: this.wage_change_occur,
+              change_in_rate: this.change_in_rate,
+              from: this.from,
+              to: this.to,
+              on_date: this.on_date,
+              works_hour_week: this.works_hour_week,
+              work_schedule: this.work_schedule,
+              no_of_current_employee: this.no_of_current_employee,
+              no_of_other_employee: this.no_of_other_employee,
+              during_same_shift: this.during_same_shift,
+              education_level: this.education_level,
+              grade: this.grade,
+              job_experience_year: this.job_experience_year,
+              job_experience_months: this.job_experience_months,
+              others: this.others,
+              location_services: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication_prescription: this.medication_des,
+              jobs: jobSDESCRIPTION,
+              job_specification: jobSPECIFICATION,
+              id:this.pid,
+              appId: this.appId,
+              status:"0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {
+        this.loader = false;
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
+  },
+    async onPublishEvent() {
       var jobSPECIFICATION = [];
       var jobSDESCRIPTION = [];
       $("table#jobspecification > tbody > tr").each(function (i) {
@@ -2453,6 +2545,9 @@ export default {
               medication_prescription: this.medication_des,
               jobs: jobSDESCRIPTION,
               job_specification: jobSPECIFICATION,
+              id:this.pid,
+              appId: this.appId,
+              status:"1",
             },
             { headers }
           );
@@ -2475,6 +2570,12 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
     async GetList() {
       const headers = {
