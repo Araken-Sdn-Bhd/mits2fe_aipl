@@ -1167,7 +1167,7 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            // this.resetmodel();
+            this.resetmodel();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -1182,11 +1182,11 @@ export default {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
         });
-            // this.GoBack();
+            this.GoBack();
       }
       }
     },
-    
+
     async OnBookAppointmentdraft() {
       try {
           this.loader = true;
@@ -1223,6 +1223,7 @@ export default {
         
       } catch (e) {}
     },
+    
     resetmodel() {
       this.risk_history_assressive = "";
       this.risk_history_criminal = "";
