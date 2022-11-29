@@ -57,7 +57,7 @@
                             <td>{{formatetime(hst.created_at)}}</td>
                             <td>{{hst.name}}</td>
                             <td>
-                              <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
+                              <a v-if="hst.status!=0" style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
                                 <a v-if="hst.status==0" style="cursor:pointer;" @click="OnHistoryEdit(hst,edit)"  class="edit"
@@ -1552,7 +1552,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/consultation-discharge-note",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1625,7 +1625,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/patient-care-plan-and-case-review",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1665,7 +1665,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-club-progress-note",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1673,7 +1673,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/rehab-discharge",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1681,7 +1681,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-discharge-note",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },

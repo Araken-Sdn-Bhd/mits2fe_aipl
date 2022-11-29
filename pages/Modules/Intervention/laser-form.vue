@@ -1238,10 +1238,22 @@
                             </li>
                         </ul>
                       </p>
+                      <br>
+                      <br>
               <div class="d-flex" v-if="!pid">
+                <button @click="GoBack" class="btn btn-primary btn-text">
+                  <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+
+                    <!-- <div  class="btn-right" :class="SidebarAccess!=1?'hide':''"> -->
+                    <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button> --> 
+
                 <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
-                  <i class="fad fa-paper-plane"></i> Submit
+                  <i class="fa fa-paper-plane"></i> PUBLISH
                 </button>
+              <!-- </div> -->
               </div>
             </div>
           </div>
@@ -1272,6 +1284,7 @@ export default {
       diagonisislist: [],
       locationlist: [],
       Id: 0,
+      appId:0,
       location_services_id: 0,
       type_diagnosis_id: 0,
       category_services: 0,
@@ -1303,6 +1316,7 @@ export default {
       this.GetList();
     }
     let urlParams1 = new URLSearchParams(window.location.search);
+    this.appId = urlParams.get("appId");
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
     if (this.pid) {
@@ -1444,9 +1458,137 @@ export default {
     onaction(ind, val) {
       this.action[ind] = val;
     },
+
+    // async onCreateEvent() {
+    //   this.errorList = [];
+    //   this.validate = true;
+    //   if (confirm("Are you sure you want to save this entry ? ")) {
+    //   try {
+    //     if (Object.values(this.precontemplation).length != 6) {
+    //       this.errorList.push("Please fill all question of PRE CONTEMPLATION");
+    //       this.validate = false;
+    //     }
+    //     if (Object.values(this.contemplation).length != 4) {
+    //       this.errorList.push("Please fill all question of CONTEMPLATION");
+    //       this.validate = false;
+    //     }
+    //     if (Object.values(this.action).length != 4) {
+    //       this.errorList.push("Please fill all question of ACTION");
+    //       this.validate = false;
+    //     }
+    //     if (!this.location_services_id) {
+    //       this.errorList.push("Location Of Services is required");
+    //     }
+    //     if (!this.type_diagnosis_id) {
+    //       this.errorList.push("Type Of Diagnosis is required");
+    //     }
+    //     if (!this.category_services) {
+    //       this.errorList.push("Category Of Services is required");
+    //     }
+    //     if (!this.complexity_services_id) {
+    //       this.errorList.push("Complexity Of Service is required");
+    //     }
+    //     if (this.category_services) {
+    //       if (this.category_services == "assisstance") {
+    //         if (!this.services_id) {
+    //           this.errorList.push("Service is required");
+    //           this.validate = false;
+    //         }
+    //       } else if (this.category_services == "clinical-work") {
+    //         if (!this.code_id) {
+    //           this.errorList.push("ICD 9 CODE is required");
+    //           this.validate = false;
+    //         }
+    //         if (!this.sub_code_id) {
+    //           this.errorList.push("ICD 9 SUB CODE is required");
+    //           this.validate = false;
+    //         }
+    //       } else {
+    //         if (!this.serviceid) {
+    //           this.errorList.push("Services is required");
+    //           this.validate = false;
+    //         } else {
+    //           this.services_id = this.serviceid;
+    //         }
+    //       }
+    //     }
+    //     if (!this.outcome_id) {
+    //       this.errorList.push("Outcome is required");
+    //     }
+    //     // if (!this.medication_des) {
+    //     //   this.errorList.push("Medication is required");
+    //     // }
+    //     if (
+    //       this.location_services_id &&
+    //       this.type_diagnosis_id &&
+    //       this.category_services &&
+    //       this.complexity_services_id &&
+    //       this.outcome_id &&
+    //       // this.medication_des &&
+    //       this.validate
+    //     ) {
+    //       this.loader = true;
+    //       const headers = {
+    //         Authorization: "Bearer " + this.userdetails.access_token,
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       };
+    //       const response = await this.$axios.post(
+    //         "intervention/laser-form",
+    //         {
+    //           added_by: this.userdetails.user.id,
+    //           patient_id: this.Id,
+    //           pre_contemplation: JSON.stringify([this.precontemplation]),
+    //           contemplation: JSON.stringify([this.contemplation]),
+    //           action: JSON.stringify([this.action]),
+    //           result: JSON.stringify([
+    //             { PRE_CONTEMPLATION: this.precontemplation },
+    //             { CONTEMPLATION: this.contemplation },
+    //             { ACTION: this.action },
+    //           ]),
+    //           location_of_service: this.location_services_id,
+    //           type_of_diagnosis: this.type_diagnosis_id,
+    //           category_of_services: this.category_services,
+    //           services: this.services_id,
+    //           complexity_of_services: this.complexity_services_id,
+    //           outcome: this.outcome_id,
+    //           icd_9_code: this.code_id,
+    //           icd_9_subcode: this.sub_code_id,
+    //           medication_prescription: this.medication_des,
+    //           test_name:"laser",
+    //           test_section_name:"laserform",
+    //           user_ip_address: "122.176.47.222",
+    //           appId: this.appId,
+    //         },
+    //         { headers }
+    //       );
+    //       console.log("response", response.data);
+    //       if (response.data.code == 200) {
+    //         this.loader = false;
+    //         this.loader = false;
+    //         localStorage.setItem(
+    //           "laserresult",
+    //           JSON.stringify(response.data.result)
+    //         );
+    //         this.$router.push({
+    //           path: "/modules/Intervention/laser-result",
+    //           query: { id: this.Id },
+    //         });
+    //       } else {
+    //         this.loader = false;
+    //         this.$nextTick(() => {
+    //           $("#errorpopup").modal("show");
+    //         });
+    //       }
+    //     }
+    //   } catch (e) {}
+    //   }
+    // },
+
     async OnSubmit() {
       this.errorList = [];
       this.validate = true;
+      if (confirm("Are you sure you want to save this entry ? ")) {
       try {
         if (Object.values(this.precontemplation).length != 6) {
           this.errorList.push("Please fill all question of PRE CONTEMPLATION");
@@ -1542,6 +1684,7 @@ export default {
               test_name:"laser",
               test_section_name:"laserform",
               user_ip_address: "122.176.47.222",
+              appId: this.appId,
             },
             { headers }
           );
@@ -1565,6 +1708,7 @@ export default {
           }
         }
       } catch (e) {}
+      }
     },
     async getdetails() {
       const headers = {
@@ -1641,6 +1785,12 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
   },
 };

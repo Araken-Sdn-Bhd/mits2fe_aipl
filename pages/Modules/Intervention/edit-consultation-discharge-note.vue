@@ -6,26 +6,62 @@
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
-            <h1>Counselling Clerking Notes</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
+            <h1>Consultation Discharge Notes</h1>
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post">
-                <Interventionphysectristdetails />
+              <form>
+                <table class="notes">
+                                          <thead>
+                                            <tr>
+                                              <th colspan="2">Patient Details</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody v-if="patientdetails">
+                                            <tr>
+                                              <th>MRN:</th>
+                                            <td>{{ patientdetails.patient_mrn }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>Patient Name:</th>
+                                              <td>{{ patientdetails.name_asin_nric }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>NRIC NO:</th>
+                                               <td>{{ patientdetails.nric_no }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>Age:</th>
+                                              <td>{{ patientdetails.age }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>Contact No:</th>
+                                               <td>{{ patientdetails.mobile_no }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>Gender:</th>
+                                           <td>{{ patientdetails.gender[0].section_value }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th>DOB:</th>
+                                            <td>{{ patientdetails.birth_date }}</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
 
-               <table class="notes">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Consultation Details </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Diagnosis: </th>
-                                        <td>
-                                             <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
+                                        <table class="notes">
+                                          <thead>
+                                            <tr>
+                                              <th colspan="2">Discharge Details</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+
+                                            <tr>
+                                              <th>Diagnosis:</th>
+                                              <td>
+                                                <select class="form-select" v-model="type_diagnosis_id">
+                                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
@@ -33,29 +69,65 @@
             >
             {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
-                              </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Clinical Summary:</th>
-                                        <td><textarea v-model="clinical_summary" class="form-control textarea" rows="2" placeholder="Enter Description"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Background History:</th>
-                                        <td><textarea v-model="background_history" class="form-control textarea" rows="2" placeholder="Enter Description"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Clinical Notes:</th>
-                                        <td><textarea v-model="clinical_notes" class="form-control textarea" rows="2" placeholder="Enter Description"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Management: </th>
-                                        <td><textarea v-model="management" class="form-control textarea" rows="2" placeholder="Enter Description"></textarea></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                </select>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <th>Category Of Discharge:</th>
+                                              <td>
+                                                 <select class="form-select" v-model="category_discharge">
+                                                  <option value="0">Please Select</option>
+                                                <option
+              v-for="dis in dischargelist"
+              v-bind:key="dis.id"
+              v-bind:value="dis.id"
+            >
+              {{ dis.name }}
+            </option>
+                                                </select>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <th>Comment:</th>
+                                              <td><textarea v-model="comment" class="form-control textarea"></textarea></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
 
-                <div
+                                        <table class="notes">
+                                          <thead>
+                                            <tr>
+                                              <th colspan="2">Verification </th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+
+                                            <tr>
+                                              <th>Specialist Name :</th>
+                                              <td>
+                                                <select class="form-select" v-model="specialist_name_id">
+                                                  <option value="0">Please Select</option>
+                                              <option
+              v-for="spec in specialistlist"
+              v-bind:key="spec.id"
+              v-bind:value="spec.id"
+            >
+              {{ spec.name }}
+            </option>
+                                                </select>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <th>Date :</th>
+                                              <td>
+                                                <input type="date" v-model="date" class="form-control" name="">
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+
+                  <div
                   class="accordion form-accordion mt-3"
                   id="accordionExample"
                 >
@@ -86,7 +158,7 @@
                           <div class="col-sm-8">
                             <select
                               class="form-select"
-                              v-model="location_services_id"
+                              v-model="location_services"
                             >
                               <option value="0">
                                 Select location of services
@@ -240,7 +312,7 @@
                             >
                             <select
                               class="form-select"
-                              v-model="complexity_services_id"
+                              v-model="complexity_services"
                             >
                               <option value="0">
                                 Select Complexity Of Service
@@ -256,7 +328,7 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome</label>
-                            <select class="form-select" v-model="outcome_id">
+                            <select class="form-select" v-model="outcome">
                               <option value="0">Select outcome</option>
                       <option
                         v-for="out in outcomelist"
@@ -290,7 +362,8 @@
                       id="collapseTwo"
                       class="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample">
+                      data-bs-parent="#accordionExample"
+                    >
                       <div class="accordion-body">
                         <div class="col-md-12 mb-3">
                           <label class="form-label">Medication</label>
@@ -303,22 +376,15 @@
                       </div>
                     </div>
                   </div>
+                  <!--  -->
                 </div>
-                <p v-if="errorList.length">
-                    <ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul>
-                </p>
-                <br>
-                <br>
-
-<p v-if="errorList.length">
-                        <ul>
-                          <li style="color:red"  v-for='err in errorList' :key='err' >
-                          {{ err }}
-                        </li>
+ <p v-if="errorList.length">
+                          <ul>
+                           <li style="color:red"  v-for='err in errorList' :key='err' >
+                           {{ err }}
+                             </li>
                         </ul>
-                      </p>
-                                             <br>
-                       <br>
+                       </p>
                 <div class="d-flex">
                     <button
                       @click="GoBack"
@@ -344,12 +410,11 @@
   </div>
 </template>
 <script>
-import Interventionphysectristdetails from '../../../components/Intervention/Interventionphysectristdetails.vue';
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 export default {
-  components: { CommonHeader, CommonSidebar, Interventionphysectristdetails },
-  name: "counsellor-clerking-note",
+  components: { CommonSidebar, CommonHeader },
+  name: "consultation-discharge-note",
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
@@ -364,16 +429,18 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
+    this.GetList();
+    this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-     if(this.pid){
+    if (this.pid) {
       this.getdetails();
     }
-    this.GetList();
   },
   data() {
     return {
+      patientdetails: null,
       userdetails: null,
       errorList: [],
       servicelist: [],
@@ -383,20 +450,22 @@ export default {
       icdcatcodelist: [],
       diagonisislist: [],
       locationlist: [],
+      dischargelist:[],
+      specialistlist:[],
+
       Id: 0,
-      appId:0,
       diagnosis_id: 0,
-      clinical_summary: "",
-      background_history: "",
-      clinical_notes: "",
-      management: "",
-      location_services_id: 0,
+      category_discharge: 0,
+      comment: "",
+      specialist_name_id: 0,
+      date: "",
+      location_services: 0,
       type_diagnosis_id: 0,
       category_services: "",
       code_id: 0,
       sub_code_id: 0,
-      complexity_services_id: 0,
-      outcome_id: 0,
+      complexity_services: 0,
+      outcome: 0,
       medication_des: "",
       patient_mrn_id: "",
       services_id: 0,
@@ -405,8 +474,8 @@ export default {
       assistancelist:[],
       externallist:[],
       pid:0,
-      appId: 0,
       type:"",
+      appId:0,
     };
   },
   methods: {
@@ -420,26 +489,27 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "patient-counsellor-clerkingnote/add",
+            "consultation-discharge-note/add",
             {
               added_by: this.userdetails.user.id.toString(),
-              diagnosis_id: this.type_diagnosis_id,  //diagnosis_id
-              clinical_summary: this.clinical_summary,
-              background_history: this.background_history,
-              clinical_notes: this.clinical_notes,
-              management: this.management,
-              location_services_id: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
+              patient_id: this.Id,
+              diagnosis_id: this.type_diagnosis_id,
+              category_discharge: this.category_discharge,
+              comment: this.comment,
+              specialist_name_id: this.specialist_name_id,
+              date: this.date,
+              location_services: this.location_services,
+              services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_services_id: this.complexity_services_id,
-              outcome_id: this.outcome_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
               medication_des: this.medication_des,
-              patient_mrn_id: this.Id,
-              services_id: this.services_id,
+              id:this.pid,
               appId: this.appId,
-              status: 0,
+              status: "0",
             },
             { headers }
           );
@@ -447,6 +517,7 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
+            this.GoBack();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -468,19 +539,22 @@ export default {
       this.errorList = [];
       this.validate = true;
       try {
-        if (!this.clinical_summary) {
-          this.errorList.push("Clinical Summary is required");
+        // if (!this.diagnosis_id) {
+        //   this.errorList.push("Diagnosis is required");
+        // }
+        if (!this.category_discharge) {
+          this.errorList.push("Category Of Discharge is required");
         }
-        if (!this.background_history) {
-          this.errorList.push("Background History is required");
+        if (!this.comment) {
+          this.errorList.push("Comment is required");
         }
-        if (!this.clinical_notes) {
-          this.errorList.push("Clinical Notes is required");
+        if (!this.specialist_name_id) {
+          this.errorList.push("Specialist Name is required");
         }
-        if (!this.management) {
-          this.errorList.push("Management is required");
+        if (!this.date) {
+          this.errorList.push("Date is required");
         }
-        if (!this.location_services_id) {
+        if (!this.location_services) {
           this.errorList.push("Location Of Services is required");
         }
         if (!this.type_diagnosis_id) {
@@ -489,7 +563,7 @@ export default {
         if (!this.category_services) {
           this.errorList.push("Category Of Services is required");
         }
-        if (!this.complexity_services_id) {
+        if (!this.complexity_services) {
           this.errorList.push("Complexity Of Service is required");
         }
         if (this.category_services) {
@@ -516,20 +590,24 @@ export default {
             }
           }
         }
-        if (!this.outcome_id) {
+        if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
+        // if (!this.medication_des) {
+        //   this.errorList.push("Medication is required");
+        // }
         if (
-
-          this.clinical_summary &&
-          this.background_history &&
-          this.clinical_notes &&
-          this.management &&
-          this.location_services_id &&
+          // this.diagnosis_id &&
+          this.category_discharge &&
+          this.comment &&
+          this.specialist_name_id &&
+          this.date &&
+          this.location_services &&
           this.type_diagnosis_id &&
           this.category_services &&
-          this.complexity_services_id &&
-          this.outcome_id &&
+          this.complexity_services &&
+          this.outcome &&
+          //this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -539,33 +617,35 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "patient-counsellor-clerkingnote/add",
+            "consultation-discharge-note/add",
             {
               added_by: this.userdetails.user.id.toString(),
-              diagnosis_id: this.type_diagnosis_id,  //diagnosis_id
-              clinical_summary: this.clinical_summary,
-              background_history: this.background_history,
-              clinical_notes: this.clinical_notes,
-              management: this.management,
-              location_services_id: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
+              patient_id: this.Id,
+              diagnosis_id: this.type_diagnosis_id,
+              category_discharge: this.category_discharge,
+              comment: this.comment,
+              specialist_name_id: this.specialist_name_id,
+              date: this.date,
+              location_services: this.location_services,
+              services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_services_id: this.complexity_services_id,
-              outcome_id: this.outcome_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
               medication_des: this.medication_des,
-              patient_mrn_id: this.Id,
-              services_id: this.services_id,
-              status: 1,
+              id:this.pid,
               appId: this.appId,
+              status: "1",
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
+            this.GoBack();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -633,6 +713,22 @@ export default {
       } else {
         this.locationlist = [];
       }
+       const response6 = await this.$axios.get("intervention/category-discharge", {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.dischargelist = response6.data.list;
+      } else {
+        this.dischargelist = [];
+      }
+        const response7 = await this.$axios.get("staff-management/getList", {
+        headers,
+      });
+      if (response7.data.code == 200 || response7.data.code == "200") {
+        this.specialistlist = response7.data.list;
+      } else {
+        this.specialistlist = [];
+      }
       const respons = await this.$axios.get(
         "general-setting/list?section=" + "assistance-or-supervision",
         { headers }
@@ -672,21 +768,41 @@ export default {
     },
     resetmodel() {
       this.diagnosis_id = 0;
-      this.clinical_summary = "";
-      this.background_history = "";
-      this.clinical_notes = "";
-      this.management = "";
-      this.location_services_id = 0;
-      this.type_diagnosis_id = 0;
-      this.category_services = "";
+      this.category_discharge = "";
+      this.comment = "";
+      this.specialist_name_id = "";
+      this.date = "";
+      this.location_services = 0;
+      this.services_id = 0;
       this.code_id = 0;
       this.sub_code_id = 0;
-      this.complexity_services_id = 0;
-      this.outcome_id = 0;
+      this.type_diagnosis_id = 0;
+      this.category_services = 0;
+      this.complexity_services = 0;
+      this.outcome = 0;
       this.medication_des = "";
-      this.services_id = 0;
     },
-     async getdetails(){
+    async GetPatientdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.Id,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.patientdetails = response.data.list[0];
+      } else {
+        window.alert("Something went wrong");
+      }
+      console.log("my details", this.patientdetails);
+    },
+      async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -696,28 +812,33 @@ export default {
         "/patient-appointment-details/fetchViewHistoryListDetails",
         {
           id: this.pid,
-          type:'CounsellorClerkingNote'
+          type: "ConsultationDischargeNote",
         },
         { headers }
       );
       if (response.data.code == 200) {
-        this.patient_mrn_id = response.data.Data[0].patient_mrn_id,
+        // window.alert(response.data.Data[0].patient_mrn_id);
+
+        this.Id = response.data.Data[0].patient_id;
+
         this.diagnosis_id = response.data.Data[0].diagnosis_id;
-        this.clinical_summary = response.data.Data[0].clinical_summary;
-        this.background_history = response.data.Data[0].background_history;
-        this.management = response.data.Data[0].management;
-        this.clinical_notes = response.data.Data[0].clinical_notes;
-        this.location_services_id = response.data.Data[0].location_services_id;
+        this.category_discharge = response.data.Data[0].category_discharge;
+        this.comment = response.data.Data[0].comment;
+        this.specialist_name_id = response.data.Data[0].specialist_name_id;
+        this.date = response.data.Data[0].date;
+
+        this.location_services = response.data.Data[0].location_services;
         this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
         this.category_services = response.data.Data[0].category_services;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
-        this.complexity_services_id = response.data.Data[0].complexity_services_id;
-        this.outcome_id = response.data.Data[0].outcome_id;
+        this.complexity_services =
+          response.data.Data[0].complexity_services;
+        this.outcome = response.data.Data[0].outcome;
         this.medication_des = response.data.Data[0].medication_des;
         this.services_id = response.data.Data[0].services_id;
-        this.serviceid = response.data.Data[0].serviceid;
-
+        this.GetList();
+        this.GetPatientdetails();
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
@@ -737,12 +858,10 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id,appId: this.appId },
+              query: { id: this.Id, appId: this.appId },
             });
     }
-
-
-},
+  },
 };
 </script>
 <style scoped>

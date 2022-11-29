@@ -695,12 +695,14 @@ export default {
       pid: 0,
       type: "",
       jobsearchlist:[],
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.GetPatientdetails();
       this.GetList();
@@ -1039,11 +1041,12 @@ export default {
               icd_9_subcode: this.sub_code_id,
               medication_prescription: this.medication_prescription,
               treatment_plan: JSON.stringify(treatmentplan),
+              appId: this.appId,
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.ResetModel();
             this.$nextTick(() => {

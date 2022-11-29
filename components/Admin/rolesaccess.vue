@@ -1,17 +1,28 @@
 <template>
   <div class="card mb-4">
-    <div class="card-header bg-transparent">
-      <h4>Screen Access</h4>
-    </div>
     <div class="card-body">
-      <ul class="sub-tab">
-        <li class="active">
-          <a>Setting 1: Access Screen</a>
-        </li>
-      </ul>
       <form method="post" @submit.prevent="onAddroles">
-        <div class="content-subtab">
           <div class="filter-form">
+            <div class="row mt-4">
+              <div class="col-sm-6 mb-3">
+                <label class="form-label">Roles</label>
+                <select
+                  v-model="roleId"
+                  class="form-select"
+                  aria-label="Default select example"
+                  @change="onchangeRole($event)">
+                  <option value="0">Please Select</option>
+                  <option
+                    v-for="hst in roleList"
+                    v-bind:key="hst.id"
+                    v-bind:value="hst.id"
+                  >
+                    {{ hst.role_name }}
+                  </option>
+                </select>
+              </div>
+
+            </div>
             <div class="row mt-3">
               <div class="col-sm-6 mb-3">
                 <label class="form-label">Module Name</label>
@@ -33,13 +44,10 @@
               </div>
 
             </div>
+            
           </div>
 
-          <table
-            v-if="screenlist.length > 0"
-            class="table table-striped data-table font-13"
-            style="width: 100%"
-          >
+          <table v-if="screenlist.length > 0" class="table table-striped data-table font-13" style="width: 100%">
             <thead>
               <tr>
                 <th>No</th>
@@ -67,42 +75,58 @@
               </tr>
             </tbody>
           </table>
-
-          <div class="form-bottom">
-            <div class="row mt-4">
-              <div class="col-sm-6 mb-3">
-                <label class="form-label">Roles</label>
-                <select
-                  v-model="roleId"
-                  class="form-select"
-                  aria-label="Default select example">
-                  <option value="0">Please Select</option>
-                  <option
-                    v-for="hst in roleList"
-                    v-bind:key="hst.id"
-                    v-bind:value="hst.id"
-                  >
-                    {{ hst.role_name }}
-                  </option>
-                </select>
-              </div>
-
+        
+          <p v-if="errors.length">
+                <ul><li style="color:red"  v-for='err in errors' :key='err' >{{ err }}</li></ul>
+            </p>
+          <br>
+        <br>
+            <div class="d-flex">
+             <button class="next-1 btn btn-primary btn-text ml-auto"><i class="fa fa-save"></i>Save</button>
             </div>
-          
-<p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
-            <button class="btn btn-success" :class="SidebarAccess!=1?'hide':''">
-              Submit <i class="fal fa-arrow-from-left"></i>
-            </button>
-          </div>
-        </div>
       </form>
+    </div>
+    <div class="card-body">
+      <div class="table-title">
+         <h3>List of Access Page</h3>
+         <div class="input-group">
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch" />
+      </div>
+      </div>
+                  <table class="table table-striped data-table1" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th style="width:5%">No</th>
+                            <th>Module</th>
+                            <th>Screen Name</th>
+                            <th>Screen Route</th>
+                            <th>Description</th>
+                            <th style="width:5%">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(s,index) in roleListbyId" :key="index">
+                            <td>{{ index+1 }}</td>
+                            <td>{{ s.module_name }}</td>
+                            <td>{{ s.screen_name }}</td>
+                            <td>{{ s.screen_route }}</td>
+                            <td>{{ s.screen_description }}</td>
+                        <td>
+                          <a class="action-icon icon-danger" @click="delRecord(s)"><i class="fa fa-trash-alt"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p
+                v-show="!roleListbyId.length" style=" padding: 0px;
+                margin: 10px;
+                color: red;
+                display: flex;
+                justify-content: center;">
+                No Record Found
+              </p>
+
     </div>
   </div>
 </template>
@@ -113,16 +137,18 @@ export default {
     return {
       errors: [],
       ModuleId: 0,
-      SubmoduleId: 0,
+      submoduleId: '',
       roleId:0,
       screenIds: "",
       screendetail: null,
       modulelist: [],
       roleList: [],
+      roleListbyId: [],
       screenlist: [],
-     
       selected: [],
       SidebarAccess:null,
+      search: "",
+      alllist:[],
     };
   },
   mounted(){
@@ -156,7 +182,6 @@ export default {
         this.modulelist = [];
       }
     },
-  
     async onchangescreen(event) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -172,12 +197,65 @@ export default {
       );
       console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
+        //alert(JSON.stringify(response.data.list));
         this.screenlist = response.data.list;
       } else {
         this.screenlist = [];
       }
     },
-  
+    async onchangeRole(event) {
+      
+      const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const response = await this.$axios.post(
+        "default-role-access/listbyId",
+        {
+          role_id: this.roleId,
+        },
+        { headers }
+    ); 
+    console.log("my screen list", response.data);
+      if (response.data.code == 200 || response.data.code == "200") {
+      
+        this.roleListbyId = response.data.list;
+        this.alllist = this.roleListbyId;
+      } else {
+        this.alllist=[];
+        this.roleListbyId = [];
+        
+      }
+
+    },
+
+    async getAlllist() {
+      
+      const headers = {
+      Authorization: "Bearer " + this.userdetails.access_token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    const response = await this.$axios.post(
+        "default-role-access/listbyId",
+        {
+          role_id: this.roleId,
+        },
+        { headers }
+    ); 
+    console.log("my screen list", response.data);
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.roleListbyId = response.data.list;
+        this.alllist = this.roleListbyId;
+      } else {
+        this.alllist=[];
+        this.roleListbyId = [];
+        
+      }
+
+    },
+
     async GetRoleList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -193,37 +271,16 @@ export default {
         this.roleList = [];
       }
     },
-
     async onAddroles() {
+      if (confirm("Are you sure you want to save this selection ? ")) {
       this.errors = [];
       try {
         if (this.ModuleId <= 0) {
-          this.errors.push("Module Name  is required.");
+          this.errors.push("Module is required.");
         }
-        // if (this.SubmoduleId <= 0) {
-        //   this.errors.push("Sub Module Name  is required.");
-        // }
-        if (this.HospitalId <= 0) {
-          this.errors.push("Hospital Name  is required.");
-        }
-        // if (this.BranchId <= 0) {
-        //   this.errors.push("Branch Name  is required.");
-        // }
-        // if (this.teamId <= 0) {
-        //   this.errors.push("Team  is required.");
-        // }
-        if (this.staffId <= 0) {
-          this.errors.push("Staff Name  is required.");
-        }
-        // if (this.selected.length <= 0) {
-        //   this.errors.push("Select atleast one screen.");
-        // }
+        
         if (
-          this.ModuleId &&
-          this.HospitalId &&
-          // this.BranchId &&
-          // this.teamId &&
-          this.staffId
+          this.ModuleId 
         ) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -231,7 +288,7 @@ export default {
             "Content-Type": "application/json",
           };
           if (this.selected.length > 0) {
-            this.selected.forEach((value, index) => {
+            this.selected.forEach((value,index) => {
               if (!this.screenIds) {
                 this.screenIds = value;
               } else {
@@ -240,17 +297,11 @@ export default {
             });
           }
           const response = await this.$axios.post(
-            "screen-module/assign-screen",
+            "default-role-access/add",
             {
               module_id: this.ModuleId,
               screen_ids: this.screenIds.toString(),
-              sub_module_id: this.SubmoduleId,
-              added_by: this.userdetails.user.id,
-              hospital_id: this.HospitalId,
-              branch_id: this.BranchId,
-              team_id: this.teamId,
-              staff_id: this.staffId.id,
-              // type: this.staffId.txt,
+              roles_id: this.roleId,
             },
             { headers }
           );
@@ -259,6 +310,7 @@ export default {
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.getAlllist();
             this.ResetModel();
           } else {
             this.$nextTick(() => {
@@ -271,14 +323,58 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     async ResetModel() {
       this.ModuleId = 0;
-      this.SubmoduleId = 0;
-      this.RoleId = 0;
       this.selected = [];
       this.screenIds = "";
       this.screenlist = [];
+    },
+    async delRecord(data) {
+      if (confirm("Are you sure you want to delete this access ? ")) {
+        try {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "default-role-access/" + data.id + "/delete",
+        {
+          id: data.id,
+        },
+        { headers }
+      );
+      console.log("my delete response", response.data);
+        if (response.data.code == 200) {
+          this.$nextTick(() => {
+            $("#deletepopup").modal("show");
+          });
+          this.getAlllist();
+        } 
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+    }
+    },
+    OnSearch() {
+      if (this.search) {
+        this.roleListbyId = this.alllist.filter((notChunk) => {
+          return (
+            notChunk.module_name
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            notChunk.screen_name
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1
+          );
+        });
+      } else {
+        this.roleListbyId  = this.alllist;
+      }
     },
   },
 };
