@@ -1220,18 +1220,26 @@
         </li>
       </ul>
         </p>
-              <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                  <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
+        <br>
+                      <br>
+                <div class="d-flex" v-if="!pid">
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
-                  <button @click="OnSubmit" type="submit" class="btn btn-success btn-text">
-                    <i class="fa fa-paper-plane"></i> Submit
-                  </button>
+                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
-
-
-              </div>
             </div>
           </div>
             <div class="card mb-4 reslt" style="display:none;">
@@ -1687,10 +1695,13 @@ export default {
       type: "",
       alertlist: [],
       isDisabled: false,
+      SidebarAccess:null,
+      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -1701,6 +1712,7 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.GetList();
     }
@@ -1724,7 +1736,76 @@ export default {
       current.getFullYear();
   },
   methods: {
-    async OnSubmit() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save as draft?")) {
+      try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "rehab-referral/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_mrn_id: this.Id,
+              patient_referred_for: this.patient_referred_for,
+              diagnosis: this.diagnosis,
+              date_onset: this.date_onset,
+              date_of_referral: this.date_of_referral,
+              no_of_admission: this.no_of_admission,
+              latest_admission_date: this.latest_admission_date,
+              current_medication: this.current_medication,
+              alerts: this.alerts,
+              education_level: this.education_level,
+              aggresion: this.aggresion,
+              suicidality: this.suicidality,
+              criminality: this.criminality,
+              age_first_started: this.age_first_started,
+              heroin: this.heroin,
+              cannabis: this.cannabis,
+              ats: this.ats,
+              inhalant: this.inhalant,
+              alcohol: this.alcohol,
+              tobacco: this.tobacco,
+              others: this.others,
+              other_information: this.other_information,
+              location_services: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome_id,
+              medication_des: this.medication_prescription,
+              referral_name: this.referral_name,
+              designation: this.designation,
+              id:this.pid,
+              appId: this.appId,
+              status:"0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } catch (e) {}
+      }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -1914,26 +1995,34 @@ export default {
               medication_des: this.medication_prescription,
               referral_name: this.referral_name,
               designation: this.designation,
+              id:this.pid,
+              appId: this.appId,
+              status:"1",
             },
             { headers }
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
-            window.alert("Data are saved successfully!");
-            // this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
-          } else {
-            window.alert("Something went wrong!");
+            this.loader = false;
             this.resetmodel();
-            // this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
           }
         }
       } catch (e) {}
+    }
+  },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
     async GetList() {
       const headers = {
@@ -2174,8 +2263,6 @@ export default {
         } else {
           this.icdcatcodelist = [];
         }
-
-
       } else {
         window.alert("Something went wrong");
       }

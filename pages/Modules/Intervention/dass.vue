@@ -126,15 +126,15 @@
                 </tbody>
               </table>
               <Error :message="error" v-if="error" />
-              <div class="d-flex align-items-center mt-2">
-                <button
-                  @click="OnsubmitTest"
-                  type="submit"
-                  class="btn btn-success ml-auto"
-                >
-                  <i class="fad fa-paper-plane"></i> Submit
+              <br><br>
+              <div class="d-flex">
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
                 </button>
-              </div>
+                  <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" title="Save" @click="OnsubmitTest">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                </div>
             </div>
           </div>
         </div>
@@ -230,7 +230,14 @@ export default {
     onchange(ind, val) {
       this.checkedList[ind] = val;
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id },
+            });
+    },
     async OnsubmitTest() {
+      if (confirm("Are you sure you want to submit this entry")) {
       this.error = null;
       if (this.list.length == Object.values(this.checkedList).length) {
         try {
@@ -276,6 +283,7 @@ export default {
       } else {
         this.error = "Please attempt all question";
       }
+    }
     },
   },
 };
