@@ -410,7 +410,7 @@
                     </button>
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                 </div>
@@ -458,10 +458,13 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
+
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+
     console.log("this.type",this.type);
+
     this.GetList();
     if(this.pid){
       this.getdetails();
@@ -900,7 +903,6 @@ export default {
     }
   },
 };
-</script>
 </script>
 <style scoped>
 .hide {
