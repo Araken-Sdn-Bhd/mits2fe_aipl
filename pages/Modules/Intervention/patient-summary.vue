@@ -1014,117 +1014,117 @@ export default {
       if (data.type == "PsychiatryClerkingNote") {
         this.$router.push({
           path: "/modules/Intervention/psychiatry-clerking-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CounsellorClerkingNote") {
         this.$router.push({
           path: "/modules/Intervention/counsellor-clerking-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PatientIndexForm") {
         this.$router.push({
           path: "/modules/Intervention/patient-index-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PsychiatricProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CPSProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/cps-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "SEProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/se-progress-notes",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CounsellingProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/counseling-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "EtpProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/etp-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/job-club-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val,  id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/consultation-discharge-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "RehabDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/rehab-discharge",
-          query: { pid: data.id, type: val ,appId: this.appId},
+          query: { pid: data.id, type: val, id: this.Id ,appId: this.appId},
         });
       } else if (data.type == "CpsDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/cps-discharge-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/cps-homevisit-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitWithdrawalForm") {
         this.$router.push({
           path: "/modules/Intervention/cps-homevisit-withdrawal-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsPoliceReferralForm") {
         this.$router.push({
           path: "/modules/Intervention/cps-police-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PhotographyConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/photography-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "SEConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/se-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ETPConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/etp-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobClubConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/job-club-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
         this.$router.push({
           path: "/modules/Intervention/patient-care-plan-and-case-review",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobStartReport") {
         this.$router.push({
           path: "/modules/Intervention/job-start-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobEndReport") {
         this.$router.push({
           path: "/modules/Intervention/job-end-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobTransitionReport") {
         this.$router.push({
           path: "/modules/Intervention/job-transition-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "LaserAssessment") {
         console.log("laser result", data);
@@ -1136,77 +1136,77 @@ export default {
       } else if (data.type == "TriageForm") {
         this.$router.push({
           path: "/modules/Intervention/triage-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobInterestCheckList") {
         this.$router.push({
           path: "/modules/Intervention/job-interest-checklist",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "WorkAnalysisForm") {
         this.$router.push({
           path: "/modules/Intervention/work-analysis-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
           path: "/modules/Intervention/list-for-job-club",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
           path: "/modules/Intervention/list-of-etp",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch" && val != "edit") {
         this.$router.push({
           path: "/modules/Intervention/list-of-job-search",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch" && val == "edit") {
         this.$router.push({
           path: "/modules/Intervention/update-list-of-job-search",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
           path: "/modules/Intervention/list-of-previous-or-current-job",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "InternalRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/internal-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ExternalRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/external-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/cps-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "OcctRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/occt-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PsychologyRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/psychology-referral",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "RehabRefferalAndClinicalForm") {
         this.$router.push({
           path: "/modules/Intervention/rehab-referral-and-clinical-summary",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       }
     },
@@ -1214,117 +1214,117 @@ export default {
       if (data.type == "PsychiatryClerkingNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-psychiatry-clerking-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CounsellorClerkingNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-counsellor-clerking-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PatientIndexForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-patient-index-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PsychiatricProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CPSProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "SEProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-edit-se-progress-notes",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CounsellingProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-counseling-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "EtpProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-etp-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-club-progress-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-consultation-discharge-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "RehabDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-rehab-discharge",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsDischargeNote") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-discharge-note",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-homevisit-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitWithdrawalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-homevisit-withdrawal-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsPoliceReferralForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-police-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PhotographyConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-photography-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "SEConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-se-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ETPConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-etp-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobClubConsentForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-club-consent-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-patient-care-plan-and-case-review",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobStartReport") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-start-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobEndReport") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-end-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobTransitionReport") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-transition-report",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "LaserAssessment") {
         console.log("laser result", data);
@@ -1336,77 +1336,77 @@ export default {
       } else if (data.type == "TriageForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-triage-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "JobInterestCheckList") {
         this.$router.push({
           path: "/modules/Intervention/edit-job-interest-checklist",
-          query: { pid: data.id, type: val,appId: this.appId},
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId},
         });
       } else if (data.type == "WorkAnalysisForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-work-analysis-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-for-job-club",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-of-etp",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch" && val != "edit") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-of-job-search",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch" && val == "edit") {
         this.$router.push({
           path: "/modules/Intervention/edit-update-list-of-job-search",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/edit-log-meeting-with-employer",
-          query: { pid: this.Id, type: val,appId: this.appId },
+          query: { pid: data.Id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-of-previous-or-current-job",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "InternalRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-internal-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ExternalRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-external-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CpsRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-cps-referral-form",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "OcctRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-occt-referral-form",
-          query: { pid: data.id, type: val ,appId: this.appId},
+          query: { pid: data.id, type: val,  id: this.Id,appId: this.appId},
         });
       } else if (data.type == "PsychologyRefferalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-psychology-referral",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "RehabRefferalAndClinicalForm") {
         this.$router.push({
           path: "/modules/Intervention/edit-rehab-referral-and-clinical-summary",
-          query: { pid: data.id, type: val,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       }
     },
