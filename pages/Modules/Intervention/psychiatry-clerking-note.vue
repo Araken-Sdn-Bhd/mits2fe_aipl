@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form>
+              <div>
                 <Interventionphysectristdetails />
 
                 <table class="notes">
@@ -410,7 +410,7 @@
                     </button>
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                 </div>
@@ -424,7 +424,7 @@
                     <i class="fa fa-save"></i> Update
                   </button>
                 </div> -->
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -458,10 +458,13 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
+
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+
     console.log("this.type",this.type);
+
     this.GetList();
     if(this.pid){
       this.getdetails();
@@ -552,10 +555,11 @@ export default {
             console.log("response", response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              this.resetmodel();
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              alert("Successfully Created")
+              // this.$nextTick(() => {
+              //   $("#insertpopup").modal("show");
+              // });
+              this.GoBack();
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -563,13 +567,8 @@ export default {
               });
             }
         } catch (e) {
-          this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
         }
     }
-    this.goback
     },
     async onPublishEvent() {
 
@@ -900,7 +899,6 @@ export default {
     }
   },
 };
-</script>
 </script>
 <style scoped>
 .hide {

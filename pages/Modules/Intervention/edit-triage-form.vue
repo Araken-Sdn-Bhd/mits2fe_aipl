@@ -12,7 +12,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <!--<form method="post" @submit.prevent="onSubmitForm" >-->
-                <form>
+                <div>
                 <section class="section-border">
 
                   <div class="form-title mt-0">
@@ -565,7 +565,7 @@
                     <i class="fa fa-save"></i> Save
                   </button>-->
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -1177,8 +1177,8 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        
-      } catch (e) { 
+
+      } catch (e) {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
         });
@@ -1220,10 +1220,10 @@ export default {
                 $("#errorpopup").modal("show");
               });
             }
-        
+
       } catch (e) {}
     },
-    
+
     resetmodel() {
       this.risk_history_assressive = "";
       this.risk_history_criminal = "";

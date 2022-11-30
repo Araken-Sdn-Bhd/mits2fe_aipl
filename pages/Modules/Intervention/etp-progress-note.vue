@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form>
+              <div>
                 <div class="row mb-3">
                   <label class="col-sm-4 col-form-label">Name</label>
                   <div class="col-sm-8">
@@ -262,7 +262,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
