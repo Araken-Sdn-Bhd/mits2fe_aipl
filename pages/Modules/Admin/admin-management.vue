@@ -48,7 +48,7 @@
                       <input
                         type="checkbox"
                         name=""
-                        v-on:click="Checkcompany(list.id, $event)"
+                        v-on:click="Checkcompany(staff.id, $event)"
                       />
                     </td>
                     <td>{{ index+1}}</td>
@@ -73,13 +73,13 @@
                 <div class="ml-auto">
                   <a
                     style="cursor: pointer"
-                    v-on:click="setSystemAdmin(0)"
+                    v-on:click="removeAccess()"
                     class="btn btn-danger btn-fill btn-md"
                     ><i class="fad fa-vote-nay"></i>Remove Access</a
                   >
                   <a
                     style="cursor: pointer"
-                    v-on:click="setSystemAdmin(2)"
+                    v-on:click="setSystemAdmin()"
                     class="btn btn-warning btn-green btn-fill btn-md"
                     ><i class="fad fa-check"></i> Assign as System Admin</a
                   >
@@ -177,7 +177,7 @@ export default {
       console.log('my id',value);
     },
 
-    async setSystemAdmin(status) {
+    async setSystemAdmin() {
     
     if (confirm("Are you sure you want to set this user as System Admin")) {
     
@@ -194,7 +194,7 @@ export default {
           .post(
             `${this.$axios.defaults.baseURL}` +
               "staff-management/setSystemAdmin",
-            { added_by: this.userdetails.user.id, id: value, status: status.toString() },
+            {id: value,added_by: this.userdetails.user.id},
             { headers }
           )
           
@@ -202,7 +202,51 @@ export default {
             console.log("reuslt", resp);
           });
          
-          this.getList();
+          this.GetList();
+          this.selected=[];
+         
+      });
+      
+      this.loader = false;
+      this.$nextTick(() => {
+        $("#updatepopup").modal("show");
+      });
+    } catch (e) {
+      this.loader = false;
+      this.$nextTick(() => {
+        $("#errorpopup").modal("show");
+      });
+    }
+  }
+  
+  },
+
+  async removeAccess() {
+    
+    if (confirm("Are you sure you want to remove access for this user? This action is irreversible.")) {
+    
+    try {
+      this.loader = true;
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      this.selected.forEach((value, index) => {
+        const axios = require("axios").default;
+        axios
+          .post(
+            `${this.$axios.defaults.baseURL}` +
+              "staff-management/removeUserAccess",
+            {id: value},
+            { headers }
+          )
+          
+          .then((resp) => {
+            console.log("reuslt", resp);
+          });
+         
+          this.GetList();
          
       });
       
