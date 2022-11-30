@@ -457,6 +457,7 @@ export default {
         "patient-appointment-details/updateTeam",
         {
           added_by: this.userdetails.user.id,
+          branch_id: this.userdetails.branch.branch_id,
           appointment_id: this.appId,
           assign_team: this.assign_team,
           service: this.serviceType,
