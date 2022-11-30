@@ -1222,7 +1222,7 @@
         </p>
         <br>
                       <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
@@ -1236,7 +1236,7 @@
                       <i class="fa fa-save"></i> Save as draft
                     </button>
                     <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Submit
+                      <i class="fa fa-paper-plane"></i> Update
                     </button>
                   </div>
                 </div>
@@ -1723,8 +1723,6 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
-    this.referral_name = this.userdetails.user.name;
-    this.designation = this.userdetails.user.role;
     if (this.type == "view") {
       this.isDisabled = true;
       // alert(this.isDisabled);
@@ -1871,9 +1869,9 @@ export default {
         if (!this.others) {
           this.errorList.push("Others is required");
         }
-        // if (!this.other_information) {
-        //   this.errorList.push("Other Information is required");
-        // }
+        if (!this.other_information) {
+          this.errorList.push("Other Information is required");
+        }
         if (!this.location_services_id) {
           this.errorList.push("Location Of Services is required");
         }
@@ -1943,7 +1941,7 @@ export default {
           this.alcohol &&
           this.tobacco &&
           this.others &&
-          // this.other_information &&
+          this.other_information &&
           this.location_services_id &&
           this.type_diagnosis_id &&
           this.category_services &&
