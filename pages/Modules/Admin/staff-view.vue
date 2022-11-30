@@ -114,11 +114,9 @@
               </table>
 
               <div class="form-foter mt-3">
-                <a
-                  href="/app/modules/Admin/staff-management"
-                  class="btn btn-primary btn-text"
-                  ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                >
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
               </div>
             </div>
           </div>
@@ -202,6 +200,9 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    },
+    back() {
+      this.$router.go(-1);
     },
   },
 };
