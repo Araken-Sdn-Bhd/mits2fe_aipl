@@ -41,7 +41,7 @@
     </table>
             <div class="form-heading mb-2">Patient Care Plan</div>
             <div class="card-body">
-              <form method="post" @submit.prevent="OnSubmit">
+              <div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -617,14 +617,18 @@
                   <a
                       @click="GoBack"
                       class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
 
-                  <button class="btn btn-warning btn-text ml-auto">
-                    <i class="fa fa-save"></i> Save
-                  </button>
+                  <div  class="btn-right">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text ml-auto">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -700,6 +704,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
@@ -742,6 +747,73 @@ export default {
     });
   },
   methods: {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+        try {
+          this.loader = true;
+            const headers = {
+              Authorization: "Bearer " + this.userdetails.access_token,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+              "intervention/patient-care-plan",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              plan_date: this.plan_date,
+              reason_of_review: this.reason_of_review,
+              diagnosis: this.diagnosis,
+              medication_oral: this.medication_oral,
+              medication_depot: this.medication_depot,
+              medication_im: this.medication_im,
+              background_history: this.background_history,
+              staff_incharge_dr: this.staff_incharge_dr,
+              treatment_plan: this.treatment_plan,
+              next_review_date: this.next_review_date,
+              case_manager_date: this.case_manager_date,
+              case_manager_name: this.case_manager_name,
+              case_manager_designation: this.case_manager_designation,
+              specialist_incharge_date: this.specialist_incharge_date,
+              specialist_incharge_name: this.specialist_incharge_name,
+              specialist_incharge_designation:
+                this.specialist_incharge_designation,
+              location_of_service: this.location_services_id,
+              type_of_diagnosis: this.type_diagnosis_id.id,
+              category_of_services: this.category_services,
+              services: this.services_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              icd_9_code: this.code_id,
+              icd_9_subcode: this.sub_code_id,
+              medication_prescription: this.medication_prescription,
+              treatment_plan: JSON.stringify(treatmentplan),
+              status: "0",
+              appId: this.appId,
+            },
+              { headers }
+            );
+            console.log("response", response.data);
+            if (response.data.code == 200) {
+              this.loader = false;
+              this.resetmodel();
+              this.GoBack();
+              this.$nextTick(() => {
+                $("#insertpopup").modal("show");
+              });
+            } else {
+              this.loader = false;
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
+            }
+        } catch (e) {
+          this.$nextTick(() => {
+            $("#errorpopup").modal("show");
+          });
+        }
+      }
+    },
     async GetPatientdetails() {
       this.loader = true;
       const headers = {
@@ -864,7 +936,8 @@ export default {
         this.externallist = [];
       }
     },
-    async OnSubmit() {
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.errorList = [];
       this.validate = true;
       try {
@@ -1042,6 +1115,7 @@ export default {
               medication_prescription: this.medication_prescription,
               treatment_plan: JSON.stringify(treatmentplan),
               appId: this.appId,
+              status: "1",
             },
             { headers }
           );
@@ -1060,6 +1134,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     ResetModel() {
       this.plan_date = "";
@@ -1169,7 +1244,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId:this.appId },
             });
     }
   },

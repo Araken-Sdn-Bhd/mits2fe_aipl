@@ -741,11 +741,22 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex" v-if="!pid">
-                <button type="submit" @click="OnSubmit" class="btn btn-success btn-text ml-auto">
-                  <i class="fad fa-paper-plane"></i> Submit
-                </button>
-              </div>
+                       <div class="d-flex">
+                    <button
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
+                    <div  class="btn-right">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                      <i class="fa fa-save"></i> Save as draft
+                    </button>
+
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -848,7 +859,75 @@ export default {
     };
   },
   methods: {
-    async OnSubmit() {
+    async onCreateEvent() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
+        this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "cps-discharge-note/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_mrn_id: this.Id,
+              name: this.name,
+              mrn: this.mrn,
+              cps_discharge_date: this.cps_discharge_date,
+              time: this.time,
+              staff_name: this.staff_name,
+              diagnosis: this.diagnosis_id,
+              post_intervention: this.post_intervention,
+              psychopathology: this.psychopathology,
+              potential_risk: this.potential_risk,
+              category_of_discharge: this.category_of_discharge,
+              discharge_diagnosis: this.discharge_diagnosis,
+              outcome_medication: this.outcome_medication,
+              psychosocial: this.psychosocial,
+              location_service: this.location_services,
+              service_category: this.category_services,
+              diagnosis_type: this.type_diagnosis_id,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_services: this.complexity_services,
+              verification_date: this.verification_date,
+              specialist_name: this.specialist_name,
+              outcome: this.outcome,
+              medication: this.medication_des,
+              case_manager: this.case_manager,
+              date: this.date,
+              status: "0",
+              id:this.pid,
+              appId: this.appId,
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.resetmodel();
+            this.GoBack();
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
+              }
+    },
+    async onPublishEvent() {
+      if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       this.errorList = [];
       if (this.Psychopathologyselected.length > 0) {
@@ -1056,6 +1135,7 @@ export default {
           }
         }
       } catch (e) {}
+    }
     },
     async GetList() {
       const headers = {
@@ -1342,6 +1422,12 @@ export default {
         window.alert("Something went wrong");
       }
     },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id,appId: this.appId },
+            });
+    }
   },
 };
 </script>
