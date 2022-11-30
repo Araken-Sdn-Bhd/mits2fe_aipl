@@ -10,7 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form>
+              <div>
                 <table class="notes">
                                           <thead>
                                             <tr>
@@ -401,7 +401,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

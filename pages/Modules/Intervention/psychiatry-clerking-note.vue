@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form>
+              <div>
                 <Interventionphysectristdetails />
 
                 <table class="notes">
@@ -424,7 +424,7 @@
                     <i class="fa fa-save"></i> Update
                   </button>
                 </div> -->
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -555,10 +555,11 @@ export default {
             console.log("response", response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              this.resetmodel();
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              alert("Successfully Created")
+              // this.$nextTick(() => {
+              //   $("#insertpopup").modal("show");
+              // });
+              this.GoBack();
             } else {
               this.loader = false;
               this.$nextTick(() => {
@@ -566,13 +567,8 @@ export default {
               });
             }
         } catch (e) {
-          this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
         }
     }
-    this.goback
     },
     async onPublishEvent() {
 
