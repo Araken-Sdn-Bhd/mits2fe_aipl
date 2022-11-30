@@ -1573,20 +1573,20 @@ export default {
     Onocctreferralform() {
       this.$router.push({
         path: "/modules/Intervention/occt-referral-form",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onpsychologyreferral() {
       this.$router.push({
         path: "/modules/Intervention/psychology-referral",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onrehabreferralandclinicalsummary() {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/rehab-referral-and-clinical-summary",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1616,7 +1616,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-referral-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1784,7 +1784,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-interest-checklist",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1792,7 +1792,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/work-analysis-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
