@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form>
+              <div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -443,7 +443,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -475,13 +475,16 @@ export default {
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
     this.GetPatientdetails();
-    if (this.Id) {
-      this.staff_name=this.userdetails.user.name;
-      this.GetList();
-    }
+
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+
+    this.GetList();
+    if (this.Id) {
+      this.staff_name=this.userdetails.user.name;
+    }
+
     if (this.pid) {
       this.getdetails();
     }
@@ -500,42 +503,42 @@ export default {
       locationlist: [],
       dischargelist: [],
       Id: 0,
-      name: "",
-      mrn: "",
-      date: "",
-      time: "",
-      staff_name: "",
-      diagnosis_id: "",
-      intervention: "",
-      discharge_category: "",
-      comment: "",
+      name: null,
+      mrn: null,
+      date: null,
+      time: null,
+      staff_name: null,
+      diagnosis_id: null,
+      intervention: null,
+      discharge_category: null,
+      comment: null,
       location_services: 0,
       type_diagnosis_id: 0,
-      category_services: "",
+      category_services: null,
       code_id: 0,
       sub_code_id: 0,
       complexity_services: 0,
       outcome: 0,
       medication_des: "None.",
-      patient_mrn_id: "",
+      patient_mrn_id: null,
       services_id: 0,
       serviceid: 0,
       validate: true,
-      specialist_name: "",
-      case_manager: "",
-      verification_date_1: "",
-      verification_date_2: "",
+      specialist_name: null,
+      case_manager: null,
+      verification_date_1: null,
+      verification_date_2: null,
       assistancelist: [],
       externallist: [],
       pid:0,
       type:"",
       appId: 0,
+      SidebarAccess:null,
     };
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save this as draft ? ")) {
-      try {
+      if (confirm("Are you sure you want to save this as draft ?")) {
         this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -575,25 +578,19 @@ export default {
             },
             { headers }
           );
-          console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
-            this.GoBack();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
+            this.resetmodel();
+            this.GoBack();
           } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
           }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
               }
     },
     async onPublishEvent() {
@@ -710,29 +707,29 @@ export default {
             "rehab-discharge-note/add",
             {
               added_by: this.userdetails.user.id,
-              name: this.name,
-              mrn: this.mrn,
-              patient_mrn_id: this.Id,
-              date: this.date,
-              time: this.time,
-              staff_name: this.staff_name,
-              diagnosis_id: this.diagnosis_id,
-              intervention: this.intervention,
-              discharge_category: this.discharge_category,
-              comment: this.comment,
-              location_services: this.location_services,
-              diagnosis_type: this.type_diagnosis_id,
-              service_category: this.category_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_services: this.complexity_services,
-              outcome: this.outcome,
-              medication: this.medication_des,
-              specialist_name: this.specialist_name,
-              case_manager: this.case_manager,
-              verification_date_1: this.verification_date_1,
-              verification_date_2: this.verification_date_2,
+              name: this.name ?? null,
+              mrn: this.mrn ?? null,
+              patient_mrn_id: this.Id ?? null,
+              date: this.date ?? null,
+              time: this.time ?? null,
+              staff_name: this.staff_name ?? null,
+              diagnosis_id: this.diagnosis_id ?? null,
+              intervention: this.intervention ?? null,
+              discharge_category: this.discharge_category ?? null,
+              comment: this.comment ?? null,
+              location_services: this.location_services ?? null,
+              diagnosis_type: this.type_diagnosis_id ?? null,
+              service_category: this.category_services ?? null,
+              services_id: this.services_id ?? null,
+              code_id: this.code_id ?? null,
+              sub_code_id: this.sub_code_id ?? null,
+              complexity_services: this.complexity_services ?? null,
+              outcome: this.outcome ?? null,
+              medication: this.medication_des ?? null,
+              specialist_name: this.specialist_name  ?? null,
+              case_manager: this.case_manager  ?? null,
+              verification_date_1: this.verification_date_1  ?? null,
+              verification_date_2: this.verification_date_2 ?? null,
               status: "1",
               id:this.pid,
               appId:this.appId,
@@ -750,7 +747,7 @@ export default {
             });
           } else {
             window.alert("Something went wrong!");
-            this.resetmodel();
+            // this.resetmodel();
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
@@ -894,7 +891,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
-    resetmodel() {
+    async resetmodel() {
       this.name = "";
       this.mrn = "";
       this.date = "";
@@ -985,7 +982,7 @@ export default {
       }
     },
 
-    GoBack(){
+    async GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id,appId: this.appId },
@@ -994,3 +991,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.hide {
+  display: none;
+}
+</style>

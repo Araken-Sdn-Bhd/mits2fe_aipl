@@ -875,6 +875,8 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    this.referral_name = this.userdetails.user.name;
+    this.referral_designation = this.userdetails.user.role;
   },
   data() {
     return {

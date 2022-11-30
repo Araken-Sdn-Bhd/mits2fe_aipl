@@ -2117,6 +2117,8 @@ export default {
   methods: {
     async onCreateEvent() {
       if (confirm("Are you sure you want to save as draft?")) {
+        var jobSPECIFICATION = [];
+        var jobSDESCRIPTION = [];
         try {
           this.loader = true;
           const headers = {
@@ -2196,6 +2198,7 @@ export default {
     }
   },
     async onPublishEvent() {
+      if (confirm("Are you sure you want to submit this entry?")) {
       var jobSPECIFICATION = [];
       var jobSDESCRIPTION = [];
       $("table#jobspecification > tbody > tr").each(function (i) {
@@ -2570,6 +2573,7 @@ export default {
           $("#errorpopup").modal("show");
         });
       }
+    }
     },
     GoBack(){
       this.$router.push({

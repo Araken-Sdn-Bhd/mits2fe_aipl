@@ -107,6 +107,7 @@ export default {
     if(this.userdetails){
       this.name=this.userdetails.user.name;
       this.id=this.userdetails.user.id;
+      this.email=this.userdetails.user.email;
       this.role=this.userdetails.user.role;
       this.branch_id=this.userdetails.branch.branch_id;
     }
@@ -124,7 +125,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post("Notification/get",
-      {added_by:this.id,role:this.role,branch_id:this.branch_id},
+      {added_by:this.id,role:this.role,branch_id:this.branch_id,email:this.email},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
         this.notificationlist = response.data.list;
