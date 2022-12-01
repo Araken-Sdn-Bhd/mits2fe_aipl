@@ -248,7 +248,7 @@
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label">Accommodation:</label>
-                    <select class="form-select" v-model="accomodation_id">
+                    <select class="form-select" v-model="accommodation_id">
                       <option value="">Please Select</option>
                       <option
                         v-for="rfl in accomodationlist"
@@ -285,7 +285,7 @@
                     <select class="form-select" v-model="occupation_status">
                       <option value="">Please Select</option>
                       <option
-                        v-for="rfl in occupationsectorlist"
+                        v-for="rfl in occupationstatuslist"
                         v-bind:key="rfl.id"
                         v-bind:value="rfl.id"
                       >
@@ -423,11 +423,9 @@
                       <td class="tdrow-num">{{ rp.nric_no }}</td>
                       <td class="tdrow-limit">{{ rp.Name }}</td>
                       <td class="tdrow-num">{{ rp.ADDRESS }}</td>
-                      <!-- <td class="tdrow">{{ rp.CITY }}</td> -->
-                      <td class="tdrow-limit">BANDAR TUN ABDUL RAZAK</td> <!--TESTING-->
+                      <td class="tdrow">{{ rp.CITY }}</td>
                       <td class="tdrow">{{ rp.STATE }}</td>
-                      <!-- <td class="tdrow">{{ rp.POSTCODE }}</td> -->
-                      <td class="tdrow-num"> 26900 </td> <!--TESTING-->
+                      <td class="tdrow">{{ rp.POSTCODE }}</td>
                       <td class="tdrow">{{ rp.citizenship }}</td>
                       <td class="tdrow-num">{{ rp.PHONE_NUMBER }}</td>
                       <td class="tdrow-num">{{ rp.DATE_OF_BIRTH }}</td>
@@ -443,18 +441,12 @@
                       <td class="tdrow">{{ rp.fee_exemption_status }}</td>
                       <td class="tdrow">{{ rp.TYPE_OF_Refferal }}</td>
                       <td class="tdrow">{{ rp.CATEGORY_OF_PATIENTS }}</td>
-                      <!-- <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td> -->
-                      <td class="tdrow"> Assistance / Supervision </td>      <!--TESTING-->
-                      <!-- <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td> -->
-                      <td class="tdrow-limit">Community Psychiatric Service (CPS)</td>  <!--TESTING-->
-                      <!-- <td class="tdrow">{{ rp.outcome }}</td> -->
-                      <td class="tdrow-limit">Ongoing Therapeutic Intervention</td><!--TESTING-->
-                      <!-- <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td> -->
-                      <td class="tdrow-num">F20.4</td>
-                      <td class="tdrow-limit-diagnosis">ISP by and exposure to antiepileptics, sedative-hypnotic, antiparkisonism and psychotropic drugs, not elsewhere classified</td>
-                      <!-- <td class="tdrow">{{ rp.DIAGNOSIS }}</td> -->
-                      <!-- <td class="tdrow">{{ rp.category_of_services }}</td> -->
-                      <td class="tdrow-limit">Assistance / Supervision</td><!--TESTING-->
+                      <td class="tdrow">{{ rp.TYPE_OF_Visit }}</td>
+                      <td class="tdrow">{{ rp.APPOINTMENT_TYPE }}</td>
+                      <td class="tdrow">{{ rp.outcome }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS_CODE }}</td>
+                      <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
+                      <td class="tdrow">{{ rp.category_of_services }}</td>
                       <td class="tdrow-limit">{{ rp.Attending_staff }}</td>
                     </tr>
                   </tbody>
@@ -561,7 +553,7 @@ export default {
       race_id: "",
       religion_id: "",
       marital_id: "",
-      accomodation_id: "",
+      accommodation_id: "",
       education_level: "",
       occupation_status: "",
       fee_exemption_status: "",
@@ -746,6 +738,8 @@ export default {
               diagnosis_id: this.Diagnosis,
               referral_type: this.REFERRAL_TYPE,
               name: this.Name,
+              accommodation_id: this.accommodation_id,
+              Age: this.Age,
               citizenship: this.citizenship,
               gender: this.Gender,
               race: this.race_id,
@@ -830,6 +824,8 @@ export default {
               diagnosis_id: this.Diagnosis,
               referral_type: this.REFERRAL_TYPE,
               name: this.Name,
+              accommodation_id: this.accommodation_id,
+              Age: this.Age,
               citizenship: this.citizenship,
               gender: this.Gender,
               race: this.race_id,
