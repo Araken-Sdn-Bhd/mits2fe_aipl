@@ -432,13 +432,14 @@
                              </li>
                         </ul>
                        </p>
-
-                <div class="d-flex" v-if="!pid">
+                      <br>
+                      <br>
+                <div class="d-flex">
                     <button @click="GoBack" class="btn btn-primary btn-text">
                       <i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
                     
-                    <div  class="btn-right" :class="SidebarAccess != 1 ?'hide' : ''">
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -553,7 +554,7 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "intervention/job-report-end",
+            "intervention/job-end-report",
             {
               added_by: this.userdetails.user.id,
               patient_id: this.Id,
@@ -583,6 +584,7 @@ export default {
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -599,14 +601,8 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-      } catch (e) {}
-        this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              }); 
-              
+      } catch (e) {}   
       }
-    
     },
     async onPublishEvent() {
 
@@ -741,7 +737,7 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "intervention/job-report-end",
+            "intervention/job-end-report",
             {
               added_by: this.userdetails.user.id,
               patient_id: this.Id,
@@ -771,6 +767,7 @@ export default {
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
@@ -788,12 +785,7 @@ export default {
             });
           }
         }
-      } catch (e) {
-        this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-      }
+      } catch (e) {}
       }
     },
     async GetList() {
