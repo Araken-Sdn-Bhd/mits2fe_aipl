@@ -18,6 +18,24 @@
                 <div class="row">
                   <div class="col-sm-3 mb-2">
                     <select
+                    v-if="dataReady"
+                     disabled
+                      v-model="branch_id"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="OnSearch"
+                    >
+                      <option value="0">Select Branch</option>
+                      <option
+                        v-for="slt in branchlist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                    v-if="dataReady2"
                       v-model="branch_id"
                       class="form-select"
                       aria-label="Default select example"
@@ -43,7 +61,7 @@
                     >
                       <option value="0">Select Service</option>
                       <option
-                        v-for="slt in assistancelist"
+                        v-for="slt in servicelist"
                         v-bind:key="slt.id"
                         v-bind:value="slt.id"
                       >
@@ -146,11 +164,14 @@ export default {
       branch_id: 0,
       service_id: 0,
       assistancelist: [],
+      dataReady: false,
+      dataReady2: false,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     //   this.GetList();
+    this.getRole();
 
   },
   mounted() {
@@ -197,6 +218,29 @@ export default {
     }
   },
   methods: {
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branch_id=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+      
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

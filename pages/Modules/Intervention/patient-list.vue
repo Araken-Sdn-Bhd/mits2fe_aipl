@@ -19,12 +19,30 @@
                 <div class="row">
                   <div class="col-sm-3 mb-2">
                     <select
+                      v-if="dataReady"
+                      disabled
                       v-model="branch_id"
                       class="form-select"
                       aria-label="Default select example"
                       @change="OnSearch"
                     >
                       <option value="0">Select Branch</option>
+                      <option
+                        v-for="slt in branchlist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                      v-if="dataReady2"
+                      v-model="branch_id"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="OnSearch"
+                    >
+                      <option value="0">All Branch</option>
                       <option
                         v-for="slt in branchlist"
                         v-bind:key="slt.id"
@@ -147,13 +165,18 @@ export default {
       loader: true,
       assistancelist: [],
       SidebarAccess:null,
+      dataReady:false,
+      dataReady2:false,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.getRole();
+
   },
   mounted() {
+    
     this.GetList();
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -162,14 +185,14 @@ export default {
     };
     const axios = require("axios").default;
     axios
-      .get(
+      .post(
         `${this.$axios.defaults.baseURL}` +
-          "patient-registration/getPatientRegistrationList",
+          "patient-registration/getPatientRegistrationListbyBranch",
+        { branch_id: this.userdetails.branch.branch_id},
         { headers }
       )
       .then((resp) => {
         this.list = resp.data.list;
-        //alert(JSON.stringify(this.list));
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -192,6 +215,29 @@ export default {
       });
   },
   methods: {
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branch_id=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+      
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
