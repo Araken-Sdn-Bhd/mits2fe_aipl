@@ -370,7 +370,7 @@
                     <i class="fa fa-download"></i> Download
                   </button>
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
-                      <i class="fa fa-paper-plane"></i> Submit
+                      <i class="fa fa-paper-plane"></i> Update
                     </button>
                   </div>
                 </div>
@@ -801,6 +801,8 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    this.name = this.userdetails.user.name;
+    this.designation = this.userdetails.user.role;
     const current = new Date();
     this.todaydate =
       current.getDate() +
