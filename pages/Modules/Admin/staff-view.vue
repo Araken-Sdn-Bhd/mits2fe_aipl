@@ -12,13 +12,13 @@
             <div class="card-header">
               <h4>Mentari Staff Detail</h4>
               <div class="icon-set">
-                <a  @click="gotoedit"
+                <a  @click="gotoedit" title="edit record"
                   ><i class="fa fa-edit"></i
                 ></a>
-                <a @click="gototransfer"
+                <a @click="gototransfer" title="transfer staff"
                   ><i class="fa fa-share-square"></i
                 ></a>
-                <a @click="deletestaff"><i class="fa fa-trash-alt"></i></a>
+                <a @click="deletestaff" title="delete record"><i class="fa fa-trash-alt"></i></a>
               </div>
             </div>
             <div class="card-body">
