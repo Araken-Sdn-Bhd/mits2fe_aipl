@@ -741,7 +741,7 @@
                              </li>
                         </ul>
                        </p>
-                       <div class="d-flex">
+                       <div class="d-flex" v-if="this.type!='view'">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
@@ -908,23 +908,21 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
+            window.alert("Data are saved successfully!");
+            //this.resetmodel();
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
+            window.alert("Something went wrong!");
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {}
       }
-              }
     },
     async onPublishEvent() {
       if (confirm("Are you sure you want to save this entry ? ")) {
@@ -1121,7 +1119,8 @@ export default {
           if (response.data.code == 200 || response.data.code == "200" ) {
             window.alert("Data are saved successfully!");
             // this.loader = false;
-            this.resetmodel();
+            this.GoBack();
+            //this.resetmodel();
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");
             // });
