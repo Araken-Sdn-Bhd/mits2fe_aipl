@@ -516,21 +516,23 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
+            window.alert("Data are saved successfully!");
+            //this.resetmodel();
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
               }
     },
@@ -644,16 +646,18 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            this.resetmodel();
+            window.alert("Data are saved successfully!");
+            //this.resetmodel();
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) {}
