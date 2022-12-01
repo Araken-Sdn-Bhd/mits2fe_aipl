@@ -67,6 +67,7 @@
                       class="form-select"
                       aria-label="Default select example"
                     >
+                    <option value="0">Please Select</option>
                       <option
                         v-for="role in rolelist"
                         v-bind:key="role.id"
@@ -83,6 +84,7 @@
                   <div class="col-md-6 mb-4">
                     <label for="" class="form-label">Email Address</label>
                     <input
+                    disabled="true"
                       type="text"
                       class="form-control"
                       placeholder="Enter Email Address"
@@ -168,6 +170,7 @@
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Mentari Location</label>
                     <select
+                      disabled="true"
                       v-model="branchId"
                       class="form-select"
                       aria-label="Default select example"
@@ -203,6 +206,7 @@
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Start Date</label>
                     <input
+                    disabled="true"
                       type="date"
                       class="form-control"
                       v-model="startdate"
@@ -327,7 +331,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get("roles/branch-viewlist", { headers });
-      this.rolelist = response.data;
+      this.rolelist = response.data.list;
     },
     async GetteamList() {
       const headers = {
@@ -379,6 +383,7 @@ export default {
     },
 
     async onCreateStaff() {
+      if (confirm("Are you sure you want to update this record")) {
       this.errors = [];
       if (!this.name) {
         this.errors.push("Name is required.");
@@ -461,6 +466,7 @@ export default {
             $("#errorpopup").modal("show");
           });
         }
+      }
       }
     },
     async gototransfer() {
