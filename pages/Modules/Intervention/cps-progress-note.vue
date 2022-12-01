@@ -2199,20 +2199,30 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Successfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
-        } catch (e) { }
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        } catch (e) {
+          this.loader = false;
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
+
+            alert("Error Occured!");
+            this.GoBack();
+         }
+
       }
     },
     async onPublishEvent() {
@@ -2438,71 +2448,71 @@ export default {
             this.errorList.push("Designation is required");
           }
 
-          // if (
-          //   this.cps_date &&
-          //   this.cps_time &&
-          //   this.cps_seen_by &&
-          //   this.cps_date_discussed &&
-          //   this.cps_time_discussed &&
-          //   this.cps_discussed_with &&
-          //   this.visit_date &&
-          //   this.visit_time &&
-          //   this.informants_name &&
-          //   this.informants_relationship &&
-          //   this.informants_contact &&
-          //   this.case_manager &&
-          //   this.visited_by &&
-          //   this.visit_outcome &&
-          //   this.current_intervention &&
-          //   this.compliance_treatment &&
-          //   this.medication_supervised_by &&
-          //   this.delusions &&
-          //   this.hallucination &&
-          //   this.behavior &&
-          //   this.blunted_affect &&
-          //   this.depression &&
-          //   this.anxiety &&
-          //   this.disorientation &&
-          //   this.uncooperativeness &&
-          //   this.poor_impulse_control &&
-          //   this.others &&
-          //   this.ipsychopathology_remarks &&
-          //   this.risk_of_violence &&
-          //   this.risk_of_suicide &&
-          //   this.risk_of_other_deliberate &&
-          //   this.risk_of_severe &&
-          //   this.risk_of_harm &&
-          //   this.changes_in_teratment &&
-          //   this.akathisia &&
-          //   this.acute_dystonia &&
-          //   this.parkinsonism &&
-          //   this.tardive_dyskinesia &&
-          //   this.others_specify &&
-          //   this.side_effects_remarks &&
-          //   this.social_performance &&
-          //   this.psychoeducation &&
-          //   this.coping_skills &&
-          //   this.adl_training &&
-          //   this.supported_employment &&
-          //   this.family_intervention &&
-          //   this.intervention_others &&
-          //   this.remarks &&
-          //   this.employment_past_months &&
-          //   this.psychiatric_clinic &&
-          //   this.im_depot_clinic &&
-          //   this.next_community_visit &&
-          //   this.comments &&
-          //   this.location_services_id &&
-          //   this.type_diagnosis_id &&
-          //   this.category_services &&
-          //   this.complexity_services_id &&
-          //   this.outcome_id &&
-          //   //this.medication_des &&
-          //   this.validate &&
-          //   this.staff_name &&
-          //   this.designation
-          // )
-          //{
+          if (
+            this.cps_date &&
+            this.cps_time &&
+            this.cps_seen_by &&
+            this.cps_date_discussed &&
+            this.cps_time_discussed &&
+            this.cps_discussed_with &&
+            this.visit_date &&
+            this.visit_time &&
+            this.informants_name &&
+            this.informants_relationship &&
+            this.informants_contact &&
+            this.case_manager &&
+            this.visited_by &&
+            this.visit_outcome &&
+            this.current_intervention &&
+            this.compliance_treatment &&
+            this.medication_supervised_by &&
+            this.delusions &&
+            this.hallucination &&
+            this.behavior &&
+            this.blunted_affect &&
+            this.depression &&
+            this.anxiety &&
+            this.disorientation &&
+            this.uncooperativeness &&
+            this.poor_impulse_control &&
+            this.others &&
+            this.ipsychopathology_remarks &&
+            this.risk_of_violence &&
+            this.risk_of_suicide &&
+            this.risk_of_other_deliberate &&
+            this.risk_of_severe &&
+            this.risk_of_harm &&
+            this.changes_in_teratment &&
+            this.akathisia &&
+            this.acute_dystonia &&
+            this.parkinsonism &&
+            this.tardive_dyskinesia &&
+            this.others_specify &&
+            this.side_effects_remarks &&
+            this.social_performance &&
+            this.psychoeducation &&
+            this.coping_skills &&
+            this.adl_training &&
+            this.supported_employment &&
+            this.family_intervention &&
+            this.intervention_others &&
+            this.remarks &&
+            this.employment_past_months &&
+            this.psychiatric_clinic &&
+            this.im_depot_clinic &&
+            this.next_community_visit &&
+            this.comments &&
+            this.location_services_id &&
+            this.type_diagnosis_id &&
+            this.category_services &&
+            this.complexity_services_id &&
+            this.outcome_id &&
+            //this.medication_des &&
+            this.validate &&
+            this.staff_name &&
+            this.designation
+          )
+          {
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -2589,21 +2599,25 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Successfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
-          //}
+          }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+
+            alert("Error Occured!");
         }
 
       }

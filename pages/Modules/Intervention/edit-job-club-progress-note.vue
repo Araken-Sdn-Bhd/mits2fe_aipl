@@ -489,6 +489,7 @@ export default {
               medication: this.medication_des,
               appId:this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -497,19 +498,24 @@ export default {
             this.loader = false;
             this.resetmodel();
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
               }
     },
@@ -632,6 +638,7 @@ export default {
               medication: this.medication_des,
               appId:this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
@@ -640,14 +647,20 @@ export default {
             this.loader = false;
             this.resetmodel();
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+
+            alert("Error Occured");
+            this.GoBack();
           }
         }
       } catch (e) {}
