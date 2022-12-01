@@ -572,6 +572,8 @@
                              </li>
                         </ul>
                        </p>
+                       <br>
+                       <br>
                 <div class="d-flex" v-if="!pid">
 
                     <button @click="GoBack" class="btn btn-primary btn-text">
@@ -780,12 +782,7 @@ export default {
             this.resetmodel();
           }
         
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-            this.GoBack();
-      }
+      } catch (e) {}
       }
     },
   

@@ -572,7 +572,9 @@
                              </li>
                         </ul>
                        </p>
-                <div class="d-flex" v-if="!pid">
+                       <br>
+                       <br>
+                <div class="d-flex">
 
                     <button @click="GoBack" class="btn btn-primary btn-text">
                       <i class="fa fa-arrow-alt-to-left"></i> Back
@@ -688,15 +690,38 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
+    if(this.Id){
+this.GetPatientdetails();
+    }
     this.GetList();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
     if (this.pid) {
       this.getdetails();
+      this.GetPatientdetails();
     }
   },
   methods: {
+    async GetPatientdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.Id,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.client = response.data.list[0].name_asin_nric;
+      } else {
+        window.alert("Something went wrong");
+      }
+     },
     async onCreateEvent() {
       if (confirm("Are you sure you want to save this as draft ? ")) {
        try{
@@ -762,6 +787,7 @@ export default {
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -777,15 +803,10 @@ export default {
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
-            this.resetmodel();
+            
           }
         
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-            this.GoBack();
-      }
+      } catch (e) {}
       }
     },
   
@@ -1008,6 +1029,7 @@ export default {
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
@@ -1241,12 +1263,21 @@ export default {
               this.outcome_id= response.data.Data[0].outcome;
               this.medication_des= response.data.Data[0].medication_prescription;
         this.GetList();
-        this.GetPatientdetails();
+        const response2 = await this.$axios.post(
+          "diagnosis/getIcd9subcodeList",
+          { icd_category_code: this.code_id },
+          { headers }
+        );
+        if (response2.data.code == 200 || response2.data.code == "200") {
+          this.icdcatcodelist = response2.data.list;
+        } else {
+          this.icdcatcodelist = [];
+        }
       } else {
         window.alert("Something went wrong");
       }
     },
-    GoBack(){
+    GoBack() {
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id, appId: this.appId },
