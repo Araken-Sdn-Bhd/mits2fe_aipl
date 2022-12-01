@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post">
+              <div>
                 <Interventionphysectristdetails />
 
                <table class="notes">
@@ -335,7 +335,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -437,8 +437,8 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: 1,
               appId: this.appId,
+              id: this.pid,
               status: "0",
             },
             { headers }
@@ -447,19 +447,21 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succefully Updated");
+            this.GoBack();
+
           } else {
             this.loader = false;
             this.$nextTick(() => {
               $("#errorpopup").modal("show");
             });
+            alert("Error Occured!");
+            this.GoBack();
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
       }
               }
     },
@@ -557,8 +559,9 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: 1,
+              status: "1",
               appId: this.appId,
+              id: this.pid,
             },
             { headers }
           );
@@ -566,14 +569,19 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succefully Updated");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+            alert("Error Occured!");
+            this.GoBack();
+
           }
         }
       } catch (e) {}

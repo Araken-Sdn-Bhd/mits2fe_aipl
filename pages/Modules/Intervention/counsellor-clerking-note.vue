@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post">
+              <div>
                 <Interventionphysectristdetails />
 
                <table class="notes">
@@ -335,7 +335,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -405,7 +405,6 @@ export default {
       assistancelist:[],
       externallist:[],
       pid:0,
-      appId: 0,
       type:"",
     };
   },
@@ -447,19 +446,25 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+            alert("Error Occured!");
+            this.GoBack();
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
+        alert("Error Occured!")
+        this.GoBack();
       }
               }
     },
