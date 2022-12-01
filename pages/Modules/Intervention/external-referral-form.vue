@@ -801,6 +801,8 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
+    this.name = this.userdetails.user.name;
+    this.designation = this.userdetails.user.role;
     const current = new Date();
     this.todaydate =
       current.getDate() +
