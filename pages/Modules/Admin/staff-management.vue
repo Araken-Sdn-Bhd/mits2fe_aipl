@@ -20,6 +20,7 @@
                 <div class="row mb-3 mt-2">
                   <div class="col-sm-3">
                     <select
+                      disabled
                       v-model="Id"
                       class="form-select"
                       aria-label="Default select example"
@@ -290,6 +291,7 @@ export default {
       SidebarAccess:null,
     };
   },
+
   mounted() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -301,7 +303,8 @@ export default {
       .post(
         `${this.$axios.defaults.baseURL}` +
           "staff-management/getStaffManagementListOrById",
-        { branch_id: this.Id, name: this.name },
+        // { branch_id: this.Id, name: this.name }, (original)
+        { branch_id: this.userdetails.branch.branch_id, name: this.userdetails.branch.branch_name },
         { headers }
       )
       .then((resp) => {
@@ -345,14 +348,17 @@ export default {
       };
       const response = await this.$axios.post(
         "staff-management/getStaffManagementListOrById",
-        { branch_id: this.Id, name: this.name },
+        // { branch_id: this.Id, name: this.name }, (original)
+        { branch_id: this.userdetails.branch.branch_id, name: this.userdetails.branch.branch_name },
         {
           headers,
         }
       );
-      console.log("my body", this.name, this.Id);
+      // console.log("my body", this.name, this.Id); (original)
+      console.log("my body", this.userdetails.branch.branch_name, this.userdetails.branch.branch_id);
       console.log("my resp", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
+        // this.list = response.data.list; (original)
         this.list = response.data.list;
       } else {
         this.list = [];
@@ -365,11 +371,13 @@ export default {
       });
     },
     async onbranchchange(event) {
-      this.Id = event.target.value;
+      // this.Id = event.target.value; (original)
+      this.userdetails.branch.branch_id = event.target.value;
       this.GetList();
     },
     async onnamechange(event) {
-      this.name = event.target.value;
+      // this.name = event.target.value; (original)
+      this.userdetails.branch.branch_name = event.target.value;
       this.GetList();
     },
     async GetBranchList() {
@@ -378,7 +386,8 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-list", {
+      const response = await this.$axios.get("hospital/branch-list", 
+      {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
