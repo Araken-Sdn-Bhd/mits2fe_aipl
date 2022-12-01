@@ -11,7 +11,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="Onphychiatryclerkingnote">
+              <div>
                  <table class="notes">
                                 <thead>
                                     <tr>
@@ -389,7 +389,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -498,7 +498,7 @@ export default {
           const response = await this.$axios.post(
             "progress-note/add",
             {
-              added_by: this.userdetails.user.id.toString(),
+              added_by: this.userdetails.user.id,
               diagnosis: this.type_diagnosis_id.id,  //diagnosis
               clinical_notes: this.clinical_notes,
               management: this.management,
@@ -512,7 +512,8 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              status: 0,
+              appId: this.appId,
+              status: "0",
             },
             { headers }
           );
@@ -520,22 +521,26 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succesfully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-            this.resetmodel();
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+            // this.resetmodel();
+
+            alert("Error Occured!")
+            this.GoBack();
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-            this.GoBack();
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
+        //     this.GoBack();
       }
               }
     },
@@ -616,7 +621,7 @@ export default {
           const response = await this.$axios.post(
             "progress-note/add",
             {
-              added_by: this.userdetails.user.id.toString(),
+              added_by: this.userdetails.user.id,
               diagnosis: this.diagnosis,  //diagnosis
               clinical_notes: this.clinical_notes,
               management: this.management,
@@ -631,7 +636,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               appId: this.appId,
-              status: 1,
+              status: "1",
             },
             { headers }
           );
@@ -639,22 +644,24 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
+            alert("Succesfully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-            this.resetmodel();
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
     }
     },
