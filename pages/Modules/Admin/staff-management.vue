@@ -20,8 +20,25 @@
                 <div class="row mb-3 mt-2">
                   <div class="col-sm-3">
                     <select
+                      v-if="dataReady"
                       disabled
-                      v-model="Id"
+                      v-model="branchId"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="onbranchchange($event)"
+                    >
+                      <option value="0">Select Branch</option>
+                      <option
+                        v-for="brnch in branchlist"
+                        v-bind:key="brnch.id"
+                        v-bind:value="brnch.id"
+                      >
+                        {{ brnch.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                      v-if="dataReady2"
+                      v-model="branchId"
                       class="form-select"
                       aria-label="Default select example"
                       @change="onbranchchange($event)"
@@ -58,6 +75,7 @@
                   <tr>
                     <th>No</th>
                     <th>Staff Name</th>
+                    <th>Role</th>
                     <th>Designation</th>
                     <th>Branch</th>
                     <th>Action</th>
@@ -67,6 +85,7 @@
                   <tr v-for="(staff,index) in list" :key="index">
                     <td>{{ index+1}}</td>
                     <td>{{ staff.name }}</td>
+                    <td>{{staff.role_name}}</td>
                     <td>{{ staff.designation_name }}</td>
                     <td>{{ staff.hospital_branch_name }}</td>
                     <td>
@@ -289,10 +308,13 @@ export default {
       list: [],
       branchlist: [],
       SidebarAccess:null,
+      dataReady: false,
+      dataReady2: false,
     };
   },
 
   mounted() {
+    this.getRole();
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -332,14 +354,40 @@ export default {
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
     }
+
+    
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+ 
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
 
     this.GetBranchList();
   },
   methods: {
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branchId=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+      
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -349,16 +397,14 @@ export default {
       const response = await this.$axios.post(
         "staff-management/getStaffManagementListOrById",
         // { branch_id: this.Id, name: this.name }, (original)
-        { branch_id: this.userdetails.branch.branch_id, name: this.userdetails.branch.branch_name },
+        { branch_id: this.branchId, name: this.userdetails.branch.branch_name },
         {
           headers,
         }
       );
-      // console.log("my body", this.name, this.Id); (original)
       console.log("my body", this.userdetails.branch.branch_name, this.userdetails.branch.branch_id);
       console.log("my resp", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
-        // this.list = response.data.list; (original)
         this.list = response.data.list;
       } else {
         this.list = [];
