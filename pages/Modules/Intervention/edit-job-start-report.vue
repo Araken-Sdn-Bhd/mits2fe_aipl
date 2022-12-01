@@ -495,19 +495,16 @@
                        </p>
                        <br>
                        <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
 
-                    <button @click="GoBack" class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                    <button @click="GoBack" class="btn btn-primary btn-text">
+                      <i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    
-
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <div class="btn-right" :class="SidebarAccess!=1 ? 'hide':''">
+                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Publish
                     </button>
                   </div>
@@ -678,6 +675,7 @@ this.GetPatientdetails();
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -694,7 +692,11 @@ this.GetPatientdetails();
               $("#errorpopup").modal("show");
             });
         }
-      } catch (e) {}
+      } catch (e) {
+        this.$nextTick(() => {
+          $("#errorpopup").modal("show");
+        });
+      }
     }
     },
     async onPublishEvent() {
@@ -840,6 +842,7 @@ this.GetPatientdetails();
               medication_prescription: this.medication_des,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
