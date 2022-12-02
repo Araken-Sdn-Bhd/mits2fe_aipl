@@ -67,23 +67,20 @@
               </div>
               <!-- search-table -->
               <div class="table-responsive-ui">
-              <table
-                class="table table-striped data-table font-13 display nowrap"
-                id="datatable"
-              >
+                <table class="table table-striped data-table font-13" style="width: 100%" id="datatable">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>MRN</th>
                     <th>Salutation</th>
-                    <th style="min-width: 100px">Name</th>
+                    <th>Name</th>
                     <th>NRIC/Passport</th>
                     <th>Status</th>
                     <th>Appo. Date</th>
                     <th>Appo. Time</th>
                     <th>Assigned Dr.</th>
                     <th>Services</th>
-                    <th style="min-width: 100px">Action</th>
+                    <th style="width:15%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -123,7 +120,7 @@
                     </td>
                     <td>{{ app.appointment_date }}</td>
                     <td>{{ app.appointment_time }}</td>
-                    <td>{{ app.team_name }}</td>
+                    <td>{{ app.staffname }}</td>
                     <td>{{ app.service }}</td>
                     <td>
                       <a
@@ -254,9 +251,10 @@ export default {
     };
     const axios = require("axios").default;
     axios
-      .get(
+      .post(
         `${this.$axios.defaults.baseURL}` +
           "patient-appointment-details/todaylist",
+          {email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id },
         { headers }
       )
       .then((resp) => {
@@ -294,15 +292,7 @@ export default {
       } else {
         this.servicelist = [];
       }
-      //  const response = await this.$axios.get("hospital/getServiceByTeamId", {     //branch-team-list
-      //   headers,
-      // },{team_id: this.appId}
-      // );
-      // if (response.data.code == 200 || response.data.code == "200") {
-      //   this.teamlist = response.data.list;
-      // } else {
-      //   this.teamlist = [];
-      // }
+    
     },
     GetAppointmentlist() {
       const headers = {
@@ -322,26 +312,7 @@ export default {
           console.log("my applist", this.list);
         });
     },
-    GetServiceByTeamId(appid){
-      //  const headers = {
-      //   Authorization: "Bearer " + this.token,
-      //   Accept: "application/json",
-      //   "Content-Type": "application/json",
-      // };
-      // const axios = require("axios").default;
-      // axios
-      //   .get(
-      //     `${this.$axios.defaults.baseURL}` +
-      //       "hospital/getServiceByTeamId",
-      //     { headers },
-      //     { team_id: appid }
-      //   )
-      //   .then((resp) => {
-      //     // this.list = resp.data.list;
-      //     this.teamlist = resp.data.list;
-      //     console.log("my applist", this.list);
-      //   });
-    },
+   
     oneditAppointment(Id) {
       this.$router.push({
         path: "/modules/Patient/book-appointment",
@@ -405,16 +376,14 @@ export default {
           keyword: this.keyword,
           date: this.date,
           service_id: this.service_id,
+          email:this.userdetails.user.email,
+          branch_id:this.userdetails.branch.branch_id 
         },
         { headers }
       );
       console.log("my list", response.data);
       if (response.data.code == 200) {
         if (response.data.list.length > 0) {
-          //this.list.splice(0, this.list.length);
-          // if ($.fn.DataTable.isDataTable(".data-table")) {
-          //   $(".data-table").DataTable().clear().destroy();
-          // }
           this.list = response.data.list;
         } else {
           this.list = [];
