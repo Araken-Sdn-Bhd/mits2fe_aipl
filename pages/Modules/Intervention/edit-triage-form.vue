@@ -700,15 +700,15 @@ export default {
       )
 
     },
+    // Save as Draft
     async onCreateEvent(){
-      this.Ontriageformdraft();
-      this.OnBookAppointmentdraft();
-
+      this.ontriageformdraft();
+      this.onBookAppointmentdraft();
     },
+    // Submit
     async onPublishEvent(){
-      this.Ontriageform();
-      this.OnBookAppointment();
-
+      this.ontriageform();
+      this.onBookAppointment();
     },
     async GetList() {
       const headers = {
@@ -864,7 +864,9 @@ export default {
         this.icdcatcodelist = [];
       }
     },
-    async OnBookAppointment() {
+
+  // Submit Function
+    async onBookAppointment() {
       this.errorList = [];
       try {
         if (!this.appointment_date) {
@@ -911,23 +913,29 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
+                appId: this.appId,
+                id: this.pid,
               },
+              
               { headers }
             );
             console.log('my rs',response.data);
             if (response.data.code == 200) {
               this.loader = false;
+              window.alert("Data are saved successfully!");
+              this.GoBack();
             } else {
               this.loader = false;
-              this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              window.alert("Something went wrong!");
+              // this.errorList.push(response.data.message);
+              // this.$nextTick(() => {
+              //   $("#errorpopup").modal("show");
+              // });
             }
         }
       } catch (e) {}
     },
-    async Ontriageform() {
+    async ontriageform() {
 
       if (confirm("Are you sure you want to save this entry ? ")) {
       var screening_type = [];
@@ -1076,37 +1084,79 @@ export default {
               screening_type: screening_type,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
+          if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            window.alert("Data are saved successfully!");
+              this.GoBack();
+            // this.resetmodel();
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+          //   this.$nextTick(() => {
+          //     $("#errorpopup").modal("show");
+          //   });
           }
         }
       } catch (e) { }
-    }},
+    }
+    },
 
-    async Ontriageformdraft() {
+  // Save as Draft Function
+    async onBookAppointmentdraft() {
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+        try{
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+              "patient-appointment-details/addByPID",
+              {
+                added_by: this.userdetails.user.id,
+                booking_date: this.appointment_date,
+                booking_time: this.appointment_time,
+                patient_mrn_id: this.Id,
+                duration: this.appointment_duration,
+                appointment_type: this.appointment_type,
+                type_visit: this.appointment_type_visit,
+                patient_category: this.appointment_patient_category,
+                assign_team: this.appointment_type,
+                appId: this.appId,
+                id: this.pid,
+              },
+              { headers }
+            );
+            console.log('my rs',response.data);
+            if (response.data.code == 200) {
+              this.loader = false;
+              window.alert("Data are saved successfully!");
+            this.GoBack();
+            } else {
+              this.loader = false;
+              window.alert("Something went wrong!");
+              // this.errorList.push(response.data.message);
+              // this.$nextTick(() => {
+              //   $("#errorpopup").modal("show");
+              // });
+            }
+        
+      } catch (e) {}
+      }
+    },
+    async ontriageformdraft() {
 
-      if (confirm("Are you sure you want to save this entry ? ")) {
-      var screening_type = [];
-      $("table#screentable > tbody > tr").each(function () {
-        var obj = {};
-        obj.duration = $('td select.selects', this).val();
-        obj.scores = $('td input[type="text"].scores', this).val();
-        screening_type.push(obj);
-      });
-      try{
+      if (confirm("Are you sure you want to save this as draft ? ")) {
+      try {
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1160,68 +1210,30 @@ export default {
               services_id: this.services_id,
               screening_type: screening_type,
               appId: this.appId,
-              status:"0",
+              status: "0",
+              id: this.pid,
             },
             { headers }
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            window.alert("Data are saved successfully!");
+            this.GoBack();
+            // this.resetmodel();
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            window.alert("Something went wrong!");
+          //   this.$nextTick(() => {
+          //     $("#errorpopup").modal("show");
+          //   });
           }
-
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-            this.GoBack();
-      }
-      }
-    },
-
-    async OnBookAppointmentdraft() {
-      try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-              "patient-appointment-details/addByPID",
-              {
-                added_by: this.userdetails.user.id,
-                booking_date: this.appointment_date,
-                booking_time: this.appointment_time,
-                patient_mrn_id: this.Id,
-                duration: this.appointment_duration,
-                appointment_type: this.appointment_type,
-                type_visit: this.appointment_type_visit,
-                patient_category: this.appointment_patient_category,
-                assign_team: this.appointment_type,
-              },
-              { headers }
-            );
-            console.log('my rs',response.data);
-            if (response.data.code == 200) {
-              this.loader = false;
-            } else {
-              this.loader = false;
-              this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
-            }
-
-      } catch (e) {}
+        
+      } catch (e) { }
+    }
     },
 
     resetmodel() {
@@ -1359,11 +1371,11 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
+    }
     },
-  },
-};
+  };
 </script>
 <style scoped>
 .hide {
