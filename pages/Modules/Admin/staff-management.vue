@@ -310,11 +310,11 @@ export default {
       SidebarAccess:null,
       dataReady: false,
       dataReady2: false,
+      branchId:"",
     };
   },
 
   mounted() {
-    this.getRole();
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -359,10 +359,10 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
- 
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
 
     this.GetBranchList();
+    this.getRole();
   },
   methods: {
     async getRole() {
