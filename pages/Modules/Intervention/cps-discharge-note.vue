@@ -106,15 +106,18 @@
 
 
 
-                     <tr v-if="!pid">
+                     <tr>
                     <th class="vertical-align-top">Psychopathology</th>
                     <td>
+                      <div class="pp-box">
                       <div class="form-check">
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="Symptoms (Delusion/hallucinnation) Controlled"
+                          v-model="symptoms"
                           name=""
-                          id="1"  @click="OnPsychopathology('Symptoms (Delusion/hallucinnation) Controlled',$event)"
+                          id="pp-1"
                         />
                         <label class="form-check-label" for="1">
                           Symptoms (Delusion/hallucinnation) Controlled
@@ -125,8 +128,10 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="No Persistent Aggressive/risk To Self Or Others"
+                          v-model="aggressive"
                           name=""
-                          id="2" @click="OnPsychopathology('No Persistent Aggressive/risk To Self Or Others',$event)"
+                          id="pp-2"
                         />
                         <label class="form-check-label" for="2">
                           No Persistent Aggressive/risk To Self Or Others
@@ -137,8 +142,10 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="No Frequent Relapse Episode (>2 Admission Per Year)"
+                          v-model="relapse"
                           name=""
-                          id="3" @click="OnPsychopathology('No Frequent Relapse Episode (>2 Admission Per Year)',$event)"
+                          id="pp-3"
                         />
                         <label class="form-check-label" for="3">
                           No Frequent Relapse Episode (>2 Admission Per Year)
@@ -148,8 +155,10 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="Compliance To Medication"
+                          v-model="compliance"
                           name=""
-                          id="4" @click="OnPsychopathology('Compliance To Medication',$event)"
+                          id="pp-4"
                         />
                         <label class="form-check-label" for="4">
                           Compliance To Medication
@@ -159,8 +168,10 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="No Or Tolerable Side Effect Or Treatment"
+                          v-model="tolerable"
                           name=""
-                          id="5" @click="OnPsychopathology('No Or Tolerable Side Effect Or Treatment',$event)"
+                          id="pp-5"
                         />
                         <label class="form-check-label" for="5">
                           No Or Tolerable Side Effect Or Treatment
@@ -170,19 +181,23 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
+                          value="Insight Towards Illness And Treatment"
+                          v-model="insight"
                           name=""
-                          id="6" @click="OnPsychopathology('Insight Towards Illness And Treatment',$event)"
+                          id="pp-6"
                         />
                         <label class="form-check-label" for="6">
                           Insight Towards Illness And Treatment
                         </label>
                       </div>
+                    </div>
                     </td>
                   </tr>
 
-                  <tr v-if="!pid">
+                  <tr>
                     <th class="vertical-align-top">Psychosocial:</th>
-                    <td>
+                    <td class="ps-box">
+                      <div class="ps-box">
                       <table class="sub-table">
                         <tbody>
                           <tr>
@@ -191,8 +206,10 @@
                                 <input
                                   class="form-check-input"
                                   type="checkbox"
+                                  value="Accommodation"
+                                  v-model="accommodation"
                                   name=""
-                                  id="11" @click="OnPsychosocial('Accommodation',$event)"
+                                  id="ps-1"
                                 />
                                 <label class="form-check-label" for="11">
                                   Accommodation
@@ -203,8 +220,10 @@
                                 <input
                                   class="form-check-input"
                                   type="checkbox"
+                                  value="Financial Support"
+                                  v-model="financial"
                                   name=""
-                                  id="21" @click="OnPsychosocial('Financial Support',$event)"
+                                  id="ps-2"
                                 />
                                 <label class="form-check-label" for="21">
                                   Financial Support
@@ -215,8 +234,10 @@
                                 <input
                                   class="form-check-input"
                                   type="checkbox"
+                                  value="Occupational Functioning"
+                                  v-model="occupational"
                                   name=""
-                                  id="31" @click="OnPsychosocial('Occupational Functioning',$event)"
+                                  id="ps-3" 
                                 />
                                 <label class="form-check-label" for="31">
                                   Occupational Functioning
@@ -226,8 +247,10 @@
                                 <input
                                   class="form-check-input"
                                   type="checkbox"
+                                  value="Living Skill"
+                                  v-model="skill"
                                   name=""
-                                  id="41" @click="OnPsychosocial('Living Skill',$event)"
+                                  id="ps-4"
                                 />
                                 <label class="form-check-label" for="41">
                                   Living Skill
@@ -241,7 +264,9 @@
                                   class="form-check-input"
                                   type="checkbox"
                                   name="mode-Of-therapy"
-                                  id="66" @click="OnPsychosocial('Social Activities',$event)"
+                                  value="Social Activities"
+                                  v-model="social"
+                                  id="ps-5"
                                 />
                                 <label class="form-check-label" for="66">
                                   Social Activities
@@ -253,7 +278,9 @@
                                   class="form-check-input"
                                   type="checkbox"
                                   name="mode-Of-therapy"
-                                  id="77" @click="OnPsychosocial('Family Cooperation/involvement/support',$event)"
+                                  value="Family Cooperation/involvement/support"
+                                  v-model="family"
+                                  id="ps-6"
                                 />
                                 <label class="form-check-label" for="77">
                                   Family Cooperation/involvement/support
@@ -265,7 +292,9 @@
                                   class="form-check-input"
                                   type="checkbox"
                                   name="mode-Of-therapy"
-                                  id="8" @click="OnPsychosocial('Regular Appointment With Doctor',$event)"
+                                  value="Regular Appointment With Doctor"
+                                  v-model="regular"
+                                  id="ps-7"
                                 />
                                 <label class="form-check-label" for="8">
                                   Regular Appointment With Doctor
@@ -275,18 +304,22 @@
                           </tr>
                         </tbody>
                       </table>
+                    </div>
                     </td>
                   </tr>
 
-                  <tr v-if="!pid">
+                  <tr>
                     <th class="vertical-align-top">Potential Risk:</th>
                     <td>
+                      <div class="pr-box">
                       <div class="form-check">
                         <input
                           class="form-check-input"
                           type="checkbox"
                           name=""
-                          id="3.1" @click="Onpotentialrisk('Aggression',$event)"
+                          value="Aggression"
+                          v-model="aggression"
+                          id="pr-1"
                         />
                         <label class="form-check-label" for="3.1">
                           Aggression
@@ -298,7 +331,9 @@
                           class="form-check-input"
                           type="checkbox"
                           name=""
-                          id="3.2" @click="Onpotentialrisk('Suicidality',$event)"
+                          value="Suicidality"
+                          v-model="suicidality"
+                          id="pr-2"
                         />
                         <label class="form-check-label" for="3.2">
                           Suicidality
@@ -310,7 +345,9 @@
                           class="form-check-input"
                           type="checkbox"
                           name=""
-                          id="3.3" @click="Onpotentialrisk('Criminality',$event)"
+                          value="Criminality"
+                          v-model="criminality"
+                          id="pr-3"
                         />
                         <label class="form-check-label" for="3.3">
                           Criminality
@@ -321,7 +358,9 @@
                           class="form-check-input"
                           type="checkbox"
                           name=""
-                          id="3.4" @click="Onpotentialrisk('Comorbid Substance Abuse',$event)"
+                          value="Comorbid Substance Abuse"
+                          v-model="comorbid"
+                          id="pr-4"
                         />
                         <label class="form-check-label" for="3.4">
                           Comorbid Substance Abuse
@@ -332,74 +371,15 @@
                           class="form-check-input"
                           type="checkbox"
                           name=""
-                          id="3.5" @click="Onpotentialrisk('Abuse Or Neglect',$event)"
+                          value="Abuse Or Neglect"
+                          v-model="abuse"
+                          id="pr-5"
                         />
                         <label class="form-check-label" for="3.5">
                           Abuse Or Neglect
                         </label>
                       </div>
-                    </td>
-                  </tr>
-
-                     <tr v-if="pid">
-                    <th class="vertical-align-top">Psychopathology</th>
-                    <td v-for="(phys,index) in phylist" :key="index">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name=""
-                          id="1"  checked
-                        />
-                        <label class="form-check-label" for="1">
-                         {{phys}}
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-
-                   <tr v-if="pid">
-                    <th class="vertical-align-top">Psychosocial:</th>
-                    <td>
-                      <table class="sub-table">
-                        <tbody>
-                          <tr>
-                            <td v-for="(psycho,index) in psycholist" :key="index">
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  name=""
-                                  id="11" checked
-                                />
-                                <label class="form-check-label" for="11">
-                                  {{psycho}}
-                                </label>
-                              </div>
-
-                            </td>
-
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-
-                  <tr v-if="pid">
-                    <th class="vertical-align-top">Potential Risk:</th>
-                    <td v-for="(potential,index) in potentiallist" :key="index">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name=""
-                          id="3.1" checked
-                        />
-                        <label class="form-check-label" for="3.1">
-                          {{potential}}
-                        </label>
-                      </div>
-
+                    </div>
                     </td>
                   </tr>
 
@@ -800,6 +780,23 @@ export default {
       this.getdetails();
     }
 
+    $(".pre-1").click(function (e) {
+        e.preventDefault();
+        $('#nav-tab a[href="#nav-cb"]').tab("show");
+      });
+      $('.pp-box input[type="checkbox"]').click(function () {
+        var inputValue = $(this).attr("value");
+        $("." + inputValue).toggle();
+      });
+      $('.ps-box input[type="checkbox"]').click(function () {
+        var inputValue = $(this).attr("value");
+        $("." + inputValue).toggle();
+      });
+      $('.pr-box input[type="checkbox"]').click(function () {
+        var inputValue = $(this).attr("value");
+        $("." + inputValue).toggle();
+      });
+
   },
   data() {
     return {
@@ -838,6 +835,24 @@ export default {
       specialist_name: "",
       case_manager: "",
       date: "",
+      symptoms: "",
+      aggressive: "",
+      relapse: "",
+      compliance: "",
+      tolerable: "",
+      insight: "",
+      accommodation: "",
+      financial: "",
+      occupational: "",
+      skill: "",
+      social: "",
+      family: "",
+      regular:"",
+      aggression: "",
+      suicidality: "",
+      criminality: "",
+      comorbid: "",
+      abuse: "",
       location_services: 0,
       type_diagnosis_id: 0,
       category_services: "",
@@ -862,7 +877,6 @@ export default {
     async onCreateEvent() {
       if (confirm("Are you sure you want to save this as draft ? ")) {
       try {
-        this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -880,12 +894,39 @@ export default {
               staff_name: this.staff_name,
               diagnosis: this.diagnosis_id,
               post_intervention: this.post_intervention,
-              psychopathology: this.psychopathology,
-              potential_risk: this.potential_risk,
+              psychopathology: JSON.stringify([
+                {
+                  "Symptoms (Delusion/hallucinnation) Controlled": this.symptoms,
+                  "No Persistent Aggressive/risk To Self Or Others": this.aggressive,
+                  "No Frequent Relapse Episode (>2 Admission Per Year)": this.relapse,
+                  "Compliance To Medication": this.compliance,
+                  "No Or Tolerable Side Effect Or Treatment": this.tolerable,
+                  "Insight Towards Illness And Treatment": this.insight,
+                }
+              ]),
+              potential_risk: JSON.stringify([
+                {
+                  "Aggression": this.aggression,
+                  "Suicidality": this.suicidality,
+                  "Criminality": this.criminality,
+                  "Comorbid Substance Abuse": this.comorbid,
+                  "Abuse Or Neglect": this.abuse,
+                }
+              ]),
               category_of_discharge: this.category_of_discharge,
               discharge_diagnosis: this.discharge_diagnosis,
               outcome_medication: this.outcome_medication,
-              psychosocial: this.psychosocial,
+              psychosocial: JSON.stringify([
+                {
+                  "Accommodation":this.accommodation,
+                  "Financial Support": this.financial,
+                  "Occupational Functioning": this.occupational,
+                  "Living Skill": this.skill,
+                  "Social Activities": this.social,
+                  "Family Cooperation/involvement/support": this.family,
+                  "Regular Appointment With Doctor": this.regular,
+                }
+              ]),
               location_service: this.location_services,
               service_category: this.category_services,
               diagnosis_type: this.type_diagnosis_id,
@@ -928,33 +969,7 @@ export default {
       if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       this.errorList = [];
-      if (this.Psychopathologyselected.length > 0) {
-        this.Psychopathologyselected.forEach((element) => {
-          if (this.psychopathology) {
-            this.psychopathology = this.psychopathology + "," + element;
-          } else {
-            this.psychopathology = element;
-          }
-        });
-      }
-      if (this.Psychosocialselected.length > 0) {
-        this.Psychosocialselected.forEach((element) => {
-          if (this.psychosocial) {
-            this.psychosocial = this.psychosocial + "," + element;
-          } else {
-            this.psychosocial = element;
-          }
-        });
-      }
-      if (this.potentialriskselected.length > 0) {
-        this.potentialriskselected.forEach((element) => {
-          if (this.potential_risk) {
-            this.potential_risk = this.potential_risk + "," + element;
-          } else {
-            this.potential_risk = element;
-          }
-        });
-      }
+    
       try {
         if (!this.name) {
           this.errorList.push("Name is required");
@@ -976,15 +991,6 @@ export default {
         }
         if (!this.post_intervention) {
           this.errorList.push("Post Intervention is required");
-        }
-        if (!this.psychopathology) {
-          this.errorList.push("Psychopathology is required");
-        }
-        if (!this.psychosocial) {
-          this.errorList.push("Psychosocial is required");
-        }
-        if (!this.potential_risk) {
-          this.errorList.push("Potential Risk is required");
         }
         if (!this.category_of_discharge) {
           this.errorList.push("Category Of Discharge is required");
@@ -1090,12 +1096,9 @@ export default {
               staff_name: this.staff_name,
               diagnosis: this.diagnosis_id,
               post_intervention: this.post_intervention,
-              psychopathology: this.psychopathology,
-              potential_risk: this.potential_risk,
               category_of_discharge: this.category_of_discharge,
               discharge_diagnosis: this.discharge_diagnosis,
               outcome_medication: this.outcome_medication,
-              psychosocial: this.psychosocial,
               location_service: this.location_services,
               service_category: this.category_services,
               diagnosis_type: this.type_diagnosis_id,
@@ -1112,6 +1115,39 @@ export default {
               status: "1",
               id:this.pid,
               appId: this.appId,
+              psychopathology: JSON.stringify([
+                {
+                  "Symptoms (Delusion/hallucinnation) Controlled": this.symptoms,
+                  "No Persistent Aggressive/risk To Self Or Others": this.aggressive,
+                  "No Frequent Relapse Episode (>2 Admission Per Year)": this.relapse,
+                  "Compliance To Medication": this.compliance,
+                  "No Or Tolerable Side Effect Or Treatment": this.tolerable,
+                  "Insight Towards Illness And Treatment": this.insight,
+                }
+              ]),
+              potential_risk: JSON.stringify([
+                {
+                  "Aggression": this.aggression,
+                  "Suicidality": this.suicidality,
+                  "Criminality": this.criminality,
+                  "Comorbid Substance Abuse": this.comorbid,
+                  "Abuse Or Neglect": this.abuse,
+                }
+              ]),
+              category_of_discharge: this.category_of_discharge,
+              discharge_diagnosis: this.discharge_diagnosis,
+              outcome_medication: this.outcome_medication,
+              psychosocial: JSON.stringify([
+                {
+                  "Accommodation":this.accommodation,
+                  "Financial Support": this.financial,
+                  "Occupational Functioning": this.occupational,
+                  "Living Skill": this.skill,
+                  "Social Activities": this.social,
+                  "Family Cooperation/involvement/support": this.family,
+                  "Regular Appointment With Doctor": this.regular,
+                }
+              ]),
             },
             { headers }
           );
@@ -1377,13 +1413,6 @@ export default {
         this.staff_name = response.data.Data[0].staff_name;
         this.diagnosis_id = parseInt(response.data.Data[0].diagnosis);
         this.post_intervention = response.data.Data[0].post_intervention;
-        this.psychopathology = response.data.Data[0].psychopathology;
-        this.phylist = this.psychopathology.split(",");
-        this.psychosocial = response.data.Data[0].psychosocial;
-        this.psycholist = this.psychosocial.split(",");
-        this.potential_risk = response.data.Data[0].potential_risk;
-        this.potentiallist = this.potential_risk.split(",");
-
         this.category_of_discharge =
           response.data.Data[0].category_of_discharge;
         this.discharge_diagnosis = response.data.Data[0].discharge_diagnosis;
@@ -1404,6 +1433,71 @@ export default {
         this.case_manager = response.data.Data[0].case_manager;
         this.GetList();
 
+        var jdata1 = JSON.parse(response.data.Data[0].psychopathology);
+        jdata1.forEach((ele) => {
+          this.psychopathology ="val";
+          if(ele["Symptoms (Delusion/hallucinnation) Controlled"]==true){
+            this.symptoms = "Symptoms (Delusion/hallucinnation) Controlled";
+          }
+          if(ele["No Persistent Aggressive/risk To Self Or Others"]==true){
+            this.aggressive = "No Persistent Aggressive/risk To Self Or Others";
+          }
+          if(ele["Compliance To Medication"]==true){
+            this.compliance = "Compliance To Medication";
+          }
+          if(ele["No Or Tolerable Side Effect Or Treatment"]==true){
+            this.tolerable = "No Or Tolerable Side Effect Or Treatment";
+          }
+          if(ele["Insight Towards Illness And Treatment"]==true){
+            this.insight = "Insight Towards Illness And Treatment";
+          }
+        });
+      
+        var jdata2 = JSON.parse(response.data.Data[0].psychosocial);
+        jdata2.forEach((ele) => {
+          this.psychosocial ="val";
+          if(ele["Accommodation"]==true){
+            this.accommodation = "Accommodation";
+          }
+          if(ele["Financial Support"]==true){
+            this.financial = "Financial Support";
+          }
+          if(ele["Occupational Functioning"]==true){
+            this.occupational = "Occupational Functioning";
+          }
+          if(ele["Living Skill"]==true){
+            this.skill = "Living Skill";
+          }
+          if(ele["Social Activities"]==true){
+            this.social = "Social Activities";
+          }
+          if(ele["Family Cooperation/involvement/support"]==true){
+            this.family = "Family Cooperation/involvement/support";
+          }
+          if(ele["Regular Appointment With Doctor"]==true){
+            this.regular = "Regular Appointment With Doctor";
+          }
+        });
+
+        var jdata3 = JSON.parse(response.data.Data[0].potential_risk);
+        jdata3.forEach((ele) => {
+          this.potential_risk ="val";
+          if(ele["Aggression"]==true){
+            this.aggression = "Aggression";
+          }
+          if(ele["Suicidality"]==true){
+            this.suicidality = "Suicidality";
+          }
+          if(ele["Criminality"]==true){
+            this.criminality = "Criminality";
+          }
+          if(ele["Comorbid Substance Abuse"]==true){
+            this.comorbid = "Comorbid Substance Abuse";
+          }
+          if(ele["Abuse Or Neglect"]==true){
+            this.abuse = "Abuse Or Neglect";
+          }
+        });
 
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
