@@ -248,12 +248,10 @@
                   </li>
                 </ul>
                 </p>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
-
-                    <button @click="setData" class="btn btn-success btn-text"><i class="fad fa-print"></i>Print</button>
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -324,6 +322,7 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.staff_name = this.userdetails.user.name;
       this.GetList();
@@ -471,29 +470,26 @@ export default {
               outcome: this.outcome_id,
               medication: this.medication_des,
               status: "0",
+              appId: this.appId,
+              id: this.pid,
             },
             { headers }
           );
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+
+            alert("Succefully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+              alert("Error Occured!");
+              this.GoBack();
           }
         } catch (e) {
-          this.$nextTick(() => {
-            this.loader = false;
-            this.resetmodel();
-            $("#errorpopup").modal("show");
-          });
+          this.loader = false;
+          alert("Error Occured!");
+          this.GoBack();
         }
       }
     },
@@ -615,6 +611,8 @@ export default {
                 outcome: this.outcome_id,
                 medication: this.medication_des,
                 status: "1",
+                appId: this.appId,
+                id: this.pid,
               },
               { headers }
             );
@@ -622,21 +620,19 @@ export default {
             if (response.data.code == 200) {
               this.loader = false;
               this.resetmodel();
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+
+              alert("Succefully Created");
+              this.GoBack();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              alert("Error Occured!");
+              this.GoBack();
             }
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          alert("Error Occured!");
+          this.GoBack();
         }
       }
     },

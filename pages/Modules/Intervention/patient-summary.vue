@@ -1054,7 +1054,7 @@ export default {
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/job-club-progress-note",
-          query: { pid: data.id, type: val,  id: this.Id,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
@@ -1238,7 +1238,7 @@ export default {
         });
       } else if (data.type == "SEProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/edit-edit-se-progress-notes",
+          path: "/modules/Intervention/edit-se-progress-notes",
           query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "CounsellingProgressNote") {
@@ -1545,7 +1545,7 @@ export default {
     Oncounselingprogressnote() {
       this.$router.push({
         path: "/modules/Intervention/counseling-progress-note",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oncounsaltationdischargenote() {
@@ -1657,7 +1657,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/etp-progress-note",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },

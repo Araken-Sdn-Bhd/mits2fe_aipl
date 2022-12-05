@@ -594,6 +594,7 @@ export default {
               patient_id: this.Id,
               appId: this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -738,6 +739,7 @@ export default {
               patient_id: this.Id,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
