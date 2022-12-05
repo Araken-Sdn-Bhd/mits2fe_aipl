@@ -49,7 +49,7 @@
                         v-bind:key="catcode.id"
                         v-bind:value="catcode.id"
                       >
-                        {{ catcode.icd_category_code }} {{catcode.icd_category_name}}
+                      {{ catcode.icd_code }} {{catcode.icd_name}}
                       </option>
                     </select>
                   </div>
@@ -76,7 +76,7 @@
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label">Age:</label>
-                    <select class="form-select" v-model="age">
+                    <select class="form-select" v-model="Age">
                       <option value="">Please Select</option>
                       <option
                         v-for="rfl in agelist"
@@ -215,7 +215,7 @@
                     <select class="form-select" v-model="occupation_status">
                       <option value="">Please Select</option>
                       <option
-                        v-for="rfl in occupationsectorlist"
+                        v-for="rfl in occupationstatuslist"
                         v-bind:key="rfl.id"
                         v-bind:value="rfl.id"
                       >
@@ -315,13 +315,14 @@
                     <label class="form-label">Method of Self Harm:</label>
                     <select class="form-select" v-model="self_harm">
                       <option value="">Please Select</option>
-                      <option
-                        v-for="rfl in selfharmmethodlist"
-                        v-bind:key="rfl.name"
-                        v-bind:value="rfl.name"
-                      >
-                        {{ rfl.name }}
-                      </option>
+                      <option>Overdose/Poisoning</option>
+                      <option>Hanging/Suffocation</option>
+                      <option>Drowning</option>
+                      <option>Firearms or explosives</option>
+                      <option>Fire/flames</option>
+                      <option>Cutting or Piercing</option>
+                      <option>Jumping from height</option>
+                      <option>Other</option>
                     </select>
                   </div>
                 </div>
@@ -330,13 +331,9 @@
                     <label class="form-label">Suicidal Intent:</label>
                     <select class="form-select" v-model="suicidal_intent">
                       <option value="">Please Select</option>
-                      <option
-                        v-for="rfl in suicidalintantlist"
-                        v-bind:key="rfl.name"
-                        v-bind:value="rfl.name"
-                      >
-                        {{ rfl.name }}
-                      </option>
+                      <option>No</option>
+                      <option>Yes</option>
+                      <option>Undetermined</option>
                     </select>
                   </div>
                 </div>
@@ -351,13 +348,11 @@
                     >
                     <select class="form-select" v-model="idea_about_method">
                       <option value="">Please Select</option>
-                      <option
-                        v-for="rfl in patientideamethodlist"
-                        v-bind:key="rfl.name"
-                        v-bind:value="rfl.name"
-                      >
-                        {{ rfl.name }}
-                      </option>
+                      <option>Family, friends, peer group</option>
+                      <option>Internet (website, social media platform, app, blogs, forum, video/photosharing)</option>
+                      <option>Printed media (newspaper, books, magazine, etc)</option>
+                      <option>Broadcast media (television, radio)</option>
+                      <option>Specify patient actual words</option>
                     </select>
                   </div>
                 </div>
@@ -773,6 +768,7 @@ export default {
             citizenship: this.citizenship,
             gender: this.gender,
             race: this.race,
+            Age: this.Age,
             religion: this.religion,
             marital_status: this.marital_status,
             accomodation: this.accomodation,
@@ -849,6 +845,7 @@ export default {
               name: this.name,
               citizenship: this.citizenship,
               gender: this.gender,
+              Age: this.age,
               race: this.race,
               religion: this.religion,
               marital_status: this.marital_status,
