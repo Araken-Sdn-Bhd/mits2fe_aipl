@@ -525,7 +525,7 @@ export default {
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");
             // });
-            alert("Succesfully Created");
+            alert("Succesfully Updated");
             this.GoBack();
           } else {
             this.loader = false;
@@ -649,7 +649,7 @@ export default {
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");
             // });
-            alert("Succesfully Created");
+            alert("Succesfully Updated");
             this.GoBack();
           } else {
             this.loader = false;
