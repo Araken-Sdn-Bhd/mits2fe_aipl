@@ -90,7 +90,7 @@
 
               <div class="form-title">
                 <h5>SECTION B INTEREST AND EMPLOYMENT HISTORY</h5>
-                <p>Arahan: Tandakan (/) di kotak yang disediakan</p>
+                <p>Arahan: Tandkan (/) di kotak yang disediakan</p>
               </div>
 
               <table class="notes th-width table-padding">
@@ -151,7 +151,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Clerk Job"
+                                value="1"
                                 v-model="clerk_job_interester"
                               />Yes
                             </td>
@@ -171,7 +171,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Factory Worker"
+                                value="1"
                                 v-model="factory_worker_job_interested"
                               />Yes
                             </td>
@@ -191,7 +191,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Cleaner"
+                                value="1"
                                 v-model="cleaner_job_interested"
                               />Yes
                             </td>
@@ -211,7 +211,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Security Guard"
+                                value="1"
                                 v-model="security_guard_job_interested"
                               />Yes
                             </td>
@@ -231,7 +231,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Laundry Worker"
+                                value="1"
                                 v-model="laundry_worker_job_interested"
                               />Yes
                             </td>
@@ -251,7 +251,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Car Wash"
+                                value="1"
                                 v-model="car_wash_worker_job"
                               />Yes
                             </td>
@@ -271,7 +271,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Kitchen Helper"
+                                value="1"
                                 v-model="kitchen_helper_job"
                               />Yes
                             </td>
@@ -291,7 +291,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Waiter"
+                                value="1"
                                 v-model="waiter_job_interested"
                               />Yes
                             </td>
@@ -311,7 +311,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Chef"
+                                value="1"
                                 v-model="chef_job_interested"
                               />Yes
                             </td>
@@ -331,7 +331,7 @@
                               <input
                                 type="checkbox"
                                 name=""
-                                value="Others"
+                                value="1"
                                 v-model="others_job_specify"
                               />Yes
                             </td>
@@ -809,7 +809,7 @@
                        </p>
                        <br>
                       <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text" title="Back"
@@ -1022,10 +1022,10 @@ export default {
             });
           }
         } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.loader = false;
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
     }
   },
@@ -1348,13 +1348,7 @@ export default {
         this.interest_to_work = response.data.Data[0].interest_to_work;
         this.agree_if_mentari_find_job_for_you =
           response.data.Data[0].agree_if_mentari_find_job_for_you;
-          var jdata1 = JSON.parse(response.data.Data[0].clerk_job_interester);
-        jdata1.forEach((ele) => {
-         this.clerk_job_interester="val";
-         if (ele["Clerk Job"]==true) {
-            this.clerk_job_interester = "Clerk Job";
-          }
-        });
+        this.clerk_job_interester = response.data.Data[0].clerk_job_interester;
         this.clerk_job_notes = response.data.Data[0].clerk_job_notes;
         this.factory_worker_job_interested =
           response.data.Data[0].factory_worker_job_interested;
