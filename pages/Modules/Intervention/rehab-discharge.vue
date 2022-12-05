@@ -580,16 +580,13 @@ export default {
           );
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Created");
             this.resetmodel();
             this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
               }
     },
@@ -741,17 +738,14 @@ export default {
             // window.alert("Data are saved successfully!");
             this.loader = false;
             this.resetmodel();
+            alert("Succesfully Created");
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
           } else {
             window.alert("Something went wrong!");
             // this.resetmodel();
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {}

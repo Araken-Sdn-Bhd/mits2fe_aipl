@@ -579,20 +579,22 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
+            alert("Succesfully Updated");
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.resetmodel();
+
+            alert("Error Occured!");
+            this.GoBack();
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
               }
     },
@@ -744,17 +746,19 @@ export default {
             // window.alert("Data are saved successfully!");
             this.loader = false;
             this.resetmodel();
+            alert("Succesfully Updated");
             this.GoBack();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            // this.$nextTick(() => {
+            //   $("#insertpopup").modal("show");
+            // });
           } else {
-            window.alert("Something went wrong!");
+            // window.alert("Something went wrong!");
             this.resetmodel();
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) {}
