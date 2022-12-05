@@ -552,6 +552,7 @@ export default {
       Age: "",
       race_id: "",
       religion_id: "",
+      diagnosis_id:"",
       marital_id: "",
       accommodation_id: "",
       education_level: "",
