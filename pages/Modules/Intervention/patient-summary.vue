@@ -1054,7 +1054,7 @@ export default {
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
           path: "/modules/Intervention/job-club-progress-note",
-          query: { pid: data.id, type: val,  id: this.Id,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
@@ -1657,7 +1657,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/etp-progress-note",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
