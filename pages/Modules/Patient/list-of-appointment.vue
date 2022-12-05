@@ -96,9 +96,10 @@ export default {
     };
     const axios = require("axios").default;
     axios
-      .get(`${this.$axios.defaults.baseURL}` + "appointment-request/get", {
-        headers,
-      })
+      .post(`${this.$axios.defaults.baseURL}` + "appointment-request/get",
+      {email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id },
+       {headers}
+       )
       .then((resp) => {
         this.list = resp.data.list;
         this.alllist = resp.data.list;

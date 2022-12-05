@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Screening Patient</h1>
-            <!-- <a href="demographic.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -15,9 +14,25 @@
               <div class="search-table">
                 <div class="row">
                   <div class="col-sm-4 mt-2 mb-3">
-                    <!-- <input type="text" class="form-control" placeholder="Search By Name/NRIC/Passport/MRN"> -->
                     <select
                       v-model="branch"
+                      v-if="dataReady"
+                      disabled
+                      class="form-select"
+                      aria-label="Default select example" @change="OnSearch"
+                    >
+                      <option v-bind:value="0">Select Branch</option>
+                      <option
+                        v-for="hst in branchlist"
+                        v-bind:key="hst.id"
+                        v-bind:value="hst.id"
+                      >
+                        {{ hst.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                      v-model="branch"
+                      v-if="dataReady2"
                       class="form-select"
                       aria-label="Default select example" @change="OnSearch"
                     >
@@ -34,6 +49,7 @@
                 </div>
               </div>
               <!-- search-table -->
+             
               <table class="table table-striped data-table" style="width: 100%">
                 <thead>
                   <tr>
@@ -66,6 +82,7 @@
                   </tr>
                 </tbody>
               </table>
+            
             </div>
           </div>
         </div>
@@ -85,13 +102,15 @@ export default {
       list: [],
       branchlist: [],
       branch: 0,
-      // SidebarAccess = 1,
+      dataReady: false,
+      dataReady2: false,
     };
   },
   beforeMount() {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
+    this.getRole();
   },
    mounted() {
     const headers = {
@@ -101,8 +120,9 @@ export default {
     };
     const axios = require("axios").default;
     axios
-      .get(
+      .post(
         `${this.$axios.defaults.baseURL}`+"patient-registration/getPatientRegistrationListByScreening",
+        {email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id },
         { headers }
       )
       .then((resp) => {
@@ -128,6 +148,29 @@ export default {
       });
   },
   methods: {
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branch=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+      
+    },
     async GetBranchList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
