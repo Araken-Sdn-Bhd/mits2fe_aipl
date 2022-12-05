@@ -91,7 +91,7 @@
                     <td>
                       <a
                         style="color: #18846f; cursor: pointer"
-                        @click="oneditPatient(app.patient_id,app.appointment_id)"
+                        @click="oneditPatient(app.id,app.appointment_id)"
                         >{{ app.name_asin_nric }}</a
                       >
                     </td>
@@ -231,7 +231,7 @@ export default {
       assign_team: 0,
       staff_id:0,
       serviceType: "",
-      
+
     };
   },
 
@@ -292,7 +292,7 @@ export default {
       } else {
         this.servicelist = [];
       }
-    
+
     },
     GetAppointmentlist() {
       const headers = {
@@ -312,7 +312,7 @@ export default {
           console.log("my applist", this.list);
         });
     },
-   
+
     oneditAppointment(Id) {
       this.$router.push({
         path: "/modules/Patient/book-appointment",
@@ -377,7 +377,7 @@ export default {
           date: this.date,
           service_id: this.service_id,
           email:this.userdetails.user.email,
-          branch_id:this.userdetails.branch.branch_id 
+          branch_id:this.userdetails.branch.branch_id
         },
         { headers }
       );
