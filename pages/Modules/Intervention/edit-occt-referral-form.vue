@@ -94,134 +94,138 @@
                                                       </tr>
                                                   </thead>
                                                   <tbody>
-                                                      <tr v-if="!pid">
+                                                      <tr>
                                                           <td>
+                                                            <div class="col-sm-8 cla-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Activities Living Assessment')"
-                                                                       id="1">
-                                                                  <label class="form-check-label" for="1">
+                                                                  <input class="form-check-input" type="checkbox"  value="Activities Living Assessment" v-model="livingassessment"
+                                                                       id="cla-1">
+                                                                  <label class="form-check-label" for="cla-1">
                                                                       Activities Living Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Behavior Assessment')"
-                                                                       id="2">
-                                                                  <label class="form-check-label" for="2">
+                                                                  <input class="form-check-input" type="checkbox"  value="Behavior Assessment" v-model="behaviorassessment"
+                                                                       id="cla-2">
+                                                                  <label class="form-check-label" for="cla-2">
                                                                       Behavior Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Cognitive And Perceptual Assessment')"
-                                                                       id="3">
-                                                                  <label class="form-check-label" for="3">
+                                                                  <input class="form-check-input" type="checkbox"  value="Cognitive and Perceptual Assessment" v-model="cognitiveassessment"
+                                                                       id="cla-3">
+                                                                  <label class="form-check-label" for="cla-3">
                                                                       Cognitive And Perceptual Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Child Development')"
-                                                                      name="fah" id="4">
-                                                                  <label class="form-check-label" for="4">
+                                                                  <input class="form-check-input" type="checkbox"  value="Child Development" v-model="childevelopment"
+                                                                    id="cla-4">
+                                                                  <label class="form-check-label" for="cla-4">
                                                                       Child Development
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Psychological Assessment')"
-                                                                      name="fah" id="5">
-                                                                  <label class="form-check-label" for="5">
+                                                                  <input class="form-check-input" type="checkbox"  value="Psychology Assessment" v-model="psychology"
+                                                                    id="cla-5">
+                                                                  <label class="form-check-label" for="cla-5">
                                                                       Psychological Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Seating and Wheelchair Assessment')"
-                                                                      name="fah" id="6">
-                                                                  <label class="form-check-label" for="6">
+                                                                  <input class="form-check-input" type="checkbox"  value="Seating and Wheelchair Assessment" v-model="seatwheelchair"
+                                                                    id="cla-6">
+                                                                  <label class="form-check-label" for="cla-6">
                                                                       Seating and Wheelchair Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Domestic Assessment')"
-                                                                      name="fah" id="7">
-                                                                  <label class="form-check-label" for="7">
+                                                                  <input class="form-check-input" type="checkbox" value="Domestic Assessment" v-model="domestic"
+                                                                    id="cla-7">
+                                                                  <label class="form-check-label" for="cla-7">
                                                                       Domestic Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Driving Assessment')"
-                                                                      name="fah" id="7">
-                                                                  <label class="form-check-label" for="7">
+                                                                  <input class="form-check-input" type="checkbox"  value="Driving Assessment" v-model="driving"
+                                                                    id="cla-8">
+                                                                  <label class="form-check-label" for="cla-8">
                                                                       Driving Assessment
                                                                   </label>
                                                               </div>
+                                                            </div>
                                                           </td>
 
                                                           <td>
+                                                            <div class="col-sm-8 cla-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Hand Function And Upper Limb Assessment')"
-                                                                      name="mode-Of-therapy" id="66">
-                                                                  <label class="form-check-label" for="66">
+                                                                  <input class="form-check-input" type="checkbox"  value="Hand Function and Upper Limb Assessment" v-model="handlimb"
+                                                                  id="cla-9">
+                                                                  <label class="form-check-label" for="cla-9">
                                                                       Hand Function And Upper Limb Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Work/home/school Assessment')"
-                                                                      name="mode-Of-therapy" id="77">
-                                                                  <label class="form-check-label" for="77">
+                                                                  <input class="form-check-input" type="checkbox"  value="Work/Home/School Assessment" v-model="workhomeschool"
+                                                                    id="cla-10">
+                                                                  <label class="form-check-label" for="cla-10">
                                                                       Work/home/school Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Sensory Motor Assessment')"
-                                                                      name="mode-Of-therapy" id="8">
-                                                                  <label class="form-check-label" for="8">
+                                                                  <input class="form-check-input" type="checkbox"  value="Sensory Motor Assessment" v-model="sensorymotor"
+                                                                    id="cla-11">
+                                                                  <label class="form-check-label" for="1cla-1">
                                                                       Sensory Motor Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Pre School/school Skill Assessment')"
-                                                                      name="mode-Of-therapy" id="9">
-                                                                  <label class="form-check-label" for="9">
+                                                                  <input class="form-check-input" type="checkbox"  value="Preschool/School Skill Assessment" v-model="preschool"
+                                                                    id="cla-12">
+                                                                  <label class="form-check-label" for="cla-12">
                                                                       Pre School/school Skill Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Play Leisure Assessment')"
-                                                                      name="mode-Of-therapy" id="10">
-                                                                  <label class="form-check-label" for="10">
+                                                                  <input class="form-check-input" type="checkbox"  value="Play Leisure Assessment" v-model="leisure"
+                                                                    id="cla-13">
+                                                                  <label class="form-check-label" for="cla-13">
                                                                       Play Leisure Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Work Assessment')"
-                                                                      name="mode-Of-therapy" id="11">
-                                                                  <label class="form-check-label" for="11">
+                                                                  <input class="form-check-input" type="checkbox"  value="Work Assessment" v-model="workassessmnt"
+                                                                    id="cla-14">
+                                                                  <label class="form-check-label" for="cla-14">
                                                                       Work Assessment
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  @click="OnclinicalAssesment('Others')"
-                                                                      name="mode-Of-therapy" id="12"
+                                                                  <input class="form-check-input" type="checkbox"  value="Others" v-model="others"
+                                                                    id="cla-15"
                                                                       data-bs-toggle="collapse"
                                                                       data-bs-target="#Others-1">
-                                                                  <label class="form-check-label" for="12">
+                                                                  <label class="form-check-label" for="cla-15">
                                                                       Others
                                                                   </label>
                                                               </div>
 
                                                               <div class="collapse" id="Others-1">
-                                                                  <input type="text" class="form-control" name="" v-model="referral_clinical_assessment_other"
+                                                                  <input type="text" class="form-control" v-model="referral_clinical_assessment_other"
                                                                       placeholder="Please Specify">
                                                               </div>
+                                                            </div>
                                                           </td>
 
                                                       </tr>
-                                                       <tr v-if="pid">
+                                                       <!-- <tr v-if="pid">
                                                           <td>
                                                               <div class="form-check" v-for="(clinical,index) in clinicallist" :key="index">
                                                                   <input class="form-check-input" type="checkbox" checked
@@ -232,7 +236,7 @@
                                                               </div>
                                                           </td>
 
-                                                      </tr>
+                                                      </tr> -->
                                                   </tbody>
                                               </table>
                                           </td>
@@ -248,155 +252,158 @@
                                                       </tr>
                                                   </thead>
                                                   <tbody>
-                                                      <tr v-if="!pid">
+                                                      <tr>
                                                           <td>
+                                                            <div class="col-sm-8 inv-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Activity Of Daily Living Training')"
-                                                                      name="" id="1.11">
-                                                                  <label class="form-check-label" for="1.11">
+                                                                  <input class="form-check-input" type="checkbox" value="Activity Of Daily Living Training" v-model="activitytraining"
+                                                                    id="inv-1">
+                                                                  <label class="form-check-label" for="inv-1">
                                                                       Activity Of Daily Living Training
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('AIDS Adaptation/Assistive Devices')"
-                                                                      name="" id="1.11">
-                                                                  <label class="form-check-label" for="1.11">
+                                                                  <input class="form-check-input" type="checkbox" value="AIDS Adaptation/Assistive Devices" v-model="aids"
+                                                                    id="inv-2">
+                                                                  <label class="form-check-label" for="inv-2">
                                                                       AIDS Adaptation/Assistive Devices
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Behavioural Therapy')"
-                                                                      name="" id="1.12">
-                                                                  <label class="form-check-label" for="1.12">
+                                                                  <input class="form-check-input" type="checkbox" value="Behavioural Therapy" v-model="behavetherapy"
+                                                                    id="inv-3">
+                                                                  <label class="form-check-label" for="inv-3">
                                                                       Behavioural Therapy
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Cognitive And Perceptual Training')"
-                                                                      name="" id="1.13">
-                                                                  <label class="form-check-label" for="1.13">
+                                                                  <input class="form-check-input" type="checkbox" value="Cognitive And Perceptual Training" v-model="cognitivetraining"
+                                                                    id="inv-4">
+                                                                  <label class="form-check-label" for="inv-4">
                                                                       Cognitive And Perceptual Training
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Compression Therapy')"
-                                                                      name="" id="1.14">
-                                                                  <label class="form-check-label" for="1.14">
+                                                                  <input class="form-check-input" type="checkbox" value="Compression Therapy" v-model="compression"
+                                                                    id="inv-5">
+                                                                  <label class="form-check-label" for="inv-5">
                                                                       Compression Therapy
                                                                   </label>
                                                               </div>
 
-                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Creative Therapy')"
-                                                                      name="" id="1.14">
-                                                                  <label class="form-check-label" for="1.14">
+                                                              <div class="form-check">
+                                                                  <input class="form-check-input" type="checkbox" value="Creative Therapy" v-model="creative"
+                                                                  id="inv-6">
+                                                                  <label class="form-check-label" for="inv-6">
                                                                       Creative Therapy
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Social Skill Training')"
-                                                                      name="" id="1.15">
-                                                                  <label class="form-check-label" for="1.15">
+                                                                  <input class="form-check-input" type="checkbox" value="Social Skill Training" v-model="socialtraining"
+                                                                    id="inv-7">
+                                                                  <label class="form-check-label" for="inv-7">
                                                                       Social Skill Training
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Relaxation Therapy/Stress Management')"
-                                                                      name="" id="1.16">
-                                                                  <label class="form-check-label" for="1.16">
+                                                                  <input class="form-check-input" type="checkbox" value="Relaxation Therapy/Stress Management" v-model="relaxtherapy"
+                                                                    id="inv-8">
+                                                                  <label class="form-check-label" for="inv-8">
                                                                       Relaxation Therapy/Stress Management
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Low Vision Rehabilitation')"
-                                                                      name="" id="1.17">
-                                                                  <label class="form-check-label" for="1.17">
+                                                                  <input class="form-check-input" type="checkbox" value="Low Vision Rehabilitation" v-model="lowvision"
+                                                                    id="inv-9">
+                                                                  <label class="form-check-label" for="inv-9">
                                                                       Low Vision Rehabilitation
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Domestic Rehabilitation')"
-                                                                      name="" id="1.17">
-                                                                  <label class="form-check-label" for="1.17">
+                                                                  <input class="form-check-input" type="checkbox" value="Domestic Rehabilitation" v-model="domesticrehab"
+                                                                    id="inv-10">
+                                                                  <label class="form-check-label" for="inv-10">
                                                                       Domestic Rehabilitation
                                                                   </label>
                                                               </div>
+                                                            </div>
                                                           </td>
 
                                                           <td>
+                                                            <div class="col-sm-8 inv-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Fine Motor/Hand Function Training')"
-                                                                      name="fah" id="1.166">
-                                                                  <label class="form-check-label" for="1.166">
+                                                                  <input class="form-check-input" type="checkbox" value="Fine Motor/Hand Function Training" v-model="motorhand"
+                                                                    id="inv-11">
+                                                                  <label class="form-check-label" for="inv-11">
                                                                       Fine Motor/Hand Function Training
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Gross Motor/Functional Mobility')"
-                                                                      name="fah" id="1.177">
-                                                                  <label class="form-check-label" for="1.177">
+                                                                  <input class="form-check-input" type="checkbox" value="Gross Motor/Functional Mobility" v-model="grossmotor"
+                                                                    id="inv-12">
+                                                                  <label class="form-check-label" for="inv-12">
                                                                       Gross Motor/Functional Mobility
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Patient'+'s And Carer'+'s Education')"
-                                                                      name="fah" id="1.18">
-                                                                  <label class="form-check-label" for="1.18">
+                                                                  <input class="form-check-input" type="checkbox" value="Patient's and Career's Education" v-model="ptcareereducate"
+                                                                   id="inv-13">
+                                                                  <label class="form-check-label" for="inv-13">
                                                                       Patient's And Carer's Education
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Play And Leisure(Explanation And Training)')"
-                                                                      name="fah" id="1.19">
-                                                                  <label class="form-check-label" for="1.19">
+                                                                  <input class="form-check-input" type="checkbox" value="Play and Leisure (Explanation and Training)" v-model="playleisure"
+                                                                    id="inv-14">
+                                                                  <label class="form-check-label" for="inv-14">
                                                                       Play And Leisure(Explanation And Training)
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Sensory Integration Training')"
-                                                                      name="fah" id="1.110">
-                                                                  <label class="form-check-label" for="1.110">
+                                                                  <input class="form-check-input" type="checkbox" value="Sensory Integration Training" v-model="sensoryintegrity"
+                                                                    id="inv-15">
+                                                                  <label class="form-check-label" for="inv-15">
                                                                       Sensory Integration Training
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Wheelchair Training')"
-                                                                      name="fah" id="1.111">
-                                                                  <label class="form-check-label" for="1.111">
+                                                                  <input class="form-check-input" type="checkbox" value="Wheelchair Training" v-model="wheelchairtraining"
+                                                                    id="inv-16">
+                                                                  <label class="form-check-label" for="inv-16">
                                                                       Wheelchair Training
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Work Rehabilitation')"
-                                                                      name="fah" id="1.111">
-                                                                  <label class="form-check-label" for="1.111">
+                                                                  <input class="form-check-input" type="checkbox" value="Work Rehabilitation" v-model="workrehab"
+                                                                    id="inv-17">
+                                                                  <label class="form-check-label" for="inv-18">
                                                                       Work Rehabilitation
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Splint')"
-                                                                      name="fah" id="1.111">
-                                                                  <label class="form-check-label" for="1.111">
+                                                                  <input class="form-check-input" type="checkbox" value="Splint" v-model="splint"
+                                                                     id="inv-19">
+                                                                  <label class="form-check-label" for="inv-19">
                                                                       Splint
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangeintervention('Others')"
-                                                                      name="fah" id="1.112"
+                                                                  <input class="form-check-input" type="checkbox" value="Others" v-model="others2"
+                                                                    id="inv-20"
                                                                       data-bs-toggle="collapse"
                                                                       data-bs-target="#Others-2">
-                                                                  <label class="form-check-label" for="1.112">
+                                                                  <label class="form-check-label" for="inv-20">
                                                                       Others
                                                                   </label>
                                                               </div>
@@ -405,10 +412,11 @@
                                                                   <input type="text" class="form-control" name="" v-model="referral_clinical_intervention_other"
                                                                       placeholder="Please Specify">
                                                               </div>
+                                                            </div>
                                                           </td>
 
                                                       </tr>
-                                                       <tr v-if="pid">
+                                                       <!-- <tr v-if="pid">
                                                           <td>
                                                               <div class="form-check" v-for="(interven,index) in interventionlist" :key="index">
                                                                   <input class="form-check-input" type="checkbox" checked
@@ -420,7 +428,7 @@
 
                                                           </td>
 
-                                                      </tr>
+                                                      </tr> -->
                                                   </tbody>
                                               </table>
                                           </td>
@@ -436,83 +444,85 @@
                                                       </tr>
                                                   </thead>
                                                   <tbody>
-                                                      <tr v-if="!pid">
+                                                      <tr>
                                                           <td>
+                                                            <div class="col-sm-8 prp-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Special Needs Children Program')"
-                                                                      name="" id="1.21">
-                                                                  <label class="form-check-label" for="1.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Special Needs Children Program" v-model="specialneeds"
+                                                                      name="" id="prp-1">
+                                                                  <label class="form-check-label" for="prp-1">
                                                                       Special Needs Children Program
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Mental Health Program')"
-                                                                      name="" id="2.21">
-                                                                  <label class="form-check-label" for="2.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Mental Health Program" v-model="mentalhealth"
+                                                                      name="" id="prp-2">
+                                                                  <label class="form-check-label" for="prp-2">
                                                                       Mental Health Program
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Senior Citizen Program')"
-                                                                      name="" id="3.21">
-                                                                  <label class="form-check-label" for="3.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Senior Citizen Program" v-model="seniorcitizen"
+                                                                      name="" id="prp-3">
+                                                                  <label class="form-check-label" for="prp-3">
                                                                       Senior Citizen Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Community Program')"
-                                                                      name="" id="4.21">
-                                                                  <label class="form-check-label" for="4.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Community Program" v-model="communityprog"
+                                                                      name="" id="prp-4">
+                                                                  <label class="form-check-label" for="prp-4">
                                                                       Community Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Out Patient Program')"
-                                                                      name="" id="5.21">
-                                                                  <label class="form-check-label" for="5.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Out Patient Program" v-model="outpatient"
+                                                                      name="" id="prp-5">
+                                                                  <label class="form-check-label" for="prp-5">
                                                                       Out Patient Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Teenagers And School Program')"
-                                                                      name="" id="6.21">
-                                                                  <label class="form-check-label" for="6.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Teenager and School Program " v-model="teenschool"
+                                                                      name="" id="prp-6">
+                                                                  <label class="form-check-label" for="prp-6">
                                                                       Teenagers And School Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Diabetes Program')"
-                                                                      name="" id="7.21">
-                                                                  <label class="form-check-label" for="7.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Diabetes Program" v-model="diabetes"
+                                                                      name="" id="prp-7">
+                                                                  <label class="form-check-label" for="prp-7">
                                                                       Diabetes Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Hypertension Program')"
-                                                                      name="" id="7.21">
-                                                                  <label class="form-check-label" for="7.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Hypertension Program" v-model="hypertension"
+                                                                      name="" id="prp-8">
+                                                                  <label class="form-check-label" for="prp-8">
                                                                       Hypertension Program
                                                                   </label>
                                                               </div>
                                                                <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Antenatal/Mother And Child Program')"
-                                                                      name="" id="7.21">
-                                                                  <label class="form-check-label" for="7.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Antenatal/Mother and Child Program" v-model="antenatalmotherchild"
+                                                                      name="" id="prp-9">
+                                                                  <label class="form-check-label" for="prp-9">
                                                                       Antenatal/Mother And Child Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" @click="Onchangepromativeprogram('Healthy Lifestyle Program')"
-                                                                      name="" id="7.21">
-                                                                  <label class="form-check-label" for="7.21">
+                                                                  <input class="form-check-input" type="checkbox" value="Healthy Lifestyle Program" v-model="healthylife"
+                                                                      name="" id="prp-10">
+                                                                  <label class="form-check-label" for="prp-10">
                                                                       Healthy Lifestyle Program
                                                                   </label>
                                                               </div>
+                                                            </div>
                                                           </td>
                                                       </tr>
-                                                       <tr v-if="pid">
+                                                       <!-- <tr v-if="pid">
                                                           <td>
                                                               <div class="form-check" v-for="(promo,index) in promotivelist" :key="index">
                                                                   <input class="form-check-input" type="checkbox" checked
@@ -523,7 +533,7 @@
                                                               </div>
 
                                                           </td>
-                                                      </tr>
+                                                      </tr> -->
                                                   </tbody>
                                               </table>
                                           </td>
@@ -822,13 +832,15 @@
                     <i class="fa fa-save"></i> Save as draft
                   </button>
                   <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
-                    <i class="fa fa-paper-plane"></i> Update
+                    <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
               </div>
+
                       </div>
                   </div>
               </div>
+
           </main>
       </div>
   </div>
@@ -858,6 +870,18 @@ beforeMount() {
       $(".services").not(targetBox).hide();
       $(targetBox).show();
     });
+    $('.cla-box input[type="checkbox"]').click(function () {
+      var inputValue = $(this).attr("value");
+      $("." + inputValue).toggle();
+    });
+    $('.prp-box input[type="checkbox"]').click(function () {
+      var inputValue = $(this).attr("value");
+      $("." + inputValue).toggle();
+    });
+    $('.inv-box input[type="checkbox"]').click(function () {
+      var inputValue = $(this).attr("value");
+      $("." + inputValue).toggle();
+    });
   });
   let urlParams = new URLSearchParams(window.location.search);
   this.Id = urlParams.get("id");
@@ -873,6 +897,8 @@ beforeMount() {
   if (this.pid) {
     this.getdetails();
   }
+  this.referral_name = this.userdetails.user.name;
+  this.referral_designation = this.userdetails.user.role;
 },
 data() {
   return {
@@ -913,9 +939,53 @@ data() {
     externallist: [],
     pid: 0,
     type: "",
-    clinicallist: [],
-    interventionlist: [],
-    promotivelist: [],
+    // clinicallist: [],
+    // interventionlist: [],
+    // promotivelist: [],
+    livingassessment:"",
+    behaviorassessment:"",
+    cognitiveassessment:"",
+    childevelopment:"",
+    psychology:"",
+    seatwheelchair:"",
+    domestic:"",
+    driving:"",
+    handlimb:"",
+    workhomeschool:"",
+    sensorymotor:"",
+    preschool:"",
+    leisure:"",
+    workassessmnt:"",
+    others:"",
+    activitytraining:"",
+    aids:"",
+    behavetherapy:"",
+    cognitivetraining:"",
+    compression:"",
+    creative:"",
+    socialtraining:"",
+    relaxtherapy:"",
+    lowvision:"",
+    domesticrehab:"",
+    motorhand:"",
+    grossmotor:"",
+    ptcareereducate:"",
+    playleisure:"",
+    sensoryintegrity:"",
+    wheelchairtraining:"",
+    workrehab:"",
+    splint:"",
+    others2:"",
+    specialneeds:"",
+    mentalhealth:"",
+    seniorcitizen:"",
+    communityprog:"",
+    outpatient:"",
+    teenschool:"",
+    diabetes:"",
+    hypertension:"",
+    antenatalmotherchild:"",
+    healthylife:"",
     SidebarAccess:null,
     appId:0,
   };
@@ -933,20 +1003,72 @@ methods: {
         const response = await this.$axios.post(
           "occt-referral/add",
           {
+            type:"add",
             added_by: this.userdetails.user.id.toString(),
             patient_mrn_id: this.Id,
             referral_location: this.referral_location,
             date: this.date,
             diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-            referral_clinical_assessment: this.referral_clinical_assessment,
+            referral_clinical_assessment: JSON.stringify([
+              {
+                "Activities Living Assessment": this.livingassessment,
+                "Behavior Assessment": this.behaviorassessment,
+                "Cognitive And Perceptual Assessment": this.cognitiveassessment,
+                "Child Development": this.childevelopment,
+                "Psychological Assessment": this.psychology,
+                "Seating and Wheelchair Assessment": this.seatwheelchair,
+                "Domestic Assessment": this.domestic,
+                "Driving Assessment": this.driving,
+                "Hand Function And Upper Limb Assessment": this.handlimb,
+                "Work/home/school Assessment": this.workhomeschool,
+                "Sensory Motor Assessment": this.sensorymotor,
+                "Pre School/school Skill Assessment": this.preschool,
+                "Play Leisure Assessment": this.leisure,
+                "Work Assessment": this.workassessmnt,
+                "Others": this.others,
+              },
+            ]),
             referral_clinical_assessment_other:
               this.referral_clinical_assessment_other,
-            referral_clinical_intervention:
-              this.referral_clinical_intervention,
+            referral_clinical_intervention:JSON.stringify([
+              {
+                "Activity Of Daily Living Training": this.activitytraining,
+                "AIDS Adaptation/Assistive Devices": this.aids,
+                "Behavioural Therapy": this.behavetherapy,
+                "Cognitive And Perceptual Training": this.cognitivetraining,
+                "Compression Therapy": this.compression,
+                "Creative Therapy": this.creative,
+                "Social Skill Training": this.socialtraining,
+                "Relaxation Therapy/Stress Management": this.relaxtherapy,
+                "Low Vision Rehabilitation": this.lowvision,
+                "Domestic Rehabilitation": this.domesticrehab,
+                "Fine Motor/Hand Function Training": this.motorhand,
+                "Gross Motor/Functional Mobility": this.grossmotor,
+                "Patient's And Carer's Education": this.ptcareereducate,
+                "Play And Leisure(Explanation And Training)": this.playleisure,
+                "Sensory Integration Training": this.sensoryintegrity,
+                "Wheelchair Training": this.wheelchairtraining,
+                "Work Rehabilitation": this.workrehab,
+                "Splint": this.splint,
+                "Others": this.others2,
+              },
+            ]),
             referral_clinical_intervention_other:
               this.referral_clinical_intervention_other,
-            referral_clinical_promotive_program:
-              this.referral_clinical_promotive_program,
+            referral_clinical_promotive_program:JSON.stringify([
+              {
+              "Special Needs Children Program": this.specialneeds,
+              "Mental Health Program": this.mentalhealth,
+              "Senior Citizen Program": this.seniorcitizen,
+              "Community Program": this.communityprog,
+              "Out Patient Program": this.outpatient,
+              "Teenagers And School Program": this.teenschool,
+              "Diabetes Program": this.diabetes,
+              "Hypertension Program": this.hypertension,
+              "Antenatal/Mother And Child Program": this.antenatalmotherchild,
+              "Healthy Lifestyle Program": this.healthylife,
+              },
+            ]),
             referral_name: this.referral_name,
             referral_designation: this.referral_designation,
             location_services: this.location_services,
@@ -1087,15 +1209,66 @@ methods: {
             referral_location: this.referral_location,
             date: this.date,
             diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-            referral_clinical_assessment: this.referral_clinical_assessment,
+            referral_clinical_assessment: JSON.stringify([
+              {
+                "Activities Living Assessment": this.livingassessment,
+                "Behavior Assessment": this.behaviorassessment,
+                "Cognitive And Perceptual Assessment": this.cognitiveassessment,
+                "Child Development": this.childevelopment,
+                "Psychological Assessment": this.psychology,
+                "Seating and Wheelchair Assessment": this.seatwheelchair,
+                "Domestic Assessment": this.domestic,
+                "Driving Assessment": this.driving,
+                "Hand Function And Upper Limb Assessment": this.handlimb,
+                "Work/home/school Assessment": this.workhomeschool,
+                "Sensory Motor Assessment": this.sensorymotor,
+                "Pre School/school Skill Assessment": this.preschool,
+                "Play Leisure Assessment": this.leisure,
+                "Work Assessment": this.workassessmnt,
+                "Others": this.others,
+              },
+            ]),
             referral_clinical_assessment_other:
               this.referral_clinical_assessment_other,
-            referral_clinical_intervention:
-              this.referral_clinical_intervention,
+            referral_clinical_intervention:JSON.stringify([
+              {
+                "Activity Of Daily Living Training": this.activitytraining,
+                "AIDS Adaptation/Assistive Devices": this.aids,
+                "Behavioural Therapy": this.behavetherapy,
+                "Cognitive And Perceptual Training": this.cognitivetraining,
+                "Compression Therapy": this.compression,
+                "Creative Therapy": this.creative,
+                "Social Skill Training": this.socialtraining,
+                "Relaxation Therapy/Stress Management": this.relaxtherapy,
+                "Low Vision Rehabilitation": this.lowvision,
+                "Domestic Rehabilitation": this.domesticrehab,
+                "Fine Motor/Hand Function Training": this.motorhand,
+                "Gross Motor/Functional Mobility": this.grossmotor,
+                "Patient's And Carer's Education": this.ptcareereducate,
+                "Play And Leisure(Explanation And Training)": this.playleisure,
+                "Sensory Integration Training": this.sensoryintegrity,
+                "Wheelchair Training": this.wheelchairtraining,
+                "Work Rehabilitation": this.workrehab,
+                "Splint": this.splint,
+                "Others": this.others2,
+              },
+            ]),
             referral_clinical_intervention_other:
               this.referral_clinical_intervention_other,
-            referral_clinical_promotive_program:
-              this.referral_clinical_promotive_program,
+            referral_clinical_promotive_program:JSON.stringify([
+              {
+              "Special Needs Children Program": this.specialneeds,
+              "Mental Health Program": this.mentalhealth,
+              "Senior Citizen Program": this.seniorcitizen,
+              "Community Program": this.communityprog,
+              "Out Patient Program": this.outpatient,
+              "Teenagers And School Program": this.teenschool,
+              "Diabetes Program": this.diabetes,
+              "Hypertension Program": this.hypertension,
+              "Antenatal/Mother And Child Program": this.antenatalmotherchild,
+              "Healthy Lifestyle Program": this.healthylife,
+              },
+            ]),
             referral_name: this.referral_name,
             referral_designation: this.referral_designation,
             location_services: this.location_services,
@@ -1250,31 +1423,31 @@ methods: {
     this.medication_des = "";
     this.services_id = 0;
   },
-  OnclinicalAssesment(val) {
-    console.log("my val", val);
-    if (this.referral_clinical_assessment) {
-      this.referral_clinical_assessment =
-        this.referral_clinical_assessment + "," + val;
-    } else {
-      this.referral_clinical_assessment = val;
-    }
-  },
-  Onchangeintervention(val) {
-    if (this.referral_clinical_intervention) {
-      this.referral_clinical_intervention =
-        this.referral_clinical_intervention + "," + val;
-    } else {
-      this.referral_clinical_intervention = val;
-    }
-  },
-  Onchangepromativeprogram(val) {
-    if (this.referral_clinical_promotive_program) {
-      this.referral_clinical_promotive_program =
-        this.referral_clinical_promotive_program + "," + val;
-    } else {
-      this.referral_clinical_promotive_program = val;
-    }
-  },
+  // OnclinicalAssesment(val) {
+  //   console.log("my val", val);
+  //   if (this.referral_clinical_assessment) {
+  //     this.referral_clinical_assessment =
+  //       this.referral_clinical_assessment + "," + val;
+  //   } else {
+  //     this.referral_clinical_assessment = val;
+  //   }
+  // },
+  // Onchangeintervention(val) {
+  //   if (this.referral_clinical_intervention) {
+  //     this.referral_clinical_intervention =
+  //       this.referral_clinical_intervention + "," + val;
+  //   } else {
+  //     this.referral_clinical_intervention = val;
+  //   }
+  // },
+  // Onchangepromativeprogram(val) {
+  //   if (this.referral_clinical_promotive_program) {
+  //     this.referral_clinical_promotive_program =
+  //       this.referral_clinical_promotive_program + "," + val;
+  //   } else {
+  //     this.referral_clinical_promotive_program = val;
+  //   }
+  // },
   async GetPatientdetails() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -1315,21 +1488,161 @@ methods: {
       this.referral_location = response.data.Data[0].referral_location;
       this.date = response.data.Data[0].date;
       this.diagnosis_id = response.data.Data[0].diagnosis_id;
-      this.referral_clinical_assessment =
-        response.data.Data[0].referral_clinical_assessment;
-      this.clinicallist = this.referral_clinical_assessment.split(",");
+
+      //window.alert(response.data.Data[0].referral_clinical_assessment);
+      var jdata1 = JSON.parse(response.data.Data[0].referral_clinical_assessment);
+      jdata1.forEach((ele) => {
+      this.referral_clinical_assessment="val";
+      if (ele["Activities Living Assessment"]==true) {
+          this.livingassessment = "Activities Living Assessment";
+        }
+        if (ele["Behavior Assessment"]==true) {
+          this.behaviorassessment = "Behavior Assessment";
+        }
+        if (ele["Cognitive And Perceptual Assessment"]==true) {
+          this.cognitiveassessment = "Cognitive And Perceptual Assessment";
+        }
+        if (ele["Child Development"]==true) {
+          this.childevelopment = "Child Development";
+        }
+        if (ele["Psychological Assessment"]==true) {
+          this.psychology = "Psychological Assessment";
+        }
+        if (ele["Seating and Wheelchair Assessment"]==true) {
+          this.seatwheelchair = "Seating and Wheelchair Assessment";
+        }
+        if (ele["Domestic Assessment"]==true) {
+          this.domestic = "Domestic Assessment";
+        }
+        if (ele["Driving Assessment"]==true) {
+          this.driving = "Driving Assessment";
+        }
+        if (ele["Hand Function And Upper Limb Assessment"]==true) {
+          this.handlimb = "Hand Function And Upper Limb Assessment";
+        }
+        if (ele["Work/home/school Assessment"]==true) {
+          this.workhomeschool = "Work/home/school Assessment";
+        }
+        if (ele["Sensory Motor Assessment"]==true) {
+          this.sensorymotor = "Sensory Motor Assessment";
+        }
+        if (ele["Pre School/school Skill Assessment"]==true) {
+          this.preschool = "Pre School/school Skill Assessment";
+        }
+        if (ele["Play Leisure Assessment"]==true) {
+          this.leisure = "Play Leisure Assessment";
+        }
+        if (ele["Work Assessment"]==true) {
+          this.cognitiveassessment = "Work Assessment";
+        }
+        if (ele["Others"]==true) {
+          this.others = "Others";
+        }
+      });
       this.referral_clinical_assessment_other =
         response.data.Data[0].referral_clinical_assessment_other;
-      this.referral_clinical_intervention =
-        response.data.Data[0].referral_clinical_intervention;
-      this.interventionlist = this.referral_clinical_intervention.split(",");
+
+        window.alert(response.data.Data[0].referral_clinical_intervention);
+      var jdata2 = JSON.parse(response.data.Data[0].referral_clinical_intervention);
+      jdata2.forEach((ele) => {
+       this.referral_clinical_intervention="val";
+       if (ele["Activity Of Daily Living Training"]==true) {
+          this.activitytraining = "Activity Of Daily Living Training";
+        }
+        if (ele["AIDS Adaptation/Assistive Devices"]==true) {
+          this.aids = "AIDS Adaptation/Assistive Devices";
+        }
+        if (ele["Behavioural Therapy"]==true) {
+          this.behavetherapy = "Behavioural Therapy";
+        }
+        if (ele["Cognitive And Perceptual Training"]==true) {
+          this.cognitivetraining = "Cognitive And Perceptual Training";
+        }
+        if (ele["Compression Therapy"]==true) {
+          this.compression = "Compression Therapy";
+        }
+        if (ele["Creative Therapy"]==true) {
+          this.creative = "Creative Therapy";
+        }
+        if (ele["Social Skill Training"]==true) {
+          this.socialtraining = "Social Skill Training";
+        }
+        if (ele["Relaxation Therapy/Stress Management"]==true) {
+          this.relaxtherapy = "Relaxation Therapy/Stress Management";
+        }
+        if (ele["Low Vision Rehabilitation"]==true) {
+          this.lowvision = "Low Vision Rehabilitation";
+        }
+        if (ele["Domestic Rehabilitation"]==true) {
+          this.domesticrehab = "Domestic Rehabilitation";
+        }
+        if (ele["Fine Motor/Hand Function Training"]==true) {
+          this.motorhand = "Fine Motor/Hand Function Training";
+        }
+        if (ele["Gross Motor/Functional Mobility"]==true) {
+          this.grossmotor = "Gross Motor/Functional Mobility";
+        }
+        if (ele["Patient's And Carer's Education"]==true) {
+          this.ptcareereducate = "Patient's And Carer's Education";
+        }
+        if (ele["Play And Leisure(Explanation And Training)"]==true) {
+          this.playleisure = "Play And Leisure(Explanation And Training)";
+        }
+        if (ele["Sensory Integration Training"]==true) {
+          this.sensoryintegrity = "Sensory Integration Training";
+        }
+        if (ele["Wheelchair Training"]==true) {
+          this.wheelchairtraining = "Wheelchair Training";
+        }
+        if (ele["Work Rehabilitation"]==true) {
+          this.workrehab = "Work Rehabilitation";
+        }
+        if (ele["Splint"]==true) {
+          this.splint = "Splint";
+        }
+        if (ele["Others"]==true) {
+          this.others2 = "Others";
+        }
+      });
 
       this.referral_clinical_intervention_other =
         response.data.Data[0].referral_clinical_intervention_other;
-      this.referral_clinical_promotive_program =
-        response.data.Data[0].referral_clinical_promotive_program;
-      this.promotivelist =
-        this.referral_clinical_promotive_program.split(",");
+
+        //window.alert(response.data.Data[0].referral_clinical_promotive_program);
+      var jdata3 = JSON.parse(response.data.Data[0].referral_clinical_promotive_program);
+      jdata3.forEach((ele) => {
+      this.referral_clinical_promotive_program="val";
+      if (ele["Special Needs Children Program"]==true) {
+          this.specialneeds = "Special Needs Children Program";
+        }
+        if (ele["Mental Health Program"]==true) {
+          this.mentalhealth = "Mental Health Program";
+        }
+        if (ele["Senior Citizen Program"]==true) {
+          this.seniorcitizen = "Senior Citizen Program";
+        }
+        if (ele["Community Program"]==true) {
+          this.communityprog = "Community Program";
+        }
+        if (ele["Out Patient Program"]==true) {
+          this.outpatient = "Out Patient Program";
+        }
+        if (ele["Teenagers And School Program"]==true) {
+          this.teenschool = "Teenagers And School Program";
+        }
+        if (ele["Diabetes Program"]==true) {
+          this.diabetes = "Diabetes Program";
+        }
+        if (ele["Hypertension Program"]==true) {
+          this.hypertension = "Hypertension Program";
+        }
+        if (ele["Antenatal/Mother And Child Program"]==true) {
+          this.antenatalmotherchild = "Antenatal/Mother And Child Program";
+        }
+        if (ele["Healthy Lifestyle Program"]==true) {
+          this.healthylife = "Healthy Lifestyle Program";
+        }
+      });
 
       this.referral_name = response.data.Data[0].referral_name;
       this.referral_designation = response.data.Data[0].referral_designation;
