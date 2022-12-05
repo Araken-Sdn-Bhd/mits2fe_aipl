@@ -16,11 +16,29 @@
                   <div class="col-sm-3">
                     <select
                       v-model="Id"
+                      v-if="dataReady"
+                      disabled
                       class="form-select"
                       aria-label="Default select example"
                       @change="onbranchchange($event)"
                     >
                       <option value="0">Select Branch</option>
+                      <option
+                        v-for="brnch in branchlist"
+                        v-bind:key="brnch.id"
+                        v-bind:value="brnch.id"
+                      >
+                        {{ brnch.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                      v-model="Id"
+                      v-if="dataReady2"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="onbranchchange($event)"
+                    >
+                      <option value="0">All Branch</option>
                       <option
                         v-for="brnch in branchlist"
                         v-bind:key="brnch.id"
@@ -92,6 +110,8 @@ export default {
       userdetails: null,
       list: [],
       branchlist: [],
+      dataReady: false,
+      dataReady2: false,
     };
   },
   mounted() {
@@ -105,7 +125,7 @@ export default {
       .post(
         `${this.$axios.defaults.baseURL}` +
           "staff-management/getStaffManagementListOrById",
-        { branch_id: this.Id, name: this.name },
+        { branch_id: this.Id, name: this.name,email:this.userdetails.user.email },
         { headers }
       )
       .then((resp) => {
@@ -133,8 +153,32 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
+    this.getRole();
   },
   methods: {
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.Id=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+      
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
