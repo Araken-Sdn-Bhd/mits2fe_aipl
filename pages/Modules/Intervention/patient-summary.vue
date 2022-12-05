@@ -1545,7 +1545,7 @@ export default {
     Oncounselingprogressnote() {
       this.$router.push({
         path: "/modules/Intervention/counseling-progress-note",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oncounsaltationdischargenote() {
