@@ -38,7 +38,7 @@
                       aria-label="Default select example"
                       @change="onbranchchange($event)"
                     >
-                      <option value="0">Select Branch</option>
+                      <option value="0">All Branch</option>
                       <option
                         v-for="brnch in branchlist"
                         v-bind:key="brnch.id"
@@ -169,7 +169,7 @@ export default {
           headers,
         }
       );
-      this.id=this.userdetails.branch.branch_id;
+      this.Id=this.userdetails.branch.branch_id;
             if (response.data.list.code =="superadmin"){
               this.dataReady2= true;
               this.dataReady= false;
