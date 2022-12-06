@@ -78,7 +78,7 @@
                     <th>Branch</th>
                     <th>Team</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th style="width:8%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,10 +88,8 @@
                     <td>{{staff.role_name}}</td>
                     <td>{{ staff.designation_name }}</td>
                     <td>{{ staff.hospital_branch_name }}</td>
+                    <td>{{staff.service_name}}</td>
                     <td><a v-if="staff.status == '1'">Active</a><a v-else-if="staff.status == '0'">Inactive</a></td>
-                  
-                      
-                  
                     <td>
                       <a @click="view(staff)" class="view" title="view staff profile"><em class="fa fa-eye"></em></a>
                       <a class="view" @click="Onview(staff)" title="view user matrix"><em class="fa fa-bars"></em></a>
