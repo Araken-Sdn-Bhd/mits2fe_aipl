@@ -513,7 +513,7 @@
                         </ul>
                        </p>
                        <br><br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
@@ -523,7 +523,7 @@
                     <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <button type="edit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
@@ -633,9 +633,50 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      alert(this.patient_acknowledged);
       if (confirm("Are you sure you want to save as draft?")) {
       try {
+        if(this.iqtest == "IQ Test"){
+        this.iqtest = true;
+        }
+        if(this.psychosocial == "Psychosocial"){
+          this.psychosocial = true;
+        }
+        if(this.neuropsychology == "Neuropsychology"){
+          this.neuropsychology = true;
+        }
+        if(this.coping == "Coping Mechanism and Skill"){
+          this.coping = true;
+        }
+        if(this.personaltest == "Personality Test"){
+          this.personaltest = true;
+        }
+        if(this.others == "Others"){
+          this.others = true;
+        }
+        if(this.psychoterapy == "Psychoterapy"){
+          this.psychoterapy = true;
+        }
+        if(this.painmgt == "Pain Management"){
+          this.painmgt = true;
+        }
+        if(this.insomniaeating == "Insomnia/Eating Disorder"){
+          this.insomniaeating = true;
+        }
+        if(this.learndevelop == "Learning/Development"){
+          this.learndevelop = true;
+        }
+        if(this.maritalfamily == "Marital and Family Therapy"){
+          this.maritalfamily = true;
+        }
+        if(this.stressanger == "Stress and Anger Management"){
+          this.stressanger = true;
+        }
+        if(this.addict== "Addiction"){
+          this.addict = true;
+        }
+        if(this.others2 == "Others"){
+          this.others2 = true;
+        }
         this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -713,6 +754,50 @@ export default {
     },
     async onPublishEvent() {
       if (confirm("Are you sure you want to submit this entry")) {
+      this.errorList = [];
+      this.validate = true;
+      if(this.iqtest == "IQ Test"){
+        this.iqtest = true;
+        }
+        if(this.psychosocial == "Psychosocial"){
+          this.psychosocial = true;
+        }
+        if(this.neuropsychology == "Neuropsychology"){
+          this.neuropsychology = true;
+        }
+        if(this.coping == "Coping Mechanism and Skill"){
+          this.coping = true;
+        }
+        if(this.personaltest == "Personality Test"){
+          this.personaltest = true;
+        }
+        if(this.others == "Others"){
+          this.others = true;
+        }
+        if(this.psychoterapy == "Psychoterapy"){
+          this.psychoterapy = true;
+        }
+        if(this.painmgt == "Pain Management"){
+          this.painmgt = true;
+        }
+        if(this.insomniaeating == "Insomnia/Eating Disorder"){
+          this.insomniaeating = true;
+        }
+        if(this.learndevelop == "Learning/Development"){
+          this.learndevelop = true;
+        }
+        if(this.maritalfamily == "Marital and Family Therapy"){
+          this.maritalfamily = true;
+        }
+        if(this.stressanger == "Stress and Anger Management"){
+          this.stressanger = true;
+        }
+        if(this.addict== "Addiction"){
+          this.addict = true;
+        }
+        if(this.others2 == "Others"){
+          this.others2 = true;
+        }
       try {
         if (!this.patient_acknowledged) {
           this.errorList.push("acknowledged with the referral is required");
@@ -1019,7 +1104,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        //window.alert(response.data.Data[0].case_formulation);
+        //window.alert(response.data.Data[0].patient_acknowledged);
         if (response.data) {
         this.Id = response.data.Data[0].patient_id;
         this.diagnosis_id = response.data.Data[0].diagnosis_id;
@@ -1028,8 +1113,8 @@ export default {
 
         var jdata1 = JSON.parse(response.data.Data[0].reason_referral_assessment);
         jdata1.forEach((ele) => {
-         this.reason_referral_assessment="val";
-         if (ele["IQ Test"]==true) {
+        this.reason_referral_assessment="val";
+        if (ele["IQ Test"]==true) {
             this.iqtest = "IQ Test";
           }
           if (ele["Psychosocial"]==true) {
