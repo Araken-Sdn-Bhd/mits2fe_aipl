@@ -8,7 +8,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>User Matrix Detail</h1>
-            <!-- <a href="demographic.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
