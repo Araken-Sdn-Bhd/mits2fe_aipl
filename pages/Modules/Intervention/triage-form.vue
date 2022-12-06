@@ -7,12 +7,10 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>TRIAGE FORM</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
           <div class="card mb-4">
             <div class="card-body">
-              <!--<form method="post" @submit.prevent="onSubmitForm" >-->
-                <div>
+              <div>
                 <section class="section-border">
 
                   <div class="form-title mt-0">
@@ -552,18 +550,15 @@
                   <a @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
-
-                      <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                      <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                  <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
-                       </button>
-                       <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                        <i class="fa fa-paper-plane"></i> Submit
                     </button>
-                      </div>
-                  <!--<button type="submit" class="btn btn-warning btn-text ml-auto">
-                    <i class="fa fa-save"></i> Save
-                  </button>-->
+
+                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Publish
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -574,14 +569,11 @@
   </div>
 </template>
 <script>
-
-
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
   components: { CommonSidebar, CommonHeader },
-  name: "progress-note",
-
+  name: "triage-form",
   data() {
     return {
       userdetails: null,
@@ -646,12 +638,11 @@ export default {
       added_by:"",
       booking_date:"",
       booking_time:"",
-      patient_mrn_id:"",
       duration:"",
       type_visit:"",
       patient_category:"",
       assign_team:"",
-      SidebarAccess: null,
+      SidebarAccess:null,
     };
   },
 
@@ -661,10 +652,7 @@ export default {
     if (this.userdetails) {
       this.token = this.userdetails.access_token;
       this.branch = this.userdetails.branch.branch_id;
-
     }
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
@@ -700,15 +688,12 @@ export default {
       )
 
     },
-    // Save as Draft
-    async onCreateEvent(){
-      this.ontriageformdraft();
-      this.onBookAppointmentdraft();
+    async onCreateEvent() {
+      this.OnTriageDraft();
     },
-    // Submit
     async onPublishEvent(){
-      this.ontriageform();
-      this.onBookAppointment();
+      this.Ontriageform();
+      this.OnBookAppointment();
     },
     async GetList() {
       const headers = {
@@ -864,9 +849,7 @@ export default {
         this.icdcatcodelist = [];
       }
     },
-
-  // Submit Function
-    async onBookAppointment() {
+    async OnBookAppointment() {
       this.errorList = [];
       try {
         if (!this.appointment_date) {
@@ -914,27 +897,24 @@ export default {
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
                 appId: this.appId,
+                status: "1",
               },
-              
               { headers }
             );
             console.log('my rs',response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              window.alert("Data are saved successfully!");
-              this.GoBack();
             } else {
               this.loader = false;
-              window.alert("Something went wrong!");
-              // this.errorList.push(response.data.message);
-              // this.$nextTick(() => {
-              //   $("#errorpopup").modal("show");
-              // });
+              this.errorList.push(response.data.message);
+              this.$nextTick(() => {
+                $("#errorpopup").modal("show");
+              });
             }
         }
       } catch (e) {}
     },
-    async ontriageform() {
+    async Ontriageform() {
 
       if (confirm("Are you sure you want to save this entry ? ")) {
       var screening_type = [];
@@ -1003,7 +983,7 @@ export default {
               this.validate = false;
             } else {
               this.services_id = this.serviceid;
-            }
+            } 
           }
         }
         if (!this.outcome_id) {
@@ -1080,37 +1060,33 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              screening_type: screening_type,
+              screening_type: this.screening_type,
               appId: this.appId,
               status: "1",
             },
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200 || response.data.code == "200") {
+          if (response.data.code == 200) {
             this.loader = false;
             window.alert("Data are saved successfully!");
-              this.GoBack();
-            // this.resetmodel();
+            this.GoBack();
+            this.resetmodel();
             // this.$nextTick(() => {
             //   $("#insertpopup").modal("show");
             // });
           } else {
+             window.alert("Something went wrong!");
             this.loader = false;
-            window.alert("Something went wrong!");
-          //   this.$nextTick(() => {
-          //     $("#errorpopup").modal("show");
-          //   });
+            // this.$nextTick(() => {
+            //   $("#errorpopup").modal("show");
+            // });
           }
         }
       } catch (e) { }
-    }
-    },
-
-  // Save as Draft Function
-    async onBookAppointmentdraft() {
-      if (confirm("Are you sure you want to save this as draft ? ")) {
-        try{
+    }},
+    async OnBookAppDraft() {
+      try{
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1129,31 +1105,29 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
-                appId: this.appId,
+                // status: "0",
               },
               { headers }
             );
             console.log('my rs',response.data);
             if (response.data.code == 200) {
               this.loader = false;
-              window.alert("Data are saved successfully!");
-            this.GoBack();
+              alert("Successfully created");
+              this.GoBack();
+
             } else {
               this.loader = false;
-              window.alert("Something went wrong!");
-              // this.errorList.push(response.data.message);
+              this.errorList.push(response.data.message);
               // this.$nextTick(() => {
               //   $("#errorpopup").modal("show");
               // });
             }
-        
-      } catch (e) {}
-      }
+        } catch (e) {}
     },
-    async ontriageformdraft() {
-
+    async OnTriageDraft() {
       if (confirm("Are you sure you want to save this as draft ? ")) {
-      try {
+        alert("Fuction is Running");
+        try {
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1161,9 +1135,9 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "triage-form/add",
+             "triage-form/add",
             {
-              added_by: this.userdetails.user.id.toString(),
+              added_by: this.userdetails.user.id,
               risk_history_assressive: this.risk_history_assressive,
               risk_history_criminal: this.risk_history_criminal,
               risk_history_detereotation: this.risk_history_detereotation,
@@ -1205,7 +1179,7 @@ export default {
               medication_des: this.medication_des,
               patient_mrn_id: this.Id,
               services_id: this.services_id,
-              screening_type: screening_type,
+              screening_type: this.screening_type,
               appId: this.appId,
               status: "0",
             },
@@ -1213,23 +1187,16 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
-            this.loader = false;
-            window.alert("Data are saved successfully!");
-            this.GoBack();
-            // this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+            alert("Data are saved successfully! ");
+            this.OnBookAppDraft();
           } else {
-            this.loader = false;
             window.alert("Something went wrong!");
-          //   this.$nextTick(() => {
-          //     $("#errorpopup").modal("show");
-          //   });
+            this.loader = false;
           }
-        
-      } catch (e) { }
-    }
+        } catch (e) { 
+          alert(e);
+        }
+      }
     },
 
     resetmodel() {
@@ -1348,7 +1315,6 @@ export default {
         this.medication_des = response.data.Data[0].medication_des;
         this.services_id = response.data.Data[0].services_id;
         this.serviceid = response.data.Data[0].services_id;
-
         this.GetList();
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
@@ -1369,9 +1335,9 @@ export default {
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id, appId: this.appId },
             });
-    }
     },
-  };
+  },
+};
 </script>
 <style scoped>
 .hide {
