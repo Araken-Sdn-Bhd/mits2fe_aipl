@@ -8,9 +8,7 @@
           <div class="page-title">
             <h1>List of Mentari Staff</h1>
             <div class="btn-group-a">
-              <a href="/app/modules/Admin/new-staff" class="add-btn"
-                ><i class="fa fa-plus"></i
-              ></a>
+              <a href="/app/modules/Admin/new-staff" class="add-btn"><em class="fa fa-plus"></em></a>
             </div>
           </div>
 
@@ -325,7 +323,6 @@ export default {
       .post(
         `${this.$axios.defaults.baseURL}` +
           "staff-management/getStaffManagementListOrById",
-        // { branch_id: this.Id, name: this.name }, (original)
         { branch_id: this.userdetails.branch.branch_id, name: this.userdetails.branch.branch_name },
         { headers }
       )
@@ -417,12 +414,11 @@ export default {
       });
     },
     async onbranchchange(event) {
-      // this.Id = event.target.value; (original)
       this.userdetails.branch.branch_id = event.target.value;
       this.GetList();
     },
     async onnamechange(event) {
-      // this.name = event.target.value; (original)
+     
       this.userdetails.branch.branch_name = event.target.value;
       this.GetList();
     },

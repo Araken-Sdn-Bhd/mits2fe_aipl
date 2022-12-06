@@ -86,10 +86,7 @@
               </div>
 
               <!-- search-table -->
-              <table
-                class="table table-striped data-table font-13"
-                style="width: 100%"
-              >
+              <table class="table table-striped data-table font-13" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
