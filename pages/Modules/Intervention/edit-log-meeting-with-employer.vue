@@ -480,7 +480,7 @@ export default {
             alert("Error Occured!");
             this.GoBack();
           }
-        //}
+        
       } catch (e) {}
   }
     },
@@ -490,66 +490,7 @@ export default {
       this.validate = false;
       this.errorList = [];
       try {
-        // if (!this.date) {
-        //   this.errorList.push("Date is required");
-        // }
-        // if (!this.employee_name) {
-        //   this.errorList.push("Employer Name is required");
-        // }
-        // if (!this.company_name) {
-        //   this.errorList.push("Company name is required");
-        // }
-        // if (!this.purpose_of_meeting) {
-        //   this.errorList.push("Purpose of Meeting is required");
-        // }
-        // if (!this.discussion_start_time) {
-        //   this.errorList.push("Start Time of Discussion is required");
-        // }
-        // if (!this.discussion_end_time) {
-        //   this.errorList.push("End Time of Discussion is required");
-        // }
-        // if (!this.staff_name) {
-        //   this.errorList.push("Staff Name is required");
-        // }
-        // if (!this.location_services_id) {
-        //   this.errorList.push("Location Of Services is required");
-        // }
-        // if (!this.type_diagnosis_id) {
-        //   this.errorList.push("Type Of Diagnosis is required");
-        // }
-        // if (!this.category_services) {
-        //   this.errorList.push("Category Of Services is required");
-        // }
-        // if (!this.complexity_services_id) {
-        //   this.errorList.push("Complexity Of Service is required");
-        // }
-        // if (this.category_services) {
-        //   if (this.category_services == "assisstance") {
-        //     if (!this.services_id) {
-        //       this.errorList.push("Service is required");
-        //       this.validate = false;
-        //     }
-        //   } else if (this.category_services == "clinical-work") {
-        //     if (!this.code_id) {
-        //       this.errorList.push("ICD 9 CODE is required");
-        //       this.validate = false;
-        //     }
-        //     if (!this.sub_code_id) {
-        //       this.errorList.push("ICD 9 SUB CODE is required");
-        //       this.validate = false;
-        //     }
-        //   } else {
-        //     if (!this.serviceid) {
-        //       this.errorList.push("Services is required");
-        //       this.validate = false;
-        //     } else {
-        //       this.services_id = this.serviceid;
-        //     }
-        //   }
-        // }
-        // if (!this.outcome_id) {
-        //   this.errorList.push("Outcome is required");
-        // }
+
         if (
           this.date &&
           this.employee_name &&

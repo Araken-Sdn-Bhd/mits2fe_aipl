@@ -142,28 +142,18 @@ export default {
       contemplationScore: 0,
       actionScore: 0,
       laserresult: null,
-      // created_at:null
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.laserresult = JSON.parse(localStorage.getItem("LaserResult"));
     console.log("laser result", this.laserresult);
-    // this.created_at=this.laserresult;
-    // console.log("laser created_at", this.created_at);
-    // if (this.laserresult) {
-    //   this.precontemplationScore = this.laserresult.PRE_CONTEMPLATION.score;
-    //   this.contemplationScore = this.laserresult.CONTEMPLATION.score;
-    //   this.actionScore = this.laserresult.ACTION.score;
-    // }
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.GetPatientdetails();
     this.GetLaserResult();
 
 
-    // let urlParams = new URLSearchParams(window.location.search);
-    // this.Id = urlParams.get("id");
   },
   mounted() {},
   methods: {
@@ -187,16 +177,6 @@ export default {
       } else {
         window.alert("Something went wrong");
       }
-      // const response1 = await this.$axios.post(
-      //   "patient-alert/alertListbyPatientId",
-      //   {
-      //     alert_id: this.alert_id,
-      //   },
-      //   { headers }
-      // );
-
-      // this.alert = response1.data[0].message;
-      // console.log("my data66", this.alert);
     },
 
      async GetLaserResult() {

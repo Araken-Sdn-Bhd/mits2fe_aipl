@@ -148,7 +148,7 @@ export default {
       if(this.SidebarAccess!=1){
          console.log('this.$refs.hidebutton',this.$refs.hidebutton1);
           this.$refs.hidebutton.classList.add("hide");
-          // this.$refs.hidebutton1.classList.add("hide");
+
     }
   },
   beforeMount() {

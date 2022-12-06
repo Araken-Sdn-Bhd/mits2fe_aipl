@@ -439,7 +439,6 @@ export default {
       errors: [],
       userdetails: null,
       typeId: 0,
-      //category
       icdtype: 0,
       icdcatcode: "",
       icdcatname: "",
@@ -447,14 +446,12 @@ export default {
       icdcatindex: 0,
       icdcatlist: [],
       icdcatId: 0,
-      //icd code
       icdcatcodeforicdcod:0,
       icdtypecodeforicdcode:0,
       icdcode: "",
       icdname: "",
       icddescription: "",
       icdindex: 0,
-    //  icdtypecodelist: [],
       icdcatcodelist: [],
       codelist: [],
       icdcodeId: 0,
@@ -654,7 +651,6 @@ export default {
       this.errors = [];
       this.GeticdList();
     },
-    //ICD CATEGORY
     GetICDCategory() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -841,7 +837,6 @@ export default {
       this.GeticdcatList();
       this.icdcatId = 0;
     },
-    //ICD CODE
       GetICDCODELIST() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -892,22 +887,7 @@ export default {
         this.codelist = [];
       }
     },
-    // async GeticdcodeList() {
-    //   const headers = {
-    //     Authorization: "Bearer " + this.userdetails.access_token,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   };
-    //   const response = await this.$axios.get(
-    //     "icd-setting/icdtype/getIcdTypeCodeList",
-    //     { headers }
-    //   );
-    //   if (response.data.code == 200 || response.data.code == "200") {
-    //     this.icdtypecodelist = response.data.list;
-    //   } else {
-    //     this.icdtypecodelist = [];
-    //   }
-    // },
+
     async onCategorycodebind(event) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

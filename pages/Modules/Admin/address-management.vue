@@ -394,8 +394,6 @@ import CommonSidebar from '../../../components/CommonSidebar.vue';
 import City from "../../../components/Admin/city.vue";
 import Country from "../../../components/Admin/country.vue";
 import State from "../../../components/Admin/state.vue";
-// window.$ = window.jQuery = require('jquery');
-// import {DataTable} from "datatables.net";
 export default {
   components: { CommonSidebar, CommonHeader, Country, State, City },
   name: "address-management",
@@ -420,7 +418,6 @@ export default {
   },
   data() {
     return {
-      //Country
       errors: [],
       Country: "",
       code: "",
@@ -429,14 +426,12 @@ export default {
       CountryList: [],
       mycountryId: 0,
       loader: false,
-      //State
       CountryId: 0,
       State: "",
       Stateindex: 0,
       StateList: [],
       mystateId: 0,
       loader: false,
-      //City
       StateId: 0,
       City: "",
       Postcode: "",
@@ -487,7 +482,6 @@ export default {
     this.GetCountryList();
   },
   methods: {
-    //Country
     BindCountryList(){
        const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -659,7 +653,6 @@ export default {
       this.mycountryId = 0;
       this.GetCountryList();
     },
-    //State
     async addstate() {
       this.errors = [];
       try {
@@ -797,8 +790,6 @@ export default {
       this.GetStateList();
 
     },
-    //EndState
-    //City
     BindCityList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

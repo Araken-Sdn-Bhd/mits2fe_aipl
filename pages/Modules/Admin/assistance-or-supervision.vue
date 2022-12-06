@@ -99,7 +99,6 @@
   </div>
 </template>
 <script>
-//import $ from "jquery";
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {

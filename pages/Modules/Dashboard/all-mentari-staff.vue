@@ -127,13 +127,11 @@ export default {
                     "all-mentari-staff/get",
                     { headers, params: {branch: this.branch, email: this.email}}
                 );
-                // console.log('my res', response.data);
                 if (response.data.code == 200 || response.data.code == "200") {
                     this.todays_appointments = response.data.today_appointment;
                     this.personal_task = response.data.personal_task;
                     this.team_task = response.data.team_task;
                     this.list = response.data.list;
-                    // this.personal_task = response.data.list1[0].PersonalTask;
 
                 } else {
                     window.alert("Something went wrong");

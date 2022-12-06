@@ -894,7 +894,6 @@ export default {
       type: "",
       SidebarAccess:null,
       appId:0,
-      // jobs1:[],
     };
   },
   beforeMount() {

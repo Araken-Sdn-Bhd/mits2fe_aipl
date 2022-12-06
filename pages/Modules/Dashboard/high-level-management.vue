@@ -596,78 +596,7 @@ export default {
     this.GetStateList();
   },
   mounted() {
-    // const headers = {
-    //   Authorization: "Bearer " + this.userdetails.access_token,
-    //   Accept: "application/json",
-    //   "Content-Type": "application/json",
-    // };
-    // const axios = require("axios").default;
-    // axios.post(
-    // `${this.$axios.defaults.baseURL}` +
-    //   "high-level-mgt/get",
-    //   {
-    //     tmpyear: this.tmpyear,
-    //     tmpmonth: this.tmpmonth,
-
-    //     taryear: this.taryear,
-    //     tarmonth: this.tarmonth,
-    //     tarmentari: this.tarmentari,
-
-    //     scryear: this.scryear,
-    //     scrmonth: this.scrmonth,
-    //     scrmentari: this.scrmentari,
-
-    //     kpiyear: this.kpiyear,
-    //     kpimonth: this.kpimonth,
-    //     kpimentari: this.kpimentari,
-
-    //     sharpyear: this.sharpyear,
-    //     sharpmonth: this.sharpmonth,
-    //     sharpmentari: this.sharpmentari,
-    //   },
-    //   {
-    //     headers,
-    //   }
-    // ).then((response) => {
-    //     console.log("my resandr", response.data);
-    // if (response.data.code == 200) {
-    //   // this.Year = response.data.list[0].Year;
-    //   // this.Month = response.data.list[0].Month;totalmentarilocation
-    //   this.total_mentari = response.data.TotalMintari[0].TotalMentari;
-    //   this.total_appointment_request =
-    //     response.data.TotalAppoitment[0].total_appointments_request;
-    //   this.totalpatient = response.data.totalpatient[0].TotalPatient;
-    //   this.totalmentarilocation =
-    //     response.data.totalmentarilocation[0].TotalMentariLocation;
-    //   this.sharp_total_caseload = response.data.totalsharp[0].Sharptotal;
-    //   this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
-
-    //   this.kpiEmployement = response.data.kpiEmployement[0].employed;
-    //   this.kpiUnemployement = response.data.kpiUnemployement[0].unemployed;
-    //   this.kpiTerminated = response.data.kpiTerminated[0].terminate;
-
-    // var xValues = ["Employed","Unemployed","Terminated"];
-    // var yValues = [this.kpiEmployement,this.kpiUnemployement,this.kpiTerminated];
-    // var barColors = ["green","black","red"];
-    // new Chart("myChartkpi", {
-    //   type: "pie",
-    //   data: {
-    //     labels: xValues,
-    //     datasets: [
-    //       {
-    //         backgroundColor: barColors,
-    //         data: yValues,
-    //       },
-    //     ],
-    //   },
-    // });
-
-    // } else {
-    //   window.alert("Something went wrong");
-    // }
-    // }).catch((err) => {
-    //     console.error(err);
-    //   });
+ 
   },
 
   methods: {
@@ -710,8 +639,6 @@ export default {
 
         console.log("my res", response.data);
         if (response.data.code == 200) {
-          // this.Year = response.data.list[0].Year;
-          // this.Month = response.data.list[0].Month;totalmentarilocation
           this.total_mentari = response.data.TotalMintari[0].TotalMentari;
           this.total_appointment_request =
             response.data.TotalAppoitment[0].total_appointments_request;
@@ -737,7 +664,6 @@ export default {
           this.sharpracetotal = response.data.race;
           console.log("my sharpracetotal", this.sharpracetotal);
           console.log("my summaryActivity", this.summaryActivity);
-          // this.service_name_list =this.summaryActivity.filter(a=>a.service_name!=null); sharpracetotal
           this.service_name_list = [];this.service_patient_list = []; this.service_color_list = [];
           this.sharp_name_list = [];this.sharp_count_list = []; this.sharp_color_list = [];
 
@@ -771,7 +697,6 @@ export default {
           console.log("my service_color_list", this.sharp_color_list);
           this.diagnosisf0 = "";this.diagnosisf1 = "";this.diagnosisf2 = "";this.diagnosisf3 = ""; this.diagnosisf4 = "";this.diagnosisf5 = "";this.diagnosisf6 = "";
           if (response.data.diagnosis) {
-            //  console.log('my six',response.data.diagnosis);
             if (response.data.diagnosis[0]["icd_category_code"] == "F00-F07") {
               this.diagnosisf0 = response.data.diagnosis[0].sum_;
             }
@@ -940,22 +865,6 @@ var xValues = ["Male","Female"];
               ],
             },
           });
-    // var xValues = ["Sharp"];
-    // var yValues1 = [this.sharp_total_caseload];
-    // var barColors = ["red", "green"];
-
-    // new Chart("myChartsharp", {
-    //   type: "bar",
-    //   data: {
-    //     labels: xValues,
-    //     datasets: [
-    //       {
-    //         backgroundColor: barColors,
-    //         data: yValues1,
-    //       },
-    //     ],
-    //   },
-    // });
   }
         } else {
           window.alert("Something went wrong");
@@ -999,8 +908,6 @@ var xValues = ["Male","Female"];
           headers,
         });
         console.log("my announcement", response.data);
-        // this.list = resp.data.list;
-        // console.log('my announcement1', this.list);
         if (response.data.code == 200) {
           this.list = response.data.list;
           console.log("my announcement1", this.list);

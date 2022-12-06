@@ -950,17 +950,13 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             window.alert("Data are saved successfully!");
-            //this.resetmodel();
+
             this.GoBack();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
           } else {
             window.alert("Something went wrong!");
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
           }
       } catch (e) {}
       }
@@ -1154,19 +1150,13 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200 || response.data.code == "200" ) {
             window.alert("Data are saved successfully!");
-            // this.loader = false;
+
             this.GoBack();
-            //this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
           } else {
             window.alert("Something went wrong!");
             this.resetmodel();
-            // this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
           }
         }
       } catch (e) {}
@@ -1302,7 +1292,6 @@ export default {
         console.log("my details", this.patientdetails);
         this.mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
-        // console.log("my details", this.patientdetails);
       } else {
         window.alert("Something went wrong");
       }
@@ -1324,7 +1313,6 @@ export default {
         console.log("my details", this.patientdetails);
         this.mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
-        // console.log("my details", this.patientdetails);
       } else {
         window.alert("Something went wrong");
       }
@@ -1401,7 +1389,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
         this.GetPatientdetails1(response.data.Data[0].patient_mrn_id);

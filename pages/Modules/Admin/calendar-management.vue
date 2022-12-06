@@ -252,7 +252,6 @@ export default {
             });
           } else {
             this.$nextTick(() => {
-              //   this.errorList.push(response.data.message.uploaded_path[0]);
               $("#attachpopup").modal("hide");
               $("#errorpopup").modal("show");
             });

@@ -285,7 +285,6 @@ export default {
       }
     },
     async Ongeneratepdf() {
-      // console.log('my date',);
       this.errorList = [];
       this.error = null;
       if (!this.fromDate) {
@@ -314,18 +313,14 @@ export default {
             },
             { headers }
           );
-          // debugger;
-          // console.log("my report", response.data);
           if (response.data.code == 200) {
 
-            // response.result[0]['group_name'];
 
             this.list = response.data.result[0]['group_name'];
             this.listKey = Object.keys(this.list);
             console.log("my list", this.list);
             console.log("my listKey", this.listKey);
 
-            // console.log("my report patient", response.data);
             if (this.listKey.length > 0) {
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");

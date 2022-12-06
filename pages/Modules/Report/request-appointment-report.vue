@@ -202,7 +202,6 @@ export default {
                 pagesplit: true
 
             };
-              // this.filename=response.data.filename;
 
                 pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("RequestAppointmentReport.pdf");

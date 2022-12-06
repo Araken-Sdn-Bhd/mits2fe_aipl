@@ -244,7 +244,6 @@ export default {
   methods: {
     changesidebar: function (event) {
       event.target.className += " active";
-      // console.log(liid,index);
       alert(event.target.className);
     },
   },

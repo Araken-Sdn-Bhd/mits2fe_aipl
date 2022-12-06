@@ -431,7 +431,6 @@ export default {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
-      // Reload the page to refresh the data
       window.location.reload();
     },
     async getdetails() {
@@ -449,14 +448,13 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+
 
         this.Id = response.data.Data[0].patient_id;
 
         this.community_psychiatry_services =
           response.data.Data[0].community_psychiatry_services;
 
-        // this.GetList();
         this.GetPatientConnsentdetails();
       } else {
         window.alert("Something went wrong");

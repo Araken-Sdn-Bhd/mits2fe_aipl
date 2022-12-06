@@ -1155,19 +1155,6 @@ export default {
   methods: {
     demoFromHTML() {
 
-    // const input = document.getElementById('results');
-    // const divHeight = input.clientHeight
-    // const divWidth = input.clientWidth+500
-    // const ratio = divHeight / divWidth;
-    // html2canvas(input, { scale: '1' }).then((canvas) => {
-    //   const imgData = canvas.toDataURL('image/jpeg');
-    //   const pdfDOC = new jsPDF(); //  use a4 for smaller page
-    //   // const width = pdfDOC.internal.pageSize.getWidth();
-    //   // let height = pdfDOC.internal.pageSize.getHeight();
-    //   // height = ratio * width;
-    //   pdfDOC.addImage(imgData, 'JPEG', 0, 0, 50, 280 );
-    //   pdfDOC.save('summary.pdf');   //Download the rendered PDF.
-    // });
 
       var HTML_Width = $("#results").width();
 		var HTML_Height = $("#results").height();
@@ -1199,13 +1186,6 @@ export default {
 		    pdf.save("HTML-Document.pdf");
         });
 
-      // var pdf = new jsPDF("p", "mm", "a4");
-      // $("html, body").scrollTop(0);
-      // setTimeout(() => {
-      // pdf.addHTML($("#results")[0], function () {
-      //   pdf.save("Result.pdf");
-      // });
-      // }, 2000);
     },
   },
 };

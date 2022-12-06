@@ -735,14 +735,12 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            // window.alert("Data are saved successfully!");
             this.loader = false;
             this.resetmodel();
             alert("Succesfully Created");
             this.GoBack();
           } else {
             window.alert("Something went wrong!");
-            // this.resetmodel();
             this.loader = false;
             alert("Error Occured!");
             this.GoBack();

@@ -791,9 +791,6 @@ export default {
         if (!this.comment_patent_condition) {
           this.errorList.push("Comments On Patent's Condition is required");
         }
-        // if (!this.session_details) {
-        //   this.errorList.push("Session Details is required");
-        // }
         if (!this.session_issues) {
           this.errorList.push("Issues/Problems  is required");
         }
@@ -872,7 +869,6 @@ export default {
           this.comment_therapy_session &&
           this.patent_condition &&
           this.comment_patent_condition &&
-          // this.session_details &&
           this.session_issues &&
           this.conduct_session &&
           this.outcome_session &&

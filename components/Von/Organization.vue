@@ -958,7 +958,6 @@ export default {
       org_desc: "",
       org_email: "",
       org_phone: "",
-      //VOLUNTEEM
       Oname: "",
       Oposition_in_org: "",
       Odob: "",
@@ -985,7 +984,6 @@ export default {
       OYear: "",
       OLocation: "",
       ODescription: "",
-      //OUTREACH
       Oproject_name: "",
       Oproject_background: "",
       Oproject_objectives: "",
@@ -1229,9 +1227,6 @@ export default {
         if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        // if (!this.Odob) {
-        //   this.errors.push("Date Of Birth is required.");
-        // }
         if (!this.Oposition_in_org) {
           this.errors.push("Position in Organization/Company is required.");
         }
@@ -1275,34 +1270,12 @@ export default {
             "Does your organization consist of mental health professional is required."
           );
         }
-        // if (this.Ois_voluneering_exp == "experience2-yes") {
-        //   if (!this.OYear) {
-        //     this.errors.push("Organization year is required.");
-        //     this.OIsvalid = false;
-        //   }
-        //   if (!this.OLocation) {
-        //     this.errors.push("Organization Location is required.");
-        //     this.OIsvalid = false;
-        //   }
-        //   if (!this.ODescription) {
-        //     this.errors.push("Organization Description is required.");
-        //     this.OIsvalid = false;
-        //   }
-        // }
         if (this.Ois_mental_health_professional == "professional2-yes") {
           if (!this.Ofile) {
             this.errors.push("Latest Resume is required.");
             this.OIsvalid = false;
           }
-          // if (!this.Omentari_services) {
-          //   this.errors.push("Relevant Mentari Service is required.");
-          //   this.OIsvalid = false;
-          // }
         } else {
-          // if (!this.Omentari_services) {
-          //   this.errors.push("Relevant Mentari Service is required.");
-          //   this.OIsvalid = false;
-          // }
         }
         if (!this.Oavailable_date) {
           this.errors.push("Available Day is required.");
@@ -1318,7 +1291,6 @@ export default {
           this.Oposition_in_org &&
           this.OIsvalid &&
           this.Oname &&
-          //    this.Odob &&
           this.Oemail &&
           this.Ophone_number &&
           this.Oaddress &&
@@ -1439,9 +1411,6 @@ export default {
         if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        // if (!this.Odob) {
-        //   this.errors.push("Date Of Birth is required.");
-        // }
         if (!this.Oposition_in_org) {
           this.errors.push("Position in Organization/Company is required.");
         }
@@ -1528,7 +1497,6 @@ export default {
         if (
           this.OIsvalid &&
           this.Oname &&
-          //  this.Odob &&
           this.Oemail &&
           this.Ophone_number &&
           this.Oaddress &&
@@ -1648,9 +1616,6 @@ export default {
         if (!this.Oname) {
           this.errors.push("Name is required.");
         }
-        // if (!this.Odob) {
-        //   this.errors.push("Date Of Birth is required.");
-        // }
         if (!this.Oposition_in_org) {
           this.errors.push("Position in Organization/Company is required.");
         }
@@ -1717,7 +1682,6 @@ export default {
         if (
           this.OIsvalid &&
           this.Oname &&
-          // this.Odob &&
           this.Oemail &&
           this.Ophone_number &&
           this.Oaddress &&

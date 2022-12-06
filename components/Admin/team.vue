@@ -289,9 +289,6 @@ export default {
         }
       } catch (e) {
         console.log("my error", e);
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
       }
     },
     async ResetModel() {

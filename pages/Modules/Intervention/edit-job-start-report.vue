@@ -782,9 +782,7 @@ this.GetPatientdetails();
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
+
         if (
           this.client &&
           this.employment_specialist &&
@@ -804,7 +802,7 @@ this.GetPatientdetails();
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
+  
           this.validate
         ) {
           this.loader = true;
@@ -1019,7 +1017,6 @@ this.GetPatientdetails();
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
 

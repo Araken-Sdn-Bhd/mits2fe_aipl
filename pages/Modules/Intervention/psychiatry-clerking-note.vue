@@ -556,9 +556,6 @@ export default {
             if (response.data.code == 200) {
               this.loader = false;
               alert("Successfully Created")
-              // this.$nextTick(() => {
-              //   $("#insertpopup").modal("show");
-              // });
               this.GoBack();
             } else {
               this.loader = false;
@@ -651,7 +648,6 @@ export default {
           this.background_history &&
           this.general_examination &&
           this.mental_state_examination &&
-          // this.diagnosis_id &&
           this.management &&
           this.discuss_psychiatrist_name &&
           this.date &&
@@ -661,7 +657,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          //this.medication_des &&
           this.validate
         ) {
           this.loader = true;

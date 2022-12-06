@@ -898,10 +898,8 @@ export default {
             .each(function () {
               var optionValue = $(this).attr("value");
               if (optionValue) {
-                // $(".selected-box").not("." + optionValue).hide();
                 $("." + optionValue).show();
               } else {
-                // $(".selected-box").hide();
               }
             });
         })

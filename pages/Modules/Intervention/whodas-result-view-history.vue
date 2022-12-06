@@ -222,33 +222,25 @@ export default {
       console.log("my res", Array);
       const Results=this.whodasresult.results.split(',');
       console.log("my result", Results);
-      // const Levels=this.whodasresult.levels.split(',');
       if(Array[0] =="UC"){
         this.UC = Results[0];
-        // this.UClevel = Levels[0];
       } if(Array[1] =="GA"){
         this.GA = Results[1];
-        // this.GAlevel = Levels[1];
       }
        if(Array[2] =="SC"){
         this.SC = Results[2];
-        // this.SClevel = Levels[2];
       }
       if(Array[3] =="GAWP"){
         this.GAWP = Results[3];
-        // this.GAWPlevel = Levels[3];
       }
        if(Array[4] =="LAH"){
         this.LAH = Results[4];
-        // this.LAHlevel = Levels[4];
       }
        if(Array[5] =="LASW"){
         this.LASW = Results[5];
-        // this.LASWlevel = Levels[5];
       }
       if(Array[6] =="PIS"){
         this.PIS = Results[6];
-        // this.PISlevel = Levels[6];
       }
       this.UserTotal = this.whodasresult.result;
     }

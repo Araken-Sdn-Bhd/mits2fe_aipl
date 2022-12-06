@@ -197,7 +197,6 @@ export default {
       );
       console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
-        //alert(JSON.stringify(response.data.list));
         this.screenlist = response.data.list;
       } else {
         this.screenlist = [];

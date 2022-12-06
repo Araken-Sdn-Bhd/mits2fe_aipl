@@ -755,17 +755,13 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
             alert('Succesfull Created.');
             this.GoBack();
           } else {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
             alert('Error Occureed.');
             this.GoBack();
           }
@@ -773,7 +769,7 @@ export default {
           this.$nextTick(() => {
             this.loader = false;
             this.resetmodel();
-            // $("#errorpopup").modal("show");
+  
           });
         }
       }
@@ -789,9 +785,7 @@ export default {
           if (!this.therapy_time) {
             this.errorList.push("Time Performed is required");
           }
-          // if (!this.diagnosis_id) {
-          //   this.errorList.push("Diagnosis is required");
-          // }
+
           if (!this.frequency_session) {
             this.errorList.push("FREQUENCY OF SESSION is required");
           }
@@ -810,9 +804,7 @@ export default {
           if (!this.comment_patent_condition) {
             this.errorList.push("Comments On Patent's Condition is required");
           }
-          // if (!this.session_details) {
-          //   this.errorList.push("Session Details is required");
-          // }
+
           if (!this.session_issues) {
             this.errorList.push("Issues/Problems  is required");
           }
@@ -879,19 +871,17 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-          // if (!this.medication_des) {
-          //   this.errorList.push("Medication is required");
-          // }
+
           if (
             this.therapy_date &&
             this.therapy_time &&
-            // this.diagnosis_id &&
+
             this.frequency_session &&
             this.model_therapy &&
             this.comment_therapy_session &&
             this.patent_condition &&
             this.comment_patent_condition &&
-            //   this.session_details &&
+  
             this.session_issues &&
             this.conduct_session &&
             this.outcome_session &&
@@ -961,25 +951,19 @@ export default {
             if (response.data.code == 200) {
               this.loader = false;
               this.resetmodel();
-              // this.$nextTick(() => {
-              //   $("#insertpopup").modal("show");
-              // });
+
               alert('Succesfull Created.');
               this.GoBack();
             } else {
               this.loader = false;
-              // this.$nextTick(() => {
-              //   $("#errorpopup").modal("show");
-              // });
+
               alert('Error Occured!');
               this.GoBack();
             }
           }
         } catch (e) {
           this.loader = false;
-          // this.$nextTick(() => {
-          //   $("#errorpopup").modal("show");
-          // });
+
         }
       }
     },
@@ -993,9 +977,7 @@ export default {
         if (!this.therapy_time) {
           this.errorList.push("Time Performed is required");
         }
-        // if (!this.diagnosis_id) {
-        //   this.errorList.push("Diagnosis is required");
-        // }
+
         if (!this.frequency_session) {
           this.errorList.push("FREQUENCY OF SESSION is required");
         }
@@ -1014,9 +996,7 @@ export default {
         if (!this.comment_patent_condition) {
           this.errorList.push("Comments On Patent's Condition is required");
         }
-        // if (!this.session_details) {
-        //   this.errorList.push("Session Details is required");
-        // }
+
         if (!this.session_issues) {
           this.errorList.push("Issues/Problems  is required");
         }
@@ -1083,19 +1063,17 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
+
         if (
           this.therapy_date &&
           this.therapy_time &&
-          // this.diagnosis_id &&
+
           this.frequency_session &&
           this.model_therapy &&
           this.comment_therapy_session &&
           this.patent_condition &&
           this.comment_patent_condition &&
-          //   this.session_details &&
+
           this.session_issues &&
           this.conduct_session &&
           this.outcome_session &&
@@ -1338,7 +1316,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
 

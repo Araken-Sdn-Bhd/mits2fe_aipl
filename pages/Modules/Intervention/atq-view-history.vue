@@ -180,8 +180,7 @@ export default {
       this.patient_id=this.atqresult_history.patient_id;
       console.log("cbi namesre", this.patient_id);
     }
-    // this.GetList();
-    // this.GetUserIpAddress();
+
     if (this.userdetails) {
       this.userId = this.userdetails.user.id;
       this.token = this.userdetails.access_token;

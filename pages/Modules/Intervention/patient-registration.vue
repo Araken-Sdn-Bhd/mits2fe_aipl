@@ -1485,24 +1485,11 @@ export default {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
           }
-          //} else {
-          //  if (this.nric_no.length != 12) {
-          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
-          //    this.NextFirstval = false;
-          //  }
-          //}
         } else if (this.citizentype == "Permanent Resident") {
           if (!this.nric_no1) {
             this.errorList.push("NRIC No is required.");
             this.NextFirstval = false;
           }
-          //else {
-          //  this.nric_no = this.nric_no1;
-          //  if (this.nric_no.length != 12) {
-          //    this.errorList.push("Please Enter 12 Digit NRIC No.");
-          //    this.NextFirstval = false;
-          //  }
-          //}
         } else {
           if (!this.passport_no) {
             this.errorList.push("Passport No is required.");
@@ -1543,27 +1530,11 @@ export default {
       this.$refs.navdiv3.classList.add("show");
     },
     NextThird() {
-      // this.errorList = [];
-      // if (!this.kin_name_asin_nric) {
-      //   this.errorList.push("Name (As In NRIC) No is required.");
-      // }
-      // if (!this.kin_relationship_id) {
-      //   this.errorList.push("Relationship is required.");
-      // }
-      // if (!this.kin_mobile_no) {
-      //   this.errorList.push("Mobile Phone No is required.");
-      // }
-      // if (
-      //   this.kin_name_asin_nric &&
-      //   this.kin_mobile_no &&
-      //   this.kin_relationship_id
-      // ) {
       this.$refs.tab4.classList.add("active");
       this.$refs.navdiv3.classList.remove("active");
       this.$refs.navdiv3.classList.remove("show");
       this.$refs.navdiv4.classList.add("active");
       this.$refs.navdiv4.classList.add("show");
-      // }
     },
     PreviousFirst() {
       this.$refs.tab1.classList.add("active");
@@ -1589,7 +1560,6 @@ export default {
       this.$refs.navdiv3.classList.add("active");
       this.$refs.navdiv3.classList.add("show");
     },
-    //List
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1624,7 +1594,6 @@ export default {
         this.genderlist = [];
       }
 
-      //const response3 = await this.$axios.get("service/list", { headers });
       const response3 = await this.$axios.get("hospital/assigned-team", {
         headers, params: {branch: this.branch}
       });
@@ -1713,7 +1682,6 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -2284,8 +2252,6 @@ export default {
         this.firstDob = String(this.nric_no).slice(0, 4);
         this.secondDob = String(this.nric_no).slice(4, 6);
         this.thirdDob = String(this.nric_no).slice(6, 8);
-        // this.birth_date = this.firstDob+"-"+this.secondDob+"-"+this.thirdDob;
-        // this.birth_date = this.getDate(this.nric_no);
         this.birth_date = this.getDate(this.nric_no);
         this.error = null;
 
@@ -2345,7 +2311,6 @@ export default {
         age--;
       }
       this.age = age;
-      //window.alert(age);
     },
     async validateIC(data){
       try {

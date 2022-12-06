@@ -492,7 +492,7 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        //}
+
       } catch (e) {}
           console.log("response", response.data);
           if (response.data.code == 200) {
@@ -507,7 +507,7 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        // }
+
   }
     },
     async onPublishEvent() {
@@ -578,9 +578,6 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.diagnosis &&
           this.reason_for_referral &&
@@ -595,7 +592,7 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          // this.medication_des &&
+
           this.validate
         ) {
           this.loader = true;
@@ -634,7 +631,6 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            // this.resetmodel();
             this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
@@ -797,10 +793,10 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+
 
         this.Id = response.data.Data[0].patient_mrn_id;
-        // this.diagnosis = response.data.Data[0].type_diagnosis_id;
+
         this.reason_for_referral = response.data.Data[0].reason_for_referral;
         this.summary = response.data.Data[0].summary;
         this.management = response.data.Data[0].management;
@@ -812,7 +808,6 @@ export default {
         this.services_id = response.data.Data[0].services_id;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
-        // this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
         this.category_services = response.data.Data[0].category_services;
         this.complexity_services = response.data.Data[0].complexity_services;
         this.outcome = response.data.Data[0].outcome;
@@ -865,7 +860,7 @@ export default {
       };
       pdf.addHTML($("#reslt"), options, function () {
         pdf.save("Internal_Referral_Form.pdf");
-        // window.location.reload();
+
         $('.btn-boxs').show();
       });
     }, 1000);

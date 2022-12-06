@@ -552,9 +552,7 @@ export default {
       } catch (e) {
         this.loader = false;
         console.log("my error", e);
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+
       }
     },
     async ResetModel() {
@@ -619,7 +617,7 @@ export default {
       });
       if (response.data.code == 200) {
         console.log("my edit", response.data);
-        // this.HospitalCode = response.data.list.hospital_id;
+
         this.HospitalCode = {
           id: response.data.list.hospital_id,
           text: response.data.list.hospital_code,
@@ -684,14 +682,7 @@ export default {
         });
       }
     },
-    // validateEmail() {
-    //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.Email)) {
-    //     this.emailerror = null;
-    //   } else {
-    //     this.emailerror = "Please Enter Valid Email";
-    //     this.Email = "";
-    //   }
-    // },
+
     OnSearch() {
       if (this.search) {
         this.branchlist = this.alllist.filter((notChunk) => {

@@ -291,7 +291,6 @@ export default {
         if (response3.data.code == 200 || response3.data.code == "200") {
           this.racelist = response3.data.list;
         }
-        // this.Ongeneratepdf();
         this.loader = false;
       } catch (e) {
         console.log("my error", e);
@@ -299,7 +298,6 @@ export default {
     },
 
     async Ongeneratepdf() {
-      // console.log('my date');
       this.errorList = [];
       this.error = null;
       if (!this.fromDate) {
@@ -326,14 +324,10 @@ export default {
             },
             { headers }
           );
-          // debugger;
           console.table();
-          // Object.keys(response.data.result)
 
           var tblbody = document.getElementById("tablebody_");
-          // debugger;
 
-          // if (response.code == 200) {
           var months = [
             "Januari",
             "Februari",
@@ -354,7 +348,6 @@ export default {
 
           var tab1 = document.getElementById("tableHeadKeys");
           var tab2 = document.getElementById("tableMonths");
-          // var maxYears = 0;
 
           tab1.innerHTML = "";
           tab2.innerHTML = "";
@@ -375,8 +368,6 @@ export default {
                 maxMonth = year;
               }
               tmp2.forEach((month, i) => {
-                // debugger;
-                // if (response.data.result[user][year][month]["month_name"]) {
                 if (i == 0) {
                   tblrow +=
                     "<td style='border: 1px solid #000; padding: 5px; font-weight: 500;'>" +
@@ -409,7 +400,6 @@ export default {
                   response.data.result[user][year][month]["kpi"] +
                   "</td>";
 
-                // }
               });
             });
             tblbody.innerHTML += "<tr class='tr-box'>" + tblrow + "</tr>";
@@ -417,7 +407,6 @@ export default {
 
           var tmp2 = Object.keys(response.data.result[maxUser][maxMonth]);
           console.log('result22',response.data.result[maxUser]);
-          // tmp2 = tmp2.map(e=>int.parse(e));
           for (let ii = 0; ii < tmp2.length; ii++) {
             for (let jj = 0; jj < tmp2.length; jj++) {
               if(parseInt(tmp2[ii])<parseInt(tmp2[jj])){
@@ -486,9 +475,6 @@ export default {
 
                 pdf.save("Nation_Kpi.pdf");
               });
-              // pdf.addHTML($("#result")[0], function () {
-              //   pdf.save("Nation_Kpi.pdf");
-              // });
             }, 100);
             setTimeout(() => {
               this.$refs.result.classList.add("hide");

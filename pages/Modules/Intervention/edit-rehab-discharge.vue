@@ -587,14 +587,9 @@ export default {
 
             alert("Error Occured!");
             this.GoBack();
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
           }
       } catch (e) {
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+
       }
               }
     },
@@ -743,22 +738,14 @@ export default {
           );
           console.log("response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            // window.alert("Data are saved successfully!");
             this.loader = false;
             this.resetmodel();
             alert("Succesfully Updated");
             this.GoBack();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
           } else {
-            // window.alert("Something went wrong!");
             this.resetmodel();
             this.loader = false;
             alert("Error Occured!");
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
           }
         }
       } catch (e) {}
@@ -937,7 +924,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 

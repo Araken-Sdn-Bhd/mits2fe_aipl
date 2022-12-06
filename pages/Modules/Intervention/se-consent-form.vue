@@ -730,14 +730,12 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 
         this.discloser = response.data.Data[0].consent_for_disclosure;
         this.participant = response.data.Data[0].consent_for_participation;
 
-        // this.GetList();
         this.GetPatientConnsentdetails();
       } else {
         window.alert("Something went wrong");
