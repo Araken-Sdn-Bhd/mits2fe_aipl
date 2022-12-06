@@ -1351,12 +1351,12 @@ export default {
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-for-job-club",
-          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
+          query: { pid: this.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
           path: "/modules/Intervention/edit-list-of-etp",
-          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
+          query: { pid: this.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch" && val != "edit") {
         this.$router.push({
@@ -1371,7 +1371,7 @@ export default {
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/edit-log-meeting-with-employer",
-          query: { pid: data.Id, type: val, id: this.Id,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({

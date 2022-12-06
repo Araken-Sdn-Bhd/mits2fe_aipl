@@ -480,7 +480,7 @@
                        </p>
                        <br>
                        <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
@@ -489,7 +489,7 @@
                     <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
                       <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
                     <i class="fa fa-download"></i> Download
-                  </button>
+                    </button>
                     <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -546,34 +546,6 @@
                   </tr>
                 </tbody>
               </table>
-
-              <!-- <table class="notes">
-                <thead>
-                  <tr>
-                    <th colspan="2">Treatment Needs</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="!pid">
-                    <th>Individual:</th>
-                    <td>
-                      {{ this.selectedindividaul.join(', ').toString() }}
-                    </td>
-                  </tr>
-                  <tr v-if="!pid">
-                    <th>Medication:</th>
-                    <td>
-                      {{ this.selectedmedication.join(', ').toString() }}
-                    </td>
-                  </tr>
-                  <tr v-if="!pid">
-                    <th>Support:</th>
-                    <td>
-                      {{ this.selectedsupport.join(', ').toString() }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
 
            <div class="card mb-4">
                   <!--  -->
@@ -861,36 +833,6 @@ export default {
         this.externallist = [];
       }
     },
-    // async checkIndividual(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedindividaul.push(value);
-    //   } else {
-    //     if (this.selectedindividaul.indexOf(value) != -1)
-    //       this.selectedindividaul.splice(
-    //         this.selectedindividaul.indexOf(value),
-    //         1
-    //       );
-    //   }
-    // },
-    // async checkMedication(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedmedication.push(value);
-    //   } else {
-    //     if (this.selectedmedication.indexOf(value) != -1)
-    //       this.selectedmedication.splice(
-    //         this.selectedmedication.indexOf(value),
-    //         1
-    //       );
-    //   }
-    // },
-    // async checkSupport(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedsupport.push(value);
-    //   } else {
-    //     if (this.selectedsupport.indexOf(value) != -1)
-    //       this.selectedsupport.splice(this.selectedsupport.indexOf(value), 1);
-    //   }
-    // },
     async onCreateEvent() {
       if (confirm("Are you sure you want to save s draft?")) {
       try {
@@ -947,20 +889,16 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Updated");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
         } catch (e) {
         this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
           }
         }
       },
@@ -969,18 +907,6 @@ export default {
       this.errorList = [];
       this.validate = true;
       try {
-        // if (!this.selectedindividaul.length) {
-        //   this.errorList.push("Individual is required");
-        //   this.validate = false;
-        // }
-        // if (!this.selectedmedication.length) {
-        //   this.errorList.push("Medication is required");
-        //   this.validate = false;
-        // }
-        // if (!this.selectedsupport.length) {
-        //   this.errorList.push("Support is required");
-        //   this.validate = false;
-        // }
         if (!this.location_services_id) {
           this.errorList.push("Location Of Services is required");
         }
@@ -1020,9 +946,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (!this.referalname) {
           this.errorList.push("Referrer Name is required");
         }
@@ -1035,32 +958,10 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate &&
           this.referalname &&
           this.designation
         ) {
-          // this.selectedindividaul.forEach((value, index) => {
-          //   if (!this.Individual) {
-          //     this.Individual = value;
-          //   } else {
-          //     this.Individual = this.Individual + "," + value;
-          //   }
-          // });
-          // this.selectedmedication.forEach((value, index) => {
-          //   if (!this.Medication) {
-          //     this.Medication = value;
-          //   } else {
-          //     this.Medication = this.Medication + "," + value;
-          //   }
-          // });
-          // this.selectedsupport.forEach((value, index) => {
-          //   if (!this.Support) {
-          //     this.Support = value;
-          //   } else {
-          //     this.Support = this.Support + "," + value;
-          //   }
-          // });
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1114,14 +1015,12 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Updated");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {}

@@ -489,7 +489,7 @@
                     <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
                       <button @click="OnPrint"  type="submit" class="btn btn-green btn-text">
                     <i class="fa fa-download"></i> Download
-                  </button>
+                    </button>
                     <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -546,34 +546,6 @@
                   </tr>
                 </tbody>
               </table>
-
-              <!-- <table class="notes">
-                <thead>
-                  <tr>
-                    <th colspan="2">Treatment Needs</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="!pid">
-                    <th>Individual:</th>
-                    <td>
-                      {{ this.selectedindividaul.join(', ').toString() }}
-                    </td>
-                  </tr>
-                  <tr v-if="!pid">
-                    <th>Medication:</th>
-                    <td>
-                      {{ this.selectedmedication.join(', ').toString() }}
-                    </td>
-                  </tr>
-                  <tr v-if="!pid">
-                    <th>Support:</th>
-                    <td>
-                      {{ this.selectedsupport.join(', ').toString() }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
 
            <div class="card mb-4">
                   <!--  -->
@@ -861,36 +833,6 @@ export default {
         this.externallist = [];
       }
     },
-    // async checkIndividual(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedindividaul.push(value);
-    //   } else {
-    //     if (this.selectedindividaul.indexOf(value) != -1)
-    //       this.selectedindividaul.splice(
-    //         this.selectedindividaul.indexOf(value),
-    //         1
-    //       );
-    //   }
-    // },
-    // async checkMedication(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedmedication.push(value);
-    //   } else {
-    //     if (this.selectedmedication.indexOf(value) != -1)
-    //       this.selectedmedication.splice(
-    //         this.selectedmedication.indexOf(value),
-    //         1
-    //       );
-    //   }
-    // },
-    // async checkSupport(value, event) {
-    //   if (event.target.checked) {
-    //     this.selectedsupport.push(value);
-    //   } else {
-    //     if (this.selectedsupport.indexOf(value) != -1)
-    //       this.selectedsupport.splice(this.selectedsupport.indexOf(value), 1);
-    //   }
-    // },
     async onCreateEvent() {
       if (confirm("Are you sure you want to save s draft?")) {
       try {
@@ -947,20 +889,15 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
         } catch (e) {
-        this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
           }
         }
       },
@@ -1114,14 +1051,13 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {}

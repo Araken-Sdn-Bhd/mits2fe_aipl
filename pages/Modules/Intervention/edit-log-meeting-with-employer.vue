@@ -12,7 +12,7 @@
 
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="OnSubmit">
+              <div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -340,7 +340,7 @@
                              </li>
                         </ul>
                        </p>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
@@ -355,7 +355,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -409,7 +409,6 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    //window.alert(JSON.stringify(this.userdetails.user.name));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
 
     this.staff_name = this.userdetails.user.name;
@@ -423,12 +422,12 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-    this.appId = urlParams.get("appId");
     if (this.pid) {
       this.getdetails();
     }
@@ -466,6 +465,7 @@ export default {
               medication_des: this.medication_des,
               appId: this.appId,
               status: "0",
+              id: this.pid,
             },
             { headers }
           );
@@ -473,31 +473,15 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         //}
       } catch (e) {}
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        // }
   }
     },
     async onPublishEvent() {
@@ -506,68 +490,65 @@ export default {
       this.validate = false;
       this.errorList = [];
       try {
-        if (!this.date) {
-          this.errorList.push("Date is required");
-        }
-        if (!this.employee_name) {
-          this.errorList.push("Employer Name is required");
-        }
-        if (!this.company_name) {
-          this.errorList.push("Company name is required");
-        }
-        if (!this.purpose_of_meeting) {
-          this.errorList.push("Purpose of Meeting is required");
-        }
-        if (!this.discussion_start_time) {
-          this.errorList.push("Start Time of Discussion is required");
-        }
-        if (!this.discussion_end_time) {
-          this.errorList.push("End Time of Discussion is required");
-        }
-        if (!this.staff_name) {
-          this.errorList.push("Staff Name is required");
-        }
-        if (!this.location_services_id) {
-          this.errorList.push("Location Of Services is required");
-        }
-        if (!this.type_diagnosis_id) {
-          this.errorList.push("Type Of Diagnosis is required");
-        }
-        if (!this.category_services) {
-          this.errorList.push("Category Of Services is required");
-        }
-        if (!this.complexity_services_id) {
-          this.errorList.push("Complexity Of Service is required");
-        }
-        if (this.category_services) {
-          if (this.category_services == "assisstance") {
-            if (!this.services_id) {
-              this.errorList.push("Service is required");
-              this.validate = false;
-            }
-          } else if (this.category_services == "clinical-work") {
-            if (!this.code_id) {
-              this.errorList.push("ICD 9 CODE is required");
-              this.validate = false;
-            }
-            if (!this.sub_code_id) {
-              this.errorList.push("ICD 9 SUB CODE is required");
-              this.validate = false;
-            }
-          } else {
-            if (!this.serviceid) {
-              this.errorList.push("Services is required");
-              this.validate = false;
-            } else {
-              this.services_id = this.serviceid;
-            }
-          }
-        }
-        if (!this.outcome_id) {
-          this.errorList.push("Outcome is required");
-        }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
+        // if (!this.date) {
+        //   this.errorList.push("Date is required");
+        // }
+        // if (!this.employee_name) {
+        //   this.errorList.push("Employer Name is required");
+        // }
+        // if (!this.company_name) {
+        //   this.errorList.push("Company name is required");
+        // }
+        // if (!this.purpose_of_meeting) {
+        //   this.errorList.push("Purpose of Meeting is required");
+        // }
+        // if (!this.discussion_start_time) {
+        //   this.errorList.push("Start Time of Discussion is required");
+        // }
+        // if (!this.discussion_end_time) {
+        //   this.errorList.push("End Time of Discussion is required");
+        // }
+        // if (!this.staff_name) {
+        //   this.errorList.push("Staff Name is required");
+        // }
+        // if (!this.location_services_id) {
+        //   this.errorList.push("Location Of Services is required");
+        // }
+        // if (!this.type_diagnosis_id) {
+        //   this.errorList.push("Type Of Diagnosis is required");
+        // }
+        // if (!this.category_services) {
+        //   this.errorList.push("Category Of Services is required");
+        // }
+        // if (!this.complexity_services_id) {
+        //   this.errorList.push("Complexity Of Service is required");
+        // }
+        // if (this.category_services) {
+        //   if (this.category_services == "assisstance") {
+        //     if (!this.services_id) {
+        //       this.errorList.push("Service is required");
+        //       this.validate = false;
+        //     }
+        //   } else if (this.category_services == "clinical-work") {
+        //     if (!this.code_id) {
+        //       this.errorList.push("ICD 9 CODE is required");
+        //       this.validate = false;
+        //     }
+        //     if (!this.sub_code_id) {
+        //       this.errorList.push("ICD 9 SUB CODE is required");
+        //       this.validate = false;
+        //     }
+        //   } else {
+        //     if (!this.serviceid) {
+        //       this.errorList.push("Services is required");
+        //       this.validate = false;
+        //     } else {
+        //       this.services_id = this.serviceid;
+        //     }
+        //   }
+        // }
+        // if (!this.outcome_id) {
+        //   this.errorList.push("Outcome is required");
         // }
         if (
           this.date &&
@@ -582,7 +563,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -614,37 +594,22 @@ export default {
               medication_des: this.medication_des,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
-          console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {
-        console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
       }
     }
     },
@@ -795,9 +760,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
-
-        this.pid = response.data.Data[0].patient_id;
         this.date = response.data.Data[0].date;
         this.employee_name = response.data.Data[0].employee_name;
         this.company_name = response.data.Data[0].company_name;
