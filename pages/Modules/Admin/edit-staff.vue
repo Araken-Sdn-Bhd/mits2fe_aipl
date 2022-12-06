@@ -199,6 +199,25 @@
                       </label>
                     </div>
                   </div>
+                  <div class="col-md-4 mb-4">
+                    <label class="form-label">Account Status</label>
+                    <select
+                      v-model="accountStatus"
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option
+                        value="0"
+                      >
+                        Inactive
+                      </option>
+                      <option
+                        value="1"
+                      >
+                      Active
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <!-- close-row -->
 
@@ -270,6 +289,7 @@ export default {
       personincharge: 0,
       startdate: "",
       enddate: "",
+      accountStatus: "",
       userdetails: null,
       rolelist: [],
       teamlist: [],
@@ -319,7 +339,7 @@ export default {
         this.personincharge = response.data.list[0].is_incharge;
         this.contactno = response.data.list[0].contact_no;
         this.email = response.data.list[0].email;
-        //    this.name = response.data.list[0].status;
+        this.accountStatus = response.data.list[0].status;
         this.startdate = response.data.list[0].start_date;
         this.enddate = response.data.list[0].end_date;
       }
@@ -450,6 +470,7 @@ export default {
         body.append("is_incharge", this.personincharge);
         body.append("designation_period_start_date", this.designationstartdate);
         body.append("designation_period_end_date", this.designationenddate);
+        body.append("account_status", this.accountStatus);
         body.append("start_date", this.startdate);
         body.append("end_date", this.enddate);
         const response = await this.$axios.post(
