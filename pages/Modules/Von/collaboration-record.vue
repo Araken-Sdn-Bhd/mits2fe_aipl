@@ -8,7 +8,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Collaboration Record</h1>
-            <!-- <a href="demographic.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -160,6 +159,7 @@ export default {
     axios
       .post(
         `${this.$axios.defaults.baseURL}` + "von/search-collaboration-list",
+        {email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id },
 
         { headers }
       )
@@ -202,6 +202,7 @@ export default {
           section: this.section,
           area_of_involvement: this.area_of_involvement,
           service: this.service,
+          email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
         },
         { headers }
       );
