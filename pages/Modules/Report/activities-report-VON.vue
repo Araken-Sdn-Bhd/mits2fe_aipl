@@ -60,13 +60,12 @@
 
                         <select
                           class="form-select select-others"
-                          aria-label=""
                           v-model="toc"
                         >
                           <option value="">Please Select</option>
                           <option value="individual">Individual</option>
                           <option value="group">Group</option>
-                          <option value="organization">Organization</option>
+                          <option value="org">Organization</option>
                         </select>
                       </div>
                     </div>
@@ -82,14 +81,14 @@
                           v-model="location"
                         >
                           <option value="">Please Select</option>
-                          <option value="All">All</option>
-                          <option value="None">None</option>
-                          <option value="mentari">Mentari</option>
+                          <option v-if="this.role=='System Admin'" value="All">All</option>
+                          <option value="">None</option>
+                          <option v-if="this.role=='System Admin'" value="mentari">Mentari</option>
                           <option value="Others">Others</option>
                         </select>
                       </div>
 
-                      <div class="mb-3 mentari selected-box hide">
+                      <div v-if="this.location == 'mentari'" class="mb-3 mentari selected-box">
                         <label class="form-label">Mentari Center:</label>
                         <select
                           class="form-select select-others"
@@ -106,14 +105,13 @@
                         </select>
                       </div>
 
-                      <div class="mb-3 Others selected-box hide">
+                      <div v-if="this.location == 'Others'" class="mb-3 Others selected-box">
                         <label class="form-label">Others:</label>
                         <input
                           type="text"
                           class="form-control"
                           placeholder="Please Specify"
-                          name=""
-                          v-model="others"
+                          v-model="others_value"
                         />
                       </div>
                     </div>
@@ -124,8 +122,8 @@
                           <option value="">Please Select</option>
                           <option
                             v-for="area in areaslist"
-                            v-bind:key="area.id"
-                            v-bind:value="area.id"
+                            v-bind:key="area.name"
+                            v-bind:value="area.name"
                           >
                             {{ area.name }}
                           </option>
@@ -279,24 +277,27 @@ export default {
       areaslist: [],
       fromDate: "",
       toDate: "",
-      toc: 0,
-      aoi: 0,
-      screening: "2",
-      event: "no-event",
+      toc: "",
+      aoi: "",
+      screening: "",
+      event: "",
       location: "",
       location_value: "",
-      others: "",
+      others_value:"",
       Volunteer: 0,
       Outreach: 0,
       Networking: 0,
       Total_Days: 0,
       Total_Patient: 0,
       SidebarAccess:null,
+  
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.branchName = this.userdetails.branch.hospital_branch_name;
+    this.user_role = this.userdetails.user.role;
     this.GetList();
   },
   methods: {
@@ -337,9 +338,6 @@ export default {
           this.errorList.push("To date is Required!");
         }
         if (this.fromDate && this.toDate) {
-          if (!this.location_value) {
-            this.location_value = this.others;
-          }
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -355,7 +353,9 @@ export default {
               screening: this.screening,
               event: this.event,
               location: this.location,
+              others_value:this.others_value,
               location_value: this.location_value,
+              branch_name: this.branchName,
               report_type: "pdf",
             },
             { headers }
@@ -418,6 +418,8 @@ export default {
               event: this.event,
               location: this.location,
               location_value: this.location_value,
+              branch_name: this.branchName,
+              others_value: this.others_value,
               report_type: "excel",
             },
             { headers }
