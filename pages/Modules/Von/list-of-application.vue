@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of VON Application</h1>
-            <!-- <a href="demographic.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -137,7 +136,7 @@ export default {
     axios
       .get(
           `${this.$axios.defaults.baseURL}` + "von/listByBranchId",
-          { headers,params: {branch: this.userdetails.branch.branch_id} }
+          { headers,params: {branch: this.userdetails.branch.branch_id, email:this.userdetails.user.email} }
         )
       .then((resp) => {
         this.list = resp.data.list;
@@ -186,7 +185,7 @@ export default {
       axios
         .get(
           `${this.$axios.defaults.baseURL}` + "von/listByBranchId",
-          { headers,params: {branch: this.userdetails.branch.branch_id} }
+          { headers,params: {branch: this.userdetails.branch.branch_id,email:this.userdetails.user.email} }
         )
         .then((resp) => {
           this.list = resp.data.list;
