@@ -159,39 +159,7 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-    //  const headers = {
-    //        Authorization: "Bearer " + this.userdetails.access_token,
-    //        Accept: "application/json",
-    //        "Content-Type": "application/json",
-    //};
-    //const response = await this.$axios.post(
-    //        "employer-job/job-list",
-    //        {email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id },
-    //        { headers }
-    //      )
-    //  .then((resp) => {
-    //    this.list = resp.data;
-    //    this.alllist = resp.data;
-    //    $(document).ready(function () {
-    //      $(".data-table").DataTable({
-    //        searching: false,
-    //        bLengthChange: false,
-    //        bInfo: false,
-    //        autoWidth: false,
-    //        responsive: true,
-
-    //        language: {
-    //          paginate: {
-    //            next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-    //            previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-    //          },
-    //        },
-    //      });
-    //    });
-    //  })
-    //  .catch((err) => {
-    //    console.error(err);
-    //  });
+   
     },
     OnSearch() {
       if (this.search) {
