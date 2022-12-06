@@ -261,7 +261,6 @@ export default {
       }
       const respons = await this.$axios.get(
         "service/list",
-        // "general-setting/list?section=" + "category-of-service",
         { headers }
       );
       if (respons.data.code == 200 || respons.data.code == "200") {

@@ -2092,7 +2092,7 @@ export default {
       this.staff_name = this.userdetails.user.name;
       this.GetList();
       this.GetstaffList();
-      //this.GetteamList();
+
     }
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
@@ -2200,16 +2200,10 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
             alert("Successfully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
 
             alert("Error Occured!");
             this.GoBack();
@@ -2217,9 +2211,6 @@ export default {
         } catch (e) {
 
         this.loader = false;
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
 
             alert("Error Occured!");
             this.GoBack();
@@ -2439,9 +2430,6 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-          // if (!this.medication_des) {
-          //   this.errorList.push("Medication is required");
-          // }
           if (!this.staff_name) {
             this.errorList.push("Staff Name	 is required");
           }
@@ -2508,7 +2496,7 @@ export default {
             this.category_services &&
             this.complexity_services_id &&
             this.outcome_id &&
-            //this.medication_des &&
+
             this.validate &&
             this.staff_name &&
             this.designation
@@ -2601,16 +2589,10 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
             alert("Successfully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
 
             alert("Error Occured!");
             this.GoBack();
@@ -2752,25 +2734,13 @@ export default {
           { headers, params: { team_id: this.appId, email: this.email } }
         )
         .then((resp) => {
-          // this.list = resp.data.list;
+
           this.stafflist = resp.data.list;
           this.teamlist = resp.data.stafflist;
           this.rolelist = resp.data.rolelist;
         });
     },
 
-    // async GetteamList(){
-    //   const headers = {
-    //     Authorization: "Bearer " + this.userdetails.access_token,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   };
-    //   const response = await this.$axios.get("staff-management/getListByBranchId/"+ this.userdetails.branch.branch_id, {
-    //     headers,
-    //   });
-    //   //this.teamlist = response.data.list;
-
-    // },
 
     async onCategorycodebind(event) {
       const headers = {
@@ -3075,7 +3045,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+
 
         this.Id = response.data.Data[0].patient_mrn_id;
         this.cps_date = response.data.Data[0].cps_date;
@@ -3152,7 +3122,7 @@ export default {
         this.designation = response.data.Data[0].designation;
         this.GetList();
         this.GetstaffList();
-        //this.GetteamList();
+
 
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",

@@ -119,7 +119,6 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
-        //alert(JSON.stringify(this.list));
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,

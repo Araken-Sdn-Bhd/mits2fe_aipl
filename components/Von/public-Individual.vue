@@ -957,7 +957,6 @@ export default {
       file: null,
       Isvalid: false,
       VolOthers: "",
-      //Outreach Project Collaboration
       project_name: "",
       project_background: "",
       project_objectives: "",
@@ -1072,7 +1071,6 @@ export default {
     },
     async getCityList(event) {
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -1107,7 +1105,6 @@ export default {
     },
     async GetList() {
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -1195,13 +1192,6 @@ export default {
     async OnIndividualVolunteerism() {
       try {
         var explist = [];
-        // $("table#volexp > tbody > tr").each(function (i) {
-        //   var obj = {};
-        //   obj.year = $('td input[type="text"].year', this).val();
-        //   obj.location = $('td input[type="text"].location', this).val();
-        //   obj.activity = $('td input[type="text"].activity', this).val();
-        //   explist.push(obj);
-        // });
         this.Isvalid = true;
         if (!this.name) {
           this.errors.push("Name is required.");
@@ -1298,7 +1288,6 @@ export default {
             this.is_mental_health_professional = "0";
           }
           const headers = {
-            // Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
@@ -1319,7 +1308,6 @@ export default {
           body.append("area_of_involvement", this.area_of_involvement);
           body.append("is_agree", "1");
           body.append("is_voluneering_exp", this.is_voluneering_exp);
-         // body.append("exp_details",  JSON.stringify(explist));
            body.append("exp_details",  this.exp_details);
           body.append(
             "is_mental_health_professional",
@@ -1472,7 +1460,6 @@ export default {
             this.address = this.address + "\n" + this.address1;
           }
           const headers = {
-            // Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
@@ -1621,7 +1608,6 @@ export default {
             this.address = this.address + "\n" + this.address1;
           }
           const headers = {
-            // Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };

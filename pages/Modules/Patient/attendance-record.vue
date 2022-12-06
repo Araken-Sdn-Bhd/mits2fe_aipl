@@ -409,7 +409,6 @@ export default {
           { headers, params: {team_id: this.appId, email: this.email}   }
         )
         .then((resp) => {
-          // this.list = resp.data.list;
           this.teamlist = resp.data.list;
           console.log("my applist", this.list);
         });

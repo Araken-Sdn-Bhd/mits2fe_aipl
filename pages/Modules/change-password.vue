@@ -184,8 +184,6 @@ export default {
             password: this.password,
           });
           if (response.data.code == 200 || response.data.code == '200') {
-            // this.$router.push("/");
-            //this.loader = false;
             this.resetmodel();
             this.$nextTick(() => {
                $("#password-change").modal("show");

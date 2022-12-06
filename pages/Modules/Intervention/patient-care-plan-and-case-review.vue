@@ -797,23 +797,13 @@ export default {
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
               window.alert("Data are saved successfully!");
-              //this.resetmodel();
               this.GoBack();
-              // this.$nextTick(() => {
-              //   $("#insertpopup").modal("show");
-              // });
             } else {
               window.alert("Something went wrong!");
               this.loader = false;
-              // this.$nextTick(() => {
-              //   $("#errorpopup").modal("show");
-              // });
             }
         } catch (e) {
           window.alert("Something went wrong!");
-          // this.$nextTick(() => {
-          //   $("#errorpopup").modal("show");
-          // });
         }
       }
     },
@@ -956,31 +946,6 @@ export default {
           this.errorList.push("Diagnosis is required");
           this.validate = false;
         }
-        //if (!this.oral) {
-        //  this.errorList.push("Please check Oral");
-        //  this.validate = false;
-        //}
-        //if (!this.medication_oral) {
-        //  this.errorList.push("Oral Description is required");
-        //  this.validate = false;
-        //}
-        //if (!this.depot) {
-        //  this.errorList.push("Please check Depot");
-        //  this.validate = false;
-        //}
-        //if (!this.medication_depot) {
-        //  this.errorList.push("Depot Description is required");
-        //  this.validate = false;
-        //}
-        //if (!this.im) {
-        //  this.errorList.push("Please check IM");
-        //  this.validate = false;
-        //}
-        //if (!this.medication_im) {
-        //  this.errorList.push("IM Description is required");
-        //  this.validate = false;
-        //}
-
         if (!this.background_history) {
           this.errorList.push("Background History is required");
           this.validate = false;
@@ -1067,10 +1032,6 @@ export default {
         obj.Who = $('td input[type="text"].who', this).val();
         treatmentplan.push(obj);
       });
-        // if (!this.medication_prescription) {
-        //   this.errorList.push("Medication is required");
-        //   this.validate = false;
-        // }
         if (
           this.location_services_id &&
           this.type_diagnosis_id &&
@@ -1192,7 +1153,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 
@@ -1206,8 +1166,6 @@ export default {
         this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
         this.treatment_plan = response.data.Data[0].treatment_plan;
         this.jobsearchlist=JSON.parse(response.data.Data[0].treatment_plan);
-        // this.jobsearchlist=this.treatment_plan;
-        // console.log('aaa',this.jobsearchlist);
 
         this.next_review_date = response.data.Data[0].next_review_date;
         this.case_manager_date = response.data.Data[0].case_manager_date;

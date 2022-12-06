@@ -245,20 +245,6 @@ export default {
           this.emailerror.push("Security is required");
         } else {
           this.loader = true;
-          // var variablevale =
-          //   this.emailfrom +
-          //   "," +
-          //   this.outgoingsmtpserver +
-          //   "," +
-          //   this.loginuserid +
-          //   "," +
-          //   this.loginpassword +
-          //   "," +
-          //   this.verifypassword +
-          //   "," +
-          //   this.smtpportno +
-          //   "," +
-          //   this.security;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -274,15 +260,9 @@ export default {
               verify_password: this.verifypassword,
               smtp_port_number: this.smtpportno,
               security: this.security,
-              // id:"1"
-              // section: "email-setting",
-              // variable_name: "send-email-from,outgoing-smtp-server,login-user-id,login-password,verify-password,smtp-port-number,security",
-              // variable_value: variablevale,
-              // status: "1,1,1,1,1,1,1",
             },
             { headers }
           );
-          // console.log("my body", variablevale);
           console.log("my resp", response.data);
           if (response.data.code == 200) {
             this.loader = false;
@@ -312,7 +292,6 @@ export default {
       };
       const response = await this.$axios.post(
         "email-setting/getEmail",
-        // { type: "psp",patient_id: this.patient_id,datetime: this.datetime },
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -350,8 +329,6 @@ export default {
         },
         { headers }
       );
-      // console.log("my body", variablevale);
-      // console.log("my resp", response.data);
       if (response.data.code == 200) {
         this.loader = false;
         this.$nextTick(() => {

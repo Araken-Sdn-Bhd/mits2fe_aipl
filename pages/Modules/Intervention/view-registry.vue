@@ -1933,7 +1933,6 @@ export default {
       procheckedList: {},
       testcheckedList: {},
       sharp_register_id: 0,
-      //selfharm  ad on
       selected: [],
       testresult: "",
       Sdate: "",
@@ -2105,7 +2104,6 @@ export default {
         $('#myTab a[href="#protective"]').tab("show");
       });
 
-      // 2
 
       $(".nex-1").click(function (e) {
         e.preventDefault();
@@ -2117,7 +2115,6 @@ export default {
         $('#myTab a[href="#risk-factors"]').tab("show");
       });
 
-      // 3
 
       $(".nex-2").click(function (e) {
         e.preventDefault();
@@ -2129,7 +2126,6 @@ export default {
         $('#myTab a[href="#protective"]').tab("show");
       });
 
-      // 4
 
       $(".nex-3").click(function (e) {
         e.preventDefault();
@@ -2141,7 +2137,6 @@ export default {
         $('#myTab a[href="#selfharm"]').tab("show");
       });
 
-      // 5
 
       $(".nex-4").click(function (e) {
         e.preventDefault();
@@ -2153,7 +2148,6 @@ export default {
         $('#myTab a[href="#suicide"]').tab("show");
       });
 
-      // 6
 
       $(".pre-5").click(function (e) {
         e.preventDefault();
@@ -2292,7 +2286,6 @@ export default {
       if (response.data.code == 200) {
         
         this.riskfactorlist = response.data.result.risk;
-        //alert(JSON.stringify(this.riskfactorlist));
       
         this.protectivefactorlist = response.data.result.protective;
         this.riskfactorlist.forEach((element) => {
@@ -2368,7 +2361,6 @@ export default {
           }
         });
 
-        //Self Harm
         this.Sdate = response.data.result.selfharm[0].section_value.Date;
         this.Stime = response.data.result.selfharm[0].section_value.Time;
         this.place_id =
@@ -2436,9 +2428,7 @@ export default {
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-        //Suicide Risk
         this.result = response.data.result.suicideRisk[0].result;
-        //Hospital
         this.referral_or_contact =
           response.data.result.hospital[0].referral_or_contact;
         this.referral_or_contact_other =
@@ -2467,12 +2457,6 @@ export default {
           response.data.result.hospital[0].external_cause_inquiry;
         this.list1 =
           response.data.result.hospital[0].discharge_psy_mx.split(",");
-        //Datasource
-        // this.officername =
-        //   response.data.result.dataSource[0].name_registering_officer;
-        //this.hospitalname = response.data.result.dataSource[0].hospital_name;
-        // this.designation = response.data.result.dataSource[0].designation;
-        // this.reportingdate = response.data.result.dataSource[0].reporting_date;
         this.psychiatristId =
           response.data.result.dataSource[0].psychiatrist_name;
       }

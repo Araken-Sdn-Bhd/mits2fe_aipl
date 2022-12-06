@@ -489,10 +489,8 @@ export default {
             .each(function () {
               var optionValue = $(this).attr("value");
               if (optionValue) {
-                // $(".selected-box").not("." + optionValue).hide();
                 $("." + optionValue).show();
               } else {
-                // $(".selected-box").hide();
               }
             });
         })
@@ -657,7 +655,6 @@ export default {
 
       this.Isvalidate = true;
       try {
-        //if (this.IAgree) {
           if (!this.name_asin_nric) {
             this.errorList.push("Name (As In NRIC) is required.");
           }
@@ -697,55 +694,11 @@ export default {
           if (!this.sex) {
             this.errorList.push("Gender is required.");
           }
-          //if (!this.birth_date) {
-          //  this.errorList.push("Birth date is required.");
-          //}
-          // if (!this.hospital_mrn_no) {
-          //   this.errorList.push("Hospital MRN is required.");
-          // }
-          //if(this.birth_date.length > 10){
-          //  this.errorList.push("Year is Invalid.");
-          //}
-          //if (!this.age) {
-          //  this.errorList.push("Age is required.");
-          //}
-          //if (!this.employment_id) {
-          //  this.errorList.push("Employment is required.");
-          //}
-          //if (!this.race_id) {
-          //  this.errorList.push("Ethnic is required.");
-          //}
-          //if (!this.household_income) {
-          //  this.errorList.push("Household Income is required.");
-          //}
-          //if (!this.religion_id) {
-          //  this.errorList.push("Religion is required.");
-          //}
-          //if (!this.marital_id) {
-          //  this.errorList.push("Maritial is required.");
-          //}
-          //if (!this.education_level) {
-          //  this.errorList.push("Education is required.");
-          //}
           if (
             this.citizenship &&
             this.name_asin_nric &&
             this.sex &&
             this.Isvalidate
-            //this.birth_date &&
-            // this.hospital_mrn_no &&
-            //this.age &&
-            //this.race_id &&
-            //this.household_income &&
-            //this.religion_id &&
-            //this.marital_id &&
-            //this.education_level &&
-            //this.employment_id &&
-          ) {
-            //var no = this.nric_no.slice(0, 6);
-            //var no1 = this.nric_no.slice(6, 8);
-            //var no2 = this.nric_no.slice(8, 12);
-            //this.nric_no = no + "-" + no1 + "-" + no2;
             this.loader = true;
             const headers = {
               Authorization: "Bearer " + this.userdetails.access_token,
@@ -847,8 +800,6 @@ export default {
         this.firstDob = String(this.nric_no).slice(0, 4);
         this.secondDob = String(this.nric_no).slice(4, 6);
         this.thirdDob = String(this.nric_no).slice(6, 8);
-        // this.birth_date = this.firstDob+"-"+this.secondDob+"-"+this.thirdDob;
-        // this.birth_date = this.getDate(this.nric_no);
         this.birth_date = this.getDate(this.nric_no);
         this.error = null;
 
@@ -908,7 +859,6 @@ export default {
         age--;
       }
       this.age = age;
-      //window.alert(age);
     },
     async validateIC(data){
       try {

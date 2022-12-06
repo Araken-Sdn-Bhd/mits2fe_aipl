@@ -915,10 +915,8 @@ export default {
             .each(function () {
               var optionValue = $(this).attr("value");
               if (optionValue) {
-                // $(".selected-box").not("." + optionValue).hide();
                 $("." + optionValue).show();
               } else {
-                // $(".selected-box").hide();
               }
             });
         })
@@ -965,7 +963,6 @@ export default {
   },
   methods: {
     getFile(file) {
-      // window.open("../../../static/InformationOnETPJobClub2020.pdf", "_blank");
     },
     formatetime(time) {
       const local = moment.utc(time).local().format("h:mm A");
@@ -1867,7 +1864,6 @@ export default {
         } else {
           this.$nextTick(() => {
             this.errorList.push(response.data.message.uploaded_path[0]);
-            //  $("#attachpopup").modal("hide");
             $("#errorpopup").modal("show");
           });
         }
@@ -1910,9 +1906,6 @@ export default {
         console.log("ff", response.data);
         if (response.data.code == 200) {
            $("#updatepopup").modal("show");
-          //  this.$router.push({
-          //     path: "/modules/Patient/attendance-record",
-          // });
         } else {
           window.alert("Something went wrong");
         }

@@ -2205,7 +2205,6 @@ export default {
         var obj = {};
         var answer = "";
         obj.questions = $("td #question", this).text();
-        //$('#Renewcheck').is(':checked')
         if ($('td input[type="checkbox"].one_' + i).is(":checked") == true) {
           answer = $('td input[type="checkbox"].one_' + i, this).val();
         }
@@ -2467,9 +2466,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.company_name &&
           this.company_address1 &&
@@ -2494,7 +2490,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -2678,7 +2673,6 @@ export default {
     },
     async getCityList(event) {
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -2763,7 +2757,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
         this.company_name = response.data.Data[0].company_name;
@@ -2810,7 +2803,6 @@ export default {
         this.jobSPECIFICATION = response.data.Data[0].jobs;
         this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
         console.log("myjobb", this.jobSPECIFICATION);
-        // console.log('myjobb11',this.job_specification);
 
         this.GetList();
         const response2 = await this.$axios.post(

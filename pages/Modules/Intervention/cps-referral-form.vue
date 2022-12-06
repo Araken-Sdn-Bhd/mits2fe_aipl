@@ -754,7 +754,6 @@ export default {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
-      // Reload the page to refresh the data
       window.location.reload();
     },
     async GetList() {
@@ -906,18 +905,7 @@ export default {
       this.errorList = [];
       this.validate = true;
       try {
-        // if (!this.selectedindividaul.length) {
-        //   this.errorList.push("Individual is required");
-        //   this.validate = false;
-        // }
-        // if (!this.selectedmedication.length) {
-        //   this.errorList.push("Medication is required");
-        //   this.validate = false;
-        // }
-        // if (!this.selectedsupport.length) {
-        //   this.errorList.push("Support is required");
-        //   this.validate = false;
-        // }
+
         if (!this.location_services_id) {
           this.errorList.push("Location Of Services is required");
         }
@@ -957,9 +945,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (!this.referalname) {
           this.errorList.push("Referrer Name is required");
         }
@@ -972,32 +957,12 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
+ 
           this.validate &&
           this.referalname &&
           this.designation
         ) {
-          // this.selectedindividaul.forEach((value, index) => {
-          //   if (!this.Individual) {
-          //     this.Individual = value;
-          //   } else {
-          //     this.Individual = this.Individual + "," + value;
-          //   }
-          // });
-          // this.selectedmedication.forEach((value, index) => {
-          //   if (!this.Medication) {
-          //     this.Medication = value;
-          //   } else {
-          //     this.Medication = this.Medication + "," + value;
-          //   }
-          // });
-          // this.selectedsupport.forEach((value, index) => {
-          //   if (!this.Support) {
-          //     this.Support = value;
-          //   } else {
-          //     this.Support = this.Support + "," + value;
-          //   }
-          // });
+
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -1084,7 +1049,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
         if (response.data) {
         this.Id = response.data.Data[0].patient_id;
         this.location_service_id = response.data.Data[0].location_of_service;
@@ -1099,7 +1063,7 @@ export default {
         this.referalname = response.data.Data[0].medication_referrer_name;
         this.designation = response.data.Data[0].medication_referrer_designation;
 
-        //window.alert(response.data[0].treatment_needs_individual);
+        window.alert(response.data[0].treatment_needs_individual);
 
         var jdata1 = JSON.parse(response.data.Data[0].treatment_needs_individual);
         jdata1.forEach((ele) => {

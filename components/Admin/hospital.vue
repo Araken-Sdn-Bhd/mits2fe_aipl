@@ -659,12 +659,7 @@ export default {
         if (!this.hospital_Adrress1) {
           this.errors.push("Hospital Adrress 1 is required.");
         }
-        // if (!this.hospital_Adrress2) {
-        //   this.errors.push("Hospital Adrress 2 is required.");
-        // }
-        // if (!this.hospital_Adrress3) {
-        //   this.errors.push("Hospital Adrress 3 is required.");
-        // }
+
         if (this.hospital_state <= 0 || !this.hospital_state) {
           this.errors.push("Hospital State is required.");
         }
@@ -696,8 +691,7 @@ export default {
           this.hospital_Prefix &&
           this.hospital_Name &&
           this.hospital_Adrress1 &&
-          // this.hospital_Adrress2 &&
-          // this.hospital_Adrress3 &&
+        
           this.hospital_state &&
           this.hospital_postcode &&
           this.hospital_city &&
@@ -831,7 +825,6 @@ export default {
       this.hospital_Email = "";
       this.fax_No = "";
       this.errors = [];
-      //  this.PostcodeList();
     },
     async GethospitalList() {
       const headers = {

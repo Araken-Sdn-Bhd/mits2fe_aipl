@@ -175,9 +175,6 @@ export default {
     this.Id = urlParams.get("id");
     this.GetPatientdetails();
 
-    // this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    // let urlParams = new URLSearchParams(window.location.search);
-    // this.Id = urlParams.get("id");
   },
   mounted() {
     const headers = {
@@ -260,7 +257,6 @@ export default {
       this.alert_id = data.id;
       console.log("myalertid1", this.alert);
       this.$router.push({
-        // path: "/modules/Intervention/add-new-registry",
         query: { alert_id: data.id },
       });
     },

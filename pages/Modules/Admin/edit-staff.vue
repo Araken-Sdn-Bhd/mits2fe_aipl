@@ -323,7 +323,6 @@ export default {
       console.log("all resp", response.data);
       console.log("my details", response.data.list[0].name);
       if (response.data.code == 200 || response.data.code == "200") {
-        // this.name = response.data.list[0].Staff_managementId;
 
         this.name = response.data.list[0].name;
         this.nricno = response.data.list[0].nric_no;

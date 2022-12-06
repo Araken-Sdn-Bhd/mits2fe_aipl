@@ -955,7 +955,6 @@ export default {
       org_desc: "",
       org_email: "",
       org_phone: "",
-      //VOLUNTEEM
       Oname: "",
       Oposition_in_org: "",
       Odob: "",
@@ -982,7 +981,6 @@ export default {
       OYear: "",
       OLocation: "",
       ODescription: "",
-      //OUTREACH
       Oproject_name: "",
       Oproject_background: "",
       Oproject_objectives: "",
@@ -1289,7 +1287,6 @@ export default {
             this.Ois_voluneering_exp = "experience-yes";
             this.volexp = "y";
           }
-         // this.Oexp_details = response.data.list.exp_details;
           this.section = response.data.list.section;
         } else if (
           response.data.list.area_of_involvement ==

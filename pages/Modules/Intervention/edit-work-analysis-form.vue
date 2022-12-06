@@ -896,7 +896,7 @@ export default {
       type: "",
       SidebarAccess:null,
       appId:0,
-      // jobs1:[],
+     
     };
   },
   beforeMount() {
@@ -921,7 +921,7 @@ export default {
       });
       $(".optionBox").on("click", ".remove", function () {
         $(this).closest(".block").remove();
-        // num=num-1;
+        
       });
     });
     let urlParams = new URLSearchParams(window.location.search);
@@ -1022,10 +1022,7 @@ export default {
             });
           }
         } catch (e) {
-        // this.loader = false;
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+
       }
     }
   },
@@ -1081,16 +1078,13 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
+
         if (
           this.location_services_id &&
           this.type_diagnosis_id &&
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -1340,7 +1334,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 

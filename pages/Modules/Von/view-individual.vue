@@ -1039,7 +1039,6 @@ export default {
       other: "",
       screening_mode: 0,
       resume: "",
-      //OUTREACH
       project_name: "",
       project_background: "",
       project_objectives: "",
@@ -1057,7 +1056,6 @@ export default {
       project_branch: "",
       outreachother: "",
       outreachmentari_services: "",
-      //NETWORK
       contribution: "",
       budget: "",
       networkno_of_paricipants: 0,

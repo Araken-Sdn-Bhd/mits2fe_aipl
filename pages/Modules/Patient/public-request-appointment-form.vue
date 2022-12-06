@@ -187,18 +187,9 @@ export default {
         if (!this.name) {
           this.errorList.push("Name is required");
         }
-        //if (!this.nric) {
-        //  this.errorList.push("NRIC is required");
-        //}
         if (!this.contactno) {
           this.errorList.push("Contact No is required");
         }
-        //if (!this.address1) {
-        //  this.errorList.push("Address 1 No is required");
-        //}
-        //if (!this.address2) {
-        //  this.errorList.push("Address 2 No is required");
-        //}
         if (!this.email) {
           this.errorList.push("Email is required");
         }
@@ -233,7 +224,6 @@ export default {
               this.$nextTick(() => {
               $("#insertpopup").modal("show");
             });
-           // this.$router.push("/modules/Patient/list-of-appointment");
              this.$swal.fire(
               'Your appointment is submitted.',
               'Please wait for us to contact you.',

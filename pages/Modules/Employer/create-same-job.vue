@@ -408,7 +408,6 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -555,9 +554,6 @@ export default {
                 $("#insertpopup").modal("show");
               });
               this.reset();
-
-
-              //this.$router.push("/modules/Employer/same-job-offer-list);
           } else {
             this.loader = false;
             this.$nextTick(() => {

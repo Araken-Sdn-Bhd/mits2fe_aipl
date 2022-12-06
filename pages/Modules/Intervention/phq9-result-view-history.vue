@@ -245,7 +245,6 @@ export default {
     this.Id = urlParams.get("id");
   },
   beforeDestroy() {
-    // localStorage.removeItem("phq9result_history");
   },
   methods: {
     demoFromHTML() {

@@ -1817,9 +1817,6 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-          // if (!this.medication_des) {
-          //   this.errorList.push("Medication is required");
-          // }
           if (!this.zone) {
             this.errorList.push("Zone is required");
           }
@@ -1865,7 +1862,6 @@ export default {
             this.category_services &&
             this.complexity_services_id &&
             this.outcome_id &&
-            // this.medication_des &&
             this.zone &&
             this.case_manager &&
             this.specialist &&
@@ -2076,11 +2072,9 @@ export default {
         this.summary_of_issues = response.data.Data[0].summary_of_issues;
         this.management_plan = response.data.Data[0].management_plan;
         this.location_services_id = response.data.Data[0].location_of_services;
-        // window.alert(this.location_services_id);
         this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
         this.category_services = response.data.Data[0].category_of_services;
         this.services_id = response.data.Data[0].services_id;
-        //  this.userdetails.user.id=response.data.Data[0].patient_mrn_id,
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
         this.complexity_services_id =

@@ -141,7 +141,6 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    //   this.GetList();
   },
   mounted() {
     this.getData();
@@ -182,7 +181,6 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
-            // retrieve: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -200,7 +198,6 @@ export default {
 
     },
     async OnSearch() {
-      // this.loader = true;
       this.list = [];
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

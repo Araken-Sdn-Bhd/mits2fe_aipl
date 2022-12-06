@@ -440,15 +440,7 @@ export default {
     this.cbiresult = JSON.parse(localStorage.getItem("cbiresult"));
     this.cbiresult_history = JSON.parse(localStorage.getItem("cbiresult_history"));
     console.log("cbi result", this.cbiresult_history);
-    // if (this.cbiresult) {
-    //   console.log("if cbi ", this.cbiresult_history.result);
-    //   this.personalScore = this.cbiresult.PERSONAL_BURNOUT.score;
-    //   this.workScore = this.cbiresult.WORK_BURNOUT.score;
-    //   this.clientScore = this.cbiresult.CLIENT_RELATED_BURNOUT.score;
-    //   this.personallevel = this.cbiresult.PERSONAL_BURNOUT.level;
-    //   this.worklevel = this.cbiresult.WORK_BURNOUT.level;
-    //   this.clientlevel = this.cbiresult.CLIENT_RELATED_BURNOUT.level;
-    // }
+
      if (this.cbiresult_history) {
       const Array=this.cbiresult_history.test_section_name.split(',');
       console.log("cbi namesre", Array);
@@ -468,12 +460,7 @@ export default {
         console.log("WORK BURNOUT", this.clientScore);
         this.clientlevel = Levels[2];
       }
-      // this.personalScore = this.cbiresult_history.PERSONAL_BURNOUT.score;
-      // this.workScore = this.cbiresult.WORK_BURNOUT.score;
-      // this.clientScore = this.cbiresult.CLIENT_RELATED_BURNOUT.score;
-      // this.personallevel = this.cbiresult.PERSONAL_BURNOUT.level;
-      // this.worklevel = this.cbiresult.WORK_BURNOUT.level;
-      // this.clientlevel = this.cbiresult.CLIENT_RELATED_BURNOUT.level;
+
     }
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

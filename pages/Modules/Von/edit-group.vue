@@ -1095,7 +1095,6 @@ export default {
       members_count: "",
       member_background: "",
       is_you_represenative: 0,
-      //VOLUNTEEM
       Gname: "",
       Gdob: "",
       Gemail: "",
@@ -1467,14 +1466,6 @@ export default {
         if (!this.Garea_of_involvement) {
           this.errors.push("Areas of Involvement is required.");
         }
-        // if (this.Gis_voluneering_exp == "1") {
-        //   if (!this.Gexp_details) {
-        //     this.errors.push(
-        //       "volunteering experience description is required."
-        //     );
-        //     this.GIsvalid = false;
-        //   }
-        // }
         if (this.Gis_mental_health_professional == "1") {
           if (!this.Gfile) {
             this.errors.push("Latest Resume is required.");
@@ -1527,7 +1518,6 @@ export default {
           body.append("branch_id", this.Gbranch_id);
           body.append("area_of_involvement", this.Garea_of_involvement);
           body.append("is_voluneering_exp", this.Gis_voluneering_exp);
-          // body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Gis_mental_health_professional
@@ -1546,7 +1536,6 @@ export default {
               "," +
               this.Others
           );
-          //   body.append("mentari_services", this.Gmentari_services);
           body.append("available_date", this.Gavailable_date);
           body.append("available_time", this.Gavailable_time);
           body.append("health_professional_resume", this.Gfile);
@@ -1975,9 +1964,7 @@ export default {
             response.data.list.is_mental_health_professional;
           this.Gexp_details = response.data.list.exp_details;
           if (this.Gis_mental_health_professional == 1) {
-            // this.Gis_mental_health_professional = "professional-yes";
           } else {
-            //   this.Gis_mental_health_professional = "professional-no";
           }
           if (this.Gexp_details) {
             this.expList = JSON.parse(this.Gexp_details);

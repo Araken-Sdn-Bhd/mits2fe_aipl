@@ -188,8 +188,6 @@ export default {
       console.log("cbi namesre", this.patient_id);
     }
     this.GetAnswerList();
-    // this.GetList();
-    // this.GetUserIpAddress();
     if (this.userdetails) {
       this.userId = this.userdetails.user.id;
       this.token = this.userdetails.access_token;

@@ -1040,7 +1040,6 @@ export default {
       members_count: "",
       member_background: "",
       is_you_represenative: 0,
-      //VOLUNTEEM
       Gname: "",
       Gdob: "",
       Gemail: "",
@@ -1381,14 +1380,6 @@ export default {
         if (!this.Garea_of_involvement) {
           this.errors.push("Areas of Involvement is required.");
         }
-        // if (this.Gis_voluneering_exp == "experience-yes") {
-        //   if (!this.Gexp_details) {
-        //     this.errors.push(
-        //       "volunteering experience description is required."
-        //     );
-        //     this.GIsvalid = false;
-        //   }
-        // }
         if (this.Gis_mental_health_professional == "professional-yesG") {
           if (!this.Gfile) {
             this.errors.push("Latest Resume is required.");

@@ -517,22 +517,16 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             window.alert("Data are saved successfully!");
-            //this.resetmodel();
+
             this.GoBack();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
           } else {
             this.loader = false;
             window.alert("Something went wrong!");
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
           }
       } catch (e) {
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+
       }
               }
     },
@@ -541,9 +535,7 @@ export default {
       this.errorList = [];
       this.validate = true;
       try {
-        // if (!this.diagnosis_id) {
-        //   this.errorList.push("Diagnosis is required");
-        // }
+
         if (!this.category_discharge) {
           this.errorList.push("Category Of Discharge is required");
         }
@@ -595,11 +587,9 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
+
         if (
-          // this.diagnosis_id &&
+
           this.category_discharge &&
           this.comment &&
           this.specialist_name_id &&
@@ -609,7 +599,7 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          //this.medication_des &&
+ 
           this.validate
         ) {
           this.loader = true;
@@ -647,17 +637,13 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             window.alert("Data are saved successfully!");
-            //this.resetmodel();
+
             this.GoBack();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
           } else {
             this.loader = false;
             window.alert("Something went wrong!");
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
           }
         }
       } catch (e) {}
@@ -821,7 +807,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 

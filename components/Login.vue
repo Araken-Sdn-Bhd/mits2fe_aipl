@@ -76,9 +76,8 @@ export default {
           password: this.password,
         });
         this.error = response.data.message.email;
-        // this.$router.push("/");
       } catch (e) {
-        this.error = e; //$user.message.email; //e.response.data.message;
+        this.error = e; 
       }
     },
   },

@@ -1725,7 +1725,6 @@ export default {
     }
     if (this.type == "view") {
       this.isDisabled = true;
-      // alert(this.isDisabled);
     }
     const current = new Date();
     this.todaydate =
@@ -1911,9 +1910,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_prescription) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (!this.referral_name) {
           this.errorList.push("Referrer Name is required");
         }
@@ -1947,7 +1943,6 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome_id &&
-          // this.medication_prescription &&
           this.referral_name &&
           this.designation &&
           this.validate
@@ -2151,7 +2146,7 @@ export default {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
-      // Reload the page to refresh the data
+
       window.location.reload();
     },
     resetmodel() {
@@ -2211,7 +2206,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+
 
         this.Id = response.data.Data[0].patient_mrn_id;
 

@@ -502,7 +502,6 @@ export default {
         )
         .then((resp) => {
           this.list = resp.data.Data;
-          //alert(JSON.stringify(this.list));
           console.log("my staff", resp.data);
           $(document).ready(function () {
             $(".data-table").DataTable({
@@ -525,7 +524,6 @@ export default {
         });
     },
     async edit(data) {
-    //alert(JSON.stringify(data));
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -537,7 +535,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        //alert(JSON.stringify(response.data.Data));
         if(this.staffpatientlist = response.data.Data[0]){
         this.outcome_id = response.data.Data[0].outcome;
         this.complexity_services_id =

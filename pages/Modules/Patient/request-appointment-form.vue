@@ -197,28 +197,16 @@ export default {
         if (!this.name) {
           this.errorList.push("Name is required");
         }
-        // if (!this.nric) {
-        //   this.errorList.push("NRIC is required");
-        // }
         if (!this.contactno) {
           this.errorList.push("Contact No is required");
         }
-        // if (!this.address1) {
-        //   this.errorList.push("Address 1 No is required");
-        // }
-        // if (!this.address2) {
-        //   this.errorList.push("Address 2 No is required");
-        // }
         if (!this.email) {
           this.errorList.push("Email is required");
         }
         if (
           this.branch &&
           this.name &&
-          // this.nric &&
           this.contactno &&
-          // this.address1 &&
-          // this.address2 &&
           this.email
         ) {
           this.loader = true;

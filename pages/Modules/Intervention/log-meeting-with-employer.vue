@@ -409,7 +409,6 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    //window.alert(JSON.stringify(this.userdetails.user.name));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
 
     this.staff_name = this.userdetails.user.name;
@@ -480,7 +479,6 @@ export default {
             alert("Error Occured!");
             this.GoBack();
           }
-        //}
       } catch (e) {}
   }
     },
@@ -550,9 +548,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.date &&
           this.employee_name &&
@@ -566,7 +561,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -764,7 +758,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.pid = response.data.Data[0].patient_id;
         this.date = response.data.Data[0].date;

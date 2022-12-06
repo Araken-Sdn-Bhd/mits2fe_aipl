@@ -555,13 +555,9 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 
-        // this.name = response.data.Data[0].name;
-
-        // this.GetList();
         this.GetPatientdetails();
       } else {
         window.alert("Something went wrong");

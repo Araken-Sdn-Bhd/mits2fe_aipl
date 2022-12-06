@@ -939,9 +939,6 @@ data() {
     externallist: [],
     pid: 0,
     type: "",
-    // clinicallist: [],
-    // interventionlist: [],
-    // promotivelist: [],
     livingassessment:"",
     behaviorassessment:"",
     cognitiveassessment:"",
@@ -1089,7 +1086,7 @@ methods: {
         console.log("response", response.data);
         if (response.data.code == 200) {
           this.loader = false;
-          // this.resetmodel();
+  
           this.$nextTick(() => {
             $("#insertpopup").modal("show");
           });
@@ -1118,9 +1115,6 @@ methods: {
       if (!this.date) {
         this.errorList.push("Referral Date is required");
       }
-      // if (!this.diagnosis_id) {
-      //   this.errorList.push("Diagnosis is required");
-      // }
       if (!this.referral_clinical_assessment) {
         this.errorList.push("CLINICAL ASSESSMENT is required");
       }
@@ -1175,13 +1169,9 @@ methods: {
       if (!this.outcome) {
         this.errorList.push("Outcome is required");
       }
-      // if (!this.medication_des) {
-      //   this.errorList.push("Medication is required");
-      // }
       if (
         this.referral_location &&
         this.date &&
-        // this.diagnosis_id &&
         this.referral_clinical_assessment &&
         this.referral_clinical_intervention &&
         this.referral_clinical_promotive_program &&
@@ -1192,7 +1182,6 @@ methods: {
         this.category_services &&
         this.complexity_services &&
         this.outcome &&
-        // this.medication_des &&
         this.validate
       ) {
         this.loader = true;
@@ -1289,7 +1278,6 @@ methods: {
         console.log("response", response.data);
         if (response.data.code == 200) {
           this.loader = false;
-          // this.resetmodel();
           this.$nextTick(() => {
             $("#insertpopup").modal("show");
           });
@@ -1423,31 +1411,6 @@ methods: {
     this.medication_des = "";
     this.services_id = 0;
   },
-  // OnclinicalAssesment(val) {
-  //   console.log("my val", val);
-  //   if (this.referral_clinical_assessment) {
-  //     this.referral_clinical_assessment =
-  //       this.referral_clinical_assessment + "," + val;
-  //   } else {
-  //     this.referral_clinical_assessment = val;
-  //   }
-  // },
-  // Onchangeintervention(val) {
-  //   if (this.referral_clinical_intervention) {
-  //     this.referral_clinical_intervention =
-  //       this.referral_clinical_intervention + "," + val;
-  //   } else {
-  //     this.referral_clinical_intervention = val;
-  //   }
-  // },
-  // Onchangepromativeprogram(val) {
-  //   if (this.referral_clinical_promotive_program) {
-  //     this.referral_clinical_promotive_program =
-  //       this.referral_clinical_promotive_program + "," + val;
-  //   } else {
-  //     this.referral_clinical_promotive_program = val;
-  //   }
-  // },
   async GetPatientdetails() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -1482,14 +1445,14 @@ methods: {
       { headers }
     );
     if (response.data.code == 200) {
-      // window.alert(response.data.Data[0].patient_mrn_id);
+
 
       this.Id = response.data.Data[0].patient_mrn_id;
       this.referral_location = response.data.Data[0].referral_location;
       this.date = response.data.Data[0].date;
       this.diagnosis_id = response.data.Data[0].diagnosis_id;
 
-      //window.alert(response.data.Data[0].referral_clinical_assessment);
+
       var jdata1 = JSON.parse(response.data.Data[0].referral_clinical_assessment);
       jdata1.forEach((ele) => {
       this.referral_clinical_assessment="val";
@@ -1608,7 +1571,7 @@ methods: {
       this.referral_clinical_intervention_other =
         response.data.Data[0].referral_clinical_intervention_other;
 
-        //window.alert(response.data.Data[0].referral_clinical_promotive_program);
+  
       var jdata3 = JSON.parse(response.data.Data[0].referral_clinical_promotive_program);
       jdata3.forEach((ele) => {
       this.referral_clinical_promotive_program="val";

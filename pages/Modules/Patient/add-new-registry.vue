@@ -2054,7 +2054,6 @@ export default {
       procheckedList: {},
       testcheckedList: {},
       sharp_register_id: 0,
-      //selfharm  ad on
       selected: [],
       testresult: "",
       Sdate: "",
@@ -2101,7 +2100,6 @@ export default {
         placeholder: "Please Select",
       });
 
-      // Presence of psychiatric disorder
       $('.yes-box input[type="radio"]').click(function () {
         $(".box-01").css("display", "inline-block");
       });
@@ -2282,7 +2280,6 @@ export default {
         }
       });
 
-      // 2
 
       $(".nex-1").click(function (e) {
         e.preventDefault();
@@ -2294,7 +2291,6 @@ export default {
         $('#myTab a[href="#risk-factors"]').tab("show");
       });
 
-      // 3
 
       $(".nex-2").click(function (e) {
         e.preventDefault();
@@ -2306,7 +2302,6 @@ export default {
         $('#myTab a[href="#protective"]').tab("show");
       });
 
-      // 4
 
       $(".nex-3").click(function (e) {
         e.preventDefault();
@@ -2318,7 +2313,6 @@ export default {
         $('#myTab a[href="#selfharm"]').tab("show");
       });
 
-      // 5
 
       $(".nex-4").click(function (e) {
         e.preventDefault();
@@ -2330,7 +2324,6 @@ export default {
         $('#myTab a[href="#suicide"]').tab("show");
       });
 
-      // 6
 
       $(".pre-5").click(function (e) {
         e.preventDefault();
@@ -2447,7 +2440,6 @@ export default {
       console.log("my list", this.checkedList);
     },
     OndropdownChange(val, event) {
-      //this.checkedList[ind] = val;
       delete checkedList.val;
       this.checkedList[val] = event.target.value;
       console.log("my pushed array", this.checkedList);
@@ -2849,9 +2841,6 @@ export default {
           console.log("my data", response.data);
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
             this.sharp_register_id = response.data.id;
             $('#myTab a[href="#data-producer"]').tab("show");
           } else {
@@ -2915,9 +2904,6 @@ export default {
           );
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
             this.$router.push({
               path: "/modules/Patient/patient-history",
               query: { id: this.Id },

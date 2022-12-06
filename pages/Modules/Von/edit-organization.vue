@@ -961,7 +961,6 @@ export default {
       org_desc: "",
       org_email: "",
       org_phone: "",
-      //VOLUNTEEM
       Oname: "",
       Oposition_in_org: "",
       Odob: "",
@@ -988,7 +987,6 @@ export default {
       OYear: "",
       OLocation: "",
       ODescription: "",
-      //OUTREACH
       Oproject_name: "",
       Oproject_background: "",
       Oproject_objectives: "",
@@ -1285,7 +1283,6 @@ export default {
           body.append("branch_id", this.Obranch_id);
           body.append("area_of_involvement", this.Oarea_of_involvement);
           body.append("is_voluneering_exp", this.Ois_voluneering_exp);
-          // body.append("exp_details", JSON.stringify(explist));
           body.append(
             "is_mental_health_professional",
             this.Ois_mental_health_professional
@@ -1517,10 +1514,8 @@ export default {
         this.Ooccupation_sector_id = response.data.list.occupation_sector;
         this.Obranch_id = response.data.list.branch_id;
         this.Oarea_of_involvement = response.data.list.area_of_involvement;
-        // this.Ois_agree = 1;
         this.Omentari_services = response.data.list.mentari_services;
         this.Oposition_in_org = response.data.list.position_in_org;
-        // this.screening_mode = response.data.list.screening_mode;
         if (this.Omentari_services) {
           var service = this.Omentari_services.split(",");
           service.forEach((val) => {

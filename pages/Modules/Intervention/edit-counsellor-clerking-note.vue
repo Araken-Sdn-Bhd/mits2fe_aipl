@@ -447,9 +447,7 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
             alert("Succefully Updated");
             this.GoBack();
 
@@ -569,16 +567,12 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
             alert("Succefully Updated");
             this.GoBack();
           } else {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
             alert("Error Occured!");
             this.GoBack();
 

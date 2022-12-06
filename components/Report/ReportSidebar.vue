@@ -300,39 +300,10 @@ export default {
   },
   mounted() {
      document.body.classList.add("sb-nav-fixed");
-    // this.nav = localStorage.getItem("nav");
-    // if (this.nav == "tab1") {
-    //   this.$refs.tab1.classList.add("active");
-    // } else if (this.nav == "tab2") {
-    //   this.$refs.tab2.classList.add("active");
-    // } else if (this.nav == "tab3") {
-    //   this.$refs.tab3.classList.add("active");
-    // } else if (this.nav == "tab4") {
-    //   this.$refs.tab4.classList.add("active");
-    // } else if (this.nav == "tab5") {
-    //   this.$refs.tab5.classList.add("active");
-    // }
+ 
   },
   methods: {
-    // changesidebar: function (val) {
-    //   this.$refs.tab1.classList.remove("active");
-    //   this.$refs.tab2.classList.remove("active");
-    //   this.$refs.tab3.classList.remove("active");
-    //   this.$refs.tab4.classList.remove("active");
-    //   this.$refs.tab5.classList.remove("active");
-    //   localStorage.setItem("nav", val);
-    //   if (val == "tab1") {
-    //     this.$refs.tab1.classList.add("active");
-    //   } else if (val == "tab2") {
-    //     this.$refs.tab2.classList.add("active");
-    //   } else if (val == "tab3") {
-    //     this.$refs.tab3.classList.add("active");
-    //   } else if (val == "tab4") {
-    //     this.$refs.tab4.classList.add("active");
-    //   } else if (val == "tab5") {
-    //     this.$refs.tab5.classList.add("active");
-    //   }
-    // },
+ 
   },
 };
 </script>

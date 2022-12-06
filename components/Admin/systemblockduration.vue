@@ -79,7 +79,6 @@ export default {
           }
         }
       } catch (e) {
-        //this.error=fff
       }
     },
 

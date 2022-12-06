@@ -223,9 +223,6 @@ export default {
         if (this.ModuleId <= 0) {
           this.errors.push("Module is required.");
         }
-        // if (this.SubmoduleId <= 0) {
-        //   this.errors.push("Sub Module is required.");
-        // }
         if (!this.screenname) {
           this.errors.push("Screen Name is required.");
         }
