@@ -12,7 +12,7 @@
 
           <div class="card mb-4">
             <div class="card-body">
-              <form method="post" @submit.prevent="OnSubmit">
+              <div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -355,7 +355,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -465,7 +465,7 @@ export default {
               outcome: this.outcome_id,
               medication_des: this.medication_des,
               appId: this.appId,
-              status: 0,
+              status: "0",
             },
             { headers }
           );
@@ -473,31 +473,15 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         //}
       } catch (e) {}
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        // }
   }
     },
     async onPublishEvent() {
@@ -613,7 +597,7 @@ export default {
               outcome: this.outcome_id,
               medication_des: this.medication_des,
               appId: this.appId,
-              status: 1,
+              status: "1",
             },
             { headers }
           );
@@ -621,30 +605,15 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succefully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
       } catch (e) {
-        console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
       }
     }
     },

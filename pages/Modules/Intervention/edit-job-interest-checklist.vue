@@ -8,7 +8,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Job Interest Checklist</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -395,7 +394,7 @@
                           </tr>
                         </tbody>
                       </table>
-                       <table class="th-auto th-bg input-width" id="job1" v-if="pid">
+                      <table class="th-auto th-bg input-width" id="job1" v-if="pid">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -699,8 +698,7 @@
                                 v-bind:key="catcode.id"
                                 v-bind:value="catcode.id"
                               >
-                                 {{ catcode.icd_code }}
- {{catcode.icd_name}}
+                                {{ catcode.icd_code }}{{catcode.icd_name}}
                               </option>
                             </select>
                           </div>
@@ -797,17 +795,16 @@
                     </div>
                   </div>
                 </div>
-                <!--  -->
               </div>
 
-                 <p v-if="errorList.length">
+                  <p v-if="errorList.length">
                           <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
+                          <li style="color:red"  v-for='err in errorList' :key='err' >
+                            {{ err }}
+                          </li>
                         </ul>
-                       </p>
-                       <br>
+                  </p>
+                      <br>
                       <br>
                 <div class="d-flex">
                     <button
@@ -921,7 +918,6 @@ export default {
       });
       $(".optionBox").on("click", ".remove", function () {
         $(this).closest(".block").remove();
-        // num=num-1;
       });
     });
     let urlParams = new URLSearchParams(window.location.search);
@@ -1012,20 +1008,14 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Updated");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!")
+            this.GoBack();
           }
         } catch (e) {
-        // this.loader = false;
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
       }
     }
   },
@@ -1150,21 +1140,16 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            alert("Succesfully Updated");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured");
+            this.GoBack();
           }
         }
       } catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
       }
     }
   },
