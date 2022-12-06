@@ -18,7 +18,6 @@
                 <a @click="gototransfer" title="transfer staff"
                   ><i class="fa fa-share-square"></i
                 ></a>
-                <a @click="deletestaff" title="delete record"><i class="fa fa-trash-alt"></i></a>
               </div>
             </div>
             <div class="card-body">

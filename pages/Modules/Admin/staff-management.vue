@@ -76,6 +76,7 @@
                     <th>Role</th>
                     <th>Designation</th>
                     <th>Branch</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -86,6 +87,7 @@
                     <td>{{staff.role_name}}</td>
                     <td>{{ staff.designation_name }}</td>
                     <td>{{ staff.hospital_branch_name }}</td>
+                    <td><a v-if="staff.status == '1'">Active</a><a v-else-if="staff.status == '0'">Inactive</a></td>
                     <td>
                       <a @click="view(staff)" class="view"
                         ><i class="fa fa-eye"></i
@@ -352,7 +354,7 @@ export default {
           this.$refs.hidebutton.classList.add("hide");
     }
 
-    
+
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -383,7 +385,7 @@ export default {
               this.dataReady= true;
               this.dataReady2= false;
             }
-      
+
     },
     async GetList() {
       const headers = {
@@ -418,7 +420,7 @@ export default {
       this.GetList();
     },
     async onnamechange(event) {
-     
+
       this.userdetails.branch.branch_name = event.target.value;
       this.GetList();
     },
@@ -428,7 +430,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-list", 
+      const response = await this.$axios.get("hospital/branch-list",
       {
         headers,
       });
