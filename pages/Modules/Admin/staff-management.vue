@@ -41,7 +41,7 @@
                       aria-label="Default select example"
                       @change="onbranchchange($event)"
                     >
-                      <option value="0">Select Branch</option>
+                      <option value="0">All Branch</option>
                       <option
                         v-for="brnch in branchlist"
                         v-bind:key="brnch.id"
@@ -76,6 +76,7 @@
                     <th>Role</th>
                     <th>Designation</th>
                     <th>Branch</th>
+                    <th>Team</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -88,10 +89,12 @@
                     <td>{{ staff.designation_name }}</td>
                     <td>{{ staff.hospital_branch_name }}</td>
                     <td><a v-if="staff.status == '1'">Active</a><a v-else-if="staff.status == '0'">Inactive</a></td>
+                  
+                      
+                  
                     <td>
-                      <a @click="view(staff)" class="view"
-                        ><i class="fa fa-eye"></i
-                      ></a>
+                      <a @click="view(staff)" class="view" title="view staff profile"><em class="fa fa-eye"></em></a>
+                      <a class="view" @click="Onview(staff)" title="view user matrix"><em class="fa fa-bars"></em></a>
                     </td>
                   </tr>
                 </tbody>
@@ -102,16 +105,15 @@
                   <button
                     type="button"
                     class="btn btn-warning btn-text btn-green"
-                    @click="downloadform"
-                  >
-                    <i class="fa fa-download"></i> User Id Request Form
+                    @click="downloadform">
+                    <em class="fa fa-download"></em> User Id Request Form
                   </button>
                   <button
                     type="button"
                     class="btn btn-success"
                     @click="OnPrint"
                   >
-                    <i class="fa fa-print"></i> Print List
+                    <em class="fa fa-print"></em> Print List
                   </button>
                 </div>
               </div>
@@ -395,7 +397,6 @@ export default {
       };
       const response = await this.$axios.post(
         "staff-management/getStaffManagementListOrById",
-        // { branch_id: this.Id, name: this.name }, (original)
         { branch_id: this.branchId, name: this.userdetails.branch.branch_name },
         {
           headers,
@@ -459,7 +460,14 @@ export default {
         this.$refs.result.classList.add("hide");
       }, 100);
     },
-  },
+    Onview(data) {
+
+      this.$router.push({
+        path: "/modules/Admin/list-of-user-matrix-view",
+      query: {id: data.team_id, usersid:data.id },
+      });
+      },
+    },
 };
 </script>
 <style scoped>

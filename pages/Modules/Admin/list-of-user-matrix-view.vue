@@ -141,10 +141,22 @@
                   </tr>
                 </tbody>
               </table>
-
-              <button type="submit" class="btn btn-success" @click="OnSubmit">
-                Save <i class="fal fa-arrow-from-left"></i>
-              </button>
+              <br>
+            <br>
+            <div class="d-flex">
+                  <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                  <button type="submit" class="btn btn-warning btn-text ml-auto btn-fill btn-md" v-on:click="OnSubmit">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                </div>
+              <!--<div class="d-flex">
+                  <div class="ml-auto">
+                    <button type="submit" class="btn btn-green btn-text" @click="OnSubmit"><em class="fad fa-save"></em> Save</button>
+                  </div>
+                </div>-->
+             
             </div>
           </div>
         </div>
@@ -183,6 +195,9 @@ export default {
     this.GetModuleList();
   },
   methods: {
+    back() {
+      this.$router.go(-1);
+    },
     GetList() {
       this.loader = true;
       const headers = {

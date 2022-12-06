@@ -197,9 +197,6 @@
                     <i class="fa fa-step-backward"/> &nbsp; Back
                 </button>
                   <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <!--<button v-on:click="onCreateEvent('0')" class="btn btn-warning btn-text">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>-->
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
