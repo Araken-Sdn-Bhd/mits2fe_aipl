@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Appointment</h1>
-            <!-- <a href="demographic.html"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -99,9 +98,6 @@
                       >
                         <i class="fa fa-edit"></i>
                       </a>
-                      <!-- <a style="pointer:cursor;" @click="OnView(app)" class="view">
-                        <i class="fa fa-eye"></i>
-                      </a> -->
                     </td>
                   </tr>
                 </tbody>
@@ -168,6 +164,7 @@ export default {
           name: "",
           date: "",
           service: "",
+          email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
         },
         { headers }
       )
@@ -210,6 +207,7 @@ export default {
             name: "",
             date: "",
             service: "",
+            email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
           },
           { headers }
         )
@@ -269,6 +267,7 @@ export default {
           name: this.name,
           date: this.date,
           service: this.service,
+          email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
         },
         { headers }
       );
