@@ -206,6 +206,13 @@ export default {
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
+    setTimeout(function () {
+        sidebarToggle.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.toggle('sb-sidenav-toggled');
+            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        })
+    }, 1000);
   },
   methods: {
     changesidebar: function (event) {
