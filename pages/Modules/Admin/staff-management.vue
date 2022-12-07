@@ -15,8 +15,8 @@
           <div class="card mb-4 reslt">
             <div class="card-body">
               <div class="search-table">
-                <div class="row mb-3 mt-2">
-                  <div class="col-sm-3">
+                <div class="rowmt-2">
+                  <div class="col-sm-3 mb-3">
                     <select
                       v-if="dataReady"
                       disabled
@@ -52,7 +52,7 @@
                     </select>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-4 mb-3">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
                         ><i class="fa fa-search"></i
@@ -68,7 +68,7 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table class="table table-striped data-table" style="width: 100%">
+              <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -98,20 +98,20 @@
                 </tbody>
               </table>
 
-              <div class="d-flex" >
+              <div class="d-flex mt-3 btn-width">
                 <div class="ml-auto" id="hidebutton" ref="hidebutton">
                   <button
                     type="button"
                     class="btn btn-warning btn-text btn-green"
                     @click="downloadform">
-                    <em class="fa fa-download"></em> User Id Request Form
+                    <i class="fa fa-download"></i> User Id Request Form
                   </button>
                   <button
                     type="button"
                     class="btn btn-success"
                     @click="OnPrint"
                   >
-                    <em class="fa fa-print"></em> Print List
+                    <i class="fa fa-print"></i> Print List
                   </button>
                 </div>
               </div>
@@ -278,21 +278,21 @@ export default {
   setup() {},
   head: {
     script: [
-      {
-        src: "/app/js/bootstrap.bundle.min.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-      {
-        src: "/app/js/jquery-3.5.1.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-      {
-        src: "/app/js/scripts.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
+      // {
+      //   src: "/app/js/bootstrap.bundle.min.js",
+      //   body: true,
+      //   crossorigin: "anonymous",
+      // },
+      // {
+      //   src: "/app/js/jquery-3.5.1.js",
+      //   body: true,
+      //   crossorigin: "anonymous",
+      // },
+      // {
+      //   src: "/app/js/scripts.js",
+      //   body: true,
+      //   crossorigin: "anonymous",
+      // },
       {
         src: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js",
         async: true,
@@ -335,8 +335,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

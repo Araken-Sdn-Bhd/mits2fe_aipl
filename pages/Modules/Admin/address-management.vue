@@ -144,7 +144,7 @@
     <div class="table-title">
       <h3>List of Country</h3>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -232,7 +232,7 @@
     <div class="table-title">
       <h3>List of State</h3>
     </div>
-    <table class="table table-striped data-table1" style="width: 100%">
+    <table class="table table-striped data-table1 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -347,7 +347,7 @@
     <div class="table-title">
       <h3>List of Postcode</h3>
     </div>
-    <table class="table table-striped data-table3" style="width: 100%">
+    <table class="table table-striped data-table3 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -389,33 +389,33 @@
   </div>
 </template>
 <script>
-import CommonHeader from '../../../components/CommonHeader.vue';
-import CommonSidebar from '../../../components/CommonSidebar.vue';
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
 import City from "../../../components/Admin/city.vue";
 import Country from "../../../components/Admin/country.vue";
 import State from "../../../components/Admin/state.vue";
 export default {
   components: { CommonSidebar, CommonHeader, Country, State, City },
   name: "address-management",
-  head: {
-    script: [
-      {
-        src: "/app/js/bootstrap.bundle.min.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-      {
-        src: "/app/js/scripts.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-      {
-        src: "/app/js/jquery.dataTables.min.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-    ],
-  },
+  // head: {
+  //   script: [
+  //     {
+  //       src: "/app/js/bootstrap.bundle.min.js",
+  //       body: true,
+  //       crossorigin: "anonymous",
+  //     },
+  //     {
+  //       src: "/app/js/scripts.js",
+  //       body: true,
+  //       crossorigin: "anonymous",
+  //     },
+  //     {
+  //       src: "/app/js/jquery.dataTables.min.js",
+  //       body: true,
+  //       crossorigin: "anonymous",
+  //     },
+  //   ],
+  // },
   data() {
     return {
       errors: [],
@@ -438,9 +438,9 @@ export default {
       CityIndex: 0,
       CountyList: [],
       CityList: [],
-      StateListforcity:[],
+      StateListforcity: [],
       cityId: 0,
-      SidebarAccess:null
+      SidebarAccess: null,
     };
   },
   mounted() {
@@ -460,14 +460,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
       })
@@ -482,42 +489,47 @@ export default {
     this.GetCountryList();
   },
   methods: {
-    BindCountryList(){
-       const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const axios = require("axios").default;
-    axios
-      .get(
-        `${this.$axios.defaults.baseURL}` +
-          "address/country/list",
-        { headers }
-      )
-      .then((resp) => {
-        this.CountryList = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            autoWidth: false,
-            responsive: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+    BindCountryList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const axios = require("axios").default;
+      axios
+        .get(`${this.$axios.defaults.baseURL}` + "address/country/list", {
+          headers,
+        })
+        .then((resp) => {
+          this.CountryList = resp.data.list;
+          $(document).ready(function () {
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              // autoWidth: false,
+              // responsive: true,
+              scrollX: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
               },
-            },
+            });
+            $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+              $($.fn.dataTable.tables(true))
+                .DataTable()
+                .columns.adjust()
+                .responsive.recalc();
+            });
           });
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
     },
-     async addcountry() {
+    async addcountry() {
       this.errors = [];
       try {
         if (!this.Country) {
@@ -581,7 +593,7 @@ export default {
           }
         }
       } catch (e) {
-        console.log('errror',e);
+        console.log("errror", e);
         this.loader = false;
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
@@ -676,7 +688,7 @@ export default {
             const response = await this.$axios.post(
               "address/" + this.mystateId + "/updateState",
               {
-                id:this.mystateId,
+                id: this.mystateId,
                 added_by: this.userdetails.user.id,
                 state_name: this.State,
                 country_id: this.CountryId,
@@ -685,7 +697,7 @@ export default {
               },
               { headers }
             );
-            console.log('my state resp',response.data);
+            console.log("my state resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
               this.$nextTick(() => {
@@ -707,7 +719,7 @@ export default {
               },
               { headers }
             );
-             console.log('my state resp',response.data);
+            console.log("my state resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
               this.$nextTick(() => {
@@ -785,10 +797,9 @@ export default {
       this.State = "";
       this.Stateindex = 0;
       this.errors = [];
-       this.StateListforcity = [];
+      this.StateListforcity = [];
       this.mystateId = 0;
       this.GetStateList();
-
     },
     BindCityList() {
       const headers = {
@@ -808,14 +819,21 @@ export default {
               searching: false,
               bLengthChange: false,
               bInfo: false,
-              autoWidth: false,
-              responsive: true,
+              // autoWidth: false,
+              // responsive: true,
+              scrollX: true,
               language: {
                 paginate: {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                   previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
                 },
               },
+            });
+            $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+              $($.fn.dataTable.tables(true))
+                .DataTable()
+                .columns.adjust()
+                .responsive.recalc();
             });
           });
         })

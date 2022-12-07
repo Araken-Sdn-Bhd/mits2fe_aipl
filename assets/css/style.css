@@ -3837,18 +3837,20 @@ table.dataTable.nowrap td {
     margin-bottom: 0;
 }
 
-.nav-tab {
+.nav-tab, .nav-tabs{
     margin-top: 10px;
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .nav.sub-tab {
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .no-border {
@@ -3859,10 +3861,10 @@ table.dataTable.nowrap td {
     padding-left: 15px;
 }
 
-.dataTables_scrollHeadInner,
+/* .dataTables_scrollHeadInner,
 .table {
     min-width: 100% !important
-}
+} */
 
 /* responsive css */
 
@@ -3940,11 +3942,21 @@ table.dataTable.nowrap td {
     .password-tab .form-check-input[type=checkbox] {
         min-width: 16px;
     }
+    .form-foter{
+        flex-wrap: wrap;
+    }
 }
 
 /* close 991 */
 
-
+@media (max-width: 800px) {
+    .login-box {
+        margin: auto;
+    }
+    .login-screen {
+        margin: auto;
+    }
+}
 @media (max-width: 650px) {
     .search-table .col-sm-3 {
         margin-bottom: 5px;
@@ -4001,6 +4013,9 @@ table.dataTable.nowrap td {
         margin-top: 8px;
         width: 100%;
     }
+    .btns-box .btn {
+        margin-bottom: 6px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -4020,6 +4035,15 @@ table.dataTable.nowrap td {
     .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
         top: 70px;
     }
+    .btn-width {
+        width: 240px;
+        margin: auto;
+        max-width: 100%;
+    }
+    .btn-width .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }
 
 @media (max-width: 355px) {
@@ -4033,5 +4057,10 @@ table.dataTable.nowrap td {
 
     .footer-action .ml-auto {
         margin-top: 0;
+    }
+    .login-box {
+        padding: 30px 10px;
+        border-radius: 0px;
+        min-height: 100vh;
     }
 }

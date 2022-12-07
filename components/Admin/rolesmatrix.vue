@@ -58,7 +58,7 @@
 
           <table
             v-if="screenlist.length > 0"
-            class="table table-striped data-table font-13"
+            class="table table-striped data-table font-13 display nowrap"
             style="width: 100%"
           >
             <thead>

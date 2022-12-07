@@ -47,7 +47,7 @@
             
           </div>
 
-          <table v-if="screenlist.length > 0" class="table table-striped data-table font-13" style="width: 100%">
+          <table v-if="screenlist.length > 0" class="table table-striped data-table font-13 display nowrap" style="width: 100%">
             <thead>
               <tr>
                 <th>No</th>
@@ -94,7 +94,7 @@
         <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch" />
       </div>
       </div>
-                  <table class="table table-striped data-table1" style="width: 100%">
+                  <table class="table table-striped data-table1 display nowrap" style="width: 100%">
                         <thead>
                           <tr>
                             <th style="width:5%">No</th>

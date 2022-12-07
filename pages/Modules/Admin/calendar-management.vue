@@ -19,7 +19,7 @@
                 <div class="calendar" id="calendar"></div>
                 <div class="table-title d-flex align-items-center">
                   <h3>List of Event</h3>
-                  <div class="btn-box ml-auto">
+                  <div class="btn-box ml-auto btns-box">
                     <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0 text-white">
                       <i class="fa fa-download"></i> Excel Template
                     </a>
@@ -35,7 +35,7 @@
                   </div>
                 </div>
                 <table
-                  class="table table-striped data-table font-13"
+                  class="table table-striped data-table font-13 display nowrap"
                   style="width: 100%"
                 >
                   <thead>
@@ -153,14 +153,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
         this.Calender();

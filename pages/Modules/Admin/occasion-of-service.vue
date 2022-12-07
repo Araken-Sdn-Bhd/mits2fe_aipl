@@ -12,8 +12,8 @@
           <div class="card mb-4">
             <div class="card-body">
               <div class="search-table">
-                <div class="row mt-2 mb-3">
-                  <div class="col-sm-3">
+                <div class="row mt-2">
+                  <div class="col-sm-3  mb-3">
                     <select
                       v-model="Id"
                       v-if="dataReady"
@@ -49,7 +49,7 @@
                     </select>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-4 mb-3">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
                         ><i class="fa fa-search"></i
@@ -65,7 +65,7 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table class="table table-striped data-table" style="width: 100%">
+              <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -135,8 +135,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

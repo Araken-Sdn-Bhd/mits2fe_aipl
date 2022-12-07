@@ -13,6 +13,12 @@ export default {
     script:[
       // {src:'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'},
       // {src:'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'}
+      
+      // Add For Sidebar Menu
+      {
+        src: "/app/js/scripts.js",
+        type: "text/javascript"
+      },
       {
         src: "https://code.jquery.com/jquery-3.3.1.slim.min.js",
         type: "text/javascript"
@@ -78,8 +84,8 @@ export default {
   axios: {
     // baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
     //baseURL:"http://192.168.1.15:8080/api/"
-    baseURL:"http://localhost:8000/api/"
-    // baseURL: "http://araken.asuscomm.com:8000/api/"
+    // baseURL:"http://localhost:8000/api/"
+    baseURL: "http://araken.asuscomm.com:8000/api/"
     // baseURL: "https://mentari.moh.gov.my/point/api/"
 
   },

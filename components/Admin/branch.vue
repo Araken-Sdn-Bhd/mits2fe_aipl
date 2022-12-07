@@ -170,7 +170,7 @@
         <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch" />
       </div>
     </div>
-    <table class="table table-striped data-table1 font-13" style="width: 100%">
+    <table class="table table-striped data-table1 font-13  display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -206,7 +206,7 @@
 <script>
 export default {
   name: "branch",
-  setup() { },
+  setup() {},
   data() {
     return {
       Id: 0,
@@ -267,14 +267,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
       })
@@ -372,7 +379,12 @@ export default {
       var Contactlist = [];
       var Conntactmobilelist = [];
       var Emaillist = [];
-      console.log('Contactlist,Conntactmobilelist,Emaillist', this.Contactlist, this.Conntactmobilelist, this.Emaillist);
+      console.log(
+        "Contactlist,Conntactmobilelist,Emaillist",
+        this.Contactlist,
+        this.Conntactmobilelist,
+        this.Emaillist
+      );
       $("table#ContactNoOfficerow > tbody > tr").each(function (i) {
         var obj = {};
         obj.ContactNoOffice = $(
@@ -479,9 +491,8 @@ export default {
                 branch_city: this.City,
                 branch_postcode: this.PostCode,
                 branch_contact_number_office: JSON.stringify(Contactlist),
-                branch_contact_number_mobile: JSON.stringify(
-                  Conntactmobilelist
-                ),
+                branch_contact_number_mobile:
+                  JSON.stringify(Conntactmobilelist),
                 branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
                 branch_status: 1,
@@ -508,7 +519,6 @@ export default {
               this.IsHeadquator = 1;
             }
 
-
             const response = await this.$axios.post(
               "hospital/updateHospitalBranch",
               {
@@ -525,9 +535,8 @@ export default {
                 branch_city: this.City,
                 branch_postcode: this.PostCode,
                 branch_contact_number_office: JSON.stringify(Contactlist),
-                branch_contact_number_mobile: JSON.stringify(
-                  Conntactmobilelist
-                ),
+                branch_contact_number_mobile:
+                  JSON.stringify(Conntactmobilelist),
                 branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
                 branch_status: 1,
@@ -552,7 +561,6 @@ export default {
       } catch (e) {
         this.loader = false;
         console.log("my error", e);
-
       }
     },
     async ResetModel() {

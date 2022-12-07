@@ -12,10 +12,17 @@
           <div class="row">
             <div class="card mb-4">
               <div class="card-body">
-                <ul class="sub-tab">
-                  <li class="active"><a href="#">New Mentari User</a></li>
-                </ul>
-                <div class="content-subtab">
+                <nav>
+                <ul id="nav-tab" role="tablist" class="nav sub-tab">
+                  <li class="nav-item">
+                    <a data-bs-toggle="tab" href="#nav-home1" role="tab" aria-controls="nav-home" aria-selected="true" class="nav-link active">
+                     New Mentari User</a>
+                  </li>
+                  </ul>
+                  </nav>
+                  <div id="nav-tabContent" class="tab-content"></div>
+                   <div id="nav-home1" role="tabpanel" class="tab-pane fade show active">
+                    <div class="content-subtab">
                   <form
                     class="g-3 mt-3"
                     method="post"
@@ -254,7 +261,7 @@
                         class="btn btn-primary btn-text"
                         ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                       >
-                      <div class="btn-right" id="hidebutton" ref="hidebutton">
+                      <div class="ml-auto" id="hidebutton" ref="hidebutton">
                         <button type="submit" class="btn btn-warning btn-text">
                           <i class="fa fa-save"></i> Save
                         </button>
@@ -262,6 +269,8 @@
                     </div>
                   </form>
                 </div>
+                   </div>
+                
               </div>
             </div>
           </div>
@@ -300,7 +309,7 @@ export default {
       branchlist: [],
       errors: [],
       nricerror: null,
-      SidebarAccess:null,
+      SidebarAccess: null,
     };
   },
   beforeMount() {
@@ -310,9 +319,9 @@ export default {
     this.GetbranchList();
     this.GetdesignationList();
   },
-  mounted(){
-     if(this.SidebarAccess!=1){
-          this.$refs.hidebutton.classList.add("hide");
+  mounted() {
+    if (this.SidebarAccess != 1) {
+      this.$refs.hidebutton.classList.add("hide");
     }
   },
   methods: {
@@ -322,7 +331,9 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("roles/branch-viewlist", { headers });
+      const response = await this.$axios.get("roles/branch-viewlist", {
+        headers,
+      });
       this.rolelist = response.data.list;
     },
     async GetteamList(branchId) {
@@ -331,9 +342,12 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("service/getServiceListByBranch?branchId=" + branchId, {
-        headers,
-      });
+      const response = await this.$axios.get(
+        "service/getServiceListByBranch?branchId=" + branchId,
+        {
+          headers,
+        }
+      );
       if (response.data.code == 200 || response.data.code == "200") {
         this.teamlist = response.data.list;
       } else {
@@ -381,108 +395,136 @@ export default {
     },
     async onCreateStaff() {
       if (confirm("Are you sure you want to save this record ? ")) {
-      this.errors = [];
-      if (!this.name) {
-        this.errors.push("Name is required.");
-      }
-      if (!this.nricno) {
-        this.errors.push("NRIC NO is required.");
-      }
-    
-      if (this.Role <= 0) {
-        this.errors.push("Role  is required.");
-      }
-      if (!this.email) {
-        this.errors.push("Email is required.");
-      }
-      if (this.teamId <= 0) {
-        this.errors.push("Team  is required.");
-      }
-      if (!this.contactno) {
-        this.errors.push("Contact NO is required.");
-      }
-      if (this.designationId <= 0) {
-        this.errors.push("Designation  is required.");
-      }
-      if (!this.designationstartdate) {
-        this.errors.push("Designation Period(Start Date) is required.");
-      }
-      if (!this.designationenddate) {
-        this.errors.push("Designation Period(End Date) is required.");
-      }
-      if (this.branchId <= 0) {
-        this.errors.push("Mentari Location is required.");
-      }
-      if (!this.startdate) {
-        this.errors.push("Start Date   is required.");
-      }
-      if (!this.enddate) {
-        this.errors.push("End Date is required.");
-      }
-  
-      console.log('this.name && this.nricno &&  this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror',this.name , this.nricno , this.Role , this.email ,
-      this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
-      this.branchId , this.startdate , this.enddate , !this.nricerror)
-      if(this.name , this.nricno , this.roleId , this.email ,
-      this.teamId , this.contactno , this.designationId , this.designationstartdate , this.designationenddate ,
-      this.branchId , this.startdate , this.enddate , !this.nricerror) {
-        if (this.personincharge > 0) {
-          this.personincharge = 1;
+        this.errors = [];
+        if (!this.name) {
+          this.errors.push("Name is required.");
         }
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        let body = new FormData();
-        body.append("added_by", this.userdetails.user.id);
-        body.append("name", this.name);
-        body.append("nric_no", this.nricno);
-        body.append("registration_no", this.professionregno);
-        body.append("role_id", this.roleId);
-        body.append("email", this.email);
-        body.append("team_id", this.teamId);
-        body.append("branch_id", this.branchId);
-        body.append("contact_no", this.contactno);
-        body.append("designation_id", this.designationId);
-        body.append("is_incharge", this.personincharge);
-        body.append("designation_period_start_date", this.designationstartdate);
-        body.append("designation_period_end_date", this.designationenddate);
-        body.append("start_date", this.startdate);
-        body.append("end_date", this.enddate);
-        body.append("document", this.file);
-        const response = await this.$axios.post(
-          "staff-management/addstaff",
-          body,
-          {
-            headers,
-          }
+        if (!this.nricno) {
+          this.errors.push("NRIC NO is required.");
+        }
+
+        if (this.Role <= 0) {
+          this.errors.push("Role  is required.");
+        }
+        if (!this.email) {
+          this.errors.push("Email is required.");
+        }
+        if (this.teamId <= 0) {
+          this.errors.push("Team  is required.");
+        }
+        if (!this.contactno) {
+          this.errors.push("Contact NO is required.");
+        }
+        if (this.designationId <= 0) {
+          this.errors.push("Designation  is required.");
+        }
+        if (!this.designationstartdate) {
+          this.errors.push("Designation Period(Start Date) is required.");
+        }
+        if (!this.designationenddate) {
+          this.errors.push("Designation Period(End Date) is required.");
+        }
+        if (this.branchId <= 0) {
+          this.errors.push("Mentari Location is required.");
+        }
+        if (!this.startdate) {
+          this.errors.push("Start Date   is required.");
+        }
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
+        }
+
+        console.log(
+          "this.name && this.nricno &&  this.Role && this.email &&this.teamId && this.contactno && this.designationId && this.designationstartdate && this.designationenddate &&this.branchId && this.startdate && this.enddate && !this.nricerror",
+          this.name,
+          this.nricno,
+          this.Role,
+          this.email,
+          this.teamId,
+          this.contactno,
+          this.designationId,
+          this.designationstartdate,
+          this.designationenddate,
+          this.branchId,
+          this.startdate,
+          this.enddate,
+          !this.nricerror
         );
-        if (response.data.code == 200 || response.data.code == "200") {
-          this.$nextTick(() => {
-            $("#insertpopup").modal("show");
-          });
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+        if (
+          (this.name,
+          this.nricno,
+          this.roleId,
+          this.email,
+          this.teamId,
+          this.contactno,
+          this.designationId,
+          this.designationstartdate,
+          this.designationenddate,
+          this.branchId,
+          this.startdate,
+          this.enddate,
+          !this.nricerror)
+        ) {
+          if (this.personincharge > 0) {
+            this.personincharge = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          body.append("added_by", this.userdetails.user.id);
+          body.append("name", this.name);
+          body.append("nric_no", this.nricno);
+          body.append("registration_no", this.professionregno);
+          body.append("role_id", this.roleId);
+          body.append("email", this.email);
+          body.append("team_id", this.teamId);
+          body.append("branch_id", this.branchId);
+          body.append("contact_no", this.contactno);
+          body.append("designation_id", this.designationId);
+          body.append("is_incharge", this.personincharge);
+          body.append(
+            "designation_period_start_date",
+            this.designationstartdate
+          );
+          body.append("designation_period_end_date", this.designationenddate);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          body.append("document", this.file);
+          const response = await this.$axios.post(
+            "staff-management/addstaff",
+            body,
+            {
+              headers,
+            }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+          } else {
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
         }
-      }
       }
     },
     async CheckNric(event) {
-       console.log('my body',event.target.value);
+      console.log("my body", event.target.value);
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "staff-management/checknricno",{ nric_no: event.target.value },
+        "staff-management/checknricno",
+        { nric_no: event.target.value },
         { headers }
-
       );
-      console.log('response',response.data);
+      console.log("response", response.data);
       if (response.data.code == 200) {
         this.nricerror = "NRIC No already exists";
       } else {
@@ -493,7 +535,7 @@ export default {
 };
 </script>
 <style scoped>
-.hide{
+.hide {
   display: none !important;
 }
 </style>

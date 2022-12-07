@@ -28,8 +28,8 @@
                   method="post"
                   @submit.prevent="insertoverdose"
                 >
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-7">
+                  <div class="row align-items-center">
+                    <div class="col-md-7 mb-4">
                       <label for="" class="form-label"
                         >Overdose / Poisoning</label
                       >
@@ -41,7 +41,7 @@
                       />
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-lg-1 col-sm-2 mb-4">
                       <label class="form-label">Index</label>
                       <input
                         type="text"
@@ -81,7 +81,7 @@
                   <h3>List of Overdose / Poisoning</h3>
                 </div>
                 <table
-                  class="table table-striped data-table"
+                  class="table table-striped data-table display nowrap"
                   style="width: 100%"
                 >
                   <thead>
@@ -158,8 +158,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
