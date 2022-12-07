@@ -376,6 +376,7 @@
                 </div>
 
             </div>
+          </div>
            <div class="card mb-4 reslt" style="display:none;">
             <div class="card-body">
 
@@ -388,7 +389,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Patient Name:</th>
- 
+
                                     </tr>
                                     <tr>
                                         <th>NRIC NO:</th>
