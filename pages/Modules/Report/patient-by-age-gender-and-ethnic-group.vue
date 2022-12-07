@@ -45,7 +45,7 @@
                       <div class="mb-3">
                         <label class="form-label">Range of Age:</label>
                         <select class="form-select" v-model="Age">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in agelist"
                             v-bind:key="rfl.id"
@@ -60,7 +60,7 @@
                       <div class="mb-3">
                         <label class="form-label">Gender:</label>
                         <select class="form-select" v-model="Gender">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in genderlist"
                             v-bind:key="rfl.id"
@@ -79,7 +79,7 @@
                       <div class="mb-3">
                         <label class="form-label">Ethnic Group:</label>
                         <select class="form-select" v-model="race_id">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in racelist"
                             v-bind:key="rfl.id"
@@ -125,7 +125,7 @@
             <td colspan="2">20-59 years</td>
             <td colspan="2">&gt;=60 10 years</td>
             <td colspan="2">Total by Gender</td>
-            <td rowspan="2">Total</td>
+            <td rowspan="2">Total by Race</td>
           </tr>
           <tr class="male-female">
             <td>Male</td>
@@ -155,6 +155,10 @@
             <td class="tdrow">{{list[rp]["total"]['female']}}</td>
              <td class="tdrow">{{list[rp]["jumlah_besar"]}}</td>
 
+          </tr>
+          <tr>
+            <td colspan="11">Total</td>
+            <td>{{ this.totalReport }}</td>
           </tr>
 
           <!-- <tr class="tr-box">
@@ -317,6 +321,7 @@ export default {
 
 
             this.list = response.data.result[0]['group_name'];
+            this.totalReport= response.data.totalReport;
             this.listKey = Object.keys(this.list);
             console.log("my list", this.list);
             console.log("my listKey", this.listKey);
