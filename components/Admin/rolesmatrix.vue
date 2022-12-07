@@ -4,11 +4,14 @@
       <h4>Screen Access</h4>
     </div>
     <div class="card-body">
-      <ul class="sub-tab">
-        <li class="active">
-          <a>Setting 1: Access Screen</a>
+      <ul class="nav sub-tab" id="nav-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-bs-toggle="tab" href="#nav-Module" role="tab" aria-controls="nav-Module"
+            aria-selected="true"><i class="far fa-user-lock"></i> Setting 1: Access Screen</a>
         </li>
       </ul>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-Module" role="tabpanel">
       <form method="post" @submit.prevent="onAddroles">
         <div class="content-subtab">
           <div class="filter-form">
@@ -174,12 +177,14 @@
         </li>
       </ul>
         </p>
-            <button class="btn btn-success" :class="SidebarAccess!=1?'hide':''">
+            <button class="btn btn-success pl-15" :class="SidebarAccess!=1?'hide':''">
               Submit <i class="fal fa-arrow-from-left"></i>
             </button>
           </div>
         </div>
       </form>
+    </div>
+    </div>
     </div>
   </div>
 </template>
@@ -206,12 +211,10 @@ export default {
       teamlist: [],
       selected: [],
       IsSubmodule: true,
-      SidebarAccess:null,
+      SidebarAccess: null,
     };
   },
-  mounted(){
-
-  },
+  mounted() {},
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
@@ -320,7 +323,7 @@ export default {
       } else {
         this.teamlist = [];
       }
-       const response1 = await this.$axios.post(
+      const response1 = await this.$axios.post(
         "staff-management/getUserlist", //getStaffManagementListOrById
         { branch_id: event.target.value, name: "" },
         {
@@ -361,12 +364,7 @@ export default {
         if (this.staffId <= 0) {
           this.errors.push("Staff Name  is required.");
         }
-        if (
-          this.ModuleId &&
-          this.HospitalId &&
-
-          this.staffId
-        ) {
+        if (this.ModuleId && this.HospitalId && this.staffId) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -392,7 +390,6 @@ export default {
               branch_id: this.BranchId,
               team_id: this.teamId,
               staff_id: this.staffId.id,
-
             },
             { headers }
           );

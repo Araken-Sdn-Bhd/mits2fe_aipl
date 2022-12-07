@@ -45,7 +45,7 @@
               </div>
             </div>
 
-            <div class="tab-content border-0" id="nav-tabContent">
+            <div class="tab-content border-0 password-tab" id="nav-tabContent">
               <div
                 class="tab-pane fade show active"
                 id="nav-home"
