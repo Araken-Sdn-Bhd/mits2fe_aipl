@@ -1323,19 +1323,14 @@ export default {
       );
       if (response.data.code == 200) {
 
+
         this.Id = response.data.Data[0].patient_id;
 
         this.patient_id = response.data.Data[0].Id;
         this.interest_to_work = response.data.Data[0].interest_to_work;
         this.agree_if_mentari_find_job_for_you =
           response.data.Data[0].agree_if_mentari_find_job_for_you;
-          var jdata1 = JSON.parse(response.data.Data[0].clerk_job_interester);
-        jdata1.forEach((ele) => {
-         this.clerk_job_interester="val";
-         if (ele["Clerk Job"]==true) {
-            this.clerk_job_interester = "Clerk Job";
-          }
-        });
+        this.clerk_job_interester = response.data.Data[0].clerk_job_interester;
         this.clerk_job_notes = response.data.Data[0].clerk_job_notes;
         this.factory_worker_job_interested =
           response.data.Data[0].factory_worker_job_interested;
