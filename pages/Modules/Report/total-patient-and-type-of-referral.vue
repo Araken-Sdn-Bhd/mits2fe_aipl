@@ -397,10 +397,6 @@ export default {
                 pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("Report.pdf");
                 });
-                // var pdf = new jsPDF("p", "pt", "a4");
-                // pdf.addHTML($("#result")[0], function () {
-                //   pdf.save("Report.pdf");
-                // });
               }, 100);
               setTimeout(() => {
                   this.$refs.result.classList.add("hide");

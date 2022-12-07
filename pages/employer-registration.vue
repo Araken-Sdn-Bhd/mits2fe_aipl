@@ -163,7 +163,6 @@ export default {
         this.loader = false;
         this.emailerror = "Email is already registered"; //$user.message.email; //e.response.data.message;
       }
-      // console.log("my data", this.userdetail);
     },
   },
 };

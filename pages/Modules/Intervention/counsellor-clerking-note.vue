@@ -446,23 +446,17 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
             alert("Succefully Created");
             this.GoBack();
           } else {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
             alert("Error Occured!");
             this.GoBack();
           }
       } catch (e) {
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+
         alert("Error Occured!")
         this.GoBack();
       }

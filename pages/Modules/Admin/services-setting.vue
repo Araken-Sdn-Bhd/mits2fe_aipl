@@ -369,7 +369,6 @@ export default {
          console.log('this.$refs.hidebutton1',this.$refs.hidebutton);
           this.$refs.hidebutton.classList.add("hide");
           this.$refs.hidebutton1.classList.add("hide");
-          // this.$refs.hidebutton2.classList.add("hide");
     }
   },
   beforeMount() {
@@ -418,7 +417,6 @@ export default {
                 added_by: this.userdetails.user.id,
                 service_code: this.servicecode,
                 service_name: this.servicename,
-                //   hospital_code: this.,
                 service_description: this.servicedescription,
                 service_order: this.serviceindex,
               },
@@ -442,7 +440,6 @@ export default {
                 service_id: this.Id,
                 service_code: this.servicecode,
                 service_name: this.servicename,
-                //hospital_code: "AIIMS",
                 service_description: this.servicedescription,
                 service_order: this.serviceindex,
               },
@@ -524,8 +521,6 @@ export default {
       this.GetList();
       this.Id = 0;
     },
-
-    //Service division
 
     async GetDivisionList() {
       const headers = {

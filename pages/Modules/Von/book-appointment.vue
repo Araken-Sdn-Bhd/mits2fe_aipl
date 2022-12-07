@@ -238,12 +238,6 @@ export default {
         headers,
       });
       this.teamlist = response.data.list;
-      // const response1 = await this.$axios.get("service/list", { headers });
-      // if (response1.data.code == 200 || response1.data.code == "200") {
-      //   this.servicelist = response1.data.list;
-      // } else {
-      //   this.servicelist = [];
-      // }
       const response2 = await this.$axios.get("areas-of-involvement/list", {
         headers,
       });
@@ -264,9 +258,6 @@ export default {
         if (!this.duration) {
           this.errorList.push("Duration is required");
         }
-        // if (!this.appointment_type) {
-        //   this.errorList.push("Appointment Type is required");
-        // }
         if (!this.interviewer_id) {
           this.errorList.push("Assigned Interviewer is required");
         }
@@ -281,7 +272,6 @@ export default {
           this.booking_date &&
           this.booking_time &&
           this.duration &&
-          //   this.appointment_type &&
           this.interviewer_id &&
           this.area_of_involvement &&
           this.services_type
@@ -302,7 +292,6 @@ export default {
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
                 duration: this.duration,
-                //  appointment_type: this.appointment_type,
                 interviewer_id: this.interviewer_id,
                 area_of_involvement: this.area_of_involvement,
                 services_type: this.services_type,
@@ -331,7 +320,6 @@ export default {
                 booking_date: this.booking_date,
                 booking_time: this.booking_time,
                 duration: this.duration,
-                // appointment_type: this.appointment_type,
                 interviewer_id: this.interviewer_id,
                 area_of_involvement: this.area_of_involvement,
                 services_type: this.services_type,
@@ -372,7 +360,6 @@ export default {
       this.booking_date = response.data[0].booking_date;
       this.booking_time = response.data[0].booking_time;
       this.duration = response.data[0].duration;
-      //  this.appointment_type = response.data[0].appointment_type;
       this.interviewer_id = response.data[0].interviewer_id;
       this.area_of_involvement = response.data[0].area_of_involvement;
       this.services_type = response.data[0].services_type;
@@ -386,7 +373,6 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
         };
-        // this.selected.forEach((value, index) => {
           const axios = require("axios").default;
           axios
             .post(
@@ -398,14 +384,11 @@ export default {
             .then((resp) => {
               console.log("reuslt", resp);
             });
-        // });
         this.loader = false;
         this.$nextTick(() => {
-          // $("#updatepopup").modal("show");
           this.$router.push({
           path: "/modules/Von/von-list-of-appointment",
         });
-          // href="/app/modules/Von/von-list-of-appointment"
         });
       } catch (e) {
         this.loader = false;

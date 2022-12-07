@@ -149,10 +149,12 @@
                       <label class="form-label">Attendance Status:</label>
                       <select class="form-select" v-model="appointment_status">
                         <option value="">Please Select</option>
-                        <option value="0">Processing</option>
-                        <option value="1">Ready</option>
+                        <option value="1">Attended</option>
+                        <option value="0">No Show</option>
+                        <!-- <option value="0">Processing</option>
+                        <option value="1">Ready</option>            !!Need to confirm back with Client!!
                         <option value="2">No Show</option>
-                        <option value="3">Completed</option>
+                        <option value="3">Completed</option> -->
                       </select>
                     </div>
                   </div>
@@ -343,10 +345,7 @@
                 <div class="d-flex">
                   <div v-if="this.appointment_type" class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
-                      ><i class="fa fa-file-pdf"></i> Generate PDF</a
-                    >
-                    <!-- <a @click="Ongenerateexel" class="btn btn-success btn-text"
-                      ><i class="fa fa-file-excel"></i> Generate Excel</a> -->
+                      ><i class="fa fa-file-pdf"></i> Generate PDF</a>
 
                       <downloadexcel
                         v-if="this.appointment_type == 1"
@@ -748,14 +747,14 @@
                       <th class="thhead">NAME</th>
                       <th class="thhead">APPOINTMENT TYPE</th>
                       <th class="thhead">TYPE OF VISIT</th>
-                      <th class="thhead">CURRENT INTERVENTION</th>
+                      <th class="thhead">TYPE OF REFERRAL</th>
                       <th class="thhead">IC NO</th>
                       <th class="thhead">GENDER</th>
                       <th class="thhead">AGE</th>
                       <th class="thhead">DIAGNOSIS</th>
                       <th class="thhead">MEDICATIONS</th>
                       <th class="thhead">APPOINTMENT NO</th>
-                      <th class="thhead">CONTACT NUMBER</th>
+                      <th class="thhead">CURRENT INTERVENTION</th>
                       <th class="thhead">NEXT VISIT</th>
                       <th class="thhead">ATTENDANCE STATUS</th>
                       <th class="thhead">ATTENDING DOCTOR/ STAFF</th>
@@ -774,7 +773,7 @@
                       <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
                       <td class="tdrow">{{ rp.MEDICATIONS }}</td>
                       <td class="tdrow">{{ rp.app_no_cps }}</td>
-                      <td class="tdrow">{{ rp.CONTACT }}</td>
+                      <td class="tdrow">{{ rp.CURRENTINTERV}}</td>
                       <td class="tdrow">{{ rp.Next_visit }}</td>
                       <td class="tdrow">{{ rp.Attendance_status }}</td>
                       <td class="tdrow">{{ rp.Attending_staff }}</td>
@@ -1026,15 +1025,7 @@ export default {
         } else {
           this.diagonisislist = [];
         }
-        // const response17 = await this.$axios.get(
-        //   "hospital/getServiceByBranchTeamId",
-        //   {headers, params: {email: this.email, appointment_type: this.appointment_type} }
-        // );
-        // if (response17.data.code == 200 || response17.data.code == "200") {
-        //   this.cmanagerlist = response17.data.list;
-        // } else {
-        //   this.cmanagerlist = [];
-        // }
+
         const response18 = await this.$axios.get(
           "general-setting/list?section=" + "employment-status",
           { headers }

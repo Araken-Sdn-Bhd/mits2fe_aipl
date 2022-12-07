@@ -482,14 +482,7 @@ export default {
         this.DepressionScore = Results[2];
         this.Depression = Levels[2];
       }
-    // if (this.dassresult) {
-    //   this.Stress = this.dassresult.Stress;
-    //   this.Anxiety = this.dassresult.Anxiety;
-    //   this.Depression = this.dassresult.Depression;
-    //   this.StressScore = this.dassresult.Stress_Value;
-    //   this.AnxietyScore = this.dassresult.Anxiety_Value;
-    //   this.DepressionScore = this.dassresult.Depression_Value;
-    // }
+
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
   },

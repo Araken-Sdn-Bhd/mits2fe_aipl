@@ -214,7 +214,6 @@
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
-//import $ from "jquery";
 export default {
   components: { CommonHeader, CommonSidebar },
   name: "create-event",

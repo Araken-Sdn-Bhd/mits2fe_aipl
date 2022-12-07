@@ -986,41 +986,7 @@
 
     <div class="d-flex align-items-center mt-4">
 
-                  <!-- <div class="row col-sm-9">
-                    <label for="" class="col-sm-4 col-form-label"
-                      >Screening Done</label
-                    >
-                    <div class="col-sm-8">
-                      <div class="form-check form-check-inline">
-                        <input
-                        disabled
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="screening-yes"
-                          value="1"
-                          v-model="screening_mode"
-                        />
-                        <label class="form-check-label" for="screening-yes"
-                          >Yes</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input
-                        disabled
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="screening-no"
-                          value="0"
-                          v-model="screening_mode"
-                        />
-                        <label class="form-check-label" for="screening-no"
-                          >No</label
-                        >
-                      </div>
-                    </div>
-                  </div> -->
+  
 
                 </div>
     <!-- </form> -->
@@ -1058,7 +1024,6 @@ export default {
       members_count: "",
       member_background: "",
       is_you_represenative: 0,
-      //VOLUNTEEM
       Gname: "",
       Gdob: "",
       Gemail: "",

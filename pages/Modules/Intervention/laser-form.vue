@@ -1459,131 +1459,6 @@ export default {
       this.action[ind] = val;
     },
 
-    // async onCreateEvent() {
-    //   this.errorList = [];
-    //   this.validate = true;
-    //   if (confirm("Are you sure you want to save this entry ? ")) {
-    //   try {
-    //     if (Object.values(this.precontemplation).length != 6) {
-    //       this.errorList.push("Please fill all question of PRE CONTEMPLATION");
-    //       this.validate = false;
-    //     }
-    //     if (Object.values(this.contemplation).length != 4) {
-    //       this.errorList.push("Please fill all question of CONTEMPLATION");
-    //       this.validate = false;
-    //     }
-    //     if (Object.values(this.action).length != 4) {
-    //       this.errorList.push("Please fill all question of ACTION");
-    //       this.validate = false;
-    //     }
-    //     if (!this.location_services_id) {
-    //       this.errorList.push("Location Of Services is required");
-    //     }
-    //     if (!this.type_diagnosis_id) {
-    //       this.errorList.push("Type Of Diagnosis is required");
-    //     }
-    //     if (!this.category_services) {
-    //       this.errorList.push("Category Of Services is required");
-    //     }
-    //     if (!this.complexity_services_id) {
-    //       this.errorList.push("Complexity Of Service is required");
-    //     }
-    //     if (this.category_services) {
-    //       if (this.category_services == "assisstance") {
-    //         if (!this.services_id) {
-    //           this.errorList.push("Service is required");
-    //           this.validate = false;
-    //         }
-    //       } else if (this.category_services == "clinical-work") {
-    //         if (!this.code_id) {
-    //           this.errorList.push("ICD 9 CODE is required");
-    //           this.validate = false;
-    //         }
-    //         if (!this.sub_code_id) {
-    //           this.errorList.push("ICD 9 SUB CODE is required");
-    //           this.validate = false;
-    //         }
-    //       } else {
-    //         if (!this.serviceid) {
-    //           this.errorList.push("Services is required");
-    //           this.validate = false;
-    //         } else {
-    //           this.services_id = this.serviceid;
-    //         }
-    //       }
-    //     }
-    //     if (!this.outcome_id) {
-    //       this.errorList.push("Outcome is required");
-    //     }
-    //     // if (!this.medication_des) {
-    //     //   this.errorList.push("Medication is required");
-    //     // }
-    //     if (
-    //       this.location_services_id &&
-    //       this.type_diagnosis_id &&
-    //       this.category_services &&
-    //       this.complexity_services_id &&
-    //       this.outcome_id &&
-    //       // this.medication_des &&
-    //       this.validate
-    //     ) {
-    //       this.loader = true;
-    //       const headers = {
-    //         Authorization: "Bearer " + this.userdetails.access_token,
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       };
-    //       const response = await this.$axios.post(
-    //         "intervention/laser-form",
-    //         {
-    //           added_by: this.userdetails.user.id,
-    //           patient_id: this.Id,
-    //           pre_contemplation: JSON.stringify([this.precontemplation]),
-    //           contemplation: JSON.stringify([this.contemplation]),
-    //           action: JSON.stringify([this.action]),
-    //           result: JSON.stringify([
-    //             { PRE_CONTEMPLATION: this.precontemplation },
-    //             { CONTEMPLATION: this.contemplation },
-    //             { ACTION: this.action },
-    //           ]),
-    //           location_of_service: this.location_services_id,
-    //           type_of_diagnosis: this.type_diagnosis_id,
-    //           category_of_services: this.category_services,
-    //           services: this.services_id,
-    //           complexity_of_services: this.complexity_services_id,
-    //           outcome: this.outcome_id,
-    //           icd_9_code: this.code_id,
-    //           icd_9_subcode: this.sub_code_id,
-    //           medication_prescription: this.medication_des,
-    //           test_name:"laser",
-    //           test_section_name:"laserform",
-    //           user_ip_address: "122.176.47.222",
-    //           appId: this.appId,
-    //         },
-    //         { headers }
-    //       );
-    //       console.log("response", response.data);
-    //       if (response.data.code == 200) {
-    //         this.loader = false;
-    //         this.loader = false;
-    //         localStorage.setItem(
-    //           "laserresult",
-    //           JSON.stringify(response.data.result)
-    //         );
-    //         this.$router.push({
-    //           path: "/modules/Intervention/laser-result",
-    //           query: { id: this.Id },
-    //         });
-    //       } else {
-    //         this.loader = false;
-    //         this.$nextTick(() => {
-    //           $("#errorpopup").modal("show");
-    //         });
-    //       }
-    //     }
-    //   } catch (e) {}
-    //   }
-    // },
 
     async OnSubmit() {
       this.errorList = [];
@@ -1641,16 +1516,12 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.location_services_id &&
           this.type_diagnosis_id &&
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -1725,36 +1596,19 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
         var pre_contemplation = response.data.Data[0].pre_contemplation;
-        // console.log('my json',JSON.stringify(response.data.Data[0].pre_contemplation));
-        // var pre_contemplation1 = JSON.stringify(pre_contemplation);
-        // console.log('my json',this.pre_contemplationlist);
         var myobj = JSON.parse(
           JSON.stringify(response.data.Data[0].pre_contemplation)
         );
-        // var ab =this.pre_contemplationlist[0];
         var tmp = JSON.parse(myobj);
         console.log("my json", tmp[0]);
 
         var contemplation= response.data.Data[0].contemplation;
-        // this.contemplation = JSON.stringify(this.contemplation);
-        //  var myobj1 = JSON.parse(
-        //   JSON.stringify(response.data.Data[0].contemplation)
-        // );
-        // // var ab =this.pre_contemplationlist[0];
-        // var tmp1 = JSON.parse(myobj1);
         console.log("my contemplation", contemplation);
 
         var action= response.data.Data[0].action;
-        // this.action = JSON.stringify(this.action);
-        //  var myobj2 = JSON.parse(
-        //   JSON.stringify(response.data.Data[0].action)
-        // );
-        // // var ab =this.pre_contemplationlist[0];
-        // var tmp2 = JSON.parse(myobj2);
         console.log("my action", action);
 
         this.location_services_id = response.data.Data[0].location_of_service;

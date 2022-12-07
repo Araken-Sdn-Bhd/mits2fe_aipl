@@ -1949,7 +1949,6 @@ export default {
       procheckedList: {},
       testcheckedList: {},
       sharp_register_id: 0,
-      //selfharm  ad on
       selected: [],
       testresult: "",
       Sdate: "",
@@ -2024,7 +2023,6 @@ export default {
         placeholder: "Please Select",
       });
 
-      // Presence of psychiatric disorder
       $('.yes-box input[type="radio"]').click(function () {
         $(".box-01").css("display", "inline-block");
       });
@@ -2201,7 +2199,6 @@ export default {
         $('#myTab a[href="#protective"]').tab("show");
       });
 
-      // 2
 
       $(".nex-1").click(function (e) {
         e.preventDefault();
@@ -2213,7 +2210,6 @@ export default {
         $('#myTab a[href="#risk-factors"]').tab("show");
       });
 
-      // 3
 
       $(".nex-2").click(function (e) {
         e.preventDefault();
@@ -2225,7 +2221,6 @@ export default {
         $('#myTab a[href="#protective"]').tab("show");
       });
 
-      // 4
 
       $(".nex-3").click(function (e) {
         e.preventDefault();
@@ -2237,7 +2232,6 @@ export default {
         $('#myTab a[href="#selfharm"]').tab("show");
       });
 
-      // 5
 
       $(".nex-4").click(function (e) {
         e.preventDefault();
@@ -2249,7 +2243,6 @@ export default {
         $('#myTab a[href="#suicide"]').tab("show");
       });
 
-      // 6
 
       $(".pre-5").click(function (e) {
         e.preventDefault();
@@ -2395,7 +2388,6 @@ export default {
             } else {
               checkedlisst = element.questionId + ":" + status;
             }
-            //  window.alert(checkedlisst);
             if (element.questionId == 1) {
               this.first = element.answer;
             }
@@ -2433,7 +2425,6 @@ export default {
               this.twelth = element.answer;
             }
           });
-          // checkedlisst = JSON.stringify(checkedlisst);
           checkedlisst.split(",").forEach((e) => {
             let tmp = e.split(":");
             arr[tmp[0]] = tmp[1];
@@ -2532,7 +2523,6 @@ export default {
             }else{
               var intent=response.data.result.selfharm[3].section_value.intent.split(",");
               this.patient_intent =intent[0];
-              //  verbal:"",Messaging:"",Rehearsing:"",Expressed:"",Handwritten:"",SocialMedia:"",Learnmore:"",Other:"",
               $(".intent-div").css(
           "display",
           intent[0] === "intent-yes" ? "block" : "none"
@@ -2572,9 +2562,7 @@ export default {
             this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
 
-          //Suicide Risk
           this.result = response.data.result.suicideRisk[0].result;
-          //Hospital
           this.referral_or_contact =
             response.data.result.hospital[0].referral_or_contact;
           this.referral_or_contact_other =
@@ -2604,13 +2592,6 @@ export default {
             response.data.result.hospital[0].external_cause_inquiry;
           this.list1 =
             response.data.result.hospital[0].discharge_psy_mx.split(",");
-          //Data producer
-          // this.officername =
-          //   response.data.result.dataSource[0].name_registering_officer;
-          // this.hospitalname = response.data.result.dataSource[0].hospital_name;
-          // this.designation = response.data.result.dataSource[0].designation;
-          // this.reportingdate =
-          //   response.data.result.dataSource[0].reporting_date;
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
         }
@@ -2632,7 +2613,6 @@ export default {
       this.procheckedList[ind] = val;
     },
     OndropdownChange(val, event) {
-      //this.checkedList[ind] = val;
       delete checkedList.val;
       this.checkedList[val] = event.target.value;
       console.log("my pushed array", this.checkedList);
@@ -2786,25 +2766,10 @@ export default {
         if (!this.place_id) {
           this.errors.push("Place of Occurrence is required.");
         }
-        // if (!this.secB) {
-        //   this.errors.push("Please tick any box of Method of Self Harm.");
-        // }
-        // if (!this.secC) {
-        //   this.errors.push(
-        //     "Please tick any box of How did Patient Get Idea about Method."
-        //   );
-        // }
-        // if (!this.secD) {
-        //   this.errors.push("Please tick any box of Suicidal Intent required.");
-        // }
         if (
           this.Sdate &&
           this.Stime &&
           this.place_id
-          //&&
-          // this.secB &&
-          // this.secC &&
-          // this.secD
         ) {
           this.loader = true;
           if (this.patient_intent == "intent-yes") {
@@ -2970,9 +2935,6 @@ export default {
         if (!this.external_cause_inquiry) {
           this.errors.push("External cause of injury is required.");
         }
-        // if (!this.discharge_psy_mx) {
-        //   this.errors.push("PSY MX on Dischargeis required.");
-        // }
         if (
           this.referral_or_contact &&
           this.arrival_mode &&
@@ -2985,8 +2947,6 @@ export default {
           this.discharge_number_days_in_ward &&
           this.main_psychiatric_diagnosis &&
           this.external_cause_inquiry
-          //&&
-          //  this.discharge_psy_mx
         ) {
           if (this.referral_or_contact == "rcp") {
             this.referral_or_contact = 0;
@@ -3094,9 +3054,6 @@ export default {
           );
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
             this.$router.push({
               path: "/modules/Intervention/patient-history",
               query: { id: this.patient_id },

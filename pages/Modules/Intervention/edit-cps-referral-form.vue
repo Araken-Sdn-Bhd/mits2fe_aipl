@@ -1047,7 +1047,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+  
         if (response.data) {
         this.Id = response.data.Data[0].patient_id;
         this.location_service_id = response.data.Data[0].location_of_service;

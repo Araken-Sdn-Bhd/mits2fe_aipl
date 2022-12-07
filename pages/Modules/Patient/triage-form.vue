@@ -650,15 +650,6 @@ export default {
         $(targetBox).show();
       });
       var num = 1;
-      //  $(".add-td").click(function (i) {
-      //   num = num + 1;
-      //   console.log(num);
-      //   $(".form-select:last").after(
-      //     '<tr class="form-select"> <td>' +
-      //       parseInt(num) +
-      //       '</td> <td> <input type="text" class="form-control job" name=""> </td> <td> <input type="text" class="form-control duration" name=""> </td> <td> <input type="text" class="form-control reason" name="" /> </td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
-      //   );
-      // });
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");

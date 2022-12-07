@@ -957,7 +957,6 @@ export default {
       file: null,
       Isvalid: false,
       VolOthers: "",
-      //Outreach Project Collaboration
       project_name: "",
       project_background: "",
       project_objectives: "",
@@ -1081,7 +1080,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        //alert(JSON.stringify(response.data.list));
         this.CityList = response.data.list;
         this.PostCodeList = response.data.list;
       } else {
@@ -1176,13 +1174,6 @@ export default {
     async OnIndividualVolunteerism() {
       try {
         var explist = [];
-        // $("table#volexp > tbody > tr").each(function (i) {
-        //   var obj = {};
-        //   obj.year = $('td input[type="text"].year', this).val();
-        //   obj.location = $('td input[type="text"].location', this).val();
-        //   obj.activity = $('td input[type="text"].activity', this).val();
-        //   explist.push(obj);
-        // });
         this.Isvalid = true;
         if (!this.name) {
           this.errors.push("Name is required.");
@@ -1300,7 +1291,6 @@ export default {
           body.append("area_of_involvement", this.area_of_involvement);
           body.append("is_agree", "1");
           body.append("is_voluneering_exp", this.is_voluneering_exp);
-         // body.append("exp_details",  JSON.stringify(explist));
            body.append("exp_details",  this.exp_details);
           body.append(
             "is_mental_health_professional",
@@ -1315,10 +1305,6 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");+
-
-            // });
             this.Reaload();
           } else {
             this.$nextTick(() => {

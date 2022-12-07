@@ -477,17 +477,13 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
+
             alert("Succefully Created");
             this.GoBack();
           } else {
             this.loader = false;
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
+
             alert("Error Occured!");
             this.GoBack();
           }
@@ -495,7 +491,7 @@ export default {
           this.$nextTick(() => {
             this.loader = false;
             this.resetmodel();
-            // $("#errorpopup").modal("show");
+
           });
         }
       }
@@ -697,7 +693,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
 

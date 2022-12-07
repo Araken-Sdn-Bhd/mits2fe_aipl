@@ -355,29 +355,16 @@ export default {
         if (this.ModuleId <= 0) {
           this.errors.push("Module Name  is required.");
         }
-        // if (this.SubmoduleId <= 0) {
-        //   this.errors.push("Sub Module Name  is required.");
-        // }
         if (this.HospitalId <= 0) {
           this.errors.push("Hospital Name  is required.");
         }
-        // if (this.BranchId <= 0) {
-        //   this.errors.push("Branch Name  is required.");
-        // }
-        // if (this.teamId <= 0) {
-        //   this.errors.push("Team  is required.");
-        // }
         if (this.staffId <= 0) {
           this.errors.push("Staff Name  is required.");
         }
-        // if (this.selected.length <= 0) {
-        //   this.errors.push("Select atleast one screen.");
-        // }
         if (
           this.ModuleId &&
           this.HospitalId &&
-          // this.BranchId &&
-          // this.teamId &&
+
           this.staffId
         ) {
           const headers = {
@@ -405,7 +392,7 @@ export default {
               branch_id: this.BranchId,
               team_id: this.teamId,
               staff_id: this.staffId.id,
-              // type: this.staffId.txt,
+
             },
             { headers }
           );

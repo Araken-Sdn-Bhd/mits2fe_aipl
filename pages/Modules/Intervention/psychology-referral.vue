@@ -774,9 +774,6 @@ export default {
         if (!this.outcome) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.diagnosis_id &&
           this.patient_acknowledged &&
@@ -790,7 +787,6 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          // this.medication_des &&
           this.validate &&
           this.date
         ) {
@@ -1019,7 +1015,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        //window.alert(response.data.Data[0].case_formulation);
         if (response.data) {
         this.Id = response.data.Data[0].patient_id;
         this.diagnosis_id = response.data.Data[0].diagnosis_id;
@@ -1048,7 +1043,6 @@ export default {
             this.others = "Others";
           }
         });
-        // this.assessmentlist = this.reason_referral_assessment.split(",");
         this.reason_referral_assessment_other = response.data.Data[0].reason_referral_assessment_other;
         var jdata1 = JSON.parse(response.data.Data[0].reason_referral_intervention);
         jdata1.forEach((ele) => {
@@ -1078,7 +1072,6 @@ export default {
             this.others2 = "Others";
           }
         });
-        // this.interventionlist = this.reason_referral_intervention.split(",");
         this.reason_referral_intervention_other = response.data.Data[0].reason_referral_intervention_other;
         this.case_formulation = response.data.Data[0].case_formulation;
         this.referring_doctor = response.data.Data[0].referring_doctor;

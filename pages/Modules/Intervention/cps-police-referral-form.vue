@@ -465,7 +465,6 @@ export default {
             this.$nextTick(() => {
               $("#updatepopup").modal("show");
             });
-            // this.resetmodel();
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -482,7 +481,6 @@ export default {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
-      // Reload the page to refresh the data
       window.location.reload();
     },
     resetmodel() {
@@ -507,7 +505,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
+  
 
         this.Id = response.data.Data[0].patient_id;
 

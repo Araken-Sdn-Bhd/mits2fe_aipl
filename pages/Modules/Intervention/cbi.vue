@@ -572,7 +572,7 @@ export default {
       this.userId = this.userdetails.user.id;
       this.token = this.userdetails.access_token;
     }
-    //localStorage.removeItem("cbiresult");
+
     this.GetPersonalList();
     this.GetWorkList();
     this.GetClientList();
@@ -742,7 +742,6 @@ export default {
     },
     onpersonalchange(ind, val) {
       this.checkedpersonalList[ind] = val;
-      // console.log(Object.values(this.checkedList).toString());
     },
     onworkchange(ind, val) {
       this.checkedworkList[ind + 1] = val;

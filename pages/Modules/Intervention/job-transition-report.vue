@@ -892,38 +892,11 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.future_plan &&
           this.short_term_goal &&
           this.long_term_goal &&
           this.who_have_you_called_past &&
-          //  this.my_case_manager_yes_no &&
-          //  this.my_therapist_yes_no &&
-          //  this.my_family_yes_no &&
-          //   this.my_friend_yes_no &&
-          //   this.my_significant_other_yes_no &&
-          //   this.clergy_yes_no &&
-          //   this.benefit_planner_yes_no &&
-          //   this.other_yes_no &&
-          //   this.my_case_manager_name &&
-          //   this.my_case_manager_contact &&
-          //   this.my_therapist_name &&
-          //    this.my_therapist_contact &&
-          //   this.my_family_name &&
-          //    this.my_family_contact &&
-          //   this.my_friend_name &&
-          //  this.my_friend_contact &&
-          //  this.my_significant_other_name &&
-          //   this.my_significant_other_contact &&
-          //   this.clergy_name &&
-          //   this.clergy_contact &&
-          //   this.benefit_planner_name &&
-          //   this.benefit_planner_contact &&
-          //    this.other_name &&
-          //    this.other_contact &&
           this.schedule_meeting_discuss_for_transition &&
           this.who_check_in_with_you &&
           this.who_contact_you &&
@@ -940,7 +913,6 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
-          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -1184,7 +1156,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
 

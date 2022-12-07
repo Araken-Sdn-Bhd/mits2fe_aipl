@@ -170,7 +170,6 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    //   this.GetList();
     this.getRole();
 
   },
@@ -197,7 +196,6 @@ export default {
             bInfo: false,
             autoWidth: false,
             responsive: true,
-            // retrieve: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -307,7 +305,6 @@ export default {
           this.list = response.data.list;
 
         } else {
-          //this.list = [];
           this.list.splice(0, this.list.length);
           if ($.fn.DataTable.isDataTable(".data-table")) {
             $(".data-table").DataTable().clear().destroy();

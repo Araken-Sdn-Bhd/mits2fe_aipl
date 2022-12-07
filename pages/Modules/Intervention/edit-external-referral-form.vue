@@ -376,7 +376,6 @@
                 </div>
 
             </div>
-          // </div>
            <div class="card mb-4 reslt" style="display:none;">
             <div class="card-body">
 
@@ -389,31 +388,28 @@
                                 <tbody>
                                     <tr>
                                         <th>Patient Name:</th>
-                                       <!-- <td>{{ patientdetails.name_asin_nric }}</td> -->
+ 
                                     </tr>
                                     <tr>
                                         <th>NRIC NO:</th>
-                                     <!-- <td>{{ patientdetails.nric_no }}</td> -->
+
                                     </tr>
                                     <tr>
                                         <th>Age:</th>
-                                    <!-- <td>{{ patientdetails.age }}</td> -->
+
                                     </tr>
                                     <tr>
                                         <th>Contact No:</th>
-                              <!-- <td>{{ patientdetails.mobile_no }}</td> -->
+
                                     </tr>
                                     <tr>
                                         <th>Gender:</th>
-                                         <!-- <td>{{ patientdetails.gender[0].section_value }}</td> -->
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                          <!-- <td>{{ patientdetails.address1 }}</td> -->
                                     </tr>
                   <tr>
                     <th>Date:</th>
-                    <!-- <td>{{ this.todaydate}}</td> -->
                     <td></td>
                   </tr>
                   <tr>
@@ -492,7 +488,6 @@
                             </select>
                           </div>
                         </div>
-                        <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
                             >Type Of Diagnosis</label
@@ -510,7 +505,6 @@
                               </select>
                           </div>
                         </div>
-                        <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
                             >Category Of Services
@@ -928,9 +922,7 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_prescription) {
-        //   this.errorList.push("Medication is required");
-        // }
+
         if (!this.name) {
           this.errorList.push("Name is required");
         }
@@ -952,7 +944,6 @@ export default {
           this.category_services &&
           this.complexity_services &&
           this.outcome_id &&
-          // this.medication_prescription &&
           this.name &&
           this.designation &&
           this.hospital &&
@@ -1139,7 +1130,6 @@ export default {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
       document.body.innerHTML = newstr;
       window.print();
-      // Reload the page to refresh the data
       window.location.reload();
     },
     resetmodel() {
@@ -1178,7 +1168,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_mrn_id;
         this.history = response.data.Data[0].history;

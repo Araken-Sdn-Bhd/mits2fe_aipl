@@ -157,8 +157,6 @@ export default {
     this.GetPatientdetails();
 
 
-    // let urlParams = new URLSearchParams(window.location.search);
-    // this.Id = urlParams.get("id");
   },
   mounted() {},
   methods: {

@@ -435,7 +435,6 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        // this.nric_or_passportno = response.data.list[0].nric_no;
         this.$router.push({
         path: "/modules/Patient/attendance-record",
       });

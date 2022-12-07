@@ -663,15 +663,6 @@ export default {
     if (this.pid) {
       this.getdetails();
     }
-    // this.GetList();
-    // console.log('aaa', this.screenlist);
-    // $(document).ready(function () {
-    //   $('.form-accordion input[type="radio"]').click(function () {
-    //     var inputValue = $(this).attr("value");
-    //     var targetBox = $("." + inputValue);
-    //     $(".services").not(targetBox).hide();
-    //     $(targetBox).show();
-    //   });
   },
 
   methods: {
@@ -788,25 +779,10 @@ export default {
       if (response10.data.code == 200 || response10.data.code == "200") {
         this.screenlist = response10.data.list;
         console.log('my screen', this.screenlist);
-        // debugger;
 
         $(".optionBox").on("click", ".remove", function () {
           $(this).closest(".block").remove();
-          // num=num-1;
         });
-        // $(".add-td").click(function (i) {
-        //   debugger;
-        // var aa =  "<select  v-model='' id='myNewDrp'>";
-        // var dd = [{id:'1',value:'okay 1'},{id:'1',value:'okay 1'},];
-        // dd.forEach(element => {
-        //   aa+="<option value="+element.id+">"+element.name+"</option>";
-        // });
-        // aa+="</select>";
-        // $("#replicatedList").append('<tr class="block"> <td> '+aa+'</td> <td> <input type="text" class="form-control" placeholder="" v-model="score"> </td> <td> <span class="remove"><i class="fal fa-times"></i></span> </td> </tr>'
-        // )
-
-        // });
-
       } else {
         this.screenlist = [];
       }
@@ -989,9 +965,6 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
-        // if (!this.medication_des) {
-        //   this.errorList.push("Medication is required");
-        // }
         if (
           this.screening_id &&
           this.score &&
@@ -1072,15 +1045,9 @@ export default {
             window.alert("Data are saved successfully!");
             this.GoBack();
             this.resetmodel();
-            // this.$nextTick(() => {
-            //   $("#insertpopup").modal("show");
-            // });
           } else {
              window.alert("Something went wrong!");
             this.loader = false;
-            // this.$nextTick(() => {
-            //   $("#errorpopup").modal("show");
-            // });
           }
         }
       } catch (e) { }
@@ -1105,7 +1072,6 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
-                // status: "0",
               },
               { headers }
             );
@@ -1118,9 +1084,6 @@ export default {
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
-              // this.$nextTick(() => {
-              //   $("#errorpopup").modal("show");
-              // });
             }
         } catch (e) {}
     },
@@ -1255,7 +1218,6 @@ export default {
       );
 
       if (response.data.code == 200) {
-        // window.alert(response.data.Data[0].patient_mrn_id);
         this.Id = response.data.Data[0].patient_mrn_id;
 
         this.risk_history_assressive =

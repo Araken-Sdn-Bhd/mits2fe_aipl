@@ -118,7 +118,6 @@ export default {
     };
   },
   beforeMount() {
-    // this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
   },
 };
 </script>

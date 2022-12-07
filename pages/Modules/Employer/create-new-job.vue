@@ -529,7 +529,6 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };

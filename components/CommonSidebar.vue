@@ -210,7 +210,6 @@ export default {
   methods: {
     changesidebar: function (event) {
       event.target.className += " active";
-      // console.log(liid,index);
       alert(event.target.className);
     },
     SidebarAccess(val) {
@@ -228,7 +227,6 @@ export default {
           staff_id: this.userdetails.user.id,
           type: this.userdetails.user.role,
         },
-        //this.userdetails.user.id 55
         { headers }
       );
 
@@ -267,11 +265,6 @@ export default {
           }
         });
       }
-      // if (response2.data.code == 400) {
-      //   console.log ("Not Valid User");
-      // } else {
-      //   window.alert("Something went wrong");
-      // }
     },
   },
 };

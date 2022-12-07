@@ -608,7 +608,6 @@ export default {
     },
     async onSelectedState(event){
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -782,7 +781,6 @@ export default {
         { added_by: this.userdetails.user.id,},
         { headers }
       );
-    //alert(JSON.stringify(response.data));
       console.log("my result", response.data);
       if (response.data) {
         this.company_name = response.data[0].company_name;

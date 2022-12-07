@@ -126,33 +126,6 @@ export default {
     },
 
     methods: {
-        // async Getrecord() {
-        //     try {
-        //         const headers = {
-        //             Authorization: "Bearer " + this.userdetails.access_token,
-        //             Accept: "application/json",
-        //             "Content-Type": "application/json",
-        //         };
-        //         const response = await this.$axios.get(
-        //             "all-mentari-staff/get",
-        //             { headers, params: {branch: this.branch}}
-        //         );
-        //         // console.log('my res', response.data);
-        //         if (response.data.code == 200 || response.data.code == "200") {
-        //             //this.team_task = response.data.team_task[0].team_task;
-
-        //             this.todays_appointments = response.data.today_appointment[0].todays_appointment;
-
-        //             console.log('my teamtask',this.team_task);
-        //             // this.personal_task = response.data.list1[0].PersonalTask;
-
-        //         } else {
-        //             window.alert("Something went wrong");
-        //         }
-        //     } catch (e) {
-
-        //     }
-        // },
 
         async GetTodayAppointment() {
             try {
