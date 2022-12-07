@@ -1251,7 +1251,7 @@
                     </button> --> 
 
                 <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
-                  <i class="fa fa-paper-plane"></i> PUBLISH
+                  <i class="fa fa-paper-plane"></i> Submit
                 </button>
               <!-- </div> -->
               </div>
