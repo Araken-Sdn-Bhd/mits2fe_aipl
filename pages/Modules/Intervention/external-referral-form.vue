@@ -376,6 +376,7 @@
                 </div>
 
             </div>
+          </div>
 
            <div class="card mb-4 reslt" style="display:none;">
             <div class="card-body">
