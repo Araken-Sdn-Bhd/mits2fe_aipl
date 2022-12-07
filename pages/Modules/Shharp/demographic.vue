@@ -699,6 +699,7 @@ export default {
             this.name_asin_nric &&
             this.sex &&
             this.Isvalidate
+            )
             this.loader = true;
             const headers = {
               Authorization: "Bearer " + this.userdetails.access_token,
@@ -788,7 +789,7 @@ export default {
             }
           }
 
-      } catch (e) {
+       catch (e) {
         this.loader = false;
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
