@@ -328,7 +328,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio1"
                                 value="assisstance"
                                 v-model="category_services"
@@ -341,7 +341,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
@@ -354,7 +354,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
@@ -517,7 +517,7 @@
                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
-                    <button @click="OnPrint" type="submit" class="btn btn-green btn-text">
+                    <button @click="OnPrint()" type="submit" class="btn btn-green btn-text">
                       <i class="fa fa-download"></i> Download
                     </button>
                     <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
@@ -603,7 +603,7 @@ export default {
       complexity_services: 0,
       outcome: 0,
       medication_des: "",
-      patient_mrn_id: "",
+      patient_id: "",
       services_id: 0,
       serviceid: 0,
       validate: true,
@@ -627,13 +627,13 @@ export default {
       stressanger:"",
       addict:"",
       others2:"",
-      appId: this.appId,
+      appId: 0,
       SidebarAccess:null,
     };
   },
   methods: {
     async onCreateEvent() {
-      alert(this.patient_acknowledged);
+      //alert(this.patient_acknowledged);
       if (confirm("Are you sure you want to save as draft?")) {
       try {
         this.loader = true;
@@ -686,7 +686,7 @@ export default {
               complexity_services: this.complexity_services,
               outcome: this.outcome,
               medication_des: this.medication_des,
-              patient_mrn_id: this.Id,
+              patient_id: this.Id,
               services_id: this.services_id,
               id:this.pid,
               appId: this.appId,
@@ -697,14 +697,13 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.resetmodel();
+            alert("Succesfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         } catch (e) {
         this.loader = false;
@@ -713,15 +712,11 @@ export default {
     },
     async onPublishEvent() {
       if (confirm("Are you sure you want to submit this entry")) {
+      this.errorList = [];
+      this.validate = true;
       try {
         if (!this.patient_acknowledged) {
-          this.errorList.push("acknowledged with the referral is required");
-        }
-        if (!this.reason_referral_assessment) {
-          this.errorList.push("ASSESSMENT is required");
-        }
-        if (!this.reason_referral_intervention) {
-          this.errorList.push("ITERVENTION is required");
+        this.errorList.push("acknowledged with the referral is required");
         }
         if (!this.case_formulation) {
           this.errorList.push("Case Formulation is required");
@@ -775,20 +770,12 @@ export default {
           this.errorList.push("Outcome is required");
         }
         if (
-          this.diagnosis_id &&
-          this.patient_acknowledged &&
-          this.reason_referral_assessment &&
-          this.reason_referral_intervention &&
-          this.case_formulation &&
-          this.referring_doctor &&
-          this.designation &&
           this.location_services_id &&
           this.type_diagnosis_id &&
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
-          this.validate &&
-          this.date
+          this.validate
         ) {
           this.loader = true;
           const headers = {
@@ -799,7 +786,6 @@ export default {
           const response = await this.$axios.post(
             "psychology-referral/add",
             {
-              type:"add",
               added_by: this.userdetails.user.id,
                 patient_id: this.Id,
                 diagnosis_id: this.diagnosis_id,
@@ -840,31 +826,27 @@ export default {
               complexity_services: this.complexity_services,
               outcome: this.outcome,
               medication_des: this.medication_des,
-              patient_mrn_id: this.Id,
+              patient_id: this.Id,
               services_id: this.services_id,
               id:this.pid,
-              appId: this.appId,
+              appId: 0,
               status:"1",
             },
             { headers }
           );
-          console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.resetmodel();
+            alert("Succesfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
-        } catch (e) {
-        this.loader = false;
-        }
-      }
+      } catch (e) {}
+    }
     },
     OnPrint() {
       var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
@@ -968,9 +950,9 @@ export default {
       }
     },
     resetmodel() {
-      this.diagnosis = "";
-      this.clinical_notes = "";
-      this.management = "";
+      // this.diagnosis = "";
+      // this.clinical_notes = "";
+      // this.management = "";
       this.location_services_id = 0;
       this.type_diagnosis_id = 0;
       this.category_services = "";
