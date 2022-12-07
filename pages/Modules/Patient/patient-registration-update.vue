@@ -538,6 +538,45 @@
                         </div>
                       </div>
                       <!-- close-row -->
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label">Mentari Location</label>
+                            <select
+                                v-if="dataReady"
+                                disabled
+                                v-model="branchId"
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                               
+                                <option
+                                  v-for="brnch in branchlist"
+                                  v-bind:key="brnch.id"
+                                  v-bind:value="brnch.id"
+                                >
+                                  {{ brnch.hospital_branch_name }}
+                                </option>
+                              </select>
+                              <select
+                                v-if="dataReady2"
+                                v-model="branchId"
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                                <option
+                                  v-for="brnch in branchlist"
+                                  v-bind:key="brnch.id"
+                                  v-bind:value="brnch.id"
+                                >
+                                  {{ brnch.hospital_branch_name }}
+                                </option>
+                              </select>
+                                    </div>
+                                    </div>
+                                    </div>
+
  <p v-if="errorList.length">
 <ul>
         <li style="color:red"  v-for='err in errorList'
@@ -546,12 +585,11 @@
         </li>
       </ul>
         </p>
+        <br><br>
                       <div class="d-flex align-items-center">
                         <a
                           @click="NextFirst"
-                          class="btn btn-success next-btn ml-auto"
-                          >Next <i class="fad fa-arrow-to-right"></i
-                        ></a>
+                          class="btn btn-primary btn-fill btn-md ml-auto">Next <i class="fad fa-arrow-to-right"></i></a>
                       </div>
                     </form>
                   </div>
@@ -809,18 +847,15 @@
                         </div>
                       </div>
                       <!-- close-row -->
-
+                      <br><br>
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousFirst"
-                          class="btn btn-primary btn-text"
-                          ><i class="fad fa-arrow-to-left"></i> Previous</a
-                        >
+                          class="btn btn-primary btn-fill btn-md"><i class="fad fa-arrow-to-left"></i> Previous</a>
 
                         <a
                           @click="NextSecond"
-                          class="btn btn-success next-btn ml-auto"
-                          >Next <i class="fad fa-arrow-to-right"></i
+                          class="btn btn-primary btn-fill btn-md ml-auto">Next <i class="fad fa-arrow-to-right"></i
                         ></a>
                       </div>
                     </form>
@@ -1017,16 +1052,15 @@
         </li>
       </ul>
         </p>
+        <br><br>
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousSecnd"
-                          class="btn btn-primary btn-text"
-                          ><i class="fad fa-arrow-to-left"></i> Previous</a
-                        >
+                          class="btn btn-primary btn-fill btn-md"><i class="fad fa-arrow-to-left"></i> Previous</a>
 
                         <a
                           @click="NextThird"
-                          class="btn btn-success next-btn ml-auto"
+                          class="btn btn-primary btn-fill btn-md ml-auto"
                           >Next <i class="fad fa-arrow-to-right"></i
                         ></a>
                       </div>
@@ -1214,31 +1248,24 @@
         </li>
       </ul>
         </p>
+        <br><br>
                       <div class="d-flex align-items-center">
                         <a
                           @click="PreviousThird"
-                          class="btn btn-primary btn-text"
-                          ><i class="fad fa-arrow-to-left"></i> Previous</a
-                        >
+                          class="btn btn-primary btn-fill btn-md"><i class="fad fa-arrow-to-left"></i> Previous</a>
 
-                        <!--<a v-if="!Id && SidebarAccess==1"
-                          @click="submitRegistration"
-                          class="btn btn-success btn-text ml-auto"
-                          ><i class="fa fa-paper-plane"></i> Submit</a
-                        >-->
                         <a v-if="Id && SidebarAccess==1"
                           @click="updateRegistration"
-                          class="btn btn-success btn-text ml-auto"
-                          ><i class="fa fa-paper-plane"></i> Update</a
-                        >
+                          class="btn btn-primary btn-fill btn-md ml-auto"><i class="fa fa-save"></i> Update</a>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div>  
         </div>
+       
       </main>
       <intervention-footer></intervention-footer>
     </div>
@@ -1252,6 +1279,10 @@ export default {
   name: "patient-registration",
   data() {
     return {
+      branchId:"",
+      branchlist:[],
+      dataReady: false,
+      dataReady2: false,
       salutationlist: [],
       citizenshiplist: [],
       genderlist: [],
@@ -1361,6 +1392,8 @@ export default {
       this.branch=this.userdetails.branch.branch_id;
     }
     this.GetList();
+    this.GetBranchList();
+    this.getRole();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     if (this.Id > 0) {
@@ -1396,6 +1429,45 @@ export default {
     });
   },
   methods: {
+    async GetBranchList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("hospital/branch-list",
+      {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.branchlist = response.data.list;
+      } else {
+        this.branchlist = [];
+      }
+    },
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      
+            if (response.data.list.code =="superadmin"){
+              this.dataReady2= true;
+              this.dataReady= false;
+            }else{
+              this.dataReady= true;
+              this.dataReady2= false;
+            }
+
+    },
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
       var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -2002,8 +2074,7 @@ export default {
           body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
 
-          this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-          body.append("branch_id", this.userdetails.branch.branch_id);
+          body.append("branch_id", this.branchId);
 
           if (this.Id > 0) {
             const response = await this.$axios.post(
@@ -2078,6 +2149,8 @@ export default {
         }
 
         this.country_id = response.data.list[0].country_id;
+
+        this.branchId = response.data.list[0].branch_id;
 
         this.drug_allergy = response.data.list[0].drug_allergy;
         this.drug_allergy_description = response.data.list[0].drug_allergy_description;
