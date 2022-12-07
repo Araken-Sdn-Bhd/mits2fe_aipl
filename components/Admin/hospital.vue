@@ -394,7 +394,7 @@
         <input type="text" class="form-control" placeholder="Search" v-model="search" @keyup="OnSearch"/>
       </div>
     </div>
-    <table class="table table-striped data-table font-13" style="width: 100%">
+    <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -475,7 +475,7 @@ export default {
       hsptlemailerror: null,
       search: "",
       Id: 0,
-      SidebarAccess:null
+      SidebarAccess: null,
     };
   },
   mounted() {
@@ -495,8 +495,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -691,7 +692,6 @@ export default {
           this.hospital_Prefix &&
           this.hospital_Name &&
           this.hospital_Adrress1 &&
-        
           this.hospital_state &&
           this.hospital_postcode &&
           this.hospital_city &&
@@ -886,12 +886,13 @@ export default {
             notChunk.hospital_fax_no
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.hospital_code?.toString()
+            notChunk.hospital_code
+              ?.toString()
               .toLowerCase()
               .indexOf(this.search.toString().toLowerCase()) > -1
           );
         });
-        console.log('my list',this.alllist);
+        console.log("my list", this.alllist);
       } else {
         this.hospitallist = this.alllist;
       }
@@ -933,8 +934,8 @@ export default {
         this.fax_No = response.data.list.hospital.fax;
 
         const response1 = await this.$axios.post(
-        "address/" + this.hospital_state + "/getCityList",
-        { headers }
+          "address/" + this.hospital_state + "/getCityList",
+          { headers }
         );
         if (response1.data.code == 200 || response1.data.code == "200") {
           this.citylist = response1.data.list;

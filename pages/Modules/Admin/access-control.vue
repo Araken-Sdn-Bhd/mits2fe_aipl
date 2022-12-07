@@ -16,8 +16,9 @@
               </div>
               <div class="card-body">
                 <nav>
-                  <div class="nav nav-tab" id="nav-tab" role="tablist">
-                    <a
+                  <ul class="nav nav-tab" id="nav-tab" role="tablist">
+                    <li class="nav-item">
+                      <a
                       class="nav-link active"
                       data-bs-toggle="tab"
                       href="#nav-home"
@@ -26,8 +27,9 @@
                       aria-selected="true"
                       ><i class="fa fa-hospital-user"></i>Hospital, Branch &
                       Team</a
-                    >
-                    <a
+                    ></li>
+                    <li class="nav-item">
+                      <a
                       class="nav-link"
                       id="nav-profile-tab"
                       data-bs-toggle="tab"
@@ -36,8 +38,9 @@
                       aria-controls="nav-profile"
                       aria-selected="false"
                       ><i class="fa fa-laptop-code"></i> Screen Management</a
-                    >
-                    <a
+                    ></li>
+                    <li class="nav-item">
+                      <a
                       class="nav-link"
                       id="nav-contact-tab"
                       data-bs-toggle="tab"
@@ -46,15 +49,15 @@
                       aria-controls="nav-contact"
                       aria-selected="false"
                       ><i class="fa fa-user"></i> Roles & Matrix</a
-                    >
-                  </div>
+                    ></li>
+                  </ul>
                 </nav>
               </div>
             </div>
 
             <div class="tab-content" id="nav-tabContent">
               <div
-                class="tab-pane fade show active"
+                class="tab-pane fade no-border show active"
                 id="nav-home"
                 role="tabpanel"
               >
@@ -62,12 +65,12 @@
                 <Hospitalbranchteam />
               </div>
 
-              <div class="tab-pane fade" id="nav-profile" role="tabpanel">
+              <div class="tab-pane fade no-border" id="nav-profile" role="tabpanel">
                 <!-- 02-tab -->
                 <Screenmanagement />
               </div>
 
-              <div class="tab-pane fade" id="nav-contact" role="tabpanel">
+              <div class="tab-pane fade no-border" id="nav-contact" role="tabpanel">
                 <!-- 03-tab -->
                 <Rolesmatrix />
               </div>
