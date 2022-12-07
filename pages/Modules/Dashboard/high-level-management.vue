@@ -107,11 +107,11 @@
                     >
                       <option value="0">Select MENTARI</option>
                       <option
-                        v-for="fee in hospitallist"
+                        v-for="fee in branchlist"
                         v-bind:key="fee.id"
                         v-bind:value="fee.id"
                       >
-                        {{ fee.hospital_name }}
+                        {{ fee.hospital_branch_name }}
                       </option>
                     </select>
                   </div>
@@ -214,11 +214,11 @@
                     >
                       <option value="0">Select MENTARI</option>
                       <option
-                        v-for="fee in hospitallist"
+                        v-for="fee in branchlist"
                         v-bind:key="fee.id"
                         v-bind:value="fee.id"
                       >
-                        {{ fee.hospital_name }}
+                        {{ fee.hospital_branch_name }}
                       </option>
                     </select>
                   </div>
@@ -250,7 +250,7 @@
               </div>
             </div>
           </div>
-          <!-- row -->
+
           <div class="row">
             <div class="col-sm-12">
               <div class="card mt-4 mb-3">
@@ -298,11 +298,11 @@
                     >
                       <option value="0">Select MENTARI</option>
                       <option
-                        v-for="fee in hospitallist"
+                        v-for="fee in branchlist"
                         v-bind:key="fee.id"
                         v-bind:value="fee.id"
                       >
-                        {{ fee.hospital_name }}
+                        {{ fee.hospital_branch_name }}
                       </option>
                     </select>
                   </div>
@@ -330,7 +330,6 @@
               </div>
             </div>
           </div>
-          <!-- row -->
 
           <div class="row">
             <div class="col-sm-12">
@@ -379,19 +378,21 @@
                     >
                       <option value="0">Select MENTARI</option>
                       <option
-                        v-for="fee in hospitallist"
+                        v-for="fee in branchlist"
                         v-bind:key="fee.id"
                         v-bind:value="fee.id"
                       >
-                        {{ fee.hospital_name }}
+                        {{ fee.hospital_branch_name }}
                       </option>
                     </select>
                   </div>
                   <div class="col-sm-3">
-                    <select class="form-select"
-                    v-model="sharprace"
-                      @change="Getrecord">
-                      <option>Select Race</option>
+                    <select
+                      class="form-select"
+                      v-model="sharprace"
+                      @change="Getrecord"
+                    >
+                      <option value="0">Select Type</option>
                       <option>Race</option>
                       <option>Range of Age</option>
                       <option>Gender</option>
@@ -412,7 +413,6 @@
                   </div>
                   <div class="col-sm-8">
                     <div class="chart-box">
-                      <!-- <h4>Employment Status</h4> -->
                       <canvas
                         id="myChartsharp"
                         style="width: 100%; max-width: 600px"
@@ -424,7 +424,6 @@
               </div>
             </div>
           </div>
-          <!-- row -->
 
           <div class="row">
             <div class="col-sm-12">
@@ -434,21 +433,45 @@
                 </div>
                 <table class="announcement-table">
                   <tbody>
-                    <tr v-for="(ann, index) in list" :key="index">
-                      <td>
-                        <span class="number">{{ index + 1 }}</span>
-                      </td>
-                      <td>{{ ann.title }}</td>
+                    <tr>
+                      <div
+                        v-if="index < list.length"
+                        v-for="(ann, index) in AnnouncmentToShow"
+                        :key="index"
+                      >
+                        <td>
+                          <span class="number">{{ index + 1 }}</span>
+                        </td>
+                        <td>
+                          <a
+                            v-bind:href="
+                              '/Modules/Admin/view-event?id=' + list[ann - 1].id
+                            "
+                            >{{ list[ann - 1].title }} ({{
+                              getFormattedDate(list[ann - 1].start_date)
+                            }})</a
+                          >
+                        </td>
+                      </div>
+                      <div
+                        v-if="
+                          AnnouncmentToShow < list.length ||
+                          list.length > AnnouncmentToShow
+                        "
+                      >
+                        <button
+                          class="btn btn-primary btn-text btn-seeall"
+                          @click="AnnouncmentToShow += 5"
+                        >
+                          Show More
+                        </button>
+                      </div>
                     </tr>
                   </tbody>
                 </table>
-                <a href="#/" class="btn btn-primary btn-text btn-seeall"
-                  >SEE ALL</a
-                >
               </div>
             </div>
           </div>
-          <!-- row -->
         </div>
       </main>
     </div>
@@ -504,7 +527,7 @@ export default {
       totalmentarilocation: "",
       sharp_total_caseload: "",
       kpi_total_caseload: "",
-      sharprace:"",
+      sharprace: "",
       yearslist: [],
       monthlist: [
         {
@@ -557,6 +580,7 @@ export default {
         },
       ],
       hospitallist: [],
+      branchlist: [],
       list: [],
       kpiEmployement: "",
       kpiUnemployement: "",
@@ -578,12 +602,34 @@ export default {
       service_color_list: [],
       service_patient_list: [],
       StateList: [],
-      sharp_total_caseloadfemale:0,
-      sharp_total_caseloadmale:0,
+      sharp_total_caseloadfemale: 0,
+      sharp_total_caseloadmale: 0,
       sharpracetotal: "",
+      shharpRaces: [],
+      rangeOfAge: [],
+      shharpReligions: [],
+      shharpMaritals: [],
+      shharpEducation: [],
+      shharpEmployment: [],
       sharp_name_list: [],
       sharp_color_list: [],
       sharp_count_list: [],
+      race_name_list: [],
+      religion_name_list: [],
+      marital_name_list: [],
+      education_name_list: [],
+      employment_name_list: [],
+      sharp_total_by_race: [],
+      sharp_total_by_religion: [],
+      sharp_total_by_marital: [],
+      sharp_total_by_education: [],
+      sharp_total_by_employment: [],
+      by_age_list: [],
+      sharp_total_by_age: [],
+      AnnouncmentToShow: 3,
+      myChart: "",
+      kpiChart: "",
+      shharpChart: "",
     };
   },
 
@@ -595,9 +641,7 @@ export default {
     this.Getannouncement();
     this.GetStateList();
   },
-  mounted() {
- 
-  },
+  mounted() {},
 
   methods: {
     async Getrecord() {
@@ -617,7 +661,7 @@ export default {
             tarmonth: this.tarmonth,
             tarmentari: this.tarmentari,
             tarmentari: this.tarmentari,
-            branch_stateid:this.branch_stateid,
+            branch_stateid: this.branch_stateid,
 
             scryear: this.scryear,
             scrmonth: this.scrmonth,
@@ -630,7 +674,7 @@ export default {
             sharpyear: this.sharpyear,
             sharpmonth: this.sharpmonth,
             sharpmentari: this.sharpmentari,
-            sharprace:this.sharprace
+            sharprace: this.sharprace,
           },
           {
             headers,
@@ -645,27 +689,126 @@ export default {
           this.totalpatient = response.data.totalpatient[0].TotalPatient;
           this.totalmentarilocation =
             response.data.totalmentarilocation[0].TotalMentariLocation;
-            this.sharp_total_caseloadmale=0; this.sharp_total_caseloadfemale=0;this.sharp_total_caseload=0;
+          this.sharp_total_caseloadmale = 0;
+          this.sharp_total_caseloadfemale = 0;
+          this.sharp_total_caseload = 0;
           this.sharp_total_caseload = response.data.totalsharp[0].Sharptotal;
 
-        if(response.data.male){
-        this.sharp_total_caseloadmale = response.data.male[0].Sharptotal;
-        this.sharp_total_caseloadfemale = response.data.female[0].Sharptotal;
-        }
-          console.log('male',this.sharp_total_caseloadfemale);
+          if (response.data.male) {
+            this.sharp_total_caseloadmale = response.data.male[0].Sharptotal;
+            this.sharp_total_caseloadfemale =
+              response.data.female[0].Sharptotal;
+          }
           this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
 
-          this.kpiEmployement =0;  this.kpiUnemployement =0;this.kpiTerminated =0;
+          this.kpiEmployement = 0;
+          this.kpiUnemployement = 0;
+          this.kpiTerminated = 0;
           this.kpiEmployement = response.data.kpiEmployement[0].employed;
           this.kpiUnemployement = response.data.kpiUnemployement[0].unemployed;
           this.kpiTerminated = response.data.kpiTerminated[0].terminate;
 
+          this.shharpRaces = response.data.shharpRaces;
+          this.rangeOfAge = response.data.rangeOfAge;
+          this.shharpReligions = response.data.shharpReligions;
+          this.shharpMaritals = response.data.shharpMaritals;
+          this.shharpEducation = response.data.shharpEducation;
+          this.shharpEmployment = response.data.shharpEmployment;
           this.summaryActivity = response.data.summaryActivity;
           this.sharpracetotal = response.data.race;
           console.log("my sharpracetotal", this.sharpracetotal);
           console.log("my summaryActivity", this.summaryActivity);
-          this.service_name_list = [];this.service_patient_list = []; this.service_color_list = [];
-          this.sharp_name_list = [];this.sharp_count_list = []; this.sharp_color_list = [];
+          this.service_name_list = [];
+          this.service_patient_list = [];
+          this.service_color_list = [];
+          this.sharp_name_list = [];
+          this.sharp_count_list = [];
+          this.sharp_color_list = [];
+
+          this.race_name_list = [];
+          this.sharp_total_by_race = [];
+          this.by_age_list = [];
+          this.sharp_total_by_age = [];
+          this.religion_name_list = [];
+          this.sharp_total_by_religion = [];
+          this.marital_name_list = [];
+          this.sharp_total_by_marital = [];
+          this.education_name_list = [];
+          this.sharp_total_by_education = [];
+          this.employment_name_list = [];
+          this.sharp_total_by_employment = [];
+
+          this.shharpRaces.forEach((element) => {
+            if (element.section_value) {
+              this.race_name_list.push(element.section_value);
+            }
+          });
+
+          this.shharpRaces.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_race.push(element.Sharptotal);
+            }
+          });
+
+          this.shharpReligions.forEach((element) => {
+            if (element.section_value) {
+              this.religion_name_list.push(element.section_value);
+            }
+          });
+
+          this.shharpReligions.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_religion.push(element.Sharptotal);
+            }
+          });
+
+          this.shharpMaritals.forEach((element) => {
+            if (element.section_value) {
+              this.marital_name_list.push(element.section_value);
+            }
+          });
+
+          this.shharpMaritals.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_marital.push(element.Sharptotal);
+            }
+          });
+
+          this.shharpEducation.forEach((element) => {
+            if (element.section_value) {
+              this.education_name_list.push(element.section_value);
+            }
+          });
+
+          this.shharpEducation.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_education.push(element.Sharptotal);
+            }
+          });
+
+          this.shharpEmployment.forEach((element) => {
+            if (element.section_value) {
+              this.employment_name_list.push(element.section_value);
+            }
+          });
+
+          this.shharpEmployment.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_employment.push(element.Sharptotal);
+            }
+          });
+
+          this.rangeOfAge.forEach((element) => {
+            if (element.section_value) {
+              this.by_age_list.push(element.section_value);
+            }
+          });
+
+          this.rangeOfAge.forEach((element) => {
+            if (element.COUNT) {
+              this.sharp_total_by_age.push(element.COUNT);
+            }
+          });
 
           this.summaryActivity.forEach((element) => {
             if (element.service_name) {
@@ -678,74 +821,110 @@ export default {
             }
           });
           this.summaryActivity.forEach((element) => {
-              this.service_color_list.push(element.color);
+            this.service_color_list.push(element.color);
           });
 
-          if(this.sharpracetotal){
-              this.sharpracetotal.forEach((element) => {
+          if (this.sharpracetotal) {
+            this.sharpracetotal.forEach((element) => {
               this.sharp_name_list.push(element.service_name);
-          });
-          this.sharpracetotal.forEach((element) => {
+            });
+            this.sharpracetotal.forEach((element) => {
               this.sharp_count_list.push(element.cn);
-          });
-          this.sharpracetotal.forEach((element) => {
+            });
+            this.sharpracetotal.forEach((element) => {
               this.sharp_color_list.push(element.color);
-          });
+            });
           }
           console.log("my service_name_list", this.sharp_name_list);
           console.log("my service_patient_list", this.sharp_count_list);
           console.log("my service_color_list", this.sharp_color_list);
-          this.diagnosisf0 = "";this.diagnosisf1 = "";this.diagnosisf2 = "";this.diagnosisf3 = ""; this.diagnosisf4 = "";this.diagnosisf5 = "";this.diagnosisf6 = "";
+          this.diagnosisf0 = "";
+          this.diagnosisf1 = "";
+          this.diagnosisf2 = "";
+          this.diagnosisf3 = "";
+          this.diagnosisf4 = "";
+          this.diagnosisf5 = "";
+          this.diagnosisf6 = "";
           if (response.data.diagnosis) {
-            if (response.data.diagnosis[0]["icd_category_code"] == "F00-F07") {
-              this.diagnosisf0 = response.data.diagnosis[0].sum_;
-            }
-            if (response.data.diagnosis[1]["icd_category_code"] == "F10-F18") {
-              this.diagnosisf1 = response.data.diagnosis[1].sum_;
-            }
-            if (response.data.diagnosis[2]["icd_category_code"] == "F20-F25") {
-              this.diagnosisf2 = response.data.diagnosis[2].sum_;
-            }
-            if (response.data.diagnosis[3]["icd_category_code"] == "F30-F39") {
-              this.diagnosisf3 = response.data.diagnosis[3].sum_;
-            }
-            if (response.data.diagnosis[4]["icd_category_code"] == "F40-F45") {
-              this.diagnosisf4 = response.data.diagnosis[4].sum_;
-            }
-            if (response.data.diagnosis[5]["icd_category_code"] == "F50-F55") {
-              this.diagnosisf5 = response.data.diagnosis[5].sum_;
-            }
-            if (response.data.diagnosis[6]["icd_category_code"] == "F60-F66") {
-              this.diagnosisf6 = response.data.diagnosis[6].sum_;
-              console.log("my six", this.diagnosisf6);
-            }
-            if (response.data.diagnosis[7]["icd_category_code"] == "F70-F73") {
-              this.diagnosisf7 = response.data.diagnosis[7].sum_;
-            }
-            if (response.data.diagnosis[8]["icd_category_code"] == "F80-F89") {
-              this.diagnosisf8 = response.data.diagnosis[8].sum_;
-            }
-            if (
-              response.data.diagnosis[9]["icd_category_code"] == "F90-F98.5"
-            ) {
-              this.diagnosisf9 = response.data.diagnosis[9].sum_;
-            }
-            if (response.data.diagnosis[10]["icd_category_code"] == "F99") {
-              this.diagnosisf10 = response.data.diagnosis[10].sum_;
-            }
-            if (response.data.diagnosis[10]["icd_category_code"] == "X60-X84") {
-              this.diagnosisf11 = response.data.diagnosis[11].sum_;
+            for (let i = 0; i < response.data.diagnosis.length; i++) {
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F00-F07"
+              ) {
+                this.diagnosisf0 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F10-F18"
+              ) {
+                this.diagnosisf1 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F20-F25"
+              ) {
+                this.diagnosisf2 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F30-F39"
+              ) {
+                this.diagnosisf3 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F40-F45"
+              ) {
+                this.diagnosisf4 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F50-F55"
+              ) {
+                this.diagnosisf5 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F60-F66"
+              ) {
+                this.diagnosisf6 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F70-F73"
+              ) {
+                this.diagnosisf7 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F80-F89"
+              ) {
+                this.diagnosisf8 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F90-F98.5"
+              ) {
+                this.diagnosisf9 = response.data.diagnosis[i].sum_;
+              }
+              if (response.data.diagnosis[i]["icd_category_code"] == "F99") {
+                this.diagnosisf10 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "X60-X84"
+              ) {
+                this.diagnosisf11 = response.data.diagnosis[i].sum_;
+              }
             }
           }
 
           var kpixValues = ["Employed", "Unemployed", "Terminated"];
-          var kpiyValues = [
-            this.kpiEmployement,
-            this.kpiUnemployement,
-            this.kpiTerminated,
-          ];
+          if (this.kpiChart) {
+            var kpiyValues = [
+              this.kpiEmployement,
+              this.kpiUnemployement,
+              this.kpiTerminated,
+            ];
+            this.kpiChart.destroy();
+          } else {
+            var kpiyValues = [
+              this.kpiEmployement,
+              this.kpiUnemployement,
+              this.kpiTerminated,
+            ];
+          }
           var barColors = ["green", "black", "red"];
-          new Chart("myChartkpi", {
+          this.kpiChart = new Chart("myChartkpi", {
             type: "pie",
             data: {
               labels: kpixValues,
@@ -758,20 +937,41 @@ export default {
             },
           });
 
-          var xValuescsa = this.service_name_list;
-          var yValuescsa = this.service_patient_list;
-          var barColors = this.service_color_list;
+          if (this.myChart) {
+            this.myChart.destroy();
+            var xValuescsa = this.service_name_list;
+            var yValuescsa = this.service_patient_list;
+            var barColors = this.service_color_list;
+          } else {
+            var xValuescsa = this.service_name_list;
+            var yValuescsa = this.service_patient_list;
+            var barColors = this.service_color_list;
+          }
 
-          new Chart("myChartSA", {
+          this.myChart = new Chart("myChartSA", {
             type: "bar",
             data: {
               labels: xValuescsa,
               datasets: [
                 {
+                  label: "Total",
                   backgroundColor: barColors,
                   data: yValuescsa,
                 },
               ],
+            },
+            options: {
+              scales: {
+                yAxes: [
+                  {
+                    display: true,
+                    stacked: true,
+                    ticks: {
+                      min: 0,
+                    },
+                  },
+                ],
+              },
             },
           });
 
@@ -808,14 +1008,14 @@ export default {
             "green",
             "red",
             "green",
-            "red",
-            "green",
-            "red",
-            "green",
-            "red",
-            "green",
-            "red",
-            "green",
+            "blue",
+            "gray",
+            "orange",
+            "brown",
+            "yellow",
+            "magenta",
+            "turquoise",
+            "purple",
           ];
 
           new Chart("myChartpieClinical", {
@@ -831,41 +1031,150 @@ export default {
             },
           });
 
-  if(this.sharp_total_caseloadmale!=0 ||this.sharp_total_caseloadfemale!=0){
-var xValues = ["Male","Female"];
-    var yValues1 = [this.sharp_total_caseloadmale,this.sharp_total_caseloadfemale];
-    var barColors = ["red", "green"];
-
-    new Chart("myChartsharp", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [
-          {
-            backgroundColor: barColors,
-            data: yValues1,
-          },
-        ],
-      },
-    });
-  }else{
-    var xValuescsa = this.sharp_name_list;
-          var yValuescsa = this.sharp_count_list;
-          var barColors = this.sharp_color_list;
-
-          new Chart("myChartsharp", {
+          if (this.shharpChart) {
+            this.shharpChart.destroy();
+            if (
+              this.sharp_total_caseloadmale != 0 ||
+              this.sharp_total_caseloadfemale != 0
+            ) {
+              var xValues = ["Male", "Female"];
+              var yValues1 = [
+                this.sharp_total_caseloadmale,
+                this.sharp_total_caseloadfemale,
+              ];
+              var barColors = ["#00BEFF", "pink"];
+            } else if (this.shharpRaces != 0) {
+              var xValues = this.race_name_list;
+              var yValues1 = this.sharp_total_by_race;
+              var barColors = [
+                "green",
+                "red",
+                "blue",
+                "gray",
+                "orange",
+                "brown",
+                "yellow",
+                "magenta",
+                "turquoise",
+                "purple",
+              ];
+            } else if (this.rangeOfAge != 0) {
+              var xValues = this.by_age_list;
+              var yValues1 = this.sharp_total_by_age;
+            } else if (this.shharpReligions != 0) {
+              var xValues = this.religion_name_list;
+              var yValues1 = this.sharp_total_by_religion;
+              var barColors = [
+                "green",
+                "red",
+                "blue",
+                "gray",
+                "orange",
+                "brown",
+                "yellow",
+                "magenta",
+                "turquoise",
+                "purple",
+              ];
+            } else if (this.shharpMaritals != 0) {
+              var xValues = this.marital_name_list;
+              var yValues1 = this.sharp_total_by_marital;
+              var barColors = [
+                "green",
+                "red",
+                "blue",
+                "gray",
+                "orange",
+                "brown",
+                "yellow",
+                "magenta",
+                "turquoise",
+                "purple",
+              ];
+            } else if (this.shharpEducation != 0) {
+              var xValues = this.education_name_list;
+              var yValues1 = this.sharp_total_by_education;
+              var barColors = [
+                "green",
+                "red",
+                "blue",
+                "gray",
+                "orange",
+                "brown",
+                "yellow",
+                "magenta",
+                "turquoise",
+                "purple",
+              ];
+            } else if (this.shharpEmployment != 0) {
+              var xValues = this.employment_name_list;
+              var yValues1 = this.sharp_total_by_employment;
+              var barColors = [
+                "green",
+                "red",
+                "blue",
+                "gray",
+                "orange",
+                "brown",
+                "yellow",
+                "magenta",
+                "turquoise",
+                "purple",
+              ];
+            } else {
+              var xValues = this.sharp_name_list;
+              var yValues1 = this.sharp_count_list;
+              var barColors = this.sharp_color_list;
+            }
+          } else {
+            if (
+              this.sharp_total_caseloadmale != 0 ||
+              this.sharp_total_caseloadfemale != 0
+            ) {
+              var xValues = ["Male", "Female"];
+              var yValues1 = [
+                this.sharp_total_caseloadmale,
+                this.sharp_total_caseloadfemale,
+              ];
+              var barColors = ["#00BEFF", "pink"];
+            } else if (this.shharpRaces != 0) {
+              var xValues = this.race_name_list;
+              var yValues1 = this.sharp_total_by_race;
+            } else if (this.rangeOfAge != 0) {
+              var xValues = this.by_age_list;
+              var yValues1 = this.sharp_total_by_race;
+            } else {
+              var xValues = this.sharp_name_list;
+              var yValues1 = this.sharp_count_list;
+              var barColors = this.sharp_color_list;
+            }
+          }
+          this.shharpChart = new Chart("myChartsharp", {
             type: "bar",
             data: {
-              labels: xValuescsa,
+              labels: xValues,
               datasets: [
                 {
+                  label: "Total",
                   backgroundColor: barColors,
-                  data: yValuescsa,
+                  data: yValues1,
                 },
               ],
             },
+            options: {
+              scales: {
+                yAxes: [
+                  {
+                    display: true,
+                    stacked: true,
+                    ticks: {
+                      min: 0,
+                    },
+                  },
+                ],
+              },
+            },
           });
-  }
         } else {
           window.alert("Something went wrong");
         }
@@ -890,11 +1199,14 @@ var xValues = ["Male","Female"];
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/list", { headers });
+
+      const response = await this.$axios.get("hospital/branch-list", {
+        headers,
+      });
       if (response.data.code == 200 || response.data.code == "200") {
-        this.hospitallist = response.data.list;
+        this.branchlist = response.data.list;
       } else {
-        this.hospitallist = [];
+        this.branchlist = [];
       }
     },
     async Getannouncement() {
