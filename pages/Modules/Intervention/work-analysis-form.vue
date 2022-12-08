@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Work Analysis Form</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -83,7 +82,7 @@
                      v-model="city_id"
                      @change="getPostcodeList($event)"
                      >
-            <option value="">Please Select</option>
+            <option value=0>Please Select</option>
             <option
               v-for="ctl in GCityList"
               v-bind:key="ctl.city_name"
@@ -540,11 +539,9 @@
                 <h5>C. JOB SPECIFICATION</h5>
               </div>
 
-              <table
-                class="notes th-width table-padding vertical-align-middle"
-                id="jobspecification"
-              >
+              <table class="notes th-width table-padding vertical-align-middle" id="jobspecification">
                 <tbody>
+                  <!--1. WORK SCHEDULE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
@@ -611,12 +608,7 @@
                       </div>
                     </td>
                   </tr>
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">
-                      2. TRANSPORT TO WORKPLACE
-                    </td>
-                  </tr> -->
+                  <!--2. TRANSPORT TO WORKPLACE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
@@ -671,18 +663,11 @@
                       </div>
                     </td>
                   </tr>
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">
-                      3. PHYSICAL AND GRADE WEIGHT ABILITIES
-                    </td>
-                  </tr> -->
+                  <!--3. PHYSICAL AND GRADE WEIGHT ABILITIES-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question"
-                          >3. PHYSICAL AND GRADE WEIGHT ABILITIES</label
-                        >
+                        <label id="question">3. PHYSICAL AND GRADE WEIGHT ABILITIES</label>
                       </div>
                       <span>A. Limited (5kg)</span>
                       <span>B. Light (5-10kg)</span>
@@ -745,15 +730,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">4. WORK TOLERANCE</td>
-                  </tr> -->
+                  <!--4. WORK TOLERANCE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">4. WORK TOLERANCE</label>
+                        <label id="question">4.WORK TOLERANCE</label>
                       </div>
                       <span>A. Less than 2 hours </span>
                       <span>B. 2-3 hours </span>
@@ -816,15 +797,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">5.WORK AREA</td>
-                  </tr> -->
+                  <!--5. WORK AREA-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">5. WORK AREA</label>
+                        <label id="question">5.WORK AREA</label>
                       </div>
                       <span>A. Small place</span>
                       <span>B. One room</span>
@@ -880,7 +857,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fifth_4"
+                          class="form-check-input five_4"
                           type="checkbox"
                           value="E. Building and ground floor"
                           id="work-area5"
@@ -899,15 +876,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">6. WORK SPEED</td>
-                  </tr> -->
+                  <!--6.WORK SPEED-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">6. WORK SPEED</label>
+                        <label id="question">6.WORK SPEED</label>
                       </div>
                       <span>A. Slow</span>
                       <span>B. Mild</span>
@@ -951,7 +924,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_5"
+                          class="form-check-input four_5"
                           type="checkbox"
                           value="D. Fast"
                           id="work-speed4"
@@ -970,15 +943,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">7. Appearance</td>
-                  </tr> -->
+                  <!--7.APPEARANCE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">7. Appearance</label>
+                        <label id="question">7.APPEARANCE</label>
                       </div>
                       <span>A. Casual</span>
                       <span>B. Clean</span>
@@ -1022,7 +991,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_6"
+                          class="form-check-input four_6"
                           type="checkbox"
                           value="D. Well kempt"
                           id="appearance4"
@@ -1041,15 +1010,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">8. Communication skill</td>
-                  </tr> -->
+                  <!--8.COMMUNICATION SKILL-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">8. Communication skill</label>
+                        <label id="question">8.COMMUNICATION SKILL</label>
                       </div>
                       <span>A. Not required/minimal</span>
                       <span>B. When needed</span>
@@ -1102,7 +1067,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_7"
+                          class="form-check-input four_7"
                           type="checkbox"
                           value="D. Good"
                           id="communication-skill4"
@@ -1124,15 +1089,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">9.Social interaction</td>
-                  </tr> -->
+                  <!--9.SOCIAL INTERACTION-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">9.Social interaction</label>
+                        <label id="question">9.SOCIAL INTERACTION</label>
                       </div>
                       <span>A. Not required/minimal</span>
                       <span>B. When needed</span>
@@ -1185,7 +1146,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_8"
+                          class="form-check-input four_8"
                           type="checkbox"
                           value="D. Good"
                           id="social-interaction4"
@@ -1207,15 +1168,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">10.Concentration</td>
-                  </tr> -->
+                  <!--10.CONCENTRATION-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">10.Concentration</label>
+                        <label id="question">10.CONCENTRATION</label>
                       </div>
                       <span>A. Minimal</span>
                       <span>B. Fair</span>
@@ -1278,15 +1235,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">11. Work demand</td>
-                  </tr> -->
+                  <!--11.WORK DEMAND-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">11. Work demand</label>
+                        <label id="question">11.WORK DEMAND</label>
                       </div>
                       <span>A. One task at a time</span>
                       <span>B. Few task (2-3)</span>
@@ -1349,15 +1302,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">12. Motivation</td>
-                  </tr> -->
+                  <!--12.MOTIVATION-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">12. Motivation</label>
+                        <label id="question">12.MOTIVATION</label>
                       </div>
                       <span>A. Need encouragement</span>
                       <span>B. Proactive</span>
@@ -1408,17 +1357,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">
-                      13. Flexibility in routine
-                    </td>
-                  </tr> -->
+                  <!--13.FLEXIBILITY IN ROUTINE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">13. Flexibility in routine</label>
+                        <label id="question">13.FLEXIBILITY IN ROUTINE</label>
                       </div>
                       <span>A. Frequent (>7)</span>
                       <span>B. Average (4-6)</span>
@@ -1463,15 +1406,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">14. Ability to read</td>
-                  </tr> -->
+                  <!--14.ABILITY TO READ-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">14. Ability to read</label>
+                        <label id="question">14.ABILITY TO READ</label>
                       </div>
                       <span>A. Not required</span>
                       <span>B. Recognize symbol</span>
@@ -1526,17 +1465,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">
-                      15. ABILITY TO CALCULATE
-                    </td>
-                  </tr> -->
+                  <!--15.ABILITY TO CALCULATE-->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">15. ABILITY TO CALCULATE</label>
+                        <label id="question">15.ABILITY TO CALCULATE</label>
                       </div>
                       <span>A. Not required</span>
                       <span>B. Use calculator</span>
@@ -1574,7 +1507,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_14"
+                          class="form-check-input four_14"
                           type="checkbox"
                           value="D. Difficult maths"
                           id="atc4"
@@ -1591,15 +1524,11 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
-
-                  <!-- <tr>
-                    <td colspan="3" class="title-td">16. BENEFITS</td>
-                  </tr> -->
+                  <!-- 16.BENEFITS -->
                   <tr>
                     <td class="option-td">
                       <div class="title-div">
-                        <label id="question">16. BENEFITS</label>
+                        <label id="question">16.BENEFITS</label>
                       </div>
                       <span>0 = Nil</span>
                       <span>1 = Mc</span>
@@ -1646,7 +1575,7 @@
                       </div>
                       <div class="form-check">
                         <input
-                          class="form-check-input fourth_15"
+                          class="form-check-input four_15"
                           type="checkbox"
                           value="3 = Annual Leave"
                           id="benefits4"
@@ -1658,7 +1587,7 @@
 
                       <div class="form-check">
                         <input
-                          class="form-check-input fifth_15"
+                          class="form-check-input five_15"
                           type="checkbox"
                           value="4 = Dental Benefits"
                           id="benefits5"
@@ -1714,7 +1643,7 @@
                       </div>
                     </td>
                   </tr>
-                  <!--  -->
+          
                 </tbody>
               </table>
 
@@ -1977,22 +1906,21 @@
                         </ul>
                        </p>
                        <br>
-                      <br>
-                <div class="d-flex" v-if="!pid">
-                    <button
+                       <br>
+              <div class="d-flex" v-if="!pid">
+                <button
                       @click="GoBack"
-                      class="btn btn-primary btn-text" title="Back"
+                      class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
-                      <i class="fa fa-paper-plane"></i> Submit
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="submit"
+                  @click="OnSubmit"
+                  class="btn btn-warning btn-text ml-auto"
+                >
+                  <i class="fa fa-save"></i> Save
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2023,12 +1951,13 @@ export default {
       GCityList: [],
       GPostCodeList: [],
       Id: 0,
+      appId:0,
       company_name: "",
       company_address1: "",
       company_address2: "",
       company_address3: "",
       state_id: "",
-      city_id: "",
+      city_id: 0,
       postcode_id: "",
       supervisor_name: "",
       email: "",
@@ -2069,13 +1998,10 @@ export default {
       pid: 0,
       type: "",
       job_des: [],
-      SidebarAccess:null,
-      appId:0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     $(document).ready(function () {
       $('.form-accordion input[type="radio"]').click(function () {
         var inputValue = $(this).attr("value");
@@ -2115,96 +2041,20 @@ export default {
     }
   },
   methods: {
-    async onCreateEvent() {
-      if (confirm("Are you sure you want to save as draft?")) {
-        var jobSPECIFICATION = [];
-        var jobSDESCRIPTION = [];
-        try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "work-analysis/add",
-            {
-              added_by: this.userdetails.user.id,
-              patient_id: this.Id,
-              company_name: this.company_name,
-              company_address1: this.company_address1,
-              company_address2: this.company_address2,
-              company_address3: this.company_address3,
-              state_id: this.state_id,
-              city_id: this.city_id,
-              postcode_id: this.postcode_id,
-              supervisor_name: this.supervisor_name,
-              email: this.email,
-              position: this.position,
-              client_name: this.client_name,
-              job_position: this.job_position,
-              current_wage: this.current_wage,
-              wage_specify: this.wage_specify,
-              wage_change_occur: this.wage_change_occur,
-              change_in_rate: this.change_in_rate,
-              from: this.from,
-              to: this.to,
-              on_date: this.on_date,
-              works_hour_week: this.works_hour_week,
-              work_schedule: this.work_schedule,
-              no_of_current_employee: this.no_of_current_employee,
-              no_of_other_employee: this.no_of_other_employee,
-              during_same_shift: this.during_same_shift,
-              education_level: this.education_level,
-              grade: this.grade,
-              job_experience_year: this.job_experience_year,
-              job_experience_months: this.job_experience_months,
-              others: this.others,
-              location_services: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_of_services: this.complexity_services_id,
-              outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
-              jobs: jobSDESCRIPTION,
-              job_specification: jobSPECIFICATION,
-              id:this.pid,
-              appId: this.appId,
-              status:"0",
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
             });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    }
-  },
-    async onPublishEvent() {
-      if (confirm("Are you sure you want to submit this entry?")) {
+    },
+    async OnSubmit() {
       var jobSPECIFICATION = [];
       var jobSDESCRIPTION = [];
       $("table#jobspecification > tbody > tr").each(function (i) {
         var obj = {};
         var answer = "";
         obj.questions = $("td #question", this).text();
+        //$('#Renewcheck').is(':checked')
         if ($('td input[type="checkbox"].one_' + i).is(":checked") == true) {
           answer = $('td input[type="checkbox"].one_' + i, this).val();
         }
@@ -2238,17 +2088,68 @@ export default {
             answer = $('td input[type="checkbox"].four_' + i, this).val();
           }
         }
-        if (i == 15) {
+        if (i == 4) {
           if (
-            $('td input[type="checkbox"].fifth_' + i).is(":checked") == true
+            $('td input[type="checkbox"].five_' + i).is(":checked") == true
           ) {
             if (answer) {
               answer =
                 answer +
                 "," +
-                $('td input[type="checkbox"].fifth_' + i, this).val();
+                $('td input[type="checkbox"].five_' + i, this).val();
             } else {
-              answer = $('td input[type="checkbox"].fifth_' + i, this).val();
+              answer = $('td input[type="checkbox"].five_' + i, this).val();
+            }
+          }
+        }
+        if (i == 15) {
+          if (
+            $('td input[type="checkbox"].five_' + i).is(":checked") == true
+          ) {
+            if (answer) {
+              answer =
+                answer +
+                "," +
+                $('td input[type="checkbox"].five_' + i, this).val();
+            } else {
+              answer = $('td input[type="checkbox"].five_' + i, this).val();
+            }
+          }
+          if (
+            $('td input[type="checkbox"].six_' + i).is(":checked") == true
+          ) {
+            if (answer) {
+              answer =
+                answer +
+                "," +
+                $('td input[type="checkbox"].six_' + i, this).val();
+            } else {
+              answer = $('td input[type="checkbox"].six_' + i, this).val();
+            }
+          }
+          if (
+            $('td input[type="checkbox"].seven_' + i).is(":checked") == true
+          ) {
+            if (answer) {
+              answer =
+                answer +
+                "," +
+                $('td input[type="checkbox"].seven_' + i, this).val();
+            } else {
+              answer = $('td input[type="checkbox"].seven_' + i, this).val();
+            }
+          }
+
+          if (
+            $('td input[type="checkbox"].eight_' + i).is(":checked") == true
+          ) {
+            if (answer) {
+              answer =
+                answer +
+                "," +
+                $('td input[type="checkbox"].eight_' + i, this).val();
+            } else {
+              answer = $('td input[type="checkbox"].eight_' + i, this).val();
             }
           }
         }
@@ -2257,15 +2158,15 @@ export default {
         obj.comments = $("td textarea.comment", this).val();
         if (i == 15) {
           if (
-            $('td input[type="checkbox"].fifth_' + i).is(":checked") == true
+            $('td input[type="checkbox"].five_' + i).is(":checked") == true
           ) {
             if (answer) {
               answer =
                 answer +
                 "," +
-                $('td input[type="checkbox"].fifth_' + i, this).val();
+                $('td input[type="checkbox"].five_' + i, this).val();
             } else {
-              answer = $('td input[type="checkbox"].fifth_' + i, this).val();
+              answer = $('td input[type="checkbox"].five_' + i, this).val();
             }
           }
           if ($('td input[type="checkbox"].six_' + i).is(":checked") == true) {
@@ -2466,6 +2367,9 @@ export default {
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
+        // if (!this.medication_des) {
+        //   this.errorList.push("Medication is required");
+        // }
         if (
           this.company_name &&
           this.company_address1 &&
@@ -2490,6 +2394,7 @@ export default {
           this.category_services &&
           this.complexity_services_id &&
           this.outcome_id &&
+          // this.medication_des &&
           this.validate
         ) {
           this.loader = true;
@@ -2508,7 +2413,7 @@ export default {
               company_address2: this.company_address2,
               company_address3: this.company_address3,
               state_id: this.state_id,
-              city_id: this.city_id,
+              city_id: this.postcode_id,//city share the same id with postcode
               postcode_id: this.postcode_id,
               supervisor_name: this.supervisor_name,
               email: this.email,
@@ -2543,38 +2448,29 @@ export default {
               medication_prescription: this.medication_des,
               jobs: jobSDESCRIPTION,
               job_specification: jobSPECIFICATION,
-              id:this.pid,
               appId: this.appId,
-              status:"1",
             },
             { headers }
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            //this.$nextTick(() => {
+            //  $("#insertpopup").modal("show");
+            //});
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            //this.$nextTick(() => {
+            //  $("#errorpopup").modal("show");
+            //});
           }
         }
       } catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        //this.$nextTick(() => {
+        //  $("#errorpopup").modal("show");
+        //});
       }
-    }
-    },
-    GoBack(){
-      this.$router.push({
-              path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id, appId: this.appId },
-            });
     },
     async GetList() {
       const headers = {
@@ -2673,6 +2569,7 @@ export default {
     },
     async getCityList(event) {
       const headers = {
+        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -2757,6 +2654,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
+        // window.alert(response.data.Data[0].patient_mrn_id);
 
         this.Id = response.data.Data[0].patient_id;
         this.company_name = response.data.Data[0].company_name;
@@ -2764,7 +2662,7 @@ export default {
         this.company_address2 = response.data.Data[0].company_address2;
         this.company_address3 = response.data.Data[0].company_address3;
         this.state_id = response.data.Data[0].state_id;
-        this.city_id = response.data.Data[0].city_id;
+        this.city_id = response.data.Data[0].postcode_id;
         this.postcode_id = response.data.Data[0].postcode_id;
         this.supervisor_name = response.data.Data[0].supervisor_name;
         this.email = response.data.Data[0].email;
@@ -2803,6 +2701,7 @@ export default {
         this.jobSPECIFICATION = response.data.Data[0].jobs;
         this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
         console.log("myjobb", this.jobSPECIFICATION);
+        // console.log('myjobb11',this.job_specification);
 
         this.GetList();
         const response2 = await this.$axios.post(
