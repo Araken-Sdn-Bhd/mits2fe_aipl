@@ -86,7 +86,7 @@
               </div>
 
               <!-- search-table -->
-              <table class="table table-striped data-table font-13" style="width: 100%">
+              <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -168,8 +168,8 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
             scrollX: true,
             language: {
               paginate: {

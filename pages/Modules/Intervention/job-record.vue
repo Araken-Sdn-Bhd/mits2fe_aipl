@@ -27,7 +27,7 @@
                   </div>
                 </div>
               </div>
-              <table class="table table-striped data-table font-13" style="width: 100%">
+              <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th></th>
@@ -145,8 +145,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

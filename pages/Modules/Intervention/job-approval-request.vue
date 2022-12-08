@@ -12,7 +12,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <table
-                class="table table-striped data-table font-13"
+                class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
                 <thead>
@@ -85,9 +85,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
-
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

@@ -366,7 +366,7 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex">
+              <div class="btn-width d-flex">
                 <div class="ml-auto" :class="SidebarAccess!=1?'hide':''">
                   <button
                     @click="Ongeneratepdf"

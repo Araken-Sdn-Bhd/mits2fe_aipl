@@ -3837,7 +3837,8 @@ table.dataTable.nowrap td {
     margin-bottom: 0;
 }
 
-.nav-tab, .nav-tabs{
+.nav-tab,
+.nav-tabs {
     margin-top: 10px;
     display: flex;
     flex-wrap: nowrap;
@@ -3942,7 +3943,8 @@ table.dataTable.nowrap td {
     .password-tab .form-check-input[type=checkbox] {
         min-width: 16px;
     }
-    .form-foter{
+
+    .form-foter {
         flex-wrap: wrap;
     }
 }
@@ -3953,10 +3955,12 @@ table.dataTable.nowrap td {
     .login-box {
         margin: auto;
     }
+
     .login-screen {
         margin: auto;
     }
 }
+
 @media (max-width: 650px) {
     .search-table .col-sm-3 {
         margin-bottom: 5px;
@@ -4009,10 +4013,12 @@ table.dataTable.nowrap td {
         font-size: 13px;
         line-height: 15px;
     }
+
     .footer-action .ml-auto {
         margin-top: 8px;
         width: 100%;
     }
+
     .btns-box .btn {
         margin-bottom: 6px;
     }
@@ -4035,11 +4041,13 @@ table.dataTable.nowrap td {
     .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
         top: 70px;
     }
+
     .btn-width {
         width: 240px;
         margin: auto;
         max-width: 100%;
     }
+
     .btn-width .btn {
         width: 100%;
         margin-bottom: 5px;
@@ -4058,9 +4066,19 @@ table.dataTable.nowrap td {
     .footer-action .ml-auto {
         margin-top: 0;
     }
+
     .login-box {
         padding: 30px 10px;
         border-radius: 0px;
         min-height: 100vh;
+    }
+}
+
+@media (max-width: 320px) {
+    .card-header h4{
+        font-size: 14px;
+    }
+    .btn-width {
+        width: 100%;
     }
 }
