@@ -67,7 +67,7 @@
               </div>
               <!-- search-table -->
               <div class="table-responsive-ui">
-                <table class="table table-striped data-table font-13" style="width: 100%" id="datatable">
+                <table class="table table-striped data-table font-13 display nowrap" style="width: 100%" id="datatable">
                 <thead>
                   <tr>
                     <th>No</th>

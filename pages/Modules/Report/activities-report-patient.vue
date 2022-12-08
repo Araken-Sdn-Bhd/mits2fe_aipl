@@ -342,7 +342,7 @@
                              </li>
                         </ul>
                        </p>
-                <div class="d-flex">
+                <div class="btn-width d-flex">
                   <div v-if="this.appointment_type" class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                     <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                       ><i class="fa fa-file-pdf"></i> Generate PDF</a>

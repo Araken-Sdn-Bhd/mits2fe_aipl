@@ -96,7 +96,7 @@
                              </li>
                         </ul>
                        </p>
-              <div class="d-flex" :class="SidebarAccess!=1?'hide':''">
+              <div class="btn-width d-flex" :class="SidebarAccess!=1?'hide':''">
                 <div class="ml-auto">
                   <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                     ><i class="fa fa-file-pdf"></i> Generate PDF</a

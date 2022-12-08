@@ -50,7 +50,7 @@
               </div>
               <!-- search-table -->
              
-              <table class="table table-striped data-table" style="width: 100%">
+              <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -132,8 +132,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
