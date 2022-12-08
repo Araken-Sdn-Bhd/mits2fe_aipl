@@ -17,7 +17,7 @@
 
         <div class="mb-3 password">
           <label for="inputPassword">Password</label>
-          <a class="small ml-auto forgot-password" href="/forget-password"
+          <a class="small ml-auto forgot-password" href="/app/forget-password"
             >Forgot Password?</a
           >
           <input
