@@ -45,7 +45,7 @@
                       <div class="mb-3">
                         <label class="form-label">Range of Age:</label>
                         <select class="form-select" v-model="Age">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in agelist"
                             v-bind:key="rfl.id"
@@ -60,7 +60,7 @@
                       <div class="mb-3">
                         <label class="form-label">Gender:</label>
                         <select class="form-select" v-model="Gender">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in genderlist"
                             v-bind:key="rfl.id"
@@ -79,7 +79,7 @@
                       <div class="mb-3">
                         <label class="form-label">Ethnic Group:</label>
                         <select class="form-select" v-model="race_id">
-                          <option selected>Please Select</option>
+                          <option value="">Please Select</option>
                           <option
                             v-for="rfl in racelist"
                             v-bind:key="rfl.id"
@@ -92,6 +92,14 @@
                     </div>
                   </div>
                   <!-- row -->
+                  <Error :message="error" v-if="error" />
+               <p v-if="errorList.length">
+                          <ul>
+                           <li style="color:red"  v-for='err in errorList' :key='err' >
+                           {{ err }}
+                             </li>
+                        </ul>
+                       </p>
 
                   <div class="d-flex">
                     <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
@@ -123,9 +131,9 @@
             <td colspan="2">&lt; 10 years</td>
             <td colspan="2">10-19 years</td>
             <td colspan="2">20-59 years</td>
-            <td colspan="2">&gt;=60 10 years</td>
+            <td colspan="2">&gt;=60 years</td>
             <td colspan="2">Total by Gender</td>
-            <td rowspan="2">Total</td>
+            <td rowspan="2">Total by Race</td>
           </tr>
           <tr class="male-female">
             <td>Male</td>
@@ -156,51 +164,11 @@
              <td class="tdrow">{{list[rp]["jumlah_besar"]}}</td>
 
           </tr>
-
-          <!-- <tr class="tr-box">
-            <td>Indian</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>2</td>
-            <td>0</td>
-            <td>0</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>4</td>
+          <tr>
+            <td colspan="11">Total</td>
+            <td>{{ this.totalReport }}</td>
           </tr>
 
-          <tr class="tr-box">
-            <td>Lain-Lain</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-
-          <tr class="tr-box last-tr">
-            <td>Total</td>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-            <td>2</td>
-            <td>5</td>
-            <td>6</td>
-            <td>1</td>
-            <td>2</td>
-            <td>7</td>
-            <td>10</td>
-            <td>17</td>
-          </tr> -->
         </tbody>
       </table>
     </div>
@@ -233,6 +201,7 @@ export default {
       toDate: "",
       error: null,
       listKey:[],
+      errorList: [],
       list: {},
       agelist: [],
       genderlist: [],
@@ -313,15 +282,17 @@ export default {
             },
             { headers }
           );
+          console.log("my report", response.data);
           if (response.data.code == 200) {
 
-
+            if (response.data.result.length>0) {
             this.list = response.data.result[0]['group_name'];
+            this.totalReport= response.data.totalReport;
             this.listKey = Object.keys(this.list);
             console.log("my list", this.list);
             console.log("my listKey", this.listKey);
 
-            if (this.listKey.length > 0) {
+            
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
                 var pdf = new jsPDF("p", "pt", "a4");

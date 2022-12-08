@@ -328,7 +328,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio1"
                                 value="assisstance"
                                 v-model="category_services"
@@ -341,7 +341,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
@@ -354,7 +354,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions"
+                                name="inlineRadioOptions2"
                                 id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
@@ -738,14 +738,13 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.resetmodel();
+            alert("Succesfully Created");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         } catch (e) {
         this.loader = false;
@@ -863,21 +862,13 @@ export default {
         //   this.errorList.push("Medication is required");
         // }
         if (
-          this.diagnosis_id &&
-          this.patient_acknowledged &&
-          this.reason_referral_assessment &&
-          this.reason_referral_intervention &&
-          this.case_formulation &&
-          this.referring_doctor &&
-          this.designation &&
           this.location_services_id &&
           this.type_diagnosis_id &&
           this.category_services &&
           this.complexity_services &&
           this.outcome &&
           // this.medication_des &&
-          this.validate &&
-          this.date
+          this.validate
         ) {
           this.loader = true;
           const headers = {
@@ -940,14 +931,13 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.resetmodel();
+            alert("Succesfully Update");
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            alert("Error Occured!");
+            this.GoBack();
           }
         }
         } catch (e) {
