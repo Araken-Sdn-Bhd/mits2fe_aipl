@@ -12,29 +12,22 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{this.hospitalName}}]</h2>
+              <h2> [{{ this.hospitalName }}]</h2>
               <p>CONSENT FOR JOB CLUB PROGRAM</p>
             </div>
             <div class="card-body new-form">
               <div class="form-title">
                 <h5>1. CONSENT FOR PARTICIPATION</h5>
               </div>
-              <table class="notes table-padding">
-                <tbody>
-                  <tr>
+              <table class="notes table-padding flex-table">
+                <tbody class="d-m-block">
+                  <tr class="d-m-block">
                     <td colspan="2">
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value="1"
-                          id="flexCheckDefault" v-model="participant"
-                        />
-                        <label
-                          class="form-check-label label-balck"
-                          for="flexCheckDefault"
-                        >
-                          I hereby agree to participate in Job Club Program [{{this.branchName}}]. I also agree to
+                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"
+                          v-model="participant" />
+                        <label class="form-check-label label-balck" for="flexCheckDefault">
+                          I hereby agree to participate in Job Club Program [{{ this.branchName }}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -115,7 +108,7 @@
           </div>
         </div>
 
-         <div class="container-fluid px-4 reslt" v-if="consentdetails" style="display:none;">
+        <div class="container-fluid px-4 reslt" v-if="consentdetails" style="display:none;">
           <div class="page-title">
             <h1>Job Club CONSENT FORM</h1>
             <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
@@ -123,7 +116,7 @@
           <div class="card mb-4">
             <div class="form-header">
               <img src="~/assets/images/form-logo.png" />
-              <h2> [{{this.hospitalName}}]</h2>
+              <h2> [{{ this.hospitalName }}]</h2>
               <p>CONSENT FOR JOB CLUB PROGRAM</p>
             </div>
             <div class="card-body new-form">
@@ -135,17 +128,10 @@
                   <tr>
                     <td colspan="2">
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value="1"
-                          id="flexCheckDefault" v-model="participant"
-                        />
-                        <label
-                          class="form-check-label label-balck"
-                          for="flexCheckDefault"
-                        >
-                          I hereby agree to participate in Job Club Program [{{this.branchName}}]. I also agree to
+                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"
+                          v-model="participant" />
+                        <label class="form-check-label label-balck" for="flexCheckDefault">
+                          I hereby agree to participate in Job Club Program [{{ this.branchName }}]. I also agree to
                           follow the rules and give my full commitment. I fully
                           understand if any rules was not follow, I deemed to be
                           terminated from this program.
@@ -153,15 +139,15 @@
                       </div>
                     </td>
                   </tr>
-                   <tr>
+                  <tr>
                     <td>
                       <textarea class="signature"></textarea>
                       <!-- <p class="text-align-center">Signature Patient/Guardian</p> -->
                     </td>
                     <td>
-                     <textarea class="signature"></textarea>
+                      <textarea class="signature"></textarea>
                       <!-- <p class="text-align-center">Signature Witness</p> -->
-                      </td>
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -235,20 +221,17 @@
             </div>
           </div>
         </div>
+        <div class="container-fluid px-4">
         <div class="d-flex" v-if="!pid">
-                <div class="ml-auto">
-                  <button
-                    type="button"
-                    class="btn btn-warning btn-text"
-                    @click="OnSubmit"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button>
-                  <a @click="OnPrint" class="btn btn-success btn-text"
-                    ><i class="fad fa-print"></i>Print</a
-                  >
-                </div>
-              </div>
+          <div class="ml-auto">
+            <button type="button" class="btn btn-warning btn-text" @click="OnSubmit">
+              <i class="fa fa-save"></i> Save
+            </button>
+            <a @click="OnPrint" class="btn btn-success btn-text"><i class="fad fa-print"></i>Print</a>
+          </div>
+        </div>
+      </div>
+
       </main>
       <footer>
         <p>© MENTARI MALAYSIA MOH</p>
@@ -272,7 +255,7 @@ export default {
       branchName: "",
       loader: false,
       participant: 0,
-      pid:0
+      pid: 0
     };
   },
   beforeMount() {
@@ -284,7 +267,7 @@ export default {
     if (this.Id) {
       this.GetPatientConnsentdetails();
     }
-     let urlParams1 = new URLSearchParams(window.location.search);
+    let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
     if (this.pid) {

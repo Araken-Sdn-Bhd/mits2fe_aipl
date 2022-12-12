@@ -4,13 +4,11 @@
       <h1 v-if="patientdetails">{{ patientdetails.name_asin_nric }}</h1>
     </div>
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-lg-8 col-sm-12">
         <div class="card mb-4">
           <div class="card-header">
             <h4>Demographic</h4>
-            <a @click="oneditPatient" style="cursor: pointer"
-              ><i class="fal fa-edit"></i
-            ></a>
+            <a @click="oneditPatient" style="cursor: pointer"><i class="fal fa-edit"></i></a>
           </div>
           <div class="card-body">
             <table class="info-table" width="100%">
@@ -62,28 +60,28 @@
           </div>
         </div>
       </div>
-  <Loader v-if="loader" />
-      <div class="col-sm-4">
+      <Loader v-if="loader" />
+      <div class="col-lg-4 col-sm-12">
         <div class="card mb-4">
           <div class="card-header">
             <h4>Alert</h4>
-             <a><i class="fal fa-edit" style="cursor:pointer;" @click="AlertList"></i></a>
+            <a><i class="fal fa-edit" style="cursor:pointer;" @click="AlertList"></i></a>
           </div>
           <div class="card-body">
-            <form class="alert-box" method="post"  @submit.prevent="AddAlert">
+            <form class="alert-box" method="post" @submit.prevent="AddAlert">
               <textarea class="form-control" v-model="alert"></textarea>
-<p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
+              <p v-if="errorList.length">
+              <ul>
+                <li style="color:red" v-for='err in errorList' :key='err'>
+                  {{ err }}
+                </li>
+              </ul>
+              </p>
               <div class="d-flex mt-2">
                 <button type="submit" class="btn btn-success ml-auto" v-if="alert">
-                  Update ALERT
+                  <i class="far fa-pen"></i> Update ALERT
                 </button>
-                 <button type="submit" class="btn btn-success ml-auto" v-if="!alert">
+                <button type="submit" class="btn btn-success ml-auto" v-if="!alert">
                   <i class="fa fa-plus"></i> Add ALERT
                 </button>
               </div>
@@ -105,7 +103,7 @@ export default {
       patientdetails: null,
       alert: "",
       loader: false,
-      alert_id:0,
+      alert_id: 0,
       alertMessage: null,
     };
   },
@@ -128,9 +126,9 @@ export default {
         query: { id: this.Id },
       });
     },
-     AlertList() {
+    AlertList() {
       this.$router.push({
-        path:"/modules/Intervention/list-of-alert",
+        path: "/modules/Intervention/list-of-alert",
         query: { id: this.Id },
       });
     },
@@ -147,7 +145,7 @@ export default {
         },
         { headers }
       );
-       console.log("my data intervention", response.data);
+      console.log("my data intervention", response.data);
       if (response.data.code == 200) {
         this.patientdetails = response.data.list[0];
       } else {
@@ -162,7 +160,7 @@ export default {
       );
 
       this.alert = response1.data[0].message;
-      console.log('my data66',this.alert);
+      console.log('my data66', this.alert);
     },
     async AddAlert() {
       this.errorList = [];
@@ -205,7 +203,7 @@ export default {
     FocusAlert() {
       document.getElementById("alert").focus();
     },
-     async GetLastupdatedAlert() {
+    async GetLastupdatedAlert() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -219,7 +217,7 @@ export default {
         },
         { headers }
       );
-       console.log("my data intervention", response.data);
+      console.log("my data intervention", response.data);
       if (response.data.code == 200) {
         this.alert = response.data.list[0].message;
       } else {

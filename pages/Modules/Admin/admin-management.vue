@@ -14,7 +14,7 @@
             <div class="card-body">
               <div class="search-table">
                 <div class="row mb-3 mt-2">
-                  <div class="col-sm-4">
+                  <div class="col-lg-4 col-sm-6">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
                         ><i class="fa fa-search"></i
@@ -30,7 +30,8 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table class="table table-striped data-table" style="width: 100%">
+              <div class="table-responsive">
+              <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th></th>
@@ -64,23 +65,22 @@
                   </tr>
                 </tbody>
               </table>
-              <br>
-              <br>
-              <div class="d-flex">
-                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
-                    <i class="fa fa-step-backward"/> &nbsp; Back
+            </div>
+              <div class="d-flex mt-4 btn-mb">
+                <button @click="back" type="button" class="btn btn-primary btn-text">
+                    <i class="fa fa-step-backward"></i> Back
                 </button>
                 <div class="ml-auto">
                   <a
                     style="cursor: pointer"
                     v-on:click="removeAccess()"
-                    class="btn btn-danger btn-fill btn-md"
+                    class="btn btn-danger btn-text"
                     ><i class="fad fa-vote-nay"></i>Remove Access</a
                   >
                   <a
                     style="cursor: pointer"
                     v-on:click="setSystemAdmin()"
-                    class="btn btn-warning btn-green btn-fill btn-md"
+                    class="btn btn-warning btn-green btn-text"
                     ><i class="fad fa-check"></i> Assign as System Admin</a
                   >
                 </div>

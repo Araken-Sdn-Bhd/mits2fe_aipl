@@ -44,8 +44,8 @@
             <div class="card-body">
               <form method="post" @submit.prevent="OnSubmit">
                 <div class="row">
-                  <div class="col-sm-4">
-                    <div class="mb-3">
+                  <div class="col-lg-4 col-sm-6 mb-3">
+                    <div class="">
                       <label class="form-label">Job Club</label>
                       <select class="form-select" v-model="job_club">
                         <option value="">Please Select Job Club</option>
@@ -130,10 +130,10 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
+                          <label class="col-lg-4 col-sm-12 col-form-label"
                             >Category Of Services
                           </label>
-                          <div class="col-sm-8">
+                          <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
                               <input
                                 class="form-check-input"
