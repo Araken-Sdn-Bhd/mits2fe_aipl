@@ -156,13 +156,20 @@
 
                     <tr>
                       <th>Medication Supervised By</th>
-                      <td colspan="3">
+                      <td colspan="2">
                         <select class="form-select" v-model="medication_supervised_by">
                           <option value="">Please Select</option>
                           <option v-for="med in medicationsupervised" v-bind:key="med.id" v-bind:value="med.id">
                             {{ med.section_value }}
                           </option>
-                        </select>
+                        </select>  
+                      </td>
+                      <td colspan="2">
+                      <input v-model="medication_supervised_by_specify"
+                      type="text" 
+                      class="form-control" 
+                      v-if="medication_supervised_by == '263'"
+                      placeholder="Specify"/>
                       </td>
                     </tr>
 
@@ -574,6 +581,14 @@
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td colspan="5">
+                                <input class="form-control" type="text" name="heroin-opiate9"
+                                id="heroin-opiate-current-use specify" 
+                                v-model="other_specify_details"
+                                placeholder="Specify"/>
+                              </td>
+                              </tr>
                           </tbody>
                         </table>
                       </td>
@@ -2003,6 +2018,7 @@ export default {
       current_intervention: "",
       compliance_treatment: "",
       medication_supervised_by: "",
+      medication_supervised_by_specify: "",
       delusions: "",
       hallucination: "",
       behavior: "",
@@ -2013,6 +2029,7 @@ export default {
       uncooperativeness: "",
       poor_impulse_control: "",
       others: "",
+      other_specify_details: "",
       ipsychopathology_remarks: "",
       risk_of_violence: "",
       risk_of_suicide: "",
@@ -2059,6 +2076,7 @@ export default {
       pid: 0,
       type: "",
       appId: null,
+      SidebarAccess:null,
 
  
 
@@ -2142,6 +2160,7 @@ export default {
               current_intervention: this.current_intervention,
               compliance_treatment: this.compliance_treatment,
               medication_supervised_by: this.medication_supervised_by,
+              medication_supervised_by_specify:this.medication_supervised_by_specify,
               delusions: this.delusions,
               hallucination: this.hallucination,
               behavior: this.behavior,
@@ -2152,6 +2171,7 @@ export default {
               uncooperativeness: this.uncooperativeness,
               poor_impulse_control: this.poor_impulse_control,
               others: this.others,
+              other_specify_details: this.other_specify_details,
               ipsychopathology_remarks: this.ipsychopathology_remarks,
               risk_of_violence: this.risk_of_violence,
               risk_of_suicide: this.risk_of_suicide,
@@ -2265,6 +2285,7 @@ export default {
           if (!this.medication_supervised_by) {
             this.errorList.push("Medication Supervised By is required");
           }
+          
           if (!this.delusions) {
             this.errorList.push("Delusions is required");
           }
@@ -2533,6 +2554,7 @@ export default {
               current_intervention: this.current_intervention,
               compliance_treatment: this.compliance_treatment,
               medication_supervised_by: this.medication_supervised_by,
+              medication_supervised_by_specify: this.medication_supervised_by_specify,
               delusions: this.delusions,
               hallucination: this.hallucination,
               behavior: this.behavior,
@@ -2543,6 +2565,7 @@ export default {
               uncooperativeness: this.uncooperativeness,
               poor_impulse_control: this.poor_impulse_control,
               others: this.others,
+              other_specify_details: this.other_specify_details,
               ipsychopathology_remarks: this.ipsychopathology_remarks,
               risk_of_violence: this.risk_of_violence,
               risk_of_suicide: this.risk_of_suicide,
@@ -2787,6 +2810,7 @@ export default {
       this.current_intervention = "";
       this.compliance_treatment = "";
       this.medication_supervised_by = "";
+      this.medication_supervised_by_specify = "";
       this.delusions = "";
       this.hallucination = "";
       this.behavior = "";
@@ -2797,6 +2821,7 @@ export default {
       this.uncooperativeness = "";
       this.poor_impulse_control = "";
       this.others = "";
+      this.other_specify_details = "",
       this.ipsychopathology_remarks = "";
       this.risk_of_violence = "";
       this.risk_of_suicide = "";
@@ -3071,6 +3096,8 @@ export default {
         this.compliance_treatment = response.data.Data[0].compliance_treatment;
         this.medication_supervised_by =
           response.data.Data[0].medication_supervised_by;
+        this.medication_supervised_by_specify = 
+          response.data.Data[0].medication_supervised_by_specify;
         this.delusions = response.data.Data[0].delusions;
         this.hallucination = response.data.Data[0].hallucination;
         this.behavior = response.data.Data[0].behavior;
@@ -3081,6 +3108,7 @@ export default {
         this.uncooperativeness = response.data.Data[0].uncooperativeness;
         this.poor_impulse_control = response.data.Data[0].poor_impulse_control;
         this.others = response.data.Data[0].others;
+        this.other_specify_details = response.data.Data[0].other_specify_details;
         this.ipsychopathology_remarks =
           response.data.Data[0].ipsychopathology_remarks;
         this.risk_of_violence = response.data.Data[0].risk_of_violence;
