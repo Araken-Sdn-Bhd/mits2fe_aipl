@@ -1365,6 +1365,7 @@ export default {
       race_type:"",
       nric_type_code:"",
       SidebarAccess:null,
+      responseMsg: "",
     };
   },
   beforeMount() {
@@ -1990,12 +1991,16 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
+              this.responseMsg = response.data.message;
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.responseMsg = JSON.stringify(response.data.message);
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.responseMsg,
+                              });
             }
           } else {
             const response = await this.$axios.post(
@@ -2005,24 +2010,32 @@ export default {
                 headers,
               }
             );
-            console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.loader = false;
+              await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.responseMsg = JSON.stringify(response.data.message);
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.responseMsg,
+                              });
             }
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.responseMsg = JSON.stringify(response.data.message);
+          this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + this.responseMsg,
+                          });
         }
       }
     },
@@ -2113,12 +2126,21 @@ export default {
               }
             );
             if (response.data.code == 200 || response.data.code == "200") {
+              this.loader = false;
+              await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.responseMsg = response.data.message;
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.responseMsg,
+                              });
             }
           } else {
             const response = await this.$axios.post(
@@ -2128,21 +2150,32 @@ export default {
                 headers,
               }
             );
-            console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
+              this.loader = false;
+              await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.responseMsg = JSON.stringify(response.data.message);
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.responseMsg,
+                              });
             }
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.responseMsg = response.data.message;
+          this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + this.responseMsg,
+                          });
         }
     },
     async GetPatientdetails() {

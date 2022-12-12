@@ -569,7 +569,15 @@ export default {
     },
     async onPublishEvent() {
 
-      if (confirm("Are you sure you want to save this entry ? ")) {
+      this.$swal.fire({
+        title: 'Are you sure to submit this form?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, save it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then(async (result) =>{
       this.validate = true;
       console.log("services", this.category_services);
       this.errorList = [];
@@ -691,32 +699,40 @@ export default {
               services_id: this.services_id,
               id:this.pid,
               appId: this.appId,
+              status: "1",
             },
             { headers }
           );
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+              await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+              this.responseMsg = JSON.stringify(response.data.message);
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                              });
           }
         }
       } catch (e) {
         this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+              this.responseMsg = JSON.stringify(response.data.message);
+              this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + e,
+                              });
       }
-  }
-  this.GoBack();
-  },
+  })
+},
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

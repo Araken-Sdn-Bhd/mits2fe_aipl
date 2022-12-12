@@ -99,7 +99,9 @@
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label">Contact No.<span style="color:red">*</span></label>
                         <input
-                          type="text"
+                          type="number"
+                          maxlength = "11"
+                          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control"
                           placeholder="Enter Contact No."
                           v-model="contactno"
@@ -140,7 +142,7 @@
 
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label"
-                          >Designation Period(End Date)<span style="color:red">*</span></label
+                          >Designation Period(End Date)</label
                         >
                         <input
                           type="date"
@@ -204,7 +206,7 @@
                       </div>
 
                       <div class="col-md-4 mb-4">
-                        <label for="" class="form-label">End Date<span style="color:red">*</span></label>
+                        <label for="" class="form-label">End Date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -394,7 +396,18 @@ export default {
       this.GetteamList(this.branchId);
     },
     async onCreateStaff() {
-      if (confirm("Are you sure you want to save this record ? ")) {
+      
+      this.$swal.fire({
+        title: 'Are you sure to save this?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, save it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }
+      ).then(async (result) =>{
+        if (result.isConfirmed) {
         this.errors = [];
         if (!this.name) {
           this.errors.push("Name is required.");
@@ -403,7 +416,7 @@ export default {
           this.errors.push("NRIC NO is required.");
         }
 
-        if (this.Role <= 0) {
+        if (this.roleId <= 0) {
           this.errors.push("Role  is required.");
         }
         if (!this.email) {
@@ -421,17 +434,14 @@ export default {
         if (!this.designationstartdate) {
           this.errors.push("Designation Period(Start Date) is required.");
         }
-        if (!this.designationenddate) {
-          this.errors.push("Designation Period(End Date) is required.");
-        }
         if (this.branchId <= 0) {
           this.errors.push("Mentari Location is required.");
         }
         if (!this.startdate) {
-          this.errors.push("Start Date   is required.");
+          this.errors.push("Start Date is required.");
         }
-        if (!this.enddate) {
-          this.errors.push("End Date is required.");
+        if (!this.file) {
+          this.errors.push("Supported Document is required.");
         }
 
         console.log(
@@ -451,23 +461,23 @@ export default {
           !this.nricerror
         );
         if (
-          (this.name,
-          this.nricno,
-          this.roleId,
-          this.email,
-          this.teamId,
-          this.contactno,
-          this.designationId,
-          this.designationstartdate,
-          this.designationenddate,
-          this.branchId,
-          this.startdate,
-          this.enddate,
+          (this.name &&
+          this.nricno &&
+          this.roleId &&
+          this.email &&
+          this.teamId &&
+          this.contactno &&
+          this.designationId &&
+          this.designationstartdate &&
+          this.branchId &&
+          this.startdate &&
+          this.file &&
           !this.nricerror)
         ) {
           if (this.personincharge > 0) {
             this.personincharge = 1;
           }
+          this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -501,16 +511,25 @@ export default {
             }
           );
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.loader = false;
+               await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
+            this.$router.push("/Modules/Admin/staff-management");
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.loader = false;
+
+            this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                          });
           }
         }
       }
+      })
     },
     async CheckNric(event) {
       console.log("my body", event.target.value);
