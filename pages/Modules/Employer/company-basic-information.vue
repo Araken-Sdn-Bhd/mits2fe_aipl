@@ -609,14 +609,17 @@ export default {
                     if (response1.data.code == 200){
                       this.loader = false;
                       this.newpwd_login = "";
-                      alert("Succesfully Updated!");
+                      this.$swal('Succesfully Updated');
+                    } else {
+                      this.loader = false;
+                      this.$swal('Error Occured! : ' + JSON.stringify(response1.data.message) );
                     }
                 } else {
                     this.loader = false;
-                    alert("Error Occured!");
+                    this.$swal('Error Occured! : ' + JSON.stringify(response.data.message['password']) );
                 }
             } catch (e) {
-                alert("Error Occured! : "+e);
+                this.$swal("Error Occured! : " + e );
             }
         },
         async getCompanyDetails() {

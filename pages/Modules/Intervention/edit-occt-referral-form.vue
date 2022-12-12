@@ -1086,7 +1086,7 @@ methods: {
         console.log("response", response.data);
         if (response.data.code == 200) {
           this.loader = false;
-  
+
           this.$nextTick(() => {
             $("#insertpopup").modal("show");
           });
@@ -1105,197 +1105,222 @@ methods: {
   }
   },
   async onPublishEvent() {
-    if (confirm("Are you sure you want to submit this entry")) {
-    this.validate = true;
-    this.errorList = [];
-    try {
-      if (!this.referral_location) {
-        this.errorList.push("Referral Location is required");
-      }
-      if (!this.date) {
-        this.errorList.push("Referral Date is required");
-      }
-      if (!this.referral_clinical_assessment) {
-        this.errorList.push("CLINICAL ASSESSMENT is required");
-      }
-      if (!this.referral_clinical_intervention) {
-        this.errorList.push("INTERVENTION is required");
-      }
-      if (!this.referral_clinical_promotive_program) {
-        this.errorList.push("PROMOTIVE PROGRAM is required");
-      }
-      if (!this.referral_name) {
-        this.errorList.push("Referral Name is required");
-      }
-      if (!this.referral_designation) {
-        this.errorList.push("Designation is required");
-      }
-      if (!this.location_services) {
-        this.errorList.push("Location Of Services is required");
-      }
-      if (!this.type_diagnosis_id) {
-        this.errorList.push("Type Of Diagnosis is required");
-      }
-      if (!this.category_services) {
-        this.errorList.push("Category Of Services is required");
-      }
-      if (!this.complexity_services) {
-        this.errorList.push("Complexity Of Service is required");
-      }
-      if (this.category_services) {
-        if (this.category_services == "assisstance") {
-          if (!this.services_id) {
-            this.errorList.push("Service is required");
-            this.validate = false;
-          }
-        } else if (this.category_services == "clinical-work") {
-          if (!this.code_id) {
-            this.errorList.push("ICD 9 CODE is required");
-            this.validate = false;
-          }
-          if (!this.sub_code_id) {
-            this.errorList.push("ICD 9 SUB CODE is required");
-            this.validate = false;
-          }
-        } else {
-          if (!this.serviceid) {
-            this.errorList.push("Services is required");
-            this.validate = false;
+      this.validate = true;
+      this.errorList = [];
+      try {
+        if (!this.referral_location) {
+          this.errorList.push("Referral Location is required");
+        }
+        if (!this.date) {
+          this.errorList.push("Referral Date is required");
+        }
+        // if (!this.referral_clinical_assessment) {
+        //   this.errorList.push("CLINICAL ASSESSMENT is required");
+        // }
+        // if (!this.referral_clinical_intervention) {
+        //   this.errorList.push("INTERVENTION is required");
+        // }
+        // if (!this.referral_clinical_promotive_program) {
+        //   this.errorList.push("PROMOTIVE PROGRAM is required");
+        // }
+        if (!this.referral_name) {
+          this.errorList.push("Referral Name is required");
+        }
+        if (!this.referral_designation) {
+          this.errorList.push("Designation is required");
+        }
+        if (!this.location_services) {
+          this.errorList.push("Location Of Services is required");
+        }
+        if (!this.type_diagnosis_id) {
+          this.errorList.push("Type Of Diagnosis is required");
+        }
+        if (!this.category_services) {
+          this.errorList.push("Category Of Services is required");
+        }
+        if (!this.complexity_services) {
+          this.errorList.push("Complexity Of Service is required");
+        }
+        if (this.category_services) {
+          if (this.category_services == "assisstance") {
+            if (!this.services_id) {
+              this.errorList.push("Service is required");
+              this.validate = false;
+            }
+          } else if (this.category_services == "clinical-work") {
+            if (!this.code_id) {
+              this.errorList.push("ICD 9 CODE is required");
+              this.validate = false;
+            }
+            if (!this.sub_code_id) {
+              this.errorList.push("ICD 9 SUB CODE is required");
+              this.validate = false;
+            }
           } else {
-            this.services_id = this.serviceid;
+            if (!this.serviceid) {
+              this.errorList.push("Services is required");
+              this.validate = false;
+            } else {
+              this.services_id = this.serviceid;
+            }
           }
         }
-      }
-      if (!this.outcome) {
-        this.errorList.push("Outcome is required");
-      }
-      if (
-        this.referral_location &&
-        this.date &&
-        this.referral_clinical_assessment &&
-        this.referral_clinical_intervention &&
-        this.referral_clinical_promotive_program &&
-        this.referral_name &&
-        this.referral_designation &&
-        this.location_services &&
-        this.type_diagnosis_id &&
-        this.category_services &&
-        this.complexity_services &&
-        this.outcome &&
-        this.validate
-      ) {
-        this.loader = true;
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "occt-referral/add",
-          {
-            added_by: this.userdetails.user.id.toString(),
-            patient_mrn_id: this.Id,
-            referral_location: this.referral_location,
-            date: this.date,
-            diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-            referral_clinical_assessment: JSON.stringify([
-              {
-                "Activities Living Assessment": this.livingassessment,
-                "Behavior Assessment": this.behaviorassessment,
-                "Cognitive And Perceptual Assessment": this.cognitiveassessment,
-                "Child Development": this.childevelopment,
-                "Psychological Assessment": this.psychology,
-                "Seating and Wheelchair Assessment": this.seatwheelchair,
-                "Domestic Assessment": this.domestic,
-                "Driving Assessment": this.driving,
-                "Hand Function And Upper Limb Assessment": this.handlimb,
-                "Work/home/school Assessment": this.workhomeschool,
-                "Sensory Motor Assessment": this.sensorymotor,
-                "Pre School/school Skill Assessment": this.preschool,
-                "Play Leisure Assessment": this.leisure,
-                "Work Assessment": this.workassessmnt,
-                "Others": this.others,
-              },
-            ]),
-            referral_clinical_assessment_other:
-              this.referral_clinical_assessment_other,
-            referral_clinical_intervention:JSON.stringify([
-              {
-                "Activity Of Daily Living Training": this.activitytraining,
-                "AIDS Adaptation/Assistive Devices": this.aids,
-                "Behavioural Therapy": this.behavetherapy,
-                "Cognitive And Perceptual Training": this.cognitivetraining,
-                "Compression Therapy": this.compression,
-                "Creative Therapy": this.creative,
-                "Social Skill Training": this.socialtraining,
-                "Relaxation Therapy/Stress Management": this.relaxtherapy,
-                "Low Vision Rehabilitation": this.lowvision,
-                "Domestic Rehabilitation": this.domesticrehab,
-                "Fine Motor/Hand Function Training": this.motorhand,
-                "Gross Motor/Functional Mobility": this.grossmotor,
-                "Patient's And Carer's Education": this.ptcareereducate,
-                "Play And Leisure(Explanation And Training)": this.playleisure,
-                "Sensory Integration Training": this.sensoryintegrity,
-                "Wheelchair Training": this.wheelchairtraining,
-                "Work Rehabilitation": this.workrehab,
-                "Splint": this.splint,
-                "Others": this.others2,
-              },
-            ]),
-            referral_clinical_intervention_other:
-              this.referral_clinical_intervention_other,
-            referral_clinical_promotive_program:JSON.stringify([
-              {
-              "Special Needs Children Program": this.specialneeds,
-              "Mental Health Program": this.mentalhealth,
-              "Senior Citizen Program": this.seniorcitizen,
-              "Community Program": this.communityprog,
-              "Out Patient Program": this.outpatient,
-              "Teenagers And School Program": this.teenschool,
-              "Diabetes Program": this.diabetes,
-              "Hypertension Program": this.hypertension,
-              "Antenatal/Mother And Child Program": this.antenatalmotherchild,
-              "Healthy Lifestyle Program": this.healthylife,
-              },
-            ]),
-            referral_name: this.referral_name,
-            referral_designation: this.referral_designation,
-            location_services: this.location_services,
-            services_id: this.services_id,
-            code_id: this.code_id,
-            sub_code_id: this.sub_code_id,
-            type_diagnosis_id: this.type_diagnosis_id,
-            category_services: this.category_services,
-            complexity_services: this.complexity_services,
-            outcome: this.outcome,
-            medication_des: this.medication_des,
-            id:this.pid,
-            appId: this.appId,
-            status: "1",
-          },
-          { headers }
-        );
-        console.log("response", response.data);
-        if (response.data.code == 200) {
-          this.loader = false;
-          this.$nextTick(() => {
-            $("#insertpopup").modal("show");
-          });
-        } else {
-          this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+        if (!this.outcome) {
+          this.errorList.push("Outcome is required");
         }
+        if (
+          this.location_services &&
+          this.type_diagnosis_id &&
+          this.category_services &&
+          this.complexity_services &&
+          this.outcome &&
+          this.validate
+        ) {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "occt-referral/add",
+            {
+              added_by: this.userdetails.user.id.toString(),
+              patient_mrn_id: this.Id,
+              referral_location: this.referral_location,
+              date: this.date,
+              diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+              referral_clinical_assessment: JSON.stringify([
+                {
+                  "Activities Living Assessment": this.livingassessment,
+                  "Behavior Assessment": this.behaviorassessment,
+                  "Cognitive And Perceptual Assessment": this.cognitiveassessment,
+                  "Child Development": this.childevelopment,
+                  "Psychological Assessment": this.psychology,
+                  "Seating and Wheelchair Assessment": this.seatwheelchair,
+                  "Domestic Assessment": this.domestic,
+                  "Driving Assessment": this.driving,
+                  "Hand Function And Upper Limb Assessment": this.handlimb,
+                  "Work/home/school Assessment": this.workhomeschool,
+                  "Sensory Motor Assessment": this.sensorymotor,
+                  "Pre School/school Skill Assessment": this.preschool,
+                  "Play Leisure Assessment": this.leisure,
+                  "Work Assessment": this.workassessmnt,
+                  "Others": this.others,
+                },
+              ]),
+              referral_clinical_assessment_other:
+                this.referral_clinical_assessment_other,
+              referral_clinical_intervention:JSON.stringify([
+                {
+                  "Activity Of Daily Living Training": this.activitytraining,
+                  "AIDS Adaptation/Assistive Devices": this.aids,
+                  "Behavioural Therapy": this.behavetherapy,
+                  "Cognitive And Perceptual Training": this.cognitivetraining,
+                  "Compression Therapy": this.compression,
+                  "Creative Therapy": this.creative,
+                  "Social Skill Training": this.socialtraining,
+                  "Relaxation Therapy/Stress Management": this.relaxtherapy,
+                  "Low Vision Rehabilitation": this.lowvision,
+                  "Domestic Rehabilitation": this.domesticrehab,
+                  "Fine Motor/Hand Function Training": this.motorhand,
+                  "Gross Motor/Functional Mobility": this.grossmotor,
+                  "Patient's And Carer's Education": this.ptcareereducate,
+                  "Play And Leisure(Explanation And Training)": this.playleisure,
+                  "Sensory Integration Training": this.sensoryintegrity,
+                  "Wheelchair Training": this.wheelchairtraining,
+                  "Work Rehabilitation": this.workrehab,
+                  "Splint": this.splint,
+                  "Others": this.others2,
+                },
+              ]),
+              referral_clinical_intervention_other:
+                this.referral_clinical_intervention_other,
+              referral_clinical_promotive_program:JSON.stringify([
+                {
+                "Special Needs Children Program": this.specialneeds,
+                "Mental Health Program": this.mentalhealth,
+                "Senior Citizen Program": this.seniorcitizen,
+                "Community Program": this.communityprog,
+                "Out Patient Program": this.outpatient,
+                "Teenagers And School Program": this.teenschool,
+                "Diabetes Program": this.diabetes,
+                "Hypertension Program": this.hypertension,
+                "Antenatal/Mother And Child Program": this.antenatalmotherchild,
+                "Healthy Lifestyle Program": this.healthylife,
+                },
+              ]),
+              referral_name: this.referral_name,
+              referral_designation: this.referral_designation,
+              location_services: this.location_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              complexity_services: this.complexity_services,
+              outcome: this.outcome,
+              medication_des: this.medication_des,
+              id:this.pid,
+              appId: this.appId,
+              status: "1",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+          // if (response.data.code == 200) {
+          //   this.loader = false;
+          //   this.$nextTick(() => {
+          //     $("#insertpopup").modal("show");
+          //   });
+          // } else {
+          //   this.loader = false;
+          //   this.$nextTick(() => {
+          //     $("#errorpopup").modal("show");
+          //   });
+          // }
+        }
+      } catch (e) {
+        this.loader = false;
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
-    } catch (e) {
-      this.loader = false;
-      this.$nextTick(() => {
-        $("#errorpopup").modal("show");
-      });
-    }
-  }
-  },
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      this.$swal.fire({
+        title: 'Are you sure to submit this?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, submit it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }
+      ).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Submitted!',
+            'Your for has been submitted.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your data is not submitted :)',
+            'error'
+          )
+        }
+      })
+    },
   async GetList() {
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -1505,7 +1530,7 @@ methods: {
       this.referral_clinical_assessment_other =
         response.data.Data[0].referral_clinical_assessment_other;
 
-        window.alert(response.data.Data[0].referral_clinical_intervention);
+      //window.alert(response.data.Data[0].referral_clinical_intervention);
       var jdata2 = JSON.parse(response.data.Data[0].referral_clinical_intervention);
       jdata2.forEach((ele) => {
        this.referral_clinical_intervention="val";
@@ -1571,7 +1596,7 @@ methods: {
       this.referral_clinical_intervention_other =
         response.data.Data[0].referral_clinical_intervention_other;
 
-  
+
       var jdata3 = JSON.parse(response.data.Data[0].referral_clinical_promotive_program);
       jdata3.forEach((ele) => {
       this.referral_clinical_promotive_program="val";

@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="search-table">
                 <div class="row">
-                  <div class="col-sm-4 mt-2 mb-3">
+                  <div class="col-lg-4 col-sm-6 mt-2 mb-3">
                     <select
                       v-model="branch"
                       v-if="dataReady"
