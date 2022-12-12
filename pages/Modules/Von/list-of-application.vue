@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="search-table mt-2">
                 <div class="row">
-                  <div class="col-sm-4 mb-3 search-box">
+                  <div class="col-lg-4 col-sm-6 mb-3 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
                         <i class="fa fa-search"></i>
