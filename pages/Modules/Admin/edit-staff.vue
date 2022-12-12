@@ -82,9 +82,8 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-4">
-                    <label for="" class="form-label">Email Address</label>
+                    <label class="form-label">Email Address</label>
                     <input
-                    disabled="true"
                       type="text"
                       class="form-control"
                       placeholder="Enter Email Address"
