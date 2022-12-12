@@ -230,13 +230,13 @@ export default {
 
     this.setTimers();
   },
-  // destroyed() {
-  //   this.events.forEach(function(event){
-  //     this.window.removeEventListener(event, this.resetTimer);
-  //   }, this);
+  destroyed() {
+    this.events.forEach(function(event){
+      this.window.removeEventListener(event, this.resetTimer);
+    }, this);
 
-  //   this.setTimers();
-  // },
+    this.setTimers();
+  },
   methods: {
     changesidebar: function (event) {
       event.target.className += " active";
@@ -300,7 +300,7 @@ export default {
 
     // INFO:: handling session auto logout.
     setTimers: function () {
-      this.warningTimer = setTimeout(this.warningMessage, 1*60*1000);
+      this.warningTimer = setTimeout(this.warningMessage, 3*60*1000);
 
     },
 
@@ -340,36 +340,21 @@ export default {
           clearInterval(timerInterval)
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === this.$swal.DismissReason.timer) {
           console.log('I was closed by the timer')
           this.logoutUser;
         }
       })
-      // this.$swal.fire(
-      //         'Are You There?',
-      //         'You will be auto log out if there is no activity.',
-      //         'question',
-      // )
     },
 
     logoutUser: function () {
-      console.log('Auto Logout Function OK');
-      this.$swal.fire(
-              'You have been kicked out?',
-              'You will be auto log out if there is no activity.',
-              'question',
-      )
-
-      // localStorage.removeItem('userdetails');
-      // this.$router.push("/staff-login");
+      localStorage.removeItem('userdetails');
+      this.$router.push("/staff-login");
     },
 
     resetTimer: function() {
-      console.log('timer reset Function OK');
-      // clearTimeout(this.warningTimer);
-      // clearTimeout(this.logoutTimer);
-      // this.setTimers();
+      clearTimeout(this.warningTimer);
+      this.setTimers();
     }
   },
 };
