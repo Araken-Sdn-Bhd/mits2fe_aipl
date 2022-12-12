@@ -177,6 +177,7 @@ export default {
       },
     ],
   },
+
   data() {
     return {
       userdetails: null,
@@ -185,6 +186,14 @@ export default {
       reportnavlist: [],
       hasreportmodule: 0,
       message: null,
+
+      setTimer: 1,
+
+      events: ['click','mousemove','mousedown','scroll','keypress','load'],
+
+      warningTimer: null,
+      logoutTimer: null,
+      warningZone: false,
     };
   },
   beforeMount() {
@@ -203,6 +212,7 @@ export default {
       this.role = this.userdetailsforReport.user.role;
     }
     this.GetListForReport();
+    this.getSessionSettings();
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
@@ -213,7 +223,20 @@ export default {
             localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
         })
     }, 1000);
+
+    this.events.forEach(function (event) {
+      return window.addEventListener(event, this.resetTimer);
+    },this);
+
+    this.setTimers();
   },
+  // destroyed() {
+  //   this.events.forEach(function(event){
+  //     this.window.removeEventListener(event, this.resetTimer);
+  //   }, this);
+
+  //   this.setTimers();
+  // },
   methods: {
     changesidebar: function (event) {
       event.target.className += " active";
@@ -243,6 +266,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
+
     async GetListForReport() {
       const headers = {
         Authorization: "Bearer " + this.userdetailsforReport.access_token,
@@ -273,6 +297,80 @@ export default {
         });
       }
     },
+
+    // INFO:: handling session auto logout.
+    setTimers: function () {
+      this.warningTimer = setTimeout(this.warningMessage, 1*60*1000);
+
+    },
+
+    async getSessionSettings() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "system-settings/get-setting/idle-session-timeout",
+        { headers }
+      );
+
+      if (response.data.code == 200) {
+        this.setTimer = response.data.setting[0].variable_value;;
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+
+    warningMessage: function () {
+      let timerInterval
+      this.$swal.fire({
+        title: 'Are You There ?',
+        html: 'You will be log out if there is no activity in '+this.setTimer+' minutes. Please click to dismiss this message.',
+        timer: this.setTimer*60*1000,
+        timerProgressBar: true,
+        didOpen: () => {
+          this.$swal.showLoading()
+          const b = this.$swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = this.$swal.getTimerLeft()
+          }, 1000)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === this.$swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+          this.logoutUser;
+        }
+      })
+      // this.$swal.fire(
+      //         'Are You There?',
+      //         'You will be auto log out if there is no activity.',
+      //         'question',
+      // )
+    },
+
+    logoutUser: function () {
+      console.log('Auto Logout Function OK');
+      this.$swal.fire(
+              'You have been kicked out?',
+              'You will be auto log out if there is no activity.',
+              'question',
+      )
+
+      // localStorage.removeItem('userdetails');
+      // this.$router.push("/staff-login");
+    },
+
+    resetTimer: function() {
+      console.log('timer reset Function OK');
+      // clearTimeout(this.warningTimer);
+      // clearTimeout(this.logoutTimer);
+      // this.setTimers();
+    }
   },
 };
 </script>
