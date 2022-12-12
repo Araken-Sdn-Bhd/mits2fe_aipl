@@ -407,7 +407,7 @@ export default {
         reverseButtons: true
       }
       ).then(async (result) =>{
-        if (result.isConfirmed) {
+        if (result.isConfirmed){
         this.errors = [];
         if (!this.name) {
           this.errors.push("Name is required.");

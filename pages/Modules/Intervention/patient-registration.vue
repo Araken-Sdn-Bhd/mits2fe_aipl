@@ -2030,11 +2030,10 @@ export default {
           }
         } catch (e) {
           this.loader = false;
-          this.responseMsg = JSON.stringify(response.data.message);
           this.$swal.fire({
                             icon: 'error',
                             title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + this.responseMsg,
+                            text: 'the error is: ' + e,
                           });
         }
       }
@@ -2135,7 +2134,7 @@ export default {
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.responseMsg = response.data.message;
+              this.responseMsg = JSON.stringify(response.data.message);
               this.$swal.fire({
                                 icon: 'error',
                                 title: 'Oops... Something Went Wrong!',
@@ -2170,11 +2169,10 @@ export default {
           }
         } catch (e) {
           this.loader = false;
-          this.responseMsg = response.data.message;
           this.$swal.fire({
                             icon: 'error',
                             title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + this.responseMsg,
+                            text: 'the error is: ' + e,
                           });
         }
     },

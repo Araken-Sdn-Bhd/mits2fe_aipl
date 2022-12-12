@@ -2130,11 +2130,10 @@ export default {
           }
         } catch (e) {
           this.loader = false;
-          this.responseMsg = JSON.stringify(response.data.message);
               this.$swal.fire({
                                 icon: 'error',
                                 title: 'Oops... Something Went Wrong!',
-                                text: 'the error is: ' + this.responseMsg,
+                                text: 'the error is: ' + e,
                               });
         }
     },
