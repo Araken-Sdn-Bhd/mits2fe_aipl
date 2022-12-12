@@ -230,13 +230,13 @@ export default {
 
     this.setTimers();
   },
-  destroyed() {
-    this.events.forEach(function(event){
-      this.window.removeEventListener(event, this.resetTimer);
-    }, this);
+  // destroyed() {
+  //   this.events.forEach(function(event){
+  //     return window.removeEventListener(event, this.resetTimer);
+  //   }, this);
 
-    this.setTimers();
-  },
+  //   this.setTimers();
+  // },
   methods: {
     changesidebar: function (event) {
       event.target.className += " active";
