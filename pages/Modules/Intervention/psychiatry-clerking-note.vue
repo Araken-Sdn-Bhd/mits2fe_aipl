@@ -386,7 +386,7 @@ export default {
                                     background_history: this.background_history,
                                     general_examination: this.general_examination,
                                     mental_state_examination: this.mental_state_examination,
-                                    diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                                    diagnosis_id: this.type_diagnosis_id,
                                     management: this.management,
                                     discuss_psychiatrist_name: this.discuss_psychiatrist_name,
                                     date: this.date,
@@ -411,18 +411,18 @@ export default {
                         console.log("response", response.data);
                         if (response.data.code == 200) {
                             this.loader = false;
-                            this.resetmodel();
+                            // this.resetmodel();
                             this.$swal.fire('Succesfully save as draft!', '', 'success')
-                            this.GoBack();
+                            // this.GoBack();
                         } else {
                             this.loader = false;
-                            this.resetmodel();
+                            // this.resetmodel();
                             this.$swal.fire({
                                 icon: 'error',
                                 title: 'Oops... Something Went Wrong! dalam function api',
                                 text: 'the error is: ' + JSON.stringify(response.data.message),
                             })
-                            this.GoBack();
+                            // this.GoBack();
                         }
                     } catch (e) {
                         this.$swal.fire({
