@@ -159,7 +159,8 @@
                 <div class="col-md-4">
                   <label for="" class="form-label">Contact No. (Mobile)</label>
                   <input
-                    type="text"
+                    type="tel"
+                    v-mask="'###-########'"
                     class="form-control"
                     placeholder="Enter Contact No."
                     v-model="mobile"
@@ -169,7 +170,8 @@
                 <div class="col-md-4">
                   <label for="" class="form-label">Contact No. (Office)</label>
                   <input
-                    type="text"
+                    type="tel"
+                    v-mask="'##-########'"
                     class="form-control"
                     placeholder="Enter Contact No."
                     v-model="Contact"
@@ -235,7 +237,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-6">
-                  <label for="" class="form-label">Hospital Adrress</label>
+                  <label for="" class="form-label">Hospital Address</label>
                   <input
                     type="text"
                     class="form-control mb-3"
@@ -323,7 +325,8 @@
                   <label for="" class="form-label">Contact No. (Office)</label>
                   <div class="add-box">
                     <input
-                      type="text"
+                      type="tel"
+                      v-mask="'##-########'"
                       class="form-control"
                       placeholder="Enter Contact No."
                       v-model="hospital_Contact"
@@ -354,7 +357,8 @@
                 <div class="col-md-4">
                   <label for="" class="form-label">FAX NO.</label>
                   <input
-                    type="text"
+                    type="tel"
+                    v-mask="'##-########'"
                     class="form-control"
                     placeholder="Enter FAX NO."
                     v-model="fax_No"
@@ -737,17 +741,21 @@ export default {
             );
             console.log("my resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+              )
               this.loader = false;
               this.resetmodel();
               this.GethospitalList();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           } else {
             const response = await this.$axios.post(
@@ -781,23 +789,26 @@ export default {
             );
             console.log("my resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+              )
               this.loader = false;
               this.resetmodel();
               this.GethospitalList();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           }
         }
       } catch (e) {
         this.loader = false;
-        this.errors.push = e;
       }
     },
     async resetmodel() {

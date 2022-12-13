@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
               <table
-                class="table table-striped data-table font-13"
+                class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
                 <thead>
@@ -56,8 +56,8 @@
               </table>
               <br><br>
               <div class="d-flex">
-                  <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
-                    <i class="fa fa-step-backward"/> &nbsp; Back
+                  <button @click="GoBack" type="button" class="btn btn-primary btn-text" title="Back">
+                    <i class="fa fa-step-backward"></i> Back
                 </button></div>
             </div>
           </div>

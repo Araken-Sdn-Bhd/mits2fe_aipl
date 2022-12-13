@@ -21,9 +21,9 @@
               <div class="form-title">
                 <h5>1. CONSENT FOR PARTICIPATION</h5>
               </div>
-              <table class="notes table-padding">
-                <tbody>
-                  <tr>
+              <table class="notes table-padding flex-table">
+                <tbody class="d-m-block">
+                  <tr class="d-m-block">
                     <td colspan="2">
                       <div class="form-check">
                         <input
@@ -125,9 +125,9 @@
               <div class="form-title">
                 <h5>2. CONSENT FOR DISCLOSURE</h5>
               </div>
-              <table class="notes table-padding">
-                <tbody>
-                  <tr>
+              <table class="notes table-padding flex-table">
+                <tbody class="d-m-block">
+                  <tr class="d-m-block">
                     <td colspan="2">
                       I agree and consent for  [{{ this.branchName }}] to
                       disclose my medical record to employee and will not

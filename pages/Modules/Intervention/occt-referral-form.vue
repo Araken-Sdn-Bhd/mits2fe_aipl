@@ -1086,24 +1086,57 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
-          } else {
+            this.$swal.fire({
+            title: 'Are you sure to save this as draft?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+          }
+          ).then((result) => {
+            if (result.isConfirmed) {
+              swalWithBootstrapButtons.fire(
+                'Submitted!',
+                'Your for has been submitted.',
+                'success'
+              )
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your data is not submitted :)',
+                'error'
+              )
+            }
+          })
+        } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + this.error,
+          })
           }
         } catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        // this.$nextTick(() => {
+        //   $("#errorpopup").modal("show");
+        // });
       }
     }
     },
     async onPublishEvent() {
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
       this.validate = true;
       this.errorList = [];
       try {
@@ -1267,17 +1300,43 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          // if (response.data.code == 200) {
-          //   this.loader = false;
-          //   this.$nextTick(() => {
-          //     $("#insertpopup").modal("show");
-          //   });
-          // } else {
-          //   this.loader = false;
-          //   this.$nextTick(() => {
-          //     $("#errorpopup").modal("show");
-          //   });
-          // }
+          if (response.data.code == 200) {
+            this.loader = false;
+            this.$swal.fire({
+            title: 'Are you sure to submit this?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+          }
+          ).then((result) => {
+            if (result.isConfirmed) {
+              swalWithBootstrapButtons.fire(
+                'Submitted!',
+                'Your for has been submitted.',
+                'success'
+              )
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your data is not submitted :)',
+                'error'
+              )
+            }
+          })
+          } else {
+            this.loader = false;
+            this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + this.error,
+          })
+          }
         }
       } catch (e) {
         this.loader = false;
@@ -1285,40 +1344,6 @@ export default {
         //   $("#errorpopup").modal("show");
         // });
       }
-      const swalWithBootstrapButtons = this.$swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      this.$swal.fire({
-        title: 'Are you sure to submit this?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, submit it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }
-      ).then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            'Submitted!',
-            'Your for has been submitted.',
-            'success'
-          )
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your data is not submitted :)',
-            'error'
-          )
-        }
-      })
     },
     async GetList() {
       const headers = {

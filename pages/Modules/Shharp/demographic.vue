@@ -12,398 +12,252 @@
 
           <div class="card">
             <div class="card-body">
-              <form class="ml-5">
-                      <div class="row">
-                        <div class="col-sm-10">
-                          <div class="mb-3">
-                            <label class="form-label"
-                              >Name (As In NRIC)<small>*</small></label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Enter Name (As In NRIC)"
-                              name=""
-                              v-model="name_asin_nric"
-                            />
-                          </div>
-                        </div>
+              <form class="mt-2">
+                <div class="col-lg-10 offset-lg-1 col-sm-12 pd-0">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="mb-3">
+                      <label class="form-label">Name (As In NRIC)<small>*</small></label>
+                      <input type="text" class="form-control" placeholder="Enter Name (As In NRIC)" name=""
+                        v-model="name_asin_nric" />
+                    </div>
+                  </div>
+                </div>
+                <!-- close-row -->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Hospital's MRN No.</label>
+                      <input type="text" class="form-control" name="" placeholder="Enter Hospital's MRN No."
+                        v-model="hospital_mrn_no" />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Employment Status</label>
+                      <select class="form-select" aria-label="" v-model="employment_id">
+                        <option value="">Please Select</option>
+                        <option v-for="emp in employstatuslist" v-bind:key="emp.id" v-bind:value="emp.id">
+                          {{ emp.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3 align-items-center">
+                  <div class="col-lg-2 col-sm-12">
+                    <label class="form-label">Citizenship<small>*</small></label>
+                  </div>
+                  <div class="col-lg-10 col-sm-12">
+                    <div class="radio radio-show">
+                      <div class="form-check form-check-inline mobile-check col-lg-3 col-sm-4" v-for="(ct, i) in citizenshiplist" :key="i">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" v-bind:id="'ct' + i"
+                          v-bind:value="ct.id" v-model="citizenship"
+                          @change="OnchangeCitizenship(ct.section_value, ct.id)" />
+                        <label class="form-check-label" v-bind:for="'ct' + i">{{ ct.section_value }}</label>
                       </div>
-                      <!-- close-row -->
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Hospital's MRN No.</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name=""
-                              placeholder="Enter Hospital's MRN No." v-model="hospital_mrn_no"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Employment Status</label>
-                                    <select class="form-select" aria-label="" v-model="employment_id">
-                                      <option value="">Please Select</option>
-                                      <option
-                                        v-for="emp in employstatuslist"
-                                        v-bind:key="emp.id"
-                                        v-bind:value="emp.id"
-                                      >
-                                        {{ emp.section_value }}
-                                      </option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
+                    </div>
+                  </div>
 
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-sm-2">
-                          <label class="form-label"
-                            >Citizenship<small>*</small></label
-                          >
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="radio radio-show">
-                            <div
-                              class="form-check form-check-inline col-sm-3"
-                              v-for="(ct, i) in citizenshiplist"
-                              :key="i"
-                            >
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                v-bind:id="'ct' + i"
-                                 v-bind:value="ct.id"
-                                v-model="citizenship"
-                                @change="OnchangeCitizenship(ct.section_value,ct.id)"
-                              />
-                              <label
-                                class="form-check-label"
-                                v-bind:for="'ct' + i"
-                                >{{ ct.section_value }}</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- DIV-SHOW -->
-                        <div
-                          class="malaysian box mb-0"
-                          v-if="citizentype == 'Malaysian'"
-                        >
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <label class="form-label">NRIC Type<small>*</small></label>
-                              <select
-                                v-model="nric_type"
-                                class="form-select"
-                                aria-label="Default select example"
-                                v-on:change="resetModelValue"
-                              >
-                              <option value="">Please Select</option>
-                                <option
-                                v-for="mar in nrictypelist"
-                                v-bind:key="mar.id"
-                                v-bind:value="mar.id"
-                              >
-                                {{ mar.section_value}}
-                              </option>
-                              </select>
-                            </div>
-
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'OIC'">
-                              <label class="form-label">Old NRIC No<small>*</small></label>
-                              <input
-                                type="tel"
-                                class="form-control toCapitalFirst"
-                                placeholder="xxxxxxxx" @keyup="OnnricNo4"
-                                v-model="nric_no"
-                              />
-                              <Error :message="error" v-if="error" />
-                            </div>
-                            <div class="col-sm-6" v-if="this.nric_type_code == 'NIC'">
-                              <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
-                              <input
-                                type="tel"
-                                class="form-control"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo"
-                                v-model="nric_no" @change="validateIC" v-on:keypress="NumbersOnly"
-                              />
-                              <Error :message="error" v-if="error" />
-                            </div>
-                            <div class="col-sm-6" v-if="nric_type_code == 'POL'">
-                              <label class="form-label">Police ID<small>*</small></label>
-                              <input
-                                type="tel"
-                                class="form-control toCapitalFirst"
-                                placeholder="xxxxxxxxx" @keyup="OnnricNo3"
-                                v-model="nric_no"
-                              />
-                              <Error :message="error" v-if="error" />
-                            </div>
-                            <div class="col-sm-6" v-if="nric_type_code == 'ARM'">
-                              <label class="form-label">Army ID<small>*</small></label>
-                              <input
-                                type="tel"
-                                class="form-control toCapitalFirst"
-                                placeholder="xxxxxxxx"
-                                v-model="nric_no"
-                              />
-                              <Error :message="error" v-if="error" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          class="permanent-resident box mb-0"
-                          v-if="citizentype == 'Permanent Resident'"
-                        >
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <label class="form-label">NRIC No<small>*</small></label>
-                              <input
-                                type="number"
-                                class="form-control"
-                                placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
-                                v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly"
-                              />
-                               <Error :message="error" v-if="error" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          class="foreigner box mb-0"
-                          v-if="citizentype == 'Foreigner'"
-                        >
-                          <div class="row">
-                            <div class="col-sm-4">
-                              <label class="form-label">Passport No<small>*</small></label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter Passport No"
-                                v-model="passport_no"
-                              />
-                            </div>
-                            <div class="col-sm-4">
-                              <label class="form-label">Expiry Date<small>*</small></label>
-                              <input type="date" class="form-control"  v-model="expiry_date" />
-                            </div>
-                            <div class="col-sm-4">
-                              <label class="form-label">Issuing Country<small>*</small></label>
-                             <select
-                              v-model="country_id"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                             <option value="0">Select</option>
-                              <option
-                                v-for="cnt in countrylist"
-                                v-bind:key="cnt.id"
-                                v-bind:value="cnt.id"
-                              >
-                                {{ cnt.country_name }}
-                              </option>
-                            </select>
-                            </div>
-                          </div>
-                        </div>
+                  <!-- DIV-SHOW -->
+                  <div class="malaysian box mb-0" v-if="citizentype == 'Malaysian'">
+                    <div class="row">
+                      <div class="col-sm-6 mb-3">
+                        <label class="form-label">NRIC Type<small>*</small></label>
+                        <select v-model="nric_type" class="form-select" aria-label="Default select example"
+                          v-on:change="resetModelValue">
+                          <option value="">Please Select</option>
+                          <option v-for="mar in nrictypelist" v-bind:key="mar.id" v-bind:value="mar.id">
+                            {{ mar.section_value }}
+                          </option>
+                        </select>
                       </div>
-                      <!-- close-row -->
 
-                      <div class="row mt-5">
-                        <div class="col-sm-2 mb-3">
-                          <label class="form-label">Sex<small>*</small></label>
-                        </div>
-                        <div class="col-sm-9 mb-3">
-                          <div class="radio">
-                            <div
-                              class="form-check form-check-inline col-sm-2"
-                              v-for="(gn, i) in genderlist"
-                              :key="i"
-                            >
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="Sex"
-                                v-bind:id="'gn' + i"
-                                v-bind:value="gn.id"
-                                v-model="sex"
-                              />
-                              <label
-                                class="form-check-label"
-                                v-bind:for="'gn' + i"
-                                >{{ gn.section_value }}</label
-                              >
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-sm-6 mb-3" v-if="this.nric_type_code == 'OIC'">
+                        <label class="form-label">Old NRIC No<small>*</small></label>
+                        <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxx" @keyup="OnnricNo4"
+                          v-model="nric_no" />
+                        <Error :message="error" v-if="error" />
                       </div>
-                      <!-- close-row -->
-
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" @change="OnAgeCalculation" class="form-control" name="" v-model="birth_date" />
-                          </div>
-                        </div>
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Age</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Age"
-                              name="" v-model="age"
-                            />
-                          </div>
-                        </div>
+                      <div class="col-sm-6 mb-3" v-if="this.nric_type_code == 'NIC'">
+                        <label class="form-label toCapitalFirst">New NRIC No<small>*</small></label>
+                        <input type="tel" class="form-control" placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo"
+                          v-model="nric_no" @change="validateIC" v-on:keypress="NumbersOnly" />
+                        <Error :message="error" v-if="error" />
                       </div>
-                      <!-- close-row -->
-
-
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Religion</label>
-                            <select
-                              v-model="religion_id"
-                              class="form-select"
-                              aria-label="Default select example"
-
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="rel in religionlist"
-                                v-bind:key="rel.id"
-                                v-bind:value="rel.id"
-                              >
-                                {{ rel.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Ethnic Group/Race</label>
-                            <select
-                              v-model="race_id"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="rce in racelist"
-                                v-bind:key="rce.id"
-                                v-bind:value="rce.id"
-
-                              >
-                                {{ rce.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
+                      <div class="col-sm-6 mb-3" v-if="nric_type_code == 'POL'">
+                        <label class="form-label">Police ID<small>*</small></label>
+                        <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxxx" @keyup="OnnricNo3"
+                          v-model="nric_no" />
+                        <Error :message="error" v-if="error" />
                       </div>
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Marital Status</label>
-                             <select
-                              v-model="marital_id"
-                              class="form-select"
-                              aria-label="Default select example"
-                              @change="OnchangeMarital($event)"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="mar in meritallist"
-                                v-bind:key="mar.id"
-                                v-bind:value="mar.id"
-                              >
-                                {{ mar.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-5" v-if="otherMarital">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="other_maritalList"
-                            placeholder="please specify other marital status"
-                          />
-                        </div>
-                        </div>
-
+                      <div class="col-sm-6 mb-3" v-if="nric_type_code == 'ARM'">
+                        <label class="form-label">Army ID<small>*</small></label>
+                        <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxx"
+                          v-model="nric_no" />
+                        <Error :message="error" v-if="error" />
                       </div>
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Highest Education</label>
-                            <select
-                              v-model="education_level"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
-                                v-for="edu in educationlist"
-                                v-bind:key="edu.id"
-                                v-bind:value="edu.id"
-                              >
-                                {{ edu.section_value }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-sm-5">
-                          <div class="mb-3">
-                            <label class="form-label">Household Income Status(monthly)</label>
-                            <select class="form-select ethnic-group" aria-label="" v-model="household_income">
-                                <option value="">Please Select</option>
-                                <option
-                                  v-for="rce in householdlist"
-                                  v-bind:key="rce.id"
-                                  v-bind:value="rce.id"
-                                >
-                                  {{ rce.section_value }}
-                                </option>
-                              </select>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- close-row -->
+                    </div>
+                  </div>
 
-                      <p v-if="errorList.length">
-<ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
+                  <div class="permanent-resident box mb-0" v-if="citizentype == 'Permanent Resident'">
+                    <div class="row">
+                      <div class="col-sm-6 mb-3">
+                        <label class="form-label">NRIC No<small>*</small></label>
+                        <input type="number" class="form-control" placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
+                          v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly" />
+                        <Error :message="error" v-if="error" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="foreigner box mb-0" v-if="citizentype == 'Foreigner'">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-12 mb-3">
+                        <label class="form-label">Passport No<small>*</small></label>
+                        <input type="text" class="form-control" placeholder="Enter Passport No" v-model="passport_no" />
+                      </div>
+                      <div class="col-lg-4 col-sm-6 mb-3">
+                        <label class="form-label">Expiry Date<small>*</small></label>
+                        <input type="date" class="form-control" v-model="expiry_date" />
+                      </div>
+                      <div class="col-lg-4 col-sm-6 mb-3">
+                        <label class="form-label">Issuing Country<small>*</small></label>
+                        <select v-model="country_id" class="form-select" aria-label="Default select example">
+                          <option value="0">Select</option>
+                          <option v-for="cnt in countrylist" v-bind:key="cnt.id" v-bind:value="cnt.id">
+                            {{ cnt.country_name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- close-row -->
+
+                <div class="row mt-2  mb-3">
+                  <div class="col-sm-2">
+                    <label class="form-label">Sex<small>*</small></label>
+                  </div>
+                  <div class="col-sm-10">
+                    <div class="radio">
+                      <div class="form-check form-check-inline col-sm-2" v-for="(gn, i) in genderlist" :key="i">
+                        <input class="form-check-input" type="radio" name="Sex" v-bind:id="'gn' + i"
+                          v-bind:value="gn.id" v-model="sex" />
+                        <label class="form-check-label" v-bind:for="'gn' + i">{{ gn.section_value }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- close-row -->
+                
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Date of Birth</label>
+                      <input type="date" @change="OnAgeCalculation" class="form-control" name="" v-model="birth_date" />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Age</label>
+                      <input type="text" class="form-control" placeholder="Age" name="" v-model="age" />
+                    </div>
+                  </div>
+                </div>
+                <!-- close-row -->
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Religion</label>
+                      <select v-model="religion_id" class="form-select" aria-label="Default select example">
+                        <option value="0">Select</option>
+                        <option v-for="rel in religionlist" v-bind:key="rel.id" v-bind:value="rel.id">
+                          {{ rel.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Ethnic Group/Race</label>
+                      <select v-model="race_id" class="form-select" aria-label="Default select example">
+                        <option value="0">Select</option>
+                        <option v-for="rce in racelist" v-bind:key="rce.id" v-bind:value="rce.id">
+                          {{ rce.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Marital Status</label>
+                      <select v-model="marital_id" class="form-select" aria-label="Default select example"
+                        @change="OnchangeMarital($event)">
+                        <option value="0">Select</option>
+                        <option v-for="mar in meritallist" v-bind:key="mar.id" v-bind:value="mar.id">
+                          {{ mar.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6" v-if="otherMarital">
+                    <div class="mb-3">
+                      <label class="form-label">Please Specify</label>
+                      <input type="text" class="form-control" v-model="other_maritalList"
+                        placeholder="please specify other marital status" />
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Highest Education</label>
+                      <select v-model="education_level" class="form-select" aria-label="Default select example">
+                        <option value="0">Select</option>
+                        <option v-for="edu in educationlist" v-bind:key="edu.id" v-bind:value="edu.id">
+                          {{ edu.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Household Income Status(monthly)</label>
+                      <select class="form-select ethnic-group" aria-label="" v-model="household_income">
+                        <option value="">Please Select</option>
+                        <option v-for="rce in householdlist" v-bind:key="rce.id" v-bind:value="rce.id">
+                          {{ rce.section_value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- close-row -->
+
+                <p v-if="errorList.length">
+                <ul>
+                  <li style="color:red" v-for='err in errorList' :key='err'>
+                    {{ err }}
+                  </li>
+                </ul>
+                </p>
                 <div class="d-flex align-items-center mt-3">
 
-                  <a v-if="!Id"
-                  @click="submitRegistration"
-                 class="btn btn-warning btn-text ml-auto"
-                    ><i class="fa fa-save"></i> Save</a
-                  >
-                  <a v-if="Id"
-                  @click="submitRegistration"
-                 class="btn btn-warning btn-text ml-auto"
-                    ><i class="fa fa-save"></i> Update</a
-                  >
+                  <a v-if="!Id" @click="submitRegistration" class="btn btn-warning btn-text ml-auto"><i
+                      class="fa fa-save"></i> Save</a>
+                  <a v-if="Id" @click="submitRegistration" class="btn btn-warning btn-text ml-auto"><i
+                      class="fa fa-save"></i> Update</a>
                 </div>
-                    </form>
+              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -439,11 +293,11 @@ export default {
       education_level: 0,
       country_id: 0,
       Id: 0,
-      branch_id:0,
+      branch_id: 0,
 
       userdetails: null,
       Isvalidate: true,
-      otherMarital:false,
+      otherMarital: false,
 
       name_asin_nric: "",
       citizenship: "",
@@ -457,13 +311,13 @@ export default {
       expiry_date: "",
       error: "",
       citizentype: "",
-      yearError:"",
+      yearError: "",
       nric_type: "",
       nric_no: "",
       nric_no1: "",
-      race_type:"",
-      nric_type_code:"",
-      other_maritalList:"",
+      race_type: "",
+      nric_type_code: "",
+      other_maritalList: "",
 
     };
   },
@@ -540,7 +394,7 @@ export default {
         this.nrictypelist = [];
       }
 
-      const response4= await this.$axios.get(
+      const response4 = await this.$axios.get(
         "general-setting/list?section=" + "race",
         { headers }
       );
@@ -616,13 +470,12 @@ export default {
         return true;
       }
     },
-    async resetModelValue()
-    {
-      if (this.nric_no != ""){
-      this.error = null;
-      }else{
-      this.nric_no = "";
-      this.error = null;
+    async resetModelValue() {
+      if (this.nric_no != "") {
+        this.error = null;
+      } else {
+        this.nric_no = "";
+        this.error = null;
       }
 
       const headers = {
@@ -655,141 +508,141 @@ export default {
 
       this.Isvalidate = true;
       try {
-          if (!this.name_asin_nric) {
-            this.errorList.push("Name (As In NRIC) is required.");
-          }
-          if (!this.citizenship) {
-            this.errorList.push("Citizenship is required.");
-          }
-          if (this.citizenship) {
-            if (this.citizentype == "Malaysian") {
-              if (!this.nric_type) {
-                this.errorList.push("NRIC Type is required.");
-                this.Isvalidate = false;
-              }
-              if (!this.nric_no) {
-                this.errorList.push("NRIC No is required.");
-                this.Isvalidate = false;
-              }
-            } else if (this.citizentype == "Permanent Resident") {
-              if (!this.nric_no1) {
-                this.errorList.push("NRIC No is required.");
-                this.Isvalidate = false;
-              }
-            } else {
-              if (!this.passport_no) {
-                this.errorList.push("Passport No is required.");
-                this.Isvalidate = false;
-              }
-              if (!this.expiry_date) {
-                this.errorList.push("Expiry Date is required.");
-                this.Isvalidate = false;
-              }
-              if (!this.country_id) {
-                this.errorList.push("Issuing Country is required.");
-                this.Isvalidate = false;
-              }
+        if (!this.name_asin_nric) {
+          this.errorList.push("Name (As In NRIC) is required.");
+        }
+        if (!this.citizenship) {
+          this.errorList.push("Citizenship is required.");
+        }
+        if (this.citizenship) {
+          if (this.citizentype == "Malaysian") {
+            if (!this.nric_type) {
+              this.errorList.push("NRIC Type is required.");
+              this.Isvalidate = false;
+            }
+            if (!this.nric_no) {
+              this.errorList.push("NRIC No is required.");
+              this.Isvalidate = false;
+            }
+          } else if (this.citizentype == "Permanent Resident") {
+            if (!this.nric_no1) {
+              this.errorList.push("NRIC No is required.");
+              this.Isvalidate = false;
+            }
+          } else {
+            if (!this.passport_no) {
+              this.errorList.push("Passport No is required.");
+              this.Isvalidate = false;
+            }
+            if (!this.expiry_date) {
+              this.errorList.push("Expiry Date is required.");
+              this.Isvalidate = false;
+            }
+            if (!this.country_id) {
+              this.errorList.push("Issuing Country is required.");
+              this.Isvalidate = false;
             }
           }
-          if (!this.sex) {
-            this.errorList.push("Gender is required.");
-          }
-          if (
-            this.citizenship &&
-            this.name_asin_nric &&
-            this.sex &&
-            this.Isvalidate
-            )
-            this.loader = true;
-            const headers = {
-              Authorization: "Bearer " + this.userdetails.access_token,
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            };
-            let body = new FormData();
-            body.append("added_by", this.userdetails.user.id);
-            body.append("citizenship", this.citizenship);
+        }
+        if (!this.sex) {
+          this.errorList.push("Gender is required.");
+        }
+        if (
+          this.citizenship &&
+          this.name_asin_nric &&
+          this.sex &&
+          this.Isvalidate
+        )
+          this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        let body = new FormData();
+        body.append("added_by", this.userdetails.user.id);
+        body.append("citizenship", this.citizenship);
 
-            body.append("name_asin_nric", this.name_asin_nric);
-            body.append("sex", this.sex);
-            body.append("birth_date", this.birth_date);
-            body.append("age", this.age);
+        body.append("name_asin_nric", this.name_asin_nric);
+        body.append("sex", this.sex);
+        body.append("birth_date", this.birth_date);
+        body.append("age", this.age);
 
-            body.append("employment_status", this.employment_id);
+        body.append("employment_status", this.employment_id);
 
-            body.append("hospital_mrn_no", this.hospital_mrn_no);
+        body.append("hospital_mrn_no", this.hospital_mrn_no);
 
-            body.append("race_id", this.race_id);
-            body.append("household_income", this.household_income);
-            body.append("religion_id", this.religion_id);
-            body.append("marital_id", this.marital_id);
-            body.append("education_level", this.education_level);
+        body.append("race_id", this.race_id);
+        body.append("household_income", this.household_income);
+        body.append("religion_id", this.religion_id);
+        body.append("marital_id", this.marital_id);
+        body.append("education_level", this.education_level);
 
-            body.append("citizentype", this.citizentype);
-            body.append("nric_type", this.nric_type);
-            body.append("nric_no", this.nric_no);
-            body.append("nric_no1", this.nric_no1);
+        body.append("citizentype", this.citizentype);
+        body.append("nric_type", this.nric_type);
+        body.append("nric_no", this.nric_no);
+        body.append("nric_no1", this.nric_no1);
 
-            body.append("passport_no", this.passport_no);
-            body.append("expiry_date", this.expiry_date);
-            body.append("country_id", this.country_id);
-            body.append("id", this.Id);
-            body.append("Sharp" ,"1");
-            body.append("branch_id", this.branch_id);
-            body.append("update_at",moment().format("YYYY-MM-DD HH:mm:ss"))
-            body.append("patient_need_triage_screening" ,"0");
+        body.append("passport_no", this.passport_no);
+        body.append("expiry_date", this.expiry_date);
+        body.append("country_id", this.country_id);
+        body.append("id", this.Id);
+        body.append("Sharp", "1");
+        body.append("branch_id", this.branch_id);
+        body.append("update_at", moment().format("YYYY-MM-DD HH:mm:ss"))
+        body.append("patient_need_triage_screening", "0");
 
-            body.append("other_maritalList", this.other_maritalList);
-            if (this.Id > 0) {
-              const response = await this.$axios.post(
-                "patient-registration/update",
-                body,
-                {
-                  headers,
-                }
-              );
-              if (response.data.code == 200 || response.data.code == "200") {
-                 this.$nextTick(() => {
-                  $("#updatepopup").modal("show");
-                });
-                setTimeout(() => {
-                   $("#updatepopup").modal("hide");
-                 this.$router.push({
-                  path: "/modules/Shharp/patient-summary",
-                  query: { id: this.Id },
-                });
-                }, 1000);
-
-              } else {
-                this.loader = false;
-                this.$nextTick(() => {
-                  $("#errorpopup").modal("show");
-                });
-              }
-            } else {
-              const response = await this.$axios.post(
-                "patient-registration/add",
-                body,
-                {
-                  headers,
-                }
-              );
-              console.log("my data result", response.data);
-              if (response.data.code == 200 || response.data.code == "200") {
-                this.$nextTick(() => {
-                $("#insertpopup").modal("show");
+        body.append("other_maritalList", this.other_maritalList);
+        if (this.Id > 0) {
+          const response = await this.$axios.post(
+            "patient-registration/update",
+            body,
+            {
+              headers,
+            }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+              $("#updatepopup").modal("show");
+            });
+            setTimeout(() => {
+              $("#updatepopup").modal("hide");
+              this.$router.push({
+                path: "/modules/Shharp/patient-summary",
+                query: { id: this.Id },
               });
-                this.$router.push("/modules/Shharp/patients-list");
-              } else {
-                this.loader = false;
-                this.$nextTick(() => {
-                  $("#errorpopup").modal("show");
-                });
-              }
-            }
-          }
+            }, 1000);
 
-       catch (e) {
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        } else {
+          const response = await this.$axios.post(
+            "patient-registration/add",
+            body,
+            {
+              headers,
+            }
+          );
+          console.log("my data result", response.data);
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$nextTick(() => {
+              $("#insertpopup").modal("show");
+            });
+            this.$router.push("/modules/Shharp/patients-list");
+          } else {
+            this.loader = false;
+            this.$nextTick(() => {
+              $("#errorpopup").modal("show");
+            });
+          }
+        }
+      }
+
+      catch (e) {
         this.loader = false;
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
@@ -804,14 +657,14 @@ export default {
         this.birth_date = this.getDate(this.nric_no);
         this.error = null;
 
-      var today = new Date();
-      var birthDate = new Date(this.birth_date);
-      var age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      this.age = age;
+        var today = new Date();
+        var birthDate = new Date(this.birth_date);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        this.age = age;
       } else {
         this.error = "Please Enter 12 Digit NRIC No";
       }
@@ -837,21 +690,21 @@ export default {
         this.error = "Please Enter 12 Digit NRIC No";
       }
     },
-    OnnricNo3(){
+    OnnricNo3() {
       if (this.nric_no.length == 9 || this.nric_no.length == 8) {
         this.error = null;
       } else {
         this.error = "Please Enter a Valid Police ID";
       }
     },
-    OnnricNo4(){
-      if (this.nric_no.length < 8 ) {
+    OnnricNo4() {
+      if (this.nric_no.length < 8) {
         this.error = null;
       } else {
         this.error = "Please Enter a Valid Old NRIC No";
       }
     },
-     OnAgeCalculation() {
+    OnAgeCalculation() {
       var today = new Date();
       var birthDate = new Date(this.birth_date);
       var age = today.getFullYear() - birthDate.getFullYear();
@@ -861,7 +714,7 @@ export default {
       }
       this.age = age;
     },
-    async validateIC(data){
+    async validateIC(data) {
       try {
         var no = this.nric_no1.slice(0, 6);
         var no1 = this.nric_no1.slice(6, 8);
@@ -873,15 +726,15 @@ export default {
           "Content-Type": "application/json",
         };
         const response = await this.$axios.get(
-        "patient-registration/validatePatientNric?ic=" + validate,
-        { headers }
+          "patient-registration/validatePatientNric?ic=" + validate,
+          { headers }
         );
         if (response.data.code == 200) {
           this.OnAgeCalculation();
         } else {
           this.error = "Patient with this NRIC is already registered.";
         }
-      } catch (e) {}
+      } catch (e) { }
     },
     async GetPatientdetails() {
       const headers = {
@@ -916,9 +769,9 @@ export default {
         this.marital_id = response.data.list[0].marital_id;
 
         this.other_maritalList = response.data.list[0].other_maritalList;
-        if (response.data.list[0].maritialstatus[0].section_value == "OTHERS"){
+        if (response.data.list[0].maritialstatus[0].section_value == "OTHERS") {
           this.otherMarital = true;
-        }else{
+        } else {
           this.otherMarital = false;
         }
 
@@ -944,7 +797,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
-     async GetStaffBranchId() {
+    async GetStaffBranchId() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -958,11 +811,11 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        if(response.data.branch[0].branch_id){
+        if (response.data.branch[0].branch_id) {
           this.branch_id = response.data.branch[0].branch_id;
-        }else{
-          this.branch_id =response.data.branch;
-          console.log('my branchid333',this.branch_id);
+        } else {
+          this.branch_id = response.data.branch;
+          console.log('my branchid333', this.branch_id);
         }
 
       } else {
@@ -970,9 +823,9 @@ export default {
       }
     },
     OnchangeMarital(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
         this.otherMarital = true;
-      }else{
+      } else {
         this.otherMarital = false;
       }
     },
