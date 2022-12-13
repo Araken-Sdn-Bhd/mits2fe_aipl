@@ -1,6 +1,6 @@
 <template>
   <div id="layoutSidenav">
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" class="ml-0">
       <main>
         <Loader v-if="loader" />
         <div class="container-fluid px-4">

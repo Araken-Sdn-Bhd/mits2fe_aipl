@@ -1,6 +1,6 @@
 <template>
   <div id="layoutSidenav">
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" class="ml-0">
       <main>
         <div class="container-fluid px-4">
           <Loader v-if="loader" />
@@ -183,7 +183,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -324,7 +324,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -474,7 +474,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -624,7 +624,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -774,7 +774,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -929,7 +929,7 @@
                       </h6>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>
@@ -1076,7 +1076,7 @@
                       </ul>
                     </div>
 
-                    <table class="form-table" id="personaltable">
+                    <table class="form-table data-mobile" id="personaltable">
                       <thead>
                         <tr>
                           <th width="50%"></th>

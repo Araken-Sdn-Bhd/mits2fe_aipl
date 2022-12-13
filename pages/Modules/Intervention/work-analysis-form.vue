@@ -19,11 +19,7 @@
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Company Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="company_name"
-                    />
+                    <input type="text" class="form-control" v-model="company_name" />
                   </div>
                 </div>
               </div>
@@ -33,77 +29,45 @@
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Company Address</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="company_address1"
-                    />
+                    <input type="text" class="form-control" v-model="company_address1" />
                   </div>
                   <div class="mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="company_address2"
-                    />
+                    <input type="text" class="form-control" v-model="company_address2" />
                   </div>
                   <div class="mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="company_address3"
-                    />
+                    <input type="text" class="form-control" v-model="company_address3" />
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">State</label>
-                     <select
-            class="form-select"
-            @change="getCityList($event)"
-            v-model="state_id"
-          >
-            <option value="">Please Select</option>
-            <option
-              v-for="state in GStateList"
-              v-bind:key="state.id"
-              v-bind:value="state.id"
-            >
-              {{ state.state_name }}
-            </option>
-          </select>
+                    <select class="form-select" @change="getCityList($event)" v-model="state_id">
+                      <option value="">Please Select</option>
+                      <option v-for="state in GStateList" v-bind:key="state.id" v-bind:value="state.id">
+                        {{ state.state_name }}
+                      </option>
+                    </select>
                   </div>
 
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City</label>
-                     <select
-                     class="form-select"
-                     v-model="city_id"
-                     @change="getPostcodeList($event)"
-                     >
-            <option value=0>Please Select</option>
-            <option
-              v-for="ctl in GCityList"
-              v-bind:key="ctl.city_name"
-              v-bind:value="ctl.city_name"
-            >
-              {{ ctl.city_name }}
-            </option>
-          </select>
+                      <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
+                        <option value=0>Please Select</option>
+                        <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
+                          {{ ctl.city_name }}
+                        </option>
+                      </select>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Postcode</label>
-                     <select class="form-select" v-model="postcode_id">
-            <option value="">Please Select</option>
-            <option
-              v-for="pst in GPostCodeList"
-              v-bind:key="pst.id"
-              v-bind:value="pst.id"
-            >
-              {{ pst.postcode }}
-            </option>
-          </select>
+                      <select class="form-select" v-model="postcode_id">
+                        <option value="">Please Select</option>
+                        <option v-for="pst in GPostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
+                          {{ pst.postcode }}
+                        </option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -114,11 +78,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label class="form-label">Supervisor Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="supervisor_name"
-                    />
+                    <input type="text" class="form-control" v-model="supervisor_name" />
                   </div>
                 </div>
 
@@ -132,11 +92,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label class="form-label">Position</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="position"
-                    />
+                    <input type="text" class="form-control" v-model="position" />
                   </div>
                 </div>
               </div>
@@ -146,22 +102,14 @@
                 <div class="col-md-8">
                   <div class="mb-3">
                     <label class="form-label">Client Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="client_name"
-                    />
+                    <input type="text" class="form-control" v-model="client_name" />
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label class="form-label">Job Position</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="job_position"
-                    />
+                    <input type="text" class="form-control" v-model="job_position" />
                   </div>
                 </div>
               </div>
@@ -182,46 +130,25 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <input
-                      type="text"
-                      name=""
-                      placeholder="Please specify wage"
-                      class="form-control"
-                      v-model="wage_specify"
-                    />
+                    <input type="text" name="" placeholder="Please specify wage" class="form-control"
+                      v-model="wage_specify" />
                   </div>
                 </div>
               </div>
               <!-- row -->
 
               <div class="mb-3">
-                <label class="form-label"
-                  >Did a wage change occur for the last 3-6 months?</label
-                >
+                <label class="form-label">Did a wage change occur for the last 3-6 months?</label>
                 <div class="col-sm-8">
                   <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wage"
-                      id="wage1"
-                      value="yes"
-                      data-rel="wage"
-                      v-model="wage_change_occur"
-                    />
+                    <input class="form-check-input" type="radio" name="wage" id="wage1" value="yes" data-rel="wage"
+                      v-model="wage_change_occur" />
                     <label class="form-check-label" for="wage1">Yes</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wage"
-                      id="wage2"
-                      value="no"
-                      data-rel="wage"
-                      v-model="wage_change_occur"
-                    />
+                    <input class="form-check-input" type="radio" name="wage" id="wage2" value="no" data-rel="wage"
+                      v-model="wage_change_occur" />
                     <label class="form-check-label" for="wage2">No</label>
                   </div>
                 </div>
@@ -245,36 +172,21 @@
                   <div class="col-sm-3">
                     <div class="mb-3">
                       <label class="form-label">From</label>
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="from"
-                      />
+                      <input type="text" name="" class="form-control" v-model="from" />
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="mb-3">
                       <label class="form-label">To</label>
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="to"
-                      />
+                      <input type="text" name="" class="form-control" v-model="to" />
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="mb-3">
                       <label class="form-label">On Date</label>
-                      <input
-                        type="date"
-                        name=""
-                        class="form-control"
-                        v-model="on_date"
-                      />
+                      <input type="date" name="" class="form-control" v-model="on_date" />
                     </div>
                   </div>
                 </div>
@@ -284,24 +196,14 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Work Hours In A Week</label>
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="works_hour_week"
-                      />
+                      <input type="text" name="" class="form-control" v-model="works_hour_week" />
                     </div>
                   </div>
 
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Work Schedule</label>
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="work_schedule"
-                      />
+                      <input type="text" name="" class="form-control" v-model="work_schedule" />
                     </div>
                   </div>
                 </div>
@@ -310,29 +212,15 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label"
-                        >No Of Current Employee In Company</label
-                      >
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="no_of_current_employee"
-                      />
+                      <label class="form-label">No Of Current Employee In Company</label>
+                      <input type="text" name="" class="form-control" v-model="no_of_current_employee" />
                     </div>
                   </div>
 
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label"
-                        >No Of Other Employees In This Position</label
-                      >
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="no_of_other_employee"
-                      />
+                      <label class="form-label">No Of Other Employees In This Position</label>
+                      <input type="text" name="" class="form-control" v-model="no_of_other_employee" />
                     </div>
                   </div>
                 </div>
@@ -342,12 +230,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">During Same Shift</label>
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        v-model="during_same_shift"
-                      />
+                      <input type="text" name="" class="form-control" v-model="during_same_shift" />
                     </div>
                   </div>
                 </div>
@@ -360,11 +243,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <label class="form-label">Education Level</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="education_level"
-                      />
+                      <input type="text" class="form-control" v-model="education_level" />
                     </div>
 
                     <div class="col-sm-4">
@@ -385,20 +264,12 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <label class="form-label">Year</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="job_experience_year"
-                      />
+                      <input type="text" class="form-control" v-model="job_experience_year" />
                     </div>
 
                     <div class="col-sm-4">
                       <label class="form-label">Months</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="job_experience_months"
-                      />
+                      <input type="text" class="form-control" v-model="job_experience_months" />
                     </div>
                   </div>
                 </div>
@@ -409,10 +280,7 @@
                 <div class="col-md-12">
                   <div class="mb-3">
                     <label class="form-label">Others</label>
-                    <textarea
-                      class="form-control textarea"
-                      v-model="others"
-                    ></textarea>
+                    <textarea class="form-control textarea" v-model="others"></textarea>
                   </div>
                 </div>
               </div>
@@ -421,125 +289,91 @@
               <div class="form-title">
                 <h5>B. JOB DESCRIPTION</h5>
               </div>
-
-              <table class="notes th-width table-padding" v-if="!pid">
-                <tbody>
-                  <tr>
-                    <td colspan="2" class="td-padding">
-                      <table
-                        class="th-auto th-bg input-width"
-                        id="JOBDESCRIPTION"
-                      >
-                        <thead>
-                          <tr>
-                            <th>Task Description (What?)</th>
-                            <th>Objectives(Why?)</th>
-                            <th>Procedure</th>
-                            <th colspan="2">% Time (Rate Of Time)</th>
-                          </tr>
-                        </thead>
-                        <tbody class="optionBox">
-                          <tr class="block">
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control task"
-                                name=""
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control object"
-                                name=""
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control width-fixed procedure"
-                                name=""
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control width-fixed time"
-                                name=""
-                              />
-                            </td>
-                            <td>
-                              <a class="add-td"><i class="fa fa-plus"></i></a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-               <table class="notes th-width table-padding" v-if="pid">
-                <tbody>
-                  <tr>
-                    <td colspan="2" class="td-padding">
-                      <table
-                        class="th-auto th-bg input-width"
-                        id="JOBDESCRIPTION1"
-                      >
-                        <thead>
-                          <tr>
-                            <th>Task Description (What?)</th>
-                            <th>Objectives(Why?)</th>
-                            <th>Procedure</th>
-                            <th colspan="2">% Time (Rate Of Time)</th>
-                          </tr>
-                        </thead>
-                        <tbody class="optionBox1">
-                          <tr class="block1" v-for="(job1, index) in jobSDESCRIPTION" :key="index">
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control task"
-                                name="" v-model="job1.task_description"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control object"
-                                name="" v-model="job1.objectives"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control width-fixed procedure"
-                                name="" v-model="job1.procedure"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control width-fixed time"
-                                name="" v-model="job1.rate_of_time"
-                              />
-                            </td>
-                            <td>
-                              <a class="add-td"><i class="fa fa-plus"></i></a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
+              <div class="table-responsive">
+                <table class="notes th-width table-padding" v-if="!pid">
+                  <tbody>
+                    <tr>
+                      <td colspan="2" class="td-padding">
+                        <table class="th-auto th-bg input-width" id="JOBDESCRIPTION">
+                          <thead>
+                            <tr>
+                              <th>Task Description (What?)</th>
+                              <th>Objectives(Why?)</th>
+                              <th>Procedure</th>
+                              <th colspan="2">% Time (Rate Of Time)</th>
+                            </tr>
+                          </thead>
+                          <tbody class="optionBox">
+                            <tr class="block">
+                              <td>
+                                <input type="text" class="form-control task" name="" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control object" name="" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control width-fixed procedure" name="" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control width-fixed time" name="" />
+                              </td>
+                              <td>
+                                <a class="add-td"><i class="fa fa-plus"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive">
+                <table class="notes th-width table-padding" v-if="pid">
+                  <tbody>
+                    <tr>
+                      <td colspan="2" class="td-padding">
+                        <table class="th-auto th-bg input-width" id="JOBDESCRIPTION1">
+                          <thead>
+                            <tr>
+                              <th>Task Description (What?)</th>
+                              <th>Objectives(Why?)</th>
+                              <th>Procedure</th>
+                              <th colspan="2">% Time (Rate Of Time)</th>
+                            </tr>
+                          </thead>
+                          <tbody class="optionBox1">
+                            <tr class="block1" v-for="(job1, index) in jobSDESCRIPTION" :key="index">
+                              <td>
+                                <input type="text" class="form-control task" name="" v-model="job1.task_description" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control object" name="" v-model="job1.objectives" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control width-fixed procedure" name=""
+                                  v-model="job1.procedure" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control width-fixed time" name=""
+                                  v-model="job1.rate_of_time" />
+                              </td>
+                              <td>
+                                <a class="add-td"><i class="fa fa-plus"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="form-title mt-3">
                 <h5>C. JOB SPECIFICATION</h5>
               </div>
 
-              <table class="notes th-width table-padding vertical-align-middle" id="jobspecification">
+              <table class="notes th-width table-padding vertical-align-middle worksch-table" id="jobspecification">
                 <tbody>
                   <!--1. WORK SCHEDULE-->
                   <tr>
@@ -555,45 +389,26 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_0"
-                          type="checkbox"
-                          value="A. Need to work on weekend"
-                          id="weekend"
-                        />
+                        <input class="form-check-input one_0" type="checkbox" value="A. Need to work on weekend"
+                          id="weekend" />
                         <label class="form-check-label" for="weekend">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_0"
-                          type="checkbox"
-                          value="B. Night shift only?"
-                          id="shift"
-                        />
+                        <input class="form-check-input two_0" type="checkbox" value="B. Night shift only?" id="shift" />
                         <label class="form-check-label" for="shift">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_0"
-                          type="checkbox"
-                          value="C. Part-time?"
-                          id="Parttime"
-                        />
+                        <input class="form-check-input three_0" type="checkbox" value="C. Part-time?" id="Parttime" />
                         <label class="form-check-label" for="Parttime">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_0"
-                          type="checkbox"
-                          value="D. Full time?"
-                          id="Fulltime"
-                        />
+                        <input class="form-check-input four_0" type="checkbox" value="D. Full time?" id="Fulltime" />
                         <label class="form-check-label" for="Fulltime">
                           Yes
                         </label>
@@ -602,9 +417,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -621,34 +434,22 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_1"
-                          type="checkbox"
-                          value="A. Public transport"
-                          id="transport"
-                        />
+                        <input class="form-check-input one_1" type="checkbox" value="A. Public transport"
+                          id="transport" />
                         <label class="form-check-label" for="transport">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_1"
-                          type="checkbox"
-                          value="B. Own transport, if yes mention type?"
-                          id="own-transport"
-                        />
+                        <input class="form-check-input two_1" type="checkbox"
+                          value="B. Own transport, if yes mention type?" id="own-transport" />
                         <label class="form-check-label" for="own-transport">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_1"
-                          type="checkbox"
-                          value="C. Company Transport"
-                          id="Company-Transport"
-                        />
+                        <input class="form-check-input three_1" type="checkbox" value="C. Company Transport"
+                          id="Company-Transport" />
                         <label class="form-check-label" for="Company-Transport">
                           Yes
                         </label>
@@ -657,9 +458,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -677,45 +476,26 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_2"
-                          type="checkbox"
-                          value="A. Limited (5kg)"
-                          id="Limited"
-                        />
+                        <input class="form-check-input one_2" type="checkbox" value="A. Limited (5kg)" id="Limited" />
                         <label class="form-check-label" for="Limited">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_2"
-                          type="checkbox"
-                          value="B. Light (5-10kg)"
-                          id="Light"
-                        />
+                        <input class="form-check-input two_2" type="checkbox" value="B. Light (5-10kg)" id="Light" />
                         <label class="form-check-label" for="Light">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_2"
-                          type="checkbox"
-                          value="C. Moderate (10-20kg)"
-                          id="Moderate"
-                        />
+                        <input class="form-check-input three_2" type="checkbox" value="C. Moderate (10-20kg)"
+                          id="Moderate" />
                         <label class="form-check-label" for="Moderate">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_2"
-                          type="checkbox"
-                          value="D. Heavy (>20kg)"
-                          id="Heavy"
-                        />
+                        <input class="form-check-input four_2" type="checkbox" value="D. Heavy (>20kg)" id="Heavy" />
                         <label class="form-check-label" for="Heavy">
                           Yes
                         </label>
@@ -724,9 +504,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -744,45 +522,27 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_3"
-                          type="checkbox"
-                          value="A. Less than 2 hours"
-                          id="hours1"
-                        />
+                        <input class="form-check-input one_3" type="checkbox" value="A. Less than 2 hours"
+                          id="hours1" />
                         <label class="form-check-label" for="hours1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_3"
-                          type="checkbox"
-                          value="B. 2-3 hours"
-                          id="hours2"
-                        />
+                        <input class="form-check-input two_3" type="checkbox" value="B. 2-3 hours" id="hours2" />
                         <label class="form-check-label" for="hours2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_3"
-                          type="checkbox"
-                          value="C. 3-4 hours"
-                          id="hours3"
-                        />
+                        <input class="form-check-input three_3" type="checkbox" value="C. 3-4 hours" id="hours3" />
                         <label class="form-check-label" for="hours3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_3"
-                          type="checkbox"
-                          value="D. More than 4 hours"
-                          id="hours4"
-                        />
+                        <input class="form-check-input four_3" type="checkbox" value="D. More than 4 hours"
+                          id="hours4" />
                         <label class="form-check-label" for="hours4">
                           Yes
                         </label>
@@ -791,9 +551,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -812,56 +570,33 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_4"
-                          type="checkbox"
-                          value="A. Small place"
-                          id="work-area1"
-                        />
+                        <input class="form-check-input one_4" type="checkbox" value="A. Small place" id="work-area1" />
                         <label class="form-check-label" for="work-area1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_4"
-                          type="checkbox"
-                          value="B. One room"
-                          id="work-area2"
-                        />
+                        <input class="form-check-input two_4" type="checkbox" value="B. One room" id="work-area2" />
                         <label class="form-check-label" for="work-area2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_4"
-                          type="checkbox"
-                          value="C. Few rooms"
-                          id="work-area3"
-                        />
+                        <input class="form-check-input three_4" type="checkbox" value="C. Few rooms" id="work-area3" />
                         <label class="form-check-label" for="work-area3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_4"
-                          type="checkbox"
-                          value="D. Big building"
-                          id="work-area4"
-                        />
+                        <input class="form-check-input four_4" type="checkbox" value="D. Big building"
+                          id="work-area4" />
                         <label class="form-check-label" for="work-area4">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input five_4"
-                          type="checkbox"
-                          value="E. Building and ground floor"
-                          id="work-area5"
-                        />
+                        <input class="form-check-input five_4" type="checkbox" value="E. Building and ground floor"
+                          id="work-area5" />
                         <label class="form-check-label" for="work-area5">
                           Yes
                         </label>
@@ -870,9 +605,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -890,45 +623,25 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_5"
-                          type="checkbox"
-                          value="A. Slow"
-                          id="work-speed1"
-                        />
+                        <input class="form-check-input one_5" type="checkbox" value="A. Slow" id="work-speed1" />
                         <label class="form-check-label" for="work-speed1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_5"
-                          type="checkbox"
-                          value="B. Mild"
-                          id="work-speed2"
-                        />
+                        <input class="form-check-input two_5" type="checkbox" value="B. Mild" id="work-speed2" />
                         <label class="form-check-label" for="work-speed2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_5"
-                          type="checkbox"
-                          value="C. Moderate"
-                          id="work-speed3"
-                        />
+                        <input class="form-check-input three_5" type="checkbox" value="C. Moderate" id="work-speed3" />
                         <label class="form-check-label" for="work-speed3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_5"
-                          type="checkbox"
-                          value="D. Fast"
-                          id="work-speed4"
-                        />
+                        <input class="form-check-input four_5" type="checkbox" value="D. Fast" id="work-speed4" />
                         <label class="form-check-label" for="work-speed4">
                           Yes
                         </label>
@@ -937,9 +650,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -957,45 +668,26 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_6"
-                          type="checkbox"
-                          value="A. Casual"
-                          id="appearance1"
-                        />
+                        <input class="form-check-input one_6" type="checkbox" value="A. Casual" id="appearance1" />
                         <label class="form-check-label" for="appearance1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_6"
-                          type="checkbox"
-                          value="B. Clean"
-                          id="appearance2"
-                        />
+                        <input class="form-check-input two_6" type="checkbox" value="B. Clean" id="appearance2" />
                         <label class="form-check-label" for="appearance2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_6"
-                          type="checkbox"
-                          value="C. Clean and well kempt"
-                          id="appearance3"
-                        />
+                        <input class="form-check-input three_6" type="checkbox" value="C. Clean and well kempt"
+                          id="appearance3" />
                         <label class="form-check-label" for="appearance3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_6"
-                          type="checkbox"
-                          value="D. Well kempt"
-                          id="appearance4"
-                        />
+                        <input class="form-check-input four_6" type="checkbox" value="D. Well kempt" id="appearance4" />
                         <label class="form-check-label" for="appearance4">
                           Yes
                         </label>
@@ -1004,9 +696,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1024,58 +714,30 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_7"
-                          type="checkbox"
-                          value="A. Not required/minimal"
-                          id="communication-skill1"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="communication-skill1"
-                        >
+                        <input class="form-check-input one_7" type="checkbox" value="A. Not required/minimal"
+                          id="communication-skill1" />
+                        <label class="form-check-label" for="communication-skill1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_7"
-                          type="checkbox"
-                          value="B. When needed"
-                          id="communication-skill2"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="communication-skill2"
-                        >
+                        <input class="form-check-input two_7" type="checkbox" value="B. When needed"
+                          id="communication-skill2" />
+                        <label class="form-check-label" for="communication-skill2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_7"
-                          type="checkbox"
-                          value="C. Average"
-                          id="communication-skill3"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="communication-skill3"
-                        >
+                        <input class="form-check-input three_7" type="checkbox" value="C. Average"
+                          id="communication-skill3" />
+                        <label class="form-check-label" for="communication-skill3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_7"
-                          type="checkbox"
-                          value="D. Good"
-                          id="communication-skill4"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="communication-skill4"
-                        >
+                        <input class="form-check-input four_7" type="checkbox" value="D. Good"
+                          id="communication-skill4" />
+                        <label class="form-check-label" for="communication-skill4">
                           Yes
                         </label>
                       </div>
@@ -1083,9 +745,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1103,58 +763,30 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_8"
-                          type="checkbox"
-                          value="A. Not required/minimal"
-                          id="social-interaction1"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="social-interaction1"
-                        >
+                        <input class="form-check-input one_8" type="checkbox" value="A. Not required/minimal"
+                          id="social-interaction1" />
+                        <label class="form-check-label" for="social-interaction1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_8"
-                          type="checkbox"
-                          value="B. When needed"
-                          id="social-interaction2"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="social-interaction2"
-                        >
+                        <input class="form-check-input two_8" type="checkbox" value="B. When needed"
+                          id="social-interaction2" />
+                        <label class="form-check-label" for="social-interaction2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_8"
-                          type="checkbox"
-                          value="C. Average"
-                          id="social-interaction3"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="social-interaction3"
-                        >
+                        <input class="form-check-input three_8" type="checkbox" value="C. Average"
+                          id="social-interaction3" />
+                        <label class="form-check-label" for="social-interaction3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_8"
-                          type="checkbox"
-                          value="D. Good"
-                          id="social-interaction4"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="social-interaction4"
-                        >
+                        <input class="form-check-input four_8" type="checkbox" value="D. Good"
+                          id="social-interaction4" />
+                        <label class="form-check-label" for="social-interaction4">
                           Yes
                         </label>
                       </div>
@@ -1162,9 +794,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1182,45 +812,26 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_9"
-                          type="checkbox"
-                          value="A. Minimal"
-                          id="concentration1"
-                        />
+                        <input class="form-check-input one_9" type="checkbox" value="A. Minimal" id="concentration1" />
                         <label class="form-check-label" for="concentration1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_9"
-                          type="checkbox"
-                          value="B. Fair"
-                          id="concentration2"
-                        />
+                        <input class="form-check-input two_9" type="checkbox" value="B. Fair" id="concentration2" />
                         <label class="form-check-label" for="concentration2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_9"
-                          type="checkbox"
-                          value="C. Average"
-                          id="concentration3"
-                        />
+                        <input class="form-check-input three_9" type="checkbox" value="C. Average"
+                          id="concentration3" />
                         <label class="form-check-label" for="concentration3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_9"
-                          type="checkbox"
-                          value="D. Good"
-                          id="concentration4"
-                        />
+                        <input class="form-check-input four_9" type="checkbox" value="D. Good" id="concentration4" />
                         <label class="form-check-label" for="concentration4">
                           Yes
                         </label>
@@ -1229,9 +840,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1249,45 +858,29 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_10"
-                          type="checkbox"
-                          value="A. One task at a time"
-                          id="work-demand1"
-                        />
+                        <input class="form-check-input one_10" type="checkbox" value="A. One task at a time"
+                          id="work-demand1" />
                         <label class="form-check-label" for="work-demand1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_10"
-                          type="checkbox"
-                          value="B. Few task (2-3)"
-                          id="work-demand2"
-                        />
+                        <input class="form-check-input two_10" type="checkbox" value="B. Few task (2-3)"
+                          id="work-demand2" />
                         <label class="form-check-label" for="work-demand2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_10"
-                          type="checkbox"
-                          value="C. Average (4-6)"
-                          id="work-demand3"
-                        />
+                        <input class="form-check-input three_10" type="checkbox" value="C. Average (4-6)"
+                          id="work-demand3" />
                         <label class="form-check-label" for="work-demand3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_10"
-                          type="checkbox"
-                          value="D. Many task (>7 )"
-                          id="work-demand4"
-                        />
+                        <input class="form-check-input four_10" type="checkbox" value="D. Many task (>7 )"
+                          id="work-demand4" />
                         <label class="form-check-label" for="work-demand4">
                           Yes
                         </label>
@@ -1296,9 +889,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1315,34 +906,21 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_11"
-                          type="checkbox"
-                          value="A. Need encouragement"
-                          id="motivation1"
-                        />
+                        <input class="form-check-input one_11" type="checkbox" value="A. Need encouragement"
+                          id="motivation1" />
                         <label class="form-check-label" for="motivation1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_11"
-                          type="checkbox"
-                          value="B. Proactive"
-                          id="motivation2"
-                        />
+                        <input class="form-check-input two_11" type="checkbox" value="B. Proactive" id="motivation2" />
                         <label class="form-check-label" for="motivation2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_11"
-                          type="checkbox"
-                          value="C. Good support"
-                          id="motivation3"
-                        />
+                        <input class="form-check-input three_11" type="checkbox" value="C. Good support"
+                          id="motivation3" />
                         <label class="form-check-label" for="motivation3">
                           Yes
                         </label>
@@ -1351,9 +929,7 @@
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1370,39 +946,22 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_12"
-                          type="checkbox"
-                          value="A. Frequent (>7)"
-                          id="fir1"
-                        />
+                        <input class="form-check-input one_12" type="checkbox" value="A. Frequent (>7)" id="fir1" />
                         <label class="form-check-label" for="fir1"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_12"
-                          type="checkbox"
-                          value="B. Average (4-6)"
-                          id="fir2"
-                        />
+                        <input class="form-check-input two_12" type="checkbox" value="B. Average (4-6)" id="fir2" />
                         <label class="form-check-label" for="fir2"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_12"
-                          type="checkbox"
-                          value="C. Minimal (2-3)"
-                          id="fir3"
-                        />
+                        <input class="form-check-input three_12" type="checkbox" value="C. Minimal (2-3)" id="fir3" />
                         <label class="form-check-label" for="fir3"> Yes </label>
                       </div>
                     </td>
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1420,48 +979,26 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_13"
-                          type="checkbox"
-                          value="A. Not required"
-                          id="atr1"
-                        />
+                        <input class="form-check-input one_13" type="checkbox" value="A. Not required" id="atr1" />
                         <label class="form-check-label" for="atr1"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_13"
-                          type="checkbox"
-                          value="B. Recognize symbol"
-                          id="atr2"
-                        />
+                        <input class="form-check-input two_13" type="checkbox" value="B. Recognize symbol" id="atr2" />
                         <label class="form-check-label" for="atr2"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_13"
-                          type="checkbox"
-                          value="C. Simple word"
-                          id="atr3"
-                        />
+                        <input class="form-check-input three_13" type="checkbox" value="C. Simple word" id="atr3" />
                         <label class="form-check-label" for="atr3"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_13"
-                          type="checkbox"
-                          value="D. Read fluently"
-                          id="atr4"
-                        />
+                        <input class="form-check-input four_13" type="checkbox" value="D. Read fluently" id="atr4" />
                         <label class="form-check-label" for="atr4"> Yes </label>
                       </div>
                     </td>
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1479,48 +1016,27 @@
                     <td class="input-checkbox">
                       <div class="title-div"></div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_14"
-                          type="checkbox"
-                          value="A. Not required"
-                          id="atc1"
-                        />
+                        <input class="form-check-input one_14" type="checkbox" value="A. Not required" id="atc1" />
                         <label class="form-check-label" for="atc1"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_14"
-                          type="checkbox"
-                          value="B. Use calculator"
-                          id="atc2"
-                        />
+                        <input class="form-check-input two_14" type="checkbox" value="B. Use calculator" id="atc2" />
                         <label class="form-check-label" for="atc2"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_14"
-                          type="checkbox"
-                          value="C. Simple maths without calculator"
-                          id="atc3"
-                        />
+                        <input class="form-check-input three_14" type="checkbox"
+                          value="C. Simple maths without calculator" id="atc3" />
                         <label class="form-check-label" for="atc3"> Yes </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_14"
-                          type="checkbox"
-                          value="D. Difficult maths"
-                          id="atc4"
-                        />
+                        <input class="form-check-input four_14" type="checkbox" value="D. Difficult maths" id="atc4" />
                         <label class="form-check-label" for="atc4"> Yes </label>
                       </div>
                     </td>
                     <td>
                       <div class="mb-3">
                         <label class="form-label">Comments</label>
-                        <textarea
-                          class="form-control textarea comment"
-                        ></textarea>
+                        <textarea class="form-control textarea comment"></textarea>
                       </div>
                     </td>
                   </tr>
@@ -1541,90 +1057,55 @@
                     </td>
                     <td class="input-checkbox">
                       <div class="form-check">
-                        <input
-                          class="form-check-input one_15"
-                          type="checkbox"
-                          value="0 = Nil"
-                          id="benefits1"
-                        />
+                        <input class="form-check-input one_15" type="checkbox" value="0 = Nil" id="benefits1" />
                         <label class="form-check-label" for="benefits1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input two_15"
-                          type="checkbox"
-                          value="1 = Mc"
-                          id="benefits2"
-                        />
+                        <input class="form-check-input two_15" type="checkbox" value="1 = Mc" id="benefits2" />
                         <label class="form-check-label" for="benefits2">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input three_15"
-                          type="checkbox"
-                          value="2 = Medical Benefit"
-                          id="benefits3"
-                        />
+                        <input class="form-check-input three_15" type="checkbox" value="2 = Medical Benefit"
+                          id="benefits3" />
                         <label class="form-check-label" for="benefits3">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input four_15"
-                          type="checkbox"
-                          value="3 = Annual Leave"
-                          id="benefits4"
-                        />
+                        <input class="form-check-input four_15" type="checkbox" value="3 = Annual Leave"
+                          id="benefits4" />
                         <label class="form-check-label" for="benefits4">
                           Yes
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input
-                          class="form-check-input five_15"
-                          type="checkbox"
-                          value="4 = Dental Benefits"
-                          id="benefits5"
-                        />
+                        <input class="form-check-input five_15" type="checkbox" value="4 = Dental Benefits"
+                          id="benefits5" />
                         <label class="form-check-label" for="benefits5">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input six_15"
-                          type="checkbox"
-                          value="5 = Discount For Employee"
-                          id="benefits6"
-                        />
+                        <input class="form-check-input six_15" type="checkbox" value="5 = Discount For Employee"
+                          id="benefits6" />
                         <label class="form-check-label" for="benefits6">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input seven_15"
-                          type="checkbox"
-                          value="6 = Free Food"
-                          id="benefits7"
-                        />
+                        <input class="form-check-input seven_15" type="checkbox" value="6 = Free Food" id="benefits7" />
                         <label class="form-check-label" for="benefits7">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input
-                          class="form-check-input eight_15"
-                          type="checkbox"
-                          value="7 = Others (To Specify)"
-                          id="benefits8"
-                        />
+                        <input class="form-check-input eight_15" type="checkbox" value="7 = Others (To Specify)"
+                          id="benefits8" />
                         <label class="form-check-label" for="benefits8">
                           Yes
                         </label>
@@ -1647,279 +1128,187 @@
                 </tbody>
               </table>
 
-             <div
-                  class="accordion form-accordion mt-3"
-                  id="accordionExample"
-                >
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                      <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
-                        OCCASION OF SERVICES
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
-                          >
-                          <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="location_services_id"
-                            >
-                              <option value="0">
-                                Select location of services
-                              </option>
-                             <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
-                            </select>
+              <div class="accordion form-accordion mt-3" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      OCCASION OF SERVICES
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Location Of Services</label>
+                        <div class="col-sm-8">
+                          <select class="form-select" v-model="location_services_id">
+                            <option value="0">
+                              Select location of services
+                            </option>
+                            <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
+                              {{ loc.section_value }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- close-row -->
+                      <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                        <div class="col-sm-8">
+                          <select class="form-select" v-model="type_diagnosis_id">
+                            <option value="0">Select Diagnosis</option>
+                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                              {{ catcode.icd_code }} {{ catcode.icd_name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- close-row -->
+                      <div class="row mb-3">
+                        <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services
+                        </label>
+                        <div class="col-lg-8 col-sm-12">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                              value="assisstance" v-model="category_services" />
+                            <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                              value="clinical-work" v-model="category_services" />
+                            <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                              value="external" v-model="category_services" />
+                            <label class="form-check-label" for="inlineRadio3">External</label>
                           </div>
                         </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
-                          >
-                          <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
-                                <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                              </select>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Category Of Services
-                          </label>
-                          <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio1"
-                                value="assisstance"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio1"
-                                >Assisstance / Supervision</label
-                              >
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio2"
-                                value="clinical-work"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio2"
-                                >Clinical Work / Procedure
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio3"
-                                value="external"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio3"
-                                >External</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                        <!-- hide-div -->
-                        <div class="assisstance services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              <select class="form-select" v-model="services_id">
-                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in assistancelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 01 -->
-                        <div class="clinical-work services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
-                                <option value="0">Select code</option>
-                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-             {{ type.icd_category_code }} {{type.icd_category_name}}
-            </option>
-                              </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
-                              <select class="form-select" v-model="sub_code_id">
-                                <option value="0">Select sub code</option>
-                                <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }}
- {{catcode.icd_name}}
-            </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 02 -->
-                        <div class="external services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              <select class="form-select" v-model="serviceid">
-                                <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in externallist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 03 -->
-                        <!-- hide-div -->
+                      </div>
+                      <!-- close-row -->
+                      <!-- hide-div -->
+                      <div class="assisstance services hide mb-3">
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label"
-                              >Complexity Of Service</label
-                            >
-                            <select
-                              class="form-select"
-                              v-model="complexity_services_id"
-                            >
-                              <option value="0">
-                                Select Complexity Of Service
+                            <label class="form-label">Services</label>
+                            <select class="form-select" v-model="services_id">
+                              <option value="0">Select Service</option>
+                              <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                {{ slt.section_value }}
                               </option>
-                      <option
-                        v-for="cm in comlexcitylist"
-                        v-bind:key="cm.id"
-                        v-bind:value="cm.id"
-                      >
-                        {{ cm.section_value }}
-                      </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 01 -->
+                      <div class="clinical-work services hide mb-3">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label class="form-label">ICD 9 CODE</label>
+                            <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                              <option value="0">Select code</option>
+                              <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                {{ type.icd_category_code }} {{ type.icd_category_name }}
+                              </option>
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
-                            <select class="form-select" v-model="outcome_id">
-                              <option value="0">Select outcome</option>
-                      <option
-                        v-for="out in outcomelist"
-                        v-bind:key="out.id"
-                        v-bind:value="out.id"
-                      >
-                        {{ out.section_value }}
-                      </option>
+                            <label class="form-label">ICD 9 SUB CODE</label>
+                            <select class="form-select" v-model="sub_code_id">
+                              <option value="0">Select sub code</option>
+                              <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id"
+                                v-bind:value="catcode.id">
+                                {{ catcode.icd_code }}
+                                {{ catcode.icd_name }}
+                              </option>
                             </select>
                           </div>
                         </div>
-                        <!-- close-row -->
                       </div>
-                    </div>
-                  </div>
-                  <!--  -->
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button
-                        class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
-                        MEDICATION
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <div class="col-md-12 mb-3">
-                          <label class="form-label">Medication</label>
-                          <textarea
-                            class="form-control textarea"
-                            placeholder="Please Type Prescription Here"
-                            v-model="medication_des"
-                          ></textarea>
+                      <!-- 02 -->
+                      <div class="external services hide mb-3">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label class="form-label">Services</label>
+                            <select class="form-select" v-model="serviceid">
+                              <option value="0">Select Service</option>
+                              <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                {{ slt.section_value }}
+                              </option>
+                            </select>
+                          </div>
                         </div>
                       </div>
+                      <!-- 03 -->
+                      <!-- hide-div -->
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Complexity Of Service</label>
+                          <select class="form-select" v-model="complexity_services_id">
+                            <option value="0">
+                              Select Complexity Of Service
+                            </option>
+                            <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
+                              {{ cm.section_value }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Outcome</label>
+                          <select class="form-select" v-model="outcome_id">
+                            <option value="0">Select outcome</option>
+                            <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
+                              {{ out.section_value }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- close-row -->
                     </div>
                   </div>
-                  <!--  -->
                 </div>
- <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-                       <br>
-                       <br>
-              <div class="d-flex" v-if="!pid">
-                <button
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back
+                <!--  -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      MEDICATION
                     </button>
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Submit
-                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div class="col-md-12 mb-3">
+                        <label class="form-label">Medication</label>
+                        <textarea class="form-control textarea" placeholder="Please Type Prescription Here"
+                          v-model="medication_des"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+              </div>
+              <p v-if="errorList.length">
+              <ul>
+                <li style="color:red" v-for='err in errorList' :key='err'>
+                  {{ err }}
+                </li>
+              </ul>
+              </p>
+              <br>
+              <br>
+              <div class="d-flex three-btn" v-if="!pid">
+                <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
+                </button>
+                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                  <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
+                    <i class="fa fa-save"></i> Save as draft
+                  </button>
+                  <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <i class="fa fa-paper-plane"></i> Submit
+                  </button>
                 </div>
               </div>
             </div>
@@ -1952,7 +1341,7 @@ export default {
       GCityList: [],
       GPostCodeList: [],
       Id: 0,
-      appId:0,
+      appId: 0,
       company_name: "",
       company_address1: "",
       company_address2: "",
@@ -2044,11 +1433,11 @@ export default {
     }
   },
   methods: {
-    GoBack(){
+    GoBack() {
       this.$router.push({
-              path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id, appId: this.appId },
-            });
+        path: "/modules/Intervention/patient-summary",
+        query: { id: this.Id, appId: this.appId },
+      });
     },
 
     async onCreateEvent() {
@@ -2233,74 +1622,74 @@ export default {
       this.validate = true;
       this.errorList = [];
       try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "work-analysis/add",
-            {
-              added_by: this.userdetails.user.id,
-              patient_id: this.Id,
-              company_name: this.company_name,
-              company_address1: this.company_address1,
-              company_address2: this.company_address2,
-              company_address3: this.company_address3,
-              state_id: this.state_id,
-              city_id: this.postcode_id,//city share the same id with postcode
-              postcode_id: this.postcode_id,
-              supervisor_name: this.supervisor_name,
-              email: this.email,
-              position: this.position,
-              client_name: this.client_name,
-              job_position: this.job_position,
-              current_wage: this.current_wage,
-              wage_specify: this.wage_specify,
-              wage_change_occur: this.wage_change_occur,
-              change_in_rate: this.change_in_rate,
-              from: this.from,
-              to: this.to,
-              on_date: this.on_date,
-              works_hour_week: this.works_hour_week,
-              work_schedule: this.work_schedule,
-              no_of_current_employee: this.no_of_current_employee,
-              no_of_other_employee: this.no_of_other_employee,
-              during_same_shift: this.during_same_shift,
-              education_level: this.education_level,
-              grade: this.grade,
-              job_experience_year: this.job_experience_year,
-              job_experience_months: this.job_experience_months,
-              others: this.others,
-              location_services: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_of_services: this.complexity_services_id,
-              outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
-              jobs: jobSDESCRIPTION,
-              job_specification: jobSPECIFICATION,
-              appId: this.appId,
-              status:"0",
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            alert("Succesfully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "work-analysis/add",
+          {
+            added_by: this.userdetails.user.id,
+            patient_id: this.Id,
+            company_name: this.company_name,
+            company_address1: this.company_address1,
+            company_address2: this.company_address2,
+            company_address3: this.company_address3,
+            state_id: this.state_id,
+            city_id: this.postcode_id,//city share the same id with postcode
+            postcode_id: this.postcode_id,
+            supervisor_name: this.supervisor_name,
+            email: this.email,
+            position: this.position,
+            client_name: this.client_name,
+            job_position: this.job_position,
+            current_wage: this.current_wage,
+            wage_specify: this.wage_specify,
+            wage_change_occur: this.wage_change_occur,
+            change_in_rate: this.change_in_rate,
+            from: this.from,
+            to: this.to,
+            on_date: this.on_date,
+            works_hour_week: this.works_hour_week,
+            work_schedule: this.work_schedule,
+            no_of_current_employee: this.no_of_current_employee,
+            no_of_other_employee: this.no_of_other_employee,
+            during_same_shift: this.during_same_shift,
+            education_level: this.education_level,
+            grade: this.grade,
+            job_experience_year: this.job_experience_year,
+            job_experience_months: this.job_experience_months,
+            others: this.others,
+            location_services: this.location_services_id,
+            type_diagnosis_id: this.type_diagnosis_id,
+            category_services: this.category_services,
+            services_id: this.services_id,
+            code_id: this.code_id,
+            sub_code_id: this.sub_code_id,
+            complexity_of_services: this.complexity_services_id,
+            outcome: this.outcome_id,
+            medication_prescription: this.medication_des,
+            jobs: jobSDESCRIPTION,
+            job_specification: jobSPECIFICATION,
+            appId: this.appId,
+            status: "0",
+          },
+          { headers }
+        );
+        console.log("response", response.data);
+        console.log("response", response.data);
+        if (response.data.code == 200) {
+          this.loader = false;
+          alert("Succesfully Created");
+          this.GoBack();
+        } else {
+          this.loader = false;
 
-            alert("Error Occured!");
-            this.GoBack();
-          }
+          alert("Error Occured!");
+          this.GoBack();
+        }
 
       } catch (e) {
         this.loader = false;
@@ -2712,7 +2101,7 @@ export default {
               jobs: jobSDESCRIPTION,
               job_specification: jobSPECIFICATION,
               appId: this.appId,
-              status:"1",
+              status: "1",
             },
             { headers }
           );
@@ -2990,6 +2379,7 @@ export default {
 .hide {
   display: none;
 }
+
 .title-div {
   color: #000 !important;
   font-size: 15px;
@@ -2998,6 +2388,7 @@ export default {
   padding: 0px !important;
   display: block !important;
 }
+
 .vertical-align-middle td {
   vertical-align: middle;
 }

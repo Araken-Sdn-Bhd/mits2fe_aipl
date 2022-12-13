@@ -11,7 +11,7 @@
 
           <div class="card mb-4">
             <div class="card-body">
-              <table class="table table-striped data-table" style="width: 100%">
+              <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -76,7 +76,8 @@ export default {
             bLengthChange: false,
             bInfo: false,
             autoWidth: false,
-            responsive: true,
+            // responsive: true,
+            // scrollX: true,
             scrollX: true,
             language: {
               paginate: {
