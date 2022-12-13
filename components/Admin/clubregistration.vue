@@ -5,7 +5,7 @@
         <div class="content-subtab">
           <form class="g-3 mt-3" method="post" @submit.prevent="onAddclubRegistration">
             <div class="row">
-              <div class="col-md-3 mb-4">
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">Club Code</label>
                 <input
                   type="text"
@@ -15,7 +15,7 @@
                 />
               </div>
 
-              <div class="col-md-3 mb-4">
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">Club Name</label>
                 <input
                   type="text"
@@ -25,7 +25,10 @@
                 />
               </div>
 
-              <div class="col-lg-5 col-sm-4 mb-4">
+            </div>
+            <div class="row">
+              
+              <div class="col-lg-6 col-sm-4 mb-4">
                 <label for="" class="form-label">Club Description</label>
                 <input
                   type="text"
@@ -34,20 +37,22 @@
                   v-model="club_description"
                 />
               </div>
-
               <div class="col-lg-1 col-sm-2 mb-4">
                 <label class="form-label">Index</label>
                 <input type="text" class="form-control" placeholder="0" v-model="club_order"/>
               </div>
+              <div class="col-sm-3 mb-4">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="status">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
+                      </div>
+
             </div>
             <!-- close-row -->
-             <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
+        <p v-if="errors.length">
+        <ul><li style="color:red"  v-for='err in errors' :key='err'>{{ err }}</li></ul>
         </p>
       <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
@@ -64,28 +69,31 @@
           <table class="table table-striped data-table display nowrap" style="width: 100%">
             <thead>
               <tr>
-                <th>No</th>
+                <th style="width:3%">No</th>
                 <th>Club Code</th>
                 <th>Club Name</th>
                 <th>Club Description</th>
                 <th>Index</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th style="width:3%">Action</th>
               </tr>
             </thead>
             <tbody>
             <tr v-for="(etp, index) in list" :key="index">
-                   <td>{{index+1}}</td>
+                <td>{{index+1}}</td>
                 <td>{{ etp.club_code }}</td>
                 <td>{{ etp.club_name }}</td>
                 <td>{{ etp.club_description }}</td>
                 <td>{{ etp.club_order }}</td>
                 <td>
+                        <p v-if="etp.status == 0" style="color:red">Disabled</p>
+                        <p v-if="etp.status == 1">Enabled</p>
+                      </td>
+                <td>
                   <a  v-if="SidebarAccess==1" class="edit" @click="editreg(etp)"
                     ><i class="fa fa-edit"></i
                   ></a>
-                  <a  v-if="SidebarAccess==1" @click="deletereg(etp)" class="action-icon icon-danger"
-                    ><i class="fa fa-trash-alt"></i
-                  ></a>
+                 
                 </td>
               </tr>
             </tbody>
@@ -109,6 +117,7 @@ export default {
       errors: [],
       userdetails: null,
       SidebarAccess:null,
+      status: 1,
     };
   },
   mounted() {
@@ -195,38 +204,12 @@ export default {
         this.club_description = response.data.list[0].club_description;
         this.club_order = response.data.list[0].club_order;
         this.Id = data.id;
+        this.status = response.data.list[0].status;
       } else {
         window.alert("Something went wrong");
       }
     },
-    async deletereg(data) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "club/remove",
-          { added_by: this.userdetails.user.id, club_id: data.id },
-          { headers }
-        );
-        if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
-          this.GetList();
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+  
     async onAddclubRegistration() {
       this.errors = [];
       try {
@@ -256,18 +239,23 @@ export default {
                 club_name: this.club_name,
                 club_description: this.club_description,
                 club_order: this.club_order,
+               
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Insert',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
+            
             }
           } else {
             const response = await this.$axios.post(
@@ -279,19 +267,24 @@ export default {
                 club_name: this.club_name,
                 club_description: this.club_description,
                 club_order:this.club_order,
+                status: this.status,
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
+            
           }
         }
       } catch (e) {
