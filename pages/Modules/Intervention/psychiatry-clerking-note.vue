@@ -251,10 +251,10 @@
                             </p>
                             <br>
                             <br>
-                            <div class="d-flex" v-if="!pid">
+                            <div class="d-flex" >
                                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
-                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
                                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                         <i class="fa fa-save"></i> Save as draft
                                     </button>
@@ -264,15 +264,6 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <!-- <div class="d-flex" v-if="pid">
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Update
-                  </button>
-                </div> -->
                         </div>
                     </div>
                 </div>
@@ -401,7 +392,6 @@ export default {
                                     medication_des: this.medication_des,
                                     patient_mrn_id: this.Id,
                                     services_id: this.services_id,
-                                    id: this.pid,
                                     appId: this.appId,
                                     status: "0",
                                 }, {
@@ -419,7 +409,7 @@ export default {
                             this.resetmodel();
                             this.$swal.fire({
                                 icon: 'error',
-                                title: 'Oops... Something Went Wrong! dalam function api',
+                                title: 'Oops... Something Went Wrong!',
                                 text: 'the error is: ' + JSON.stringify(response.data.message),
                             })
                             this.GoBack();
@@ -561,7 +551,6 @@ export default {
                                     medication_des: this.medication_des,
                                     patient_mrn_id: this.Id,
                                     services_id: this.services_id,
-                                    id: this.pid,
                                     appId: this.appId,
                                     status: "1",
                                 }, {

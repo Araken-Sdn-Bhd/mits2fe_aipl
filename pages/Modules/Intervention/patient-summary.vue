@@ -1168,7 +1168,7 @@ export default {
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",
-          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
