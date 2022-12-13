@@ -9,7 +9,7 @@
             @submit.prevent="onAddetpregistration"
           >
             <div class="row">
-              <div class="col-md-3 mb-4">
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">ETP Code</label>
                 <input
                   type="text"
@@ -19,7 +19,7 @@
                 />
               </div>
 
-              <div class="col-md-3 mb-4">
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">ETP Name</label>
                 <input
                   type="text"
@@ -29,7 +29,9 @@
                 />
               </div>
 
-              <div class="col-lg-5 col-sm-4 mb-4">
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-sm-4 mb-4">
                 <label for="" class="form-label">ETP Description</label>
                 <input
                   type="text"
@@ -38,7 +40,6 @@
                   v-model="etpdescription"
                 />
               </div>
-
               <div class="col-lg-1 col-sm-2 mb-4">
                 <label class="form-label">Index</label>
                 <input
@@ -47,6 +48,13 @@
                   placeholder="0"
                   v-model="index"
                 />
+              </div>
+              <div class="col-sm-3 mb-4">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="status">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
               </div>
             </div>
             <!-- close-row -->
@@ -75,12 +83,13 @@
           <table class="table table-striped data-table display nowrap" style="width: 100%">
             <thead>
               <tr>
-                <th>No</th>
+                <th style="width:3%">No</th>
                 <th>ETP Code</th>
                 <th>ETP Name</th>
                 <th>ETP Description</th>
                 <th>Index</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th style="width:3%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -91,12 +100,14 @@
                 <td>{{ etp.etp_description }}</td>
                 <td>{{ etp.etp_order }}</td>
                 <td>
+                        <p v-if="etp.status == 0" style="color:red">Disabled</p>
+                        <p v-if="etp.status == 1">Enabled</p>
+                      </td>
+                <td>
                   <a class="edit" @click="editreg(etp)" v-if="SidebarAccess==1"
                     ><i class="fa fa-edit"></i
                   ></a>
-                  <a @click="deletereg(etp)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-                    ><i class="fa fa-trash-alt"></i
-                  ></a>
+                 
                 </td>
               </tr>
             </tbody>
@@ -120,6 +131,7 @@ export default {
       errors: [],
       userdetails: null,
       SidebarAccess:null,
+      status: 1,
     };
   },
   mounted() {
@@ -203,39 +215,13 @@ export default {
         this.etpname = response.data.list[0].etp_name;
         this.etpdescription = response.data.list[0].etp_description;
         this.index = response.data.list[0].etp_order;
+        this.status = response.data.list[0].status;
         this.Id = data.id;
       } else {
         window.alert("Something went wrong");
       }
     },
-    async deletereg(data) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "etp/remove",
-          { added_by: this.userdetails.user.id, etp_id: data.id },
-          { headers }
-        );
-        if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
-          this.GetList();
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+   
     async onAddetpregistration() {
       this.errors = [];
       try {
@@ -269,14 +255,17 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Insert',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           } else {
             const response = await this.$axios.post(
@@ -288,18 +277,22 @@ export default {
                 etp_name: this.etpname,
                 etp_description: this.etpdescription,
                 etp_order: this.index,
+                status: this.status,
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           }
         }
