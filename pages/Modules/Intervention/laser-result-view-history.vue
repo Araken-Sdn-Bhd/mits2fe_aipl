@@ -142,6 +142,7 @@ export default {
       contemplationScore: 0,
       actionScore: 0,
       laserresult: null,
+      appId:0,
     };
   },
   beforeMount() {
@@ -150,6 +151,7 @@ export default {
     console.log("laser result", this.laserresult);
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetPatientdetails();
     this.GetLaserResult();
 
