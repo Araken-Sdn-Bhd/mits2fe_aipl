@@ -20,7 +20,7 @@
                 <div class="table-title d-flex align-items-center">
                   <h3>List of Event</h3>
                   <div class="btn-box ml-auto">
-                    <a href="http://122.176.47.222:85/mintari2/storage/app/public/assets/CalendarExceptionTemplate/exception_template.xlsx" download class="btn btn-primary mt-0 text-white">
+                    <a @click="DownloadExcel" download class="btn btn-primary mt-0 text-white">
                       <i class="fa fa-download"></i> Excel Template
                     </a>
                     <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary text-white mt-0">
@@ -304,6 +304,38 @@ export default {
         path: "/modules/Admin/exception",
         query: { id: data.id },
       });
+    },
+
+    startDownload(){
+        this.loader = true;
+    },
+    finishDownload(){
+        this.loader = false;
+    },
+    async DownloadExcel() {
+      this.errorList = [];
+      this.error = null;
+        try {
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "calendar-management/download-excel",
+            {
+              user_role: this.userdetails.user.id,
+            },
+            { headers }
+          );
+          console.log("my excel", response.data);
+          if (response.data.code == 200) {
+              window.open(response.data.filepath, "_blank");
+          } else {
+            this.error = "No Record Found";
+          }
+        } catch (e) {}
+      
     },
   },
 };
