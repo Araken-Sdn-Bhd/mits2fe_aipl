@@ -278,21 +278,7 @@ export default {
   setup() {},
   head: {
     script: [
-      // {
-      //   src: "/app/js/bootstrap.bundle.min.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
-      // {
-      //   src: "/app/js/jquery-3.5.1.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
-      // {
-      //   src: "/app/js/scripts.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
+     
       {
         src: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js",
         async: true,
@@ -310,7 +296,7 @@ export default {
       SidebarAccess:null,
       dataReady: false,
       dataReady2: false,
-      branchId:"",
+      branchId:0,
     };
   },
 
@@ -462,7 +448,7 @@ export default {
 
       this.$router.push({
         path: "/modules/Admin/list-of-user-matrix-view",
-      query: {id: data.team_id, usersid:data.id },
+      query: {id: data.service_name, usersid:data.users_id },
       });
       },
     },

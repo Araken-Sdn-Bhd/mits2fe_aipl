@@ -20,7 +20,7 @@
                   </div>
                   <div class="col-sm-4">
                     <h5>Team</h5>
-                    <p>{{ details.team_name }}</p>
+                    <p>{{ this.Id }}</p>
                   </div>
                   <div class="col-sm-4">
                     <h5>Status</h5>
@@ -183,6 +183,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.UsersId = urlParams.get("usersid");
@@ -205,7 +206,7 @@ export default {
         .post(
           `${this.$axios.defaults.baseURL}` +
             "screen-module/getUserMatrixListById",
-          { team_id: this.Id,staff_id:this.UsersId },
+          { staff_id:this.UsersId },
           { headers }
         )
         .then((resp) => {
@@ -269,6 +270,10 @@ export default {
         this.submodulelist = [];
       }
       this.OnSearch();
+
+      if (this.ModuleId == 0) {
+        this.GetList();
+      }
     },
     OnSearch() {
       if (this.ModuleId && !this.SubmoduleId && !this.search) {
@@ -350,9 +355,9 @@ export default {
           { headers }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          this.$nextTick(() => {
-            $("#updatepopup").modal("show");
-          });
+          this.$swal.fire(
+                  'Successfully Update',
+                )
         } else {
           this.$nextTick(() => {
             $("#errorpopup").modal("show");
@@ -360,9 +365,12 @@ export default {
         }
       } catch (e) {
         console.log(e);
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
   },
