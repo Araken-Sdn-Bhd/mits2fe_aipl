@@ -21,8 +21,8 @@
 
                 <div class="content-subtab">
                   <form class="g-3 mt-3" method="post" @submit.prevent="insertsaltation">
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-md-7">
+                    <div class="row align-items-center">
+                      <div class="col-md-7 mb-4">
                         <label for="" class="form-label">Salutation</label>
                         <input
                           type="text"
@@ -32,7 +32,7 @@
                         />
                       </div>
 
-                      <div class="col-lg-1 col-sm-2">
+                      <div class="col-lg-1 col-sm-2 mb-4">
                         <label class="form-label">Index</label>
                         <input
                           type="text"

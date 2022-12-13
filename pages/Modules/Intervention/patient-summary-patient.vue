@@ -7,7 +7,7 @@
         <div class="container-fluid px-4">
           <InterventionPatientDetails />
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-lg-8 col-sm-12">
               <div class="accordion mb-4 accordion-box" id="accordion2">
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="heading1">
@@ -30,7 +30,7 @@
                   >
                     <div class="accordion-body">
                       <table
-                        class="table table-striped data-table1"
+                        class="table table-striped data-table1 display nowrap"
                         style="width: 100%"
                       >
                         <thead>
@@ -135,7 +135,7 @@
                       <div class="row">
                         <div class="col-sm-6">
                           <table
-                            class="info-table clinical-information"
+                            class="info-table clinical-information clinical-information"
                             width="100%"
                           >
                             <tbody>
@@ -145,7 +145,7 @@
                                    {{ clinicalinfo.date_time }}
                                 </td>
                               </tr>
-                              <tr>
+                              <tr class="blank-tr">
                                 <td><br /></td>
                               </tr>
                               <tr>
@@ -178,10 +178,10 @@
                             width="100%"
                           >
                             <tbody>
-                              <tr>
+                              <tr class="blank-tr">
                                 <td><br /></td>
                               </tr>
-                              <tr>
+                              <tr class="blank-tr">
                                 <td><br /></td>
                               </tr>
                               <tr>
@@ -241,7 +241,7 @@
                   >
                     <div class="accordion-body">
                       <table
-                        class="table table-striped data-table"
+                        class="table table-striped data-table display nowrap"
                         style="width: 100%"
                       >
                         <thead>
@@ -280,12 +280,12 @@
               </div>
               <!-- accordion -->
 
-              <a class="common-btn" style="cursor:pointer;" @click="Ontransactionlog"
+              <a class="common-btn mb-sm-3" style="cursor:pointer;" @click="Ontransactionlog"
                 >Transaction Log</a
               >
             </div>
 
-            <div class="col-sm-4 general-action">
+            <div class="col-lg-4 col-sm-12 general-action">
               <div class="card mb-4">
                 <div class="card-header">
                   <h4>General Action</h4>
@@ -573,14 +573,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          
+          $('button[data-bs-toggle="collapse"]').click("show.bs.collapse", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
           });
         });
       })
@@ -620,8 +627,9 @@ export default {
               bLengthChange: false,
               bInfo: false,
               autoWidth: false,
-              responsive: true,
-              scrollX: false,
+              // responsive: true,
+              // scrollX: false,
+              scrollX: true,
               language: {
                 paginate: {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -629,6 +637,11 @@ export default {
                 },
               },
             });
+            $('button[data-bs-toggle="collapse"]').click("show.bs.collapse", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+          });
           });
         })
         .catch((err) => {

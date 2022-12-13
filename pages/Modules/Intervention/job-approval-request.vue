@@ -12,7 +12,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <table
-                class="table table-striped data-table font-13"
+                class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
                 <thead>
@@ -38,6 +38,14 @@
                   </tr>
                 </tbody>
               </table>
+              <p
+                v-show="!list.length" style=" padding: 0px;
+                margin: 10px;
+                color: red;
+                display: flex;
+                justify-content: center;">
+                No Record Found
+              </p>
             </div>
           </div>
         </div>
@@ -75,6 +83,7 @@ export default {
     };
     const response = await this.$axios.post(
             "intervention-company/approval-list",
+            { branch_id: this.userdetails.branch.branch_id,email:this.userdetails.user.email},
             { headers }
           )
       .then((resp) => {
@@ -85,9 +94,7 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
-
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

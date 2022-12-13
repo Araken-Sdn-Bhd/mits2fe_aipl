@@ -47,7 +47,7 @@
                   <div class="content-subtab">
                   <form class="g-3 mt-3" method="post" @submit.prevent="onAddparameter()">
                     <div class="row">
-                      <div class="col-md-9 mb-4">
+                      <div class="col-sm-9 mb-4">
                         <label for="" class="form-label">Role Name</label>
                         <input
                           type="text"
@@ -56,7 +56,7 @@
                           v-model="rolename"/>
                       </div>
 
-                      <div class="col-md-3 mb-4">
+                      <div class="col-sm-3 mb-4">
                         <label for="" class="form-label">Status</label>
                         <select class="form-select" v-model="rolestatus">
                                 <option value="0">Enable</option>
@@ -78,7 +78,7 @@
                   <div class="table-title">
                     <h3>List of Roles</h3>
                   </div>
-                  <table class="table table-striped data-table1" style="width: 100%">
+                  <table class="table table-striped data-table1 display nowrap" style="width: 100%">
                     <thead>
                       <tr>
                         <th style="width:3%">No</th>
@@ -167,14 +167,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+           $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
       })

@@ -12,10 +12,10 @@
 
           <div class="card mb-4">
             <div class="card-body new-form">
-              <div>
+              <div class="cps-form">
                 <table class="notes width-eq">
-                  <tbody>
-                    <tr>
+                  <tbody class="d-tb-block">
+                    <tr class="three-td">
                       <th>Date & Time Seen By :</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="cps_date" />
@@ -33,7 +33,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="three-td">
                       <th>Date & Time Discussed with:</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="cps_date_discussed" />
@@ -51,7 +51,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="three-td">
                       <th>Visit Date & time</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="visit_date" />
@@ -61,9 +61,21 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="three-td">
                       <th>Informants</th>
-                      <td colspan="3">
+                      <td class="tdl-5">
+                          <th>Name</th>
+                          <input type="text" class="form-control" v-model="informants_name" />
+                        </td>
+                        <td class="tdl-5">
+                          <th>Relationship</th>
+                          <input type="text" class="form-control" v-model="informants_relationship" />
+                        </td>
+                        <td class="tdl-5">
+                          <th>Contact No</th>
+                          <input type="text" class="form-control" v-model="informants_contact" />
+                        </td>
+                      <!-- <td colspan="3">
                         <table>
                           <thead>
                             <tr>
@@ -75,28 +87,31 @@
                           <tbody>
                             <tr>
                               <td class="tdl-5">
+                                <th class="th-bg">Name</th>
                                 <input type="text" class="form-control" v-model="informants_name" />
                               </td>
                               <td class="tdl-5">
+                                <th class="th-bg">Relationship</th>
                                 <input type="text" class="form-control" v-model="informants_relationship" />
                               </td>
                               <td class="tdl-5">
+                                <th class="th-bg">Contact No</th>
                                 <input type="text" class="form-control" v-model="informants_contact" />
                               </td>
                             </tr>
                             <tr>
                               <td colspan="3" style="padding: 0">
-                                <!-- <a href="#" class="add"
+                                <a href="#" class="add"
                                 ><i class="fa fa-plus"></i
                               ></a> -->
-                              </td>
+                              <!-- </td>
                             </tr>
                           </tbody>
                         </table>
-                      </td>
+                      </td>  -->
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Case Manager</th>
                       <td colspan="3">
                         <select class="form-select" aria-label="Default select example" v-model="case_manager">
@@ -108,7 +123,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Visited By</th>
                       <td colspan="2">
                         <input type="text" class="form-control" v-model="visited_by" />
@@ -118,7 +133,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Visit Outcome</th>
                       <td colspan="3">
                         <select class="form-select" aria-label="Default select example" v-model="visit_outcome">
@@ -130,7 +145,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Current Intervention</th>
                       <td colspan="3">
                         <select class="form-select" v-model="current_intervention">
@@ -142,7 +157,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Compliance To Treatment</th>
                       <td colspan="3">
                         <select class="form-select" v-model="compliance_treatment">
@@ -154,21 +169,28 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Medication Supervised By</th>
-                      <td colspan="3">
+                      <td colspan="2">
                         <select class="form-select" v-model="medication_supervised_by">
                           <option value="">Please Select</option>
                           <option v-for="med in medicationsupervised" v-bind:key="med.id" v-bind:value="med.id">
                             {{ med.section_value }}
                           </option>
-                        </select>
+                        </select>  
+                      </td>
+                      <td colspan="2">
+                      <input v-model="medication_supervised_by_specify"
+                      type="text" 
+                      class="form-control" 
+                      v-if="medication_supervised_by == '263'"
+                      placeholder="Specify"/>
                       </td>
                     </tr>
 
                     <tr>
                       <td colspan="4">
-                        <table class="sub-table-form td-width">
+                        <table class="sub-table-form td-width mental-state">
                           <tbody>
                             <tr>
                               <th colspan="5" class="black">
@@ -574,12 +596,20 @@
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td colspan="5">
+                                <input class="form-control" type="text" name="heroin-opiate9"
+                                id="heroin-opiate-current-use specify" 
+                                v-model="other_specify_details"
+                                placeholder="Specify"/>
+                              </td>
+                              </tr>
                           </tbody>
                         </table>
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Remarks</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="ipsychopathology_remarks"></textarea>
@@ -588,7 +618,7 @@
 
                     <tr>
                       <td colspan="4">
-                        <table class="sub-table-form td-width">
+                        <table class="sub-table-form td-width mental-state">
                           <tbody>
                             <tr>
                               <td colspan="5" class="black">Risk Assessment:</td>
@@ -800,7 +830,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Changes in treatment at Current Visit:</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="changes_in_teratment"></textarea>
@@ -810,7 +840,7 @@
                     <tr>
                       <td colspan="2" class="black">Side Effects:</td>
                     </tr>
-                    <tr>
+                    <tr class="two-radio">
                       <th>Akathisia</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -831,7 +861,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Acute Dystonia</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -852,7 +882,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Parkinsonism</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -873,7 +903,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Tardive Dyskinesia</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -894,7 +924,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Tardive Dystonia</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -915,14 +945,14 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Others, specify</th>
                       <td colspan="3">
                         <input type="text" class="form-control" name="" v-model="others_specify" />
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Remarks:</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="side_effects_remarks"></textarea>
@@ -935,7 +965,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr  class="psp-scale">
                       <td>
                         <input type="text" class="form-control" name="" v-model="social_performance" />
                       </td>
@@ -950,7 +980,7 @@
                       <td colspan="4" class="black">Intervention</td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Psychoeducation/Counseling</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -971,7 +1001,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Coping Skills Training</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -991,7 +1021,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="two-radio">
                       <th>ADL Training</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -1011,7 +1041,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="two-radio">
                       <th>Supported Employment</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -1031,7 +1061,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="two-radio">
                       <th>Family Intervention</th>
                       <td>
                         <div class="form-check form-check-inline">
@@ -1052,20 +1082,20 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Others, specify</th>
                       <td colspan="3">
                         <input type="text" class="form-control" name="" v-model="intervention_others" />
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="two-td">
                       <th>Remarks:</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="remarks"></textarea>
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-radio">
                       <th>Employment the past 6 month:</th>
                       <td colspan="3">
                         <div class="form-check form-check-inline">
@@ -1085,7 +1115,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="this.employment_past_months == 'Yes'">
+                    <tr class="two-radio" v-if="this.employment_past_months == 'Yes'">
                       <th>*If Yes,</th>
                       <td colspan="3">
                         <select class="form-select" v-model="if_employment_yes">
@@ -1103,28 +1133,28 @@
                       <td colspan="4" class="black">Follow Up</td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Psychiatric clinic</th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="psychiatric_clinic" />
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>IM depot in clinic</th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="im_depot_clinic" />
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Next community visit</th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="next_community_visit" />
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr class="two-td">
                       <th>Comments</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="comments"></textarea>
@@ -1172,9 +1202,9 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Category Of Services
+                          <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services
                           </label>
-                          <div class="col-sm-8">
+                          <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
                                 value="assisstance" v-model="category_services" />
@@ -1317,6 +1347,7 @@
                   </tbody>
                 </table>
               </div>
+
               <div class="reslt d-none d-print-block">
                 <table class="notes width-eq">
                   <tbody>
@@ -1927,6 +1958,7 @@
                   </tbody>
                 </table>
               </div>
+
               <p v-if="errorList.length">
               <ul>
                 <li style="color:red" v-for='err in errorList' :key='err'>
@@ -1935,10 +1967,11 @@
               </ul>
               </p>
               <br /><br />
-              <div class="d-flex" v-if="!pid">
+
+              <div class="d-flex four-btn" v-if="!pid">
                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                 </button>
-                <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
+                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
 
                   <button @click="setData" class="btn btn-success btn-text"><i class="fad fa-print"></i>Print</button>
                   <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
@@ -2003,6 +2036,7 @@ export default {
       current_intervention: "",
       compliance_treatment: "",
       medication_supervised_by: "",
+      medication_supervised_by_specify: "",
       delusions: "",
       hallucination: "",
       behavior: "",
@@ -2013,6 +2047,7 @@ export default {
       uncooperativeness: "",
       poor_impulse_control: "",
       others: "",
+      other_specify_details: "",
       ipsychopathology_remarks: "",
       risk_of_violence: "",
       risk_of_suicide: "",
@@ -2059,6 +2094,7 @@ export default {
       pid: 0,
       type: "",
       appId: null,
+      SidebarAccess:null,
 
  
 
@@ -2142,6 +2178,7 @@ export default {
               current_intervention: this.current_intervention,
               compliance_treatment: this.compliance_treatment,
               medication_supervised_by: this.medication_supervised_by,
+              medication_supervised_by_specify:this.medication_supervised_by_specify,
               delusions: this.delusions,
               hallucination: this.hallucination,
               behavior: this.behavior,
@@ -2152,6 +2189,7 @@ export default {
               uncooperativeness: this.uncooperativeness,
               poor_impulse_control: this.poor_impulse_control,
               others: this.others,
+              other_specify_details: this.other_specify_details,
               ipsychopathology_remarks: this.ipsychopathology_remarks,
               risk_of_violence: this.risk_of_violence,
               risk_of_suicide: this.risk_of_suicide,
@@ -2265,6 +2303,7 @@ export default {
           if (!this.medication_supervised_by) {
             this.errorList.push("Medication Supervised By is required");
           }
+          
           if (!this.delusions) {
             this.errorList.push("Delusions is required");
           }
@@ -2533,6 +2572,7 @@ export default {
               current_intervention: this.current_intervention,
               compliance_treatment: this.compliance_treatment,
               medication_supervised_by: this.medication_supervised_by,
+              medication_supervised_by_specify: this.medication_supervised_by_specify,
               delusions: this.delusions,
               hallucination: this.hallucination,
               behavior: this.behavior,
@@ -2543,6 +2583,7 @@ export default {
               uncooperativeness: this.uncooperativeness,
               poor_impulse_control: this.poor_impulse_control,
               others: this.others,
+              other_specify_details: this.other_specify_details,
               ipsychopathology_remarks: this.ipsychopathology_remarks,
               risk_of_violence: this.risk_of_violence,
               risk_of_suicide: this.risk_of_suicide,
@@ -2787,6 +2828,7 @@ export default {
       this.current_intervention = "";
       this.compliance_treatment = "";
       this.medication_supervised_by = "";
+      this.medication_supervised_by_specify = "";
       this.delusions = "";
       this.hallucination = "";
       this.behavior = "";
@@ -2797,6 +2839,7 @@ export default {
       this.uncooperativeness = "";
       this.poor_impulse_control = "";
       this.others = "";
+      this.other_specify_details = "",
       this.ipsychopathology_remarks = "";
       this.risk_of_violence = "";
       this.risk_of_suicide = "";
@@ -3071,6 +3114,8 @@ export default {
         this.compliance_treatment = response.data.Data[0].compliance_treatment;
         this.medication_supervised_by =
           response.data.Data[0].medication_supervised_by;
+        this.medication_supervised_by_specify = 
+          response.data.Data[0].medication_supervised_by_specify;
         this.delusions = response.data.Data[0].delusions;
         this.hallucination = response.data.Data[0].hallucination;
         this.behavior = response.data.Data[0].behavior;
@@ -3081,6 +3126,7 @@ export default {
         this.uncooperativeness = response.data.Data[0].uncooperativeness;
         this.poor_impulse_control = response.data.Data[0].poor_impulse_control;
         this.others = response.data.Data[0].others;
+        this.other_specify_details = response.data.Data[0].other_specify_details;
         this.ipsychopathology_remarks =
           response.data.Data[0].ipsychopathology_remarks;
         this.risk_of_violence = response.data.Data[0].risk_of_violence;

@@ -1,11 +1,11 @@
 <template>
   <div id="layoutSidenav">
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" class="ml-0">
       <main>
         <div class="container-fluid px-4">
            <publicnav></publicnav>
           <div class="offline-title">
-            <h1>Patient Screening and Appointment</h1>
+            <h1 class="mt-2 mb-2">Patient Screening and Appointment</h1>
           </div>
           <div class="card mb-4">
             <div
@@ -18,7 +18,7 @@
                 <p>Thank you for reaching out to MENTARI Self Test</p>
               </div>
               <div class="row justify-content-center">
-                <div class="col-sm-8">
+                <div class="col-lg-8 col-md-12">
                   <div class="whodas-result">
                     <p>Your general disability score</p>
                     <h4>{{ UserTotal }} <span>/ 180</span></h4>
@@ -106,8 +106,8 @@
               </div>
             </div>
             <div class="row justify-content-center">
-              <div class="col-sm-8">
-                <div class="d-flex mt-3">
+              <div class="col-lg-8 col-md-12">
+                <div class="d-flex mt-3 full-width">
                   <button
                     type="button"
                     class="btn btn-secondary btn-text mr-auto"

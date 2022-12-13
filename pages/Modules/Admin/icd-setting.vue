@@ -80,7 +80,7 @@
           />
         </div>
 
-        <div class="col-md-5 mb-4">
+        <div class="col-lg-5 col-sm-4 mb-4">
           <label for="" class="form-label">ICD Type Description</label>
           <input
             type="text"
@@ -90,7 +90,7 @@
           />
         </div>
 
-        <div class="col-md-1 mb-4">
+        <div class="col-lg-1 col-sm-2 mb-4">
           <label class="form-label">Index</label>
           <input
             type="text"
@@ -122,7 +122,7 @@
     <div class="table-title">
       <h3>List of ICD Type</h3>
     </div>
-    <table class="table table-striped data-table" style="width: 100%">
+    <table class="table table-striped data-table display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -197,7 +197,7 @@
           />
         </div>
 
-        <div class="col-md-5 mb-4">
+        <div class="col-lg-5 col-sm-4 mb-4">
           <label for="" class="form-label">ICD Category Description</label>
           <input
             type="text"
@@ -207,7 +207,7 @@
           />
         </div>
 
-        <div class="col-md-1 mb-4">
+        <div class="col-lg-1 col-sm-2 mb-4">
           <label class="form-label">Index</label>
           <input type="text" class="form-control" placeholder="0" v-model="icdcatindex"/>
         </div>
@@ -233,7 +233,7 @@
     <div class="table-title">
       <h3>List of ICD Category</h3>
     </div>
-    <table class="table table-striped data-table1" style="width: 100%">
+    <table class="table table-striped data-table1 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -333,7 +333,7 @@
           />
         </div>
 
-        <div class="col-md-5 mb-4">
+        <div class="col-lg-5 col-sm-4 mb-4">
           <label for="" class="form-label">ICD Description</label>
           <input
             type="text"
@@ -343,7 +343,7 @@
           />
         </div>
 
-        <div class="col-md-1 mb-4">
+        <div class="col-lg-1 col-sm-2 mb-4">
           <label class="form-label">Index</label>
           <input
             type="text"
@@ -377,7 +377,7 @@
     <div class="table-title">
       <h3>List of ICD Code</h3>
     </div>
-    <table class="table table-striped data-table2 font-13" style="width: 100%">
+    <table class="table table-striped data-table2 font-13 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -478,8 +478,9 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -487,6 +488,13 @@ export default {
               },
             },
           });
+          $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
+          });
+
         });
       })
       .catch((err) => {
@@ -670,8 +678,9 @@ export default {
               searching: false,
               bLengthChange: false,
               bInfo: false,
-              autoWidth: false,
-              responsive: true,
+              // autoWidth: false,
+              // responsive: true,
+              scrollX: true,
               language: {
                 paginate: {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
@@ -679,6 +688,13 @@ export default {
                 },
               },
             });
+            
+            $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
+          });
           });
         })
         .catch((err) => {
@@ -857,14 +873,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
       })

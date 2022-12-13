@@ -57,7 +57,7 @@
     <div class="table-title">
       <h3>List of Modules</h3>
     </div>
-    <table class="table table-striped data-table5 font-13" style="width: 100%">
+    <table class="table table-striped data-table5 font-13 display nowrap" style="width: 100%">
       <thead>
         <tr>
           <th>No</th>
@@ -124,14 +124,21 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            autoWidth: false,
-            responsive: true,
+            // autoWidth: false,
+            // responsive: true,
+            scrollX: true,
             language: {
               paginate: {
                 next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                 previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
               },
             },
+          });
+          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+            $($.fn.dataTable.tables(true))
+              .DataTable()
+              .columns.adjust()
+              .responsive.recalc();
           });
         });
       })
