@@ -361,6 +361,7 @@ export default {
                                 outcome: this.outcome_id,
                                 medication_des: this.medication_des,
                                 appId: this.appId,
+                                id: this.pid,
                                 status: "0",
                             }, {
                                 headers
@@ -507,6 +508,7 @@ export default {
                                     outcome: this.outcome_id,
                                     medication_des: this.medication_des,
                                     appId: this.appId,
+                                    id: this.pid,
                                     status: "1",
                                 }, {
                                     headers
