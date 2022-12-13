@@ -10,6 +10,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body">
+              <!-- tab -->
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <button
@@ -20,8 +21,7 @@
                     type="button"
                     role="tab"
                     aria-controls="nav-home"
-                    aria-selected="true"
-                  >
+                    aria-selected="true">
                     Service Registration
                   </button>
                   <button
@@ -32,235 +32,236 @@
                     type="button"
                     role="tab"
                     aria-controls="nav-profile"
-                    aria-selected="false"
-                  >
+                    aria-selected="false" >
                     Service Division
                   </button>
                 </div>
               </nav>
               <div class="tab-content" id="nav-tabContent">
+                 <!-- service registration -->
                 <div
                   class="tab-pane fade show active"
                   id="nav-home"
                   role="tabpanel"
-                  aria-labelledby="nav-home-tab"
-                >
+                  aria-labelledby="nav-home-tab">
                   <div class="content-subtab">
-    <form class="g-3 mt-3" method="post" @submit.prevent="onAddserviceregistration">
-      <div class="row">
-        <div class="col-md-3 mb-4">
-          <label for="" class="form-label">Service Code</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Service Code"
-            v-model="servicecode"
-          />
-        </div>
+                  <form class="g-3 mt-3" method="post" @submit.prevent="onAddserviceregistration">
+                    <div class="row">
+                      <div class="col-md-4 mb-4">
+                        <label for="" class="form-label">Service Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Service Code"
+                          v-model="servicecode"
+                        />
+                      </div>
+                      <div class="col-md-7 mb-4">
+                        <label for="" class="form-label">Service Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Service Name"
+                          v-model="servicename"
+                        />
+                      </div>
+                     
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-7 col-sm-4 mb-4">
+                        <label for="" class="form-label">Service Description</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Service Description"
+                          v-model="servicedescription"/>
+                      </div>
+                      <div class="col-lg-1 col-sm-2 mb-4">
+                        <label class="form-label">Index</label>
+                        <input type="text" class="form-control" placeholder="0" v-model="serviceindex" />
+                      </div>
+                      <div class="col-sm-3 mb-4">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="status">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
+                      </div>
 
-        <div class="col-md-3 mb-4">
-          <label for="" class="form-label">Service Name</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Service Name"
-            v-model="servicename"
-          />
-        </div>
-
-        <div class="col-lg-5 col-sm-4 mb-4">
-          <label for="" class="form-label">Service Description</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter Service Description"
-            v-model="servicedescription"
-          />
-        </div>
-
-        <div class="col-lg-1 col-sm-2 mb-4">
-          <label class="form-label">Index</label>
-          <input type="text" class="form-control" placeholder="0" v-model="serviceindex" />
-        </div>
-      </div>
-      <!-- close-row -->
-      <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
-      <div class="d-flex justify-content-center" id="hidebutton1" ref="hidebutton1">
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
-        <i class="fa fa-save"></i> Save
-        </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
-          <i class="fa fa-plus"></i> Add Parameter
-        </button>
-      </div>
-    </form>
-    <div class="table-title">
-      <h3>List of Service</h3>
-    </div>
-    <table class="table table-striped data-table1 display nowrap" style="width: 100%">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Service Code</th>
-          <th>Service Name</th>
-          <th>Service Description</th>
-          <th>Index</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(rg, index) in list" :key="index">
-          <td>{{index+1}}</td>
-          <td>{{rg.service_code}}</td>
-          <td>{{rg.service_name}}</td>
-          <td>{{rg.service_description}}</td>
-          <td>{{rg.service_order}}</td>
-          <td>
-            <a class="edit" @click="editreg(rg)"><i class="fa fa-edit" v-if="SidebarAccess==1"></i></a>
-            <a @click="deletereg(rg)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-              ><i class="fa fa-trash-alt"></i
-            ></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                    </div>
+                    <!-- close-row -->
+                    <p v-if="errors.length">
+                       <ul><li style="color:red"  v-for='err in errors' :key='err'>{{ err }}</li></ul>
+                    </p>
+                    <div class="d-flex justify-content-center" id="hidebutton1" ref="hidebutton1">
+                      <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
+                      <i class="fa fa-save"></i> Save
+                      </button>
+                      <button type="submit" class="btn btn-warning btn-text" v-if="!Id">
+                        <i class="fa fa-plus"></i> Add Parameter
+                      </button>
+                    </div>
+                  </form>
+                  <div class="table-title"><h3>List of Service</h3></div>
+                  <table class="table table-striped data-table1 display nowrap" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th style="width:3%">No</th>
+                        <th>Service Code</th>
+                        <th>Service Name</th>
+                        <th>Service Description</th>
+                        <th>Index</th>
+                        <th>Status</th>
+                        <th style="width:3%">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(rg, index) in list" :key="index">
+                        <td>{{index+1}}</td>
+                        <td>{{rg.service_code}}</td>
+                        <td>{{rg.service_name}}</td>
+                        <td>{{rg.service_description}}</td>
+                        <td>{{rg.service_order}}</td>
+                        <td>
+                        <p v-if="rg.status == 0" style="color:red">Disabled</p>
+                        <p v-if="rg.status == 1">Enabled</p>
+                      </td>
+                        <td>
+                          <a class="edit" @click="editreg(rg)"><i class="fa fa-edit" v-if="SidebarAccess==1"></i></a>
+                       </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+                </div>
+                <!-- service division -->
                 <div
                   class="tab-pane fade"
                   id="nav-profile"
                   role="tabpanel"
-                  aria-labelledby="nav-profile-tab"
-                >
+                  aria-labelledby="nav-profile-tab">
                 <div class="content-subtab border-top-left">
-    <form class="g-3 mt-3" method="post" @submit.prevent="onAddservicedivision">
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <label for="" class="form-label">Service Name</label>
-          <select
-            v-model="dserviceName"
-            class="form-select"
-            aria-label="Default select example"
-          >
-          <option value="">Please Select</option>
-            <option
-              v-for="srvc in list"
-              v-bind:key="srvc.id"
-              v-bind:value="srvc.id"
-            >
-              {{ srvc.service_name }}
-            </option>
-          </select>
-        </div>
+                <form class="g-3 mt-3" method="post" @submit.prevent="onAddservicedivision">
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <label for="" class="form-label">Service Name</label>
+                      <select
+                        v-model="dserviceName"
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                      <option value="">Please Select</option>
+                        <option
+                          v-for="srvc in servicelist"
+                          v-bind:key="srvc.id"
+                          v-bind:value="srvc.id"
+                        >
+                          {{ srvc.service_name }}
+                        </option>
+                      </select>
+                    </div>
 
-        <div class="col-lg-4 col-sm-3 mb-4">
-          <label for="" class="form-label">Hospital</label>
-          <select
-            v-model="dhospitalName"
-            class="form-select"
-            aria-label="Default select example"
-            @change="onHospitalCodechange($event)"
-          >
-          <option value="">Please Select</option>
-            <option
-              v-for="hst in hospitallist"
-              v-bind:key="hst.id"
-              v-bind:value="hst.id"
-            >
-              {{ hst.hospital_code }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-3 mb-4">
-          <label for="" class="form-label">Branch</label>
-          <select
-            v-model="dbranceName"
-            class="form-select"
-            aria-label="Default select example"
-          >
-          <option value="">Please Select</option>
-            <option
-              v-for="bnch in branchlist"
-              v-bind:key="bnch.id"
-              v-bind:value="bnch.id"
-            >
-              {{ bnch.hospital_branch_name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-lg-1 col-sm-2 mb-4">
-          <label class="form-label">Index</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="0"
-            v-model="dservicedindex"
-          />
-        </div>
-      </div>
-      <!-- close-row -->
-       <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
-      <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="dId">
-        <i class="fa fa-save"></i> Save
-        </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!dId">
-          <i class="fa fa-plus"></i> Add Parameter
-        </button>
-      </div>
-    </form>
-
-
-
-    <div class="table-title">
-      <h3>List of Service</h3>
-    </div>
-    <table class="table table-striped data-table display nowrap" style="width: 100%">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Hospital</th>
-          <th>Branch</th>
-          <th>Service Name</th>
-          <th>Index</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(srvcdvsv, index) in dlist" :key="index">
-          <td>{{ index}}</td>
-          <td>{{ srvcdvsv.hospitals.hospital_name }}</td>
-          <td>{{ srvcdvsv.branchs.hospital_branch_name }}</td>
-          <td>{{ srvcdvsv.services.service_name }}</td>
-          <td>{{ srvcdvsv.division_order }}</td>
-          <td>
-            <a class="edit" @click="editdivison(srvcdvsv)" v-if="SidebarAccess==1"
-              ><i class="fa fa-edit"></i
-            ></a>
-            <a @click="deletedivison(srvcdvsv)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-              ><i class="fa fa-trash-alt"></i
-            ></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                    <div class="col-lg-6 col-sm-3 mb-4">
+                      <label for="" class="form-label">Hospital</label>
+                      <select
+                        v-model="dhospitalName"
+                        class="form-select"
+                        aria-label="Default select example"
+                        @change="onHospitalCodechange($event)"
+                      >
+                      <option value="">Please Select</option>
+                        <option
+                          v-for="hst in hospitallist"
+                          v-bind:key="hst.id"
+                          v-bind:value="hst.id"
+                        >
+                          {{ hst.hospital_name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <label for="" class="form-label">Branch</label>
+                      <select
+                        v-model="dbranceName"
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                      <option value="">Please Select</option>
+                        <option
+                          v-for="bnch in branchlist"
+                          v-bind:key="bnch.id"
+                          v-bind:value="bnch.id"
+                        >
+                          {{ bnch.hospital_branch_name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-lg-1 col-sm-2 mb-4">
+                      <label class="form-label">Index</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="0"
+                        v-model="dservicedindex"
+                      />
+                    </div>
+                    <div class="col-sm-3 mb-4">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="dstatus">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
+                      </div>
+                  </div>
+                  <!-- close-row -->
+                    <p v-if="errors.length">
+                    <ul><li style="color:red"  v-for='err in errors' :key='err'> {{ err }}</li></ul>
+                    </p>
+                  <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
+                    <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="dId">
+                    <i class="fa fa-save"></i> Save
+                    </button>
+                    <button type="submit" class="btn btn-warning btn-text" v-if="!dId">
+                      <i class="fa fa-plus"></i> Add Parameter
+                    </button>
+                  </div>
+                </form>
+                <div class="table-title"><h3>List of Service</h3></div>
+                <table class="table table-striped data-table display nowrap" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th style="width:3%">No</th>
+                      <th>Hospital</th>
+                      <th>Branch</th>
+                      <th>Service Name</th>
+                      <th>Index</th>
+                      <th >Status</th>
+                      <th style="width:5%">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(srvcdvsv, index) in dlist" :key="index">
+                      <td>{{index+1}}</td>
+                      <td>{{ srvcdvsv.hospitals.hospital_name }}</td>
+                      <td>{{ srvcdvsv.branchs.hospital_branch_name }}</td>
+                      <td>{{ srvcdvsv.services.service_name }}</td>
+                      <td>{{ srvcdvsv.division_order }}</td>
+                      <td>
+                        <p v-if="srvcdvsv.status == 0" style="color:red">Disabled</p>
+                        <p v-if="srvcdvsv.status == 1">Enabled</p>
+                      </td>
+                      <td>
+                        <a class="edit" @click="editdivison(srvcdvsv)" v-if="SidebarAccess==1"
+                          ><i class="fa fa-edit"></i
+                        ></a>
+                       
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
                 </div>
               </div>
             </div>
@@ -287,6 +288,8 @@ export default {
   setup() {},
   data() {
     return {
+      status: 1,
+      dstatus: 1,
       servicecode: "",
       servicename: "",
       servicedescription: "",
@@ -324,8 +327,6 @@ export default {
             searching: false,
             bLengthChange: false,
             bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
             scrollX: true,
             language: {
               paginate: {
@@ -388,6 +389,7 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    this.GetActiveList();
     this.GethospitalList();
   },
   methods: {
@@ -437,14 +439,17 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           } else {
             const response = await this.$axios.post(
@@ -456,18 +461,22 @@ export default {
                 service_name: this.servicename,
                 service_description: this.servicedescription,
                 service_order: this.serviceindex,
+                status: this.status,
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           }
         }
@@ -494,38 +503,12 @@ export default {
         this.servicedescription = response.data.list[0].service_description;
         this.serviceindex = response.data.list[0].service_order;
         this.Id = data.id;
+        this.status = response.data.list[0].status;
       } else {
         window.alert("Something went wrong");
       }
     },
-    async deletereg(data) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "service/remove",
-          { added_by: this.userdetails.user.id, service_id: data.id },
-          { headers }
-        );
-        if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
-          this.GetList();
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+   
     async resetmodel() {
       this.servicecode = "";
       this.servicename = "";
@@ -534,6 +517,7 @@ export default {
       this.errors = [];
       this.GetList();
       this.Id = 0;
+      this.status='';
     },
 
     async GetDivisionList() {
@@ -565,6 +549,21 @@ export default {
         this.hospitallist = response.data.list;
       } else {
         this.hospitallist = [];
+      }
+    },
+    async GetActiveList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("service/activeList", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.servicelist = response.data.list;
+      } else {
+        this.servicelist = [];
       }
     },
     async onHospitalCodechange(event) {
@@ -604,6 +603,7 @@ export default {
         this.dhospitalName = response.data.list[0].hospital_id;
         this.dbranceName = response.data.list[0].branch_id;
         this.dservicedindex = response.data.list[0].division_order;
+        this.dstatus = response.data.list[0].status;
         this.dId = data.id;
         console.log(response.data.list[0]);
         const response1 = await this.$axios.post(
@@ -622,34 +622,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
-    async deletedivison(data) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "service/remove-division",
-          { added_by: this.userdetails.user.id, division_id: data.id },
-          { headers }
-        );
-        if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
-          this.GetDivisionList();
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+   
     async onAddservicedivision() {
       this.errors = [];
       try {
@@ -689,14 +662,17 @@ export default {
                 { headers }
               );
               if (response.data.code == 200 || response.data.code == "200") {
-                this.$nextTick(() => {
-                  $("#insertpopup").modal("show");
-                });
+                this.$swal.fire(
+                  'Successfully Insert',
+                )
                 this.resetdividionmodel();
               } else {
-                this.$nextTick(() => {
-                  $("#errorpopup").modal("show");
-                });
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
               }
             } else {
               const response = await this.$axios.post(
@@ -708,18 +684,22 @@ export default {
                   hospital_id: this.dhospitalName,
                   branch_id: this.dbranceName,
                   division_order: this.dservicedindex,
+                  status:this.dstatus
                 },
                 { headers }
               );
               if (response.data.code == 200 || response.data.code == "200") {
-                this.$nextTick(() => {
-                  $("#updatepopup").modal("show");
-                });
+                this.$swal.fire(
+                  'Successfully Update',
+                )
                 this.resetdividionmodel();
               } else {
-                this.$nextTick(() => {
-                  $("#errorpopup").modal("show");
-                });
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
               }
             }
         }
