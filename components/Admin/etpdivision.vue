@@ -5,7 +5,7 @@
         <div class="content-subtab border-top-left">
           <form class="g-3 mt-3" method="post" @submit.prevent="onAddetpDivition">
             <div class="row">
-              <div class="col-md-4 mb-4">
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">ETP Name</label>
                  <select
             v-model="etp_id"
@@ -23,7 +23,7 @@
           </select>
               </div>
 
-              <div class="col-lg-4 col-sm-3 mb-4">
+              <div class="col-lg-6 col-sm-3 mb-4">
                 <label for="" class="form-label">Hospital</label>
                  <select
             v-model="hospital_id"
@@ -42,7 +42,10 @@
           </select>
               </div>
 
-              <div class="col-md-3 mb-4">
+            </div>
+            <div class="row">
+              
+              <div class="col-md-6 mb-4">
                 <label for="" class="form-label">Branch</label>
                 <select
             v-model="branch_id"
@@ -63,6 +66,13 @@
               <div class="col-lg-1 col-sm-2 mb-4">
                 <label class="form-label">Index</label>
                 <input type="text" class="form-control" placeholder="0" v-model="division_order" />
+              </div>
+              <div class="col-sm-3 mb-4">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="status">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
               </div>
             </div>
             <!-- close-row -->
@@ -92,12 +102,13 @@
           <table class="table table-striped data-table1 display nowrap" style="width: 100%">
             <thead>
               <tr>
-                <th>No</th>
+                <th style="width:3%">No</th>
                 <th>Hospital</th>
                 <th>Branch</th>
                 <th>ETP Name</th>
                 <th>Index</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th style="width:3%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -108,12 +119,14 @@
                 <td>{{etp.etp.etp_name}}</td>
                 <td>{{etp.division_order}}</td>
                 <td>
+                        <p v-if="etp.status == 0" style="color:red">Disabled</p>
+                        <p v-if="etp.status == 1">Enabled</p>
+                      </td>
+                <td>
                   <a class="edit" @click="editdiv(etp)" v-if="SidebarAccess==1"
                     ><i class="fa fa-edit"></i
                   ></a>
-                  <a @click="deletediv(etp)" class="action-icon icon-danger" v-if="SidebarAccess==1"
-                    ><i class="fa fa-trash-alt"></i
-                  ></a>
+                 
                 </td>
               </tr>
             </tbody>
@@ -140,6 +153,7 @@ export default {
       errors: [],
       userdetails: null,
       SidebarAccess:null,
+      status: 1,
     };
   },
   mounted() {
@@ -197,7 +211,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("etp/list", {
+      const response = await this.$axios.get("etp/activelist", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
@@ -273,6 +287,7 @@ export default {
         this.hospital_id = response.data.list[0].hospital_id;
         this.branch_id = response.data.list[0].branch_id;
         this.division_order = response.data.list[0].division_order;
+        this.status = response.data.list[0].status;
         this.Id = data.id;
         const response1 = await this.$axios.post(
           "hospital/get-branch-by-hospital-code",
@@ -290,34 +305,7 @@ export default {
         window.alert("Something went wrong");
       }
     },
-    async deletediv(data) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "etp/remove-division",
-          { added_by: this.userdetails.user.id, division_id: data.id },
-          { headers }
-        );
-        if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
-          this.GetList();
-        } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+   
     async onAddetpDivition() {
       this.errors = [];
       try {
@@ -347,18 +335,22 @@ export default {
                 hospital_id: this.hospital_id,
                 branch_id: this.branch_id,
                 division_order: this.division_order,
+                
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Insert',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           } else {
             const response = await this.$axios.post(
@@ -370,18 +362,22 @@ export default {
                 branch_id: this.branch_id,
                 division_order: this.division_order,
                 division_id: this.Id,
+                status: this.status,
               },
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           }
         }
