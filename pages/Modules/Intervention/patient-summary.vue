@@ -54,7 +54,7 @@
                                 <p v-if="hst.status==0">Draft</p>
                               </td>
                             <td>{{hst.date}}</td>
-                            <td>{{formatetime(hst.created_at)}}</td>
+                            <td>{{hst.time}}</td>
                             <td>{{hst.name}}</td>
                             <td>
                               <a v-if="hst.status!=0" style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"

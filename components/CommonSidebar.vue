@@ -342,7 +342,7 @@ export default {
       }).then((result) => {
         if (result.dismiss === this.$swal.DismissReason.timer) {
           console.log('I was closed by the timer')
-          this.logoutUser();
+          // this.logoutUser();
         }
       })
     },
