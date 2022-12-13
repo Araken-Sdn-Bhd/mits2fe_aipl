@@ -445,7 +445,7 @@
                     </button>
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                    <!-- <button
@@ -545,7 +545,13 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save this as draft ? ")) {
+      this.$swal.fire({
+          title: 'Do you want to save as draft?',
+          showCancelButton: true,
+          confirmButtonText: 'Save',
+          }).then(async(result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
         try {
           this.loader = true;
           const headers = {
@@ -554,7 +560,7 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "intervention/job-end-report",
+            "intervention/job-report-end",
             {
               added_by: this.userdetails.user.id,
               patient_id: this.Id,
@@ -592,21 +598,33 @@ export default {
           if (response.data.code == 200 || reponse.data.code == "200") {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Succesfully save as draft!', '', 'success')
+            this.GoBack();
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.resetmodel();
+            this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + JSON.stringify(response.data.message),
+            })
+            this.GoBack();
           }
-      } catch (e) {}   
+      } catch (e) {
+            this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + e,
+            })
+                  }
+      } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
       }
+    }) 
     },
     async onPublishEvent() {
 
-      if (confirm("Are you sure you want to save this entry ? ")) {
+      // if (confirm("Are you sure you want to save this entry ? ")) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -735,7 +753,7 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "intervention/job-end-report",
+            "intervention/job-report-end",
             {
               added_by: this.userdetails.user.id,
               patient_id: this.Id,
@@ -773,9 +791,15 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetmodel();
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire({
+        title: 'Are you sure to submit this?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, submit it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      });
           } else {
             this.loader = false;
             this.$nextTick(() => {
@@ -784,7 +808,7 @@ export default {
           }
         }
       } catch (e) {}
-      }
+      // }
     },
     async GetList() {
       const headers = {
