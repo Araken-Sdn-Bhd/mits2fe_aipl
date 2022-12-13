@@ -17,7 +17,7 @@
 
               <form class="g-3 mt-3">
                 <div class="row">
-                  <div class="col-md-3 mb-4">
+                  <div class="col-lg-3 col-md-4 mb-4">
                     <label for="" class="form-label"
                       >Profession Registrtion No.</label
                     >
@@ -28,7 +28,7 @@
                     />
                   </div>
 
-                  <div class="col-md-6 mb-4">
+                  <div class="col-lg-6 col-md-8 mb-4">
                     <label for="" class="form-label">Staff Name</label>
                     <input
                       type="text"
@@ -37,7 +37,7 @@
                     />
                   </div>
 
-                  <div class="col-md-3 mb-4">
+                  <div class="col-lg-3 col-md-4 mb-4">
                     <label for="" class="form-label">Mentari Branch</label>
                     <input
                       type="text"
@@ -71,7 +71,7 @@
               </form>
 
               <table
-                class="table table-striped data-table font-13"
+                class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
                 <thead>
@@ -508,8 +508,9 @@ export default {
               searching: false,
               bLengthChange: false,
               bInfo: false,
-              autoWidth: false,
-              responsive: true,
+              // autoWidth: false,
+              // responsive: true,
+              scrollX: true,
               language: {
                 paginate: {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'

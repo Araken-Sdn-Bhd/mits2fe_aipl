@@ -12,224 +12,151 @@
           <div class="card mb-4">
             <div class="card-body new-form">
               <div class="row" v-if="patientdetails">
-                  <div class="col-sm-6">
-                    <div class="mb-3">
-                      <label class="form-label">Name</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="patientdetails.name_asin_nric"
-                        readonly
-                      />
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="mb-3">
-                      <label class="form-label">NRIC</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="patientdetails.nric_no"
-                        readonly
-                      />
-                    </div>
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" v-model="patientdetails.name_asin_nric" readonly />
                   </div>
                 </div>
-                <!-- close-row -->
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">NRIC</label>
+                    <input type="text" class="form-control" v-model="patientdetails.nric_no" readonly />
+                  </div>
+                </div>
+              </div>
+              <!-- close-row -->
 
-                <div class="row" v-if="patientdetails">
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label">Age</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="patientdetails.age"
-                        readonly
-                      />
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label">Date Of Birth</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="patientdetails.birth_date"
-                        readonly
-                      />
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label">Gender</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="patientdetails.gender[0].section_value"
-                        readonly
-                      />
-                    </div>
+              <div class="row" v-if="patientdetails">
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="text" class="form-control" v-model="patientdetails.age" readonly />
                   </div>
                 </div>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label">Date Of Birth</label>
+                    <input type="text" class="form-control" v-model="patientdetails.birth_date" readonly />
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <input type="text" class="form-control" v-model="patientdetails.gender[0].section_value" readonly />
+                  </div>
+                </div>
+              </div>
               <form method="post" @submit.prevent="OnSubmit">
-                <table class="job-search-table" id="companydetail" v-if="!pid">
+                <div class="table-responsive">
+                  <table class="job-search-table" id="companydetail" v-if="!pid">
+                    <thead>
+                      <tr>
+                        <th>Company Name </th>
+                        <th>Job Applied </th>
+                        <th>Application Date </th>
+                        <th>Interview Date </th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody class="optionBox">
+                      <tr class="block">
+                        <td><input type="text" class="form-control name" /></td>
+                        <td><input type="text" class="form-control job" /></td>
+                        <td>
+                          <input type="date" class="form-control appdate" />
+                        </td>
+                        <td><input type="date" class="form-control intdate" /></td>
+                        <td>
+                          <a class="add-row"><i class="fa fa-plus"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-responsive">
+                <table class="job-search-table" id="companydetail1" v-if="pid">
                   <thead>
                     <tr>
-                      <th>Company Name	</th>
-                      <th>Job Applied	</th>
-                      <th>Application Date	</th>
-                      <th>Interview Date	</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody class="optionBox">
-                    <tr class="block">
-                      <td><input type="text" class="form-control name" /></td>
-                      <td><input type="text" class="form-control job" /></td>
-                      <td>
-                        <input type="date" class="form-control appdate" />
-                      </td>
-                      <td><input type="date" class="form-control intdate" /></td>
-                      <td>
-                        <a class="add-row"><i class="fa fa-plus"></i></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                 <table class="job-search-table" id="companydetail1" v-if="pid">
-                  <thead>
-                    <tr>
-                      <th>Company Name	</th>
-                      <th>Job Applied	</th>
-                      <th>Application Date	</th>
-                      <th>Interview Date	</th>
+                      <th>Company Name </th>
+                      <th>Job Applied </th>
+                      <th>Application Date </th>
+                      <th>Interview Date </th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody class="optionBox1">
                     <tr class="block1" v-for="(job1, index) in jobSDESCRIPTION" :key="index">
                       <td><input type="text" class="form-control name" v-model="job1.company_name" /></td>
-                      <td><input type="text" class="form-control job" v-model="job1.job_applied"/></td>
+                      <td><input type="text" class="form-control job" v-model="job1.job_applied" /></td>
                       <td>
-                        <input type="date" class="form-control appdate" v-model="job1.application_date"/>
+                        <input type="date" class="form-control appdate" v-model="job1.application_date" />
                       </td>
-                      <td><input type="date" class="form-control intdate" v-model="job1.interview_date"/></td>
+                      <td><input type="date" class="form-control intdate" v-model="job1.interview_date" /></td>
                       <td>
                         <a class="add-row"><i class="fa fa-plus"></i></a>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <div
-                  class="accordion form-accordion mt-3"
-                  id="accordionExample"
-                >
+                </div>
+                <div class="accordion form-accordion mt-3" id="accordionExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                      <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         OCCASION OF SERVICES
                       </button>
                     </h2>
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
-                          >
+                          <label class="col-sm-4 col-form-label">Location Of Services</label>
                           <div class="col-sm-8">
-                            <select
-                              class="form-select"
-                              v-model="location_services_id"
-                            >
+                            <select class="form-select" v-model="location_services_id">
                               <option value="0">
                                 Select location of services
                               </option>
-                             <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
+                              <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
+                                {{ loc.section_value }}
+                              </option>
                             </select>
                           </div>
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
-                          >
+                          <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
-                                <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                              </select>
+                              <option value="0">Select Diagnosis</option>
+                              <option v-for="catcode in diagonisislist" v-bind:key="catcode.id"
+                                v-bind:value="catcode.id">
+                                {{ catcode.icd_code }} {{ catcode.icd_name }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Category Of Services
+                          <label class="col-lg-4 col-md-12 col-form-label">Category Of Services
                           </label>
-                          <div class="col-sm-8">
+                          <div class="col-lg-8 col-md-12">
                             <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio1"
-                                value="assisstance"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio1"
-                                >Assisstance / Supervision</label
-                              >
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                value="assisstance" v-model="category_services" />
+                              <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio2"
-                                value="clinical-work"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio2"
-                                >Clinical Work / Procedure
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="clinical-work" v-model="category_services" />
+                              <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                               </label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="inlineRadio3"
-                                value="external"
-                                v-model="category_services"
-                              />
-                              <label class="form-check-label" for="inlineRadio3"
-                                >External</label
-                              >
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                value="external" v-model="category_services" />
+                              <label class="form-check-label" for="inlineRadio3">External</label>
                             </div>
                           </div>
                         </div>
@@ -240,14 +167,10 @@
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services</label>
                               <select class="form-select" v-model="services_id">
-                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in assistancelist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
+                                <option value="0">Select Service</option>
+                                <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                  {{ slt.section_value }}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -257,25 +180,22 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">ICD 9 CODE</label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
+                              <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
-                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-             {{ type.icd_category_code }} {{type.icd_category_name}}
-            </option>
+                                <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                  {{ type.icd_category_code }} {{ type.icd_category_name }}
+                                </option>
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
                               <label class="form-label">ICD 9 SUB CODE</label>
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
-                                <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }}
- {{catcode.icd_name}}
-            </option>
+                                <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id"
+                                  v-bind:value="catcode.id">
+                                  {{ catcode.icd_code }}
+                                  {{ catcode.icd_name }}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -287,13 +207,9 @@
                               <label class="form-label">Services</label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
-                      <option
-                        v-for="slt in externallist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.section_value }}
-                      </option>
+                                <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                  {{ slt.section_value }}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -302,36 +218,23 @@
                         <!-- hide-div -->
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label"
-                              >Complexity Of Service</label
-                            >
-                            <select
-                              class="form-select"
-                              v-model="complexity_services_id"
-                            >
+                            <label class="form-label">Complexity Of Service</label>
+                            <select class="form-select" v-model="complexity_services_id">
                               <option value="0">
                                 Select Complexity Of Service
                               </option>
-                      <option
-                        v-for="cm in comlexcitylist"
-                        v-bind:key="cm.id"
-                        v-bind:value="cm.id"
-                      >
-                        {{ cm.section_value }}
-                      </option>
+                              <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
+                                {{ cm.section_value }}
+                              </option>
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome</label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
-                      <option
-                        v-for="out in outcomelist"
-                        v-bind:key="out.id"
-                        v-bind:value="out.id"
-                      >
-                        {{ out.section_value }}
-                      </option>
+                              <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
+                                {{ out.section_value }}
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -342,49 +245,33 @@
                   <!--  -->
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                      <button
-                        class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         MEDICATION
                       </button>
                     </h2>
-                    <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div class="col-md-12 mb-3">
                           <label class="form-label">Medication</label>
-                          <textarea
-                            class="form-control textarea"
-                            placeholder="Please Type Prescription Here"
-                            v-model="medication_des"
-                          ></textarea>
+                          <textarea class="form-control textarea" placeholder="Please Type Prescription Here"
+                            v-model="medication_des"></textarea>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!--  -->
                 </div>
- <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
+                <p v-if="errorList.length">
+                <ul>
+                  <li style="color:red" v-for='err in errorList' :key='err'>
+                    {{ err }}
+                  </li>
+                </ul>
+                </p>
                 <div class="d-flex" v-if="!pid">
-                  <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
+                  <button type="submit" class="btn btn-warning btn-text ml-auto">
                     <i class="fa fa-save"></i> Save
                   </button>
                 </div>
@@ -432,7 +319,7 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
-      jobSDESCRIPTION:[],
+      jobSDESCRIPTION: [],
       appId: null,
     };
   },
@@ -731,8 +618,8 @@ export default {
         this.medication_des = response.data.Data[0].medication_des;
         this.jobSDESCRIPTION = response.data.Data[0].jobs;
         this.GetList();
-       this.GetPatientdetails();
-       const response2 = await this.$axios.post(
+        this.GetPatientdetails();
+        const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
           { headers }

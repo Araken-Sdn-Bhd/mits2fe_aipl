@@ -54,7 +54,7 @@
                                 <p v-if="hst.status==0">Draft</p>
                               </td>
                             <td>{{hst.date}}</td>
-                            <td>{{formatetime(hst.created_at)}}</td>
+                            <td>{{hst.time}}</td>
                             <td>{{hst.name}}</td>
                             <td>
                               <a v-if="hst.status!=0" style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
@@ -1168,7 +1168,7 @@ export default {
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",
-          query: { pid: this.Id, type: val, id: this.Id,appId: this.appId },
+          query: { pid: data.id, type: val, id: this.Id,appId: this.appId },
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({

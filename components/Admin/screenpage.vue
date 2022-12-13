@@ -247,7 +247,7 @@ export default {
         }
         if (
           this.ModuleId &&
-          //  this.SubmoduleId &&
+          this.SubmoduleId &&
           this.screenname &&
           this.pageroute &&
           this.description &&
@@ -275,15 +275,18 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopupscreen").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+            )
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                this.message = JSON.stringify(response.data.message);
-                $("#errorpopupscreen").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           } else {
             const response = await this.$axios.post(
@@ -303,15 +306,19 @@ export default {
             );
             console.log(response.data.message);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopupscreen").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+              )
               this.resetmodel();
             } else {
               this.message = JSON.stringify(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopupscreen").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           }
         }

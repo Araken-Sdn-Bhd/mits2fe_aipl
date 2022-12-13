@@ -32,7 +32,7 @@
 
       <div class="row mb-4">
         <div class="col-md-6">
-          <label for="" class="form-label">Branch Adrress</label>
+          <label for="" class="form-label">Branch Addrress</label>
           <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress1" />
 
           <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress2" />
@@ -82,14 +82,14 @@
             <table class="add-boxs" id="ContactNoOfficerow">
               <tbody v-if="Contactlist.length">
                 <tr class="block-ui block-contact" v-for="(office, index) in Contactlist" :key="index">
-                  <td><input type="text" class="form-control contactoffice" v-model="office.ContactNoOffice"
+                  <td><input type="tel" v-mask="'##-########'" class="form-control contactoffice" v-model="office.ContactNoOffice"
                       placeholder="Enter Contact No." /></td>
                   <td><span class="add-conatct-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Contactlist.length">
                 <tr class="block-ui block-contact">
-                  <td><input type="text" class="form-control contactoffice" placeholder="Enter Contact No." /></td>
+                  <td><input type="tel" v-mask="'##-########'" class="form-control contactoffice" placeholder="Enter Contact No." /></td>
                   <td><span class="add-conatct-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
@@ -101,14 +101,14 @@
             <table class="add-boxs" id="ContactNoMobilerow">
               <tbody v-if="Conntactmobilelist.length">
                 <tr class="block-mobile block-ui" v-for="(mobile, index) in Conntactmobilelist" :key="index">
-                  <td><input type="text" class="form-control conntactmobile" v-model="mobile.MobileOffice"
+                  <td><input type="tel" v-mask="'###-########'" class="form-control conntactmobile" v-model="mobile.MobileOffice"
                       placeholder="Enter Contact No." /></td>
                   <td><span class="add-mobile-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
               <tbody v-if="!Conntactmobilelist.length">
                 <tr class="block-mobile block-ui">
-                  <td><input type="text" class="form-control conntactmobile" placeholder="Enter Contact No." /></td>
+                  <td><input type="tel" v-mask="'###-########'" class="form-control conntactmobile" placeholder="Enter Contact No." /></td>
                   <td><span class="add-mobile-no add-ui"><i class="fa fa-plus"></i></span></td>
                 </tr>
               </tbody>
@@ -119,7 +119,7 @@
         <div class="col-md-6">
           <div class="mb-3">
             <label for="" class="form-label">FAX NO.</label>
-            <input type="text" class="form-control" placeholder="Enter FAX NO." v-model="FaxNo" />
+            <input type="tel" v-mask="'##-########'" class="form-control" placeholder="Enter FAX NO." v-model="FaxNo" />
           </div>
 
           <div class="mb-3">
@@ -388,7 +388,7 @@ export default {
       $("table#ContactNoOfficerow > tbody > tr").each(function (i) {
         var obj = {};
         obj.ContactNoOffice = $(
-          'td input[type="text"].contactoffice',
+          'td input[type="tel"].contactoffice',
           this
         ).val();
         if (obj.ContactNoOffice) {
@@ -398,7 +398,7 @@ export default {
       $("table#ContactNoMobilerow > tbody > tr").each(function (i) {
         var obj = {};
         obj.MobileOffice = $(
-          'td input[type="text"].conntactmobile',
+          'td input[type="tel"].conntactmobile',
           this
         ).val();
         if (obj.MobileOffice) {
@@ -428,12 +428,12 @@ export default {
         if (!this.BranchAddress1) {
           this.errors.push("Branch Adrress 1 is required.");
         }
-        if (!this.BranchAddress2) {
-          this.errors.push("Branch Adrress 2 is required.");
-        }
-        if (!this.BranchAddress3) {
-          this.errors.push("Branch Adrress 3 is required.");
-        }
+        // if (!this.BranchAddress2) {
+        //   this.errors.push("Branch Adrress 2 is required.");
+        // }
+        // if (!this.BranchAddress3) {
+        //   this.errors.push("Branch Adrress 3 is required.");
+        // }
         if (this.State <= 0) {
           this.errors.push("State is required.");
         }
@@ -459,8 +459,8 @@ export default {
           this.HospitalCode &&
           this.BranchName &&
           this.BranchAddress1 &&
-          this.BranchAddress2 &&
-          this.BranchAddress3 &&
+          // this.BranchAddress2 &&
+          // this.BranchAddress3 &&
           this.State &&
           this.PostCode &&
           this.City &&
@@ -501,16 +501,20 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+              )
               this.ResetModel();
               this.GetBranchList();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           } else {
             if (!this.IsHeadquator) {
@@ -545,16 +549,20 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+              'Successfully Submitted.',
+              'Data is inserted.',
+              'success',
+              )
               this.ResetModel();
               this.GetBranchList();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+            })
             }
           }
         }

@@ -278,7 +278,7 @@ ul {
 }
 
 .selected-box .form-label {
-    color: #f37648;
+    color: #008b8b
 }
 
 .btn-success {
@@ -3862,6 +3862,28 @@ table.dataTable.nowrap td {
     padding-left: 15px;
 }
 
+.mobile-check{
+    padding-right: 0;
+}
+
+.pd-0 {
+    padding: 0px;
+}
+
+.table-responsive tbody th, .table-responsive thead th{
+    white-space: nowrap;
+}
+
+.title-th{
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;   
+}
+
+.btn-deactivate {
+    font-size: 13px;
+    font-weight: 500;
+}
 /* .dataTables_scrollHeadInner,
 .table {
     min-width: 100% !important
@@ -3947,6 +3969,31 @@ table.dataTable.nowrap td {
     .form-foter {
         flex-wrap: wrap;
     }
+
+    .mobile-check{
+        margin-left: 0px;
+    }
+    .d-tb-block{
+        display: block;
+    }
+    .three-td th{
+        width: 100% !important;
+        padding: 0px;
+    }
+    .three-td {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .three-td td{
+        padding: 5px 10px 0px 0px !important;
+        min-width: 33.33%;
+    }
+
+    .cps-form .form-control{
+        min-width: 200px !important;
+    }
 }
 
 /* close 991 */
@@ -3959,11 +4006,101 @@ table.dataTable.nowrap td {
     .login-screen {
         margin: auto;
     }
-}
 
+    .radio-group .form-check {
+        margin-left: 0;
+    }
+
+    .worksch-table tr {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .worksch-table tr td:last-child{
+        width: 100%;
+    }
+    .worksch-table tr .option-td{
+        width: 80%;
+    }
+
+    .worksch-table tr td {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+    .worksch-table .title-div{
+        height: auto;
+    }
+    .pconsent-table th, .pconsent-table td {
+        padding: 0px !important;
+    }
+
+    .pconsent-table table tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .cps-form .form-control, .cps-form select{
+        max-width: 100%;
+        min-width: 100% !important;
+    }
+
+    .mental-state tbody {
+        display: block;
+    }
+
+    .mental-state tbody tr {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+    .mental-state tbody tr th {
+        width: 100%;
+        padding: 0px;
+        margin-bottom: 5px;
+    }
+    .mental-state tbody tr td {
+        padding: 0;
+    }
+}
+@media (max-width: 768px) {
+    .mb-sm-3 {
+        margin-bottom: 1rem;
+        display: block;
+    }
+}
 @media (max-width: 650px) {
     .search-table .col-sm-3 {
         margin-bottom: 5px;
+    }
+
+    .preferences-table td {
+        white-space: nowrap;
+        padding: 0px 20px 10px 0px;
+    }
+    .preferences-table .form-control {
+        width: 200px;
+    }
+    .flex-table {
+        display: block;
+    }
+    .flex-table td{
+        width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    }
+   
+    .flex-table td table tr th, .flex-table td table tr td {
+        padding: 0px;
+        word-break: break-all;
+        white-space: break-spaces;
+    }
+    .d-m-block{
+        display: block;
+    }
+    .three-td td{
+        min-width: 50%;
     }
 }
 
@@ -3990,6 +4127,66 @@ table.dataTable.nowrap td {
     .px-4 {
         padding-right: 1rem !important;
         padding-left: 1rem !important;
+    }
+    .btn-mb .btn{
+        margin-bottom: 5px;
+    }
+    .btn-mb .ml-auto{
+        margin: 0 !important;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .data-mobile {
+        width: 100%;
+    }
+
+    .data-mobile tr {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+        width: 100%;
+    }
+
+    .data-mobile tr td {
+        width: 100%;
+        padding: 3px 0;
+    }
+    .btn-footer .mr-auto{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .btn-footer .ml-auto{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .four-btns .btn {
+        margin-bottom: 5px;
+    }
+    .four-btns .ml-auto{
+        margin-top: 10px;
+        margin-left: 0px !important;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .two-radio {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .two-radio th {
+        width: 50% !important;
+    }
+    .four-btn .btn {
+        margin-bottom: 6px;
     }
 }
 
@@ -4022,6 +4219,84 @@ table.dataTable.nowrap td {
     .btns-box .btn {
         margin-bottom: 6px;
     }
+    .btn-mb .ml-auto .btn{
+        width: 100%;
+    }
+
+    .full-width {
+        flex-wrap: wrap;
+        padding: 0 25px;
+    }
+    .full-width .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .four-btns .ml-auto{
+        margin-top: 10px;
+    }
+    .four-btns .ml-auto .btn {
+        width: 100%;
+    }
+
+    .three-btn .btn{
+        margin-bottom: 5px;
+    }
+    .three-btn .ml-auto {
+        margin-left: 0px !important;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .pconsent-table td {
+        display: flex;
+        flex-direction: column;
+    }
+    .two-td th {
+        width: 100% !important;
+        padding: 0px;
+    }
+    .two-td {
+        display: flex;
+        flex-direction: column;
+    }
+    .psp-scale {
+        display: flex;
+        flex-direction: column;
+    }
+    .psp-scale td {
+        padding: 0px;
+    }
+    .psp-scale td .btn{
+        margin: 10px 0 0;
+    }
+
+    .three-td td {
+        padding: 5px 0px 0px !important;
+        width: 100%;
+    }
+
+    .four-btn .ml-auto {
+        margin-left: 0px !important;
+        justify-content: space-between;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .four-btn .ml-auto .btn {
+        width: 100%;
+    }
+
+    .clinical-information tr {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .blank-tr {
+        display: none !important;
+    }
 }
 
 @media (max-width: 450px) {
@@ -4052,6 +4327,50 @@ table.dataTable.nowrap td {
         width: 100%;
         margin-bottom: 5px;
     }
+
+    .mobile-table tr{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    .mobile-table tr td, .mobile-table tr th{
+        width: 100%;
+        padding: 5px 0px;
+    }
+    .mobile-table tr td .mt-3 {
+        margin-top: 0px !important;
+    }
+
+    .staff-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .staff-table tbody th, .staff-table tbody td{
+        width: 100%;
+        padding: 3px 0;
+    }
+
+    .flex-table td table, .flex-table td tbody{
+        display: block;
+    }
+    .flex-table td table tr {
+        display: flex;
+        flex-direction: column;
+    }
+    .two-radio{
+        flex-wrap: wrap;
+    }
+    .two-radio th {
+        width: 100% !important;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .two-radio td{
+        padding: 0;
+    }
 }
 
 @media (max-width: 355px) {
@@ -4071,6 +4390,17 @@ table.dataTable.nowrap td {
         padding: 30px 10px;
         border-radius: 0px;
         min-height: 100vh;
+    }
+    
+    .btn-footer .ml-auto{
+        flex-wrap: wrap;
+    }
+    .btn-footer .ml-auto .btn{
+        width: 100%;
+        margin-bottom: 6px;
+    }
+    .three-btn .ml-auto .btn{
+        width: 100%;
     }
 }
 

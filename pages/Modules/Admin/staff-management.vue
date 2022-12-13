@@ -15,8 +15,8 @@
           <div class="card mb-4 reslt">
             <div class="card-body">
               <div class="search-table">
-                <div class="rowmt-2">
-                  <div class="col-sm-3 mb-3">
+                <div class="row mt-2">
+                  <div class="col-lg-4 col-sm-6 mb-3">
                     <select
                       v-if="dataReady"
                       disabled
@@ -52,7 +52,7 @@
                     </select>
                   </div>
 
-                  <div class="col-sm-4 mb-3">
+                  <div class="col-lg-4 col-sm-6 mb-3">
                     <div class="input-group">
                       <span class="input-group-text bg-transparent br-0"
                         ><i class="fa fa-search"></i

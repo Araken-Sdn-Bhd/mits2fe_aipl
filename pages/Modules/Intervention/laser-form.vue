@@ -1562,7 +1562,6 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.loader = false;
             localStorage.setItem(
               "laserresult",
               JSON.stringify(response.data.result)

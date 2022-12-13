@@ -501,7 +501,7 @@
                     <!-- row-close -->
                      <Error :message="error" v-if="error" />
                      <br><br>
-                    <div class="d-flex">
+                    <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                         <button class="nexttab btn btn-success next-btn" title="Next Page">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
@@ -576,7 +576,7 @@
                     </div>
                       <Error :message="error" v-if="error" />
                       <br><br>
-                     <div class="d-flex">
+                     <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                         <button class="pre-1 btn btn-success" title="Back" ><i class="fad fa-arrow-to-left"></i> Back</button>
                         <button class="nex-1 btn btn-success next-btn" title="Next Page" >Next <i class="fad fa-arrow-alt-to-right"></i></button>
@@ -607,7 +607,7 @@
                     <p>please fill the below form</p>
                   </div>
                   <!-- <form class="step-form accordion-form"> -->
-                    <div class="accordion" id="accordionExample">
+                    <div class="accordion accordion-form" id="accordionExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                           <button
@@ -618,11 +618,13 @@
                             aria-expanded="true"
                             aria-controls="collapseOne"
                           >
+                          <div>
                             SECTION A : CURRENT SELF HARM ACT
                             <small
                               >(within past 2 weeks from time of
                               presentation)</small
                             >
+                          </div>
                           </button>
                         </h2>
                         <div
@@ -1297,7 +1299,7 @@
       </ul>
         </p>
         <br><br>
-                    <div class="d-flex">
+                    <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                       <button class="pre-2 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -1429,7 +1431,7 @@
       </ul>
         </p>
         <br><br>
-                    <div class="d-flex">
+                    <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                       <button class="pre-3 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -1876,7 +1878,7 @@
         </p>
                     <!-- close-row -->
                     <br><br>
-                    <div class="d-flex">
+                    <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                       <button class="pre-4 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -1992,13 +1994,15 @@
         </p>
                     <!-- row -->
                     <br><br>
-                    <div class="d-flex">
-                      <button class="pre-5 btn btn-success mr-auto" title="Back">
+                    <div class="d-flex btn-footer">
+                      <div class="mr-auto">
+                      <button class="pre-5 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
+                      </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-success ml-auto" title="Submit" @click="adddataproducer">
+                        <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
                           <i class="fad fa-paper-plane"></i> Submit
                         </button>
                       </div>

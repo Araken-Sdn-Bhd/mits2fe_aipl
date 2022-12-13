@@ -1,7 +1,7 @@
 <template>
   <div id="layoutSidenav">
 
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" class="ml-0">
 
       <main>
         <Loader v-if="loader" />
@@ -24,7 +24,7 @@
               </p>
 
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-lg-4 col-sm-6">
                   <div class="mb-3">
                     <label for="" class="form-label">Application Form</label>
                     <select class="form-select select-others" aria-label="">

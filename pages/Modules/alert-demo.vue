@@ -16,6 +16,9 @@
                 <button type="submit" class="btn btn-success btn-text" @click="onError">
                   <i class=""></i> Error
                 </button>
+                <button type="submit" class="btn btn-success btn-text" @click="onSaveAsDraft">
+                  <i class=""></i> Save As Draft
+                </button>
                 <button type="submit" class="btn btn-green btn-text" @click="onSave">
                   <i class=""></i> Save
                 </button>
@@ -84,6 +87,20 @@ export default {
     };
   },
   methods: {
+    async onSaveAsDraft() {
+      this.$swal.fire({
+        title: 'Do you want to save as draft?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.$swal.fire('Succesfully save as draft!', '', 'success')
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+    },
     // submit with custom class modal
     async onSubmit() {
       const swalWithBootstrapButtons = this.$swal.mixin({
@@ -127,7 +144,6 @@ export default {
         icon: 'error',
         title: 'Oops... Something Went Wrong!',
         text: 'the error is: ' + this.error,
-        footer: '<a href="">Why do I have this issue?</a>'
       })
     },
     // basic save modal
@@ -142,15 +158,13 @@ export default {
     async download() {
       this.$swal.fire({
         title: 'Do you want to save the changes?',
-        showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: 'Save',
-        denyButtonText: `Don't save`,
-      }).then((result) => {
+      }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           this.$swal.fire('Saved!', '', 'success')
-        } else if (result.isDenied) {
+        } else if (result.isDismissed) {
           this.$swal.fire('Changes are not saved', '', 'info')
         }
       })
