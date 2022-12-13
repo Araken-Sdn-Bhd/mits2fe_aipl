@@ -386,7 +386,7 @@ export default {
                                     background_history: this.background_history,
                                     general_examination: this.general_examination,
                                     mental_state_examination: this.mental_state_examination,
-                                    diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                                    diagnosis_id: this.type_diagnosis_id,
                                     management: this.management,
                                     discuss_psychiatrist_name: this.discuss_psychiatrist_name,
                                     date: this.date,
