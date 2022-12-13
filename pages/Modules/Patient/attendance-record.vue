@@ -129,7 +129,7 @@
                         ><i class="fad fa-edit"></i
                       ></a>
                       <a
-                        @click="OnAssignStaffPop(app.team_id,app.appointment_id,app.service)"
+                        @click="OnAssignStaffPop(app.team_id,app.appointment_id,app.serviceid)"
                         class="action-icon icon-info"
                         ><i class="fad fa-check"></i
                       ></a>
@@ -309,8 +309,22 @@ export default {
         )
         .then((resp) => {
           this.list = resp.data.list;
-          console.log("my applist", this.list);
-        });
+          console.log("my list", this.list);
+          $(document).ready(function () {
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              scrollX: true,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              },
+            });
+          });
+        })
     },
 
     oneditAppointment(Id) {
@@ -355,7 +369,7 @@ export default {
         "appointmentId",aptId
       );
       this.$router.push({
-        path: "/modules/Intervention/patient-summary",  ///Modules/Patient/patient-summary
+        path: "/modules/Intervention/patient-summary",
         query: { id: Id , appId: aptId},
       });
     },
@@ -404,9 +418,9 @@ export default {
       axios
         .get(
           `${this.$axios.defaults.baseURL}` +
-            "hospital/getServiceByTeamId",
+            "hospital/getStaffNamebyPatientTeamBranch",
 
-          { headers, params: {team_id: this.appId, email: this.email}   }
+          { headers, params: {team_id: this.serviceType, email: this.email}   }
         )
         .then((resp) => {
           this.teamlist = resp.data.list;

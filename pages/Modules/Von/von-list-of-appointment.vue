@@ -151,46 +151,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetServicelist();
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const axios = require("axios").default;
-    axios
-      .post(
-        `${this.$axios.defaults.baseURL}` + "von-appointment/list",
-        {
-          name: "",
-          date: "",
-          service: "",
-          email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
-        },
-        { headers }
-      )
-      .then((resp) => {
-        this.list = resp.data.list;
-        console.log("my lst", resp.data);
-        $(document).ready(function () {
-            $(".data-table").DataTable({
-              searching: false,
-              bLengthChange: false,
-              bInfo: false,
-              autoWidth: false,
-              responsive: true,
-              scrollX: true,
-              language: {
-                paginate: {
-                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                },
-              },
-            });
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    this.GetList();
   },
   methods: {
     GetList() {
@@ -261,40 +222,26 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.post(
-        "von-appointment/list",
-        {
-          name: this.name,
+      const axios = require("axios").default;
+      axios
+        .post(
+          `${this.$axios.defaults.baseURL}` + "von-appointment/list",
+          {
+            name: this.name,
           date: this.date,
           service: this.service,
-          email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
-        },
-        { headers }
-      );
-      console.log("my list", response.data);
-      if (response.data.code == 200) {
-         this.list = response.data.list;
-         $('.data-table').DataTable().destroy();
-         $(document).ready(function () {
-            $(".data-table").DataTable({
-              searching: false,
-              bLengthChange: false,
-              bInfo: false,
-              autoWidth: false,
-              responsive: true,
-              scrollX: true,
-              language: {
-                paginate: {
-                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                },
-              },
-            });
-          });
-
-      } else {
-        window.alert("Something went wrong");
-      }
+          email:this.userdetails.user.email,
+          branch_id:this.userdetails.branch.branch_id 
+          },
+          { headers }
+        )
+        .then((resp) => {
+          this.list = resp.data.list;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+     
     },
     Checkuser(value, event) {
       if (event.target.checked) {
