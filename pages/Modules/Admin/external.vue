@@ -192,9 +192,9 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             if (this.settingId > 0) {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
             } else {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");

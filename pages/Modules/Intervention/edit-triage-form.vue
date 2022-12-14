@@ -779,11 +779,11 @@ export default {
       if (response10.data.code == 200 || response10.data.code == "200") {
         this.screenlist = response10.data.list;
         console.log('my screen', this.screenlist);
-  
+
 
         $(".optionBox").on("click", ".remove", function () {
           $(this).closest(".block").remove();
-  
+
         });
 
       } else {
@@ -886,9 +886,12 @@ export default {
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
         }
       } catch (e) {}
@@ -962,13 +965,13 @@ export default {
               this.validate = false;
             } else {
               this.services_id = this.serviceid;
-            } 
+            }
           }
         }
         if (!this.outcome_id) {
           this.errorList.push("Outcome is required");
         }
- 
+
         if (
           this.screening_id &&
           this.score &&
@@ -1079,7 +1082,7 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
-                
+
                 id: this.pid,
               },
               { headers }
@@ -1167,8 +1170,8 @@ export default {
             window.alert("Something went wrong!");
             this.loader = false;
           }
-        } catch (e) { 
-         
+        } catch (e) {
+
         }
       }
     },
