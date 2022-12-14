@@ -1671,27 +1671,30 @@ export default {
             this.loader = false;
             this.resetmodel();
             if (this.pid) {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
             }else if(status == "0" || status== 0) {
-                this.$nextTick(() => {
-                  $("#updatepopup").modal("show");
-                });
+              this.$swal.fire(
+                  'Successfully Update',
+                )
                 this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
               } else {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+                this.$swal.fire(
+                  'Successfully Insert',
+                )
             }
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
           }
         } else {
           if (!this.diagnosis) {
@@ -1930,19 +1933,22 @@ export default {
               this.loader = false;
               this.resetmodel();
               if (this.pid) {
-                this.$nextTick(() => {
-                  $("#updatepopup").modal("show");
-                });
+                this.$swal.fire(
+                  'Successfully Update',
+                )
               } else {
-                this.$nextTick(() => {
-                  $("#insertpopup").modal("show");
-                });
+                this.$swal.fire(
+                  'Successfully Insert',
+                )
               }
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
           }
         }
