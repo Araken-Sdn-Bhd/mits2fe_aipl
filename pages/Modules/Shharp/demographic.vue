@@ -249,7 +249,11 @@
                   </li>
                 </ul>
                 </p>
+                <br><br>
                 <div class="d-flex align-items-center mt-3">
+                  <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <em class="fa fa-step-backward"/> &nbsp; Back
+                  </button>
 
                   <a v-if="!Id" @click="submitRegistration" class="btn btn-warning btn-text ml-auto"><i
                       class="fa fa-save"></i> Save</a>
@@ -359,6 +363,9 @@ export default {
     this.GetStaffBranchId();
   },
   methods: {
+    back() {
+      this.$router.go(-1);
+    },
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -602,9 +609,9 @@ export default {
             }
           );
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#updatepopup").modal("show");
-            });
+            this.$swal.fire(
+                  'Successfully Update',
+                )
             setTimeout(() => {
               $("#updatepopup").modal("hide");
               this.$router.push({
@@ -615,9 +622,12 @@ export default {
 
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
           }
         } else {
           const response = await this.$axios.post(
@@ -629,24 +639,30 @@ export default {
           );
           console.log("my data result", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire(
+                  'Successfully Insert',
+                )
             this.$router.push("/modules/Shharp/patients-list");
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
           }
         }
       }
 
       catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
     OnnricNo() {

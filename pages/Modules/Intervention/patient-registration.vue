@@ -1366,6 +1366,7 @@ export default {
       nric_type_code:"",
       SidebarAccess:null,
       responseMsg: "",
+      rid:0,
     };
   },
   beforeMount() {
@@ -1379,9 +1380,17 @@ export default {
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.rid = urlParams.get("rid");
+
     if (this.Id > 0) {
       this.GetPatientdetails();
     }
+
+    if (this.rid > 0) {
+      this.GetPatientRequestDetails();
+    }
+
     $(document).ready(function () {
       $('input[name="drug-allergy"]:radio').change(function () {
         var radio_value = $('input:radio[name="drug-allergy"]:checked').val();
@@ -1431,7 +1440,9 @@ export default {
     },
     async resetModelValue()
     {
+      if(!this.rid){
       this.nric_no = "";
+      }
       this.error = null;
 
       const headers = {
@@ -1448,11 +1459,9 @@ export default {
       );
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].section_value;
-        console.log('manish',this.nric_type_code);
       } else {
         window.alert("Something went wrong");
       }
-
 
     },
     NextFirst() {
@@ -1980,6 +1989,7 @@ export default {
           body.append("other_maritalList", this.other_maritalList);
           body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
+          body.append("patient_request_id", this.rid);
 
 
           if (this.Id > 0) {
@@ -2258,6 +2268,40 @@ export default {
         this.other_maritalList = response.data.list[0].other_maritalList;
         this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
         this.other_occupationStatus = response.data.list[0].other_occupationStatus;
+
+        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
+      }
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+        async GetPatientRequestDetails(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "appointment-request/getAll",
+        {
+          id: this.rid,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.address1 = response.data.list[0].address;
+        this.address2 = response.data.list[0].address1;
+        this.mobile_no = response.data.list[0].contact_no;
+        this.name_asin_nric = response.data.list[0].name;
+        var str = response.data.list[0].nric_or_passportno;
+        this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+        console.log('nric',this.nric_no);
 
         const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
         headers,

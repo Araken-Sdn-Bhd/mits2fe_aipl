@@ -480,174 +480,218 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save this as draft ? ")) {
-      try {
-        this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "consultation-discharge-note/add",
-            {
-              added_by: this.userdetails.user.id.toString(),
-              patient_id: this.Id,
-              diagnosis_id: this.type_diagnosis_id,
-              category_discharge: this.category_discharge,
-              comment: this.comment,
-              specialist_name_id: this.specialist_name_id,
-              date: this.date,
-              location_services: this.location_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              complexity_services: this.complexity_services,
-              outcome: this.outcome,
-              medication_des: this.medication_des,
-              id:this.pid,
-              appId: this.appId,
-              status: "0",
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            window.alert("Data are saved successfully!");
+      this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async(result) => {
+              if (result.isConfirmed) {
+                try {
+                  this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "consultation-discharge-note/add",
+                      {
+                        added_by: this.userdetails.user.id.toString(),
+                        patient_id: this.Id,
+                        diagnosis_id: this.type_diagnosis_id,
+                        category_discharge: this.category_discharge,
+                        comment: this.comment,
+                        specialist_name_id: this.specialist_name_id,
+                        date: this.date,
+                        location_services: this.location_services,
+                        services_id: this.services_id,
+                        code_id: this.code_id,
+                        sub_code_id: this.sub_code_id,
+                        type_diagnosis_id: this.type_diagnosis_id,
+                        category_services: this.category_services,
+                        complexity_services: this.complexity_services,
+                        outcome: this.outcome,
+                        medication_des: this.medication_des,
+                        id:this.pid,
+                        appId: this.appId,
+                        status: "0",
+                      },
+                      { headers }
+                    );
+                    console.log("response", response.data);
+                    if (response.data.code == 200) {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire('Succesfully save as draft!', '', 'success')
+                      this.GoBack();
 
-            this.GoBack();
-
-          } else {
-            this.loader = false;
-            window.alert("Something went wrong!");
-
-          }
-      } catch (e) {
-
-      }
-              }
+                    } else {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire({
+                          icon: 'error',
+                          title: 'Oops... Something Went Wrong!',
+                          text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                      this.GoBack();
+                    }
+                } catch (e) {
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                  })
+                }
+              }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
     },
     async onPublishEvent() {
-      if (confirm("Are you sure you want to save this entry ? ")) {
-      this.errorList = [];
-      this.validate = true;
-      try {
+      this.$swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                this.errorList = [];
+                this.validate = true;
+                try {
 
-        if (!this.category_discharge) {
-          this.errorList.push("Category Of Discharge is required");
-        }
-        if (!this.comment) {
-          this.errorList.push("Comment is required");
-        }
-        if (!this.specialist_name_id) {
-          this.errorList.push("Specialist Name is required");
-        }
-        if (!this.date) {
-          this.errorList.push("Date is required");
-        }
-        if (!this.location_services) {
-          this.errorList.push("Location Of Services is required");
-        }
-        if (!this.type_diagnosis_id) {
-          this.errorList.push("Type Of Diagnosis is required");
-        }
-        if (!this.category_services) {
-          this.errorList.push("Category Of Services is required");
-        }
-        if (!this.complexity_services) {
-          this.errorList.push("Complexity Of Service is required");
-        }
-        if (this.category_services) {
-          if (this.category_services == "assisstance") {
-            if (!this.services_id) {
-              this.errorList.push("Service is required");
-              this.validate = false;
-            }
-          } else if (this.category_services == "clinical-work") {
-            if (!this.code_id) {
-              this.errorList.push("ICD 9 CODE is required");
-              this.validate = false;
-            }
-            if (!this.sub_code_id) {
-              this.errorList.push("ICD 9 SUB CODE is required");
-              this.validate = false;
-            }
-          } else {
-            if (!this.serviceid) {
-              this.errorList.push("Services is required");
-              this.validate = false;
-            } else {
-              this.services_id = this.serviceid;
-            }
-          }
-        }
-        if (!this.outcome) {
-          this.errorList.push("Outcome is required");
-        }
+                  if (!this.category_discharge) {
+                    this.errorList.push("Category Of Discharge is required");
+                  }
+                  if (!this.comment) {
+                    this.errorList.push("Comment is required");
+                  }
+                  if (!this.specialist_name_id) {
+                    this.errorList.push("Specialist Name is required");
+                  }
+                  if (!this.date) {
+                    this.errorList.push("Date is required");
+                  }
+                  if (!this.location_services) {
+                    this.errorList.push("Location Of Services is required");
+                  }
+                  if (!this.type_diagnosis_id) {
+                    this.errorList.push("Type Of Diagnosis is required");
+                  }
+                  if (!this.category_services) {
+                    this.errorList.push("Category Of Services is required");
+                  }
+                  if (!this.complexity_services) {
+                    this.errorList.push("Complexity Of Service is required");
+                  }
+                  if (this.category_services) {
+                    if (this.category_services == "assisstance") {
+                      if (!this.services_id) {
+                        this.errorList.push("Service is required");
+                        this.validate = false;
+                      }
+                    } else if (this.category_services == "clinical-work") {
+                      if (!this.code_id) {
+                        this.errorList.push("ICD 9 CODE is required");
+                        this.validate = false;
+                      }
+                      if (!this.sub_code_id) {
+                        this.errorList.push("ICD 9 SUB CODE is required");
+                        this.validate = false;
+                      }
+                    } else {
+                      if (!this.serviceid) {
+                        this.errorList.push("Services is required");
+                        this.validate = false;
+                      } else {
+                        this.services_id = this.serviceid;
+                      }
+                    }
+                  }
+                  if (!this.outcome) {
+                    this.errorList.push("Outcome is required");
+                  }
 
-        if (
+                  if (
 
-          this.category_discharge &&
-          this.comment &&
-          this.specialist_name_id &&
-          this.date &&
-          this.location_services &&
-          this.type_diagnosis_id &&
-          this.category_services &&
-          this.complexity_services &&
-          this.outcome &&
-  
-          this.validate
-        ) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "consultation-discharge-note/add",
-            {
-              added_by: this.userdetails.user.id.toString(),
-              patient_id: this.Id,
-              diagnosis_id: this.type_diagnosis_id,
-              category_discharge: this.category_discharge,
-              comment: this.comment,
-              specialist_name_id: this.specialist_name_id,
-              date: this.date,
-              location_services: this.location_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              complexity_services: this.complexity_services,
-              outcome: this.outcome,
-              medication_des: this.medication_des,
-              id:this.pid,
-              appId: this.appId,
-              status: "1",
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.loader = false;
-            window.alert("Data are saved successfully!");
- 
-            this.GoBack();
+                    this.category_discharge &&
+                    this.comment &&
+                    this.specialist_name_id &&
+                    this.date &&
+                    this.location_services &&
+                    this.type_diagnosis_id &&
+                    this.category_services &&
+                    this.complexity_services &&
+                    this.outcome &&
+          
+                    this.validate
+                  ) {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "consultation-discharge-note/add",
+                      {
+                        added_by: this.userdetails.user.id.toString(),
+                        patient_id: this.Id,
+                        diagnosis_id: this.type_diagnosis_id,
+                        category_discharge: this.category_discharge,
+                        comment: this.comment,
+                        specialist_name_id: this.specialist_name_id,
+                        date: this.date,
+                        location_services: this.location_services,
+                        services_id: this.services_id,
+                        code_id: this.code_id,
+                        sub_code_id: this.sub_code_id,
+                        type_diagnosis_id: this.type_diagnosis_id,
+                        category_services: this.category_services,
+                        complexity_services: this.complexity_services,
+                        outcome: this.outcome,
+                        medication_des: this.medication_des,
+                        id:this.pid,
+                        appId: this.appId,
+                        status: "1",
+                      },
+                      { headers }
+                    );
+                    console.log("response", response.data);
+                    if (response.data.code == 200 || response.data.code == "200") {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire(
+                          'Successfully Submitted.',
+                          'Data is inserted.',
+                          'success',
+                      );
+                      this.GoBack();
 
-          } else {
-            this.loader = false;
-            window.alert("Something went wrong!");
+                    } else {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire({
+                          icon: 'error',
+                          title: 'Oops... Something Went Wrong!',
+                          text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                      this.GoBack();
+                    }
+                  }
+                } catch (e) {
+                  this.loader = false;
+                        this.resetmodel();
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
 
-          }
-        }
-      } catch (e) {}
-    }
+                        this.GoBack();
+                }
+              }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
     },
     async GetList() {
       const headers = {
@@ -711,9 +755,9 @@ export default {
       } else {
         this.dischargelist = [];
       }
-        const response7 = await this.$axios.get("staff-management/getList", {
-        headers,
-      });
+      const response7 = await this.$axios.post("staff-management/getStaffDetailByBranch", 
+        {branch_id: this.userdetails.branch.branch_id},{headers}
+        );
       if (response7.data.code == 200 || response7.data.code == "200") {
         this.specialistlist = response7.data.list;
       } else {
