@@ -1984,9 +1984,12 @@ export default {
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -2004,9 +2007,12 @@ export default {
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         } catch (e) {
@@ -2106,9 +2112,12 @@ export default {
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -2123,9 +2132,12 @@ export default {
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         } catch (e) {
