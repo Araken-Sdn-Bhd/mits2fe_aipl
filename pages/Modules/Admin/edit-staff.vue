@@ -1,8 +1,8 @@
 <template>
   <div id="layoutSidenav">
-      <CommonSidebar />
-      <div id="layoutSidenav_content">
-        <CommonHeader/>
+    <CommonSidebar />
+    <div id="layoutSidenav_content">
+      <CommonHeader />
       <main>
         <div class="container-fluid px-4">
           <div class="page-title">
@@ -12,67 +12,37 @@
             <div class="card-header">
               <h4>Edit Mentari Staff</h4>
               <div class="icon-set">
-                <a @click="gototransfer"
-                  ><i class="fa fa-share-square"></i
-                ></a>
+                <a @click="gototransfer"><i class="fa fa-share-square"></i></a>
                 <!-- <a href="#"><i class="fa fa-trash-alt"></i></a> -->
               </div>
             </div>
             <div class="card-body">
-              <form
-                class="g-3 mt-3"
-                method="post"
-                @submit.prevent="onCreateStaff"
-              >
+              <form class="g-3 mt-3" method="post" @submit.prevent="onCreateStaff">
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <label for="" class="form-label">Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Name"
-                      v-model="name"
-                    />
+                    <input type="text" class="form-control" placeholder="Enter Name" v-model="name" />
                   </div>
 
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">NRIC NO</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter NRIC NO"
-                      v-model="nricno"
-                    />
+                    <input type="text" class="form-control" placeholder="Enter NRIC NO" v-model="nricno" />
                   </div>
                 </div>
                 <!-- close-row -->
 
                 <div class="row">
                   <div class="col-md-6 mb-4">
-                    <label for="" class="form-label"
-                      >Profession Registration NO.</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Profession Reg No."
-                      v-model="professionregno"
-                    />
+                    <label for="" class="form-label">Profession Registration NO.</label>
+                    <input type="text" class="form-control" placeholder="Enter Profession Reg No."
+                      v-model="professionregno" />
                   </div>
 
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Role</label>
-                    <select
-                      v-model="roleId"
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                    <option value="0">Please Select</option>
-                      <option
-                        v-for="role in rolelist"
-                        v-bind:key="role.id"
-                        v-bind:value="role.id"
-                      >
+                    <select v-model="roleId" class="form-select" aria-label="Default select example">
+                      <option value="0">Please Select</option>
+                      <option v-for="role in rolelist" v-bind:key="role.id" v-bind:value="role.id">
                         {{ role.role_name }}
                       </option>
                     </select>
@@ -83,26 +53,13 @@
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <label class="form-label">Email Address</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Email Address"
-                      v-model="email"
-                    />
+                    <input type="text" class="form-control" placeholder="Enter Email Address" v-model="email" />
                   </div>
 
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Team</label>
-                    <select
-                      v-model="teamId"
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option
-                        v-for="team in teamlist"
-                        v-bind:key="team.id"
-                        v-bind:value="team.id"
-                      >
+                    <select v-model="teamId" class="form-select" aria-label="Default select example">
+                      <option v-for="team in teamlist" v-bind:key="team.id" v-bind:value="team.id">
                         {{ team.service_name }}
                       </option>
                     </select>
@@ -113,12 +70,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <label for="" class="form-label">Contact NO.</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Contact No."
-                      v-model="contactno"
-                    />
+                    <input type="text" class="form-control" placeholder="Enter Contact No." v-model="contactno" />
                   </div>
                 </div>
                 <!-- close-row -->
@@ -126,41 +78,21 @@
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Designation</label>
-                    <select
-                      v-model="designationId"
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option
-                        v-for="des in designationlist"
-                        v-bind:key="des.id"
-                        v-bind:value="des.id"
-                      >
+                    <select v-model="designationId" class="form-select" aria-label="Default select example">
+                      <option v-for="des in designationlist" v-bind:key="des.id" v-bind:value="des.id">
                         {{ des.section_value }}
                       </option>
                     </select>
                   </div>
 
                   <div class="col-md-4 mb-4">
-                    <label for="" class="form-label"
-                      >Designation Period(Start Date)</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      v-model="designationstartdate"
-                    />
+                    <label for="" class="form-label">Designation Period(Start Date)</label>
+                    <input type="date" class="form-control" v-model="designationstartdate" />
                   </div>
 
                   <div class="col-md-4 mb-4">
-                    <label for="" class="form-label"
-                      >Designation Period(End Date)</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      v-model="designationenddate"
-                    />
+                    <label for="" class="form-label">Designation Period(End Date)</label>
+                    <input type="date" class="form-control" v-model="designationenddate" />
                   </div>
                 </div>
                 <!-- close-row -->
@@ -168,17 +100,8 @@
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Mentari Location</label>
-                    <select
-                      disabled="true"
-                      v-model="branchId"
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option
-                        v-for="brnch in branchlist"
-                        v-bind:key="brnch.id"
-                        v-bind:value="brnch.id"
-                      >
+                    <select disabled="true" v-model="branchId" class="form-select" aria-label="Default select example">
+                      <option v-for="brnch in branchlist" v-bind:key="brnch.id" v-bind:value="brnch.id">
                         {{ brnch.hospital_branch_name }}
                       </option>
                     </select>
@@ -186,13 +109,8 @@
 
                   <div class="col-md-4 mt-5">
                     <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                        v-model="personincharge"
-                      />
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        v-model="personincharge" />
                       <label class="form-check-label" for="flexCheckDefault">
                         Set As Person In Charge Mentari
                       </label>
@@ -200,20 +118,12 @@
                   </div>
                   <div class="col-md-4 mb-4">
                     <label class="form-label">Account Status</label>
-                    <select
-                      v-model="accountStatus"
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option
-                        value="0"
-                      >
+                    <select v-model="accountStatus" class="form-select" aria-label="Default select example">
+                      <option value="0">
                         Inactive
                       </option>
-                      <option
-                        value="1"
-                      >
-                      Active
+                      <option value="1">
+                        Active
                       </option>
                     </select>
                   </div>
@@ -223,12 +133,7 @@
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <label for="" class="form-label">Start Date</label>
-                    <input
-                    disabled="true"
-                      type="date"
-                      class="form-control"
-                      v-model="startdate"
-                    />
+                    <input disabled="true" type="date" class="form-control" v-model="startdate" />
                   </div>
 
                   <div class="col-md-4 mb-4">
@@ -237,20 +142,16 @@
                   </div>
                 </div>
                 <!-- close-row -->
-  <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
+                <p v-if="errors.length">
+                <ul>
+                  <li style="color:red" v-for='err in errors' :key='err'>
+                    {{ err }}
+                  </li>
+                </ul>
+                </p>
                 <div class="form-foter mt-3">
-                  <a
-                    href="/app/modules/Admin/staff-management"
-                    class="btn btn-primary btn-text"
-                    ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                  >
+                  <a href="/app/modules/Admin/staff-management" class="btn btn-primary btn-text"><i
+                      class="fa fa-arrow-alt-to-left"></i> Back</a>
                   <div class="btn-right">
                     <button type="submit" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save
@@ -402,90 +303,96 @@ export default {
 
     async onCreateStaff() {
       if (confirm("Are you sure you want to update this record")) {
-      this.errors = [];
-      if (!this.name) {
-        this.errors.push("Name is required.");
-      }
-      if (!this.nricno) {
-        this.errors.push("NRIC NO is required.");
-      }
-      if (!this.professionregno) {
-        this.errors.push("Profession Registration NO is required.");
-      }
-      if (this.Role <= 0) {
-        this.errors.push("Role  is required.");
-      }
-      if (!this.email) {
-        this.errors.push("Email is required.");
-      }
-      if (this.teamId <= 0) {
-        this.errors.push("Team  is required.");
-      }
-      if (!this.contactno) {
-        this.errors.push("Contact NO is required.");
-      }
-      if (this.designationId <= 0) {
-        this.errors.push("Designation  is required.");
-      }
-      if (!this.designationstartdate) {
-        this.errors.push("Designation Period(Start Date) is required.");
-      }
-      if (!this.designationenddate) {
-        this.errors.push("Designation Period(End Date) is required.");
-      }
-      if (this.branchId <= 0) {
-        this.errors.push("Mentari Location is required.");
-      }
-      if (!this.contactno) {
-        this.errors.push("Contact NO is required.");
-      }
-      if (!this.startdate) {
-        this.errors.push("Start Date   is required.");
-      }
-      if (!this.enddate) {
-        this.errors.push("End Date is required.");
-      } else {
-        if (this.personincharge > 0) {
-          this.personincharge = 1;
+        this.errors = [];
+        if (!this.name) {
+          this.errors.push("Name is required.");
         }
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        let body = new FormData();
-        body.append("id", this.Id);
-        body.append("added_by", this.userdetails.user.id);
-        body.append("name", this.name);
-        body.append("nric_no", this.nricno);
-        body.append("registration_no", this.professionregno);
-        body.append("role_id", this.roleId);
-        body.append("email", this.email);
-        body.append("team_id", this.teamId);
-        body.append("branch_id", this.branchId);
-        body.append("contact_no", this.contactno);
-        body.append("designation_id", this.designationId);
-        body.append("is_incharge", this.personincharge);
-        body.append("designation_period_start_date", this.designationstartdate);
-        body.append("designation_period_end_date", this.designationenddate);
-        body.append("account_status", this.accountStatus);
-        body.append("start_date", this.startdate);
-        body.append("end_date", this.enddate);
-        const response = await this.$axios.post(
-          "staff-management/update",
-          body,
-          {
-            headers,
-          }
-        );
-        if (response.data.code == 200 || response.data.code == "200") {
-          this.$router.push("/modules/Admin/staff-management");
+        if (!this.nricno) {
+          this.errors.push("NRIC NO is required.");
+        }
+        if (!this.professionregno) {
+          this.errors.push("Profession Registration NO is required.");
+        }
+        if (this.Role <= 0) {
+          this.errors.push("Role  is required.");
+        }
+        if (!this.email) {
+          this.errors.push("Email is required.");
+        }
+        if (this.teamId <= 0) {
+          this.errors.push("Team  is required.");
+        }
+        if (!this.contactno) {
+          this.errors.push("Contact NO is required.");
+        }
+        if (this.designationId <= 0) {
+          this.errors.push("Designation  is required.");
+        }
+        if (!this.designationstartdate) {
+          this.errors.push("Designation Period(Start Date) is required.");
+        }
+        if (!this.designationenddate) {
+          this.errors.push("Designation Period(End Date) is required.");
+        }
+        if (this.branchId <= 0) {
+          this.errors.push("Mentari Location is required.");
+        }
+        if (!this.contactno) {
+          this.errors.push("Contact NO is required.");
+        }
+        if (!this.startdate) {
+          this.errors.push("Start Date   is required.");
+        }
+        if (!this.enddate) {
+          this.errors.push("End Date is required.");
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          if (this.personincharge > 0) {
+            this.personincharge = 1;
+          }
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          let body = new FormData();
+          body.append("id", this.Id);
+          body.append("added_by", this.userdetails.user.id);
+          body.append("name", this.name);
+          body.append("nric_no", this.nricno);
+          body.append("registration_no", this.professionregno);
+          body.append("role_id", this.roleId);
+          body.append("email", this.email);
+          body.append("team_id", this.teamId);
+          body.append("branch_id", this.branchId);
+          body.append("contact_no", this.contactno);
+          body.append("designation_id", this.designationId);
+          body.append("is_incharge", this.personincharge);
+          body.append("designation_period_start_date", this.designationstartdate);
+          body.append("designation_period_end_date", this.designationenddate);
+          body.append("account_status", this.accountStatus);
+          body.append("start_date", this.startdate);
+          body.append("end_date", this.enddate);
+          const response = await this.$axios.post(
+            "staff-management/update",
+            body,
+            {
+              headers,
+            }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.$swal.fire(
+              'Successfully Updated',
+            );
+            this.$router.push("/modules/Admin/staff-management");
+          } else {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + this.error,
+              footer: ''
+            });
+          }
         }
-      }
       }
     },
     async gototransfer() {
