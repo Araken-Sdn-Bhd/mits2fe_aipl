@@ -660,7 +660,12 @@ export default {
         this.consentdetails = response.data.list;
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async OnSubmit() {
@@ -738,7 +743,12 @@ export default {
 
         this.GetPatientConnsentdetails();
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

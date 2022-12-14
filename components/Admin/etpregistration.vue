@@ -107,7 +107,7 @@
                   <a class="edit" @click="editreg(etp)" v-if="SidebarAccess==1"
                     ><i class="fa fa-edit"></i
                   ></a>
-                 
+
                 </td>
               </tr>
             </tbody>
@@ -147,7 +147,7 @@ export default {
           "etp/list",
         { headers }
       )
-      
+
       .then((resp) => {
         this.list = resp.data.list;
         $(document).ready(function () {
@@ -219,10 +219,15 @@ export default {
         this.status = response.data.list[0].status;
         this.Id = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
-   
+
     async onAddetpregistration() {
       this.errors = [];
       try {

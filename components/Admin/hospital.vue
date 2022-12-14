@@ -965,7 +965,12 @@ export default {
           this.postcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

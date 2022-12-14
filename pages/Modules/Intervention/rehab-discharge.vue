@@ -927,7 +927,12 @@ export default {
         this.name= response.data.list[0].name_asin_nric;
         console.log("my details", this.patientdetails);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async resetmodel() {
@@ -1016,7 +1021,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
 

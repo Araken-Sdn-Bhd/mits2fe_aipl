@@ -1362,9 +1362,12 @@ export default {
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async OnGroupVolunteerism() {
@@ -1519,11 +1522,18 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted!',
+                );
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -1714,17 +1724,27 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted.',
+                );
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async OnGroupNetworkingMakeaContribution() {
@@ -1875,17 +1895,27 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted.',
+                );
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     Reload() {

@@ -694,7 +694,12 @@ export default {
         this.mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     resetmodel() {
@@ -768,7 +773,12 @@ export default {
           this.icdcatcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack() {

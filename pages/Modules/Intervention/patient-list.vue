@@ -176,7 +176,7 @@ export default {
 
   },
   mounted() {
-    
+
     this.GetList();
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
@@ -237,7 +237,7 @@ export default {
               this.dataReady= true;
               this.dataReady2= false;
             }
-      
+
     },
     async GetList() {
       const headers = {
@@ -277,7 +277,7 @@ export default {
         query: { id: Id },
       });
       }else{
-   
+
       }
     },
     async OnSearch() {
@@ -304,7 +304,12 @@ export default {
       if (response.data.code == 200) {
         this.list = response.data.list;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

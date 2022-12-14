@@ -247,7 +247,12 @@ export default {
         this.Stateindex = response.data.list[0].state_order;
         this.stateId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletestate(data) {

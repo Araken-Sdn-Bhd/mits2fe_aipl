@@ -1460,7 +1460,12 @@ export default {
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].section_value;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
 
     },
@@ -1687,7 +1692,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onSelectedState(event){
@@ -1981,7 +1991,7 @@ export default {
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
-          body.append("branch_id", this.branch_id);
+          body.append("branch_id", this.branch);
           body.append("patient_need_triage_screening",this.patient_need_triage_screening);
           body.append("other_race", this.other_race);
           body.append("other_religion", this.other_religion);
@@ -2278,7 +2288,12 @@ export default {
         this.citylist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
         async GetPatientRequestDetails(){
@@ -2312,7 +2327,12 @@ export default {
         this.citylist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     kinOnnricNo1() {

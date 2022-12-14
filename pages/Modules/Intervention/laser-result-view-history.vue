@@ -177,7 +177,12 @@ export default {
         this.patientdetails = response.data.list[0];
         console.log("patient details", this.patientdetails);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
 
@@ -204,7 +209,12 @@ export default {
         this.actionScore = this.resultlist[2].result;
         console.log("my data 111",  response.data.list);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

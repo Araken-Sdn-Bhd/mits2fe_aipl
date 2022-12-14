@@ -44,7 +44,7 @@
 
             </div>
             <div class="row">
-              
+
               <div class="col-md-6 mb-4">
                 <label for="" class="form-label">Branch</label>
                 <select
@@ -126,7 +126,7 @@
                   <a class="edit" @click="editdiv(etp)" v-if="SidebarAccess==1"
                     ><i class="fa fa-edit"></i
                   ></a>
-                 
+
                 </td>
               </tr>
             </tbody>
@@ -302,10 +302,15 @@ export default {
           this.branchlist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
-   
+
     async onAddetpDivition() {
       this.errors = [];
       try {
@@ -335,11 +340,11 @@ export default {
                 hospital_id: this.hospital_id,
                 branch_id: this.branch_id,
                 division_order: this.division_order,
-                
+
               },
               { headers }
             );
-            
+
             if (response.data.code == 200 || response.data.code == "200") {
               this.$swal.fire(
                   'Successfully Insert',

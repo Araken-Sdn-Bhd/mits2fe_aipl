@@ -1311,7 +1311,7 @@ export default {
             this.errors.push("Latest Resume is required.");
             this.OIsvalid = false;
           }
-        } 
+        }
         if (!this.Oavailable_date) {
           this.errors.push("Available Day is required.");
         }
@@ -1411,7 +1411,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -1613,7 +1618,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -1783,7 +1793,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {

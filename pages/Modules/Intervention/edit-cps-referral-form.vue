@@ -729,7 +729,12 @@ export default {
         console.log("my profile", this.details);
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onCategorycodebind(event) {
@@ -1047,7 +1052,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-  
+
         if (response.data) {
         this.Id = response.data.Data[0].patient_id;
         this.location_service_id = response.data.Data[0].location_of_service;
@@ -1117,7 +1122,12 @@ export default {
           this.icdcatcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     }
     },

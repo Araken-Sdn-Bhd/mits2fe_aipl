@@ -275,7 +275,12 @@ export default {
         this.name = response.data.list[0].name;
         this.branch_id = response.data.list[0].branch_id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

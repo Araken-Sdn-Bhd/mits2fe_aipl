@@ -67,7 +67,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
@@ -104,9 +104,9 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <hr />
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -120,7 +120,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -142,7 +142,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="row">
                     <label class="form-label">Medication </label>
                     <div class="col-sm-4">
@@ -204,7 +204,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -226,9 +226,9 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="form-heading mt-3">Treatment Plan</div>
-  
+
                   <table class="job-search-table" id="treatmentplan">
                     <thead>
                       <tr>
@@ -255,7 +255,7 @@
                       </tr>
                     </tbody>
                   </table>
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -270,7 +270,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div class="row mt-3">
                     <div class="col-sm-6">
                       <label class="form-label">Case Manager</label>
@@ -328,7 +328,7 @@
                     </div>
                   </div>
                   <!-- close-row -->
-  
+
                   <div
                     class="accordion form-accordion form-custum-labal"
                     id="accordionExample"
@@ -592,7 +592,7 @@
                         @click="GoBack"
                         class="btn btn-primary btn-text"
                         ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
-  
+
                     <div  class="btn-right">
                       <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                         <i class="fa fa-save"></i> Save as draft
@@ -694,7 +694,7 @@
         (current.getMonth() + 1) +
         "-" +
         current.getFullYear();
-  
+
       this.currenttime = current.getHours() + ":" + current.getMinutes();
       $(document).ready(function () {
         $('.form-accordion input[type="radio"]').click(function () {
@@ -703,8 +703,8 @@
           $(".services").not(targetBox).hide();
           $(targetBox).show();
         });
-  
-  
+
+
         $(".add-row").click(function (i) {
             $(".block:last").after(
               '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
@@ -767,16 +767,28 @@
               console.log("response", response.data);
               if (response.data.code == 200) {
                 this.loader = false;
-                window.alert("Data are saved successfully!");
+                this.$swal.fire(
+                  'Data are saved successfully!',
+                );
 
                 this.GoBack();
               } else {
                 this.loader = false;
-                window.alert("Something went wrong!");
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
 
               }
           } catch (e) {
-            window.alert("Something went wrong!");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                })
 
           }
         }
@@ -802,7 +814,12 @@
           console.log("my profile", this.details);
         } else {
           this.loader = false;
-          window.alert("Something went wrong");
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
         }
       },
       async onCategorycodebind(event) {
@@ -826,7 +843,7 @@
       BindDiagnosis(){
         this.diagnosis=this.type_diagnosis_id.text;
       },
-  
+
       async GetList() {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
@@ -921,7 +938,7 @@
             this.errorList.push("Diagnosis is required");
             this.validate = false;
           }
-  
+
           if (!this.background_history) {
             this.errorList.push("Background History is required");
             this.validate = false;
@@ -930,7 +947,7 @@
             this.errorList.push("Doctor of Staff Incharge is required");
             this.validate = false;
           }
-  
+
           if (!this.next_review_date) {
             this.errorList.push("Date of next Review is required");
             this.validate = false;
@@ -959,7 +976,7 @@
             this.errorList.push("Specialist Incharge Date is required");
             this.validate = false;
           }
-  
+
           if (!this.location_services_id) {
             this.errorList.push("Location Of Services is required");
           }
@@ -1064,16 +1081,30 @@
             console.log("response", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              window.alert("Data are saved successfully!");
+              this.$swal.fire(
+                  'Data are saved successfully!',
+                );
               this.GoBack();
 
             } else {
               this.loader = false;
-              window.alert("Something went wrong!");
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
 
             }
           }
-        } catch (e) {}
+        } catch (e) {
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                })
+        }
       }
       },
       ResetModel() {
@@ -1128,7 +1159,7 @@
           { headers }
         );
         if (response.data.code == 200) {
-  
+
           this.Id = response.data.Data[0].patient_id;
           this.appId = response.data.Data[0].appointment_details_id;
           this.plan_date = response.data.Data[0].plan_date;
@@ -1141,7 +1172,7 @@
           this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
           this.treatment_plan = response.data.Data[0].treatment_plan;
           this.jobsearchlist=JSON.parse(response.data.Data[0].treatment_plan);
-  
+
           this.next_review_date = response.data.Data[0].next_review_date;
           this.case_manager_date = response.data.Data[0].case_manager_date;
           this.case_manager_name = response.data.Data[0].case_manager_name;
@@ -1159,7 +1190,7 @@
           this.code_id = response.data.Data[0].icd_9_code;
           this.icd_9_subcode = response.data.Data[0].icd_9_subcode;
           this.medication_prescription = response.data.Data[0].medication_prescription;
-  
+
           this.GetList();
           this.GetPatientdetails();
           const response2 = await this.$axios.post(
@@ -1170,12 +1201,17 @@
           if (response2.data.code == 200 || response2.data.code == "200") {
             this.icdcatcodelist = response2.data.list;
             console.log('my icd9data',this.icdcatcodelist);
-  
+
           } else {
             this.icdcatcodelist = [];
           }
         } else {
-          window.alert("Something went wrong");
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
         }
       },
       GoBack(){
@@ -1192,4 +1228,3 @@
     display: none;
   }
   </style>
-  

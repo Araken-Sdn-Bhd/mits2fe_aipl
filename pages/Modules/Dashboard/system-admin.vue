@@ -130,7 +130,12 @@ export default {
                     this.total_mentari = response.data.list[0].total_mentari;
                     this.state_name = response.data.list[0].state_name;
                 } else {
-                    window.alert("Something went wrong");
+                    this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
                 }
             } catch (e) {
 

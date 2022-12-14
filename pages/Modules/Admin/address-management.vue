@@ -625,7 +625,12 @@ export default {
         this.index = response.data.list[0].country_order;
         this.mycountryId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecountry(data) {
@@ -1002,7 +1007,12 @@ this.$swal.fire(
           this.StateListforcity = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecity(data) {

@@ -263,7 +263,12 @@ export default {
       if (response1.data.code == 200) {
         this.navlist = response1.data.list;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
 
@@ -318,7 +323,12 @@ export default {
       if (response.data.code == 200) {
         this.setTimer = response.data.setting[0].variable_value;;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
 

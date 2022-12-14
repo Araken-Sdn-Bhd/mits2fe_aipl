@@ -149,7 +149,12 @@ export default {
       if (response.data.code == 200) {
         this.patientdetails = response.data.list[0];
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
       const response1 = await this.$axios.post(
         "patient-alert/alertListbyPatientId",
@@ -221,7 +226,12 @@ export default {
       if (response.data.code == 200) {
         this.alert = response.data.list[0].message;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

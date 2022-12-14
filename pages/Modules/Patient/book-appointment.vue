@@ -429,7 +429,12 @@ export default {
         this.patient_category = response.data.list[0].patient_category;
         this.assign_team = response.data.list[0].assign_team;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetPatientdetails() {
@@ -452,7 +457,12 @@ export default {
           this.nric_or_passportno = response.data.list[0].nric_no;
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async OnCancelAppointment() {
@@ -474,7 +484,12 @@ export default {
         path: "/modules/Patient/attendance-record",
       });
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

@@ -281,7 +281,12 @@ this.$swal.fire(
         this.index = response.data.list[0].module_order;
         this.Id = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletemodule(data) {
