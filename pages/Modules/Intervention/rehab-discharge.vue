@@ -979,11 +979,11 @@ export default {
         this.date = response.data.Data[0].date;
         this.staff_name = response.data.Data[0].staff_name;
         this.diagnosis_id = response.data.Data[0].diagnosis_id;
-        if (response.data.Data[0].intervention == "Supported Employment"){
+        if (response.data.Data[0].intervention == "supportedEmployment"){
           this.intervention = "supportedEmployment"
         }else if (response.data.Data[0].intervention == "ETP"){
           this.intervention = "ETP"
-        }else if (response.data.Data[0].intervention == "Job Club"){
+        }else if (response.data.Data[0].intervention == "jobClub"){
           this.intervention = "jobClub"
         }
         this.discharge_category = response.data.Data[0].discharge_category;
