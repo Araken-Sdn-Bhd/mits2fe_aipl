@@ -147,6 +147,7 @@ export default {
           "etp/list",
         { headers }
       )
+      
       .then((resp) => {
         this.list = resp.data.list;
         $(document).ready(function () {
