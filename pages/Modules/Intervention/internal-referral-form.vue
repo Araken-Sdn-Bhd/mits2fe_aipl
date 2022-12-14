@@ -263,7 +263,6 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -550,7 +549,6 @@ export default {
                                     'success',
                                 );
 
-                                this.GoBack();
                             } else {
                                 this.loader = false;
                                 this.$swal.fire({
@@ -800,7 +798,7 @@ export default {
                 };
                 pdf.addHTML($("#reslt"), options, function () {
                     pdf.save("Internal_Referral_Form.pdf");
-                    $('.btn-boxs').show();
+
                 });
             }, 1000);
         },
