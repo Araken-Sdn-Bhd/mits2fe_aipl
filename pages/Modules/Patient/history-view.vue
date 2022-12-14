@@ -371,7 +371,7 @@
                                   v-bind:key="catcode.id"
                                   v-bind:value="catcode.id"
                                 >
-                                   {{ catcode.icd_code }} 
+                                   {{ catcode.icd_code }}
  {{catcode.icd_name}}
                                 </option>
                               </select>
@@ -680,7 +680,12 @@ export default {
         this.clinical_notes = response.data.Data[0].clinical_notes;
         this.management = response.data.Data[0].management;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

@@ -429,11 +429,11 @@ export default {
         this.appId = urlParams.get("appId");
         this.GetPatientdetails();
         if (this.Id) {
-            
+
             this.GetList();
         }
 
-        
+
         let urlParams1 = new URLSearchParams(window.location.search);
         this.pid = urlParams1.get("pid");
         this.type = urlParams1.get("type");
@@ -459,7 +459,12 @@ export default {
                 this.client = response.data.list[0].name_asin_nric;
                 console.log("my details", this.patientdetails);
             } else {
-                window.alert("Something went wrong");
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
         },
         async getAddress(event) {
@@ -476,7 +481,12 @@ export default {
             if (response.data.code == 200 || response.data.code == "200") {
                 this.address = JSON.stringify(response.data.list[0].company_address_1 + response.data.list[0].company_address_2 + response.data.list[0].company_address_3 + "," + response.data.list[0].postcode);
             } else {
-                window.alert("Something went wrong");
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
         },
         async onCreateEvent() {
@@ -944,7 +954,12 @@ export default {
                     this.icdcatcodelist = [];
                 }
             } else {
-                window.alert("Something went wrong");
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
         },
         GoBack() {

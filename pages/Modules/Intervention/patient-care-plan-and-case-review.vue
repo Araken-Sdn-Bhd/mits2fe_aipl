@@ -606,14 +606,26 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Data are saved successfully!");
+            this.$swal.fire(
+                  'Data are saved successfully!',
+                );
             this.GoBack();
           } else {
-            window.alert("Something went wrong!");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             this.loader = false;
           }
         } catch (e) {
-          window.alert("Something went wrong!");
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
         }
       }
     },
@@ -638,7 +650,12 @@ export default {
         console.log("my profile", this.details);
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onCategorycodebind(event) {
@@ -1013,7 +1030,12 @@ export default {
           this.icdcatcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack() {

@@ -215,9 +215,12 @@ export default {
       } catch (e) {
         console.log('errror',e);
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async GetCountryList() {
@@ -245,7 +248,12 @@ export default {
         this.index = response.data.list[0].country_order;
         this.countryId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
     async deletecountry(data) {
@@ -272,9 +280,12 @@ export default {
           });
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async resetmodel() {

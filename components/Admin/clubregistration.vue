@@ -27,7 +27,7 @@
 
             </div>
             <div class="row">
-              
+
               <div class="col-lg-6 col-sm-4 mb-4">
                 <label for="" class="form-label">Club Description</label>
                 <input
@@ -93,7 +93,7 @@
                   <a  v-if="SidebarAccess==1" class="edit" @click="editreg(etp)"
                     ><i class="fa fa-edit"></i
                   ></a>
-                 
+
                 </td>
               </tr>
             </tbody>
@@ -206,10 +206,15 @@ export default {
         this.Id = data.id;
         this.status = response.data.list[0].status;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
-  
+
     async onAddclubRegistration() {
       this.errors = [];
       try {
@@ -239,7 +244,7 @@ export default {
                 club_name: this.club_name,
                 club_description: this.club_description,
                 club_order: this.club_order,
-               
+
               },
               { headers }
             );
@@ -255,7 +260,7 @@ export default {
                   text: 'the error is: ' + this.error,
                   footer: ''
                 })
-            
+
             }
           } else {
             const response = await this.$axios.post(
@@ -284,7 +289,7 @@ export default {
                   footer: ''
                 })
             }
-            
+
           }
         }
       } catch (e) {

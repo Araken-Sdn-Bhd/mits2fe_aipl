@@ -1050,17 +1050,31 @@ export default {
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            window.alert("Data are saved successfully!");
+            this.$swal.fire(
+                  'Data are saved successfully!',
+                );
             this.GoBack();
             this.resetmodel();
 
           } else {
-             window.alert("Something went wrong!");
+             this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             this.loader = false;
 
           }
         }
-      } catch (e) { }
+      } catch (e) {
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+       }
     }},
     async OnBookAppDraft() {
       try{
@@ -1167,11 +1181,21 @@ export default {
             alert("Data are saved successfully! ");
             this.OnBookAppDraft();
           } else {
-            window.alert("Something went wrong!");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             this.loader = false;
           }
         } catch (e) {
-
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
         }
       }
     },
@@ -1304,7 +1328,12 @@ export default {
           this.icdcatcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack(){

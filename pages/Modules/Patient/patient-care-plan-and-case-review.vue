@@ -671,7 +671,12 @@ export default {
         console.log("my profile", this.details);
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onCategorycodebind(event) {

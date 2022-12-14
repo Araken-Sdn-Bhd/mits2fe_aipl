@@ -151,7 +151,7 @@
                   </div>
                 </div>
                 <!-- close-row -->
-                
+
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -500,7 +500,12 @@ export default {
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].code;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
 
 
@@ -810,7 +815,12 @@ export default {
 
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetStaffBranchId() {
@@ -835,7 +845,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     OnchangeMarital(event) {

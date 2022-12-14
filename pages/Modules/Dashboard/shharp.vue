@@ -147,7 +147,12 @@ export default {
                     this.report_month = response.data.list[0].report_month;
                     this.total_case = response.data.list[0].total_case;
                 } else {
-                    window.alert("Something went wrong");
+                    this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
                 }
             } catch (e) {
 

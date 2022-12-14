@@ -275,7 +275,12 @@ this.$swal.fire(
         this.index = response.data.setting[0].section_order;
         this.requesttype = "update";
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

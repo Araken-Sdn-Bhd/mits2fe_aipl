@@ -128,7 +128,12 @@ export default {
                     this.team_task = response.data.list[0].team_task;
                     this.request_appointment = response.data.list[0].request_appointment;
                 } else {
-                    window.alert("Something went wrong");
+                    this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
                 }
             } catch (e) {
 

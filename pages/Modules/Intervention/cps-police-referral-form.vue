@@ -384,7 +384,12 @@ export default {
         this.patientdetails = response.data.list[0];
         console.log("my details", this.patientdetails);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetPatientConnsentdetails() {
@@ -409,7 +414,12 @@ export default {
         this.consentdetails = response.data.list;
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async OnSubmit() {
@@ -505,7 +515,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-  
+
 
         this.Id = response.data.Data[0].patient_id;
 
@@ -516,7 +526,12 @@ export default {
         this.GetPatientdetails();
         this.GetPatientConnsentdetails();
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

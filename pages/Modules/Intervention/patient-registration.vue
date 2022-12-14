@@ -1460,7 +1460,12 @@ export default {
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].section_value;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
 
     },
@@ -1687,7 +1692,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onSelectedState(event){
@@ -2278,7 +2288,12 @@ export default {
         this.citylist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
         async GetPatientRequestDetails(){
@@ -2312,7 +2327,12 @@ export default {
         this.citylist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     kinOnnricNo1() {

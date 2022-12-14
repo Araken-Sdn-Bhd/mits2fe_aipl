@@ -401,7 +401,12 @@ export default {
           this.submodulelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletescreen(data) {
@@ -429,10 +434,12 @@ export default {
           });
         }
       } catch (e) {
-        this.$nextTick(() => {
-          this.message = JSON.stringify(response.data.message);
-          $("#errorpopupscreen").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
   },

@@ -49,7 +49,7 @@
                 </div>
               </div>
               <!-- search-table -->
-             
+
               <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
@@ -82,7 +82,7 @@
                   </tr>
                 </tbody>
               </table>
-            
+
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default {
               this.dataReady= true;
               this.dataReady2= false;
             }
-      
+
     },
     async GetBranchList() {
       const headers = {
@@ -218,7 +218,12 @@ export default {
       if (response.data.code == 200) {
         this.list = response.data.list;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

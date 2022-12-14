@@ -251,7 +251,12 @@ this.$swal.fire(
         this.serviceindex = response.data.list[0].service_order;
         this.Id = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletereg(data) {
@@ -277,9 +282,12 @@ this.$swal.fire(
           });
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async resetmodel() {

@@ -237,7 +237,7 @@
                                   value="Occupational Functioning"
                                   v-model="occupational"
                                   name=""
-                                  id="ps-3" 
+                                  id="ps-3"
                                 />
                                 <label class="form-check-label" for="31">
                                   Occupational Functioning
@@ -1092,7 +1092,7 @@ export default {
               if(this.abuse == "Abuse Or Neglect"){
                 this.abuse = true;
               }
-            
+
               try {
                 if (!this.name) {
                   this.errorList.push("Name is required");
@@ -1440,7 +1440,12 @@ export default {
         this.mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
      async GetPatientdetails1(id) {
@@ -1461,7 +1466,12 @@ export default {
         this.mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     resetmodel() {
@@ -1586,7 +1596,7 @@ export default {
             this.insight = "Insight Towards Illness And Treatment";
           }
         });
-      
+
         var jdata2 = JSON.parse(response.data.Data[0].psychosocial);
         jdata2.forEach((ele) => {
           this.psychosocial ="val";
@@ -1646,7 +1656,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack(){

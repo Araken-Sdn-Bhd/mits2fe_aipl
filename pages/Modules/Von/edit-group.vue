@@ -2003,7 +2003,12 @@ export default {
           this.Gnetworkother = response.data.list.project_loaction_value;
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

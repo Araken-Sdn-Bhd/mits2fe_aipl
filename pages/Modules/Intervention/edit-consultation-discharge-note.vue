@@ -621,7 +621,7 @@ export default {
                     this.category_services &&
                     this.complexity_services &&
                     this.outcome &&
-          
+
                     this.validate
                   ) {
                     this.loader = true;
@@ -755,7 +755,7 @@ export default {
       } else {
         this.dischargelist = [];
       }
-      const response7 = await this.$axios.post("staff-management/getStaffDetailByBranch", 
+      const response7 = await this.$axios.post("staff-management/getStaffDetailByBranch",
         {branch_id: this.userdetails.branch.branch_id},{headers}
         );
       if (response7.data.code == 200 || response7.data.code == "200") {
@@ -832,7 +832,12 @@ export default {
       if (response.data.code == 200) {
         this.patientdetails = response.data.list[0];
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
       console.log("my details", this.patientdetails);
     },
@@ -886,7 +891,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack(){

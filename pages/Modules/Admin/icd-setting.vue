@@ -625,7 +625,12 @@ this.$swal.fire(
         this.index = response.data.list[0].icd_type_order;
         this.typeId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletetype(data) {
@@ -824,7 +829,12 @@ this.$swal.fire(
         this.icdcatindex = response.data.list[0].icd_category_order;
         this.icdcatId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecat(data) {
@@ -1060,7 +1070,12 @@ this.$swal.fire(
         this.icdcatcodelist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecode(data) {

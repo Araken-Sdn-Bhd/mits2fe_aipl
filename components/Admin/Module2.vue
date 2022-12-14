@@ -280,7 +280,12 @@ this.$swal.fire(
         this.subcode = response.data.list[0].sub_module_code;
         this.Id = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletesubmodule(data) {

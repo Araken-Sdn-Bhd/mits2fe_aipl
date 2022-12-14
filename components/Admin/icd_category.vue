@@ -302,7 +302,12 @@ export default {
         this.icdcatindex = response.data.list[0].icd_category_order;
         this.icdcatId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecat(data) {
@@ -328,9 +333,12 @@ export default {
           });
         }
       } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
     async resetmodel() {

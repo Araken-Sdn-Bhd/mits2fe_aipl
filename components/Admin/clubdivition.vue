@@ -44,7 +44,7 @@
 
             </div>
             <div class="row">
-              
+
               <div class="col-md-6 mb-4">
                 <label for="" class="form-label">Branch</label>
                 <select
@@ -124,7 +124,7 @@
                   <a class="edit" @click="editdiv(etp)"
                     ><i class="fa fa-edit"></i
                   ></a>
-                  
+
                 </td>
               </tr>
             </tbody>
@@ -304,10 +304,15 @@ export default {
           this.branchlist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     },
-   
+
     async onAddclubDivition() {
       this.errors = [];
       try {
