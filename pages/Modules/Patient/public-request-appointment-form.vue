@@ -169,7 +169,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-list", {
+      const response = await this.$axios.get("hospital/branch-excluded-hospital-list", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
