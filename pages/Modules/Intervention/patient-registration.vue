@@ -1991,7 +1991,7 @@ export default {
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
-          body.append("branch_id", this.branch_id);
+          body.append("branch_id", this.branch);
           body.append("patient_need_triage_screening",this.patient_need_triage_screening);
           body.append("other_race", this.other_race);
           body.append("other_religion", this.other_religion);
