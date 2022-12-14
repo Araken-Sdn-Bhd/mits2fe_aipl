@@ -81,6 +81,11 @@ export default {
     "@nuxtjs/auth",
     "vue-sweetalert2/nuxt",
   ],
+  
+  sweetalert: {
+      confirmButtonColor: '#008B8B',
+      cancelButtonColor: '#ff7674'
+  },
   axios: {
     // baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
     //baseURL:"http://192.168.1.15:8080/api/"
