@@ -872,7 +872,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                              <label class="form-label">NRIC ID<small>*</small></label>
+                              <label class="form-label">NRIC ID</label>
                               <input
                                 type="tel"
                                 class="form-control toCapitalFirst"
