@@ -883,9 +883,12 @@ export default {
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
         }
       } catch (e) {}
@@ -959,7 +962,7 @@ export default {
               this.validate = false;
             } else {
               this.services_id = this.serviceid;
-            } 
+            }
           }
         }
         if (!this.outcome_id) {
@@ -1156,7 +1159,7 @@ export default {
             window.alert("Something went wrong!");
             this.loader = false;
           }
-        } catch (e) { 
+        } catch (e) {
           alert(e);
         }
       }

@@ -97,7 +97,7 @@
                         </td>
                         <td>
                           <a class="edit" @click="editreg(rg)"><i class="fa fa-edit"></i></a>
-                        
+
                         </td>
                       </tr>
                     </tbody>
@@ -197,7 +197,7 @@ export default {
         if (!this.rolename) {
           this.errors.push("Role Name is required.");
         }
-        if(this.rolename) 
+        if(this.rolename)
         {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -220,9 +220,12 @@ export default {
               });
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -237,18 +240,21 @@ export default {
             );
 
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
-            
+
           }
-         
+
         }
       } catch (e) {
         this.errors.push = e;
@@ -287,7 +293,7 @@ export default {
     },
 
 
-   
+
   },
 };
 </script>

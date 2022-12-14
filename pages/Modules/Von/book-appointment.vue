@@ -306,9 +306,12 @@ export default {
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -332,9 +335,12 @@ export default {
             } else {
               this.loader = false;
               this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
