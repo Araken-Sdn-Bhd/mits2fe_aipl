@@ -1355,6 +1355,7 @@ export default {
       race_type:"",
       nric_type_code:"",
       SidebarAccess:null,
+      rid:0,
     };
   },
   beforeMount() {
@@ -1364,9 +1365,17 @@ export default {
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.rid = urlParams1.get("rid");
+
     if (this.Id > 0) {
       this.GetPatientdetails();
     }
+
+    if (this.rid > 0) {
+      this.GetPatientRequestDetails();
+    }
+
     $(document).ready(function () {
       $('input[name="drug-allergy"]:radio').change(function () {
         var radio_value = $('input:radio[name="drug-allergy"]:checked').val();
@@ -2221,6 +2230,42 @@ export default {
         window.alert("Something went wrong");
       }
     },
+
+    async GetPatientRequestDetails(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get(
+        "appointment-request/getAll",
+        {
+          id: this.rid,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.address1 = response.data.list[0].address;
+        this.address2 = response.data.list[0].address1;
+        this.mobile_no = response.data.list[0].contact_no;
+        this.name_asin_nric = response.data.list[0].name;
+        var str = response.data.list[0].nric_or_passportno;
+        this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+        console.log('nric',this.nric_no);
+
+        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
+      }
+      } else {
+        window.alert("Something went wrong");
+      }
+    },
+
     kinOnnricNo1() {
       if (this.kin_nric_no.length == 12) {
         this.error = null;

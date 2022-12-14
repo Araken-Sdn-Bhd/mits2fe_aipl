@@ -105,7 +105,7 @@
                           v-bind:key="vst.id"
                           v-bind:value="vst.id"
                         >
-                          {{ vst.appointment_visit_name }}
+                          {{ vst.section_value }}
                         </option>
                       </select>
                     </div>
@@ -128,7 +128,7 @@
                           v-bind:key="cat.id"
                           v-bind:value="cat.id"
                         >
-                          {{ cat.appointment_category_name }}
+                          {{ cat.section_value }}
                         </option>
                       </select>
                     </div>
@@ -241,7 +241,9 @@ export default {
         "Content-Type": "application/json",
       };
       const response2 = await this.$axios.get(
-        "patient-appointment-visit/list",
+        `${this.$axios.defaults.baseURL}` +
+          "general-setting/list?section=" +
+          "type-of-visit",
         { headers }
       );
 
@@ -251,7 +253,9 @@ export default {
         this.visitlist = [];
       }
       const response3 = await this.$axios.get(
-        "patient-appointment-category/list",
+        `${this.$axios.defaults.baseURL}` +
+          "general-setting/list?section=" +
+          "patient-category",
         { headers }
       );
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -271,7 +275,13 @@ export default {
       }
     },
     async OnBookAppointment() {
-      this.errorList = [];
+      this.$swal.fire({
+                title: 'Do you want to submit the appointment?',
+                showCancelButton: true,
+                confirmButtonText: 'Submit',
+            }).then(async (result) =>{
+              if (result.isConfirmed) {
+              this.errorList = [];
       try {
         if (!this.nric_or_passportno) {
           this.errorList.push("NRIC/Passport NO. is required");
@@ -329,13 +339,20 @@ export default {
             );
             if (response.data.code == 200) {
               this.loader = false;
+              this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Appointment is updated.',
+                                    'success',
+                                );
               this.$router.push("/modules/Patient/attendance-record");
             } else {
               this.loader = false;
-              this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+              this.$router.push("/modules/Patient/attendance-record");
             }
           } else {
             const response = await this.$axios.post(
@@ -358,17 +375,35 @@ export default {
             console.log('my rs',response.data);
             if (response.data.code == 200) {
               this.loader = false;
+              this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Appointment is booked.',
+                                    'success',
+                                );
               this.$router.push("/modules/Patient/attendance-record");
             } else {
               this.loader = false;
-              this.errorList.push(response.data.message);
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+              this.$router.push("/modules/Patient/attendance-record");
             }
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + e,
+        })
+      }
+    }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not submitted', '', 'info')
+                }
+    })
+
     },
     async GetAppointmentdetails() {
       const headers = {
