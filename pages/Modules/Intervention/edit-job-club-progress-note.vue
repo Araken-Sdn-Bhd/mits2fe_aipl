@@ -457,202 +457,232 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save this as draft ? ")) {
-      try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "job-club-progress/add",
-            {
-              patient_mrn_id: this.Id,
-              added_by: this.userdetails.user.id,
-              name: this.name,
-              mrn: this.mrn,
-              date: this.date,
-              time: this.time,
-              staff_name: this.staff_name,
-              work_readiness: this.work_readiness,
-              progress_note: this.progress_note,
-              management_plan: this.management_plan,
-              location_service: this.location_services_id,
-              diagnosis_type: this.type_diagnosis_id,
-              service_category: this.category_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_service: this.complexity_services_id,
-              outcome: this.outcome_id,
-              medication: this.medication_des,
-              appId:this.appId,
-              status: "0",
-              id: this.pid,
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.GoBack();
-
-            alert("Succefully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
-
-
-            alert("Error Occured!");
-            this.GoBack();
-          }
-      } catch (e) {
-
-      }
+      this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async(result) => {
+              if (result.isConfirmed) {
+                try {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "job-club-progress/add",
+                      {
+                        patient_mrn_id: this.Id,
+                        added_by: this.userdetails.user.id,
+                        name: this.name,
+                        mrn: this.mrn,
+                        date: this.date,
+                        time: this.time,
+                        staff_name: this.staff_name,
+                        work_readiness: this.work_readiness,
+                        progress_note: this.progress_note,
+                        management_plan: this.management_plan,
+                        location_service: this.location_services_id,
+                        diagnosis_type: this.type_diagnosis_id,
+                        service_category: this.category_services,
+                        services_id: this.services_id,
+                        code_id: this.code_id,
+                        sub_code_id: this.sub_code_id,
+                        complexity_service: this.complexity_services_id,
+                        outcome: this.outcome_id,
+                        medication: this.medication_des,
+                        appId:this.appId,
+                        status: "0",
+                        id: this.pid,
+                      },
+                      { headers }
+                    );
+                    console.log("response", response.data);
+                    if (response.data.code == 200) {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire('Succesfully save as draft!', '', 'success')
+                      this.GoBack();
+                    } else {
+                      this.loader = false;
+                      this.resetmodel();
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                            })
+                      this.GoBack();
+                    }
+                } catch (e) {
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                }
               }
+            })
     },
     async onPublishEvent() {
-      if (confirm("Are you sure you want to save this entry ? ")) {
-      this.errorList = [];
-      this.validate = true;
-      try {
-        if (!this.name) {
-          this.errorList.push("Name is required");
-        }
-        if (!this.mrn) {
-          this.errorList.push("MRN is required");
-        }
-        if (!this.date) {
-          this.errorList.push("Date is required");
-        }
-        if (!this.time) {
-          this.errorList.push("Time is required");
-        }
-        if (!this.staff_name) {
-          this.errorList.push("Staff Name is required");
-        }
-        if (!this.work_readiness) {
-          this.errorList.push("Work Readiness is required");
-        }
-        if (!this.progress_note) {
-          this.errorList.push("Progress Note is required");
-        }
-        if (!this.management_plan) {
-          this.errorList.push("Management Plan is required");
-        }
+      this.$swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                this.errorList = [];
+                this.validate = true;
+                try {
+                  if (!this.name) {
+                    this.errorList.push("Name is required");
+                  }
+                  if (!this.mrn) {
+                    this.errorList.push("MRN is required");
+                  }
+                  if (!this.date) {
+                    this.errorList.push("Date is required");
+                  }
+                  if (!this.time) {
+                    this.errorList.push("Time is required");
+                  }
+                  if (!this.staff_name) {
+                    this.errorList.push("Staff Name is required");
+                  }
+                  if (!this.work_readiness) {
+                    this.errorList.push("Work Readiness is required");
+                  }
+                  if (!this.progress_note) {
+                    this.errorList.push("Progress Note is required");
+                  }
+                  if (!this.management_plan) {
+                    this.errorList.push("Management Plan is required");
+                  }
 
-        if (!this.location_services_id) {
-          this.errorList.push("Location Of Services is required");
-        }
-        if (!this.type_diagnosis_id) {
-          this.errorList.push("Type Of Diagnosis is required");
-        }
-        if (!this.category_services) {
-          this.errorList.push("Category Of Services is required");
-        }
-        if (!this.complexity_services_id) {
-          this.errorList.push("Complexity Of Service is required");
-        }
-        if (this.category_services) {
-          if (this.category_services == "assisstance") {
-            if (!this.services_id) {
-              this.errorList.push("Service is required");
-              this.validate = false;
-            }
-          } else if (this.category_services == "clinical-work") {
-            if (!this.code_id) {
-              this.errorList.push("ICD 9 CODE is required");
-              this.validate = false;
-            }
-            if (!this.sub_code_id) {
-              this.errorList.push("ICD 9 SUB CODE is required");
-              this.validate = false;
-            }
-          } else {
-            if (!this.serviceid) {
-              this.errorList.push("Services is required");
-              this.validate = false;
-            } else {
-              this.services_id = this.serviceid;
-            }
-          }
-        }
-        if (!this.outcome_id) {
-          this.errorList.push("Outcome is required");
-        }
-
-        if (
-          this.name &&
-          this.mrn &&
-          this.date &&
-          this.time &&
-          this.staff_name &&
-          this.work_readiness &&
-          this.progress_note &&
-          this.management_plan &&
-          this.location_services_id &&
-          this.type_diagnosis_id &&
-          this.category_services &&
-          this.complexity_services_id &&
-          this.outcome_id &&
-
-          this.validate
-        ) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "job-club-progress/add",
-            {
-              patient_mrn_id: this.Id,
-              added_by: this.userdetails.user.id,
-              name: this.name,
-              mrn: this.mrn,
-              date: this.date,
-              time: this.time,
-              staff_name: this.staff_name,
-              work_readiness: this.work_readiness,
-              progress_note: this.progress_note,
-              management_plan: this.management_plan,
-              location_service: this.location_services_id,
-              diagnosis_type: this.type_diagnosis_id,
-              service_category: this.category_services,
-              services_id: this.services_id,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_service: this.complexity_services_id,
-              outcome: this.outcome_id,
-              medication: this.medication_des,
-              appId:this.appId,
-              status: "1",
-              id: this.pid,
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.GoBack();
-
-
-            alert("Succefully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
-
-
-            alert("Error Occured");
-            this.GoBack();
-          }
-        }
-      } catch (e) {}
-    }
+                  if (!this.location_services_id) {
+                    this.errorList.push("Location Of Services is required");
+                  }
+                  if (!this.type_diagnosis_id) {
+                    this.errorList.push("Type Of Diagnosis is required");
+                  }
+                  if (!this.category_services) {
+                    this.errorList.push("Category Of Services is required");
+                  }
+                  if (!this.complexity_services_id) {
+                    this.errorList.push("Complexity Of Service is required");
+                  }
+                  if (this.category_services) {
+                    if (this.category_services == "assisstance") {
+                      if (!this.services_id) {
+                        this.errorList.push("Service is required");
+                        this.validate = false;
+                      }
+                    } else if (this.category_services == "clinical-work") {
+                      if (!this.code_id) {
+                        this.errorList.push("ICD 9 CODE is required");
+                        this.validate = false;
+                      }
+                      if (!this.sub_code_id) {
+                        this.errorList.push("ICD 9 SUB CODE is required");
+                        this.validate = false;
+                      }
+                    } else {
+                      if (!this.serviceid) {
+                        this.errorList.push("Services is required");
+                        this.validate = false;
+                      } else {
+                        this.services_id = this.serviceid;
+                      }
+                    }
+                  }
+                  if (!this.outcome_id) {
+                    this.errorList.push("Outcome is required");
+                  }
+                  if (
+                    this.name &&
+                    this.mrn &&
+                    this.date &&
+                    this.time &&
+                    this.staff_name &&
+                    this.work_readiness &&
+                    this.progress_note &&
+                    this.management_plan &&
+                    this.location_services_id &&
+                    this.type_diagnosis_id &&
+                    this.category_services &&
+                    this.complexity_services_id &&
+                    this.outcome_id &&
+                    this.validate
+                  ) {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "job-club-progress/add",
+                      {
+                        patient_mrn_id: this.Id,
+                        added_by: this.userdetails.user.id,
+                        name: this.name,
+                        mrn: this.mrn,
+                        date: this.date,
+                        time: this.time,
+                        staff_name: this.staff_name,
+                        work_readiness: this.work_readiness,
+                        progress_note: this.progress_note,
+                        management_plan: this.management_plan,
+                        location_service: this.location_services_id,
+                        diagnosis_type: this.type_diagnosis_id,
+                        service_category: this.category_services,
+                        services_id: this.services_id,
+                        code_id: this.code_id,
+                        sub_code_id: this.sub_code_id,
+                        complexity_service: this.complexity_services_id,
+                        outcome: this.outcome_id,
+                        medication: this.medication_des,
+                        appId:this.appId,
+                        status: "1",
+                        id: this.pid,
+                      },
+                      { headers }
+                    );
+                    console.log("response", response.data);
+                    if (response.data.code == 200) {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                      );
+                      this.GoBack();
+                    } else {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire({
+                          icon: 'error',
+                          title: 'Oops... Something Went Wrong!',
+                          text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                      this.GoBack();
+                    }
+                  }
+                } catch (e) {
+                  this.loader = false;
+                        this.resetmodel();
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                        this.GoBack();
+                }
+              }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+              }
+            })
     },
     async GetList() {
       const headers = {
@@ -766,7 +796,12 @@ export default {
         this.name= response.data.list[0].name_asin_nric;
         console.log("my details", this.patientdetails);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     resetmodel() {
@@ -841,7 +876,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
 

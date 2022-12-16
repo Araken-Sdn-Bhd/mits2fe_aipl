@@ -200,13 +200,13 @@
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    
+
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Publish
                     </button>
                   </div>
                 </div>
-           
+
             </div>
           </div>
         </div>
@@ -305,7 +305,7 @@ export default {
             this.error = "No Record Found";
           }
     },
-   
+
 
     back() {
       this.$router.go(-1);
@@ -353,9 +353,14 @@ export default {
         if (ctsplt[5] == 1){
           this.cat6 = 'Healthcare-Assistant';
         }
-       
+
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
 
@@ -459,7 +464,7 @@ export default {
             });
           }
         }
-      
+
       } catch (e) {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");
@@ -516,7 +521,7 @@ export default {
           body.append("added_by", this.userdetails.user.id);
           body.append("title", this.title);
           body.append("content", this.content);
-         
+
           body.append("document", this.file);
           body.append("start_date", this.startdate);
           body.append("end_date", this.enddate);
@@ -551,7 +556,7 @@ export default {
             });
           }
         }
-      
+
       } catch (e) {
         this.$nextTick(() => {
           $("#errorpopup").modal("show");

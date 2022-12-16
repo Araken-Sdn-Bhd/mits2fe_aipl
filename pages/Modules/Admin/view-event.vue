@@ -22,7 +22,7 @@
                   </div>
                 </div>
                 <div class="row mb-5 col-sm-12">
-                 
+
                   <label col-sm-3 class="col-sm-3 col-form-label"
                     >Content</label
                   >
@@ -42,7 +42,7 @@
                         ><i class="fa fa-download"></i> Download File</a
                       >
                   </div>
-                  
+
                 </div>
 
                 <div class="row mb-5 col-sm-12">
@@ -64,7 +64,7 @@
                     disabled="true"
                       type="date"
                       class="form-control"
-                     
+
                       v-model="enddate"
                     />
                   </div>
@@ -343,9 +343,14 @@ export default {
         if (ctsplt[5] == 1){
           this.cat6 = 'Healthcare-Assistant';
         }
-       
+
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetbranchList() {

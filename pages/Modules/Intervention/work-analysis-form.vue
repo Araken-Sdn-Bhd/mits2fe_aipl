@@ -1441,6 +1441,12 @@ export default {
     },
 
     async onCreateEvent() {
+      this.$swal.fire({
+        title: 'Do you want to save as draft?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async(result) => {
+        if (result.isConfirmed) {
       var jobSPECIFICATION = [];
       var jobSDESCRIPTION = [];
       $("table#jobspecification > tbody > tr").each(function (i) {
@@ -1622,84 +1628,98 @@ export default {
       this.validate = true;
       this.errorList = [];
       try {
-        this.loader = true;
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "work-analysis/add",
-          {
-            added_by: this.userdetails.user.id,
-            patient_id: this.Id,
-            company_name: this.company_name,
-            company_address1: this.company_address1,
-            company_address2: this.company_address2,
-            company_address3: this.company_address3,
-            state_id: this.state_id,
-            city_id: this.postcode_id,//city share the same id with postcode
-            postcode_id: this.postcode_id,
-            supervisor_name: this.supervisor_name,
-            email: this.email,
-            position: this.position,
-            client_name: this.client_name,
-            job_position: this.job_position,
-            current_wage: this.current_wage,
-            wage_specify: this.wage_specify,
-            wage_change_occur: this.wage_change_occur,
-            change_in_rate: this.change_in_rate,
-            from: this.from,
-            to: this.to,
-            on_date: this.on_date,
-            works_hour_week: this.works_hour_week,
-            work_schedule: this.work_schedule,
-            no_of_current_employee: this.no_of_current_employee,
-            no_of_other_employee: this.no_of_other_employee,
-            during_same_shift: this.during_same_shift,
-            education_level: this.education_level,
-            grade: this.grade,
-            job_experience_year: this.job_experience_year,
-            job_experience_months: this.job_experience_months,
-            others: this.others,
-            location_services: this.location_services_id,
-            type_diagnosis_id: this.type_diagnosis_id,
-            category_services: this.category_services,
-            services_id: this.services_id,
-            code_id: this.code_id,
-            sub_code_id: this.sub_code_id,
-            complexity_of_services: this.complexity_services_id,
-            outcome: this.outcome_id,
-            medication_prescription: this.medication_des,
-            jobs: jobSDESCRIPTION,
-            job_specification: jobSPECIFICATION,
-            appId: this.appId,
-            status: "0",
-          },
-          { headers }
-        );
-        console.log("response", response.data);
-        console.log("response", response.data);
-        if (response.data.code == 200) {
-          this.loader = false;
-          alert("Succesfully Created");
-          this.GoBack();
-        } else {
-          this.loader = false;
-
-          alert("Error Occured!");
-          this.GoBack();
-        }
-
-      } catch (e) {
-        this.loader = false;
-        //this.$nextTick(() => {
-        //  $("#errorpopup").modal("show");
-        //});
-      }
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "work-analysis/add",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              company_name: this.company_name,
+              company_address1: this.company_address1,
+              company_address2: this.company_address2,
+              company_address3: this.company_address3,
+              state_id: this.state_id,
+              city_id: this.postcode_id,//city share the same id with postcode
+              postcode_id: this.postcode_id,
+              supervisor_name: this.supervisor_name,
+              email: this.email,
+              position: this.position,
+              client_name: this.client_name,
+              job_position: this.job_position,
+              current_wage: this.current_wage,
+              wage_specify: this.wage_specify,
+              wage_change_occur: this.wage_change_occur,
+              change_in_rate: this.change_in_rate,
+              from: this.from,
+              to: this.to,
+              on_date: this.on_date,
+              works_hour_week: this.works_hour_week,
+              work_schedule: this.work_schedule,
+              no_of_current_employee: this.no_of_current_employee,
+              no_of_other_employee: this.no_of_other_employee,
+              during_same_shift: this.during_same_shift,
+              education_level: this.education_level,
+              grade: this.grade,
+              job_experience_year: this.job_experience_year,
+              job_experience_months: this.job_experience_months,
+              others: this.others,
+              location_services: this.location_services_id,
+              type_diagnosis_id: this.type_diagnosis_id,
+              category_services: this.category_services,
+              services_id: this.services_id,
+              code_id: this.code_id,
+              sub_code_id: this.sub_code_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              medication_prescription: this.medication_des,
+              jobs: jobSDESCRIPTION,
+              job_specification: jobSPECIFICATION,
+              appId: this.appId,
+              status:"0",
+            },
+            { headers }
+          );
+          console.log("response", response.data);
+                        if (response.data.code == 200) {
+                            this.loader = false;
+                            this.resetmodel();
+                            this.$swal.fire('Succesfully save as draft!', '', 'success')
+                            this.GoBack();
+                        } else {
+                            this.loader = false;
+                            this.resetmodel();
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong! dalam function api',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                            })
+                            this.GoBack();
+                        }
+                    } catch (e) {
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
     },
 
     async onPublishEvent() {
+      this.$swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
       var jobSPECIFICATION = [];
       var jobSDESCRIPTION = [];
       $("table#jobspecification > tbody > tr").each(function (i) {
@@ -2106,24 +2126,36 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            alert("Succesfully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
-
-            alert("Error Occured!");
-            this.GoBack();
-          }
-        }
-      } catch (e) {
-        this.loader = false;
-        //this.$nextTick(() => {
-        //  $("#errorpopup").modal("show");
-        //});
-      }
+                            if (response.data.code == 200) {
+                                this.loader = false;
+                                this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
+                            } else {
+                                this.loader = false;
+                                this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+                                this.GoBack();
+                            }
+                        }
+                    } catch (e) {
+                        this.loader = false;
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                        this.GoBack();
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
     },
     async GetList() {
       const headers = {
@@ -2323,7 +2355,7 @@ export default {
         this.client_name = response.data.Data[0].client_name;
         this.job_position = response.data.Data[0].job_position;
         this.current_wage = response.data.Data[0].current_wage;
-        this.age_specify = response.data.Data[0].wage_specify;
+        this.wage_specify = response.data.Data[0].wage_specify;
         this.wage_change_occur = response.data.Data[0].wage_change_occur;
         this.change_in_rate = response.data.Data[0].change_in_rate;
         this.from = response.data.Data[0].from;
@@ -2368,7 +2400,12 @@ export default {
           this.icdcatcodelist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

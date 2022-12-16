@@ -568,9 +568,12 @@ export default {
               });
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -586,14 +589,17 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
               this.resetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
@@ -619,7 +625,12 @@ export default {
         this.index = response.data.list[0].icd_type_order;
         this.typeId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletetype(data) {
@@ -688,7 +699,7 @@ export default {
                 },
               },
             });
-            
+
             $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
             $($.fn.dataTable.tables(true))
               .DataTable()
@@ -758,9 +769,12 @@ export default {
               });
               this.icdcategoryresetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -777,14 +791,17 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
               this.icdcategoryresetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
@@ -812,7 +829,12 @@ export default {
         this.icdcatindex = response.data.list[0].icd_category_order;
         this.icdcatId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecat(data) {
@@ -974,9 +996,12 @@ export default {
               });
               this.icdcoderesetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -994,14 +1019,17 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
               this.icdcoderesetmodel();
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
@@ -1042,7 +1070,12 @@ export default {
         this.icdcatcodelist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecode(data) {

@@ -52,9 +52,9 @@
                     <td>{{ app.created }}</td>
                     <td>
                       <a
-                       href="/app/modules/Intervention/patient-registration"
+                      @click="OnPatientRegistration(app)"
                         class="view"
-                        ><i class="fas fa-eye"></i
+                        ><i class="fas fa-edit"></i
                       ></a>
                     </td>
                   </tr>
@@ -136,7 +136,13 @@ export default {
       } else {
         this.list = this.alllist;
       }
-    }
+    },
+    OnPatientRegistration(data){
+    this.$router.push({
+        path: "/modules/Intervention/patient-registration",
+        query: { rid: data.id },
+      });
+  }
   }
 };
 </script>

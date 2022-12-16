@@ -206,9 +206,9 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             if (this.settingId > 0) {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
             } else {
               this.$nextTick(() => {
                 $("#insertpopup").modal("show");
@@ -288,7 +288,12 @@ export default {
         this.index = response.data.setting[0].section_order;
         this.requesttype = "update";
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

@@ -1248,7 +1248,7 @@
                     <!-- <div  class="btn-right" :class="SidebarAccess!=1?'hide':''"> -->
                     <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
-                    </button> --> 
+                    </button> -->
 
                 <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
                   <i class="fa fa-paper-plane"></i> Submit
@@ -1352,7 +1352,12 @@ export default {
         this.details = response.data.details;
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetList() {
@@ -1636,7 +1641,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     GoBack(){

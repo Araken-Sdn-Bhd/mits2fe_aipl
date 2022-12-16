@@ -231,6 +231,7 @@ export default {
       assign_team: 0,
       staff_id:0,
       serviceType: "",
+      appointmentstatus: "",
 
     };
   },
@@ -334,35 +335,58 @@ export default {
       });
     },
     async OnUpdateAppointmentStatus(status, id) {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "patient-appointment-details/updateappointmentstatus",
-          {
-            appointment_id: id,
-            appointment_status: status,
-          },
-          { headers }
-        );
-        console.log("my status", response.data);
-        if (response.data.code == 200) {
-          this.GetAppointmentlist();
-          this.$nextTick(() => {
-            $("#updatepopup").modal("show");
-          });
-        } else {
-          this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
-        }
-      } catch (e) {
-        this.error = e;
+      if(status == 2){
+        this.appointmentstatus = "no show";
       }
+      else{
+        this.appointmentstatus = "completed";
+      }
+      this.$swal.fire({
+                title: 'Do you want to update the appointment status to ' + this.appointmentstatus + '?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                try {
+                  const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  };
+                  const response = await this.$axios.post(
+                    "patient-appointment-details/updateappointmentstatus",
+                    {
+                      appointment_id: id,
+                      appointment_status: status,
+                    },
+                    { headers }
+                  );
+                  console.log("my status", response.data);
+                  if (response.data.code == 200) {
+                    this.$swal.fire(
+                                    'Successfully Updated.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
+                    location.reload();
+                    this.GetAppointmentlist();
+                  } else {
+                    this.loader = false;
+                    this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+                  }
+                } catch (e) {
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                  })
+                }
+    }
+    })
     },
     oneditPatient(Id,aptId) {
       localStorage.setItem(

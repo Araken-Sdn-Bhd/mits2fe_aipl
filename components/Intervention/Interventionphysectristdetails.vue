@@ -106,7 +106,12 @@ export default {
         this.patientdetails = response.data.list[0];
         console.log("my details", this.patientdetails);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

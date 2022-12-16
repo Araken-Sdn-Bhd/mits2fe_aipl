@@ -872,7 +872,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                              <label class="form-label">NRIC ID<small>*</small></label>
+                              <label class="form-label">NRIC ID</label>
                               <input
                                 type="tel"
                                 class="form-control toCapitalFirst"
@@ -1366,6 +1366,7 @@ export default {
       nric_type_code:"",
       SidebarAccess:null,
       responseMsg: "",
+      rid:0,
     };
   },
   beforeMount() {
@@ -1379,9 +1380,17 @@ export default {
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.rid = urlParams.get("rid");
+
     if (this.Id > 0) {
       this.GetPatientdetails();
     }
+
+    if (this.rid > 0) {
+      this.GetPatientRequestDetails();
+    }
+
     $(document).ready(function () {
       $('input[name="drug-allergy"]:radio').change(function () {
         var radio_value = $('input:radio[name="drug-allergy"]:checked').val();
@@ -1431,7 +1440,9 @@ export default {
     },
     async resetModelValue()
     {
+      if(!this.rid){
       this.nric_no = "";
+      }
       this.error = null;
 
       const headers = {
@@ -1448,11 +1459,14 @@ export default {
       );
       if (response.data.code == 200) {
         this.nric_type_code = response.data.setting[0].section_value;
-        console.log('manish',this.nric_type_code);
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
-
 
     },
     NextFirst() {
@@ -1678,7 +1692,12 @@ export default {
         }
 
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async onSelectedState(event){
@@ -1972,7 +1991,7 @@ export default {
           body.append("expiry_date", this.expiry_date);
           body.append("country_id", this.country_id);
           body.append("id", this.Id);
-          body.append("branch_id", this.branch_id);
+          body.append("branch_id", this.branch);
           body.append("patient_need_triage_screening",this.patient_need_triage_screening);
           body.append("other_race", this.other_race);
           body.append("other_religion", this.other_religion);
@@ -1980,6 +1999,7 @@ export default {
           body.append("other_maritalList", this.other_maritalList);
           body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
+          body.append("patient_request_id", this.rid);
 
 
           if (this.Id > 0) {
@@ -2268,7 +2288,51 @@ export default {
         this.citylist = [];
       }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
+      }
+    },
+        async GetPatientRequestDetails(){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "appointment-request/getAll",
+        {
+          id: this.rid,
+        },
+        { headers }
+      );
+      if (response.data.code == 200) {
+        this.address1 = response.data.list[0].address;
+        this.address2 = response.data.list[0].address1;
+        this.mobile_no = response.data.list[0].contact_no;
+        this.name_asin_nric = response.data.list[0].name;
+        var str = response.data.list[0].nric_or_passportno;
+        this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+        console.log('nric',this.nric_no);
+
+        const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
+        headers,
+      });
+      if (response6.data.code == 200 || response6.data.code == "200") {
+        this.citylist = response6.data.list;
+      } else {
+        this.citylist = [];
+      }
+      } else {
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     kinOnnricNo1() {

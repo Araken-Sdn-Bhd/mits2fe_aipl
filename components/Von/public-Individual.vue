@@ -1327,7 +1327,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -1502,7 +1507,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -1646,7 +1656,12 @@ export default {
             this.Reload();
           } else {
             this.loader = false;
-            window.alert("Something went wrong");
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
           }
         }
       } catch (e) {

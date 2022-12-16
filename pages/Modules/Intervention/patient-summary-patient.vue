@@ -399,7 +399,7 @@
                         </li>
                       </ul>
                     </li>
-                  
+
                     <li class="accordion-item sub-nav">
                       <a
                         class="accordion-button collapsed"
@@ -583,7 +583,7 @@ export default {
               },
             },
           });
-          
+
           $('button[data-bs-toggle="collapse"]').click("show.bs.collapse", function (e) {
             $($.fn.dataTable.tables(true))
               .DataTable()
@@ -1264,7 +1264,12 @@ export default {
       if (response.data.code == 200) {
         this.clinicalinfo = response.data.list;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     OpenAttachPopUp() {
@@ -1326,7 +1331,12 @@ export default {
         if (response.data.code == 200) {
           this.nextappointmentdetails = response.data.result;
         } else {
-          window.alert("Something went wrong");
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
         }
       } catch (e) {}
     },
@@ -1348,7 +1358,12 @@ export default {
         if (response.data.code == 200) {
            $("#updatepopup").modal("show");
         } else {
-          window.alert("Something went wrong");
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
         }
       } catch (e) {}
     },

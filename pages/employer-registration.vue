@@ -144,12 +144,19 @@ export default {
             });
             this.userdetail = response.data;
             if (this.userdetail.code == 200) {
-              alert('Thank You for your registration. Please Login to continue');
+              this.$swal.fire(
+                  'Thank You for your registration. Please Login to continue',
+                );
               this.$router.push("/employer-login");
 
             } else if(this.userdetail.code == 201){
               this.loader = false;
-              window.alert('User has not right to access any form. Please contact to Admin');
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'User has not right to access any form. Please contact to Admin.',
+                  // text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             } else {
               this.loader = false;
               this.emailerror = this.userdetail.message.email[0];

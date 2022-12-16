@@ -217,9 +217,12 @@ export default {
             if (response.data.code == 200) {
               this.$router.push("/modules/Admin/calendar-management");
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -239,9 +242,12 @@ export default {
             if (response.data.code == 200) {
               this.$router.push("/modules/Admin/calendar-management");
             } else {
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
@@ -269,7 +275,12 @@ export default {
         this.name = response.data.list[0].name;
         this.branch_id = response.data.list[0].branch_id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
   },

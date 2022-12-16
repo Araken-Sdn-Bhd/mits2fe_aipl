@@ -1133,7 +1133,7 @@
               v-bind:key="catcode.id"
               v-bind:value="catcode.id"
             >
-               {{ catcode.icd_code }} 
+               {{ catcode.icd_code }}
  {{catcode.icd_name}}
             </option>
                               </select>
@@ -1331,7 +1331,12 @@ export default {
         this.details = response.data.details;
       } else {
         this.loader = false;
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async GetList() {
@@ -1538,7 +1543,7 @@ export default {
             },
             { headers }
           );
-                
+
           console.log("response", response.data);
           if (response.data.code == 200) {
             this.loader = false;

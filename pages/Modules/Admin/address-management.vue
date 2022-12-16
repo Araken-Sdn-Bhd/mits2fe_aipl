@@ -625,7 +625,12 @@ export default {
         this.index = response.data.list[0].country_order;
         this.mycountryId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecountry(data) {
@@ -700,13 +705,18 @@ export default {
             console.log("my state resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                );
               this.resetmodel();
             } else {
               this.loader = false;
-              this.errors.push(response.message.country_id[0]);
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + response.message.country_id[0],
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -722,13 +732,17 @@ export default {
             console.log("my state resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                );
               this.resetmodel();
             } else {
-              this.loader = false;
-              this.errors.push(response.message.country_id[0]);
+              this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + response.message.country_id[0],
+                  footer: ''
+                });
             }
           }
         }
@@ -761,7 +775,12 @@ export default {
         this.Stateindex = response.data.list[0].state_order;
         this.mystateId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + response.message,
+                  footer: ''
+                });
       }
     },
     async deletestate(data) {
@@ -911,16 +930,19 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+this.$swal.fire(
+                  'Successfully Update',
+                );
 
               this.cityresetmodel();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           } else {
             const response = await this.$axios.post(
@@ -944,9 +966,12 @@ export default {
               this.cityresetmodel();
             } else {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#errorpopup").modal("show");
-              });
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
             }
           }
         }
@@ -982,7 +1007,12 @@ export default {
           this.StateListforcity = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletecity(data) {

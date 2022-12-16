@@ -182,13 +182,18 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
               this.loader = false;
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Update',
+                );
               this.resetmodel();
             } else {
               this.loader = false;
-              this.errors.push(response.message.country_id[0]);
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + response.message.country_id[0],
+                  footer: ''
+                })
             }
           } else {
             const response = await this.$axios.post(
@@ -242,7 +247,12 @@ export default {
         this.Stateindex = response.data.list[0].state_order;
         this.stateId = data.id;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
     async deletestate(data) {

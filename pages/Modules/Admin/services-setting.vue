@@ -65,7 +65,7 @@
                           v-model="servicename"
                         />
                       </div>
-                     
+
                     </div>
                     <div class="row">
                       <div class="col-lg-7 col-sm-4 mb-4">
@@ -256,7 +256,7 @@
                         <a class="edit" @click="editdivison(srvcdvsv)" v-if="SidebarAccess==1"
                           ><i class="fa fa-edit"></i
                         ></a>
-                       
+
                       </td>
                     </tr>
                   </tbody>
@@ -505,10 +505,15 @@ export default {
         this.Id = data.id;
         this.status = response.data.list[0].status;
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
-   
+
     async resetmodel() {
       this.servicecode = "";
       this.servicename = "";
@@ -619,10 +624,15 @@ export default {
           this.branchlist = [];
         }
       } else {
-        window.alert("Something went wrong");
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     },
-   
+
     async onAddservicedivision() {
       this.errors = [];
       try {
