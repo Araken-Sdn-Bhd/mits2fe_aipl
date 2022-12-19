@@ -97,7 +97,7 @@
       </div>
 
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label">Address</label>
+        <label for="" class="col-sm-4 col-form-label">Address<span>*</span></label>
         <div class="col-sm-8">
           <input type="txet" class="form-control" id="" v-model="Oaddress"/>
           <input type="txet" class="form-control mt-2" id="" v-model="Oaddress1"/>
