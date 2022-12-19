@@ -32,7 +32,7 @@
 
       <div class="row mb-4">
         <div class="col-md-6">
-          <label for="" class="form-label">Branch Addrress</label>
+          <label for="" class="form-label">Branch Address</label>
           <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress1" />
 
           <input type="text" class="form-control mb-3" placeholder="Enter Street Adrress" v-model="BranchAddress2" />

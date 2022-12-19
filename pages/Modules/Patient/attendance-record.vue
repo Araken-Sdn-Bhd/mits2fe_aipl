@@ -126,19 +126,19 @@
                       <a
                         @click="oneditAppointment(app.appointment_id)"
                         class="edit"
-                        ><i class="fad fa-edit"></i
+                        ><i class="fa fa-edit"></i
                       ></a>
                       <a
                         @click="OnAssignStaffPop(app.team_id,app.appointment_id,app.serviceid)"
                         class="action-icon icon-info"
-                        ><i class="fad fa-check"></i
+                        ><i class="fa fa-check"></i
                       ></a>
                       <a
                         @click="
                           OnUpdateAppointmentStatus(2, app.appointment_id)
                         "
                         class="action-icon icon-danger"
-                        ><i class="fad fa-times"></i
+                        ><i class="fa fa-times"></i
                       ></a>
                       <a
                         @click="
