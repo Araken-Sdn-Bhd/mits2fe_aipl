@@ -152,7 +152,12 @@ export default {
                 });
             })
             .catch((err) => {
-                console.error(err);
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
             });
         if (this.SidebarAccess != 1) {
             this.$refs.sidebar.classList.add("hide");

@@ -4,6 +4,7 @@
     <div id="layoutSidenav_content">
         <CommonHeader />
         <main>
+            <Loader v-if="loader" />
             <div class="container-fluid px-4">
                 <div class="page-title">
                     <h1>User Block</h1>
@@ -31,15 +32,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(setting, index) in settinglist" :key="index">
+                                    <tr v-for="(list, index) in userBlockList" :key="index">
                                         <td>{{index+1}}</td>
-                                        <td>{{setting.section_value}}</td>
-                                        <td>{{setting.section_order}}</td>
-                                        <td>{{setting.section_value}}</td>
-                                        <td>{{setting.section_order}}</td>
-                                        <td>{{setting.section_value}}</td>
-                                        <td class="td" :class="SidebarAccess!=1?'hide':''">
-                                            <a class="edit" @click="editsetting(setting)"><em class="fa fa-lock"></em></a>
+                                        <td>{{list.name}}</td>
+                                        <td>{{list.email}}</td>
+                                        <td>{{list.hospital_branch_name}}</td>
+                                        <td>{{list.created_at}}</td>
+                                        <td>{{list.block_untill}}</td>
+                                        <td class="td">
+                                            <a class="edit" title="Unblock User" @click="UnblockUser(list)"><i class="fa fa-lock"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -62,8 +63,117 @@ export default {
         CommonHeader
     },
     name: 'admin-userblock',
-    method: {
+    data() {
+        return {
+            errorList: [],
+            userBlockList: [],
+            userdetails: null,
+            loader: false,
+            SidebarAccess: null,
+        };
+    },
+    beforeMount() {
+        this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    },
+    mounted() {
+        this.loader = true;
+        this.getUserBlockList();
+    },
+    methods: {
+        async getUserBlockList() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const axios = require("axios").default;
+            axios
+                .get(
+                    `${this.$axios.defaults.baseURL}` +
+                    "userBlock/get", {
+                        headers
+                    }
+                )
+                .then((resp) => {
+                    this.userBlockList = resp.data.list;
 
+                    $(document).ready(function () {
+                        $(".data-table").DataTable({
+                            searching: false,
+                            bLengthChange: false,
+                            bInfo: false,
+                            // autoWidth: false,
+                            // responsive: true,
+                            scrollX: true,
+                            language: {
+                                paginate: {
+                                    next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                                    previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                                },
+                            },
+                        });
+                    });
+
+                    this.loader = false;
+                })
+                .catch((err) => {
+
+                    this.loader = false;
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: 'Oops... Something Went Wrong!',
+                        text: 'the error is: ' + err,
+                        footer: ''
+                    });
+                });
+        },
+        async UnblockUser(data) {
+            this.$swal.fire({
+                title: 'Do you want to unblock this user?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then(async (result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    try {
+                        this.loader = true;
+                        const headers = {
+                            Authorization: "Bearer " + this.userdetails.access_token,
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        };
+                        const response = await this.$axios.post(
+                            "userBlock/update", {
+                                id: data.id
+                            }, {
+                                headers
+                            }
+                        );
+                        if (response.data.code == 200) {
+                            this.loader = false;
+                            this.$swal.fire('Succesfully unblock user', '', 'success')
+                            this.getUserBlockList();
+                        } else {
+                            this.loader = false;
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                            })
+                        }
+                    } catch (e) {
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        }
     }
 
 }
