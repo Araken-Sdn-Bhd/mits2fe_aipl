@@ -55,6 +55,7 @@
         </li>
       </ul>
         </p>
+        
        <div class="d-flex justify-content-center" id="hidebutton" ref="hidebutton">
         <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="Id">
         <i class="fa fa-save"></i> Save
@@ -107,6 +108,12 @@
                 justify-content: center;">
                 No Record Found
               </p>
+              <div class="d-flex">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                    
+                </div>
         </div>
       </div>
     </div>
@@ -158,7 +165,9 @@
     
   },
   methods: {
-   
+    back() {
+      this.$router.go(-1);
+    },
     async GetETPList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

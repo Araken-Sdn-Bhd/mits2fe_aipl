@@ -102,6 +102,14 @@
                 justify-content: center;">
                 No Record Found
               </p>
+              <br>
+              <br>
+              <div class="d-flex">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                    
+                </div>
         </div>
       </div>
     </div>
@@ -152,6 +160,9 @@
     this.GetclubList();
   },
   methods: {
+    back() {
+      this.$router.go(-1);
+    },
     async GetclubList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
