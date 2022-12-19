@@ -150,28 +150,28 @@ export default {
 
       .then((resp) => {
         this.list = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-           $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-            $($.fn.dataTable.tables(true))
-              .DataTable()
-              .columns.adjust()
-              .responsive.recalc();
-          });
-        });
+        //$(document).ready(function () {
+        //  $(".data-table").DataTable({
+        //    searching: false,
+        //    bLengthChange: false,
+        //    bInfo: false,
+        //    // autoWidth: false,
+        //    // responsive: true,
+        //    scrollX: true,
+        //    language: {
+        //      paginate: {
+        //        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+        //        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+        //      },
+        //    },
+        //  });
+        //   $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+        //    $($.fn.dataTable.tables(true))
+        //      .DataTable()
+        //      .columns.adjust()
+        //      .responsive.recalc();
+        //  });
+        //});
       })
       .catch((err) => {
         console.error(err);
@@ -265,6 +265,7 @@ export default {
                   'Successfully Insert',
                 )
               this.resetmodel();
+              this.$router.push("/app/Modules/Admin/etp-setting");
             } else {
               this.$swal.fire({
                   icon: 'error',
@@ -292,6 +293,7 @@ export default {
                   'Successfully Update',
                 )
               this.resetmodel();
+              this.$router.push("/Modules/Admin/etp-setting");
             } else {
               this.$swal.fire({
                   icon: 'error',

@@ -131,6 +131,14 @@
               </tr>
             </tbody>
           </table>
+          <p
+                v-show="!list.length" style=" padding: 0px;
+                margin: 10px;
+                color: red;
+                display: flex;
+                justify-content: center;">
+                No Record Found
+              </p>
         </div>
       </div>
     </div>
@@ -157,6 +165,8 @@ export default {
     };
   },
   mounted() {
+    this.GetETPList();
+    
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -167,28 +177,28 @@ export default {
       .get(`${this.$axios.defaults.baseURL}` + "etp/division-list", { headers })
       .then((resp) => {
         this.list = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table1").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-           $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-            $($.fn.dataTable.tables(true))
-              .DataTable()
-              .columns.adjust()
-              .responsive.recalc();
-          });
-        });
+        //$(document).ready(function () {
+        //  $(".data-table1").DataTable({
+        //    searching: false,
+        //    bLengthChange: false,
+        //    bInfo: false,
+        //    // autoWidth: false,
+        //    // responsive: true,
+        //    scrollX: true,
+        //    language: {
+        //      paginate: {
+        //        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+        //        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+        //      },
+        //    },
+        //  });
+        //   $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+        //    $($.fn.dataTable.tables(true))
+        //      .DataTable()
+        //      .columns.adjust()
+        //      .responsive.recalc();
+        //  });
+        //});
       })
       .catch((err) => {
         console.error(err);

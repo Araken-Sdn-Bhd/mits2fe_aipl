@@ -116,22 +116,22 @@ export default {
       .then((resp) => {
         this.list = resp.data;
         this.alllist = resp.data;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            autoWidth: false,
-            responsive: true,
+        //$(document).ready(function () {
+        //  $(".data-table").DataTable({
+        //    searching: false,
+        //    bLengthChange: false,
+        //    bInfo: false,
+        //    autoWidth: false,
+        //    responsive: true,
 
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-        });
+        //    language: {
+        //      paginate: {
+        //        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+        //        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+        //      },
+        //    },
+        //  });
+        //});
       })
       .catch((err) => {
         console.error(err);

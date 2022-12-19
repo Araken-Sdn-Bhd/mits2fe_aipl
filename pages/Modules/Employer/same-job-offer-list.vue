@@ -7,8 +7,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Same Job Offer List</h1>
-            <!--<a href="/app/modules/Employer/create-same-job" class=" add-btn" title="create same job offer"><i class="fal fa-plus"></i></a>-->
-          </div>
+         </div>
 
           <div class="card mb-4 col-12">
             <div class="card-body">
@@ -81,13 +80,9 @@
                       <p v-if="job.is_accommodation">Yes</p>
                       <p v-if="!job.is_accommodation">No</p>
                     </td>
-                    <!--<td> {{GetWorkRequiremnet(job.work_requirement)}}</td>-->
+                   
                     <td>{{ job.hospital_branch_name }}</td>
-                    <!--<td>
-                      <p v-if="job.approval_status == 1">Pending</p>
-                      <p v-if="job.approval_status == 0">Rejected</p>
-                      <p v-if="job.approval_status == 2">Approved</p>
-                    </td>-->
+                   
 
                   </tr>
                 </tbody>
@@ -168,22 +163,22 @@ export default {
       .then((resp) => {
         this.list = resp.data;
         this.alllist = resp.data;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            autoWidth: false,
-            responsive: true,
+        //$(document).ready(function () {
+        //  $(".data-table").DataTable({
+        //    searching: false,
+        //    bLengthChange: false,
+        //    bInfo: false,
+        //    autoWidth: false,
+        //    responsive: true,
 
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-        });
+        //    language: {
+        //      paginate: {
+        //        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+        //        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+        //      },
+        //    },
+        //  });
+        //});
       })
       .catch((err) => {
         console.error(err);

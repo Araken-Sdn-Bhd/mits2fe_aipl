@@ -37,15 +37,15 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th>No</th>
-                    <th style="min-width: 200px">Name/Company Name</th>
-                    <th style="min-width: 200px">Type Of Application</th>
-                    <th style="min-width: 200px">Areas Of Involvement</th>
-                    <th style="min-width: 200px">Services</th>
-                    <th style="min-width: 200px">Contact NO</th>
-                    <th style="min-width: 200px">Email</th>
-                    <th style="min-width: 200px">Screening Done</th>
-                    <th style="min-width: 100px">Action</th>
+                    <th style="width: 3%">No</th>
+                    <th>Name/Company Name</th>
+                    <th>Type Of Application</th>
+                    <th>Areas Of Involvement</th>
+                    <th>Services</th>
+                    <th>Contact NO</th>
+                    <th>Email</th>
+                    <th>Screening Done</th>
+                    <th style="width: 8%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,22 +66,22 @@
                     <td>{{ app.email }}</td>
                     <td>{{ app.screening }}</td>
                     <td class="td"  :class="SidebarAccess!=1?'hide':''">
-                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit">
+                      <a style="pointer:cursor;" @click="OnEdit(app)" class="edit" title="edit record">
                         <i class="fa fa-edit"></i>
                       </a>
 
-                      <a style="pointer:cursor;" @click="OnView(app)" class="view">
+                      <a style="pointer:cursor;" @click="OnView(app)" class="view" title="view record">
                         <i class="fa fa-eye"></i>
                       </a>
 
-                      <a @click="OnBook(app)" class="add">
+                      <a @click="OnBook(app)" class="add" title="book appointment">
                         <i class="fa fa-plus"></i>
                       </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
-
+<br><br>
               <div class="d-flex">
                 <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
                   <a
