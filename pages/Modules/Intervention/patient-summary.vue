@@ -1410,115 +1410,115 @@ export default {
     OnBookAppointment(){
       this.$router.push({
         path: "/modules/Patient/book-appointment",
-        query: { pid: this.Id},
+        query: { pid: this.Id, appId: this.appId},
       });
     },
     onAddPatientClinicalinfo() {
       this.$router.push({
         path: "/modules/Intervention/add-clinical-info",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     onclinicalhistory() {
       this.$router.push({
         path: "/modules/Intervention/clinical-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     OnAppointmenthistory() {
       this.$router.push({
         path: "/modules/Intervention/appointment-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     OnSharphistory() {
       this.$router.push({
         path: "/modules/Intervention/patient-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     OnAddSharphistory() {
       this.$router.push({
         path: "/modules/Intervention/add-new-registry",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onpsychometrichistory() {
       this.$router.push({
         path: "/modules/Intervention/psychometric-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Oncbitest() {
       this.$router.push({
         path: "/modules/Intervention/cbi",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Ondasstest() {
       this.$router.push({
         path: "/modules/Intervention/dass",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onphqtest() {
       this.$router.push({
         path: "/modules/Intervention/phq-9",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onwhodasstest() {
       this.$router.push({
         path: "/modules/Intervention/whodas",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onbditest() {
       this.$router.push({
         path: "/modules/Intervention/bdi",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onpsptest() {
       this.$router.push({
         path: "/modules/Intervention/psp",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onbaitest() {
       this.$router.push({
         path: "/modules/Intervention/bai",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onatqtest() {
       this.$router.push({
         path: "/modules/Intervention/atq",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onsuiciderisktest() {
       this.$router.push({
         path: "/modules/Intervention/suicide-risk",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onatqtest() {
       this.$router.push({
         path: "/modules/Intervention/atq",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Onsuicidescaletest() {
       this.$router.push({
         path: "/modules/Intervention/level-of-suicidal-intent",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     Ontransactionlog() {
       this.$router.push({
         path: "/modules/Intervention/transaction-log",
-        query: { id: this.Id },
+        query: { id: this.Id, appId: this.appId },
       });
     },
     OnPsychiatryclerkingnote() {
