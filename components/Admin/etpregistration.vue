@@ -265,6 +265,7 @@ export default {
                   'Successfully Insert',
                 )
               this.resetmodel();
+              this.$router.push("/app/Modules/Admin/etp-setting");
             } else {
               this.$swal.fire({
                   icon: 'error',
@@ -292,6 +293,7 @@ export default {
                   'Successfully Update',
                 )
               this.resetmodel();
+              this.$router.push("/Modules/Admin/etp-setting");
             } else {
               this.$swal.fire({
                   icon: 'error',

@@ -50,14 +50,14 @@
                     <td>{{ job.position }}</td>
                     <td>{{ job.location_address_1 }} {{ job.location_address_2 }} {{ job.location_address_3 }}</td>
                     <td>{{ job.duration_of_employment }}</td>
-                    <td>{{ job.salary_offered }}</td>
+                    <td>RM {{ job.salary_offered }}</td>
                     <td>{{ job.work_schedule }}</td>
                     <td>{{ job.company_name }}</td>
                     <td>{{ job.contact_name }}</td>
                     <td>{{ job.contact_number }}</td>
                     <td>
-                      <span v-if="job.job_availability == 0">Yes</span>
-                      <span v-if="job.job_availability == 1">No</span>
+                      <span v-if="job.job_availability == 0" >Yes</span>
+                      <span v-if="job.job_availability == 1" style="color:red">No</span>
                     </td>
                     <td>
                       <a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="view"><i class="fa fa-eye"></i></a>
@@ -66,6 +66,8 @@
                   </tr>
                 </tbody>
               </table>
+              <br>
+              <br>
               <div class="d-flex">
                 <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
@@ -140,23 +142,25 @@ export default {
       .then((resp) => {
         this.list = resp.data;
         this.alllist = resp.data;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-        });
-      })
+      //  $(document).ready(function () {
+      //    $(".data-table").DataTable({
+      //      searching: false,
+      //      bLengthChange: false,
+      //      bInfo: false,
+      //      // autoWidth: false,
+      //      // responsive: true,
+      //      scrollX: true,
+      //      language: {
+      //        paginate: {
+      //          next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+      //          previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+      //        },
+      //      },
+      //    });
+      //  });
+      //
+    }
+      )
       .catch((err) => {
         console.error(err);
       });
@@ -216,14 +220,17 @@ export default {
         });
 
         this.loader = false;
-        this.$nextTick(() => {
-          $("#updatepopup").modal("show");
-        });
+        this.$swal.fire(
+                  'Successfully Update',
+                )
       } catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
       }
     }
 

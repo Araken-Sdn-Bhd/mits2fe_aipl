@@ -82,7 +82,7 @@
                   </tr>
                 </tbody>
               </table>
-
+              <br><br>
               <div class="d-flex">
                 <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
                     <i class="fa fa-step-backward"/> &nbsp; Back
@@ -282,14 +282,17 @@ export default {
         });
         
         this.loader = false;
-        this.$nextTick(() => {
-          $("#updatepopup").modal("show");
-        });
+        this.$swal.fire(
+                  'Successfully Update',
+                )
       } catch (e) {
         this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
       }
     }
     

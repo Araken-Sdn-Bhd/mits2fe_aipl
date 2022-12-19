@@ -157,6 +157,8 @@ export default {
     };
   },
   mounted() {
+    this.GetETPList();
+    
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
