@@ -1,5 +1,16 @@
 <template>
-  <div class="row">
+    <div id="layoutSidenav">
+      <CommonSidebar />
+      <div id="layoutSidenav_content">
+        <CommonHeader />
+        <main>
+          <div class="container-fluid px-4">
+            <div class="page-title">
+              <h1>CLUB SETTING</h1>
+            </div>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
     <div class="card mb-4">
       <div class="card-body">
         <div class="content-subtab border-top-left">
@@ -19,46 +30,6 @@
               v-bind:value="et.id"
             >
               {{ et.club_name }}
-            </option>
-          </select>
-              </div>
-
-              <div class="col-lg-6 col-sm-3 mb-4">
-                <label for="" class="form-label">Hospital</label>
-                 <select
-            v-model="hospital_id"
-            class="form-select"
-            aria-label="Default select example"
-            @change="onHospitalCodechange($event)"
-          >
-           <option value="0">Please Select</option>
-            <option
-              v-for="hst in hospitallist"
-              v-bind:key="hst.id"
-              v-bind:value="hst.id"
-            >
-              {{ hst.hospital_name }}
-            </option>
-          </select>
-              </div>
-
-            </div>
-            <div class="row">
-
-              <div class="col-md-6 mb-4">
-                <label for="" class="form-label">Branch</label>
-                <select
-            v-model="branch_id"
-            class="form-select"
-            aria-label="Default select example"
-          >
-           <option value="0">Please Select</option>
-            <option
-              v-for="bnch in branchlist"
-              v-bind:key="bnch.id"
-              v-bind:value="bnch.id"
-            >
-              {{ bnch.hospital_branch_name }}
             </option>
           </select>
               </div>
@@ -98,8 +69,7 @@
             <thead>
               <tr>
                 <th style="width:3%">No</th>
-                <th>Hospital</th>
-                <th>Branch</th>
+               
                 <th>Club Name</th>
                 <th>Index</th>
                 <th>Status</th>
@@ -109,8 +79,6 @@
             <tbody>
            <tr v-for="(etp, index) in list" :key="index">
               <td>{{index+1}}</td>
-                <td>{{etp.hospitals.hospital_name}}</td>
-                <td>{{etp.branchs.hospital_branch_name}}</td>
                 <td>{{etp.club.club_name}}</td>
                 <td>{{etp.division_order}}</td>
                 <td>
@@ -126,15 +94,46 @@
               </tr>
             </tbody>
           </table>
+          <p
+                v-show="!list.length" style=" padding: 0px;
+                margin: 10px;
+                color: red;
+                display: flex;
+                justify-content: center;">
+                No Record Found
+              </p>
+              <br>
+              <br>
+              <div class="d-flex">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+                    
+                </div>
         </div>
       </div>
     </div>
   </div>
-</template>
-<script>
-export default {
-  name: "etpdivision",
-  data() {
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </template>
+  <script>
+  import CommonHeader from '../../../components/CommonHeader.vue';
+  import CommonSidebar from '../../../components/CommonSidebar.vue';
+  
+  export default {
+    components: {
+      CommonHeader,
+      CommonSidebar,
+    },
+    name: "services-division-admin",
+    setup() {},
+
+    data() {
     return {
       Id: 0,
       club_id: 0,
@@ -149,61 +148,21 @@ export default {
       userdetails: null,
       SidebarAccess:null,
       status: 1,
+      errors: [],
     };
   },
   mounted() {
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const axios = require("axios").default;
-    axios
-      .get(
-        `${this.$axios.defaults.baseURL}` +
-          "club/division-list",
-        { headers }
-      )
-      .then((resp) => {
-        this.list = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table1").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-           $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-            $($.fn.dataTable.tables(true))
-              .DataTable()
-              .columns.adjust()
-              .responsive.recalc();
-          });
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-       if(this.SidebarAccess!=1){
-         console.log('this.$refs.hidebutton',this.$refs.hidebutton);
-          this.$refs.hidebutton.classList.add("hide");
-    }
+   this.GetList();
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetclubList();
-    this.GethospitalList();
   },
   methods: {
+    back() {
+      this.$router.go(-1);
+    },
     async GetclubList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -226,7 +185,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("club/division-list", {
+      const response = await this.$axios.post("club/division-list-branch",{branch_id: this.userdetails.branch.branch_id}, {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
@@ -235,40 +194,7 @@ export default {
         this.list = [];
       }
     },
-    async GethospitalList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get("hospital/list", {
-        headers,
-      });
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.hospitallist = response.data.list;
-      } else {
-        this.hospitallist = [];
-      }
-    },
-    async onHospitalCodechange(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "hospital/get-branch-by-hospital-code",
-        {
-          hospital_code: event.target.value,
-        },
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.branchlist = response.data.branches;
-      } else {
-        this.branchlist = [];
-      }
-    },
+  
     async editdiv(data) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -282,24 +208,10 @@ export default {
       );
       if (response.data.code == 200) {
         this.club_id = response.data.list[0].club_id;
-        this.hospital_id = response.data.list[0].hospital_id;
-        this.branch_id = response.data.list[0].branch_id;
         this.division_order = response.data.list[0].division_order;
         this.status = response.data.list[0].status;
         this.Id = data.id;
-        const response1 = await this.$axios.post(
-          "hospital/get-branch-by-hospital-code",
-          {
-            hospital_code: response.data.list[0].hospital_id.toString(),
-          },
-          { headers }
-        );
-        console.log('my reseeee',response1.data);
-        if (response1.data.code == 200 || response1.data.code == "200") {
-          this.branchlist = response1.data.branches;
-        } else {
-          this.branchlist = [];
-        }
+       
       } else {
         this.$swal.fire({
                   icon: 'error',
@@ -316,12 +228,7 @@ export default {
         if (this.club_id <= 0) {
           this.errors.push("Club Name is required.");
         }
-        if (this.hospital_id <= 0) {
-          this.errors.push("Hospital is required.");
-        }
-        if (this.branch_id <= 0) {
-          this.errors.push("Branch is required.");
-        }
+    
         if (this.division_order <= 0) {
           this.errors.push("Index is required.");
         } else {
@@ -336,8 +243,8 @@ export default {
               {
                 added_by: this.userdetails.user.id,
                 club_id: this.club_id,
-                hospital_id: this.hospital_id,
-                branch_id: this.branch_id,
+                hospital_id: this.userdetails.branch.hospital_id,
+                branch_id: this.userdetails.branch.branch_id,
                 division_order: this.division_order,
               },
               { headers }
@@ -361,8 +268,8 @@ export default {
               {
                 added_by: this.userdetails.user.id,
                 club_id: this.club_id,
-                hospital_id: this.hospital_id,
-                branch_id: this.branch_id,
+                hospital_id: this.userdetails.branch.hospital_id,
+                branch_id: this.userdetails.branch.branch_id,
                 division_order: this.division_order,
                 division_id: this.Id,
                 status: this.status,
@@ -398,10 +305,5 @@ export default {
       this.GetList();
     },
   },
-};
-</script>
-<style scoped>
-.hide{
-  display: none !important;
-}
-</style>
+  };
+  </script>
