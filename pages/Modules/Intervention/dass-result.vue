@@ -1047,18 +1047,6 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
-                  <button
-                    type="button"
-                    class="btn btn-secondary btn-text mr-auto"
-                    @click="demoFromHTML"
-                  >
-                    <i class="fad fa-download"></i> Download Result
-                  </button>
-                  <a
-                    @click="Gotorequestappointment"
-                    class="btn btn-success btn-text ml-auto"
-                    ><i class="fad fa-calendar-day"></i> Request Appointment</a
-                  >
                 </div>
               </div>
             </div>
@@ -1124,7 +1112,9 @@ export default {
       this.DepressionScore = this.dassresult.Depression_Value;
     }
     let urlParams = new URLSearchParams(window.location.search);
+    let urlParams2 = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams2.get("appId");
   },
   beforeDestroy() {
     localStorage.removeItem("dassresult");
@@ -1143,10 +1133,17 @@ export default {
       });
     },
     GoBack(){
-      this.$router.push({
+      if(this.appId){
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
+      }else{
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
+      }
     }
   },
 };

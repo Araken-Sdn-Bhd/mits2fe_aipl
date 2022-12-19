@@ -1251,6 +1251,7 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -1262,9 +1263,15 @@ export default {
       this.token = this.userdetails.access_token;
     }
     let urlParams = new URLSearchParams(window.location.search);
+    let urlParams2 = new URLSearchParams(window.location.search);
+
     this.Id = urlParams.get("id");
+    this.appId = urlParams2.get("appId");
     if (!this.Id) {
       this.Id = 0;
+    }
+    if (!this.appId) {
+      this.appId = 0;
     }
   },
   methods: {
@@ -1378,7 +1385,11 @@ export default {
         this.$refs.navdiv2.classList.add("show");
         this.ChangeTextofNav(2);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     gototab3() {
@@ -1391,7 +1402,11 @@ export default {
         this.$refs.navdiv3.classList.add("show");
         this.ChangeTextofNav(3);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     gototab4() {
@@ -1404,7 +1419,11 @@ export default {
         this.$refs.navdiv4.classList.add("show");
         this.ChangeTextofNav(4);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     gototab5() {
@@ -1417,7 +1436,11 @@ export default {
         this.$refs.navdiv5.classList.add("show");
         this.ChangeTextofNav(5);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     gototab6() {
@@ -1430,7 +1453,11 @@ export default {
         this.$refs.navdiv6.classList.add("show");
         this.ChangeTextofNav(6);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     gototab7() {
@@ -1443,7 +1470,11 @@ export default {
         this.$refs.navdiv7.classList.add("show");
         this.ChangeTextofNav(7);
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     Backtab1() {
@@ -1535,7 +1566,12 @@ export default {
       this.tab7 = 0;
     },
     async OnTestSubmit() {
-      if (confirm("Are you sure you want to submit this entry")) {
+      this.$swal.fire({
+                title: 'Do you want to save the selections?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
       if (
         this.list.length == Object.values(this.checkedList).length &&
         this.list1.length == Object.values(this.checkedList1).length &&
@@ -1575,6 +1611,12 @@ export default {
           console.log("my response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
+            this.$swal.fire({
+                        icon: 'success',
+                        title: 'Result is successfully generated.',
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
             localStorage.setItem(
               "whodasresult",
               JSON.stringify(response.data.result)
@@ -1582,24 +1624,35 @@ export default {
 
             this.$router.push({
               path: "/modules/Intervention/whodas-result",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
         }
       } else {
-        window.alert("Please check All Module and attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please check all modules and attempt all questions!',
+                            text: '',
+                      })
       }
-    }
+    } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+              }
+    })
     },
     async GetUserIpAddress() {
       const {
