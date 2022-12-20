@@ -1307,15 +1307,20 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.Reaload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async OnIndividualOutreachProjectCollaboration() {
@@ -1482,20 +1487,23 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
             this.Reaload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async OnIndividualNetworkingMakeaContribution() {
@@ -1627,20 +1635,23 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
             this.Reaload();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     Reaload() {

@@ -151,7 +151,7 @@ export default {
                         );
                         if (response.data.code == 200) {
                             this.loader = false;
-                            this.$swal.fire('Succesfully unblock user', '', 'success');
+                            this.$swal.fire('Succesfully unblock user', '', 'success')
                             this.getUserBlockList();
                         } else {
                             this.loader = false;

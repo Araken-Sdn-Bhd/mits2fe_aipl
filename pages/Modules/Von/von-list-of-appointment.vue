@@ -290,14 +290,14 @@ export default {
         });
         this.loader = false;
         this.GetList();
-        this.$nextTick(() => {
-          $("#updatepopup").modal("show");
-        });
+          this.$swal.fire('Successfully Update', '', 'success');
       } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
   },

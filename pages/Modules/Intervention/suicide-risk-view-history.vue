@@ -244,16 +244,21 @@ export default {
             });
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async GetUserIpAddress() {

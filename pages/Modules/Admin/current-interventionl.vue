@@ -207,9 +207,7 @@ export default {
                                 'Successfully Update',
                             );
                         } else {
-                            this.$nextTick(() => {
-                                $("#insertpopup").modal("show");
-                            });
+                            this.$swal.fire('Created Succefully', '', 'success');
                         }
                         this.GetSettingList();
                         this.index = 0;

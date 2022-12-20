@@ -195,9 +195,7 @@ export default {
                     });
 
                     this.loader = false;
-                    this.$nextTick(() => {
-                        $("#updatepopup").modal("show");
-                    });
+                    this.$swal.fire('Successfully Update', '', 'success');
                 } catch (e) {
                     this.loader = false;
                     this.$swal.fire({
@@ -243,9 +241,7 @@ export default {
                     });
 
                     this.loader = false;
-                    this.$nextTick(() => {
-                        $("#updatepopup").modal("show");
-                    });
+                    this.$swal.fire('Successfully Update', '', 'success');
                 } catch (e) {
                     this.loader = false;
                     this.$swal.fire({

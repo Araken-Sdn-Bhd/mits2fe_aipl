@@ -212,9 +212,7 @@ this.$swal.fire(
                   'Successfully Update',
                 );
             } else {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
             }
             this.GetSettingList();
             this.index = 0;
@@ -223,9 +221,12 @@ this.$swal.fire(
             this.requesttype = "insert";
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -265,10 +266,12 @@ this.$swal.fire(
       if (response.data.code == 200) {
         this.$swal.fire('Deleted Successfully', '', 'success');
         this.GetSettingList();
-      } else {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } else {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async editsetting(data) {

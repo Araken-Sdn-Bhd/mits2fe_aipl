@@ -1,11 +1,11 @@
 <template>
   <div id="layoutSidenav">
-    <CommonSidebar />
+    <CommonSidebar  />
     <div id="layoutSidenav_content">
       <CommonHeader />
       <main>
         <div class="container-fluid px-4">
-          <PatientDetails />
+          <SharpPatientDetails />
           <div class="row">
             <div class="col-sm-8">
               <div class="accordion mb-4 accordion-box" id="accordion2">
@@ -45,7 +45,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="(hst, index) in historylist" :key="index">
+                           <tr v-for="(hst, index) in historylist" :key="index">
                             <td>{{index+1}}</td>
                             <td>{{hst.section_name}}</td>
                             <td>
@@ -56,10 +56,14 @@
                             <td>{{formatetime(hst.created_at)}}</td>
                             <td>{{hst.name}}</td>
                             <td>
-                              <a style="cursor:pointer;" @click="OnHistoryview(hst)"  class="view"
+                              <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"
                                 ><i class="fas fa-eye"></i
                               ></a>
+                                <a v-if="hst.editstatus==1" style="cursor:pointer;" @click="OnHistoryview(hst,edit)"  class="edit"
+                                ><i class="fas fa-edit"></i
+                              ></a>
                             </td>
+
                           </tr>
                         </tbody>
                       </table>
@@ -447,7 +451,7 @@
                                   aria-labelledby=""
                                   data-bs-parent="#sub-men-1"
                                 >
-                                  <!-- <li><a href="notes-form.html">Clerking Notes</a></li> -->
+
                                   <li>
                                     <a style="cursor:pointer;" @click="OnPsychiatryclerkingnote"
                                       >Psychiatry Clerking Note</a
@@ -458,7 +462,7 @@
                                       >Counselling Clerking Note</a
                                     >
                                   </li>
-                                  <li><a href="#">Patient Index Form </a></li>
+                                  <li><a style="cursor:pointer;" @click="Onpatientindexform">Patient Index Form </a></li>
                                 </ul>
                               </li>
                               <li>
@@ -482,16 +486,16 @@
                                       >Psychiatric Progress Note</a
                                     >
                                   </li>
-                                  <li><a href="#">CPS Progress Note</a></li>
-                                  <li><a href="#">SE Progress Note</a></li>
+                                  <li><a style="cursor:pointer;" @click="Oncpsprogressnote">CPS Progress Note</a></li>
+                                  <li><a style="cursor:pointer;" @click="OnSeprogressnotes">SE Progress Note</a></li>
                                   <li>
                                     <a style="cursor:pointer;" @click="Oncounselingprogressnote"
                                       >Counselling Progress Note</a
                                     >
                                   </li>
-                                  <li><a href="#">ETP Progress Note</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onetpprogressnote">ETP Progress Note</a></li>
                                   <li>
-                                    <a href="#">Job Club Progress Note</a>
+                                    <a style="cursor:pointer;" @click="Onjobclubprogressnote">Job Club Progress Note</a>
                                   </li>
                                 </ul>
                               </li>
@@ -516,8 +520,8 @@
                                       >Consultation Discharge Note</a
                                     >
                                   </li>
-                                  <li><a href="#">Rehab Discharge Note</a></li>
-                                  <li><a href="#">CPS Discharge Note</a></li>
+                                  <li><a style="cursor:pointer;" @click="OnRehabDischargeNote">Rehab Discharge Note</a></li>
+                                  <li><a style="cursor:pointer;" @click="Oncpsdischargenote">CPS Discharge Note</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -557,23 +561,23 @@
                                   data-bs-parent="#sub-men-2"
                                 >
                                   <li>
-                                    <a href="#">CPS Homevisit Consent Form</a>
+                                    <a style="cursor:pointer;" @click="Oncpshomevisitconsentform">CPS Homevisit Consent Form</a>
                                   </li>
                                   <li>
-                                    <a href="#"
+                                    <a style="cursor:pointer;" @click="Oncpshomevisitwithdrawalform"
                                       >CPS Homevisit Withdrawal Form</a
                                     >
                                   </li>
                                   <li>
-                                    <a href="#">CPS Police Referral Form</a>
+                                    <a style="cursor:pointer;" @click="Oncpspolicereferralform">CPS Police Referral Form</a>
                                   </li>
                                   <li>
-                                    <a href="#">Photography Consent Form</a>
+                                    <a style="cursor:pointer;" @click="Onphotographyconsentform">Photography Consent Form</a>
                                   </li>
                                   <li><a style="cursor:pointer;" @click="Onseconsentreferral">SE Consent Form</a></li>
-                                  <li><a href="#">ETP Consent Form</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onetpconsentform">ETP Consent Form</a></li>
                                   <li>
-                                    <a href="#">Job Club Consent Form </a>
+                                    <a style="cursor:pointer;" @click="Onjobclubconsentform">Job Club Consent Form </a>
                                   </li>
                                 </ul>
                               </li>
@@ -594,10 +598,10 @@
                                   aria-labelledby="headingTwo"
                                   data-bs-parent="#sub-men-2"
                                 >
-                                  <li><a href="#">Information On CPS</a></li>
-                                  <li><a href="#">Information On SE</a></li>
+                                  <li><a >Information On CPS</a></li>
+                                  <li><a target="_blank"  href="/InformationOnSE2020.pdf">  Information On SE</a></li>
                                   <li>
-                                    <a href="#">Information On ETP/Job Club </a>
+                                    <a target="_blank" href="/InformationOnETPJobClub2020.pdf">Information On ETP/Job Club </a>
                                   </li>
                                 </ul>
                               </li>
@@ -642,13 +646,9 @@
                                       >Patient Care Plan And Case Review Form</a
                                     >
                                   </li>
-                                  <li><a href="#">Job Start Report</a></li>
-                                  <li><a href="#">Job End Report</a></li>
-                                  <!-- <li>
-                                    <a href="#">Job Commencement Report</a>
-                                  </li>
-                                  <li><a href="#">Job Cessation Report</a></li> -->
-                                  <li><a href="#">Job Transition Report</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onjobstartreport">Job Start Report</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onjobendreport">Job End Report</a></li>
+                                  <li><a style="cursor:pointer;" @click="Onjobtransitionreport">Job Transition Report</a></li>
                                   <li>
                                     <a style="cursor:pointer;" @click="Onlaserform">LA.S.E.R Form (Motivation) </a>
                                   </li>
@@ -675,17 +675,17 @@
                                   data-bs-parent="#sub-men-3"
                                 >
                                   <li>
-                                    <a href="#">Job Interest Checklist</a>
+                                    <a style="cursor:pointer" @click="Onjobinterestchecklist">Job Interest Checklist</a>
                                   </li>
-                                  <li><a href="#">Work Analysis Form</a></li>
-                                  <li><a href="#">List for Job Club</a></li>
-                                  <li><a href="#">List of ETP</a></li>
-                                  <li><a href="#">List Of Job Search</a></li>
+                                  <li><a style="cursor:pointer" @click="Onworkanalysisform">Work Analysis Form</a></li>
+                                  <li><a style="cursor:pointer" @click="OnListforJobClub">List for Job Club</a></li>
+                                  <li><a style="cursor:pointer" @click="Onlistofetp">List of ETP</a></li>
+                                  <li><a style="cursor:pointer" @click="Onlistofjobsearch">List Of Job Search</a></li>
                                   <li>
-                                    <a href="#">Log Meeting With Employer</a>
+                                    <a style="cursor:pointer" @click="Onlogmeetingwithemployer">Log Meeting With Employer</a>
                                   </li>
                                   <li>
-                                    <a href="#"
+                                    <a style="cursor:pointer" @click="Onlistofpreviousorcurrentjob"
                                       >List Of Previous Or Current Job
                                     </a>
                                   </li>
@@ -715,8 +715,8 @@
                                   >Internal Referral (To Hospital/Mentari)</a
                                 >
                               </li>
-                              <li><a href="#">External Referral Form</a></li>
-                              <li><a style="cursor:pointer;" @click="Oncpsreferal">CPS Referral Form</a></li>
+                                <li><a style="cursor:pointer;" @click="Onexternalreferralform">External Referral Form</a></li>
+                              <li><a style="cursor:pointer;" @click="Oncpsreferal" >CPS Referral Form</a></li>
                               <li>
                                 <a style="cursor:pointer;" @click="Onocctreferralform"
                                   >OCCT Referral Form</a
@@ -728,7 +728,7 @@
                                 >
                               </li>
                               <li>
-                                <a href="#"
+                                <a style="cursor:pointer" @click="Onrehabreferralandclinicalsummary"
                                   >Rehab Referral Form And Clinical Summary
                                 </a>
                               </li>
@@ -762,7 +762,7 @@
                           >
                         </li>
                         <li>
-                          <a style="cursor:pointer;" @click="OnBookAppointment"
+                          <a href="/app/modules/Patient/book-appointment"
                             >Book Appointment</a
                           >
                         </li>
@@ -810,8 +810,8 @@
                 </div>
               </div>
                 <div class="d-flex">
-                                    <a @click="endVisit" class="btn btn-danger btn-text ml-auto"><i class="fa fa-power-off"></i> End Visit</a>
-                                </div>
+                 <a href="#" class="btn btn-danger btn-text ml-auto"><i class="fa fa-power-off"></i> End Visit</a>
+                </div>
             </div>
           </div>
         </div>
@@ -835,13 +835,8 @@
                 />
               </div>
                <p v-if="errorList.length">
-<ul>
-        <li style="color:red"  v-for='err in errorList'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
+                  <ul><li style="color:red"  v-for='err in errorList' :key='err'>{{ err }}</li></ul>
+               </p>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-ok" @click="onAttachdoc">
                   Submit
@@ -851,30 +846,35 @@
           </div>
         </div>
       </main>
-        <footer>
-                   <p>© MENTARI MALAYSIA MOH</p>
-                </footer>
+        <footer><p>© MENTARI MALAYSIA MOH</p></footer>
     </div>
   </div>
 </template>
 <script>
-import PatientDetails from "../../../components/Patient/PatientDetails.vue";
-import CommonHeader from '../../../components/CommonHeader.vue';
-import CommonSidebar from '../../../components/CommonSidebar.vue';
+import CommonHeader from "../../../components/CommonHeader.vue";
+import CommonSidebar from "../../../components/CommonSidebar.vue";
+import SharpPatientDetails from "../../../components/Intervention/SharpPatientDetails.vue";
 import * as moment from "moment/moment";
 export default {
-  components: { CommonSidebar, CommonHeader, PatientDetails },
+  components: {
+    CommonHeader,
+    CommonSidebar,
+    SharpPatientDetails,
+  },
   name: "patient-summary",
   data() {
     return {
       userdetails: null,
       errorList: [],
       attachList: [],
-      historylist: [],
       clinicalinfo: null,
       Id: 0,
       file: "",
+      view: "view",
+      edit: "edit",
       nextappointmentdetails: {},
+      historylist: [],
+      date: "2022-08-01T09:40:32Z",
     };
   },
   beforeMount() {
@@ -905,6 +905,7 @@ export default {
         })
         .change();
     });
+
   },
   mounted() {
     const headers = {
@@ -952,10 +953,13 @@ export default {
     this.GethistoryList();
   },
   methods: {
-     formatetime(time) {
+    getFile(file) {
+    },
+    formatetime(time) {
       const local = moment.utc(time).local().format('h:mm A');
       return local;
     },
+
     GethistoryList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -972,7 +976,7 @@ export default {
         )
         .then((resp) => {
           this.historylist = resp.data.Data;
-          console.log("my list", resp.data);
+          console.log("my list22", resp.data);
           $(document).ready(function () {
             $(".data-table1").DataTable({
               searching: false,
@@ -1002,196 +1006,540 @@ export default {
           console.error(err);
         });
     },
+    OnHistoryview(data, val) {
+      if (data.type == "PsychiatryClerkingNote") {
+        this.$router.push({
+          path: "/modules/Intervention/psychiatry-clerking-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CounsellorClerkingNote") {
+        this.$router.push({
+          path: "/modules/Intervention/counsellor-clerking-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PatientIndexForm") {
+        this.$router.push({
+          path: "/modules/Intervention/patient-index-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PsychiatricProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CPSProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "SEProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/se-progress-notes",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CounsellingProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/counseling-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "EtpProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/etp-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobClubProgressNote") {
+        this.$router.push({
+          path: "/modules/Intervention/job-club-progress-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ConsultationDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/consultation-discharge-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "RehabDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/rehab-discharge",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsDischargeNote") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-discharge-note",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsHomeVisitConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-homevisit-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsHomeVisitWithdrawalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-homevisit-withdrawal-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsPoliceReferralForm") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-police-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PhotographyConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/photography-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "SEConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/se-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ETPConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/etp-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobClubConsentForm") {
+        this.$router.push({
+          path: "/modules/Intervention/job-club-consent-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
+        this.$router.push({
+          path: "/modules/Intervention/patient-care-plan-and-case-review",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobStartReport") {
+        this.$router.push({
+          path: "/modules/Intervention/job-start-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobEndReport") {
+        this.$router.push({
+          path: "/modules/Intervention/job-end-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobTransitionReport") {
+        this.$router.push({
+          path: "/modules/Intervention/job-transition-report",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "LaserAssessment") {
+        this.$router.push({
+          path: "/modules/Intervention/laser-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "TriageForm") {
+        this.$router.push({
+          path: "/modules/Intervention/triage-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "JobInterestCheckList") {
+        this.$router.push({
+          path: "/modules/Intervention/job-interest-checklist",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "WorkAnalysisForm") {
+        this.$router.push({
+          path: "/modules/Intervention/work-analysis-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofJobClub") {
+        this.$router.push({
+          path: "/modules/Intervention/list-for-job-club",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofEtp") {
+        this.$router.push({
+          path: "/modules/Intervention/list-of-etp",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofJobSearch") {
+        this.$router.push({
+          path: "/modules/Intervention/list-of-job-search",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "LogMeetingWithEmployer") {
+        this.$router.push({
+          path: "/modules/Intervention/log-meeting-with-employer",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ListofPreviousCurrentJob") {
+        this.$router.push({
+          path: "/modules/Intervention/list-of-previous-or-current-job",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "InternalRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/internal-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "ExternalRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/external-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "CpsRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/cps-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "OcctRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/occt-referral-form",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "PsychologyRefferalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/psychology-referral",
+          query: { pid: data.id, type: val },
+        });
+      } else if (data.type == "RehabRefferalAndClinicalForm") {
+        this.$router.push({
+          path: "/modules/Intervention/rehab-referral-and-clinical-summary",
+          query: { pid: data.id, type: val },
+        });
+      }
+    },
     onAddPatientClinicalinfo() {
       this.$router.push({
-        path: "/modules/Patient/add-clinical-info",
+        path: "/modules/Intervention/add-clinical-info",
         query: { id: this.Id },
       });
     },
     onclinicalhistory() {
       this.$router.push({
-        path: "/modules/Patient/clinical-history",
+        path: "/modules/Intervention/clinical-history",
         query: { id: this.Id },
       });
     },
     OnAppointmenthistory() {
       this.$router.push({
-        path: "/modules/Patient/appointment-history",
+        path: "/modules/Intervention/appointment-history",
         query: { id: this.Id },
       });
     },
     OnSharphistory() {
       this.$router.push({
-        path: "/modules/Patient/patient-history",
+        path: "/modules/Intervention/patient-history",
         query: { id: this.Id },
       });
     },
     OnAddSharphistory() {
       this.$router.push({
-        path: "/modules/Patient/add-new-registry",
+        path: "/modules/Intervention/add-new-registry",
         query: { id: this.Id },
       });
     },
     Onpsychometrichistory() {
       this.$router.push({
-        path: "/modules/Patient/psychometric-history",
+        path: "/modules/Intervention/psychometric-history",
         query: { id: this.Id },
       });
     },
     Oncbitest() {
       this.$router.push({
-        path: "/modules/Patient/cbi",
+        path: "/modules/Intervention/cbi",
         query: { id: this.Id },
       });
     },
     Ondasstest() {
       this.$router.push({
-        path: "/modules/Patient/dass",
+        path: "/modules/Intervention/dass",
         query: { id: this.Id },
       });
     },
     Onphqtest() {
       this.$router.push({
-        path: "/modules/Patient/phq-9",
+        path: "/modules/Intervention/phq-9",
         query: { id: this.Id },
       });
     },
     Onwhodasstest() {
       this.$router.push({
-        path: "/modules/Patient/whodas",
+        path: "/modules/Intervention/whodas",
         query: { id: this.Id },
       });
     },
     Onbditest() {
       this.$router.push({
-        path: "/modules/Patient/bdi",
+        path: "/modules/Intervention/bdi",
         query: { id: this.Id },
       });
     },
     Onpsptest() {
       this.$router.push({
-        path: "/modules/Patient/psp",
+        path: "/modules/Intervention/psp",
         query: { id: this.Id },
       });
     },
     Onbaitest() {
       this.$router.push({
-        path: "/modules/Patient/bai",
+        path: "/modules/Intervention/bai",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/modules/Patient/atq",
+        path: "/modules/Intervention/atq",
         query: { id: this.Id },
       });
     },
     Onsuiciderisktest() {
       this.$router.push({
-        path: "/modules/Patient/suicide-risk",
+        path: "/modules/Intervention/suicide-risk",
         query: { id: this.Id },
       });
     },
     Onatqtest() {
       this.$router.push({
-        path: "/modules/Patient/atq",
+        path: "/modules/Intervention/atq",
         query: { id: this.Id },
       });
     },
     Onsuicidescaletest() {
       this.$router.push({
-        path: "/modules/Patient/level-of-suicidal-intent",
+        path: "/modules/Intervention/level-of-suicidal-intent",
         query: { id: this.Id },
       });
     },
     Ontransactionlog() {
       this.$router.push({
-        path: "/modules/Patient/transaction-log",
+        path: "/modules/Intervention/transaction-log",
         query: { id: this.Id },
       });
     },
     OnPsychiatryclerkingnote() {
       this.$router.push({
-        path: "/modules/Patient/psychiatry-clerking-note",
+        path: "/modules/Intervention/psychiatry-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncounsellorclerkingnote() {
       this.$router.push({
-        path: "/modules/Patient/counsellor-clerking-note",
+        path: "/modules/Intervention/counsellor-clerking-note",
         query: { id: this.Id },
       });
     },
     Oncprogressnote() {
       this.$router.push({
-        path: "/modules/Patient/progress-note",
+        path: "/modules/Intervention/progress-note",
         query: { id: this.Id },
       });
     },
     Oncounselingprogressnote() {
       this.$router.push({
-        path: "/modules/Patient/counseling-progress-note",
+        path: "/modules/Intervention/counseling-progress-note",
         query: { id: this.Id },
       });
     },
     Oncounsaltationdischargenote() {
       this.$router.push({
-        path: "/modules/Patient/consultation-discharge-note",
+        path: "/modules/Intervention/consultation-discharge-note",
         query: { id: this.Id },
       });
     },
     OnTriageform() {
       this.$router.push({
-        path: "/modules/Patient/triage-form",
+        path: "/modules/Intervention/triage-form",
         query: { id: this.Id },
       });
     },
     Oninternalreferralform() {
       this.$router.push({
-        path: "/modules/Patient/internal-referral-form",
+        path: "/modules/Intervention/internal-referral-form",
         query: { id: this.Id },
       });
     },
     Onocctreferralform() {
       this.$router.push({
-        path: "/modules/Patient/occt-referral-form",
+        path: "/modules/Intervention/occt-referral-form",
         query: { id: this.Id },
       });
     },
     Onpsychologyreferral() {
       this.$router.push({
-        path: "/modules/Patient/psychology-referral",
+        path: "/modules/Intervention/psychology-referral",
+        query: { id: this.Id },
+      });
+    },
+    Onrehabreferralandclinicalsummary() {
+      this.$router.push({
+        path: "/modules/Intervention/rehab-referral-and-clinical-summary",
         query: { id: this.Id },
       });
     },
     Onseconsentreferral() {
       this.$router.push({
-        path: "/modules/Patient/se-consent-form",
+        path: "/modules/Intervention/se-consent-form",
         query: { id: this.Id },
       });
     },
     Onlaserform() {
       this.$router.push({
-        path: "/modules/Patient/laser-form",
+        path: "/modules/Intervention/laser-form",
+        query: { id: this.Id },
+      });
+    },
+    Onexternalreferralform() {
+      this.$router.push({
+        path: "/modules/Intervention/external-referral-form",
         query: { id: this.Id },
       });
     },
     Oncpsreferal() {
       this.$router.push({
-        path: "/modules/Patient/cps-referral-form",
+        path: "/modules/Intervention/cps-referral-form",
         query: { id: this.Id },
       });
     },
     Onpatientcareplan() {
       this.$router.push({
-        path: "/modules/Patient/patient-care-plan-and-case-review",
+        path: "/modules/Intervention/patient-care-plan-and-case-review",
         query: { id: this.Id },
       });
     },
-    OnBookAppointment(){
-       this.$router.push({
-        path: "/modules/Patient/book-appointment",
-        query: { pid: this.Id },
+    Onpatientcareplan() {
+      this.$router.push({
+        path: "/modules/Intervention/patient-care-plan-and-case-review",
+        query: { id: this.Id },
+      });
+    },
+    OnSeprogressnotes() {
+      this.$router.push({
+        path: "/modules/Intervention/se-progress-notes",
+        query: { id: this.Id },
+      });
+    },
+    Onpatientindexform() {
+      this.$router.push({
+        path: "/modules/Intervention/patient-index-form",
+        query: { id: this.Id },
+      });
+    },
+    Oncpsprogressnote() {
+      this.$router.push({
+        path: "/modules/Intervention/cps-progress-note",
+        query: { id: this.Id },
+      });
+    },
+    Onetpprogressnote() {
+      this.$router.push({
+        path: "/modules/Intervention/etp-progress-note",
+        query: { id: this.Id },
+      });
+    },
+    Onjobclubprogressnote() {
+      this.$router.push({
+        path: "/modules/Intervention/job-club-progress-note",
+        query: { id: this.Id },
+      });
+    },
+    OnRehabDischargeNote() {
+      this.$router.push({
+        path: "/modules/Intervention/rehab-discharge",
+        query: { id: this.Id },
+      });
+    },
+    Oncpsdischargenote() {
+      this.$router.push({
+        path: "/modules/Intervention/cps-discharge-note",
+        query: { id: this.Id },
+      });
+    },
+    Oncpshomevisitconsentform() {
+      this.$router.push({
+        path: "/modules/Intervention/cps-homevisit-consent-form",
+        query: { id: this.Id },
+      });
+    },
+    Oncpshomevisitwithdrawalform() {
+      this.$router.push({
+        path: "/modules/Intervention/cps-homevisit-withdrawal-form",
+        query: { id: this.Id },
+      });
+    },
+    Oncpspolicereferralform() {
+      this.$router.push({
+        path: "/modules/Intervention/cps-police-referral-form",
+        query: { id: this.Id },
+      });
+    },
+    Onphotographyconsentform() {
+      this.$router.push({
+        path: "/modules/Intervention/photography-consent-form",
+        query: { id: this.Id },
+      });
+    },
+    Onetpconsentform() {
+      this.$router.push({
+        path: "/modules/Intervention/etp-consent-form",
+        query: { id: this.Id },
+      });
+    },
+    Onjobclubconsentform() {
+      this.$router.push({
+        path: "/modules/Intervention/job-club-consent-form",
+        query: { id: this.Id },
+      });
+    },
+
+    Onjobstartreport() {
+      this.$router.push({
+        path: "/modules/Intervention/job-start-report",
+        query: { id: this.Id },
+      });
+    },
+    Onjobendreport() {
+      this.$router.push({
+        path: "/modules/Intervention/job-end-report",
+        query: { id: this.Id },
+      });
+    },
+    Onjobtransitionreport() {
+      this.$router.push({
+        path: "/modules/Intervention/job-transition-report",
+        query: { id: this.Id },
+      });
+    },
+    OnListforJobClub() {
+      this.$router.push({
+        path: "/modules/Intervention/list-for-job-club",
+        query: { id: this.Id },
+      });
+    },
+    Onlistofetp() {
+      this.$router.push({
+        path: "/modules/Intervention/list-of-etp",
+        query: { id: this.Id },
+      });
+    },
+    Onlogmeetingwithemployer() {
+      this.$router.push({
+        path: "/modules/Intervention/log-meeting-with-employer",
+        query: { id: this.Id },
+      });
+    },
+    Onjobinterestchecklist() {
+      this.$router.push({
+        path: "/modules/Intervention/job-interest-checklist",
+        query: { id: this.Id },
+      });
+    },
+    Onworkanalysisform() {
+      this.$router.push({
+        path: "/modules/Intervention/work-analysis-form",
+        query: { id: this.Id },
+      });
+    },
+    Onlistofjobsearch() {
+      this.$router.push({
+        path: "/modules/Intervention/list-of-job-search",
+        query: { id: this.Id },
+      });
+    },
+    Onlistofpreviousorcurrentjob() {
+      this.$router.push({
+        path: "/modules/Intervention/list-of-previous-or-current-job",
+        query: { id: this.Id },
       });
     },
     async GetPatientClinicinfodetails() {
@@ -1221,6 +1569,7 @@ export default {
         $("#attachpopup").modal("show");
       });
     },
+
     selectFile(event) {
       this.file = event.target.files[0];
     },
@@ -1251,11 +1600,13 @@ export default {
             $("#insertpopup").modal("show");
           });
         } else {
-          this.$nextTick(() => {
             this.errorList.push(response.data.message.uploaded_path[0]);
-            //  $("#attachpopup").modal("hide");
-            $("#errorpopup").modal("show");
-          });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       }
     },
@@ -1291,45 +1642,6 @@ export default {
                   footer: ''
                 });
       }
-    },
-     async endVisit() {
-      try {
-        const headers = {
-          Authorization: "Bearer " + this.userdetails.access_token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-        const response = await this.$axios.post(
-          "patient-appointment-details/endappointmentDate",
-          { patient_id: this.Id },
-          { headers }
-        );
-        console.log("ff", response.data);
-        if (response.data.code == 200) {
-           $("#insertpopup").modal("show");
-        } else {
-          this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-    },
-    OnHistoryview(data) {
-      this.$router.push({
-        path: "/modules/patient/history-view",
-        query: { id: data.id, type: data.type },
-      });
     },
   },
 };

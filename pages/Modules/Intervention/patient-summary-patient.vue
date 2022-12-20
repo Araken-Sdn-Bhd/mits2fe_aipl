@@ -1380,7 +1380,7 @@ export default {
         );
         console.log("ff", response.data);
         if (response.data.code == 200) {
-           $("#updatepopup").modal("show");
+           this.$swal.fire('Successfully Update', '', 'success');
         } else {
           this.$swal.fire({
                   icon: 'error',

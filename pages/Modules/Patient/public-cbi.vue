@@ -767,9 +767,12 @@ export default {
             this.$router.push("/modules/Patient/public-cbi-result");
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         } else {
           this.$nextTick(() => {
@@ -777,10 +780,12 @@ export default {
           });
         }
       } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     onpersonalchange(ind, val) {

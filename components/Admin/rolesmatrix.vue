@@ -395,14 +395,15 @@ export default {
           );
           console.log("my response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
             this.ResetModel();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {

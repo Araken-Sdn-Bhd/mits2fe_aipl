@@ -234,14 +234,15 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.$nextTick(() => {
-          $("#updatepopup").modal("show");
-        });
+        this.$swal.fire('Successfully Update', '', 'success');
         this.GetAlertList();
       } else {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async editalert(data) {
@@ -342,21 +343,20 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             if (this.alert_id == 0) {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-                this.GetAlertList();
-              });
+              this.$swal.fire('Created Succefully', '', 'success');
+              this.GetAlertList();
             } else {
-              this.$nextTick(() => {
-                $("#updatepopup").modal("show");
+                this.$swal.fire('Created Succefully', '', 'success');
                 this.GetAlertList();
-              });
             }
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {

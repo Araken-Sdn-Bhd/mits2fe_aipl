@@ -1600,10 +1600,13 @@ export default {
             $("#insertpopup").modal("show");
           });
         } else {
-          this.$nextTick(() => {
             this.errorList.push(response.data.message.uploaded_path[0]);
-            $("#errorpopup").modal("show");
-          });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       }
     },

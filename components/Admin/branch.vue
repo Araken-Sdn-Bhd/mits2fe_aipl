@@ -710,9 +710,12 @@ export default {
           this.GetBranchList();
           this.loader = false;
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       } catch (e) {
         this.$swal.fire({

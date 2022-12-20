@@ -189,9 +189,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
               this.resetmodel();
             } else {
               this.$swal.fire({
@@ -312,14 +310,19 @@ this.$swal.fire(
           this.$swal.fire('Deleted Successfully', '', 'success');
           this.GetList();
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
   },

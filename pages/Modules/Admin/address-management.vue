@@ -931,9 +931,7 @@ export default {
                         console.log("my data", response.data);
                         if (response.data.code == 200 || response.data.code == "200") {
                             this.loader = false;
-                            this.$nextTick(() => {
-                                $("#insertpopup").modal("show");
-                            });
+                            this.$swal.fire('Created Succefully', '', 'success');
                             this.cityresetmodel();
                         } else {
                             this.loader = false;
