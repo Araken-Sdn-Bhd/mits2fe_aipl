@@ -168,14 +168,22 @@ export default {
             name: "",
             date: "",
             service: "",
-            email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id 
+            email:this.userdetails.user.email,branch_id:this.userdetails.branch.branch_id
           },
           { headers }
         )
         .then((resp) => {
           this.list = resp.data.list;
         })
-        .catch((err) => {
+        .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
           console.error(err);
         });
     },
@@ -231,17 +239,25 @@ export default {
           date: this.date,
           service: this.service,
           email:this.userdetails.user.email,
-          branch_id:this.userdetails.branch.branch_id 
+          branch_id:this.userdetails.branch.branch_id
           },
           { headers }
         )
         .then((resp) => {
           this.list = resp.data.list;
         })
-        .catch((err) => {
+        .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
           console.error(err);
         });
-     
+
     },
     Checkuser(value, event) {
       if (event.target.checked) {

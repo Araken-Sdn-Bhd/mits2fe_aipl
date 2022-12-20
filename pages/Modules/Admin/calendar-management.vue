@@ -155,7 +155,15 @@ export default {
                 });
                 this.Calender();
             })
-            .catch((err) => {
+            .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
                 console.error(err);
                 this.$swal.fire({
                     icon: 'error',
@@ -239,7 +247,15 @@ export default {
                                 this.list = resp.data.list;
                                 this.Calender();
                             })
-                            .catch((err) => {
+                            .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
                                 console.error(err);
                             });
                         this.$nextTick(() => {
@@ -293,7 +309,15 @@ export default {
                         this.list = resp.data.list;
                         this.Calender();
                     })
-                    .catch((err) => {
+                    .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
                         console.error(err);
                         this.$swal.fire({
                             icon: 'error',

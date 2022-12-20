@@ -128,8 +128,8 @@ export default {
       companyName: "",
       loader: false,
       SidebarAccess:null,
-      
-      
+
+
     };
   },
   beforeMount() {
@@ -142,7 +142,7 @@ export default {
   mounted() {
 
     this.getList();
-    
+
   },
   methods: {
     back() {
@@ -157,7 +157,7 @@ export default {
     const response = await this.$axios.post(
             "employer-job/pending-approval",
             {
-              company_id: this.companyId 
+              company_id: this.companyId
             },
             { headers }
           )
@@ -181,7 +181,15 @@ export default {
           });
         });
       })
-      .catch((err) => {
+      .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
       });
     },
@@ -191,7 +199,7 @@ export default {
           return (
             notChunk.position
               .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1 
+              .indexOf(this.search.toLowerCase()) > -1
           );
         });
       } else {
@@ -253,9 +261,9 @@ export default {
       console.log('my id',value);
     },
     async OnApproverejectRequest(status) {
-    
+
       if (confirm("Are you sure you want to perform this action")) {
-      
+
       try {
         this.loader = true;
         const headers = {
@@ -272,15 +280,15 @@ export default {
               { added_by: this.userdetails.user.id, id: value, status: status.toString() },
               { headers }
             )
-            
+
             .then((resp) => {
               console.log("reuslt", resp);
             });
-           
+
             this.getList();
-           
+
         });
-        
+
         this.loader = false;
         this.$swal.fire(
                   'Successfully Update',
@@ -295,10 +303,10 @@ export default {
                 });
       }
     }
-    
+
     },
-  
-   
+
+
   },
 };
 </script>

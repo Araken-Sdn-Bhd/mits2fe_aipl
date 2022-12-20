@@ -172,7 +172,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
-       
+
         console.log("list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
@@ -192,7 +192,15 @@ export default {
         });
         this.loader = false;
       })
-      .catch((err) => {
+      .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         this.loader = false;
         console.error(err);
       });

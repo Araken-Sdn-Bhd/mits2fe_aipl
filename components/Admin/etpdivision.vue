@@ -166,7 +166,7 @@ export default {
   },
   mounted() {
     this.GetETPList();
-    
+
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -200,7 +200,15 @@ export default {
         //  });
         //});
       })
-      .catch((err) => {
+      .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
       });
        if(this.SidebarAccess!=1){

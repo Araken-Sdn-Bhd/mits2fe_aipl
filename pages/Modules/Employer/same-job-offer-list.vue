@@ -80,9 +80,9 @@
                       <p v-if="job.is_accommodation">Yes</p>
                       <p v-if="!job.is_accommodation">No</p>
                     </td>
-                   
+
                     <td>{{ job.hospital_branch_name }}</td>
-                   
+
 
                   </tr>
                 </tbody>
@@ -180,7 +180,15 @@ export default {
         //  });
         //});
       })
-      .catch((err) => {
+      .catch ((err) => {      
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
       });
     },
