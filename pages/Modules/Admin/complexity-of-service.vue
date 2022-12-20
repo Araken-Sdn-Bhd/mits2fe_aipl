@@ -212,9 +212,7 @@ export default {
                                 'Successfully Update',
                             );
                         } else {
-                            this.$nextTick(() => {
-                                $("#insertpopup").modal("show");
-                            });
+                            this.$swal.fire('Created Succefully', '', 'success');
                         }
                         this.GetSettingList();
                         this.index = 0;
@@ -274,9 +272,7 @@ export default {
             );
             if (response.data.code == 200) {
                 this.loader = false;
-                this.$nextTick(() => {
-                    $("#deletepopup").modal("show");
-                });
+                this.$swal.fire('Deleted Successfully', '', 'success');
                 this.GetSettingList();
             } else {
                 this.loader = false;

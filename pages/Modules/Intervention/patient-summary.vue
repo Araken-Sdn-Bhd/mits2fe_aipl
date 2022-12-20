@@ -1883,10 +1883,13 @@ export default {
             $("#insertpopup").modal("show");
           });
         } else {
-          this.$nextTick(() => {
             this.errorList.push(response.data.message.uploaded_path[0]);
-            $("#errorpopup").modal("show");
-          });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       }
     },
@@ -1939,7 +1942,7 @@ export default {
         );
         console.log("ff", response.data);
         if (response.data.code == 200) {
-           $("#updatepopup").modal("show");
+           this.$swal.fire('Successfully Update', '', 'success');
         } else {
           this.$swal.fire({
                   icon: 'error',

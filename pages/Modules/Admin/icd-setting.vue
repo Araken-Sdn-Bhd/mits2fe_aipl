@@ -571,9 +571,7 @@ export default {
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
               this.resetmodel();
             } else {
               this.$swal.fire({
@@ -654,19 +652,22 @@ this.$swal.fire(
           { headers }
         );
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
+          this.$swal.fire('Deleted Successfully', '', 'success');
           this.GeticdList();
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async resetmodel() {
@@ -780,9 +781,7 @@ this.$swal.fire(
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
               this.icdcategoryresetmodel();
             } else {
               this.$swal.fire({
@@ -866,19 +865,22 @@ this.$swal.fire(
           { headers }
         );
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
+          this.$swal.fire('Deleted Successfully', '', 'success');
           this.GeticdcatList();
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async icdcategoryresetmodel() {
@@ -1015,9 +1017,7 @@ this.$swal.fire(
               { headers }
             );
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
               this.icdcoderesetmodel();
             } else {
               this.$swal.fire({
@@ -1115,19 +1115,22 @@ this.$swal.fire(
           { headers }
         );
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
+          this.$swal.fire('Deleted Successfully', '', 'success');
           this.Geticdcode();
         } else {
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async icdcoderesetmodel() {

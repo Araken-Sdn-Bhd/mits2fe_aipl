@@ -407,13 +407,6 @@ export default {
                   footer: ''
                 });
 
-                this.loader = false;
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + err,
-                    footer: ''
-                });
             });
         this.BindCityList();
     },
@@ -460,21 +453,13 @@ export default {
                     });
                 })
                 .catch ((err) => {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + err,
-                  footer: ''
-                });
-
-                    console.error(err);
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: 'Oops... Something Went Wrong!',
-                        text: 'the error is: ' + err,
-                        footer: ''
-                    });
+                  this.loader = false;
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + err,
+                            footer: ''
+                          });
                 });
         },
         async addcountry() {
@@ -509,9 +494,7 @@ export default {
                         );
                         if (response.data.code == 200 || response.data.code == "200") {
                             this.loader = false;
-                            this.$nextTick(() => {
-                                $("#updatepopup").modal("show");
-                            });
+                            this.$swal.fire('Updated Successfully', '', 'success');
                             this.Countryresetmodel();
                         } else {
                             this.loader = false;
@@ -530,9 +513,7 @@ export default {
                         );
                         if (response.data.code == 200 || response.data.code == "200") {
                             this.loader = false;
-                            this.$nextTick(() => {
-                                $("#insertpopup").modal("show");
-                            });
+                            this.$swal.fire('Added Successfully', '', 'success');
                             this.Countryresetmodel();
                         } else {
                             this.loader = false;
@@ -603,9 +584,7 @@ export default {
                 );
                 console.log("my delete response", response.data);
                 if (response.data.code == 200) {
-                    this.$nextTick(() => {
-                        $("#deletepopup").modal("show");
-                    });
+                    this.$swal.fire('Deleted Successfully', '', 'success');
                     this.GetCountryList();
                 } else {
                     this.$swal.fire({
@@ -770,9 +749,7 @@ export default {
                     }
                 );
                 if (response.data.code == 200) {
-                    this.$nextTick(() => {
-                        $("#deletepopup").modal("show");
-                    });
+                    this.$swal.fire('Deleted Successfully', '', 'success');
                     this.GetStateList();
                 } else {
                     this.$swal.fire({
@@ -954,9 +931,7 @@ export default {
                         console.log("my data", response.data);
                         if (response.data.code == 200 || response.data.code == "200") {
                             this.loader = false;
-                            this.$nextTick(() => {
-                                $("#insertpopup").modal("show");
-                            });
+                            this.$swal.fire('Created Succefully', '', 'success');
                             this.cityresetmodel();
                         } else {
                             this.loader = false;
@@ -1033,9 +1008,7 @@ export default {
                     }
                 );
                 if (response.data.code == 200) {
-                    this.$nextTick(() => {
-                        $("#deletepopup").modal("show");
-                    });
+                    this.$swal.fire('Deleted Successfully', '', 'success');
                     this.PostcodeList();
                 } else {
                     this.$swal.fire({

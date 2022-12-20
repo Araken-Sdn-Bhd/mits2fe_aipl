@@ -200,9 +200,7 @@ export default {
                     );
                     if (response.data.code == 200) {
                         this.loader = false;
-                        this.$nextTick(() => {
-                            $("#deletepopup").modal("show");
-                        });
+                        this.$swal.fire('Deleted Successfully', '', 'success');
                         this.GetList();
                     } else {
                         this.loader = false;

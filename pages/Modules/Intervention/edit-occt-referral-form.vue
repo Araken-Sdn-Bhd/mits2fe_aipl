@@ -1124,9 +1124,12 @@ methods: {
         }
       } catch (e) {
       this.loader = false;
-      // this.$nextTick(() => {
-      //   $("#errorpopup").modal("show");
-      // });
+      this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
     }
   }
   },
@@ -1341,9 +1344,12 @@ methods: {
         }
       } catch (e) {
         this.loader = false;
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     },
   async GetList() {

@@ -294,9 +294,7 @@ export default {
                 }
             );
             if (response.data.code == 200) {
-                this.$nextTick(() => {
-                    $("#deletepopup").modal("show");
-                });
+                this.$swal.fire('Deleted Successfully', '', 'success');
                 const axios = require("axios").default;
                 axios
                     .get(

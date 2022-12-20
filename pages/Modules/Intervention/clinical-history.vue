@@ -147,14 +147,14 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.$nextTick(() => {
-          $("#deletepopup").modal("show");
-        });
+        this.$swal.fire('Deleted Successfully', '', 'success');
         this.GetList();
-      } else {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } else {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     }
     },

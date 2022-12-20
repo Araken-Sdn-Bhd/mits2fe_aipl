@@ -1420,10 +1420,12 @@ export default {
           }
         }
       } catch (e) {
-        console.log("my log", e);
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+        console.log("my log", e);this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async OnOrganizationOutreachProjectCollaboration() {
@@ -1626,10 +1628,12 @@ export default {
                 });
           }
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async OnOrganizationNetworkingMakeaContribution() {
@@ -1801,10 +1805,12 @@ export default {
                 });
           }
         }
-      } catch (e) {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
+      } catch (e) {this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     Reload() {
