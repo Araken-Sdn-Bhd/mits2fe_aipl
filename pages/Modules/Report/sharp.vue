@@ -474,7 +474,7 @@
                       <p v-if=rp.PROTECTIVE_FACTOR15 >{{ rp.PROTECTIVE_FACTOR15 }} <br></p>
                       <p v-if=rp.PROTECTIVE_FACTOR16 >{{ rp.PROTECTIVE_FACTOR16 }} <br></p>
                       <p v-if=rp.PROTECTIVE_FACTOR17 >{{ rp.PROTECTIVE_FACTOR17 }} <br></p>
-                      <p v-if=rp.PROTECTIVE_FACTOR18 >{{ rp.PROTECTIVE_FACTOR18 }} <br></p>                
+                      <p v-if=rp.PROTECTIVE_FACTOR18 >{{ rp.PROTECTIVE_FACTOR18 }} <br></p>
                       </td>
                       <td class="tdrow">
                         <p v-if=rp.METHOD_OF_SELF_HARM1 >{{ rp.METHOD_OF_SELF_HARM1 }} <br></p>
@@ -484,14 +484,14 @@
                         <p v-if=rp.METHOD_OF_SELF_HARM5 >{{ rp.METHOD_OF_SELF_HARM5 }} <br></p>
                         <p v-if=rp.METHOD_OF_SELF_HARM6 >{{ rp.METHOD_OF_SELF_HARM6 }} <br></p>
                         <p v-if=rp.METHOD_OF_SELF_HARM7 >{{ rp.METHOD_OF_SELF_HARM7 }} <br></p>
-                        <p v-if=rp.METHOD_OF_SELF_HARM8 >{{ rp.METHOD_OF_SELF_HARM8 }} <br></p>                        
+                        <p v-if=rp.METHOD_OF_SELF_HARM8 >{{ rp.METHOD_OF_SELF_HARM8 }} <br></p>
                       </td>
                       <td class="tdrow">
                         <p v-if=rp.IDEA_OF_METHOD1 >{{ rp.IDEA_OF_METHOD1 }} <br></p>
-                        <p v-if=rp.IDEA_OF_METHOD2 >{{ rp.IDEA_OF_METHOD2 }} <br></p> 
-                        <p v-if=rp.IDEA_OF_METHOD3 >{{ rp.IDEA_OF_METHOD3 }} <br></p> 
-                        <p v-if=rp.IDEA_OF_METHOD4 >{{ rp.IDEA_OF_METHOD4 }} <br></p> 
-                        <p v-if=rp.IDEA_OF_METHOD5 >{{ rp.IDEA_OF_METHOD5 }} <br></p>  
+                        <p v-if=rp.IDEA_OF_METHOD2 >{{ rp.IDEA_OF_METHOD2 }} <br></p>
+                        <p v-if=rp.IDEA_OF_METHOD3 >{{ rp.IDEA_OF_METHOD3 }} <br></p>
+                        <p v-if=rp.IDEA_OF_METHOD4 >{{ rp.IDEA_OF_METHOD4 }} <br></p>
+                        <p v-if=rp.IDEA_OF_METHOD5 >{{ rp.IDEA_OF_METHOD5 }} <br></p>
                       </td>
                       <td class="tdrow">
                         <p v-if=rp.SUCIDAL_INTENT1 >{{ rp.SUCIDAL_INTENT1 }} <br></p>
@@ -870,8 +870,16 @@ export default {
             } else {
               this.error = "No Record Found";
             }
-          } 
-        } catch (e) {}
+          }
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
     currentDate() {

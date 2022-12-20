@@ -61,7 +61,7 @@
                     </td>
                     <td>
                       <a style="cursor:pointer;" @click="OneditClick(job.jobofferId)" class="view"><i class="fa fa-eye"></i></a>
-                    
+
                     </td>
                   </tr>
                 </tbody>
@@ -161,10 +161,18 @@ export default {
       //
     }
       )
-      .catch((err) => {
+      .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
       });
-   
+
     },
     OnSearch() {
       if (this.search) {

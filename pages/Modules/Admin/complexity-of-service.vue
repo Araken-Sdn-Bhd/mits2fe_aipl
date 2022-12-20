@@ -88,7 +88,6 @@
 </div>
 </template>
 
-
 <script>
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
@@ -112,6 +111,7 @@ export default {
         };
     },
     mounted() {
+        this.loader = true;
         const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
@@ -128,6 +128,7 @@ export default {
             )
             .then((resp) => {
                 this.settinglist = resp.data.list;
+                this.loader = false;
                 $(document).ready(function () {
                     $(".data-table").DataTable({
                         searching: false,
@@ -151,12 +152,21 @@ export default {
                     });
                 });
             })
-            .catch((err) => {
-                this.$swal.fire({
+            .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
                   text: 'the error is: ' + err,
                   footer: ''
+                });
+
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + err,
+                    footer: ''
                 });
             });
         if (this.SidebarAccess != 1) {
@@ -213,12 +223,22 @@ export default {
                         this.requesttype = "insert";
                     } else {
                         this.loader = false;
-                        this.$nextTick(() => {
-                            $("#errorpopup").modal("show");
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                            footer: ''
                         });
                     }
                 }
-            } catch (e) {}
+            } catch (e) {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + e,
+                    footer: ''
+                });
+            }
         },
         async GetSettingList() {
             const headers = {
@@ -238,6 +258,7 @@ export default {
             }
         },
         async deletesetting(data) {
+            this.loader = true;
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
@@ -252,17 +273,23 @@ export default {
                 }
             );
             if (response.data.code == 200) {
+                this.loader = false;
                 this.$nextTick(() => {
                     $("#deletepopup").modal("show");
                 });
                 this.GetSettingList();
             } else {
-                this.$nextTick(() => {
-                    $("#errorpopup").modal("show");
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                    footer: ''
                 });
             }
         },
         async editsetting(data) {
+            this.loader = true;
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
@@ -276,15 +303,17 @@ export default {
                 }
             );
             if (response.data.code == 200) {
+                this.loader = false;
                 this.settingId = response.data.setting[0].id;
                 this.services = response.data.setting[0].section_value;
                 this.index = response.data.setting[0].section_order;
                 this.requesttype = "update";
             } else {
+                this.loader = false;
                 this.$swal.fire({
                     icon: 'error',
                     title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + this.error,
+                    text: 'the error is: ' + JSON.stringify(response.data.message),
                     footer: ''
                 });
             }

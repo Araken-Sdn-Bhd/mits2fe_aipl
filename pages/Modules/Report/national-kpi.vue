@@ -482,7 +482,15 @@ export default {
           } else {
             this.error = "No Record Found";
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
     startDownload(){
@@ -528,7 +536,15 @@ export default {
           } else {
             this.error = "No Record Found";
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
   },

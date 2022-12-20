@@ -46,7 +46,7 @@
                       <label class="form-label">Appointment Type: </label>
                       <select class="form-select" v-model="appointment_type" @change="getServiceByBranchTeamId()">
                         <option value="">Please Select</option>
-                        <option 
+                        <option
                           v-for="serv in servicelist"
                           v-if="serv.service_name != 'Rehabilitation'"
                           v-bind:key="serv.id"
@@ -396,7 +396,7 @@
                        :name=excelname
                       ><i class="fa fa-file-excel"></i> Generate Excel
                       </downloadexcel>
-                      
+
                       <downloadexcel
                        v-if="this.appointment_type == 5"
                        class="btn btn-success btn-text"
@@ -1196,7 +1196,15 @@ export default {
               this.error = "No Record Found";
             }
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
   },

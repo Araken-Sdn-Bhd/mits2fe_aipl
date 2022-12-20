@@ -1,301 +1,322 @@
 <template>
-  <div id="layoutSidenav">
-   <CommonSidebar />
-      <div id="layoutSidenav_content">
-        <CommonHeader/>
-      <main>
-         <Loader v-if="loader" />
-        <div class="container-fluid px-4">
-          <div class="page-title">
-            <h1>General Setting</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
-          </div>
-            <div class="card mb-4">
-              <div class="card-header icon-title">
-                <a href="#"><i class="fa fa-shield-alt"></i></a>
-                <h4>Category of Service</h4>
-              </div>
-              <div class="card-body">
-                <ul class="sub-tab">
-                  <li>
-                    <a href="#" class="active">Category of Service</a>
-                  </li>
-                </ul>
-
-                <div class="content-subtab">
-                  <form class="g-3 mt-3" method="post" @submit.prevent="insertservices">
-                    <div class="row align-items-center">
-                      <div class="col-md-7 mb-4">
-                        <label for="" class="form-label"
-                          >Category of Service</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Category of Service"
-                          v-model="services"
-                        />
-                      </div>
-
-                      <div class="col-lg-1 col-sm-2 mb-4">
-                        <label class="form-label">Index</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="0"
-                          v-model="index"
-                        />
-                      </div>
-                    </div>
-                    <!-- close-row -->
-                    <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-                  <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
-        <i class="fa fa-save"></i> Save
-        </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
-          <i class="fa fa-plus"></i> Add Parameter
-        </button>
-      </div>
-                  </form>
-
-
-
-                  <div class="table-title">
-                    <h3>List of Category of Service</h3>
-                  </div>
-                  <table
-                    class="table table-striped data-table display nowrap"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Category of Service</th>
-                        <th>Index</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                  <tbody>
-                     <tr v-for="(setting, index) in settinglist" :key="index">
-                         <td>{{index+1}}</td>
-                        <td>{{setting.section_value}}</td>
-                        <td>{{setting.section_order}}</td>
-                        <td class="td"  :class="SidebarAccess!=1?'hide':''">
-                          <a  class="edit" @click="editsetting(setting)"
-                            ><i class="fa fa-edit"></i
-                          ></a>
-                          <a class="action-icon icon-danger" @click="deletesetting(setting)"
-                            ><i class="fa fa-trash-alt"></i
-                          ></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+<div id="layoutSidenav">
+    <CommonSidebar />
+    <div id="layoutSidenav_content">
+        <CommonHeader />
+        <main>
+            <Loader v-if="loader" />
+            <div class="container-fluid px-4">
+                <div class="page-title">
+                    <h1>General Setting</h1>
+                    <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
                 </div>
-              </div>
+                <div class="card mb-4">
+                    <div class="card-header icon-title">
+                        <a href="#"><i class="fa fa-shield-alt"></i></a>
+                        <h4>Category of Service</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="sub-tab">
+                            <li>
+                                <a href="#" class="active">Category of Service</a>
+                            </li>
+                        </ul>
+
+                        <div class="content-subtab">
+                            <form class="g-3 mt-3" method="post" @submit.prevent="insertservices">
+                                <div class="row align-items-center">
+                                    <div class="col-md-7 mb-4">
+                                        <label for="" class="form-label">Category of Service</label>
+                                        <input type="text" class="form-control" placeholder="Enter Category of Service" v-model="services" />
+                                    </div>
+
+                                    <div class="col-lg-1 col-sm-2 mb-4">
+                                        <label class="form-label">Index</label>
+                                        <input type="text" class="form-control" placeholder="0" v-model="index" />
+                                    </div>
+                                </div>
+                                <!-- close-row -->
+                                <p v-if="errorList.length">
+                                    <ul>
+                                        <li style="color:red" v-for='err in errorList' :key='err'>
+                                            {{ err }}
+                                        </li>
+                                    </ul>
+                                </p>
+                                <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
+                                    <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
+                                        <i class="fa fa-save"></i> Save
+                                    </button>
+                                    <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
+                                        <i class="fa fa-plus"></i> Add Parameter
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="table-title">
+                                <h3>List of Category of Service</h3>
+                            </div>
+                            <table class="table table-striped data-table display nowrap" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category of Service</th>
+                                        <th>Index</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(setting, index) in settinglist" :key="index">
+                                        <td>{{index+1}}</td>
+                                        <td>{{setting.section_value}}</td>
+                                        <td>{{setting.section_order}}</td>
+                                        <td class="td" :class="SidebarAccess!=1?'hide':''">
+                                            <a class="edit" @click="editsetting(setting)"><i class="fa fa-edit"></i></a>
+                                            <a class="action-icon icon-danger" @click="deletesetting(setting)"><i class="fa fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-      </main>
+        </main>
     </div>
-  </div>
+</div>
 </template>
-  <script>
+
+
+<script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { CommonSidebar, CommonHeader },
-  name: "category-of-service",
-  data() {
-    return {
-      services: "",
-      index: 0,
-      errorList: [],
-      userdetails: null,
-      settinglist: [],
-      settingId: 0,
-      requesttype: "insert",
-      loader: false,
-      SidebarAccess:null,
-    };
-  },
-  mounted() {
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const axios = require("axios").default;
-    axios
-      .get(
-        `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
-          "category-of-service",
-        { headers }
-      )
-      .then((resp) => {
-        this.settinglist = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-            $($.fn.dataTable.tables(true))
-              .DataTable()
-              .columns.adjust()
-              .responsive.recalc();
-          });
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-       if (this.SidebarAccess != 1) {
-      this.$refs.sidebar.classList.add("hide");
-    }
-  },
-  beforeMount() {
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-  },
-  methods: {
-    async insertservices() {
-      this.errorList = [];
-      try {
-        if (!this.services) {
-          this.errorList.push("Category-of-service is required");
-        }
-        if (!this.index) {
-          this.errorList.push("Index is required");
-        } else {
-          this.loader = true;
-          const headers = {
+    components: {
+        CommonSidebar,
+        CommonHeader
+    },
+    name: "category-of-service",
+    data() {
+        return {
+            services: "",
+            index: 0,
+            errorList: [],
+            userdetails: null,
+            settinglist: [],
+            settingId: 0,
+            requesttype: "insert",
+            loader: false,
+            SidebarAccess: null,
+        };
+    },
+    mounted() {
+        this.loader = true;
+        const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "/general-setting/add",
-            {
-              added_by: this.userdetails.user.id,
-              section: "category-of-service",
-              section_value: this.services,
-              section_order: this.index,
-              setting_id: this.settingId,
-              request_type: this.requesttype,
-            },
-            { headers }
-          );
-          if (response.data.code == 200) {
-            this.loader = false;
-            if (this.settingId > 0) {
-this.$swal.fire(
-                  'Successfully Update',
-                );
-            } else {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
-            }
-            this.GetSettingList();
-            this.index = 0;
-            this.services = "";
-            this.settingId = 0;
-            this.requesttype = "insert";
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        }
-      } catch (e) {}
-    },
-    async GetSettingList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
-        "general-setting/list?section=" + "category-of-service",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.settinglist = response.data.list;
-      } else {
-        this.settinglist = [];
-      }
-    },
-    async deletesetting(data) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "/general-setting/remove",
-        {
-          added_by: this.userdetails.user.id,
-          setting_id: data.id,
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.$nextTick(() => {
-          $("#deletepopup").modal("show");
-        });
-        this.GetSettingList();
-      } else {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
-    async editsetting(data) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "/general-setting/fetch",
-        {
-          setting_id: data.id,
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.settingId = response.data.setting[0].id;
-        this.services = response.data.setting[0].section_value;
-        this.index = response.data.setting[0].section_order;
-        this.requesttype = "update";
-      } else {
+        };
+        const axios = require("axios").default;
+        axios
+            .get(
+                `${this.$axios.defaults.baseURL}` +
+                "general-setting/list?section=" +
+                "category-of-service", {
+                    headers
+                }
+            )
+            .then((resp) => {
+                this.settinglist = resp.data.list;
+                this.loader = false;
+                $(document).ready(function () {
+                    $(".data-table").DataTable({
+                        searching: false,
+                        bLengthChange: false,
+                        bInfo: false,
+                        // autoWidth: false,
+                        // responsive: true,
+                        scrollX: true,
+                        language: {
+                            paginate: {
+                                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                            },
+                        },
+                    });
+                    $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
+                        $($.fn.dataTable.tables(true))
+                            .DataTable()
+                            .columns.adjust()
+                            .responsive.recalc();
+                    });
+                });
+            })
+            .catch ((err) => {
+        this.loader = false;
         this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
+                  text: 'the error is: ' + err,
                   footer: ''
                 });
-      }
+
+                console.error(err);
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + err,
+                    footer: ''
+                });
+            });
+        if (this.SidebarAccess != 1) {
+            this.$refs.sidebar.classList.add("hide");
+        }
     },
-  },
+    beforeMount() {
+        this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+    },
+    methods: {
+        async insertservices() {
+            this.errorList = [];
+            try {
+                if (!this.services) {
+                    this.errorList.push("Category-of-service is required");
+                }
+                if (!this.index) {
+                    this.errorList.push("Index is required");
+                } else {
+                    this.loader = true;
+                    const headers = {
+                        Authorization: "Bearer " + this.userdetails.access_token,
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                        "/general-setting/add", {
+                            added_by: this.userdetails.user.id,
+                            section: "category-of-service",
+                            section_value: this.services,
+                            section_order: this.index,
+                            setting_id: this.settingId,
+                            request_type: this.requesttype,
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response.data.code == 200) {
+                        this.loader = false;
+                        if (this.settingId > 0) {
+                            this.$swal.fire(
+                                'Successfully Update',
+                            );
+                        } else {
+                            this.$swal.fire(
+                                'Succesfully Update',
+                            );
+                        }
+                        this.GetSettingList();
+                        this.index = 0;
+                        this.services = "";
+                        this.settingId = 0;
+                        this.requesttype = "insert";
+                    } else {
+                        this.loader = false;
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                            footer: ''
+                        });
+                    }
+                }
+            } catch (e) {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + e,
+                    footer: ''
+                });
+            }
+        },
+        async GetSettingList() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.get(
+                "general-setting/list?section=" + "category-of-service", {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.settinglist = response.data.list;
+            } else {
+                this.settinglist = [];
+            }
+        },
+        async deletesetting(data) {
+            this.loader = true;
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "/general-setting/remove", {
+                    added_by: this.userdetails.user.id,
+                    setting_id: data.id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.loader = false;
+                this.$nextTick(() => {
+                    $("#deletepopup").modal("show");
+                });
+                this.GetSettingList();
+            } else {
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                    footer: ''
+                });
+            }
+        },
+        async editsetting(data) {
+            this.loader = true;
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "/general-setting/fetch", {
+                    setting_id: data.id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.loader = false;
+                this.settingId = response.data.setting[0].id;
+                this.services = response.data.setting[0].section_value;
+                this.index = response.data.setting[0].section_order;
+                this.requesttype = "update";
+            } else {
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
+                });
+            }
+        },
+    },
 };
 </script>
