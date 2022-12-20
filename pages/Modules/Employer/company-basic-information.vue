@@ -568,20 +568,26 @@ export default {
                     if (response.data.code == 200) {
                         this.Id = response.data.id;
                         this.loader = false;
-                        this.$nextTick(() => {
-                            $("#insertpopup").modal("show");
-                        });
+                        this.$swal.fire(
+                                'Successfully Update',
+                                )
                     } else {
                         this.loader = false;
-                        this.$nextTick(() => {
-                            $("#errorpopup").modal("show");
-                        });
+                        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
                     }
                 }
             } catch (e) {
-                this.$nextTick(() => {
-                    $("#errorpopup").modal("show");
-                });
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                })
             }
         },
         async onUpdatePassword() {

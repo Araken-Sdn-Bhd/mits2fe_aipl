@@ -181,6 +181,7 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -192,9 +193,14 @@ export default {
       this.token = this.userdetails.access_token;
     }
     let urlParams = new URLSearchParams(window.location.search);
+    let urlParams2 = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams2.get("appId");
     if (!this.Id) {
       this.Id = 0;
+    }
+    if (!this.appId) {
+      this.appId = 0;
     }
   },
   methods: {
@@ -235,58 +241,97 @@ export default {
       this.checkedList[ind] = val;
     },
     GoBack(){
-      this.$router.push({
+      if(this.appId){
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
+      }else{
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id },
             });
+      }
     },
     async OnsubmitTest() {
-      if (confirm("Are you sure you want to submit this entry")) {
-      this.error = null;
-      if (this.list.length == Object.values(this.checkedList).length) {
-        try {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "patient/online-test",
-            {
-              added_by: this.userId,
-              patient_id: this.Id,
-              test_name: "phq9",
-              test_section_name: "PHQ9",
-              result: JSON.stringify([{ PHQ9: this.checkedList }]),
-              user_ip_address: this.Ipaddress,
-            },
-            { headers }
-          );
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.loader = false;
-            localStorage.setItem(
-              "phq9result",
-              JSON.stringify(response.data.result)
-            );
-            this.$router.push({
-              path: "/modules/Intervention/phq9-result",
-              query: { id: this.Id },
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        } catch (e) {
-          this.loader = false;
-          this.errors = e;
-        }
-      } else {
-        this.error = "Please attempt all question";
-      }
-    }
+      this.$swal.fire({
+                title: 'Do you want to save the selections?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                this.error = null;
+                if (this.list.length == Object.values(this.checkedList).length) {
+                  try {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "patient/online-test",
+                      {
+                        added_by: this.userId,
+                        patient_id: this.Id,
+                        test_name: "phq9",
+                        test_section_name: "PHQ9",
+                        result: JSON.stringify([{ PHQ9: this.checkedList }]),
+                        user_ip_address: this.Ipaddress,
+                      },
+                      { headers }
+                    );
+                    if (response.data.code == 200 || response.data.code == "200") {
+                      this.loader = false;
+                      this.$swal.fire({
+                        icon: 'success',
+                        title: 'Result is successfully generated.',
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                      localStorage.setItem(
+                        "phq9result",
+                        JSON.stringify(response.data.result)
+                      );
+                      if(this.appId){
+                                    this.$router.push({
+                                          path: "/modules/Intervention/phq9-result",
+                                          query: { id: this.Id, appId: this.appId },
+                                        });
+                                  }else{
+                                    this.$router.push({
+                                          path: "/modules/Intervention/phq9-result",
+                                          query: { id: this.Id },
+                                        });
+                                }
+                    } else {
+                      this.loader = false;
+                      this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                    }
+                  } catch (e) {
+                    this.loader = false;
+                    this.errors = e;
+                    this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + this.errors,
+                        })
+                  }
+                } else {
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
+                }
+              }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+              }
+    })
     },
   },
 };

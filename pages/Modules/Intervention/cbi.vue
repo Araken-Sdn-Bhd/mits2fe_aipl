@@ -564,6 +564,7 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -579,8 +580,13 @@ export default {
     this.GetUserIpAddress();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams2 = new URLSearchParams(window.location.search);
+    this.appId = urlParams2.get("appId");
     if (!this.Id) {
       this.Id = 0;
+    }
+    if (!this.appId) {
+      this.appId = 0;
     }
   },
   methods: {
@@ -649,7 +655,11 @@ export default {
         this.$refs.navprofile.classList.add("active");
         this.$refs.navprofile.classList.add("show");
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     async backpersonal() {
@@ -671,7 +681,11 @@ export default {
         this.$refs.navcontact.classList.add("active");
         this.$refs.navcontact.classList.add("show");
       } else {
-        window.alert("Please attempt all question");
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Please attempt all questions!',
+                            text: '',
+                        })
       }
     },
     async backworkburnout() {
@@ -683,62 +697,84 @@ export default {
       this.$refs.navprofile.classList.add("show");
     },
     async OnsubmitTest() {
-      if (confirm("Are you sure you want to submit this entry")) {
-      try {
-        if (
-          this.peronallist.length ==
-            Object.values(this.checkedpersonalList).length &&
-          this.worklist.length == Object.values(this.checkedworkList).length &&
-          this.clientlist.length == Object.values(this.checkedclientList).length
-        ) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "patient/online-test",
-            {
-              added_by: this.userId,
-              patient_id: this.Id,
-              test_name: "cbi",
-              test_section_name: "PERSONAL BURNOUT",
-              result: JSON.stringify([
-                { PERSONAL_BURNOUT: this.checkedpersonalList },
-                { WORK_BURNOUT: this.checkedworkList },
-                { CLIENT_RELATED_BURNOUT: this.checkedclientList },
-              ]),
-              user_ip_address: this.Ipaddress,
-            },
-            { headers }
-          );
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.loader = false;
-            localStorage.setItem(
-              "cbiresult",
-              JSON.stringify(response.data.result)
-            );
-            this.$router.push({
-              path: "/modules/Intervention/cbi-result",
-              query: { id: this.Id },
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        } else {
-          window.alert("Please check All Module and attempt all question");
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    }
+      this.$swal.fire({
+                title: 'Do you want to save the selections?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                try {
+                  if (
+                    this.peronallist.length ==
+                      Object.values(this.checkedpersonalList).length &&
+                    this.worklist.length == Object.values(this.checkedworkList).length &&
+                    this.clientlist.length == Object.values(this.checkedclientList).length
+                  ) {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "patient/online-test",
+                      {
+                        added_by: this.userId,
+                        patient_id: this.Id,
+                        test_name: "cbi",
+                        test_section_name: "PERSONAL BURNOUT",
+                        result: JSON.stringify([
+                          { PERSONAL_BURNOUT: this.checkedpersonalList },
+                          { WORK_BURNOUT: this.checkedworkList },
+                          { CLIENT_RELATED_BURNOUT: this.checkedclientList },
+                        ]),
+                        user_ip_address: this.Ipaddress,
+                      },
+                      { headers }
+                    );
+                    if (response.data.code == 200 || response.data.code == "200") {
+                      this.loader = false;
+                      this.$swal.fire({
+                        icon: 'success',
+                        title: 'Result is successfully generated.',
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                      localStorage.setItem(
+                        "cbiresult",
+                        JSON.stringify(response.data.result)
+                      );
+                      this.$router.push({
+                        path: "/modules/Intervention/cbi-result",
+                        query: { id: this.Id, appId: this.appId },
+                      });
+                    } else {
+                      this.loader = false;
+                      this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                    }
+                  } else {
+                    this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Please check all modules and attempt all questions!',
+                                    text: '',
+                      })
+                  }
+                } catch (e) {
+                  this.loader = false;
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                }
+            } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+              }
+            })
     },
     onpersonalchange(ind, val) {
       this.checkedpersonalList[ind] = val;
