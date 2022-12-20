@@ -175,7 +175,7 @@ export default {
         .then((resp) => {
           this.list = resp.data.list;
         })
-        .catch ((err) => {      
+        .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',
@@ -246,7 +246,7 @@ export default {
         .then((resp) => {
           this.list = resp.data.list;
         })
-        .catch ((err) => {      
+        .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',

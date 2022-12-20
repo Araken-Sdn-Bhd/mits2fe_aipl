@@ -159,7 +159,7 @@ export default {
           });
         });
       })
-      .catch ((err) => {      
+      .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',
@@ -199,7 +199,7 @@ export default {
           this.list = resp.data.list;
           this.alllist = resp.data.list;
         })
-        .catch ((err) => {      
+        .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',

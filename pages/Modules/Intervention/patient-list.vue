@@ -211,7 +211,7 @@ export default {
         });
         this.loader = false;
       })
-      .catch ((err) => {      
+      .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',

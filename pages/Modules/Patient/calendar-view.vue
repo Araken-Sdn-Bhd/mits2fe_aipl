@@ -113,7 +113,7 @@ export default {
           this.OnSearch();
         }, 100);
       })
-      .catch ((err) => {      
+      .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',

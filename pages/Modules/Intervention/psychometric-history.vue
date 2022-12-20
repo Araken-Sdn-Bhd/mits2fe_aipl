@@ -205,7 +205,7 @@ export default {
           });
         });
       })
-      .catch ((err) => {      
+      .catch ((err) => {
         this.loader = false;
         this.$swal.fire({
                   icon: 'error',
