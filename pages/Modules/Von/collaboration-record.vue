@@ -132,7 +132,6 @@ export default {
         };
     },
     beforeMount() {
-        this.loader = true;
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     },
     mounted() {
