@@ -282,6 +282,7 @@ export default {
                 this.accommodation = response.data.setting[0].section_value;
                 this.index = response.data.setting[0].section_order;
                 this.requesttype = "update";
+                this.status=response.data.setting[0].status;
             } else {
                 this.loader = false;
                 this.$swal.fire({
