@@ -184,69 +184,91 @@ export default {
       result: "",
       loader:false,
       error:null,
-      user_ip_address:""
+      user_ip_address:"",
+      appId: 0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams2 = new URLSearchParams(window.location.search);
+    this.appId = urlParams2.get("appId");
     this.GetUserIpAddress();
   },
   methods: {
     async Onsuciderisk() {
-      if (confirm("Are you sure you want to submit this entry")) {
-      this.error = null;
-      try {
-        if (!this.result) {
-          this.error="Please select RISK LEVEL.";
-        }
-        if (this.result) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "test-result-suicidal-risk/add",
-            {
-              added_by: this.userdetails.user.id,
-              patient_id: this.Id,
-              result: this.result,
-              user_ip_address: this.user_ip_address,
-            },
-            { headers }
-          );
-          console.log('mt resp',response.data);
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#resultmodal").modal("show");
-            });
-            this.$router.push({
-              path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    }
+      this.$swal.fire({
+                title: 'Do you want to submit this entry?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                this.error = null;
+                try {
+                  if (!this.result) {
+                    this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Please select RISK LEVEL.',
+                                    text: '',
+                      })
+                  }
+                  if (this.result) {
+                    this.loader = true;
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "test-result-suicidal-risk/add",
+                      {
+                        added_by: this.userdetails.user.id,
+                        patient_id: this.Id,
+                        result: this.result,
+                        user_ip_address: this.user_ip_address,
+                      },
+                      { headers }
+                    );
+                    console.log('mt resp',response.data);
+                    if (response.data.code == 200 || response.data.code == "200") {
+                      this.loader = false;
+                      this.$router.push({
+                          path: "/modules/Intervention/psychometric-history",
+                          query: { id: this.Id, appId: this.appId },
+                        });
+                        this.$swal.fire({
+                                    icon: 'success',
+                                    title: 'Result is successfully submitted.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                    });
+                    } else {
+                      this.loader = false;
+                      this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                    }
+                  }
+                } catch (e) {
+                  this.loader = false;
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                }
+              }else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+              }
+    })
     },
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     },
     async GetUserIpAddress() {
@@ -264,12 +286,6 @@ export default {
       });
       this.user_ip_address = ip;
     },
-    async Gotorequestappointment() {
-      this.$router.push({
-        path: "/modules/Intervention/request-appointment-form",
-        query: { id: this.Id },
-      });
-    }
   },
 };
 </script>

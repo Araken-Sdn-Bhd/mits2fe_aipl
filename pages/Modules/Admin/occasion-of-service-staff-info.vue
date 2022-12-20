@@ -520,7 +520,15 @@ export default {
             });
           });
         })
-        .catch((err) => {
+        .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
           console.error(err);
         });
     },
@@ -551,7 +559,7 @@ export default {
         this.type = response.data.Data[0].type;
         this.tbid = response.data.Data[0].id;
         }
-       
+
       }
     },
     async delRow(data) {
@@ -651,7 +659,15 @@ export default {
           this.list = resp.data.Data;
           console.log("my staff", resp.data);
         })
-        .catch((err) => {
+        .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
           console.error(err);
         });
     },

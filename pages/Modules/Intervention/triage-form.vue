@@ -891,7 +891,15 @@ export default {
                 });
             }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     async Ontriageform() {
 
@@ -1060,7 +1068,7 @@ export default {
             this.loader = false;
           }
         }
-      } catch (e) { 
+      } catch (e) {
         this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
@@ -1102,7 +1110,15 @@ export default {
               this.loader = false;
               this.errorList.push(response.data.message);
             }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     async OnTriageDraft() {
       if (confirm("Are you sure you want to save this as draft ? ")) {

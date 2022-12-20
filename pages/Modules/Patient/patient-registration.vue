@@ -2390,7 +2390,15 @@ export default {
         } else {
           this.error = "Patient with this NRIC is already registered.";
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
   },
 };

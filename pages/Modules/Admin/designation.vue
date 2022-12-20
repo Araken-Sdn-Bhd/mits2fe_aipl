@@ -122,6 +122,7 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   mounted() {
+    this.loader = true;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -137,6 +138,7 @@ export default {
       )
       .then((resp) => {
         this.settinglist = resp.data.list;
+        this.loader = false;
         $(document).ready(function () {
           $(".data-table").DataTable({
             searching: false,
@@ -154,8 +156,22 @@ export default {
           });
         });
       })
-      .catch((err) => {
+      .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
       });
        if (this.SidebarAccess != 1) {
       this.$refs.sidebar.classList.add("hide");
@@ -192,7 +208,7 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             if (this.settingId > 0) {
-this.$swal.fire(
+                this.$swal.fire(
                   'Successfully Update',
                 );
             } else {
@@ -207,12 +223,23 @@ this.$swal.fire(
             this.requesttype = "insert";
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     async GetSettingList() {
       const headers = {

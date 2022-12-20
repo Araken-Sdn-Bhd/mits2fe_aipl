@@ -151,7 +151,7 @@
                     <em class="fa fa-save"></em> Save
                   </button>
                 </div>
-             
+
             </div>
           </div>
         </div>
@@ -183,7 +183,7 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    
+
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
     this.UsersId = urlParams.get("usersid");
@@ -232,7 +232,15 @@ export default {
             });
           });
         })
-        .catch((err) => {
+        .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
           this.loader = false;
           console.error(err);
         });

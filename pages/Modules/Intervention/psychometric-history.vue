@@ -162,12 +162,15 @@ export default {
       bdilevel:"",
       bdiscore:"",
       TitleName:"",
+      appId: 0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams2 = new URLSearchParams(window.location.search);
+    this.appId = urlParams2.get("appId");
   },
   mounted() {
     const headers = {
@@ -202,7 +205,15 @@ export default {
           });
         });
       })
-      .catch((err) => {
+      .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
         console.error(err);
       });
   },
@@ -289,7 +300,7 @@ export default {
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     }
   },

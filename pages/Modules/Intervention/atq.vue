@@ -168,6 +168,7 @@ export default {
       token: "",
       Id: 0,
       result: null,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -179,7 +180,9 @@ export default {
       this.token = this.userdetails.access_token;
     }
     let urlParams = new URLSearchParams(window.location.search);
+    let urlParams2 = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams2.get("appId");
   },
   methods: {
     async GetList() {
@@ -218,53 +221,73 @@ export default {
       this.checkedList[ind] = val;
     },
     async OnsubmitTest() {
-      if (confirm("Are you sure you want to submit this entry")) {
-      this.error = null;
-      try {
-        if (this.list.length == Object.values(this.checkedList).length) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "patient/online-test",
-            {
-              added_by: this.userId,
-              patient_id: this.Id,
-              test_name: "atq",
-              test_section_name: "ATQ",
-              result: JSON.stringify([{ ATQ: this.checkedList }]),
-              user_ip_address: this.Ipaddress,
-            },
-            { headers }
-          );
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.loader = false;
-            this.result = response.data.result;
-            this.$nextTick(() => {
-              $("#resultmodal").modal("show");
-            });
-            this.$router.push({
-              path: "/modules/Intervention/psychometric-history",
-              query: { id: this.Id },
-            });
-          } else {
-            this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
-          }
-        } else {
-          this.error = "Please attempt all question";
-        }
-      } catch (e) {
-        this.loader = false;
-        this.errors = e;
-        console;
-      }
-    }
+      this.$swal.fire({
+                title: 'Do you want to submit this entry?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                  this.error = null;
+                  try {
+                    if (this.list.length == Object.values(this.checkedList).length) {
+                      this.loader = true;
+                      const headers = {
+                        Authorization: "Bearer " + this.token,
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      };
+                      const response = await this.$axios.post(
+                        "patient/online-test",
+                        {
+                          added_by: this.userId,
+                          patient_id: this.Id,
+                          test_name: "atq",
+                          test_section_name: "ATQ",
+                          result: JSON.stringify([{ ATQ: this.checkedList }]),
+                          user_ip_address: this.Ipaddress,
+                        },
+                        { headers }
+                      );
+                      if (response.data.code == 200 || response.data.code == "200") {
+                        this.loader = false;
+                        this.result = response.data.result;
+                        this.$router.push({
+                          path: "/modules/Intervention/psychometric-history",
+                          query: { id: this.Id, appId: this.appId },
+                        });
+                        this.$swal.fire({
+                                    icon: 'success',
+                                    title: 'Result is successfully submitted.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                    });
+                      } else {
+                        this.loader = false;
+                        this.$swal.fire({
+                                      icon: 'error',
+                                      title: 'Oops... Something Went Wrong!',
+                                      text: 'the error is: ' + JSON.stringify(response.data.message),
+                        })
+                      }
+                    } else {
+                      this.$swal.fire({
+                                      icon: 'error',
+                                      title: 'Please attempt all questions!',
+                                      text: '',
+                        })
+                    }
+                  } catch (e) {
+                    this.loader = false;
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: 'Oops... Something Went Wrong!',
+                        text: 'the error is: ' + e,
+                    })
+                  }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+              })
     },
     downloadresult() {
       var pdf = new jsPDF("p", "pt", "a4");
@@ -272,16 +295,11 @@ export default {
         pdf.save("Result.pdf");
       });
     },
-      async Gotorequestappointment() {
-      this.$router.push({
-        path: "/modules/Intervention/request-appointment-form",
-        query: { id: this.Id },
-      });
-    },
+
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
     }
   },
