@@ -9,6 +9,7 @@
         <CommonHeader />
       </div>
       <main>
+        <Loader v-if="loader" />
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Appointment</h1>
@@ -125,27 +126,27 @@
                     <td>
                       <a
                         @click="oneditAppointment(app.appointment_id)"
-                        class="edit"
+                        class="edit"  data-toggle="tooltip" data-placement="top" title="Edit Appointment"
                         ><i class="fa fa-edit"></i
                       ></a>
                       <a
                         @click="OnAssignStaffPop(app.team_id,app.appointment_id,app.serviceid)"
-                        class="action-icon icon-info"
+                        class="action-icon icon-info" data-toggle="tooltip" data-placement="top" title="Assign Staff"
                         ><i class="fa fa-check"></i
                       ></a>
                       <a
                         @click="
                           OnUpdateAppointmentStatus(2, app.appointment_id)
                         "
-                        class="action-icon icon-danger"
+                        class="action-icon icon-danger" data-toggle="tooltip" data-placement="top" title="Update as No Show"
                         ><i class="fa fa-times"></i
                       ></a>
                       <a
                         @click="
                           OnUpdateAppointmentStatus(3, app.appointment_id)
                         "
-                        class="edit"
-                        ><i class="fa fa-power-off"></i
+                        class="edit" data-toggle="tooltip" data-placement="top" title="Update as completed"
+                        ><i class="fa fa-power-off" ></i
                       ></a>
                     </td>
                   </tr>
@@ -232,6 +233,7 @@ export default {
       staff_id:0,
       serviceType: "",
       appointmentstatus: "",
+      loader: false,
 
     };
   },
@@ -245,6 +247,7 @@ export default {
     this.GetList();
   },
   mounted() {
+    this.loader = true;
     const headers = {
       Authorization: "Bearer " + this.token,
       Accept: "application/json",
@@ -260,6 +263,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
+        this.loader = false;
         console.log("my list", this.list);
         $(document).ready(function () {
           $(".data-table").DataTable({
@@ -481,6 +485,7 @@ export default {
       if (response.data.code == 200) {
         this.assign_team = 0;
         $("#Assignstaffpopup").modal("hide");
+        location.reload();
         this.GetAppointmentlist();
       }
     },
