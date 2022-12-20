@@ -2846,26 +2846,24 @@ export default {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
-            const response = await this.$axios.get(
-                "staff-management/getStaffDetailById?id=" + this.cps_seen_by, {
-                    headers,
-                }
+            const response = await this.$axios.post(
+                "staff-management/getStaffDetailByBranch", 
+                {branch_id: this.userdetails.branch.branch_id},{headers}
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.cps_seenByName = response.data.list.name;
             } else {
-                this.cps_seenByName = "";
+                this.cps_seenByName = [];
             }
 
             const response2 = await this.$axios.get(
-                "staff-management/getStaffDetailById?id=" + this.cps_discussed_with, {
-                    headers,
-                }
+                "staff-management/getStaffDetailByRole", 
+                {branch_id: this.userdetails.branch.branch_id},{headers}
             );
             if (response2.data.code == 200 || response2.data.code == "200") {
                 this.cps_discussedWithName = response2.data.list.name;
             } else {
-                this.cps_discussedWithName = "";
+                this.cps_discussedWithName = [];
             };
 
             const response3 = await this.$axios.get(
