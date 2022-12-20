@@ -209,7 +209,6 @@ export default {
                                 this.loader = false;
                                 this.resetform();
                                 this.loader = false;
-                                this.resetmodel();
                                 this.$swal.fire(
                                     'Successfully Submitted.',
                                     'Data is saved.',
@@ -218,11 +217,10 @@ export default {
                                 this.GoBack();
                             } else {
                                 this.loader = false;
-                                this.errorList.push(response.data.message);
                                 this.$swal.fire({
                                     icon: 'error',
                                     title: 'Oops... Something Went Wrong!',
-                                    text: 'the error is: ' + response.data.message,
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
                                     footer: ''
                                 });
                             }
