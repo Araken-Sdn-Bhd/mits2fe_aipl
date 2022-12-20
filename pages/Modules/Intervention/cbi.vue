@@ -698,7 +698,7 @@ export default {
     },
     async OnsubmitTest() {
       this.$swal.fire({
-                title: 'Do you want to save the selections?',
+                title: 'Do you want to submit this entry?',
                 showCancelButton: true,
                 confirmButtonText: 'Save',
             }).then(async (result) => {
