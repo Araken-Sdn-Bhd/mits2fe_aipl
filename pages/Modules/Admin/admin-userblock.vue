@@ -125,15 +125,6 @@ export default {
                   text: 'the error is: ' + err,
                   footer: ''
                 });
-
-
-                    this.loader = false;
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: 'Oops... Something Went Wrong!',
-                        text: 'the error is: ' + err,
-                        footer: ''
-                    });
                 });
         },
         async UnblockUser(data) {
@@ -160,7 +151,7 @@ export default {
                         );
                         if (response.data.code == 200) {
                             this.loader = false;
-                            this.$swal.fire('Succesfully unblock user', '', 'success')
+                            this.$swal.fire('Succesfully unblock user', '', 'success');
                             this.getUserBlockList();
                         } else {
                             this.loader = false;

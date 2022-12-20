@@ -268,9 +268,7 @@ this.$swal.fire(
         { headers }
       );
       if (response.data.code == 200) {
-        this.$nextTick(() => {
-          $("#deletepopup").modal("show");
-        });
+        this.$swal.fire('Deleted Successfully', '', 'success');
         this.GetSettingList();
       } else {
         this.$nextTick(() => {

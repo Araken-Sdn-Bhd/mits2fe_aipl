@@ -278,9 +278,7 @@ export default {
         );
         console.log("my delete response", response.data);
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
+          this.$swal.fire('Deleted Successfully', '', 'success');
           this.GetCountryList();
         } else {
           this.$nextTick(() => {
