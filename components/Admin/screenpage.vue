@@ -154,10 +154,12 @@ export default {
       list: [],
       IsSubmodule: true,
       SidebarAccess: null,
+      loader: false,
       message: "The screen route has already been taken.",
     };
   },
   mounted() {
+    this.loader = false;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -171,6 +173,7 @@ export default {
       )
       .then((resp) => {
         this.list = resp.data.list;
+        this.loader = false;
         $(document).ready(function () {
           $(".data-table6").DataTable({
             searching: false,
@@ -431,15 +434,16 @@ export default {
         );
         console.log("my delete resp", response.data);
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopupscreen").modal("show");
-          });
+          this.$swal.fire('Successfully Delete', '', 'success');
           this.GetList();
         } else {
-          this.$nextTick(() => {
             this.message = JSON.stringify(response.data.message);
-            $("#errorpopupscreen").modal("show");
-          });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       } catch (e) {
         this.$swal.fire({

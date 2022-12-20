@@ -915,9 +915,7 @@ export default {
               this.loader = false;
               this.ResetModel();
               this.GoBack();
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
             } else {
               this.loader = false;
               this.$swal.fire({

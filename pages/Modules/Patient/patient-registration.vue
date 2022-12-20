@@ -2011,9 +2011,7 @@ export default {
             );
             console.log("my data resuklt", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire('Successfully Update', '', 'success');
               this.$router.push("/modules/Intervention/patient-list");
             } else {
               this.loader = false;
@@ -2027,9 +2025,12 @@ export default {
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
       }
     },
@@ -2152,9 +2153,12 @@ export default {
           }
         } catch (e) {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
         }
     },
     async GetPatientdetails() {

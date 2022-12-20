@@ -1123,9 +1123,12 @@ export default {
           }
         } catch (e) {
         this.loader = false;
-        // this.$nextTick(() => {
-        //   $("#errorpopup").modal("show");
-        // });
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
       }
     }
     },
@@ -1340,7 +1343,7 @@ export default {
         }
       } catch (e) {
         this.loader = false;
-        // this.$nextTick(() => {
+        // this.$swal.fire('Created Succefully', '', 'success');
         //   $("#errorpopup").modal("show");
         // });
       }

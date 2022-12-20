@@ -44,7 +44,6 @@ export default {
   mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    // $("#insertpopup").modal("show");
 
     this.getDefault();
   },
@@ -74,9 +73,7 @@ export default {
           );
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
           } else {
             this.error = response.data.message.status[0];
             this.loader = false;

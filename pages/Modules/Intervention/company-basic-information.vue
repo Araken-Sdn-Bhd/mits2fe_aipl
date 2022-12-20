@@ -670,20 +670,24 @@ export default {
             this.Id=response.data.id;
             this.loader = false;
             $('#nav-tab a[href="#nav-cp"]').tab("show");
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });}
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });}
     },
     async OnAddContactPerson() {
       this.errorList = [];
@@ -726,20 +730,24 @@ export default {
           console.log('my result',response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {
-        this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });}
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });}
     },
   },
 };

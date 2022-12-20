@@ -44,7 +44,7 @@
               </div>
 
             </div>
-            
+
           </div>
 
           <table v-if="screenlist.length > 0" class="table table-striped data-table font-13 display nowrap" style="width: 100%">
@@ -75,7 +75,7 @@
               </tr>
             </tbody>
           </table>
-        
+
           <p v-if="errors.length">
                 <ul><li style="color:red"  v-for='err in errors' :key='err' >{{ err }}</li></ul>
             </p>
@@ -203,7 +203,7 @@ export default {
       }
     },
     async onchangeRole(event) {
-      
+
       const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -215,22 +215,22 @@ export default {
           role_id: this.roleId,
         },
         { headers }
-    ); 
+    );
     console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
-      
+
         this.roleListbyId = response.data.list;
         this.alllist = this.roleListbyId;
       } else {
         this.alllist=[];
         this.roleListbyId = [];
-        
+
       }
 
     },
 
     async getAlllist() {
-      
+
       const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -242,7 +242,7 @@ export default {
           role_id: this.roleId,
         },
         { headers }
-    ); 
+    );
     console.log("my screen list", response.data);
       if (response.data.code == 200 || response.data.code == "200") {
         this.roleListbyId = response.data.list;
@@ -250,7 +250,7 @@ export default {
       } else {
         this.alllist=[];
         this.roleListbyId = [];
-        
+
       }
 
     },
@@ -277,9 +277,9 @@ export default {
         if (this.ModuleId <= 0) {
           this.errors.push("Module is required.");
         }
-        
+
         if (
-          this.ModuleId 
+          this.ModuleId
         ) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -306,15 +306,16 @@ export default {
           );
           console.log("my response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+            this.$swal.fire('Created Succefully', '', 'success');
             this.getAlllist();
             this.ResetModel();
           } else {
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {
@@ -350,11 +351,9 @@ export default {
       );
       console.log("my delete response", response.data);
         if (response.data.code == 200) {
-          this.$nextTick(() => {
-            $("#deletepopup").modal("show");
-          });
+          this.$swal.fire('Deleted Successfully', '', 'success');
           this.getAlllist();
-        } 
+        }
       } catch (e) {
         this.$swal.fire({
                   icon: 'error',

@@ -221,9 +221,7 @@ export default {
           );
           if (response.data.code == 200) {
             this.loader = false;
-              this.$nextTick(() => {
-              $("#insertpopup").modal("show");
-            });
+              this.$swal.fire('Created Succefully', '', 'success');
              this.$swal.fire(
               'Your appointment is submitted.',
               'Please wait for us to contact you.',
@@ -232,9 +230,12 @@ export default {
            window.location.href = 'https://mentari.moh.gov.my/self-test/';
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
           }
         }
       } catch (e) {

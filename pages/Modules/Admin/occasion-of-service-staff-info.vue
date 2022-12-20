@@ -578,7 +578,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        $("#updatepopup").modal("show");
+        this.$swal.fire('Successfully Update', '', 'success');
         this.Getstaffpatientlist1();
       }
       }
@@ -637,7 +637,7 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
          $("#exampleModal").modal('hide');
-        $("#updatepopup").modal("show");
+        this.$swal.fire('Successfully Update', '', 'success');
         this.Getstaffpatientlist1();
       }
     },

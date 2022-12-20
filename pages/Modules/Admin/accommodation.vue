@@ -205,17 +205,93 @@ export default {
             this.$swal.fire({
                             icon: 'error',
                             title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + JSON.stringify(response.data.message),
-                          });
-          }
-        }
-      } catch (e) {
-        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + e,
-                          });
-      }
+                            text: 'the error is: ' + JSON.stringify(response.code.message),
+                            footer: ''
+                        });
+                    }
+                }
+            } catch (e) {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + e,
+                    footer: ''
+                });
+            }
+        },
+        async GetSettingList() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.get(
+                "general-setting/list?section=" + "accommodation", {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.settinglist = response.data.list;
+            } else {
+                this.settinglist = [];
+            }
+        },
+        async deletesetting(data) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "/general-setting/remove", {
+                    added_by: this.userdetails.user.id,
+                    setting_id: data.id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.$swal.fire('Deleted Successfully', '', 'success');
+                this.GetSettingList();
+            } else {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                    footer: ''
+                });
+            }
+        },
+        async editsetting(data) {
+            this.loader = true;
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "/general-setting/fetch", {
+                    setting_id: data.id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.loader = false;
+                this.settingId = response.data.setting[0].id;
+                this.accommodation = response.data.setting[0].section_value;
+                this.index = response.data.setting[0].section_order;
+                this.requesttype = "update";
+            } else {
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                    footer: ''
+                });
+            }
+        },
     },
     async GetSettingList() {
       const headers = {
@@ -262,8 +338,8 @@ export default {
                           });
       }
     },
-  },
-};
+  };
+
 </script>
 <style scoped>
 .hide {
