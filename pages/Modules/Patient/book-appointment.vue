@@ -164,8 +164,11 @@
                         </ul>
                        </p>
                 <div class="d-flex">
+                      <button v-if="Id" @click="GoBack" type="button" class="btn btn-primary btn-text" title="Back">
+                          <i class="fad fa-step-backward"/> &nbsp; Back
+                      </button>
                   <div class="ml-auto" :class="SidebarAccess!=1?'hide':''">
-                    <a
+                    <a v-if="Id"
                       @click="OnCancelAppointment"
                       class="btn btn-danger btn-text"
                       ><i class="fad fa-times"></i> Cancel</a
@@ -466,31 +469,61 @@ export default {
       }
     },
     async OnCancelAppointment() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "patient-appointment-details/cancelappointmentstatus",
-        {
-          appointment_id: this.Id,
-          appointment_status: "2",// original used status 10. but in attendance record cancel used status 2.
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.$router.push({
-        path: "/modules/Patient/attendance-record",
-      });
-      } else {
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
-      }
+      this.$swal.fire({
+                title: 'Do you want to cancel this appointment?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText:'No',
+            }).then(async (result) => { 
+              if (result.isConfirmed) {
+                try {
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "patient-appointment-details/cancelappointmentstatus",
+                      {
+                        appointment_id: this.Id,
+                        appointment_status: "2",// original used status 10. but in attendance record cancel used status 2.
+                      },
+                      { headers }
+                    );
+                    if (response.data.code == 200) {
+                      this.$swal.fire({
+                        icon: 'success',
+                        title: 'The appointment is cancelled.',
+                        showConfirmButton: false,
+                        timer: 2000
+                        });
+                      this.$router.push({
+                      path: "/modules/Patient/attendance-record",
+                    });
+                    } else {
+                      this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                                footer: ''
+                              });
+                    }  
+                } catch (error) {
+                  this.loader = false;
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                }
+              }
+    })
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Patient/attendance-record",
+              query: {},
+            });
     },
   },
 };
