@@ -8,7 +8,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>General Setting</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
             <div class="card mb-4">
               <div class="card-header icon-title">
@@ -34,7 +33,6 @@
                           v-model="accommodation"
                         />
                       </div>
-
                       <div class="col-lg-1 col-sm-2">
                         <label class="form-label">Index</label>
                         <input
@@ -44,54 +42,51 @@
                           v-model="index"
                         />
                       </div>
+                      
+                      <div class="col-sm-3">
+                        <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="status">
+                          <option value="1">Enable</option>
+                          <option value="0">Disable</option>
+                        </select>
+                      </div>
                     </div>
-                    <p v-if="errorList.length">
-                          <ul>
-                           <li style="color:red"  v-for='err in errorList' :key='err' >
-                           {{ err }}
-                             </li>
-                        </ul>
-                       </p>
-                    <!-- close-row -->
+                    <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err' >{{ err }}</li></ul></p>
+                    
                       <div class="d-flex justify-content-center" id="sidebar" ref="sidebar">
-        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
-        <i class="fa fa-save"></i> Save
-        </button>
-         <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
-          <i class="fa fa-plus"></i> Add Parameter
-        </button>
-      </div>
+                        <button type="submit" class="btn btn-warning btn-text ml-auto" v-if="settingId">
+                        <i class="fa fa-save"></i> Save
+                        </button>
+                        <button type="submit" class="btn btn-warning btn-text" v-if="!settingId">
+                          <i class="fa fa-plus"></i> Add Parameter
+                        </button>
+                      </div>
                   </form>
-
-
 
                   <div class="table-title">
                     <h3>List of Accommodation</h3>
                   </div>
-                  <table
-                    class="table table-striped data-table display nowrap"
-                    style="width: 100%"
-                  >
+                  <table class="table table-striped data-table display nowrap" style="width: 100%">
                     <thead>
                       <tr>
-                        <th>No</th>
+                        <th style="width:3%">No</th>
                         <th>Accommodation</th>
                         <th>Index</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th style="width:3%">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                        <tr v-for="(setting, index) in settinglist" :key="index">
-                        <td>{{index+1}}</td>
+                        <td>#{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
+                        <td>
+                        <p v-if="setting.status == 0" style="color:red">Disabled</p>
+                        <p v-if="setting.status == 1">Enabled</p>
+                      </td>
                         <td class="td"  :class="SidebarAccess!=1?'hide':''">
-                          <a  class="edit" @click="editsetting(setting)"
-                            ><i class="fa fa-edit"></i
-                          ></a>
-                          <a class="action-icon icon-danger" @click="deletesetting(setting)"
-                            ><i class="fa fa-trash-alt"></i
-                          ></a>
+                          <a  class="edit" @click="editsetting(setting)"><i class="fa fa-edit"></i></a>
                         </td>
                       </tr>
                     </tbody>
@@ -121,6 +116,7 @@ export default {
       requesttype: "insert",
       loader: false,
       SidebarAccess:null,
+      status: 1,
     };
   },
   mounted() {
@@ -139,28 +135,6 @@ export default {
       )
       .then((resp) => {
         this.settinglist = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-          $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-            $($.fn.dataTable.tables(true))
-              .DataTable()
-              .columns.adjust()
-              .responsive.recalc();
-          });
-        });
       })
       .catch((err) => {
         console.error(err);
@@ -198,19 +172,20 @@ export default {
               section_order: this.index,
               setting_id: this.settingId,
               request_type: this.requesttype,
+              status: this.status,
             },
             { headers }
           );
           if (response.data.code == 200) {
             this.loader = false;
             if (this.settingId > 0) {
-this.$swal.fire(
+            this.$swal.fire(
                   'Successfully Update',
                 );
             } else {
-              this.$nextTick(() => {
-                $("#insertpopup").modal("show");
-              });
+              this.$swal.fire(
+                  'Successfully Insert',
+                );
             }
             this.GetSettingList();
             this.index = 0;
@@ -219,9 +194,11 @@ this.$swal.fire(
             this.requesttype = "insert";
           } else {
             this.loader = false;
-            this.$nextTick(() => {
-              $("#errorpopup").modal("show");
-            });
+            this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                          });
           }
         }
       } catch (e) {}
@@ -242,32 +219,9 @@ this.$swal.fire(
         this.settinglist = [];
       }
     },
-    async deletesetting(data) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "/general-setting/remove",
-        {
-          added_by: this.userdetails.user.id,
-          setting_id: data.id,
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.$nextTick(() => {
-          $("#deletepopup").modal("show");
-        });
-        this.GetSettingList();
-      } else {
-        this.$nextTick(() => {
-          $("#errorpopup").modal("show");
-        });
-      }
-    },
+  
     async editsetting(data) {
+    
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -285,6 +239,7 @@ this.$swal.fire(
         this.accommodation = response.data.setting[0].section_value;
         this.index = response.data.setting[0].section_order;
         this.requesttype = "update";
+        this.status = response.data.setting[0].status;
       } else {
         this.$swal.fire({
                   icon: 'error',
