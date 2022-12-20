@@ -6,7 +6,7 @@
     <Loader v-if="loader" />
     <div class="card-body">
       <div class="tab-box">
-        <form class="mt-2 mb-2" method="post" @submit.prevent="insertdefault()">
+        <form class="mt-2 mb-1" method="post" @submit.prevent="insertdefault()">
           <div class="d-flex align-items-center flex-box">
             <input
               class="form-check-input"
@@ -19,9 +19,11 @@
             <label class="form-check-label" for="flexCheckDefaults">
               Set the default password value
             </label>
+          </div>
+          <div>
             <input
               type="text"
-              class="form-control width-small"
+              class="form-control"
               v-model="passwordvalue"
             />
           </div>
@@ -69,6 +71,16 @@ export default {
   },
   methods: {
     async insertdefault() {
+      this.$swal.fire({
+        title: 'Are you sure to save this?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, save it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }
+      ).then(async (result) =>{
+        if (result.isConfirmed){
       this.loader = true;
       var variablename = "";
       var status = "";
@@ -108,19 +120,26 @@ export default {
           this.passwordvalue = "";
           this.errors = null;
           this.loader = false;
-          this.$nextTick(() => {
-            $("#insertpopup").modal("show");
-          });
+          await this.$swal.fire(
+                                'Successfully Submitted.',
+                                'Data is inserted.',
+                                'success',
+                              );
+                              this.getDefault();
         } else {
           this.loader = false;
-          this.$nextTick(() => {
-            $("#errorpopup").modal("show");
-          });
+          this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                          });
         }
       } catch (e) {
         this.loader = false;
       }
-    },
+    } 
+  })
+  },
     OnChangedefault(event) {
       if (event.target.Checked) {
         this.defaultpass = true;
