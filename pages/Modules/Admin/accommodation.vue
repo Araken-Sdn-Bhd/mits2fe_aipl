@@ -120,6 +120,7 @@ export default {
     };
   },
   mounted() {
+    this.loader=true;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -134,10 +135,17 @@ export default {
         { headers }
       )
       .then((resp) => {
+        this.loader=false;
         this.settinglist = resp.data.list;
       })
       .catch((err) => {
+        this.loader=false;
         console.error(err);
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + err,
+                          });
       });
       if (this.SidebarAccess != 1) {
       this.$refs.sidebar.classList.add("hide");
@@ -201,7 +209,13 @@ export default {
                           });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                          });
+      }
     },
     async GetSettingList() {
       const headers = {
@@ -242,11 +256,10 @@ export default {
         this.status = response.data.setting[0].status;
       } else {
         this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                          });
       }
     },
   },
