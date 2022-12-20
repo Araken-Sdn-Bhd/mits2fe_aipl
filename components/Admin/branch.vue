@@ -243,6 +243,7 @@ export default {
     };
   },
   mounted() {
+    this.loader = true;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -262,6 +263,7 @@ export default {
           console.log("my data", element);
         });
         this.alllist = resp.data.list;
+        this.loader=false;
         $(document).ready(function () {
           $(".data-table1").DataTable({
             searching: false,
@@ -628,6 +630,7 @@ export default {
       }
     },
     async editbranch(data) {
+      this.loader = true;
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -667,6 +670,7 @@ export default {
         if (response1.data.code == 200 || response1.data.code == "200") {
           this.CityList = response1.data.list;
           this.PostCodeList = response1.data.list;
+          this.loader = false;
         } else {
           this.CityList = [];
           this.PostCodeList = [];
@@ -681,6 +685,7 @@ export default {
       }
     },
     async deletebranch(data) {
+      this.loader = true;
       try {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
@@ -697,6 +702,7 @@ export default {
             $("#deletepopup").modal("show");
           });
           this.GetBranchList();
+          this.loader = false;
         } else {
           this.$nextTick(() => {
             $("#errorpopup").modal("show");

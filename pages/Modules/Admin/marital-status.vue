@@ -219,7 +219,15 @@ this.$swal.fire(
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     async GetSettingList() {
       const headers = {

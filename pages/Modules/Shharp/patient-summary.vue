@@ -1614,7 +1614,15 @@ export default {
                   footer: ''
                 });
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
   },
 };

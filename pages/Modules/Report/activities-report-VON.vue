@@ -290,7 +290,7 @@ export default {
       Total_Days: 0,
       Total_Patient: 0,
       SidebarAccess:null,
-  
+
     };
   },
   beforeMount() {
@@ -389,7 +389,15 @@ export default {
             this.error = "No Record Found";
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     async Ongenerateexel() {
       this.errorList = [];
@@ -437,7 +445,15 @@ export default {
               this.error = "No Record Found";
             }
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
   },

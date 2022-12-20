@@ -1802,7 +1802,15 @@ export default {
               $("#errorpopup").modal("show");
             });
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
     async onPublishEvent() {
@@ -2008,7 +2016,15 @@ export default {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     }
   },
     GoBack(){

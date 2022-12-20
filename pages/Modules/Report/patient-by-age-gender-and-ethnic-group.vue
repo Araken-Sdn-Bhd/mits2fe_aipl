@@ -292,7 +292,7 @@ export default {
             console.log("my list", this.list);
             console.log("my listKey", this.listKey);
 
-            
+
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
                 var pdf = new jsPDF("p", "pt", "a4");
@@ -309,7 +309,15 @@ export default {
           } else {
             this.error = "No Record Found";
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
     async Ongenerateexel() {
@@ -351,7 +359,15 @@ export default {
           } else {
             this.error = "No Record Found";
           }
-        } catch (e) {}
+        } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
       }
     },
   },

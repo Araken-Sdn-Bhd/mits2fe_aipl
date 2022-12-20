@@ -2010,7 +2010,7 @@ export default {
     this.designation = this.userdetails.user.role;
     this.reportingdateFE = moment().format("DD-MM-YYYY");
     this.reportingdate = moment().format("YYYY-MM-DD");
-  
+
     this.GetList();
 
     $(document).ready(function () {
@@ -2595,7 +2595,15 @@ export default {
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
         }
-      } catch (e) {}
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      }
     },
     OnpatientIntent(value, event) {
       if (event.target.checked) {
