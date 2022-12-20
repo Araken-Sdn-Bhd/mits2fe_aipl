@@ -261,7 +261,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("roles/list", {
+      const response = await this.$axios.get("roles/screenaccessroleslist", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
