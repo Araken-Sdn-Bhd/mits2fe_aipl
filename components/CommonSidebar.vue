@@ -132,8 +132,6 @@
       </div>
     </div>
   </div>
-
-  <!-- </html> -->
 </template>
 <script>
 export default {
@@ -305,7 +303,7 @@ export default {
 
     // INFO:: handling session auto logout.
     setTimers: function () {
-      this.warningTimer = setTimeout(this.warningMessage, 3*60*1000);
+      this.warningTimer = setTimeout(this.warningMessage, this.setTimer*60*1000);
 
     },
 
@@ -336,22 +334,24 @@ export default {
       let timerInterval
       this.$swal.fire({
         title: 'Are You There ?',
-        html: 'You will be log out if there is no activity in '+this.setTimer+' minutes. Please click to dismiss this message.',
-        timer: this.setTimer*60*1000,
+        html: 'You will be log out if there is no activity in <b></b> seconds. Please click to dismiss this message.',
+        timer: 30*1000,
         timerProgressBar: true,
         didOpen: () => {
           this.$swal.showLoading()
           const b = this.$swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = this.$swal.getTimerLeft()
-          }, 1000)
+          timerInterval = setInterval(() =>
+          {
+            this.$swal.getHtmlContainer().querySelector('b')
+            .textContent = (this.$swal.getTimerLeft() / 1000)
+            .toFixed(0)
+          }, 100)
         },
         willClose: () => {
           clearInterval(timerInterval)
         }
       }).then((result) => {
         if (result.dismiss === this.$swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
           this.logoutUser();
         }
       })
