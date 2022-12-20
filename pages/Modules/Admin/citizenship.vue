@@ -208,6 +208,7 @@ export default {
                         this.index = 0;
                         this.citizenship = "";
                         this.settingId = 0;
+                        this.status= 1;
                         this.requesttype = "insert";
                     } else {
                         this.loader = false;
