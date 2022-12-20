@@ -355,7 +355,6 @@ export default {
                                     title: 'Oops... Something Went Wrong!',
                                     text: 'the error is: ' + JSON.stringify(response.data.message),
                                 })
-              this.$router.push("/modules/Patient/attendance-record");
             }
           } else {
             const response = await this.$axios.post(
@@ -391,7 +390,6 @@ export default {
                                     title: 'Oops... Something Went Wrong!',
                                     text: 'the error is: ' + JSON.stringify(response.data.message),
                                 })
-              this.$router.push("/modules/Patient/attendance-record");
             }
           }
         }
