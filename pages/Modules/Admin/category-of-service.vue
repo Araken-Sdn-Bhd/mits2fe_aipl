@@ -33,14 +33,16 @@
                                         <label class="form-label">Index</label>
                                         <input type="text" class="form-control" placeholder="0" v-model="index" />
                                     </div>
-                                </div>
-                                <div class="col-sm-3">
+                                    <div class="col-sm-3 mb-4">
                                     <label for="" class="form-label">Status</label>
                                     <select class="form-select" v-model="status">
                                     <option value="1">Enable</option>
                                     <option value="0">Disable</option>
                                     </select>
                                 </div>
+                                    </div>
+
+                               
                                 <!-- close-row -->
                                 <p v-if="errorList.length">
                                     <ul>
@@ -74,7 +76,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(setting, index) in settinglist" :key="index">
-                                        <td>{{index+1}}</td>
+                                        <td>#{{index+1}}</td>
                                         <td>{{setting.section_value}}</td>
                                         <td>{{setting.section_order}}</td>
                                         <td>
