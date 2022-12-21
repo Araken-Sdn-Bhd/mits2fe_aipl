@@ -141,7 +141,7 @@ export default {
     axios
       .get(
         `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
+          "general-setting/lists?section=" +
           "employment-status",
         { headers }
       )
@@ -236,7 +236,7 @@ this.$swal.fire(
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get(
-        "general-setting/list?section=" + "employment-status",
+        "general-setting/lists?section=" + "employment-status",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
