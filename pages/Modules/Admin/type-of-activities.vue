@@ -41,6 +41,13 @@
                           v-model="index"
                         />
                       </div>
+                      <div class="col-sm-3 mb-4">
+                                    <label for="" class="form-label">Status</label>
+                                    <select class="form-select" v-model="status">
+                                    <option value="1">Enable</option>
+                                    <option value="0">Disable</option>
+                                    </select>
+                                </div>
                     </div>
                       <p v-if="errorList.length">
                           <ul>
@@ -68,24 +75,27 @@
                   >
                     <thead>
                       <tr>
-                        <th>No</th>
+                        <th style="width:3%">No</th>
                         <th>Type of Activities</th>
                         <th>Index</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th style="width:3%">Action</th>
                       </tr>
                     </thead>
                    <tbody>
                        <tr v-for="(setting, index) in settinglist" :key="index">
-                      <td>{{index+1}}</td>
+                      <td>#{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
+                        <td>
+                                            <p v-if="setting.status == 0" style="color:red">Disabled</p>
+                                            <p v-if="setting.status == 1">Enabled</p>
+                                        </td>
                         <td class="td"  :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editsetting(setting)"
                             ><i class="fa fa-edit"></i
                           ></a>
-                          <a class="action-icon icon-danger" @click="deletesetting(setting)"
-                            ><i class="fa fa-trash-alt"></i
-                          ></a>
+                          
                         </td>
                       </tr>
                     </tbody>
@@ -115,6 +125,7 @@ export default {
       requesttype: "insert",
       loader: false,
       SidebarAccess:null,
+      status: 1,
     };
   },
   beforeMount() {
@@ -122,6 +133,7 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
   },
   mounted() {
+    this.loader = true;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -131,28 +143,13 @@ export default {
     axios
       .get(
         `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
+          "general-setting/lists?section=" +
           "type-of-activities",
         { headers }
       )
       .then((resp) => {
         this.settinglist = resp.data.list;
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-        });
+        this.loader = false;
       })
       .catch ((err) => {
         this.loader = false;
@@ -194,6 +191,7 @@ export default {
               section_order: this.index,
               setting_id: this.settingId,
               request_type: this.requesttype,
+              status: this.status,
             },
             { headers }
           );
@@ -210,6 +208,7 @@ this.$swal.fire(
             this.index = 0;
             this.activity = "";
             this.settingId = 0;
+            this.status= 1;
             this.requesttype = "insert";
           } else {
             this.loader = false;
@@ -238,7 +237,7 @@ this.$swal.fire(
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get(
-        "general-setting/list?section=" + "type-of-activities",
+        "general-setting/lists?section=" + "type-of-activities",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -247,31 +246,7 @@ this.$swal.fire(
         this.settinglist = [];
       }
     },
-    async deletesetting(data) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "/general-setting/remove",
-        {
-          added_by: this.userdetails.user.id,
-          setting_id: data.id,
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.$swal.fire('Deleted Successfully', '', 'success');
-        this.GetSettingList();
-      } else {this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
-      }
-    },
+   
     async editsetting(data) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -289,6 +264,7 @@ this.$swal.fire(
         this.settingId = response.data.setting[0].id;
         this.activity = response.data.setting[0].section_value;
         this.index = response.data.setting[0].section_order;
+        this.status=response.data.setting[0].status;
         this.requesttype = "update";
       } else {
         this.$swal.fire({
