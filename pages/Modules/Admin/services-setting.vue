@@ -143,7 +143,7 @@
                 <div class="content-subtab border-top-left">
                 <form class="g-3 mt-3" method="post" @submit.prevent="onAddservicedivision">
                   <div class="row">
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-5 mb-4">
                       <label for="" class="form-label">Service Name</label>
                       <select
                         v-model="dserviceName"
@@ -160,7 +160,9 @@
                         </option>
                       </select>
                     </div>
-
+                    <div class="col-md-1 mb-4">
+                <a  @click="reload"  class="edit btn-primary" title="reload"><i class="fa fa-exchange"></i></a>
+              </div>
                     <div class="col-lg-6 col-sm-3 mb-4">
                       <label for="" class="form-label">Hospital</label>
                       <select
@@ -421,6 +423,10 @@ export default {
       } else {
         this.list = [];
       }
+    },
+    async reload(){
+      
+      this.GetActiveList();
     },
     async onAddserviceregistration() {
       this.errors = [];

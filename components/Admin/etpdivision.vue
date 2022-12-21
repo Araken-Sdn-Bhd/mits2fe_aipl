@@ -5,7 +5,7 @@
         <div class="content-subtab border-top-left">
           <form class="g-3 mt-3" method="post" @submit.prevent="onAddetpDivition">
             <div class="row">
-              <div class="col-md-6 mb-4">
+              <div class="col-md-5 mb-4">
                 <label for="" class="form-label">ETP Name</label>
                  <select
             v-model="etp_id"
@@ -20,7 +20,11 @@
             >
               {{ et.etp_name }}
             </option>
-          </select>
+                 </select>
+                 
+              </div>
+              <div class="col-md-1 mb-4">
+                <a  @click="reload"  class="edit btn-primary" title="reload"><i class="fa fa-exchange"></i></a>
               </div>
 
               <div class="col-lg-6 col-sm-3 mb-4">
@@ -166,7 +170,7 @@ export default {
   },
   mounted() {
     this.GetETPList();
-
+    this.loader = true;
     const headers = {
       Authorization: "Bearer " + this.userdetails.access_token,
       Accept: "application/json",
@@ -177,28 +181,8 @@ export default {
       .get(`${this.$axios.defaults.baseURL}` + "etp/division-list", { headers })
       .then((resp) => {
         this.list = resp.data.list;
-        //$(document).ready(function () {
-        //  $(".data-table1").DataTable({
-        //    searching: false,
-        //    bLengthChange: false,
-        //    bInfo: false,
-        //    // autoWidth: false,
-        //    // responsive: true,
-        //    scrollX: true,
-        //    language: {
-        //      paginate: {
-        //        next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-        //        previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-        //      },
-        //    },
-        //  });
-        //   $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-        //    $($.fn.dataTable.tables(true))
-        //      .DataTable()
-        //      .columns.adjust()
-        //      .responsive.recalc();
-        //  });
-        //});
+        this.loader = false;
+       
       })
       .catch ((err) => {
         this.loader = false;
@@ -237,6 +221,10 @@ export default {
       } else {
         this.etplist = [];
       }
+    },
+    async reload(){
+      
+      this.GetETPList();
     },
     async GetList() {
       const headers = {
