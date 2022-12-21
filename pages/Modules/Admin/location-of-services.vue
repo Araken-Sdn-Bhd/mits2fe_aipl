@@ -84,7 +84,7 @@
                     </thead>
                    <tbody>
                        <tr v-for="(setting, index) in settinglist" :key="index">
-                      <td>{{index+1}}</td>
+                      <td>#{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
                         <td>
