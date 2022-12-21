@@ -22,7 +22,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-4 col-form-label">MRN</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" v-model="patient_mrn_id"/>
+                    <input type="text" class="form-control" v-model="patient_mrn"/>
                   </div>
                 </div>
                 <!-- close-row -->
@@ -431,6 +431,7 @@ export default {
       pid: 0,
       type: "",
       appId: 0,
+       SidebarAccess:null,
     };
   },
   beforeMount() {
@@ -832,7 +833,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-        this.patient_mrn_id = response.data.list[0].patient_mrn;
+        this.patient_mrn = response.data.list[0].patient_mrn;
         this.name = response.data.list[0].name_asin_nric;
         console.log("my details", this.patientdetails);
       } else {
