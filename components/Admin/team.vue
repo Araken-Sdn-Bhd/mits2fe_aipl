@@ -42,7 +42,7 @@
       <!-- close-row -->
 
       <div class="row mb-4">
-        <div class="col-md-9">
+        <div class="col-md-3">
           <label for="" class="form-label">Team</label>
           <select
                 v-model="team"
@@ -59,6 +59,13 @@
                 </option>
               </select>
         </div>
+        <div class="col-md-6">
+              <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="teamstatus">
+                                <option value="1">Enable</option>
+                                <option value="0">Disable</option>
+                        </select>
+          </div>
       </div>
       <p v-if="errors.length">
 <ul>
@@ -88,6 +95,7 @@
           <th>Hospital Code</th>
           <th>Branch Name</th>
           <th>Team Name</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -97,13 +105,12 @@
           <td>{{tem.branchs.hospital_code}}</td>
           <td>{{tem.branchs.hospital_branch_name}}</td>
           <td>{{tem.services.service_name}}</td>
+          <td v-if="tem.status == 1">Enabled</td>
+          <td v-if="tem.status == 0" style="color:red">Disabled</td>
 
            <td class="td"  :class="SidebarAccess!=1?'hide':''">
             <a class="edit" @click="editteam(tem)"
               ><i class="fa fa-edit"></i
-            ></a>
-            <a @click="deleteteam(tem)" class="action-icon icon-danger"
-              ><i class="fa fa-trash-alt"></i
             ></a>
           </td>
         </tr>
@@ -121,6 +128,7 @@ export default {
       hospital_code: 0,
       branceName: 0,
       team: "",
+      teamstatus:"",
       hospitallist: [],
       branchlist: [],
       taemlist: [],
@@ -263,6 +271,7 @@ export default {
                 hospital_id: this.hospital_code,
                 branch_id: this.branceName,
                 division_order: 0,
+                status: this.teamstatus,
               },
               { headers }
             );
@@ -288,6 +297,7 @@ export default {
                 hospital_id: this.hospital_code,
                 branch_id: this.branceName,
                 division_order: 0,
+                status: this.teamstatus,
               },
               { headers }
             );
@@ -351,6 +361,7 @@ this.$swal.fire(
         this.branceName = response.data.list[0].branch_id;
         this.servicedindex = response.data.list[0].division_order;
         this.Id = data.id;
+        this.teamstatus = response.data.list[0].status;
         const response1 = await this.$axios.post(
           "hospital/get-branch-by-hospital-code",
           {
