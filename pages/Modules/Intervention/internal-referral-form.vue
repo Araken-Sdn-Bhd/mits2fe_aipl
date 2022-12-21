@@ -3,7 +3,7 @@
     <CommonSidebar />
     <div id="layoutSidenav_content">
         <CommonHeader />
-        <main id="reslt" ref="reslt">
+        <main>
             <div class="container-fluid px-4">
                 <div class="page-title">
                     <h1>INTERNAL REFERRAL</h1>
@@ -264,6 +264,96 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card mb-4 result" style="display:none;">
+              <h1>INTERNAL REFERRAL</h1>
+                <div class="card-body">
+                    <table class="notes">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Patient Details</th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="patientdetails">
+                            <tr>
+                                <th>Patient Name:</th>
+                                <td>{{ patientdetails.name_asin_nric }}</td>
+                            </tr>
+                            <tr>
+                                <th>NRIC NO:</th>
+                                <td>{{ patientdetails.nric_no }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age:</th>
+                                <td>{{ patientdetails.age }}</td>
+                            </tr>
+                            <tr>
+                                <th>Contact No:</th>
+                                <td>{{ patientdetails.mobile_no }}</td>
+                            </tr>
+                            <tr>
+                                <th>Gender:</th>
+                                <td>{{ patientdetails.gender[0].section_value }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address:</th>
+                                <td>{{ patientdetails.address1 }}</td>
+                            </tr>
+                            <tr>
+                                <th>From:</th>
+                                <td>Mentari Address</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    Dear Dr,<br> Thank you for seeing this patient. </th>
+                            </tr>
+                            <tr>
+                                <th>Diagnosis: </th>
+                                <td>{{ this.diagnosis }}</td>
+                            </tr>
+                            <tr>
+                                <th>Reason For Referral: </th>
+                                <td>{{ this.reason_for_referral }}</td>
+                            </tr>
+                            <tr>
+                                <th>Summary: </th>
+                                <td>{{ this.summary }}</td>
+                            </tr>
+                            <tr>
+                                <th>Management: </th>
+                                <td>{{ this.management }}</td>
+                            </tr>
+                            <tr>
+                                <th>Medication: </th>
+                                <td>{{ this.medication }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Thank You,</th>
+                            </tr>
+                            <tr>
+                                <th>Name: </th>
+                                <td>{{ this.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Designation: </th>
+                                <td>{{ this.designation }}</td>
+                            </tr>
+                            <tr>
+                                <th>Hospital: </th>
+                                <td>{{ this.hospital }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p v-if="errorList.length">
+                        <ul>
+                            <li style="color:red" v-for='err in errorList' :key='err'>
+                                {{ err }}
+                            </li>
+                        </ul>
+                    </p>
                 </div>
             </div>
         </main>
@@ -710,10 +800,10 @@ export default {
                 this.patientdetails = response.data.list[0];
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
             console.log("my details", this.patientdetails);
@@ -787,30 +877,19 @@ export default {
 
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
         OnPrint() {
-            $('.btn-boxs').hide();
-            $('.btn-boxs').click(function () {
-                $('.form-accordion .collapse').show();
-            });
-            setTimeout(() => {
-                var pdf = new jsPDF("p", "px", [800, 1800]);
-                var options = {
-                    format: "JPEG",
-                    pagesplit: true,
-                    background: "#FFF",
-                };
-                pdf.addHTML($("#reslt"), options, function () {
-                    pdf.save("Internal_Referral_Form.pdf");
-
-                });
-            }, 1000);
+            var newstr = document.getElementsByClassName("result")[0].innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            // Reload the page to refresh the data
+            window.location.reload();
         },
         GoBack() {
             this.$router.push({
