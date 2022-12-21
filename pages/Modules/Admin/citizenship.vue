@@ -132,7 +132,7 @@ export default {
         axios
             .get(
                 `${this.$axios.defaults.baseURL}` +
-                "general-setting/list?section=" +
+                "general-setting/lists?section=" +
                 "citizenship", {
                     headers
                 }
@@ -236,7 +236,7 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.get(
-                "general-setting/list?section=" + "citizenship", {
+                "general-setting/lists?section=" + "citizenship", {
                     headers
                 }
             );
