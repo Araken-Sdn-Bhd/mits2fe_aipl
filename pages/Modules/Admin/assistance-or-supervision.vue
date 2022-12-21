@@ -84,7 +84,7 @@
                     </thead>
                    <tbody>
                        <tr v-for="(setting, index) in settinglist" :key="index">
-                      <td>{{index+1}}</td>
+                      <td>#{{index+1}}</td>
                         <td>{{setting.section_value}}</td>
                         <td>{{setting.section_order}}</td>
                         <td>
@@ -142,7 +142,7 @@ export default {
     axios
       .get(
         `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
+          "general-setting/lists?section=" +
           "assistance-or-supervision",
         { headers }
       )
@@ -220,83 +220,8 @@ this.$swal.fire(
                 });
             }
         },
-        async GetSettingList() {
-            const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            };
-            const response = await this.$axios.get(
-                "general-setting/list?section=" + "assistance-or-supervision", {
-                    headers
-                }
-            );
-            if (response.data.code == 200 || response.data.code == "200") {
-                this.settinglist = response.data.list;
-            } else {
-                this.settinglist = [];
-            }
-        },
-        async deletesetting(data) {
-            const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            };
-            this.loader = true;
-            const response = await this.$axios.post(
-                "/general-setting/remove", {
-                    added_by: this.userdetails.user.id,
-                    setting_id: data.id,
-                }, {
-                    headers
-                }
-            );
-            if (response.data.code == 200) {
-                this.loader = false;
-                this.$swal.fire('Deleted Successfully', '', 'success');
-                this.GetSettingList();
-            } else {
-                this.loader = false;
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                    footer: ''
-                });
-            }
-        },
-        async editsetting(data) {
-            this.loader = true;
-            const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            };
-            const response = await this.$axios.post(
-                "/general-setting/fetch", {
-                    setting_id: data.id,
-                }, {
-                    headers
-                }
-            );
-            if (response.data.code == 200) {
-                this.loader = false
-                this.settingId = response.data.setting[0].id;
-                this.assistanceorsupervision = response.data.setting[0].section_value;
-                this.index = response.data.setting[0].section_order;
-                this.requesttype = "update";
-            } else {
-                this.loader = false;
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + this.error,
-                    footer: ''
-                });
-            }
-        },
-    },
+        
+    
     async GetSettingList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -304,7 +229,7 @@ this.$swal.fire(
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get(
-        "general-setting/list?section=" + "assistance-or-supervision",
+        "general-setting/lists?section=" + "assistance-or-supervision",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
@@ -342,5 +267,6 @@ this.$swal.fire(
                 });
       }
     },
+  }
   };
 </script>
