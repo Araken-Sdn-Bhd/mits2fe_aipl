@@ -4477,3 +4477,7 @@ table.dataTable.nowrap td {
         width: 100%;
     }
 }
+
+.dataTables_empty {
+    color: #F00;
+}

@@ -503,6 +503,7 @@ export default {
         .then((resp) => {
           this.list = resp.data.Data;
           console.log("my staff", resp.data);
+          setTimeout(() => {
           $(document).ready(function () {
             $(".data-table").DataTable({
               searching: false,
@@ -516,9 +517,11 @@ export default {
                   next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
                   previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
                 },
+                emptyTable: "No Record Found"
               },
             });
           });
+        }, 2000);
         })
         .catch ((err) => {
         this.loader = false;
