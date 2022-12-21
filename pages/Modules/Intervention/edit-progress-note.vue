@@ -91,8 +91,7 @@
                                               <option value="0">Select Diagnosis</option>
                                               <option
                                                 v-for="catcode in diagonisislist"
-                                                v-bind:key="catcode.id"
-                                                v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
+                                                v-bind:key="catcode.id" v-bind:value="catcode.id"
                                               >
                                               {{ catcode.icd_code }} {{catcode.icd_name}}
                                               </option>
@@ -170,8 +169,7 @@
                                 <option value="0">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="{id:catcode.id,text:catcode.icd_code+' '+catcode.icd_name}"
+              v-bind:key="catcode.id" v-bind:value="catcode.id"
             >
             {{ catcode.icd_code }} {{catcode.icd_name}}
             </option>
@@ -496,6 +494,9 @@ export default {
                 if (result.isConfirmed) {
                     try {
                         this.loader = true;
+                        if(this.serviceid){
+                            this.services_id = this.serviceid
+                        }
                         const headers = {
                             Authorization: "Bearer " + this.userdetails.access_token,
                             Accept: "application/json",
@@ -504,11 +505,11 @@ export default {
                         const response = await this.$axios.post(
                             "progress-note/add", {
                                 added_by: this.userdetails.user.id,
-                                diagnosis: this.type_diagnosis_id.id, //diagnosis
+                                diagnosis: this.type_diagnosis_id, //diagnosis
                                 clinical_notes: this.clinical_notes,
                                 management: this.management,
                                 location_services_id: this.location_services_id,
-                                type_diagnosis_id: this.type_diagnosis_id.id,
+                                type_diagnosis_id: this.type_diagnosis_id,
                                 category_services: this.category_services,
                                 code_id: this.code_id,
                                 sub_code_id: this.sub_code_id,
@@ -627,11 +628,11 @@ export default {
                             const response = await this.$axios.post(
                                 "progress-note/add", {
                                     added_by: this.userdetails.user.id,
-                                    diagnosis: this.diagnosis, //diagnosis
+                                    diagnosis: this.type_diagnosis_id, //diagnosis
                                     clinical_notes: this.clinical_notes,
                                     management: this.management,
                                     location_services_id: this.location_services_id,
-                                    type_diagnosis_id: this.type_diagnosis_id.id,
+                                    type_diagnosis_id: this.type_diagnosis_id,
                                     category_services: this.category_services,
                                     code_id: this.code_id,
                                     sub_code_id: this.sub_code_id,
@@ -851,7 +852,7 @@ export default {
         this.outcome_id = response.data.Data[0].outcome_id;
         this.medication_des = response.data.Data[0].medication_des;
         this.services_id = response.data.Data[0].services_id;
-        this.serviceid = response.data.Data[0].serviceid;
+        this.serviceid = response.data.Data[0].services_id;
         this.GetPatientdetails();
          const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
