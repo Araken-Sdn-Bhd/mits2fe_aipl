@@ -319,6 +319,8 @@
           </div>
 
           <div class="d-flex" v-if="!pid">
+            <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
+                            </button>
             <div class="ml-auto">
               <button
                 type="button"
@@ -361,6 +363,7 @@ export default {
       consent_for_hereby_already_give_explanation1: false,
       pid: 0,
       type: "",
+      appId: 0,
     };
   },
   beforeMount() {
@@ -368,6 +371,7 @@ export default {
     let urlParams = new URLSearchParams(window.location.search);
     this.hospitalName = this.userdetails.branch.hospital_name;
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     if (this.Id) {
       this.GetPatientConnsentdetails();
     }
@@ -392,6 +396,7 @@ export default {
         {
           added_by: this.userdetails.user.id,
           patient_id: this.Id,
+          appId: this.appId,
         },
         { headers }
       );
@@ -462,6 +467,15 @@ export default {
       window.print();
       window.location.reload();
     },
+    GoBack() {
+            this.$router.push({
+                path: "/modules/Intervention/patient-summary",
+                query: {
+                    id: this.Id,
+                    appId: this.appId
+                },
+            });
+        },
     async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

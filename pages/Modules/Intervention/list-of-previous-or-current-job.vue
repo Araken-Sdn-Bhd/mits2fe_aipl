@@ -352,7 +352,11 @@
                              </li>
                         </ul>
                        </p>
+                       <br><br>
                 <div class="d-flex" v-if="!pid">
+                  <button @click="GoBack" class="btn btn-primary btn-text">
+                      <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button>
                   <button
                     type="submit"
                     class="btn btn-warning btn-text ml-auto"
@@ -404,7 +408,7 @@ export default {
       externallist: [],
       pid: 0,
       type: "",
-      appId: null,
+      appId: 0,
     };
   },
   beforeMount() {
@@ -430,12 +434,12 @@ export default {
     });
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.appId = urlParams.get("appId");
     this.GetList();
     this.GetPatientdetails();
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-    this.appId = urlParams.get("appId");
     if (this.pid) {
       this.getdetails();
     }
@@ -732,6 +736,12 @@ export default {
                   footer: ''
                 });
       }
+    },
+    GoBack(){
+      this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
     },
   },
 };

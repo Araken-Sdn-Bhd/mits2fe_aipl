@@ -1606,7 +1606,7 @@ export default {
     Onseconsentreferral() {
       this.$router.push({
         path: "/modules/Intervention/se-consent-form",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
     },
     Onlaserform() {
@@ -1702,7 +1702,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-homevisit-consent-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId  },
         });
       }
     },
@@ -1710,7 +1710,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-homevisit-withdrawal-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1718,7 +1718,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/cps-police-referral-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1726,7 +1726,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/photography-consent-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1734,7 +1734,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/etp-consent-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },
@@ -1742,7 +1742,7 @@ export default {
       if (this.userdetails.user.role != "Counsellor") {
         this.$router.push({
           path: "/modules/Intervention/job-club-consent-form",
-          query: { id: this.Id },
+          query: { id: this.Id, appId: this.appId },
         });
       }
     },

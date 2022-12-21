@@ -3890,6 +3890,71 @@ table.dataTable.nowrap td {
 } */
 
 /* responsive css */
+@media (max-width: 1220px) and (min-width: 991px)  {
+    .three-td th {
+        display: block;
+        padding: 0px;
+        width: 100% !important;
+    }
+    .three-td {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .three-td td.tdl-5 {
+        padding: 5px 0 !important;
+    }
+
+    .two-td {
+        display: flex;
+        align-items: center;
+    }
+    .two-td th {
+        width: 33.33%;
+    }
+    .two-radio {
+        display: flex;
+        align-items: center;
+    }
+
+    .mental-state tr {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .mental-state tr th {
+        width: 100%;
+        padding: 0px !important;
+        margin-top: 10px;
+    }
+    .mental-state tr td {
+        padding: 0px !important;
+        margin-top: 10px;
+    }
+    .psp-scale {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 651px)  {
+    .flex-table table{
+        margin-top: 10px;
+    }
+    .flex-table table tr {
+        display: flex;
+        flex-direction: column;
+    }
+    .flex-table table tr th, .flex-table table tr td{
+        padding: 0px;
+    }
+    .flex-table table tr td{
+        margin-bottom: 12px;
+    }
+    .flex-table th {
+        margin-bottom: 5px;
+    }
+    
+}
 
 @media (max-width: 991px) {
     .card-body .d-flex {
