@@ -113,6 +113,13 @@
                 </tr>
               </tbody>
             </table>
+            <div class="mb-3">
+              <label for="" class="form-label">Status</label>
+                        <select class="form-select" v-model="branchstatus">
+                                <option value="1">Enable</option>
+                                <option value="0">Disable</option>
+                        </select>
+          </div>
           </div>
         </div>
 
@@ -143,6 +150,7 @@
             </table>
             <Error :message="emailerror" v-if="emailerror" />
           </div>
+
         </div>
       </div>
       <!-- close-row -->
@@ -179,6 +187,7 @@
           <th width="250px">Address</th>
           <th>Phone No.</th>
           <th>Fax No.</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -194,9 +203,10 @@
             <p v-for="mobile in brnc.branch_contact_number_office" :key="mobile.id">{{ mobile.ContactNoOffice }}</p>
           </td>
           <td>{{ brnc.branch_fax_no }}</td>
+          <td v-if="brnc.branch_status==1">Enabled</td>
+          <td v-if="brnc.branch_status==0" style="color:red">Disabled</td>
           <td class="td" :class="SidebarAccess != 1 ? 'hide' : ''">
-            <a class="edit" @click="editbranch(brnc)"><i class="fa fa-edit"></i></a>
-            <a @click="deletebranch(brnc)" class="action-icon icon-danger"><i class="fa fa-trash-alt"></i></a>
+            <a class="edit" @click="editbranch(brnc)" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
           </td>
         </tr>
       </tbody>
@@ -223,6 +233,7 @@ export default {
       MobileOffice: "",
       FaxNo: "",
       Email: "",
+      branchstatus: 0,
       StateList: [],
       CityList: [],
       PostCodeList: [],
@@ -505,7 +516,7 @@ export default {
                   JSON.stringify(Conntactmobilelist),
                 branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
-                branch_status: 1,
+                branch_status: this.branchstatus,
               },
               { headers }
             );
@@ -553,7 +564,7 @@ export default {
                   JSON.stringify(Conntactmobilelist),
                 branch_email: JSON.stringify(Emaillist),
                 branch_fax_no: this.FaxNo,
-                branch_status: 1,
+                branch_status: this.branchstatus,
               },
               { headers }
             );
@@ -570,8 +581,8 @@ export default {
               this.loader = false;
               this.$swal.fire({
               icon: 'error',
-              title: 'Oops... Something Went Wrong!',
-              text: 'the error is: ' + this.error,
+              title: JSON.stringify(response.data.message),
+              text:'',
             })
             }
           }
@@ -601,6 +612,10 @@ export default {
       this.FaxNo = "";
       this.email.Email = "";
       this.Id = 0;
+      this.branchstatus = "";
+      this.Contactlist = "";
+      this.Conntactmobilelist ="";
+      this.Emaillist = "";
     },
     async GetBranchList() {
       const headers = {
@@ -662,6 +677,7 @@ export default {
         this.State = response.data.list.branch_state;
         this.City = response.data.list.branch_city;
         this.PostCode = response.data.list.branch_postcode;
+        this.branchstatus = response.data.list.branch_status;
         this.Emaillist = JSON.parse(response.data.list.branch_email);
         this.Contactlist = JSON.parse(
           response.data.list.branch_contact_number_office
