@@ -325,6 +325,7 @@ export default {
             pid: 0,
             type: "",
             appId: 0,
+            SidebarAccess:null,
         };
     },
     beforeMount() {
