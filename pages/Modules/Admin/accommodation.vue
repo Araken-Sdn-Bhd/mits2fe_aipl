@@ -130,7 +130,7 @@ export default {
     axios
       .get(
         `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
+          "general-setting/lists?section=" +
           "accommodation",
         { headers }
       )
@@ -226,7 +226,7 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.get(
-                "general-setting/list?section=" + "accommodation", {
+                "general-setting/lists?section=" + "accommodation", {
                     headers
                 }
             );
@@ -282,6 +282,7 @@ export default {
                 this.accommodation = response.data.setting[0].section_value;
                 this.index = response.data.setting[0].section_order;
                 this.requesttype = "update";
+                this.status=response.data.setting[0].status;
             } else {
                 this.loader = false;
                 this.$swal.fire({
@@ -300,7 +301,7 @@ export default {
         "Content-Type": "application/json",
       };
       const response = await this.$axios.get(
-        "general-setting/list?section=" + "accommodation",
+        "general-setting/lists?section=" + "accommodation",
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {

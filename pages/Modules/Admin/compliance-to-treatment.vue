@@ -31,6 +31,13 @@
                                         <label class="form-label">Index</label>
                                         <input type="text" class="form-control" placeholder="0" v-model="index" />
                                     </div>
+                                    <div class="col-sm-3 mb-4">
+                                    <label for="" class="form-label">Status</label>
+                                    <select class="form-select" v-model="status">
+                                    <option value="1">Enable</option>
+                                    <option value="0">Disable</option>
+                                    </select>
+                                </div>
                                 </div>
                                 <p v-if="errorList.length">
                                     <ul>
@@ -55,10 +62,11 @@
                             <table class="table table-striped data-table display nowrap" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th style="width:3%">No</th>
                                         <th>Compliance To Treatment</th>
                                         <th>Index</th>
-                                        <th>Action</th>
+                                        <th>Status</th>
+                                        <th style="width:3%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,10 +74,13 @@
                                         <td>{{index+1}}</td>
                                         <td>{{setting.section_value}}</td>
                                         <td>{{setting.section_order}}</td>
+                                        <td>
+                                            <p v-if="setting.status == 0" style="color:red">Disabled</p>
+                                            <p v-if="setting.status == 1">Enabled</p>
+                                        </td>
                                         <td class="td" :class="SidebarAccess!=1?'hide':''">
                                             <a class="edit" @click="editsetting(setting)"><i class="fa fa-edit"></i></a>
-                                            <a class="action-icon icon-danger" @click="deletesetting(setting)"><i class="fa fa-trash-alt"></i></a>
-                                        </td>
+                                       </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -102,6 +113,7 @@ export default {
             requesttype: "insert",
             loader: false,
             SidebarAccess: null,
+            status: 1,
         };
     },
     beforeMount() {
@@ -119,7 +131,7 @@ export default {
         axios
             .get(
                 `${this.$axios.defaults.baseURL}` +
-                "general-setting/list?section=" +
+                "general-setting/lists?section=" +
                 "compliance-to-treatment", {
                     headers
                 }
@@ -127,28 +139,7 @@ export default {
             .then((resp) => {
                 this.settinglist = resp.data.list;
                 this.loader = false;
-                $(document).ready(function () {
-                    $(".data-table").DataTable({
-                        searching: false,
-                        bLengthChange: false,
-                        bInfo: false,
-                        // autoWidth: false,
-                        // responsive: true,
-                        scrollX: true,
-                        language: {
-                            paginate: {
-                                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                            },
-                        },
-                    });
-                    $('a[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
-                        $($.fn.dataTable.tables(true))
-                            .DataTable()
-                            .columns.adjust()
-                            .responsive.recalc();
-                    });
-                });
+               
             })
             .catch ((err) => {
         this.loader = false;
@@ -195,6 +186,7 @@ export default {
                             section_order: this.index,
                             setting_id: this.settingId,
                             request_type: this.requesttype,
+                            status: this.status,
                         }, {
                             headers
                         }
@@ -212,6 +204,7 @@ export default {
                         this.index = 0;
                         this.compliancetotreatment = "";
                         this.settingId = 0;
+                        this.status= 1;
                         this.requesttype = "insert";
                     } else {
                         this.loader = false;
@@ -240,7 +233,7 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.get(
-                "general-setting/list?section=" + "compliance-to-treatment", {
+                "general-setting/lists?section=" + "compliance-to-treatment", {
                     headers
                 }
             );
@@ -298,6 +291,7 @@ export default {
                 this.settingId = response.data.setting[0].id;
                 this.compliancetotreatment = response.data.setting[0].section_value;
                 this.index = response.data.setting[0].section_order;
+                this.status=response.data.setting[0].status;
                 this.requesttype = "update";
             } else {
                 this.loader = false;
