@@ -131,7 +131,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-lg-4 col-sm-12 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
@@ -565,13 +565,13 @@ export default {
       }
     },
     async GetList() {
-      const response6 = await this.$axios.get("club/list", {
-        headers,
-      });
+      const response6 = await this.$axios.post("club/division-list-branch", {
+                branch_id: this.userdetails.branch.branch_id,
+            }, {
+                headers,
+            });
       if (response6.data.code == 200 || response6.data.code == "200") {
-        this.joblist = response6.data.list;
-      } else {
-        this.joblist = [];
+        this.joblist = response6.data.club;
       }
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
