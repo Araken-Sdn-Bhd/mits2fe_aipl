@@ -185,9 +185,9 @@ export default {
       hasreportmodule: 0,
       message: null,
 
-      setTimer: 1,
+      setTimer: 3,
 
-      events: ['click','mousemove','mousedown','scroll','keypress','load'],
+      events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
 
       warningTimer: null,
       logoutTimer: null,
@@ -201,6 +201,8 @@ export default {
     } else {
       this.role = this.userdetails.user.role;
     }
+
+    this.getSessionSettings();
     this.GetList();
 
     this.userdetailsforReport = JSON.parse(localStorage.getItem("userdetails"));
@@ -210,21 +212,20 @@ export default {
       this.role = this.userdetailsforReport.user.role;
     }
     this.GetListForReport();
-    this.getSessionSettings();
   },
   mounted() {
     document.body.classList.add("sb-nav-fixed");
     setTimeout(function () {
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-        })
+      sidebarToggle.addEventListener('click', event => {
+        event.preventDefault();
+        document.body.classList.toggle('sb-sidenav-toggled');
+        localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+      })
     }, 1000);
 
     this.events.forEach(function (event) {
       return window.addEventListener(event, this.resetTimer);
-    },this);
+    }, this);
 
     this.setTimers();
   },
@@ -262,11 +263,11 @@ export default {
         this.navlist = response1.data.list;
       } else {
         this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                })
+          icon: 'error',
+          title: 'Oops... Something Went Wrong!',
+          text: 'the error is: ' + this.error,
+          footer: ''
+        })
       }
     },
 
@@ -303,7 +304,7 @@ export default {
 
     // INFO:: handling session auto logout.
     setTimers: function () {
-      this.warningTimer = setTimeout(this.warningMessage, this.setTimer*60*1000);
+      this.warningTimer = setTimeout(this.warningMessage, this.setTimer * 60 * 1000);
 
     },
 
@@ -319,14 +320,14 @@ export default {
       );
 
       if (response.data.code == 200) {
-        this.setTimer = response.data.setting[0].variable_value;;
+        this.setTimer = parseInt(response.data.setting[0].variable_value);
       } else {
         this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                })
+          icon: 'error',
+          title: 'Oops... Something Went Wrong!',
+          text: 'the error is: ' + this.error,
+          footer: ''
+        })
       }
     },
 
@@ -335,16 +336,15 @@ export default {
       this.$swal.fire({
         title: 'Are You There ?',
         html: 'You will be log out if there is no activity in <b></b> seconds. Please click to dismiss this message.',
-        timer: 30*1000,
+        timer: 30 * 1000,
         timerProgressBar: true,
         didOpen: () => {
           this.$swal.showLoading()
           const b = this.$swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() =>
-          {
+          timerInterval = setInterval(() => {
             this.$swal.getHtmlContainer().querySelector('b')
-            .textContent = (this.$swal.getTimerLeft() / 1000)
-            .toFixed(0)
+              .textContent = (this.$swal.getTimerLeft() / 1000)
+                .toFixed(0)
           }, 100)
         },
         willClose: () => {
@@ -362,7 +362,7 @@ export default {
       this.$router.push("/staff-login");
     },
 
-    resetTimer: function() {
+    resetTimer: function () {
       clearTimeout(this.warningTimer);
       this.setTimers();
     }
