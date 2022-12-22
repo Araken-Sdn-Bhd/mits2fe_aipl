@@ -17,77 +17,49 @@
             </div>
             <div class="card-body">
 
-                <div class="row mr-0">
-                  <div
-                    class="col-sm-6"
-                    v-for="(bdi, index) in list"
-                    :key="index"
-                  >
-                    <div class="group-radios mt-3">
-                      <label class="form-label">{{ bdi.Question }}</label>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          v-bind:name="'bdi' + index"
-                          value="0"
-                          @change="onchange(bdi.id, 0)"
-                        />
-                        <label class="form-check-label" for="bdi1.0">
-                          {{ bdi.Answer0 }}
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          v-bind:name="'bdi' + index"
-                          value="1"
-                          @change="onchange(bdi.id, 1)"
-                        />
-                        <label class="form-check-label" for="bdi1.1">
-                          {{ bdi.Answer1 }}
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          v-bind:name="'bdi' + index"
-                          value="2"
-                          @change="onchange(bdi.id, 2)"
-                        />
-                        <label class="form-check-label" for="bdi1.2">
-                          {{ bdi.Answer2 }}
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          v-bind:name="'bdi' + index"
-                          value="3"
-                          @change="onchange(bdi.id, 3)"
-                        />
-                        <label class="form-check-label" for="bdi1.3">
-                          {{ bdi.Answer3 }}
-                        </label>
-                      </div>
+              <div class="row mr-0">
+                <div class="col-sm-6" v-for="(bdi, index) in list" :key="index">
+                  <div class="group-radios mt-3">
+                    <label class="form-label">{{ bdi.Question }}</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" v-bind:name="'bdi' + index" value="0"
+                        @change="onchange(bdi.id, 0)" />
+                      <label class="form-check-label" for="bdi1.0">
+                        {{ bdi.Answer0 }}
+                      </label>
                     </div>
-                    <!-- 01 -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" v-bind:name="'bdi' + index" value="1"
+                        @change="onchange(bdi.id, 1)" />
+                      <label class="form-check-label" for="bdi1.1">
+                        {{ bdi.Answer1 }}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" v-bind:name="'bdi' + index" value="2"
+                        @change="onchange(bdi.id, 2)" />
+                      <label class="form-check-label" for="bdi1.2">
+                        {{ bdi.Answer2 }}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" v-bind:name="'bdi' + index" value="3"
+                        @change="onchange(bdi.id, 3)" />
+                      <label class="form-check-label" for="bdi1.3">
+                        {{ bdi.Answer3 }}
+                      </label>
+                    </div>
                   </div>
-                  <!-- col-sm-6 -->
+                  <!-- 01 -->
                 </div>
-                <Error :message="error" v-if="error" />
-                <div class="d-flex align-items-center">
-                  <button
-                    type="submit"
-                    @click="OnsubmitTest"
-                    class="btn btn-success ml-auto"
-                  >
-                    <i class="fad fa-paper-plane"></i> Submit
-                  </button>
-                </div>
+                <!-- col-sm-6 -->
+              </div>
+              <Error :message="error" v-if="error" />
+              <div class="d-flex align-items-center">
+                <button type="submit" @click="OnsubmitTest" class="btn btn-success ml-auto">
+                  <i class="fad fa-paper-plane"></i> Submit
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -112,20 +84,16 @@
                     </thead>
                     <tbody>
                       <tr class="active" v-if="result">
-                        <th scope="row">{{result.BDI}}</th>
-                        <td>{{result.bdiScore}}</td>
+                        <th scope="row">{{ result.BDI }}</th>
+                        <td>{{ result.bdiScore }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <div class="modal-footer">
-                <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                  </div>
-              <!-- </div>
+                  <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+                </div>
+                <!-- </div>
               <div class="modal-footer">
                 <button
                   @click="downloadresult"
@@ -198,7 +166,7 @@ export default {
         this.list = [];
       }
     },
-   async GetUserIpAddress() {
+    async GetUserIpAddress() {
       const {
         data: { ip },
       } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
@@ -238,7 +206,7 @@ export default {
             },
             { headers }
           );
-          console.log('bdi submit',response.data);
+          console.log('bdi submit', response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.result = response.data.result;
@@ -248,11 +216,11 @@ export default {
           } else {
             this.loader = false;
             this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + JSON.stringify(response.data.message),
+              footer: ''
+            });
           }
         } else {
           this.error = "Please attempt all question";
@@ -263,7 +231,11 @@ export default {
       }
     },
     downloadresult() {
+      var imgData = canvas.toDataURL("image/jpeg", 1.0);
       var pdf = new jsPDF("p", "pt", "a4");
+      var width = pdf.internal.pageSize.getWidth();
+      var height = pdf.internal.pageSize.getHeight();
+      doc.addImage(image, 'JPEG', 0, 0, width - 20, height - 10);
       pdf.addHTML($("#results")[0], function () {
         pdf.save("Result.pdf");
       });
@@ -274,11 +246,11 @@ export default {
         query: { id: this.Id },
       });
     },
-    GoBack(){
+    GoBack() {
       this.$router.push({
-              path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
-            });
+        path: "/modules/Intervention/patient-summary",
+        query: { id: this.Id },
+      });
     }
 
   },
