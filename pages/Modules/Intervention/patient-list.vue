@@ -269,7 +269,7 @@ export default {
         this.branchlist = [];
       }
       const respons = await this.$axios.get(
-        "service/list",
+        "service/activeList",
         { headers }
       );
       if (respons.data.code == 200 || respons.data.code == "200") {

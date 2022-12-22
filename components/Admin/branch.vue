@@ -262,7 +262,7 @@ export default {
     };
     const axios = require("axios").default;
     axios
-      .get(`${this.$axios.defaults.baseURL}` + "hospital/branch-list", {
+      .get(`${this.$axios.defaults.baseURL}` + "hospital/branch-list-regardless-status", {
         headers,
       })
       .then((resp) => {
@@ -623,7 +623,7 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.get("hospital/branch-list", {
+      const response = await this.$axios.get("hospital/branch-list-regardless-status", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {

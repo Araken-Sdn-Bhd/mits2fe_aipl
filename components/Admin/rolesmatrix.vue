@@ -138,6 +138,7 @@
                   v-model="teamId"
                   class="form-select"
                   aria-label="Default select example"
+                  @change="onChangeTeam($event)"
                 >
                   <option value="0">Please Select</option>
                   <option
@@ -145,7 +146,7 @@
                     v-bind:key="team.id"
                     v-bind:value="team.id"
                   >
-                    {{ team.team_name }}
+                    {{ team.service_name }}
                   </option>
                 </select>
               </div>
@@ -310,22 +311,29 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response = await this.$axios.post(
-        "screen-module/getTeamListByHospitalIdAndBranchId",
+      const response = await this.$axios.get(
+        "service/getServiceListByBranch?branchId=" + event.target.value,
         {
-          hospital_id: this.HospitalId,
-          branch_id: event.target.value,
-        },
-        { headers }
+          headers,
+        }
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.teamlist = response.data.list;
       } else {
         this.teamlist = [];
       }
+     
+    },
+
+    async onChangeTeam(event){
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
       const response1 = await this.$axios.post(
-        "staff-management/getUserlist", //getStaffManagementListOrById
-        { branch_id: event.target.value, name: "" },
+        "staff-management/getUserlistbyTeam",
+        { team_id: event.target.value, branch_id: this.BranchId },
         {
           headers,
         }
@@ -335,6 +343,7 @@ export default {
       } else {
         this.stafflist = [];
       }
+
     },
     async GethospitalList() {
       const headers = {
