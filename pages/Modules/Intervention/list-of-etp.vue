@@ -131,7 +131,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-lg-4 col-sm-12 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
@@ -574,11 +574,13 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response6 = await this.$axios.get("etp/list", {
-        headers,
-      });
+      const response6 = await this.$axios.post("etp/division-list-branch", {
+                branch_id: this.userdetails.branch.branch_id,
+            }, {
+                headers,
+            });
       if (response6.data.code == 200 || response6.data.code == "200") {
-        this.etplist = response6.data.list;
+        this.etplist = response6.data.etp;
       } else {
         this.etplist = [];
       }
