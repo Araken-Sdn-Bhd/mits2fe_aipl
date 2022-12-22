@@ -182,6 +182,8 @@ export default {
         {
           fromDate: this.fromDate,
           toDate: this.toDate,
+          email: this.userdetails.user.email,
+          branch_id: this.userdetails.branch.branch_id,
           report_type: "pdf"
         },
         { headers, params: {branch_id: this.branch_id}  }
@@ -231,6 +233,8 @@ export default {
         const response = await this.$axios.post(
           "request-appointment-report/get",
           {
+            email: this.userdetails.user.email,
+            branch_id: this.userdetails.branch.branch_id,
             fromDate: this.fromDate,
             toDate: this.toDate,
             report_type: "excel"

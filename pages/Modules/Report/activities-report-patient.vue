@@ -1079,6 +1079,8 @@ export default {
           {
             fromDate: this.fromDate,
             toDate: this.toDate,
+            email: this.userdetails.user.email,
+            branch_id: this.userdetails.branch.branch_id,
             patient_category: this.patient_category,
             type_visit: this.type_visit,
             referral_type: this.referral_type,
@@ -1166,6 +1168,8 @@ export default {
             "report/activity/patient",
             {
               fromDate: this.fromDate,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               toDate: this.toDate,
               patient_category: this.patient_category,
               type_visit: this.type_visit,

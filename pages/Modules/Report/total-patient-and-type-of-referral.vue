@@ -366,6 +366,8 @@ export default {
             "report/total-patient-type-refferal",
             {
               fromDate: this.fromDate,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               toDate: this.toDate,
               patient_category: this.patient_category,
               type_visit: this.type_visit,
@@ -437,6 +439,8 @@ export default {
           const response = await this.$axios.post(
             "report/total-patient-type-refferal",
             {
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               fromDate: this.fromDate,
               toDate: this.toDate,
               patient_category: this.patient_category,
