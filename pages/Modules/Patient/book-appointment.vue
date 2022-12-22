@@ -16,7 +16,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="mb-3">
-                      <label class="form-label">NRIC/Passport NO.</label>
+                      <label class="form-label">NRIC/Passport NO.<small>*</small></label>
                       <input
                         :disabled="validated == 1"
                         type="text"
@@ -32,7 +32,7 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label">Date</label>
+                      <label class="form-label">Date<small>*</small></label>
                       <input
                         type="date"
                         class="form-control"
@@ -43,7 +43,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label">Time</label>
+                      <label class="form-label">Time<small>*</small></label>
                       <input
                         type="time"
                         class="form-control"
@@ -54,7 +54,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label">Duration</label>
+                      <label class="form-label">Duration<small>*</small></label>
                       <select
                         class="form-select"
                         aria-label="Default select example" v-model="duration"
@@ -73,7 +73,7 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Appointment Type</label>
+                      <label class="form-label">Appointment Type<small>*</small></label>
                       <select
                         v-model="appointment_type"
                         class="form-select"
@@ -93,7 +93,7 @@
 
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Type of Visit</label>
+                      <label class="form-label">Type of Visit<small>*</small></label>
                       <select
                         v-model="type_visit"
                         class="form-select"
@@ -116,7 +116,7 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Category of Patient</label>
+                      <label class="form-label">Category of Patient<small>*</small></label>
                       <select
                         v-model="patient_category"
                         class="form-select"
@@ -136,7 +136,7 @@
 
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Assigned Team</label>
+                      <label class="form-label">Assigned Team<small>*</small></label>
                       <select
                         disabled
                         v-model="appointment_type"
