@@ -11,124 +11,6 @@
                 </div>
                 <div class="row">
                     <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="ml-2 col-md-12">
-                                Add New Exception (Public Holiday/Events)
-                                <button
-                                v-if="visibleProfile == true"
-                                v-b-toggle.collapse-1
-                                type="button"
-                                class="float-right btn-fill btn-md"
-                                >
-                                <i class="fa fa-minus"></i>
-                                </button>
-                                <button
-                                v-if="visibleProfile == false"
-                                v-b-toggle.collapse-1
-                                type="button"
-                                class="float-right btn-fill btn-md"
-                                >
-                                <i class="fa fa-plus"></i>
-                                </button>
-                                <hr />
-                                <b-collapse id="collapse-1" class="mt-2" v-model="visibleProfile">
-                                
-                                <form class="mt-3" method="post" @submit.prevent="onexception">
-                                <div class="row"><label style="color:red">Option 1 : Add individually</label></div>
-                                <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="mb-3">
-                                                <label class="form-label">Date</label>
-                                                <input
-                                                    type="date"
-                                                    class="form-control"
-                                                    v-model="startdate"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="mb-3">
-                                            <label class="form-label">End Date</label>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                v-model="enddate"
-                                            />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                        <div class="mb-3">
-                                           <label class="form-label">Public holiday/Events</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            v-model="name"/>
-                                    </div>
-                                        </div>
-                                </div>
-                                <div class="row">   
-                                    <div class="col-sm-6">
-                                    <div class="mb-3">
-                                    <label for="" class="form-label">Branch</label>
-                                    <select
-                                        v-model="branch_id"
-                                        class="form-select"
-                                        aria-label="Default select example">
-                                        <option value="0">All Branch</option>
-                                        <option
-                                        v-for="bnch in branchlist"
-                                        v-bind:key="bnch.id"
-                                        v-bind:value="bnch.id"
-                                        >
-                                        {{ bnch.hospital_branch_name }}
-                                        </option>
-                                    </select>
-                                </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                        <label class="form-label">Description</label>
-                                        <input
-                                            type="textarea"
-                                            class="form-control"
-                                            v-model="description"/>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- row -->
-                                <p v-if="errorList.length">
-                                 <ul><li style="color:red"  v-for='err in errorList' :key='err'>{{ err }}</li> </ul>
-                                </p>
-                                <div class="d-flex">
-                                <div class="ml-auto">
-                                    <button type="submit" class="btn btn-success btn-text">
-                                    <i class="fad fa-paper-plane"></i> Submit
-                                    </button>
-                                </div>
-                                </div>
-                                </form>
-                                <br>
-                                <br>
-                                <div class="row"><label style="color:red">Option 2 : Bulk Upload</label></div>
-                                <label class="form-label"><a @click="DownloadExcel" download class="btn-fill btn-md" title="click to download excel template"><i class="fa fa-download"></i>Click to download Excel Template</a></label>
-
-                                <input type="file" class="form-control" id="inputPassword3" @change="selectFile" />
-                               <br>
-                                <div class="d-flex">
-                                <div class="ml-auto">
-                                    <button type="submit" class="btn btn-success btn-text" @click="onAttachdoc">
-                                    <i class="fad fa-paper-plane"></i> Submit
-                                    </button>
-                                </div>
-                                </div>
-
-                                </b-collapse>
-                            </div>
-                           
-                           
-                        </div>
-                        <br>
                         <div class="card-header icon-title">
                             <a href="#"><i class="fa fa-calendar-alt"></i></a>
                             <h4>Calendar Management</h4>
@@ -137,13 +19,24 @@
                             <div class="calendar" id="calendar"></div>
                             <div class="table-title d-flex align-items-center">
                                 <h3>List of Event</h3>
+                                <div class="btn-box ml-auto">
+                                    <a @click="DownloadExcel" download class="btn btn-primary mt-0 text-white">
+
+                                        <i class="fa fa-download"></i> Excel Template
+                                    </a>
+                                    <button type="submit" @click="OpenAttachPopUp" class="btn btn-primary text-white mt-0">
+                                        <i class="fa fa-file-excel"></i> Upload Excel
+                                    </button>
+                                    <a href="/app/modules/Admin/exception" class="btn btn-primary mt-0 text-white">
+                                        <i class="fa fa-plus"></i> Add Exception
+                                    </a>
+                                </div>
                             </div>
                             <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Branch</th>
-                                        <th>Public Holiday/Event</th>
+                                        <th>Name</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Action</th>
@@ -151,8 +44,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(cla, index) in list" :key="index">
-                                        <td>#{{ index+1 }}</td>
-                                        <td>{{ cla.branch_name }}</td>
+                                        <td>{{ index+1 }}</td>
                                         <td>{{ cla.name }}</td>
                                         <td>{{ cla.start_date }}</td>
                                         <td>{{ cla.end_date }}</td>
@@ -175,7 +67,28 @@
                     </div>
                 </div>
             </div>
-       </main>
+            <div class="modal fade" id="attachpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm test-connection">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <input type="file" class="form-control" id="inputPassword3" @change="selectFile" />
+                        </div>
+                        <p v-if="errorList.length">
+                            <ul>
+                                <li style="color:red" v-for='err in errorList' :key='err'>
+                                    {{ err }}
+                                </li>
+                            </ul>
+                        </p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-ok" @click="onAttachdoc">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </div>
 </template>
@@ -205,18 +118,6 @@ export default {
             errorList: [],
             file: null,
             loader: false,
-            visibleProfile:false,
-            userdetails: null,
-            errorList: [],
-            StateList: [],
-            branchlist: [],
-            startdate: "",
-            enddate: "",
-            stateId: 0,
-            description: "",
-            name: "",
-            Id: 0,
-            branch_id: 0,
         };
     },
     mounted() {
@@ -262,113 +163,7 @@ export default {
             this.Calender();
         }, 1000);
     },
-    beforeMount(){
-        
-     this.GetBranchList();
-    },
     methods: {
-        async GetBranchList() {
-            this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-            const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            };
-        
-            const response = await this.$axios.get("hospital/branch-excluded-hospital-list", {
-            headers,
-        });
-        if (response.data.code == 200 || response.data.code == "200") {
-            this.branchlist = response.data.list;
-        } else {
-            this.branchlist = [];
-        }
-        },
-        async onexception() {
-      this.errorList = [];
-      try {
-        if (!this.startdate) {
-          this.errorList.push("Date is required");
-        }
-        if (!this.enddate) {
-          this.errorList.push("End Date is required");
-        }
-        if (!this.name) {
-          this.errorList.push("Name is required");
-        }
-        if (!this.description) {
-          this.errorList.push("Description is required");
-        } else {
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          if (this.Id) {
-            const response = await this.$axios.post(
-              "calendar-management/add",
-              {
-                added_by: this.userdetails.user.id,
-                name: this.name,
-                start_date: this.startdate,
-                end_date: this.enddate,
-                description: this.description,
-                state: this.stateId.toString(),
-                branch_id: this.branch_id,
-                type: "update",
-                id: this.Id,
-              },
-              { headers }
-            );
-            if (response.data.code == 200) {
-              this.$router.push("/modules/Admin/calendar-management");
-            } else {
-              this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
-            }
-          } else {
-            const response = await this.$axios.post(
-              "calendar-management/add",
-              {
-                added_by: this.userdetails.user.id,
-                name: this.name,
-                start_date: this.startdate,
-                end_date: this.enddate,
-                description: this.description,
-                state: this.stateId.toString(),
-                branch_id: this.branch_id,
-                type: "add",
-              },
-              { headers }
-            );
-            if (response.data.code == 200) {
-                this.$swal.fire(
-                  'Successfully Insert',
-                );
-            } else {
-              this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
-            }
-          }
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-    },
         async Calender() {
             this.eventslist = [];
             this.list.forEach((value, index) => {
@@ -397,7 +192,11 @@ export default {
             });
             calendar.render(this.eventslist, true);
         },
-       
+        OpenAttachPopUp() {
+            this.$nextTick(() => {
+                $("#attachpopup").modal("show");
+            });
+        },
         selectFile(event) {
             this.file = event.target.files[0];
         },
@@ -446,6 +245,15 @@ export default {
 
                                 console.error(err);
                             });
+                        this.$nextTick(() => {
+                            $("#attachpopup").modal("hide");
+                            $("#insertpopup").modal("show");
+                        });
+                    } else {
+                        this.$nextTick(() => {
+                            $("#attachpopup").modal("hide");
+                            $("#errorpopup").modal("show");
+                        });
                     }
                 }
             } catch (e) {

@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>Exception</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
 
           <div class="card mb-4">
@@ -35,9 +34,9 @@
                     </div>
                   </div>
                    </div>
- <div class="row">
-    <div class="col-sm-6">
-                    <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                                        <div class="mb-3">
                       <label class="form-label">Name</label>
                       <input
                         type="text"
@@ -52,8 +51,7 @@
                       <select
                         v-model="stateId"
                         class="form-select"
-                        aria-label="Default select example"
-                      >
+                        aria-label="Default select example">
                          <option value="0">Please Select</option>
                         <option
                           v-for="state in StateList"
