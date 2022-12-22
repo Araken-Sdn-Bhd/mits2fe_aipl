@@ -35,7 +35,7 @@
                                 </tr>
 
                                 <tr>
-                                    <th>To:</th>
+                                    <th>To<small style="color:red">*</small> :</th>
                                     <td>
                                         <input type="text" class="form-control  d-print-none" v-model="to" />
                                         <span class="d-none d-print-block">{{ this.to }}</span>
@@ -43,7 +43,7 @@
                                 </tr>
 
                                 <tr>
-                                    <th>Officer in charge:</th>
+                                    <th>Officer in charge<small style="color:red">*</small> :</th>
                                     <td>
                                         <input type="text" class="form-control d-print-none" v-model="officer_in_charge" />
                                         <span class="d-none d-print-block">{{ this.officer_in_charge }}</span>
@@ -88,7 +88,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <label class="form-label">The above patient ongoing/history of treatment at our
-                                            department.</label>
+                                            department.<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea d-print-none" v-model="the_above_patient_ongoing"></textarea>
 
                                         <span class="d-none d-print-block">{{ this.the_above_patient_ongoing }}</span>

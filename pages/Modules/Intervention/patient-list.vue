@@ -101,7 +101,7 @@
                     <th>Age</th>
                     <th>NRIC/Passport</th>
                     <th>Next Visit</th>
-                    <th>Assigned Doctor</th>
+                    <th>Assigned Team</th>
                     <th>Services</th>
                   </tr>
                 </thead>

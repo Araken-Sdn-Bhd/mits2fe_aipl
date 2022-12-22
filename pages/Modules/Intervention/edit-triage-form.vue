@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>History of aggressive and impulsive behavior</td>
+                        <td>History of aggressive and impulsive behavior<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
@@ -35,7 +35,7 @@
                       </tr>
 
                       <tr>
-                        <td>History of criminal case</td>
+                        <td>History of criminal case<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal" >
@@ -44,7 +44,7 @@
                       </tr>
 
                       <tr>
-                        <td>Deterioration of clinical condition</td>
+                        <td>Deterioration of clinical condition<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes"
@@ -54,7 +54,7 @@
                       </tr>
 
                       <tr>
-                        <td>Neglect of self care</td>
+                        <td>Neglect of self care<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Suicidal Behaviour</td>
+                        <td>Suicidal Behaviour<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes"
@@ -91,7 +91,7 @@
                       </tr>
 
                       <tr>
-                        <td>Homicidal </td>
+                        <td>Homicidal<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes"
@@ -107,7 +107,7 @@
                       </tr>
 
                       <tr>
-                        <td>Aggressive</td>
+                        <td>Aggressive<small style="color:red">*</small> </td>
                         <td>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Yes"
@@ -169,7 +169,7 @@
 
                   <div class="row">
                     <div class="col-sm-6">
-                      <h6 class="mb-3 black">Treatment</h6>
+                      <h6 class="mb-3 black">Treatment<small style="color:red">*</small> </h6>
                       <div class="form-check mb-3">
                         <input class="form-check-input" value="Checked Immediately" v-model="treatment_checked"
                           type="radio" name="exampleRadios" id="exampleRadios1" checked>
@@ -194,7 +194,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                      <h6 class="mb-3 black">Placement</h6>
+                      <h6 class="mb-3 black">Placement<small style="color:red">*</small> </h6>
                       <div class="form-check mb-3">
                         <input class="form-check-input" value="Referred to the main hospital"
                           v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
@@ -224,8 +224,8 @@
                     <table class="notes th-auto" id="screentable">
                       <thead>
                         <tr>
-                          <th>Type of Screening</th>
-                          <th>Score</th>
+                          <th>Type of Screening<small style="color:red">*</small> </th>
+                          <th>Score<small style="color:red">*</small> </th>
                           <th></th>
                         </tr>
                       </thead>
@@ -293,13 +293,13 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Date</label>
+                        <label for="" class="form-label">Date<small style="color:red">*</small> </label>
                         <input type="date" class="form-control" v-model="appointment_date">
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Time</label>
+                        <label for="" class="form-label">Time<small style="color:red">*</small> </label>
                         <input type="time" class="form-control" v-model="appointment_time">
                       </div>
                     </div>
@@ -307,7 +307,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Duration</label>
+                        <label for="" class="form-label">Duration<small style="color:red">*</small> </label>
                         <select class="form-select" aria-label="Default select example" v-model="appointment_duration">
                           <option value="0">Select Duration</option>
                           <option value="15">15 Minutes</option>
@@ -319,7 +319,7 @@
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Appointment Type</label>
+                        <label for="" class="form-label">Appointment Type<small style="color:red">*</small> </label>
                         <select class="form-select" aria-label="Default select example" v-model="appointment_type">
                           <option value="0">Select Appointment Type</option>
                           <option v-for="serv in teamlist" v-bind:key="serv.id" v-bind:value="serv.id">
@@ -332,7 +332,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Category of Patient</label>
+                        <label for="" class="form-label">Category of Patient<small style="color:red">*</small> </label>
                         <select class="form-select" aria-label="Default select example"
                           v-model="appointment_patient_category">
                           <option value="0">Select Category of Patient</option>
@@ -344,7 +344,7 @@
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Type of visit</label>
+                        <label for="" class="form-label">Type of visit<small style="color:red">*</small> </label>
                         <select class="form-select" aria-label="Default select example"
                           v-model="appointment_type_visit">
                           <option value="0">Select Type of Visit</option>
@@ -358,7 +358,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label for="" class="form-label">Assigned team</label>
+                        <label for="" class="form-label">Assigned team<small style="color:red">*</small> </label>
                         <select class="form-select" aria-label="Default select example" v-model="appointment_type"
                           disabled>
                           <option value="0">Select Assigned Team</option>
@@ -385,7 +385,7 @@
                       data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Location Of Services</label>
+                          <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                           <div class="col-sm-8">
                             <select class="form-select" v-model="location_services_id">
                               <option value="0">
@@ -399,7 +399,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                          <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id">
                               <option value="0">Select Diagnosis</option>
@@ -412,7 +412,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Category Of Services
+                          <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -438,7 +438,7 @@
                         <div v-if="category_services == 'assisstance'" >
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="services_id">
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -452,7 +452,7 @@
                         <div v-if="category_services == 'clinical-work'">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
+                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -461,7 +461,7 @@
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
+                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
                                 <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id"
@@ -477,7 +477,7 @@
                         <div  v-if="category_services == 'external'" >
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -491,7 +491,7 @@
                         <!-- hide-div -->
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Complexity Of Service</label>
+                            <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
                             <select class="form-select" v-model="complexity_services_id">
                               <option value="0">
                                 Select Complexity Of Service
@@ -502,7 +502,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome<small style="color:red">*</small> </label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
                               <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">

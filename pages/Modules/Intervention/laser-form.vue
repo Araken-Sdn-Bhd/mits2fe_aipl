@@ -65,7 +65,7 @@
                   <tr>
                     <td>
                       1. I'm not able to work. I do not see why I have to be
-                      here.
+                      here.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -129,7 +129,7 @@
                   <tr>
                     <td>
                       2. Getting myself ready to find a job is pretty much a
-                      waste of time because I can't work anyway.
+                      waste of time because I can't work anyway.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -193,7 +193,7 @@
                   <tr>
                     <td>
                       3. I guess being out of work is not good, but there is
-                      nothing I can do about it right now.
+                      nothing I can do about it right now.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -257,7 +257,7 @@
                   <tr>
                     <td>
                       4. People tell me that I should get a job, but I don't
-                      think so.
+                      think so.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -321,7 +321,7 @@
                   <tr>
                     <td>
                       5. All this talk about work is boring. Why can't people
-                      just leave me alone?
+                      just leave me alone?<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -385,7 +385,7 @@
                   <tr>
                     <td>
                       6. It is pretty much a waste of time getting ready to find
-                      a job because I really don't want to work.
+                      a job because I really don't want to work.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -461,7 +461,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      1. I think I might be ready to look for some kind of job.
+                      1. I think I might be ready to look for some kind of job.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -523,7 +523,7 @@
                   </tr>
 
                   <tr>
-                    <td>2. It might be worthwhile to work on finding a job</td>
+                    <td>2. It might be worthwhile to work on finding a job<small style="color:red">*</small> </td>
                     <td>
                       <div class="form-check form-check-inline">
                         <input
@@ -586,7 +586,7 @@
                   <tr>
                     <td>
                       3. I have been thinking that it right be time for me to
-                      find a job
+                      find a job<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -650,7 +650,7 @@
                   <tr>
                     <td>
                       4. I know I need to get a job and really think I should
-                      work on finding one.
+                      work on finding one.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -731,7 +731,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      1. I am doing something to get ready to look for a job.
+                      1. I am doing something to get ready to look for a job.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -794,7 +794,7 @@
 
                   <tr>
                     <td>
-                      2. I am finally doing something about finding a job.
+                      2. I am finally doing something about finding a job.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -858,7 +858,7 @@
                   <tr>
                     <td>
                       3. Anyone can talk about wanting to find a job, but I am
-                      actually doing something about it.
+                      actually doing something about it.<small style="color:red">*</small> 
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -920,7 +920,7 @@
                   </tr>
 
                   <tr>
-                    <td>4. I am actively doing something to find a job.</td>
+                    <td>4. I am actively doing something to find a job.<small style="color:red">*</small> </td>
                     <td>
                       <div class="form-check form-check-inline">
                         <input
@@ -1008,7 +1008,7 @@
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
+                            >Location Of Services<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
                             <select
@@ -1031,7 +1031,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
+                            >Type Of Diagnosis<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id">
@@ -1049,7 +1049,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services
+                            >Category Of Services<small style="color:red">*</small> 
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1098,7 +1098,7 @@
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="services_id">
                                  <option value="0">Select Service</option>
                       <option
@@ -1116,7 +1116,7 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
+                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
@@ -1125,7 +1125,7 @@
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
+                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
                                 <option
@@ -1143,7 +1143,7 @@
                         <div class="external services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
                       <option
@@ -1162,7 +1162,7 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label"
-                              >Complexity Of Service</label
+                              >Complexity Of Service<small style="color:red">*</small> </label
                             >
                             <select
                               class="form-select"
@@ -1181,7 +1181,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome<small style="color:red">*</small> </label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
                       <option

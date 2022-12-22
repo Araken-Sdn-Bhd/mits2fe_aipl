@@ -43,7 +43,7 @@
                     <td>{{ patientdetails.gender[0].section_value }}</td>
                   </tr>
                   <tr>
-                    <th>Referred For:</th>
+                    <th>Referred For<small style="color:red">*</small> :</th>
                     <td>
                       <div class="form-check">
                         <input
@@ -128,7 +128,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Diagnosis:</th>
+                    <th>Diagnosis<small style="color:red">*</small> :</th>
                     <td>
                       <select class="form-select" v-model="diagnosis" :disabled = "isDisabled">
                         <option value="">Please Select</option>
@@ -143,7 +143,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Date Onset:</th>
+                    <th>Date Onset<small style="color:red">*</small> :</th>
                     <td>
                       <input
                         type="date"
@@ -155,7 +155,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Date Of Referral:</th>
+                    <th>Date Of Referral<small style="color:red">*</small> :</th>
                     <td>
                       <input
                         type="date"
@@ -167,7 +167,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>No. Of Admission :</th>
+                    <th>No. Of Admission<small style="color:red">*</small> :</th>
                     <td>
                       <input
                         type="text"
@@ -179,7 +179,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Latest Admission Date:</th>
+                    <th>Latest Admission Date<small style="color:red">*</small> :</th>
                     <td>
                       <input
                         type="date"
@@ -191,7 +191,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Current Medication:</th>
+                    <th>Current Medication<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -200,7 +200,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Alerts:</th>
+                    <th>Alerts<small style="color:red">*</small> :</th>
                     <td v-if="!pid">
                       <div class="form-check form-check-inline">
                         <input
@@ -258,7 +258,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Education Level:</th>
+                    <th>Education Level<small style="color:red">*</small> :</th>
                     <td>
                       <select class="form-select" v-model="education_level" :disabled = "isDisabled">
                         <option value="">Please Select</option>
@@ -280,7 +280,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Aggresion</th>
+                            <th>Aggresion<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -355,7 +355,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Suicidality</th>
+                            <th>Suicidality<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -430,7 +430,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Criminality</th>
+                            <th>Criminality<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -504,7 +504,7 @@
                     <td colspan="2" class="black">Substance History:</td>
                   </tr>
                   <tr>
-                    <th>Age First Started:</th>
+                    <th>Age First Started<small style="color:red">*</small> :</th>
                     <td>
                       <input type="text" class="form-control" name="" v-model="age_first_started" :disabled = "isDisabled"/>
                     </td>
@@ -574,7 +574,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Cannabis</th>
+                            <th>Cannabis<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -634,7 +634,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>ATS</th>
+                            <th>ATS<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -691,7 +691,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Inhalant</th>
+                            <th>Inhalant<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -751,7 +751,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Alcohol</th>
+                            <th>Alcohol<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -811,7 +811,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Tobacco</th>
+                            <th>Tobacco<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -871,7 +871,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Others</th>
+                            <th>Others<small style="color:red">*</small> </th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -928,7 +928,7 @@
                   </tr>
                   <tr>
                     <th>
-                      Other Information:<br />
+                      Other Information<small style="color:red">*</small> :<br />
                       <em
                         ><i
                           ><small
@@ -973,7 +973,7 @@
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
+                            >Location Of Services<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
                             <select
@@ -997,7 +997,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
+                            >Type Of Diagnosis<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id" :disabled = "isDisabled">
@@ -1015,7 +1015,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services
+                            >Category Of Services<small style="color:red">*</small> 
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1064,7 +1064,7 @@
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="services_id" :disabled = "isDisabled">
                                  <option value="0">Select Service</option>
                                   <option
@@ -1082,7 +1082,7 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
+                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)" :disabled = "isDisabled">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
@@ -1091,7 +1091,7 @@
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
+                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="sub_code_id" :disabled = "isDisabled">
                                 <option value="0">Select sub code</option>
                                 <option
@@ -1110,7 +1110,7 @@
                         <div class="external services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small> </label>
                               <select class="form-select" v-model="services_id" :disabled = "isDisabled">
                                 <option value="0">Select Service</option>
                                 <option
@@ -1129,7 +1129,7 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label"
-                              >Complexity Of Service</label
+                              >Complexity Of Service<small style="color:red">*</small> </label
                             >
                             <select
                               class="form-select"
@@ -1149,7 +1149,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome<small style="color:red">*</small> </label>
                             <select class="form-select" v-model="outcome_id" :disabled = "isDisabled">
                               <option value="0">Select outcome</option>
                               <option
@@ -1203,11 +1203,11 @@
               <table class="notes">
                 <tbody>
                   <tr>
-                    <th>Referrer Name:</th>
+                    <th>Referrer Name<small style="color:red">*</small> :</th>
                     <td><input type="text" class="form-control" name="" v-model="referral_name" :disabled = "isDisabled"/></td>
                   </tr>
                   <tr>
-                    <th>Designation:</th>
+                    <th>Designation<small style="color:red">*</small> :</th>
                     <td><input type="text" class="form-control" name="" v-model="designation" :disabled = "isDisabled"/></td>
                   </tr>
                 </tbody>

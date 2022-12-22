@@ -60,19 +60,19 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>Date Performed: </th>
+                                        <th>Date Performed<small style="color:red">*</small> : </th>
                                         <td>
                                             <input type="date" class="form-control mt-3" v-model="therapy_date">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Time Performed: </th>
+                                        <th>Time Performed<small style="color:red">*</small> : </th>
                                         <td>
                                             <input type="time" name="time" class="form-control" v-model="therapy_time">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Diagnosis: </th>
+                                        <th>Diagnosis<small style="color:red">*</small> : </th>
                                         <td>
                                             <select class="form-select" v-model="type_diagnosis_id" aria-label="Default select example">
                                                 <option value="0">Select Diagnosis</option>
@@ -83,14 +83,14 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Therapy Session:</th>
+                                        <th>Therapy Session<small style="color:red">*</small> :</th>
                                         <td>
                                             <table class="sub-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Frequency Of Session: </th>
-                                                        <th>Model Of Therapy: </th>
-                                                        <th>Mode Of Therapy:</th>
+                                                        <th>Frequency Of Session<small style="color:red">*</small> : </th>
+                                                        <th>Model Of Therapy<small style="color:red">*</small> : </th>
+                                                        <th>Mode Of Therapy<small style="color:red">*</small> :</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -234,8 +234,8 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-label">Comments On Therapy Sessions:</label>
-                                                            <textarea class="form-control textarea" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
+                                                            <label class="form-label">Comments On Therapy Sessions<small style="color:red">*</small> :</label>
+                                                            <textarea class="form-control textarea" rows="5" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -248,7 +248,7 @@
                                             <table class="sub-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Condition (Since Last Session): </th>
+                                                        <th>Condition (Since Last Session)<small style="color:red">*</small> : </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -297,8 +297,8 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-label">Comments On Patent's Condition:</label>
-                                                            <textarea class="form-control textarea" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
+                                                            <label class="form-label">Comments On Patent's Condition<small style="color:red">*</small> :</label>
+                                                            <textarea class="form-control textarea" rows="5" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -323,41 +323,41 @@
                                               <td><input type="text" class="form-control mt-3" v-model="session_details"></td>
                                             </tr> -->
                                     <tr>
-                                        <th>Issues/Problems Dealt With Today:</th>
+                                        <th>Issues/Problems Dealt With Today<small style="color:red">*</small> :</th>
                                         <td><textarea class="form-control textarea" rows="2" v-model="session_issues"></textarea></td>
                                     </tr>
                                     <tr>
-                                        <th>Conduct Of Session:</th>
+                                        <th>Conduct Of Session<small style="color:red">*</small> :</th>
                                         <td><textarea class="form-control textarea" rows="2" v-model="conduct_session"></textarea></td>
                                     </tr>
                                     <tr>
-                                        <th>Outcome Of Session:</th>
+                                        <th>Outcome Of Session<small style="color:red">*</small>:</th>
                                         <td><textarea class="form-control textarea" rows="2" v-model="outcome_session"></textarea></td>
                                     </tr>
                                     <tr>
-                                        <th>Transference/countertransference:</th>
+                                        <th>Transference/countertransference<small style="color:red">*</small>:</th>
                                         <td><textarea class="form-control textarea" rows="2" v-model="transference_session"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Duration Of Session:</th>
+                                        <th>Duration Of Session<small style="color:red">*</small> :</th>
                                         <td><input type="text" class="form-control" v-model="duration_session"></td>
                                     </tr>
                                     <tr>
-                                        <th>Other Comments:</th>
+                                        <th>Other Comments<small style="color:red">*</small> :</th>
                                         <td><input type="text" class="form-control" v-model="other_comment_session"></td>
                                     </tr>
 
                                     <tr>
-                                        <th>Name:</th>
+                                        <th>Name<small style="color:red">*</small> :</th>
                                         <td><input type="text" class="form-control" v-model="name"></td>
                                     </tr>
                                     <tr>
-                                        <th>Designation:</th>
+                                        <th>Designation<small style="color:red">*</small> :</th>
                                         <td><input type="text" class="form-control" v-model="designation"></td>
                                     </tr>
                                     <tr>
-                                        <th>Date:</th>
+                                        <th>Date<small style="color:red">*</small> :</th>
                                         <td><input type="date" class="form-control" v-model="date_session"></td>
                                     </tr>
                                 </tbody>
@@ -373,7 +373,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Location Of Services</label>
+                                                <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="location_services_id">
                                                         <option value="0">
@@ -387,7 +387,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="type_diagnosis_id">
                                                         <option value="0">Select Diagnosis</option>
@@ -399,7 +399,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
@@ -422,7 +422,7 @@
                                             <div class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="services_id">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -436,7 +436,7 @@
                                             <div class="clinical-work services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 CODE</label>
+                                                        <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                             <option value="0">Select code</option>
                                                             <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -445,7 +445,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE</label>
+                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="sub_code_id">
                                                             <option value="0">Select sub code</option>
                                                             <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
@@ -460,7 +460,7 @@
                                             <div class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="serviceid">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -474,7 +474,7 @@
                                             <!-- hide-div -->
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Complexity Of Service</label>
+                                                    <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
                                                     <select class="form-select" v-model="complexity_services_id">
                                                         <option value="0">
                                                             Select Complexity Of Service
@@ -485,7 +485,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Outcome</label>
+                                                    <label class="form-label">Outcome<small style="color:red">*</small></label>
                                                     <select class="form-select" v-model="outcome_id">
                                                         <option value="0">Select outcome</option>
                                                         <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
@@ -523,6 +523,8 @@
                                     </li>
                                 </ul>
                             </p>
+                            <br>
+                            <br>
                             <div class="d-flex">
                                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
@@ -661,6 +663,7 @@ export default {
             pid: 0,
             type: "",
             appId: 0,
+            SidebarAccess: null,
         };
     },
     methods: {
