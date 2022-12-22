@@ -101,7 +101,7 @@ export default {
     const axios = require("axios").default;
     axios
       .get(
-        `${this.$axios.defaults.baseURL}` + "patient-appointment-details/list",
+        `${this.$axios.defaults.baseURL}` + "patient-appointment-details/list?branch_id="+this.userdetails.branch.branch_id,
         { headers }
       )
       .then((resp) => {
