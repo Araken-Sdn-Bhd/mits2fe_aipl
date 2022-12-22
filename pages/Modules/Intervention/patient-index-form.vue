@@ -78,7 +78,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Diagnosis:</th>
+                    <th>Diagnosis<small style="color:red">*</small> :</th>
                     <td>
                      <select class="form-select" v-model="diagnosis">
                                 <option value="">Select Diagnosis</option>
@@ -97,11 +97,11 @@
                       <table class="sub-table-form">
                         <tbody>
                           <tr>
-                            <th>Date Onset:</th>
+                            <th>Date Onset<small style="color:red">*</small> :</th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="date_onset"/>
                             </td>
-                            <th class="thl-10">Date of Diagnosis:</th>
+                            <th class="thl-10">Date of Diagnosis<small style="color:red">*</small> :</th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="date_of_diagnosis" />
                             </td>
@@ -115,12 +115,12 @@
                       <table class="sub-table-form">
                         <tbody>
                           <tr>
-                            <th>Date Of Referral:</th>
+                            <th>Date Of Referral<small style="color:red">*</small> :</th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="date_of_referral" />
                             </td>
                             <th class="thl-10">
-                              Date of First Assessment/Visit:
+                              Date of First Assessment/Visit<small style="color:red">*</small> :
                             </th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="date_of_first_assessment" />
@@ -136,7 +136,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Hospital :</th>
+                    <th>Hospital<small style="color:red">*</small> :</th>
                     <td>
                       <input type="text" class="form-control" name="" v-model="hospital" />
                     </td>
@@ -146,11 +146,11 @@
                       <table class="sub-table-form">
                         <tbody>
                           <tr>
-                            <th>Latest Admission Date:</th>
+                            <th>Latest Admission Date<small style="color:red">*</small> :</th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="latest_admission_date"/>
                             </td>
-                            <th class="thl-10">Date of Discharge:</th>
+                            <th class="thl-10">Date of Discharge<small style="color:red">*</small> :</th>
                             <td>
                               <input type="date" class="form-control" name="" v-model="date_of_discharge" />
                             </td>
@@ -160,7 +160,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th class="vertical-align-top">Reason:</th>
+                    <th class="vertical-align-top">Reason<small style="color:red">*</small> :</th>
                     <td>
                       <table class="sub-table">
                         <tbody>
@@ -318,7 +318,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Adherence To Medication:</th>
+                    <th>Adherence To Medication<small style="color:red">*</small> :</th>
                     <td>
                       <table class="sub-table-form td-width">
                         <tbody>
@@ -376,7 +376,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Aggresion</th>
+                            <th>Aggresion<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -451,7 +451,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Suicidality</th>
+                            <th>Suicidality<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -526,7 +526,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Criminality</th>
+                            <th>Criminality<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -600,7 +600,7 @@
                     <td colspan="2" class="black">Substance History:</td>
                   </tr>
                   <tr>
-                    <th>Age First Started:</th>
+                    <th>Age First Started<small style="color:red">*</small> :</th>
                     <td>
                       <input type="text" class="form-control" name="" v-model="age_first_started" />
                     </td>
@@ -610,7 +610,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Heroin/Opiate</th>
+                            <th>Heroin/Opiate<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -670,7 +670,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Cannabis</th>
+                            <th>Cannabis<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -730,7 +730,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>ATS</th>
+                            <th>ATS<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -787,7 +787,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Inhalant</th>
+                            <th>Inhalant<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -847,7 +847,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Alcohol</th>
+                            <th>Alcohol<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -907,7 +907,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Tobacco</th>
+                            <th>Tobacco<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -967,7 +967,7 @@
                       <table class="sub-table-form td-width">
                         <tbody>
                           <tr>
-                            <th>Others</th>
+                            <th>Others<small style="color:red">*</small></th>
                             <td>
                               <div class="form-check">
                                 <input
@@ -1023,7 +1023,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Past Medical/Surgical History:</th>
+                    <th>Past Medical/Surgical History<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -1032,7 +1032,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Background History (Family/Personal):</th>
+                    <th>Background History (Family/Personal)<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -1041,7 +1041,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>WHO DAS Assessment:</th>
+                    <th>WHO DAS Assessment<small style="color:red">*</small> :</th>
                     <td>
                       <table class="sub-table-form">
                         <tbody>
@@ -1060,7 +1060,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Mental State Examination:</th>
+                    <th>Mental State Examination<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -1069,7 +1069,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Summary Of Issues:</th>
+                    <th>Summary Of Issues<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -1078,7 +1078,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Management Plan:</th>
+                    <th>Management Plan<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
                         class="form-control textarea"
@@ -1114,7 +1114,7 @@
                       <div class="accordion-body">
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
+                            >Location Of Services<small style="color:red">*</small></label
                           >
                           <div class="col-sm-8">
                             <select
@@ -1137,7 +1137,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
+                            >Type Of Diagnosis<small style="color:red">*</small></label
                           >
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id">
@@ -1155,7 +1155,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1204,7 +1204,7 @@
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small></label>
                               <select class="form-select" v-model="services_id">
                                  <option value="0">Select Service</option>
                       <option
@@ -1222,7 +1222,7 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
+                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
                               <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
@@ -1231,7 +1231,7 @@
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
+                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small></label>
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
                                 <option
@@ -1250,7 +1250,7 @@
                         <div class="external services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small></label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
                       <option
@@ -1269,7 +1269,7 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label"
-                              >Complexity Of Service</label
+                              >Complexity Of Service<small style="color:red">*</small></label
                             >
                             <select
                               class="form-select"
@@ -1288,7 +1288,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome<small style="color:red">*</small></label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
                       <option
@@ -1347,19 +1347,19 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Zone:</th>
+                    <th>Zone<small style="color:red">*</small> :</th>
                     <td><input type="text" class="form-control" name="" v-model="zone" /></td>
                   </tr>
                   <tr>
-                    <th>Case Manager:</th>
+                    <th>Case Manager<small style="color:red">*</small> :</th>
                     <td><input type="text" class="form-control" name="" v-model="case_manager" /></td>
                   </tr>
                   <tr>
-                    <th>Specialist:</th>
+                    <th>Specialist<small style="color:red">*</small> :</th>
                     <td><input type="text" class="form-control" name="" v-model="specialist" /></td>
                   </tr>
                   <tr>
-                    <th>Date:</th>
+                    <th>Date<small style="color:red">*</small> :</th>
                     <td><input type="date" class="form-control" name="" v-model="date" /></td>
                   </tr>
                 </tbody>

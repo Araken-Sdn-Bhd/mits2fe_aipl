@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Client</label>
+                                        <label class="form-label">Client<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="client" />
                                     </div>
                                 </div>
@@ -27,13 +27,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Employment Specialist </label>
+                                        <label class="form-label">Employment Specialist<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="employment_specialist" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Case Manager</label>
+                                        <label class="form-label">Case Manager<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="case_manager">
                                             <option value="0">
                                                 Select Case Manager
@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">First Date Of Work </label>
+                                        <label class="form-label">First Date Of Work<small style="color:red">*</small> </label>
                                         <input type="date" class="form-control" v-model="first_date_of_work" />
                                     </div>
                                 </div>
@@ -60,13 +60,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Job Title</label>
+                                        <label class="form-label">Job Title<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="job_title" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Duties Field </label>
+                                        <label class="form-label">Duties Field<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="duties_field" />
                                     </div>
                                 </div>
@@ -76,20 +76,20 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Rate Of Pay </label>
+                                        <label class="form-label">Rate Of Pay<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="rate_of_pay" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Benefits Field</label>
+                                        <label class="form-label">Benefits Field<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="benefits_field" />
                                     </div>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Work Schedule</label>
+                                        <label class="form-label">Work Schedule<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="work_schedule" />
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                             <!-- close-row -->
                             <div>
                                 <div class="row mb-3">
-                                    <label class="form-label">Disclosure</label>
+                                    <label class="form-label">Disclosure<small style="color:red">*</small> </label>
                                     <div class="col-sm-6">
                                         <div class="form-check form-check-inline">
                                             <b-form-group v-slot="{ ariaDescribedby }">
@@ -150,13 +150,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Name of Employer </label>
+                                        <label class="form-label">Name of Employer<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="name_of_employer" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Name of Supervisor </label>
+                                        <label class="form-label">Name of Supervisor<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="name_of_superviser" />
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Address </label>
+                                        <label class="form-label">Address<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="address"></textarea>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Location Of Services</label>
+                                                <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="location_services_id">
                                                         <option value="0">
@@ -196,7 +196,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="type_diagnosis_id">
                                                         <option value="0">Select Diagnosis</option>
@@ -208,7 +208,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
@@ -231,7 +231,7 @@
                                             <div class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="services_id">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -245,7 +245,7 @@
                                             <div class="clinical-work services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 CODE</label>
+                                                        <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                             <option value="0">Select code</option>
                                                             <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -254,7 +254,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE</label>
+                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="sub_code_id">
                                                             <option value="0">Select sub code</option>
                                                             <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
@@ -269,7 +269,7 @@
                                             <div class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="serviceid">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -283,7 +283,7 @@
                                             <!-- hide-div -->
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Complexity Of Service</label>
+                                                    <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="complexity_services_id">
                                                         <option value="0">
                                                             Select Complexity Of Service
@@ -294,7 +294,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Outcome</label>
+                                                    <label class="form-label">Outcome<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="outcome_id">
                                                         <option value="0">Select outcome</option>
                                                         <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
