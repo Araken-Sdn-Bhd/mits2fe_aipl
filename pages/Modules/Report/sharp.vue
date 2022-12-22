@@ -755,6 +755,7 @@ export default {
           "report/shharp",
           {
             added_by: this.userdetails.user.id,
+            email: this.userdetails.user.email,
             branch_id: this.branch_id,
             fromDate: this.fromDate,
             toDate: this.toDate,
@@ -834,7 +835,9 @@ export default {
           const response = await this.$axios.post(
             "report/shharp",
             {
+              branch_id: this.branch_id,
               fromDate: this.fromDate,
+              email: this.userdetails.user.email,
               toDate: this.toDate,
               diagnosis: this.diagnosis,
               risk_factor: this.risk_factor,

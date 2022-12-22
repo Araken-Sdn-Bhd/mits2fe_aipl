@@ -730,6 +730,8 @@ export default {
           const response = await this.$axios.post(
             "report/general",
             {
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               added_by: this.userdetails.user.id,
               fromDate: this.fromDate,
               toDate: this.toDate,
@@ -823,6 +825,8 @@ export default {
           const response = await this.$axios.post(
             "report/general",
             {
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               added_by: this.userdetails.user.id,
               fromDate: this.fromDate,
               toDate: this.toDate,
@@ -849,7 +853,8 @@ export default {
           );
           console.log("my report", response.data);
           if (response.data.code == 200) {
-            if (response.data) {
+            this.list = response.data.result;
+            if (this.list.length > 0) {
 
               this.ReportList = response.data.result;
               this.excelname = response.data.filename;
