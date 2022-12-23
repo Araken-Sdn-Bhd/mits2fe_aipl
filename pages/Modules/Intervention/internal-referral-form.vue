@@ -124,7 +124,7 @@
                                         </div>
                                         <!-- close-row -->
                                         <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
+                                            <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                                             </label>
                                             <div class="col-sm-8">
                                                 <div class="form-check form-check-inline">
@@ -249,9 +249,9 @@
                             </ul>
                         </p>
                         <br><br>
-                        <div class="d-flex" v-if="!pid">
+                        <div class="d-flex" >
                             <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
-                            <div class="ml-auto btn-boxs">
+                            <div class="ml-auto btn-boxs" v-if="!pid">
                                 <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
                                     <i class="fa fa-download"></i> Download
                                 </button>

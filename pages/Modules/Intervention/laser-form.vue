@@ -1245,7 +1245,7 @@
                   <i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
 
-                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
+                    <div class="btn-right" v-if="!pid">
                     <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
                   <i class="fa fa-paper-plane"></i> Submit
                 </button>
@@ -1463,9 +1463,14 @@ export default {
 
 
     async OnSubmit() {
+      this.$swal.fire({
+        title: 'Do you want to save the changes?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
       this.errorList = [];
       this.validate = true;
-      if (confirm("Are you sure you want to save this entry ? ")) {
       try {
         if (Object.values(this.precontemplation).length != 6) {
           this.errorList.push("Please fill all question of PRE CONTEMPLATION");
@@ -1562,36 +1567,37 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            localStorage.setItem(
-              "laserresult",
-              JSON.stringify(response.data.result)
-            );
-            this.$router.push({
-              path: "/modules/Intervention/laser-result",
-              query: { id: this.Id },
-            });
-          } else {
-            this.loader = false;
-            this.$swal.fire({
+              if (response.data.code == 200) {
+                this.loader = false;
+                this.$swal.fire(
+                  'Successfully Submitted.',
+                  'Data is inserted.',
+                  'success',
+                );
+
+              } else {
+                this.loader = false;
+                this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
                   text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
+                })
+                this.GoBack();
+              }
+            }
+          } catch (e) {
+            this.loader = false;
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + e,
+            })
+            this.GoBack();
           }
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
         }
-      } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-      }
+      })
     },
     async getdetails() {
       const headers = {
