@@ -551,9 +551,9 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
                   <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
-                    </button> -->
+                    </button>
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Publish
@@ -590,7 +590,7 @@ export default {
       categorylist: [],
       screenlist: [],
       Id: 0,
-      // appId:0,
+      appId:0,
       risk_history_assressive: "",
       risk_history_criminal: "",
       risk_history_detereotation: "",
@@ -679,9 +679,9 @@ export default {
       )
 
     },
-    // async onCreateEvent() {
-    //   this.OnTriageDraft();
-    // },
+    async onCreateEvent() {
+      this.OnTriageDraft();
+    },
     async onPublishEvent(){
       this.Ontriageform();
       this.OnBookAppointment();
@@ -872,7 +872,7 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
-                // appId: this.appId,
+                appId: this.appId,
                 status: "1",
               },
               { headers }
@@ -1045,7 +1045,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               screening_type: this.screening_type,
-              // appId: this.appId,
+              appId: this.appId,
               status: "1",
             },
             { headers }
