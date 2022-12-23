@@ -182,7 +182,7 @@
       </div>
 
       <div class="row mb-3 mt-2">
-        <label for="" class="col-sm-4 col-form-label">Mentari</label>
+        <label for="" class="col-sm-4 col-form-label">Mentari<span>*</span></label>
         <div class="col-sm-8">
           <select class="form-select" v-model="Obranch_id">
             <option value="0">Please Select</option>
@@ -243,7 +243,7 @@
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label">
-            Does your organization have any volunteering experience?</label
+            Does your organization have any volunteering experience?<span>*</span></label
           >
           <div class="col-sm-8 radio-box">
             <div class="form-check form-check-inline">

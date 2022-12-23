@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="" class="col-sm-4 col-form-label">Address</label>
+                  <label for="" class="col-sm-4 col-form-label">Address<span>*</span></label>
                   <div class="col-sm-8">
                     <span class="form-control">{{ this.address }}</span>
                     <br/>
@@ -1026,7 +1026,7 @@
                 <div class="d-flex align-items-center mt-4">
                   <div class="row col-sm-9">
                     <label for="" class="col-sm-4 col-form-label"
-                      >Screening Done</label
+                      >Screening Done<span>*</span></label
                     >
                     <div class="col-sm-8">
                       <div class="form-check form-check-inline">

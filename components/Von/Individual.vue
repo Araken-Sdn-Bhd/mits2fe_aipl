@@ -137,7 +137,7 @@
       </div>
 
       <div class="row mb-3 mt-2">
-        <label for="" class="col-sm-4 col-form-label">Mentari</label>
+        <label for="" class="col-sm-4 col-form-label">Mentari<span>*</span></label>
         <div class="col-sm-8">
           <select class="form-select" v-model="branch_id">
             <option value="0">Please Select</option>
