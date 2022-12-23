@@ -103,7 +103,7 @@
                                 <div class="d-flex">
                                 <div class="ml-auto">
                                     <button type="submit" class="btn btn-success btn-text">
-                                    <i class="fad fa-paper-plane"></i> Submit
+                                    <i class="fad fa-save"></i> Save
                                     </button>
                                 </div>
                                 </div>
@@ -118,7 +118,7 @@
                                 <div class="d-flex">
                                 <div class="ml-auto">
                                     <button type="submit" class="btn btn-success btn-text" @click="onAttachdoc">
-                                    <i class="fad fa-paper-plane"></i> Submit
+                                    <i class="fad fa-upload"></i> Upload
                                     </button>
                                 </div>
                                 </div>
@@ -144,28 +144,30 @@
                                         <th>No</th>
                                         <th>Branch</th>
                                         <th>Public Holiday/Event</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>From</th>
+                                        <th>Until</th>
+                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(cla, index) in list" :key="index">
                                         <td>#{{ index+1 }}</td>
-                                        <td>{{ cla.branch_name }}</td>
+                                        <td>{{ cla.branch_id }}</td>
                                         <td>{{ cla.name }}</td>
                                         <td>{{ cla.start_date }}</td>
-                                        <td>{{ cla.end_date }}</td>
+                                        <td>{{ cla.until_date }}</td>
+                                        <td>{{ cla.description }}</td>
+
                                         <td>
-                                            <a @click="OnEditexception(cla)" class="action-icon icon-success"><i class="fa fa-edit"></i></a>
+                                            <a @click="editexception(cla)" class="action-icon icon-success"><i class="fa fa-edit"></i></a>
                                             <a style="cursor:pointer;" @click="Onremoveexception(cla)" class="action-icon icon-danger"><i class="fa fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <p
-                                v-show="!list.length" style=" padding: 0px;
-                                margin: 10px;
+                                v-show="!list.length" style=" padding: 0px; margin: 10px;
                                 color: red;
                                 display: flex;
                                 justify-content: center;">
@@ -220,7 +222,16 @@ export default {
         };
     },
     mounted() {
-        this.loader = true;
+        this.getList();
+      
+    },
+    beforeMount(){
+        
+     this.GetBranchList();
+    },
+    methods: {
+        async getList(){
+            this.loader = true;
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -261,12 +272,7 @@ export default {
         setTimeout(() => {
             this.Calender();
         }, 1000);
-    },
-    beforeMount(){
-        
-     this.GetBranchList();
-    },
-    methods: {
+        },
         async GetBranchList() {
             this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
             const headers = {
@@ -321,7 +327,11 @@ export default {
               { headers }
             );
             if (response.data.code == 200) {
-              this.$router.push("/modules/Admin/calendar-management");
+                this.$swal.fire(
+                  'Successfully Update',
+                );
+                this.getList();
+                this.visibleProfile=false;
             } else {
               this.$swal.fire({
                   icon: 'error',
@@ -349,6 +359,8 @@ export default {
                 this.$swal.fire(
                   'Successfully Insert',
                 );
+                this.getList();
+                this.visibleProfile=false;
             } else {
               this.$swal.fire({
                   icon: 'error',
@@ -368,7 +380,7 @@ export default {
                   footer: ''
                 });
       }
-    },
+        },
         async Calender() {
             this.eventslist = [];
             this.list.forEach((value, index) => {
@@ -459,6 +471,16 @@ export default {
             }
         },
         async Onremoveexception(data) {
+            this.$swal.fire({
+        title: 'Are you sure to delete this?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }
+      ).then(async (result) =>{
+        if (result.isConfirmed){
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
@@ -474,43 +496,10 @@ export default {
             );
             if (response.data.code == 200) {
                 this.$swal.fire('Deleted Successfully', '', 'success');
-                const axios = require("axios").default;
-                axios
-                    .get(
-                        `${this.$axios.defaults.baseURL}` +
-                        "calendar-management/getAnnouncementList", {
-                            headers
-                        }
-                    )
-                    .then((resp) => {
-                        this.list = resp.data.list;
-                        this.Calender();
-                    })
-                    .catch ((err) => {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + err,
-                  footer: ''
-                });
-
-                        console.error(err);
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + err,
-                            footer: ''
-                        });
-                    });
-            } else {
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                    footer: ''
-                });
+                this.getList();
             }
+        }
+    })
         },
         OnEditexception(data) {
             this.$router.push({
@@ -559,6 +548,40 @@ export default {
             }
 
         },
+
+    async editexception(cla) {
+       
+        this.visibleProfile=true;
+        this.Id=cla.id;
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "calendar-management/getAnnouncementListById",
+        {
+          id: cla.id,
+        },
+        { headers }
+      );
+      console.log("response", response.data);
+      if (response.data.code == 200) {
+        
+        this.startdate = response.data.list[0].start_date;
+        this.enddate = response.data.list[0].end_date;
+        this.description = response.data.list[0].description;
+        this.name = response.data.list[0].name;
+        this.branch_id = response.data.list[0].branch_id;
+      } else {
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
+      }
+    },
     },
 };
 </script>
