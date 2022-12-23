@@ -19,7 +19,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="mb-3">
-                        <label class="form-label">Name.</label>
+                        <label class="form-label">Name<small style="color:red">*</small> </label>
                         <input
                           type="text"
                           class="form-control"
@@ -34,7 +34,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small> </label>
                         <input
                           type="date"
                           class="form-control"
@@ -45,7 +45,7 @@
 
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label">Time</label>
+                        <label class="form-label">Time<small style="color:red">*</small> </label>
                         <input
                           type="time"
                           class="form-control"
@@ -56,7 +56,7 @@
 
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label">Duration</label>
+                        <label class="form-label">Duration<small style="color:red">*</small> </label>
                         <select
                           class="form-select"
                           aria-label="Default select example"
@@ -96,7 +96,7 @@
 
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Assigned Interviewer</label>
+                        <label class="form-label">Assigned Interviewer<small style="color:red">*</small> </label>
                         <select
                           class="form-select"
                           aria-label="Default select example"
@@ -119,7 +119,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Areas Of Involvement</label>
+                        <label class="form-label">Areas Of Involvement<small style="color:red">*</small> </label>
                         <select
                           class="form-select"
                           aria-label="Default select example"
@@ -139,7 +139,7 @@
 
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Type of Servies</label>
+                        <label class="form-label">Type of Servies<small style="color:red">*</small> </label>
                         <select
                           class="form-select"
                           aria-label="Default select example"

@@ -26,7 +26,7 @@
               <div class="row">
                 <div class="col-sm-4">
                   <div class="mb-3">
-                    <label for="" class="form-label">Application Form</label>
+                    <label for="" class="form-label">Application Form<small style="color:red">*</small> </label>
                     <select class="form-select select-others" aria-label="">
                       <option value="0">Select Application Form</option>
                       <option value="individual">Individual</option>
