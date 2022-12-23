@@ -234,7 +234,7 @@
                             <div class="col-sm-6">
                               <label class="form-label">NRIC No<small>*</small></label>
                               <input
-                                type="number"
+                                type="tel"
                                 class="form-control"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
                                 v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly"
