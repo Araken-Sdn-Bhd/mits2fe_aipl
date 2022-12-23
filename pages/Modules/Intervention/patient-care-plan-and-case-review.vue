@@ -295,7 +295,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small> 
+                          <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
@@ -428,10 +428,10 @@
                 </p>
                 <br>
                 <br>
-                <div class="d-flex three-btn" v-if="this.type != 'view'">
+                <div class="d-flex three-btn">
                   <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
 
-                  <div class="ml-auto">
+                  <div class="ml-auto" v-if="!pid">
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
