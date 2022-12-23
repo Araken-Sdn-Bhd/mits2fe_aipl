@@ -1166,7 +1166,7 @@
                       </div>
                       <!-- close-row -->
                       <div class="row mb-3">
-                        <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small> 
+                        <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                         </label>
                         <div class="col-lg-8 col-sm-12">
                           <div class="form-check form-check-inline">
@@ -1299,10 +1299,10 @@
               </p>
               <br>
               <br>
-              <div class="d-flex three-btn" v-if="!pid">
+              <div class="d-flex three-btn">
                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                 </button>
-                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
                   <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
                     <i class="fa fa-save"></i> Save as draft
                   </button>

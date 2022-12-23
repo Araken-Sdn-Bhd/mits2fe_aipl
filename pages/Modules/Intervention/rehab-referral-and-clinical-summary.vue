@@ -1015,7 +1015,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1222,13 +1222,13 @@
         </p>
         <br>
                       <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
                     <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
@@ -1738,7 +1738,13 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save as draft?")) {
+      this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
       try {
           this.loader = true;
           const headers = {
@@ -1790,32 +1796,40 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$swal.fire('Created Succefully', '', 'success');
-          } else {
-            this.loader = false;
-            this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
-          }
-        } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-      }
-    },
+                        if (response.data.code == 200) {
+                            this.loader = false;
+                            this.resetmodel();
+                            this.$swal.fire('Succesfully save as draft!', '', 'success')
+                            this.GoBack();
+                        } else {
+                            this.loader = false;
+                            this.resetmodel();
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong! dalam function api',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                            })
+                            this.GoBack();
+                        }
+                    } catch (e) {
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        },
     async onPublishEvent() {
-      if (confirm("Are you sure you want to submit this entry")) {
+      this.$swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -2004,31 +2018,37 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            this.$swal.fire('Created Succefully', '', 'success');
-          } else {
-            this.loader = false;
-            this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
-          }
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-    }
-  },
+                            if (response.data.code == 200) {
+                                this.loader = false;
+                                this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
+                            } else {
+                                this.loader = false;
+                                this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+                                this.GoBack();
+                            }
+                        }
+                    } catch (e) {
+                        this.loader = false;
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                        })
+                        this.GoBack();
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        },
     GoBack(){
       this.$router.push({
               path: "/modules/Intervention/patient-summary",

@@ -106,7 +106,7 @@
 
                                 <tr>
                                     <th style="width: 80%">
-                                        2. Do you agree if MENTARI find a job for you?<small style="color:red">*</small> 
+                                        2. Do you agree if MENTARI find a job for you?<small style="color:red">*</small>
                                     </th>
                                     <td>
                                         <div class="form-check">
@@ -317,7 +317,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" id="set-as-headquarters" v-model="patient_consent_interested" />
                                 <label class="form-check-label" for="set-as-headquarters">
-                                    I am interested to join this supported employment program<small style="color:red">*</small> 
+                                    I am interested to join this supported employment program<small style="color:red">*</small>
                                 </label>
                             </div>
                         </div>
@@ -412,7 +412,7 @@
                                         </div>
                                         <!-- close-row -->
                                         <div class="row mb-3">
-                                            <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small> 
+                                            <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                                             </label>
                                             <div class="col-lg-8 col-sm-12">
                                                 <div class="form-check form-check-inline">
@@ -539,10 +539,10 @@
                         <br>
                         <br>
 
-                        <div class="d-flex three-btn" v-if="!pid">
+                        <div class="d-flex three-btn">
                             <button @click="GoBack" class="btn btn-primary btn-text" title="Back"><i class="fa fa-arrow-alt-to-left"></i> Back
                             </button>
-                            <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                            <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
                                 <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
                                     <i class="fa fa-save"></i> Save as draft
                                 </button>
