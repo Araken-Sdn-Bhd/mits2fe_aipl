@@ -26,9 +26,6 @@
                                         <td class="tdl-5">
                                             <select class="form-select" aria-label="Default select example" v-model="cps_seen_by">
                                                 <option value="">Please Select</option>
-                                                <!-- <option v-for="team in teamlist" v-bind:key="team.id" v-bind:value="team.id">
-                                                    {{ team.name }}
-                                                </option> -->
                                                 <option v-for="team in stafflist" v-bind:key="team.id" v-bind:value="team.id">
                                                     {{ team.name }}
                                                 </option>
@@ -47,12 +44,12 @@
                                         <td class="tdl-5">
                                             <select class="form-select" aria-label="Default select example" v-model="cps_discussed_with">
                                                 <option value="">Please Select</option>
-                                                <!-- <option v-for="role in rolelist" v-bind:key="role.id" v-bind:value="role.id">
-                                                    {{ role.name }}
-                                                </option> -->
-                                                <option v-for="role in stafflist" v-bind:key="role.id" v-bind:value="role.id">
+                                                <option v-for="role in rolelist" v-bind:key="role.id" v-bind:value="role.id">
                                                     {{ role.name }}
                                                 </option>
+                                                <!-- <option v-for="role in stafflist" v-bind:key="role.id" v-bind:value="role.id">
+                                                    {{ role.name }}
+                                                </option> -->
                                             </select>
                                         </td>
                                     </tr>
@@ -1879,18 +1876,19 @@
                         </p>
                         <br /><br />
 
-                        <div class="d-flex four-btn" v-if="!pid">
-                            <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
-                            </button>
-                            <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
-                                <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                    <i class="fa fa-save"></i> Save as draft
+                        <div class="d-flex" >
+                                <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
-                                <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                    <i class="fa fa-paper-plane"></i> Submit
-                                </button>
+                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
+                                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                                        <i class="fa fa-save"></i> Save as draft
+                                    </button>
+
+                                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                                        <i class="fa fa-paper-plane"></i> Submit
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1915,7 +1913,6 @@ export default {
         return {
             stafflist: [],
             rolelist: [],
-            teamlist: [],
             errorList: [],
             servicelist: [],
             outcomelist: [],
@@ -2731,8 +2728,7 @@ export default {
                 )
                 .then((resp) => {
 
-                    this.stafflist = resp.data.list;
-                    this.teamlist = resp.data.stafflist;
+                    this.stafflist = resp.data.stafflist;
                     this.rolelist = resp.data.rolelist;
                 });
         },
@@ -2847,7 +2843,7 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "staff-management/getStaffDetailByBranch", 
+                "staff-management/getStaffDetailByBranch",
                 {branch_id: this.userdetails.branch.branch_id},{headers}
             );
             if (response.data.code == 200 || response.data.code == "200") {
@@ -2857,7 +2853,7 @@ export default {
             }
 
             const response2 = await this.$axios.get(
-                "staff-management/getStaffDetailByRole", 
+                "staff-management/getStaffDetailByRole",
                 {branch_id: this.userdetails.branch.branch_id},{headers}
             );
             if (response2.data.code == 200 || response2.data.code == "200") {
