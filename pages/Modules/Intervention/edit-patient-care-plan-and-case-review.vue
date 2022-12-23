@@ -110,7 +110,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small> </label>
                         <input
                           type="date"
                           class="form-control"
@@ -124,7 +124,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Reason for Review </label>
+                        <label class="form-label">Reason for Review<small style="color:red">*</small> </label>
                         <textarea
                           class="form-control textarea"
                           v-model="reason_of_review"
@@ -133,7 +133,7 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Diagnosis </label>
+                        <label class="form-label">Diagnosis<small style="color:red">*</small> </label>
                         <textarea
                           class="form-control textarea"
                           v-model="diagnosis"
@@ -144,7 +144,7 @@
                   <!-- close-row -->
 
                   <div class="row">
-                    <label class="form-label">Medication </label>
+                    <label class="form-label">Medication<small style="color:red">*</small> </label>
                     <div class="col-sm-4">
                       <div class="mb-4">
                         <div class="form-check">
@@ -208,7 +208,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Background History </label>
+                        <label class="form-label">Background History<small style="color:red">*</small> </label>
                         <textarea
                           class="form-control textarea"
                           v-model="background_history"
@@ -217,7 +217,7 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Doctor of Staff Incharge</label>
+                        <label class="form-label">Doctor of Staff Incharge<small style="color:red">*</small> </label>
                         <textarea
                           class="form-control textarea"
                           v-model="staff_incharge_dr"
@@ -233,10 +233,10 @@
                     <thead>
                       <tr>
                         <!-- <th>No</th> -->
-                        <th>Issues/Current Status</th>
-                        <th>Goal(s)</th>
-                        <th>Management Strategies</th>
-                        <th>Who,By When</th>
+                        <th>Issues/Current Status<small style="color:red">*</small> </th>
+                        <th>Goal(s)<small style="color:red">*</small> </th>
+                        <th>Management Strategies<small style="color:red">*</small> </th>
+                        <th>Who,By When<small style="color:red">*</small> </th>
                         <th></th>
                       </tr>
                     </thead>
@@ -259,7 +259,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Date of next Review</label>
+                        <label class="form-label">Date of next Review<small style="color:red">*</small> </label>
                         <input
                           type="date"
                           class="form-control"
@@ -275,7 +275,7 @@
                     <div class="col-sm-6">
                       <label class="form-label">Case Manager</label>
                       <div class="mb-3">
-                        <label class="form-label">Name</label>
+                        <label class="form-label">Name<small style="color:red">*</small> </label>
                         <input
                           type="text"
                           class="form-control"
@@ -283,7 +283,7 @@
                         />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label">Designation</label>
+                        <label class="form-label">Designation<small style="color:red">*</small> </label>
                         <input
                           type="text"
                           class="form-control"
@@ -291,7 +291,7 @@
                         />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small> </label>
                         <input
                           type="date"
                           class="form-control"
@@ -302,7 +302,7 @@
                     <div class="col-sm-6">
                       <label class="form-label">Specialist Incharge</label>
                       <div class="mb-3">
-                        <label class="form-label">Name</label>
+                        <label class="form-label">Name<small style="color:red">*</small> </label>
                         <input
                           type="text"
                           class="form-control"
@@ -310,7 +310,7 @@
                         />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label">Designation</label>
+                        <label class="form-label">Designation<small style="color:red">*</small> </label>
                         <input
                           type="text"
                           class="form-control"
@@ -318,7 +318,7 @@
                         />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small> </label>
                         <input
                           type="date"
                           class="form-control"
@@ -355,7 +355,7 @@
                         <div class="accordion-body">
                           <div class="row mb-3">
                             <label class="col-sm-4 col-form-label"
-                              >Location Of Services</label
+                              >Location Of Services<small style="color:red">*</small> </label
                             >
                             <div class="col-sm-8">
                               <select
@@ -378,7 +378,7 @@
                           <!-- close-row -->
                           <div class="row mb-3">
                             <label class="col-sm-4 col-form-label"
-                              >Type Of Diagnosis</label
+                              >Type Of Diagnosis<small style="color:red">*</small> </label
                             >
                             <div class="col-sm-8">
                               <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
@@ -396,7 +396,7 @@
                           <!-- close-row -->
                           <div class="row mb-3">
                             <label class="col-sm-4 col-form-label"
-                              >Category Of Services
+                              >Category Of Services<small style="color:red">*</small> 
                             </label>
                             <div class="col-sm-8">
                               <div class="form-check form-check-inline">
@@ -445,7 +445,7 @@
                           <div class="assisstance services hide mb-3">
                             <div class="row">
                               <div class="col-md-6 mb-3">
-                                <label class="form-label">Services</label>
+                                <label class="form-label">Services<small style="color:red">*</small> </label>
                                 <select class="form-select" v-model="services_id">
                                    <option value="0">Select Service</option>
                         <option
@@ -463,7 +463,7 @@
                           <div class="clinical-work services hide mb-3">
                             <div class="row">
                               <div class="col-md-6 mb-3">
-                                <label class="form-label">ICD 9 CODE</label>
+                                <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                 <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
                                   <option value="0">Select code</option>
                                   <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
@@ -472,7 +472,7 @@
                                 </select>
                               </div>
                               <div class="col-md-6 mb-3">
-                                <label class="form-label">ICD 9 SUB CODE</label>
+                                <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                 <select class="form-select" v-model="sub_code_id">
                                   <option value="0">Select sub code</option>
                                   <option
@@ -491,7 +491,7 @@
                           <div class="external services hide mb-3">
                             <div class="row">
                               <div class="col-md-6 mb-3">
-                                <label class="form-label">Services</label>
+                                <label class="form-label">Services<small style="color:red">*</small> </label>
                                 <select class="form-select" v-model="serviceid">
                                   <option value="0">Select Service</option>
                         <option
@@ -587,6 +587,8 @@
                                </li>
                           </ul>
                          </p>
+                         <br>
+                         <br>
                   <div class="d-flex">
                     <a
                         @click="GoBack"

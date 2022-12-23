@@ -16,7 +16,7 @@
                             <table class="notes width-eq">
                                 <tbody class="d-tb-block">
                                     <tr class="three-td">
-                                        <th>Date & Time Seen By :</th>
+                                        <th>Date & Time Seen By<small style="color:red">*</small> :</th>
                                         <td class="tdl-5">
                                             <input type="date" class="form-control" name="" v-model="cps_date" />
                                         </td>
@@ -37,7 +37,7 @@
                                     </tr>
 
                                     <tr class="three-td">
-                                        <th>Date & Time Discussed with:</th>
+                                        <th>Date & Time Discussed with<small style="color:red">*</small> :</th>
                                         <td class="tdl-5">
                                             <input type="date" class="form-control" name="" v-model="cps_date_discussed" />
                                         </td>
@@ -58,7 +58,7 @@
                                     </tr>
 
                                     <tr class="three-td">
-                                        <th>Visit Date & time</th>
+                                        <th>Visit Date & time<small style="color:red">*</small> :</th>
                                         <td class="tdl-5">
                                             <input type="date" class="form-control" name="" v-model="visit_date" />
                                         </td>
@@ -68,7 +68,7 @@
                                     </tr>
 
                                     <tr class="three-td">
-                                        <th>Informants</th>
+                                        <th>Informants<small style="color:red">*</small></th>
                                         <td class="tdl-5">
                                         <th>Name</th>
                                         <input type="text" class="form-control" v-model="informants_name" />
@@ -125,7 +125,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Case Manager</th>
+                                        <th>Case Manager<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <select class="form-select" aria-label="Default select example" v-model="case_manager">
                                                 <option value="">Please Select</option>
@@ -137,7 +137,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Visited By</th>
+                                        <th>Visited By<small style="color:red">*</small></th>
                                         <td colspan="2">
                                             <input type="text" class="form-control" v-model="visited_by" />
                                         </td>
@@ -147,7 +147,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Visit Outcome</th>
+                                        <th>Visit Outcome<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <select class="form-select" aria-label="Default select example" v-model="visit_outcome">
                                                 <option value="">Please Select</option>
@@ -159,7 +159,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Current Intervention</th>
+                                        <th>Current Intervention<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <select class="form-select" v-model="current_intervention">
                                                 <option value="">Please Select</option>
@@ -171,7 +171,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Compliance To Treatment</th>
+                                        <th>Compliance To Treatment<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <select class="form-select" v-model="compliance_treatment">
                                                 <option value="">Please Select</option>
@@ -183,7 +183,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Medication Supervised By</th>
+                                        <th>Medication Supervised By<small style="color:red">*</small></th>
                                         <td colspan="2">
                                             <select class="form-select" v-model="medication_supervised_by">
                                                 <option value="">Please Select</option>
@@ -207,7 +207,7 @@
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <th>Delusions</th>
+                                                        <th>Delusions<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-Nil" value="Nil" v-model="delusions" />
@@ -243,7 +243,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Hallucination</th>
+                                                        <th>Hallucination<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate1" id="heroin-opiate-Nil1" value="Nil" v-model="hallucination" />
@@ -279,7 +279,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Disorganized Speech /Behavior</th>
+                                                        <th>Disorganized Speech /Behavior<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate2" id="heroin-opiate-Nil2" value="Nil" v-model="behavior" />
@@ -315,7 +315,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Blunted Affect</th>
+                                                        <th>Blunted Affect<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate3" id="heroin-opiate-Nil3" value="Nil" v-model="blunted_affect" />
@@ -351,7 +351,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Depression</th>
+                                                        <th>Depression<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate4" id="heroin-opiate-Nil4" value="Nil" v-model="depression" />
@@ -387,7 +387,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Anxiety</th>
+                                                        <th>Anxiety<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate5" id="heroin-opiate-Nil5" value="Nil" v-model="anxiety" />
@@ -423,7 +423,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Disorientation</th>
+                                                        <th>Disorientation<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate6" id="heroin-opiate-Nil6" value="Nil" v-model="disorientation" />
@@ -459,7 +459,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Uncooperativeness</th>
+                                                        <th>Uncooperativeness<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate7" id="heroin-opiate-Nil7" value="Nil" v-model="uncooperativeness" />
@@ -495,7 +495,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Poor Impulse Control</th>
+                                                        <th>Poor Impulse Control<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate8" id="heroin-opiate-Nil8" value="Nil" v-model="poor_impulse_control" />
@@ -531,7 +531,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Others, Please specify</th>
+                                                        <th>Others, Please specify<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="heroin-opiate9" id="heroin-opiate-Nil9" value="Nil" v-model="others" />
@@ -576,7 +576,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Remarks</th>
+                                        <th>Remarks<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <textarea class="form-control textarea" v-model="ipsychopathology_remarks"></textarea>
                                         </td>
@@ -590,7 +590,7 @@
                                                         <td colspan="5" class="black">Risk Assessment:</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Risk of violence/harm to others</th>
+                                                        <th>Risk of violence/harm to others<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-none" value="No" v-model="risk_of_violence" />
@@ -626,7 +626,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Risk Of Suicide</th>
+                                                        <th>Risk Of Suicide<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="Aggresion1" id="aggresion-none1" value="No" v-model="risk_of_suicide" />
@@ -662,7 +662,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Risk Of Other Deliberate Self Harm</th>
+                                                        <th>Risk Of Other Deliberate Self Harm<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="Aggresion2" id="aggresion-none2" value="No" v-model="risk_of_other_deliberate" />
@@ -700,7 +700,7 @@
                                                     <tr>
                                                         <th>
                                                             Risk Of Severe Self-neglect / Serious Accidental
-                                                            Self-harm
+                                                            Self-harm<small style="color:red">*</small>
                                                         </th>
                                                         <td>
                                                             <div class="form-check">
@@ -737,7 +737,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Risk Of Harm From Others / Vulnerability</th>
+                                                        <th>Risk Of Harm From Others / Vulnerability<small style="color:red">*</small></th>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="Aggresion4" id="aggresion-none4" value="No" v-model="risk_of_harm" />
@@ -777,7 +777,7 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Changes in treatment at Current Visit:</th>
+                                        <th>Changes in treatment at Current Visit<small style="color:red">*</small> :</th>
                                         <td colspan="3">
                                             <textarea class="form-control textarea" v-model="changes_in_teratment"></textarea>
                                         </td>
@@ -787,7 +787,7 @@
                                         <td colspan="2" class="black">Side Effects:</td>
                                     </tr>
                                     <tr class="two-radio">
-                                        <th>Akathisia</th>
+                                        <th>Akathisia<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Akathisia" id="Akathisia-none" value="Absent" v-model="akathisia" />
@@ -806,7 +806,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Acute Dystonia</th>
+                                        <th>Acute Dystonia<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Acute" id="Acute-none" value="Absent" v-model="acute_dystonia" />
@@ -825,7 +825,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Parkinsonism</th>
+                                        <th>Parkinsonism<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Parkinsonism" id="Parkinsonism-none" value="Absent" v-model="parkinsonism" />
@@ -844,7 +844,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Tardive Dyskinesia</th>
+                                        <th>Tardive Dyskinesia<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Tardive" id="Tardive-none" value="Absent" v-model="tardive_dyskinesia" />
@@ -863,7 +863,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Tardive Dystonia</th>
+                                        <th>Tardive Dystonia<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Dystonia" id="Dystonia-none" value="Absent" v-model="tardive_dystonia" />
@@ -882,14 +882,14 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Others, specify</th>
+                                        <th>Others, specify<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <input type="text" class="form-control" name="" v-model="others_specify" />
                                         </td>
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Remarks:</th>
+                                        <th>Remarks<small style="color:red">*</small> :</th>
                                         <td colspan="3">
                                             <textarea class="form-control textarea" v-model="side_effects_remarks"></textarea>
                                         </td>
@@ -897,7 +897,7 @@
 
                                     <tr>
                                         <td colspan="4" class="black">
-                                            Personal And Social Performance (PSP) Scale
+                                            Personal And Social Performance (PSP) Scale<small style="color:red">*</small>
                                         </td>
                                     </tr>
 
@@ -917,7 +917,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Psychoeducation/Counseling</th>
+                                        <th>Psychoeducation/Counseling<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Psychoeducation" id="Psychoeducation-none" value="Yes" v-model="psychoeducation" />
@@ -936,7 +936,7 @@
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Coping Skills Training</th>
+                                        <th>Coping Skills Training<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Coping" id="Coping-none" value="Yes" v-model="coping_skills" />
@@ -954,7 +954,7 @@
                                         </td>
                                     </tr>
                                     <tr class="two-radio">
-                                        <th>ADL Training</th>
+                                        <th>ADL Training<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="ADL" id="ADL-none" value="Yes" v-model="adl_training" />
@@ -972,7 +972,7 @@
                                         </td>
                                     </tr>
                                     <tr class="two-radio">
-                                        <th>Supported Employment</th>
+                                        <th>Supported Employment<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Supported" id="Supported-none" value="Yes" v-model="supported_employment" />
@@ -990,7 +990,7 @@
                                         </td>
                                     </tr>
                                     <tr class="two-radio">
-                                        <th>Family Intervention</th>
+                                        <th>Family Intervention<small style="color:red">*</small></th>
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Family" id="Family-none" value="Yes" v-model="family_intervention" />
@@ -1009,20 +1009,20 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Others, specify</th>
+                                        <th>Others, specify<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <input type="text" class="form-control" name="" v-model="intervention_others" />
                                         </td>
                                     </tr>
                                     <tr class="two-td">
-                                        <th>Remarks:</th>
+                                        <th>Remarks<small style="color:red">*</small> :</th>
                                         <td colspan="3">
                                             <textarea class="form-control textarea" v-model="remarks"></textarea>
                                         </td>
                                     </tr>
 
                                     <tr class="two-radio">
-                                        <th>Employment the past 6 month:</th>
+                                        <th>Employment the past 6 month<small style="color:red">*</small> :</th>
                                         <td colspan="3">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="Employment" id="Employment-none" value="Yes" v-model="employment_past_months" />
@@ -1040,7 +1040,7 @@
                                         </td>
                                     </tr>
                                     <tr class="two-radio" v-if="this.employment_past_months == 'Yes'">
-                                        <th>*If Yes,</th>
+                                        <th>If Yes<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <select class="form-select" v-model="if_employment_yes">
                                                 <option value="">Please Select</option>
@@ -1058,28 +1058,28 @@
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Psychiatric clinic</th>
+                                        <th>Psychiatric clinic<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <input type="date" class="form-control" v-model="psychiatric_clinic" />
                                         </td>
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>IM depot in clinic</th>
+                                        <th>IM depot in clinic<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <input type="date" class="form-control" v-model="im_depot_clinic" />
                                         </td>
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Next community visit</th>
+                                        <th>Next community visit<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <input type="date" class="form-control" v-model="next_community_visit" />
                                         </td>
                                     </tr>
 
                                     <tr class="two-td">
-                                        <th>Comments</th>
+                                        <th>Comments<small style="color:red">*</small></th>
                                         <td colspan="3">
                                             <textarea class="form-control textarea" v-model="comments"></textarea>
                                         </td>
@@ -1101,7 +1101,7 @@
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="location_services_id">
                                                         <option value="0">
-                                                            Select location of services
+                                                            Select location of services<small style="color:red">*</small>
                                                         </option>
                                                         <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
                                                             {{ loc.section_value }}
@@ -1111,7 +1111,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="type_diagnosis_id">
                                                         <option value="0">Select Diagnosis</option>
@@ -1123,7 +1123,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services
+                                                <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                                                 </label>
                                                 <div class="col-lg-8 col-sm-12">
                                                     <div class="form-check form-check-inline">
@@ -1146,7 +1146,7 @@
                                             <div class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="services_id">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -1160,7 +1160,7 @@
                                             <div class="clinical-work services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 CODE</label>
+                                                        <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                             <option value="0">Select code</option>
                                                             <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -1169,7 +1169,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE</label>
+                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="sub_code_id">
                                                             <option value="0">Select sub code</option>
                                                             <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
@@ -1184,7 +1184,7 @@
                                             <div class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small></label>
                                                         <select class="form-select" v-model="serviceid">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -1198,7 +1198,7 @@
                                             <!-- hide-div -->
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Complexity Of Service</label>
+                                                    <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
                                                     <select class="form-select" v-model="complexity_services_id">
                                                         <option value="0">
                                                             Select Complexity Of Service
@@ -1209,7 +1209,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Outcome</label>
+                                                    <label class="form-label">Outcome<small style="color:red">*</small></label>
                                                     <select class="form-select" v-model="outcome_id">
                                                         <option value="0">Select outcome</option>
                                                         <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">

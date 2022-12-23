@@ -16,7 +16,7 @@
                 <table class="notes width-eq">
                   <tbody>
                     <tr>
-                      <th>Date & Time Seen By :</th>
+                      <th>Date & Time Seen By<small style="color:red">*</small> :</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="cps_date" />
                       </td>
@@ -34,7 +34,7 @@
                     </tr>
 
                     <tr>
-                      <th>Date & Time Discussed with:</th>
+                      <th>Date & Time Discussed with<small style="color:red">*</small> :</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="cps_date_discussed" />
                       </td>
@@ -52,7 +52,7 @@
                     </tr>
 
                     <tr>
-                      <th>Visit Date & time</th>
+                      <th>Visit Date & time<small style="color:red">*</small> :</th>
                       <td class="tdl-5">
                         <input type="date" class="form-control" name="" v-model="visit_date" />
                       </td>
@@ -62,7 +62,7 @@
                     </tr>
 
                     <tr>
-                      <th>Informants</th>
+                      <th>Informants<small style="color:red">*</small></th>
                       <td colspan="3">
                         <table>
                           <thead>
@@ -104,7 +104,7 @@
                     </tr>
 
                     <tr>
-                      <th>Case Manager</th>
+                      <th>Case Manager<small style="color:red">*</small></th>
                       <td colspan="3">
                         <select class="form-select" aria-label="Default select example" v-model="case_manager">
                           <option value="">Please Select</option>
@@ -116,7 +116,7 @@
                     </tr>
 
                     <tr>
-                      <th>Visited By</th>
+                      <th>Visited By<small style="color:red">*</small></th>
                       <td colspan="2">
                         <input type="text" class="form-control" v-model="visited_by" />
                       </td>
@@ -126,7 +126,7 @@
                     </tr>
 
                     <tr>
-                      <th>Visit Outcome</th>
+                      <th>Visit Outcome<small style="color:red">*</small></th>
                       <td colspan="3">
                         <select class="form-select" aria-label="Default select example" v-model="visit_outcome">
                           <option value="">Please Select</option>
@@ -138,7 +138,7 @@
                     </tr>
 
                     <tr>
-                      <th>Current Intervention</th>
+                      <th>Current Intervention<small style="color:red">*</small></th>
                       <td colspan="3">
                         <select class="form-select" v-model="current_intervention">
                           <option value="">Please Select</option>
@@ -150,7 +150,7 @@
                     </tr>
 
                     <tr>
-                      <th>Compliance To Treatment</th>
+                      <th>Compliance To Treatment<small style="color:red">*</small></th>
                       <td colspan="3">
                         <select class="form-select" v-model="compliance_treatment">
                           <option value="">Please Select</option>
@@ -162,7 +162,7 @@
                     </tr>
 
                     <tr>
-                      <th>Medication Supervised By</th>
+                      <th>Medication Supervised By<small style="color:red">*</small></th>
                       <td colspan="2">
                         <select class="form-select" v-model="medication_supervised_by">
                           <option value="">Please Select</option>
@@ -190,7 +190,7 @@
                               </th>
                             </tr>
                             <tr>
-                              <th>Delusions</th>
+                              <th>Delusions<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate"
@@ -230,7 +230,7 @@
                             </tr>
 
                             <tr>
-                              <th>Hallucination</th>
+                              <th>Hallucination<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate1"
@@ -270,7 +270,7 @@
                             </tr>
 
                             <tr>
-                              <th>Disorganized Speech /Behavior</th>
+                              <th>Disorganized Speech /Behavior<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate2"
@@ -310,7 +310,7 @@
                             </tr>
 
                             <tr>
-                              <th>Blunted Affect</th>
+                              <th>Blunted Affect<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate3"
@@ -350,7 +350,7 @@
                             </tr>
 
                             <tr>
-                              <th>Depression</th>
+                              <th>Depression<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate4"
@@ -390,7 +390,7 @@
                             </tr>
 
                             <tr>
-                              <th>Anxiety</th>
+                              <th>Anxiety<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate5"
@@ -430,7 +430,7 @@
                             </tr>
 
                             <tr>
-                              <th>Disorientation</th>
+                              <th>Disorientation<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate6"
@@ -470,7 +470,7 @@
                             </tr>
 
                             <tr>
-                              <th>Uncooperativeness</th>
+                              <th>Uncooperativeness<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate7"
@@ -510,7 +510,7 @@
                             </tr>
 
                             <tr>
-                              <th>Poor Impulse Control</th>
+                              <th>Poor Impulse Control<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate8"
@@ -550,7 +550,7 @@
                             </tr>
 
                             <tr>
-                              <th>Others, Please specify</th>
+                              <th>Others, Please specify<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="heroin-opiate9"
@@ -602,7 +602,7 @@
                     </tr>
 
                     <tr>
-                      <th>Remarks</th>
+                      <th>Remarks<small style="color:red">*</small></th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="ipsychopathology_remarks"></textarea>
                       </td>
@@ -616,7 +616,7 @@
                               <td colspan="5" class="black">Risk Assessment:</td>
                             </tr>
                             <tr>
-                              <th>Risk of violence/harm to others</th>
+                              <th>Risk of violence/harm to others<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-none"
@@ -656,7 +656,7 @@
                             </tr>
 
                             <tr>
-                              <th>Risk Of Suicide</th>
+                              <th>Risk Of Suicide<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="Aggresion1" id="aggresion-none1"
@@ -696,7 +696,7 @@
                             </tr>
 
                             <tr>
-                              <th>Risk Of Other Deliberate Self Harm</th>
+                              <th>Risk Of Other Deliberate Self Harm<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="Aggresion2" id="aggresion-none2"
@@ -738,7 +738,7 @@
                             <tr>
                               <th>
                                 Risk Of Severe Self-neglect / Serious Accidental
-                                Self-harm
+                                Self-harm<small style="color:red">*</small>
                               </th>
                               <td>
                                 <div class="form-check">
@@ -779,7 +779,7 @@
                             </tr>
 
                             <tr>
-                              <th>Risk Of Harm From Others / Vulnerability</th>
+                              <th>Risk Of Harm From Others / Vulnerability<small style="color:red">*</small></th>
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="Aggresion4" id="aggresion-none4"
@@ -823,7 +823,7 @@
                     </tr>
 
                     <tr>
-                      <th>Changes in treatment at Current Visit:</th>
+                      <th>Changes in treatment at Current Visit<small style="color:red">*</small> :</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="changes_in_teratment"></textarea>
                       </td>
@@ -833,7 +833,7 @@
                       <td colspan="2" class="black">Side Effects:</td>
                     </tr>
                     <tr>
-                      <th>Akathisia</th>
+                      <th>Akathisia<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Akathisia" id="Akathisia-none"
@@ -854,7 +854,7 @@
                     </tr>
 
                     <tr>
-                      <th>Acute Dystonia</th>
+                      <th>Acute Dystonia<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Acute" id="Acute-none" value="Absent"
@@ -875,7 +875,7 @@
                     </tr>
 
                     <tr>
-                      <th>Parkinsonism</th>
+                      <th>Parkinsonism<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Parkinsonism" id="Parkinsonism-none"
@@ -896,7 +896,7 @@
                     </tr>
 
                     <tr>
-                      <th>Tardive Dyskinesia</th>
+                      <th>Tardive Dyskinesia<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Tardive" id="Tardive-none" value="Absent"
@@ -917,7 +917,7 @@
                     </tr>
 
                     <tr>
-                      <th>Tardive Dystonia</th>
+                      <th>Tardive Dystonia<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Dystonia" id="Dystonia-none" value="Absent"
@@ -938,14 +938,14 @@
                     </tr>
 
                     <tr>
-                      <th>Others, specify</th>
+                      <th>Others, specify<small style="color:red">*</small></th>
                       <td colspan="3">
                         <input type="text" class="form-control" name="" v-model="others_specify" />
                       </td>
                     </tr>
 
                     <tr>
-                      <th>Remarks:</th>
+                      <th>Remarks<small style="color:red">*</small> :</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="side_effects_remarks"></textarea>
                       </td>
@@ -953,7 +953,7 @@
 
                     <tr>
                       <td colspan="4" class="black">
-                        Personal And Social Performance (PSP) Scale
+                        Personal And Social Performance (PSP) Scale<small style="color:red">*</small>
                       </td>
                     </tr>
 
@@ -973,7 +973,7 @@
                     </tr>
 
                     <tr>
-                      <th>Psychoeducation/Counseling</th>
+                      <th>Psychoeducation/Counseling<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Psychoeducation" id="Psychoeducation-none"
@@ -994,7 +994,7 @@
                     </tr>
 
                     <tr>
-                      <th>Coping Skills Training</th>
+                      <th>Coping Skills Training<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Coping" id="Coping-none" value="Yes"
@@ -1014,7 +1014,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>ADL Training</th>
+                      <th>ADL Training<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="ADL" id="ADL-none" value="Yes"
@@ -1034,7 +1034,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>Supported Employment</th>
+                      <th>Supported Employment<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Supported" id="Supported-none" value="Yes"
@@ -1054,7 +1054,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>Family Intervention</th>
+                      <th>Family Intervention<small style="color:red">*</small></th>
                       <td>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Family" id="Family-none" value="Yes"
@@ -1075,20 +1075,20 @@
                     </tr>
 
                     <tr>
-                      <th>Others, specify</th>
+                      <th>Others, specify<small style="color:red">*</small></th>
                       <td colspan="3">
                         <input type="text" class="form-control" name="" v-model="intervention_others" />
                       </td>
                     </tr>
                     <tr>
-                      <th>Remarks:</th>
+                      <th>Remarks<small style="color:red">*</small> :</th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="remarks"></textarea>
                       </td>
                     </tr>
 
                     <tr>
-                      <th>Employment the past 6 month:</th>
+                      <th>Employment the past 6 month<small style="color:red">*</small> :</th>
                       <td colspan="3">
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="Employment" id="Employment-none"
@@ -1108,7 +1108,7 @@
                       </td>
                     </tr>
                     <tr v-if="this.employment_past_months == 'Yes'">
-                      <th>*If Yes,</th>
+                      <th>If Yes<small style="color:red">*</small></th>
                       <td colspan="3">
                         <select class="form-select" v-model="if_employment_yes">
                           <option value="">Please Select</option>
@@ -1126,28 +1126,28 @@
                     </tr>
 
                     <tr>
-                      <th>Psychiatric clinic</th>
+                      <th>Psychiatric clinic<small style="color:red">*</small></th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="psychiatric_clinic" />
                       </td>
                     </tr>
 
                     <tr>
-                      <th>IM depot in clinic</th>
+                      <th>IM depot in clinic<small style="color:red">*</small></th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="im_depot_clinic" />
                       </td>
                     </tr>
 
                     <tr>
-                      <th>Next community visit</th>
+                      <th>Next community visit<small style="color:red">*</small></th>
                       <td colspan="3">
                         <input type="date" class="form-control" v-model="next_community_visit" />
                       </td>
                     </tr>
 
                     <tr>
-                      <th>Comments</th>
+                      <th>Comments<small style="color:red">*</small></th>
                       <td colspan="3">
                         <textarea class="form-control textarea" v-model="comments"></textarea>
                       </td>
@@ -1167,7 +1167,7 @@
                       data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Location Of Services</label>
+                          <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                           <div class="col-sm-8">
                             <select class="form-select" v-model="location_services_id">
                               <option value="0">
@@ -1181,7 +1181,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                          <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                           <div class="col-sm-8">
                             <select class="form-select" v-model="type_diagnosis_id">
                               <option value="0">Select Diagnosis</option>
@@ -1194,7 +1194,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Category Of Services
+                          <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1220,7 +1220,7 @@
                         <div class="assisstance services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small></label>
                               <select class="form-select" v-model="services_id">
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -1234,7 +1234,7 @@
                         <div class="clinical-work services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE</label>
+                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
                               <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                 <option value="0">Select code</option>
                                 <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -1243,7 +1243,7 @@
                               </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE</label>
+                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small></label>
                               <select class="form-select" v-model="sub_code_id">
                                 <option value="0">Select sub code</option>
                                 <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id"
@@ -1259,7 +1259,7 @@
                         <div class="external services hide mb-3">
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
+                              <label class="form-label">Services<small style="color:red">*</small></label>
                               <select class="form-select" v-model="serviceid">
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -1273,7 +1273,7 @@
                         <!-- hide-div -->
                         <div class="row">
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Complexity Of Service</label>
+                            <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
                             <select class="form-select" v-model="complexity_services_id">
                               <option value="0">
                                 Select Complexity Of Service
@@ -1284,7 +1284,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome</label>
+                            <label class="form-label">Outcome<small style="color:red">*</small></label>
                             <select class="form-select" v-model="outcome_id">
                               <option value="0">Select outcome</option>
                               <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
@@ -2081,6 +2081,7 @@ export default {
       pid: 0,
       type: "",
       appId: null,
+      SidebarAccess: null,
 
       // for print data based on dropdown
 

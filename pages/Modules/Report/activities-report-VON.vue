@@ -348,6 +348,8 @@ export default {
             {
               fromDate: this.fromDate,
               toDate: this.toDate,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               toc: this.toc,
               aoi: this.aoi,
               screening: this.screening,
@@ -420,6 +422,8 @@ export default {
             {
               fromDate: this.fromDate,
               toDate: this.toDate,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               toc: this.toc,
               aoi: this.aoi,
               screening: this.screening,

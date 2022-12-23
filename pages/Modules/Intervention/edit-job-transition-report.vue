@@ -17,13 +17,13 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                        <label class="form-label">What are your future plan?</label>
+                                        <label class="form-label">What are your future plan?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="future_plan"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                        <label class="form-label">What is your short-term goal?</label>
+                                        <label class="form-label">What is your short-term goal?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="short_term_goal"></textarea>
                                     </div>
                                 </div>
@@ -32,14 +32,14 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                        <label class="form-label">What is your long-term goal?</label>
+                                        <label class="form-label">What is your long-term goal?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="long_term_goal"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">If you had to make a big decision today who you call?
-                                            Who have you called in the past?</label>
+                                            Who have you called in the past?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="who_have_you_called_past"></textarea>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">Should we schedule a meeting with any of your supports
-                                            to discuss the transition?</label>
+                                            to discuss the transition?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="schedule_meeting_discuss_for_transition"></textarea>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">If you are employed, how often do you want someone to
                                             check in with you about your job? Who should check in
-                                            with you?
+                                            with you?<small style="color:red">*</small> 
                                         </label>
                                         <textarea class="form-control textarea" v-model="who_check_in_with_you"></textarea>
                                     </div>
@@ -203,13 +203,13 @@
                                         <label class="form-label">If you are leaving IPS unemployed when would be a good
                                             time to ask you about returning to IPS for Repeated IPS
                                             for help with employment or education? Who should
-                                            contact you?</label>
+                                            contact you?<small style="color:red">*</small> </label>
                                         <textarea class="form-control textarea" v-model="who_contact_you"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">How would you like to be contacted?</label>
+                                        <label class="form-label">How would you like to be contacted?<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="how_would_like_to_contacted">
                                             <option value="">Please Select</option>
                                             <option value="Call">Call</option>
@@ -225,7 +225,7 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">What are some tools/coping strategies you use or have
-                                            used in the past on the job to manage stress?
+                                            used in the past on the job to manage stress?<small style="color:red">*</small> 
                                         </label>
                                         <textarea class="form-control textarea" v-model="coping_strategies"></textarea>
                                     </div>
@@ -233,7 +233,7 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">How would you know if you started to feel dissatisfied
-                                            with your job or that you were having other problems?
+                                            with your job or that you were having other problems?<small style="color:red">*</small> 
                                         </label>
                                         <textarea class="form-control textarea" v-model="dissatisfied_with_your_job"></textarea>
                                     </div>
@@ -244,7 +244,7 @@
                                             future? (Help leaving current job, help to find a new
                                             job, help advocating for a promotion or raise,
                                             assistance with training or education, benefits
-                                            planning, etc).
+                                            planning, etc).<small style="color:red">*</small> 
                                         </label>
                                         <textarea class="form-control textarea" v-model="reasons_to_re_connect_to_ips"></textarea>
                                     </div>
@@ -255,13 +255,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Patient Name</label>
+                                        <label class="form-label">Patient Name<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="patient_name" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Doctor Name</label>
+                                        <label class="form-label">Doctor Name<small style="color:red">*</small> </label>
                                         <input type="text" class="form-control" v-model="doctor_name" />
                                     </div>
                                 </div>
@@ -271,13 +271,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Date</label>
+                                        <label class="form-label">Date<small style="color:red">*</small> </label>
                                         <input type="date" class="form-control" v-model="transition_report_date" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Date</label>
+                                        <label class="form-label">Date<small style="color:red">*</small> </label>
                                         <input type="date" class="form-control" v-model="date" />
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Location Of Services</label>
+                                                <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="location_services_id">
                                                         <option value="0">
@@ -307,7 +307,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis</label>
+                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
                                                     <select class="form-select" v-model="type_diagnosis_id">
                                                         <option value="0">Select Diagnosis</option>
@@ -319,7 +319,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
@@ -342,7 +342,7 @@
                                             <div class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="services_id">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -356,7 +356,7 @@
                                             <div class="clinical-work services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 CODE</label>
+                                                        <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                             <option value="0">Select code</option>
                                                             <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
@@ -365,7 +365,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE</label>
+                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="sub_code_id">
                                                             <option value="0">Select sub code</option>
                                                             <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
@@ -380,7 +380,7 @@
                                             <div class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services</label>
+                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
                                                         <select class="form-select" v-model="serviceid">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
@@ -394,7 +394,7 @@
                                             <!-- hide-div -->
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Complexity Of Service</label>
+                                                    <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="complexity_services_id">
                                                         <option value="0">
                                                             Select Complexity Of Service
@@ -405,7 +405,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Outcome</label>
+                                                    <label class="form-label">Outcome<small style="color:red">*</small> v</label>
                                                     <select class="form-select" v-model="outcome_id">
                                                         <option value="0">Select outcome</option>
                                                         <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
