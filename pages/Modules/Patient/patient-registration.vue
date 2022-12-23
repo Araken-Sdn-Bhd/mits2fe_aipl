@@ -1175,7 +1175,7 @@
                       </div>
                       <div class="row align-items-center mb-3" v-if="!Id">
                         <div class="col-sm-5">
-                          <label class="form-label mb-0">DOES THIS PATIENT NEED TRIAGE/SCREENING</label>
+                          <label class="form-label mb-0">DOES THIS PATIENT NEED TRIAGE/SCREENING<small style="color:red">*</small></label>
                         </div>
                         <div class="col-sm-2">
                           <div class="form-check form-check-inline">

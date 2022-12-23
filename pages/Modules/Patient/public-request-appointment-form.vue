@@ -37,7 +37,12 @@
                     >Name<span>*</span></label
                   >
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" v-model="name" />
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    v-model="name"
+                    v-on:keypress="isLetter($event)" 
+                    />
                   </div>
                 </div>
                 <!-- row -->
@@ -45,7 +50,13 @@
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">NRIC</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" v-model="nric" />
+                    <input 
+                    type="text"
+                    :maxlength="12" 
+                    class="form-control" 
+                    v-model="nric"
+                    v-on:keypress="NumbersOnly" 
+                    />
                   </div>
                 </div>
                 <!-- row -->
@@ -57,8 +68,10 @@
                   <div class="col-sm-9">
                     <input
                       type="text"
+                      :maxlength="11" 
                       class="form-control"
                       v-model="contactno"
+                      v-on:keypress="NumbersOnly"
                     />
                   </div>
                 </div>
@@ -178,6 +191,23 @@ export default {
         this.BranchList = [];
       }
     },
+
+    async isLetter(e){
+        let char = String.fromCharCode(e.keyCode); 
+        if(/^[A-Za-z\'@]+$/.test(char)) return true; 
+        else e.preventDefault();
+    },
+
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+
     async OnBookApointment() {
       this.errorList = [];
       try {
