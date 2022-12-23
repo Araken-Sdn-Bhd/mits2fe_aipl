@@ -1687,12 +1687,12 @@ export default {
           console.log("response", response.data);
                         if (response.data.code == 200) {
                             this.loader = false;
-                            this.resetmodel();
+                            // this.resetmodel();
                             this.$swal.fire('Succesfully save as draft!', '', 'success')
                             this.GoBack();
                         } else {
                             this.loader = false;
-                            this.resetmodel();
+                            // this.resetmodel();
                             this.$swal.fire({
                                 icon: 'error',
                                 title: 'Oops... Something Went Wrong! dalam function api',

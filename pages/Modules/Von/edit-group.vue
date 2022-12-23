@@ -40,7 +40,7 @@
     <!-- <form class="form-padding"> -->
     <div class="row mb-3">
       <label for="" class="col-sm-4 col-form-label"
-        >Does your group represent an organization?</label
+        >Does your group represent an organization?<span>*</span></label
       >
       <div class="col-sm-8 organization-box">
         <div class="form-check form-check-inline" id="change">
@@ -73,14 +73,14 @@
         <div class="organization-no organiz-box">
           <div class="mt-3 mb-3">
             <label class="form-label"
-              >How many group members do you have?</label
+              >How many group members do you have?<span>*</span></label
             >
             <span class="form-control">{{ this.members_count }}</span>
           </div>
 
           <div class="mb-3">
             <label class="form-label"
-              >What is the background of your group member?</label
+              >What is the background of your group member?<span>*</span></label
             >
             <span class="form-control">{{ this.member_background }}</span>
           </div>
@@ -90,7 +90,7 @@
 
     <div class="row mb-3">
       <label for="" class="col-sm-4 col-form-label"
-        >Are you the representative of your group?</label
+        >Are you the representative of your group?<span>*</span></label
       >
       <div class="col-sm-8 representative-box">
         <div class="form-check form-check-inline">
@@ -166,7 +166,7 @@
       </div>
 
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label">Address</label>
+        <label for="" class="col-sm-4 col-form-label">Address<span>*</span></label>
         <div class="col-sm-8">
           <span class="form-control">{{ this.Gaddress }}</span>
           <span class="form-control">{{ this.Gaddress1 }}</span>
