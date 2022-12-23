@@ -7,7 +7,7 @@
             <loader v-if="loader" />
             <div class="container-fluid px-4">
                 <div class="page-title">
-                    <h1>System Setting</h1>
+                    <h1>Calendar Setting</h1>
                 </div>
                 <div class="row">
                     <div class="card mb-4">
@@ -36,7 +36,7 @@
                                 <form class="mt-3" method="post" @submit.prevent="onexception">
                                 <div class="row"><label style="color:red">Option 1 : Add individually</label></div>
                                 <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Date</label>
                                                 <input
@@ -46,7 +46,7 @@
                                                 />
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6">
                                             <div class="mb-3">
                                             <label class="form-label">End Date</label>
                                             <input
@@ -56,7 +56,10 @@
                                             />
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                      
+                                </div>
+                                <div class="row">   
+                                    <div class="col-sm-6">
                                         <div class="mb-3">
                                            <label class="form-label">Public holiday/Events</label>
                                         <input
@@ -65,26 +68,6 @@
                                             v-model="name"/>
                                     </div>
                                         </div>
-                                </div>
-                                <div class="row">   
-                                    <div class="col-sm-6">
-                                    <div class="mb-3">
-                                    <label for="" class="form-label">Branch</label>
-                                    <select
-                                        v-model="branch_id"
-                                        class="form-select"
-                                        aria-label="Default select example">
-                                        <option value="0">0 : All Branch</option>
-                                        <option
-                                        v-for="bnch in branchlist"
-                                        v-bind:key="bnch.id"
-                                        v-bind:value="bnch.id"
-                                        >
-                                        {{ bnch.id }} : {{ bnch.hospital_branch_name }}
-                                        </option>
-                                    </select>
-                                </div>
-                                    </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                         <label class="form-label">Description</label>
@@ -151,7 +134,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(cla, index) in list" :key="index">
+                                    <tr v-for="(cla, index) in listbybranch" :key="index">
                                         <td>#{{ index+1 }}</td>
                                         <td>{{ cla.branch_id }}</td>
                                         <td>{{ cla.name }}</td>
@@ -202,6 +185,7 @@ export default {
     data() {
         return {
             list: [],
+            listbybranch: [],
             userdetails: null,
             eventslist: [],
             errorList: [],
@@ -210,8 +194,6 @@ export default {
             visibleProfile:false,
             userdetails: null,
             errorList: [],
-            StateList: [],
-            branchlist: [],
             startdate: "",
             enddate: "",
             description: "",
@@ -222,12 +204,10 @@ export default {
     },
     mounted() {
         this.getList();
+        this.getListBranch();
       
     },
-    beforeMount(){
-        
-     this.GetBranchList();
-    },
+   
     methods: {
         async getList(){
             this.loader = true;
@@ -239,9 +219,9 @@ export default {
         };
         const axios = require("axios").default;
         axios
-            .get(
+            .post(
                 `${this.$axios.defaults.baseURL}` +
-                "calendar-management/getAnnouncementList", {
+                "calendar-management/calendar-view",{branch_id:this.userdetails.branch.branch_id}, {
                     headers
                 }
             )
@@ -272,23 +252,46 @@ export default {
             this.Calender();
         }, 1000);
         },
-        async GetBranchList() {
-            this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-            const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            };
-        
-            const response = await this.$axios.get("hospital/branch-excluded-hospital-list", {
-            headers,
-        });
-        if (response.data.code == 200 || response.data.code == "200") {
-            this.branchlist = response.data.list;
-        } else {
-            this.branchlist = [];
-        }
+        async getListBranch(){
+            this.loader = true;
+        this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        };
+        const axios = require("axios").default;
+        axios
+            .post(
+                `${this.$axios.defaults.baseURL}` +
+                "calendar-management/getAnnouncementList-branch",{branch_id:this.userdetails.branch.branch_id}, {
+                    headers
+                }
+            )
+            .then((resp) => {
+                this.listbybranch = resp.data.list;
+                this.loader = false;
+               
+            })
+            .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
+                console.error(err);
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + err,
+                    footer: ''
+                });
+            });
         },
+       
         async onexception() {
       this.errorList = [];
       try {
@@ -318,7 +321,7 @@ export default {
                 start_date: this.startdate,
                 end_date: this.enddate,
                 description: this.description,
-                branch_id: this.branch_id,
+                branch_id: this.userdetails.branch.branch_id,
                 type: "update",
                 id: this.Id,
               },
@@ -329,6 +332,7 @@ export default {
                   'Successfully Update',
                 );
                 this.getList();
+                this.getListBranch();
                 this.visibleProfile=false;
             } else {
               this.$swal.fire({
@@ -347,7 +351,7 @@ export default {
                 start_date: this.startdate,
                 end_date: this.enddate,
                 description: this.description,
-                branch_id: this.branch_id,
+                branch_id: this.userdetails.branch.branch_id,
                 type: "add",
               },
               { headers }
@@ -357,6 +361,7 @@ export default {
                   'Successfully Insert',
                 );
                 this.getList();
+                this.getListBranch();
                 this.visibleProfile=false;
             } else {
               this.$swal.fire({
@@ -424,10 +429,11 @@ export default {
                     let body = new FormData();
 
                     body.append("added_by", this.userdetails.user.id);
+                    body.append("branch_id", this.userdetails.branch.branch_id);
                     body.append("exceptions", this.file);
 
                     const response = await this.$axios.post(
-                        "calendar-management/upload-exception",
+                        "calendar-management/upload-exception-branch",
                         body, {
                             headers,
                         }
@@ -438,6 +444,7 @@ export default {
                   'Successfully Upload',
                 );
                 this.getList();
+                this.getListBranch();
                 this.visibleProfile=false;
                 this.file = null;
                     }
@@ -479,17 +486,10 @@ export default {
             if (response.data.code == 200) {
                 this.$swal.fire('Deleted Successfully', '', 'success');
                 this.getList();
+                this.getListBranch();
             }
         }
     })
-        },
-        OnEditexception(data) {
-            this.$router.push({
-                path: "/modules/Admin/exception",
-                query: {
-                    id: data.id
-                },
-            });
         },
 
         startDownload() {
@@ -508,7 +508,7 @@ export default {
                     "Content-Type": "application/json",
                 };
                 const response = await this.$axios.post(
-                    "calendar-management/download-excel", {
+                    "calendar-management/download-excel-branch", {
                         user_role: this.userdetails.user.id,
                     }, {
                         headers
@@ -554,7 +554,7 @@ export default {
         this.enddate = response.data.list[0].end_date;
         this.description = response.data.list[0].description;
         this.name = response.data.list[0].name;
-        this.branch_id = response.data.list[0].branch_id;
+        this.branch_id = this.userdetails.branch.branch_id;
       } else {
         this.$swal.fire({
                   icon: 'error',
