@@ -22,7 +22,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">Period Of Services:</label>
+                    <label class="form-label">Period Of Services<small style="color:red">*</small> :</label>
                     <input
                       type="date"
                       v-model="fromDate"
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">To:</label>
+                    <label class="form-label">To<small style="color:red">*</small> :</label>
                     <input type="date" v-model="toDate" class="form-control" />
                   </div>
                 </div>
