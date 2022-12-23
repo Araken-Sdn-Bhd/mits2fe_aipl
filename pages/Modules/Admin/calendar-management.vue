@@ -74,13 +74,13 @@
                                         v-model="branch_id"
                                         class="form-select"
                                         aria-label="Default select example">
-                                        <option value="0">All Branch</option>
+                                        <option value="0">0 : All Branch</option>
                                         <option
                                         v-for="bnch in branchlist"
                                         v-bind:key="bnch.id"
                                         v-bind:value="bnch.id"
                                         >
-                                        {{ bnch.hospital_branch_name }}
+                                        {{ bnch.id }} : {{ bnch.hospital_branch_name }}
                                         </option>
                                     </select>
                                 </div>
@@ -425,8 +425,10 @@ export default {
                         "Content-Type": "application/json",
                     };
                     let body = new FormData();
+
                     body.append("added_by", this.userdetails.user.id);
                     body.append("exceptions", this.file);
+
                     const response = await this.$axios.post(
                         "calendar-management/upload-exception",
                         body, {
@@ -435,29 +437,12 @@ export default {
                     );
                     console.log("result", response);
                     if (response.data.code == 200 || response.data.code == "200") {
-                        const axios = require("axios").default;
-                        axios
-                            .get(
-                                `${this.$axios.defaults.baseURL}` +
-                                "calendar-management/getAnnouncementList", {
-                                    headers
-                                }
-                            )
-                            .then((resp) => {
-                                this.list = resp.data.list;
-                                this.Calender();
-                            })
-                            .catch ((err) => {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + err,
-                  footer: ''
-                });
-
-                                console.error(err);
-                            });
+                        this.$swal.fire(
+                  'Successfully Upload',
+                );
+                this.getList();
+                this.visibleProfile=false;
+                this.file = null;
                     }
                 }
             } catch (e) {
