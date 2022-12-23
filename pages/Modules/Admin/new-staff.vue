@@ -36,6 +36,7 @@
                           class="form-control"
                           placeholder="Enter Name"
                           v-model="name"
+                          v-on:keypress="isLetter($event)"
                         />
                       </div>
 
@@ -43,9 +44,12 @@
                         <label for="" class="form-label">NRIC No.<span style="color:red">*</span></label>
                         <input
                           type="text"
+                          :maxlength="12"
                           class="form-control"
                           placeholder="Enter NRIC NO"
                           v-model="nricno" @change="CheckNric($event)"
+                          v-on:keypress="NumbersOnly"
+                          
                         />
                          <Error :message="nricerror" v-if="nricerror" />
                       </div>
@@ -99,12 +103,13 @@
                       <div class="col-md-4 mb-4">
                         <label for="" class="form-label">Contact No.<span style="color:red">*</span></label>
                         <input
-                          type="number"
-                          maxlength = "11"
+                          type="text"
+                          :maxlength = "11"
                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control"
                           placeholder="Enter Contact No."
                           v-model="contactno"
+                          v-on:keypress="NumbersOnly"
                         />
                       </div>
                     </div>
@@ -531,6 +536,23 @@ export default {
       }
       })
     },
+
+    async isLetter(e){
+        let char = String.fromCharCode(e.keyCode); 
+        if(/^[A-Za-z\'@]+$/.test(char)) return true; 
+        else e.preventDefault();
+    },
+
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+
     async CheckNric(event) {
       console.log("my body", event.target.value);
       const headers = {
