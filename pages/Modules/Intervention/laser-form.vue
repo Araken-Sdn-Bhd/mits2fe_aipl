@@ -65,7 +65,7 @@
                   <tr>
                     <td>
                       1. I'm not able to work. I do not see why I have to be
-                      here.<small style="color:red">*</small> 
+                      here.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -129,7 +129,7 @@
                   <tr>
                     <td>
                       2. Getting myself ready to find a job is pretty much a
-                      waste of time because I can't work anyway.<small style="color:red">*</small> 
+                      waste of time because I can't work anyway.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -193,7 +193,7 @@
                   <tr>
                     <td>
                       3. I guess being out of work is not good, but there is
-                      nothing I can do about it right now.<small style="color:red">*</small> 
+                      nothing I can do about it right now.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -257,7 +257,7 @@
                   <tr>
                     <td>
                       4. People tell me that I should get a job, but I don't
-                      think so.<small style="color:red">*</small> 
+                      think so.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -321,7 +321,7 @@
                   <tr>
                     <td>
                       5. All this talk about work is boring. Why can't people
-                      just leave me alone?<small style="color:red">*</small> 
+                      just leave me alone?<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -385,7 +385,7 @@
                   <tr>
                     <td>
                       6. It is pretty much a waste of time getting ready to find
-                      a job because I really don't want to work.<small style="color:red">*</small> 
+                      a job because I really don't want to work.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -461,7 +461,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      1. I think I might be ready to look for some kind of job.<small style="color:red">*</small> 
+                      1. I think I might be ready to look for some kind of job.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -586,7 +586,7 @@
                   <tr>
                     <td>
                       3. I have been thinking that it right be time for me to
-                      find a job<small style="color:red">*</small> 
+                      find a job<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -650,7 +650,7 @@
                   <tr>
                     <td>
                       4. I know I need to get a job and really think I should
-                      work on finding one.<small style="color:red">*</small> 
+                      work on finding one.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -731,7 +731,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      1. I am doing something to get ready to look for a job.<small style="color:red">*</small> 
+                      1. I am doing something to get ready to look for a job.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -794,7 +794,7 @@
 
                   <tr>
                     <td>
-                      2. I am finally doing something about finding a job.<small style="color:red">*</small> 
+                      2. I am finally doing something about finding a job.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -858,7 +858,7 @@
                   <tr>
                     <td>
                       3. Anyone can talk about wanting to find a job, but I am
-                      actually doing something about it.<small style="color:red">*</small> 
+                      actually doing something about it.<small style="color:red">*</small>
                     </td>
                     <td>
                       <div class="form-check form-check-inline">
@@ -1049,7 +1049,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1240,19 +1240,16 @@
                       </p>
                       <br>
                       <br>
-              <div class="d-flex" v-if="!pid">
+              <div class="d-flex">
                 <button @click="GoBack" class="btn btn-primary btn-text">
                   <i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
 
-                    <!-- <div  class="btn-right" :class="SidebarAccess!=1?'hide':''"> -->
-                    <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button> -->
-
-                <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
+                    <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit">
                   <i class="fa fa-paper-plane"></i> Submit
                 </button>
+              </div>
               <!-- </div> -->
               </div>
             </div>
