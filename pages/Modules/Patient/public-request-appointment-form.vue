@@ -194,7 +194,7 @@ export default {
 
     async isLetter(e){
         let char = String.fromCharCode(e.keyCode); 
-        if(/^[A-Za-z\'@]+$/.test(char)) return true; 
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
         else e.preventDefault();
     },
 

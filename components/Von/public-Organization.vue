@@ -53,7 +53,7 @@
                 <label for="" class="form-label"
                   >Phone Number<span>*</span></label
                 >
-                <input type="text" class="form-control" v-model="org_phone"/>
+                <input type="text" class="form-control" v-model="org_phone" v-on:keypress="NumbersOnly"/>
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@
       <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Oname" />
+          <input type="txet" class="form-control" id="" v-model="Oname" v-on:keypress="isLetter($event)"/>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
           >Phone Number<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Ophone_number"/>
+          <input type="txet" class="form-control" id="" v-model="Ophone_number" v-on:keypress="NumbersOnly"/>
         </div>
       </div>
 
@@ -1093,6 +1093,20 @@ export default {
   methods: {
     OselectFile(event) {
       this.Ofile = event.target.files[0];
+    },
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+    async isLetter(e){
+        let char = String.fromCharCode(e.keyCode); 
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        else e.preventDefault();
     },
     OOnreliventmentari(val) {
       if (this.Omentari_services) {

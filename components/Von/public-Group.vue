@@ -108,7 +108,7 @@
        <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Name<span>*</span></label>
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Gname" />
+          <input type="txet" class="form-control" id="" v-model="Gname" v-on:keypress="isLetter($event)"/>
         </div>
       </div>
 
@@ -140,6 +140,7 @@
             class="form-control"
             id=""
             v-model="Gphone_number"
+            v-on:keypress="NumbersOnly"
           />
         </div>
       </div>
@@ -1176,6 +1177,20 @@ export default {
   methods: {
     GselectFile(event) {
       this.Gfile = event.target.files[0];
+    },
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+    async isLetter(e){
+        let char = String.fromCharCode(e.keyCode); 
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        else e.preventDefault();
     },
     GOnreliventmentari(val) {
       if (this.Gmentari_services) {
