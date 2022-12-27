@@ -2721,7 +2721,7 @@ export default {
                 )
                 .then((resp) => {
 
-                    this.stafflist = resp.data.list;
+                    this.stafflist = resp.data.stafflist;
                     this.rolelist = resp.data.rolelist;
                 });
         },
