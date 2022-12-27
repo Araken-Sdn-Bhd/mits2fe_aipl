@@ -517,13 +517,13 @@
                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
-                    <button @click="OnPrint" type="submit" class="btn btn-green btn-text">
+                    <button v-if="this.showStatus == 1" @click="OnPrint" type="submit" class="btn btn-green btn-text">
                       <i class="fa fa-download"></i> Download
                     </button>
-                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button type="edit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <button  v-if="this.showStatus == 0" type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
@@ -629,6 +629,7 @@ export default {
       others2:"",
       appId: this.appId,
       SidebarAccess:null,
+      showStatus:0,
     };
   },
   methods: {
@@ -933,7 +934,7 @@ export default {
             this.loader = false;
             this.resetmodel();
             alert("Succesfully Update");
-            this.GoBack();
+            this.showStatus = 1;
           } else {
             this.loader = false;
             alert("Error Occured!");

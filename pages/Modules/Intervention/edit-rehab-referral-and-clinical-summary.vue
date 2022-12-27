@@ -1015,7 +1015,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -1229,14 +1229,14 @@
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
                     <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
+                    <button v-if="this.showStatus == 1" type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
-                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Update
+                    <button v-if="this.showStatus == 0" type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                 </div>
@@ -1697,6 +1697,7 @@ export default {
       isDisabled: false,
       SidebarAccess:null,
       appId:0,
+      showStatus:0,
     };
   },
   beforeMount() {
@@ -2010,6 +2011,7 @@ export default {
             this.loader = false;
             this.resetmodel();
             this.$swal.fire('Created Succefully', '', 'success');
+            this.showStatus = 1;
           } else {
             this.loader = false;
             this.$swal.fire({

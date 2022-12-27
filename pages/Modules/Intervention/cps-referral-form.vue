@@ -333,14 +333,14 @@
                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                 </button>
 
-                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''"  v-if="!pid">
-                  <button @click="OnPrint" type="submit" class="btn btn-green btn-text">
+                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                  <button v-if="this.showStatus == 1" @click="OnPrint" type="submit" class="btn btn-green btn-text">
                     <i class="fa fa-download"></i> Download
                   </button>
-                  <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                  <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                     <i class="fa fa-save"></i> Save as draft
                   </button>
-                  <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                  <button v-if="this.showStatus == 0" type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                     <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
@@ -393,6 +393,40 @@
                     <td>{{ details.birth_date }}</td>
                   </tr>
                 </tbody>
+              </table>
+
+              <table class="notes">
+                <thead>
+                  <tr>
+                    <th colspan="2">Treatment Needs</th>
+                  </tr>
+                </thead>
+                <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Individual</label>
+                  <div class="col-sm-8 ind-box">
+                  <div v-if="this.frequentrelapse == true">-Frequent Relapse</div>
+                  <div v-if="this.risk == true">-Frequent Relapse</div>
+                  <div v-if="this.functionality == true">-Frequent Relapse</div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Medication</label>
+                  <div class="col-sm-8 med-box">
+                  <div v-if="this.adherence == true">-Adherence</div>
+                  <div v-if="this.sideeffect == true">-Frequent Relapse</div>
+                  <div v-if="this.depotmonitoring == true">-Frequent Relapse</div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Support</label>
+                  <div class="col-sm-8 spt-box">
+                  <div v-if="this.identification == true">-Identification</div>
+                  <div v-if="this.psychoeducation == true">-Psychoeducation</div>
+                  <div v-if="this.practice == true">-Practice</div>
+                  </div>
+                </div>
               </table>
 
               <table class="notes">
@@ -500,6 +534,7 @@ export default {
       practice: "",
       SidebarAccess: null,
       appId: 0,
+      showStatus: 0,
     };
   },
   beforeMount() {
@@ -877,6 +912,7 @@ export default {
                   'Data is inserted.',
                   'success',
                 );
+                this.showStatus = 1;
 
               } else {
                 this.loader = false;
