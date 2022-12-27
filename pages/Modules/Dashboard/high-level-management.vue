@@ -7,12 +7,13 @@
         <div class="container-fluid px-4 dashboard">
           <div class="page-title dashboard-title">
             <h1>High Level Management</h1>
-            <div class="input-group dashboard-search">
-              <span class="input-group-text" id="basic-addon1"
+            <div class="input-group dashboard-search" v-if="dataReady">
+              <span class="input-group-text" id="basic-addon1" type="button" v-on:click="SearchPatient"
                 ><i class="fa fa-search"></i
               ></span>
               <input
                 type="text"
+                v-model="search"
                 class="form-control"
                 placeholder="Search By Name/NRIC/Passport/MRN"
               />
@@ -632,6 +633,9 @@ export default {
       kpiChart: "",
       shharpChart: "",
       diagnosisChart:"",
+      search:"",
+      dataReady: false,
+      branch_id: 0,
     };
   },
 
@@ -643,6 +647,7 @@ export default {
     this.GetMentariIncludingHospitalList();
     this.Getannouncement();
     this.GetStateList();
+    this.getRole();
   },
   mounted() {},
 
@@ -1329,6 +1334,27 @@ export default {
                 });
       }
     },
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branch_id=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady= true;
+            }else{
+              this.dataReady= false;
+            }
+
+    },
     async GetYears() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1422,6 +1448,10 @@ export default {
       } else {
         this.StateList = [];
       }
+    },
+    SearchPatient() {
+    localStorage.setItem('keyword',(this.search));
+    this.$router.push("/modules/Patient/patient-list" );
     },
   },
 };
