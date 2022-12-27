@@ -1505,24 +1505,6 @@ export default {
       try {
         this.Isvalid = true;
         var explist = [];
-        if (this.is_voluneering_exp == "experience-yes") {
-          if (!this.exp_details) {
-            this.errors.push(
-              "volunteering experience description is required."
-            );
-            this.Isvalid = false;
-          }
-        }
-        if (this.is_mental_health_professional == "professional-yes") {
-          if (!this.file) {
-            this.errors.push("Latest Resume is required.");
-            this.Isvalid = false;
-          }
-          if (!this.mentari_services) {
-            this.errors.push("Relevant Mentari Service is required.");
-            this.Isvalid = false;
-          }
-        }
         if (
           this.Isvalid &&
           this.screening_mode &&

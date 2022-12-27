@@ -8,8 +8,7 @@
           <div class="card mb-4 mt-5">
 <div class="card-header">
               <h4>Volunteer, Outreach, And Networking Application Form</h4>
-              <a href="#" class="visibility-h"
-                ><i class="fa fa-user-edit"></i
+              <a href="#" class="visibility-h"><i class="fa fa-user-edit"></i
               ></a>
             </div>
              <div class="organization notshow-box">
@@ -21,26 +20,21 @@
 
     <!-- <form class="form-padding"> -->
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label"
-          >Name of organization or company<span>*</span></label
-        >
+        <label for="" class="col-sm-4 col-form-label">Name of organization or company<span>*</span></label>
         <div class="col-sm-8">
-          <span class="form-control">{{ this.org_name }}</span>
+          <span class="form-control" >{{ this.org_name }}</span>
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label"
-          >Registration Number<span>*</span></label
-        >
+        <label for="" class="col-sm-4 col-form-label">Registration Number<span>*</span></label>
         <div class="col-sm-8">
           <span class="form-control">{{ this.org_reg_number }}</span>
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="" class="col-sm-4 col-form-label"
-          >Brief description of the company/organization background<span
+        <label for="" class="col-sm-4 col-form-label">Brief description of the company/organization background<span
             >*</span
           ></label
         >
@@ -920,7 +914,8 @@
                       </div>
                     </div>
                   </div>
-
+                  <br>
+                  <br>
                   <button
                     @click="OnSubmit"
                     class="btn btn-warning btn-text ml-auto"
