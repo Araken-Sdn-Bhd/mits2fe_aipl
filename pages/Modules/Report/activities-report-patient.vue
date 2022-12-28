@@ -67,7 +67,7 @@
                           v-bind:key="cat.id"
                           v-bind:value="cat.id"
                         >
-                          {{ cat.appointment_category_name }}
+                          {{ cat.section_value }}
                         </option>
                       </select>
                     </div>
@@ -101,7 +101,7 @@
                           v-bind:key="vst.id"
                           v-bind:value="vst.id"
                         >
-                          {{ vst.appointment_visit_name }}
+                          {{ vst.section_value }}
                         </option>
                       </select>
                     </div>
@@ -981,7 +981,7 @@ export default {
           this.genderlist = response2.data.list;
         }
         const response12 = await this.$axios.get(
-          "patient-appointment-category/list",
+          "general-setting/list?section=" + "patient-category",
           { headers }
         );
         if (response12.data.code == 200 || response12.data.code == "200") {
@@ -1001,7 +1001,7 @@ export default {
           this.referallist = [];
         }
         const response14 = await this.$axios.get(
-          "patient-appointment-visit/list",
+          "general-setting/list?section=" +"type-of-visit",
           { headers }
         );
 
