@@ -7,12 +7,13 @@
         <div class="container-fluid px-4 dashboard">
           <div class="page-title dashboard-title">
             <h1>High Level Management</h1>
-            <div class="input-group dashboard-search">
-              <span class="input-group-text" id="basic-addon1"
+            <div class="input-group dashboard-search" v-if="dataReady">
+              <span class="input-group-text" id="basic-addon1" type="button" v-on:click="SearchPatient"
                 ><i class="fa fa-search"></i
               ></span>
               <input
                 type="text"
+                v-model="search"
                 class="form-control"
                 placeholder="Search By Name/NRIC/Passport/MRN"
               />
@@ -378,7 +379,7 @@
                     >
                       <option value="0">Select MENTARI</option>
                       <option
-                        v-for="fee in branchlist"
+                        v-for="fee in branchincludinghospitallist"
                         v-bind:key="fee.id"
                         v-bind:value="fee.id"
                       >
@@ -396,7 +397,7 @@
                       <option>Race</option>
                       <option>Range of Age</option>
                       <option>Gender</option>
-                      <option>Method of Self harm</option>
+                      <!-- <option>Method of Self harm</option> -->
                       <option>Religion</option>
                       <option>Marital Status</option>
                       <option>Education</option>
@@ -581,6 +582,7 @@ export default {
       ],
       hospitallist: [],
       branchlist: [],
+      branchincludinghospitallist: [],
       list: [],
       kpiEmployement: "",
       kpiUnemployement: "",
@@ -630,6 +632,10 @@ export default {
       myChart: "",
       kpiChart: "",
       shharpChart: "",
+      diagnosisChart:"",
+      search:"",
+      dataReady: false,
+      branch_id: 0,
     };
   },
 
@@ -638,8 +644,10 @@ export default {
     this.Getrecord();
     this.GetYears();
     this.GetMentariList();
+    this.GetMentariIncludingHospitalList();
     this.Getannouncement();
     this.GetStateList();
+    this.getRole();
   },
   mounted() {},
 
@@ -838,85 +846,19 @@ export default {
           console.log("my service_name_list", this.sharp_name_list);
           console.log("my service_patient_list", this.sharp_count_list);
           console.log("my service_color_list", this.sharp_color_list);
-          this.diagnosisf0 = "";
-          this.diagnosisf1 = "";
-          this.diagnosisf2 = "";
-          this.diagnosisf3 = "";
-          this.diagnosisf4 = "";
-          this.diagnosisf5 = "";
-          this.diagnosisf6 = "";
-          if (response.data.diagnosis) {
-            for (let i = 0; i < response.data.diagnosis.length; i++) {
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F00-F07"
-              ) {
-                this.diagnosisf0 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F10-F18"
-              ) {
-                this.diagnosisf1 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F20-F25"
-              ) {
-                this.diagnosisf2 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F30-F39"
-              ) {
-                this.diagnosisf3 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F40-F45"
-              ) {
-                this.diagnosisf4 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F50-F55"
-              ) {
-                this.diagnosisf5 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F60-F66"
-              ) {
-                this.diagnosisf6 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F70-F73"
-              ) {
-                this.diagnosisf7 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F80-F89"
-              ) {
-                this.diagnosisf8 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "F90-F98.5"
-              ) {
-                this.diagnosisf9 = response.data.diagnosis[i].sum_;
-              }
-              if (response.data.diagnosis[i]["icd_category_code"] == "F99") {
-                this.diagnosisf10 = response.data.diagnosis[i].sum_;
-              }
-              if (
-                response.data.diagnosis[i]["icd_category_code"] == "X60-X84"
-              ) {
-                this.diagnosisf11 = response.data.diagnosis[i].sum_;
-              }
-            }
-          }
+          
 
-          var kpixValues = ["Employed", "Unemployed", "Terminated"];
+
           if (this.kpiChart) {
+            this.kpiChart.destroy();
+            var kpixValues = ["Employed", "Unemployed", "Terminated"];
             var kpiyValues = [
               this.kpiEmployement,
               this.kpiUnemployement,
               this.kpiTerminated,
             ];
-            this.kpiChart.destroy();
           } else {
+            var kpixValues = ["Employed", "Unemployed", "Terminated"];
             var kpiyValues = [
               this.kpiEmployement,
               this.kpiUnemployement,
@@ -975,7 +917,85 @@ export default {
             },
           });
 
-          var xValues = [
+          if(this.diagnosisChart){
+            this.diagnosisChart.destroy();
+            this.diagnosisf0 = "";
+          this.diagnosisf1 = "";
+          this.diagnosisf2 = "";
+          this.diagnosisf3 = "";
+          this.diagnosisf4 = "";
+          this.diagnosisf5 = "";
+          this.diagnosisf6 = "";
+          this.diagnosisf7 = "";
+          this.diagnosisf8 = "";
+          this.diagnosisf9 = "";
+          this.diagnosisf10 = "";
+          this.diagnosisf11 = "";
+          if (response.data.diagnosis) {
+            for (let i = 0; i < response.data.diagnosis.length; i++) {
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F00-F07"
+              ) {
+                this.diagnosisf0 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F10-F18"
+              ) {
+                this.diagnosisf1 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F20-F25"
+              ) {
+                this.diagnosisf2 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F30-F39"
+              ) {
+                this.diagnosisf3 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F40-F45"
+              ) {
+                this.diagnosisf4 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F50-F55"
+              ) {
+                this.diagnosisf5 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F60-F66"
+              ) {
+                this.diagnosisf6 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F70-F73"
+              ) {
+                this.diagnosisf7 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F80-F89"
+              ) {
+                this.diagnosisf8 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F90-F98.5"
+              ) {
+                this.diagnosisf9 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F99"
+              ) {
+                this.diagnosisf10 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "X60-X84"
+              ) {
+                this.diagnosisf11 = response.data.diagnosis[i].sum_;
+              }
+            }
+          }
+            var xValues = [
             "F00-F07",
             "F10-F18",
             "F20-F25",
@@ -1007,7 +1027,7 @@ export default {
             "pink",
             "green",
             "red",
-            "green",
+            "#FFE5B4",
             "blue",
             "gray",
             "orange",
@@ -1018,7 +1038,128 @@ export default {
             "purple",
           ];
 
-          new Chart("myChartpieClinical", {
+          }else{
+            this.diagnosisf0 = "";
+          this.diagnosisf1 = "";
+          this.diagnosisf2 = "";
+          this.diagnosisf3 = "";
+          this.diagnosisf4 = "";
+          this.diagnosisf5 = "";
+          this.diagnosisf6 = "";
+          this.diagnosisf7 = "";
+          this.diagnosisf8 = "";
+          this.diagnosisf9 = "";
+          this.diagnosisf10 = "";
+          this.diagnosisf11 = "";
+          if (response.data.diagnosis) {
+            for (let i = 0; i < response.data.diagnosis.length; i++) {
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F00-F07"
+              ) {
+                this.diagnosisf0 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F10-F18"
+              ) {
+                this.diagnosisf1 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F20-F25"
+              ) {
+                this.diagnosisf2 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F30-F39"
+              ) {
+                this.diagnosisf3 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F40-F45"
+              ) {
+                this.diagnosisf4 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F50-F55"
+              ) {
+                this.diagnosisf5 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F60-F66"
+              ) {
+                this.diagnosisf6 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F70-F73"
+              ) {
+                this.diagnosisf7 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F80-F89"
+              ) {
+                this.diagnosisf8 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F90-F98.5"
+              ) {
+                this.diagnosisf9 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "F99"
+              ) {
+                this.diagnosisf10 = response.data.diagnosis[i].sum_;
+              }
+              if (
+                response.data.diagnosis[i]["icd_category_code"] == "X60-X84"
+              ) {
+                this.diagnosisf11 = response.data.diagnosis[i].sum_;
+              }
+            }
+          }
+            var xValues = [
+            "F00-F07",
+            "F10-F18",
+            "F20-F25",
+            "F30-F39",
+            "F40-F45",
+            "F50-F55",
+            "F60-F66",
+            "F70-F73",
+            "F80-F89",
+            "F90-F98.5",
+            "F99",
+            "X60-X84",
+          ];
+          var yValues = [
+            this.diagnosisf0,
+            this.diagnosisf1,
+            this.diagnosisf2,
+            this.diagnosisf3,
+            this.diagnosisf4,
+            this.diagnosisf5,
+            this.diagnosisf6,
+            this.diagnosisf7,
+            this.diagnosisf8,
+            this.diagnosisf9,
+            this.diagnosisf10,
+            this.diagnosisf11,
+          ];
+          var barColors = [
+            "pink",
+            "green",
+            "red",
+            "#FFE5B4",
+            "blue",
+            "gray",
+            "orange",
+            "brown",
+            "yellow",
+            "magenta",
+            "turquoise",
+            "purple",
+          ];
+          }
+
+          this.diagnosisChart = new Chart("myChartpieClinical", {
             type: "pie",
             data: {
               labels: xValues,
@@ -1193,6 +1334,27 @@ export default {
                 });
       }
     },
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      this.branch_id=this.userdetails.branch.branch_id;
+            if (response.data.list.code =="superadmin"){
+              this.dataReady= true;
+            }else{
+              this.dataReady= false;
+            }
+
+    },
     async GetYears() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -1213,7 +1375,7 @@ export default {
         "Content-Type": "application/json",
       };
 
-      const response = await this.$axios.get("hospital/branch-list", {
+      const response = await this.$axios.get("hospital/branch-excluded-hospital-list", {
         headers,
       });
       if (response.data.code == 200 || response.data.code == "200") {
@@ -1222,6 +1384,24 @@ export default {
         this.branchlist = [];
       }
     },
+
+    async GetMentariIncludingHospitalList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+
+      const response = await this.$axios.get("hospital/branch-list", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.branchincludinghospitallist = response.data.list;
+      } else {
+        this.branchincludinghospitallist = [];
+      }
+    },
+
     async Getannouncement() {
       try {
         const headers = {
@@ -1268,6 +1448,10 @@ export default {
       } else {
         this.StateList = [];
       }
+    },
+    SearchPatient() {
+    localStorage.setItem('keyword',(this.search));
+    this.$router.push("/modules/Patient/patient-list" );
     },
   },
 };

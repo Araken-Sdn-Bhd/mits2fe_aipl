@@ -89,7 +89,7 @@
                     <td>{{ app.app_time }}</td>
                     <td>{{ app.dr_name }}</td>
                     <td>{{ app.aoi }}</td>
-                    <td>{{ app.service }}</td>
+                    <td>{{ app.services_type }}</td>
                     <td class="td"  :class="SidebarAccess!=1?'hide1':''">
                       <a
                         style="cursor: pointer"

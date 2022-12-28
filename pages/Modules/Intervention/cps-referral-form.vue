@@ -56,7 +56,7 @@
                   </tr>
                 </thead>
                 <div class="row mb-3">
-                  <label class="col-sm-4 col-form-label">Individual</label>
+                  <label class="col-sm-4 col-form-label">Individual<small style="color:red">*</small></label>
                   <div class="col-sm-8 ind-box">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="Frequent Relapse" v-model="frequentrelapse"
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label class="col-sm-4 col-form-label">Medication</label>
+                  <label class="col-sm-4 col-form-label">Medication<small style="color:red">*</small></label>
                   <div class="col-sm-8 med-box">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="Adherence" v-model="adherence"
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label class="col-sm-4 col-form-label">Support</label>
+                  <label class="col-sm-4 col-form-label">Support<small style="color:red">*</small></label>
                   <div class="col-sm-8 spt-box">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="Identification" v-model="identification"
@@ -179,7 +179,7 @@
                       </div>
                       <!-- close-row -->
                       <div class="row mb-3">
-                        <label class="col-lg-4 col-md-12 col-form-label">Category Of Services<small style="color:red">*</small> 
+                        <label class="col-lg-4 col-md-12 col-form-label">Category Of Services<small style="color:red">*</small>
                         </label>
                         <div class="col-lg-8 col-md-12">
                           <div class="form-check form-check-inline">
@@ -329,11 +329,11 @@
               </p>
               <br>
               <br>
-              <div class="d-flex four-btns" v-if="!pid">
+              <div class="d-flex four-btns">
                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                 </button>
 
-                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''"  v-if="!pid">
                   <button @click="OnPrint" type="submit" class="btn btn-green btn-text">
                     <i class="fa fa-download"></i> Download
                   </button>

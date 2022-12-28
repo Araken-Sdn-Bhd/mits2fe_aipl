@@ -85,7 +85,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Referral Purpose:</th>
+                                            <th>Referral Purpose<small style="color:red">*</small> :</th>
                                             <td>
                                                 <table class="sub-table">
                                                     <thead>
@@ -625,7 +625,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -818,13 +818,13 @@
                                 </p>
                                 <br>
                        <br>
-                <div class="d-flex" v-if="!pid">
+                <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''"  v-if="!pid">
                     <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
@@ -989,7 +989,13 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      if (confirm("Are you sure you want to save as draft?")) {
+      this.$swal.fire({
+        title: 'Do you want to save as draft?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
       try {
           this.loader = true;
           const headers = {
@@ -1084,62 +1090,39 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.$swal.fire({
-            title: 'Are you sure to save this as draft?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, submit it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-          }
-          ).then((result) => {
-            if (result.isConfirmed) {
-              swalWithBootstrapButtons.fire(
-                'Submitted!',
-                'Your for has been submitted.',
-                'success'
-              )
-            } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
-              swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your data is not submitted :)',
-                'error'
-              )
+            if (response.data.code == 200) {
+              this.loader = false;
+              this.$swal.fire('Succesfully save as draft!', '', 'success')
+              this.GoBack();
+            } else {
+              this.loader = false;
+              this.resetmodel();
+              this.$swal.fire({
+                icon: 'error',
+                title: 'Oops... Something Went Wrong! dalam function api',
+                text: 'the error is: ' + JSON.stringify(response.data.message),
+              })
+              this.GoBack();
             }
-          })
-        } else {
-            this.loader = false;
+          } catch (e) {
             this.$swal.fire({
-            icon: 'error',
-            title: 'Oops... Something Went Wrong!',
-            text: 'the error is: ' + this.error,
-          })
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + e,
+            })
           }
-        } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-    }
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
+        }
+      })
     },
     async onPublishEvent() {
-      const swalWithBootstrapButtons = this.$swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
+      this.$swal.fire({
+        title: 'Do you want to save the changes?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
       this.validate = true;
       this.errorList = [];
       try {
@@ -1303,50 +1286,37 @@ export default {
             { headers }
           );
           console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.$swal.fire({
-            title: 'Are you sure to submit this?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, submit it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-          }
-          ).then((result) => {
-            if (result.isConfirmed) {
-              swalWithBootstrapButtons.fire(
-                'Submitted!',
-                'Your for has been submitted.',
-                'success'
-              )
-            } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
-              swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your data is not submitted :)',
-                'error'
-              )
+              if (response.data.code == 200) {
+                this.loader = false;
+                this.$swal.fire(
+                  'Successfully Submitted.',
+                  'Data is inserted.',
+                  'success',
+                );
+
+              } else {
+                this.loader = false;
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                })
+                this.GoBack();
+              }
             }
-          })
-          } else {
+          } catch (e) {
             this.loader = false;
             this.$swal.fire({
-            icon: 'error',
-            title: 'Oops... Something Went Wrong!',
-            text: 'the error is: ' + this.error,
-          })
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + e,
+            })
+            this.GoBack();
           }
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
         }
-      } catch (e) {
-        this.loader = false;
-        // this.$swal.fire('Created Succefully', '', 'success');
-        //   $("#errorpopup").modal("show");
-        // });
-      }
+      })
     },
     async GetList() {
       const headers = {

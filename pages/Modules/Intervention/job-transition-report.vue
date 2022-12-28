@@ -48,7 +48,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label class="form-label">Who can help with your career goals?</label>
+                                    <label class="form-label">Who can help with your career goals?<small style="color:red">*</small></label>
                                     <table class="with-full goals mb-3">
                                         <thead>
                                             <tr>
@@ -189,7 +189,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">If you are employed, how often do you want someone to
                                             check in with you about your job? Who should check in
-                                            with you?<small style="color:red">*</small> 
+                                            with you?<small style="color:red">*</small>
                                         </label>
                                         <textarea class="form-control textarea" v-model="who_check_in_with_you"></textarea>
                                     </div>
@@ -225,7 +225,7 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">What are some tools/coping strategies you use or have
-                                            used in the past on the job to manage stress?<small style="color:red">*</small> 
+                                            used in the past on the job to manage stress?<small style="color:red">*</small>
                                         </label>
                                         <textarea class="form-control textarea" v-model="coping_strategies"></textarea>
                                     </div>
@@ -233,7 +233,7 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">How would you know if you started to feel dissatisfied
-                                            with your job or that you were having other problems?<small style="color:red">*</small> 
+                                            with your job or that you were having other problems?<small style="color:red">*</small>
                                         </label>
                                         <textarea class="form-control textarea" v-model="dissatisfied_with_your_job"></textarea>
                                     </div>
@@ -244,7 +244,7 @@
                                             future? (Help leaving current job, help to find a new
                                             job, help advocating for a promotion or raise,
                                             assistance with training or education, benefits
-                                            planning, etc).<small style="color:red">*</small> 
+                                            planning, etc).<small style="color:red">*</small>
                                         </label>
                                         <textarea class="form-control textarea" v-model="reasons_to_re_connect_to_ips"></textarea>
                                     </div>
@@ -319,7 +319,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
@@ -445,13 +445,13 @@
                             </p>
                             <br>
                             <br>
-                            <div class="d-flex" v-if="!pid">
+                            <div class="d-flex">
 
                                 <button @click="GoBack" class="btn btn-primary btn-text">
                                     <i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
 
-                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
+                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
                                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                         <i class="fa fa-save"></i> Save as draft
                                     </button>

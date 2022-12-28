@@ -262,7 +262,7 @@
                         v-bind:key="cat.id"
                         v-bind:value="cat.id"
                       >
-                        {{ cat.section_value }}
+                        {{ cat.appointment_category_name }}
                       </option>
                     </select>
                   </div>
@@ -377,9 +377,8 @@ export default {
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    let urlParams = new URLSearchParams(window.location.search);
-    this.Id = urlParams.get("id");
-    this.users_id = urlParams.get("users_id");
+    this.Id = this.userdetails.user.id;
+    this.users_id = this.userdetails.user.id
     this.GetList();
     this.Getdetails();
     this.Getstaffpatientlist();
@@ -392,9 +391,7 @@ export default {
         "Content-Type": "application/json",
       };
       const responsecat = await this.$axios.get(
-        `${this.$axios.defaults.baseURL}` +
-          "general-setting/list?section=" +
-          "patient-category",
+        "patient-appointment-category/list",
         { headers }
       );
       if (responsecat.data.code == 200 || responsecat.data.code == "200") {
