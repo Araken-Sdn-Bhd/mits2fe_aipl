@@ -70,6 +70,7 @@
                       class="form-control"
                       name=""
                       v-model="name"
+                      v-on:keypress="isLetter($event)"
                     />
                   </div>
                 </div>
@@ -736,6 +737,12 @@ export default {
         console.log("my error", e);
       }
     },
+    async isLetter(e){
+        let char = String.fromCharCode(e.keyCode); 
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        else e.preventDefault();
+    },
+
     async Ongeneratepdf() {
       this.errorList = [];
       this.error = null;

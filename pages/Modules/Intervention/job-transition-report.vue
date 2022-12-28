@@ -48,7 +48,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label class="form-label">Who can help with your career goals?</label>
+                                    <label class="form-label">Who can help with your career goals?<small style="color:red">*</small></label>
                                     <table class="with-full goals mb-3">
                                         <thead>
                                             <tr>

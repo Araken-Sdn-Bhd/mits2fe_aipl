@@ -56,7 +56,7 @@
                                   </tr>
                               </thead>
                               <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Individual</label>
+                                  <label class="col-sm-4 col-form-label">Individual<small style="color:red">*</small></label>
                                   <div class="col-sm-8 ind-box">
                                       <div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="Frequent Relapse" v-model="frequentrelapse" id="ind-1" />
@@ -82,7 +82,7 @@
                               </div>
 
                               <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Medication</label>
+                                  <label class="col-sm-4 col-form-label">Medication<small style="color:red">*</small></label>
                                   <div class="col-sm-8 med-box">
                                       <div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="Adherence" v-model="adherence" id="med-4" />
@@ -108,7 +108,7 @@
                               </div>
 
                               <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Support</label>
+                                  <label class="col-sm-4 col-form-label">Support<small style="color:red">*</small></label>
                                   <div class="col-sm-8 spt-box">
                                       <div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="Identification" v-model="identification" id="spt-7" />
