@@ -262,7 +262,7 @@
                         v-bind:key="cat.id"
                         v-bind:value="cat.id"
                       >
-                        {{ cat.appointment_category_name }}
+                        {{ cat.section_value }}
                       </option>
                     </select>
                   </div>
@@ -392,7 +392,9 @@ export default {
         "Content-Type": "application/json",
       };
       const responsecat = await this.$axios.get(
-        "patient-appointment-category/list",
+        `${this.$axios.defaults.baseURL}` +
+          "general-setting/list?section=" +
+          "patient-category",
         { headers }
       );
       if (responsecat.data.code == 200 || responsecat.data.code == "200") {

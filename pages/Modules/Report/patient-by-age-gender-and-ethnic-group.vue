@@ -342,6 +342,7 @@ export default {
             "report/getPatientByAgeReport",
             {
               added_by: this.userdetails.user.id,
+              email: this.userdetails.user.email,
               fromDate: this.fromDate,
               toDate: this.toDate,
               gender: this.Gender,
