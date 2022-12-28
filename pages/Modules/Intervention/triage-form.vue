@@ -337,7 +337,7 @@
                           v-model="appointment_patient_category">
                           <option value="0">Select Category of Patient</option>
                           <option v-for="cat in categorylist" v-bind:key="cat.id" v-bind:value="cat.id">
-                            {{ cat.appointment_category_name }}
+                            {{ cat.section_value }}
                           </option>
                         </select>
                       </div>
@@ -349,7 +349,7 @@
                           v-model="appointment_type_visit">
                           <option value="0">Select Type of Visit</option>
                           <option v-for="vst in visitlist" v-bind:key="vst.id" v-bind:value="vst.id">
-                            {{ vst.appointment_visit_name }}
+                            {{ vst.section_value }}
                           </option>
                         </select>
                       </div>
@@ -736,7 +736,7 @@ export default {
         this.teamlist = [];
       }
       const response6 = await this.$axios.get(
-        "patient-appointment-visit/list",
+        "general-setting/list?section=" + "type-of-visit",
         { headers }
       );
 
@@ -746,7 +746,7 @@ export default {
         this.visitlist = [];
       }
       const response7 = await this.$axios.get(
-        "patient-appointment-category/list",
+        "general-setting/list?section=" + "patient-category",
         { headers }
       );
       if (response7.data.code == 200 || response7.data.code == "200") {
