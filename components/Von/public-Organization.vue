@@ -1520,12 +1520,12 @@ export default {
         if (!this.Oproject_loaction) {
           this.errors.push("Project Location is required.");
         } else {
-          if (this.Oproject_loaction == "project-location-others") {
+          if (this.Oproject_loaction == "location-others") {
             if (!this.Oother_loaction) {
               this.errors.push("Please Enter Other Location");
               this.OIsvalid = false;
             } else {
-              this.Oproject_loaction_value = this.Oproject_other;
+              this.Oproject_loaction_value = this.Oother_loaction;
             }
           } else {
             if (!this.Oproject_branch) {
@@ -1630,7 +1630,9 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted.',
+                );
             this.Reload();
           } else {
             this.loader = false;
@@ -1714,7 +1716,7 @@ export default {
           this.errors.push("Project Location is required.");
         } else {
           if (this.Onetwotkproject_loaction == "project-location-others") {
-            if (!this.networkother) {
+            if (!this.Onetworkother) {
               this.errors.push("Please Enter Other Location");
               this.OIsvalid = false;
             } else {
@@ -1807,7 +1809,9 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted.',
+                );
             this.Reload();
           } else {
             this.loader = false;
