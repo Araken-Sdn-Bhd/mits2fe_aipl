@@ -25,63 +25,102 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Period Of Services<small style="color:red">*</small> :</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          v-model="fromDate"
-                        />
+                        <label class="form-label">Year:</label>
+                        <select class="form-select" v-model="year">
+                        <option v-for="year in getCurrentYear()" v-if="year>=1970" :value="year">{{ year }}</option>
+                      </select>
+                      </div>
+                    </div>
+                  </div>
+                  <!--- row -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="mb-3">
+                        <label class="form-label">Period Of Services<small style="color:red">*</small>:</label>
+                        <select class="form-select" v-model="fromMonth">
+                          <option value="" selected="selected">Please Select</option>
+                        <option v-for="m in months.month">{{ m }}</option>
+                      </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">To<small style="color:red">*</small> :</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          v-model="toDate"
-                        />
+                        <label class="form-label">To<small style="color:red">*</small>:</label>
+                        <select class="form-select" v-model="toMonth">
+                          <option value="" selected="selected">Please Select</option>
+                        <option v-for="m in months.month">{{ m }}</option>
+                      </select>
                       </div>
                     </div>
                   </div>
                   <!-- row -->
                   <div class="row">
-                    <div class="col-sm-6">
+
+                    <!-- <div v-if="(user_role=='superadmin')" class="col-sm-6"> comment out for testing and developing purposes -->
+                      <div  class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Level of Report:</label>
-                        <select class="form-select" v-model="Age">
-                          <option value="">Please Select</option>
-                          <option
-                            v-for="rfl in agelist"
-                            v-bind:key="rfl.id"
-                            v-bind:value="rfl.id"
-                          >
-                            {{ rfl.section_value }}
-                          </option>
+                        <select class="form-select" v-model="level_report" @change="OnchangeLeveofReport($event)">
+                          <option value="" selected="selected">Please Select</option>
+                          <option value="National">National</option>
+                          <option value="State">State</option>
+                          <option value="Hospital">Hospital</option>
                         </select>
                       </div>
+
+
                     </div>
-                    <div class="col-sm-6">
-                      <div class="mb-3">
-                        <label class="form-label">Status Of Job:</label>
-                        <select class="form-select" v-model="Gender">
-                          <option value="">Please Select</option>
+
+                    
+
+                  <div class="col-sm-6">
+                    <div class="mb-3 mentari selected-box">
+                      <div v-if="this.level_report == 'Hospital'" style = "position:relative; top:30px;">
+                        <select 
+                          class="form-select select-others"
+                          v-model="hospital"
+                        >
+                          <option value="" selected="selected">Please Select Hospital</option>
                           <option
-                            v-for="rfl in genderlist"
-                            v-bind:key="rfl.id"
-                            v-bind:value="rfl.id"
+                            v-for="brn in BranchList"
+                            v-bind:key="brn.id"
+                            v-bind:value="brn.id"
                           >
-                            {{ rfl.section_value }}
+                            {{ brn.hospital_branch_name }}
                           </option>
                         </select>
                       </div>
+
+                      <div v-if="this.level_report == 'State'" style = "position:relative; top:30px;">
+                        <select
+                          class="form-select select-others"
+                          v-model="state"
+                        >
+                          <option value="" selected="selected">Please Select State</option>
+                          <option
+                          v-for="state in StateList"
+                          v-bind:key="state.id"
+                          v-bind:value="state.id">
+                          
+                          {{ state.state_name }}
+                          </option>
+                        </select>
+                      </div>
+                      </div>   
                     </div>
                   </div>
                   <!-- row -->
-                  <!-- row -->
+                  <Error :message="error" v-if="error" />
+               <p v-if="errorList.length">
+                          <ul>
+                           <li style="color:red"  v-for='err in errorList' :key='err' >
+                           {{ err }}
+                             </li>
+                        </ul>
+                       </p>
 
                   <div class="btn-width d-flex">
-                    <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
+                    <div class="ml-auto">
                       <a @click="Ongeneratepdf" class="btn btn-danger btn-text"
                         ><i class="fa fa-file-pdf"></i> Generate PDF</a
                       >
@@ -90,46 +129,264 @@
                         class="btn btn-success btn-text"
                         ><i class="fa fa-file-excel"></i> Generate Excel</a
                       >
-                      <!-- <downloadexcel
-                       class="btn btn-success btn-text"
-                       :header="header"
-                       :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"
-                       :json_data="ReportList"
-                       :fetch = "Ongenerateexel"
-                       :fields ="json_fields"
-                       :excelname="excelname"
-                       :sheetname="sheetname"
-                        worksheet="National KPI"
-                       :name=excelname
-                      >
-                      <i class="fa fa-file-excel"></i> Generate Excel
-                      </downloadexcel> -->
+
                     </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
+
           <div id="result" class="hide" ref="result" style="background: #fff">
-            <table id="datatable">
-              <thead>
-                <tr class="bg">
-                  <td rowspan="3" style="border-right: 0.1em solid #000;">Bil</td>
-                  <td rowspan="3" style="border-left: 1px solid #000;">Mentari</td>
-                  <td colspan="45">2022</td>
-                </tr>
+            <h4>NATIONAL KPI REPORT</h4>
+            <div class="legend">
+              <div class="legend1">
+                <ul id="legend-order">
+                  <li>(c) = Total Caseload</li>
+                  <li>(d) = Total Dismissed</li>
+                </ul>
+              </div>
 
-                <tr class="bg" id="tableMonths"></tr>
+            <div class="legend2">
+                <ul id="legend-order">
+                  <li>(a) = Newly Job Placed</li>
+                  <li>(b) = Ongoing Job Placement</li>
+                </ul>
+            </div>
+            </div>
 
-                <tr class="vertical bg text-justify" id="tableHeadKeys"></tr>
-              </thead>
-              <tbody id="tablebody_"></tbody>
-            </table>
-          </div>
+
+      <table>
+        <tbody>
+          <tr>
+            <td rowspan="4">BIL</td>
+            <td rowspan="4" colspan="3">MENTARI</td>
+          
+          <tr>
+            <td colspan="60" > YEAR {{ yearResult }} </td>
+            
+          </tr>
+          <tr v-for="(rp, index) in averageResult" 
+              v-bind:key="index"           
+          >
+  
+            <td v-if="rp[1]!=NULL" colspan="5">January</td>
+            <td v-if="rp[2]!=NULL" colspan="5">February</td>
+            <td v-if="rp[3]!=NULL" colspan="5">March</td>
+            <td v-if="rp[4]!=NULL" colspan="5">April</td>
+            <td v-if="rp[5]!=NULL" colspan="5">May</td>
+            <td v-if="rp[6]!=NULL" colspan="5">June</td>
+            <td v-if="rp[7]!=NULL" colspan="5">July</td>
+            <td v-if="rp[8]!=NULL" colspan="5">August</td>
+            <td v-if="rp[9]!=NULL" colspan="5">September</td>
+            <td v-if="rp[10]!=NULL" colspan="5">October</td>
+            <td v-if="rp[11]!=NULL" colspan="5">November</td>
+            <td v-if="rp[12]!=NULL" colspan="5">December</td>
+          </tr>
+          <tr
+          v-for="(rp, index) in averageResult" 
+          v-bind:key="index" >
+            <td v-if="rp[1]!=NULL">(a)</td><!--JAN-->
+            <td v-if="rp[1]!=NULL">(b)</td>
+            <td v-if="rp[1]!=NULL">(c)</td>
+            <td v-if="rp[1]!=NULL">(d)</td>
+            <td v-if="rp[1]!=NULL">KPI (%)</td>     
+
+            <td v-if="rp[2]!=NULL">(a)</td><!--FEB-->
+            <td v-if="rp[2]!=NULL">(b)</td>
+            <td v-if="rp[2]!=NULL">(c)</td>
+            <td v-if="rp[2]!=NULL">(d)</td>
+            <td v-if="rp[2]!=NULL">KPI (%)</td>       
+
+            <td v-if="rp[3]!=NULL">(a)</td><!--MAC-->
+            <td v-if="rp[3]!=NULL">(b)</td>
+            <td v-if="rp[3]!=NULL">(c)</td>
+            <td v-if="rp[3]!=NULL">(d)</td>
+            <td v-if="rp[3]!=NULL">KPI (%)</td>            
+
+            <td v-if="rp[4]!=NULL">(a)</td><!--APR-->
+            <td v-if="rp[4]!=NULL">(b)</td>
+            <td v-if="rp[4]!=NULL">(c)</td>
+            <td v-if="rp[4]!=NULL">(d)</td>
+            <td v-if="rp[4]!=NULL">KPI (%)</td>            
+
+            <td v-if="rp[5]!=NULL">(a)</td><!--MAY-->
+            <td v-if="rp[5]!=NULL">(b)</td>
+            <td v-if="rp[5]!=NULL">(c)</td>
+            <td v-if="rp[5]!=NULL">(d)</td>
+            <td v-if="rp[5]!=NULL">KPI (%)</td> 
+
+            <td v-if="rp[6]!=NULL">(a)</td><!--JUN-->
+            <td v-if="rp[6]!=NULL">(b)</td>
+            <td v-if="rp[6]!=NULL">(c)</td>
+            <td v-if="rp[6]!=NULL">(d)</td>
+            <td v-if="rp[6]!=NULL">KPI (%)</td>  
+
+            <td v-if="rp[7]!=NULL">(a)</td><!--JUL-->
+            <td v-if="rp[7]!=NULL">(b)</td>
+            <td v-if="rp[7]!=NULL">(c)</td>
+            <td v-if="rp[7]!=NULL">(d)</td>
+            <td v-if="rp[7]!=NULL">KPI (%)</td> 
+
+            <td v-if="rp[8]!=NULL">(a)</td><!--AUG-->
+            <td v-if="rp[8]!=NULL">(b)</td>
+            <td v-if="rp[8]!=NULL">(c)</td>
+            <td v-if="rp[8]!=NULL">(d)</td>
+            <td v-if="rp[8]!=NULL">KPI (%)</td>
+
+            <td v-if="rp[9]!=NULL">(a)</td><!--SEP-->
+            <td v-if="rp[9]!=NULL">(b)</td>
+            <td v-if="rp[9]!=NULL">(c)</td>
+            <td v-if="rp[9]!=NULL">(d)</td>
+            <td v-if="rp[9]!=NULL">KPI (%)</td>         
+
+            <td v-if="rp[10]!=NULL">(a)</td><!--OCT-->
+            <td v-if="rp[10]!=NULL">(b)</td>
+            <td v-if="rp[10]!=NULL">(c)</td>
+            <td v-if="rp[10]!=NULL">(d)</td>
+            <td v-if="rp[10]!=NULL">KPI (%)</td>     
+
+            <td v-if="rp[11]!=NULL">(a)</td><!--NOV-->
+            <td v-if="rp[11]!=NULL">(b)</td>
+            <td v-if="rp[11]!=NULL">(c)</td>
+            <td v-if="rp[11]!=NULL">(d)</td>
+            <td v-if="rp[11]!=NULL">KPI (%)</td>
+
+            <td v-if="rp[12]!=NULL">(a)</td><!--DEC-->
+            <td v-if="rp[12]!=NULL">(b)</td>
+            <td v-if="rp[12]!=NULL">(c)</td>
+            <td v-if="rp[12]!=NULL">(d)</td>
+            <td v-if="rp[12]!=NULL">KPI (%)</td>         
+          </tr>  
+      
+</tr>                   
+
+          <tr class="tr-box" v-for="(rp, index) in result" :key="index">
+            <td colspan="1" class="tdrow"> </td>
+            <td colspan="3" class="tdrow" >{{ rp.group_name}} </td> <!-- Nama Mentari -->
+            <!-- <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td> -->
+<!-- 
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+
+            <td class="tdrow">list[rp]['below_10']['male']</td>
+            <td class="tdrow">list[rp]['below_10']['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['male']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow">list[rp]["10-19"]['female']</td> -->
+          </tr>
+          
+          
+
+           <!-- <tr>
+            <td colspan="8">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+            <td colspan="4">Average(%)</td>
+            <td class="tdrow">{{ this.totalReport }}</td>
+
+          </tr>   -->
+        </tbody>
+      </table>
+      <label>Date Generated: {{ this.dateGenerated }}</label>
+    </div>
+
+
         </main>
       </div>
     </div>
+    
   </div>
 </template>
 <style scoped>
@@ -161,6 +418,31 @@ table {
   border-spacing: 0;
   border: 1px solid #000;
   text-align: center;
+}
+.legend{
+  width:fit-content;
+  float: right;
+  border:1px solid #000;
+  text-align: left;
+  margin-bottom: 10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top: 10px;
+}
+.legend1{
+  width:fit-content;
+  float: right;
+  border:0px solid #000;
+  text-align: left;
+  padding-left:10px;
+}
+
+.legend2{
+  width:fit-content;
+  float: right;
+  border:0px solid #000;
+  text-align: left;
+  padding-left:10px;
 }
 
 .tr-box td:first-child {
@@ -218,50 +500,70 @@ export default {
   },
   data() {
     return {
-      json_fields: {
-        "NO":'No',
-        "NAME" : 'Name',
-        "APPOINTMENT_TYPE" :"APPOINTMENT_TYPE",
-        "TYPE OF VISIT": "TYPE_OF_Visit",
-        "TYPE OF REFERRAL" :"TYPE_OF_Refferal",
-        "IC NO": "IC_NO",
-        "GENDER": "GENDER",
-        "AGE": "AGE",
-        "DIAGNOSIS" : "DIAGNOSIS",
-        "MEDICATIONS" : "MEDICATIONS",
-        "APPOINTMENT NO" :"app_no",
-        "PROCEDURE":"Procedure",
-        "NEXT VISIT":"Next_visit",
-        "TIME REGISTERED" :"time_registered",
-        "TIME SEEN":"time_seen",
-        "ATTENDANCE STATUS":"Attendance_status",
-        "ATTENDING DOCTOR/STAFF":"Attending_staff",
-      },
-      excelname: "",
-      sheetname: "NATIONAL KPI",
+
       header:"",
       userdetails: null,
-      fromDate: "", //2022-04-12
-      toDate: "", //2022-08-30
+      fromMonth: "", //2022-04-12
+      toMonth: "", //2022-08-30
       error: null,
       listKey: [],
       list: {},
+      errorList: [],
+      BranchList: [],
       agelist: [],
       genderlist: [],
       racelist: [],
       ReportList:[],
+      StateList: [],
+      state:'',
+      user_role:'',
       Gender: "",
       Age: "",
+      result:[], 
+      averageResult:[],
+      yearResult:"", 
       race_id: "",
+      level_report:"",
+      hospital:"",
       SidebarAccess:null,
+      year:new Date().getFullYear(),
+       months:{
+        month:["January","February","March","April","May","June","July","August","September","October","November","December"],
+              },
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.GetList();
+    this.getRole();
   },
   methods: {
+
+    getCurrentYear() {
+      return new Date().getFullYear();
+    },
+
+    async getRole() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "staff-management/getRoleCode",
+        { email: this.userdetails.user.email },
+        {
+          headers,
+        }
+      );
+      if(response.data.code == 200 || response.data.code == "200"){
+
+      this.user_role=response.data.list.code; 
+
+      }
+
+    },
     async GetList() {
       try {
         this.loader = true;
@@ -270,27 +572,22 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
         };
-        const response = await this.$axios.get(
-          "general-setting/list?section=" + "range-of-age",
-          { headers }
-        );
-        if (response.data.code == 200 || response.data.code == "200") {
-          this.agelist = response.data.list;
-        }
-        const response2 = await this.$axios.get(
-          "general-setting/list?section=" + "gender",
-          { headers }
-        );
+        const response2 = await this.$axios.get("hospital/branch-list", {
+          headers,
+        });
         if (response2.data.code == 200 || response2.data.code == "200") {
-          this.genderlist = response2.data.list;
+          this.BranchList = response2.data.list;
+        } else {
+          this.BranchList = [];
         }
-        const response3 = await this.$axios.get(
-          "general-setting/list?section=" + "race",
-          { headers }
-        );
-        if (response3.data.code == 200 || response3.data.code == "200") {
-          this.racelist = response3.data.list;
-        }
+        const response = await this.$axios.get("address/list", {
+        headers,
+      });
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.StateList = response.data.list;
+      } else {
+        this.StateList = [];
+      }
         this.loader = false;
       } catch (e) {
         console.log("my error", e);
@@ -300,13 +597,13 @@ export default {
     async Ongeneratepdf() {
       this.errorList = [];
       this.error = null;
-      if (!this.fromDate) {
+      if (!this.fromMonth) {
         this.errorList.push("From date is Required!");
       }
-      if (!this.toDate) {
+      if (!this.toMonth) {
         this.errorList.push("To date is Required!");
       }
-      if (this.fromDate && this.toDate) {
+      if (this.fromMonth && this.toMonth) {
         try {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -316,169 +613,36 @@ export default {
           const response = await this.$axios.post(
             "report/kpi",
             {
-              added_by: this.userdetails.user.id,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
-              job_status: this.job_status,
+              user_role: this.userdetails.user.id,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
+              year: this.year,
+              fromMonth: this.fromMonth,
+              toMonth: this.toMonth,
+              hospital: this.hospital,
+              state: this.state,
+              level_report: this.level_report,
               report_type: "pdf",
             },
             { headers }
           );
-          console.table();
-
-          var tblbody = document.getElementById("tablebody_");
-
-          var months = [
-            "Januari",
-            "Februari",
-            "Mac",
-            "April",
-            "Mei",
-            "Jun",
-            "Julai",
-            "Ogos",
-            "September",
-            "Oktober",
-            "November",
-            "Disember",
-          ];
-          var tableHeads = [
-            "KPI(%)","KPI(%)","KPI(%)","KPI(%)","KPI(%)",
-          ]
-
-          var tab1 = document.getElementById("tableHeadKeys");
-          var tab2 = document.getElementById("tableMonths");
-
-          tab1.innerHTML = "";
-          tab2.innerHTML = "";
-
-          tblbody.innerHTML = "";
-
-          var maxUser = 0;
-          var maxMonth = 0;
-          var n = 1;
-
-          Object.keys(response.data.result).forEach((user, i) => {
-            var tblrow = "";
-            var tmp1 = Object.keys(response.data.result[user]);
-            tmp1.forEach((year) => {
-              var tmp2 = Object.keys(response.data.result[user][year]);
-              if (tmp2.length > maxMonth) {
-                maxUser = user;
-                maxMonth = year;
-              }
-              tmp2.forEach((month, i) => {
-                if (i == 0) {
-                  tblrow +=
-                    "<td style='border: 1px solid #000; padding: 5px; font-weight: 500;'>" +
-                    n++ +
-                    "</td>";
-                  tblrow +=
-                    "<td style='border: 1px solid #000; padding: 5px; font-weight: 500;'>" +
-                    user +
-                    "</td>";
-                }
-
-                tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
-                  response.data.result[user][year][month]["new_job"] +
-                  "</td>";
-                tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
-                  response.data.result[user][year][month]["ongoing_job"] +
-                  "</td>";
-                tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
-                  response.data.result[user][year][month]["total_caseload"] +
-                  "</td>";
-                tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
-                  response.data.result[user][year][month]["total_dismissed"] +
-                  "</td>";
-                tblrow +=
-                  "<td style='    border-bottom: 1px solid #000; border-right: 1px solid #000; padding: 5px; font-weight: 500; width: 40px;'>" +
-                  response.data.result[user][year][month]["kpi"] +
-                  "</td>";
-
-              });
-            });
-            tblbody.innerHTML += "<tr class='tr-box'>" + tblrow + "</tr>";
-          });
-
-          var tmp2 = Object.keys(response.data.result[maxUser][maxMonth]);
-          console.log('result22',response.data.result[maxUser]);
-          for (let ii = 0; ii < tmp2.length; ii++) {
-            for (let jj = 0; jj < tmp2.length; jj++) {
-              if(parseInt(tmp2[ii])<parseInt(tmp2[jj])){
-                var tmp = tmp2[ii];
-                tmp2[ii]=tmp2[jj];
-                tmp2[jj]=tmp;
-              }
-            }
-          }
-
-          tmp2.forEach((month) => {
-            tab2.innerHTML += `<td colspan='5' style='border-right: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000; width: 200px;'>${
-              months[parseInt(month) - 1]
-            }</td>`;
-            tab1.innerHTML += `<td style='border: 0;padding: 0; width: 40px;height: 459px;'> <a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Newly Job Placed (a)</a></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Ongoing Job Placement (b)</a></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Total Caseload (c)</a></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>Total Dismissed (d)</a></td>
-                              <td style='border: 0;padding: 0; width: 40px;height: 459px;'class='fifth-td'><a style='transform: rotate(270deg);transform-origin: left top 0;float: right; position:absolute;'>KPI (%)</a></td>`;
-          });
 
           if (response.data.code == 200) {
-            setTimeout(() => {
-              this.$refs.result.classList.remove("hide");
-              var pdf = new jsPDF();
-
-              var HTML_Width = $("#result").width();
-              var HTML_Height = $("#result").height();
-              var top_left_margin = 15;
-              var PDF_Width = HTML_Width + top_left_margin * 2;
-              var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
-              var canvas_image_width = HTML_Width;
-              var canvas_image_height = HTML_Height;
-
-              var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-
-              html2canvas($("#result")[0], { allowTaint: true }).then(function (
-                canvas
-              ) {
-                canvas.getContext("2d");
-
-                console.log(canvas.height + "  " + canvas.width);
-
-                var imgData = canvas.toDataURL("image/jpeg", 1.0);
-                var pdf = new jsPDF("p", "pt", [PDF_Width, PDF_Height]);
-                pdf.addImage(
-                  imgData,
-                  "JPG",
-                  top_left_margin,
-                  top_left_margin,
-                  canvas_image_width,
-                  canvas_image_height
-                );
-
-                for (var i = 1; i <= totalPDFPages; i++) {
-                  pdf.addPage(PDF_Width, PDF_Height);
-                  pdf.addImage(
-                    imgData,
-                    "JPG",
-                    top_left_margin,
-                    -(PDF_Height * i) + top_left_margin * 4,
-                    canvas_image_width,
-                    canvas_image_height
-                  );
-                }
-
-                pdf.save("Nation_Kpi.pdf");
-              });
-            }, 100);
-            setTimeout(() => {
-              this.$refs.result.classList.add("hide");
-            }, 1000);
+            this.result = response.data.result;
+            this.averageResult= response.data.averageResult;
+            this.yearResult = response.data.year;
+            // this.listKey = Object.keys(this.averageResult);
+            
+              setTimeout(() => {
+                this.$refs.result.classList.remove("hide");
+                var pdf = new jsPDF("l", "pt", "a4");
+                pdf.addHTML($("#result")[0], function () {
+                  pdf.save("NationalKPI_Report.pdf");
+                });
+              }, 100);
+              setTimeout(() => {
+                this.$refs.result.classList.add("hide");
+              }, 100);
           } else {
             this.error = "No Record Found";
           }
@@ -493,6 +657,19 @@ export default {
       }
       }
     },
+
+    OnchangeLeveofReport(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "National"){
+        this.hospital = '';
+        this.state = '';
+
+      }else if(event.target.options[event.target.options.selectedIndex].text == "State"){
+        this.hospital = '';
+      }
+      else if(event.target.options[event.target.options.selectedIndex].text == "Hospital"){
+        this.state = '';
+      }
+    },
     startDownload(){
         this.loader = true;
     },
@@ -502,13 +679,13 @@ export default {
     async Ongenerateexel() {
       this.errorList = [];
       this.error = null;
-      if (!this.fromDate) {
+      if (!this.fromMonth) {
         this.errorList.push("From date is Required!");
       }
-      if (!this.toDate) {
+      if (!this.toMonth) {
         this.errorList.push("To date is Required!");
       }
-      if (this.fromDate && this.toDate) {
+      if (this.fromMonth && this.toMonth) {
         try {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -518,10 +695,15 @@ export default {
           const response = await this.$axios.post(
             "report/kpi",
             {
-              added_by: this.userdetails.user.id,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
-              job_status: this.job_status,
+              user_role: this.userdetails.user.id,
+              email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
+              year: this.year,
+              fromMonth: this.fromMonth,
+              toMonth: this.toMonth,
+              hospital: this.hospital,
+              state: this.state,
+              level_report: this.level_report,
               report_type: "excel",
             },
             { headers }
