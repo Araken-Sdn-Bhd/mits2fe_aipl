@@ -1984,8 +1984,12 @@ export default {
           body.append("other_allergy", this.other_allergy);
           body.append("other_description", this.other_description);
           body.append("nric_type", this.nric_type);
+          if (this.citizentype == "Permanent Resident"){
+            body.append("nric_no", this.nric_no1);
+          }else if(this.citizentype == "Malaysian"){
           body.append("nric_no", this.nric_no);
-          body.append("nric_no1", this.nric_no1);
+        }
+         
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2245,6 +2249,7 @@ export default {
         var str = response.data.list[0].nric_no;
         this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
         console.log('nric',this.nric_no);
+       
         this.nric_type = response.data.list[0].nric_type;
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
