@@ -825,13 +825,13 @@
                     ><i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                  <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
+                  <button v-if="this.showStatus == 1" type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                   <i class="fa fa-download"></i> Download
                 </button>
-                  <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                  <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                     <i class="fa fa-save"></i> Save as draft
                   </button>
-                  <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                  <button v-if="this.showStatus == 0" type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                     <i class="fa fa-paper-plane"></i> Submit
                   </button>
                 </div>
@@ -985,6 +985,7 @@ data() {
     healthylife:"",
     SidebarAccess:null,
     appId:0,
+    showStatus:0,
   };
 },
 methods: {
@@ -1322,6 +1323,7 @@ methods: {
                 'Your for has been submitted.',
                 'success'
               )
+              this.showStatus=1;
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
