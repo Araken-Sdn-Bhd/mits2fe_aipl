@@ -726,7 +726,7 @@ export default {
                                     patient_id: this.Id,
                                     services_id: this.services_id,
                                     id: this.pid,
-                                    appId: 0,
+                                    appId: this.appId,
                                     status: "1",
                                 }, {
                                     headers
