@@ -1677,7 +1677,7 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.Reaload();
           } else {
             this.$swal.fire({
@@ -1777,7 +1777,7 @@ export default {
           });
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.Reaload();
           } else {
             this.$swal.fire({

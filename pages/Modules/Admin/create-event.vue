@@ -320,7 +320,7 @@ export default {
                             headers,
                         });
                         if (response.data.code == 200 || response.data.code == "200") {
-                            this.$swal.fire('Created Succefully', '', 'success');
+                            this.$swal.fire('created successfully', '', 'success');
                             this.$router.push("/modules/Admin/announcement-management");
                         } else {
                             this.$swal.fire({
@@ -420,7 +420,7 @@ export default {
                         });
                         if (response.data.code == 200 || response.data.code == "200") {
                             this.loader = false;
-                            this.$swal.fire('Created Succefully', '', 'success');
+                            this.$swal.fire('created successfully', '', 'success');
                             this.$router.push("/modules/Admin/announcement-management");
                         } else {
                             this.loader = false;

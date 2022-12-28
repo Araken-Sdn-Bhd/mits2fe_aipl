@@ -245,7 +245,7 @@ export default {
           if (response.data.code == 200) {
             this.loader = false;
             this.resetform();
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.$router.push({
               path: "/modules/Patient/clinical-history",
               query: { id: this.Id },
