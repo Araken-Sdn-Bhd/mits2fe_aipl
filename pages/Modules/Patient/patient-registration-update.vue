@@ -273,7 +273,8 @@
                                             <div class="col-sm-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">City</label>
-                                                    <select v-model="city_id" class="form-select" @change="getPostcodeList($event)" aria-label="Default select example">
+                                                    <select v-model="city_id" class="form-select"
+                                                     @change="getPostcodeList($event)" aria-label="Default select example">
                                                         <option value="0">Select</option>
                                                         <option v-for="ct in citylist" v-bind:key="ct.city_name" v-bind:value="ct.city_name">
                                                             {{ ct.city_name }}
@@ -1614,78 +1615,92 @@ export default {
             );
             console.log("my pt details", response.data);
             if (response.data.code == 200) {
-
-                this.accomodation_id = response.data.list[0].accomodation_id;
+                //alert(response.data.list[0].citizenships[0].section_value);
+                
+                this.salutation_id = response.data.list[0].salutation_id;
+                this.name_asin_nric =  response.data.list[0].name_asin_nric;
+                this.nric_type = response.data.list[0].nric_type;
+                this.citizenship = response.data.list[0].citizenship;
+                this.citizentype = response.data.list[0].citizenships[0].section_value;
+                this.nric_type_code = response.data.list[0].typeic[0].code;
+                var str = response.data.list[0].nric_no;
+                this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
+                this.nric_no1=str.replace(/[^a-z0-9\s]/gi, '');
+                this.passport_no = response.data.list[0].passport_no;
+                this.expiry_date = response.data.list[0].expiry_date;
+                this.sex = response.data.list[0].sex;
+                this.birth_date = response.data.list[0].birth_date;
+                this.age = response.data.list[0].age;
+                this.mobile_no = response.data.list[0].mobile_no;
+                this.house_no = response.data.list[0].house_no;
+                this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;
+                this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
+                this.services_type = {
+                    id: response.data.list[0].services_type,
+                    text: response.data.list[0].service['service_name']
+                };
+                this.referral_type = response.data.list[0].referral_type;
                 this.address1 = response.data.list[0].address1;
                 this.address2 = response.data.list[0].address2;
                 this.address3 = response.data.list[0].address3;
-                this.age = response.data.list[0].age;
-                this.birth_date = response.data.list[0].birth_date;
-                this.citizenship = response.data.list[0].citizenship;
-
                 this.state_id = response.data.list[0].state_id;
                 this.city_id = response.data.list[0].city[0].city_name;
+                
                 if (this.city_id != "") {
                     this.getCity();
                     this.getPostcode();
                 }
-
-                this.country_id = response.data.list[0].country_id;
-
+                this.postcode = response.data.list[0].postcode;
                 this.branchId = response.data.list[0].branch_id;
+                this.patient_mrn = response.data.list[0].patient_mrn;
+                this.referral_letter = response.data.list[0].referral_letter;
 
-                this.drug_allergy = response.data.list[0].drug_allergy;
-                this.drug_allergy_description = response.data.list[0].drug_allergy_description;
-                this.education_level = response.data.list[0].education_level;
-                this.expiry_date = response.data.list[0].expiry_date;
+
+                this.race_id = response.data.list[0].race_id;
+                this.religion_id = response.data.list[0].religion_id;
+                this.accomodation_id = response.data.list[0].accomodation_id;
+                this.marital_id = response.data.list[0].marital_id;
                 this.fee_exemption_status = response.data.list[0].fee_exemption_status;
-                this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;
-                this.house_no = response.data.list[0].house_no;
-                this.Id = response.data.list[0].id;
+                this.occupation_status = response.data.list[0].occupation_status;
+                this.occupation_sector = response.data.list[0].occupation_sector;
+                this.education_level = response.data.list[0].education_level;
+                this.other_race = response.data.list[0].other_race;
+                this.other_religion = response.data.list[0].other_religion;
+                this.other_accommodation = response.data.list[0].other_accommodation;
+                this.other_maritalList = response.data.list[0].other_maritalList;
+                this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
+                this.other_occupationStatus = response.data.list[0].other_occupationStatus;
+
+                this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;
+                this.kin_relationship_id = response.data.list[0].kin_relationship_id;
+                this.kin_nric_no = response.data.list[0].kin_nric_no;
+                this.kin_mobile_no = response.data.list[0].kin_mobile_no;
+                this.kin_house_no = response.data.list[0].kin_house_no;
                 this.kin_address1 = response.data.list[0].kin_address1;
                 this.kin_address2 = response.data.list[0].kin_address2;
                 this.kin_address3 = response.data.list[0].kin_address3;
                 this.kin_state_id = response.data.list[0].kin_state_id;
                 this.kin_city_id = response.data.list[0].kincity[0].city_name;
-
                 if (this.kin_city_id != "") {
                     this.getkinCity();
                     this.getkinPostcode();
                 }
-                this.kin_house_no = response.data.list[0].kin_house_no;
-                this.kin_mobile_no = response.data.list[0].kin_mobile_no;
-                this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;
                 this.kin_postcode = response.data.list[0].kin_postcode;
-                this.kin_relationship_id = response.data.list[0].kin_relationship_id;
+                
+                
 
-                this.kin_nric_no = response.data.list[0].kin_nric_no;
-                this.marital_id = response.data.list[0].marital_id;
-                this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;
-                this.mobile_no = response.data.list[0].mobile_no;
-                this.name_asin_nric = response.data.list[0].name_asin_nric;
-
-                var str = response.data.list[0].nric_no;
-                this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
-                console.log('nric', this.nric_no);
-                this.nric_type = response.data.list[0].nric_type;
-                this.nric_type_code = response.data.list[0].typeic[0].code;
-
-                this.occupation_sector = response.data.list[0].occupation_sector;
-                this.occupation_status = response.data.list[0].occupation_status;
+                this.drug_allergy = response.data.list[0].drug_allergy;
+                this.drug_allergy_description = response.data.list[0].drug_allergy_description;
                 this.other_allergy = response.data.list[0].other_allergy;
                 this.other_description = response.data.list[0].other_description;
-                this.passport_no = response.data.list[0].passport_no;
-                this.patient_mrn = response.data.list[0].patient_mrn;
-                this.postcode = response.data.list[0].postcode;
-                this.race_id = response.data.list[0].race_id;
-                this.referral_letter = response.data.list[0].referral_letter;
-                this.referral_type = response.data.list[0].referral_type;
-                this.religion_id = response.data.list[0].religion_id;
-                this.salutation_id = response.data.list[0].salutation_id;
-                this.services_type = {
-                    id: response.data.list[0].services_type,
-                    text: response.data.list[0].service['service_name']
-                };
+                this.traditional_description = response.data.list[0].traditional_description;
+                this.traditional_medication = response.data.list[0].traditional_medication;
+               
+           
+                this.Id = response.data.list[0].id;
+                this.status = response.data.list[0].status;
+              
+            
                 if (response.data.list[0].service['service_name'] ==
                     "Community Psychiatric Service (CPS)" ||
                     response.data.list[0].service['service_name'] ==
@@ -1696,19 +1711,6 @@ export default {
                     this.uploaddoc = false;
                 }
 
-                this.sex = response.data.list[0].sex;
-                this.status = response.data.list[0].status;
-                this.traditional_description = response.data.list[0].traditional_description;
-                this.traditional_medication = response.data.list[0].traditional_medication;
-
-                this.citizentype = response.data.list[0].citizenships[0].section_value;
-
-                this.other_race = response.data.list[0].other_race;
-                this.other_religion = response.data.list[0].other_religion;
-                this.other_accommodation = response.data.list[0].other_accommodation;
-                this.other_maritalList = response.data.list[0].other_maritalList;
-                this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
-                this.other_occupationStatus = response.data.list[0].other_occupationStatus;
 
                 if (response.data.list[0].race[0].section_value == "OTHERS") {
                     this.otherRace = true;
