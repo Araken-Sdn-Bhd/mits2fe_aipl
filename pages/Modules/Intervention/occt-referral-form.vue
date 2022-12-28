@@ -747,7 +747,7 @@
                             <tr>
                                 <th>Diagnosis: </th>
                                 <td>
-                                this.
+                                    this.
                                     <select v-model="type_diagnosis_id" class="form-select" aria-label="Default select example">
                                         <option value="0">Select Diagnosis</option>
                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
@@ -1504,6 +1504,7 @@ export default {
             healthylife: "",
             SidebarAccess: null,
             appId: 0,
+            showStatus: 1,
         };
     },
     methods: {
@@ -1796,7 +1797,7 @@ export default {
                                     'Data is inserted.',
                                     'success',
                                 );
-
+                                this.showStatus = 1;
                             } else {
                                 this.loader = false;
                                 this.$swal.fire({
