@@ -1636,7 +1636,7 @@ export default {
               this.errors.push("Please Enter Other Location");
               this.GIsvalid = false;
             } else {
-              this.Gproject_loaction_value = this.Gproject_other;
+              this.Gproject_loaction_value = this.Gother_loaction;
             }
           } else {
             if (!this.Gproject_branch) {
