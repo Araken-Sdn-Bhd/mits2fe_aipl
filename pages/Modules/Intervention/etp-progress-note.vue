@@ -55,7 +55,7 @@
                                         <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions2" v-model="work_readiness" />
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions1" v-model="work_readiness" />
                                         <label class="form-check-label" for="inlineCheckbox2">No</label>
                                     </div>
                                 </div>

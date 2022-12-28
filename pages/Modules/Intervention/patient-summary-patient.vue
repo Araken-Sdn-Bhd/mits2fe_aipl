@@ -401,6 +401,25 @@
                     </li>
 
                     <li class="accordion-item sub-nav">
+                      <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Clinical Documentation
+                      </a>
+                      <div class="accordion" id="accordionExample">
+                        <ul id="collapseThree" class="accordion-collapse collapse" aria-labelledby="heading3"
+                          data-bs-parent="#accordionExample">
+                          
+                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse"
+                              data-bs-target="#sub-men-3" aria-expanded="false" aria-controls="sub-men-3"
+                               style="cursor:pointer;" @click="OnTriageform">
+                              Triage Form
+                            </a>
+                          
+                        </ul>
+                      </div>
+                    </li>
+
+                    <li class="accordion-item sub-nav">
                       <a
                         class="accordion-button collapsed"
                         href="#"

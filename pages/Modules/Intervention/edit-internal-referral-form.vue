@@ -252,13 +252,13 @@
                           <div class="d-flex">
                               <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
                               <div class="ml-auto btn-boxs">
-                                  <button type="submit" class="btn btn-green btn-text" @click="OnPrint">
+                                  <button v-if="this.showStatus == 1"  type="submit" class="btn btn-green btn-text" @click="OnPrint">
                                       <i class="fa fa-download"></i> Download
                                   </button>
-                                  <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                                  <button v-if="this.showStatus == 0"  type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                       <i class="fa fa-save"></i> Save as draft
                                   </button>
-                                  <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                                  <button v-if="this.showStatus == 0"  type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                                       <i class="fa fa-paper-plane"></i> Submit
                                   </button>
                               </div>
@@ -434,6 +434,7 @@
               pid: 0,
               type: "",
               appId: null,
+              showStatus:0,
           };
       },
       methods: {
@@ -638,7 +639,7 @@
                                       'Data is inserted.',
                                       'success',
                                   );
-
+                                  this.showStatus = 1;
                               } else {
                                   this.loader = false;
                                   this.$swal.fire({

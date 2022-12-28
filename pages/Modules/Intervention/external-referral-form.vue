@@ -263,13 +263,13 @@
                             <button @click="GoBack" class="btn btn-primary btn-text" title="Back"><i class="fa fa-arrow-alt-to-left"></i> Back
                             </button>
                             <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
-                                <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
+                                <button v-if="this.showStatus == 0" type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
                                     <i class="fa fa-save"></i> Save as draft
                                 </button>
-                                <button @click="OnPrint" type="submit" class="btn btn-green btn-text">
+                                <button v-if="this.showStatus == 1" @click="OnPrint" type="submit" class="btn btn-green btn-text">
                                     <i class="fa fa-download"></i> Download
                                 </button>
-                                <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
+                                <button v-if="this.showStatus == 0" type="submit" @click="onPublishEvent()" class="btn btn-success btn-text" title="Publish">
                                     <i class="fa fa-paper-plane"></i> Submit
                                 </button>
                             </div>
@@ -441,6 +441,8 @@ export default {
             serviceid_sectionValue: "",
             complexity_servicesIdSectionValue: "",
             outcome_idSectionValue: "",
+
+            showStatus: 0,
         };
     },
     beforeMount() {
@@ -686,6 +688,7 @@ export default {
                                     'Data is inserted.',
                                     'success',
                                 );
+                                this.showStatus = 1;
                             } else {
                                 this.loader = false;
                                 this.$swal.fire({

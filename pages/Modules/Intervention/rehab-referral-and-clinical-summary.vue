@@ -1228,14 +1228,14 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
+                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
                     <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                     <i class="fa fa-download"></i> Download
                   </button>
-                    <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
-                    <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                    <button v-if="this.showStatus == 0" type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
@@ -1503,102 +1503,6 @@
                   </tr>
                 </tbody>
               </table>
-              <div
-                class="accordion form-accordion mt-3 form-custum-labal"
-                id="accordionExample"
-              >
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                      OCCASION OF SERVICES
-                  </h2>
-                   <div>
-                      <div class="accordion-body">
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Location Of Services</label
-                          >
-                          {{ this.location_services_id }}
-                        </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Type Of Diagnosis</label
-                          >
-                          {{ this.type_diagnosis_id }}
-                        </div>
-                        <!-- close-row -->
-                        <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label"
-                            >Category Of Services
-                          </label>
-                          {{ this.category_services }}
-                        </div>
-                        <!-- close-row -->
-                        <!-- hide-div -->
-                        <div class="assisstance services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services:</label>
-                              {{ this.services_id }}
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 01 -->
-                        <div class="clinical-work services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE:</label>
-                              {{ this.code_id }}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE:</label>
-                              {{ this.sub_code_id }}
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 02 -->
-                        <div class="external services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Services</label>
-                              {{ this.services_id }}
-                            </div>
-                          </div>
-                        </div>
-                        <!-- 03 -->
-                        <!-- hide-div -->
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label class="form-label"
-                              >Complexity Of Service: </label
-                            >
-                            {{ this.complexity_services }}
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label class="form-label">Outcome: </label>
-                            {{ this.outcome_id }}
-                          </div>
-                        </div>
-                        <!-- close-row -->
-                      </div>
-                    </div>
-                </div>
-                <!--  -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                      MEDICATION
-                  </h2>
-                  <div>
-                    <div class="accordion-body">
-                      <div class="col-md-12 mb-3">
-                        <label class="form-label">Medication: </label>
-                        {{ this.medication_prescription }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--  -->
-              </div>
               <table class="notes">
                 <tbody>
                   <tr>
@@ -1697,6 +1601,7 @@ export default {
       isDisabled: false,
       SidebarAccess:null,
       appId:0,
+      showStatus:1,
     };
   },
   beforeMount() {
