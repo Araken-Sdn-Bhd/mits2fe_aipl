@@ -182,7 +182,7 @@ export default {
           this.minlen = "";
           this.errors = [];
           this.loader = false;
-          this.$swal.fire('Created Succefully', '', 'success');
+          this.$swal.fire('created successfully', '', 'success');
 
           this.getCharacteristic();
         } else {

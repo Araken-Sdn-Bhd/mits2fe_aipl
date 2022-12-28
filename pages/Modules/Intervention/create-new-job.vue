@@ -520,7 +520,7 @@ export default {
           console.log("result", response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.$router.push("/modules/Intervention/list-of-job-offer");
           } else {
             this.loader = false;

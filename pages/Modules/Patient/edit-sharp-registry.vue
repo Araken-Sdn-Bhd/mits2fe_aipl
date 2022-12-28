@@ -2932,7 +2932,7 @@ export default {
           );
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.$router.push({
               path: "/modules/Patient/patient-history",
               query: { id: this.Id },

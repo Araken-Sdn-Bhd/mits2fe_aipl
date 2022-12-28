@@ -76,6 +76,7 @@ export default {
     return {
       userdetails: null,
       list: [],
+      eventCalendarList: [],
       alllist: [],
       teamlist: [],
       token: "",
@@ -97,6 +98,8 @@ export default {
       Accept: "application/json",
       "Content-Type": "application/json",
     };
+
+    this.getListBranch();
 
     const axios = require("axios").default;
     axios
@@ -124,18 +127,66 @@ export default {
 
         console.error(err);
       });
+
   },
   methods: {
+    async getListBranch(){
+            this.loader = true;
+        this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        };
+        const axios = require("axios").default;
+        axios
+            .post(
+                `${this.$axios.defaults.baseURL}` +
+                "calendar-management/getAnnouncementList-branch",{branch_id:this.userdetails.branch.branch_id}, {
+                    headers
+                }
+            )
+            .then((resp) => {
+                this.eventCalendarList = resp.data.list;
+                this.loader = false;
+
+            })
+            .catch ((err) => {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + err,
+                  footer: ''
+                });
+
+                console.error(err);
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + err,
+                    footer: ''
+                });
+            });
+        },
     Calender() {
+
+      this.eventslist = [];
       this.list.forEach((value, index) => {
         var obj = {};
         obj.start = value.appointment_date;
         obj.end = value.appointment_date;
-        obj.overlap = false;
-        obj.color = "#46bdc6";
         obj.title = value.appointment_time + " #" + value.nric_no;
         this.eventslist.push(obj);
       });
+      this.eventCalendarList.forEach((value, index) => {
+        var obj = {};
+        obj.start = value.start_date;
+        obj.end = value.end_date;
+        obj.title = value.name;
+        this.eventslist.push(obj);
+      });
+      console.log('array list for calendar all :'+JSON.stringify(this.eventslist));
       var calendarEl = document.getElementById("calendar");
       var calendar = new FullCalendar.Calendar(calendarEl, {
         height: "550px",

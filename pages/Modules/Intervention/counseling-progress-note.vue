@@ -1343,7 +1343,7 @@ export default {
                     if (response.data.code == 200) {
                         this.loader = false;
                         this.resetmodel();
-                        this.$swal.fire('Created Succefully', '', 'success');
+                        this.$swal.fire('created successfully', '', 'success');
                     } else {
                         this.loader = false;
                         this.$swal.fire({

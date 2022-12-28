@@ -670,7 +670,7 @@ export default {
             this.Id=response.data.id;
             this.loader = false;
             $('#nav-tab a[href="#nav-cp"]').tab("show");
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
           } else {
             this.loader = false;
             this.$swal.fire({
@@ -730,7 +730,7 @@ export default {
           console.log('my result',response.data);
           if (response.data.code == 200) {
             this.loader = false;
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
           } else {
             this.loader = false;
             this.$swal.fire({
