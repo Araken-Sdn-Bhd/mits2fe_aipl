@@ -397,15 +397,233 @@
                             <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                             </button>
                             <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
-                                <button @click="OnPrint()" type="submit" class="btn btn-green btn-text">
+                                <button v-if="this.showStatus == 1"  @click="OnPrint()" type="submit" class="btn btn-green btn-text">
                                     <i class="fa fa-download"></i> Download
                                 </button>
-                                <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                                <button v-if="this.showStatus == 0"  type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                     <i class="fa fa-save"></i> Save as draft
                                 </button>
-                                <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
+                                <button v-if="this.showStatus == 0"  type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
                                     <i class="fa fa-paper-plane"></i> Submit
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 reslt" style="display:none;">
+                    <div class="card-body">
+                        <table class="notes">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Patient Details</th>
+                                </tr>
+                            </thead>
+                            <tbody v-if="patientdetails">
+                                <tr>
+                                    <th>Patient Name:</th>
+                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                </tr>
+                                <tr>
+                                    <th>NRIC No:</th>
+                                    <td>{{ patientdetails.nric_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Age:</th>
+                                    <td>{{ patientdetails.age }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contact No:</th>
+                                    <td>{{ patientdetails.mobile_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address:</th>
+                                    <td>{{ patientdetails.address1 }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="notes">
+                            <tbody>
+                                <tr>
+                                    <th>Have patient acknowledged with the referral?<small style="color:red">*</small> </th>
+                                    <td>
+                                        {{ this.patient_acknowledged }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Diagnosis: </th>
+                                    <td>
+                                        <select class="form-select" v-model="diagnosis_id">
+                                            <option value="0">Select Diagnosis</option>
+                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                            </option>
+                                        </select>
+                                        {{ this.diagnosis_id }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Reason For Referral<small style="color:red">*</small> :</th>
+                                    <td>
+                                        <table class="sub-table td-check-width">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">A) ASSESSMENT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="col-sm-8 asm-box">
+                                                            <div class="form-check">
+                                                            <label v-if="iqtest!=null"> - IQ Test</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="psychosocial!=null">
+                                                                    - Psychosocial
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="neuropsychology!=null" class="form-check-label" for="asm-3">
+                                                                    - Neuropsychology
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-sm-8 asm-box">
+                                                            <div class="form-check">
+                                                                <label v-if="coping!=null" class="form-check-label" for="asm-4">
+                                                                    - Coping Mechanism and Skill
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="personaltest!=null" class="form-check-label" for="asm-5">
+                                                                    - Personality Test
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="others!=null" class="form-check-label" for="12">
+                                                                    - Others
+                                                                </label>
+                                                            </div>
+                                                            <div v-if="others!=null"  class="collapse" id="Others-1">
+                                                                {{ this.reason_referral_assessment_other }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <table class="sub-table td-check-width">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">B) INTERVENTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="col-sm-8 int-box">
+                                                            <div class="form-check">
+                                                                <label v-if="psychoterapy!=null">
+                                                                    - Psychotherapy
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="painmgt!=null">
+                                                                    - Pain Management
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="insomniaeating!=null">
+                                                                    - Insomnia/Eating Disorder
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="learndevelop!=null">
+                                                                    - Learning/Development
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-sm-8 asm-box">
+                                                            <div class="form-check">
+                                                                <label v-if="maritalfamily!=null">
+                                                                    - Marital and Family Therapy
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="stressanger!=null">
+                                                                    - Stress and Anger Management
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="addict!=null">
+                                                                    - Addiction
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="others2!=null">
+                                                                    - Others
+                                                                </label>
+                                                            </div>
+                                                            <div v-if="others2!=null">
+                                                                {{ this.reason_referral_intervention_other }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Case Formulation<small style="color:red">*</small> : </th>
+                                    <td>
+                                        {{ this.case_formulation }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Referring Doctor<small style="color:red">*</small> :</th>
+                                    <td>
+                                        {{ this.referring_doctor }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Designation<small style="color:red">*</small> : </th>
+                                    <td>
+                                        {{ this.designation }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Date<small style="color:red">*</small> : </th>
+                                    <td>
+                                        {{ this.date }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="accordion form-accordion mt-3" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        MEDICATION
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="col-md-12 mb-3">
+                                            {{ this.medication_des }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -420,459 +638,500 @@
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 export default {
-  components: { CommonSidebar, CommonHeader },
-  name: "psychology-referral",
-  beforeMount() {
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-    $(document).ready(function () {
-      $('.form-accordion input[type="radio"]').click(function () {
-        var inputValue = $(this).attr("value");
-        var targetBox = $("." + inputValue);
-        $(".services").not(targetBox).hide();
-        $(targetBox).show();
-      });
-      $('.asm-box input[type="checkbox"]').click(function () {
-        var inputValue = $(this).attr("value");
-        $("." + inputValue).toggle();
-      });
-      $('.int-box input[type="checkbox"]').click(function () {
-        var inputValue = $(this).attr("value");
-        $("." + inputValue).toggle();
-      });
-    });
-    let urlParams = new URLSearchParams(window.location.search);
-    this.Id = urlParams.get("id");
-    this.appId = urlParams.get("appId");
-    this.GetList();
-    this.GetPatientdetails();
-    let urlParams1 = new URLSearchParams(window.location.search);
-    this.pid = urlParams1.get("pid");
-    this.type = urlParams1.get("type");
-    if (this.pid) {
-      this.getdetails();
-    }
-  },
-  data() {
-    return {
-      userdetails: null,
-      patientdetails: null,
-      errorList: [],
-      servicelist: [],
-      outcomelist: [],
-      comlexcitylist: [],
-      codelist: [],
-      icdcatcodelist: [],
-      diagonisislist: [],
-      locationlist: [],
-      Id: 0,
-      diagnosis_id: 0,
-      patient_acknowledged: "",
-      reason_referral_assessment: "",
-      reason_referral_assessment_other: "",
-      reason_referral_intervention: "",
-      reason_referral_intervention_other: "",
-      case_formulation: "",
-      referring_doctor: "",
-      date: "",
-      designation: "",
-      location_services_id: 0,
-      type_diagnosis_id: 0,
-      category_services: "",
-      code_id: 0,
-      sub_code_id: 0,
-      complexity_services: 0,
-      outcome: 0,
-      medication_des: "",
-      patient_id: "",
-      services_id: 0,
-      serviceid: 0,
-      validate: true,
-      assistancelist: [],
-      externallist: [],
-      pid: 0,
-      type: "",
-      assessmentlist: [],
-      interventionlist: [],
-      iqtest:"",
-      psychosocial:"",
-      neuropsychology:"",
-      coping:"",
-      personaltest:"",
-      others:"",
-      psychoterapy:"",
-      painmgt:"",
-      insomniaeating:"",
-      learndevelop:"",
-      maritalfamily:"",
-      stressanger:"",
-      addict:"",
-      others2:"",
-      appId: 0,
-      SidebarAccess:null,
-    };
-  },
-  methods: {
-    async onCreateEvent() {
-      //alert(this.patient_acknowledged);
-      if (confirm("Are you sure you want to save as draft?")) {
-      try {
-        this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "psychology-referral/add",
-            {
-              type:"add",
-              added_by: this.userdetails.user.id,
-                patient_id: this.Id,
-                diagnosis_id: this.diagnosis_id,
-                patient_acknowledged: this.patient_acknowledged,
-                reason_referral_assessment: JSON.stringify([
-                {
-                  "IQ Test": this.iqtest,
-                  "Psychosocial": this.psychosocial,
-                  "Neuropsychology": this.neuropsychology,
-                  "Coping Mechanism and Skill" : this.coping,
-                  "Personality Test": this.personaltest,
-                  "Others": this.others,
-                },
-              ]),
-                reason_referral_assessment_other: this.reason_referral_assessment_other,
-                  reason_referral_intervention: JSON.stringify([
-                {
-                  "Psychoterapy":this.psychoterapy,
-                  "Pain Management":this.painmgt,
-                  "Insomnia/Eating Disorder":this.insomniaeating,
-                  "Learning/Development":this.learndevelop,
-                  "Marital and Family Therapy":this.maritalfamily,
-                  "Stress and Anger Management":this.stressanger,
-                  "Addiction":this.addict,
-                  "Others":this.others2,
-                },
-              ]),
-              reason_referral_intervention_other: this.reason_referral_intervention_other,
-              case_formulation: this.case_formulation,
-              referring_doctor: this.referring_doctor,
-              designation: this.designation,
-              date:this.date,
-              location_services: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_services: this.complexity_services,
-              outcome: this.outcome,
-              medication_des: this.medication_des,
-              patient_id: this.Id,
-              services_id: this.services_id,
-              id:this.pid,
-              appId: this.appId,
-              status:"0",
-            },
-            { headers }
-          );
-          console.log("response", response.data);
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            alert("Succesfully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
-            alert("Error Occured!");
-            this.GoBack();
-          }
-        } catch (e) {
-        this.loader = false;
-        }
-      }
+    components: {
+        CommonSidebar,
+        CommonHeader
     },
-    async onPublishEvent() {
-      if (confirm("Are you sure you want to submit this entry")) {
-      this.errorList = [];
-      this.validate = true;
-      try {
-        if (!this.patient_acknowledged) {
-        this.errorList.push("acknowledged with the referral is required");
+    name: "psychology-referral",
+    beforeMount() {
+        this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
+        $(document).ready(function () {
+            $('.form-accordion input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".services").not(targetBox).hide();
+                $(targetBox).show();
+            });
+            $('.asm-box input[type="checkbox"]').click(function () {
+                var inputValue = $(this).attr("value");
+                $("." + inputValue).toggle();
+            });
+            $('.int-box input[type="checkbox"]').click(function () {
+                var inputValue = $(this).attr("value");
+                $("." + inputValue).toggle();
+            });
+        });
+        let urlParams = new URLSearchParams(window.location.search);
+        this.Id = urlParams.get("id");
+        this.appId = urlParams.get("appId");
+        this.GetList();
+        this.GetPatientdetails();
+        let urlParams1 = new URLSearchParams(window.location.search);
+        this.pid = urlParams1.get("pid");
+        this.type = urlParams1.get("type");
+        if (this.pid) {
+            this.getdetails();
         }
-        if (!this.case_formulation) {
-          this.errorList.push("Case Formulation is required");
-        }
-        if (!this.referring_doctor) {
-          this.errorList.push("Referring Doctor is required");
-        }
-        if (!this.designation) {
-          this.errorList.push("Designation is required");
-        }
-        if (!this.date) {
-          this.errorList.push("Date is required");
-        }
-        if (!this.location_services_id) {
-          this.errorList.push("Location Of Services is required");
-        }
-        if (!this.type_diagnosis_id) {
-          this.errorList.push("Type Of Diagnosis is required");
-        }
-        if (!this.category_services) {
-          this.errorList.push("Category Of Services is required");
-        }
-        if (!this.complexity_services) {
-          this.errorList.push("Complexity Of Service is required");
-        }
-        if (this.category_services) {
-          if (this.category_services == "assisstance") {
-            if (!this.services_id) {
-              this.errorList.push("Service is required");
-              this.validate = false;
-            }
-          } else if (this.category_services == "clinical-work") {
-            if (!this.code_id) {
-              this.errorList.push("ICD 9 CODE is required");
-              this.validate = false;
-            }
-            if (!this.sub_code_id) {
-              this.errorList.push("ICD 9 SUB CODE is required");
-              this.validate = false;
-            }
-          } else {
-            if (!this.serviceid) {
-              this.errorList.push("Services is required");
-              this.validate = false;
-            } else {
-              this.services_id = this.serviceid;
-            }
-          }
-        }
-        if (!this.outcome) {
-          this.errorList.push("Outcome is required");
-        }
-        if (
-          this.location_services_id &&
-          this.type_diagnosis_id &&
-          this.category_services &&
-          this.complexity_services &&
-          this.outcome &&
-          this.validate
-        ) {
-          this.loader = true;
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "psychology-referral/add",
-            {
-              added_by: this.userdetails.user.id,
-                patient_id: this.Id,
-                diagnosis_id: this.diagnosis_id,
-                patient_acknowledged: this.patient_acknowledged,
-                reason_referral_assessment: JSON.stringify([
-                {
-                  "IQ Test": this.iqtest,
-                  "Psychosocial": this.psychosocial,
-                  "Neuropsychology": this.neuropsychology,
-                  "Coping Mechanism and Skill" : this.coping,
-                  "Personality Test": this.personaltest,
-                  "Others": this.others,
-                },
-              ]),
-                reason_referral_assessment_other: this.reason_referral_assessment_other,
-                  reason_referral_intervention: JSON.stringify([
-                {
-                  "Psychoterapy":this.psychoterapy,
-                  "Pain Management":this.painmgt,
-                  "Insomnia/Eating Disorder":this.insomniaeating,
-                  "Learning/Development":this.learndevelop,
-                  "Marital and Family Therapy":this.maritalfamily,
-                  "Stress and Anger Management":this.stressanger,
-                  "Addiction":this.addict,
-                  "Others":this.others2,
-                },
-              ]),
-              reason_referral_intervention_other: this.reason_referral_intervention_other,
-              case_formulation: this.case_formulation,
-              referring_doctor: this.referring_doctor,
-              designation: this.designation,
-              date:this.date,
-              location_services: this.location_services_id,
-              type_diagnosis_id: this.type_diagnosis_id,
-              category_services: this.category_services,
-              code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
-              complexity_services: this.complexity_services,
-              outcome: this.outcome,
-              medication_des: this.medication_des,
-              patient_id: this.Id,
-              services_id: this.services_id,
-              id:this.pid,
-              appId: 0,
-              status:"1",
-            },
-            { headers }
-          );
-          if (response.data.code == 200) {
-            this.loader = false;
-            this.resetmodel();
-            alert("Succesfully Created");
-            this.GoBack();
-          } else {
-            this.loader = false;
-            alert("Error Occured!");
-            this.GoBack();
-          }
-        }
-      } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
-                });
-      }
-    }
     },
-    OnPrint() {
-      var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
-      document.body.innerHTML = newstr;
-      window.print();
-      // Reload the page to refresh the data
-      window.location.reload();
+    data() {
+        return {
+            userdetails: null,
+            patientdetails: null,
+            errorList: [],
+            servicelist: [],
+            outcomelist: [],
+            comlexcitylist: [],
+            codelist: [],
+            icdcatcodelist: [],
+            diagonisislist: [],
+            locationlist: [],
+            Id: 0,
+            diagnosis_id: 0,
+            patient_acknowledged: "",
+            reason_referral_assessment: "",
+            reason_referral_assessment_other: "",
+            reason_referral_intervention: "",
+            reason_referral_intervention_other: "",
+            case_formulation: "",
+            referring_doctor: "",
+            date: "",
+            designation: "",
+            location_services_id: 0,
+            type_diagnosis_id: 0,
+            category_services: "",
+            code_id: 0,
+            sub_code_id: 0,
+            complexity_services: 0,
+            outcome: 0,
+            medication_des: "",
+            patient_id: "",
+            services_id: 0,
+            serviceid: 0,
+            validate: true,
+            assistancelist: [],
+            externallist: [],
+            pid: 0,
+            type: "",
+            assessmentlist: [],
+            interventionlist: [],
+            iqtest: "",
+            psychosocial: "",
+            neuropsychology: "",
+            coping: "",
+            personaltest: "",
+            others: "",
+            psychoterapy: "",
+            painmgt: "",
+            insomniaeating: "",
+            learndevelop: "",
+            maritalfamily: "",
+            stressanger: "",
+            addict: "",
+            others2: "",
+            appId: 0,
+            SidebarAccess: null,
+            showStatus: 0,
+        };
     },
-    async GetList() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.get(
-        "general-setting/list?section=" + "complexity-of-service",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.comlexcitylist = response.data.list;
-      } else {
-        this.comlexcitylist = [];
-      }
-      const response1 = await this.$axios.get("service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
-      const response2 = await this.$axios.get(
-        "general-setting/list?section=" + "outcome",
-        { headers }
-      );
-      if (response2.data.code == 200 || response2.data.code == "200") {
-        this.outcomelist = response2.data.list;
-      } else {
-        this.outcomelist = [];
-      }
-      const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
-        headers,
-      });
-      if (response3.data.code == 200 || response3.data.code == "200") {
-        this.codelist = response3.data.list;
-      } else {
-        this.codelist = [];
-      }
-      const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
-        headers,
-      });
-      if (response4.data.code == 200 || response4.data.code == "200") {
-        this.diagonisislist = response4.data.list;
-      } else {
-        this.diagonisislist = [];
-      }
-      const response5 = await this.$axios.get(
-        "general-setting/list?section=" + "location-of-services",
-        {
-          headers,
-        }
-      );
-      if (response5.data.code == 200 || response5.data.code == "200") {
-        this.locationlist = response5.data.list;
-      } else {
-        this.locationlist = [];
-      }
-      const respons = await this.$axios.get(
-        "general-setting/list?section=" + "assistance-or-supervision",
-        { headers }
-      );
-      if (respons.data.code == 200 || respons.data.code == "200") {
-        this.assistancelist = respons.data.list;
-      } else {
-        this.assistancelist = [];
-      }
-      const respon = await this.$axios.get(
-        "general-setting/list?section=" + "external",
-        { headers }
-      );
-      if (respon.data.code == 200 || respon.data.code == "200") {
-        this.externallist = respon.data.list;
-      } else {
-        this.externallist = [];
-      }
-    },
-    async onCategorycodebind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      console.log("my id", event);
-      const response = await this.$axios.post(
-        "diagnosis/getIcd9subcodeList",
-        { icd_category_code: event.target.value },
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.icdcatcodelist = response.data.list;
-      } else {
-        this.icdcatcodelist = [];
-      }
-    },
-    resetmodel() {
-      // this.diagnosis = "";
-      // this.clinical_notes = "";
-      // this.management = "";
-      this.location_services_id = 0;
-      this.type_diagnosis_id = 0;
-      this.category_services = "";
-      this.code_id = 0;
-      this.sub_code_id = 0;
-      this.complexity_services = 0;
-      this.outcome = 0;
-      this.medication_des = "";
-      this.services_id = 0;
-    },
-    async GetPatientdetails() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "patient-registration/getPatientRegistrationById",
-        {
-          id: this.Id,
+    methods: {
+        async onCreateEvent() {
+            //alert(this.patient_acknowledged);
+            this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    try {
+                        this.loader = true;
+                        const headers = {
+                            Authorization: "Bearer " + this.userdetails.access_token,
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        };
+                        const response = await this.$axios.post(
+                            "psychology-referral/add", {
+                                type: "add",
+                                added_by: this.userdetails.user.id,
+                                patient_id: this.Id,
+                                diagnosis_id: this.diagnosis_id,
+                                patient_acknowledged: this.patient_acknowledged,
+                                reason_referral_assessment: JSON.stringify([{
+                                    "IQ Test": this.iqtest,
+                                    "Psychosocial": this.psychosocial,
+                                    "Neuropsychology": this.neuropsychology,
+                                    "Coping Mechanism and Skill": this.coping,
+                                    "Personality Test": this.personaltest,
+                                    "Others": this.others,
+                                }, ]),
+                                reason_referral_assessment_other: this.reason_referral_assessment_other,
+                                reason_referral_intervention: JSON.stringify([{
+                                    "Psychoterapy": this.psychoterapy,
+                                    "Pain Management": this.painmgt,
+                                    "Insomnia/Eating Disorder": this.insomniaeating,
+                                    "Learning/Development": this.learndevelop,
+                                    "Marital and Family Therapy": this.maritalfamily,
+                                    "Stress and Anger Management": this.stressanger,
+                                    "Addiction": this.addict,
+                                    "Others": this.others2,
+                                }, ]),
+                                reason_referral_intervention_other: this.reason_referral_intervention_other,
+                                case_formulation: this.case_formulation,
+                                referring_doctor: this.referring_doctor,
+                                designation: this.designation,
+                                date: this.date,
+                                location_services: this.location_services_id,
+                                type_diagnosis_id: this.type_diagnosis_id,
+                                category_services: this.category_services,
+                                code_id: this.code_id,
+                                sub_code_id: this.sub_code_id,
+                                complexity_services: this.complexity_services,
+                                outcome: this.outcome,
+                                medication_des: this.medication_des,
+                                patient_id: this.Id,
+                                services_id: this.services_id,
+                                id: this.pid,
+                                appId: this.appId,
+                                status: "0",
+                            }, {
+                                headers
+                            }
+                        );
+                        console.log("response", response.data);
+                        if (response.data.code == 200) {
+                            this.loader = false;
+                            this.resetmodel();
+                            this.$swal.fire('Succesfully save as draft!', '', 'success')
+                            this.GoBack();
+                        } else {
+                            this.loader = false;
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + JSON.stringify(response.data.message),
+                                footer: ''
+                            });
+                            this.GoBack();
+                        }
+                    } catch (e) {
+                        this.loader = false;
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                            footer: ''
+                        });
+                        this.GoBack();
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
         },
-        { headers }
-      );
-      if (response.data.code == 200) {
-        this.patientdetails = response.data.list[0];
-      } else {
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+        async onPublishEvent() {
+            this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async (result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.errorList = [];
+                    this.validate = true;
+                    try {
+                        if (!this.patient_acknowledged) {
+                            this.errorList.push("acknowledged with the referral is required");
+                        }
+                        if (!this.case_formulation) {
+                            this.errorList.push("Case Formulation is required");
+                        }
+                        if (!this.referring_doctor) {
+                            this.errorList.push("Referring Doctor is required");
+                        }
+                        if (!this.designation) {
+                            this.errorList.push("Designation is required");
+                        }
+                        if (!this.date) {
+                            this.errorList.push("Date is required");
+                        }
+                        if (!this.location_services_id) {
+                            this.errorList.push("Location Of Services is required");
+                        }
+                        if (!this.type_diagnosis_id) {
+                            this.errorList.push("Type Of Diagnosis is required");
+                        }
+                        if (!this.category_services) {
+                            this.errorList.push("Category Of Services is required");
+                        }
+                        if (!this.complexity_services) {
+                            this.errorList.push("Complexity Of Service is required");
+                        }
+                        if (this.category_services) {
+                            if (this.category_services == "assisstance") {
+                                if (!this.services_id) {
+                                    this.errorList.push("Service is required");
+                                    this.validate = false;
+                                }
+                            } else if (this.category_services == "clinical-work") {
+                                if (!this.code_id) {
+                                    this.errorList.push("ICD 9 CODE is required");
+                                    this.validate = false;
+                                }
+                                if (!this.sub_code_id) {
+                                    this.errorList.push("ICD 9 SUB CODE is required");
+                                    this.validate = false;
+                                }
+                            } else {
+                                if (!this.serviceid) {
+                                    this.errorList.push("Services is required");
+                                    this.validate = false;
+                                } else {
+                                    this.services_id = this.serviceid;
+                                }
+                            }
+                        }
+                        if (!this.outcome) {
+                            this.errorList.push("Outcome is required");
+                        }
+                        if (
+                            this.location_services_id &&
+                            this.type_diagnosis_id &&
+                            this.category_services &&
+                            this.complexity_services &&
+                            this.outcome &&
+                            this.validate
+                        ) {
+                            this.loader = true;
+                            const headers = {
+                                Authorization: "Bearer " + this.userdetails.access_token,
+                                Accept: "application/json",
+                                "Content-Type": "application/json",
+                            };
+                            const response = await this.$axios.post(
+                                "psychology-referral/add", {
+                                    added_by: this.userdetails.user.id,
+                                    patient_id: this.Id,
+                                    diagnosis_id: this.diagnosis_id,
+                                    patient_acknowledged: this.patient_acknowledged,
+                                    reason_referral_assessment: JSON.stringify([{
+                                        "IQ Test": this.iqtest,
+                                        "Psychosocial": this.psychosocial,
+                                        "Neuropsychology": this.neuropsychology,
+                                        "Coping Mechanism and Skill": this.coping,
+                                        "Personality Test": this.personaltest,
+                                        "Others": this.others,
+                                    }, ]),
+                                    reason_referral_assessment_other: this.reason_referral_assessment_other,
+                                    reason_referral_intervention: JSON.stringify([{
+                                        "Psychoterapy": this.psychoterapy,
+                                        "Pain Management": this.painmgt,
+                                        "Insomnia/Eating Disorder": this.insomniaeating,
+                                        "Learning/Development": this.learndevelop,
+                                        "Marital and Family Therapy": this.maritalfamily,
+                                        "Stress and Anger Management": this.stressanger,
+                                        "Addiction": this.addict,
+                                        "Others": this.others2,
+                                    }, ]),
+                                    reason_referral_intervention_other: this.reason_referral_intervention_other,
+                                    case_formulation: this.case_formulation,
+                                    referring_doctor: this.referring_doctor,
+                                    designation: this.designation,
+                                    date: this.date,
+                                    location_services: this.location_services_id,
+                                    type_diagnosis_id: this.type_diagnosis_id,
+                                    category_services: this.category_services,
+                                    code_id: this.code_id,
+                                    sub_code_id: this.sub_code_id,
+                                    complexity_services: this.complexity_services,
+                                    outcome: this.outcome,
+                                    medication_des: this.medication_des,
+                                    patient_id: this.Id,
+                                    services_id: this.services_id,
+                                    id: this.pid,
+                                    appId: 0,
+                                    status: "1",
+                                }, {
+                                    headers
+                                }
+                            );
+                            if (response.data.code == 200) {
+                                this.loader = false;
+                                this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
+                                this.showStatus = 1;
+                            } else {
+                                this.loader = false;
+                                this.$swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops... Something Went Wrong!',
+                                    text: 'the error is: ' + JSON.stringify(response.data.message),
+                                })
+                                this.GoBack();
+                            }
+                        }
+                    } catch (e) {
+                        this.loader = false;
+                        this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                            footer: ''
+                        });
+                        this.GoBack();
+                    }
+                } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        },
+        OnPrint() {
+            var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            // Reload the page to refresh the data
+            window.location.reload();
+        },
+        async GetList() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.get(
+                "general-setting/list?section=" + "complexity-of-service", {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.comlexcitylist = response.data.list;
+            } else {
+                this.comlexcitylist = [];
+            }
+            const response1 = await this.$axios.get("service/list", {
+                headers
+            });
+            if (response1.data.code == 200 || response1.data.code == "200") {
+                this.servicelist = response1.data.list;
+            } else {
+                this.servicelist = [];
+            }
+            const response2 = await this.$axios.get(
+                "general-setting/list?section=" + "outcome", {
+                    headers
+                }
+            );
+            if (response2.data.code == 200 || response2.data.code == "200") {
+                this.outcomelist = response2.data.list;
+            } else {
+                this.outcomelist = [];
+            }
+            const response3 = await this.$axios.get("diagnosis/getIcd9codeList", {
+                headers,
+            });
+            if (response3.data.code == 200 || response3.data.code == "200") {
+                this.codelist = response3.data.list;
+            } else {
+                this.codelist = [];
+            }
+            const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+                headers,
+            });
+            if (response4.data.code == 200 || response4.data.code == "200") {
+                this.diagonisislist = response4.data.list;
+            } else {
+                this.diagonisislist = [];
+            }
+            const response5 = await this.$axios.get(
+                "general-setting/list?section=" + "location-of-services", {
+                    headers,
+                }
+            );
+            if (response5.data.code == 200 || response5.data.code == "200") {
+                this.locationlist = response5.data.list;
+            } else {
+                this.locationlist = [];
+            }
+            const respons = await this.$axios.get(
+                "general-setting/list?section=" + "assistance-or-supervision", {
+                    headers
+                }
+            );
+            if (respons.data.code == 200 || respons.data.code == "200") {
+                this.assistancelist = respons.data.list;
+            } else {
+                this.assistancelist = [];
+            }
+            const respon = await this.$axios.get(
+                "general-setting/list?section=" + "external", {
+                    headers
+                }
+            );
+            if (respon.data.code == 200 || respon.data.code == "200") {
+                this.externallist = respon.data.list;
+            } else {
+                this.externallist = [];
+            }
+        },
+        async onCategorycodebind(event) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            console.log("my id", event);
+            const response = await this.$axios.post(
+                "diagnosis/getIcd9subcodeList", {
+                    icd_category_code: event.target.value
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.icdcatcodelist = response.data.list;
+            } else {
+                this.icdcatcodelist = [];
+            }
+        },
+        resetmodel() {
+            // this.diagnosis = "";
+            // this.clinical_notes = "";
+            // this.management = "";
+            this.location_services_id = 0;
+            this.type_diagnosis_id = 0;
+            this.category_services = "";
+            this.code_id = 0;
+            this.sub_code_id = 0;
+            this.complexity_services = 0;
+            this.outcome = 0;
+            this.medication_des = "";
+            this.services_id = 0;
+        },
+        async GetPatientdetails() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "patient-registration/getPatientRegistrationById", {
+                    id: this.Id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.patientdetails = response.data.list[0];
+            } else {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
