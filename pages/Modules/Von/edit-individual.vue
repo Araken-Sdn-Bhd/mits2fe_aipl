@@ -1263,6 +1263,7 @@ export default {
       );
       console.log("get detail", response.data);
       if (response.data.code == 200) {
+        //alert(JSON.stringify(response.data.list));
         this.name = response.data.list.name;
         this.dob = response.data.list.dob;
         this.email = response.data.list.email;
@@ -1307,12 +1308,14 @@ export default {
           });
         }
         if (response.data.list.area_of_involvement == "Volunteerism") {
+          
           this.available_date = response.data.list.available_date;
           this.available_time = response.data.list.available_time;
+         
           this.is_voluneering_exp = response.data.list.is_voluneering_exp;
           this.is_mental_health_professional =
             response.data.list.is_mental_health_professional;
-          if (this.is_voluneering_exp) {
+          if (this.is_voluneering_exp == 1) {
             this.is_voluneering_exp = "experience-yes";
             this.volexp = "y";
           }
