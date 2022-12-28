@@ -85,7 +85,7 @@
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th>Referral Purpose:</th>
+                                          <th>Referral Purpose<small style="color:red">*</small> :</th>
                                           <td>
                                               <table class="sub-table">
                                                   <thead>

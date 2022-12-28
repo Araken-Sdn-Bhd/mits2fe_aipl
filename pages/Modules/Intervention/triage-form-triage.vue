@@ -337,7 +337,7 @@
                           v-model="appointment_patient_category">
                           <option value="0">Select Category of Patient</option>
                           <option v-for="cat in categorylist" v-bind:key="cat.id" v-bind:value="cat.id">
-                            {{ cat.section_value }}
+                            {{ cat.appointment_category_name }}
                           </option>
                         </select>
                       </div>
@@ -349,7 +349,7 @@
                           v-model="appointment_type_visit">
                           <option value="0">Select Type of Visit</option>
                           <option v-for="vst in visitlist" v-bind:key="vst.id" v-bind:value="vst.id">
-                            {{ vst.section_value }}
+                            {{ vst.appointment_visit_name }}
                           </option>
                         </select>
                       </div>
@@ -412,7 +412,7 @@
                         </div>
                         <!-- close-row -->
                         <div class="row mb-3">
-                          <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
+                          <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
@@ -546,14 +546,14 @@
                 </p>
                 <br>
                 <br>
-                <div class="d-flex">
+                <div class="d-flex" v-if="!pid">
                   <a @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
                   <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                    <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
-                    </button> -->
+                    </button>
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                       <i class="fa fa-paper-plane"></i> Publish
@@ -590,7 +590,7 @@ export default {
       categorylist: [],
       screenlist: [],
       Id: 0,
-      // appId:0,
+      appId:0,
       risk_history_assressive: "",
       risk_history_criminal: "",
       risk_history_detereotation: "",
@@ -679,9 +679,9 @@ export default {
       )
 
     },
-    // async onCreateEvent() {
-    //   this.OnTriageDraft();
-    // },
+    async onCreateEvent() {
+      this.OnTriageDraft();
+    },
     async onPublishEvent(){
       this.Ontriageform();
       this.OnBookAppointment();
@@ -736,7 +736,7 @@ export default {
         this.teamlist = [];
       }
       const response6 = await this.$axios.get(
-        "general-setting/list?section=" + "type-of-visit",
+        "patient-appointment-visit/list",
         { headers }
       );
 
@@ -746,7 +746,7 @@ export default {
         this.visitlist = [];
       }
       const response7 = await this.$axios.get(
-        "general-setting/list?section=" + "patient-category",
+        "patient-appointment-category/list",
         { headers }
       );
       if (response7.data.code == 200 || response7.data.code == "200") {
@@ -872,7 +872,7 @@ export default {
                 type_visit: this.appointment_type_visit,
                 patient_category: this.appointment_patient_category,
                 assign_team: this.appointment_type,
-                // appId: this.appId,
+                appId: this.appId,
                 status: "1",
               },
               { headers }
@@ -1045,7 +1045,7 @@ export default {
               patient_mrn_id: this.Id,
               services_id: this.services_id,
               screening_type: this.screening_type,
-              // appId: this.appId,
+              appId: this.appId,
               status: "1",
             },
             { headers }

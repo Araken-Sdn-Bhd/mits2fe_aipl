@@ -72,7 +72,7 @@
                             </td>
                                     </tr>
                                     <tr>
-                      <th>Reason For Referral:</th>
+                      <th>Reason For Referral<small style="color:red">*</small> :</th>
                       <td>
                         <table class="sub-table td-check-width">
                           <thead>
