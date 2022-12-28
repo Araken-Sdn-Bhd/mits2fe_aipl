@@ -37,11 +37,11 @@
                     >Name<span>*</span></label
                   >
                   <div class="col-sm-9">
-                    <input 
-                    type="text" 
-                    class="form-control" 
+                    <input
+                    type="text"
+                    class="form-control"
                     v-model="name"
-                    v-on:keypress="isLetter($event)" 
+                    v-on:keypress="isLetter($event)"
                     />
                   </div>
                 </div>
@@ -50,12 +50,12 @@
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">NRIC</label>
                   <div class="col-sm-9">
-                    <input 
+                    <input
                     type="text"
-                    :maxlength="12" 
-                    class="form-control" 
+                    :maxlength="12"
+                    class="form-control"
                     v-model="nric"
-                    v-on:keypress="NumbersOnly" 
+                    v-on:keypress="NumbersOnly"
                     />
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                   <div class="col-sm-9">
                     <input
                       type="text"
-                      :maxlength="11" 
+                      :maxlength="11"
                       class="form-control"
                       v-model="contactno"
                       v-on:keypress="NumbersOnly"
@@ -193,8 +193,8 @@ export default {
     },
 
     async isLetter(e){
-        let char = String.fromCharCode(e.keyCode); 
-        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        let char = String.fromCharCode(e.keyCode);
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true;
         else e.preventDefault();
     },
 
@@ -251,7 +251,7 @@ export default {
           );
           if (response.data.code == 200) {
             this.loader = false;
-              this.$swal.fire('Created Succefully', '', 'success');
+              this.$swal.fire('created successfully', '', 'success');
              this.$swal.fire(
               'Your appointment is submitted.',
               'Please wait for us to contact you.',

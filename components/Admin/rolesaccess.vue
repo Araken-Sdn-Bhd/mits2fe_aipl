@@ -306,7 +306,7 @@ export default {
           );
           console.log("my response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.getAlllist();
             this.ResetModel();
           } else {

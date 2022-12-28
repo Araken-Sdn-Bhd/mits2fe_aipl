@@ -1229,7 +1229,7 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
         };
-        const response = await this.$axios.post("announcement/this.$swal.fire('Created Succefully', '', 'success');", {
+        const response = await this.$axios.post("announcement/this.$swal.fire('created successfully', '', 'success');", {
           headers,
         });
         console.log("my announcement", response.data);

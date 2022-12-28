@@ -69,7 +69,7 @@ export default {
             { headers }
           );
           if (response.data.code == 200 || response.data.code == "200") {
-            this.$swal.fire('Created Succefully', '', 'success');
+            this.$swal.fire('created successfully', '', 'success');
             this.loader = false;
           } else {
             this.error = response.data.message.status[0];

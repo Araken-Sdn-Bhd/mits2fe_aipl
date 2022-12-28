@@ -140,7 +140,7 @@ export default {
             .then((resp) => {
                 this.settinglist = resp.data.list;
                 this.loader = false;
-                
+
             })
             .catch ((err) => {
         this.loader = false;
@@ -199,7 +199,7 @@ export default {
                                 'Successfully Update',
                             );
                         } else {
-                            this.$swal.fire('Created Succefully', '', 'success');
+                            this.$swal.fire('created successfully', '', 'success');
                         }
                         this.GetSettingList();
                         this.index = 0;

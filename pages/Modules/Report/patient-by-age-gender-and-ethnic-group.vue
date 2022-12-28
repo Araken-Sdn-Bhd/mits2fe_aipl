@@ -343,6 +343,7 @@ export default {
             {
               added_by: this.userdetails.user.id,
               email: this.userdetails.user.email,
+              branch_id: this.userdetails.branch.branch_id,
               fromDate: this.fromDate,
               toDate: this.toDate,
               gender: this.Gender,
