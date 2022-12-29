@@ -248,14 +248,15 @@
                         class="experience-yes experi-box"
                         v-if="volexp == 'y'"
                       >
-                        <!-- <div class="mt-3">
+                        <div class="mt-3">
                           <textarea
+                          disabled
                             class="form-control textarea"
                             rows="3"
                             placeholder="Please describe"
                             v-model="exp_details"
                           ></textarea>
-                        </div> -->
+                        </div>
                            <table class="note" style="width: 100%" id="volexp1">
               <!-- <thead>
                 <tr>
@@ -979,8 +980,15 @@
               </div>
               <!-- individual -->
             </div>
+            <div class="d-flex mt-4 btn-mb">
+            <button @click="back" type="button" class="btn btn-primary btn-text">
+                <i class="fa fa-step-backward"></i> Back
+            </button>
           </div>
+          </div>
+
         </div>
+
       </main>
       <von-footer></von-footer>
     </div>
@@ -1143,6 +1151,10 @@ export default {
     }
   },
   methods: {
+    back() {
+            this.$router.go(-1);
+        },
+
     Onvolexp(val) {
       this.volexp = val;
     },
@@ -1219,7 +1231,7 @@ export default {
             this.is_mental_health_professional = "professional-no";
             this.menhelth = "n";
           }
-          if (this.is_voluneering_exp) {
+          if (this.is_voluneering_exp == 1) {
             this.is_voluneering_exp = "experience-yes";
             this.volexp = "y";
           }
