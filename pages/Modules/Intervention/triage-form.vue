@@ -556,7 +556,7 @@
                     </button> -->
 
                     <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Publish
+                      <i class="fa fa-paper-plane"></i> Submit
                     </button>
                   </div>
                 </div>
@@ -1059,7 +1059,7 @@ export default {
             this.GoBack();
             this.resetmodel();
           } else {
-             this.$swal.fire({
+            this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
                   text: 'the error is: ' + this.error,
