@@ -1,15 +1,826 @@
 <template>
-<div id="layoutSidenav">
-    <CommonSidebar />
-    <div id="layoutSidenav_content">
-        <CommonHeader />
-        <main id="reslt" ref="reslt">
-            <div class="container-fluid px-4">
-                <div class="page-title">
-                    <h1>OCCT REFERRAL FORM</h1>
-                    <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
+    <div id="layoutSidenav">
+        <CommonSidebar />
+        <div id="layoutSidenav_content">
+            <CommonHeader />
+            <main id="reslt" ref="reslt">
+                <div class="container-fluid px-4">
+                    <div class="page-title">
+                        <h1>OCCT REFERRAL FORM</h1>
+                        <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <table class="notes">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Patient Details</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody v-if="patientdetails">
+                                    <tr>
+                                        <th>MRN:</th>
+                                        <td>{{ patientdetails.patient_mrn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Patient Name:</th>
+                                        <td>{{ patientdetails.name_asin_nric }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>NRIC NO:</th>
+                                        <td>{{ patientdetails.nric_no }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Age:</th>
+                                        <td>{{ patientdetails.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact No:</th>
+                                        <td>{{ patientdetails.mobile_no }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender:</th>
+                                        <td>{{ patientdetails.gender[0].section_value }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>DOB:</th>
+                                        <td>{{ patientdetails.birth_date }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="notes">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Psychotherapy Progress Note </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Referral Location<small style="color:red">*</small> : </th>
+                                        <td>
+                                            <input type="text" class="form-control mt-3" v-model="referral_location">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Referral Date<small style="color:red">*</small> : </th>
+                                        <td>
+                                            <input type="date" class="form-control" v-model="date">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Diagnosis: </th>
+                                        <td>
+                                            <select v-model="type_diagnosis_id" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value="0">Select Diagnosis</option>
+                                                <option v-for="catcode in diagonisislist" v-bind:key="catcode.id"
+                                                    v-bind:value="catcode.id">
+                                                    {{ catcode.icd_code }} {{ catcode.icd_name }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Referral Purpose:</th>
+                                        <td>
+                                            <table class="sub-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2">Clinical Assessment: </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-sm-8 cla-box">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Activities Living Assessment"
+                                                                        v-model="livingassessment" id="cla-1">
+                                                                    <label class="form-check-label" for="cla-1">
+                                                                        Activities Living Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Behavior Assessment"
+                                                                        v-model="behaviorassessment" id="cla-2">
+                                                                    <label class="form-check-label" for="cla-2">
+                                                                        Behavior Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Cognitive and Perceptual Assessment"
+                                                                        v-model="cognitiveassessment" id="cla-3">
+                                                                    <label class="form-check-label" for="cla-3">
+                                                                        Cognitive And Perceptual Assessment
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Child Development"
+                                                                        v-model="childevelopment" id="cla-4">
+                                                                    <label class="form-check-label" for="cla-4">
+                                                                        Child Development
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Psychology Assessment"
+                                                                        v-model="psychology" id="cla-5">
+                                                                    <label class="form-check-label" for="cla-5">
+                                                                        Psychological Assessment
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Seating and Wheelchair Assessment"
+                                                                        v-model="seatwheelchair" id="cla-6">
+                                                                    <label class="form-check-label" for="cla-6">
+                                                                        Seating and Wheelchair Assessment
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Domestic Assessment" v-model="domestic"
+                                                                        id="cla-7">
+                                                                    <label class="form-check-label" for="cla-7">
+                                                                        Domestic Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Driving Assessment" v-model="driving"
+                                                                        id="cla-8">
+                                                                    <label class="form-check-label" for="cla-8">
+                                                                        Driving Assessment
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="col-sm-8 cla-box">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Hand Function and Upper Limb Assessment"
+                                                                        v-model="handlimb" id="cla-9">
+                                                                    <label class="form-check-label" for="cla-9">
+                                                                        Hand Function And Upper Limb Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Work/Home/School Assessment"
+                                                                        v-model="workhomeschool" id="cla-10">
+                                                                    <label class="form-check-label" for="cla-10">
+                                                                        Work/home/school Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Sensory Motor Assessment"
+                                                                        v-model="sensorymotor" id="cla-11">
+                                                                    <label class="form-check-label" for="1cla-1">
+                                                                        Sensory Motor Assessment
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Preschool/School Skill Assessment"
+                                                                        v-model="preschool" id="cla-12">
+                                                                    <label class="form-check-label" for="cla-12">
+                                                                        Pre School/school Skill Assessment
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Play Leisure Assessment"
+                                                                        v-model="leisure" id="cla-13">
+                                                                    <label class="form-check-label" for="cla-13">
+                                                                        Play Leisure Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Work Assessment" v-model="workassessmnt"
+                                                                        id="cla-14">
+                                                                    <label class="form-check-label" for="cla-14">
+                                                                        Work Assessment
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Others" v-model="others" id="cla-15"
+                                                                        data-bs-toggle="collapse"
+                                                                        data-bs-target="#Others-1">
+                                                                    <label class="form-check-label" for="cla-15">
+                                                                        Others
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="collapse" id="Others-1">
+                                                                    <input type="text" class="form-control"
+                                                                        v-model="referral_clinical_assessment_other"
+                                                                        placeholder="Please Specify">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- <tr v-if="pid">
+                                                            <td>
+                                                                <div class="form-check" v-for="(clinical,index) in clinicallist" :key="index">
+                                                                    <input class="form-check-input" type="checkbox" checked
+                                                                         id="1">
+                                                                    <label class="form-check-label" for="1">
+                                                                        {{clinical}}
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+
+                                                        </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <td>
+                                            <table class="sub-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2">Intervention: </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-sm-8 inv-box">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Activity Of Daily Living Training"
+                                                                        v-model="activitytraining" id="inv-1">
+                                                                    <label class="form-check-label" for="inv-1">
+                                                                        Activity Of Daily Living Training
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="AIDS Adaptation/Assistive Devices"
+                                                                        v-model="aids" id="inv-2">
+                                                                    <label class="form-check-label" for="inv-2">
+                                                                        AIDS Adaptation/Assistive Devices
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Behavioural Therapy"
+                                                                        v-model="behavetherapy" id="inv-3">
+                                                                    <label class="form-check-label" for="inv-3">
+                                                                        Behavioural Therapy
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Cognitive And Perceptual Training"
+                                                                        v-model="cognitivetraining" id="inv-4">
+                                                                    <label class="form-check-label" for="inv-4">
+                                                                        Cognitive And Perceptual Training
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Compression Therapy"
+                                                                        v-model="compression" id="inv-5">
+                                                                    <label class="form-check-label" for="inv-5">
+                                                                        Compression Therapy
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Creative Therapy" v-model="creative"
+                                                                        id="inv-6">
+                                                                    <label class="form-check-label" for="inv-6">
+                                                                        Creative Therapy
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Social Skill Training"
+                                                                        v-model="socialtraining" id="inv-7">
+                                                                    <label class="form-check-label" for="inv-7">
+                                                                        Social Skill Training
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Relaxation Therapy/Stress Management"
+                                                                        v-model="relaxtherapy" id="inv-8">
+                                                                    <label class="form-check-label" for="inv-8">
+                                                                        Relaxation Therapy/Stress Management
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Low Vision Rehabilitation"
+                                                                        v-model="lowvision" id="inv-9">
+                                                                    <label class="form-check-label" for="inv-9">
+                                                                        Low Vision Rehabilitation
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Domestic Rehabilitation"
+                                                                        v-model="domesticrehab" id="inv-10">
+                                                                    <label class="form-check-label" for="inv-10">
+                                                                        Domestic Rehabilitation
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="col-sm-8 inv-box">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Fine Motor/Hand Function Training"
+                                                                        v-model="motorhand" id="inv-11">
+                                                                    <label class="form-check-label" for="inv-11">
+                                                                        Fine Motor/Hand Function Training
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Gross Motor/Functional Mobility"
+                                                                        v-model="grossmotor" id="inv-12">
+                                                                    <label class="form-check-label" for="inv-12">
+                                                                        Gross Motor/Functional Mobility
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Patient's and Career's Education"
+                                                                        v-model="ptcareereducate" id="inv-13">
+                                                                    <label class="form-check-label" for="inv-13">
+                                                                        Patient's And Carer's Education
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Play and Leisure (Explanation and Training)"
+                                                                        v-model="playleisure" id="inv-14">
+                                                                    <label class="form-check-label" for="inv-14">
+                                                                        Play And Leisure(Explanation And Training)
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Sensory Integration Training"
+                                                                        v-model="sensoryintegrity" id="inv-15">
+                                                                    <label class="form-check-label" for="inv-15">
+                                                                        Sensory Integration Training
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Wheelchair Training"
+                                                                        v-model="wheelchairtraining" id="inv-16">
+                                                                    <label class="form-check-label" for="inv-16">
+                                                                        Wheelchair Training
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Work Rehabilitation" v-model="workrehab"
+                                                                        id="inv-17">
+                                                                    <label class="form-check-label" for="inv-18">
+                                                                        Work Rehabilitation
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Splint" v-model="splint" id="inv-19">
+                                                                    <label class="form-check-label" for="inv-19">
+                                                                        Splint
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Others" v-model="others2" id="inv-20"
+                                                                        data-bs-toggle="collapse"
+                                                                        data-bs-target="#Others-2">
+                                                                    <label class="form-check-label" for="inv-20">
+                                                                        Others
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="collapse" id="Others-2">
+                                                                    <input type="text" class="form-control" name=""
+                                                                        v-model="referral_clinical_intervention_other"
+                                                                        placeholder="Please Specify">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- <tr v-if="pid">
+                                                            <td>
+                                                                <div class="form-check" v-for="(interven,index) in interventionlist" :key="index">
+                                                                    <input class="form-check-input" type="checkbox" checked
+                                                                        name="" id="1.11">
+                                                                    <label class="form-check-label" for="1.11">
+                                                                        {{interven}}
+                                                                    </label>
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <td>
+                                            <table class="sub-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2">Promotive Program: </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-sm-8 prp-box">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Special Needs Children Program"
+                                                                        v-model="specialneeds" name="" id="prp-1">
+                                                                    <label class="form-check-label" for="prp-1">
+                                                                        Special Needs Children Program
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Mental Health Program"
+                                                                        v-model="mentalhealth" name="" id="prp-2">
+                                                                    <label class="form-check-label" for="prp-2">
+                                                                        Mental Health Program
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Senior Citizen Program"
+                                                                        v-model="seniorcitizen" name="" id="prp-3">
+                                                                    <label class="form-check-label" for="prp-3">
+                                                                        Senior Citizen Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Community Program"
+                                                                        v-model="communityprog" name="" id="prp-4">
+                                                                    <label class="form-check-label" for="prp-4">
+                                                                        Community Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Out Patient Program" v-model="outpatient"
+                                                                        name="" id="prp-5">
+                                                                    <label class="form-check-label" for="prp-5">
+                                                                        Out Patient Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Teenager and School Program "
+                                                                        v-model="teenschool" name="" id="prp-6">
+                                                                    <label class="form-check-label" for="prp-6">
+                                                                        Teenagers And School Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Diabetes Program" v-model="diabetes"
+                                                                        name="" id="prp-7">
+                                                                    <label class="form-check-label" for="prp-7">
+                                                                        Diabetes Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Hypertension Program"
+                                                                        v-model="hypertension" name="" id="prp-8">
+                                                                    <label class="form-check-label" for="prp-8">
+                                                                        Hypertension Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Antenatal/Mother and Child Program"
+                                                                        v-model="antenatalmotherchild" name=""
+                                                                        id="prp-9">
+                                                                    <label class="form-check-label" for="prp-9">
+                                                                        Antenatal/Mother And Child Program
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="Healthy Lifestyle Program"
+                                                                        v-model="healthylife" name="" id="prp-10">
+                                                                    <label class="form-check-label" for="prp-10">
+                                                                        Healthy Lifestyle Program
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- <tr v-if="pid">
+                                                            <td>
+                                                                <div class="form-check" v-for="(promo,index) in promotivelist" :key="index">
+                                                                    <input class="form-check-input" type="checkbox" checked
+                                                                        name="" id="1.21">
+                                                                    <label class="form-check-label" for="1.21">
+                                                                        {{promo}}
+                                                                    </label>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Referral Name: </th>
+                                        <td>
+                                            <input type="text" class="form-control" v-model="referral_name">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Designation: </th>
+                                        <td>
+                                            <input type="text" class="form-control" v-model="referral_designation">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="accordion form-accordion mt-3" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            OCCASION OF SERVICES
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 col-form-label">Location Of Services<small
+                                                        style="color:red">*</small> </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-select" v-model="location_services">
+                                                        <option value="0">
+                                                            Select location of services
+                                                        </option>
+                                                        <option v-for="loc in locationlist" v-bind:key="loc.id"
+                                                            v-bind:value="loc.id">
+                                                            {{ loc.section_value }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- close-row -->
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small
+                                                        style="color:red">*</small> </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-select" v-model="type_diagnosis_id">
+                                                        <option value="0">Select Diagnosis</option>
+                                                        <option v-for="catcode in diagonisislist"
+                                                            v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                            {{ catcode.icd_code }} {{ catcode.icd_name }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- close-row -->
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small
+                                                        style="color:red">*</small>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio1"
+                                                            value="assisstance" v-model="category_services" />
+                                                        <label class="form-check-label" for="inlineRadio1">Assisstance /
+                                                            Supervision</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio2"
+                                                            value="clinical-work" v-model="category_services" />
+                                                        <label class="form-check-label" for="inlineRadio2">Clinical Work
+                                                            / Procedure
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio3" value="external"
+                                                            v-model="category_services" />
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio3">External</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- close-row -->
+                                            <!-- hide-div -->
+                                            <div class="assisstance services hide mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Services<small
+                                                                style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="services_id">
+                                                            <option value="0">Select Service</option>
+                                                            <option v-for="slt in assistancelist" v-bind:key="slt.id"
+                                                                v-bind:value="slt.id">
+                                                                {{ slt.section_value }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 01 -->
+                                            <div class="clinical-work services hide mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">ICD 9 CODE<small
+                                                                style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="code_id"
+                                                            @change="onCategorycodebind($event)">
+                                                            <option value="0">Select code</option>
+                                                            <option v-for="type in codelist" v-bind:key="type.id"
+                                                                v-bind:value="type.id">
+                                                                {{ type.icd_category_code }} {{ type.icd_category_name
+                                                                }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">ICD 9 SUB CODE<small
+                                                                style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="sub_code_id">
+                                                            <option value="0">Select sub code</option>
+                                                            <option v-for="catcode in icdcatcodelist"
+                                                                v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                {{ catcode.icd_code }}
+                                                                {{ catcode.icd_name }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 02 -->
+                                            <div class="external services hide mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Services<small
+                                                                style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="serviceid">
+                                                            <option value="0">Select Service</option>
+                                                            <option v-for="slt in externallist" v-bind:key="slt.id"
+                                                                v-bind:value="slt.id">
+                                                                {{ slt.section_value }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 03 -->
+                                            <!-- hide-div -->
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Complexity Of Service<small
+                                                            style="color:red">*</small> </label>
+                                                    <select class="form-select" v-model="complexity_services">
+                                                        <option value="0">
+                                                            Select Complexity Of Service
+                                                        </option>
+                                                        <option v-for="cm in comlexcitylist" v-bind:key="cm.id"
+                                                            v-bind:value="cm.id">
+                                                            {{ cm.section_value }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Outcome<small style="color:red">*</small>
+                                                    </label>
+                                                    <select class="form-select" v-model="outcome">
+                                                        <option value="0">Select outcome</option>
+                                                        <option v-for="out in outcomelist" v-bind:key="out.id"
+                                                            v-bind:value="out.id">
+                                                            {{ out.section_value }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- close-row -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            MEDICATION
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Medication</label>
+                                                <textarea class="form-control textarea"
+                                                    placeholder="Please Type Prescription Here"
+                                                    v-model="medication_des"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                            <p v-if="errorList.length">
+                            <ul>
+                                <li style="color:red" v-for='err in errorList' :key='err'>
+                                    {{ err }}
+                                </li>
+                            </ul>
+                            </p>
+                            <br>
+                            <br>
+                            <div class="d-flex">
+                                <button @click="GoBack" class="btn btn-primary btn-text"><i
+                                        class="fa fa-arrow-alt-to-left"></i> Back
+                                </button>
+                                <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
+                                    <button v-if="this.showStatus == 1" type="submit" class="btn btn-green btn-text"
+                                        title="Download Form" @click="OnPrint">
+                                        <i class="fa fa-download"></i> Download
+                                    </button>
+                                    <button v-if="this.showStatus == 0" type="submit" title="Draft"
+                                        @click="onCreateEvent()" class="btn btn-warning btn-text">
+                                        <i class="fa fa-save"></i> Save as draft
+                                    </button>
+                                    <button v-if="this.showStatus == 0" type="submit" title="Publish"
+                                        @click="onPublishEvent()" class="btn btn-success btn-text">
+                                        <i class="fa fa-paper-plane"></i> Submit
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="card mb-4">
+
+                <div class="card mb-4 result" style="display:none;">
+                    <h1>OCCT REFERRAL FORM</h1>
                     <div class="card-body">
                         <table class="notes">
                             <thead>
@@ -60,22 +871,25 @@
                                 <tr>
                                     <th>Referral Location<small style="color:red">*</small> : </th>
                                     <td>
-                                        <input type="text" class="form-control mt-3" v-model="referral_location">
+                                        <label>{{ this.referral_location }}</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Referral Date<small style="color:red">*</small> : </th>
                                     <td>
-                                        <input type="date" class="form-control" v-model="date">
+                                        {{ this.date }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Diagnosis: </th>
                                     <td>
-                                        <select v-model="type_diagnosis_id" class="form-select" aria-label="Default select example">
+                                        this.
+                                        <select v-model="type_diagnosis_id" class="form-select"
+                                            aria-label="Default select example">
                                             <option value="0">Select Diagnosis</option>
-                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id"
+                                                v-bind:value="catcode.id">
+                                                {{ catcode.icd_code }} {{ catcode.icd_name }}
                                             </option>
                                         </select>
                                     </td>
@@ -94,54 +908,46 @@
                                                     <td>
                                                         <div class="col-sm-8 cla-box">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Activities Living Assessment" v-model="livingassessment" id="cla-1">
-                                                                <label class="form-check-label" for="cla-1">
-                                                                    Activities Living Assessment
+                                                                <label v-if="livingassessment != null">
+                                                                    - Activities Living Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Behavior Assessment" v-model="behaviorassessment" id="cla-2">
-                                                                <label class="form-check-label" for="cla-2">
-                                                                    Behavior Assessment
+                                                                <label v-if="behaviorassessment != null">
+                                                                    - Behavior Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Cognitive and Perceptual Assessment" v-model="cognitiveassessment" id="cla-3">
-                                                                <label class="form-check-label" for="cla-3">
-                                                                    Cognitive And Perceptual Assessment
+                                                                <label v-if="cognitiveassessment != null">
+                                                                    - Cognitive And Perceptual Assessment
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Child Development" v-model="childevelopment" id="cla-4">
-                                                                <label class="form-check-label" for="cla-4">
-                                                                    Child Development
+                                                                <label v-if="childevelopment != null">
+                                                                    - Child Development
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Psychology Assessment" v-model="psychology" id="cla-5">
-                                                                <label class="form-check-label" for="cla-5">
-                                                                    Psychological Assessment
+                                                                <label v-if="psychology != null">
+                                                                    - Psychological Assessment
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Seating and Wheelchair Assessment" v-model="seatwheelchair" id="cla-6">
-                                                                <label class="form-check-label" for="cla-6">
-                                                                    Seating and Wheelchair Assessment
+                                                                <label v-if="seatwheelchair != null">
+                                                                    - Seating and Wheelchair Assessment
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Domestic Assessment" v-model="domestic" id="cla-7">
-                                                                <label class="form-check-label" for="cla-7">
-                                                                    Domestic Assessment
+                                                                <label v-if="domestic != null">
+                                                                    - Domestic Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Driving Assessment" v-model="driving" id="cla-8">
-                                                                <label class="form-check-label" for="cla-8">
-                                                                    Driving Assessment
+                                                                <label v-if="driving != null">
+                                                                    - Driving Assessment
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -150,71 +956,53 @@
                                                     <td>
                                                         <div class="col-sm-8 cla-box">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Hand Function and Upper Limb Assessment" v-model="handlimb" id="cla-9">
-                                                                <label class="form-check-label" for="cla-9">
-                                                                    Hand Function And Upper Limb Assessment
+                                                                <label v-if="handlimb != null">
+                                                                    - Hand Function And Upper Limb Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Work/Home/School Assessment" v-model="workhomeschool" id="cla-10">
-                                                                <label class="form-check-label" for="cla-10">
-                                                                    Work/home/school Assessment
+                                                                <label v-if="workhomeschool != null">
+                                                                    - Work/home/school Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Sensory Motor Assessment" v-model="sensorymotor" id="cla-11">
-                                                                <label class="form-check-label" for="1cla-1">
-                                                                    Sensory Motor Assessment
+                                                                <label v-if="sensorymotor != null">
+                                                                    - Sensory Motor Assessment
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Preschool/School Skill Assessment" v-model="preschool" id="cla-12">
-                                                                <label class="form-check-label" for="cla-12">
-                                                                    Pre School/school Skill Assessment
+                                                                <label v-if="preschool != null">
+                                                                    - Pre School/school Skill Assessment
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Play Leisure Assessment" v-model="leisure" id="cla-13">
-                                                                <label class="form-check-label" for="cla-13">
-                                                                    Play Leisure Assessment
+                                                                <label v-if="leisure != null">
+                                                                    - Play Leisure Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Work Assessment" v-model="workassessmnt" id="cla-14">
-                                                                <label class="form-check-label" for="cla-14">
-                                                                    Work Assessment
+                                                                <label v-if="workassessmnt != null">
+                                                                    - Work Assessment
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Others" v-model="others" id="cla-15" data-bs-toggle="collapse" data-bs-target="#Others-1">
-                                                                <label class="form-check-label" for="cla-15">
-                                                                    Others
+                                                                <label v-if="others != null">
+                                                                    - Others
                                                                 </label>
                                                             </div>
 
-                                                            <div class="collapse" id="Others-1">
-                                                                <input type="text" class="form-control" v-model="referral_clinical_assessment_other" placeholder="Please Specify">
+                                                            <div v-if="others != null">
+                                                                <label>{{ this.referral_clinical_assessment_other
+                                                                }}</label>
                                                             </div>
                                                         </div>
                                                     </td>
 
                                                 </tr>
-                                                <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(clinical,index) in clinicallist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                         id="1">
-                                                                    <label class="form-check-label" for="1">
-                                                                        {{clinical}}
-                                                                    </label>
-                                                                </div>
-                                                            </td>
-
-                                                        </tr> -->
                                             </tbody>
                                         </table>
                                     </td>
@@ -234,69 +1022,59 @@
                                                     <td>
                                                         <div class="col-sm-8 inv-box">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Activity Of Daily Living Training" v-model="activitytraining" id="inv-1">
-                                                                <label class="form-check-label" for="inv-1">
-                                                                    Activity Of Daily Living Training
+                                                                <label v-if="activitytraining != null">
+                                                                    - Activity Of Daily Living Training
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="AIDS Adaptation/Assistive Devices" v-model="aids" id="inv-2">
-                                                                <label class="form-check-label" for="inv-2">
-                                                                    AIDS Adaptation/Assistive Devices
+                                                                <label v-if="aids != null">
+                                                                    - AIDS Adaptation/Assistive Devices
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Behavioural Therapy" v-model="behavetherapy" id="inv-3">
-                                                                <label class="form-check-label" for="inv-3">
-                                                                    Behavioural Therapy
+                                                                <label v-if="behavetherapy != null">
+                                                                    - Behavioural Therapy
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Cognitive And Perceptual Training" v-model="cognitivetraining" id="inv-4">
-                                                                <label class="form-check-label" for="inv-4">
-                                                                    Cognitive And Perceptual Training
+                                                                <label v-if="cognitivetraining != null">
+                                                                    - Cognitive And Perceptual Training
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Compression Therapy" v-model="compression" id="inv-5">
-                                                                <label class="form-check-label" for="inv-5">
-                                                                    Compression Therapy
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Creative Therapy" v-model="creative" id="inv-6">
-                                                                <label class="form-check-label" for="inv-6">
-                                                                    Creative Therapy
+                                                                <label v-if="compression != null">
+                                                                    - Compression Therapy
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Social Skill Training" v-model="socialtraining" id="inv-7">
-                                                                <label class="form-check-label" for="inv-7">
-                                                                    Social Skill Training
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Relaxation Therapy/Stress Management" v-model="relaxtherapy" id="inv-8">
-                                                                <label class="form-check-label" for="inv-8">
-                                                                    Relaxation Therapy/Stress Management
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Low Vision Rehabilitation" v-model="lowvision" id="inv-9">
-                                                                <label class="form-check-label" for="inv-9">
-                                                                    Low Vision Rehabilitation
+                                                                <label v-if="creative != null">
+                                                                    - Creative Therapy
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Domestic Rehabilitation" v-model="domesticrehab" id="inv-10">
-                                                                <label class="form-check-label" for="inv-10">
-                                                                    Domestic Rehabilitation
+                                                                <label v-if="socialtraining != null">
+                                                                    - Social Skill Training
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="relaxtherapy != null">
+                                                                    - Relaxation Therapy/Stress Management
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label v-if="lowvision != null">
+                                                                    - Low Vision Rehabilitation
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <label v-if="domesticrehab != null">
+                                                                    - Domestic Rehabilitation
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -305,86 +1083,65 @@
                                                     <td>
                                                         <div class="col-sm-8 inv-box">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Fine Motor/Hand Function Training" v-model="motorhand" id="inv-11">
-                                                                <label class="form-check-label" for="inv-11">
-                                                                    Fine Motor/Hand Function Training
+                                                                <label v-if="motorhand != null">
+                                                                    - Fine Motor/Hand Function Training
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Gross Motor/Functional Mobility" v-model="grossmotor" id="inv-12">
-                                                                <label class="form-check-label" for="inv-12">
-                                                                    Gross Motor/Functional Mobility
+                                                                <label v-if="grossmotor != null">
+                                                                    - Gross Motor/Functional Mobility
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Patient's and Career's Education" v-model="ptcareereducate" id="inv-13">
-                                                                <label class="form-check-label" for="inv-13">
-                                                                    Patient's And Carer's Education
+                                                                <label v-if="ptcareereducate != null">
+                                                                    - Patient's And Carer's Education
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Play and Leisure (Explanation and Training)" v-model="playleisure" id="inv-14">
-                                                                <label class="form-check-label" for="inv-14">
-                                                                    Play And Leisure(Explanation And Training)
+                                                                <label v-if="playleisure != null">
+                                                                    - Play And Leisure(Explanation And Training)
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Sensory Integration Training" v-model="sensoryintegrity" id="inv-15">
-                                                                <label class="form-check-label" for="inv-15">
-                                                                    Sensory Integration Training
+                                                                <label v-if="sensoryintegrity != null">
+                                                                    - Sensory Integration Training
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Wheelchair Training" v-model="wheelchairtraining" id="inv-16">
-                                                                <label class="form-check-label" for="inv-16">
-                                                                    Wheelchair Training
+                                                                <label v-if="wheelchairtraining != null">
+                                                                    - Wheelchair Training
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Work Rehabilitation" v-model="workrehab" id="inv-17">
-                                                                <label class="form-check-label" for="inv-18">
-                                                                    Work Rehabilitation
+                                                                <label v-if="workrehab != null">
+                                                                    - Work Rehabilitation
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Splint" v-model="splint" id="inv-19">
-                                                                <label class="form-check-label" for="inv-19">
-                                                                    Splint
+                                                                <label v-if="splint != null">
+                                                                    - Splint
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Others" v-model="others2" id="inv-20" data-bs-toggle="collapse" data-bs-target="#Others-2">
-                                                                <label class="form-check-label" for="inv-20">
+                                                                <label v-if="others2 != null">
                                                                     Others
                                                                 </label>
                                                             </div>
 
-                                                            <div class="collapse" id="Others-2">
-                                                                <input type="text" class="form-control" name="" v-model="referral_clinical_intervention_other" placeholder="Please Specify">
+                                                            <div v-if="others2 != null">
+                                                                <label>{{ this.referral_clinical_intervention_other
+                                                                }}</label>
                                                             </div>
                                                         </div>
                                                     </td>
 
                                                 </tr>
-                                                <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(interven,index) in interventionlist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                        name="" id="1.11">
-                                                                    <label class="form-check-label" for="1.11">
-                                                                        {{interven}}
-                                                                    </label>
-                                                                </div>
-
-                                                            </td>
-
-                                                        </tr> -->
                                             </tbody>
                                         </table>
                                     </td>
@@ -404,82 +1161,60 @@
                                                     <td>
                                                         <div class="col-sm-8 prp-box">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Special Needs Children Program" v-model="specialneeds" name="" id="prp-1">
-                                                                <label class="form-check-label" for="prp-1">
-                                                                    Special Needs Children Program
+                                                                <label v-if="specialneeds != null">
+                                                                    - Special Needs Children Program
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Mental Health Program" v-model="mentalhealth" name="" id="prp-2">
-                                                                <label class="form-check-label" for="prp-2">
-                                                                    Mental Health Program
+                                                                <label v-if="mentalhealth != null">
+                                                                    - Mental Health Program
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Senior Citizen Program" v-model="seniorcitizen" name="" id="prp-3">
-                                                                <label class="form-check-label" for="prp-3">
-                                                                    Senior Citizen Program
+                                                                <label v-if="seniorcitizen != null">
+                                                                    - Senior Citizen Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Community Program" v-model="communityprog" name="" id="prp-4">
-                                                                <label class="form-check-label" for="prp-4">
-                                                                    Community Program
+                                                                <label v-if="communityprog != null">
+                                                                    - Community Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Out Patient Program" v-model="outpatient" name="" id="prp-5">
-                                                                <label class="form-check-label" for="prp-5">
-                                                                    Out Patient Program
+                                                                <label v-if="outpatient != null">
+                                                                    - Out Patient Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Teenager and School Program " v-model="teenschool" name="" id="prp-6">
-                                                                <label class="form-check-label" for="prp-6">
-                                                                    Teenagers And School Program
+                                                                <label v-if="teenschool != null">
+                                                                    - Teenagers And School Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Diabetes Program" v-model="diabetes" name="" id="prp-7">
-                                                                <label class="form-check-label" for="prp-7">
-                                                                    Diabetes Program
+                                                                <label v-if="diabetes != null">
+                                                                    - Diabetes Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Hypertension Program" v-model="hypertension" name="" id="prp-8">
-                                                                <label class="form-check-label" for="prp-8">
-                                                                    Hypertension Program
+                                                                <label v-if="hypertension != null">
+                                                                    - Hypertension Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Antenatal/Mother and Child Program" v-model="antenatalmotherchild" name="" id="prp-9">
-                                                                <label class="form-check-label" for="prp-9">
-                                                                    Antenatal/Mother And Child Program
+                                                                <label v-if="antenatalmotherchild != null">
+                                                                    - Antenatal/Mother And Child Program
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="Healthy Lifestyle Program" v-model="healthylife" name="" id="prp-10">
-                                                                <label class="form-check-label" for="prp-10">
-                                                                    Healthy Lifestyle Program
+                                                                <label v-if="healthylife != null">
+                                                                    - Healthy Lifestyle Program
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(promo,index) in promotivelist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                        name="" id="1.21">
-                                                                    <label class="form-check-label" for="1.21">
-                                                                        {{promo}}
-                                                                    </label>
-                                                                </div>
-
-                                                            </td>
-                                                        </tr> -->
                                             </tbody>
                                         </table>
                                     </td>
@@ -488,879 +1223,39 @@
                                 <tr>
                                     <th>Referral Name: </th>
                                     <td>
-                                        <input type="text" class="form-control" v-model="referral_name">
+                                        {{ this.referral_name }}
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th>Designation: </th>
                                     <td>
-                                        <input type="text" class="form-control" v-model="referral_designation">
+                                        {{ this.referral_designation }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="accordion form-accordion mt-3" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        OCCASION OF SERVICES
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
-                                            <div class="col-sm-8">
-                                                <select class="form-select" v-model="location_services">
-                                                    <option value="0">
-                                                        Select location of services
-                                                    </option>
-                                                    <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
-                                                        {{ loc.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
-                                            <div class="col-sm-8">
-                                                <select class="form-select" v-model="type_diagnosis_id">
-                                                    <option value="0">Select Diagnosis</option>
-                                                    <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
-                                            </label>
-                                            <div class="col-sm-8">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio3">External</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <!-- hide-div -->
-                                        <div class="assisstance services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="services_id">
-                                                        <option value="0">Select Service</option>
-                                                        <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                            {{ slt.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 01 -->
-                                        <div class="clinical-work services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
-                                                        <option value="0">Select code</option>
-                                                        <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                            {{ type.icd_category_code }} {{type.icd_category_name}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="sub_code_id">
-                                                        <option value="0">Select sub code</option>
-                                                        <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                            {{ catcode.icd_code }}
-                                                            {{catcode.icd_name}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 02 -->
-                                        <div class="external services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="serviceid">
-                                                        <option value="0">Select Service</option>
-                                                        <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                            {{ slt.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 03 -->
-                                        <!-- hide-div -->
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="complexity_services">
-                                                    <option value="0">
-                                                        Select Complexity Of Service
-                                                    </option>
-                                                    <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
-                                                        {{ cm.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="outcome">
-                                                    <option value="0">Select outcome</option>
-                                                    <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
-                                                        {{ out.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        MEDICATION
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Medication</label>
-                                            <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                        </div>
-                        <p v-if="errorList.length">
-                            <ul>
-                                <li style="color:red" v-for='err in errorList' :key='err'>
-                                    {{ err }}
-                                </li>
-                            </ul>
-                        </p>
-                        <br>
-                        <br>
-                        <div class="d-flex">
-                            <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
-                            </button>
-                            <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
-                                <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
-                                    <i class="fa fa-download"></i> Download
-                                </button>
-                                <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                    <i class="fa fa-save"></i> Save as draft
-                                </button>
-                                <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                    <i class="fa fa-paper-plane"></i> Submit
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-4 result" style="display:none;">
-                <h1>OCCT REFERRAL FORM</h1>
-                <div class="card-body">
-                    <table class="notes">
-                        <thead>
-                            <tr>
-                                <th colspan="2">Patient Details</th>
-
-                            </tr>
-                        </thead>
-                        <tbody v-if="patientdetails">
-                            <tr>
-                                <th>MRN:</th>
-                                <td>{{ patientdetails.patient_mrn }}</td>
-                            </tr>
-                            <tr>
-                                <th>Patient Name:</th>
-                                <td>{{ patientdetails.name_asin_nric }}</td>
-                            </tr>
-                            <tr>
-                                <th>NRIC NO:</th>
-                                <td>{{ patientdetails.nric_no }}</td>
-                            </tr>
-                            <tr>
-                                <th>Age:</th>
-                                <td>{{ patientdetails.age }}</td>
-                            </tr>
-                            <tr>
-                                <th>Contact No:</th>
-                                <td>{{ patientdetails.mobile_no }}</td>
-                            </tr>
-                            <tr>
-                                <th>Gender:</th>
-                                <td>{{ patientdetails.gender[0].section_value }}</td>
-                            </tr>
-                            <tr>
-                                <th>DOB:</th>
-                                <td>{{ patientdetails.birth_date }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="notes">
-                        <thead>
-                            <tr>
-                                <th colspan="2">Psychotherapy Progress Note </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Referral Location<small style="color:red">*</small> : </th>
-                                <td>
-                                    <input type="text" class="form-control mt-3" v-model="referral_location">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Referral Date<small style="color:red">*</small> : </th>
-                                <td>
-                                    <input type="date" class="form-control" v-model="date">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Diagnosis: </th>
-                                <td>
-                                this.
-                                    <select v-model="type_diagnosis_id" class="form-select" aria-label="Default select example">
-                                        <option value="0">Select Diagnosis</option>
-                                        <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                            {{ catcode.icd_code }} {{catcode.icd_name}}
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Referral Purpose:</th>
-                                <td>
-                                    <table class="sub-table">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Clinical Assessment: </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="col-sm-8 cla-box">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Activities Living Assessment" v-model="livingassessment" id="cla-1">
-                                                            <label class="form-check-label" for="cla-1">
-                                                                Activities Living Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Behavior Assessment" v-model="behaviorassessment" id="cla-2">
-                                                            <label class="form-check-label" for="cla-2">
-                                                                Behavior Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Cognitive and Perceptual Assessment" v-model="cognitiveassessment" id="cla-3">
-                                                            <label class="form-check-label" for="cla-3">
-                                                                Cognitive And Perceptual Assessment
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Child Development" v-model="childevelopment" id="cla-4">
-                                                            <label class="form-check-label" for="cla-4">
-                                                                Child Development
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Psychology Assessment" v-model="psychology" id="cla-5">
-                                                            <label class="form-check-label" for="cla-5">
-                                                                Psychological Assessment
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Seating and Wheelchair Assessment" v-model="seatwheelchair" id="cla-6">
-                                                            <label class="form-check-label" for="cla-6">
-                                                                Seating and Wheelchair Assessment
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Domestic Assessment" v-model="domestic" id="cla-7">
-                                                            <label class="form-check-label" for="cla-7">
-                                                                Domestic Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Driving Assessment" v-model="driving" id="cla-8">
-                                                            <label class="form-check-label" for="cla-8">
-                                                                Driving Assessment
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <div class="col-sm-8 cla-box">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Hand Function and Upper Limb Assessment" v-model="handlimb" id="cla-9">
-                                                            <label class="form-check-label" for="cla-9">
-                                                                Hand Function And Upper Limb Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Work/Home/School Assessment" v-model="workhomeschool" id="cla-10">
-                                                            <label class="form-check-label" for="cla-10">
-                                                                Work/home/school Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Sensory Motor Assessment" v-model="sensorymotor" id="cla-11">
-                                                            <label class="form-check-label" for="1cla-1">
-                                                                Sensory Motor Assessment
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Preschool/School Skill Assessment" v-model="preschool" id="cla-12">
-                                                            <label class="form-check-label" for="cla-12">
-                                                                Pre School/school Skill Assessment
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Play Leisure Assessment" v-model="leisure" id="cla-13">
-                                                            <label class="form-check-label" for="cla-13">
-                                                                Play Leisure Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Work Assessment" v-model="workassessmnt" id="cla-14">
-                                                            <label class="form-check-label" for="cla-14">
-                                                                Work Assessment
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Others" v-model="others" id="cla-15" data-bs-toggle="collapse" data-bs-target="#Others-1">
-                                                            <label class="form-check-label" for="cla-15">
-                                                                Others
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="collapse" id="Others-1">
-                                                            <input type="text" class="form-control" v-model="referral_clinical_assessment_other" placeholder="Please Specify">
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                            <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(clinical,index) in clinicallist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                         id="1">
-                                                                    <label class="form-check-label" for="1">
-                                                                        {{clinical}}
-                                                                    </label>
-                                                                </div>
-                                                            </td>
-
-                                                        </tr> -->
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <table class="sub-table">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Intervention: </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="col-sm-8 inv-box">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Activity Of Daily Living Training" v-model="activitytraining" id="inv-1">
-                                                            <label class="form-check-label" for="inv-1">
-                                                                Activity Of Daily Living Training
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="AIDS Adaptation/Assistive Devices" v-model="aids" id="inv-2">
-                                                            <label class="form-check-label" for="inv-2">
-                                                                AIDS Adaptation/Assistive Devices
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Behavioural Therapy" v-model="behavetherapy" id="inv-3">
-                                                            <label class="form-check-label" for="inv-3">
-                                                                Behavioural Therapy
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Cognitive And Perceptual Training" v-model="cognitivetraining" id="inv-4">
-                                                            <label class="form-check-label" for="inv-4">
-                                                                Cognitive And Perceptual Training
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Compression Therapy" v-model="compression" id="inv-5">
-                                                            <label class="form-check-label" for="inv-5">
-                                                                Compression Therapy
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Creative Therapy" v-model="creative" id="inv-6">
-                                                            <label class="form-check-label" for="inv-6">
-                                                                Creative Therapy
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Social Skill Training" v-model="socialtraining" id="inv-7">
-                                                            <label class="form-check-label" for="inv-7">
-                                                                Social Skill Training
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Relaxation Therapy/Stress Management" v-model="relaxtherapy" id="inv-8">
-                                                            <label class="form-check-label" for="inv-8">
-                                                                Relaxation Therapy/Stress Management
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Low Vision Rehabilitation" v-model="lowvision" id="inv-9">
-                                                            <label class="form-check-label" for="inv-9">
-                                                                Low Vision Rehabilitation
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Domestic Rehabilitation" v-model="domesticrehab" id="inv-10">
-                                                            <label class="form-check-label" for="inv-10">
-                                                                Domestic Rehabilitation
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <div class="col-sm-8 inv-box">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Fine Motor/Hand Function Training" v-model="motorhand" id="inv-11">
-                                                            <label class="form-check-label" for="inv-11">
-                                                                Fine Motor/Hand Function Training
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Gross Motor/Functional Mobility" v-model="grossmotor" id="inv-12">
-                                                            <label class="form-check-label" for="inv-12">
-                                                                Gross Motor/Functional Mobility
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Patient's and Career's Education" v-model="ptcareereducate" id="inv-13">
-                                                            <label class="form-check-label" for="inv-13">
-                                                                Patient's And Carer's Education
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Play and Leisure (Explanation and Training)" v-model="playleisure" id="inv-14">
-                                                            <label class="form-check-label" for="inv-14">
-                                                                Play And Leisure(Explanation And Training)
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Sensory Integration Training" v-model="sensoryintegrity" id="inv-15">
-                                                            <label class="form-check-label" for="inv-15">
-                                                                Sensory Integration Training
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Wheelchair Training" v-model="wheelchairtraining" id="inv-16">
-                                                            <label class="form-check-label" for="inv-16">
-                                                                Wheelchair Training
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Work Rehabilitation" v-model="workrehab" id="inv-17">
-                                                            <label class="form-check-label" for="inv-18">
-                                                                Work Rehabilitation
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Splint" v-model="splint" id="inv-19">
-                                                            <label class="form-check-label" for="inv-19">
-                                                                Splint
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Others" v-model="others2" id="inv-20" data-bs-toggle="collapse" data-bs-target="#Others-2">
-                                                            <label class="form-check-label" for="inv-20">
-                                                                Others
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="collapse" id="Others-2">
-                                                            <input type="text" class="form-control" name="" v-model="referral_clinical_intervention_other" placeholder="Please Specify">
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                            <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(interven,index) in interventionlist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                        name="" id="1.11">
-                                                                    <label class="form-check-label" for="1.11">
-                                                                        {{interven}}
-                                                                    </label>
-                                                                </div>
-
-                                                            </td>
-
-                                                        </tr> -->
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <table class="sub-table">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Promotive Program: </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="col-sm-8 prp-box">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Special Needs Children Program" v-model="specialneeds" name="" id="prp-1">
-                                                            <label class="form-check-label" for="prp-1">
-                                                                Special Needs Children Program
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Mental Health Program" v-model="mentalhealth" name="" id="prp-2">
-                                                            <label class="form-check-label" for="prp-2">
-                                                                Mental Health Program
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Senior Citizen Program" v-model="seniorcitizen" name="" id="prp-3">
-                                                            <label class="form-check-label" for="prp-3">
-                                                                Senior Citizen Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Community Program" v-model="communityprog" name="" id="prp-4">
-                                                            <label class="form-check-label" for="prp-4">
-                                                                Community Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Out Patient Program" v-model="outpatient" name="" id="prp-5">
-                                                            <label class="form-check-label" for="prp-5">
-                                                                Out Patient Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Teenager and School Program " v-model="teenschool" name="" id="prp-6">
-                                                            <label class="form-check-label" for="prp-6">
-                                                                Teenagers And School Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Diabetes Program" v-model="diabetes" name="" id="prp-7">
-                                                            <label class="form-check-label" for="prp-7">
-                                                                Diabetes Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Hypertension Program" v-model="hypertension" name="" id="prp-8">
-                                                            <label class="form-check-label" for="prp-8">
-                                                                Hypertension Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Antenatal/Mother and Child Program" v-model="antenatalmotherchild" name="" id="prp-9">
-                                                            <label class="form-check-label" for="prp-9">
-                                                                Antenatal/Mother And Child Program
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="Healthy Lifestyle Program" v-model="healthylife" name="" id="prp-10">
-                                                            <label class="form-check-label" for="prp-10">
-                                                                Healthy Lifestyle Program
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!-- <tr v-if="pid">
-                                                            <td>
-                                                                <div class="form-check" v-for="(promo,index) in promotivelist" :key="index">
-                                                                    <input class="form-check-input" type="checkbox" checked
-                                                                        name="" id="1.21">
-                                                                    <label class="form-check-label" for="1.21">
-                                                                        {{promo}}
-                                                                    </label>
-                                                                </div>
-
-                                                            </td>
-                                                        </tr> -->
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th>Referral Name: </th>
-                                <td>
-                                    <input type="text" class="form-control" v-model="referral_name">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th>Designation: </th>
-                                <td>
-                                    <input type="text" class="form-control" v-model="referral_designation">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="accordion form-accordion mt-3" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    OCCASION OF SERVICES
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
-                                        <div class="col-sm-8">
-                                            <select class="form-select" v-model="location_services">
-                                                <option value="0">
-                                                    Select location of services
-                                                </option>
-                                                <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
-                                                    {{ loc.section_value }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- close-row -->
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
-                                        <div class="col-sm-8">
-                                            <select class="form-select" v-model="type_diagnosis_id">
-                                                <option value="0">Select Diagnosis</option>
-                                                <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                    {{ catcode.icd_code }} {{catcode.icd_name}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- close-row -->
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
-                                                <label class="form-check-label" for="inlineRadio3">External</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- close-row -->
-                                    <!-- hide-div -->
-                                    <div class="assisstance services hide mb-3">
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="services_id">
-                                                    <option value="0">Select Service</option>
-                                                    <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                        {{ slt.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 01 -->
-                                    <div class="clinical-work services hide mb-3">
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
-                                                    <option value="0">Select code</option>
-                                                    <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                        {{ type.icd_category_code }} {{type.icd_category_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="sub_code_id">
-                                                    <option value="0">Select sub code</option>
-                                                    <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }}
-                                                        {{catcode.icd_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 02 -->
-                                    <div class="external services hide mb-3">
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="serviceid">
-                                                    <option value="0">Select Service</option>
-                                                    <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                        {{ slt.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 03 -->
-                                    <!-- hide-div -->
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="complexity_services">
-                                                <option value="0">
-                                                    Select Complexity Of Service
-                                                </option>
-                                                <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
-                                                    {{ cm.section_value }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="outcome">
-                                                <option value="0">Select outcome</option>
-                                                <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
-                                                    {{ out.section_value }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- close-row -->
-                                </div>
-                            </div>
-                        </div>
-                        <!--  -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h3>
                                     MEDICATION
-                                </button>
+                                </h3>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div>
                                 <div class="accordion-body">
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label">Medication</label>
-                                        <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                        <label>{{ this.medication_des }}</label>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--  -->
                     </div>
-                    <p v-if="errorList.length">
-                        <ul>
-                            <li style="color:red" v-for='err in errorList' :key='err'>
-                                {{ err }}
-                            </li>
-                        </ul>
-                    </p>
-                    <br>
-                    <br>
-                    <div class="d-flex">
-                        <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
-                        </button>
-                        <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
-                            <button type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
-                                <i class="fa fa-download"></i> Download
-                            </button>
-                            <button type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                <i class="fa fa-save"></i> Save as draft
-                            </button>
-                            <button type="submit" title="Publish" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                <i class="fa fa-paper-plane"></i> Submit
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
 
-        </main>
+            </main>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -1377,7 +1272,7 @@ export default {
             src: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js",
             async: true,
             crossorigin: "anonymous",
-        }, ],
+        },],
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -1504,6 +1399,7 @@ export default {
             healthylife: "",
             SidebarAccess: null,
             appId: 0,
+            showStatus: 0,
         };
     },
     methods: {
@@ -1524,81 +1420,81 @@ export default {
                         };
                         const response = await this.$axios.post(
                             "occt-referral/add", {
-                                type: "add",
-                                added_by: this.userdetails.user.id.toString(),
-                                patient_mrn_id: this.Id,
-                                referral_location: this.referral_location,
-                                date: this.date,
-                                diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                referral_clinical_assessment: JSON.stringify([{
-                                    "Activities Living Assessment": this.livingassessment,
-                                    "Behavior Assessment": this.behaviorassessment,
-                                    "Cognitive And Perceptual Assessment": this.cognitiveassessment,
-                                    "Child Development": this.childevelopment,
-                                    "Psychological Assessment": this.psychology,
-                                    "Seating and Wheelchair Assessment": this.seatwheelchair,
-                                    "Domestic Assessment": this.domestic,
-                                    "Driving Assessment": this.driving,
-                                    "Hand Function And Upper Limb Assessment": this.handlimb,
-                                    "Work/home/school Assessment": this.workhomeschool,
-                                    "Sensory Motor Assessment": this.sensorymotor,
-                                    "Pre School/school Skill Assessment": this.preschool,
-                                    "Play Leisure Assessment": this.leisure,
-                                    "Work Assessment": this.workassessmnt,
-                                    "Others": this.others,
-                                }, ]),
-                                referral_clinical_assessment_other: this.referral_clinical_assessment_other,
-                                referral_clinical_intervention: JSON.stringify([{
-                                    "Activity Of Daily Living Training": this.activitytraining,
-                                    "AIDS Adaptation/Assistive Devices": this.aids,
-                                    "Behavioural Therapy": this.behavetherapy,
-                                    "Cognitive And Perceptual Training": this.cognitivetraining,
-                                    "Compression Therapy": this.compression,
-                                    "Creative Therapy": this.creative,
-                                    "Social Skill Training": this.socialtraining,
-                                    "Relaxation Therapy/Stress Management": this.relaxtherapy,
-                                    "Low Vision Rehabilitation": this.lowvision,
-                                    "Domestic Rehabilitation": this.domesticrehab,
-                                    "Fine Motor/Hand Function Training": this.motorhand,
-                                    "Gross Motor/Functional Mobility": this.grossmotor,
-                                    "Patient's And Carer's Education": this.ptcareereducate,
-                                    "Play And Leisure(Explanation And Training)": this.playleisure,
-                                    "Sensory Integration Training": this.sensoryintegrity,
-                                    "Wheelchair Training": this.wheelchairtraining,
-                                    "Work Rehabilitation": this.workrehab,
-                                    "Splint": this.splint,
-                                    "Others": this.others2,
-                                }, ]),
-                                referral_clinical_intervention_other: this.referral_clinical_intervention_other,
-                                referral_clinical_promotive_program: JSON.stringify([{
-                                    "Special Needs Children Program": this.specialneeds,
-                                    "Mental Health Program": this.mentalhealth,
-                                    "Senior Citizen Program": this.seniorcitizen,
-                                    "Community Program": this.communityprog,
-                                    "Out Patient Program": this.outpatient,
-                                    "Teenagers And School Program": this.teenschool,
-                                    "Diabetes Program": this.diabetes,
-                                    "Hypertension Program": this.hypertension,
-                                    "Antenatal/Mother And Child Program": this.antenatalmotherchild,
-                                    "Healthy Lifestyle Program": this.healthylife,
-                                }, ]),
-                                referral_name: this.referral_name,
-                                referral_designation: this.referral_designation,
-                                location_services: this.location_services,
-                                services_id: this.services_id,
-                                code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
-                                type_diagnosis_id: this.type_diagnosis_id,
-                                category_services: this.category_services,
-                                complexity_services: this.complexity_services,
-                                outcome: this.outcome,
-                                medication_des: this.medication_des,
-                                id: this.pid,
-                                appId: this.appId,
-                                status: "0",
-                            }, {
-                                headers
-                            }
+                            type: "add",
+                            added_by: this.userdetails.user.id.toString(),
+                            patient_mrn_id: this.Id,
+                            referral_location: this.referral_location,
+                            date: this.date,
+                            diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                            referral_clinical_assessment: JSON.stringify([{
+                                "Activities Living Assessment": this.livingassessment,
+                                "Behavior Assessment": this.behaviorassessment,
+                                "Cognitive And Perceptual Assessment": this.cognitiveassessment,
+                                "Child Development": this.childevelopment,
+                                "Psychological Assessment": this.psychology,
+                                "Seating and Wheelchair Assessment": this.seatwheelchair,
+                                "Domestic Assessment": this.domestic,
+                                "Driving Assessment": this.driving,
+                                "Hand Function And Upper Limb Assessment": this.handlimb,
+                                "Work/home/school Assessment": this.workhomeschool,
+                                "Sensory Motor Assessment": this.sensorymotor,
+                                "Pre School/school Skill Assessment": this.preschool,
+                                "Play Leisure Assessment": this.leisure,
+                                "Work Assessment": this.workassessmnt,
+                                "Others": this.others,
+                            },]),
+                            referral_clinical_assessment_other: this.referral_clinical_assessment_other,
+                            referral_clinical_intervention: JSON.stringify([{
+                                "Activity Of Daily Living Training": this.activitytraining,
+                                "AIDS Adaptation/Assistive Devices": this.aids,
+                                "Behavioural Therapy": this.behavetherapy,
+                                "Cognitive And Perceptual Training": this.cognitivetraining,
+                                "Compression Therapy": this.compression,
+                                "Creative Therapy": this.creative,
+                                "Social Skill Training": this.socialtraining,
+                                "Relaxation Therapy/Stress Management": this.relaxtherapy,
+                                "Low Vision Rehabilitation": this.lowvision,
+                                "Domestic Rehabilitation": this.domesticrehab,
+                                "Fine Motor/Hand Function Training": this.motorhand,
+                                "Gross Motor/Functional Mobility": this.grossmotor,
+                                "Patient's And Carer's Education": this.ptcareereducate,
+                                "Play And Leisure(Explanation And Training)": this.playleisure,
+                                "Sensory Integration Training": this.sensoryintegrity,
+                                "Wheelchair Training": this.wheelchairtraining,
+                                "Work Rehabilitation": this.workrehab,
+                                "Splint": this.splint,
+                                "Others": this.others2,
+                            },]),
+                            referral_clinical_intervention_other: this.referral_clinical_intervention_other,
+                            referral_clinical_promotive_program: JSON.stringify([{
+                                "Special Needs Children Program": this.specialneeds,
+                                "Mental Health Program": this.mentalhealth,
+                                "Senior Citizen Program": this.seniorcitizen,
+                                "Community Program": this.communityprog,
+                                "Out Patient Program": this.outpatient,
+                                "Teenagers And School Program": this.teenschool,
+                                "Diabetes Program": this.diabetes,
+                                "Hypertension Program": this.hypertension,
+                                "Antenatal/Mother And Child Program": this.antenatalmotherchild,
+                                "Healthy Lifestyle Program": this.healthylife,
+                            },]),
+                            referral_name: this.referral_name,
+                            referral_designation: this.referral_designation,
+                            location_services: this.location_services,
+                            services_id: this.services_id,
+                            code_id: this.code_id,
+                            sub_code_id: this.sub_code_id,
+                            type_diagnosis_id: this.type_diagnosis_id,
+                            category_services: this.category_services,
+                            complexity_services: this.complexity_services,
+                            outcome: this.outcome,
+                            medication_des: this.medication_des,
+                            id: this.pid,
+                            appId: this.appId,
+                            status: "0",
+                        }, {
+                            headers
+                        }
                         );
                         console.log("response", response.data);
                         if (response.data.code == 200) {
@@ -1713,80 +1609,80 @@ export default {
                             };
                             const response = await this.$axios.post(
                                 "occt-referral/add", {
-                                    added_by: this.userdetails.user.id.toString(),
-                                    patient_mrn_id: this.Id,
-                                    referral_location: this.referral_location,
-                                    date: this.date,
-                                    diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                    referral_clinical_assessment: JSON.stringify([{
-                                        "Activities Living Assessment": this.livingassessment,
-                                        "Behavior Assessment": this.behaviorassessment,
-                                        "Cognitive And Perceptual Assessment": this.cognitiveassessment,
-                                        "Child Development": this.childevelopment,
-                                        "Psychological Assessment": this.psychology,
-                                        "Seating and Wheelchair Assessment": this.seatwheelchair,
-                                        "Domestic Assessment": this.domestic,
-                                        "Driving Assessment": this.driving,
-                                        "Hand Function And Upper Limb Assessment": this.handlimb,
-                                        "Work/home/school Assessment": this.workhomeschool,
-                                        "Sensory Motor Assessment": this.sensorymotor,
-                                        "Pre School/school Skill Assessment": this.preschool,
-                                        "Play Leisure Assessment": this.leisure,
-                                        "Work Assessment": this.workassessmnt,
-                                        "Others": this.others,
-                                    }, ]),
-                                    referral_clinical_assessment_other: this.referral_clinical_assessment_other,
-                                    referral_clinical_intervention: JSON.stringify([{
-                                        "Activity Of Daily Living Training": this.activitytraining,
-                                        "AIDS Adaptation/Assistive Devices": this.aids,
-                                        "Behavioural Therapy": this.behavetherapy,
-                                        "Cognitive And Perceptual Training": this.cognitivetraining,
-                                        "Compression Therapy": this.compression,
-                                        "Creative Therapy": this.creative,
-                                        "Social Skill Training": this.socialtraining,
-                                        "Relaxation Therapy/Stress Management": this.relaxtherapy,
-                                        "Low Vision Rehabilitation": this.lowvision,
-                                        "Domestic Rehabilitation": this.domesticrehab,
-                                        "Fine Motor/Hand Function Training": this.motorhand,
-                                        "Gross Motor/Functional Mobility": this.grossmotor,
-                                        "Patient's And Carer's Education": this.ptcareereducate,
-                                        "Play And Leisure(Explanation And Training)": this.playleisure,
-                                        "Sensory Integration Training": this.sensoryintegrity,
-                                        "Wheelchair Training": this.wheelchairtraining,
-                                        "Work Rehabilitation": this.workrehab,
-                                        "Splint": this.splint,
-                                        "Others": this.others2,
-                                    }, ]),
-                                    referral_clinical_intervention_other: this.referral_clinical_intervention_other,
-                                    referral_clinical_promotive_program: JSON.stringify([{
-                                        "Special Needs Children Program": this.specialneeds,
-                                        "Mental Health Program": this.mentalhealth,
-                                        "Senior Citizen Program": this.seniorcitizen,
-                                        "Community Program": this.communityprog,
-                                        "Out Patient Program": this.outpatient,
-                                        "Teenagers And School Program": this.teenschool,
-                                        "Diabetes Program": this.diabetes,
-                                        "Hypertension Program": this.hypertension,
-                                        "Antenatal/Mother And Child Program": this.antenatalmotherchild,
-                                        "Healthy Lifestyle Program": this.healthylife,
-                                    }, ]),
-                                    referral_name: this.referral_name,
-                                    referral_designation: this.referral_designation,
-                                    location_services: this.location_services,
-                                    services_id: this.services_id,
-                                    code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
-                                    type_diagnosis_id: this.type_diagnosis_id,
-                                    category_services: this.category_services,
-                                    complexity_services: this.complexity_services,
-                                    outcome: this.outcome,
-                                    medication_des: this.medication_des,
-                                    id: this.pid,
-                                    appId: this.appId,
-                                    status: "1",
-                                }, {
-                                    headers
-                                }
+                                added_by: this.userdetails.user.id.toString(),
+                                patient_mrn_id: this.Id,
+                                referral_location: this.referral_location,
+                                date: this.date,
+                                diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                                referral_clinical_assessment: JSON.stringify([{
+                                    "Activities Living Assessment": this.livingassessment,
+                                    "Behavior Assessment": this.behaviorassessment,
+                                    "Cognitive And Perceptual Assessment": this.cognitiveassessment,
+                                    "Child Development": this.childevelopment,
+                                    "Psychological Assessment": this.psychology,
+                                    "Seating and Wheelchair Assessment": this.seatwheelchair,
+                                    "Domestic Assessment": this.domestic,
+                                    "Driving Assessment": this.driving,
+                                    "Hand Function And Upper Limb Assessment": this.handlimb,
+                                    "Work/home/school Assessment": this.workhomeschool,
+                                    "Sensory Motor Assessment": this.sensorymotor,
+                                    "Pre School/school Skill Assessment": this.preschool,
+                                    "Play Leisure Assessment": this.leisure,
+                                    "Work Assessment": this.workassessmnt,
+                                    "Others": this.others,
+                                },]),
+                                referral_clinical_assessment_other: this.referral_clinical_assessment_other,
+                                referral_clinical_intervention: JSON.stringify([{
+                                    "Activity Of Daily Living Training": this.activitytraining,
+                                    "AIDS Adaptation/Assistive Devices": this.aids,
+                                    "Behavioural Therapy": this.behavetherapy,
+                                    "Cognitive And Perceptual Training": this.cognitivetraining,
+                                    "Compression Therapy": this.compression,
+                                    "Creative Therapy": this.creative,
+                                    "Social Skill Training": this.socialtraining,
+                                    "Relaxation Therapy/Stress Management": this.relaxtherapy,
+                                    "Low Vision Rehabilitation": this.lowvision,
+                                    "Domestic Rehabilitation": this.domesticrehab,
+                                    "Fine Motor/Hand Function Training": this.motorhand,
+                                    "Gross Motor/Functional Mobility": this.grossmotor,
+                                    "Patient's And Carer's Education": this.ptcareereducate,
+                                    "Play And Leisure(Explanation And Training)": this.playleisure,
+                                    "Sensory Integration Training": this.sensoryintegrity,
+                                    "Wheelchair Training": this.wheelchairtraining,
+                                    "Work Rehabilitation": this.workrehab,
+                                    "Splint": this.splint,
+                                    "Others": this.others2,
+                                },]),
+                                referral_clinical_intervention_other: this.referral_clinical_intervention_other,
+                                referral_clinical_promotive_program: JSON.stringify([{
+                                    "Special Needs Children Program": this.specialneeds,
+                                    "Mental Health Program": this.mentalhealth,
+                                    "Senior Citizen Program": this.seniorcitizen,
+                                    "Community Program": this.communityprog,
+                                    "Out Patient Program": this.outpatient,
+                                    "Teenagers And School Program": this.teenschool,
+                                    "Diabetes Program": this.diabetes,
+                                    "Hypertension Program": this.hypertension,
+                                    "Antenatal/Mother And Child Program": this.antenatalmotherchild,
+                                    "Healthy Lifestyle Program": this.healthylife,
+                                },]),
+                                referral_name: this.referral_name,
+                                referral_designation: this.referral_designation,
+                                location_services: this.location_services,
+                                services_id: this.services_id,
+                                code_id: this.code_id,
+                                sub_code_id: this.sub_code_id,
+                                type_diagnosis_id: this.type_diagnosis_id,
+                                category_services: this.category_services,
+                                complexity_services: this.complexity_services,
+                                outcome: this.outcome,
+                                medication_des: this.medication_des,
+                                id: this.pid,
+                                appId: this.appId,
+                                status: "1",
+                            }, {
+                                headers
+                            }
                             );
                             console.log("response", response.data);
                             if (response.data.code == 200) {
@@ -1796,7 +1692,7 @@ export default {
                                     'Data is inserted.',
                                     'success',
                                 );
-
+                                this.showStatus = 1;
                             } else {
                                 this.loader = false;
                                 this.$swal.fire({
@@ -1829,8 +1725,8 @@ export default {
             };
             const response = await this.$axios.get(
                 "general-setting/list?section=" + "complexity-of-service", {
-                    headers
-                }
+                headers
+            }
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.comlexcitylist = response.data.list;
@@ -1847,8 +1743,8 @@ export default {
             }
             const response2 = await this.$axios.get(
                 "general-setting/list?section=" + "outcome", {
-                    headers
-                }
+                headers
+            }
             );
             if (response2.data.code == 200 || response2.data.code == "200") {
                 this.outcomelist = response2.data.list;
@@ -1873,8 +1769,8 @@ export default {
             }
             const response5 = await this.$axios.get(
                 "general-setting/list?section=" + "location-of-services", {
-                    headers,
-                }
+                headers,
+            }
             );
             if (response5.data.code == 200 || response5.data.code == "200") {
                 this.locationlist = response5.data.list;
@@ -1883,8 +1779,8 @@ export default {
             }
             const respons = await this.$axios.get(
                 "general-setting/list?section=" + "assistance-or-supervision", {
-                    headers
-                }
+                headers
+            }
             );
             if (respons.data.code == 200 || respons.data.code == "200") {
                 this.assistancelist = respons.data.list;
@@ -1893,8 +1789,8 @@ export default {
             }
             const respon = await this.$axios.get(
                 "general-setting/list?section=" + "external", {
-                    headers
-                }
+                headers
+            }
             );
             if (respon.data.code == 200 || respon.data.code == "200") {
                 this.externallist = respon.data.list;
@@ -1911,10 +1807,10 @@ export default {
             console.log("my id", event);
             const response = await this.$axios.post(
                 "diagnosis/getIcd9subcodeList", {
-                    icd_category_code: event.target.value
-                }, {
-                    headers
-                }
+                icd_category_code: event.target.value
+            }, {
+                headers
+            }
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.icdcatcodelist = response.data.list;
@@ -1951,10 +1847,10 @@ export default {
             };
             const response = await this.$axios.post(
                 "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
-                }, {
-                    headers
-                }
+                id: this.Id,
+            }, {
+                headers
+            }
             );
             if (response.data.code == 200) {
                 this.patientdetails = response.data.list[0];
@@ -1975,11 +1871,11 @@ export default {
             };
             const response = await this.$axios.post(
                 "/patient-appointment-details/fetchViewHistoryListDetails", {
-                    id: this.pid,
-                    type: "OcctRefferalForm",
-                }, {
-                    headers
-                }
+                id: this.pid,
+                type: "OcctRefferalForm",
+            }, {
+                headers
+            }
             );
             if (response.data.code == 200) {
 
@@ -2155,10 +2051,10 @@ export default {
                 this.GetPatientdetails();
                 const response2 = await this.$axios.post(
                     "diagnosis/getIcd9subcodeList", {
-                        icd_category_code: this.code_id
-                    }, {
-                        headers
-                    }
+                    icd_category_code: this.code_id
+                }, {
+                    headers
+                }
                 );
                 if (response2.data.code == 200 || response2.data.code == "200") {
                     this.icdcatcodelist = response2.data.list;
