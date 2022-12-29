@@ -140,18 +140,6 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back</a
                     >
-                  <button
-                    type="button"
-                    class="btn btn-secondary btn-text mr-auto"
-                    @click="demoFromHTML"
-                  >
-                    <i class="fad fa-download"></i> Download Result
-                  </button>
-                  <a
-                   	 @click="Gotorequestappointment"
-                    class="btn btn-success btn-text ml-auto"
-                    ><i class="fad fa-calendar-day"></i> Request Appointment</a
-                  >
                 </div>
               </div>
             </div>
@@ -210,7 +198,8 @@ export default {
       SClevel: "",
       UClevel: "",
       UserTotal: 0,
-      Id:0
+      Id:0,
+      appId: 0
     };
   },
   beforeMount() {
@@ -246,16 +235,26 @@ export default {
     }
      let urlParams = new URLSearchParams(window.location.search);
        this.Id = urlParams.get("id");
+    
+     let urlParams1 = new URLSearchParams(window.location.search);
+       this.appId = urlParams1.get("appId");
   },
   beforeDestroy() {
     localStorage.removeItem("whodasresult");
   },
   methods: {
     GoBack(){
-      this.$router.push({
+      if(this.appId){
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
+      }else{
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id},
+            });
+      };
     },
     demoFromHTML() {
       var pdf = new jsPDF("p", "pt", "a4");
