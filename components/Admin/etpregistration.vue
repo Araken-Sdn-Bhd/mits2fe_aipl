@@ -230,7 +230,7 @@ export default {
         this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
                   footer: ''
                 });
       }
@@ -278,7 +278,7 @@ export default {
               this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
                   footer: ''
                 })
             }
@@ -306,14 +306,19 @@ export default {
               this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
                   footer: ''
                 })
             }
           }
         }
       } catch (e) {
-        this.errors.push = e;
+        this.resetmodel();
+        this.$swal.fire({
+            icon: 'error',
+            title: 'Oops... Something Went Wrong!',
+            text: 'the error is: ' + e,
+        })
       }
     },
     async resetmodel() {
