@@ -138,8 +138,8 @@
                                         <td>#{{ index+1 }}</td>
                                         <td>{{ cla.branch_id }}</td>
                                         <td>{{ cla.name }}</td>
-                                        <td>{{ cla.start_date }}</td>
-                                        <td>{{ cla.until_date }}</td>
+                                        <td>{{ getFormattedDate(cla.start_date) }}</td>
+                                        <td>{{ getFormattedDate(cla.until_date) }}</td>
                                         <td>{{ cla.description }}</td>
 
                                         <td>
@@ -169,6 +169,7 @@
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 import "@/assets/css/fullcalendar.css";
+import moment from 'moment';
 export default {
     components: {
         CommonSidebar,
@@ -209,6 +210,9 @@ export default {
     },
    
     methods: {
+        getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
+        },
         async getList(){
             this.loader = true;
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
