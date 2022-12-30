@@ -224,25 +224,25 @@ export default {
         localStorage.setItem("cbiresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/cbi-result-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }else if(name=="dass"){
         localStorage.setItem("cbiresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/dass-result-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }else if(name=="phq9"){
         localStorage.setItem("phq9result_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/phq9-result-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }else if(name=="whodas"){
         localStorage.setItem("whodasresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/whodas-result-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }
       else if(name=="bdi"){
@@ -267,21 +267,21 @@ export default {
         localStorage.setItem("atqresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/atq-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }
       else if(name=="psp"){
         localStorage.setItem("pspresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/psp-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }
       else if(name=="SR"){
         localStorage.setItem("suicidalresult_history",JSON.stringify(test));
         this.$router.push({
         path: "/modules/Intervention/suicide-risk-view-history",
-        query: { id: this.Id },
+        query: { id: this.Id, appId:this.appId },
       });
       }
     },
