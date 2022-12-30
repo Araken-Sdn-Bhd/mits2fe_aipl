@@ -56,8 +56,7 @@
                   <!-- row -->
                   <div class="row">
 
-                    <!-- <div v-if="(user_role=='superadmin')" class="col-sm-6"> comment out for testing and developing purposes -->
-                      <div  class="col-sm-6">
+                    <div v-if="(user_role=='superadmin')" class="col-sm-6"> comment out for testing and developing purposes
                       <div class="mb-3">
                         <label class="form-label">Level of Report:</label>
                         <select class="form-select" v-model="level_report" @change="OnchangeLeveofReport($event)">
@@ -142,15 +141,15 @@
             <div class="legend">
               <div class="legend1">
                 <ul id="legend-order">
-                  <li>(c) = Total Caseload</li>
-                  <li>(d) = Total Dismissed</li>
+                  <li>c = Total Caseload</li>
+                  <li>d = Total Dismissed</li>
                 </ul>
               </div>
 
             <div class="legend2">
                 <ul id="legend-order">
-                  <li>(a) = Newly Job Placed</li>
-                  <li>(b) = Ongoing Job Placement</li>
+                  <li>a = Newly Job Placed</li>
+                  <li>b = Ongoing Job Placement</li>
                 </ul>
             </div>
             </div>
@@ -186,200 +185,201 @@
           <tr
           v-for="(rp, index) in averageResult" 
           v-bind:key="index" >
-            <td v-if="rp[1]!=NULL">(a)</td><!--JAN-->
-            <td v-if="rp[1]!=NULL">(b)</td>
-            <td v-if="rp[1]!=NULL">(c)</td>
-            <td v-if="rp[1]!=NULL">(d)</td>
+            <td v-if="rp[1]!=NULL">a</td><!--JAN-->
+            <td v-if="rp[1]!=NULL">b</td>
+            <td v-if="rp[1]!=NULL">c</td>
+            <td v-if="rp[1]!=NULL">d</td>
             <td v-if="rp[1]!=NULL">KPI (%)</td>     
 
-            <td v-if="rp[2]!=NULL">(a)</td><!--FEB-->
-            <td v-if="rp[2]!=NULL">(b)</td>
-            <td v-if="rp[2]!=NULL">(c)</td>
-            <td v-if="rp[2]!=NULL">(d)</td>
+            <td v-if="rp[2]!=NULL">a</td><!--FEB-->
+            <td v-if="rp[2]!=NULL">b</td>
+            <td v-if="rp[2]!=NULL">c</td>
+            <td v-if="rp[2]!=NULL">d</td>
             <td v-if="rp[2]!=NULL">KPI (%)</td>       
 
-            <td v-if="rp[3]!=NULL">(a)</td><!--MAC-->
-            <td v-if="rp[3]!=NULL">(b)</td>
-            <td v-if="rp[3]!=NULL">(c)</td>
-            <td v-if="rp[3]!=NULL">(d)</td>
+            <td v-if="rp[3]!=NULL">a</td><!--MAC-->
+            <td v-if="rp[3]!=NULL">b</td>
+            <td v-if="rp[3]!=NULL">c</td>
+            <td v-if="rp[3]!=NULL">d</td>
             <td v-if="rp[3]!=NULL">KPI (%)</td>            
 
-            <td v-if="rp[4]!=NULL">(a)</td><!--APR-->
-            <td v-if="rp[4]!=NULL">(b)</td>
-            <td v-if="rp[4]!=NULL">(c)</td>
-            <td v-if="rp[4]!=NULL">(d)</td>
+            <td v-if="rp[4]!=NULL">a</td><!--APR-->
+            <td v-if="rp[4]!=NULL">b</td>
+            <td v-if="rp[4]!=NULL">c</td>
+            <td v-if="rp[4]!=NULL">d</td>
             <td v-if="rp[4]!=NULL">KPI (%)</td>            
 
-            <td v-if="rp[5]!=NULL">(a)</td><!--MAY-->
-            <td v-if="rp[5]!=NULL">(b)</td>
-            <td v-if="rp[5]!=NULL">(c)</td>
-            <td v-if="rp[5]!=NULL">(d)</td>
+            <td v-if="rp[5]!=NULL">a</td><!--MAY-->
+            <td v-if="rp[5]!=NULL">b</td>
+            <td v-if="rp[5]!=NULL">c</td>
+            <td v-if="rp[5]!=NULL">d</td>
             <td v-if="rp[5]!=NULL">KPI (%)</td> 
 
-            <td v-if="rp[6]!=NULL">(a)</td><!--JUN-->
-            <td v-if="rp[6]!=NULL">(b)</td>
-            <td v-if="rp[6]!=NULL">(c)</td>
-            <td v-if="rp[6]!=NULL">(d)</td>
+            <td v-if="rp[6]!=NULL">a</td><!--JUN-->
+            <td v-if="rp[6]!=NULL">b</td>
+            <td v-if="rp[6]!=NULL">c</td>
+            <td v-if="rp[6]!=NULL">d</td>
             <td v-if="rp[6]!=NULL">KPI (%)</td>  
 
-            <td v-if="rp[7]!=NULL">(a)</td><!--JUL-->
-            <td v-if="rp[7]!=NULL">(b)</td>
-            <td v-if="rp[7]!=NULL">(c)</td>
-            <td v-if="rp[7]!=NULL">(d)</td>
+            <td v-if="rp[7]!=NULL">a</td><!--JUL-->
+            <td v-if="rp[7]!=NULL">b</td>
+            <td v-if="rp[7]!=NULL">c</td>
+            <td v-if="rp[7]!=NULL">d</td>
             <td v-if="rp[7]!=NULL">KPI (%)</td> 
 
-            <td v-if="rp[8]!=NULL">(a)</td><!--AUG-->
-            <td v-if="rp[8]!=NULL">(b)</td>
-            <td v-if="rp[8]!=NULL">(c)</td>
-            <td v-if="rp[8]!=NULL">(d)</td>
+            <td v-if="rp[8]!=NULL">a</td><!--AUG-->
+            <td v-if="rp[8]!=NULL">b</td>
+            <td v-if="rp[8]!=NULL">c</td>
+            <td v-if="rp[8]!=NULL">d</td>
             <td v-if="rp[8]!=NULL">KPI (%)</td>
 
-            <td v-if="rp[9]!=NULL">(a)</td><!--SEP-->
-            <td v-if="rp[9]!=NULL">(b)</td>
-            <td v-if="rp[9]!=NULL">(c)</td>
-            <td v-if="rp[9]!=NULL">(d)</td>
+            <td v-if="rp[9]!=NULL">a</td><!--SEP-->
+            <td v-if="rp[9]!=NULL">b</td>
+            <td v-if="rp[9]!=NULL">c</td>
+            <td v-if="rp[9]!=NULL">d</td>
             <td v-if="rp[9]!=NULL">KPI (%)</td>         
 
-            <td v-if="rp[10]!=NULL">(a)</td><!--OCT-->
-            <td v-if="rp[10]!=NULL">(b)</td>
-            <td v-if="rp[10]!=NULL">(c)</td>
-            <td v-if="rp[10]!=NULL">(d)</td>
+            <td v-if="rp[10]!=NULL">a</td><!--OCT-->
+            <td v-if="rp[10]!=NULL">b</td>
+            <td v-if="rp[10]!=NULL">c</td>
+            <td v-if="rp[10]!=NULL">d</td>
             <td v-if="rp[10]!=NULL">KPI (%)</td>     
 
-            <td v-if="rp[11]!=NULL">(a)</td><!--NOV-->
-            <td v-if="rp[11]!=NULL">(b)</td>
-            <td v-if="rp[11]!=NULL">(c)</td>
-            <td v-if="rp[11]!=NULL">(d)</td>
+            <td v-if="rp[11]!=NULL">a</td><!--NOV-->
+            <td v-if="rp[11]!=NULL">b</td>
+            <td v-if="rp[11]!=NULL">c</td>
+            <td v-if="rp[11]!=NULL">d</td>
             <td v-if="rp[11]!=NULL">KPI (%)</td>
 
-            <td v-if="rp[12]!=NULL">(a)</td><!--DEC-->
-            <td v-if="rp[12]!=NULL">(b)</td>
-            <td v-if="rp[12]!=NULL">(c)</td>
-            <td v-if="rp[12]!=NULL">(d)</td>
+            <td v-if="rp[12]!=NULL">a</td><!--DEC-->
+            <td v-if="rp[12]!=NULL">b</td>
+            <td v-if="rp[12]!=NULL">c</td>
+            <td v-if="rp[12]!=NULL">d</td>
             <td v-if="rp[12]!=NULL">KPI (%)</td>         
           </tr>  
       
 </tr>                   
 
-          <tr class="tr-box" v-for="(rp, index) in result" :key="index">
-            <td colspan="1" class="tdrow"> </td>
-            <td colspan="3" class="tdrow" >{{ rp.group_name}} </td> <!-- Nama Mentari -->
-            <!-- <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td> -->
-<!-- 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+          <tr class="tr-box" v-for="(rp, index) in listKey" :key="index">
+            <td colspan="1" class="tdrow">{{ index+1 }} </td>
+            <td colspan="3" class="tdrow" >{{ rp }} </td> <!-- Nama Mentari -->
+            <td class="tdrow" v-if="result[rp][1]!=NULL">{{ result[rp][1]['a']  }}</td>
+            <td class="tdrow" v-if="result[rp][1]!=NULL">{{ result[rp][1]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][1]!=NULL">{{ result[rp][1]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][1]!=NULL">{{ result[rp][1]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][1]!=NULL">{{ result[rp][1]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][2]!=NULL">{{ result[rp][2]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][2]!=NULL">{{ result[rp][2]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][2]!=NULL">{{ result[rp][2]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][2]!=NULL">{{ result[rp][2]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][2]!=NULL">{{ result[rp][2]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][3]!=NULL">{{ result[rp][3]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][3]!=NULL">{{ result[rp][3]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][3]!=NULL">{{ result[rp][3]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][3]!=NULL">{{ result[rp][3]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][3]!=NULL">{{ result[rp][3]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][4]!=NULL">{{ result[rp][4]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][4]!=NULL">{{ result[rp][4]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][4]!=NULL">{{ result[rp][4]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][4]!=NULL">{{ result[rp][4]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][4]!=NULL">{{ result[rp][4]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][5]!=NULL">{{ result[rp][5]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][5]!=NULL">{{ result[rp][5]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][5]!=NULL">{{ result[rp][5]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][5]!=NULL">{{ result[rp][5]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][5]!=NULL">{{ result[rp][5]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][6]!=NULL">{{ result[rp][6]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][6]!=NULL">{{ result[rp][6]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][6]!=NULL">{{ result[rp][6]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][6]!=NULL">{{ result[rp][6]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][6]!=NULL">{{ result[rp][6]['kpi'] }}</td>
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][7]!=NULL">{{ result[rp][7]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][7]!=NULL">{{ result[rp][7]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][7]!=NULL">{{ result[rp][7]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][7]!=NULL">{{ result[rp][7]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][7]!=NULL">{{ result[rp][7]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][8]!=NULL">{{ result[rp][8]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][8]!=NULL">{{ result[rp][8]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][8]!=NULL">{{ result[rp][8]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][8]!=NULL">{{ result[rp][8]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][8]!=NULL">{{ result[rp][8]['kpi'] }}</td> 
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][9]!=NULL">{{ result[rp][9]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][9]!=NULL">{{ result[rp][9]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][9]!=NULL">{{ result[rp][9]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][9]!=NULL">{{ result[rp][9]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][9]!=NULL">{{ result[rp][9]['kpi'] }}</td>
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
+            <td class="tdrow" v-if="result[rp][10]!=NULL">{{ result[rp][10]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][10]!=NULL">{{ result[rp][10]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][10]!=NULL">{{ result[rp][10]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][10]!=NULL">{{ result[rp][10]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][10]!=NULL">{{ result[rp][10]['kpi'] }}</td>
 
-            <td class="tdrow">list[rp]['below_10']['male']</td>
-            <td class="tdrow">list[rp]['below_10']['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['male']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td>
-            <td class="tdrow">list[rp]["10-19"]['female']</td> -->
+            <td class="tdrow" v-if="result[rp][11]!=NULL">{{ result[rp][11]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][11]!=NULL">{{ result[rp][11]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][11]!=NULL">{{ result[rp][11]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][11]!=NULL">{{ result[rp][11]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][11]!=NULL">{{ result[rp][11]['kpi'] }}</td>
+
+            <td class="tdrow" v-if="result[rp][12]!=NULL">{{ result[rp][12]['a'] }} </td>
+            <td class="tdrow" v-if="result[rp][12]!=NULL">{{ result[rp][12]['b'] }}</td>
+            <td class="tdrow" v-if="result[rp][12]!=NULL">{{ result[rp][12]['c'] }}</td>
+            <td class="tdrow" v-if="result[rp][12]!=NULL">{{ result[rp][12]['d'] }}</td>
+            <td class="tdrow" v-if="result[rp][12]!=NULL">{{ result[rp][12]['kpi'] }}</td> 
           </tr>
           
           
 
-           <!-- <tr>
-            <td colspan="8">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+           <tr class="tr-box" v-for="(rp, index) in averageResult" :key="index">
+            <td colspan="4"></td>
+            <td colspan="4" v-if="rp[1]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[1]!=NULL">{{ rp[1] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[2]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[2]!=NULL">{{ rp[2] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[3]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[3]!=NULL">{{ rp[3] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[4]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[4]!=NULL">{{ rp[4] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[5]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[5]!=NULL">{{ rp[5] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[6]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[6]!=NULL">{{ rp[6] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[7]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[7]!=NULL">{{ rp[7] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[8]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[8]!=NULL">{{ rp[8] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[9]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[9]!=NULL">{{ rp[9] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[10]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[10]!=NULL">{{ rp[10] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[11]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[11]!=NULL">{{ rp[11] }}</td>
 
-            <td colspan="4">Average(%)</td>
-            <td class="tdrow">{{ this.totalReport }}</td>
+            <td colspan="4" v-if="rp[12]!=NULL">Average(%)</td>
+            <td class="tdrow" v-if="rp[12]!=NULL">{{ rp[12] }}</td>
 
-          </tr>   -->
+          </tr>  
         </tbody>
       </table>
-      <label>Date Generated: {{ this.dateGenerated }}</label>
+      <label>Date Generated: {{ currentDate() }}</label>
     </div>
 
 
@@ -415,7 +415,10 @@ table td {
 
 table {
   width: auto;
+  margin-left: auto;  
+  margin-right: auto;  
   border-spacing: 0;
+  font-size: 11px;
   border: 1px solid #000;
   text-align: center;
 }
@@ -540,6 +543,12 @@ export default {
   },
   methods: {
 
+    currentDate() {
+      const current = new Date();
+      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+      return date;
+    },
+
     getCurrentYear() {
       return new Date().getFullYear();
     },
@@ -628,17 +637,24 @@ export default {
           );
 
           if (response.data.code == 200) {
-            this.result = response.data.result;
+            this.result = response.data.result[0]['group_name'];
             this.averageResult= response.data.averageResult;
             this.yearResult = response.data.year;
-            // this.listKey = Object.keys(this.averageResult);
+            this.listKey = Object.keys(this.result);
             
               setTimeout(() => {
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "pt", "a4");
-                pdf.addHTML($("#result")[0], function () {
+                var pdf = new jsPDF("l", "pt", "A4");
+                 pdf.internal.scaleFactor = 1.8;  // = 2.0; (working great with yellow page result before insert dummy data)
+
+                var options = {
+                pagesplit: true
+            };
+
+              pdf.addHTML($("#result")[0],options, function () {
                   pdf.save("NationalKPI_Report.pdf");
                 });
+
               }, 100);
               setTimeout(() => {
                 this.$refs.result.classList.add("hide");
