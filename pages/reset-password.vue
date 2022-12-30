@@ -15,7 +15,7 @@
         <input
           class="form-control"
           id="inputEmail"
-          type="text"
+          type="password"
           v-model="password"
         />
       </div>
@@ -24,7 +24,7 @@
         <input
           class="form-control"
           id="inputEmail"
-          type="text"
+          type="password"
           v-model="Cnfpassword"
         />
       </div>
