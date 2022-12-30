@@ -1420,6 +1420,11 @@ export default {
       });
     });
     this.GetStaffBranchId();
+
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
   },
   mounted(){
     if(this.SidebarAccess!=1){
