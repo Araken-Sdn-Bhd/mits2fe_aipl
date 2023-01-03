@@ -42,7 +42,7 @@
 
                         <tr>
                           <td>Marital Status:</td>
-                          <td>{{ patientdetails.maritialstatus[0].section_value }}</td>
+                          <td v-if="patientdetails.maritialstatus != 0 ">{{ patientdetails.maritialstatus[0].section_value }}</td>
                         </tr>
 
                         <tr>
