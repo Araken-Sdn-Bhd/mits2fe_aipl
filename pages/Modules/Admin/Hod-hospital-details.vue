@@ -7,7 +7,6 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>System Setting</h1>
-            <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
           </div>
           <div class="card mb-4">
             <div class="card-header icon-title">
@@ -53,7 +52,7 @@
             >
               <div class="card mb-4">
                 <div class="card-header bg-transparent">
-                  <h4>Hospital Details</h4>
+                  <h4>Hospital Details </h4>
                 </div>
                 <div class="card-body">
                   <table class="info-table" width="100%" v-if="HospitalDetails">
@@ -117,6 +116,12 @@
                       </tr>
                     </tbody>
                   </table>
+                  <br><br>
+                  <div class="form-foter mt-3">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+              </div>
                 </div>
               </div>
             </div>
@@ -180,6 +185,12 @@
                       </tr>
                     </tbody>
                   </table>
+                  <br><br>
+                  <div class="form-foter mt-3">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+              </div>
                 </div>
               </div>
             </div>
@@ -210,6 +221,9 @@ export default {
     this.getdetails();
   },
   methods: {
+    back() {
+            this.$router.go(-1);
+        },
     async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
