@@ -2477,14 +2477,15 @@ export default {
           response.data.Data[0].complexity_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.medication_prescription = response.data.Data[0].medication_des;
-        //this.jobSPECIFICATION = response.data.Data[0].jobs;
-// alert(response.data.Data[0].jobs[0][0].answer);
+        this.jobSPECIFICATION = response.data.Data[0].jobs;
+
         if(response.data.Data[0].jobs[0][0].answer == "A. Need to work on weekend"){
           this.work_schedule_A = response.data.Data[0].jobs[0][0].answer;
-        } ;
+        };
+
         if(response.data.Data[0].jobs[0][1].answer == "B. Night shift only?"){
           this.work_schedule_B = response.data.Data[0].jobs[0][1].answer;
-        } ;
+        };
         if(response.data.Data[0].jobs[0][2].answer == "C. Part-time?"){
           this.work_schedule_C = response.data.Data[0].jobs[0][2].answer;
         } ;
@@ -2496,13 +2497,13 @@ export default {
 
         if(response.data.Data[0].jobs[1][0].answer =="A. Public transport"){
           this.transport_to_workplace_A = response.data.Data[0].jobs[1][0].answer;
-        } ;
-        if(response.data.Data[0].jobs[1][1].answer =="B. Own transport if yes mention type?"){
+        };
+        if(response.data.Data[0].jobs[1][1].answer =="B. Own transport"){
           this.transport_to_workplace_B = response.data.Data[0].jobs[1][1].answer;
-        } ;
-        if(response.data.Data[0].jobs[1][2].answer =="C. Company Transport"){
-          this.transport_to_workplace_C = response.data.Data[0].jobs[1][2].answer;
-        } ;
+        };
+        if(response.data.Data[0].jobs[1][3].answer =="C. Company Transport"){
+          this.transport_to_workplace_C = response.data.Data[0].jobs[1][3].answer;
+        };
 
           this.transport_to_workplace_comment = response.data.Data[0].comment[1].comment;
 
