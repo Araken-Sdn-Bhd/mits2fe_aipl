@@ -609,6 +609,7 @@ export default {
       sharpracetotal: "",
       shharpRaces: [],
       rangeOfAge: [],
+      shharpGender: [],
       shharpReligions: [],
       shharpMaritals: [],
       shharpEducation: [],
@@ -621,11 +622,13 @@ export default {
       marital_name_list: [],
       education_name_list: [],
       employment_name_list: [],
+      sharp_gender_list: [],
       sharp_total_by_race: [],
       sharp_total_by_religion: [],
       sharp_total_by_marital: [],
       sharp_total_by_education: [],
       sharp_total_by_employment: [],
+      sharp_total_by_gender: [],
       by_age_list: [],
       sharp_total_by_age: [],
       AnnouncmentToShow: 3,
@@ -697,16 +700,9 @@ export default {
           this.totalpatient = response.data.totalpatient[0].TotalPatient;
           this.totalmentarilocation =
             response.data.totalmentarilocation[0].TotalMentariLocation;
-          this.sharp_total_caseloadmale = 0;
-          this.sharp_total_caseloadfemale = 0;
           this.sharp_total_caseload = 0;
-          this.sharp_total_caseload = response.data.totalsharp[0].Sharptotal;
+          this.sharp_total_caseload = response.data.totalsharp.length;
 
-          if (response.data.male) {
-            this.sharp_total_caseloadmale = response.data.male[0].Sharptotal;
-            this.sharp_total_caseloadfemale =
-              response.data.female[0].Sharptotal;
-          }
           this.kpi_total_caseload = response.data.kpi[0].kpiTotalCaseLoad;
 
           this.kpiEmployement = 0;
@@ -722,6 +718,7 @@ export default {
           this.shharpMaritals = response.data.shharpMaritals;
           this.shharpEducation = response.data.shharpEducation;
           this.shharpEmployment = response.data.shharpEmployment;
+          this.shharpGender = response.data.shharpGender;
           this.summaryActivity = response.data.summaryActivity;
           this.sharpracetotal = response.data.race;
           console.log("my sharpracetotal", this.sharpracetotal);
@@ -739,12 +736,14 @@ export default {
           this.sharp_total_by_age = [];
           this.religion_name_list = [];
           this.sharp_total_by_religion = [];
-          this.marital_name_list = [];
+          this.sharp_gender_list = [];
           this.sharp_total_by_marital = [];
           this.education_name_list = [];
           this.sharp_total_by_education = [];
           this.employment_name_list = [];
+          this.marital_name_list = [];
           this.sharp_total_by_employment = [];
+          this.sharp_total_by_gender = [];
 
           this.shharpRaces.forEach((element) => {
             if (element.section_value) {
@@ -767,6 +766,18 @@ export default {
           this.shharpReligions.forEach((element) => {
             if (element.Sharptotal) {
               this.sharp_total_by_religion.push(element.Sharptotal);
+            }
+          });
+
+          this.shharpGender.forEach((element) => {
+            if (element.section_value) {
+              this.sharp_gender_list.push(element.section_value);
+            }
+          });
+
+          this.shharpGender.forEach((element) => {
+            if (element.Sharptotal) {
+              this.sharp_total_by_gender.push(element.Sharptotal);
             }
           });
 
@@ -1174,16 +1185,15 @@ export default {
 
           if (this.shharpChart) {
             this.shharpChart.destroy();
-            if (
-              this.sharp_total_caseloadmale != 0 ||
-              this.sharp_total_caseloadfemale != 0
-            ) {
-              var xValues = ["Male", "Female"];
-              var yValues1 = [
-                this.sharp_total_caseloadmale,
-                this.sharp_total_caseloadfemale,
-              ];
-              var barColors = ["#00BEFF", "pink"];
+            if (this.shharpGender != 0) {
+              var xValues = this.sharp_gender_list;
+              var yValues1 = this.sharp_total_by_gender;
+              if(this.sharp_gender_list[0] == "Male"){
+                var barColors = ["#00BEFF", "pink"];
+              }else{
+                var barColors = ["pink", "#00BEFF"];
+              }
+              
             } else if (this.shharpRaces != 0) {
               var xValues = this.race_name_list;
               var yValues1 = this.sharp_total_by_race;
@@ -1268,16 +1278,14 @@ export default {
               var barColors = this.sharp_color_list;
             }
           } else {
-            if (
-              this.sharp_total_caseloadmale != 0 ||
-              this.sharp_total_caseloadfemale != 0
-            ) {
-              var xValues = ["Male", "Female"];
-              var yValues1 = [
-                this.sharp_total_caseloadmale,
-                this.sharp_total_caseloadfemale,
-              ];
-              var barColors = ["#00BEFF", "pink"];
+            if (this.shharpGender != 0) {
+              var xValues = this.sharp_gender_list;
+              var yValues1 = this.sharp_total_by_gender;
+              if(this.sharp_gender_list[0] == "Male"){
+                var barColors = ["#00BEFF", "pink"];
+              }else{
+                var barColors = ["pink", "#00BEFF"];
+              }
             } else if (this.shharpRaces != 0) {
               var xValues = this.race_name_list;
               var yValues1 = this.sharp_total_by_race;
