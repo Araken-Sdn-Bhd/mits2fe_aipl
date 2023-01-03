@@ -31,6 +31,12 @@
                   </tr>
                 </tbody>
               </table>
+              <br><br>
+                  <div class="form-foter mt-3">
+                <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -106,6 +112,9 @@ export default {
     this.Id = urlParams.get("id");
   },
   methods:{
+    back() {
+            this.$router.go(-1);
+        },
     formatetime(time) {
        const local = moment(time).format("hh:mm a");
       return local;
