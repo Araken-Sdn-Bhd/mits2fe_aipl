@@ -133,6 +133,7 @@ export default {
       token: "",
       keyword: "",
       search: "",
+      search2: "",
       fromDate: "",
       toDate: "",
       branch_id: 0,
@@ -143,7 +144,11 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
   },
   mounted() {
-    this.getData();
+    if(localStorage.getItem("keyword")!=''){
+      this.search2=localStorage.getItem("keyword");
+      this.search=this.search2;
+      this.OnSearch();
+    }
     },
   methods: {
     oneditPatient(Id) {
@@ -207,6 +212,7 @@ export default {
 
     },
     async OnSearch() {
+      localStorage.removeItem('keyword');
       this.list = [];
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
