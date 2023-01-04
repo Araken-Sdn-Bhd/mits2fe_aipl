@@ -186,7 +186,6 @@
         <div class="col-md-4 mb-3">
           <label class="form-label">Postcode<span>*</span></label>
           <span class="form-control">{{ this.Gpostcode_id }}</span>
-          </select>
         </div>
       </div>
 
@@ -993,6 +992,11 @@
   </div>
               <!-- individual -->
             </div>
+            <div class="d-flex mt-4 btn-mb">
+            <button @click="back" type="button" class="btn btn-primary btn-text">
+                <i class="fa fa-step-backward"></i> Back
+            </button>
+          </div>
           </div>
         </div>
       </main>
@@ -1378,6 +1382,9 @@ export default {
                 });
       }
     },
+    back() {
+            this.$router.go(-1);
+        },
   },
 };
 </script>
