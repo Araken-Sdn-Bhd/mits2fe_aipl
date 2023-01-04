@@ -133,6 +133,7 @@ export default {
             loader: false,
             errorList: [],
             appointmentid: null,
+            appId: 0,
         };
     },
 
@@ -142,6 +143,8 @@ export default {
         console.log('appointmentid', this.appointmentid);
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
+        let urlParams2 = new URLSearchParams(window.location.search);
+        this.appId = urlParams2.get("appId");
     },
     methods: {
         async OnAddClinicalInfo() {
@@ -248,14 +251,19 @@ export default {
             this.bmi = "";
             this.waist_circumference = "";
         },
-        GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id
-                },
+        GoBack(){
+      if(this.appId){
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
             });
-        },
+      }else{
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id},
+            });
+      };
+    },
         calculateBMI() {
             var heightInMeter = this.height / 100;
             var val = this.weight / (heightInMeter * heightInMeter);
