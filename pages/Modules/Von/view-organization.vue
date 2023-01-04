@@ -928,6 +928,11 @@
     <!-- </form> -->
   </div>
           </div>
+          <div class="d-flex mt-4 btn-mb">
+            <button @click="back" type="button" class="btn btn-primary btn-text">
+                <i class="fa fa-step-backward"></i> Back
+            </button>
+          </div>
         </div>
       </main>
       <von-footer></von-footer>
@@ -1335,6 +1340,9 @@ export default {
     Onnetworkchange(val) {
       this.networkbranch1 = val;
     },
+    back() {
+            this.$router.go(-1);
+        },
   },
 };
 </script>
