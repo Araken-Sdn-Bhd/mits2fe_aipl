@@ -54,8 +54,8 @@
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City<small style="color:red">*</small> </label>
                       <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
-                        <option value=0>Please Select</option>
-                        <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
+                        <option value="">Please Select</option>
+                        <option v-for="ctl in GCityList" v-bind:key="ctl.id" v-bind:value="ctl.id">
                           {{ ctl.city_name }}
                         </option>
                       </select>
@@ -1168,7 +1168,7 @@
                       <div class="row mb-3">
                         <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                         </label>
-                        <div class="col-lg-8 col-sm-12">
+                        <div class="col-lg-8">
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
                               value="assisstance" v-model="category_services" />
@@ -1346,9 +1346,9 @@ export default {
       company_address1: "",
       company_address2: "",
       company_address3: "",
-      state_id: "",
+      state_id: 0,
       city_id: 0,
-      postcode_id: "",
+      postcode_id: 0,
       supervisor_name: "",
       email: "",
       position: "",
@@ -1496,7 +1496,7 @@ export default {
         $(targetBox).show();
       });
 
-      $(".add-td").click(function (i) {
+      $(".add-td").click(function () {
         $(".block:last").after(
           '<tr class="block"> <td> <input type="text" class="form-control task" name="" /></td><td><input type="text" class="form-control object" name="" /></td><td><input type="text" class="form-control width-fixed procedure" name="" /> </td><td> <input type="text" class="form-control width-fixed time" name=""/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
         );
@@ -1771,25 +1771,26 @@ export default {
               services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_of_services: this.complexity_services_id,
+              complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_prescription: this.medication_des,
               jobs: this.jobSDESCRIPTION,
               job_specification: this.jobSPECIFICATION,
               appId: this.appId,
               status:"0",
+              id: this.pid,
             },
             { headers }
           );
           console.log("response", response.data);
                         if (response.data.code == 200) {
                             this.loader = false;
-                            // this.resetmodel();
+                            this.resetmodel();
                             this.$swal.fire('Succesfully save as draft!', '', 'success')
                             this.GoBack();
                         } else {
                             this.loader = false;
-                            // this.resetmodel();
+                            this.resetmodel();
                             this.$swal.fire({
                                 icon: 'error',
                                 title: 'Oops... Something Went Wrong! dalam function api',
@@ -1798,6 +1799,7 @@ export default {
                             this.GoBack();
                         }
                     } catch (e) {
+                      this.resetmodel();
                         this.$swal.fire({
                             icon: 'error',
                             title: 'Oops... Something Went Wrong!',
@@ -1997,6 +1999,7 @@ export default {
       });
       this.validate = true;
       this.errorList = [];
+      console.log("services", this.category_services);
       try {
         if (!this.company_name) {
           this.errorList.push("Company Name is required");
@@ -2212,26 +2215,30 @@ export default {
               services_id: this.services_id,
               code_id: this.code_id,
               sub_code_id: this.sub_code_id,
-              complexity_of_services: this.complexity_services_id,
+              complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
               medication_prescription: this.medication_des,
               jobs: this.jobSDESCRIPTION,
               job_specification: this.jobSPECIFICATION,
               appId: this.appId,
               status: "1",
+              id: this.pid,
             },
             { headers }
           );
           console.log("response", response.data);
                             if (response.data.code == 200) {
                                 this.loader = false;
+                                this.resetmodel();
                                 this.$swal.fire(
                                     'Successfully Submitted.',
                                     'Data is inserted.',
                                     'success',
                                 );
+                                this.GoBack();
                             } else {
                                 this.loader = false;
+                                this.resetmodel();
                                 this.$swal.fire({
                                     icon: 'error',
                                     title: 'Oops... Something Went Wrong!',
@@ -2242,6 +2249,7 @@ export default {
                         }
                     } catch (e) {
                         this.loader = false;
+                        this.resetmodel();
                         this.$swal.fire({
                             icon: 'error',
                             title: 'Oops... Something Went Wrong!',
@@ -2351,7 +2359,7 @@ export default {
     },
     async getCityList(event) {
       const headers = {
-        // Authorization: "Bearer " + this.userdetails.access_token,
+        Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -2361,13 +2369,25 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.GCityList = response.data.list;
-        this.GPostCodeList = [];
       } else {
         this.GCityList = [];
-        this.GPostCodeList = [];
       }
 
     },
+
+    resetmodel() {
+      this.location_services_id = 0;
+      this.type_diagnosis_id = 0;
+      this.category_services = "";
+      this.code_id = 0;
+      this.sub_code_id = 0;
+      this.complexity_services_id = 0;
+      this.outcome_id = 0;
+      this.medication_des = "";
+      this.services_id = 0;
+      this.serviceid = 0;
+    },
+
     async getPostcodeList(event) {
       const headers = {
         Accept: "application/json",
@@ -2402,25 +2422,25 @@ export default {
         this.icdcatcodelist = [];
       }
     },
-    async onCitybind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "address/" + event.target.value + "/stateWisePostcodeList",
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        console.log("my city", response.data.list);
-        this.GCityList = response.data.list;
-        this.GPostCodeList = response.data.list;
-      } else {
-        this.GCityList = [];
-        this.GPostCodeList = [];
-      }
-    },
+    // async onCitybind(event) {
+    //   const headers = {
+    //     Authorization: "Bearer " + this.userdetails.access_token,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   };
+    //   const response = await this.$axios.post(
+    //     "address/" + event.target.value + "/stateWisePostcodeList",
+    //     { headers }
+    //   );
+    //   if (response.data.code == 200 || response.data.code == "200") {
+    //     console.log("my city", response.data.list);
+    //     this.GCityList = response.data.list;
+    //     this.GPostCodeList = response.data.list;
+    //   } else {
+    //     this.GCityList = [];
+    //     this.GPostCodeList = [];
+    //   }
+    // },
     async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -2476,7 +2496,7 @@ export default {
         this.services_id = response.data.Data[0].services_id;
         this.code_id = response.data.Data[0].code_id;
         this.sub_code_id = response.data.Data[0].sub_code_id;
-        this.complexity_of_services =
+        this.complexity_services_id =
           response.data.Data[0].complexity_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.medication_prescription = response.data.Data[0].medication_des;
@@ -2760,6 +2780,15 @@ export default {
         //console.log("myjobb", this.jobSPECIFICATION);
         // console.log('myjobb11',this.job_specification);
         this.GetList();
+        const response1 = await this.$axios.post(
+          "address/" + this.state_id + "/getCityList",
+          { headers }
+        );
+        if (response1.data.code == 200 || response1.data.code == "200") {
+          this.GCityList = response1.data.list;
+        } else {
+          this.GCityList = [];
+        }
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
@@ -2769,6 +2798,15 @@ export default {
           this.icdcatcodelist = response2.data.list;
         } else {
           this.icdcatcodelist = [];
+        }
+        const response3 = await this.$axios.post(
+          "address/" + this.city_id + "/getPostcodeListById",
+          { headers }
+        );
+        if (response3.data.code == 200 || response3.data.code == "200") {
+          this.GPostCodeList = response3.data.list;
+        } else {
+          this.GPostCodeList = [];
         }
       } else {
         this.$swal.fire({
