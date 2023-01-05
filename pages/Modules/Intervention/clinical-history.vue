@@ -80,12 +80,15 @@ export default {
       errorList: [],
       list: [],
       Id: 0,
+      appId: 0,
     };
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.appId = urlParams1.get("appId");
   },
    mounted() {
     const headers = {
@@ -172,10 +175,17 @@ export default {
       }
     },
     GoBack(){
-      this.$router.push({
+      if(this.appId){
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
+      }else{
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id},
+            });
+      };
     }
   },
 };

@@ -607,10 +607,7 @@ export default {
       this.State = 0;
       this.PostCode = 0;
       this.City = 0;
-      this.ContactNoOffice = "";
-      this.MobileOffice = "";
       this.FaxNo = "";
-      this.email.Email = "";
       this.Id = 0;
       this.branchstatus = "";
       this.Contactlist = "";

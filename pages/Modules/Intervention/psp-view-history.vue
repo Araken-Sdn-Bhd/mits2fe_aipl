@@ -96,6 +96,14 @@
                 </button>
               </div> -->
             </div>
+            <div class="row justify-content">
+              <div class="col-sm-8">
+                <a
+                      @click="GoBack"
+                      class="btn btn-primary btn-text"
+                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal fade" id="resultmodal" tabindex="-1">
@@ -125,26 +133,6 @@
                   </table>
                 </div> -->
               </div>
-              <div class="modal-footer">
-                <a
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back</a
-                    >
-                <!-- <button
-                  @click="downloadresult"
-                  type="button"
-                  class="btn btn-secondary mr-auto"
-                >
-                  <i class="fad fa-download"></i> Download Result
-                </button>
-                <a
-                 @click="Gotorequestappointment"
-                  class="btn btn-primary ml-auto"
-                >
-                  <i class="fad fa-calendar-day"></i> Request Appointment
-                </a> -->
-              </div>
             </div>
           </div>
         </div>
@@ -169,6 +157,7 @@ export default {
       userId: 0,
       token: "",
       Id: 0,
+      appId: 0,
       result: null,
       pspresult_history:null,
       test_name:"",
@@ -194,6 +183,8 @@ export default {
     }
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    let urlParams1 = new URLSearchParams(window.location.search);
+    this.appId = urlParams1.get("appId");
   },
   methods: {
      async GetAnswerList() {
@@ -309,10 +300,17 @@ export default {
       });
     },
     GoBack(){
-      this.$router.push({
+      if(this.appId){
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id },
+              query: { id: this.Id, appId: this.appId },
             });
+      }else{
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id},
+            });
+      };
     }
 
   },
