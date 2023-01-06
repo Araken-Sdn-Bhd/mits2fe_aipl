@@ -232,25 +232,29 @@ export default {
             });
         },
         OnView(data) {
+          
             if (data.app_type == "Individual") {
                 this.$router.push({
                     path: "/modules/Von/view-individual",
                     query: {
-                        id: data.id
+                        id: data.id,
+                        type: data.app_type
                     },
                 });
             } else if (data.app_type == "Group") {
                 this.$router.push({
                     path: "/modules/Von/view-group",
                     query: {
-                        id: data.id
+                        id: data.id,
+                        type: data.app_type
                     },
                 });
             } else {
                 this.$router.push({
                     path: "/modules/Von/view-organization",
                     query: {
-                        id: data.id
+                        id: data.id,
+                        type: data.app_type
                     },
                 });
             }
