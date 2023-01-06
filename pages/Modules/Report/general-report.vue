@@ -772,9 +772,9 @@ export default {
               setTimeout(() => {
 
                 this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "pt", "A3");
+                var pdf = new jsPDF("l", "px",[ 929,  1920], "A4");
                  //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
-                  pdf.internal.scaleFactor =1.30; //A3 or use 1.41
+                  pdf.internal.scaleFactor =1.0; //A3 or use 1.41
                 //pdf.internal.scaleFactor =30;
                 var options = {
                 pagesplit: true
@@ -972,6 +972,7 @@ export default {
 }
 div#result {
   padding: 5px;
+  width: 1920px;
 
 }
 </style>
