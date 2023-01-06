@@ -76,6 +76,7 @@
                     <th>Age</th>
                     <th>NRIC/Passport</th>
                     <th>Mentari</th>
+                    <th>Date Harm</th>
                     <th>Last Seen</th>
                     <th>Shharp Form Status</th>
                   </tr>
@@ -93,7 +94,10 @@
                     <td>{{ patint.age }}</td>
                     <td>{{ patint.nric_no }}</td>
                     <td>{{ patint.hospital_branch_name }}</td>
-                    <td>{{ patint.harm_date }}</td>
+                    <td v-if="patint.harm_date !='-'">{{ getFormattedDate(patint.harm_date) }}</td>
+                    <td v-if="patint.harm_date =='-'">-</td>
+                    <td v-if="patint.booking_date !='-'">{{ getFormattedDate(patint.booking_date) }}</td>
+                    <td v-if="patint.booking_date =='-'">-</td>
                     <td>{{ patint.status }}</td>
                   </tr>
                 </tbody>
@@ -106,8 +110,7 @@
                   color: red;
                   display: flex;
                   justify-content: center;
-                "
-              >
+                ">
                 No Record Found
               </p>
             </div>
@@ -120,6 +123,7 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import moment from 'moment';
 export default {
   components: { CommonSidebar, CommonHeader },
   data() {
@@ -151,6 +155,10 @@ export default {
     }
     },
   methods: {
+    getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
+        },
+
     oneditPatient(Id) {
       this.$router.push({
         path: "/modules/Shharp/patient-summary",
@@ -176,6 +184,7 @@ export default {
         { headers }
       )
       .then((resp) => {
+      // alert(JSON.stringify(resp.data.list));
         this.list = resp.data.list;
 
         console.log("list", this.list);
