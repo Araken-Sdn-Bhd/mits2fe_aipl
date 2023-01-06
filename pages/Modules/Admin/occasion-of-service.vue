@@ -65,7 +65,8 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table class="table table-striped data-table display nowrap" style="width: 100%">
+              <div style="overflow-x:auto;">
+                <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -89,6 +90,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </div>
@@ -125,26 +127,26 @@ export default {
       .post(
         `${this.$axios.defaults.baseURL}` +
           "staff-management/getStaffManagementListOrById",
-        { branch_id: this.Id, name: this.name,email:this.userdetails.user.email },
+        { branch_id: this.userdetails.branch.branch_id, name: this.name,email:this.userdetails.user.email },
         { headers }
       )
       .then((resp) => {
         this.list = resp.data.list;
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   // autoWidth: false,
+          //   // responsive: true,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
       })
       .catch ((err) => {
@@ -163,6 +165,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
     this.getRole();
+    this.GetList();
   },
   methods: {
     async getRole() {
