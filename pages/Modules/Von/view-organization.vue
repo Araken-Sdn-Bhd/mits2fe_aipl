@@ -886,53 +886,17 @@
         </li>
       </ul>
         </p>
-
-      <div class="d-flex align-items-center mt-4">
-
-                  <!-- <div class="row col-sm-9">
-                    <label for="" class="col-sm-4 col-form-label"
-                      >Screening Done</label
-                    >
-                    <div class="col-sm-8">
-                      <div class="form-check form-check-inline">
-                        <input
-                        disabled
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="screening-yes"
-                          value="1"
-                          v-model="screening_mode"
-                        />
-                        <label class="form-check-label" for="screening-yes"
-                          >Yes</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input
-                        disabled
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="screening-no"
-                          value="0"
-                          v-model="screening_mode"
-                        />
-                        <label class="form-check-label" for="screening-no"
-                          >No</label
-                        >
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
-    <!-- </form> -->
-  </div>
-          </div>
-          <div class="d-flex mt-4 btn-mb">
+      <br><br>
+      <div class="d-flex mt-4 btn-mb">
             <button @click="back" type="button" class="btn btn-primary btn-text">
                 <i class="fa fa-step-backward"></i> Back
             </button>
           </div>
+   
+    <!-- </form> -->
+  </div>
+          </div>
+         
         </div>
       </main>
       <von-footer></von-footer>
@@ -1013,6 +977,7 @@ export default {
       Onetworkother: "",
       Onetworkserviceother: "",
       Id: 0,
+      Type:'',
       screening_mode: 0,
       work: "",
       awareness: "",
@@ -1028,6 +993,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.Type = urlParams.get("type");
     if (this.Id) {
       this.editrecord();
     }
@@ -1218,6 +1184,8 @@ export default {
         "von/get-record",
         {
           id: this.Id,
+          type: this.Type
+        
         },
         { headers }
       );
