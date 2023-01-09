@@ -287,11 +287,11 @@
                 </ul>
             </p>
             <br><br>
-            <div class="d-flex" v-if="!pid">
+            <div class="d-flex">
                 <button @click="GoBack" class="btn btn-primary btn-text">
                     <i class="fa fa-arrow-alt-to-left"></i> Back
                 </button>
-                <div class="ml-auto">
+                <div class="ml-auto" v-if="!pid">
                     <button type="button" class="btn btn-warning btn-text" @click="OnSubmit">
                         <i class="fa fa-save"></i> Save
                     </button>
@@ -457,13 +457,17 @@ export default {
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         },
     },
 };

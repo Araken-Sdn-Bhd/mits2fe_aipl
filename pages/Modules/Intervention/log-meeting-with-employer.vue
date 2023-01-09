@@ -107,7 +107,7 @@
                                             </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small> 
+                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
@@ -756,13 +756,17 @@ export default {
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+          if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         }
     },
 };

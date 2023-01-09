@@ -327,7 +327,7 @@ export default {
             pid: 0,
             type: "",
             appId: 0,
-            SidebarAccess:null,
+            SidebarAccess: null,
         };
     },
     beforeMount() {
@@ -737,10 +737,10 @@ export default {
                 console.log("my details", this.patientdetails);
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
@@ -818,21 +818,25 @@ export default {
                 }
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         },
     },
 };

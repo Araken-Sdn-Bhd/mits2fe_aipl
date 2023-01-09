@@ -251,7 +251,7 @@
                             </p>
                             <br>
                             <br>
-                            <div class="d-flex" >
+                            <div class="d-flex">
                                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
                                 <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
@@ -359,7 +359,7 @@ export default {
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
                 confirmButtonText: 'Save',
-            }).then(async(result) => {
+            }).then(async (result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     try {
@@ -370,34 +370,34 @@ export default {
                             "Content-Type": "application/json",
                         };
                         const response = await this.$axios.post(
-                                "patient-psychiatry-clerkingnote/add", {
-                                    added_by: this.userdetails.user.id.toString(),
-                                    chief_complain: this.chief_complain,
-                                    presenting_illness: this.presenting_illness,
-                                    background_history: this.background_history,
-                                    general_examination: this.general_examination,
-                                    mental_state_examination: this.mental_state_examination,
-                                    diagnosis_id: this.type_diagnosis_id,
-                                    management: this.management,
-                                    discuss_psychiatrist_name: this.discuss_psychiatrist_name,
-                                    date: this.date,
-                                    time: this.time,
-                                    location_services_id: this.location_services_id,
-                                    type_diagnosis_id: this.type_diagnosis_id,
-                                    category_services: this.category_services,
-                                    code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
-                                    complexity_services_id: this.complexity_services_id,
-                                    outcome_id: this.outcome_id,
-                                    medication_des: this.medication_des,
-                                    patient_mrn_id: this.Id,
-                                    services_id: this.services_id,
-                                    appId: this.appId,
-                                    status: "0",
-                                }, {
-                                    headers
-                                }
-                            );
+                            "patient-psychiatry-clerkingnote/add", {
+                                added_by: this.userdetails.user.id.toString(),
+                                chief_complain: this.chief_complain,
+                                presenting_illness: this.presenting_illness,
+                                background_history: this.background_history,
+                                general_examination: this.general_examination,
+                                mental_state_examination: this.mental_state_examination,
+                                diagnosis_id: this.type_diagnosis_id,
+                                management: this.management,
+                                discuss_psychiatrist_name: this.discuss_psychiatrist_name,
+                                date: this.date,
+                                time: this.time,
+                                location_services_id: this.location_services_id,
+                                type_diagnosis_id: this.type_diagnosis_id,
+                                category_services: this.category_services,
+                                code_id: this.code_id,
+                                sub_code_id: this.sub_code_id,
+                                complexity_services_id: this.complexity_services_id,
+                                outcome_id: this.outcome_id,
+                                medication_des: this.medication_des,
+                                patient_mrn_id: this.Id,
+                                services_id: this.services_id,
+                                appId: this.appId,
+                                status: "0",
+                            }, {
+                                headers
+                            }
+                        );
                         console.log("response", response.data);
                         if (response.data.code == 200) {
                             this.loader = false;
@@ -771,21 +771,25 @@ export default {
 
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         }
     },
 };
