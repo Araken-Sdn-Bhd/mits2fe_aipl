@@ -566,7 +566,7 @@
 
     <div class="areas-involvement" id="outreach-project1show" v-if="Garea_of_involvement=='Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
-        <p>Please Provide a breief project description</p>
+        <p>Please provide a brief project description</p>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
@@ -1354,7 +1354,7 @@ export default {
           this.Gestimated_budget = response.data.list.estimated_budget;
           this.Gproject_scopes = response.data.list.project_scopes;
           this.Gproject_loaction = response.data.list.project_loaction;
-          this.Gprojectlocation = response.data.list.project_loaction;
+          this.Gproject_loaction_value = response.data.list.project_loaction_value;
           this.Gtarget_outcome = response.data.list.target_outcome;
           this.Gfollowup_projects = response.data.list.followup_projects;
           this.Gother_loaction = response.data.list.project_loaction_value;
@@ -1367,8 +1367,7 @@ export default {
           this.Gbudget = response.data.list.budget;
           this.Gnetworkno_of_paricipants = response.data.list.no_of_paricipants;
           this.Gnetwotkproject_loaction = response.data.list.project_loaction;
-          this.Gnetwotkproject_loaction_value =
-            response.data.list.project_loaction_value;
+          this.Gnetwotkproject_loaction_value = response.data.list.project_loaction_value;
           this.Gnetworkbranch = response.data.list.project_loaction_value;
           this.Gnetworkbranch1 = response.data.list.project_loaction;
           this.Gnetworkother = response.data.list.project_loaction_value;

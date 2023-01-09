@@ -357,7 +357,7 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Rehabilitation" @click="OOnreliventmentari('Work-based Rehabilitation')"
+                    id="Rehabilitation" v-model="work"
                   />
                   <label class="form-check-label" for="Rehabilitation">
                     Work-based Rehabilitation
@@ -369,7 +369,7 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Psychoeducation" @click="OOnreliventmentari('Awareness Or Psychoeducation')"
+                    id="Psychoeducation" v-model="awareness"
                   />
                   <label class="form-check-label" for="Psychoeducation">
                     Awareness Or Psychoeducation
@@ -381,7 +381,7 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Therapy" @click="OOnreliventmentari('Recreational Therapy')"
+                    id="Therapy" v-model="recreational"
                   />
                   <label class="form-check-label" for="Therapy">
                     Recreational Therapy
@@ -393,10 +393,10 @@
                     class="form-check-input"
                     type="checkbox"
                     value=""
-                    id="Others" @click="OOnreliventmentari('Others')"
+                    id="Others" v-model="other"
                   />
                   <label class="form-check-label" for="Others">
-                    Others:<input disabled type="text" name="" v-model="OVolOthers"/>
+                    Others: <span class="">{{ this.Others }}</span>
                   </label>
                 </div>
               </div>
@@ -485,7 +485,7 @@
 
       <div class="areas-involvement" id="outreach-project2show" v-if="area_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
-        <p>Please Provide a breief project description</p>
+        <p>Please Provide a brief project description</p>
 
          <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
@@ -592,16 +592,16 @@
                 class="form-check-input"
                 type="radio"
                 name="project-location"
-                id="location-others"
+                id="location-others1"
                 value="location-others" v-model="Oproject_loaction"
               />
-              <label class="form-check-label" for="location-others"
+              <label class="form-check-label" for="location-others1"
                 >Others</label
               >
             </div>
 
             <!-- hide-div -->
-            <div class="location-mentari profess-box hide">
+            <div class="location-mentari profess-box hide" v-if="Oproject_loaction=='location-mentari'">
               <div class="mt-3">
               <select disabled class="form-select" v-model="Oproject_branch">
                   <option value="">Please Select</option>
@@ -616,15 +616,9 @@
               </div>
             </div>
 
-            <div class="location-others profess-box hide">
+            <div class="location-others profess-box" v-if="Oproject_loaction!=='location-mentari'">
               <div class="mt-3">
-                <input
-                disabled
-                  type="text"
-                  class="form-control"
-                  placeholder="Please Specify" v-model="Oother_loaction"
-                  name=""
-                />
+                <span class="form-control">{{ this.Oother_loaction }}</span>
               </div>
             </div>
           </div>
@@ -665,7 +659,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Work-based Rehabilitation"
-                id="Rehabilitation2" @change="OOnrelevatedmentari('Work-based Rehabilitation')"
+                id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
                 Work-based Rehabilitation
@@ -677,7 +671,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Awareness Or Psychoeducation"
-                id="Psychoeducation2" @change="OOnrelevatedmentari('Awareness Or Psychoeducation')"
+                id="Psychoeducation2" v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -689,7 +683,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Recreational Therapy"
-                id="Therapy2" @change="OOnrelevatedmentari('Recreational Therapy')"
+                id="Therapy2" v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -701,10 +695,10 @@
                 class="form-check-input"
                 type="checkbox"
                 value="Others"
-                id="Others2" @change="OOnrelevatedmentari('Others')"
+                id="Others2" v-model="Others"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input disabled type="text" name=""  v-model="Ooutreachother"/>
+                Others: <input type="text" name=""  v-model="Others"/>
               </label>
             </div>
           </div>
@@ -763,7 +757,7 @@
               >
             </div>
 
-            <div class="form-check form-check-inline">
+            <div class="form-check form-check-inline" >
               <input
               disabled
                 class="form-check-input"
@@ -778,7 +772,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="project-location-mentari profess-box hide">
+            <div class="project-location-mentari profess-box hide" v-if="Onetwotkproject_loaction=='project-location-mentari'">
               <div class="mt-3">
                 <select disabled class="form-select" v-model="Onetworkbranch">
                   <option value="">Please Select</option>
@@ -793,15 +787,9 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box hide">
+            <div class="project-location-others profess-box"  v-if="Onetwotkproject_loaction!='project-location-mentari'">
               <div class="mt-3">
-                <input
-                disabled
-                  type="text"
-                  class="form-control"
-                  placeholder="Please Specify"
-                  name="" v-model="Onetworkother"
-                />
+                <span class="form-control">{{ this.Onetworkother }}</span>
               </div>
             </div>
           </div>
@@ -831,7 +819,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Rehabilitation2" @click="OOnnetworkrelevatedmentari('Work-based Rehabilitation')"
+                id="Rehabilitation2" v-model="work"
               />
               <label class="form-check-label" for="Rehabilitation2">
                 Work-based Rehabilitation
@@ -843,7 +831,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Psychoeducation2" @click="OOnnetworkrelevatedmentari('Awareness Or Psychoeducation')"
+                id="Psychoeducation2" v-model="awareness"
               />
               <label class="form-check-label" for="Psychoeducation2">
                 Awareness Or Psychoeducation
@@ -855,7 +843,7 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Therapy2" @click="OOnnetworkrelevatedmentari('Recreational Therapy')"
+                id="Therapy2" v-model="recreational"
               />
               <label class="form-check-label" for="Therapy2">
                 Recreational Therapy
@@ -867,10 +855,10 @@
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                id="Others2" @click="OOnnetworkrelevatedmentari('Other')"
+                id="Others2"  v-model="other"
               />
               <label class="form-check-label" for="Others2">
-                Others: <input type="text" name="" v-model="Onetworkserviceother"/>
+                Others: <input type="text" name=""  v-model="Others"/>
               </label>
             </div>
           </div>
@@ -886,17 +874,53 @@
         </li>
       </ul>
         </p>
-      <br><br>
-      <div class="d-flex mt-4 btn-mb">
+
+      <div class="d-flex align-items-center mt-4">
+
+                  <!-- <div class="row col-sm-9">
+                    <label for="" class="col-sm-4 col-form-label"
+                      >Screening Done</label
+                    >
+                    <div class="col-sm-8">
+                      <div class="form-check form-check-inline">
+                        <input
+                        disabled
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="screening-yes"
+                          value="1"
+                          v-model="screening_mode"
+                        />
+                        <label class="form-check-label" for="screening-yes"
+                          >Yes</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                        disabled
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="screening-no"
+                          value="0"
+                          v-model="screening_mode"
+                        />
+                        <label class="form-check-label" for="screening-no"
+                          >No</label
+                        >
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+    <!-- </form> -->
+  </div>
+  <div class="d-flex mt-4 btn-mb">
             <button @click="back" type="button" class="btn btn-primary btn-text">
                 <i class="fa fa-step-backward"></i> Back
             </button>
           </div>
-   
-    <!-- </form> -->
-  </div>
           </div>
-         
         </div>
       </main>
       <von-footer></von-footer>
@@ -946,7 +970,7 @@ export default {
       Oavailable_time: "",
       Ofile: null,
       OIsvalid: false,
-      OVolOthers: "",
+      // OVolOthers: "",
       OYear: "",
       OLocation: "",
       ODescription: "",
@@ -965,7 +989,7 @@ export default {
       Ofollowup_projects: 0,
       Oother_loaction: "",
       Oproject_branch: "",
-      Ooutreachother: "",
+      // Ooutreachother: "",
       Ooutreachmentari_services: "",
       Onetworkmentari_services: "",
       Ocontribution: "",
@@ -975,7 +999,11 @@ export default {
       Onetwotkproject_loaction_value: "",
       Onetworkbranch: "",
       Onetworkother: "",
-      Onetworkserviceother: "",
+      // Onetworkserviceother: "",
+      work: "",
+      awareness: "",
+      recreational: "",
+      Others: "",
       Id: 0,
       Type:'',
       screening_mode: 0,
@@ -1185,7 +1213,7 @@ export default {
         {
           id: this.Id,
           type: this.Type
-        
+
         },
         { headers }
       );
@@ -1274,7 +1302,7 @@ export default {
           this.Oestimated_budget = response.data.list.estimated_budget;
           this.Oproject_scopes = response.data.list.project_scopes;
           this.Oproject_loaction = response.data.list.project_loaction;
-          this.Oprojectlocation = response.data.list.project_loaction;
+          this.Oproject_loaction_value = response.data.list.project_loaction_value;
           this.Otarget_outcome = response.data.list.target_outcome;
           this.Ofollowup_projects = response.data.list.followup_projects;
           this.Oother_loaction = response.data.list.project_loaction_value;
@@ -1290,7 +1318,7 @@ export default {
           this.Onetwotkproject_loaction_value =
             response.data.list.project_loaction_value;
           this.Onetworkbranch = response.data.list.project_loaction_value;
-          this.Onetworkbranch1 = response.data.list.project_loaction;
+          // this.Onetworkbranch1 = response.data.list.project_loaction;
           this.Onetworkother = response.data.list.project_loaction_value;
         }
       } else {
