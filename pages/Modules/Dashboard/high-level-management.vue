@@ -479,6 +479,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 
@@ -1460,6 +1461,9 @@ export default {
     SearchPatient() {
     localStorage.setItem('keyword',(this.search));
     this.$router.push("/modules/Patient/patient-list" );
+    },
+    getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
     },
   },
 };
