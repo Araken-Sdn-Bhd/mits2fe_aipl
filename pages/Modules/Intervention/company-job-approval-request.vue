@@ -29,8 +29,8 @@
                   </div>
                 </div>
               </div>
-
-              <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
+              <div style="overflow-x:auto;">
+                <table class="table table-striped data-table font-13 display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th></th>
@@ -82,6 +82,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
               <br><br>
               <div class="d-flex">
                 <button @click="back" type="button" class="btn btn-primary btn-fill btn-md">
@@ -165,20 +166,20 @@ export default {
         this.list = resp.data;
         this.alllist = resp.data;
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   // autoWidth: false,
+          //   // responsive: true,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
       })
       .catch ((err) => {

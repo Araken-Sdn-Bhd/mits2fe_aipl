@@ -30,7 +30,8 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table
+              <div style="overflow-x:auto;">
+                <table
                 class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
@@ -81,6 +82,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
 <br><br>
               <div class="d-flex">
                 <div class="ml-auto"  :class="SidebarAccess!=1?'hide':''">
@@ -143,20 +145,20 @@ export default {
         this.alllist = resp.data.list;
         console.log("my lst", resp.data);
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   // autoWidth: false,
+          //   // responsive: true,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
       })
       .catch ((err) => {
