@@ -256,39 +256,57 @@ export default {
     },
     OnEdit(data) {
       if (data.app_type == "Individual") {
-        this.$router.push({
-          path: "/modules/Von/edit-individual",
-          query: { id: data.id },
-        });
-      } else if (data.app_type == "Group") {
-         this.$router.push({
-          path: "/modules/Von/edit-group",
-          query: { id: data.id },
-        });
-      } else if (data.app_type == "Organization") {
-         this.$router.push({
-          path: "/modules/Von/edit-organization",
-          query: { id: data.id },
-        });
-      }
+                this.$router.push({
+                    path: "/modules/Von/view-individual",
+                    query: {
+                        id: data.id,
+                        type: data.app_type
+                    },
+                });
+            } else if (data.app_type == "Group") {
+                this.$router.push({
+                    path: "/modules/Von/view-group",
+                    query: {
+                        id: data.org_background_id,
+                        type: data.app_type
+                    },
+                });
+            } else {
+                this.$router.push({
+                    path: "/modules/Von/view-organization",
+                    query: {
+                        id: data.org_background_id,
+                        type: data.app_type
+                    },
+                });
+            }
     },
     OnView(data) {
       if (data.app_type == "Individual") {
-        this.$router.push({
-          path: "/modules/Von/view-individual",
-          query: { id: data.id },
-        });
-      } else if (data.app_type == "Group") {
-         this.$router.push({
-          path: "/modules/Von/view-group",
-          query: { id: data.id },
-        });
-      } else {
-         this.$router.push({
-          path: "/modules/Von/view-organization",
-          query: { id: data.id },
-        });
-      }
+                this.$router.push({
+                    path: "/modules/Von/view-individual",
+                    query: {
+                        id: data.id,
+                        type: data.app_type
+                    },
+                });
+            } else if (data.app_type == "Group") {
+                this.$router.push({
+                    path: "/modules/Von/view-group",
+                    query: {
+                        id: data.org_background_id,
+                        type: data.app_type
+                    },
+                });
+            } else {
+                this.$router.push({
+                    path: "/modules/Von/view-organization",
+                    query: {
+                        id: data.org_background_id,
+                        type: data.app_type
+                    },
+                });
+            }
     },
     OnBook(data){
       this.$router.push({
