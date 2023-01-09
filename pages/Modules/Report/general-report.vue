@@ -339,6 +339,7 @@
                              </li>
                         </ul>
                        </p>
+                       <br><br>
               <div class="btn-width d-flex">
                 <div class="ml-auto" :class="SidebarAccess!=1?'hide1':''">
                   <button
@@ -714,8 +715,8 @@ export default {
     },
 
     async isLetter(e){
-        let char = String.fromCharCode(e.keyCode); 
-        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        let char = String.fromCharCode(e.keyCode);
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true;
         else e.preventDefault();
     },
 
