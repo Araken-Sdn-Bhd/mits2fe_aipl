@@ -10,7 +10,7 @@
           </div>
 
           <div class="card mb-4">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x:auto;">
               <table
                 class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"

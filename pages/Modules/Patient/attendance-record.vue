@@ -67,7 +67,7 @@
                 </div>
               </div>
               <!-- search-table -->
-              <div class="table-responsive-ui">
+              <div class="table-responsive-ui" style="overflow-x:auto;">
                 <table class="table table-striped data-table font-13 display nowrap" style="width: 100%" id="datatable">
                 <thead>
                   <tr>
@@ -266,18 +266,18 @@ export default {
         this.loader = false;
         console.log("my list", this.list);
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
       })
       .catch ((err) => {
@@ -324,18 +324,18 @@ export default {
           this.list = resp.data.list;
           console.log("my list", this.list);
           $(document).ready(function () {
-            $(".data-table").DataTable({
-              searching: false,
-              bLengthChange: false,
-              bInfo: false,
-              scrollX: true,
-              language: {
-                paginate: {
-                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                },
-              },
-            });
+            // $(".data-table").DataTable({
+            //   searching: false,
+            //   bLengthChange: false,
+            //   bInfo: false,
+            //   scrollX: true,
+            //   language: {
+            //     paginate: {
+            //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+            //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+            //     },
+            //   },
+            // });
           });
         })
     },

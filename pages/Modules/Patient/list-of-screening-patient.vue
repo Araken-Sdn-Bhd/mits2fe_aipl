@@ -50,7 +50,8 @@
               </div>
               <!-- search-table -->
 
-              <table class="table table-striped data-table display nowrap" style="width: 100%">
+              <div style="overflow-x:auto;">
+                <table class="table table-striped data-table display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -82,6 +83,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
 
             </div>
           </div>
@@ -128,20 +130,20 @@ export default {
       .then((resp) => {
         this.list = resp.data.list;
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   // autoWidth: false,
+          //   // responsive: true,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
       })
       .catch ((err) => {
