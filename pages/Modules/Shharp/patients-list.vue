@@ -65,7 +65,8 @@
                 </div>
               </div>
               <!-- search-table -->
-              <table
+              <div style="overflow-x:auto;">
+                <table
                 class="table table-striped data-table font-13 display nowrap"
                 style="width: 100%"
               >
@@ -102,6 +103,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
               <p
                 v-show="!list.length"
                 style="
@@ -189,20 +191,20 @@ export default {
 
         console.log("list", this.list);
         $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
+          // $(".data-table").DataTable({
+          //   searching: false,
+          //   bLengthChange: false,
+          //   bInfo: false,
+          //   // autoWidth: false,
+          //   // responsive: true,
+          //   scrollX: true,
+          //   language: {
+          //     paginate: {
+          //       next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+          //       previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+          //     },
+          //   },
+          // });
         });
         this.loader = false;
       })

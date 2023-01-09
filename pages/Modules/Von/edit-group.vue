@@ -379,7 +379,7 @@
 
                                 <div class="areas-involvement" id="outreach-project1show" v-if="Garea_of_involvement=='Outreach Project Collaboration'">
                                     <h4 class="title-h4">Outreach-Project Collaboration</h4>
-                                    <p>Please Provide a breief project description</p>
+                                    <p>Please Provide a brief project description</p>
 
                                     <div class="row mb-3 mt-2">
                                         <label for="" class="col-sm-4 col-form-label">Project Name<span>*</span></label>
@@ -684,7 +684,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <br><br>
+                            </div>
+                            <!-- </form> -->
+                        </div>
+                        <!-- individual -->
+                    </div>
+                    <br><br>
                                 <div class="d-flex mt-4 btn-mb">
                                     <button @click="back" type="button" class="btn btn-primary btn-text">
                                         <i class="fa fa-step-backward"></i> Back
@@ -693,11 +698,6 @@
                                         <i class="fa fa-save"></i> Save
                                     </button>
                                 </div>
-                            </div>
-                            <!-- </form> -->
-                        </div>
-                        <!-- individual -->
-                    </div>
                 </div>
             </div>
         </main>
@@ -790,12 +790,14 @@ export default {
             other: "",
             Others: "",
             Id: 0,
+            Type: "",
         };
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
+        this.Type = urlParams.get("type");
         if (this.Id) {
             this.editrecord();
         }
@@ -876,6 +878,9 @@ export default {
         this.GetList();
     },
     methods: {
+      back() {
+            this.$router.go(-1);
+        },
         OnchangeIsrepresent(val) {
             this.is_you_represenative = val;
         },
@@ -1562,6 +1567,7 @@ export default {
             const response = await this.$axios.post(
                 "von/get-record", {
                     id: this.Id,
+                    type: this.Type
                 }, {
                     headers
                 }
@@ -1640,7 +1646,7 @@ export default {
                     this.Gestimated_budget = response.data.list.estimated_budget;
                     this.Gproject_scopes = response.data.list.project_scopes;
                     this.Gproject_loaction = response.data.list.project_loaction;
-                    this.Gprojectlocation = response.data.list.project_loaction;
+                    this.Gproject_loaction_value = response.data.list.project_loaction_value;
                     this.Gtarget_outcome = response.data.list.target_outcome;
                     this.Gfollowup_projects = response.data.list.followup_projects;
                     this.Gother_loaction = response.data.list.project_loaction_value;

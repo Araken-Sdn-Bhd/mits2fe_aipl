@@ -160,6 +160,7 @@
     </div>
   </template>
   <script>
+  import moment from 'moment';
   import CommonHeader from "../../../components/CommonHeader.vue";
   import CommonSidebar from "../../../components/CommonSidebar.vue";
   
@@ -833,6 +834,9 @@
       localStorage.setItem('keyword',(this.search));
       this.$router.push("/modules/Shharp/patients-list" );
       },
+      getFormattedDate(date) {
+            return moment(date).format("DD-MM-YYYY")
+        },
     },
   };
   </script>

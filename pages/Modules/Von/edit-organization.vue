@@ -170,7 +170,7 @@
                             </div>
                         </div>
 
-                        <div class="areas-involvement hide" id="volunteerism2show">
+                        <div class="areas-involvement" id="volunteerism2show" v-if="Oarea_of_involvement=='Volunteerism'">
                             <h4 class="title-h4">Volunteerism</h4>
 
                             <div class="row mb-3 mt-2">
@@ -239,27 +239,27 @@
                                         <div class="mt-3">
                                             <label for="formFile" class="form-label">Relevant Mentari Service That You Want To Be Involved<span>*</span></label>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation" @click="OOnreliventmentari('Work-based Rehabilitation')" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation" v-model="work" />
                                                 <label class="form-check-label" for="Rehabilitation">
                                                     Work-based Rehabilitation
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation" @click="OOnreliventmentari('Awareness Or Psychoeducation')" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation" v-model="awareness" />
                                                 <label class="form-check-label" for="Psychoeducation">
                                                     Awareness Or Psychoeducation
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Therapy" @click="OOnreliventmentari('Recreational Therapy')" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Therapy" v-model="recreational"/>
                                                 <label class="form-check-label" for="Therapy">
                                                     Recreational Therapy
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Others" @click="OOnreliventmentari('Others')" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Others" v-model="other"/>
                                                 <label class="form-check-label" for="Others">
-                                                    Others:<input disabled type="text" name="" v-model="OVolOthers" />
+                                                  Others:<input type="text" name="" v-model="Others" />
                                                 </label>
                                             </div>
                                         </div>
@@ -269,27 +269,27 @@
                                         <div class="mt-3">
                                             <label for="formFile" class="form-label">Relevant Mentari Service That You Want To Be Involved<span>*</span></label>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation" v-model="work"/>
                                                 <label class="form-check-label" for="Rehabilitation">
                                                     Work-based Rehabilitation
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation" v-model="awareness" />
                                                 <label class="form-check-label" for="Psychoeducation">
                                                     Awareness Or Psychoeducation
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Therapy" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Therapy" v-model="recreational" />
                                                 <label class="form-check-label" for="Therapy">
                                                     Recreational Therapy
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="Others" />
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="Others" v-model="other" />
                                                 <label class="form-check-label" for="Others">
-                                                    Others:<input disabled type="text" name="" />
+                                                  Others:<input type="text" name="" v-model="Others" />
                                                 </label>
                                             </div>
                                         </div>
@@ -329,9 +329,9 @@
 
                         <!-- volunteerismshow -->
 
-                        <div class="areas-involvement hide" id="outreach-project2show">
+                        <div class="areas-involvement" id="outreach-project2show" v-if="Oarea_of_involvement=='Outreach Project Collaboration'">
                             <h4 class="title-h4">Outreach-Project Collaboration</h4>
-                            <p>Please Provide a breief project description</p>
+                            <p>Please Provide a brief project description</p>
 
                             <div class="row mb-3 mt-2">
                                 <label for="" class="col-sm-4 col-form-label">Project Name<span>*</span></label>
@@ -422,7 +422,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="location-others profess-box hide">
+                                    <div class="location-others profess-box">
                                         <div class="mt-3">
                                             <input disabled type="text" class="form-control" placeholder="Please Specify" v-model="Oother_loaction" name="" />
                                         </div>
@@ -452,27 +452,27 @@
                                 <label for="" class="col-sm-4 col-form-label">Relevant Mentari Service That You Want To Be Involved<span>*</span></label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="Work-based Rehabilitation" id="Rehabilitation2" @change="OOnrelevatedmentari('Work-based Rehabilitation')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="Work-based Rehabilitation" id="Rehabilitation2" v-model="work" />
                                         <label class="form-check-label" for="Rehabilitation2">
                                             Work-based Rehabilitation
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="Awareness Or Psychoeducation" id="Psychoeducation2" @change="OOnrelevatedmentari('Awareness Or Psychoeducation')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="Awareness Or Psychoeducation" id="Psychoeducation2" v-model="awareness" />
                                         <label class="form-check-label" for="Psychoeducation2">
                                             Awareness Or Psychoeducation
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="Recreational Therapy" id="Therapy2" @change="OOnrelevatedmentari('Recreational Therapy')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="Recreational Therapy" id="Therapy2" v-model="recreational"/>
                                         <label class="form-check-label" for="Therapy2">
                                             Recreational Therapy
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="Others" id="Others2" @change="OOnrelevatedmentari('Others')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="Others" id="Others2" v-model="other" />
                                         <label class="form-check-label" for="Others2">
-                                            Others: <input disabled type="text" name="" v-model="Ooutreachother" />
+                                          Others:<input type="text" name="" v-model="Others" />
                                         </label>
                                     </div>
                                 </div>
@@ -482,7 +482,7 @@
 
                         <!-- outreach-projectshow -->
 
-                        <div class="areas-involvement hide" id="networking2show">
+                        <div class="areas-involvement" id="networking2show" v-if="Oarea_of_involvement=='Networking Make a Contribution'">
                             <h4 class="title-h4">Networking-Make a Contribution</h4>
                             <p>
                                 We encourage any participation from the community members in line with
@@ -532,7 +532,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="project-location-others profess-box hide">
+                                    <div class="project-location-others profess-box">
                                         <div class="mt-3">
                                             <input disabled type="text" class="form-control" placeholder="Please Specify" name="" v-model="Onetworkother" />
                                         </div>
@@ -553,27 +553,27 @@
                                 <label for="" class="col-sm-4 col-form-label">Relevant Mentari Service That You Want To Be Involved<span>*</span></label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation2" @click="OOnnetworkrelevatedmentari('Work-based Rehabilitation')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="" id="Rehabilitation2" v-model="work" />
                                         <label class="form-check-label" for="Rehabilitation2">
                                             Work-based Rehabilitation
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation2" @click="OOnnetworkrelevatedmentari('Awareness Or Psychoeducation')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="" id="Psychoeducation2" v-model="awareness" />
                                         <label class="form-check-label" for="Psychoeducation2">
                                             Awareness Or Psychoeducation
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="" id="Therapy2" @click="OOnnetworkrelevatedmentari('Recreational Therapy')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="" id="Therapy2" v-model="recreational" />
                                         <label class="form-check-label" for="Therapy2">
                                             Recreational Therapy
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input disabled class="form-check-input" type="checkbox" value="" id="Others2" @click="OOnnetworkrelevatedmentari('Other')" />
+                                        <input disabled class="form-check-input" type="checkbox" value="" id="Others2" v-model="other" />
                                         <label class="form-check-label" for="Others2">
-                                            Others: <input type="text" name="" v-model="Onetworkserviceother" />
+                                          Others:<input type="text" name="" v-model="Others" />
                                         </label>
                                     </div>
                                 </div>
@@ -589,11 +589,11 @@
                             </ul>
                         </p>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck12" v-model="Ois_agree" />
-                            <label class="form-check-label" for="gridCheck12">
-                                I agree to the terms and condition<span>*</span>
-                            </label>
-                        </div>
+                                <input class="form-check-input" type="checkbox" id="gridCheck1" v-model="Ois_agree" />
+                                <label class="form-check-label" for="gridCheck1">
+                                    I agree to the terms and condition<span>*</span>
+                                </label>
+                            </div>
                         <div class="d-flex align-items-center mt-4">
 
                             <div class="row col-sm-9">
@@ -609,7 +609,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <br>
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                    <br>
                             <br>
                             <div class="d-flex mt-4 btn-mb">
                                 <button @click="back" type="button" class="btn btn-primary btn-text">
@@ -619,9 +622,6 @@
                                     <i class="fa fa-save"></i> Save
                                 </button>
                             </div>
-                        </div>
-                        <!-- </form> -->
-                    </div>
                 </div>
             </div>
         </main>
@@ -716,6 +716,8 @@ export default {
             awareness: "",
             recreational: "",
             other: "",
+            Others: "",
+            Type: "",
             expList: [],
         };
     },
@@ -723,6 +725,7 @@ export default {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
+        this.Type = urlParams.get("type");
         if (this.Id) {
             this.editrecord();
         }
@@ -806,29 +809,29 @@ export default {
         OselectFile(event) {
             this.Ofile = event.target.files[0];
         },
-        OOnreliventmentari(val) {
-            if (this.Omentari_services) {
-                this.Omentari_services = this.Omentari_services + "," + val;
-            } else {
-                this.Omentari_services = val;
-            }
-        },
-        OOnrelevatedmentari(val) {
-            if (this.Ooutreachmentari_services) {
-                this.Ooutreachmentari_services =
-                    this.Ooutreachmentari_services + "," + val;
-            } else {
-                this.Ooutreachmentari_services = val;
-            }
-        },
-        OOnnetworkrelevatedmentari(val) {
-            if (this.Onetworkmentari_services) {
-                this.Onetworkmentari_services =
-                    this.Onetworkmentari_services + "," + val;
-            } else {
-                this.Onetworkmentari_services = val;
-            }
-        },
+        // OOnreliventmentari(val) {
+        //     if (this.Omentari_services) {
+        //         this.Omentari_services = this.Omentari_services + "," + val;
+        //     } else {
+        //         this.Omentari_services = val;
+        //     }
+        // },
+        // OOnrelevatedmentari(val) {
+        //     if (this.Ooutreachmentari_services) {
+        //         this.Ooutreachmentari_services =
+        //             this.Ooutreachmentari_services + "," + val;
+        //     } else {
+        //         this.Ooutreachmentari_services = val;
+        //     }
+        // },
+        // OOnnetworkrelevatedmentari(val) {
+        //     if (this.Onetworkmentari_services) {
+        //         this.Onetworkmentari_services =
+        //             this.Onetworkmentari_services + "," + val;
+        //     } else {
+        //         this.Onetworkmentari_services = val;
+        //     }
+        // },
         async onCitybind(event) {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -988,7 +991,20 @@ export default {
                         "is_mental_health_professional",
                         this.Ois_mental_health_professional
                     );
-                    body.append("mentari_services", this.Omentari_services);
+                    body.append(
+                        "mentari_services",
+                        this.Consultation +
+                        "," +
+                        this.work +
+                        "," +
+                        this.awareness +
+                        "," +
+                        this.recreational +
+                        "," +
+                        this.other +
+                        "," +
+                        this.Others
+                    );
                     body.append("available_date", this.Oavailable_date);
                     body.append("available_time", this.Oavailable_time);
                     body.append("health_professional_resume", this.Ofile);
@@ -1065,7 +1081,20 @@ export default {
                     body.append("project_name", this.Oproject_name);
                     body.append("project_background", this.Oproject_background);
                     body.append("project_objectives", this.Oproject_objectives);
-                    body.append("mentari_services", this.Ooutreachmentari_services);
+                    body.append(
+                        "mentari_services",
+                        this.Consultation +
+                        "," +
+                        this.work +
+                        "," +
+                        this.awareness +
+                        "," +
+                        this.recreational +
+                        "," +
+                        this.other +
+                        "," +
+                        this.Others
+                    );
                     body.append("target_audience", this.Otarget_audience);
                     body.append("no_of_paricipants", this.Ono_of_paricipants);
                     body.append("time_frame", this.Otime_frame);
@@ -1146,7 +1175,20 @@ export default {
                     body.append("area_of_involvement", this.Oarea_of_involvement);
                     body.append("contribution", this.Ocontribution);
                     body.append("budget", this.Obudget);
-                    body.append("mentari_services", this.Onetworkmentari_services);
+                    body.append(
+                        "mentari_services",
+                        this.Consultation +
+                        "," +
+                        this.work +
+                        "," +
+                        this.awareness +
+                        "," +
+                        this.recreational +
+                        "," +
+                        this.other +
+                        "," +
+                        this.Others
+                    );
                     body.append("no_of_paricipants", this.Onetworkno_of_paricipants);
                     body.append("project_loaction", this.Onetwotkproject_loaction);
                     body.append(
@@ -1193,6 +1235,7 @@ export default {
             const response = await this.$axios.post(
                 "von/get-record", {
                     id: this.Id,
+                    type: this.Type
                 }, {
                     headers
                 }
@@ -1281,7 +1324,7 @@ export default {
                     this.Oestimated_budget = response.data.list.estimated_budget;
                     this.Oproject_scopes = response.data.list.project_scopes;
                     this.Oproject_loaction = response.data.list.project_loaction;
-                    this.Oprojectlocation = response.data.list.project_loaction;
+                    this.Oproject_loaction_value = response.data.list.project_loaction_value;
                     this.Otarget_outcome = response.data.list.target_outcome;
                     this.Ofollowup_projects = response.data.list.followup_projects;
                     this.Oother_loaction = response.data.list.project_loaction_value;
@@ -1308,6 +1351,9 @@ export default {
                     footer: ''
                 });
             }
+        },
+        back() {
+            this.$router.go(-1);
         },
     },
 };

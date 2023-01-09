@@ -108,7 +108,7 @@ export default {
       total:true
     },
   },
-  ssr: true,
-  target: 'development',
-  // target: 'server',
+  ssr: false,
+  // target: 'development',
+  target: 'server',
 };
