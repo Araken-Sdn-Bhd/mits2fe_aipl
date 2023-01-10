@@ -525,7 +525,7 @@
                             </p>
                             <br>
                             <br>
-                            <div class="d-flex" >
+                            <div class="d-flex">
                                 <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
                                 <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
@@ -847,15 +847,15 @@ export default {
 
                             this.$swal.fire(
                                 'Succesfully Created',
-                              );
+                            );
                             this.GoBack();
                         } else {
                             this.loader = false;
                             this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + this.error,
-                              footer: ''
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.error,
+                                footer: ''
                             })
                             this.GoBack();
                         }
@@ -1347,22 +1347,22 @@ export default {
                     } else {
                         this.loader = false;
                         this.$swal.fire({
-                          icon: 'error',
-                          title: 'Oops... Something Went Wrong!',
-                          text: 'the error is: ' + JSON.stringify(response.data.message),
-                          footer: ''
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + JSON.stringify(response.data.message),
+                            footer: ''
                         });
                     }
                 }
             } catch (e) {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + e,
-                  footer: ''
+                this.loader = false;
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + e,
+                    footer: ''
                 });
-      }
+            }
         },
         async GetList() {
             const headers = {
@@ -1516,10 +1516,10 @@ export default {
                 this.patientdetails = response.data.list[0];
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
             console.log("my details", this.patientdetails);
@@ -1599,21 +1599,25 @@ export default {
 
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         }
     },
 };

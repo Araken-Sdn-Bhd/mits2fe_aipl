@@ -390,7 +390,7 @@ export default {
                 if (result.isConfirmed) {
                     try {
                         this.loader = true;
-                        if(this.serviceid){
+                        if (this.serviceid) {
                             this.services_id = this.serviceid
                         }
                         const headers = {
@@ -715,10 +715,10 @@ export default {
                 this.patientdetails = response.data.list[0];
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
             console.log("my details", this.patientdetails);
@@ -770,21 +770,25 @@ export default {
 
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         }
     },
 };
