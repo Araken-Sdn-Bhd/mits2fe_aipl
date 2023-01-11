@@ -209,7 +209,7 @@ export default {
       if (this.search && this.team) {
         this.list = this.alllist.filter((notChunk) => {
           return (
-            notChunk.patient_mrn
+            (notChunk.patient_mrn
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
             notChunk.name_asin_nric
@@ -219,9 +219,9 @@ export default {
               -1 ||
             notChunk.passport_no
               .toLowerCase()
-              .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.team_name.toLowerCase().indexOf(this.team.toLowerCase()) >
-              -1
+              .indexOf(this.search.toLowerCase()) > -1) &&
+            (notChunk.team_name.toLowerCase().indexOf(this.team.toLowerCase()) >
+              -1)
           );
         });
         this.Calender();
