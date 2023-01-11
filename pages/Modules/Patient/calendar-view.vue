@@ -57,21 +57,20 @@
   </div>
 </template>
 <script>
-import "@/assets/css/fullcalendar.css";
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import "@/assets/css/fullcalendar.css";
+import moment from 'moment';
 export default {
   components: { CommonSidebar, CommonHeader },
   name: "calendar-view",
   head: {
-    script: [
-      {
-        src: "/app/js/fullcalendar.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-    ],
-  },
+        script: [{
+            src: "/app/js/fullcalendar.js",
+            body: true,
+            crossorigin: "anonymous",
+        },],
+    },
   data() {
     return {
       userdetails: null,
@@ -92,7 +91,6 @@ export default {
 
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-    this.Calender();
     const headers = {
       Authorization: "Bearer " + this.token,
       Accept: "application/json",
