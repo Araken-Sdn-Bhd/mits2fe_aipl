@@ -111,8 +111,11 @@ export default {
       this.role=this.userdetails.user.role;
       this.branch_id=this.userdetails.branch.branch_id;
     }
-    this.GetNotificationList();
+    
   },
+  mounted() {
+    this.GetNotificationList();
+    },
    methods: {
     async Logout() {
        localStorage.removeItem('userdetails');

@@ -900,10 +900,14 @@ export default {
       }
     },
     GoBack(){
-      this.$router.push({
+      if (this.type == 'view'){
+        this.$router.go(-1);
+      } else {
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
               query: { id: this.Id, appId: this.appId },
             });
+      }
     }
   },
 };
