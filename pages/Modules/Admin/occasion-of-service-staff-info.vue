@@ -646,7 +646,7 @@ export default {
           if (result.isConfirmed) {
             this.$router.go();
           } else if (result.isDenied) {
-            Swal.fire('Changes are not saved', '', 'info')
+            this.$swal.fire('Changes are not saved', '', 'info')
           }
         });
           this.Getstaffpatientlist1();
