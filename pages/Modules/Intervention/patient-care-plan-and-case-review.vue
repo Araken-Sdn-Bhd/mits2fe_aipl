@@ -1046,7 +1046,7 @@ export default {
                 });
       }
     },
-    GoBack() {
+    GoBack() {if(this.appId){
       if (this.type == 'view') {
                 this.$router.go(-1);
             } else {
@@ -1058,6 +1058,13 @@ export default {
                     },
                 });
             }
+    }else{
+      this.$router.push({
+        path: "/modules/Intervention/patient-list",
+      });
+    }
+
+
     }
   },
 };
