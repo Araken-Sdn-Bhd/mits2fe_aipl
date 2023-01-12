@@ -1047,10 +1047,16 @@ export default {
       }
     },
     GoBack() {
+      if(this.appId){
       this.$router.push({
         path: "/modules/Intervention/patient-summary",
         query: { id: this.Id, appId: this.appId },
       });
+    }else{
+      this.$router.push({
+        path: "/modules/Intervention/patient-list",
+      });
+    }
     }
   },
 };
