@@ -2675,6 +2675,7 @@ export default {
                         } else if (response.data.Data[0].jobs[7][i].answer == "D. Good") {
                             this.communication_skill_D = response.data.Data[0].jobs[7][i].answer;
                         };
+                        
                     }
 
                     for (let i = 0; i < response.data.Data[0].jobs[8].length; i++) {
