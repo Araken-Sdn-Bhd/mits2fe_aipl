@@ -55,7 +55,7 @@
                                         <label class="form-label">City<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                                             <option value="">Please Select</option>
-                                            <option v-for="ctl in GCityList" v-bind:key="ctl.id" v-bind:value="ctl.id">
+                                            <option v-for="ctl in GCityList" v-bind:key="ctl.id" v-bind:value="ctl.city_name">
                                                 {{ ctl.city_name }}
                                             </option>
                                         </select>
@@ -2361,6 +2361,7 @@ export default {
 
         async getPostcodeList(event) {
             const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
