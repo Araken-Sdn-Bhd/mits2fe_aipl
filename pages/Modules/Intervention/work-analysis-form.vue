@@ -2368,6 +2368,7 @@ export default {
 
         async getPostcodeList(event) {
             const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
