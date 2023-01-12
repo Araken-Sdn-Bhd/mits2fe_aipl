@@ -43,7 +43,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">State<small style="color:red">*</small> </label>
                                     <select class="form-select" @change="getCityList($event)" v-model="state_id">
-                                        <option value="">Please Select</option>
+                                        <option value="0">Please Select</option>
                                         <option v-for="state in GStateList" v-bind:key="state.id" v-bind:value="state.id">
                                             {{ state.state_name }}
                                         </option>
@@ -54,8 +54,8 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">City<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
-                                            <option value="">Please Select</option>
-                                            <option v-for="ctl in GCityList" v-bind:key="ctl.id" v-bind:value="ctl.city_name">
+                                            <option value="0">Please Select</option>
+                                            <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
                                                 {{ ctl.city_name }}
                                             </option>
                                         </select>
@@ -63,7 +63,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Postcode<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="postcode_id">
-                                            <option value="">Please Select</option>
+                                            <option value="0">Please Select</option>
                                             <option v-for="pst in GPostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
                                                 {{ pst.postcode }}
                                             </option>
@@ -2301,10 +2301,15 @@ export default {
             const response7 = await this.$axios.get("address/list", {
                 headers,
             });
+            console.log('my stat33',response7.data);
             if (response7.data.code == 200 || response7.data.code == "200") {
                 this.GStateList = response7.data.list;
+                // this.GCityList = [];
+          	    // this.GPostCodeList = [];
             } else {
                 this.GStateList = [];
+                // this.GCityList = [];
+                // this.GPostCodeList = [];
             }
             const respons = await this.$axios.get(
                 "general-setting/list?section=" + "assistance-or-supervision", {
@@ -2340,8 +2345,10 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.GCityList = response.data.list;
+                // this.GPostCodeList = [];
             } else {
                 this.GCityList = [];
+                // this.GPostCodeList = [];
             }
 
         },
@@ -2487,15 +2494,23 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[0].length; i++) {
                         if (response.data.Data[0].jobs[0][i].answer == "A. Need to work on weekend") {
                             this.work_schedule_A = response.data.Data[0].jobs[0][i].answer;
+                        } else if (response.data.Data[0].jobs[0][i].answer == "A. Need to work on weekend") {
+                            this.work_schedule_A = response.data.Data[0].jobs[0][i].answer;
                         };
 
                         if (response.data.Data[0].jobs[0][i].answer == "B. Night shift only?") {
                             this.work_schedule_B = response.data.Data[0].jobs[0][i].answer;
+                        }else if (response.data.Data[0].jobs[0][i].answer == "B. Night shift only ?") {
+                            this.work_schedule_B = response.data.Data[0].jobs[0][i].answer;
                         };
                         if (response.data.Data[0].jobs[0][i].answer == "C. Part-time?") {
                             this.work_schedule_C = response.data.Data[0].jobs[0][i].answer;
+                        } else if (response.data.Data[0].jobs[0][i].answer == "C. Part-time") {
+                            this.work_schedule_C = response.data.Data[0].jobs[0][i].answer;
                         };
                         if (response.data.Data[0].jobs[0][i].answer == "D. Full time?") {
+                            this.work_schedule_D = response.data.Data[0].jobs[0][i].answer;
+                        } else if (response.data.Data[0].jobs[0][i].answer == "D. Full time ?") {
                             this.work_schedule_D = response.data.Data[0].jobs[0][i].answer;
                         };
                     }
@@ -2503,11 +2518,18 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[1].length; i++) {
                         if (response.data.Data[0].jobs[1][i].answer == "A. Public transport") {
                             this.transport_to_workplace_A = response.data.Data[0].jobs[1][i].answer;
+                        } else if (response.data.Data[0].jobs[1][i].answer == "A. Public transport") {
+                            this.transport_to_workplace_A = response.data.Data[0].jobs[1][i].answer;
                         };
-                        if (response.data.Data[0].jobs[1][i].answer == "B. Own transport") {
+                        if (response.data.Data[0].jobs[1][i].answer == "B. Own transport if yes mention type?") {
+                            this.transport_to_workplace_B = response.data.Data[0].jobs[1][i].answer;
+                        }else
+                        if (response.data.Data[0].jobs[1][i].answer == "B. Own transport. if yes mention type ?") {
                             this.transport_to_workplace_B = response.data.Data[0].jobs[1][i].answer;
                         };
                         if (response.data.Data[0].jobs[1][i].answer == "C. Company Transport") {
+                            this.transport_to_workplace_C = response.data.Data[0].jobs[1][i].answer;
+                        } else if (response.data.Data[0].jobs[1][i].answer == "C. Company transport") {
                             this.transport_to_workplace_C = response.data.Data[0].jobs[1][i].answer;
                         };
                     }
@@ -2515,14 +2537,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[2].length; i++) {
                         if (response.data.Data[0].jobs[2][i].answer == "A. Limited (5kg)") {
                             this.pgwa_A = response.data.Data[0].jobs[2][i].answer;
+                        } else if (response.data.Data[0].jobs[2][i].answer == "A. Limited ( < 5kg )") {
+                            this.pgwa_A = response.data.Data[0].jobs[2][i].answer;
                         };
                         if (response.data.Data[0].jobs[2][i].answer == "B. Light (5-10kg)") {
+                            this.pgwa_B = response.data.Data[0].jobs[2][i].answer;
+                        } else if (response.data.Data[0].jobs[2][i].answer == "B. Light ( 5 - 10kg )") {
                             this.pgwa_B = response.data.Data[0].jobs[2][i].answer;
                         };
                         if (response.data.Data[0].jobs[2][i].answer == "C. Moderate (10-20kg)") {
                             this.pgwa_C = response.data.Data[0].jobs[2][i].answer;
+                        }else if (response.data.Data[0].jobs[2][i].answer == "C. Moderate ( 10-20kg )") {
+                            this.pgwa_C = response.data.Data[0].jobs[2][i].answer;
                         };
                         if (response.data.Data[0].jobs[2][i].answer == "D. Heavy (>20kg)") {
+                            this.pgwa_D = response.data.Data[0].jobs[2][i].answer;
+                        } else if (response.data.Data[0].jobs[2][i].answer == "C. Heavy ( >20kg )") {
                             this.pgwa_D = response.data.Data[0].jobs[2][i].answer;
                         };
                     }
@@ -2530,14 +2560,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[3].length; i++) {
                         if (response.data.Data[0].jobs[3][i].answer == "A. Less than 2 hours") {
                             this.work_tolerance_A = response.data.Data[0].jobs[3][i].answer;
+                        } else if (response.data.Data[0].jobs[3][i].answer == "A. Less than 2 hours") {
+                            this.work_tolerance_A = response.data.Data[0].jobs[3][i].answer;
                         };
                         if (response.data.Data[0].jobs[3][i].answer == "B. 2-3 hours") {
+                            this.work_tolerance_B = response.data.Data[0].jobs[3][i].answer;
+                        } else if (response.data.Data[0].jobs[3][i].answer == "B. 2-3 hours") {
                             this.work_tolerance_B = response.data.Data[0].jobs[3][i].answer;
                         };
                         if (response.data.Data[0].jobs[3][i].answer == "C. 3-4 hours") {
                             this.work_tolerance_C = response.data.Data[0].jobs[3][i].answer;
+                        } else if (response.data.Data[0].jobs[3][i].answer == "C. 3-4 hours") {
+                            this.work_tolerance_C = response.data.Data[0].jobs[3][i].answer;
                         };
                         if (response.data.Data[0].jobs[3][i].answer == "D. More than 4 hours") {
+                            this.work_tolerance_D = response.data.Data[0].jobs[3][i].answer;
+                        } else if (response.data.Data[0].jobs[3][i].answer == "C. More than 4 hours") {
                             this.work_tolerance_D = response.data.Data[0].jobs[3][i].answer;
                         };
                     }
@@ -2545,17 +2583,27 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[4].length; i++) {
                         if (response.data.Data[0].jobs[4][i].answer == "A. Small place") {
                             this.work_area_A = response.data.Data[0].jobs[4][i].answer;
+                        } else if (response.data.Data[0].jobs[4][i].answer == "A. Small place") {
+                            this.work_area_A = response.data.Data[0].jobs[4][i].answer;
                         };
                         if (response.data.Data[0].jobs[4][i].answer == "B. One room") {
+                            this.work_area_B = response.data.Data[0].jobs[4][i].answer;
+                        } else if (response.data.Data[0].jobs[4][i].answer == "B. One room") {
                             this.work_area_B = response.data.Data[0].jobs[4][i].answer;
                         };
                         if (response.data.Data[0].jobs[4][i].answer == "C. Few rooms") {
                             this.work_area_C = response.data.Data[0].jobs[4][i].answer;
+                        } else if (response.data.Data[0].jobs[4][i].answer == "C. Few rooms") {
+                            this.work_area_C = response.data.Data[0].jobs[4][i].answer;
                         };
                         if (response.data.Data[0].jobs[4][i].answer == "D. Big building") {
                             this.work_area_D = response.data.Data[0].jobs[4][i].answer;
+                        } else if (response.data.Data[0].jobs[4][i].answer == "D. Big building") {
+                            this.work_area_D = response.data.Data[0].jobs[4][i].answer;
                         };
                         if (response.data.Data[0].jobs[4][i].answer == "E. Building and ground floor") {
+                            this.work_area_E = response.data.Data[0].jobs[4][i].answer;
+                        } else if (response.data.Data[0].jobs[4][i].answer == "E. Building and ground floor") {
                             this.work_area_E = response.data.Data[0].jobs[4][i].answer;
                         };
                     }
@@ -2563,14 +2611,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[5].length; i++) {
                         if (response.data.Data[0].jobs[5][i].answer == "A. Slow") {
                             this.work_speed_A = response.data.Data[0].jobs[5][i].answer;
+                        } else if (response.data.Data[0].jobs[5][i].answer == "A. Slow") {
+                            this.work_speed_A = response.data.Data[0].jobs[5][i].answer;
                         };
                         if (response.data.Data[0].jobs[5][i].answer == "B. Mild") {
+                            this.work_speed_B = response.data.Data[0].jobs[5][i].answer;
+                        } else if (response.data.Data[0].jobs[5][i].answer == "B. Mild") {
                             this.work_speed_B = response.data.Data[0].jobs[5][i].answer;
                         };
                         if (response.data.Data[0].jobs[5][i].answer == "C. Moderate") {
                             this.work_speed_C = response.data.Data[0].jobs[5][i].answer;
+                        } else if (response.data.Data[0].jobs[5][i].answer == "C. Moderate") {
+                            this.work_speed_C = response.data.Data[0].jobs[5][i].answer;
                         };
                         if (response.data.Data[0].jobs[5][i].answer == "D. Fast") {
+                            this.work_speed_D = response.data.Data[0].jobs[5][i].answer;
+                        } else if (response.data.Data[0].jobs[5][i].answer == "D. Fast") {
                             this.work_speed_D = response.data.Data[0].jobs[5][i].answer;
                         };
                     }
@@ -2578,14 +2634,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[6].length; i++) {
                         if (response.data.Data[0].jobs[6][i].answer == "A. Casual") {
                             this.appearance_A = response.data.Data[0].jobs[6][i].answer;
+                        } else if (response.data.Data[0].jobs[6][i].answer == "A. Casual") {
+                            this.appearance_A = response.data.Data[0].jobs[6][i].answer;
                         };
                         if (response.data.Data[0].jobs[6][i].answer == "B. Clean") {
+                            this.appearance_B = response.data.Data[0].jobs[6][i].answer;
+                        } else if (response.data.Data[0].jobs[6][i].answer == "B. Clean") {
                             this.appearance_B = response.data.Data[0].jobs[6][i].answer;
                         };
                         if (response.data.Data[0].jobs[6][i].answer == "C. Clean and well kempt") {
                             this.appearance_C = response.data.Data[0].jobs[6][i].answer;
+                        } else if (response.data.Data[0].jobs[6][i].answer == "C. Clean and well kempt") {
+                            this.appearance_C = response.data.Data[0].jobs[6][i].answer;
                         };
                         if (response.data.Data[0].jobs[6][i].answer == "D. Well kempt") {
+                            this.appearance_D = response.data.Data[0].jobs[6][i].answer;
+                        } else if (response.data.Data[0].jobs[6][i].answer == "D. Well kempt") {
                             this.appearance_D = response.data.Data[0].jobs[6][i].answer;
                         };
                     }
@@ -2593,29 +2657,46 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[7].length; i++) {
                         if (response.data.Data[0].jobs[7][i].answer == "A. Not required/minimal") {
                             this.communication_skill_A = response.data.Data[0].jobs[7][i].answer;
+                        } else if (response.data.Data[0].jobs[7][i].answer == "A. Not required/minimal") {
+                            this.communication_skill_A = response.data.Data[0].jobs[7][i].answer;
                         };
                         if (response.data.Data[0].jobs[7][i].answer == "B. When needed") {
+                            this.communication_skill_B = response.data.Data[0].jobs[7][i].answer;
+                        } else if (response.data.Data[0].jobs[7][i].answer == "B. When needed") {
                             this.communication_skill_B = response.data.Data[0].jobs[7][i].answer;
                         };
                         if (response.data.Data[0].jobs[7][i].answer == "C. Average") {
                             this.communication_skill_C = response.data.Data[0].jobs[7][i].answer;
+                        } else if (response.data.Data[0].jobs[7][i].answer == "C. Average") {
+                            this.communication_skill_C = response.data.Data[0].jobs[7][i].answer;
                         };
                         if (response.data.Data[0].jobs[7][i].answer == "D. Good") {
                             this.communication_skill_D = response.data.Data[0].jobs[7][i].answer;
+                        } else if (response.data.Data[0].jobs[7][i].answer == "D. Good") {
+                            this.communication_skill_D = response.data.Data[0].jobs[7][i].answer;
                         };
+                        
                     }
 
                     for (let i = 0; i < response.data.Data[0].jobs[8].length; i++) {
                         if (response.data.Data[0].jobs[8][i].answer == "A. Not required/minimal") {
                             this.social_interaction_A = response.data.Data[0].jobs[8][i].answer;
+                        }else if (response.data.Data[0].jobs[8][i].answer == "A. Not required / minimal") {
+                            this.social_interaction_A = response.data.Data[0].jobs[8][i].answer;
                         };
                         if (response.data.Data[0].jobs[8][i].answer == "B. When needed") {
+                            this.social_interaction_B = response.data.Data[0].jobs[8][i].answer;
+                        } else if (response.data.Data[0].jobs[8][i].answer == "B. When needed") {
                             this.social_interaction_B = response.data.Data[0].jobs[8][i].answer;
                         };
                         if (response.data.Data[0].jobs[8][i].answer == "C. Average") {
                             this.social_interaction_C = response.data.Data[0].jobs[8][i].answer;
+                        } else if (response.data.Data[0].jobs[8][i].answer == "C. Average") {
+                            this.social_interaction_C = response.data.Data[0].jobs[8][i].answer;
                         };
                         if (response.data.Data[0].jobs[8][i].answer == "D. Good") {
+                            this.social_interaction_D = response.data.Data[0].jobs[8][i].answer;
+                        } else if (response.data.Data[0].jobs[8][i].answer == "D. Good") {
                             this.social_interaction_D = response.data.Data[0].jobs[8][i].answer;
                         };
                     }
@@ -2623,14 +2704,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[9].length; i++) {
                         if (response.data.Data[0].jobs[9][i].answer == "A. Minimal") {
                             this.concentration_A = response.data.Data[0].jobs[9][i].answer;
+                        } else if (response.data.Data[0].jobs[9][i].answer == "A. Minimal") {
+                            this.concentration_A = response.data.Data[0].jobs[9][i].answer;
                         };
                         if (response.data.Data[0].jobs[9][i].answer == "B. Fair") {
+                            this.concentration_B = response.data.Data[0].jobs[9][i].answer;
+                        } else if (response.data.Data[0].jobs[9][i].answer == "B. Fair") {
                             this.concentration_B = response.data.Data[0].jobs[9][i].answer;
                         };
                         if (response.data.Data[0].jobs[9][i].answer == "C. Average") {
                             this.concentration_C = response.data.Data[0].jobs[9][i].answer;
+                        } else if (response.data.Data[0].jobs[9][i].answer == "C. Average") {
+                            this.concentration_C = response.data.Data[0].jobs[9][i].answer;
                         };
                         if (response.data.Data[0].jobs[9][i].answer == "D. Good") {
+                            this.concentration_D = response.data.Data[0].jobs[9][i].answer;
+                        } else if (response.data.Data[0].jobs[9][i].answer == "D. Good") {
                             this.concentration_D = response.data.Data[0].jobs[9][i].answer;
                         };
                     }
@@ -2638,14 +2727,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[10].length; i++) {
                         if (response.data.Data[0].jobs[10][i].answer == "A. One task at a time") {
                             this.work_demand_A = response.data.Data[0].jobs[10][i].answer;
+                        } else if (response.data.Data[0].jobs[10][i].answer == "A. One task at a time") {
+                            this.work_demand_A = response.data.Data[0].jobs[10][i].answer;
                         };
                         if (response.data.Data[0].jobs[10][i].answer == "B. Few task (2-3)") {
+                            this.work_demand_B = response.data.Data[0].jobs[10][i].answer;
+                        } else if (response.data.Data[0].jobs[10][i].answer == "B. Few task ( 2-3 )") {
                             this.work_demand_B = response.data.Data[0].jobs[10][i].answer;
                         };
                         if (response.data.Data[0].jobs[10][i].answer == "C. Average (4-6)") {
                             this.work_demand_C = response.data.Data[0].jobs[10][i].answer;
+                        } else if (response.data.Data[0].jobs[10][i].answer == "C. Average ( 4-6 )") {
+                            this.work_demand_C = response.data.Data[0].jobs[10][i].answer;
                         };
                         if (response.data.Data[0].jobs[10][i].answer == "D. Many task (>7 )") {
+                            this.work_demand_D = response.data.Data[0].jobs[10][i].answer;
+                        } else if (response.data.Data[0].jobs[10][i].answer == "D. Many task ( > 7 )") {
                             this.work_demand_D = response.data.Data[0].jobs[10][i].answer;
                         };
                     }
@@ -2653,11 +2750,17 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[11].length; i++) {
                         if (response.data.Data[0].jobs[11][i].answer == "A. Need encouragement") {
                             this.motivation_A = response.data.Data[0].jobs[11][i].answer;
+                        } else if (response.data.Data[0].jobs[11][i].answer == "A. Need encouragement") {
+                            this.motivation_A = response.data.Data[0].jobs[11][i].answer;
                         };
                         if (response.data.Data[0].jobs[11][i].answer == "B. Proactive") {
                             this.motivation_B = response.data.Data[0].jobs[11][i].answer;
+                        } else if (response.data.Data[0].jobs[11][i].answer == "B. Practive") {
+                            this.motivation_B = response.data.Data[0].jobs[11][i].answer;
                         };
                         if (response.data.Data[0].jobs[11][i].answer == "C. Good support") {
+                            this.motivation_C = response.data.Data[0].jobs[11][i].answer;
+                        } else if (response.data.Data[0].jobs[11][i].answer == "C. Good support") {
                             this.motivation_C = response.data.Data[0].jobs[11][i].answer;
                         };
                     }
@@ -2665,11 +2768,17 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[12].length; i++) {
                         if (response.data.Data[0].jobs[12][i].answer == "A. Frequent (>7)") {
                             this.flexibility_A = response.data.Data[0].jobs[12][i].answer;
+                        } else if (response.data.Data[0].jobs[12][i].answer == "A. Frequant ( > 7 )") {
+                            this.flexibility_A = response.data.Data[0].jobs[12][i].answer;
                         };
                         if (response.data.Data[0].jobs[12][i].answer == "B. Average (4-6)") {
                             this.flexibility_B = response.data.Data[0].jobs[12][i].answer;
+                        } else if (response.data.Data[0].jobs[12][i].answer == "B. Average ( 4-6 )") {
+                            this.flexibility_B = response.data.Data[0].jobs[12][i].answer;
                         };
                         if (response.data.Data[0].jobs[12][i].answer == "C. Minimal (2-3)") {
+                            this.flexibility_C = response.data.Data[0].jobs[12][i].answer;
+                        } else if (response.data.Data[0].jobs[12][i].answer == "C. Minimal ( 2-3 )") {
                             this.flexibility_C = response.data.Data[0].jobs[12][i].answer;
                         };
                     }
@@ -2677,14 +2786,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[13].length; i++) {
                         if (response.data.Data[0].jobs[13][i].answer == "A. Not required") {
                             this.ability_A = response.data.Data[0].jobs[13][i].answer;
+                        } else if (response.data.Data[0].jobs[13][i].answer == "A. Not required") {
+                            this.ability_A = response.data.Data[0].jobs[13][i].answer;
                         };
                         if (response.data.Data[0].jobs[13][i].answer == "B. Recognize symbol") {
+                            this.ability_B = response.data.Data[0].jobs[13][i].answer;
+                        } else if (response.data.Data[0].jobs[13][i].answer == "B. Recognize symbol") {
                             this.ability_B = response.data.Data[0].jobs[13][i].answer;
                         };
                         if (response.data.Data[0].jobs[13][i].answer == "C. Simple word") {
                             this.ability_C = response.data.Data[0].jobs[13][i].answer;
+                        } else if (response.data.Data[0].jobs[13][i].answer == "C. Simple word") {
+                            this.ability_C = response.data.Data[0].jobs[13][i].answer;
                         };
                         if (response.data.Data[0].jobs[13][i].answer == "D. Read fluently") {
+                            this.ability_D = response.data.Data[0].jobs[13][i].answer;
+                        } else if (response.data.Data[0].jobs[13][i].answer == "D. Read fluently") {
                             this.ability_D = response.data.Data[0].jobs[13][i].answer;
                         };
                     }
@@ -2692,14 +2809,22 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[14].length; i++) {
                         if (response.data.Data[0].jobs[14][i].answer == "A. Not required") {
                             this.calculate_A = response.data.Data[0].jobs[14][i].answer;
+                        } else if (response.data.Data[0].jobs[14][i].answer == "A. Not required") {
+                            this.calculate_A = response.data.Data[0].jobs[14][i].answer;
                         };
                         if (response.data.Data[0].jobs[14][i].answer == "B. Use calculator") {
+                            this.calculate_B = response.data.Data[0].jobs[14][i].answer;
+                        } else if (response.data.Data[0].jobs[14][i].answer == "B. Use calculator") {
                             this.calculate_B = response.data.Data[0].jobs[14][i].answer;
                         };
                         if (response.data.Data[0].jobs[14][i].answer == "C. Simple maths without calculator") {
                             this.calculate_C = response.data.Data[0].jobs[14][i].answer;
+                        } else if (response.data.Data[0].jobs[14][i].answer == "C. Simple math without calculator") {
+                            this.calculate_C = response.data.Data[0].jobs[14][i].answer;
                         };
                         if (response.data.Data[0].jobs[14][i].answer == "D. Difficult maths") {
+                            this.calculate_D = response.data.Data[0].jobs[14][i].answer;
+                        } else if (response.data.Data[0].jobs[14][i].answer == "D. Difficult maths") {
                             this.calculate_D = response.data.Data[0].jobs[14][i].answer;
                         };
 
@@ -2708,26 +2833,42 @@ export default {
                     for (let i = 0; i < response.data.Data[0].jobs[15].length; i++) {
                         if (response.data.Data[0].jobs[15][i].answer == "0 = Nil") {
                             this.benefits_0 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "0 = Nil") {
+                            this.benefits_0 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "1 = Mc") {
+                            this.benefits_1 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "1 = Mc") {
                             this.benefits_1 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "2 = Medical Benefit") {
                             this.benefits_2 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "2 = Medical Benefit") {
+                            this.benefits_2 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "3 = Annual Leave") {
+                            this.benefits_3 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "3 = Annual Leave") {
                             this.benefits_3 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "4 = Dental Benefits") {
                             this.benefits_4 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "4 = Dental Benefits") {
+                            this.benefits_4 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "5 = Discount For Employee") {
+                            this.benefits_5 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "5 = Discount For Employee") {
                             this.benefits_5 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "6 = Free Food") {
                             this.benefits_6 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "6 = Free Food") {
+                            this.benefits_6 = response.data.Data[0].jobs[15][i].answer;
                         };
                         if (response.data.Data[0].jobs[15][i].answer == "7 = Others (To Specify)") {
+                            this.benefits_7 = response.data.Data[0].jobs[15][i].answer;
+                        } else if (response.data.Data[0].jobs[15][i].answer == "7 = Others (To Specify)") {
                             this.benefits_7 = response.data.Data[0].jobs[15][i].answer;
                         };
                     }
@@ -2758,6 +2899,8 @@ export default {
                 this.sevencomment = response.data.Data[0].comment[15].comment;
                 this.eightcomment = response.data.Data[0].comment[15].comment;
                 this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
+                this.job1.task_description = response.data.Data[0].jobs_des[0].task_description;
+                this.objectives = response.data.Data[0].jobs_des[0].objectives;
                 // console.log("myjobb", this.jobSPECIFICATION);
                 // console.log('myjobb11',this.job_specification);
                 this.GetList();
