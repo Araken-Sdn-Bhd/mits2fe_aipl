@@ -894,6 +894,9 @@ export default {
             window.location.reload();
         },
         GoBack() {
+          if (this.type == 'view'){
+            this.$router.go(-1);
+          } else {
             this.$router.push({
                 path: "/modules/Intervention/patient-summary",
                 query: {
@@ -901,6 +904,7 @@ export default {
                     appId: this.appId
                 },
             });
+          }
         },
         BindDiagnosis() {
             this.diagnosis = this.type_diagnosis_id.text;

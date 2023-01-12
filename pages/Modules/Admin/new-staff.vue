@@ -49,7 +49,7 @@
                           placeholder="Enter NRIC NO"
                           v-model="nricno" @change="CheckNric($event)"
                           v-on:keypress="NumbersOnly"
-                          
+
                         />
                          <Error :message="nricerror" v-if="nricerror" />
                       </div>
@@ -98,6 +98,7 @@
                           class="form-control"
                           placeholder="Enter Email Address"
                           v-model="email"
+                          @blur="validateEmail"
                         />
                       </div>
                       <div class="col-md-4 mb-4">
@@ -277,7 +278,7 @@
                   </form>
                 </div>
                    </div>
-                
+
               </div>
             </div>
           </div>
@@ -401,7 +402,7 @@ export default {
       this.GetteamList(this.branchId);
     },
     async onCreateStaff() {
-      
+
       this.$swal.fire({
         title: 'Are you sure to save this?',
         text: "You won't be able to revert this!",
@@ -537,9 +538,17 @@ export default {
       })
     },
 
+    async validateEmail() {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        this.emailerror = null;
+      } else {
+        this.emailerror = "Please Enter Valid Email";
+        this.email = "";
+      }
+    },
     async isLetter(e){
-        let char = String.fromCharCode(e.keyCode); 
-        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        let char = String.fromCharCode(e.keyCode);
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true;
         else e.preventDefault();
     },
 

@@ -26,7 +26,7 @@
                                 <div class="col-sm-5">
                                     <div class="mb-3">
                                         <label class="form-label">Company Registration Number<small>*</small></label>
-                                        <input type="text" class="form-control" placeholder="Enter Company Name" v-model="company_registration_number" />
+                                        <input type="text" class="form-control" placeholder="Enter Company Registration Number" v-model="company_registration_number" />
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="row mb-3 mt-3">
                                 <div class="col-sm-4">
-                                    <label class="form-label">Does your company have an existing training program in place?</label>
+                                    <label class="form-label">Does your company have an existing training program in place?<small>*</small></label>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-check form-check-inline col-sm-2">
@@ -506,7 +506,7 @@ export default {
                     this.errorList.push("Company Registration Number is required");
                 }
                 if (!this.company_address_1) {
-                    this.errorList.push("Company Registered Addres is required");
+                    this.errorList.push("Company Registered Address is required");
                 }
                 if (!this.state_id) {
                     this.errorList.push("State is required");
@@ -514,12 +514,16 @@ export default {
                 if (!this.postcode) {
                     this.errorList.push("Postcode is required");
                 }
+                if (!this.is_existing_training_program) {
+                    this.errorList.push("Existing Training Program is required");
+                }
                 if (
                     this.company_name &&
                     this.company_registration_number &&
                     this.company_address_1 &&
                     this.state_id &&
-                    this.postcode
+                    this.postcode &&
+                    this.is_existing_training_program
                 ) {
                     this.loader = true;
                     const headers = {

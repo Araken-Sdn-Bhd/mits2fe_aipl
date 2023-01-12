@@ -206,6 +206,9 @@
                     </table>
                     <br><br>
                     <div class="d-flex align-items-center mt-2">
+                      <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                       <button
                         @click="onburnout"
                         class="btn btn-success next-btn ml-auto" title="Next Page"
@@ -800,6 +803,19 @@ export default {
       });
       this.Ipaddress = ip;
     },
+    GoBack(){
+      if(this.appId){
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id, appId: this.appId },
+            });
+      }else{
+        this.$router.push({
+              path: "/modules/Intervention/patient-summary",
+              query: { id: this.Id},
+            });
+      };
+    }
   },
 };
 </script>
