@@ -55,7 +55,7 @@
                                         <label class="form-label">City<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                                             <option value="0">Please Select</option>
-                                            <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
+                                            <option v-for="ctl in GCityList" v-bind:key="ctl.city_id" v-bind:value="ctl.city_name">
                                                 {{ ctl.city_name }}
                                             </option>
                                         </select>
@@ -2675,7 +2675,7 @@ export default {
                         } else if (response.data.Data[0].jobs[7][i].answer == "D. Good") {
                             this.communication_skill_D = response.data.Data[0].jobs[7][i].answer;
                         };
-                        
+
                     }
 
                     for (let i = 0; i < response.data.Data[0].jobs[8].length; i++) {
