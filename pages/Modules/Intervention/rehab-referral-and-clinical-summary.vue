@@ -95,7 +95,7 @@
                                 <tr>
                                     <th>Diagnosis<small style="color:red">*</small> :</th>
                                     <td>
-                                        <select class="form-select" v-model="diagnosis" :disabled="isDisabled">
+                                        <select class="form-select" v-model="diagnosis" :disabled="isDisabled" @change="onSelect()">
                                             <option value="">Please Select</option>
                                             <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                 {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -159,7 +159,7 @@
                                 <tr>
                                     <th>Education Level<small style="color:red">*</small> :</th>
                                     <td>
-                                        <select class="form-select" v-model="education_level" :disabled="isDisabled">
+                                        <select class="form-select" v-model="education_level" :disabled="isDisabled" @change="onSelect2()">
                                             <option value="">Please Select</option>
                                             <option v-for="edu in settinglist" v-bind:key="edu.id" v-bind:value="edu.id">
                                                 {{ edu.section_value }}
@@ -598,7 +598,7 @@
                                         <div class="row mb-3">
                                             <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                             <div class="col-sm-8">
-                                                <select class="form-select" v-model="type_diagnosis_id" :disabled="isDisabled">
+                                                <select class="form-select" v-model="type_diagnosis_id" :disabled="isDisabled"">
                                                     <option value="0">Select Diagnosis</option>
                                                     <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                         {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -750,7 +750,7 @@
                             <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                             </button>
                             <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                <button v-if="this.showStatus == 1"  type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
+                                <button v-if="this.showStatus == 0"  type="submit" class="btn btn-green btn-text" title="Download Form" @click="OnPrint">
                                     <i class="fa fa-download"></i> Download
                                 </button>
                                 <button v-if="this.showStatus == 0" type="submit" title="Draft" @click="onCreateEvent()" class="btn btn-warning btn-text">
@@ -817,7 +817,7 @@
                                 <tr>
                                     <th>Diagnosis:</th>
                                     <td>
-                                        {{ this.diagnosis }}
+                                        {{ this.diagnosisName }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -859,7 +859,7 @@
                                 <tr>
                                     <th>Education Level:</th>
                                     <td>
-                                        {{ this.education_level }}
+                                        {{ this.education_level_name }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -1126,6 +1126,9 @@ export default {
             SidebarAccess: null,
             appId: 0,
             showStatus: 0,
+            selectedDiagnosisList: "",
+            diagnosisName: "",
+            education_level_name: "",
         };
     },
     beforeMount() {
@@ -1480,13 +1483,17 @@ export default {
             })
         },
         GoBack() {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
+          if (this.type == 'view'){
+                this.$router.go(-1);
+          } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+          }
         },
         async GetList() {
             const headers = {
@@ -1624,7 +1631,17 @@ export default {
             }
             console.log("my details", this.patientdetails);
         },
+        onSelect(){
+            const dataDiagnosis = this.diagonisislist.find(element => element.id == this.diagnosis);
+            this.diagnosisName = dataDiagnosis.icd_code +' '+ dataDiagnosis.icd_name;
+            this.type_diagnosis_id = this.diagnosis;
+        },
+        onSelect2(){
+            const dataDiagnosis2 = this.settinglist.find(element => element.id == this.education_level);
+            this.education_level_name = dataDiagnosis2.section_value;
+        },
         OnPrint() {
+            this.selectedDiagnosisList = this.diagonisislist[this.diagnosis].icd_name;
             var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
             document.body.innerHTML = newstr;
             window.print();

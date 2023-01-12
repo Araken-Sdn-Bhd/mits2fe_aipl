@@ -1031,6 +1031,9 @@ export default {
             }
         },
         GoBack() {
+          if (this.type == 'view'){
+            this.$router.go(-1);
+          } else {
             this.$router.push({
                 path: "/modules/Intervention/patient-summary",
                 query: {
@@ -1038,6 +1041,7 @@ export default {
                     appId: this.appId
                 },
             });
+          }
         },
     },
 };
