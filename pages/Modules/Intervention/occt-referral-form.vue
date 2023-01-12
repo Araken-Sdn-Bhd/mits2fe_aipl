@@ -800,7 +800,7 @@
                                         class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
                                 <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
-                                    <button v-if="this.showStatus == 0" type="submit" class="btn btn-green btn-text"
+                                    <button v-if="this.showStatus == 1" type="submit" class="btn btn-green btn-text"
                                         title="Download Form" @click="OnPrint">
                                         <i class="fa fa-download"></i> Download
                                     </button>
