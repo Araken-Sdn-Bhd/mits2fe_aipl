@@ -59,7 +59,7 @@
                                 <tr>
                                     <th>Diagnosis: </th>
                                     <td>
-                                        <select class="form-select" v-model="diagnosis_id">
+                                        <select class="form-select" v-model="diagnosis_id" @change="onSelect()">
                                             <option value="0">Select Diagnosis</option>
                                             <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                 {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -453,13 +453,7 @@
                                 <tr>
                                     <th>Diagnosis: </th>
                                     <td>
-                                        <select class="form-select" v-model="diagnosis_id">
-                                            <option value="0">Select Diagnosis</option>
-                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                {{ catcode.icd_code }} {{catcode.icd_name}}
-                                            </option>
-                                        </select>
-                                        {{ this.diagnosis_id }}
+                                       {{ this.diagnosisName }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -732,6 +726,8 @@ export default {
             appId: 0,
             SidebarAccess: null,
             showStatus: 0,
+            diagnosisNameOutput: this.diagnosisName,
+            diagnosisName: "",
         };
     },
     methods: {
@@ -996,6 +992,11 @@ export default {
             // Reload the page to refresh the data
             window.location.reload();
         },
+        onSelect(){
+            const dataDiagnosis = this.diagonisislist.find(element => element.id == this.diagnosis_id);
+            this.diagnosisName = dataDiagnosis.icd_code +' '+ dataDiagnosis.icd_name;
+            this.type_diagnosis_id = this.diagnosis_id;
+        },
         async GetList() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -1245,6 +1246,9 @@ export default {
             }
         },
         GoBack() {
+          if (this.type == 'view'){
+            this.$router.go(-1);
+          } else {
             this.$router.push({
                 path: "/modules/Intervention/patient-summary",
                 query: {
@@ -1252,6 +1256,7 @@ export default {
                     appId: this.appId
                 },
             });
+          }
         },
     },
 };

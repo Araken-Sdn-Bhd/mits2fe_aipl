@@ -527,7 +527,8 @@
                       </ul>
                     </li>
                     <li class="accordion-item sub-nav">
-                      <a class="accordion-button collapsed" style="cursor: pointer" @click="OpenAttachPopUp">
+                      <a class="accordion-button collapsed" style="cursor: pointer" data-bs-toggle="modal"
+                        data-bs-target="#attachpopup" @click="OpenAttachPopUp">
                         Attachment
                       </a>
                     </li>
@@ -1584,7 +1585,7 @@ export default {
     },
     OpenAttachPopUp() {
       this.$nextTick(() => {
-        $("#attachpopup").modal("show");
+        //$("#attachpopup").modal("show");
       });
     },
 
@@ -1613,18 +1614,16 @@ export default {
           }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          this.$nextTick(() => {
-            $("#attachpopup").modal("hide");
-            $("#insertpopup").modal("show");
-          });
+            this.$swal.fire('Successfully Update', '', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this.$router.go();
+          } else if (result.isDenied) {
+            this.$swal.fire('Changes are not saved', '', 'info')
+          }
+        });
         } else {
-          this.errorList.push(response.data.message.uploaded_path[0]);
-          this.$swal.fire({
-            icon: 'error',
-            title: 'Oops... Something Went Wrong!',
-            text: 'the error is: ' + JSON.stringify(response.data.message),
-            footer: ''
-          });
+            this.errorList.push(response.data.message.uploaded_path[0]);
+            this.$swal.fire('Something went wrong', '', 'info')
         }
       }
     },

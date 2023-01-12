@@ -454,6 +454,8 @@
                     </li>
                     <li class="accordion-item sub-nav">
                       <a
+                        data-bs-toggle="modal"
+                        data-bs-target="#attachpopup"
                         class="accordion-button collapsed"
                         style="cursor: pointer"
                         @click="OpenAttachPopUp"
@@ -1309,7 +1311,7 @@ export default {
     },
     OpenAttachPopUp() {
       this.$nextTick(() => {
-        $("#attachpopup").modal("show");
+        //$("#attachpopup").modal("show");
       });
     },
 
@@ -1319,7 +1321,7 @@ export default {
     async onAttachdoc() {
       this.errorList = [];
       if (!this.file) {
-        this.errorList.push("please select a file");
+        this.errorList.push("Please select a file");
       } else {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
@@ -1338,15 +1340,16 @@ export default {
           }
         );
         if (response.data.code == 200 || response.data.code == "200") {
-          this.$nextTick(() => {
-            $("#attachpopup").modal("hide");
-            $("#insertpopup").modal("show");
-          });
+            this.$swal.fire('Successfully Update', '', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this.$router.go();
+          } else if (result.isDenied) {
+            this.$swal.fire('Changes are not saved', '', 'info')
+          }
+        });
         } else {
-          this.$nextTick(() => {
             this.errorList.push(response.data.message.uploaded_path[0]);
-            $("#errorpopup").modal("show");
-          });
+            this.$swal.fire('Something went wrong', '', 'info')
         }
       }
     },

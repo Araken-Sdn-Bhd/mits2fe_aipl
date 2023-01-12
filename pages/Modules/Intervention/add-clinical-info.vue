@@ -195,6 +195,7 @@ export default {
                             const response = await this.$axios.post(
                                 "patient-clinicalinfo/add", {
                                     added_by: this.userdetails.user.id,
+                                    branch_id: this.userdetails.branch.branch_id,
                                     patient_id: this.Id,
                                     temperature: this.temperature,
                                     blood_pressure: this.blood_pressure,

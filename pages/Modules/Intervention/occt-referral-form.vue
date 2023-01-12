@@ -73,7 +73,7 @@
                                         <th>Diagnosis: </th>
                                         <td>
                                             <select v-model="type_diagnosis_id" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" @change="onSelect()">
                                                 <option value="0">Select Diagnosis</option>
                                                 <option v-for="catcode in diagonisislist" v-bind:key="catcode.id"
                                                     v-bind:value="catcode.id">
@@ -883,15 +883,7 @@
                                 <tr>
                                     <th>Diagnosis: </th>
                                     <td>
-                                        this.
-                                        <select v-model="type_diagnosis_id" class="form-select"
-                                            aria-label="Default select example">
-                                            <option value="0">Select Diagnosis</option>
-                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id"
-                                                v-bind:value="catcode.id">
-                                                {{ catcode.icd_code }} {{ catcode.icd_name }}
-                                            </option>
-                                        </select>
+                                        {{ this.diagnosisName }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -1400,6 +1392,7 @@ export default {
             SidebarAccess: null,
             appId: 0,
             showStatus: 0,
+            diagnosisName: "",
         };
     },
     methods: {
@@ -2070,6 +2063,10 @@ export default {
                 });
             }
         },
+        onSelect(){
+            const dataDiagnosis = this.diagonisislist.find(element => element.id == this.type_diagnosis_id);
+            this.diagnosisName = dataDiagnosis.icd_code +' '+ dataDiagnosis.icd_name;
+        },
         OnPrint() {
             var newstr = document.getElementsByClassName("result")[0].innerHTML;
             document.body.innerHTML = newstr;
@@ -2078,6 +2075,9 @@ export default {
             window.location.reload();
         },
         GoBack() {
+          if (this.type == 'view'){
+            this.$router.go(-1);
+          } else {
             this.$router.push({
                 path: "/modules/Intervention/patient-summary",
                 query: {
@@ -2085,6 +2085,7 @@ export default {
                     appId: this.appId
                 },
             });
+          }
         }
     },
 };

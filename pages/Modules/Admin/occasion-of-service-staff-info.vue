@@ -641,9 +641,15 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-         $("#exampleModal").modal('hide');
-        this.$swal.fire('Successfully Update', '', 'success');
-        this.Getstaffpatientlist1();
+         $("#exampleModal").hide();
+          this.$swal.fire('Successfully Update', '', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this.$router.go();
+          } else if (result.isDenied) {
+            this.$swal.fire('Changes are not saved', '', 'info')
+          }
+        });
+          this.Getstaffpatientlist1();
       }
     },
      async Getstaffpatientlist1() {
