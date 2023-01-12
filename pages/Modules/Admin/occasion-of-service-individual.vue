@@ -638,8 +638,14 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-         $("#exampleModal").modal('hide');
-        this.$swal.fire('Successfully Update', '', 'success');
+        $("#exampleModal").hide();
+          this.$swal.fire('Successfully Update', '', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this.$router.go();
+          } else if (result.isDenied) {
+            Swal.fire('Changes are not saved', '', 'info')
+          }
+        });
         this.Getstaffpatientlist1();
       }
     },
