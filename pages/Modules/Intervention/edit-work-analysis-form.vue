@@ -2335,8 +2335,12 @@ export default {
       });
       if (response7.data.code == 200 || response7.data.code == "200") {
         this.GStateList = response7.data.list;
+        this.GCityList = [];
+        this.GPostCodeList = [];
       } else {
         this.GStateList = [];
+        this.GCityList = [];
+        this.GPostCodeList = [];
       }
       const respons = await this.$axios.get(
         "general-setting/list?section=" + "assistance-or-supervision",
@@ -2369,8 +2373,10 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.GCityList = response.data.list;
+        this.GPostCodeList = [];
       } else {
         this.GCityList = [];
+        this.GPostCodeList = [];
       }
 
     },
