@@ -257,7 +257,7 @@ export default {
     OnEdit(data) {
       if (data.app_type == "Individual") {
                 this.$router.push({
-                    path: "/modules/Von/view-individual",
+                    path: "/modules/Von/edit-individual",
                     query: {
                         id: data.id,
                         type: data.app_type
@@ -265,7 +265,7 @@ export default {
                 });
             } else if (data.app_type == "Group") {
                 this.$router.push({
-                    path: "/modules/Von/view-group",
+                    path: "/modules/Von/edit-group",
                     query: {
                         id: data.org_background_id,
                         type: data.app_type
@@ -273,7 +273,7 @@ export default {
                 });
             } else {
                 this.$router.push({
-                    path: "/modules/Von/view-organization",
+                    path: "/modules/Von/edit-organization",
                     query: {
                         id: data.org_background_id,
                         type: data.app_type
