@@ -189,7 +189,7 @@ export default {
                     this.team_task = response.data.team_task;
                     this.list = response.data.list;
                     this.review_patient = response.data.review_patient;
-                    this.$route=response.data.route;
+                    this.route=response.data.route;
                     this.cd_draft = response.data.cd_draft;
 
                 } else {
