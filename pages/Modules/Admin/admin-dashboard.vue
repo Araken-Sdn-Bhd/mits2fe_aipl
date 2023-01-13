@@ -60,7 +60,59 @@
             </div>
           </div>
 
+                    <!-- row -->
 
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card mt-4 mb-3">
+                                <div class="card-header dashboard-header">
+                                    <h4>Upcoming Review for Patient Care Plan :</h4>
+                                </div>
+                                <table class="announcement-table" >
+                                    <tbody>
+                                        <tr>
+                                            <div v-if="index < review_patient.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
+                                                    <td><span class="number">{{ index+1 }}</span></td>
+                                                    <td><a v-bind:href="'/modules/Intervention/patient-care-plan-and-case-review?pid='+ review_patient[ann-1].id+'&type=view'">{{ review_patient[ann-1].name_asin_nric }} ({{ getFormattedDate(review_patient[ann-1].next_review_date) }})</a></td>
+                                            </div>
+                                            <div v-if="AnnouncmentToShow< review_patient.length || review_patient.length > AnnouncmentToShow">
+                                                    <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
+                                            </div>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td><span class="number">02</span></td>
+                                            <td>Hari Kesihatan Mental</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 mb-3">
+                            <div class="card mt-4 mb-3">
+                                <div class="card-header dashboard-header">
+                                    <h4>Patient Clinical Documentation in Draft Status  :</h4>
+                                </div>
+                                <table class="announcement-table" >
+                                    <tbody>
+                                        <tr>
+                                            <div v-if="index < cd_draft.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
+                                                    <td><span class="number">{{ index+1 }}</span></td>
+                                                    <td><a v-bind:href="cd_draft[ann-1].route">{{ cd_draft[ann-1].name }} ({{ getFormattedDate(cd_draft[ann-1].updated_at) }})</a></td>
+                                            </div>
+                                            <div v-if="AnnouncmentToShow< cd_draft.length || cd_draft.length > AnnouncmentToShow">
+                                                    <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
+                                            </div>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td><span class="number">02</span></td>
+                                            <td>Hari Kesihatan Mental</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
           <!-- row -->
 
           <div class="row">
@@ -110,7 +162,8 @@ export default {
             AnnouncmentToShow:3,
             totalAnouncement:0,
             search:'',
-
+            cd_draft:[],
+            review_patient:[],
             list: [],
         };
     },
@@ -145,6 +198,9 @@ export default {
                     this.team_task = response.data.team_task;
                     this.request_appointment = response.data.request_appointment;
                     this.list = response.data.list;
+                    this.review_patient = response.data.review_patient;
+                    this.route=response.data.route;
+                    this.cd_draft = response.data.cd_draft;
 
 
                 } else {
