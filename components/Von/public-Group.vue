@@ -1,17 +1,16 @@
 <template>
-  <div class="group notshow-box hide">
+  <div class="group notshow-box ">
     <div class="row">
       <div class="col-sm-12">
         <h4 class="title-h4">Background</h4>
       </div>
     </div>
 
-    <!-- <form class="form-padding"> -->
     <div class="row mb-3">
       <label for="" class="col-sm-4 col-form-label"
         >Does your group represent an organization?<span>*</span></label
       >
-      <div class="col-sm-8 organization-box">
+      <div class="col-sm-8 organization-box" @change="orgYes">
         <div class="form-check form-check-inline" id="change">
           <input
             class="form-check-input"
@@ -1175,6 +1174,9 @@ export default {
     this.GetUserIpAddress();
   },
   methods: {
+    orgYes(event){
+
+    },
     GselectFile(event) {
       this.Gfile = event.target.files[0];
     },

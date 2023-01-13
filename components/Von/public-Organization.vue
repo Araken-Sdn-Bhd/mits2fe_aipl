@@ -1,5 +1,5 @@
 <template>
-  <div class="organization notshow-box hide">
+  <div class="organization notshow-box ">
     <div class="row">
       <div class="col-sm-12">
         <h4 class="title-h4">Organization Background</h4>
@@ -1104,8 +1104,8 @@ export default {
       }
     },
     async isLetter(e){
-        let char = String.fromCharCode(e.keyCode); 
-        if(/^[A-Za-z\'@ ]+$/.test(char)) return true; 
+        let char = String.fromCharCode(e.keyCode);
+        if(/^[A-Za-z\'@ ]+$/.test(char)) return true;
         else e.preventDefault();
     },
     OOnreliventmentari(val) {
