@@ -310,9 +310,6 @@ export default {
         if (!this.nricno) {
           this.errors.push("NRIC NO is required.");
         }
-        if (!this.professionregno) {
-          this.errors.push("Profession Registration NO is required.");
-        }
         if (this.Role <= 0) {
           this.errors.push("Role  is required.");
         }
@@ -322,30 +319,12 @@ export default {
         if (this.teamId <= 0) {
           this.errors.push("Team  is required.");
         }
-        if (!this.contactno) {
-          this.errors.push("Contact NO is required.");
-        }
         if (this.designationId <= 0) {
           this.errors.push("Designation  is required.");
         }
-        if (!this.designationstartdate) {
-          this.errors.push("Designation Period(Start Date) is required.");
-        }
-        if (!this.designationenddate) {
-          this.errors.push("Designation Period(End Date) is required.");
-        }
         if (this.branchId <= 0) {
           this.errors.push("Mentari Location is required.");
-        }
-        if (!this.contactno) {
-          this.errors.push("Contact NO is required.");
-        }
-        if (!this.startdate) {
-          this.errors.push("Start Date   is required.");
-        }
-        if (!this.enddate) {
-          this.errors.push("End Date is required.");
-        } else {
+        }else {
           if (this.personincharge > 0) {
             this.personincharge = 1;
           }
