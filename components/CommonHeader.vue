@@ -100,6 +100,7 @@ export default {
       message:"",
       notification_count:"",
       notifi_id:"",
+      try:[],
     };
   },
    beforeMount() {
@@ -131,7 +132,7 @@ export default {
       {added_by:this.id,role:this.role,branch_id:this.branch_id,email:this.email,user_id:this.id},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
-        this.notificationlist = response.data.list;
+        this.notificationlist = response.data.list.sort((a,b)=>b.time<a.time?1:-1);      
         this.notification_count = response.data.notification_count;
         this.notifi_id= response.data.id;
          console.log('my notification',this.notification_count);
