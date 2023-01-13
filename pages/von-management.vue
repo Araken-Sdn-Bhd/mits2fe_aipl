@@ -27,7 +27,7 @@
                 <div class="col-lg-4 col-sm-6">
                   <div class="mb-3">
                     <label for="" class="form-label">Application Form</label>
-                    <select class="form-select select-others" aria-label="">
+                    <select v-model="selectForm" class="form-select select-others" aria-label="">
                       <option value="0">Select Application Form</option>
                       <option value="individual">Individual</option>
                       <option value="group">Group</option>
@@ -36,15 +36,20 @@
                   </div>
                 </div>
               </div>
-
+              <div v-if="this.selectForm == 'individual'">
               <Individual />
+              </div>
 
               <!-- individual -->
 
+              <div v-if="this.selectForm == 'group'">
               <Group />
+              </div>
               <!-- group -->
 
+              <div v-if="this.selectForm == 'organization'">
               <Organization />
+              </div>
               <!-- Organization -->
             </div>
           </div>
@@ -115,6 +120,7 @@ export default {
       userdetails: null,
       errors: [],
       loader: false,
+      selectForm: "",
     };
   },
   beforeMount() {
