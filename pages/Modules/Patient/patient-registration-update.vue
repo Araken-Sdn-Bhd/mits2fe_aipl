@@ -1615,8 +1615,7 @@ export default {
             );
             console.log("my pt details", response.data);
             if (response.data.code == 200) {
-                //alert(JSON.stringify(response.data.list[0].nric_type));
-                
+                //alert(JSON.stringify(response.data.list[0]));
                 if(response.data.list[0].salutation_id != null){ this.salutation_id = response.data.list[0].salutation_id;}
                 if(response.data.list[0].name_asin_nric){ this.name_asin_nric =  response.data.list[0].name_asin_nric;}
                 if(response.data.list[0].citizenship != null){ this.citizenship = response.data.list[0].citizenship;}
@@ -1636,7 +1635,7 @@ export default {
                 if(response.data.list[0].expiry_date != null){ this.expiry_date = response.data.list[0].expiry_date;}
                 if(response.data.list[0].country_id != null){ this.country_id = response.data.list[0].country_id;}
                 if(response.data.list[0].birth_date != null){ this.birth_date = response.data.list[0].birth_date;}
-              
+
                 if(response.data.list[0].age != null){this.age = response.data.list[0].age;}
                 if(response.data.list[0].mobile_no != null){ this.mobile_no = response.data.list[0].mobile_no;}
                 if(response.data.list[0].house_no != null){ this.house_no = response.data.list[0].house_no;}
@@ -1647,33 +1646,32 @@ export default {
                     this.services_type = {
                     id: response.data.list[0].services_type,
                     text: response.data.list[0].service['service_name']
-                     };
+                    };
                 }
                 if(response.data.list[0].referral_type != null){ this.referral_type = response.data.list[0].referral_type;}
                 if(response.data.list[0].address1 != null){ this.address1 = response.data.list[0].address1;}
                 if(response.data.list[0].address2 != null){ this.address2 = response.data.list[0].address2;}
                 if(response.data.list[0].address3 != null){ this.address3 = response.data.list[0].address3;}
-               
-
-                if(response.data.list[0].state_id != null){ 
+                if(response.data.list[0].state_id != null){
                     this.state_id = response.data.list[0].state_id;
                     this.getCity();
                 }
-                if(response.data.list[0].city[0].city_id != null){ this.city_id = response.data.list[0].city[0].city_id;}
-                if (response.data.list[0].city[0].city_id != "") {
+                //alert(response.data.list[0].city.length);
+                if(response.data.list[0].city.length != 0) {
+                    if(response.data.list[0].city[0].city_id != null){ this.city_id = response.data.list[0].city[0].city_id;}
+                    if (response.data.list[0].city[0].city_id != "") {
                     this.getCity();
                     this.city_id = response.data.list[0].city[0].city_name
                     this.getPostcode();
+                    }
                 }
                 if(response.data.list[0].postcode != null){ this.postcode = response.data.list[0].postcode; this.getPostcode();}
                 if(response.data.list[0].patient_mrn != null){ this.patient_mrn = response.data.list[0].patient_mrn;}
                 if(response.data.list[0].referral_letter != null){ this.referral_letter = response.data.list[0].referral_letter;}
-
-
-                if(response.data.list[0].race_id != null){this.race_id = response.data.list[0].race_id;}
-                if(response.data.list[0].religion_id != null){this.religion_id = response.data.list[0].religion_id;}
-                if(response.data.list[0].accomodation_id != null){ this.accomodation_id = response.data.list[0].accomodation_id;}
+                if(response.data.list[0].race_id != null){this.race_id = response.data.list[0].race[0].id;}
+                if(response.data.list[0].religion_id != null){this.religion_id = response.data.list[0].religion[0].id;}
                 if(response.data.list[0].marital_id != null){ this.marital_id = response.data.list[0].marital_id;}
+                if(response.data.list[0].accomodation_id != null){ this.accomodation_id = response.data.list[0].accomodation_id;}
                 if(response.data.list[0].fee_exemption_status != null){ this.fee_exemption_status = response.data.list[0].fee_exemption_status;}
                 if(response.data.list[0].occupation_status != null){ this.occupation_status = response.data.list[0].occupation_status; }
                 if(response.data.list[0].occupation_sector != null){ this.occupation_sector = response.data.list[0].occupation_sector;}
@@ -1684,8 +1682,6 @@ export default {
                 if(response.data.list[0].other_maritalList != null){  this.other_maritalList = response.data.list[0].other_maritalList;}
                 if(response.data.list[0].other_feeExemptionStatus != null){ this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;}
                 if(response.data.list[0].other_occupationStatus != null){ this.other_occupationStatus = response.data.list[0].other_occupationStatus;}
-
-
                 if(response.data.list[0].kin_name_asin_nric != null){ this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;}
                 if(response.data.list[0].kin_relationship_id != null){ this.kin_relationship_id = response.data.list[0].kin_relationship_id;}
                 if(response.data.list[0].kin_nric_no != null){ this.kin_nric_no = response.data.list[0].kin_nric_no;}
@@ -1694,7 +1690,7 @@ export default {
                 if(response.data.list[0].kin_address1 != null){ this.kin_address1 = response.data.list[0].kin_address1;}
                 if(response.data.list[0].kin_address2 != null){ this.kin_address2 = response.data.list[0].kin_address2;}
                 if(response.data.list[0].kin_address3 != null){ this.kin_address3 = response.data.list[0].kin_address3;}
-                if(response.data.list[0].kin_state_id != null){ 
+                if(response.data.list[0].kin_state_id != null){
                     this.kin_state_id = response.data.list[0].kin_state_id;
                     this.getkinCity();
                 }
@@ -1705,19 +1701,14 @@ export default {
                     this.getkinPostcode();
                 }
                 if(response.data.list[0].kin_postcode != null){ this.kin_postcode = response.data.list[0].kin_postcode;}
-
-
                 if(response.data.list[0].drug_allergy != null){ this.drug_allergy = response.data.list[0].drug_allergy;}
+                if(response.data.list[0].drug_allergy_description != null){ this.drug_allergy_description = response.data.list[0].drug_allergy_description;}
                 if(response.data.list[0].other_allergy != null){ this.other_allergy = response.data.list[0].other_allergy;}
                 if(response.data.list[0].other_description != null){ this.other_description = response.data.list[0].other_description;}
                 if(response.data.list[0].traditional_description != null){ this.traditional_description = response.data.list[0].traditional_description;}
                 if(response.data.list[0].traditional_medication != null){ this.traditional_medication = response.data.list[0].traditional_medication;}
-              
-           
                 this.Id = response.data.list[0].id;
                 this.status = response.data.list[0].status;
-              
-            
                 if (response.data.list[0].service['service_name'] ==
                     "Community Psychiatric Service (CPS)" ||
                     response.data.list[0].service['service_name'] ==
@@ -1727,8 +1718,6 @@ export default {
                 } else {
                     this.uploaddoc = false;
                 }
-
-
                 if (response.data.list[0].race[0].section_value == "OTHERS") {
                     this.otherRace = true;
                 } else {
