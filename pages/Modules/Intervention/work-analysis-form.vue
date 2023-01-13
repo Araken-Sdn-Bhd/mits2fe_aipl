@@ -2445,16 +2445,17 @@ export default {
                 this.company_address1 = response.data.Data[0].company_address1;
                 this.company_address2 = response.data.Data[0].company_address2;
                 this.company_address3 = response.data.Data[0].company_address3;
+                alert(response.data.Data[0].state_id);
                 this.state_id = response.data.Data[0].state_id;
-                if (response.data.Data[0].city_id != null) {
-                    this.getCityList();
-                    this.city_id = response.data.Data[0].city_name
-                    this.getPostcodeList();
-                }
-                if(response.data.list[0].postcode != null){
-                  this.postcode = response.data.Data[0].postcode_id;
-                  this.getPostcodeList();
-                }
+                // if (response.data.Data[0].city_id != null) {
+                    // this.getCityList();
+                    // this.city_id = response.data.Data[0].city_name
+                    // this.getPostcodeList();
+                // }
+                // if(response.data.list[0].postcode != null){
+                  // this.postcode = response.data.Data[0].postcode_id;
+                  // this.getPostcodeList();
+                // }
                 this.supervisor_name = response.data.Data[0].supervisor_name;
                 this.email = response.data.Data[0].email;
                 this.position = response.data.Data[0].position;
