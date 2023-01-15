@@ -43,7 +43,7 @@
                   <div class="mb-3">
                     <label class="form-label">State<small style="color:red">*</small> </label>
                     <select class="form-select" @change="getCityList($event)" v-model="state_id">
-                      <option value="">Please Select</option>
+                      <option value="0">Please Select</option>
                       <option v-for="state in GStateList" v-bind:key="state.id" v-bind:value="state.id">
                         {{ state.state_name }}
                       </option>
@@ -54,7 +54,7 @@
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City<small style="color:red">*</small> </label>
                       <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
-                        <option value="">Please Select</option>
+                        <option value="0">Please Select</option>
                         <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
                           {{ ctl.city_name }}
                         </option>
@@ -63,7 +63,7 @@
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Postcode<small style="color:red">*</small> </label>
                       <select class="form-select" v-model="postcode_id">
-                        <option value="">Please Select</option>
+                        <option value="0">Please Select</option>
                         <option v-for="pst in GPostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
                           {{ pst.postcode }}
                         </option>
@@ -2363,7 +2363,7 @@ export default {
     },
     async getCityList(event) {
       const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
+        // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
         "Content-Type": "application/json",
       };
@@ -2470,7 +2470,7 @@ export default {
         this.company_address2 = response.data.Data[0].company_address2;
         this.company_address3 = response.data.Data[0].company_address3;
         this.state_id = response.data.Data[0].state_id;
-        this.city_id = response.data.Data[0].city_id;
+        this.city_id = response.data.Data[0].city_name;
         this.postcode_id = response.data.Data[0].postcode_id;
         this.supervisor_name = response.data.Data[0].supervisor_name;
         this.email = response.data.Data[0].email;
@@ -2782,7 +2782,9 @@ export default {
           this.sevencomment = response.data.Data[0].comment[15].comment;
           this.eightcomment = response.data.Data[0].comment[15].comment;
 
-          this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
+          this.jobSDESCRIPTION = response.data.Data[0].jobs_des[0].task_description
+;
+          this.task_description = response.data.Data[0].jobs_des[0].task_description;
         //console.log("myjobb", this.jobSPECIFICATION);
         // console.log('myjobb11',this.job_specification);
         this.GetList();
