@@ -1449,10 +1449,10 @@ export default {
             this.GIsvalid = false;
           }
         }
-        if (!this.Gmentari_services) {
-          this.errors.push("Relevant Mentari Service is required.");
-          this.GIsvalid = false;
-        }
+        // if (!this.Gmentari_services) {
+        //   this.errors.push("Relevant Mentari Service is required.");
+        //   this.GIsvalid = false;
+        // }
         if (!this.Gavailable_date) {
           this.errors.push("Available Day is required.");
         }
@@ -1649,15 +1649,15 @@ export default {
             }
           }
         }
-        if (!this.Gtarget_outcome) {
-          this.errors.push("target outcome is required.");
-        }
-        if (!this.Gfollowup_projects) {
-          this.errors.push("Any planned follow up projects is required.");
-        }
-        if (!this.Goutreachmentari_services) {
-          this.errors.push("Relevant Mentari Service is required.");
-        }
+        // if (!this.Gtarget_outcome) {
+        //   this.errors.push("target outcome is required.");
+        // }
+        // if (!this.Gfollowup_projects) {
+        //   this.errors.push("Any planned follow up projects is required.");
+        // }
+        // if (!this.Goutreachmentari_services) {
+        //   this.errors.push("Relevant Mentari Service is required.");
+        // }
         if (
           this.GIsvalid &&
           this.Gname &&

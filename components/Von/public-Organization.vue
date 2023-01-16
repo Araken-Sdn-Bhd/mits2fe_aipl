@@ -1542,9 +1542,9 @@ export default {
         if (!this.Ofollowup_projects) {
           this.errors.push("Any planned follow up projects is required.");
         }
-        if (!this.Ooutreachmentari_services) {
-          this.errors.push("Relevant Mentari Service is required.");
-        }
+        // if (!this.Ooutreachmentari_services) {
+        //   this.errors.push("Relevant Mentari Service is required.");
+        // }
         if (
           this.OIsvalid &&
           this.Oname &&
