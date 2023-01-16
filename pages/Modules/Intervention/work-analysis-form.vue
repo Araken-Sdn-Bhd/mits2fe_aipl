@@ -55,7 +55,7 @@
                                         <label class="form-label">City<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                                             <option value="0">Please Select</option>
-                                            <option v-for="ctl in GCityList" v-bind:key="ctl.city_id" v-bind:value="ctl.city_name">
+                                            <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
                                                 {{ ctl.city_name }}
                                             </option>
                                         </select>
@@ -1257,7 +1257,7 @@
                         <div class="d-flex three-btn">
                             <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                             </button>
-                            <div class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                            <div v-if="type != 'view' " class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
                                 <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
                                     <i class="fa fa-save"></i> Save as draft
                                 </button>
@@ -2304,12 +2304,12 @@ export default {
             console.log('my stat33',response7.data);
             if (response7.data.code == 200 || response7.data.code == "200") {
                 this.GStateList = response7.data.list;
-                // this.GCityList = [];
-          	    // this.GPostCodeList = [];
+                this.GCityList = [];
+          	    this.GPostCodeList = [];
             } else {
                 this.GStateList = [];
-                // this.GCityList = [];
-                // this.GPostCodeList = [];
+                this.GCityList = [];
+                this.GPostCodeList = [];
             }
             const respons = await this.$axios.get(
                 "general-setting/list?section=" + "assistance-or-supervision", {
@@ -2345,10 +2345,10 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.GCityList = response.data.list;
-                // this.GPostCodeList = [];
+                this.GPostCodeList = response.data.list;
             } else {
                 this.GCityList = [];
-                // this.GPostCodeList = [];
+                this.GPostCodeList = [];
             }
 
         },
@@ -2445,7 +2445,7 @@ export default {
                 this.company_address1 = response.data.Data[0].company_address1;
                 this.company_address2 = response.data.Data[0].company_address2;
                 this.company_address3 = response.data.Data[0].company_address3;
-                alert(response.data.Data[0].state_id);
+                // alert(response.data.Data[0].state_id);
                 this.state_id = response.data.Data[0].state_id;
                 // if (response.data.Data[0].city_id != null) {
                     // this.getCityList();
@@ -2456,6 +2456,9 @@ export default {
                   // this.postcode = response.data.Data[0].postcode_id;
                   // this.getPostcodeList();
                 // }
+                // alert(response.data.Data[0].postcode_id);
+                this.city_id = response.data.Data[0].city_id;
+                this.postcode_id = response.data.Data[0].postcode_id;
                 this.supervisor_name = response.data.Data[0].supervisor_name;
                 this.email = response.data.Data[0].email;
                 this.position = response.data.Data[0].position;
@@ -2900,8 +2903,6 @@ export default {
                 this.sevencomment = response.data.Data[0].comment[15].comment;
                 this.eightcomment = response.data.Data[0].comment[15].comment;
                 this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
-                this.job1.task_description = response.data.Data[0].jobs_des[0].task_description;
-                this.objectives = response.data.Data[0].jobs_des[0].objectives;
                 // console.log("myjobb", this.jobSPECIFICATION);
                 // console.log('myjobb11',this.job_specification);
                 this.GetList();
