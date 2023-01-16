@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <div class="areas-involvement hide" id="volunteerismshow">
+    <div class="areas-involvement" id="volunteerismshow" v-if="this.area_of_involvement == 'Volunteerism'">
         <h4 class="title-h4">Volunteerism</h4>
 
         <div class="row mb-3 mt-2">
@@ -146,7 +146,7 @@
                 </div>
 
                 <!-- hide-div -->
-                <div class="experience-yes experi-box hide">
+                <div class="experience-yes experi-box" v-if="this.is_voluneering_exp == 'experience-yes'">
                     <div class="mt-3">
                         <textarea class="form-control textarea" rows="3" placeholder="Please describe" v-model="exp_details"></textarea>
                     </div>
@@ -196,7 +196,7 @@
                 </div>
 
                 <!-- hide-div -->
-                <div class="professional-yes profess-box hide">
+                <div class="professional-yes profess-box" v-if="this.is_mental_health_professional == 'professional-yes'">
                     <div class="mt-3">
                         <label for="formFile" class="form-label">Please Attach Your Latest Resume<span>*</span></label>
                         <input class="form-control" type="file" id="formFile" @change="selectFile" />
@@ -313,7 +313,7 @@
 
     <!-- volunteerismshow -->
 
-    <div class="areas-involvement hide" id="outreach-projectshow">
+    <div class="areas-involvement" id="outreach-projectshow" v-if="this.area_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
         <p>Please Provide a breief project description</p>
 
@@ -395,7 +395,7 @@
                 </div>
 
                 <!-- hide-div -->
-                <div class="mentari profess-box hide">
+                <div class="mentari profess-box" v-if="this.project_loaction == 'mentari'">
                     <div class="mt-3">
                         <select class="form-select" v-model="project_branch">
                             <option value="">Please Select</option>
@@ -406,7 +406,7 @@
                     </div>
                 </div>
 
-                <div class="project-location-others profess-box hide">
+                <div class="project-location-others profess-box" v-if="this.project_loaction == 'project-location-others'">
                     <div class="mt-3">
                         <input type="text" class="form-control" placeholder="Please Specify" name="" v-model="other_loaction" />
                     </div>
@@ -477,7 +477,7 @@
 
     <!-- outreach-projectshow -->
 
-    <div class="areas-involvement hide" id="networkingshow">
+    <div class="areas-involvement" id="networkingshow" v-if="this.area_of_involvement == 'Networking Make a Contribution'">
         <h4 class="title-h4">Networking-Make a Contribution</h4>
         <p>
             We encourage any participation from the community members in line with
@@ -516,7 +516,7 @@
                 </div>
 
                 <!-- hide-div -->
-                <div class="project-location-mentari profess-box hide">
+                <div class="project-location-mentari profess-box" v-if="this.netwotkproject_loaction == 'project-location-mentari'">
                     <div class="mt-3">
                         <select class="form-select" v-model="networkbranch">
                             <option value="">Please Select</option>
@@ -527,7 +527,7 @@
                     </div>
                 </div>
 
-                <div class="project-location-others profess-box hide">
+                <div class="project-location-others profess-box" v-if="this.netwotkproject_loaction == 'project-location-others'">
                     <div class="mt-3">
                         <input type="text" class="form-control" placeholder="Please Specify" name="" v-model="networkother" />
                     </div>
