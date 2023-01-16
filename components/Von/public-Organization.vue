@@ -238,7 +238,7 @@
         </div>
       </div>
 
-      <div class="areas-involvement hide" id="volunteerism2show">
+      <div class="areas-involvement " id="volunteerism2show" v-if="this.Oarea_of_involvement == 'Volunteerism'">
         <h4 class="title-h4">Volunteerism</h4>
 
         <div class="row mb-3 mt-2">
@@ -270,7 +270,7 @@
         </div>
 
         <!-- hide-div -->
-        <div class="experience2-yes experi-box hide">
+        <div class="experience2-yes experi-box " v-if="this.Ois_voluneering_exp == 'experience2-yes'">
           <div class="mt-3">
             <table class="note" style="width: 100%" id="orgvolexp">
               <thead>
@@ -332,7 +332,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="professional2-yes profess-box hide">
+            <div class="professional2-yes profess-box " v-if="this.Ois_mental_health_professional=='professional2-yes'">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Please Attach Your Latest Resume<span>*</span></label
@@ -506,7 +506,7 @@
 
       <!-- volunteerismshow -->
 
-      <div class="areas-involvement hide" id="outreach-project2show">
+      <div class="areas-involvement " id="outreach-project2show" v-if="this.Oarea_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
         <p>Please Provide a breief project description</p>
 
@@ -622,7 +622,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="location-mentari profess-box hide">
+            <div class="location-mentari profess-box" v-if="this.Oproject_loaction == 'location-mentari'">
               <div class="mt-3">
               <select class="form-select" v-model="Oproject_branch">
                   <option value="">Please Select</option>
@@ -637,7 +637,7 @@
               </div>
             </div>
 
-            <div class="location-others profess-box hide">
+            <div class="location-others profess-box" v-if="this.Oproject_loaction == 'location-others'">
               <div class="mt-3">
                 <input
                   type="text"
@@ -742,7 +742,7 @@
 
       <!-- outreach-projectshow -->
 
-      <div class="areas-involvement hide" id="networking2show">
+      <div class="areas-involvement " id="networking2show" v-if="this.Oarea_of_involvement == 'Networking Make a Contribution'">
         <h4 class="title-h4">Networking-Make a Contribution</h4>
         <p>
           We encourage any participation from the community members in line with
@@ -803,7 +803,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="project-location-mentari profess-box hide">
+            <div class="project-location-mentari profess-box" v-if="this.Onetwotkproject_loaction == 'project-location-mentari'">
               <div class="mt-3">
                 <select class="form-select" v-model="Onetworkbranch">
                   <option value="">Please Select</option>
@@ -818,7 +818,7 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box hide">
+            <div class="project-location-others profess-box" v-if="this.Onetwotkproject_loaction == 'project-location-others'">
               <div class="mt-3">
                 <input
                   type="text"

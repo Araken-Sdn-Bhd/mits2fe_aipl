@@ -17,7 +17,7 @@
             type="radio"
             name="organization"
             id="organization-yes"
-            value="option1"
+            value="1"
             v-model="is_represent_org"
           />
           <label class="form-check-label" for="organization-yes">Yes</label>
@@ -28,7 +28,7 @@
             type="radio"
             name="organization"
             id="organization-no"
-            value="organization-no"
+            value="0"
             v-model="is_represent_org"
           />
           <label class="form-check-label" for="organization-no">No</label>
@@ -36,7 +36,7 @@
 
         <!-- hide-organization -->
 
-        <div class="organization-no organiz-box hide">
+        <div class="organization-no organiz-box" v-if="this.is_represent_org == '0'">
           <div class="mt-3 mb-3">
             <label class="form-label"
               >How many group members do you have?<span>*</span></label
@@ -95,10 +95,10 @@
 
     <!-- hide-representative -->
 
-    <div class="representative-no represen-box hide">
+    <div class="representative-no represen-box " v-if="this.is_you_represenative == 'representative-no'">
       <p>Please appoint a group representative to complete this form</p>
     </div>
-    <div class="representative-yes represen-box hide">
+    <div class="representative-yes represen-box" v-if="this.is_you_represenative == 'representative-yes'">
       <div>
         <label for="" class="col-sm-4 font-italic"
         >Please provide personal details below.</label
@@ -301,7 +301,7 @@
         </div>
       </div>
 
-      <div class="areas-involvement hide" id="volunteerism1show">
+      <div class="areas-involvement" id="volunteerism1show" v-if="this.Garea_of_involvement == 'Volunteerism'">
         <h4 class="title-h4">Volunteerism</h4>
 
         <div class="row mb-3 mt-2">
@@ -333,7 +333,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="experience-yes experi-box hide">
+            <div class="experience-yes experi-box" v-if="this.Gis_voluneering_exp == 'experience-yes'">
               <!-- <div class="mt-3">
                 <textarea
                   class="form-control textarea"
@@ -403,7 +403,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="professional-yesG profess-box hide">
+            <div class="professional-yesG profess-box " v-if="this.Gis_mental_health_professional == 'professional-yesG'">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Please Attach Your Latest Resume<span>*</span></label
@@ -592,7 +592,7 @@
 
       <!-- volunteerismshow -->
 
-    <div class="areas-involvement hide" id="outreach-project1show">
+    <div class="areas-involvement " id="outreach-project1show" v-if="this.Garea_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
         <p>Please Provide a breief project description</p>
 
@@ -708,7 +708,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="mentari profess-box hide">
+            <div class="mentari profess-box " v-if="this.Gproject_loaction == 'mentari'">
               <div class="mt-3">
                 <select class="form-select" v-model="Gproject_branch">
                   <option value="">Please Select</option>
@@ -723,7 +723,7 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box hide">
+            <div class="project-location-others profess-box " v-if="this.Gproject_loaction == 'project-location-othersG'">
               <div class="mt-3">
                 <input
                   type="text"
@@ -828,7 +828,7 @@
 
       <!-- outreach-projectshow -->
 
-      <div class="areas-involvement hide" id="networking1show">
+      <div class="areas-involvement " id="networking1show" v-if="this.Garea_of_involvement == 'Networking Make a Contribution'">
         <h4 class="title-h4">Networking-Make a Contribution</h4>
         <p>
           We encourage any participation from the community members in line with
@@ -889,7 +889,7 @@
             </div>
 
             <!-- hide-div -->
-            <div class="project-location-mentari profess-box hide">
+            <div class="project-location-mentari profess-box " v-if="this.Gnetwotkproject_loaction == 'project-location-mentari'">
               <div class="mt-3">
                 <select class="form-select" v-model="Gnetworkbranch">
                   <option value="">Please Select</option>
@@ -904,7 +904,7 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box hide">
+            <div class="project-location-others profess-box" v-if="this.Gnetwotkproject_loaction == 'project-location-others'">
               <div class="mt-3">
                 <input
                   type="text"
