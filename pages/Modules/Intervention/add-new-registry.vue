@@ -2049,6 +2049,15 @@ import moment from 'moment'
 export default {
   components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
+  head: {
+    script: [
+      {
+        src: "/app/js/jquery-3.5.1.js",
+        body: true,
+        crossorigin: "anonymous",
+      },
+    ]
+  },
   data() {
     return {
       userdetails: null,
