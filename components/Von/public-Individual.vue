@@ -950,16 +950,16 @@ export default {
                         this.Isvalid = false;
                     }
                 }
-                if (!this.mentari_services) {
-                    this.errors.push("Relevant Mentari Service is required.");
-                    this.Isvalid = false;
-                }
-                if (!this.available_date) {
-                    this.errors.push("Available Day is required.");
-                }
-                if (!this.available_time) {
-                    this.errors.push("Available Time is required.");
-                }
+                // if (!this.mentari_services) {
+                //     this.errors.push("Relevant Mentari Service is required.");
+                //     this.Isvalid = false;
+                // }
+                // if (!this.available_date) {
+                //     this.errors.push("Available Day is required.");
+                // }
+                // if (!this.available_time) {
+                //     this.errors.push("Available Time is required.");
+                // }
                 if (
                     this.Isvalid &&
                     this.name &&
@@ -973,9 +973,10 @@ export default {
                     this.education_id &&
                     this.occupation_sector_id &&
                     this.branch_id &&
-                    this.area_of_involvement &&
-                    this.available_date &&
-                    this.available_time
+                    this.area_of_involvement
+                    // &&
+                    // this.available_date &&
+                    // this.available_time
                 ) {
                     if (this.mentari_services) {
                         this.mentari_services =
@@ -1136,9 +1137,9 @@ export default {
                 if (!this.followup_projects) {
                     this.errors.push("Any planned follow up projects is required.");
                 }
-                if (!this.outreachmentari_services) {
-                    this.errors.push("Relevant Mentari Service is required.");
-                }
+                // if (!this.outreachmentari_services) {
+                //     this.errors.push("Relevant Mentari Service is required.");
+                // }
                 if (
                     this.Isvalid &&
                     this.name &&
@@ -1149,23 +1150,24 @@ export default {
                     this.state_id &&
                     this.city_id &&
                     this.postcode_id &&
-                    this.education_id &&
-                    this.occupation_sector_id &&
-                    this.branch_id &&
-                    this.area_of_involvement &&
-                    this.project_name &&
-                    this.project_background &&
-                    this.project_objectives &&
-                    this.target_audience &&
-                    this.no_of_paricipants &&
-                    this.time_frame &&
-                    this.estimated_budget &&
-                    this.project_scopes &&
-                    this.project_loaction &&
-                    this.project_loaction_value &&
-                    this.target_outcome &&
-                    this.followup_projects &&
-                    this.outreachmentari_services
+                    this.education_id
+                    // &&
+                    // this.occupation_sector_id &&
+                    // this.branch_id &&
+                    // this.area_of_involvement &&
+                    // this.project_name &&
+                    // this.project_background &&
+                    // this.project_objectives &&
+                    // this.target_audience &&
+                    // this.no_of_paricipants &&
+                    // this.time_frame &&
+                    // this.estimated_budget &&
+                    // this.project_scopes &&
+                    // this.project_loaction &&
+                    // this.project_loaction_value &&
+                    // this.target_outcome &&
+                    // this.followup_projects &&
+                    // this.outreachmentari_services
                 ) {
                     if (this.outreachmentari_services) {
                         this.outreachmentari_services =
