@@ -237,7 +237,7 @@
                     </div>
                 </div>
 
-                <div class="professional-no profess-box hide">
+                <div class="professional-no profess-box" v-if="this.is_mental_health_professional == 'professional-no'">
                     <div class="mt-3">
                         <label for="formFile" class="form-label">Relevant Mentari Service That You Want To Be Involved<span>*</span></label>
                         <!-- <div class="form-check">
