@@ -260,6 +260,9 @@
                     </table>
                     <br><br>
                     <div class="d-flex align-items-center mt-2">
+                      <button @click="GoBack" type="button" class="btn btn-primary btn-fill btn-md" title="Back">
+                    <i class="fa fa-step-backward"/> &nbsp; Back
+                </button>
                       <button
                         class="btn btn-success next-btn ml-auto"
                         title="Next Page"
@@ -1653,6 +1656,9 @@ export default {
                     this.$swal.fire('Changes are not saved', '', 'info')
               }
     })
+    },
+    GoBack(){
+      this.$router.go(-1);
     },
     async GetUserIpAddress() {
       const {

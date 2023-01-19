@@ -884,7 +884,7 @@ export default {
         });
       } else if (data.type == "TriageForm") {
         this.$router.push({
-          path: "/modules/Intervention/triage-form",
+          path: "/modules/Intervention/triage-form-triage",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobInterestCheckList") {
