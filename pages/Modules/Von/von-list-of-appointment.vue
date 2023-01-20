@@ -88,7 +88,7 @@
                     <td>{{ app.app_date }}</td>
                     <td>{{ app.app_time }}</td>
                     <td>{{ app.dr_name }}</td>
-                    <td>{{ app.aoi }}</td>
+                    <td>{{ app.area_of_involvement }}</td>
                     <td>{{ app.services_type }}</td>
                     <td class="td"  :class="SidebarAccess!=1?'hide1':''">
                       <a

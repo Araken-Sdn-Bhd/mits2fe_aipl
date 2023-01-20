@@ -19,7 +19,7 @@
                                         <option value="">Select Type of Application</option>
                                         <option value="individual">Individual</option>
                                         <option value="group">Group</option>
-                                        <option value="organization">Organization</option>
+                                        <option value="org">Organization</option>
                                     </select>
                                 </div>
 
@@ -27,11 +27,11 @@
                                     <select class="form-select" v-model="area_of_involvement" @change="Onseacrh">
                                         <option value="">Select Areas of Involvement</option>
                                         <option value="Volunteerism">Volunteerism</option>
-                                        <option value="Outreach Project Collaboration">
-                                            Outreach Project Collaboration
+                                        <option value="Outreach - Project Collaboration">
+                                            Outreach - Project Collaboration
                                         </option>
-                                        <option value="Networking Make a Contribution">
-                                            Networking Make a Contribution
+                                        <option value="Networking - Make a Contribution">
+                                            Networking - Make a Contribution
                                         </option>
                                     </select>
                                 </div>
@@ -86,9 +86,9 @@
                                 <tr v-for="(app, index) in list" :key="index">
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ app.name }}</td>
-                                    <td>{{ app.app_type }}</td>
-                                    <td>{{ app.area_of_involvment }}</td>
-                                    <td>{{ app.services }}</td>
+                                    <td>{{ app.section }}</td>
+                                    <td>{{ app.aoi }}</td>
+                                    <td>{{ app.services_type }}</td>
                                     <td>{{ app.phone_number }}</td>
                                     <td>{{ app.email }}</td>
                                     <td>
@@ -147,7 +147,7 @@ export default {
         const axios = require("axios").default;
         axios
             .post(
-                `${this.$axios.defaults.baseURL}` + "von/search-collaboration-list", {
+                `${this.$axios.defaults.baseURL}` + "von/collaboration-list", {
                     email: this.userdetails.user.email,
                     branch_id: this.userdetails.branch.branch_id
                 },
@@ -160,20 +160,7 @@ export default {
                 this.list = resp.data.list;
                 console.log("my lst", resp.data);
                 $(document).ready(function () {
-                    // $(".data-table").DataTable({
-                    //     searching: false,
-                    //     bLengthChange: false,
-                    //     bInfo: false,
-                    //     // autoWidth: false,
-                    //     // responsive: true,
-                    //     scrollX: true,
-                    //     language: {
-                    //         paginate: {
-                    //             next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                    //             previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                    //         },
-                    //     },
-                    // });
+                  
                 });
                 this.loader = false;
             })
@@ -204,10 +191,10 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "von/search-collaboration-list", {
+                "von/collaboration-list", {
                     name: this.name,
                     section: this.section,
-                    area_of_involvement: this.area_of_involvement,
+                    aoi: this.area_of_involvement,
                     service: this.service,
                     email: this.userdetails.user.email,
                     branch_id: this.userdetails.branch.branch_id
