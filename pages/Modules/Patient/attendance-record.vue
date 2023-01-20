@@ -55,7 +55,7 @@
                                         <th>Status</th>
                                         <th>Appo. Date</th>
                                         <th>Appo. Time</th>
-                                        <th>Assigned Dr.</th>
+                                        <th>Assigned Staff.</th>
                                         <th>Services</th>
                                         <th style="width:15%">Action</th>
                                     </tr>
