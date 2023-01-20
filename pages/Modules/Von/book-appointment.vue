@@ -119,13 +119,13 @@
 
                     <div class="col-sm-6">
                       <div class="mb-3">
-                        <label class="form-label">Type of Servies<small style="color:red">*</small> </label>
+                        <label class="form-label">Type of Services<small style="color:red">*</small> </label>
                         <select
                           class="form-select"
                           aria-label="Default select example"
                           v-model="services_type"
                         >
-                          <option value="">Select Type of Servies</option>
+                          <option value="">Select Type of Services</option>
                           <option value="Consultation/Counselling">
                             Consultation/Counselling
                           </option>
