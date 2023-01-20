@@ -4,6 +4,7 @@
     <div id="layoutSidenav_content">
         <CommonHeader />
         <main>
+          <Loader v-if="loader" />
             <div class="container-fluid px-4">
                 <div class="page-title">
                     <h1>Work Analysis Form</h1>
@@ -52,7 +53,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">City<small style="color:red">*</small> </label>
+                                        <label for="" class="form-label">City<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                                             <option value="0">Please Select</option>
                                             <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
@@ -61,7 +62,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Postcode<small style="color:red">*</small> </label>
+                                        <label for="" class="form-label">Postcode<small style="color:red">*</small> </label>
                                         <select class="form-select" v-model="postcode_id">
                                             <option value="0">Please Select</option>
                                             <option v-for="pst in GPostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
@@ -1148,12 +1149,12 @@
                                         </div>
                                         <!-- close-row -->
                                         <!-- hide-div -->
-                                        <div class="assisstance services hide mb-3">
+                                        <div v-if="type == pid" class="assisstance services hide mb-3">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Services<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="services_id">
-                                                        <option value="0">Select Service</option>
+                                                        <option value='0'>Select Service</option>
                                                         <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                             {{ slt.section_value }}
                                                         </option>
@@ -1162,12 +1163,12 @@
                                             </div>
                                         </div>
                                         <!-- 01 -->
-                                        <div class="clinical-work services hide mb-3">
+                                        <div value="" class="clinical-work services hide mb-3">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
-                                                        <option value="0">Select code</option>
+                                                        <option value="">Select code</option>
                                                         <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                                             {{ type.icd_category_code }} {{ type.icd_category_name }}
                                                         </option>
@@ -1176,7 +1177,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                     <select class="form-select" v-model="sub_code_id">
-                                                        <option value="0">Select sub code</option>
+                                                        <option value='0'>Select sub code</option>
                                                         <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }}
                                                             {{ catcode.icd_name }}
@@ -1307,7 +1308,7 @@ export default {
             company_address3: "",
             state_id: 0,
             city_id: 0,
-            postcode_id: 0,
+            postcode_id: "",
             supervisor_name: "",
             email: "",
             position: "",
@@ -1487,6 +1488,8 @@ export default {
         if (this.pid) {
             this.getdetails();
         }
+        this.GetStateList();
+        this.GetList();
     },
     methods: {
         GoBack() {
@@ -1739,11 +1742,11 @@ export default {
                                 complexity_services: this.complexity_services_id,
                                 outcome: this.outcome_id,
                                 medication_prescription: this.medication_des,
-                                jobs: this.jobSDESCRIPTION,
-                                job_specification: this.jobSPECIFICATION,
+                                jobs: jobSDESCRIPTION,
+                                job_specification: jobSPECIFICATION,
                                 appId: this.appId,
                                 status: "0",
-
+                                id: this.pid,
                             }, {
                                 headers
                             }
@@ -2183,11 +2186,11 @@ export default {
                                     complexity_services: this.complexity_services_id,
                                     outcome: this.outcome_id,
                                     medication_prescription: this.medication_des,
-                                    jobs: this.jobSDESCRIPTION,
-                                    job_specification: this.jobSPECIFICATION,
+                                    jobs: jobSDESCRIPTION,
+                                    job_specification: jobSPECIFICATION,
                                     appId: this.appId,
                                     status: "1",
-
+                                    id:this.pid,
                                 }, {
                                     headers
                                 }
@@ -2332,6 +2335,26 @@ export default {
                 this.externallist = [];
             }
         },
+          async GetStateList() {
+                const headers = {
+                  Authorization: "Bearer " + this.userdetails.access_token,
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                };
+                const response = await this.$axios.get("address/list", {
+                  headers,
+                });
+                if (response.data.code == 200 || response.data.code == "200") {
+                  this.StateList = response.data.list;
+                  this.CityList =[];
+                  this.postcodelist = [];
+                } else {
+                  this.StateList = [];
+                  this.CityList =[];
+                  this.postcodelist = [];
+                }
+              },
+
         async getCityList(event) {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -2345,7 +2368,7 @@ export default {
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.GCityList = response.data.list;
-                this.GPostCodeList = response.data.list;
+                this.GPostCodeList = [];
             } else {
                 this.GCityList = [];
                 this.GPostCodeList = [];
@@ -2404,25 +2427,6 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
-        // async onCitybind(event) {
-        //   const headers = {
-        //     Authorization: "Bearer " + this.userdetails.access_token,
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json",
-        //   };
-        //   const response = await this.$axios.post(
-        //     "address/" + event.target.value + "/stateWisePostcodeList",
-        //     { headers }
-        //   );
-        //   if (response.data.code == 200 || response.data.code == "200") {
-        //     console.log("my city", response.data.list);
-        //     this.GCityList = response.data.list;
-        //     this.GPostCodeList = response.data.list;
-        //   } else {
-        //     this.GCityList = [];
-        //     this.GPostCodeList = [];
-        //   }
-        // },
         async getdetails() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -2439,24 +2443,13 @@ export default {
             );
             if (response.data.code == 200) {
                 // window.alert(response.data.Data[0].patient_mrn_id);
-
+                // alert(JSON.stringify(response.data.Data[0].state_name[0].state_name));
                 this.Id = response.data.Data[0].patient_id;
                 this.company_name = response.data.Data[0].company_name;
                 this.company_address1 = response.data.Data[0].company_address1;
                 this.company_address2 = response.data.Data[0].company_address2;
                 this.company_address3 = response.data.Data[0].company_address3;
-                // alert(response.data.Data[0].state_id);
                 this.state_id = response.data.Data[0].state_id;
-                // if (response.data.Data[0].city_id != null) {
-                    // this.getCityList();
-                    // this.city_id = response.data.Data[0].city_name
-                    // this.getPostcodeList();
-                // }
-                // if(response.data.list[0].postcode != null){
-                  // this.postcode = response.data.Data[0].postcode_id;
-                  // this.getPostcodeList();
-                // }
-                // alert(response.data.Data[0].postcode_id);
                 this.city_id = response.data.Data[0].city_id;
                 this.postcode_id = response.data.Data[0].postcode_id;
                 this.supervisor_name = response.data.Data[0].supervisor_name;
@@ -2915,29 +2908,33 @@ export default {
                     this.GCityList = response1.data.list;
                 } else {
                     this.GCityList = [];
+
                 }
+
                 const response2 = await this.$axios.post(
+                    "address/" + this.city_id + "/getPostcodeListById", {
+                        headers
+                    }
+                );
+                if (response2.data.code == 200 || response2.data.code == "200") {
+                    this.GPostCodeList = response2.data.list;
+                } else {
+                    this.GPostCodeList = [];
+                }
+
+                const response3 = await this.$axios.post(
                     "diagnosis/getIcd9subcodeList", {
                         icd_category_code: this.code_id
                     }, {
                         headers
                     }
                 );
-                if (response2.data.code == 200 || response2.data.code == "200") {
-                    this.icdcatcodelist = response2.data.list;
+                if (response3.data.code == 200 || response3.data.code == "200") {
+                    this.icdcatcodelist = response3.data.list;
                 } else {
                     this.icdcatcodelist = [];
                 }
-                const response3 = await this.$axios.post(
-                    "address/" + this.city_id + "/getPostcodeListById", {
-                        headers
-                    }
-                );
-                if (response3.data.code == 200 || response3.data.code == "200") {
-                    this.GPostCodeList = response3.data.list;
-                } else {
-                    this.GPostCodeList = [];
-                }
+
             } else {
                 this.$swal.fire({
                     icon: 'error',
