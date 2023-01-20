@@ -198,6 +198,7 @@
                               <input
                                 type="tel"
                                 class="form-control"
+                                maxlength = "12"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo"
                                 v-model="nric_no" @change="validateIC" v-on:keypress="NumbersOnly"
                               />
@@ -236,6 +237,7 @@
                               <input
                                 type="tel"
                                 class="form-control"
+                                maxlength = "12"
                                 placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
                                 v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly"
                               />
@@ -2353,6 +2355,9 @@ export default {
       }
     },
     OnnricNo() {
+      if (this.nric_no.length > this.maxLength){ 
+        this.nric_no = this.nric_no.slice(0, this.maxLength)
+        };
       if (this.nric_no.length == 12) {
         this.firstDob = String(this.nric_no).slice(0, 4);
         this.secondDob = String(this.nric_no).slice(4, 6);
@@ -2386,6 +2391,9 @@ export default {
       );
     },
     OnnricNo1() {
+      if (this.nric_no1.length > this.maxLength){ 
+        this.nric_no1 = this.nric_no1.slice(0, this.maxLength)
+        };
       if (this.nric_no1.length == 12) {
         this.birth_date = this.getDate(this.nric_no1);
         this.error = null;
