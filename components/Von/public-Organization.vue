@@ -404,7 +404,7 @@
               </div>
             </div>
 
-            <div class="professional2-no profess-box hide">
+            <div class="professional2-no profess-box " v-if="this.Ois_mental_health_professional=='professional2-no'">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
@@ -1216,7 +1216,7 @@ export default {
       } else {
         this.OOccupationList = [];
       }
-      const response3 = await this.$axios.get("hospital/branch-list", {
+      const response3 = await this.$axios.get("hospital/branch-excluded-hospital-list", {
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -1421,7 +1421,9 @@ export default {
           console.log("my console response", response.data);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
-            window.alert("Your form is submitted");
+            this.$swal.fire(
+                  'Your Form Is Submitted!',
+                );
             this.Reload();
           } else {
             this.loader = false;

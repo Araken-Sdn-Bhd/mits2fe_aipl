@@ -486,7 +486,7 @@
               </div>
             </div>
 
-            <div class="professional-noG profess-box hide">
+            <div class="professional-noG profess-box " v-if="this.Gis_mental_health_professional == 'professional-noG'">
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
@@ -594,7 +594,7 @@
 
     <div class="areas-involvement " id="outreach-project1show" v-if="this.Garea_of_involvement == 'Outreach Project Collaboration'">
         <h4 class="title-h4">Outreach-Project Collaboration</h4>
-        <p>Please Provide a breief project description</p>
+        <p>Please Provide a brief project description</p>
 
         <div class="row mb-3 mt-2">
           <label for="" class="col-sm-4 col-form-label"
@@ -1270,7 +1270,7 @@ export default {
       } else {
         this.GOccupationList = [];
       }
-      const response3 = await this.$axios.get("hospital/branch-list", {
+      const response3 = await this.$axios.get("hospital/branch-excluded-hospital-list", {
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -1350,7 +1350,7 @@ export default {
             "What is the background of your group member is required."
           );
         }
-        if (this.members_count && this.member_background) {
+        if (this.members_count && this.member_background && (this.is_you_represenative != "representative-no")) {
           const headers = {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -1378,6 +1378,13 @@ export default {
                   footer: ''
                 });
           }
+        }else{
+          this.$swal.fire({
+                  icon: 'warning',
+                  title: '',
+                  text: 'Please appoint a group representative to complete this form.',
+                  footer: ''
+                });
         }
       } catch (e) {
         this.$swal.fire({
