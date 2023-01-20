@@ -74,26 +74,6 @@
                   <!-- row -->
 
                   <div class="row">
-                    <!-- <div class="col-sm-6">
-                      <div class="mb-3">
-                        <label class="form-label">Appointment Type</label>
-                        <select
-                          v-model="appointment_type"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option value="0">Select Appointment Type</option>
-                          <option
-                            v-for="area in areaslist"
-                            v-bind:key="area.id"
-                            v-bind:value="area.id"
-                          >
-                            {{ area.name }}
-                          </option>
-                        </select>
-                      </div>
-                    </div> -->
-
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Assigned Interviewer<small style="color:red">*</small> </label>
@@ -128,8 +108,8 @@
                           <option value="0">Select Areas Of Involvement</option>
                           <option
                             v-for="area in areaslist"
-                            v-bind:key="area.id"
-                            v-bind:value="area.id"
+                            v-bind:key="area.name"
+                            v-bind:value="area.name"
                           >
                             {{ area.name }}
                           </option>
@@ -331,6 +311,7 @@ export default {
             );
             if (response.data.code == 200) {
               this.loader = false;
+              this.$swal.fire('Successfully Insert', '', 'success');
               this.$router.push("/modules/Von/von-list-of-appointment");
             } else {
               this.loader = false;
