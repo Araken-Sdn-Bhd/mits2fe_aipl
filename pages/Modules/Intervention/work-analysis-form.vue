@@ -1149,7 +1149,7 @@
                                         </div>
                                         <!-- close-row -->
                                         <!-- hide-div -->
-                                        <div v-if="type == pid" class="assisstance services hide mb-3">
+                                        <div  class="assisstance services hide mb-3">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Services<small style="color:red">*</small> </label>
@@ -1235,7 +1235,7 @@
                                         MEDICATION
                                     </button>
                                 </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div id="collapseTwo" class="accordion-collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">Medication</label>
@@ -1488,10 +1488,46 @@ export default {
         if (this.pid) {
             this.getdetails();
         }
-        this.GetStateList();
-        this.GetList();
     },
     methods: {
+
+      async getCity() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "address/" + this.state_id + "/getCityList", {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.GCityList = response.data.list;
+                this.GPostCodeList = [];
+            } else {
+                this.GCityList = [];
+                this.GPostCodeList = [];
+            }
+        },
+
+        async getPostcode() {
+            const headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "address/" + this.city_id + "/getPostcodeListById", {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.GPostCodeList= response.data.list;
+            } else {
+                this.GPostCodeList = [];
+            }
+
+        },
         GoBack() {
             if (this.type == 'view') {
                 this.$router.go(-1);
@@ -1741,7 +1777,7 @@ export default {
                                 sub_code_id: this.sub_code_id,
                                 complexity_services: this.complexity_services_id,
                                 outcome: this.outcome_id,
-                                medication_prescription: this.medication_des,
+                                medication_des: this.medication_des,
                                 jobs: jobSDESCRIPTION,
                                 job_specification: jobSPECIFICATION,
                                 appId: this.appId,
@@ -2185,7 +2221,7 @@ export default {
                                     sub_code_id: this.sub_code_id,
                                     complexity_services: this.complexity_services_id,
                                     outcome: this.outcome_id,
-                                    medication_prescription: this.medication_des,
+                                    medication_des: this.medication_des,
                                     jobs: jobSDESCRIPTION,
                                     job_specification: jobSPECIFICATION,
                                     appId: this.appId,
@@ -2307,12 +2343,12 @@ export default {
             console.log('my stat33',response7.data);
             if (response7.data.code == 200 || response7.data.code == "200") {
                 this.GStateList = response7.data.list;
-                this.GCityList = [];
-          	    this.GPostCodeList = [];
+                // this.GCityList = [];
+          	    // this.GPostCodeList = [];
             } else {
                 this.GStateList = [];
-                this.GCityList = [];
-                this.GPostCodeList = [];
+                // this.GCityList = [];
+                // this.GPostCodeList = [];
             }
             const respons = await this.$axios.get(
                 "general-setting/list?section=" + "assistance-or-supervision", {
@@ -2335,25 +2371,6 @@ export default {
                 this.externallist = [];
             }
         },
-          async GetStateList() {
-                const headers = {
-                  Authorization: "Bearer " + this.userdetails.access_token,
-                  Accept: "application/json",
-                  "Content-Type": "application/json",
-                };
-                const response = await this.$axios.get("address/list", {
-                  headers,
-                });
-                if (response.data.code == 200 || response.data.code == "200") {
-                  this.StateList = response.data.list;
-                  this.CityList =[];
-                  this.postcodelist = [];
-                } else {
-                  this.StateList = [];
-                  this.CityList =[];
-                  this.postcodelist = [];
-                }
-              },
 
         async getCityList(event) {
             const headers = {
@@ -2391,7 +2408,6 @@ export default {
 
         async getPostcodeList(event) {
             const headers = {
-                Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
@@ -2442,16 +2458,29 @@ export default {
                 }
             );
             if (response.data.code == 200) {
-                // window.alert(response.data.Data[0].patient_mrn_id);
-                // alert(JSON.stringify(response.data.Data[0].state_name[0].state_name));
+                //alert(response.data.Data[0].city_name.city_name);
+              if(response.data.Data[0].state_id != null){
+                this.state_id = response.data.Data[0].state_id;
+                this.getCity();
+                }
+
+              if (response.data.Data[0].city_id != "" || response.data.Data[0].city_id != null) {
+                    this.getCity();
+                    this.city_id = response.data.Data[0].city_name.city_name
+                    this.getPostcode();
+
+                  }
+              if(response.data.Data[0].postcode_id != null){
+                    this.postcode_id = response.data.Data[0].postcode_id;
+                    this.getPostcode();
+                  }
+
                 this.Id = response.data.Data[0].patient_id;
                 this.company_name = response.data.Data[0].company_name;
                 this.company_address1 = response.data.Data[0].company_address1;
                 this.company_address2 = response.data.Data[0].company_address2;
                 this.company_address3 = response.data.Data[0].company_address3;
-                this.state_id = response.data.Data[0].state_id;
-                this.city_id = response.data.Data[0].city_id;
-                this.postcode_id = response.data.Data[0].postcode_id;
+
                 this.supervisor_name = response.data.Data[0].supervisor_name;
                 this.email = response.data.Data[0].email;
                 this.position = response.data.Data[0].position;
@@ -2485,8 +2514,10 @@ export default {
                 this.complexity_services_id =
                     response.data.Data[0].complexity_services;
                 this.outcome_id = response.data.Data[0].outcome;
-                this.medication_prescription = response.data.Data[0].medication_des;
-                // this.jobSPECIFICATION = response.data.Data[0].jobs;
+                this.medication_des = response.data.Data[0].medication_des;
+
+
+
                 if (response.data.Data[0].jobs) {
                     for (let i = 0; i < response.data.Data[0].jobs[0].length; i++) {
                         if (response.data.Data[0].jobs[0][i].answer == "A. Need to work on weekend") {
@@ -2896,20 +2927,10 @@ export default {
                 this.sevencomment = response.data.Data[0].comment[15].comment;
                 this.eightcomment = response.data.Data[0].comment[15].comment;
                 this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
-                // console.log("myjobb", this.jobSPECIFICATION);
-                // console.log('myjobb11',this.job_specification);
-                this.GetList();
-                const response1 = await this.$axios.post(
-                    "address/" + this.state_id + "/getCityList", {
-                        headers
-                    }
-                );
-                if (response1.data.code == 200 || response1.data.code == "200") {
-                    this.GCityList = response1.data.list;
-                } else {
-                    this.GCityList = [];
 
-                }
+
+                this.GetList();
+
 
                 const response2 = await this.$axios.post(
                     "address/" + this.city_id + "/getPostcodeListById", {
