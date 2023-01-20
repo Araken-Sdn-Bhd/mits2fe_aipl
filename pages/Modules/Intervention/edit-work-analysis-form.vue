@@ -1530,7 +1530,7 @@ export default {
     }
   },
   methods: {
-    
+
     async getCity() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -1812,9 +1812,9 @@ export default {
               sub_code_id: this.sub_code_id,
               complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
-              jobs: this.jobSDESCRIPTION,
-              job_specification: this.jobSPECIFICATION,
+              medication_des: this.medication_des,
+              jobs: jobSDESCRIPTION,
+              job_specification: jobSPECIFICATION,
               appId: this.appId,
               status:"0",
               id: this.pid,
@@ -2256,9 +2256,9 @@ export default {
               sub_code_id: this.sub_code_id,
               complexity_services: this.complexity_services_id,
               outcome: this.outcome_id,
-              medication_prescription: this.medication_des,
-              jobs: this.jobSDESCRIPTION,
-              job_specification: this.jobSPECIFICATION,
+              medication_des: this.medication_des,
+              jobs: jobSDESCRIPTION,
+              job_specification: jobSPECIFICATION,
               appId: this.appId,
               status: "1",
               id: this.pid,
@@ -2401,7 +2401,7 @@ export default {
       }
     },
     async getCityList(event) {
-      
+
       const headers = {
         // Authorization: "Bearer " + this.userdetails.access_token,
         Accept: "application/json",
@@ -2468,7 +2468,7 @@ export default {
         this.icdcatcodelist = [];
       }
     },
-   
+
     async getdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -2484,7 +2484,7 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-       
+
         //alert(response.data.Data[0].city_name.city_name);
         if(response.data.Data[0].state_id != null){
                 this.state_id = response.data.Data[0].state_id;
@@ -2495,10 +2495,10 @@ export default {
                     this.getCity();
                     this.city_id = response.data.Data[0].city_name.city_name
                     this.getPostcode();
-                    
+
           }
-         if(response.data.Data[0].postcode_id != null){ 
-          this.postcode_id = response.data.Data[0].postcode_id; 
+         if(response.data.Data[0].postcode_id != null){
+          this.postcode_id = response.data.Data[0].postcode_id;
           this.getPostcode();
         }
 
@@ -2508,7 +2508,7 @@ export default {
         this.company_address1 = response.data.Data[0].company_address1;
         this.company_address2 = response.data.Data[0].company_address2;
         this.company_address3 = response.data.Data[0].company_address3;
-  
+
         this.supervisor_name = response.data.Data[0].supervisor_name;
         this.email = response.data.Data[0].email;
         this.position = response.data.Data[0].position;
@@ -2540,8 +2540,8 @@ export default {
         this.sub_code_id = response.data.Data[0].sub_code_id;
         this.complexity_services_id =response.data.Data[0].complexity_services;
         this.outcome_id = response.data.Data[0].outcome;
-        this.medication_prescription = response.data.Data[0].medication_des;
-        
+        this.medication_des = response.data.Data[0].medication_des;
+
 
 
         if (response.data.Data[0].jobs){
@@ -2819,15 +2819,15 @@ export default {
           this.sevencomment = response.data.Data[0].comment[15].comment;
           this.eightcomment = response.data.Data[0].comment[15].comment;
 
-          this.jobSDESCRIPTION = response.data.Data[0].jobs_des[0].task_description;
-          this.task_description = response.data.Data[0].jobs_des[0].task_description;
-        
-         
+          this.jobSDESCRIPTION = response.data.Data[0].jobs_des;
+
+
+
 
         this.GetList();
 
-        
-        
+
+
         const response2 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.code_id },
