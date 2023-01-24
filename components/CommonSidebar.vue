@@ -138,31 +138,36 @@ export default {
   name: "CommonSidebar",
   head: {
     script: [
-      // {
-      //   src: "/app/js/bootstrap.bundle.min.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
-      // {
-      //   src: "/app/js/scripts.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
+      {
+        src: "/app/js/bootstrap.bundle.min.js",
+        body: true,
+        crossorigin: "anonymous",
+        type: "text/javascript",
+      },
+      {
+        src: "/app/js/scripts.js",
+        body: true,
+        crossorigin: "anonymous",
+        type: "text/javascript",
+      },
       // {
       //   src: "/app/js/jquery-3.5.1.js",
       //   body: true,
       //   crossorigin: "anonymous",
+      //   type: "text/javascript",
       // },
-      // {
-      //   src: "/app/js/jquery.dataTables.min.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
-      // {
-      //   src: "/app/js/dataTables.bootstrap5.min.js",
-      //   body: true,
-      //   crossorigin: "anonymous",
-      // },
+      {
+        src: "/app/js/jquery.dataTables.min.js",
+        body: true,
+        crossorigin: "anonymous",
+        type: "text/javascript",
+      },
+      {
+        src: "https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js",
+        body: true,
+        crossorigin: "anonymous",
+        type: "text/javascript",
+      },
       {
         src: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js",
         body: true,

@@ -2132,7 +2132,7 @@ export default {
       screenIds:""
     };
   },
-  beforeMount() {
+  mounted() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.officername = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
