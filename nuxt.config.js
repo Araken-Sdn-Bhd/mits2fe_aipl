@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import PnpWebpackPlugin from "pnp-webpack-plugin";
 
 export default {
   router: {
@@ -13,7 +14,7 @@ export default {
     script:[
       // {src:'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'},
       // {src:'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'}
-      
+
       // Add For Sidebar Menu
       {
         src: "/app/js/scripts.js",
@@ -32,6 +33,15 @@ export default {
         src:
           "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js",
         type: "text/javascript"
+      },
+      {
+        src:
+          "https://cdn.jsdelivr.net/npm/fullcalendar@5.7.2/main.js",
+        type: "text/javascript"
+      },
+      {
+        src: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js",
+        type: "text/javascript"
       }
     ],
     meta: [
@@ -48,6 +58,7 @@ export default {
       href:
         "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     }
+
   ],
   },
 
@@ -81,7 +92,7 @@ export default {
     "@nuxtjs/auth",
     "vue-sweetalert2/nuxt",
   ],
-  
+
   sweetalert: {
       confirmButtonColor: '#008B8B',
       cancelButtonColor: '#ff7674'
@@ -101,6 +112,12 @@ export default {
     babel: {
       compact: true,
     },
+    transpile: /@fullcalendar.*/, //this is needed
+
+    extend(config) {
+      config.resolve.plugins.push(PnpWebpackPlugin);
+      config.resolveLoader.plugins.push(PnpWebpackPlugin.moduleLoader(module));
+    }
   },
   server: {
     host:"0.0.0.0",
