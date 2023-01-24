@@ -26,7 +26,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>History of aggressive and impulsive behavior<small style="color:red">*</small> </td>
+                                            <td>History of aggressive and impulsive behavior</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
@@ -35,7 +35,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td>History of criminal case<small style="color:red">*</small> </td>
+                                            <td>History of criminal case</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal">
@@ -44,7 +44,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Deterioration of clinical condition<small style="color:red">*</small> </td>
+                                            <td>Deterioration of clinical condition</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_detereotation">
@@ -53,7 +53,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Neglect of self care<small style="color:red">*</small> </td>
+                                            <td>Neglect of self care</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
@@ -74,7 +74,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Suicidal Behaviour<small style="color:red">*</small> </td>
+                                            <td>Suicidal Behaviour</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_idea">
@@ -88,7 +88,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Homicidal<small style="color:red">*</small> </td>
+                                            <td>Homicidal</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_idea">
@@ -102,7 +102,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Aggressive<small style="color:red">*</small> </td>
+                                            <td>Aggressive</td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_idea">
@@ -180,7 +180,7 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <h6 class="mb-3 black">Placement<small style="color:red">*</small> </h6>
+                                        <h6 class="mb-3 black">Placement</h6>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" value="Referred to the main hospital" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
                                             <label class="form-check-label" for="exampleRadios4">

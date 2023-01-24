@@ -26,7 +26,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="dot"></span>
+            <span v-if="notification_count>0" class="dot"></span>
             <i class="fas fa-bell"></i>
           </a>
           <div

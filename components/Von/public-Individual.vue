@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3">  
         <label for="" class="col-sm-4 col-form-label">Date Of Birth<span>*</span></label>
         <div class="col-sm-8">
             <input type="date" class="form-control" id="" v-model="dob" />
@@ -841,7 +841,7 @@ export default {
             } else {
                 this.OccupationList = [];
             }
-            const response3 = await this.$axios.get("hospital/branch-list", {
+            const response3 = await this.$axios.get("hospital/branch-excluded-hospital-list", {
                 headers,
             });
             if (response3.data.code == 200 || response3.data.code == "200") {
@@ -1031,7 +1031,9 @@ export default {
                     console.log("my console response", response.data);
                     if (response.data.code == 200 || response.data.code == "200") {
                         this.loader = false;
-                        window.alert("Your form is submitted");
+                        this.$swal.fire(
+                            'Your Form Is Submitted!',
+                        );
                         this.Reload();
                     } else {
                         this.loader = false;

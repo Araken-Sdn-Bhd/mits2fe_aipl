@@ -744,17 +744,20 @@ export default {
       if (this.search) {
         this.branchlist = this.alllist.filter((notChunk) => {
           return (
-            notChunk.hospital_code
+           (notChunk.hospital_code||'')
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.hospital_branch_name
+            (notChunk.hospital_branch_name||'')
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.branch_adrress_1
+            (notChunk.branch_adrress_1||'')
               .toLowerCase()
               .indexOf(this.search.toLowerCase()) > -1 ||
-            notChunk.branch_contact_number_office.indexOf(this.search) > -1 ||
-            notChunk.branch_fax_no.indexOf(this.search) > -1
+            (notChunk.branch_adrress_2||'')
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) > -1 ||
+            (JSON.stringify(notChunk.branch_contact_number_office)||'').indexOf(this.search) > -1 ||
+            (notChunk.branch_fax_no||'').indexOf(this.search) > -1
           );
         });
       } else {
