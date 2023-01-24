@@ -2049,15 +2049,6 @@ import moment from 'moment'
 export default {
   components: { CommonSidebar, CommonHeader, PatientDetails },
   name: "patient-summary",
-  head: {
-    script: [
-      {
-        src: "/app/js/jquery-3.5.1.js",
-        body: true,
-        crossorigin: "anonymous",
-      },
-    ]
-  },
   data() {
     return {
       userdetails: null,
@@ -2153,11 +2144,6 @@ export default {
     this.GetList();
     this.GetUserIpAddress();
     $(document).ready(function () {
-      $(".data-table").DataTable({
-        searching: false,
-        bLengthChange: false,
-      });
-
       $(".multiselect").select2({
         placeholder: "Please Select",
       });
@@ -3498,11 +3484,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 /* #myTab .nav-item a {
   pointer-events: none;
 } */
 .hide {
   display: none;
 }
-</style>
+</style> -->
