@@ -50,7 +50,7 @@
                             <td>{{hst.section_name}}</td>
                             <td>
                               <p v-if="hst.status==1">Completed</p>
-                                <p v-if="hst.status==0">Draft<i v-if="getFormattedDate(hst.date)==true" class="fa fa-flag" style="color: red;" ></i></p>
+                                <p v-if="hst.status==0">Draft<i v-if="hst.flag_status == 1" class="fa fa-flag" style="color: red;" ></i></p>
                               </td>
                             <td>{{hst.date}}</td>
                             <td>{{formatetime(hst.created_at)}}</td>
@@ -625,6 +625,7 @@ export default {
         console.error(err);
       });
     this.GethistoryList();
+      
   },
   methods: {
     getFile(file) {
@@ -633,16 +634,6 @@ export default {
       const local = moment.utc(time).local().format("h:mm A");
       return local;
     },
-
-    getFormattedDate(date) {
-      var date1 = moment().subtract(2, "days").format("dd-mm-yyyy");
-      if(date<date1){
-        return true;
-      }else{
-        return false;
-      }     
-    },
-
 
     GethistoryList() {
       const headers = {
