@@ -21,7 +21,7 @@ export default {
         type: "text/javascript"
       },
       {
-        src: "https://code.jquery.com/jquery-3.3.1.slim.min.js",
+        src: "https://code.jquery.com/jquery-3.6.3.min.js",
         type: "text/javascript"
       },
       {
