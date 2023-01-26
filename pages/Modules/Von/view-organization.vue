@@ -1005,7 +1005,7 @@ export default {
       recreational: "",
       Others: "",
       Id: 0,
-      Type:'',
+      Type:"",
       screening_mode: 0,
       work: "",
       awareness: "",

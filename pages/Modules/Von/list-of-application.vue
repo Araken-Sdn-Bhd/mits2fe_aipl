@@ -267,7 +267,7 @@ export default {
                 this.$router.push({
                     path: "/modules/Von/edit-group",
                     query: {
-                        id: data.org_background_id,
+                        id: data.id,
                         type: data.app_type
                     },
                 });
@@ -294,7 +294,7 @@ export default {
                 this.$router.push({
                     path: "/modules/Von/view-group",
                     query: {
-                        id: data.org_background_id,
+                        id: data.id,
                         type: data.app_type
                     },
                 });

@@ -92,7 +92,7 @@
                                     <td>{{ app.phone_number }}</td>
                                     <td>{{ app.email }}</td>
                                     <td>
-                                        <a style="pointer:cursor;" @click="OnView(app)" class="view">
+                                        <a style="pointer:cursor;" @click="OnView(app)" class="view" title="view record">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>
@@ -160,7 +160,6 @@ export default {
                 this.list = resp.data.list;
                 console.log("my lst", resp.data);
                 $(document).ready(function () {
-                  
                 });
                 this.loader = false;
             })
@@ -221,21 +220,21 @@ export default {
             });
         },
         OnView(data) {
-          
-            if (data.app_type == "Individual") {
+
+            if (data.section == "individual") {
                 this.$router.push({
                     path: "/modules/Von/view-individual",
                     query: {
                         id: data.id,
-                        type: data.app_type
+                        type: data.section
                     },
                 });
-            } else if (data.app_type == "Group") {
+            } else if (data.section == "group") {
                 this.$router.push({
                     path: "/modules/Von/view-group",
                     query: {
                         id: data.id,
-                        type: data.app_type
+                        type: data.section
                     },
                 });
             } else {
@@ -243,7 +242,7 @@ export default {
                     path: "/modules/Von/view-organization",
                     query: {
                         id: data.id,
-                        type: data.app_type
+                        type: data.section
                     },
                 });
             }
