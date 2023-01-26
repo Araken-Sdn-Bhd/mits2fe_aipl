@@ -1574,7 +1574,11 @@ export default {
                   'Data is inserted.',
                   'success',
                 );
+                this.$router.push({
+              path: "/modules/Intervention/laser-result",
+              query: { id: this.Id,appId: this.appId },
 
+            });
               } else {
                 this.loader = false;
                 this.$swal.fire({
@@ -1669,6 +1673,12 @@ export default {
               query: { id: this.Id, appId: this.appId },
             });
     },
+    onResult() {
+      this.$router.push({
+              path: "/modules/Intervention/laser-result",
+              query: { id: this.Id, appId: this.appId },
+            });
+    }
   },
 };
 </script>

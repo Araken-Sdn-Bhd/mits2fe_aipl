@@ -101,6 +101,11 @@
                 </tbody>
               </table>
             </div>
+            <br><br>
+            <div class="d-flex">
+                <button @click="GoBack" class="btn btn-primary btn-text">
+                  <i class="fa fa-arrow-alt-to-left"></i> Back
+                    </button></div>
           </div>
           <!-- card -->
         </div>
@@ -196,6 +201,19 @@ export default {
 
       this.alert = response1.data[0].message;
       console.log("my data66", this.alert);
+    },
+    GoBack(){
+      if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
     },
   },
 };
