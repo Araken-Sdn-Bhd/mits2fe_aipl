@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="row mb-3">  
+    <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Date Of Birth<span>*</span></label>
         <div class="col-sm-8">
             <input type="date" class="form-control" id="" v-model="dob" />
@@ -30,7 +30,7 @@
     <div class="row mb-3">
         <label for="" class="col-sm-4 col-form-label">Phone Number<span>*</span></label>
         <div class="col-sm-8">
-            <input type="txet" class="form-control" id="" v-model="phone_number" v-on:keypress="NumbersOnly" />
+            <input type="tel" v-mask="'###-########'" class="form-control" id="" v-model="phone_number" v-on:keypress="NumbersOnly" />
         </div>
     </div>
 
