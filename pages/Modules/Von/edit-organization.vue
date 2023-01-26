@@ -1270,6 +1270,7 @@ export default {
                 this.Ooccupation_sector_id = response.data.list.occupation_sector;
                 this.Obranch_id = response.data.list.branch_id;
                 this.Oarea_of_involvement = response.data.list.area_of_involvement;
+                this.Ois_agree = 1;
                 this.Omentari_services = response.data.list.mentari_services;
                 this.Oposition_in_org = response.data.list.position_in_org;
                 if (this.Omentari_services) {
