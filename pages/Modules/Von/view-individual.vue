@@ -1037,6 +1037,7 @@ export default {
       Isvalid: false,
       VolOthers: "",
       Id: 0,
+      Type:"",
       section: "",
       volexp: "",
       menhelth: "",
@@ -1079,6 +1080,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.Type = urlParams.get("type");
     this.GetList();
     $(document).ready(function () {
       $(".data-table").DataTable({
@@ -1171,6 +1173,7 @@ export default {
         "von/get-record",
         {
           id: this.Id,
+          type: this.Type
         },
         { headers }
       );

@@ -382,7 +382,8 @@
             </div>
 
             <!-- hide-div -->
-            <div class="professional-yesG profess-box" v-if="Gis_mental_health_professional=='1'">
+            <div class="professional-yesG profess-box" v-if="mentalhealth=='y'">
+
               <div class="mt-3" v-if="this.resume != null || this.resume != ''">
                           <label for="formFile" class="form-label"
                             >Mental Health Professional Resume</label
@@ -466,14 +467,17 @@
               </div>
             </div>
 
-            <div class="professional-noG profess-box hide" >
+            <div
+                        class="professional-no profess-box"
+                        v-if="mentalhealth == 'n'"
+                      >
               <div class="mt-3">
                 <label for="formFile" class="form-label"
                   >Relevant Mentari Service That You Want To Be Involved<span
                     >*</span
                   ></label
                 >
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input
                   disabled
                     class="form-check-input"
@@ -485,7 +489,7 @@
                   <label class="form-check-label" for="Consultation/Counselling">
                     Consultation/Counselling
                   </label>
-                </div>
+                </div> -->
                 <div class="form-check">
                   <input
                   disabled
@@ -1083,6 +1087,8 @@ export default {
       other: "",
       Others: "",
       Id:0,
+      Type:"",
+      mentalhealth: "",
       Consultation:"",
       resume: "",
     };
@@ -1091,6 +1097,7 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.Type = urlParams.get("type");
     if (this.Id) {
       this.editrecord();
     }
@@ -1174,7 +1181,7 @@ export default {
       this.Gis_voluneering_exp = val;
     },
     Onhealthprofession(val) {
-      this.Gis_mental_health_professional = val;
+      this.mentalhealth = val;
     },
     GselectFile(event) {
       this.Gfile = event.target.files[0];
@@ -1278,6 +1285,7 @@ export default {
         "von/get-record",
         {
           id: this.Id,
+          type: this.Type
         },
         { headers }
       );
@@ -1307,11 +1315,6 @@ export default {
         this.Garea_of_involvement = response.data.list.area_of_involvement;
         this.Gis_agree = 1;
         this.Gmentari_services = response.data.list.mentari_services;
-        this.is_represent_org = "organization-no";
-        this.members_count = response.data.list.members_count;
-        this.member_background = response.data.list.member_background;
-        this.is_you_represenative = response.data.list.is_you_represenative;
-        this.screening_mode = response.data.list.screening_mode;
         if (this.Gmentari_services) {
           var service = this.Gmentari_services.split(",");
           service.forEach((val) => {
@@ -1330,10 +1333,23 @@ export default {
             }
           });
         }
+        // alert(response.data.list.mentari_services);
+        this.is_represent_org = "organization-no";
+        this.members_count = response.data.list.members_count;
+        this.member_background = response.data.list.member_background;
+        this.is_you_represenative = response.data.list.is_you_represenative;
+        this.screening_mode = response.data.list.screening_mode;
         if (response.data.list.area_of_involvement == "Volunteerism") {
           this.Gis_voluneering_exp = response.data.list.is_voluneering_exp;
-          this.Gis_mental_health_professional =
-            response.data.list.is_mental_health_professional;
+          this.Gis_mental_health_professional = response.data.list.is_mental_health_professional;
+          if (this.Gis_mental_health_professional==1) {
+            this.is_mental_health_professional = "professional-yesG";
+            this.mentalhealth = "y";
+            this.resume = response.data.list.resume;
+          } else {
+            this.is_mental_health_professional = "professional-noG";
+            this.mentalhealth = "n";
+          }
           this.Gavailable_date = response.data.list.available_date;
           this.Gavailable_time = response.data.list.available_time;
           this.Gexp_details = response.data.list.exp_details;
