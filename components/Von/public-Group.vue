@@ -135,7 +135,7 @@
         >
         <div class="col-sm-8">
           <input
-            type="txet"
+          type="tel" v-mask="'###-########'"
             class="form-control"
             id=""
             v-model="Gphone_number"

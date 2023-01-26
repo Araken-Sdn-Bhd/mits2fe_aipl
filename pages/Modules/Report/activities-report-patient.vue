@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Appointment Type: </label>
+                                        <label class="form-label">Appointment Type: <small style="color:red">*</small></label>
                                         <select class="form-select" v-model="appointment_type" @change="getServiceByBranchTeamId()">
                                             <option value="">Please Select</option>
                                             <option v-for="serv in servicelist" v-if="serv.service_name != 'Rehabilitation'" v-bind:key="serv.id" v-bind:value="serv.id">

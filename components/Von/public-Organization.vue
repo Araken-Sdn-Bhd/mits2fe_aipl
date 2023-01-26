@@ -53,7 +53,7 @@
                 <label for="" class="form-label"
                   >Phone Number<span>*</span></label
                 >
-                <input type="text" class="form-control" v-model="org_phone" v-on:keypress="NumbersOnly"/>
+                <input type="tel" v-mask="'###-########'" class="form-control" v-model="org_phone" v-on:keypress="NumbersOnly"/>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
           >Phone Number<span>*</span></label
         >
         <div class="col-sm-8">
-          <input type="txet" class="form-control" id="" v-model="Ophone_number" v-on:keypress="NumbersOnly"/>
+          <input type="tel" v-mask="'###-########'" class="form-control" id="" v-model="Ophone_number" v-on:keypress="NumbersOnly"/>
         </div>
       </div>
 

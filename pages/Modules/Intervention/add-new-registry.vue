@@ -99,7 +99,7 @@
                   <!-- <form class="step-form" method="post" @submit.prevent="Onriskfactor"> -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>1</span>Presence of psychiatric disorder</label
+                        ><span>1</span>Presence of psychiatric disorder<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box">
@@ -138,7 +138,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>2</span>Hopelessness or despair</label
+                        ><span>2</span>Hopelessness or despair<small style="color:red">*</small> </label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
@@ -164,7 +164,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>3</span>Previous suicide attempts</label
+                        ><span>3</span>Previous suicide attempts<small style="color:red">*</small> </label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box1">
@@ -197,7 +197,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>4</span>Presence of substance use/abuse</label
+                        ><span>4</span>Presence of substance use/abuse<small style="color:red">*</small> </label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box2">
@@ -238,7 +238,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>5</span>Family history of suicidal
-                        behavior</label
+                        behavior<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
@@ -265,7 +265,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>6</span>Family history of psychiatric
-                        disorders</label
+                        disorders<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box3">
@@ -303,7 +303,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>7</span>Family history of substance abuse</label
+                        ><span>7</span>Family history of substance abuse<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box4">
@@ -343,7 +343,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>8</span>Stressful life events or loss</label
+                        ><span>8</span>Stressful life events or loss<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box5">
@@ -384,7 +384,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>9</span>Isolation, rejection or feelings of
-                        shame</label
+                        shame<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
@@ -411,7 +411,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>10</span>chronic physical illness or
-                        condition</label
+                        condition<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box6">
@@ -445,7 +445,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>11</span>History of physical , sexual or
-                        emotional abuse</label
+                        emotional abuse<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
@@ -473,7 +473,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>12</span>Access to lethal methods/weapons</label
+                        ><span>12</span>Access to lethal methods/weapons<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
@@ -535,7 +535,7 @@
                 <div class="card-body steps-form-body">
                   <div class="text">
                     <h4>Protective Factors</h4>
-                    <p>Instruction : Please Tick (/) In The Box Provided</p>
+                    <p>Instruction : Please Tick (/) In The Box Provided<small style="color:red">*</small></p>
                   </div>
 
                     <div
@@ -637,16 +637,16 @@
                           <div class="accordion-body">
                             <div class="row">
                               <div class="col-sm-4">
-                                <label class="form-label">Date</label>
+                                <label class="form-label">Date<small style="color:red">*</small> </label>
                                 <input type="date" class="form-control" v-model="Sdate" />
                               </div>
                               <div class="col-sm-4">
-                                <label class="form-label">Time</label>
+                                <label class="form-label">Time<small style="color:red">*</small> </label>
                                 <input type="time" class="form-control" v-model="Stime" />
                               </div>
                               <div class="col-sm-4">
                                 <label class="form-label"
-                                  >Place of Occurrence</label
+                                  >Place of Occurrence<small style="color:red">*</small> </label
                                 >
                                 <select class="form-select select-others" v-model="place_id">
                                   <option value="0">Please Select</option>
@@ -705,6 +705,7 @@
                           <div class="accordion-body">
                             <p>
                               INSTRUCTION : PLEASE TICK (/) IN THE BOX PROVIDED
+                              <small style="color:red">*</small>
                             </p>
                             <div class="row mt-3">
                               <div class="col-sm-6">
@@ -922,6 +923,7 @@
                           <div class="accordion-body">
                             <p>
                               INSTRUCTION : PLEASE TICK (/) IN THE BOX PROVIDED
+                              <small style="color:red">*</small>
                             </p>
                             <div class="row mt-3">
                               <div class="col-sm-6">
@@ -1032,7 +1034,7 @@
                             </p>
                             <div class="mb-3 mt-3">
                               <label class="form-label"
-                                >Was there an intent?</label
+                                >Was there an intent?<small style="color:red">*</small></label
                               >
                               <div class="mt-2">
                                 <div class="form-check form-check-inline">
@@ -1336,7 +1338,7 @@
 
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
-                        >Level of Suicide Risk For Current Attempt</label
+                        >Level of Suicide Risk For Current Attempt<small style="color:red">*</small></label
                       >
                       <table class="table">
                         <thead>
@@ -1467,7 +1469,7 @@
 
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Referral or Contact point</label
+                        >Referral or Contact point<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
 
@@ -1510,7 +1512,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Mode of Arrival</label
+                        >Mode of Arrival<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
                         <select
@@ -1552,10 +1554,10 @@
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >First psychiatry assessment after current
-                        attempt</label
+                        attempt<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small></label>
                         <input
                           type="date"
                           class="form-control"
@@ -1563,7 +1565,7 @@
                         />
                       </div>
                       <div class="col-sm-3">
-                        <label class="form-label">Time</label>
+                        <label class="form-label">Time<small style="color:red">*</small></label>
                         <input
                           type="time"
                           class="form-control"
@@ -1574,7 +1576,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Physical consequence of current attempt</label
+                        >Physical consequence of current attempt<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1651,7 +1653,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >If patient admitted for current attempt</label
+                        >If patient admitted for current attempt<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1690,7 +1692,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Status on Discharge</label
+                        >Status on Discharge<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1720,14 +1722,14 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Discharge Details</label
+                        >Discharge Details<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date<small style="color:red">*</small></label>
                         <input type="date" class="form-control" v-model="discharge_date"/>
                       </div>
                       <div class="col-sm-3">
-                        <label class="form-label">Number of days in ward</label>
+                        <label class="form-label">Number of days in ward<small style="color:red">*</small></label>
                         <input
                           type="text"
                           class="form-control"
@@ -1738,11 +1740,11 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Discharge Diagnosis(ICD-10)</label
+                        >Discharge Diagnosis(ICD-10)<small style="color:red">*</small></label
                       >
                       <div class="col-sm-4">
                         <label class="form-label"
-                          >Main psychiatric diagnosis</label
+                          >Main psychiatric diagnosis<small style="color:red">*</small></label
                         >
                           <select
                           v-model="main_psychiatric_diagnosis"
@@ -1761,7 +1763,7 @@
                       </div>
                       <div class="col-sm-4">
                         <label class="form-label"
-                          >External cause of injury</label
+                          >External cause of injury<small style="color:red">*</small></label
                         >
                         <select
                           class="form-select"
@@ -1781,7 +1783,7 @@
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Psychiatry MX on Discharge</label
+                        >Psychiatry MX on Discharge<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1880,7 +1882,7 @@
                     <br><br>
                     <div class="d-flex btn-footer">
                       <div class=" mr-auto">
-                      <button class="pre-4 btn btn-success" title="Back">
+                        <button class="pre-3 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
                       <button class="nex-4 btn btn-success next-btn" title="Next Page">
@@ -1914,7 +1916,7 @@
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Name of registering officer</label
+                          >Name of registering officer<small style="color:red">*</small></label
                         >
                         <input
                           type="text"
@@ -1926,7 +1928,7 @@
                       <!-- col-sm-6 -->
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Name of hospital</label
+                          >Name of hospital<small style="color:red">*</small></label
                         >
                          <input
                 v-model="hospitalname"
@@ -1940,7 +1942,7 @@
                     <!-- row -->
                     <div class="row">
                       <div class="col-sm-6 mb-3">
-                        <label for="" class="form-label">Designation</label>
+                        <label for="" class="form-label">Designation<small style="color:red">*</small></label>
                         <input
                           type="text"
                           class="form-control"
@@ -1951,7 +1953,7 @@
                       <!-- col-sm-6 -->
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Name of Psychiatrist</label
+                          >Name of Psychiatrist<small style="color:red">*</small></label
                         >
                         <select
                           v-model="psychiatristId"
@@ -1974,7 +1976,7 @@
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Date of Reporting</label
+                          >Date of Reporting<small style="color:red">*</small></label
                         >
                         <input
                           class="form-control"
@@ -1996,7 +1998,7 @@
                     <br><br>
                     <div class="d-flex btn-footer">
                       <div class="mr-auto">
-                      <button class="pre-5 btn btn-success" title="Back">
+                        <button class="pre-3 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
                       </div>
