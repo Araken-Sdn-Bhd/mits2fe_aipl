@@ -12,7 +12,7 @@
             </div>
           </div>
 
-          <div class="card mb-4 reslt">
+          <div class="card mb-4">
             <div class="card-body">
               <div class="search-table">
                 <div class="row mt-2">
@@ -99,6 +99,114 @@
                 </tbody>
               </table>
               </div>
+
+              <div class="card mb-4 reslt" style="display: none">
+            <div class="card-body">
+              <div class="search-table">
+                <div class="row mt-2">
+                  <div class="col-lg-4 col-sm-6 mb-3">
+                    <select
+                      v-if="dataReady"
+                      disabled
+                      v-model="branchId"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="onbranchchange($event)"
+                    >
+                      <option value="0">Select Branch</option>
+                      <option
+                        v-for="brnch in branchlist"
+                        v-bind:key="brnch.id"
+                        v-bind:value="brnch.id"
+                      >
+                        {{ brnch.hospital_branch_name }}
+                      </option>
+                    </select>
+                    <select
+                      v-if="dataReady2"
+                      v-model="branchId"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="onbranchchange($event)"
+                    >
+                      <option value="0">All Branch</option>
+                      <option
+                        v-for="brnch in branchlist"
+                        v-bind:key="brnch.id"
+                        v-bind:value="brnch.id"
+                      >
+                        {{ brnch.hospital_branch_name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-4 col-sm-6 mb-3">
+                    <div class="input-group">
+                      <span class="input-group-text bg-transparent br-0"
+                        ><i class="fa fa-search"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Staff Name"
+                        @keyup="onnamechange"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- search-table -->
+              <div style="overflow-x:auto;">
+                <table class="table table-striped data-table display nowrap" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Staff Name</th>
+                    <th>Role</th>
+                    <th>Designation</th>
+                    <th>Branch</th>
+                    <th>Team</th>
+                    <th>Status</th>
+                    <th style="width:8%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(staff,index) in list" :key="index">
+                    <td>{{ index+1}}</td>
+                    <td>{{ staff.name }}</td>
+                    <td>{{staff.role_name}}</td>
+                    <td>{{ staff.designation_name }}</td>
+                    <td>{{ staff.hospital_branch_name }}</td>
+                    <td>{{staff.service_name}}</td>
+                    <td><a v-if="staff.status == '1'">Active</a><a v-else-if="staff.status == '0'">Inactive</a></td>
+                    <td>
+                      <a @click="view(staff)" class="view" title="view staff profile"><em class="fa fa-eye"></em></a>
+                      <a class="view" @click="Onview(staff)" title="view user matrix"><em class="fa fa-bars"></em></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+
+              <!-- <div class="d-flex mt-3 btn-width">
+                <div class="ml-auto" id="hidebutton" ref="hidebutton">
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-text btn-green"
+                    @click="downloadform">
+                    <i class="fa fa-download"></i> User Id Request Form
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    @click="OnPrint"
+                  >
+                    <i class="fa fa-print"></i> Print List
+                  </button>
+                </div>
+              </div> -->
+            </div>
+          </div>
 
               <div class="d-flex mt-3 btn-width">
                 <div class="ml-auto" id="hidebutton" ref="hidebutton">
