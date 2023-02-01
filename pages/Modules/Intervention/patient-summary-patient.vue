@@ -53,7 +53,7 @@
                                 <p v-if="hst.status==0">Draft<i v-if="hst.flag_status == 1" class="fa fa-flag" style="color: red;" ></i></p>
                               </td>
                             <td>{{hst.date}}</td>
-                            <td>{{formatetime(hst.created_at)}}</td>
+                            <td>{{hst.time}}</td>
                             <td>{{hst.name}}</td>
                             <td>
                               <a  style="cursor:pointer;" @click="OnHistoryview(hst,view)"  class="view"

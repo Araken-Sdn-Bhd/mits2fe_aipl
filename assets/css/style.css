@@ -4481,3 +4481,7 @@ table.dataTable.nowrap td {
 .dataTables_empty {
     color: #F00;
 }
+
+.dataTables_scrollHeadInner, .table {
+    min-width: 100%;
+}
