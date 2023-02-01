@@ -26,7 +26,7 @@
             <div class="accordion-body">
               <div class="row mb-4">
                 <div class="col-md-3">
-                  <label for="" class="form-label">Salutation</label>
+                  <label for="" class="form-label">Salutation<small style="color:red">*</small> </label>
                   <select
                     v-model="salutation"
                     class="form-select"
@@ -43,7 +43,7 @@
                   </select>
                 </div>
                 <div class="col-md-9">
-                  <label class="form-label">Name</label>
+                  <label class="form-label">Name<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -56,7 +56,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-3">
-                  <label for="" class="form-label">Gender</label>
+                  <label for="" class="form-label">Gender<small style="color:red">*</small> </label>
                   <select
                     v-model="gender"
                     class="form-select"
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label for="" class="form-label">Citizenship</label>
+                  <label for="" class="form-label">Citizenship<small style="color:red">*</small> </label>
                   <select
                     v-model="citizenship"
                     class="form-select"
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label class="form-label">NRIC NO. / Passport</label>
+                  <label class="form-label">NRIC NO. / Passport<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -105,7 +105,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-3">
-                  <label for="" class="form-label">Religion</label>
+                  <label for="" class="form-label">Religion<small style="color:red">*</small> </label>
                   <select
                     v-model="religion"
                     class="form-select"
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label for="" class="form-label">Designation</label>
+                  <label for="" class="form-label">Designation<small style="color:red">*</small> </label>
                   <select
                     v-model="designation"
                     class="form-select"
@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label class="form-label">Email</label>
+                  <label class="form-label">Email<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -157,7 +157,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-4">
-                  <label for="" class="form-label">Contact No. (Mobile)</label>
+                  <label for="" class="form-label">Contact No. (Mobile)<small style="color:red">*</small> </label>
                   <input
                     type="tel"
                     v-mask="'###-########'"
@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="col-md-4">
-                  <label for="" class="form-label">Contact No. (Office)</label>
+                  <label for="" class="form-label">Contact No. (Office)<small style="color:red">*</small> </label>
                   <input
                     type="tel"
                     v-mask="'##-########'"
@@ -204,7 +204,7 @@
             <div class="accordion-body">
               <div class="row mb-4">
                 <div class="col-md-3">
-                  <label for="" class="form-label">Hospital Code</label>
+                  <label for="" class="form-label">Hospital Code<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label for="" class="form-label">Hospital Prefix</label>
+                  <label for="" class="form-label">Hospital Prefix<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -224,7 +224,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label class="form-label">Hospital Name</label>
+                  <label class="form-label">Hospital Name<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -237,7 +237,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-6">
-                  <label for="" class="form-label">Hospital Address</label>
+                  <label for="" class="form-label">Hospital Address<small style="color:red">*</small> </label>
                   <input
                     type="text"
                     class="form-control mb-3"
@@ -261,7 +261,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label for="" class="form-label">State</label>
+                  <label for="" class="form-label">State<small style="color:red">*</small> </label>
                   <select
                     v-model="hospital_state"
                     class="form-select"
@@ -280,7 +280,7 @@
 
                   <div class="row mt-4">
                     <div class="col-md-6">
-                      <label for="" class="form-label">City</label>
+                      <label for="" class="form-label">City<small style="color:red">*</small> </label>
                       <select
                         v-model="hospital_city"
                         class="form-select"
@@ -299,7 +299,7 @@
                     </div>
 
                     <div class="col-md-6">
-                      <label for="" class="form-label">Post Code</label>
+                      <label for="" class="form-label">Post Code<small style="color:red">*</small> </label>
                       <select
                         v-model="hospital_postcode"
                         class="form-select"
@@ -322,7 +322,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-6">
-                  <label for="" class="form-label">Contact No. (Office)</label>
+                  <label for="" class="form-label">Contact No. (Office)<small style="color:red">*</small> </label>
                   <div class="add-box">
                     <input
                       type="tel"
@@ -336,7 +336,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label for="" class="form-label">Email</label>
+                  <label for="" class="form-label">Email<small style="color:red">*</small> </label>
                   <div class="add-box">
                     <input
                       type="text"
@@ -355,7 +355,7 @@
 
               <div class="row mb-4">
                 <div class="col-md-4">
-                  <label for="" class="form-label">FAX NO.</label>
+                  <label for="" class="form-label">FAX NO.<small style="color:red">*</small> </label>
                   <input
                     type="tel"
                     v-mask="'##-########'"
