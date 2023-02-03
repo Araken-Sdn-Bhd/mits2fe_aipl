@@ -162,6 +162,8 @@ export default {
       this.id=this.userdetails.user.id;
       this.email=this.userdetails.user.email;
       this.branch=this.userdetails.branch.branch_id;
+      this.name=this.userdetails.user.name;
+      this.branch_name=this.userdetails.branch.hospital_branch_name;
 
     }
     },
@@ -181,7 +183,7 @@ export default {
                 };
                 const response = await this.$axios.get(
                     "all-mentari-staff/get",
-                    { headers, params: {branch: this.branch, email: this.email}}
+                    { headers, params: {branch: this.branch, email: this.email, name: this.name, branch_name:this.branch_name}}
                 );
                 if (response.data.code == 200 || response.data.code == "200") {
                     this.todays_appointments = response.data.today_appointment;
