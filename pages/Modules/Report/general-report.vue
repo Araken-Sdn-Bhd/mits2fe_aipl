@@ -108,7 +108,7 @@
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label">Diagnosis:</label>
-                    <select class="form-select" v-model="Diagnosis">
+                    <select class="form-select" v-model="diagnosis_id">
                       <option value="">Please Select</option>
                       <option
                         v-for="catcode in diagonisislist"
@@ -747,7 +747,7 @@ export default {
               patient_category: this.patient_category,
               type_visit: this.type_visit,
               appointment_type: this.appointment_type,
-              diagnosis_id: this.Diagnosis,
+              diagnosis_id: this.diagnosis_id,
               referral_type: this.REFERRAL_TYPE,
               name: this.Name,
               accommodation_id: this.accommodation_id,
@@ -842,7 +842,7 @@ export default {
               patient_category: this.patient_category,
               type_visit: this.type_visit,
               appointment_type: this.appointment_type,
-              diagnosis_id: this.Diagnosis,
+              diagnosis_id: this.diagnosis_id,
               referral_type: this.REFERRAL_TYPE,
               name: this.Name,
               accommodation_id: this.accommodation_id,
