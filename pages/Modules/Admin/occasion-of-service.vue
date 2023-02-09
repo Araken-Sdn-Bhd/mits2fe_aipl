@@ -165,7 +165,6 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.GetBranchList();
     this.getRole();
-    this.GetList();
   },
   methods: {
     async getRole() {
