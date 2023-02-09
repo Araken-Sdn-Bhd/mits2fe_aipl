@@ -532,21 +532,6 @@
                         Attachment
                       </a>
                     </li>
-                    <li class="accordion-item sub-nav">
-                      <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse"
-                        data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                        Shharp
-                      </a>
-                      <ul id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
-                        data-bs-parent="#accordionExample">
-                        <li>
-                          <a @click="OnSharphistory" style="cursor: pointer">View History</a>
-                        </li>
-                        <li>
-                          <a @click="OnAddSharphistory" style="cursor: pointer">Add New Registry</a>
-                        </li>
-                      </ul>
-                    </li>
                   </ul>
                 </div>
               </div>
