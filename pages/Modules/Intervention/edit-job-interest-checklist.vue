@@ -106,7 +106,7 @@
 
                                 <tr>
                                     <th style="width: 80%">
-                                        2. Do you agree if MENTARI find a job for you?<small style="color:red">*</small> 
+                                        2. Do you agree if MENTARI find a job for you?<small style="color:red">*</small>
                                     </th>
                                     <td>
                                         <div class="form-check">
@@ -299,14 +299,14 @@
                                 <tr>
                                     <th>Note<small style="color:red">*</small> :</th>
                                     <td>
-                                        <textarea class="form-control textarea mt-3" rows="2" placeholder="Enter Description" v-model="note"></textarea>
+                                        <textarea class="form-control mt-3" rows="15" placeholder="Enter Description" v-model="note"></textarea>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th>Planning<small style="color:red">*</small> :</th>
                                     <td>
-                                        <textarea class="form-control textarea mt-3" rows="2" placeholder="Enter Description" v-model="planning"></textarea>
+                                        <textarea class="form-control mt-3" rows="15" placeholder="Enter Description" v-model="planning"></textarea>
                                     </td>
                                 </tr>
                             </tbody>
@@ -317,7 +317,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" id="set-as-headquarters" v-model="patient_consent_interested" />
                                 <label class="form-check-label" for="set-as-headquarters">
-                                    I am interested to join this supported employment program<small style="color:red">*</small> 
+                                    I am interested to join this supported employment program<small style="color:red">*</small>
                                 </label>
                             </div>
                         </div>
@@ -412,7 +412,7 @@
                                         </div>
                                         <!-- close-row -->
                                         <div class="row mb-3">
-                                            <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small> 
+                                            <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
                                             </label>
                                             <div class="col-lg-8 col-sm-12">
                                                 <div class="form-check form-check-inline">

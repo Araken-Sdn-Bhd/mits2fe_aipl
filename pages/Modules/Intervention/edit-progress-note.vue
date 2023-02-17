@@ -101,13 +101,13 @@
                                     <tr>
                                         <th>Clinical Notes<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Clinical Notes" v-model="clinical_notes"></textarea>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Clinical Notes" v-model="clinical_notes"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Management<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Management" v-model="management"></textarea>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Management" v-model="management"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>

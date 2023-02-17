@@ -299,14 +299,14 @@
                                 <tr>
                                     <th>Note<small style="color:red">*</small> :</th>
                                     <td>
-                                        <textarea class="form-control textarea mt-3" rows="2" placeholder="Enter Description" v-model="note"></textarea>
+                                        <textarea class="form-control mt-3" rows="15" placeholder="Enter Description" v-model="note"></textarea>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th>Planning<small style="color:red">*</small> :</th>
                                     <td>
-                                        <textarea class="form-control textarea mt-3" rows="2" placeholder="Enter Description" v-model="planning"></textarea>
+                                        <textarea class="form-control mt-3" rows="15" placeholder="Enter Description" v-model="planning"></textarea>
                                     </td>
                                 </tr>
                             </tbody>

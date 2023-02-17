@@ -209,19 +209,19 @@
                                 <tr>
                                     <th>Case Formulation<small style="color:red">*</small> : </th>
                                     <td>
-                                        <textarea class="form-control textarea" v-model="case_formulation"></textarea>
+                                        <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="case_formulation"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Referring Doctor<small style="color:red">*</small> :</th>
                                     <td>
-                                        <input type="text" class="form-control" v-model="referring_doctor">
+                                        <input type="text" class="form-control" placeholder="Enter Description" v-model="referring_doctor">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Designation<small style="color:red">*</small> : </th>
                                     <td>
-                                        <input type="text" class="form-control" v-model="designation">
+                                        <input type="text" class="form-control" placeholder="Enter Designation" v-model="designation">
                                     </td>
                                 </tr>
                                 <tr>

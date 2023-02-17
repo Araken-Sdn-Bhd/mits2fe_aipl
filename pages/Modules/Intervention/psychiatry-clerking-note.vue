@@ -24,31 +24,31 @@
                                     <tr>
                                         <th>Chief Complaint<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea mt-3" rows="2" placeholder="Enter Description" v-model="chief_complain"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="chief_complain"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>History Of Presenting Illness<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="5" placeholder="Enter Description" v-model="presenting_illness"></textarea>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="presenting_illness"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Background History<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Description" v-model="background_history"></textarea>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="background_history"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>General Examination<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Description" v-model="general_examination"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="general_examination"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Mental State Examination<small style="color:red">*</small> :</th>
                                         <td>
-                                            <textarea class="form-control textarea" rows="2" placeholder="Enter Description" v-model="mental_state_examination"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="mental_state_examination"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
@@ -65,7 +65,8 @@
                                     <tr>
                                         <th>Management<small style="color:red">*</small> :</th>
                                         <td>
-                                            <input type="text" class="form-control max-width" placeholder="Enter Management Details" v-model="management" />
+                                            <!-- <input type="text" class="form-control max-width" placeholder="Enter Management Details" v-model="management" /> -->
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="management"></textarea>
                                         </td>
                                     </tr>
                                     <tr>

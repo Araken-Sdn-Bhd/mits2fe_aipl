@@ -55,7 +55,8 @@
               >What is the background of your group member?<span>*</span></label
             >
             <textarea
-              class="form-control textarea"
+              class="form-control" rows="15"
+              placeholder="Please Specify"
               v-model="member_background"
             ></textarea>
           </div>

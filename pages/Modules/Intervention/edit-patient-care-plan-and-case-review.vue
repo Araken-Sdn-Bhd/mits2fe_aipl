@@ -206,15 +206,16 @@
                   <!-- close-row -->
 
                   <div class="row">
-                    <div class="col-sm-6">
+
                       <div class="mb-3">
                         <label class="form-label">Background History<small style="color:red">*</small> </label>
                         <textarea
-                          class="form-control textarea"
+                          class="form-control" rows="15"
+                          placeholder="Enter Description"
                           v-model="background_history"
                         ></textarea>
                       </div>
-                    </div>
+
                     <div class="col-sm-6">
                       <div class="mb-3">
                         <label class="form-label">Doctor of Staff Incharge<small style="color:red">*</small> </label>
@@ -228,7 +229,7 @@
                   <!-- close-row -->
 
                   <div class="form-heading mt-3">Treatment Plan</div>
-
+                  <div class="table-responsive">
                   <table class="job-search-table" id="treatmentplan">
                     <thead>
                       <tr>
@@ -243,10 +244,10 @@
                     <tbody class="optionBox">
                       <tr class="block">
                         <!-- <td>-</td> -->
-                        <td><input type="text" class="issue" v-model="Issues" placeholder="Issues/Current Status"/></td>
-                        <td><input type="text" class="goal" v-model="Goal" placeholder="Goal(s)"/></td>
-                        <td><input type="text" class="management" v-model="Management" placeholder="Management Strategies"/></td>
-                        <td><input type="text" class="who" v-model="Who" placeholder="Who,By When"/></td>
+                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea></td>
+                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
+                        <td><textarea class="management" v-model="Management" placeholder="Management Strategies"></textarea></td>
+                        <td><textarea class="who" v-model="Who" placeholder="Who,By When"></textarea></td>
                         <td>
                           <a class="add-row"
                             ><i class="fa fa-plus"></i
@@ -255,7 +256,7 @@
                       </tr>
                     </tbody>
                   </table>
-
+                </div>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-3">
@@ -396,7 +397,7 @@
                           <!-- close-row -->
                           <div class="row mb-3">
                             <label class="col-sm-4 col-form-label"
-                              >Category Of Services<small style="color:red">*</small> 
+                              >Category Of Services<small style="color:red">*</small>
                             </label>
                             <div class="col-sm-8">
                               <div class="form-check form-check-inline">
@@ -709,7 +710,7 @@
 
         $(".add-row").click(function (i) {
             $(".block:last").after(
-              '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+              '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td> <td><input type="text" class="goal" placeholder="Goal(s)"/></td> <td><input type="text" class="management" placeholder="Management Strategies"/></td> <td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
             );
           });
           $(".optionBox").on("click", ".remove", function () {
