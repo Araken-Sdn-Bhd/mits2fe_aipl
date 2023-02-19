@@ -54,27 +54,27 @@
                                 </tr>
                                 <tr>
                                     <th>History<small style="color:red">*</small> :</th>
-                                    <td><textarea v-model="history" class="form-control textarea"></textarea></td>
+                                    <td><textarea v-model="history" class="form-control" placeholder="Enter Description" rows="15"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Examination<small style="color:red">*</small> :</th>
-                                    <td><textarea v-model="examination" class="form-control textarea"></textarea></td>
+                                    <td><textarea v-model="examination" class="form-control" placeholder="Enter Description" rows="15"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Diagnosis<small style="color:red">*</small> :</th>
-                                    <td><input v-model="diagnosis" type="text" class="form-control" name="" /></td>
+                                    <td><textarea v-model="diagnosis" class="form-control textarea" name=""></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Result of investigation<small style="color:red">*</small> :</th>
-                                    <td><textarea v-model="result_of_investigation" class="form-control textarea"></textarea></td>
+                                    <td><textarea v-model="result_of_investigation" class="form-control" placeholder="Enter Description"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Treatment<small style="color:red">*</small> :</th>
-                                    <td><input v-model="treatment" type="text" class="form-control" name="" /></td>
+                                    <td><textarea v-model="treatment" class="form-control" placeholder="Enter Description" rows="15" name=""></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Purpose of referral<small style="color:red">*</small> :</th>
-                                    <td><input v-model="purpose_of_referral" type="text" class="form-control" name="" /></td>
+                                    <td><textarea v-model="purpose_of_referral" class="form-control" placeholder="Enter Description" name=""></textarea></td>
                                 </tr>
                             </tbody>
                         </table>

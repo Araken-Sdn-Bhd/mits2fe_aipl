@@ -85,18 +85,18 @@
                 </div>
                 <!-- close-row -->
                 <div class="row mb-3">
-                  <label class="col-sm-4 col-form-label">Progress Note<small style="color:red">*</small></label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control textarea" rows="5" v-model="progress_note"></textarea>
-                  </div>
-                </div>
-                <!-- close-row -->
-                <div class="row mb-3">
-                  <label class="col-sm-4 col-form-label">Management Plan<small style="color:red">*</small></label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control textarea" rows="5" v-model="management_plan"></textarea>
-                  </div>
-                </div>
+                                <label class="col-sm-4 col-form-label">Progress Note<small style="color:red">*</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="progress_note"></textarea>
+                                </div>
+                            </div>
+                            <!-- close-row -->
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label">Management Plan<small style="color:red">*</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="management_plan"></textarea>
+                                </div>
+                            </div>
                 <!-- close-row -->
              <div
                   class="accordion form-accordion mt-3"

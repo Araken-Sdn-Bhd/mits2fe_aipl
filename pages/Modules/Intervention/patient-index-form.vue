@@ -1026,7 +1026,7 @@
                     <th>Past Medical/Surgical History<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
-                        class="form-control textarea"
+                        class="form-control"
                         placeholder="Please type here.." v-model="past_Medical"
                       ></textarea>
                     </td>
@@ -1035,7 +1035,7 @@
                     <th>Background History (Family/Personal)<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
-                        class="form-control textarea"
+                        class="form-control" rows="15"
                         placeholder="Please type here.." v-model="background_history"
                       ></textarea>
                     </td>
@@ -1063,7 +1063,7 @@
                     <th>Mental State Examination<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
-                        class="form-control textarea"
+                        class="form-control" rows="15"
                         placeholder="Please type here.." v-model="mental_state_examination"
                       ></textarea>
                     </td>
@@ -1072,7 +1072,7 @@
                     <th>Summary Of Issues<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
-                        class="form-control textarea"
+                        class="form-control"
                         placeholder="Please type here.." v-model="summary_of_issues"
                       ></textarea>
                     </td>
@@ -1081,7 +1081,7 @@
                     <th>Management Plan<small style="color:red">*</small> :</th>
                     <td>
                       <textarea
-                        class="form-control textarea"
+                        class="form-control" rows="15"
                         placeholder="Please type here.." v-model="management_plan"
                       ></textarea>
                     </td>

@@ -89,7 +89,7 @@
                                             </tr>
                                             <tr>
                                               <th>Comment<small style="color:red">*</small> :</th>
-                                              <td><textarea v-model="comment" class="form-control textarea"></textarea></td>
+                                              <td><textarea v-model="comment" placeholder="Enter Comment" rows="15" class="form-control"></textarea></td>
                                             </tr>
                                           </tbody>
                                         </table>

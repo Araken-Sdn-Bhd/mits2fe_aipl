@@ -141,12 +141,10 @@
                 <!-- close-row -->
 
                 <div class="row">
-                  <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Background History<small style="color:red">*</small>  </label>
-                      <textarea class="form-control textarea" v-model="background_history"></textarea>
+                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="background_history"></textarea>
                     </div>
-                  </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Doctor of Staff Incharge<small style="color:red">*</small> </label>
@@ -172,12 +170,12 @@
                     <tbody class="optionBox">
                       <tr class="block">
                         <!-- <td>-</td> -->
-                        <td><input type="text" class="issue" v-model="Issues" placeholder="Issues/Current Status" />
+                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea>
                         </td>
-                        <td><input type="text" class="goal" v-model="Goal" placeholder="Goal(s)" /></td>
-                        <td><input type="text" class="management" v-model="Management"
-                            placeholder="Management Strategies" /></td>
-                        <td><input type="text" class="who" v-model="Who" placeholder="Who,By When" /></td>
+                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
+                        <td><textarea class="management" v-model="Management"
+                            placeholder="Management Strategies"></textarea></td>
+                        <td><textarea class="who" v-model="Who" placeholder="Who,By When"></textarea></td>
                         <td>
                           <a class="add-row"><i class="fa fa-plus"></i></a>
                         </td>
@@ -200,7 +198,7 @@
                     <tbody>
                       <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
                         <!-- <td>-</td> -->
-                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status" /></td>
+                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status dewfrgtr" /></td>
                         <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
                         <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" />
                         </td>

@@ -564,13 +564,18 @@
                                             </table>
                                         </td>
                                     </tr>
-
-                                    <tr class="two-td">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="ipsychopathology_remarks"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <tr class="two-td">
                                         <th>Remarks<small style="color:red">*</small></th>
                                         <td colspan="3">
-                                            <textarea class="form-control textarea" v-model="ipsychopathology_remarks"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="ipsychopathology_remarks"></textarea>
                                         </td>
-                                    </tr>
+                                    </tr> -->
 
                                     <tr>
                                         <td colspan="4">
@@ -878,12 +883,18 @@
                                         </td>
                                     </tr>
 
-                                    <tr class="two-td">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="side_effects_remarks"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <tr class="two-td">
                                         <th>Remarks<small style="color:red">*</small> :</th>
                                         <td colspan="3">
-                                            <textarea class="form-control textarea" v-model="side_effects_remarks"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="side_effects_remarks"></textarea>
                                         </td>
-                                    </tr>
+                                    </tr> -->
 
                                     <tr>
                                         <td colspan="4" class="black">
@@ -1004,12 +1015,18 @@
                                             <input type="text" class="form-control" name="" v-model="intervention_others" />
                                         </td>
                                     </tr>
-                                    <tr class="two-td">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="remarks"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <tr class="two-td">
                                         <th>Remarks<small style="color:red">*</small> :</th>
                                         <td colspan="3">
-                                            <textarea class="form-control textarea" v-model="remarks"></textarea>
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15"  v-model="remarks"></textarea>
                                         </td>
-                                    </tr>
+                                    </tr> -->
 
                                     <tr class="two-radio">
                                         <th>Employment the past 6 month<small style="color:red">*</small> :</th>
@@ -3140,18 +3157,17 @@ export default {
             }
         },
         GoBack() {
-          if (this.type == 'view'){
-            this.$router.go(-1);
-          }
-          else {
-            this.$router.push({
-                path: "/modules/Intervention/patient-summary",
-                query: {
-                    id: this.Id,
-                    appId: this.appId
-                },
-            });
-          }
+            if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({
+                    path: "/modules/Intervention/patient-summary",
+                    query: {
+                        id: this.Id,
+                        appId: this.appId
+                    },
+                });
+            }
         }
     },
 };

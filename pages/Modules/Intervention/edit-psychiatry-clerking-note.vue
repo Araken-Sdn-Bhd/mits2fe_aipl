@@ -15,128 +15,80 @@
                 <Interventionphysectristdetails />
 
                 <table class="notes">
-                  <thead>
-                    <tr>
-                      <th colspan="2">Consultation Details</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>Chief Complaint<small style="color:red">*</small> :</th>
-                      <td>
-                        <textarea
-                          class="form-control textarea mt-3"
-                          rows="2"
-                          placeholder="Enter Description"
-                          v-model="chief_complain"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>History Of Presenting Illness<small style="color:red">*</small> :</th>
-                      <td>
-                        <textarea
-                          class="form-control textarea"
-                          rows="2"
-                          placeholder="Enter Description"
-                          v-model="presenting_illness"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Background History<small style="color:red">*</small> :</th>
-                      <td>
-                        <textarea
-                          class="form-control textarea"
-                          rows="2"
-                          placeholder="Enter Description"
-                          v-model="background_history"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>General Examination<small style="color:red">*</small> :</th>
-                      <td>
-                        <textarea
-                          class="form-control textarea"
-                          rows="2"
-                          placeholder="Enter Description"
-                          v-model="general_examination"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Mental State Examination<small style="color:red">*</small> :</th>
-                      <td>
-                        <textarea
-                          class="form-control textarea"
-                          rows="2"
-                          placeholder="Enter Description"
-                          v-model="mental_state_examination"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Diagnosis<small style="color:red">*</small> :</th>
-                      <td>
-                         <select class="form-select" v-model="type_diagnosis_id">
-                                <option value="0">Select Diagnosis</option>
-                                <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                              </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Management<small style="color:red">*</small> :</th>
-                      <td>
-                        <input
-                          type="text"
-                          class="form-control max-width"
-                          placeholder="Enter Management Details"
-                          v-model="management"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Discussed With<small style="color:red">*</small> :</th>
-                      <td>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Psychiatrist Name"
-                          v-model="discuss_psychiatrist_name"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Date<small style="color:red">*</small> :</th>
-                      <td>
-                        <input
-                          type="date"
-                          class="form-control"
-                          placeholder="Enter Date"
-                          v-model="date"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Time<small style="color:red">*</small> :</th>
-                      <td>
-                        <input
-                          type="time"
-                          class="form-control"
-                          placeholder="Enter Time"
-                          v-model="time"
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Consultation Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Chief Complaint<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="chief_complain"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>History Of Presenting Illness<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="presenting_illness"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Background History<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="background_history"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>General Examination<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="general_examination"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mental State Examination<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <textarea class="form-control" placeholder="Enter Description" v-model="mental_state_examination"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Diagnosis<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <select class="form-select" v-model="type_diagnosis_id">
+                                                <option value="0">Select Diagnosis</option>
+                                                <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                    {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Management<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <!-- <input type="text" class="form-control max-width" placeholder="Enter Management Details" v-model="management" /> -->
+                                            <textarea class="form-control" rows="15" placeholder="Enter Description" v-model="management"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Discussed With<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Enter Psychiatrist Name" v-model="discuss_psychiatrist_name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <input type="date" class="form-control" placeholder="Enter Date" v-model="date" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Time<small style="color:red">*</small> :</th>
+                                        <td>
+                                            <input type="time" class="form-control" placeholder="Enter Time" v-model="time" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
                 <div
                   class="accordion form-accordion mt-3"

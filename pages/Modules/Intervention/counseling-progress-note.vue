@@ -235,7 +235,7 @@
                                                     <tr>
                                                         <td>
                                                             <label class="form-label">Comments On Therapy Sessions<small style="color:red">*</small> :</label>
-                                                            <textarea class="form-control textarea" rows="5" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
+                                                            <textarea class="form-control" rows="5" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -243,7 +243,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Patent's Condition: </th>
+                                        <th>Patient's Condition: </th>
                                         <td>
                                             <table class="sub-table">
                                                 <thead>
@@ -297,8 +297,8 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-label">Comments On Patent's Condition<small style="color:red">*</small> :</label>
-                                                            <textarea class="form-control textarea" rows="5" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
+                                                            <label class="form-label">Comments On Patient's Condition<small style="color:red">*</small> :</label>
+                                                            <textarea class="form-control" rows="5" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -324,37 +324,37 @@
                                             </tr> -->
                                     <tr>
                                         <th>Issues/Problems Dealt With Today<small style="color:red">*</small> :</th>
-                                        <td><textarea class="form-control textarea" rows="2" v-model="session_issues"></textarea></td>
+                                        <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="session_issues"></textarea></td>
                                     </tr>
                                     <tr>
                                         <th>Conduct Of Session<small style="color:red">*</small> :</th>
-                                        <td><textarea class="form-control textarea" rows="2" v-model="conduct_session"></textarea></td>
+                                        <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="conduct_session"></textarea></td>
                                     </tr>
                                     <tr>
                                         <th>Outcome Of Session<small style="color:red">*</small> :</th>
-                                        <td><textarea class="form-control textarea" rows="2" v-model="outcome_session"></textarea></td>
+                                        <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="outcome_session"></textarea></td>
                                     </tr>
                                     <tr>
                                         <th>Transference/countertransference<small style="color:red">*</small> :</th>
-                                        <td><textarea class="form-control textarea" rows="2" v-model="transference_session"></textarea>
+                                        <td><textarea class="form-control" placeholder="Enter Description" v-model="transference_session"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Duration Of Session<small style="color:red">*</small> :</th>
-                                        <td><input type="text" class="form-control" v-model="duration_session"></td>
+                                        <td><textarea class="form-control" placeholder="Enter Description" v-model="duration_session"></textarea></td>
                                     </tr>
                                     <tr>
                                         <th>Other Comments<small style="color:red">*</small> :</th>
-                                        <td><input type="text" class="form-control" v-model="other_comment_session"></td>
+                                        <td><textarea class="form-control" placeholder="Enter Description" v-model="other_comment_session"></textarea></td>
                                     </tr>
 
                                     <tr>
                                         <th>Name<small style="color:red">*</small> :</th>
-                                        <td><input type="text" class="form-control" v-model="name"></td>
+                                        <td><input type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
                                     </tr>
                                     <tr>
                                         <th>Designation<small style="color:red">*</small> :</th>
-                                        <td><input type="text" class="form-control" v-model="designation"></td>
+                                        <td><input type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
                                     </tr>
                                     <tr>
                                         <th>Date<small style="color:red">*</small> :</th>

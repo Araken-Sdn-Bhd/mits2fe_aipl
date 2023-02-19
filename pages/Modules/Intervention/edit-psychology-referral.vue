@@ -229,23 +229,23 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>Case Formulation<small style="color:red">*</small> : </th>
-                      <td>
-                        <textarea class="form-control textarea" v-model="case_formulation"></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Referring Doctor<small style="color:red">*</small> :</th>
-                      <td>
-                        <input type="text" class="form-control" v-model="referring_doctor">
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Designation<small style="color:red">*</small> : </th>
-                      <td>
-                        <input type="text" class="form-control" v-model="designation">
-                      </td>
-                    </tr>
+                                    <th>Case Formulation<small style="color:red">*</small> : </th>
+                                    <td>
+                                        <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="case_formulation"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Referring Doctor<small style="color:red">*</small> :</th>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="Enter Description" v-model="referring_doctor">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Designation<small style="color:red">*</small> : </th>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="Enter Designation" v-model="designation">
+                                    </td>
+                                </tr>
                     <tr>
                       <th>Date<small style="color:red">*</small> : </th>
                       <td>
@@ -321,7 +321,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">

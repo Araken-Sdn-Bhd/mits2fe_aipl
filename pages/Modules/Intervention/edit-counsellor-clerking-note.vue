@@ -33,21 +33,21 @@
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th>Clinical Summary<small style="color:red">*</small> :</th>
-                                          <td><textarea v-model="clinical_summary" class="form-control textarea" rows="5" placeholder="Enter Description"></textarea></td>
-                                      </tr>
-                                      <tr>
-                                          <th>Background History<small style="color:red">*</small> :</th>
-                                          <td><textarea v-model="background_history" class="form-control textarea" rows="5" placeholder="Enter Description"></textarea></td>
-                                      </tr>
-                                      <tr>
-                                          <th>Clinical Notes<small style="color:red">*</small> :</th>
-                                          <td><textarea v-model="clinical_notes" class="form-control textarea" rows="5" placeholder="Enter Description"></textarea></td>
-                                      </tr>
-                                      <tr>
-                                          <th>Management<small style="color:red">*</small> :</th>
-                                          <td><textarea v-model="management" class="form-control textarea" rows="2" placeholder="Enter Description"></textarea></td>
-                                      </tr>
+                                        <th>Clinical Summary<small style="color:red">*</small> :</th>
+                                        <td><textarea v-model="clinical_summary" class="form-control" rows="15" placeholder="Enter Description"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Background History<small style="color:red">*</small> :</th>
+                                        <td><textarea v-model="background_history" class="form-control" rows="15" placeholder="Enter Description"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Clinical Notes<small style="color:red">*</small> :</th>
+                                        <td><textarea v-model="clinical_notes" class="form-control" rows="15" placeholder="Enter Description"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Management<small style="color:red">*</small> :</th>
+                                        <td><textarea v-model="management" class="form-control" rows="15" placeholder="Enter Description"></textarea></td>
+                                    </tr>
                                   </tbody>
                               </table>
 

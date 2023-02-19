@@ -56,19 +56,19 @@
                                 </tr>
                                 <tr>
                                     <th>Reason For Referral<small style="color:red">*</small> : </th>
-                                    <td><textarea v-model="reason_for_referral" class="form-control textarea"></textarea></td>
+                                    <td><textarea v-model="reason_for_referral" class="form-control" placeholder="Enter Description"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Summary<small style="color:red">*</small> : </th>
-                                    <td><textarea v-model="summary" class="form-control textarea"></textarea></td>
+                                    <td><textarea v-model="summary" class="form-control" placeholder="Enter Description" rows="15"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Management<small style="color:red">*</small> : </th>
-                                    <td><input v-model="management" type="text" class="form-control max-width" name=""></td>
+                                    <td><textarea v-model="management" type="text" class="form-control" placeholder="Enter Description" rows="15" name=""></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Medication<small style="color:red">*</small> : </th>
-                                    <td><input v-model="medication" type="text" class="form-control max-width" name=""></td>
+                                    <td><textarea v-model="medication" type="text" class="form-control" placeholder="Enter Description" rows="15" name=""></textarea></td>
                                 </tr>
                                 <tr>
                                     <th colspan="2">Thank You,</th>

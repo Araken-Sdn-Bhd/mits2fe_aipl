@@ -132,7 +132,7 @@
                   <div class="col-sm-12">
                     <div class="mb-3">
                       <label class="form-label">Comment<small style="color:red">*</small> </label>
-                      <textarea class="form-control textarea" v-model="comment"></textarea>
+                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="comment"></textarea>
                     </div>
                   </div>
                 </div>

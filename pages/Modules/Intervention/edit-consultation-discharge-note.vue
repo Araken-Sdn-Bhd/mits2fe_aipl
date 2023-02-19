@@ -89,7 +89,7 @@
                                             </tr>
                                             <tr>
                                               <th>Comment<small style="color:red">*</small> :</th>
-                                              <td><textarea v-model="comment" class="form-control textarea"></textarea></td>
+                                              <td><textarea v-model="comment" placeholder="Enter Comment" rows="15" class="form-control"></textarea></td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -194,7 +194,7 @@
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
-                            >Category Of Services<small style="color:red">*</small> 
+                            >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
                             <div class="form-check form-check-inline">
