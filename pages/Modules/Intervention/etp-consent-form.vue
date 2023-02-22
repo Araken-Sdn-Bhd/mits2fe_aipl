@@ -590,6 +590,8 @@ export default {
                     added_by: this.userdetails.user.id,
                     patient_id: this.Id,
                     appId: this.appId,
+                    pid: this.pid,
+                    type: "ETPConsentForm",
                 }, {
                     headers
                 }

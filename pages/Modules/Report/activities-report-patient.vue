@@ -974,7 +974,7 @@ export default {
                                 };
 
                                 pdf.addHTML($("#result")[0], options, function () {
-                                    pdf.save("Report.pdf");
+                                    pdf.save("Activities Report-Patient.pdf");
                                 });
                             }, 100);
                             setTimeout(() => {
@@ -1172,7 +1172,7 @@ export default {
 }
 
 div#result {
-    padding: 5px;
+    padding: 45px;
     width: 1920px;
 
 }
