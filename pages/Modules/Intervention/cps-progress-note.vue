@@ -1085,12 +1085,18 @@
                                         </td>
                                     </tr>
 
-                                    <tr class="two-td">
+                                    <!-- <tr class="row mb-3">
                                         <th>Comments<small style="color:red">*</small></th>
                                         <td colspan="3">
-                                            <textarea class="form-control textarea" v-model="comments"></textarea>
+                                            <textarea class="form-control" rows="15" v-model="comments"></textarea>
                                         </td>
-                                    </tr>
+                                    </tr> -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Comments<small style="color:red">*</small> </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="comments"></textarea>
+                                        </div>
+                                    </div>
                                 </tbody>
                             </table>
 

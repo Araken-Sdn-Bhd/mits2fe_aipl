@@ -972,7 +972,7 @@ export default {
   display: none;
 }
 div#result {
-  padding: 5px;
+  padding: 55px;
   width: 1920px;
 
 }
