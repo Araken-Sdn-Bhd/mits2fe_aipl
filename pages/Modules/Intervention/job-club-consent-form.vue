@@ -260,7 +260,7 @@ export default {
             branchName: "",
             loader: false,
             participant: 0,
-            pid: 0,
+            pid: "",
             appId: 0,
         };
     },
@@ -294,6 +294,8 @@ export default {
                     added_by: this.userdetails.user.id,
                     patient_id: this.Id,
                     appId: this.appId,
+                    pid: this.pid,
+                    type: "JobClubConsentForm",
                 }, {
                     headers
                 }
@@ -380,6 +382,7 @@ export default {
             if (response.data.code == 200) {
 
                 this.Id = response.data.Data[0].patient_id;
+                this.participant = response.data.Data[0].consent_for_participation;
 
                 this.GetPatientConnsentdetails();
             } else {

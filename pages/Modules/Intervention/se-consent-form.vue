@@ -54,8 +54,8 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Witness:</th>
-                                                    <!-- <td>{{ consentdetails.user_name }}</td> -->
-                                                    <td> <input type="text" class="form-control" name="" v-model="consentdetails.user_name" /></td>
+                                                    <td>{{ consentdetails.user_name }}</td>
+                                                    <!-- <td> <input type="text" class="form-control" name="" v-model="consentdetails.user_name" /></td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -77,7 +77,8 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Designation:</th>
-                                                    <td><input type="text" class="form-control" v-model="consentdetails.designation"> </td>
+                                                    <td>{{ consentdetails.designation}}</td>
+                                                    <!-- <td><input type="text" class="form-control" v-model="consentdetails.designation"> </td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -121,9 +122,21 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <div v-if="this.type != 'view'">
+
                                             <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" />
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" checked/>
+                                                <label class="form-check-label" for="inlineRadio1">Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
+                                                <label class="form-check-label" for="inlineRadio2">No
+                                                </label>
+                                            </div>
+
+                                          <div v-if="this.discloser == 1">
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" checked />
                                                 <label class="form-check-label" for="inlineRadio1">Yes
                                                 </label>
                                             </div>
@@ -133,32 +146,19 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div v-if="this.type == 'view'">
-                                            <div v-if="this.discloser == 1">
-                                                <div class="form-check form-check-inline mt-2">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" true />
-                                                    <label class="form-check-label" for="inlineRadio1">Yes
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline mt-2">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
-                                                    <label class="form-check-label" for="inlineRadio2">No
-                                                    </label>
-                                                </div>
+                                        <div v-if="this.discloser == 0">
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" />
+                                                <label class="form-check-label" for="inlineRadio1">Yes
+                                                </label>
                                             </div>
-                                            <div v-if="this.discloser == 0">
-                                                <div class="form-check form-check-inline mt-2">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" />
-                                                    <label class="form-check-label" for="inlineRadio1">Yes
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline mt-2">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" true />
-                                                    <label class="form-check-label" for="inlineRadio2">No
-                                                    </label>
-                                                </div>
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" checked />
+                                                <label class="form-check-label" for="inlineRadio2">No
+                                                </label>
                                             </div>
                                         </div>
+
                                     </td>
                                 </tr>
 
@@ -178,8 +178,8 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Witness:</th>
-                                                    <!-- <td>{{ consentdetails.user_name }}</td> -->
-                                                    <td> <input type="text" class="form-control" name="" v-model="consentdetails.user_name" /></td>
+                                                    <td>{{ consentdetails.user_name }}</td>
+                                                    <!-- <td> <input type="text" class="form-control" name="" v-model="consentdetails.user_name" /></td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -201,8 +201,8 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Designation:</th>
-                                                    <!-- <td>{{ consentdetails.designation }}</td> -->
-                                                    <td> <input type="text" class="form-control" name="" v-model="consentdetails.designation" /></td>
+                                                    <td>{{ consentdetails.designation }}</td>
+                                                    <!-- <td> <input type="text" class="form-control" name="" v-model="consentdetails.designation" /></td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -516,7 +516,7 @@ export default {
             branchName: "",
             loader: false,
             participant: 0,
-            discloser: 0,
+            discloser: 1,
             appId: 0,
         };
     },
@@ -550,6 +550,8 @@ export default {
                     added_by: this.userdetails.user.id,
                     patient_id: this.Id,
                     appId: this.appId,
+                    pid: this.pid,
+                    type: "SEConsentForm",
                 }, {
                     headers
                 }
@@ -575,7 +577,7 @@ export default {
                     this.errorList.push(
                         "Please agree to participate in supported employment program"
                     );
-                } else {
+                  } else {
                     this.participant = "1";
                 }
                 if (this.participant) {
