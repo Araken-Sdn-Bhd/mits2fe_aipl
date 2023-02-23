@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
           <div class="page-title">
             <h1>List of Patients</h1>
-            <a href="/app/modules/Shharp/demographic" class="add-btn"
+            <a href="/app/modules/Shharp/demographic" class="add-btn" title="Register new patient"
               ><i class="fal fa-plus"></i
             ></a>
           </div>
