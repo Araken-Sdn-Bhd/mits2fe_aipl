@@ -34,8 +34,8 @@
                        <tr v-for="(setting, index) in settinglist" :key="index">
                      
                         <td>
-                          <p><b>{{index+1}} : {{setting.question}} ?</b></p>
-                          <p style="color:red">&nbsp;&nbsp;&nbsp;&nbsp; {{setting.answer}}</p>
+                          <p><b>{{index+1}} : {{setting.question}}</b></p>
+                          <p style="color:grey,">&nbsp;&nbsp;&nbsp;&nbsp; {{setting.answer}}</p>
                         </td>
                         
                       </tr>
