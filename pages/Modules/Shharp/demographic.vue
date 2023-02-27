@@ -172,7 +172,8 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Religion</label>
-                      <select v-model="religion_id" class="form-select" aria-label="Default select example">
+                      <select v-model="religion_id" class="form-select" aria-label="Default select example"
+                      @change="OnchangeReligion($event)">
                         <option value="0">Select</option>
                         <option v-for="rel in religionlist" v-bind:key="rel.id" v-bind:value="rel.id">
                           {{ rel.section_value }}
@@ -180,10 +181,18 @@
                       </select>
                     </div>
                   </div>
+                  <div class="col-sm-6" v-if="otherReligion">
+                    <div class="mb-3">
+                      <label class="form-label">Please Specify</label>
+                      <input type="text" class="form-control" v-model="other_religion"
+                        placeholder="please specify other religion status" />
+                    </div>
+                  </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Ethnic Group/Race</label>
-                      <select v-model="race_id" class="form-select" aria-label="Default select example">
+                      <select v-model="race_id" class="form-select" aria-label="Default select example"
+                      @change="OnchangeRace($event)">
                         <option value="0">Select</option>
                         <option v-for="rce in racelist" v-bind:key="rce.id" v-bind:value="rce.id">
                           {{ rce.section_value }}
@@ -191,8 +200,14 @@
                       </select>
                     </div>
                   </div>
+                  <div class="col-sm-6" v-if="otherRace">
+                    <div class="mb-3">
+                      <label class="form-label">Please Specify</label>
+                      <input type="text" class="form-control" v-model="other_race"
+                        placeholder="please specify other race status" />
+                    </div>
+                  </div>
                 </div>
-
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -220,12 +235,20 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Highest Education</label>
-                      <select v-model="education_level" class="form-select" aria-label="Default select example">
+                      <select v-model="education_level" class="form-select" aria-label="Default select example"
+                      @change="OnchangeEducation($event)">
                         <option value="0">Select</option>
                         <option v-for="edu in educationlist" v-bind:key="edu.id" v-bind:value="edu.id">
                           {{ edu.section_value }}
                         </option>
                       </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6" v-if="otherEducation">
+                    <div class="mb-3">
+                      <label class="form-label">Please Specify</label>
+                      <input type="text" class="form-control" v-model="other_education"
+                        placeholder="please specify other education status" />
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -302,7 +325,9 @@ export default {
       userdetails: null,
       Isvalidate: true,
       otherMarital: false,
-
+      otherReligion: false,
+      otherRace: false,
+      otherEducation: false,
       name_asin_nric: "",
       citizenship: "",
       sex: "",
@@ -322,6 +347,9 @@ export default {
       race_type: "",
       nric_type_code: "",
       other_maritalList: "",
+      other_religion: "",
+      other_race: "",
+      other_education: "",
 
     };
   },
@@ -450,7 +478,7 @@ export default {
       }
 
       const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "occupation-status",
+        "general-setting/list?section=" + "employment-status",
         { headers }
       );
       if (response9.data.code == 200 || response9.data.code == "200") {
@@ -605,6 +633,9 @@ export default {
         body.append("patient_need_triage_screening", "0");
 
         body.append("other_maritalList", this.other_maritalList);
+        body.append("other_religion", this.other_religion);
+        body.append("other_race", this.other_race);
+        body.append("other_education", this.other_education);
         if (this.Id > 0) {
           const response = await this.$axios.post(
             "patient-registration/update",
@@ -803,7 +834,9 @@ export default {
         } else {
           this.otherMarital = false;
         }
-
+        this.other_race = response.data.list[0].other_race;
+        this.other_religion= response.data.list[0].other_religion;
+        this.other_education = response.data.list[0].other_education;
         this.sex = response.data.list[0].sex;
         this.race_id = response.data.list[0].race_id;
         this.religion_id = response.data.list[0].religion_id;
@@ -866,6 +899,27 @@ export default {
         this.otherMarital = true;
       } else {
         this.otherMarital = false;
+      }
+    },
+    OnchangeReligion(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+        this.otherReligion = true;
+      } else {
+        this.otherReligion = false;
+      }
+    },
+    OnchangeRace(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+        this.otherRace = true;
+      } else {
+        this.otherRace = false;
+      }
+    },
+    OnchangeEducation(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+        this.otherEducation = true;
+      } else {
+        this.otherEducation = false;
       }
     },
   },

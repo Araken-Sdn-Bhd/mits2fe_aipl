@@ -804,7 +804,7 @@
                                     id="2" v-model="hanging"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="2">
-                                    Hanging/Suffocation
+                                    Hanging/Strangulation/Suffocation
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -816,7 +816,7 @@
                                     id="3" v-model="drowning"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="3">
-                                    Drowning
+                                    Drowning/Submersion
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -828,7 +828,7 @@
                                     id="4" v-model="firearmsorexplosives"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="4">
-                                    Firearms or explosives
+                                    Firearms/Explosives
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -842,7 +842,7 @@
                                     id="5"   v-model="fire_flames"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="5">
-                                    Fire/flames
+                                    Smoke/Fire/Flames
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -855,7 +855,7 @@
 
                                   />
                                   <label class="form-check-label" for="6">
-                                    Cutting or Piercing
+                                    Cutting/Piercing
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -981,13 +981,25 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Own ideas"
+                                    id="4.4" v-model="ideas" @click="onSectionC('val')"
+                                  />
+                                  <label class="form-check-label" for="4.4">
+                                    Own ideas
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
                                     class="form-check-input specify-other"
                                     type="checkbox"
                                     value="Specify patient actual words"
                                     id="6.6" v-model="patientactualword" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="6.6">
-                                    Specify patient actual words
+                                    Others, specify patient's actual words
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -1678,7 +1690,7 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <p style="display: none;font-size: 8px;margin-top: -20px; margin-left: 40px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p>
+                          <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p>
                           <input
                             type="text"
                             class="form-control pafca-other-div hide"
@@ -1783,7 +1795,7 @@
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Psychiatry MX on Discharge<small style="color:red">*</small></label
+                        >Psychiatry Management on Discharge<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -2119,6 +2131,7 @@ export default {
       family: "",
       internet: "",
       printed: "",
+      ideas: "",
       broadcast: "",
       patientactualword: "",
       patientactualword_other: "",
@@ -2868,6 +2881,7 @@ export default {
                     this.internet,
                   "Printed media (newspaper, books, magazine, etc)":
                     this.printed,
+                  "Own ideas":this.ideas,
                   "Broadcast media (television, radio)": this.broadcast,
                   "Specify patient actual words": this.patientactualword_other,
                 },
@@ -2992,6 +3006,7 @@ export default {
                       this.internet,
                     "Printed media (newspaper, books, magazine, etc)":
                       this.printed,
+                    "Own ideas":this.ideas,
                     "Broadcast media (television, radio)": this.broadcast,
                     "Specify patient actual words":
                       this.patientactualword_other,
