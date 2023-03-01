@@ -121,44 +121,45 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
-
-                                            <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" checked/>
-                                                <label class="form-check-label" for="inlineRadio1">Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
-                                                <label class="form-check-label" for="inlineRadio2">No
-                                                </label>
-                                            </div>
-
-                                          <div v-if="this.discloser == 1">
-                                            <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" checked />
-                                                <label class="form-check-label" for="inlineRadio1">Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
-                                                <label class="form-check-label" for="inlineRadio2">No
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div v-if="this.discloser == 0">
+                                  <td colspan="2">
+                                        <div v-if="this.type != 'view'">
                                             <div class="form-check form-check-inline mt-2">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" />
                                                 <label class="form-check-label" for="inlineRadio1">Yes
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-inline mt-2">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" checked />
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
                                                 <label class="form-check-label" for="inlineRadio2">No
                                                 </label>
                                             </div>
                                         </div>
-
+                                        <div v-if="this.type == 'view'">
+                                            <div v-if="this.discloser == 1">
+                                                <div class="form-check form-check-inline mt-2">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" true />
+                                                    <label class="form-check-label" for="inlineRadio1">Yes
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline mt-2">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" />
+                                                    <label class="form-check-label" for="inlineRadio2">No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div v-if="this.discloser == 0">
+                                                <div class="form-check form-check-inline mt-2">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="discloser" />
+                                                    <label class="form-check-label" for="inlineRadio1">Yes
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline mt-2">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" v-model="discloser" true />
+                                                    <label class="form-check-label" for="inlineRadio2">No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
 

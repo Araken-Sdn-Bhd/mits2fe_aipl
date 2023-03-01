@@ -63,14 +63,14 @@
                                         <th colspan="2">STAFF DETAILS </th>
                                     </tr>
                                 </thead>
-                                <tbody v-if="userdetails">
+                                <tbody v-if="this.staff_name">
                                     <tr>
                                         <th>Staff Name / Seen By:</th>
-                                      <td>{{ userdetails.user.name }}</td>
+                                        <td>{{ this.staff_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Designation:</th>
-                                   <td>{{ userdetails.user.role }}</td>
+                                        <td>{{ this.designation }}</td>
                                     </tr>
                                     <!-- <tr>
                                         <th>Room:</th>
@@ -441,6 +441,10 @@ export default {
       pid: 0,
       type: "",
       appId: 0,
+      staff_name: "",
+      designation: "",
+      date: "",
+      time: "",
     };
     // test
   },
@@ -837,7 +841,10 @@ export default {
         { headers }
       );
       if (response.data.code == 200) {
-
+        this.staff_name = response.data.Data[0].name;
+        this.designation = response.data.Data[0].designation;
+        this.date = response.data.Data[0].created_at;
+        this.time = response.data.Data[0].created_at;
         this.Id = response.data.Data[0].patient_mrn_id;
         this.diagnosis = response.data.Data[0].diagnosis;
         this.clinical_notes = response.data.Data[0].clinical_notes;
