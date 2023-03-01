@@ -834,15 +834,28 @@ export default {
         } else {
           this.otherMarital = false;
         }
-        this.other_race = response.data.list[0].other_race;
-        this.other_religion= response.data.list[0].other_religion;
+        this.education_level = response.data.list[0].education_level;
         this.other_education = response.data.list[0].other_education;
+        if (response.data.list[0].education[0].section_value == "OTHERS") {
+          this.otherEducation = true;
+        } else {
+          this.otherEducation = false;
+        }
         this.sex = response.data.list[0].sex;
         this.race_id = response.data.list[0].race_id;
+        this.other_race = response.data.list[0].other_race;
+        if (response.data.list[0].race[0].section_value == "OTHERS") {
+          this.otherRace = true;
+        } else {
+          this.otherRace = false;
+        }
         this.religion_id = response.data.list[0].religion_id;
-
-
-
+        this.other_religion= response.data.list[0].other_religion;
+        if (response.data.list[0].religion[0].section_value == "OTHERS") {
+          this.otherReligion = true;
+        } else {
+          this.otherReligion = false;
+        }
         this.name_asin_nric = response.data.list[0].name_asin_nric;
         this.nric_no = response.data.list[0].nric_no;
         if (this.nric_no) {
