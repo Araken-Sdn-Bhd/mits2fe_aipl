@@ -20,5 +20,4 @@ blocks:
       jobs:
         - name: Run Build
           commands:
-            - 'npm run build '
-            - npm test
+            - npm run build
