@@ -183,6 +183,7 @@ export default {
       categorylist: [],
       errorList: [],
       Id: 0,
+      added_by: 0,
       name: "",
       booking_date: "",
       booking_time: "",
@@ -199,6 +200,7 @@ export default {
     this.GetList();
     let urlParams = new URLSearchParams(window.location.search);
     this.Id = urlParams.get("id");
+    this.added_by = urlParams.get("added_by");
     let urlParams1 = new URLSearchParams(window.location.search);
     this.section = urlParams1.get("section");
     let urlParams2 = new URLSearchParams(window.location.search);
@@ -345,7 +347,7 @@ export default {
         "von-appointment/getVonAppointmentById",
         {
           id: this.Id,
-          added_by: this.userdetails.user.id,
+          added_by: this.added_by,
         },
         { headers }
       );
