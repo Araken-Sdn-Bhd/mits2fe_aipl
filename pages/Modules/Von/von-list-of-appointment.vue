@@ -190,7 +190,7 @@ export default {
     Onedit(data) {
       this.$router.push({
         path: "/modules/Von/book-appointment",
-        query: { id: data.id },
+        query: {  added_by:data.added_by, id: data.id },
       });
     },
     OnView(data) {
