@@ -376,6 +376,16 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option value="others">
+                                    Others
+                                  </option>
+                                  <div class="step-form-box box-07">
+                          <input
+                            type="text"
+                            class="form-control" v-model="stress_other"
+                            placeholder="Please Specify"
+                          />
+                        </div>
                           </select>
                         </div>
                       </div>
@@ -1501,7 +1511,7 @@
                             {{ referal.section_value }}
                           </option>
                           <option value="rcp">
-                            Other(Please Specfy)
+                            Other(Please Specify)
                           </option>
                         </select>
                       </div>
@@ -1517,7 +1527,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="referral_or_contact_other"
+                          placeholder="Please Specify" v-model="referral_or_contact_other"
                         />
                       </div>
                     </div>
@@ -1558,7 +1568,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="arrival_mode_other"
+                          placeholder="Please Specify" v-model="arrival_mode_other"
                         />
                       </div>
                     </div>
@@ -1573,7 +1583,7 @@
                         <input
                           type="date"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="date"
+                          placeholder="Please Specify" v-model="date"
                         />
                       </div>
                       <div class="col-sm-3">
@@ -1581,7 +1591,7 @@
                         <input
                           type="time"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="time"
+                          placeholder="Please Specify" v-model="time"
                         />
                       </div>
                     </div>
@@ -2119,6 +2129,7 @@ export default {
       Stime: "",
       place_id: "",
       place_other: "",
+      stress_other: "",
       overdose: "",
       overdosevalue: "",
       hanging: "",

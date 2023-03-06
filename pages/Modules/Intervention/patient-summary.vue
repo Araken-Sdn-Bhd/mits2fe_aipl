@@ -762,7 +762,7 @@ export default {
         });
       } else if (data.type == "PsychiatricProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/progress-note",
+          path: "/modules/Intervention/edit-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CPSProgressNote") {
