@@ -69,9 +69,6 @@
         </button>
       </div>
                   </form>
-
-
-
                   <div class="table-title">
                     <h3>List of Category</h3>
                   </div>
@@ -94,8 +91,8 @@
                         <td>{{setting.faq_category}}</td>
                         <td>{{setting.index}}</td>
                         <td>
-                                            <p v-if="setting.isactive == 0" style="color:red">Disabled</p>
-                                            <p v-if="setting.isactive == 1">Enabled</p>
+                                            <p v-if="setting.isactive == 1" style="color:red">Disabled</p>
+                                            <p v-if="setting.isactive == 0">Enabled</p>
                                         </td>
                         <td class="td"  :class="SidebarAccess!=1?'hide':''">
                           <a  class="edit" @click="editsetting(setting)"
@@ -131,7 +128,7 @@ export default {
       requesttype: "insert",
       loader: false,
       SidebarAccess:null,
-      status: 1,
+      status: 0,
     };
   },
   beforeMount() {
@@ -145,7 +142,7 @@ export default {
     async insertcat() {
       this.errorList = [];
       try {
-        if (!this.gender) {
+        if (!this.category) {
           this.errorList.push("Category is required");
         }
         else {
@@ -156,19 +153,20 @@ export default {
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "/faq-category/add",
+            "/faqCategory/add",
             {
               faq_category: this.category,
               index: this.index,
               request_type: this.requesttype,
               status: this.status,
+              settingId: this.settingId,
             },
             { headers }
           );
           if (response.data.code == 200) {
             this.loader = false;
             if (this.settingId > 0) {
-this.$swal.fire(
+              this.$swal.fire(
                   'Successfully Update',
                 );
             } else {
@@ -202,7 +200,7 @@ this.$swal.fire(
     },
     async GetSettingList() {
       const response = await this.$axios.post(
-                "faqCategory/faqCategoryList"
+                "faqCategory/faqCategoryAll"
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.settinglist = response.data.list;
@@ -218,18 +216,21 @@ this.$swal.fire(
         "Content-Type": "application/json",
       };
       const response = await this.$axios.post(
-        "/general-setting/fetch",
+        "/faqCategory/fetch",
         {
-          setting_id: data.id,
+          settingId: data.faq_category_id,
         },
         { headers }
       );
       if (response.data.code == 200) {
-        this.settingId = response.data.list[0].faq_category_id;
-        this.gender = response.data.setting[0].faq_category;
-        this.index = response.data.setting[0].faq_;
-        this.status=response.data.setting[0].status;
+        this.settingId = data.faq_category_id;
+        this.category = response.data.list[0].faq_category;
+        this.index = response.data.list[0].index;
+        this.status=response.data.list[0].isactive;
         this.requesttype = "update";
+        
+        this.GetSettingList();
+        
       } else {
         this.$swal.fire({
                   icon: 'error',

@@ -26,8 +26,22 @@
                             </option>
                           </select>
                         </div>
-                        </div>
-                        <br>
+                        <div class="col-sm-5 ml-auto mb-3 search-box">
+                           <div class="input-group mt-4">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fa fa-search"></i>
+                            </span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Search By Question and Answer"
+                                v-model="search"
+                                @keyup="OnSearch"
+                              />
+                          </div>
+                  </div>
+                  </div>
+                  <br>
                   <table class="table table-striped data-table" style="width: 100%">
                     
                     <tbody>
@@ -61,6 +75,8 @@ export default {
       status: 1,
       categoryList:[],
       categoryId:"",
+      search:"",
+      keyword: "",
     };
   },
   mounted() {
@@ -72,8 +88,12 @@ export default {
    
   },
   methods: {
+    async OnSearch() {
+      this.GetSearchList();
+    },
 
     async onCatbind(event) {
+       this.search="";
       
             const response = await this.$axios.post(
                 "faqList/listbyId",
@@ -98,10 +118,28 @@ export default {
             }
         },
 
-  async GetSettingList() {
-          
+  async GetSettingList() {   
             const response = await this.$axios.post(
                 "faqList/list"
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.settinglist = response.data.list;
+            } else {
+                this.settinglist = [];
+            }
+        },
+  async GetSearchList() {  
+          if (!this.search) {
+              this.keyword = "no-keyword";
+            } else {
+              this.keyword = this.search;
+            }
+            const response = await this.$axios.post(
+                "faqList/search", 
+                {
+                  keyword: this.keyword,
+                  category: this.categoryId,
+                }
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.settinglist = response.data.list;
