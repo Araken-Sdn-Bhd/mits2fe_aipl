@@ -2211,7 +2211,7 @@
                                 <button @click="GoBack" class="btn btn-primary btn-text"><i
                                         class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
-                                <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''" v-if="!pid">
+                                <div class="btn-right" :class="SidebarAccess != 1 ? 'hide' : ''">
                                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                         <i class="fa fa-save"></i> Save as draft
                                     </button>
