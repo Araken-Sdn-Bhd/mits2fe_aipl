@@ -714,13 +714,15 @@
                                 <div
                                   class="
                                     col-sm-12
+                                    overdose-poisoning-div
                                     mt-3
-                                  " v-show="overdosevalue"
+                                    hide
+                                  "
                                 >
                                   <div class="mb-3">
                                     <select class="form-select" id="op-select" v-model="overdosevalue">
                                       <option value="">Please select</option>
-                                       <option
+                                   <option
                         v-for="slt in overdoselist"
                         v-bind:key="slt.section_value"
                         v-bind:value="slt.section_value"
@@ -730,7 +732,19 @@
                                     </select>
                                   </div>
                                   <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 medication op-box">
+                                  <div class="col-sm-12 medication" v-if="overdosevalue && overdosevalue!='none'">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control" v-model="Overdosespecify"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
+                                   <div class="col-sm-12 medication op-box">
                                     <div class="mb-3">
                                       <label class="form-label"
                                         >Please Specify</label
@@ -779,7 +793,7 @@
                                     id="2" v-model="hanging"
                                   />
                                   <label class="form-check-label" for="2">
-                                    Hanging/Suffocation
+                                    Hanging/Strangulation/Suffocation
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -791,7 +805,7 @@
                                     id="3" v-model="drowning"
                                   />
                                   <label class="form-check-label" for="3">
-                                    Drowning
+                                    Drowning/Submersion
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -803,7 +817,7 @@
                                     id="4" v-model="firearmsorexplosives"
                                   />
                                   <label class="form-check-label" for="4">
-                                    Firearms or explosives
+                                    Firearms/Explosives
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -817,7 +831,7 @@
                                     id="5"   v-model="fire_flames"
                                   />
                                   <label class="form-check-label" for="5">
-                                    Fire/flames
+                                    Smoke/Fire/Flames
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -830,7 +844,7 @@
 
                                   />
                                   <label class="form-check-label" for="6">
-                                    Cutting or Piercing
+                                    Cutting/Piercing
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -950,6 +964,18 @@
                                   />
                                   <label class="form-check-label" for="5.5">
                                     Broadcast media (television, radio)
+                                  </label>
+                                </div>
+                                <!-- checkbox -->
+                                <div class="form-check mb-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="Own ideas"
+                                    id="4.4" v-model="ideas" @click="onSectionC('val')"
+                                  />
+                                  <label class="form-check-label" for="4.4">
+                                    Own ideas
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -1701,10 +1727,51 @@
                         </select>
                       </div>
                     </div>
+                    <!-- close row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Additional psychiatric diagnosis</label
+                      >
+                      <div class="col-sm-4">
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+            {{ catcode.icd_code }} {{catcode.icd_name}}
+            </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Additional external cause of injury</label
+                      >
+                    <div class="col-sm-4">
+                        <select
+                        id="externalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                          <option value="0">Please Select</option>
+                         <option
+              v-for="catcode in diagonisislist_external"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+            {{ catcode.icd_code }} {{catcode.icd_name}}
+            </option>
+                        </select>
+                      </div>
+                      </div>
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >PSY MX on Discharge</label
+                        >Psychiatry Management on Discharge</label
                       >
                       <div class="col-sm-9">
                         <div class="form-check" v-for="(pb, index) in list1" :key="index">
@@ -1936,6 +2003,8 @@ export default {
       discharge_number_days_in_ward: 0,
       main_psychiatric_diagnosis: 0,
       external_cause_inquiry: 0,
+      additional_diagnosis: 0,
+      additional_external_cause_injury: 0,
       discharge_psy_mx: "",
       discharge_psy_mx_des: "",
       officername: "",
@@ -1967,6 +2036,7 @@ export default {
       family: "",
       internet: "",
       printed: "",
+      ideas: "",
       broadcast: "",
       patientactualword: "",
       patientactualword_other: "",
@@ -2559,6 +2629,7 @@ export default {
             this.internet=response.data.result.selfharm[2].section_value.Internet_website_social_media_platform_app_blogs_forum_video_photosharing;
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
+            this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
             this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
 
@@ -2590,6 +2661,10 @@ export default {
             response.data.result.hospital[0].main_psychiatric_diagnosis;
           this.external_cause_inquiry =
             response.data.result.hospital[0].external_cause_inquiry;
+            this.additional_diagnosis =
+            response.data.result.hospital[0].additionalbox;
+          this.additional_external_cause_injury =
+            response.data.result.hospital[0].externalbox;
           this.list1 =
             response.data.result.hospital[0].discharge_psy_mx.split(",");
           this.psychiatristId =
@@ -2838,6 +2913,7 @@ export default {
                     "Printed media (newspaper, books, magazine, etc)":
                       this.printed,
                     "Broadcast media (television, radio)": this.broadcast,
+                    "Own ideas":this.ideas,
                     "Specify patient actual words":
                       this.patientactualword_other,
                   },
@@ -2924,6 +3000,24 @@ export default {
       }
     },
     async OnSavehospitalmanagement() {
+      var additionalbox = "";
+      var externalbox = "";
+
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+
+      $("#externalbox :selected").each(function () {
+        if (externalbox) {
+          externalbox = externalbox + "," + this.value;
+        } else {
+          externalbox = this.value;
+        }
+      });
       this.errors = [];
       try {
         if (!this.referral_or_contact) {
@@ -3004,6 +3098,8 @@ export default {
               discharge_number_days_in_ward: this.discharge_number_days_in_ward,
               main_psychiatric_diagnosis: this.main_psychiatric_diagnosis,
               external_cause_inquiry: this.external_cause_inquiry,
+              additional_diagnosis: JSON.stringify(additionalbox),
+              additional_external_cause_injury: JSON.stringify(externalbox),
               discharge_psy_mx: this.discharge_psy_mx,
               discharge_psy_mx_des: this.discharge_psy_mx_des,
               sharp_register_id: this.Id,

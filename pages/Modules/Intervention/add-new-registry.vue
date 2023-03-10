@@ -1802,6 +1802,47 @@
                         </select>
                       </div>
                     </div>
+                    <!-- close row -->
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Additional psychiatric diagnosis</label
+                      >
+                      <div class="col-sm-4">
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+            {{ catcode.icd_code }} {{catcode.icd_name}}
+            </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-5 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"
+                        >Additional external cause of injury</label
+                      >
+                    <div class="col-sm-4">
+                        <select
+                        id="externalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                          <option value="0">Please Select</option>
+                         <option
+              v-for="catcode in diagonisislist_external"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+            {{ catcode.icd_code }} {{catcode.icd_name}}
+            </option>
+                        </select>
+                      </div>
+                      </div>
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
@@ -2109,6 +2150,8 @@ export default {
       discharge_date: "",
       discharge_number_days_in_ward: 0,
       main_psychiatric_diagnosis: 0,
+      additional_diagnosis: 0,
+      additional_external_cause_injury: 0,
       external_cause_inquiry: 0,
       discharge_psy_mx: "",
       discharge_psy_mx_des: "",
@@ -3202,6 +3245,25 @@ export default {
     },
 
     async OnDraftSavehospitalmanagement() {
+      var additionalbox = 0;
+      var externalbox = 0;
+
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+
+      $("#externalbox :selected").each(function () {
+        if (externalbox) {
+          externalbox = externalbox + "," + this.value;
+        } else {
+          externalbox = this.value;
+        }
+      });
+
       this.errors = [];
       try {
         if (this.referral_or_contact == "rcp") {
@@ -3236,6 +3298,8 @@ export default {
             discharge_number_days_in_ward: this.discharge_number_days_in_ward,
             main_psychiatric_diagnosis: this.main_psychiatric_diagnosis,
             external_cause_inquiry: this.external_cause_inquiry,
+            additional_diagnosis: JSON.stringify(additionalbox),
+            additional_external_cause_injury: JSON.stringify(externalbox),
             discharge_psy_mx: this.discharge_psy_mx,
             discharge_psy_mx_des: this.discharge_psy_mx_des,
             sharp_register_id: this.sharp_register_id,
@@ -3268,6 +3332,28 @@ export default {
       }
     },
     async OnSavehospitalmanagement() {
+      var Boxvalue = [];
+      var Boxvalue1 = [];
+      var additionalbox = "";
+      var externalbox = "";
+
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+      Boxvalue.push({ additionalbox });
+
+      $("#externalbox :selected").each(function () {
+        if (externalbox) {
+          externalbox = externalbox + "," + this.value;
+        } else {
+          externalbox = this.value;
+        }
+      });
+      Boxvalue1.push({ externalbox });
       this.errors = [];
       try {
         if (!this.referral_or_contact) {
@@ -3351,6 +3437,8 @@ export default {
               discharge_date: this.discharge_date,
               discharge_number_days_in_ward: this.discharge_number_days_in_ward,
               main_psychiatric_diagnosis: this.main_psychiatric_diagnosis,
+              additional_diagnosis: JSON.stringify(additionalbox),
+              additional_external_cause_injury: JSON.stringify(externalbox),
               external_cause_inquiry: this.external_cause_inquiry,
               discharge_psy_mx: this.discharge_psy_mx,
               discharge_psy_mx_des: this.discharge_psy_mx_des,
