@@ -47,7 +47,7 @@
                           :maxlength="12"
                           class="form-control"
                           placeholder="Enter NRIC NO"
-                          v-model="nricno" @change="CheckNric($event)"
+                          v-model="nricno"
                           v-on:keypress="NumbersOnly"
 
                         />
