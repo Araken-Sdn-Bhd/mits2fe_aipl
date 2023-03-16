@@ -111,6 +111,11 @@
                                                         <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxx" v-model="nric_no" />
                                                         <Error :message="error" v-if="error" />
                                                     </div>
+                                                    <div class="col-sm-6" v-if="this.nric_type_code == 'BC'">
+                                                        <label class="form-label">Birth Certificate<small>*</small></label>
+                                                        <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxx" v-model="nric_no" />
+                                                        <Error :message="error" v-if="error" />
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -150,7 +155,7 @@
 
                                         <div class="row mt-4">
                                             <div class="col-sm-2 mb-3">
-                                                <label class="form-label">Sex<small>*</small></label>
+                                                <label class="form-label">Gender<small>*</small></label>
                                             </div>
                                             <div class="col-sm-9 mb-3">
                                                 <div class="radio">
@@ -235,12 +240,18 @@
                                             <div class="col-sm-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Type of Referral<small>*</small></label>
-                                                    <select v-model="referral_type" class="form-select" aria-label="Default select example">
+                                                    <select v-model="referral_type" class="form-select" aria-label="Default select example" @change="OnchangeReferral($event)">
                                                         <option value="0">Select</option>
                                                         <option v-for="rfl in referallist" v-bind:key="rfl.id" v-bind:value="rfl.id">
                                                             {{ rfl.section_value }}
                                                         </option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" v-if="otherReferral">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Please Specify</label>
+                                                    <input type="text" class="form-control" v-model="other_referral" placeholder="please specify other referral" />
                                                 </div>
                                             </div>
                                         </div>
@@ -452,7 +463,7 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Education Level</label>
-                                                    <select v-model="education_level" class="form-select" aria-label="Default select example">
+                                                    <select v-model="education_level" class="form-select" aria-label="Default select example" @change="OnchangeEducation($event)">
                                                         <option value="0">Select</option>
                                                         <option v-for="edu in educationlist" v-bind:key="edu.id" v-bind:value="edu.id">
                                                             {{ edu.section_value }}
@@ -460,6 +471,17 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-6" v-if="otherEducation">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_education"
+                            placeholder="please specify other education status"
+                          />
+                        </div>
+                        </div>
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Occupation Sector</label>
@@ -805,18 +827,22 @@ export default {
             id: 0,
             text: "",
             branch_id: 0,
+            otherReferral: false,
             otherRace: false,
             otherReligion: false,
             otherAccommodation: false,
             otherMarital: false,
             otherFeeExemStatus: false,
             otherOccStatus: false,
+            otherEducation: false,
             other_race: "",
             other_religion: "",
             other_accommodation: "",
             other_maritalList: "",
             other_feeExemptionStatus: "",
             other_occupationStatus: "",
+            other_education: "",
+            other_referral: "",
             race_type: "",
             nric_type_code: "",
             SidebarAccess: null,
@@ -1451,6 +1477,13 @@ export default {
                 this.otherOccStatus = false;
             }
         },
+        OnchangeReferral(event) {
+            if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+                this.otherReferral = true;
+            } else {
+                this.otherReferral = false;
+            }
+    },
 
         selectFile(event) {
             this.file = event.target.files[0];
@@ -1538,6 +1571,8 @@ export default {
                 body.append("other_maritalList", this.other_maritalList);
                 body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
                 body.append("other_occupationStatus", this.other_occupationStatus);
+                body.append("other_education", this.other_education);
+                body.append("other_referral", this.other_referral);
 
                 body.append("branch_id", this.branchId);
 
@@ -1649,6 +1684,7 @@ export default {
                     };
                 }
                 if(response.data.list[0].referral_type != null){ this.referral_type = response.data.list[0].referral_type;}
+                this.other_referral = response.data.list[0].other_referral;
                 if(response.data.list[0].address1 != null){ this.address1 = response.data.list[0].address1;}
                 if(response.data.list[0].address2 != null){ this.address2 = response.data.list[0].address2;}
                 if(response.data.list[0].address3 != null){ this.address3 = response.data.list[0].address3;}
@@ -1677,11 +1713,43 @@ export default {
                 if(response.data.list[0].occupation_sector != null){ this.occupation_sector = response.data.list[0].occupation_sector;}
                 if(response.data.list[0].education_level != null){ this.education_level = response.data.list[0].education_level;}
                 if(response.data.list[0].other_race != null){  this.other_race = response.data.list[0].other_race;}
+                if (response.data.list[0].race[0].section_value == "OTHERS") {
+                    this.otherRace = true;
+                } else {
+                    this.otherRace = false;
+                }
                 if(response.data.list[0].other_religion != null){ this.other_religion = response.data.list[0].other_religion;}
+                if (response.data.list[0].religion[0].section_value == "OTHERS") {
+                    this.otherReligion = true;
+                } else {
+                    this.otherReligion = false;
+                }
                 if(response.data.list[0].other_accommodation != null){ this.other_accommodation = response.data.list[0].other_accommodation;}
+                if (response.data.list[0].accomondation[0].section_value == "OTHERS") {
+                    this.otherAccommodation = true;
+                } else {
+                    this.otherAccommodation = false;
+                }
+
                 if(response.data.list[0].other_maritalList != null){  this.other_maritalList = response.data.list[0].other_maritalList;}
+                if (response.data.list[0].maritialstatus[0].section_value == "OTHERS") {
+                    this.otherMarital = true;
+                } else {
+                    this.otherMarital = false;
+                }
                 if(response.data.list[0].other_feeExemptionStatus != null){ this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;}
                 if(response.data.list[0].other_occupationStatus != null){ this.other_occupationStatus = response.data.list[0].other_occupationStatus;}
+                if (response.data.list[0].occupation[0].section_value == "OTHERS") {
+                    this.otherOccStatus = true;
+                } else {
+                    this.otherOccStatus = false;
+                }
+                this.other_education = response.data.list[0].other_education;
+                if (response.data.list[0].education[0].section_value == "OTHERS") {
+                  this.otherEducation = true;
+                } else {
+                  this.otherEducation = false;
+                }
                 if(response.data.list[0].kin_name_asin_nric != null){ this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;}
                 if(response.data.list[0].kin_relationship_id != null){ this.kin_relationship_id = response.data.list[0].kin_relationship_id;}
                 if(response.data.list[0].kin_nric_no != null){ this.kin_nric_no = response.data.list[0].kin_nric_no;}
@@ -1718,39 +1786,10 @@ export default {
                 } else {
                     this.uploaddoc = false;
                 }
-                if (response.data.list[0].race[0].section_value == "OTHERS") {
-                    this.otherRace = true;
-                } else {
-                    this.otherRace = false;
-                }
-
-                if (response.data.list[0].religion[0].section_value == "OTHERS") {
-                    this.otherReligion = true;
-                } else {
-                    this.otherReligion = false;
-                }
-                if (response.data.list[0].maritialstatus[0].section_value == "OTHERS") {
-                    this.otherMarital = true;
-                } else {
-                    this.otherMarital = false;
-                }
-
-                if (response.data.list[0].accomondation[0].section_value == "OTHERS") {
-                    this.otherAccommodation = true;
-                } else {
-                    this.otherAccommodation = false;
-                }
-
                 if (response.data.list[0].fee[0].section_value == "OTHERS") {
                     this.otherFeeExemStatus = true;
                 } else {
                     this.otherFeeExemStatus = false;
-                }
-
-                if (response.data.list[0].occupation[0].section_value == "OTHERS") {
-                    this.otherOccStatus = true;
-                } else {
-                    this.otherOccStatus = false;
                 }
 
                 this.loader = false;
