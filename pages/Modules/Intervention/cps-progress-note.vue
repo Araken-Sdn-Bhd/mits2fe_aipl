@@ -57,7 +57,7 @@
                                     <tr class="three-td">
                                         <th>Visit Date & time<small style="color:red">*</small> :</th>
                                         <td class="tdl-5">
-                                            <input type="date" class="form-control" name="" v-model="visit_date" />
+                                            <input type="date" class="form-control" name="" v-model="cps_date" />
                                         </td>
                                         <td class="tdl-5">
                                             <input type="time" class="form-control" name="" v-model="visit_time" />
@@ -1953,9 +1953,9 @@ export default {
             cps_discussed_with: "",
             visit_date: "",
             visit_time: "",
-            informants_name: "",
-            informants_relationship: "",
-            informants_contact: "",
+            informants_name: "-",
+            informants_relationship: "-",
+            informants_contact: "-",
             case_manager: "",
             visited_by: "",
             visit_outcome: "",
@@ -2096,7 +2096,7 @@ export default {
                                 cps_date_discussed: this.cps_date_discussed,
                                 cps_time_discussed: this.cps_time_discussed,
                                 cps_discussed_with: this.cps_discussed_with,
-                                visit_date: this.visit_date,
+                                visit_date: this.cps_date, //visit_date
                                 visit_time: this.visit_time,
                                 informants_name: this.informants_name,
                                 informants_relationship: this.informants_relationship,
@@ -2216,15 +2216,15 @@ export default {
                         if (!this.visit_date || !this.visit_time) {
                             this.errorList.push("Visit Date & time is required");
                         }
-                        if (!this.informants_name) {
-                            this.errorList.push("Informants NAME is required");
-                        }
-                        if (!this.informants_relationship) {
-                            this.errorList.push("Informants RELATIONSHIP is required");
-                        }
-                        if (!this.informants_contact) {
-                            this.errorList.push("Informants CONTACT NO is required");
-                        }
+                        // if (!this.informants_name) {
+                        //     this.errorList.push("Informants NAME is required");
+                        // }
+                        // if (!this.informants_relationship) {
+                        //     this.errorList.push("Informants RELATIONSHIP is required");
+                        // }
+                        // if (!this.informants_contact) {
+                        //     this.errorList.push("Informants CONTACT NO is required");
+                        // }
                         if (!this.case_manager) {
                             this.errorList.push("Case Manager	 is required");
                         }
@@ -2499,7 +2499,7 @@ export default {
                                     cps_date_discussed: this.cps_date_discussed,
                                     cps_time_discussed: this.cps_time_discussed,
                                     cps_discussed_with: this.cps_discussed_with,
-                                    visit_date: this.visit_date,
+                                    visit_date: this.cps_date,
                                     visit_time: this.visit_time,
                                     informants_name: this.informants_name,
                                     informants_relationship: this.informants_relationship,
