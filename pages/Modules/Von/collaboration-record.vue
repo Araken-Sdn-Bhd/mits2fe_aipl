@@ -87,7 +87,7 @@
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ app.name }}</td>
                                     <td>{{ app.section }}</td>
-                                    <td>{{ app.aoi }}</td>
+                                    <td>{{ app.area_of_involvement }}</td>
                                     <td>{{ app.services_type }}</td>
                                     <td>{{ app.phone_number }}</td>
                                     <td>{{ app.email }}</td>
@@ -193,7 +193,7 @@ export default {
                 "von/collaboration-list", {
                     name: this.name,
                     section: this.section,
-                    aoi: this.area_of_involvement,
+                    area_of_involvement: this.area_of_involvement,
                     service: this.service,
                     email: this.userdetails.user.email,
                     branch_id: this.userdetails.branch.branch_id

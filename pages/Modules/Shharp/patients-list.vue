@@ -161,10 +161,10 @@ export default {
             return moment(date).format("DD-MM-YYYY")
         },
 
-    oneditPatient(Id) {
+    oneditPatient(patient_id) {
       this.$router.push({
         path: "/modules/Shharp/patient-summary",
-        query: { id: Id },
+        query: { id: patient_id},
       });
     },
     async getData() {
@@ -223,6 +223,7 @@ export default {
 
     },
     async OnSearch() {
+
       localStorage.removeItem('keyword');
       this.list = [];
       const headers = {

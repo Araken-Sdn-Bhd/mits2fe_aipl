@@ -3,7 +3,7 @@
     <div class="card-header bg-transparent">
       <h4>
         Screen and Module Management (<span style="color: red"
-          >*Please contact your system administrator for assistant</span
+          >*Please contact your system administrator for assistance</span
         >)
       </h4>
     </div>

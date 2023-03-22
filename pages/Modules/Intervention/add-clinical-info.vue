@@ -17,6 +17,21 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <form class="mt-3" method="post" @submit.prevent="OnAddClinicalInfo">
+                          <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter Name" v-model="name" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">NRIC/Passport No.</label>
+                                        <input type="text" class="form-control" placeholder="Enter NRIC/Passport No." v-model="nric_or_passportno" />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
@@ -123,6 +138,8 @@ export default {
         return {
             userdetails: null,
             Id: 0,
+            name: "",
+            nric_or_passportno: "",
             temperature: "",
             blood_pressure: "",
             pulse_rate: "",
@@ -145,6 +162,7 @@ export default {
         this.Id = urlParams.get("id");
         let urlParams2 = new URLSearchParams(window.location.search);
         this.appId = urlParams2.get("appId");
+        this.GetPatientdetails();
     },
     methods: {
         async OnAddClinicalInfo() {
@@ -265,6 +283,32 @@ export default {
             });
       };
     },
+    async GetPatientdetails() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "patient-registration/getPatientRegistrationById", {
+                    id: this.Id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.name = response.data.list[0].name_asin_nric;
+                this.nric_or_passportno = response.data.list[0].nric_no;
+                console.log("my details", this.patientdetails);
+            } else {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
+                });
+            }
+        },
         calculateBMI() {
             var heightInMeter = this.height / 100;
             var val = this.weight / (heightInMeter * heightInMeter);

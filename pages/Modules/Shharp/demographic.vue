@@ -35,7 +35,8 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Employment Status</label>
-                      <select class="form-select" aria-label="" v-model="employment_id">
+                      <select class="form-select" aria-label="" v-model="employment_id"
+                      @change="OnchangeOccStatus($event)">
                         <option value="">Please Select</option>
                         <option v-for="emp in employstatuslist" v-bind:key="emp.id" v-bind:value="emp.id">
                           {{ emp.section_value }}
@@ -43,6 +44,17 @@
                       </select>
                     </div>
                   </div>
+                  <div class="col-sm-6" v-if="otherOccStatus ">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_occupationStatus"
+                            placeholder="please specify"
+                          />
+                        </div>
+                        </div>
                 </div>
 
                 <div class="row mt-3 align-items-center">
@@ -313,7 +325,6 @@ export default {
       citizenshiplist: [],
       genderlist: [],
       employstatuslist: [],
-
       race_id: 0,
       religion_id: 0,
       marital_id: 0,
@@ -328,6 +339,7 @@ export default {
       otherReligion: false,
       otherRace: false,
       otherEducation: false,
+      otherOccStatus:false,
       name_asin_nric: "",
       citizenship: "",
       sex: "",
@@ -350,6 +362,7 @@ export default {
       other_religion: "",
       other_race: "",
       other_education: "",
+      other_occupationStatus:"",
 
     };
   },
@@ -478,7 +491,7 @@ export default {
       }
 
       const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "employment-status",
+        "general-setting/list?section=" + "occupation-status",
         { headers }
       );
       if (response9.data.code == 200 || response9.data.code == "200") {
@@ -824,6 +837,7 @@ export default {
         this.expiry_date = response.data.list[0].expiry_date;
         this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;
         this.employment_id = response.data.list[0].employment_status;
+        this.other_occupationStatus = response.data.list[0].other_occupationStatus;
         this.Id = response.data.list[0].id;
         this.country_id = response.data.list[0].country_id;
         this.marital_id = response.data.list[0].marital_id;
@@ -933,6 +947,13 @@ export default {
         this.otherEducation = true;
       } else {
         this.otherEducation = false;
+      }
+    },
+    OnchangeOccStatus(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherOccStatus = true;
+      }else{
+        this.otherOccStatus = false;
       }
     },
   },
