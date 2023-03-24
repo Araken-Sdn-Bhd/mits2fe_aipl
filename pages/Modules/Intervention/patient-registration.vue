@@ -224,6 +224,16 @@
                               />
                               <Error :message="error" v-if="error" />
                             </div>
+                            <div class="col-sm-6" v-if="nric_type_code == 'Birth Certificate'">
+                              <label class="form-label">Birth Certificate<small>*</small></label>
+                              <input
+                                type="tel"
+                                class="form-control toCapitalFirst"
+                                placeholder="xxxxxxxx"
+                                v-model="nric_no"
+                              />
+                              <Error :message="error" v-if="error" />
+                            </div>
                           </div>
                         </div>
 
@@ -288,7 +298,7 @@
 
                       <div class="row mt-4">
                         <div class="col-sm-2 mb-3">
-                          <label class="form-label">Sex<small>*</small></label>
+                          <label class="form-label">Gender<small>*</small></label>
                         </div>
                         <div class="col-sm-9 mb-3">
                           <div class="radio">
@@ -429,24 +439,28 @@
                         <!-- col-sm-4 -->
 
                         <div class="col-sm-4">
-                          <div class="mb-3">
-                            <label class="form-label">Type of Referral<small>*</small></label>
-                            <select
-                              v-model="referral_type"
-                              class="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option value="0">Select</option>
-                              <option
+                    <div class="mb-3">
+                      <label class="form-label">Type of Referral<small>*</small></label>
+                      <select v-model="referral_type" class="form-select" aria-label="Default select example"
+                      @change="OnchangeReferral($event)">
+                        <option value="0">Select</option>
+                        <option
                                 v-for="rfl in referallist"
                                 v-bind:key="rfl.id"
                                 v-bind:value="rfl.id"
                               >
                                 {{ rfl.section_value }}
                               </option>
-                            </select>
-                          </div>
-                        </div>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-4" v-if="otherReferral">
+                    <div class="mb-3">
+                      <label class="form-label">Please Specify</label>
+                      <input type="text" class="form-control" v-model="other_referral"
+                        placeholder="please specify other referral" />
+                    </div>
+                  </div>
                       </div>
                       <!-- close-row -->
 
@@ -777,6 +791,7 @@
                               v-model="education_level"
                               class="form-select"
                               aria-label="Default select example"
+                              @change="OnchangeEducation($event)"
                             >
                               <option value="0">Select</option>
                               <option
@@ -788,6 +803,17 @@
                               </option>
                             </select>
                           </div>
+                        </div>
+                        <div class="col-sm-6" v-if="otherEducation">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="other_education"
+                            placeholder="please specify other education status"
+                          />
+                        </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="mb-3">
@@ -1358,12 +1384,16 @@ export default {
       otherMarital:false,
       otherFeeExemStatus:false,
       otherOccStatus:false,
+      otherReferral:false,
+      otherEducation:false,
       other_race:"",
       other_religion:"",
       other_accommodation:"",
       other_maritalList:"",
       other_feeExemptionStatus:"",
       other_occupationStatus:"",
+      other_referral: "",
+      other_education: "",
       race_type:"",
       nric_type_code:"",
       SidebarAccess:null,
@@ -1740,7 +1770,6 @@ export default {
       } else {
         this.postcodelist = [];
       }
-
     },
     async onSelectedStateKin(event){
       const headers = {
@@ -1913,6 +1942,20 @@ export default {
         this.otherOccStatus = false;
       }
     },
+    OnchangeEducation(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.otherEducation = true;
+      }else{
+        this.otherEducation = false;
+      }
+    },
+    async OnchangeReferral(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+        this.otherReferral = true;
+      } else {
+        this.otherReferral = false;
+      }
+    },
 
     selectFile(event) {
       this.file = event.target.files[0];
@@ -1996,7 +2039,7 @@ export default {
           }else if(this.citizentype == "Malaysian"){
           body.append("nric_no", this.nric_no);
         }
-         
+
           body.append("referral_letter", this.file);
           body.append("passport_no", this.passport_no);
           body.append("expiry_date", this.expiry_date);
@@ -2010,6 +2053,9 @@ export default {
           body.append("other_maritalList", this.other_maritalList);
           body.append("other_feeExemptionStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
+          body.append("other_referral", this.other_referral);
+          body.append("other_education", this.other_education);
+          body.append("other_referral", this.other_referral);
           body.append("patient_request_id", this.rid);
 
 
@@ -2094,6 +2140,7 @@ export default {
           body.append("mintari_mrn_no", this.mintari_mrn_no);
           body.append("services_type", this.services_type.id);
           body.append("referral_type", this.referral_type);
+          body.append("other_referral", this.other_referral);
           body.append("referral_letter", this.referral_letter);
           body.append("address1", this.address1);
           body.append("address2", this.address2);
@@ -2147,6 +2194,8 @@ export default {
           body.append("other_marital", this.other_maritalList);
           body.append("other_feeExemStatus", this.other_feeExemptionStatus);
           body.append("other_occupationStatus", this.other_occupationStatus);
+          body.append("other_education", this.other_education);
+          body.append("other_referral", this.other_referral);
           if (this.Id > 0) {
             const response = await this.$axios.post(
               "patient-registration/update",
@@ -2256,7 +2305,7 @@ export default {
         var str = response.data.list[0].nric_no;
         this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
         console.log('nric',this.nric_no);
-       
+
         this.nric_type = response.data.list[0].nric_type;
         this.occupation_sector = response.data.list[0].occupation_sector;
         this.occupation_status = response.data.list[0].occupation_status;
@@ -2265,32 +2314,59 @@ export default {
         this.passport_no = response.data.list[0].passport_no;
         this.patient_mrn = response.data.list[0].patient_mrn;
         this.postcode = response.data.list[0].postcode;
+
         this.race_id = response.data.list[0].race_id;
+        this.other_race = response.data.list[0].other_race;
+        if (response.data.list[0].race[0].section_value == "OTHERS") {
+          this.otherRace = true;
+        } else {
+          this.otherRace = false;
+        }
         this.referral_letter = response.data.list[0].referral_letter;
         this.referral_type = response.data.list[0].referral_type;
+        this.other_referral = response.data.list[0].other_referral;
         this.religion_id = response.data.list[0].religion_id;
+        this.other_religion= response.data.list[0].other_religion;
+        if (response.data.list[0].religion[0].section_value == "OTHERS") {
+          this.otherReligion = true;
+        } else {
+          this.otherReligion = false;
+        }
         this.salutation_id = response.data.list[0].salutation_id;
         this.services_type = {id: response.data.list[0].services_type, text: response.data.list[0].service['service_name']};
-
         this.sex = response.data.list[0].sex;
         this.state_id = response.data.list[0].state_id;
         this.status = response.data.list[0].status;
         this.traditional_description = response.data.list[0].traditional_description;
         this.traditional_medication = response.data.list[0].traditional_medication;
 
-
         this.citizentype = response.data.list[0].citizenships[0].section_value;
 
-        this.race
-
-
-        this.other_race = response.data.list[0].other_race;
-        this.other_religion= response.data.list[0].other_religion;
         this.other_accommodation = response.data.list[0].other_accommodation;
+        if (response.data.list[0].accomondation[0].section_value == "OTHERS") {
+          this.otherAccomodation = true;
+        } else {
+          this.otherAccomodation = false;
+        }
         this.other_maritalList = response.data.list[0].other_maritalList;
+        if (response.data.list[0].maritalstatus[0].section_value == "OTHERS") {
+          this.otherMarital = true;
+        } else {
+          this.otherMarital = false;
+        }
         this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;
         this.other_occupationStatus = response.data.list[0].other_occupationStatus;
-
+        if (response.data.list[0].occupation[0].section_value == "OTHERS") {
+          this.otherOccStatus = true;
+        } else {
+          this.otherOccStatus = false;
+        }
+        this.other_education = response.data.list[0].other_education;
+        if (response.data.list[0].education[0].section_value == "OTHERS") {
+          this.otherEducation = true;
+        } else {
+          this.otherEducation = false;
+        }
         const response6 = await this.$axios.get("address/postcodelistfiltered?state="+this.state_id, {
         headers,
       });
@@ -2355,7 +2431,7 @@ export default {
       }
     },
     OnnricNo() {
-      if (this.nric_no.length > this.maxLength){ 
+      if (this.nric_no.length > this.maxLength){
         this.nric_no = this.nric_no.slice(0, this.maxLength)
         };
       if (this.nric_no.length == 12) {
@@ -2391,7 +2467,7 @@ export default {
       );
     },
     OnnricNo1() {
-      if (this.nric_no1.length > this.maxLength){ 
+      if (this.nric_no1.length > this.maxLength){
         this.nric_no1 = this.nric_no1.slice(0, this.maxLength)
         };
       if (this.nric_no1.length == 12) {

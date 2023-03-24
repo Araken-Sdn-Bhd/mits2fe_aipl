@@ -2332,8 +2332,10 @@ export default {
       });
       if (response7.data.code == 200 || response7.data.code == "200") {
         this.diagonisislist = response7.data.list;
+        this.diagonisislist_external = response7.data.list_external;
       } else {
         this.diagonisislist = [];
+        this.diagonisislist_external = [];
       }
       const response8 = await this.$axios.get(
         "general-setting/list?section=" + "type-of-substance",
@@ -2661,10 +2663,16 @@ export default {
             response.data.result.hospital[0].main_psychiatric_diagnosis;
           this.external_cause_inquiry =
             response.data.result.hospital[0].external_cause_inquiry;
-            this.additional_diagnosis =
-            response.data.result.hospital[0].additionalbox;
-          this.additional_external_cause_injury =
-            response.data.result.hospital[0].externalbox;
+            this.additional_diagnosis = response.data.result.hospital[0].additional_diagnosis.split(",");
+            $("#additionalbox")
+            .val(this.additional_diagnosis)
+            .trigger("change");
+
+            this.additional_external_cause_injury = response.data.result.hospital[0].additional_external_cause_injury.split(",");
+            $("#externalbox")
+            .val(this.additional_external_cause_injury)
+            .trigger("change");
+
           this.list1 =
             response.data.result.hospital[0].discharge_psy_mx.split(",");
           this.psychiatristId =
