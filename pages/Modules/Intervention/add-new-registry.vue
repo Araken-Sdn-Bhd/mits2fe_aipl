@@ -730,7 +730,6 @@
                                     Overdose/Poisoning
                                   </label>
                                 </div>
-                                <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div
                                   class="
@@ -740,20 +739,7 @@
                                     hide
                                   "
                                 >
-                                  <div class="mb-3">
-                                    <select class="form-select" id="op-select" v-model="overdosevalue">
-                                      <option value="">Please select</option>
-                                   <option
-                        v-for="slt in overdoselist"
-                        v-bind:key="slt.section_value"
-                        v-bind:value="slt.section_value"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                                    </select>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 medication" v-if="overdosevalue && overdosevalue!='none'">
+                                <div class="col-sm-12">
                                     <div class="mb-3">
                                       <label class="form-label"
                                         >Please Specify</label
@@ -765,47 +751,8 @@
                                       />
                                     </div>
                                   </div>
-                                   <div class="col-sm-12 medication op-box">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 chemicals op-box">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div
-                                    class="col-sm-12 illicit-substance op-box"
-                                  >
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
                                 </div>
+
                                 <div class="form-check mb-3">
                                   <input
                                     class="form-check-input"
@@ -1700,14 +1647,17 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p>
-                          <input
+                          <label class="pafca-other-div hide">If admitted, specify the first admitting ward</label>
+                          <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
+                          <div class="col-sm-3">
+                            <input
                             type="text"
                             class="form-control pafca-other-div hide"
                             id="attempt"
                             style="display: none"
                             placeholder="Please Specify" v-model="patient_admitted_des"
                           />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1733,7 +1683,7 @@
                             class="form-check-input"
                             type="radio"
                             name="Status on Discharge"
-                            id="sond2" value="Dead" v-model="discharge_status"
+                            id="sond2" value="Alive" v-model="discharge_status"
                           />
                           <label class="form-check-label" for="sond2">
                             Alive
@@ -3375,7 +3325,7 @@ export default {
           this.errors.push("patient admitted for current is required.");
         }
         if (!this.discharge_status) {
-          this.errors.push("Status on Dischargeis required.");
+          this.errors.push("Status on Discharge is required.");
         }
         if (!this.discharge_date) {
           this.errors.push("Discharge Date is required.");
