@@ -73,7 +73,7 @@
                                         <tr>
                                             <div v-if="index < review_patient.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
                                                     <td><span class="number">{{ index+1 }}</span></td>
-                                                    <td><a v-bind:href="'/modules/Intervention/patient-care-plan-and-case-review?pid='+ review_patient[ann-1].id+'&type=view'">{{ review_patient[ann-1].name_asin_nric }} ({{ getFormattedDate(review_patient[ann-1].next_review_date) }})</a></td>
+                                                    <td><a v-bind:href="'/app/modules/Intervention/patient-care-plan-and-case-review?pid='+ review_patient[ann-1].id+'&type=view'">{{ review_patient[ann-1].name_asin_nric }} ({{ getFormattedDate(review_patient[ann-1].next_review_date) }})</a></td>
                                             </div>
                                             <div v-if="AnnouncmentToShow< review_patient.length || review_patient.length > AnnouncmentToShow">
                                                     <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
