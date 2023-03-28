@@ -83,6 +83,20 @@
                     </select>
                   </div>
                 </div>
+                <!-- close row -->
+                <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label">Restart Program<small style="color:red">*</small></label>
+                                <div class="col-sm-8">
+                                  <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="Yes" name="inlineRadioOptions1" v-model="restart_program" />
+                                        <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions1" v-model="restart_program" />
+                                        <label class="form-check-label" for="inlineCheckbox2">No</label>
+                                    </div>
+                                </div>
+                            </div>
                 <!-- close-row -->
                 <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label">Progress Note<small style="color:red">*</small></label>
@@ -415,6 +429,7 @@ export default {
       date: "",
       time: "",
       staff_name: "",
+      restart_program: "",
       progress_note: "",
       management_plan: "",
       location_services_id: 0,
@@ -588,6 +603,7 @@ export default {
                                 date: this.date,
                                 time: this.time,
                                 staff_name: this.staff_name,
+                                restart_program: this.restart_program,
                                 progress_note: this.progress_note,
                                 management_plan: this.management_plan,
                                 location_service: this.location_services_id,
@@ -667,6 +683,9 @@ export default {
                         if (!this.employment_status) {
                             this.errorList.push("Employment Status is required");
                         }
+                        if (!this.restart_program) {
+                            this.errorList.push("Restart Program is required");
+                        }
                         if (!this.progress_note) {
                             this.errorList.push("Progress Note is required");
                         }
@@ -720,6 +739,7 @@ export default {
                             this.date &&
                             this.time &&
                             this.staff_name &&
+                            this.restart_program &&
                             this.progress_note &&
                             this.management_plan &&
                             this.location_services_id &&
@@ -746,6 +766,7 @@ export default {
                                     date: this.date,
                                     time: this.time,
                                     staff_name: this.staff_name,
+                                    restart_program: this.restart_program,
                                     progress_note: this.progress_note,
                                     management_plan: this.management_plan,
                                     location_service: this.location_services_id,
@@ -855,6 +876,7 @@ export default {
       this.date = "";
       this.time = "";
       this.staff_name = "";
+      this.restart_program = "",
       this.progress_note = "";
       this.management_plan = "";
       this.location_services_id = 0;
@@ -893,6 +915,7 @@ export default {
         this.date = response.data.Data[0].date;
         this.time = response.data.Data[0].time;
         this.staff_name = response.data.Data[0].staff_name;
+        this.restart_program = response.data.Data[0].restart_program
         this.progress_note = response.data.Data[0].progress_note;
         this.management_plan = response.data.Data[0].management_plan;
         this.location_services_id = response.data.Data[0].location_service;
