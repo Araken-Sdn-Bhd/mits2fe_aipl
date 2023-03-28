@@ -566,10 +566,10 @@ export default {
             this.errorList = [];
             this.error = null;
             if (!this.fromMonth) {
-                this.errorList.push("From date is Required!");
+                this.errorList.push("Period Of Services is Required!");
             }
             if (!this.toMonth) {
-                this.errorList.push("To date is Required!");
+                this.errorList.push("Period Of Services is Required!");
             }
             if (this.fromMonth && this.toMonth) {
                 try {
