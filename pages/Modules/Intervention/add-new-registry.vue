@@ -1151,13 +1151,20 @@
                                     >Other</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div class="intent-other-div hide">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="Please Specify" v-model="intent_other"
-                                    />
+                                  <div class="intent-other-div hide" style="display:none;">
+                                  <div class="col-sm-12">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control" v-model="Overdosespecify"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
                                   </div>
+                                </div>
                                   <!-- SHOW_DIV -->
                                 </div>
                               </div>
@@ -1647,17 +1654,16 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <label class="pafca-other-div hide">If admitted, specify the first admitting ward</label>
-                          <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
-                          <div class="col-sm-3">
+                          <div class="pafca-other-div hide" style="display:none;">
+                          <div class="mb-3">
+                            <label>If admitted, specify the first admitting ward</label>
                             <input
-                            type="text"
-                            class="form-control pafca-other-div hide"
-                            id="attempt"
-                            style="display: none"
-                            placeholder="Please Specify" v-model="patient_admitted_des"
-                          />
+                              type="text"
+                              class="form-control"
+                              placeholder="Please Specify" v-model="patient_admitted_des"
+                            />
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -2868,7 +2874,7 @@ export default {
               },
               {
                 "Method of Self-Harm": {
-                  "Overdose/Poisoning": this.overdosevalue,
+                  "Overdose/Poisoning": this.overdose,
                   "Hanging/Suffocation": this.hanging,
                   Drowning: this.drowning,
                   "Firearms or explosives": this.firearmsorexplosives,
@@ -2876,6 +2882,7 @@ export default {
                   "Cutting or Piercing": this.cuttingorpiercing,
                   "Jumping from height": this.jumpingfromheight,
                   Other: this.selfharm_other,
+                  Overdosespecify:this.Overdosespecify
                 },
               },
               {
@@ -2993,7 +3000,7 @@ export default {
                 },
                 {
                   "Method of Self-Harm": {
-                    "Overdose/Poisoning": this.overdosevalue,
+                    "Overdose/Poisoning": this.overdose,
                     "Hanging/Suffocation": this.hanging,
                     Drowning: this.drowning,
                     "Firearms or explosives": this.firearmsorexplosives,
@@ -3001,6 +3008,7 @@ export default {
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
                     Other: this.selfharm_other,
+                    Overdosespecify:this.Overdosespecify
                   },
                 },
                 {
@@ -3025,7 +3033,7 @@ export default {
               ]),
               sharp_register_id: this.sharp_register_id,
               status: "1",
-              Overdosespecify:this.Overdosespecify
+
             },
             { headers }
           );
