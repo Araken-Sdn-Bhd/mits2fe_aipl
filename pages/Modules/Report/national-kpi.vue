@@ -56,14 +56,14 @@
                                 <!-- row -->
                                 <div class="row">
 
-                                    <div v-if="(user_role=='superadmin')" class="col-sm-6">
+                                    <div v-if="(user_role=='superadmin' || user_role=='high level')" class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Level of Report:</label>
                                             <select class="form-select" v-model="level_report" @change="OnchangeLeveofReport($event)">
                                                 <option value="" selected="selected">Please Select</option>
                                                 <option value="National">National</option>
                                                 <option value="State">State</option>
-                                                <option value="Hospital">Hospital</option>
+                                                <option value="Hospital">Mentari</option>
                                             </select>
                                         </div>
 
@@ -73,7 +73,7 @@
                                         <div class="mb-3 mentari selected-box">
                                             <div v-if="this.level_report == 'Hospital'" style="position:relative; top:30px;">
                                                 <select class="form-select select-others" v-model="hospital">
-                                                    <option value="" selected="selected">Please Select Hospital</option>
+                                                    <option value="" selected="selected">Please Select Mentari</option>
                                                     <option v-for="brn in BranchList" v-bind:key="brn.id" v-bind:value="brn.id">
                                                         {{ brn.hospital_branch_name }}
                                                     </option>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div id="result"  ref="result" style="background: #fff">
+                <div id="result"  ref="result" class="hide" style="background: #fff">
                     <h4>NATIONAL KPI REPORT</h4>
                     
                     
@@ -540,7 +540,7 @@ export default {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 };
-                const response2 = await this.$axios.get("hospital/branch-list", {
+                const response2 = await this.$axios.get("hospital/branch-excluded-hospital-list", {
                     headers,
                 });
                 if (response2.data.code == 200 || response2.data.code == "200") {
@@ -603,7 +603,7 @@ export default {
 
                         setTimeout(() => {
                             this.$refs.result.classList.remove("hide");
-                            var pdf = new jsPDF("l", "px", [929, 1920], "A4");
+                            var pdf = new jsPDF("l", "px", [937,1920], "A4");
                             pdf.internal.scaleFactor = 1.0; //A3 or use 1.41  // = 2.0; (working great with yellow page result before insert dummy data)
 
                             var options = {
