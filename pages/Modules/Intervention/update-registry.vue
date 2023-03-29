@@ -639,7 +639,7 @@
                                 <label class="form-label"
                                   >Place of Occurrence</label
                                 >
-                                <select class="form-select select-others" v-model="place_id">
+                                <select class="form-select" @change="OnchangePlace($event)" v-model="place_id">
                                   <option value="0">Please Select</option>
                                  <option
                         v-for="slt in placelist"
@@ -648,27 +648,23 @@
                       >
                         {{ slt.section_value }}
                       </option>
-                                  <option value="others">
-                                    Other area (Please specify)
-                                  </option>
+
                                 </select>
                               </div>
                               <!-- SHOW_DIV -->
-                              <div
-                                class="col-sm-12 others selected-box mt-3"
-                                style="display: none"
-                              >
-                                <div class="mb-3">
-                                  <label class="form-label"
-                                    >Others (Please specify)</label
-                                  >
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Please Specify" v-model="place_other"
-                                  />
-                                </div>
-                              </div>
+
+<div class="col-sm-6" v-if="placeOther">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="place_other"
+                            placeholder="please specify"
+
+                          />
+                        </div>
+                        </div>
                             </div>
                           </div>
                         </div>
@@ -812,7 +808,7 @@
                                   <input
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
-                                    value="Others"
+                                    value="Other" v-model="other_sh"
                                     id="8"
                                   />
                                   <label class="form-check-label" for="8">
@@ -1426,9 +1422,6 @@
                           >
                             {{ mode.section_value }}
                           </option>
-                          <option value="am">
-                            Other(Please Specify)
-                          </option>
                         </select>
                       </div>
                       <div
@@ -1979,14 +1972,16 @@ export default {
       Stime: "",
       place_id: "",
       place_other: "",
+      placeOther: false,
       overdose: "",
-      overdosevalue: "",
+      overdosespecify: "",
       hanging: "",
       drowning: "",
       firearmsorexplosives: "",
       fire_flames: "",
       cuttingorpiercing: "",
       jumpingfromheight: "",
+      other_sh: "",
       selfharm_other: "",
       family: "",
       internet: "",
@@ -2383,6 +2378,13 @@ export default {
       }
       this.getdetails();
     },
+    OnchangePlace(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.placeOther = true;
+      }else{
+        this.placeOther = false;
+      }
+    },
     async getdetails() {
       try {
         const headers = {
@@ -2525,11 +2527,22 @@ export default {
           this.Stime = response.data.result.selfharm[0].section_value.Time;
           this.place_id =
             response.data.result.selfharm[0].section_value.Place_of_Occurance;
+          this.place_other = response.data.result.selfharm[0].section_value.place_other;
+          if(response.data.result.selfharm[0].section_value == 'OTHERS') {
+            this.placeOther = true
+          }
+          else {
+            this.placeOther = false
+          }
           this.testresult = response.data.result.selfharm[4];
           this.overdose =
             response.data.result.selfharm[1].section_value.Overdose_Poisoning;
-          this.selfharm_other =
-            response.data.result.selfharm[1].section_value.Other;
+         if(response.data.result.selfharm[1].section_value.Overdose_Poisoning) {
+          this.Overdosespecify = true
+         }
+         else {
+          this.Overdosespecify = false
+         }
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
           this.drowning =
@@ -2542,8 +2555,10 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
-          this.selfharm_other =
-            response.data.result.selfharm[1].section_value.Other;
+            this.other_sh = response.data.result.selfharm[1].section_value.Other;
+            this.selfharm_other =
+            response.data.result.selfharm[1].section_value.selfharm_other;
+
             if(response.data.result.selfharm[3].section_value.intent=="no"||response.data.result.selfharm[3].section_value.intent=="Undetermined"){
             this.patient_intent =
             response.data.result.selfharm[3].section_value.intent;
@@ -2859,14 +2874,16 @@ export default {
                 {
                   "Method of Self-Harm": {
                     "Overdose/Poisoning": this.overdose,
+                    Overdosespecify:this.Overdosespecify,
                     "Hanging/Suffocation": this.hanging,
                     Drowning: this.drowning,
                     "Firearms or explosives": this.firearmsorexplosives,
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    Other: this.selfharm_other,
-                    Overdosespecify:this.Overdosespecify
+                    "Other": this.other_selfharm,
+                    // other_selfharm: this.other_selfharm,
+
                   },
                 },
                 {
@@ -2879,7 +2896,7 @@ export default {
                     "Broadcast media (television, radio)": this.broadcast,
                     "Own ideas":this.ideas,
                     "Specify patient actual words":
-                      this.patientactualword_other,
+                      this.patientactualword,
                   },
                 },
                 {
