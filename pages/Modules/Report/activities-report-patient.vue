@@ -409,6 +409,7 @@
                     <th class="thhead">AGE</th>
                     <th class="thhead">DIAGNOSIS</th>
                     <th class="thhead">MEDICATIONS</th>
+                    <th class="thhead">RESTART</th>
                     <th class="thhead">APPOINTMENT NO</th>
                     <th class="thhead">NO. OF JOB SEARCH</th>
                     <th class="thhead">NO. OF JOB VISIT</th>
@@ -432,6 +433,7 @@
                     <td class="tdrow">{{ rp.AGE }}</td>
                     <td class="tdrow">{{ rp.DIAGNOSIS }}</td>
                     <td class="tdrow">{{ rp.MEDICATIONS }}</td>
+                    <td class="tdrow">{{ rp.RESTART }}</td>
                     <td class="tdrow">{{ rp.app_no_se }}</td>
                     <td class="tdrow">{{ rp.no_job_search }}</td>
                     <td class="tdrow">{{ rp.no_job_visit }}</td>
@@ -680,6 +682,7 @@ export default {
                 "AGE": "AGE",
                 "DIAGNOSIS": "DIAGNOSIS",
                 "MEDICATIONS": "MEDICATIONS",
+                "RESTART": "RESTART",
                 "APPOINTMENT NO": "app_no_se",
                 "NO. OF JOB SEARCH": "no_job_search",
                 "NO. OF JOB VISIT": "no_job_visit",
