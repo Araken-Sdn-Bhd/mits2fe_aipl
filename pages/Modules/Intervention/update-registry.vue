@@ -500,6 +500,7 @@
                     </div>
                     <!-- row-close -->
                      <Error :message="error" v-if="error" />
+                     <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
                         <button class="nexttab btn btn-success next-btn">
@@ -562,7 +563,7 @@
                             class="form-check-input"
                             type="radio"
                             id="yes" value="Yes" @click="onchangeprotect(pro.questionId,1)"
-                             v-bind:name="'pro' + index"
+                            v-bind:name="'pro' + index"
                               v-model="pro.answer"
                           />
                           <label class="form-check-label" for="yes">{{
@@ -571,8 +572,8 @@
                         </div>
                       </div>
                     </div>
-
-                     <div class="d-flex">
+                    <br><br>
+                    <div class="d-flex">
                                             <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
                                             <div class="ml-auto">
                                                 <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
@@ -719,20 +720,7 @@
                                     hide
                                   "
                                 >
-                                  <div class="mb-3">
-                                    <select class="form-select" id="op-select" v-model="overdosevalue">
-                                      <option value="">Please select</option>
-                                   <option
-                        v-for="slt in overdoselist"
-                        v-bind:key="slt.section_value"
-                        v-bind:value="slt.section_value"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                                    </select>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 medication" v-if="overdosevalue && overdosevalue!='none'">
+                                <div class="col-sm-12">
                                     <div class="mb-3">
                                       <label class="form-label"
                                         >Please Specify</label
@@ -740,46 +728,6 @@
                                       <input
                                         type="text"
                                         class="form-control" v-model="Overdosespecify"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                   <div class="col-sm-12 medication op-box">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 chemicals op-box">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div
-                                    class="col-sm-12 illicit-substance op-box"
-                                  >
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
                                         placeholder="Please Specify"
                                       />
                                     </div>
@@ -864,7 +812,7 @@
                                   <input
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
-                                    value="Other"
+                                    value="Others"
                                     id="8"
                                   />
                                   <label class="form-check-label" for="8">
@@ -1258,6 +1206,7 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <div class="d-flex">
                       <button class="pre-2 btn btn-success mr-auto">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -1266,9 +1215,6 @@
                         <button class="nex-2 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <!-- <button type="submit" class="btn btn-text btn-warning">
-                          <i class="fad fa-save"></i> Save
-                        </button> -->
                         <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
                       </div>
                     </div>
@@ -1388,6 +1334,7 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <div class="d-flex">
                       <button class="pre-3 btn btn-success mr-auto">
                         <i class="fad fa-arrow-to-left"></i> Back
@@ -1602,7 +1549,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >If patient admitted for current attempt</label
+                        >If patient admitted for current attempt<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1627,12 +1574,18 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <input
-                            type="text"
-                            class="form-control pafca-other-div"
-                            id="attempt" v-show="patient_admitted_des"
-                            placeholder="Please Specify" v-model="patient_admitted_des"
-                          />
+
+                          <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
+                          <div class="pafca-other-div hide" style="display:none;">
+                          <div class="mb-3">
+                            <label>If admitted, specify the first admitting ward</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Please Specify" v-model="patient_admitted_des"
+                            />
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -1806,6 +1759,7 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <!-- close-row -->
                     <div class="d-flex">
                       <button class="pre-4 btn btn-success mr-auto">
@@ -1919,6 +1873,7 @@
         </li>
       </ul>
         </p>
+        <br><br>
                     <!-- row -->
                     <div class="d-flex">
                       <button class="pre-5 btn btn-success mr-auto">
@@ -2573,8 +2528,8 @@ export default {
           this.testresult = response.data.result.selfharm[4];
           this.overdose =
             response.data.result.selfharm[1].section_value.Overdose_Poisoning;
-          this.overdosevalue =
-            response.data.result.selfharm[1].section_value.Overdose_Poisoning;
+          this.selfharm_other =
+            response.data.result.selfharm[1].section_value.Other;
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
           this.drowning =
@@ -2903,7 +2858,7 @@ export default {
                 },
                 {
                   "Method of Self-Harm": {
-                    "Overdose/Poisoning": this.overdosevalue,
+                    "Overdose/Poisoning": this.overdose,
                     "Hanging/Suffocation": this.hanging,
                     Drowning: this.drowning,
                     "Firearms or explosives": this.firearmsorexplosives,
@@ -2911,6 +2866,7 @@ export default {
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
                     Other: this.selfharm_other,
+                    Overdosespecify:this.Overdosespecify
                   },
                 },
                 {
