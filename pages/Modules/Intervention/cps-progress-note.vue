@@ -2043,7 +2043,7 @@ export default {
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-        this.designation = this.userdetails.user.role;
+        this.designation = this.userdetails.designation.section_value;
         let urlParams = new URLSearchParams(window.location.search);
         this.email = this.userdetails.user.email;
         this.Id = urlParams.get("id");
