@@ -60,7 +60,7 @@
                                         <tr>
                                             <div v-if="index < review_patient.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
                                                     <td><span class="number">{{ index+1 }}</span></td>
-                                                    <td><a v-bind:href="'/modules/Intervention/patient-care-plan-and-case-review?pid='+ review_patient[ann-1].id+'&type=view'">{{ review_patient[ann-1].name_asin_nric }} ({{ getFormattedDate(review_patient[ann-1].next_review_date) }})</a></td>
+                                                    <td><a v-bind:href="review_route+ review_patient[ann-1].id+'&type=view'">{{ review_patient[ann-1].name_asin_nric }} ({{ getFormattedDate(review_patient[ann-1].next_review_date) }})</a></td>
                                             </div>
                                             <div v-if="AnnouncmentToShow< review_patient.length || review_patient.length > AnnouncmentToShow">
                                                     <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
@@ -113,7 +113,7 @@
                                         <tr>
                                             <div v-if="index < list.length" v-for="(ann,index) in AnnouncmentToShow" :key="index">
                                                     <td><span class="number">{{ index+1 }}</span></td>
-                                                    <td><a v-bind:href="'/Modules/Admin/view-event?id='+ list[ann-1].id">{{ list[ann-1].title }} ({{ getFormattedDate(list[ann-1].start_date) }})</a></td>
+                                                    <td><a v-bind:href="announcement_route+ list[ann-1].id">{{ list[ann-1].title }} ({{ getFormattedDate(list[ann-1].start_date) }})</a></td>
                                             </div>
                                             <div v-if="AnnouncmentToShow< list.length || list.length > AnnouncmentToShow">
                                                     <button class="btn btn-primary btn-text btn-seeall" @click="AnnouncmentToShow += 5">Show More</button>
@@ -150,10 +150,11 @@ export default {
             list: [],
             cd_draft:[],
             review_patient:[],
-            $route:"",
             AnnouncmentToShow:3,
             totalAnouncement:0,
             search:'',
+            announcement_route:'',
+            review_route:'',
         };
     },
     beforeMount() {
@@ -190,9 +191,10 @@ export default {
                     this.personal_task = response.data.personal_task;
                     this.team_task = response.data.team_task;
                     this.list = response.data.list;
+                    this.announcement_route= response.data.announcement_route;
                     this.review_patient = response.data.review_patient;
-                    this.route=response.data.route;
                     this.cd_draft = response.data.cd_draft;
+                    this.review_route=response.data.review_route;
 
                 } else {
                     this.$swal.fire({
