@@ -2638,7 +2638,7 @@ export default {
             .val(this.additional_external_cause_injury)
             .trigger("change");
 
-            this.list1 =
+          this.list1 =
             response.data.result.hospital[0].discharge_psy_mx.split(",");
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
