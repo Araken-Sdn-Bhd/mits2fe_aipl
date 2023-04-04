@@ -652,8 +652,7 @@
                                 </select>
                               </div>
                               <!-- SHOW_DIV -->
-
-<div class="col-sm-6" v-if="placeOther">
+                        <div class="col-sm-6" v-if="place_id=='OTHERS'">
                         <div class="mb-3">
                           <label class="form-label">Please Specify</label>
                           <input
@@ -697,7 +696,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input overdose-poisoning"
+                                    class="form-check-input"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
                                     id="1" v-model="overdose" @click="onSectionB('val')"
@@ -818,7 +817,7 @@
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-12 selfharm-other-div mt-3 hide"
+                                  class="col-sm-12 selfharm-other-div mt-3" v-if="selfharm_other==true"
                                 >
                                   <div class="mb-3">
                                     <input
@@ -1361,16 +1360,16 @@
                     <p>PLEASE FILL THE BELOW FORM</p>
                   </div>
 
-                    <div class="row mb-5 align-items-flex-start">
+                  <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Referral or Contact point</label
+                        >Referral or Contact point<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
-
                         <select
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
                           aria-label="Default select example"
+                          @change="OnchangeContact($event)"
                         >
                         <option value="0">
                            Please select
@@ -1382,24 +1381,17 @@
                           >
                             {{ referal.section_value }}
                           </option>
-                          <option value="rcp">
-                            Other(Please Specfy)
-                          </option>
                         </select>
                       </div>
-                      <div
-                        class="
-                          col-sm-3
-                          contact-point-div
-                          rcp
-                        " v-show="referral_or_contact_other"
-                      >
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Please Specfy" v-model="referral_or_contact_other"
-                        />
-                      </div>
+                      <div class="col-sm-3" v-if="referral_or_contact=='OTHERS' || referral_or_contact==194">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="referral_or_contact_other"
+                            placeholder="please specify"
+                          />
+                        </div>
                     </div>
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
@@ -1409,8 +1401,9 @@
                       <div class="col-sm-3">
                         <select
                           v-model="arrival_mode"
-                          class="form-select mode-of-arrival"
+                          class="form-select"
                           aria-label="Default select example"
+                          @change="OnchangeArrival($event)"
                         >
                          <option value="0">
                            Please select
@@ -1426,16 +1419,13 @@
                       </div>
                       <div
                         class="
-                          col-sm-3
-                          mode-of-arrival-div am
-                          hide
-                        "
-                        style="display: none"
+                          col-sm-3" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
                       >
+                      <label class="form-label">Please Specify</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="arrival_mode_other"
+                          placeholder="Please Specify" v-model="arrival_mode_other"
                         />
                       </div>
                     </div>
@@ -1937,8 +1927,8 @@ export default {
       list: [],
       Id: 0,
       referral_or_contact: 0,
-      arrival_mode: 0,
       referral_or_contact_other: "",
+      arrival_mode: 0,
       arrival_mode_other: "",
       date: "",
       time: "",
@@ -1972,7 +1962,6 @@ export default {
       Stime: "",
       place_id: "",
       place_other: "",
-      placeOther: false,
       overdose: "",
       overdosespecify: "",
       hanging: "",
@@ -1981,8 +1970,8 @@ export default {
       fire_flames: "",
       cuttingorpiercing: "",
       jumpingfromheight: "",
-      other_sh: "",
       selfharm_other: "",
+      other_sh: false,
       family: "",
       internet: "",
       printed: "",
@@ -2385,6 +2374,20 @@ export default {
         this.placeOther = false;
       }
     },
+    OnchangeContact(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.contactOther = true;
+      }else{
+        this.contactOther = false;
+      }
+    },
+    OnchangeArrival(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.arrivalOther = true;
+      }else{
+        this.arrivalOther = false;
+      }
+    },
     async getdetails() {
       try {
         const headers = {
@@ -2528,21 +2531,10 @@ export default {
           this.place_id =
             response.data.result.selfharm[0].section_value.Place_of_Occurance;
           this.place_other = response.data.result.selfharm[0].section_value.place_other;
-          if(response.data.result.selfharm[0].section_value == 'OTHERS') {
-            this.placeOther = true
-          }
-          else {
-            this.placeOther = false
-          }
           this.testresult = response.data.result.selfharm[4];
           this.overdose =
             response.data.result.selfharm[1].section_value.Overdose_Poisoning;
-         if(response.data.result.selfharm[1].section_value.Overdose_Poisoning) {
-          this.Overdosespecify = true
-         }
-         else {
-          this.Overdosespecify = false
-         }
+          this.Overdosespecify = response.data.result.selfharm[1].section_value.Overdosespecify;
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
           this.drowning =
@@ -2555,6 +2547,9 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
+            // if(response.data.result.selfharm[1].section_value.Other!=null) {
+            //   this.other_sh = true;
+            // }
             this.other_sh = response.data.result.selfharm[1].section_value.Other;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
@@ -2643,7 +2638,7 @@ export default {
             .val(this.additional_external_cause_injury)
             .trigger("change");
 
-          this.list1 =
+            this.list1 =
             response.data.result.hospital[0].discharge_psy_mx.split(",");
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
@@ -2881,9 +2876,8 @@ export default {
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    "Other": this.other_selfharm,
-                    // other_selfharm: this.other_selfharm,
-
+                    "Other": this.selfharm_other,
+                    // selfharm_other: this.selfharm_other,
                   },
                 },
                 {
@@ -3047,12 +3041,12 @@ export default {
           this.main_psychiatric_diagnosis &&
           this.external_cause_inquiry
         ) {
-          if (this.referral_or_contact == "rcp") {
-            this.referral_or_contact = 0;
-          }
-          if (this.arrival_mode == "am") {
-            this.arrival_mode = 0;
-          }
+          // if (this.referral_or_contact == "rcp") {
+          //   this.referral_or_contact = 0;
+          // }
+          // if (this.arrival_mode == "am") {
+          //   this.arrival_mode = 0;
+          // }
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,

@@ -80,7 +80,7 @@
                                         <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions1" v-model="restart_program" />
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions2" v-model="restart_program" />
                                         <label class="form-check-label" for="inlineCheckbox2">No</label>
                                     </div>
                                 </div>
@@ -812,7 +812,7 @@ export default {
                 this.date = response.data.Data[0].date;
                 this.time = response.data.Data[0].time;
                 this.staff_name = response.data.Data[0].staff_name;
-                this.restart_program = response.data.Data[0].restart_program;
+                this.restart_program = response.data.Data[0].restart;
                 this.progress_note = response.data.Data[0].progress_note;
                 this.management_plan = response.data.Data[0].management_plan;
                 this.location_services_id = response.data.Data[0].location_service;
