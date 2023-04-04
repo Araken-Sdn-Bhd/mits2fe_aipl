@@ -63,10 +63,10 @@
                                         <tr class="three-td">
                                             <th>Visit Date & time<small style="color:red">*</small> :</th>
                                             <td class="tdl-5">
-                                                <input type="date" class="form-control" name="" v-model="visit_date" />
+                                                <input type="date" class="form-control" name="" v-model="cps_date" />
                                             </td>
                                             <td class="tdl-5">
-                                                <input type="time" class="form-control" name="" v-model="visit_time" />
+                                                <input type="time" class="form-control" name="" v-model="cps_time" />
                                             </td>
                                         </tr>
 
@@ -82,8 +82,7 @@
                                             </td>
                                             <td class="tdl-5">
                                             <th>Contact No</th>
-                                            <input type="tel" class="form-control" name="" v-mask="'###-########'"
-                                                placeholder="xxx-xxxxxxxx" v-model="informants_contact" />
+                                            <input type="tel" class="form-control" name="" v-model="informants_contact" />
                                             </td>
                                             <!-- <td colspan="3">
                           <table>
@@ -2269,9 +2268,9 @@ export default {
             cps_discussed_with: "",
             visit_date: "",
             visit_time: "",
-            informants_name: "",
-            informants_relationship: "",
-            informants_contact: "",
+            informants_name: "-",
+            informants_relationship: "-",
+            informants_contact: "-",
             case_manager: "",
             visited_by: "",
             visit_outcome: "",
