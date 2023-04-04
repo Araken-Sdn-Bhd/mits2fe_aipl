@@ -658,7 +658,8 @@
                                 <label class="form-label"
                                   >Place of Occurrence<small style="color:red">*</small> </label
                                 >
-                                <select class="form-select select-others" v-model="place_id">
+                                <select class="form-select" @change="OnchangePlace($event)" v-model="place_id">
+
                                   <option value="0">Please Select</option>
                                  <option
                         v-for="slt in placelist"
@@ -667,27 +668,21 @@
                       >
                         {{ slt.section_value }}
                       </option>
-                                  <option value="others">
-                                    Other area (Please specify)
-                                  </option>
                                 </select>
                               </div>
                               <!-- SHOW_DIV -->
-                              <div
-                                class="col-sm-12 others selected-box mt-3"
-                                style="display: none"
-                              >
-                                <div class="mb-3">
-                                  <label class="form-label"
-                                    >Others (Please specify)</label
-                                  >
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Please Specify" v-model="place_other"
-                                  />
-                                </div>
-                              </div>
+                              <div class="col-sm-6" v-if="placeOther">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="place_other"
+                            placeholder="please specify"
+
+                          />
+                        </div>
+                        </div>
                             </div>
                           </div>
                         </div>
@@ -1151,13 +1146,20 @@
                                     >Other</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div class="intent-other-div hide">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="Please Specify" v-model="intent_other"
-                                    />
+                                  <div class="intent-other-div hide" style="display:none;">
+                                  <div class="col-sm-12">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control" v-model="intent_other"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
                                   </div>
+                                </div>
                                   <!-- SHOW_DIV -->
                                 </div>
                               </div>
@@ -1441,11 +1443,11 @@
                         >Referral or Contact point<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
-
                         <select
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
                           aria-label="Default select example"
+                          @change="OnchangeContact($event)"
                         >
                         <option value="0">
                            Please select
@@ -1457,26 +1459,17 @@
                           >
                             {{ referal.section_value }}
                           </option>
-                          <option value="rcp">
-                            Other(Please Specify)
-                          </option>
                         </select>
                       </div>
-                      <div
-                        class="
-                          col-sm-3
-                          contact-point-div
-                          rcp
-                          hide
-                        "
-                        style="display: none"
-                      >
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Please Specify" v-model="referral_or_contact_other"
-                        />
-                      </div>
+                      <div class="col-sm-3" v-if="contactOther">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="referral_or_contact_other"
+                            placeholder="please specify"
+                          />
+                        </div>
                     </div>
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
@@ -1488,6 +1481,7 @@
                           v-model="arrival_mode"
                           class="form-select mode-of-arrival"
                           aria-label="Default select example"
+                          @change="OnchangeArrival($event)"
                         >
                          <option value="0">
                            Please select
@@ -1499,25 +1493,17 @@
                           >
                             {{ mode.section_value }}
                           </option>
-                          <option value="am">
-                            Other(Please Specify)
-                          </option>
                         </select>
                       </div>
-                      <div
-                        class="
-                          col-sm-3
-                          mode-of-arrival-div am
-                          hide
-                        "
-                        style="display: none"
-                      >
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Please Specify" v-model="arrival_mode_other"
-                        />
-                      </div>
+                      <div class="col-sm-3" v-if="arrivalOther">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="arrival_mode_other"
+                            placeholder="please specify"
+                          />
+                        </div>
                     </div>
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
@@ -1647,17 +1633,16 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <label class="pafca-other-div hide">If admitted, specify the first admitting ward</label>
-                          <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
-                          <div class="col-sm-3">
+                          <div class="pafca-other-div hide" style="display:none;">
+                          <div class="mb-3">
+                            <label>If admitted, specify the first admitting ward</label>
                             <input
-                            type="text"
-                            class="form-control pafca-other-div hide"
-                            id="attempt"
-                            style="display: none"
-                            placeholder="Please Specify" v-model="patient_admitted_des"
-                          />
+                              type="text"
+                              class="form-control"
+                              placeholder="Please Specify" v-model="patient_admitted_des"
+                            />
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -2088,8 +2073,10 @@ export default {
       Id: 0,
       referral_or_contact: 0,
       arrival_mode: 0,
+      contactOther: false,
       referral_or_contact_other: "",
       arrival_mode_other: "",
+      arrivalOther: false,
       date: "",
       time: "",
       physical_consequences: "",
@@ -2122,6 +2109,7 @@ export default {
       Stime: "",
       place_id: "",
       place_other: "",
+      placeOther: false,
       stress_other: "",
       overdose: "",
       overdosevalue: "",
@@ -2520,6 +2508,27 @@ export default {
         this.hospitallist = [];
       }
     },
+    OnchangePlace(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.placeOther = true;
+      }else{
+        this.placeOther = false;
+      }
+    },
+    OnchangeContact(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.contactOther = true;
+      }else{
+        this.contactOther = false;
+      }
+    },
+    OnchangeArrival(event) {
+      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+        this.arrivalOther = true;
+      }else{
+        this.arrivalOther = false;
+      }
+    },
     async GetUserIpAddress() {
       const {
         data: { ip },
@@ -2864,18 +2873,22 @@ export default {
                   Date: this.Sdate,
                   Time: this.Stime,
                   "Place of Occurance": this.place_id,
+                  place_other: this.place_other,
                 },
               },
               {
                 "Method of Self-Harm": {
-                  "Overdose/Poisoning": this.overdosevalue,
+                  "Overdose/Poisoning": this.overdose,
+                  Overdosespecify:this.Overdosespecify,
                   "Hanging/Suffocation": this.hanging,
                   Drowning: this.drowning,
                   "Firearms or explosives": this.firearmsorexplosives,
                   "Fire/flames": this.fire_flames,
                   "Cutting or Piercing": this.cuttingorpiercing,
                   "Jumping from height": this.jumpingfromheight,
-                  Other: this.selfharm_other,
+                  Other: this.other,
+                  selfharm_other: this.selfharm_other,
+
                 },
               },
               {
@@ -2899,7 +2912,6 @@ export default {
             ]),
             sharp_register_id: this.sharp_register_id,
             status: "0",
-            Overdosespecify:this.Overdosespecify
           },
           { headers }
         );
@@ -2989,18 +3001,22 @@ export default {
                     Date: this.Sdate,
                     Time: this.Stime,
                     "Place of Occurance": this.place_id,
+                    place_other: this.place_other,
                   },
                 },
                 {
                   "Method of Self-Harm": {
-                    "Overdose/Poisoning": this.overdosevalue,
+                    "Overdose/Poisoning": this.overdose,
+                    Overdosespecify:this.Overdosespecify,
                     "Hanging/Suffocation": this.hanging,
                     Drowning: this.drowning,
                     "Firearms or explosives": this.firearmsorexplosives,
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    Other: this.selfharm_other,
+                    Other: this.other,
+                    selfharm_other: this.selfharm_other
+
                   },
                 },
                 {
@@ -3025,7 +3041,7 @@ export default {
               ]),
               sharp_register_id: this.sharp_register_id,
               status: "1",
-              Overdosespecify:this.Overdosespecify
+
             },
             { headers }
           );
