@@ -334,10 +334,11 @@
             </tbody>
         </table>
 
-        <table class="table" id="datatable">
+        <table class="table " id="datatable">
             <thead>
                 <tr>
                     <th class="thhead">No</th>
+                    <th class="thhead">Hospital Name</th>
                     <th class="thhead">Harm Date</th>
                     <th class="thhead">Harm Time</th>
                     <th class="thhead">NRIC/Passport</th>
@@ -348,6 +349,8 @@
                     <th class="thhead">PostCode</th>
                     <th class="thhead">Phone Number</th>
                     <th class="thhead">Date of Birth</th>
+                    <th class="thhead">Main Diagnosis</th>
+                    <th class="thhead">Additional Diagnosis</th>
                     <th class="thhead">Risk Factor</th>
                     <th class="thhead">Protective Factor</th>
                     <th class="thhead">Method of Self Harm</th>
@@ -358,6 +361,7 @@
             <tbody>
                 <tr v-for="(rp, index) in list" :key="index">
                     <td class="tdrow">{{ index + 1 }}</td>
+                    <td class="tdrow">{{ rp.HOSPITAL }}</td>
                     <td class="tdrow">{{ rp.DATE }}</td>
                     <td class="tdrow">{{ rp.TIME }}</td>
                     <td class="tdrow">{{ rp.NRIC_NO_PASSPORT_NO }}</td>
@@ -368,6 +372,9 @@
                     <td class="tdrow">{{ rp.POSTCODE }}</td>
                     <td class="tdrow">{{ rp.PHONE_NUMBER }}</td>
                     <td class="tdrow">{{ rp.DATE_OF_BIRTH }}</td>
+                    <td class="tdrow">{{ rp.MAIN_DIAGNOSIS }}</td>
+                    <td class="tdrow"> {{ rp.ADDITIONAL_DIAGNOSIS }}</td>
+
                     <td class="tdrow">
                         <p v-if=rp.RISK_FACTOR1>{{ rp.RISK_FACTOR1 }} <br></p>
                         <p v-if=rp.RISK_FACTOR2>{{ rp.RISK_FACTOR2 }} <br></p>
@@ -439,6 +446,7 @@ export default {
         return {
             json_fields: {
                 "No": 'NO',
+                "Hospital Name": 'HOSPITAL',
                 "Harm Date": 'DATE',
                 "Harm Time": 'TIME',
                 "NRIC No/PASSPORT No": 'NRIC_NO_PASSPORT_NO',
@@ -449,6 +457,8 @@ export default {
                 "PostCode": 'POSTCODE',
                 "Telephone Number": 'PHONE_NUMBER',
                 "Date of Birth": 'DATE_OF_BIRTH',
+                "Main Diagnosis": 'MAIN_DIAGNOSIS',
+                "Additional Diagnosis": 'ADDITIONAL_DIAGNOSIS',
                 "Risk Factor": 'RISK_FACTOR',
                 "Protective Factors": 'PROTECTIVE_FACTOR',
                 "Method of Self Harm": 'METHOD_OF_SELF_HARM',
@@ -509,7 +519,7 @@ export default {
             count: 0,
             SidebarAccess: null,
             totalResultlist: 0,
-        };
+         };
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
@@ -840,7 +850,8 @@ export default {
     border: 1px solid #000;
     font-size: 12px;
     font-weight: 600;
-    text-align: center
+    text-align: center;
+    
 }
 
 .thhead {
