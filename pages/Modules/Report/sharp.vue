@@ -319,7 +319,7 @@
         </div>
     </div>
     <div id="result" class="hide" ref="result" style="background: #fff;">
-        <table style="border: 1px solid #000; width: 50%">
+        <table style="border: 1px solid #000">
             <thead>
                 <tr>
                     <th class="tabhead">Period of Services</th>
@@ -749,7 +749,7 @@ export default {
                             };
 
                             pdf.addHTML($("#result")[0], options, function () {
-                                pdf.save("Sharp_Report.pdf");
+                                pdf.save("SHHARP_Report.pdf");
                             });
                         }, 100);
                         setTimeout(() => {
@@ -847,42 +847,45 @@ export default {
 <style scoped>
 .tdrow {
     padding: 5px 5px;
-    border: 1px solid #000;
+    border: 2.0px solid #000;
     font-size: 12px;
     font-weight: 600;
     text-align: center;
+    max-width:80px;
     
 }
 
 .thhead {
     background: #bbf2eb;
     padding: 5px;
-    border: 1px solid #000;
+    border:2.0px solid #000;
     text-transform: uppercase;
     font-size: 12px;
     line-height: normal;
+    text-align: center;
+    max-width:80px;
 }
 
 .table {
-    border: 1px solid rgb(0, 0, 0);
+    border: 2.0px solid rgb(0, 0, 0);
     width: fit-content;
-    margin-top: 50px;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
     line-height: normal;
 }
 
 .tabhead {
     background: #ddd;
     padding: 5px;
-    border: 1px solid #000;
+    border: 2.0px solid #000;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .tabtd {
     padding: 5px;
-    border: 1px solid #000;
+    border: 2.0px solid #000;
     font-size: 12px;
     font-weight: 600;
 }
@@ -893,7 +896,7 @@ export default {
 }
 
 div#result {
-    padding: 35px 15px;
+    padding: 15px;
     width: 1920px;
 }
 </style>
