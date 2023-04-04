@@ -60,7 +60,7 @@
                                             <input type="date" class="form-control" name="" v-model="cps_date" />
                                         </td>
                                         <td class="tdl-5">
-                                            <input type="time" class="form-control" name="" v-model="visit_time" />
+                                            <input type="time" class="form-control" name="" v-model="cps_time" />
                                         </td>
                                     </tr>
 
@@ -76,7 +76,7 @@
                                         </td>
                                         <td class="tdl-5">
                                         <th>Contact No</th>
-                                        <input type="tel" class="form-control" name="" v-mask="'###-########'" placeholder="xxx-xxxxxxxx" v-model="informants_contact" />
+                                        <input type="tel" class="form-control" name="" v-model="informants_contact" />
                                         </td>
                                         <!-- <td colspan="3">
                         <table>
