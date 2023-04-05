@@ -2213,9 +2213,9 @@ export default {
                         ) {
                             this.errorList.push("Date & Time Discussed with is required");
                         }
-                        if (!this.visit_date || !this.visit_time) {
-                            this.errorList.push("Visit Date & time is required");
-                        }
+                        // if (!this.visit_date || !this.visit_time) {
+                        //     this.errorList.push("Visit Date & time is required");
+                        // }
                         // if (!this.informants_name) {
                         //     this.errorList.push("Informants NAME is required");
                         // }

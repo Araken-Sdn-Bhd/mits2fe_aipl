@@ -53,9 +53,11 @@
                     <td>
                       <a
                       @click="OnPatientRegistration(app)"
-                        class="view"
+                        class="view" title="Register patient"
                         ><i class="fas fa-edit"></i
                       ></a>
+                      <a @click="deleteappointment(app)" title="Delete record" class="action-icon icon-danger">
+                        <i class="fa fa-trash-alt"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -80,6 +82,7 @@ export default {
       alllist: [],
       token: "",
       search: "",
+      rid: 0,
     };
   },
   beforeMount() {
@@ -150,7 +153,49 @@ export default {
         path: "/modules/Intervention/patient-registration",
         query: { rid: data.id },
       });
-  }
+  },
+  deleteappointment(data){
+    this.$swal.fire({
+      title: 'Are you sure you want to delete this record? Please fill in the remarks before delete record',
+                            input: 'text',
+                            showCancelButton: true,
+                            confirmButtonText: 'Delete Record',
+                            cancelButtonText: 'Cancel!',
+                            reverseButtons: true,
+                            preConfirm: (result) => {
+                                return fetch(this.SaveRemark(result, data.id))
+                            },
+            })
+  },
+  async SaveRemark(data,rid) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+
+            const response = await this.$axios.post(
+                "appointment-request/remove", {
+                  added_by: this.userdetails.user.id,
+                  remarks: data,
+                  id: rid
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+              this.$swal.fire('Deleted Successfully', '', 'success');
+              location.reload();
+            } else {
+              this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+            }
+
+        },
   }
 };
 </script>
