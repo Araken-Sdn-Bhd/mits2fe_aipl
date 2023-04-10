@@ -879,23 +879,7 @@ export default {
         this.icdcatcodelist = [];
       }
     },
-    async onCategoryaddcodebind(event) {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "diagnosis/getIcd9subcodeList",
-        { icd_category_code: event.target.value },
-        { headers }
-      );
-      if (response.data.code == 200 || response.data.code == "200") {
-        this.addicdcatcodelist = response.data.list;
-      } else {
-        this.addicdcatcodelist = [];
-      }
-    },
+   
       async GetPatientdetails() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
