@@ -292,7 +292,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" disabled placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                                 </div>
                                             </div>
                                         </div>
