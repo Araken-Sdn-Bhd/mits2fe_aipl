@@ -2411,8 +2411,8 @@ export default {
                             cps_date_discussed: this.cps_date_discussed,
                             cps_time_discussed: this.cps_time_discussed,
                             cps_discussed_with: this.cps_discussed_with,
-                            visit_date: this.visit_date,
-                            visit_time: this.visit_time,
+                            visit_date: this.cps_date,
+                            visit_time: this.cps_time,
                             informants_name: this.informants_name,
                             informants_relationship: this.informants_relationship,
                             informants_contact: this.informants_contact,
@@ -2741,8 +2741,8 @@ export default {
                             this.cps_date_discussed &&
                             this.cps_time_discussed &&
                             this.cps_discussed_with &&
-                            this.visit_date &&
-                            this.visit_time &&
+                            // this.visit_date &&
+                            // this.visit_time &&
                             this.informants_name &&
                             this.informants_relationship &&
                             this.informants_contact &&
@@ -2814,8 +2814,8 @@ export default {
                                 cps_date_discussed: this.cps_date_discussed,
                                 cps_time_discussed: this.cps_time_discussed,
                                 cps_discussed_with: this.cps_discussed_with,
-                                visit_date: this.visit_date,
-                                visit_time: this.visit_time,
+                                visit_date: this.cps_date,
+                                visit_time: this.cps_time,
                                 informants_name: this.informants_name,
                                 informants_relationship: this.informants_relationship,
                                 informants_contact: this.informants_contact,
