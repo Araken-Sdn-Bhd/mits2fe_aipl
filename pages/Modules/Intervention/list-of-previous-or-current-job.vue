@@ -59,12 +59,12 @@
                                 </thead>
                                 <tbody class="optionBox">
                                     <tr class="block">
-                                        <td><input type="text" class="form-control job" /></td>
-                                        <td><input type="text" class="form-control salary" /></td>
+                                        <td><input type="text" required class="form-control job" /></td>
+                                        <td><input type="text" required class="form-control salary" /></td>
                                         <td>
-                                            <input type="text" class="form-control duration" />
+                                            <input type="text" required class="form-control duration" />
                                         </td>
-                                        <td><input type="text" class="form-control reason" /></td>
+                                        <td><input type="text" required class="form-control reason" /></td>
                                         <td>
                                             <a class="add-row"><i class="fa fa-plus"></i></a>
                                         </td>
@@ -473,18 +473,6 @@ export default {
             this.errorList = [];
 
             try {
-                if (!$('td input[type="text"].job', this).val()) {
-                    this.errorList.push("Job is required");
-                }
-                if (!$('td input[type="text"].salary', this).val()) {
-                    this.errorList.push("Salary is required");
-                }
-                if (!$('td input[type="text"].duration', this).val()) {
-                    this.errorList.push("Duration is required");
-                }
-                if (!$('td input[type="text"].reason', this).val()) {
-                    this.errorList.push("Reason For Quit is required");
-                }
                 if (!this.location_services_id) {
                     this.errorList.push("Location Of Services is required");
                 }
