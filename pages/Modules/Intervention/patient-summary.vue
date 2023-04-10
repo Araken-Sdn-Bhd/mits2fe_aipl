@@ -909,7 +909,7 @@ export default {
         });
       } else if (data.type == "ListofPreviousCurrentJob") {
         this.$router.push({
-          path: "/modules/Intervention/list-of-previous-or-current-job",
+          path: "/modules/Intervention/list-of-previous-or-current-job-view",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "InternalRefferalForm") {
