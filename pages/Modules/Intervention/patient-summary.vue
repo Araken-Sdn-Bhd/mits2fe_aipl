@@ -747,12 +747,12 @@ export default {
     OnHistoryview(data, val) {
       if (data.type == "PsychiatryClerkingNote") {
         this.$router.push({
-          path: "/modules/Intervention/psychiatry-clerking-note",
+          path: "/modules/Intervention/view-psychiatry-clerking-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CounsellorClerkingNote") {
         this.$router.push({
-          path: "/modules/Intervention/counsellor-clerking-note",
+          path: "/modules/Intervention/view-counsellor-clerking-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "PatientIndexForm") {
@@ -762,27 +762,27 @@ export default {
         });
       } else if (data.type == "PsychiatricProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/edit-progress-note",
+          path: "/modules/Intervention/view-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CPSProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/cps-progress-note",
+          path: "/modules/Intervention/view-cps-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "SEProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/se-progress-notes",
+          path: "/modules/Intervention/view-se-progress-notes",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CounsellingProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/counseling-progress-note",
+          path: "/modules/Intervention/view-counseling-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "EtpProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/etp-progress-note",
+          path: "/modules/Intervention/view-etp-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobClubProgressNote") {
