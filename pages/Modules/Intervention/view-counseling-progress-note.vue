@@ -62,19 +62,19 @@
                                       <tr>
                                           <th>Date Performed<small style="color:red">*</small> : </th>
                                           <td>
-                                              <input type="date" class="form-control mt-3" v-model="therapy_date">
+                                              <input disabled type="date" class="form-control mt-3" v-model="therapy_date">
                                           </td>
                                       </tr>
                                       <tr>
                                           <th>Time Performed<small style="color:red">*</small> : </th>
                                           <td>
-                                              <input type="time" name="time" class="form-control" v-model="therapy_time">
+                                              <input disabled type="time" name="time" class="form-control" v-model="therapy_time">
                                           </td>
                                       </tr>
                                       <tr>
                                           <th>Diagnosis<small style="color:red">*</small> : </th>
                                           <td>
-                                              <select class="form-select" v-model="type_diagnosis_id" aria-label="Default select example">
+                                              <select disabled class="form-select" v-model="type_diagnosis_id" aria-label="Default select example">
                                                   <option value="0">Select Diagnosis</option>
                                                   <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                       {{ catcode.icd_code }} {{ catcode.icd_name }}
@@ -97,128 +97,128 @@
                                                       <tr>
                                                           <td class="other-input1">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Twice A Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="1">
+                                                                  <input disabled class="form-check-input" value="Twice A Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="1">
                                                                   <label class="form-check-label" for="1">
                                                                       Twice A Week
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Once A Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="2">
+                                                                  <input disabled class="form-check-input" value="Once A Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="2">
                                                                   <label class="form-check-label" for="2">
                                                                       Once A Week
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Once In Two  Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="3">
+                                                                  <input disabled class="form-check-input" value="Once In Two  Week" v-model="frequency_session" type="radio" name="frequency-of-session" id="3">
                                                                   <label class="form-check-label" for="3">
                                                                       Once In Two Weeks
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Once A Month" v-model="frequency_session" type="radio" name="frequency-of-session" id="4">
+                                                                  <input disabled class="form-check-input" value="Once A Month" v-model="frequency_session" type="radio" name="frequency-of-session" id="4">
                                                                   <label class="form-check-label" for="4">
                                                                       Once A Month
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" v-model="frequency_session" type="radio" name="frequency-of-session" id="5" value="Otherfrequency">
+                                                                  <input disabled class="form-check-input" v-model="frequency_session" type="radio" name="frequency-of-session" id="5" value="Otherfrequency">
                                                                   <label class="form-check-label" for="5">
                                                                       Others
                                                                   </label>
                                                               </div>
                                                               <div class="Otherfrequency hide others1">
-                                                                  <input type="text" v-model="frequency_session_other" class="form-control" name="" placeholder="Please Specify">
+                                                                  <input disabled type="text" v-model="frequency_session_other" class="form-control" name="" placeholder="Please Specify">
                                                               </div>
                                                           </td>
 
                                                           <td class="other-input2">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Psychodynamic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="6">
+                                                                  <input disabled class="form-check-input" value="Psychodynamic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="6">
                                                                   <label class="form-check-label" for="6">
                                                                       Psychodynamic
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Cognitive" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="7">
+                                                                  <input disabled class="form-check-input" value="Cognitive" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="7">
                                                                   <label class="form-check-label" for="7">
                                                                       Cognitive
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Behavioral" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="8">
+                                                                  <input disabled class="form-check-input" value="Behavioral" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="8">
                                                                   <label class="form-check-label" for="8">
                                                                       Behavioral
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Systemic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="9">
+                                                                  <input disabled class="form-check-input" value="Systemic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="9">
                                                                   <label class="form-check-label" for="9">
                                                                       Systemic
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Supportive" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="10">
+                                                                  <input disabled class="form-check-input" value="Supportive" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="10">
                                                                   <label class="form-check-label" for="10">
                                                                       Supportive
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Eclectic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="11">
+                                                                  <input disabled class="form-check-input" value="Eclectic" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="11">
                                                                   <label class="form-check-label" for="11">
                                                                       Eclectic
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="12" value="Othermodel">
+                                                                  <input disabled class="form-check-input" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="12" value="Othermodel">
                                                                   <label class="form-check-label" for="12">
                                                                       Others
                                                                   </label>
                                                               </div>
                                                               <div class="Othermodel hide others2">
-                                                                  <input type="text" v-model="model_therapy_other" class="form-control" name="" placeholder="Please Specify">
+                                                                  <input disabled type="text" v-model="model_therapy_other" class="form-control" name="" placeholder="Please Specify">
                                                               </div>
                                                           </td>
                                                           <td class="other-input3">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Individual" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.1">
+                                                                  <input disabled class="form-check-input" value="Individual" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.1">
                                                                   <label class="form-check-label" for="1.1">
                                                                       Individual
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Group" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.2">
+                                                                  <input disabled class="form-check-input" value="Group" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.2">
                                                                   <label class="form-check-label" for="1.2">
                                                                       Group
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Couple/Marital" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.3">
+                                                                  <input disabled class="form-check-input" value="Couple/Marital" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.3">
                                                                   <label class="form-check-label" for="1.3">
                                                                       Couple/Marital
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Family" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.4">
+                                                                  <input disabled class="form-check-input" value="Family" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.4">
                                                                   <label class="form-check-label" for="1.4">
                                                                       Family
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.5" value="Others">
+                                                                  <input disabled class="form-check-input" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.5" value="Others">
                                                                   <label class="form-check-label" for="1.5">
                                                                       Others
                                                                   </label>
                                                               </div>
                                                               <div class="Others hide others3" v-if="mode_therapy=='Others'">
-                                                                  <input type="text" class="form-control" v-model="mode_therapy_other" name="" placeholder="Please Specify">
+                                                                  <input disabled type="text" class="form-control" v-model="mode_therapy_other" name="" placeholder="Please Specify">
                                                               </div>
                                                           </td>
                                                       </tr>
@@ -235,7 +235,7 @@
                                                       <tr>
                                                           <td>
                                                               <label class="form-label">Comments On Therapy Sessions<small style="color:red">*</small> :</label>
-                                                              <textarea class="form-control" rows="5" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
+                                                              <textarea disabled class="form-control" rows="5" v-model="comment_therapy_session" placeholder="Enter Comments"></textarea>
                                                           </td>
                                                       </tr>
                                                   </tbody>
@@ -255,33 +255,33 @@
                                                       <tr>
                                                           <td class=" other-input">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Improved" v-model="patent_condition" type="radio" name="condition" id="4.1">
+                                                                  <input disabled class="form-check-input" value="Improved" v-model="patent_condition" type="radio" name="condition" id="4.1">
                                                                   <label class="form-check-label" for="4.1">
                                                                       Improved
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Unchanged" v-model="patent_condition" type="radio" name="condition" id="4.2">
+                                                                  <input disabled class="form-check-input" value="Unchanged" v-model="patent_condition" type="radio" name="condition" id="4.2">
                                                                   <label class="form-check-label" for="4.2">
                                                                       Unchanged
                                                                   </label>
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" value="Worsened" v-model="patent_condition" type="radio" name="condition" id="4.3">
+                                                                  <input disabled class="form-check-input" value="Worsened" v-model="patent_condition" type="radio" name="condition" id="4.3">
                                                                   <label class="form-check-label" for="4.3">
                                                                       Worsened
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" v-model="patent_condition" type="radio" name="condition" id="4.5" value="condition-others">
+                                                                  <input disabled class="form-check-input" v-model="patent_condition" type="radio" name="condition" id="4.5" value="condition-others">
                                                                   <label class="form-check-label" for="4.5">
                                                                       Others
                                                                   </label>
                                                               </div>
                                                               <div class="condition-others hide others">
-                                                                  <input type="text" v-model="patent_condition_other" class="form-control" name="" placeholder="Please Specify">
+                                                                  <input disabled type="text" v-model="patent_condition_other" class="form-control" name="" placeholder="Please Specify">
                                                               </div>
                                                           </td>
                                                       </tr>
@@ -298,7 +298,7 @@
                                                       <tr>
                                                           <td>
                                                               <label class="form-label">Comments On Patient's Condition<small style="color:red">*</small> :</label>
-                                                              <textarea class="form-control" rows="5" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
+                                                              <textarea disabled class="form-control" rows="5" v-model="comment_patent_condition" placeholder="Enter Comments"></textarea>
                                                           </td>
                                                       </tr>
                                                   </tbody>
@@ -324,41 +324,41 @@
                                               </tr> -->
                                       <tr>
                                           <th>Issues/Problems Dealt With Today<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="session_issues"></textarea></td>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" rows="15" v-model="session_issues"></textarea></td>
                                       </tr>
                                       <tr>
                                           <th>Conduct Of Session<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="conduct_session"></textarea></td>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" rows="15" v-model="conduct_session"></textarea></td>
                                       </tr>
                                       <tr>
                                           <th>Outcome Of Session<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" rows="15" v-model="outcome_session"></textarea></td>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" rows="15" v-model="outcome_session"></textarea></td>
                                       </tr>
                                       <tr>
                                           <th>Transference/countertransference<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" v-model="transference_session"></textarea>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" v-model="transference_session"></textarea>
                                           </td>
                                       </tr>
                                       <tr>
                                           <th>Duration Of Session<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" v-model="duration_session"></textarea></td>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" v-model="duration_session"></textarea></td>
                                       </tr>
                                       <tr>
                                           <th>Other Comments<small style="color:red">*</small> :</th>
-                                          <td><textarea class="form-control" placeholder="Enter Description" v-model="other_comment_session"></textarea></td>
+                                          <td><textarea disabled class="form-control" placeholder="Enter Description" v-model="other_comment_session"></textarea></td>
                                       </tr>
 
                                       <tr>
                                           <th>Name<small style="color:red">*</small> :</th>
-                                          <td><input type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
+                                          <td><input disabled type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
                                       </tr>
                                       <tr>
                                           <th>Designation<small style="color:red">*</small> :</th>
-                                          <td><input type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
+                                          <td><input disabled type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
                                       </tr>
                                       <tr>
                                           <th>Date<small style="color:red">*</small> :</th>
-                                          <td><input type="date" class="form-control" v-model="date_session"></td>
+                                          <td><input disabled type="date" class="form-control" v-model="date_session"></td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -375,7 +375,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="location_services_id">
+                                                      <select disabled class="form-select" v-model="location_services_id">
                                                           <option value="0">
                                                               Select location of services
                                                           </option>
@@ -389,7 +389,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="type_diagnosis_id">
+                                                      <select disabled class="form-select" v-model="type_diagnosis_id">
                                                           <option value="0">Select Diagnosis</option>
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }} {{ catcode.icd_name }}
@@ -400,7 +400,7 @@
                                               <!-- close-row -->
                                               <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                                       <div class="col-sm-8">
-                                                      <select
+                                                      <select disabled
                                                       id="additionalbox" v-model="additional_diagnosis"
                                                       class="form-select multiselect" multiple="multiple"
                                                     >
@@ -421,27 +421,27 @@
                                                   </label>
                                                   <div class="col-sm-8">
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                           </label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio3">External</label>
                                                       </div>
                                                   </div>
                                               </div>
                                               <!-- close-row -->
                                               <!-- hide-div -->
-                                              <div class="assisstance services hide mb-3">
+                                              <div id="assisstance" class="assisstance services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="services_id">
+                                                          <select disabled class="form-select" v-model="services_id">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -451,11 +451,11 @@
                                                   </div>
                                               </div>
                                               <!-- 01 -->
-                                              <div class="clinical-work services hide mb-3">
+                                              <div id="clinical-work" class="clinical-work services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                          <select disabled class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                               <option value="0">Select code</option>
                                                               <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                   {{ type.icd_category_code }} {{ type.icd_category_name }}
@@ -466,7 +466,7 @@
                                                               <div><label class="form-label">ICD 9 SUB CODE</label></div>
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
-                                                                  <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -480,7 +480,7 @@
                                                   <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                               <label class="form-label">Additional ICD 9 CODE</label>
-                                                              <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                              <select disabled class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
                                                                   <option value="0">Select code</option>
                                                                   <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                       {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -491,7 +491,7 @@
                                                               <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
-                                                                  <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -504,11 +504,11 @@
                                                       </div>
                                               </div>
                                               <!-- 02 -->
-                                              <div class="external services hide mb-3">
+                                              <div id="external" class="external services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="serviceid">
+                                                          <select disabled class="form-select" v-model="serviceid">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -522,7 +522,7 @@
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="complexity_services_id">
+                                                      <select disabled class="form-select" v-model="complexity_services_id">
                                                           <option value="0">
                                                               Select Complexity Of Service
                                                           </option>
@@ -533,7 +533,7 @@
                                                   </div>
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Outcome<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="outcome_id">
+                                                      <select disabled class="form-select" v-model="outcome_id">
                                                           <option value="0">Select outcome</option>
                                                           <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                               {{ out.section_value }}
@@ -556,7 +556,7 @@
                                           <div class="accordion-body">
                                               <div class="col-md-12 mb-3">
                                                   <label class="form-label">Medication</label>
-                                                  <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                  <textarea disabled class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                               </div>
                                           </div>
                                       </div>
@@ -575,14 +575,6 @@
                               <div class="d-flex">
                                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                   </button>
-                                  <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                      <i class="fa fa-save"></i> Save as draft
-                                    </button>
-                                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                      <i class="fa fa-paper-plane"></i> Submit
-                                    </button>
-                                  </div>
                               </div>
                           </div>
                       </div>
@@ -722,367 +714,6 @@
           };
       },
       methods: {
-          async onPublishEvent() {
-              if (confirm("Are you sure you want to save this entry ? ")) {
-                  this.errorList = [];
-                  this.validate = true;
-                  var Boxvalue = [];
-                        var Boxvalue1 = [];
-                        var Boxvalue2 = [];
-                        var additionalbox = 0;
-                        var subcode = 0;
-                        var addsubcode = 0;
-
-                        $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                            additionalbox = additionalbox + "," + this.value;
-                          } else {
-                            additionalbox = this.value;
-                          }
-                        });
-                        Boxvalue.push({ additionalbox });
-
-                        $("#subcode :selected").each(function () {
-                          if (subcode) {
-                            subcode = subcode + "," + this.value;
-                          } else {
-                            subcode = this.value;
-                          }
-                        });
-                        Boxvalue1.push({ subcode });
-
-                        $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                            addsubcode = addsubcode + "," + this.value;
-                          } else {
-                            addsubcode = this.value;
-                          }
-                        });
-                        Boxvalue2.push({ addsubcode });
-
-                  try {
-                      if (!this.therapy_date) {
-                          this.errorList.push("Date Performed is required");
-                      }
-                      if (!this.therapy_time) {
-                          this.errorList.push("Time Performed is required");
-                      }
-
-                      if (!this.frequency_session) {
-                          this.errorList.push("FREQUENCY OF SESSION is required");
-                      }
-                      if (!this.model_therapy) {
-                          this.errorList.push("	MODEL OF THERAPY is required");
-                      }
-                      if (!this.mode_therapy) {
-                          this.errorList.push("MODE OF THERAPY is required");
-                      }
-                      if (!this.comment_therapy_session) {
-                          this.errorList.push("Comments On Therapy Sessions is required");
-                      }
-                      if (!this.patent_condition) {
-                          this.errorList.push("Patent's Condition is required");
-                      }
-                      if (!this.comment_patent_condition) {
-                          this.errorList.push("Comments On Patent's Condition is required");
-                      }
-
-                      if (!this.session_issues) {
-                          this.errorList.push("Issues/Problems  is required");
-                      }
-                      if (!this.conduct_session) {
-                          this.errorList.push("Conduct Of Session is required");
-                      }
-                      if (!this.outcome_session) {
-                          this.errorList.push("Outcome Of Session is required");
-                      }
-                      if (!this.transference_session) {
-                          this.errorList.push("Transference/countertransference is required");
-                      }
-                      if (!this.duration_session) {
-                          this.errorList.push("Duration Of Session is required");
-                      }
-                      if (!this.other_comment_session) {
-                          this.errorList.push("Other Comments is required");
-                      }
-                      if (!this.name) {
-                          this.errorList.push("Name is required");
-                      }
-                      if (!this.designation) {
-                          this.errorList.push("Designation is required");
-                      }
-                      if (!this.date_session) {
-                          this.errorList.push("Date is required");
-                      }
-                      if (!this.location_services_id) {
-                          this.errorList.push("Location Of Services is required");
-                      }
-                      if (!this.type_diagnosis_id) {
-                          this.errorList.push("Type Of Diagnosis is required");
-                      }
-                      if (!this.category_services) {
-                          this.errorList.push("Category Of Services is required");
-                      }
-                      if (!this.complexity_services_id) {
-                          this.errorList.push("Complexity Of Service is required");
-                      }
-                      if (this.category_services) {
-                          if (this.category_services == "assisstance") {
-                              if (!this.services_id) {
-                                  this.errorList.push("Service is required");
-                                  this.validate = false;
-                              }
-                          } else if (this.category_services == "clinical-work") {
-                              if (!this.code_id) {
-                                  this.errorList.push("ICD 9 CODE is required");
-                                  this.validate = false;
-                              }
-                              if (!JSON.stringify(subcode)) {
-                                  this.errorList.push("ICD 9 SUB CODE is required");
-                                  this.validate = false;
-                              }
-                          } else {
-                              if (!this.serviceid) {
-                                  this.errorList.push("Services is required");
-                                  this.validate = false;
-                              } else {
-                                  this.services_id = this.serviceid;
-                              }
-                          }
-                      }
-                      if (!this.outcome_id) {
-                          this.errorList.push("Outcome is required");
-                      }
-
-                      if (
-                          this.therapy_date &&
-                          this.therapy_time &&
-
-                          this.frequency_session &&
-                          this.model_therapy &&
-                          this.comment_therapy_session &&
-                          this.patent_condition &&
-                          this.comment_patent_condition &&
-
-                          this.session_issues &&
-                          this.conduct_session &&
-                          this.outcome_session &&
-                          this.transference_session &&
-                          this.duration_session &&
-                          this.other_comment_session &&
-                          this.name &&
-                          this.designation &&
-                          this.date_session &&
-                          this.location_services_id &&
-                          this.type_diagnosis_id &&
-                          this.category_services &&
-                          this.complexity_services_id &&
-                          this.outcome_id &&
-                          // this.medication_des &&
-                          this.validate
-                      ) {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "counselling-progress-note/add", {
-                                  added_by: this.userdetails.user.id.toString(),
-                                  therapy_date: this.therapy_date,
-                                  therapy_time: this.therapy_time,
-                                  diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                  frequency_session: this.frequency_session,
-                                  frequency_session_other: this.frequency_session_other,
-                                  model_therapy: this.model_therapy,
-                                  model_therapy_other: this.model_therapy_other,
-                                  mode_therapy: this.mode_therapy,
-                                  mode_therapy_other: this.mode_therapy_other,
-                                  comment_therapy_session: this.comment_therapy_session,
-                                  patent_condition: this.patent_condition,
-                                  patent_condition_other: this.patent_condition_other,
-                                  comment_patent_condition: this.comment_patent_condition,
-                                  session_details: this.session_details,
-                                  session_issues: this.session_issues,
-                                  conduct_session: this.conduct_session,
-                                  outcome_session: this.outcome_session,
-                                  transference_session: this.transference_session,
-                                  duration_session: this.duration_session,
-                                  other_comment_session: this.other_comment_session,
-                                  name: this.name,
-                                  designation: this.designation,
-                                  date_session: this.date_session,
-                                  location_services_id: this.location_services_id,
-                                  type_diagnosis_id: this.type_diagnosis_id,
-                                  category_services: this.category_services,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  additional_code_id: this.additional_code_id,
-                                  complexity_services_id: this.complexity_services_id,
-                                  outcome_id: this.outcome_id,
-                                  medication_des: this.medication_des,
-                                  patient_mrn_id: this.Id,
-                                  services_id: this.services_id,
-                                  status: "1",
-                                  appId: this.appId,
-                                  id: this.pid,
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-
-                              this.$swal.fire(
-                                  'Succesfully Created',
-                              );
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong!',
-                                  text: 'the error is: ' + this.error,
-                                  footer: ''
-                              })
-                              this.GoBack();
-                          }
-                      }
-                  } catch (e) {
-                      this.loader = false;
-
-                  }
-              }
-          },
-
-          async onCreateEvent() {
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-                    var Boxvalue = [];
-                        var Boxvalue1 = [];
-                        var Boxvalue2 = [];
-                        var additionalbox = 0;
-                        var subcode = 0;
-                        var addsubcode = 0;
-
-                        $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                            additionalbox = additionalbox + "," + this.value;
-                          } else {
-                            additionalbox = this.value;
-                          }
-                        });
-                        Boxvalue.push({ additionalbox });
-
-                        $("#subcode :selected").each(function () {
-                          if (subcode) {
-                            subcode = subcode + "," + this.value;
-                          } else {
-                            subcode = this.value;
-                          }
-                        });
-                        Boxvalue1.push({ subcode });
-
-                        $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                            addsubcode = addsubcode + "," + this.value;
-                          } else {
-                            addsubcode = this.value;
-                          }
-                        });
-                        Boxvalue2.push({ addsubcode });
-
-                      try {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "counselling-progress-note/add", {
-                                  added_by: this.userdetails.user.id.toString(),
-                                  therapy_date: this.therapy_date,
-                                  therapy_time: this.therapy_time,
-                                  diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                  frequency_session: this.frequency_session,
-                                  frequency_session_other: this.frequency_session_other,
-                                  model_therapy: this.model_therapy,
-                                  model_therapy_other: this.model_therapy_other,
-                                  mode_therapy: this.mode_therapy,
-                                  mode_therapy_other: this.mode_therapy_other,
-                                  comment_therapy_session: this.comment_therapy_session,
-                                  patent_condition: this.patent_condition,
-                                  patent_condition_other: this.patent_condition_other,
-                                  comment_patent_condition: this.comment_patent_condition,
-                                  session_details: this.session_details,
-                                  session_issues: this.session_issues,
-                                  conduct_session: this.conduct_session,
-                                  outcome_session: this.outcome_session,
-                                  transference_session: this.transference_session,
-                                  duration_session: this.duration_session,
-                                  other_comment_session: this.other_comment_session,
-                                  name: this.name,
-                                  designation: this.designation,
-                                  date_session: this.date_session,
-                                  location_services_id: this.location_services_id,
-                                  type_diagnosis_id: this.type_diagnosis_id,
-                                  category_services: this.category_services,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  additional_code_id: this.additional_code_id,
-                                  complexity_services_id: this.complexity_services_id,
-                                  outcome_id: this.outcome_id,
-                                  medication_des: this.medication_des,
-                                  patient_mrn_id: this.Id,
-                                  services_id: this.services_id,
-                                  status: "0",
-                                  appId: this.appId,
-                                  id: this.pid,
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong!',
-                                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                              })
-                              this.GoBack();
-                          }
-                      } catch (e) {
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
           async GetList() {
               const headers = {
                   Authorization: "Bearer " + this.userdetails.access_token,
@@ -1345,6 +976,21 @@
                       .trigger("change");
 
                   this.additional_code_id = response.data.Data[0].additional_code_id;
+
+                  if(this.category_services=='assisstance'){
+                        $(document).ready(function(){
+                            $("#assisstance").removeClass("hide");
+                        });
+                    }else if(this.category_services=='clinical-work'){
+                        $(document).ready(function(){
+                            $("#clinical-work").removeClass("hide");
+                        });
+                    }else if(this.category_services=='external'){
+                        $(document).ready(function(){
+                            $("#external").removeClass("hide");
+                        });
+                    }
+
                   this.GetList();
                   this.GetPatientdetails();
 
