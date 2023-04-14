@@ -6,75 +6,110 @@
           <main>
               <div class="container-fluid px-4">
                   <div class="page-title">
-                      <h1>ETP Progress Note</h1>
+                      <h1>PSYCHIATRIC PROGRESS NOTE</h1>
                       <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
                   </div>
                   <div class="card mb-4">
                       <div class="card-body">
                           <div>
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Name<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" v-model="name" />
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">MRN<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" v-model="mrn" />
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Date<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <input type="date" class="form-control" v-model="date" />
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Time<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <input type="time" class="form-control" v-model="time" />
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Staff Name<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" v-model="staff_name" />
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Work Readiness<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" id="inlineCheckbox1" value="Yes" name="inlineRadioOptions1" v-model="work_readiness" />
-                                          <label class="form-check-label" for="inlineCheckbox1">Yes</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" id="inlineCheckbox2" value="No" name="inlineRadioOptions1" v-model="work_readiness" />
-                                          <label class="form-check-label" for="inlineCheckbox2">No</label>
-                                      </div>
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Progress Note<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="progress_note"></textarea>
-                                  </div>
-                              </div>
-                              <!-- close-row -->
-                              <div class="row mb-3">
-                                  <label class="col-sm-4 col-form-label">Management Plan<small style="color:red">*</small> </label>
-                                  <div class="col-sm-8">
-                                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="management_plan"></textarea>
-                                  </div>
-                              </div>
-                              <!-- close-row -->
+                              <table class="notes">
+                                  <thead>
+                                      <tr>
+                                          <th colspan="2">Patient Details</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody v-if="patientdetails">
+                                      <tr>
+                                          <th>MRN:</th>
+                                          <td>{{ patientdetails.patient_mrn }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Patient Name:</th>
+                                          <td>{{ patientdetails.name_asin_nric }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>NRIC NO:</th>
+                                          <td>{{ patientdetails.nric_no }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Age:</th>
+                                          <td>{{ patientdetails.age }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Contact No:</th>
+                                          <td>{{ patientdetails.mobile_no }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Gender:</th>
+                                          <td>{{ patientdetails.gender[0].section_value }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>DOB:</th>
+                                          <td>{{ patientdetails.birth_date }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Date:</th>
+                                          <td>{{ currentdate }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Time:</th>
+                                          <td>{{ currenttime }}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <table class="notes">
+                                  <thead>
+                                      <tr>
+                                          <th colspan="2">STAFF DETAILS </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody v-if="this.staff_name">
+                                      <tr>
+                                          <th>Staff Name / Seen By:</th>
+                                          <td>{{ staff_name }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Designation:</th>
+                                          <td>{{ this.designation }}</td>
+                                      </tr>
+                                      <!-- <tr>
+                                          <th>Room:</th>
+                                          <td>-</td>
+                                      </tr> -->
+                                      <tr>
+                                          <th>Date:</th>
+                                          <td>{{ currentdate }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Time: </th>
+                                          <td>{{ currenttime }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Diagnosis<small style="color:red">*</small> :</th>
+                                          <td>
+                                              <select disabled class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
+                                                  <option value="0">Select Diagnosis</option>
+                                                  <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                      {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                  </option>
+                                              </select>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <th>Clinical Notes<small style="color:red">*</small> :</th>
+                                          <td>
+                                              <textarea class="form-control" disabled rows="15" placeholder="Enter Clinical Notes" v-model="clinical_notes"></textarea>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <th>Management<small style="color:red">*</small> :</th>
+                                          <td>
+                                              <textarea class="form-control" disabled rows="15" placeholder="Enter Management" v-model="management"></textarea>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+
                               <div class="accordion form-accordion mt-3" id="accordionExample">
                                   <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingOne">
@@ -85,9 +120,9 @@
                                       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                           <div class="accordion-body">
                                               <div class="row mb-3">
-                                                  <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
+                                                  <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="location_services_id">
+                                                      <select class="form-select" disabled v-model="location_services_id">
                                                           <option value="0">
                                                               Select location of services
                                                           </option>
@@ -99,12 +134,12 @@
                                               </div>
                                               <!-- close-row -->
                                               <div class="row mb-3">
-                                                  <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
+                                                  <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="type_diagnosis_id">
+                                                      <select class="form-select" disabled v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                                           <option value="0">Select Diagnosis</option>
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                              {{ catcode.icd_code }} {{ catcode.icd_name }}
+                                                              {{ catcode.icd_code }} {{catcode.icd_name}}
                                                           </option>
                                                       </select>
                                                   </div>
@@ -112,7 +147,7 @@
                                               <!-- close-row -->
                                               <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                                       <div class="col-sm-8">
-                                                      <select
+                                                      <select disabled
                                                       id="additionalbox" v-model="additional_diagnosis"
                                                       class="form-select multiselect" multiple="multiple"
                                                     >
@@ -133,27 +168,27 @@
                                                   </label>
                                                   <div class="col-sm-8">
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                           </label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio3">External</label>
                                                       </div>
                                                   </div>
                                               </div>
                                               <!-- close-row -->
                                               <!-- hide-div -->
-                                              <div class="assisstance services hide mb-3">
+                                              <div id="assistance" class="assisstance services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
-                                                          <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                          <select class="form-select" v-model="services_id">
+                                                          <label class="form-label">Services<small style="color:red">*</small></label>
+                                                          <select class="form-select" disabled v-model="services_id">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -163,14 +198,14 @@
                                                   </div>
                                               </div>
                                               <!-- 01 -->
-                                              <div class="clinical-work services hide mb-3">
+                                              <div id="clinical-work" class="clinical-work services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
-                                                          <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                                                          <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                          <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
+                                                          <select class="form-select" disabled v-model="code_id" @change="onCategorycodebind($event)">
                                                               <option value="0">Select code</option>
                                                               <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                                  {{ type.icd_category_code }} {{ type.icd_category_name }}
+                                                                  {{ type.icd_category_code }} {{type.icd_category_name}}
                                                               </option>
                                                           </select>
                                                       </div>
@@ -178,7 +213,7 @@
                                                               <div><label class="form-label">ICD 9 SUB CODE</label></div>
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
-                                                                  <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -192,7 +227,7 @@
                                                   <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                               <label class="form-label">Additional ICD 9 CODE</label>
-                                                              <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                              <select disabled class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
                                                                   <option value="0">Select code</option>
                                                                   <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                       {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -203,7 +238,7 @@
                                                               <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
-                                                                  <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -216,11 +251,11 @@
                                                       </div>
                                               </div>
                                               <!-- 02 -->
-                                              <div class="external services hide mb-3">
+                                              <div id="external" class="external services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
-                                                          <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                          <select class="form-select" v-model="serviceid">
+                                                          <label class="form-label">Services<small style="color:red">*</small></label>
+                                                          <select disabled class="form-select" v-model="serviceid">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -233,8 +268,8 @@
                                               <!-- hide-div -->
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
-                                                      <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                      <select class="form-select" v-model="complexity_services_id">
+                                                      <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
+                                                      <select disabled class="form-select" v-model="complexity_services_id">
                                                           <option value="0">
                                                               Select Complexity Of Service
                                                           </option>
@@ -244,8 +279,8 @@
                                                       </select>
                                                   </div>
                                                   <div class="col-md-6 mb-3">
-                                                      <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                      <select class="form-select" v-model="outcome_id">
+                                                      <label class="form-label">Outcome<small style="color:red">*</small></label>
+                                                      <select disabled class="form-select" v-model="outcome_id">
                                                           <option value="0">Select outcome</option>
                                                           <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                               {{ out.section_value }}
@@ -268,14 +303,13 @@
                                           <div class="accordion-body">
                                               <div class="col-md-12 mb-3">
                                                   <label class="form-label">Medication</label>
-                                                  <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                  <textarea class="form-control textarea" disabled placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                               </div>
                                           </div>
                                       </div>
                                   </div>
                                   <!--  -->
                               </div>
-
                               <p v-if="errorList.length">
                                   <ul>
                                       <li style="color:red" v-for='err in errorList' :key='err'>
@@ -288,74 +322,64 @@
                               <div class="d-flex">
                                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                   </button>
-                                  <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                      <i class="fa fa-save"></i> Save as draft
-                                    </button>
-                                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                      <i class="fa fa-paper-plane"></i> Submit
-                                    </button>
-                                  </div>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
           </main>
-          <footer>
-              <p>© MENTARI MALAYSIA MOH</p>
-          </footer>
       </div>
   </div>
   </template>
 
   <script>
+  import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
   import CommonHeader from "../../../components/CommonHeader.vue";
   import CommonSidebar from "../../../components/CommonSidebar.vue";
+
   export default {
       components: {
+          CommonHeader,
           CommonSidebar,
-          CommonHeader
       },
-      name: "etp-progress-note",
+      name: "progress-note",
       data() {
           return {
-              stafflist: [],
+              userdetails: null,
               errorList: [],
               servicelist: [],
               outcomelist: [],
               comlexcitylist: [],
               codelist: [],
               icdcatcodelist: [],
-              selectedindividaul: [],
-              selectedmedication: [],
-              selectedsupport: [],
               diagonisislist: [],
               locationlist: [],
               additionalcodelist: [],
               add_icdcatcodelist: [],
-              name: "",
-              mrn: "",
-              date: "",
-              time: "",
-              staff_name: "",
-              work_readiness: "",
-              progress_note: "",
-              management_plan: "",
+              Id: 0,
+              diagnosis: "",
+              clinical_notes: "",
+              management: "",
               location_services_id: 0,
               type_diagnosis_id: 0,
-              category_services: 0,
+              category_services: "",
               code_id: 0,
               sub_code_id: 0,
               complexity_services_id: 0,
               outcome_id: 0,
               medication_des: "",
+              patient_mrn_id: "",
               services_id: 0,
               serviceid: 0,
               validate: true,
+              currentdate: "",
+              currenttime: "",
+              patientdetails: null,
               assistancelist: [],
               externallist: [],
               pid: 0,
+              staff_name: "",
+              designation: "",
               type: "",
               appId: 0,
               additional_diagnosis: 0,
@@ -366,21 +390,6 @@
       beforeMount() {
           this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
           this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
-          let urlParams = new URLSearchParams(window.location.search);
-          this.Id = urlParams.get("id");
-          this.appId = urlParams.get("appId");
-          if (this.Id) {
-              this.staff_name = this.userdetails.user.name;
-              this.GetList();
-              this.GetPatientdetails();
-          }
-          let urlParams1 = new URLSearchParams(window.location.search);
-          this.pid = urlParams1.get("pid");
-          this.type = urlParams1.get("type");
-          this.GetPatientdetails();
-          if (this.pid) {
-              this.getdetails();
-          }
           $(document).ready(function () {
               $('.form-accordion input[type="radio"]').click(function () {
                   var inputValue = $(this).attr("value");
@@ -392,8 +401,310 @@
                   placeholder: "Please Select",
                 });
           });
+
+          this.GetList();
+
+          let urlParams = new URLSearchParams(window.location.search);
+          this.appId = urlParams.get("appId");
+          this.Id = urlParams.get("id");
+
+          let urlParams1 = new URLSearchParams(window.location.search);
+          this.pid = urlParams1.get("pid");
+          this.type = urlParams1.get("type");
+          const current = new Date();
+          this.currentdate =
+              current.getDate() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getFullYear();
+
+          this.currenttime = current.getHours() + ":" + current.getMinutes();
+      },
+      mounted() {
+          this.GetPatientdetails();
+          if (this.pid) {
+              this.getdetails();
+          }
       },
       methods: {
+          async onCreateEvent() {
+              this.$swal.fire({
+                  title: 'Do you want to save as draft?',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+              }).then(async (result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                      var Boxvalue = [];
+                        var Boxvalue1 = [];
+                        var Boxvalue2 = [];
+                        var additionalbox = 0;
+                        var subcode = 0;
+                        var addsubcode = 0;
+
+                        $("#additionalbox :selected").each(function () {
+                          if (additionalbox) {
+                            additionalbox = additionalbox + "," + this.value;
+                          } else {
+                            additionalbox = this.value;
+                          }
+                        });
+                        Boxvalue.push({ additionalbox });
+
+                        $("#subcode :selected").each(function () {
+                          if (subcode) {
+                            subcode = subcode + "," + this.value;
+                          } else {
+                            subcode = this.value;
+                          }
+                        });
+                        Boxvalue1.push({ subcode });
+
+                        $("#addsubcode :selected").each(function () {
+                          if (addsubcode) {
+                            addsubcode = addsubcode + "," + this.value;
+                          } else {
+                            addsubcode = this.value;
+                          }
+                        });
+                        Boxvalue2.push({ addsubcode });
+
+                      try {
+                          this.loader = true;
+                          if (this.serviceid) {
+                              this.services_id = this.serviceid
+                          }
+                          const headers = {
+                              Authorization: "Bearer " + this.userdetails.access_token,
+                              Accept: "application/json",
+                              "Content-Type": "application/json",
+                          };
+                          const response = await this.$axios.post(
+                              "progress-note/add", {
+                                  added_by: this.userdetails.user.id,
+                                  diagnosis: this.type_diagnosis_id, //diagnosis
+                                  clinical_notes: this.clinical_notes,
+                                  management: this.management,
+                                  location_services_id: this.location_services_id,
+                                  type_diagnosis_id: this.type_diagnosis_id,
+                                  category_services: this.category_services,
+                                  code_id: this.code_id,
+                                  sub_code_id: JSON.stringify(subcode),
+                                  additional_diagnosis: JSON.stringify(additionalbox),
+                                  additional_subcode: JSON.stringify(addsubcode),
+                                  additional_code_id: this.additional_code_id,
+                                  complexity_services_id: this.complexity_services_id,
+                                  outcome_id: this.outcome_id,
+                                  medication_des: this.medication_des,
+                                  patient_mrn_id: this.Id,
+                                  services_id: this.services_id,
+                                  appId: this.appId,
+                                  status: "0",
+                              }, {
+                                  headers
+                              }
+                          );
+                          console.log("response", response.data);
+                          if (response.data.code == 200) {
+                              this.loader = false;
+                              this.resetmodel();
+                              this.$swal.fire('Succesfully save as draft!', '', 'success')
+                              this.GoBack();
+                          } else {
+                              this.loader = false;
+                              this.resetmodel();
+                              this.$swal.fire({
+                                  icon: 'error',
+                                  title: 'Oops... Something Went Wrong!',
+                                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                              })
+                              this.GoBack();
+                          }
+                      } catch (e) {
+                          this.$swal.fire({
+                              icon: 'error',
+                              title: 'Oops... Something Went Wrong!',
+                              text: 'the error is: ' + e,
+                          })
+                      }
+                  } else if (result.isDismissed) {
+                      this.$swal.fire('Changes are not saved', '', 'info')
+                  }
+              })
+          },
+          async onPublishEvent() {
+              this.$swal.fire({
+                  title: 'Do you want to save the changes?',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+              }).then(async (result) => {
+                  if (result.isConfirmed) {
+                      var Boxvalue = [];
+                        var Boxvalue1 = [];
+                        var Boxvalue2 = [];
+                        var additionalbox = 0;
+                        var subcode = 0;
+                        var addsubcode = 0;
+
+                        $("#additionalbox :selected").each(function () {
+                          if (additionalbox) {
+                            additionalbox = additionalbox + "," + this.value;
+                          } else {
+                            additionalbox = this.value;
+                          }
+                        });
+                        Boxvalue.push({ additionalbox });
+
+                        $("#subcode :selected").each(function () {
+                          if (subcode) {
+                            subcode = subcode + "," + this.value;
+                          } else {
+                            subcode = this.value;
+                          }
+                        });
+                        Boxvalue1.push({ subcode });
+
+                        $("#addsubcode :selected").each(function () {
+                          if (addsubcode) {
+                            addsubcode = addsubcode + "," + this.value;
+                          } else {
+                            addsubcode = this.value;
+                          }
+                        });
+                        Boxvalue2.push({ addsubcode });
+
+                      this.validate = true;
+                      console.log("services", this.category_services);
+                      this.errorList = [];
+                      try {
+                          if (!this.clinical_notes) {
+                              this.errorList.push("Clinical Notes is required");
+                          }
+                          if (!this.management) {
+                              this.errorList.push("Management is required");
+                          }
+                          if (!this.location_services_id) {
+                              this.errorList.push("Location Of Services is required");
+                          }
+                          if (!this.type_diagnosis_id) {
+                              this.errorList.push("Type Of Diagnosis is required");
+                          }
+                          if (!this.category_services) {
+                              this.errorList.push("Category Of Services is required");
+                          }
+                          if (!this.complexity_services_id) {
+                              this.errorList.push("Complexity Of Service is required");
+                          }
+                          if (this.category_services) {
+                              if (this.category_services == "assisstance") {
+                                  if (!this.services_id) {
+                                      this.errorList.push("Service is required");
+                                      this.validate = false;
+                                  }
+                              } else if (this.category_services == "clinical-work") {
+                                  if (!this.code_id) {
+                                      this.errorList.push("ICD 9 CODE is required");
+                                      this.validate = false;
+                                  }
+                                  if (!JSON.stringify(subcode)) {
+                                      this.errorList.push("ICD 9 SUB CODE is required");
+                                      this.validate = false;
+                                  }
+                              } else {
+                                  if (!this.serviceid) {
+                                      this.errorList.push("Services is required");
+                                      this.validate = false;
+                                  } else {
+                                      this.services_id = this.serviceid;
+                                  }
+                              }
+                          }
+                          if (!this.outcome_id) {
+                              this.errorList.push("Outcome is required");
+                          }
+                          if (
+                              this.clinical_notes &&
+                              this.management &&
+                              this.location_services_id &&
+                              this.type_diagnosis_id &&
+                              this.category_services &&
+                              this.complexity_services_id &&
+                              this.outcome_id &&
+                              this.validate
+                          ) {
+                              this.loader = true;
+                              const headers = {
+                                  Authorization: "Bearer " + this.userdetails.access_token,
+                                  Accept: "application/json",
+                                  "Content-Type": "application/json",
+                              };
+                              const response = await this.$axios.post(
+                                  "progress-note/add", {
+                                      added_by: this.userdetails.user.id,
+                                      diagnosis: this.type_diagnosis_id, //diagnosis
+                                      clinical_notes: this.clinical_notes,
+                                      management: this.management,
+                                      location_services_id: this.location_services_id,
+                                      type_diagnosis_id: this.type_diagnosis_id,
+                                      category_services: this.category_services,
+                                      code_id: this.code_id,
+                                      sub_code_id: JSON.stringify(subcode),
+                                      additional_diagnosis: JSON.stringify(additionalbox),
+                                      additional_subcode: JSON.stringify(addsubcode),
+                                      additional_code_id: this.additional_code_id,
+                                      complexity_services_id: this.complexity_services_id,
+                                      outcome_id: this.outcome_id,
+                                      medication_des: this.medication_des,
+                                      patient_mrn_id: this.Id,
+                                      services_id: this.services_id,
+                                      appId: this.appId,
+                                      status: "1",
+                                  }, {
+                                      headers
+                                  }
+                              );
+                              console.log("response", response.data);
+                              if (response.data.code == 200) {
+                                  this.loader = false;
+                                  this.resetmodel();
+                                  this.$swal.fire(
+                                      'Successfully Submitted.',
+                                      'Data is inserted.',
+                                      'success',
+                                  );
+
+                                  this.GoBack();
+                              } else {
+                                  this.loader = false;
+                                  this.resetmodel();
+                                  this.$swal.fire({
+                                      icon: 'error',
+                                      title: 'Oops... Something Went Wrong!',
+                                      text: 'the error is: ' + JSON.stringify(response.data.message),
+                                  })
+                                  this.GoBack();
+                              }
+                          }
+                      } catch (e) {
+                          this.loader = false;
+                          this.resetmodel();
+                          this.$swal.fire({
+                              icon: 'error',
+                              title: 'Oops... Something Went Wrong!',
+                              text: 'the error is: ' + e,
+                          })
+
+                          this.GoBack();
+                      }
+                  } else if (result.isDismissed) {
+                      this.$swal.fire('Changes are not saved', '', 'info')
+                  }
+              })
+          },
+          BindDiagnosis() {
+              this.diagnosis = this.type_diagnosis_id.text;
+          },
           async GetList() {
               const headers = {
                   Authorization: "Bearer " + this.userdetails.access_token,
@@ -490,6 +801,7 @@
                   Accept: "application/json",
                   "Content-Type": "application/json",
               };
+              console.log("my id", event);
               const response = await this.$axios.post(
                   "diagnosis/getIcd9subcodeList", {
                       icd_category_code: event.target.value
@@ -523,316 +835,19 @@
                       this.add_icdcatcodelist = [];
                   }
               },
-          async onCreateEvent() {
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-                    var Boxvalue = [];
-                        var Boxvalue1 = [];
-                        var Boxvalue2 = [];
-                        var additionalbox = 0;
-                        var subcode = 0;
-                        var addsubcode = 0;
-
-                        $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                            additionalbox = additionalbox + "," + this.value;
-                          } else {
-                            additionalbox = this.value;
-                          }
-                        });
-                        Boxvalue.push({ additionalbox });
-
-                        $("#subcode :selected").each(function () {
-                          if (subcode) {
-                            subcode = subcode + "," + this.value;
-                          } else {
-                            subcode = this.value;
-                          }
-                        });
-                        Boxvalue1.push({ subcode });
-
-                        $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                            addsubcode = addsubcode + "," + this.value;
-                          } else {
-                            addsubcode = this.value;
-                          }
-                        });
-                        Boxvalue2.push({ addsubcode });
-
-                      try {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "etp-progress/add", {
-                                  patient_mrn_id: this.Id,
-                                  added_by: this.userdetails.user.id,
-                                  name: this.name,
-                                  mrn: this.mrn,
-                                  date: this.date,
-                                  time: this.time,
-                                  staff_name: this.staff_name,
-                                  work_readiness: this.work_readiness,
-                                  progress_note: this.progress_note,
-                                  management_plan: this.management_plan,
-                                  location_service: this.location_services_id,
-                                  diagnosis_type: this.type_diagnosis_id,
-                                  service_category: this.category_services,
-                                  services_id: this.services_id,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  additional_code_id: this.additional_code_id,
-                                  complexity_service: this.complexity_services_id,
-                                  outcome: this.outcome_id,
-                                  medication: this.medication_des,
-                                  status: "0",
-                                  appId: this.appId,
-                                  id: this.pid,
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong!',
-                                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                              })
-                              this.GoBack();
-                          }
-                      } catch (e) {
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
-          async onPublishEvent() {
-              this.$swal.fire({
-                  title: 'Do you want to save the changes?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  if (result.isConfirmed) {
-                    var Boxvalue = [];
-                        var Boxvalue1 = [];
-                        var Boxvalue2 = [];
-                        var additionalbox = 0;
-                        var subcode = 0;
-                        var addsubcode = 0;
-
-                        $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                            additionalbox = additionalbox + "," + this.value;
-                          } else {
-                            additionalbox = this.value;
-                          }
-                        });
-                        Boxvalue.push({ additionalbox });
-
-                        $("#subcode :selected").each(function () {
-                          if (subcode) {
-                            subcode = subcode + "," + this.value;
-                          } else {
-                            subcode = this.value;
-                          }
-                        });
-                        Boxvalue1.push({ subcode });
-
-                        $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                            addsubcode = addsubcode + "," + this.value;
-                          } else {
-                            addsubcode = this.value;
-                          }
-                        });
-                        Boxvalue2.push({ addsubcode });
-
-                      this.validate = true;
-                      console.log("services", this.category_services);
-                      this.errorList = [];
-                      try {
-                          if (!this.name) {
-                              this.errorList.push("Name is required");
-                          }
-                          if (!this.mrn) {
-                              this.errorList.push("MRN is required");
-                          }
-                          if (!this.date) {
-                              this.errorList.push("Date is required");
-                          }
-                          if (!this.time) {
-                              this.errorList.push("Time is required");
-                          }
-                          if (!this.staff_name) {
-                              this.errorList.push("Staff Name is required");
-                          }
-                          if (!this.work_readiness) {
-                              this.errorList.push("Work Readiness is required");
-                          }
-                          if (!this.progress_note) {
-                              this.errorList.push("Progress Note is required");
-                          }
-                          if (!this.management_plan) {
-                              this.errorList.push("Management Plan is required");
-                          }
-
-                          if (!this.location_services_id) {
-                              this.errorList.push("Location Of Services is required");
-                          }
-                          if (!this.type_diagnosis_id) {
-                              this.errorList.push("Type Of Diagnosis is required");
-                          }
-                          if (!this.category_services) {
-                              this.errorList.push("Category Of Services is required");
-                          }
-                          if (!this.complexity_services_id) {
-                              this.errorList.push("Complexity Of Service is required");
-                          }
-                          if (this.category_services) {
-                              if (this.category_services == "assisstance") {
-                                  if (!this.services_id) {
-                                      this.errorList.push("Service is required");
-                                      this.validate = false;
-                                  }
-                              } else if (this.category_services == "clinical-work") {
-                                  if (!this.code_id) {
-                                      this.errorList.push("ICD 9 CODE is required");
-                                      this.validate = false;
-                                  }
-                                  if (!JSON.stringify(subcode)) {
-                                      this.errorList.push("ICD 9 SUB CODE is required");
-                                      this.validate = false;
-                                  }
-                              } else {
-                                  if (!this.serviceid) {
-                                      this.errorList.push("Services is required");
-                                      this.validate = false;
-                                  } else {
-                                      this.services_id = this.serviceid;
-                                  }
-                              }
-                          }
-                          if (!this.outcome_id) {
-                              this.errorList.push("Outcome is required");
-                          }
-                          // if (!this.medication_des) {
-                          //     this.errorList.push("Medication is required");
-                          // }
-                          if (
-                              this.name &&
-                              this.mrn &&
-                              this.date &&
-                              this.time &&
-                              this.staff_name &&
-                              this.work_readiness &&
-                              this.progress_note &&
-                              this.management_plan &&
-                              this.location_services_id &&
-                              this.type_diagnosis_id &&
-                              this.category_services &&
-                              this.complexity_services_id &&
-                              this.outcome_id &&
-                              this.validate
-                          ) {
-                              this.loader = true;
-                              const headers = {
-                                  Authorization: "Bearer " + this.userdetails.access_token,
-                                  Accept: "application/json",
-                                  "Content-Type": "application/json",
-                              };
-                              const response = await this.$axios.post(
-                                  "etp-progress/add", {
-                                      patient_mrn_id: this.Id,
-                                      added_by: this.userdetails.user.id,
-                                      name: this.name,
-                                      mrn: this.mrn,
-                                      date: this.date,
-                                      time: this.time,
-                                      staff_name: this.staff_name,
-                                      work_readiness: this.work_readiness,
-                                      progress_note: this.progress_note,
-                                      management_plan: this.management_plan,
-                                      location_service: this.location_services_id,
-                                      diagnosis_type: this.type_diagnosis_id,
-                                      service_category: this.category_services,
-                                      services_id: this.services_id,
-                                      code_id: this.code_id,
-                                      sub_code_id: JSON.stringify(subcode),
-                                      additional_diagnosis: JSON.stringify(additionalbox),
-                                      additional_subcode: JSON.stringify(addsubcode),
-                                      additional_code_id: this.additional_code_id,
-                                      complexity_service: this.complexity_services_id,
-                                      outcome: this.outcome_id,
-                                      medication: this.medication_des,
-                                      status: "1",
-                                      appId: this.appId,
-                                      id: this.pid,
-                                  }, {
-                                      headers
-                                  }
-                              );
-                              console.log("response", response.data);
-                              if (response.data.code == 200) {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire(
-                                      'Successfully Submitted.',
-                                      'Data is inserted.',
-                                      'success',
-                                  );
-
-                                  this.GoBack();
-                              } else {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire({
-                                      icon: 'error',
-                                      title: 'Oops... Something Went Wrong!',
-                                      text: 'the error is: ' + JSON.stringify(response.data.message),
-                                  })
-                                  this.GoBack();
-                              }
-                          }
-                      } catch (e) {
-                          this.loader = false;
-                          this.resetmodel();
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-
-                          this.GoBack();
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
+          resetmodel() {
+              this.diagnosis = "";
+              this.clinical_notes = "";
+              this.management = "";
+              this.location_services_id = 0;
+              this.type_diagnosis_id = 0;
+              this.category_services = "";
+              this.code_id = 0;
+              this.sub_code_id = 0;
+              this.complexity_services_id = 0;
+              this.outcome_id = 0;
+              this.medication_des = "";
+              this.services_id = 0;
           },
           async GetPatientdetails() {
               const headers = {
@@ -848,8 +863,7 @@
                   }
               );
               if (response.data.code == 200) {
-                  this.mrn = response.data.list[0].patient_mrn;
-                  this.name = response.data.list[0].name_asin_nric;
+                  this.patientdetails = response.data.list[0];
               } else {
                   this.$swal.fire({
                       icon: 'error',
@@ -858,26 +872,7 @@
                       footer: ''
                   });
               }
-          },
-          resetmodel() {
-              this.name = "";
-              this.mrn = "";
-              this.date = "";
-              this.time = "";
-              this.staff_name = "";
-              this.work_readiness = "";
-              this.progress_note = "";
-              this.management_plan = "";
-              this.location_services_id = 0;
-              this.type_diagnosis_id = 0;
-              this.category_services = 0;
-              this.code_id = 0;
-              this.sub_code_id = 0;
-              this.complexity_services_id = 0;
-              this.outcome_id = 0;
-              this.medication_des = "";
-              this.services_id = 0;
-              this.serviceid = 0;
+              console.log("my details", this.patientdetails);
           },
           async getdetails() {
               const headers = {
@@ -888,38 +883,32 @@
               const response = await this.$axios.post(
                   "/patient-appointment-details/fetchViewHistoryListDetails", {
                       id: this.pid,
-                      type: "EtpProgressNote",
+                      type: "PsychiatricProgressNote",
                   }, {
                       headers
                   }
               );
               if (response.data.code == 200) {
-
+                  this.staff_name = response.data.Data[0].name;
+                  this.designation = response.data.Data[0].designation;
                   this.Id = response.data.Data[0].patient_mrn_id;
-
-                  this.date = response.data.Data[0].date;
-                  this.time = response.data.Data[0].time;
-                  this.name = response.data.Data[0].name;
-                  this.mrn = response.data.Data[0].mrn;
-                  this.staff_name = response.data.Data[0].staff_name;
-                  this.work_readiness = response.data.Data[0].work_readiness;
-
-                  this.progress_note = response.data.Data[0].progress_note;
-                  this.management_plan = response.data.Data[0].management_plan;
-
-                  this.location_services_id = response.data.Data[0].location_service;
-                  this.type_diagnosis_id = response.data.Data[0].diagnosis_type;
-                  this.category_services = response.data.Data[0].service_category;
+                  this.diagnosis = response.data.Data[0].diagnosis;
+                  this.clinical_notes = response.data.Data[0].clinical_notes;
+                  this.management = response.data.Data[0].management;
+                  this.location_services_id = response.data.Data[0].location_services_id;
+                  this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
+                  this.category_services = response.data.Data[0].category_services;
                   this.code_id = response.data.Data[0].code_id;
                   this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
                       $("#subcode")
                       .val(this.sub_code_id)
                       .trigger("change");
-                  this.complexity_services_id = response.data.Data[0].complexity_service;
-                  this.outcome_id = response.data.Data[0].outcome;
-                  this.medication_des = response.data.Data[0].medication;
-                  this.patient_mrn_id = response.data.Data[0].Id;
+                  this.complexity_services_id =
+                      response.data.Data[0].complexity_services_id;
+                  this.outcome_id = response.data.Data[0].outcome_id;
+                  this.medication_des = response.data.Data[0].medication_des;
                   this.services_id = response.data.Data[0].services_id;
+                  this.serviceid = response.data.Data[0].services_id;
                   this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
                       $("#additionalbox")
                       .val(this.additional_diagnosis)
@@ -931,7 +920,22 @@
                       .trigger("change");
 
                   this.additional_code_id = response.data.Data[0].additional_code_id;
-                  this.GetList();
+
+                  this.GetPatientdetails();
+
+                  if(this.category_services=='assisstance'){
+                        $(document).ready(function(){
+                            $("#assisstance").removeClass("hide");
+                        });
+                    }else if(this.category_services=='clinical-work'){
+                        $(document).ready(function(){
+                            $("#clinical-work").removeClass("hide");
+                        });
+                    }else if(this.category_services=='external'){
+                        $(document).ready(function(){
+                            $("#external").removeClass("hide");
+                        });
+                    }
 
                   const response2 = await this.$axios.post(
                       "diagnosis/getIcd9subcodeList", {
