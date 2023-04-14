@@ -123,12 +123,12 @@
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" v-model="frequency_session" type="radio" name="frequency-of-session" id="5" value="therapy-1">
+                                                                <input class="form-check-input" v-model="frequency_session" type="radio" name="frequency-of-session" id="5" value="Otherfrequency">
                                                                 <label class="form-check-label" for="5">
                                                                     Others
                                                                 </label>
                                                             </div>
-                                                            <div class="therapy-1 hide others1">
+                                                            <div class="Otherfrequency hide others1">
                                                                 <input type="text" v-model="frequency_session_other" class="form-control" name="" placeholder="Please Specify">
                                                             </div>
                                                         </td>
@@ -175,12 +175,12 @@
                                                             </div>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="12" value="therapy-2">
+                                                                <input class="form-check-input" v-model="model_therapy" type="radio" name="mode-Of-therapy" id="12" value="Othermodel">
                                                                 <label class="form-check-label" for="12">
                                                                     Others
                                                                 </label>
                                                             </div>
-                                                            <div class="therapy-2 hide others2">
+                                                            <div class="Othermodel hide others2">
                                                                 <input type="text" v-model="model_therapy_other" class="form-control" name="" placeholder="Please Specify">
                                                             </div>
                                                         </td>
@@ -212,12 +212,12 @@
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.5" value="therapy-3">
+                                                                <input class="form-check-input" v-model="mode_therapy" type="radio" name="mode-Of-therapy1" id="1.5" value="Others">
                                                                 <label class="form-check-label" for="1.5">
                                                                     Others
                                                                 </label>
                                                             </div>
-                                                            <div class="therapy-3 hide others3">
+                                                            <div class="Others hide others3">
                                                                 <input type="text" class="form-control" v-model="mode_therapy_other" name="" placeholder="Please Specify">
                                                             </div>
                                                         </td>
@@ -398,6 +398,24 @@
                                                 </div>
                                             </div>
                                             <!-- close-row -->
+                                            <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
+                                                    <div class="col-sm-8">
+                                                    <select
+                                                    id="additionalbox"
+                                                    class="form-select multiselect" multiple="multiple"
+                                                  >
+                                                  <option value="0">Please Select</option>
+                                                    <option
+                                        v-for="catcode in diagonisislist"
+                                        v-bind:key="catcode.id"
+                                        v-bind:value="catcode.id"
+                                      >
+                                      {{ catcode.icd_code }} {{catcode.icd_name}}
+                                      </option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            <!-- close row -->
                                             <div class="row mb-3">
                                                 <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
                                                 </label>
@@ -445,16 +463,45 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small></label>
-                                                        <select class="form-select" v-model="sub_code_id">
-                                                            <option value="0">Select sub code</option>
-                                                            <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                                {{ catcode.icd_code }}
-                                                                {{ catcode.icd_name }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                                            <div><label class="form-label">ICD 9 SUB CODE</label></div>
+                                                            <div>
+                                                              <div class="mt-2 align-items-flex-start">
+                                                                <select id='subcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                <option value="0">Select sub code</option>
+                                                                <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                    {{ catcode.icd_code }}
+                                                                    {{catcode.icd_name}}
+                                                                </option>
+                                                            </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                 </div>
+                                                <div class="row">
+                                                      <div class="col-md-6 mb-3">
+                                                            <label class="form-label">Additional ICD 9 CODE</label>
+                                                            <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                                <option value="0">Select code</option>
+                                                                <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                                    {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
+                                                            <div>
+                                                              <div class="mt-2 align-items-flex-start">
+                                                                <select id='addsubcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                <option value="0">Select sub code</option>
+                                                                <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                    {{ catcode.icd_code }}
+                                                                    {{catcode.icd_name}}
+                                                                </option>
+                                                            </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
                                             <!-- 02 -->
                                             <div class="external services hide mb-3">
@@ -596,6 +643,9 @@ export default {
                 $(".services").not(targetBox).hide();
                 $(targetBox).show();
             });
+            $(".multiselect").select2({
+                placeholder: "Please Select",
+              });
         });
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
@@ -621,6 +671,8 @@ export default {
             icdcatcodelist: [],
             diagonisislist: [],
             locationlist: [],
+            additionalcodelist: [],
+            add_icdcatcodelist: [],
             Id: 0,
             therapy_date: "",
             therapy_time: "",
@@ -664,6 +716,9 @@ export default {
             type: "",
             appId: 0,
             SidebarAccess: null,
+            additional_diagnosis: 0,
+            additional_subcode: 0,
+            additional_code_id: 0,
         };
     },
     methods: {
@@ -671,6 +726,40 @@ export default {
             if (confirm("Are you sure you want to save this entry ? ")) {
                 this.errorList = [];
                 this.validate = true;
+                var Boxvalue = [];
+                      var Boxvalue1 = [];
+                      var Boxvalue2 = [];
+                      var additionalbox = 0;
+                      var subcode = 0;
+                      var addsubcode = 0;
+
+                      $("#additionalbox :selected").each(function () {
+                        if (additionalbox) {
+                          additionalbox = additionalbox + "," + this.value;
+                        } else {
+                          additionalbox = this.value;
+                        }
+                      });
+                      Boxvalue.push({ additionalbox });
+
+                      $("#subcode :selected").each(function () {
+                        if (subcode) {
+                          subcode = subcode + "," + this.value;
+                        } else {
+                          subcode = this.value;
+                        }
+                      });
+                      Boxvalue1.push({ subcode });
+
+                      $("#addsubcode :selected").each(function () {
+                        if (addsubcode) {
+                          addsubcode = addsubcode + "," + this.value;
+                        } else {
+                          addsubcode = this.value;
+                        }
+                      });
+                      Boxvalue2.push({ addsubcode });
+
                 try {
                     if (!this.therapy_date) {
                         this.errorList.push("Date Performed is required");
@@ -828,7 +917,10 @@ export default {
                                 type_diagnosis_id: this.type_diagnosis_id,
                                 category_services: this.category_services,
                                 code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
+                                sub_code_id: JSON.stringify(subcode),
+                                additional_diagnosis: JSON.stringify(additionalbox),
+                                additional_subcode: JSON.stringify(addsubcode),
+                                additional_code_id: this.additional_code_id,
                                 complexity_services_id: this.complexity_services_id,
                                 outcome_id: this.outcome_id,
                                 medication_des: this.medication_des,
@@ -875,6 +967,40 @@ export default {
             }).then(async (result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                  var Boxvalue = [];
+                      var Boxvalue1 = [];
+                      var Boxvalue2 = [];
+                      var additionalbox = 0;
+                      var subcode = 0;
+                      var addsubcode = 0;
+
+                      $("#additionalbox :selected").each(function () {
+                        if (additionalbox) {
+                          additionalbox = additionalbox + "," + this.value;
+                        } else {
+                          additionalbox = this.value;
+                        }
+                      });
+                      Boxvalue.push({ additionalbox });
+
+                      $("#subcode :selected").each(function () {
+                        if (subcode) {
+                          subcode = subcode + "," + this.value;
+                        } else {
+                          subcode = this.value;
+                        }
+                      });
+                      Boxvalue1.push({ subcode });
+
+                      $("#addsubcode :selected").each(function () {
+                        if (addsubcode) {
+                          addsubcode = addsubcode + "," + this.value;
+                        } else {
+                          addsubcode = this.value;
+                        }
+                      });
+                      Boxvalue2.push({ addsubcode });
+
                     try {
                         this.loader = true;
                         const headers = {
@@ -912,7 +1038,10 @@ export default {
                                 type_diagnosis_id: this.type_diagnosis_id,
                                 category_services: this.category_services,
                                 code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
+                                sub_code_id: JSON.stringify(subcode),
+                                additional_diagnosis: JSON.stringify(additionalbox),
+                                additional_subcode: JSON.stringify(addsubcode),
+                                additional_code_id: this.additional_code_id,
                                 complexity_services_id: this.complexity_services_id,
                                 outcome_id: this.outcome_id,
                                 medication_des: this.medication_des,
@@ -951,418 +1080,6 @@ export default {
                     this.$swal.fire('Changes are not saved', '', 'info')
                 }
             })
-        },
-        async onPublishEvent() {
-            this.$swal.fire({
-                title: 'Do you want to save the changes?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    this.validate = true;
-                    console.log("services", this.category_services);
-                    this.errorList = [];
-                    try {
-                        if (!this.therapy_date) {
-                            this.errorList.push("Date Performed is required");
-                        }
-                        if (!this.therapy_time) {
-                            this.errorList.push("Time Performed is required");
-                        }
-
-                        if (!this.frequency_session) {
-                            this.errorList.push("FREQUENCY OF SESSION is required");
-                        }
-                        if (!this.model_therapy) {
-                            this.errorList.push("	MODE OF THERAPY is required");
-                        }
-                        if (!this.mode_therapy) {
-                            this.errorList.push("MODE OF THERAPY is required");
-                        }
-                        if (!this.comment_therapy_session) {
-                            this.errorList.push("Comments On Therapy Sessions is required");
-                        }
-                        if (!this.patent_condition) {
-                            this.errorList.push("Patent's Condition is required");
-                        }
-                        if (!this.comment_patent_condition) {
-                            this.errorList.push("Comments On Patent's Condition is required");
-                        }
-
-                        if (!this.session_issues) {
-                            this.errorList.push("Issues/Problems  is required");
-                        }
-                        if (!this.conduct_session) {
-                            this.errorList.push("Conduct Of Session is required");
-                        }
-                        if (!this.outcome_session) {
-                            this.errorList.push("Outcome Of Session is required");
-                        }
-                        if (!this.transference_session) {
-                            this.errorList.push("Transference/countertransference is required");
-                        }
-                        if (!this.duration_session) {
-                            this.errorList.push("Duration Of Session is required");
-                        }
-                        if (!this.other_comment_session) {
-                            this.errorList.push("Other Comments is required");
-                        }
-                        if (!this.name) {
-                            this.errorList.push("Name is required");
-                        }
-                        if (!this.designation) {
-                            this.errorList.push("Designation is required");
-                        }
-                        if (!this.date_session) {
-                            this.errorList.push("Date is required");
-                        }
-                        if (!this.location_services_id) {
-                            this.errorList.push("Location Of Services is required");
-                        }
-                        if (!this.type_diagnosis_id) {
-                            this.errorList.push("Type Of Diagnosis is required");
-                        }
-                        if (!this.category_services) {
-                            this.errorList.push("Category Of Services is required");
-                        }
-                        if (!this.complexity_services_id) {
-                            this.errorList.push("Complexity Of Service is required");
-                        }
-                        if (this.category_services) {
-                            if (this.category_services == "assisstance") {
-                                if (!this.services_id) {
-                                    this.errorList.push("Service is required");
-                                    this.validate = false;
-                                }
-                            } else if (this.category_services == "clinical-work") {
-                                if (!this.code_id) {
-                                    this.errorList.push("ICD 9 CODE is required");
-                                    this.validate = false;
-                                }
-                                if (!this.sub_code_id) {
-                                    this.errorList.push("ICD 9 SUB CODE is required");
-                                    this.validate = false;
-                                }
-                            } else {
-                                if (!this.serviceid) {
-                                    this.errorList.push("Services is required");
-                                    this.validate = false;
-                                } else {
-                                    this.services_id = this.serviceid;
-                                }
-                            }
-                        }
-                        if (!this.outcome_id) {
-                            this.errorList.push("Outcome is required");
-                        }
-
-                        if (
-                            this.therapy_date &&
-                            this.therapy_time &&
-
-                            this.frequency_session &&
-                            this.model_therapy &&
-                            this.comment_therapy_session &&
-                            this.patent_condition &&
-                            this.comment_patent_condition &&
-
-                            this.session_issues &&
-                            this.conduct_session &&
-                            this.outcome_session &&
-                            this.transference_session &&
-                            this.duration_session &&
-                            this.other_comment_session &&
-                            this.name &&
-                            this.designation &&
-                            this.date_session &&
-                            this.location_services_id &&
-                            this.type_diagnosis_id &&
-                            this.category_services &&
-                            this.complexity_services_id &&
-                            this.outcome_id &&
-                            // this.medication_des &&
-                            this.validate
-                        ) {
-                            this.loader = true;
-                            const headers = {
-                                Authorization: "Bearer " + this.userdetails.access_token,
-                                Accept: "application/json",
-                                "Content-Type": "application/json",
-                            };
-                            const response = await this.$axios.post(
-                                "counselling-progress-note/add", {
-                                    added_by: this.userdetails.user.id.toString(),
-                                    therapy_date: this.therapy_date,
-                                    therapy_time: this.therapy_time,
-                                    diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                    frequency_session: this.frequency_session,
-                                    frequency_session_other: this.frequency_session_other,
-                                    model_therapy: this.model_therapy,
-                                    model_therapy_other: this.model_therapy_other,
-                                    mode_therapy: this.mode_therapy,
-                                    mode_therapy_other: this.mode_therapy_other,
-                                    comment_therapy_session: this.comment_therapy_session,
-                                    patent_condition: this.patent_condition,
-                                    patent_condition_other: this.patent_condition_other,
-                                    comment_patent_condition: this.comment_patent_condition,
-                                    session_details: this.session_details,
-                                    session_issues: this.session_issues,
-                                    conduct_session: this.conduct_session,
-                                    outcome_session: this.outcome_session,
-                                    transference_session: this.transference_session,
-                                    duration_session: this.duration_session,
-                                    other_comment_session: this.other_comment_session,
-                                    name: this.name,
-                                    designation: this.designation,
-                                    date_session: this.date_session,
-                                    location_services_id: this.location_services_id,
-                                    type_diagnosis_id: this.type_diagnosis_id,
-                                    category_services: this.category_services,
-                                    code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
-                                    complexity_services_id: this.complexity_services_id,
-                                    outcome_id: this.outcome_id,
-                                    medication_des: this.medication_des,
-                                    patient_mrn_id: this.Id,
-                                    services_id: this.services_id,
-                                    status: "1",
-                                    appId: this.appId,
-                                }, {
-                                    headers
-                                }
-                            );
-                            console.log("response", response.data);
-                            if (response.data.code == 200) {
-                                this.loader = false;
-                                this.resetmodel();
-                                this.$swal.fire(
-                                    'Successfully Submitted.',
-                                    'Data is inserted.',
-                                    'success',
-                                );
-
-                                this.GoBack();
-                            } else {
-                                this.loader = false;
-                                this.resetmodel();
-                                this.$swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops... Something Went Wrong!',
-                                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                                })
-                                this.GoBack();
-                            }
-                        }
-                    } catch (e) {
-                        this.loader = false;
-                        this.resetmodel();
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + e,
-                        })
-
-                        this.GoBack();
-                    }
-                } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
-            })
-        },
-        async Oncounsellingprogressnote() {
-            this.errorList = [];
-            this.validate = true;
-            try {
-                if (!this.therapy_date) {
-                    this.errorList.push("Date Performed is required");
-                }
-                if (!this.therapy_time) {
-                    this.errorList.push("Time Performed is required");
-                }
-
-                if (!this.frequency_session) {
-                    this.errorList.push("FREQUENCY OF SESSION is required");
-                }
-                if (!this.model_therapy) {
-                    this.errorList.push("	MODE OF THERAPY is required");
-                }
-                if (!this.mode_therapy) {
-                    this.errorList.push("MODE OF THERAPY is required");
-                }
-                if (!this.comment_therapy_session) {
-                    this.errorList.push("Comments On Therapy Sessions is required");
-                }
-                if (!this.patent_condition) {
-                    this.errorList.push("Patent's Condition is required");
-                }
-                if (!this.comment_patent_condition) {
-                    this.errorList.push("Comments On Patent's Condition is required");
-                }
-
-                if (!this.session_issues) {
-                    this.errorList.push("Issues/Problems  is required");
-                }
-                if (!this.conduct_session) {
-                    this.errorList.push("Conduct Of Session is required");
-                }
-                if (!this.outcome_session) {
-                    this.errorList.push("Outcome Of Session is required");
-                }
-                if (!this.transference_session) {
-                    this.errorList.push("Transference/countertransference is required");
-                }
-                if (!this.duration_session) {
-                    this.errorList.push("Duration Of Session is required");
-                }
-                if (!this.other_comment_session) {
-                    this.errorList.push("Other Comments is required");
-                }
-                if (!this.name) {
-                    this.errorList.push("Name is required");
-                }
-                if (!this.designation) {
-                    this.errorList.push("Designation is required");
-                }
-                if (!this.date_session) {
-                    this.errorList.push("Date is required");
-                }
-                if (!this.location_services_id) {
-                    this.errorList.push("Location Of Services is required");
-                }
-                if (!this.type_diagnosis_id) {
-                    this.errorList.push("Type Of Diagnosis is required");
-                }
-                if (!this.category_services) {
-                    this.errorList.push("Category Of Services is required");
-                }
-                if (!this.complexity_services_id) {
-                    this.errorList.push("Complexity Of Service is required");
-                }
-                if (this.category_services) {
-                    if (this.category_services == "assisstance") {
-                        if (!this.services_id) {
-                            this.errorList.push("Service is required");
-                            this.validate = false;
-                        }
-                    } else if (this.category_services == "clinical-work") {
-                        if (!this.code_id) {
-                            this.errorList.push("ICD 9 CODE is required");
-                            this.validate = false;
-                        }
-                        if (!this.sub_code_id) {
-                            this.errorList.push("ICD 9 SUB CODE is required");
-                            this.validate = false;
-                        }
-                    } else {
-                        if (!this.serviceid) {
-                            this.errorList.push("Services is required");
-                            this.validate = false;
-                        } else {
-                            this.services_id = this.serviceid;
-                        }
-                    }
-                }
-                if (!this.outcome_id) {
-                    this.errorList.push("Outcome is required");
-                }
-
-                if (
-                    this.therapy_date &&
-                    this.therapy_time &&
-
-                    this.frequency_session &&
-                    this.model_therapy &&
-                    this.comment_therapy_session &&
-                    this.patent_condition &&
-                    this.comment_patent_condition &&
-
-                    this.session_issues &&
-                    this.conduct_session &&
-                    this.outcome_session &&
-                    this.transference_session &&
-                    this.duration_session &&
-                    this.other_comment_session &&
-                    this.name &&
-                    this.designation &&
-                    this.date_session &&
-                    this.location_services_id &&
-                    this.type_diagnosis_id &&
-                    this.category_services &&
-                    this.complexity_services_id &&
-                    this.outcome_id &&
-                    // this.medication_des &&
-                    this.validate
-                ) {
-                    this.loader = true;
-                    const headers = {
-                        Authorization: "Bearer " + this.userdetails.access_token,
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    };
-                    const response = await this.$axios.post(
-                        "counselling-progress-note/add", {
-                            added_by: this.userdetails.user.id.toString(),
-                            therapy_date: this.therapy_date,
-                            therapy_time: this.therapy_time,
-                            diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                            frequency_session: this.frequency_session,
-                            frequency_session_other: this.frequency_session_other,
-                            model_therapy: this.model_therapy,
-                            model_therapy_other: this.model_therapy_other,
-                            mode_therapy: this.mode_therapy,
-                            mode_therapy_other: this.mode_therapy_other,
-                            comment_therapy_session: this.comment_therapy_session,
-                            patent_condition: this.patent_condition,
-                            patent_condition_other: this.patent_condition_other,
-                            comment_patent_condition: this.comment_patent_condition,
-                            session_details: this.session_details,
-                            session_issues: this.session_issues,
-                            conduct_session: this.conduct_session,
-                            outcome_session: this.outcome_session,
-                            transference_session: this.transference_session,
-                            duration_session: this.duration_session,
-                            other_comment_session: this.other_comment_session,
-                            name: this.name,
-                            designation: this.designation,
-                            date_session: this.date_session,
-                            location_services_id: this.location_services_id,
-                            type_diagnosis_id: this.type_diagnosis_id,
-                            category_services: this.category_services,
-                            code_id: this.code_id,
-                            sub_code_id: this.sub_code_id,
-                            complexity_services_id: this.complexity_services_id,
-                            outcome_id: this.outcome_id,
-                            medication_des: this.medication_des,
-                            patient_mrn_id: this.Id,
-                            services_id: this.services_id,
-                        }, {
-                            headers
-                        }
-                    );
-                    console.log("response", response.data);
-                    if (response.data.code == 200) {
-                        this.loader = false;
-                        this.resetmodel();
-                        this.$swal.fire('created successfully', '', 'success');
-                    } else {
-                        this.loader = false;
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + JSON.stringify(response.data.message),
-                            footer: ''
-                        });
-                    }
-                }
-            } catch (e) {
-                this.loader = false;
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + e,
-                    footer: ''
-                });
-            }
         },
         async GetList() {
             const headers = {
@@ -1444,6 +1161,14 @@ export default {
             } else {
                 this.externallist = [];
             }
+            const response6 = await this.$axios.get("diagnosis/getIcd9codeList", {
+                    headers,
+                });
+                if (response6.data.code == 200 || response6.data.code == "200") {
+                    this.additionalcodelist = response6.data.list;
+                } else {
+                    this.additionalcodelist = [];
+                }
         },
         async onCategorycodebind(event) {
             const headers = {
@@ -1465,6 +1190,26 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
+        async onCategorycodebind2(event) {
+                const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                };
+                console.log("my id", event);
+                const response = await this.$axios.post(
+                    "diagnosis/getIcd9subcodeList", {
+                        icd_category_code: event.target.value
+                    }, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200 || response.data.code == "200") {
+                    this.add_icdcatcodelist = response.data.list;
+                } else {
+                    this.add_icdcatcodelist = [];
+                }
+            },
         resetmodel() {
             this.therapy_date = "";
             this.therapy_time = "";
@@ -1574,15 +1319,30 @@ export default {
                 this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
                 this.category_services = response.data.Data[0].category_services;
                 this.code_id = response.data.Data[0].code_id;
-                this.sub_code_id = response.data.Data[0].sub_code_id;
+                this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                    $("#subcode")
+                    .val(this.sub_code_id)
+                    .trigger("change");
                 this.complexity_services_id =
                     response.data.Data[0].complexity_services_id;
                 this.outcome_id = response.data.Data[0].outcome_id;
                 this.medication_des = response.data.Data[0].medication_des;
                 this.patient_mrn_id = response.data.Data[0].Id;
                 this.services_id = response.data.Data[0].servicesid;
+                this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
+                    $("#additionalbox")
+                    .val(this.additional_diagnosis)
+                    .trigger("change");
+
+                this.additional_subcode = response.data.Data[0].additional_subcode.split(",");
+                    $("#addsubcode")
+                    .val(this.additional_subcode)
+                    .trigger("change");
+
+                this.additional_code_id = response.data.Data[0].additional_code_id;
                 this.GetList();
                 this.GetPatientdetails();
+
                 const response2 = await this.$axios.post(
                     "diagnosis/getIcd9subcodeList", {
                         icd_category_code: this.code_id
@@ -1595,6 +1355,19 @@ export default {
 
                 } else {
                     this.icdcatcodelist = [];
+                }
+
+                const response3 = await this.$axios.post(
+                    "diagnosis/getIcd9subcodeList", {
+                        icd_category_code: this.additional_code_id
+                    }, {
+                        headers
+                    }
+                );
+                if (response3.data.code == 200 || response3.data.code == "200") {
+                    this.add_icdcatcodelist = response3.data.list;
+                } else {
+                    this.add_icdcatcodelist = [];
                 }
 
             } else {

@@ -367,26 +367,22 @@
                         <div class="step-form-box box-06">
                           <select id="eightbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
                           >
                            <option
-              v-for="catcode in stresslist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
-            <option value="others">
-                                    Others
-                                  </option>
-                                  <div class="step-form-box box-07">
+                            v-for="catcode in stresslist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                            {{ catcode.section_value }}
+                          </option>
+                          </select>
+                          <div class="step-form-box box-07">
                           <input
                             type="text"
                             class="form-control" v-model="stress_other"
                             placeholder="Please Specify"
                           />
                         </div>
-                          </select>
                         </div>
                       </div>
                     </div>
@@ -831,7 +827,7 @@
                                     id="8"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="8">
-                                    Other
+                                    Others
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -1314,10 +1310,10 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="20%">Risk Level</th>
+                            <th width="20%"><b>Risk Level</b></th>
                             <th scope="col">
-                              Based on Risk Factor/Protective Factor/Suicidal
-                              Intent
+                              <b>Based on Risk Factor/Protective Factor/Suicidal
+                              Intent</b>
                             </th>
                           </tr>
                         </thead>
@@ -1339,11 +1335,11 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Psychiatric diagnoses with severe symptoms or
                                 acute precipitating events; protective factors
                                 not relevant; high suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1363,10 +1359,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Multiple risk factors, few protective factors,
                                 moderate suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1386,10 +1382,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Modifiable risk factors, strong protective
                                 factors, no or low suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
@@ -1461,13 +1457,12 @@
                           </option>
                         </select>
                       </div>
-                      <div class="col-sm-3" v-if="contactOther">
-                          <label class="form-label">Please Specify</label>
+                      <div class="col-sm-4" v-if="contactOther">
                           <input
                             type="text"
                             class="form-control"
                             v-model="referral_or_contact_other"
-                            placeholder="please specify"
+                            placeholder="Please Specify"
                           />
                         </div>
                     </div>
@@ -1495,15 +1490,14 @@
                           </option>
                         </select>
                       </div>
-                      <div class="col-sm-3" v-if="arrivalOther">
-                          <label class="form-label">Please Specify</label>
+                      <div class="col-sm-4" v-if="arrivalOther">
                           <input
                             type="text"
                             class="form-control"
                             v-model="arrival_mode_other"
-                            placeholder="please specify"
+                            placeholder="Please Specify"
                           />
-                        </div>
+                      </div>
                     </div>
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
@@ -1710,12 +1704,12 @@
                         >
                         <option value="0">Please Select</option>
                            <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                         </select>
                       </div>
                       <div class="col-sm-4">
@@ -1728,12 +1722,12 @@
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist_external"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                     </div>
@@ -1749,12 +1743,12 @@
                         >
                         <option value="0">Please Select</option>
                            <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -1769,12 +1763,12 @@
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist_external"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                       </div>
@@ -1869,13 +1863,13 @@
                       </div>
                     </div>
                         <p v-if="errors.length">
-<ul>
-        <li style="color:red"  v-for='err in errors'
-    :key='err' >
-          {{ err }}
-        </li>
-      </ul>
-        </p>
+                          <ul>
+                            <li style="color:red"  v-for='err in errors'
+                        :key='err' >
+                              {{ err }}
+                            </li>
+                          </ul>
+                        </p>
                     <!-- close-row -->
                     <br><br>
                     <div class="d-flex btn-footer">
@@ -2516,14 +2510,14 @@ export default {
       }
     },
     OnchangeContact(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Others"){
         this.contactOther = true;
       }else{
         this.contactOther = false;
       }
     },
     OnchangeArrival(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Others"){
         this.arrivalOther = true;
       }else{
         this.arrivalOther = false;

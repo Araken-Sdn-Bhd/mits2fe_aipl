@@ -715,7 +715,7 @@
                                     hide
                                   "
                                 >
-                                <div class="col-sm-12">
+                                <div v-if="overdose!=null" class="col-sm-12">
                                     <div class="mb-3">
                                       <label class="form-label"
                                         >Please Specify</label
@@ -811,15 +811,15 @@
                                     id="8"
                                   />
                                   <label class="form-check-label" for="8">
-                                    Other
+                                    Others
                                   </label>
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div
-                                  class="col-sm-12 selfharm-other-div mt-3" v-if="selfharm_other==true"
+                                <div v-if="other_sh!=null"
+                                  class="col-sm-12 selfharm-other-div mt-3"
                                 >
-                                  <div class="mb-3">
+                                  <div class="mb-3" >
                                     <input
                                       type="text"
                                       class="form-control"
@@ -927,7 +927,7 @@
                                     class="form-check-input specify-other"
                                     type="checkbox"
                                     value="Specify patient actual words"
-                                    id="6.6" v-model="patientactualword" @click="onSectionC('val')"
+                                    id="6.6" v-model="patientactualword" 
                                   />
                                   <label class="form-check-label" for="6.6">
                                     Specify patient actual words
@@ -935,10 +935,10 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div
+                                <div v-if="patientactualword!=null"
                                   class="col-sm-12 specify-other-div mt-3 hide"
                                 >
-                                  <div class="mb-3">
+                                  <div class="mb-3" >
                                     <input
                                       type="text"
                                       class="form-control"
@@ -1133,13 +1133,17 @@
                                     >Other</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div class="intent-other-div hide">
+                                  <div v-if="Other!=null"
+                                  class="intent-other-div hide"
+                                >
+                                  <div class="mb-3" >
                                     <input
                                       type="text"
                                       class="form-control"
                                       placeholder="Please Specify" v-model="intent_other"
                                     />
                                   </div>
+                                </div>
                                   <!-- SHOW_DIV -->
                                 </div>
                               </div>
@@ -1240,10 +1244,10 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="20%">Risk Level</th>
+                            <th width="20%"><b>Risk Level</b></th>
                             <th scope="col">
-                              Based on Risk Factor/Protective Factor/Suicidal
-                              Intent
+                              <b>Based on Risk Factor/Protective Factor/Suicidal
+                              Intent</b>
                             </th>
                           </tr>
                         </thead>
@@ -1265,11 +1269,11 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Psychiatric diagnoses with severe symptoms or
                                 acute precipitating events; protective factors
                                 not relevant; high suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1289,10 +1293,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Multiple risk factors, few protective factors,
                                 moderate suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1312,10 +1316,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Modifiable risk factors, strong protective
                                 factors, no or low suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
@@ -1383,13 +1387,12 @@
                           </option>
                         </select>
                       </div>
-                      <div class="col-sm-3" v-if="referral_or_contact=='OTHERS' || referral_or_contact==194">
-                          <label class="form-label">Please Specify</label>
+                      <div class="col-sm-4" v-if="referral_or_contact=='OTHERS' || referral_or_contact==194">
                           <input
                             type="text"
                             class="form-control"
                             v-model="referral_or_contact_other"
-                            placeholder="please specify"
+                            placeholder="Please Specify"
                           />
                         </div>
                     </div>
@@ -1419,9 +1422,8 @@
                       </div>
                       <div
                         class="
-                          col-sm-3" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
+                          col-sm-4" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
                       >
-                      <label class="form-label">Please Specify</label>
                         <input
                           type="text"
                           class="form-control"
@@ -1560,7 +1562,7 @@
 
                           <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
                           <div class="pafca-other-div hide" style="display:none;">
-                          <div class="mb-3">
+                          <div class="mb-5">
                             <label>If admitted, specify the first admitting ward</label>
                             <input
                               type="text"
@@ -1971,7 +1973,7 @@ export default {
       cuttingorpiercing: "",
       jumpingfromheight: "",
       selfharm_other: "",
-      other_sh: false,
+      other_sh: "",
       family: "",
       internet: "",
       printed: "",
@@ -2532,9 +2534,12 @@ export default {
             response.data.result.selfharm[0].section_value.Place_of_Occurance;
           this.place_other = response.data.result.selfharm[0].section_value.place_other;
           this.testresult = response.data.result.selfharm[4];
-          this.overdose =
-            response.data.result.selfharm[1].section_value.Overdose_Poisoning;
-          this.Overdosespecify = response.data.result.selfharm[1].section_value.Overdosespecify;
+          // this.overdose =
+          //   response.data.result.selfharm[1].section_value.Overdose_Poisoning;
+          if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
+              this.overdose = true;
+            }
+            this.Overdosespecify = response.data.result.selfharm[1].section_value.Overdosespecify;
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
           this.drowning =
@@ -2547,10 +2552,10 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
-            // if(response.data.result.selfharm[1].section_value.Other!=null) {
-            //   this.other_sh = true;
-            // }
-            this.other_sh = response.data.result.selfharm[1].section_value.Other;
+            if(response.data.result.selfharm[1].section_value.Other_!=null) {
+              this.other_sh = true;
+            }
+            // this.other_sh = response.data.result.selfharm[1].section_value.Other_;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
 
@@ -2597,7 +2602,11 @@ export default {
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
-            this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
+            // this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
+            
+            if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
+              this.patientactualword = true;
+            }
             this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
 
           this.result = response.data.result.suicideRisk[0].result;
@@ -2877,7 +2886,6 @@ export default {
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
                     "Other": this.selfharm_other,
-                    // selfharm_other: this.selfharm_other,
                   },
                 },
                 {
@@ -2890,7 +2898,7 @@ export default {
                     "Broadcast media (television, radio)": this.broadcast,
                     "Own ideas":this.ideas,
                     "Specify patient actual words":
-                      this.patientactualword,
+                      this.patientactualword_other,
                   },
                 },
                 {

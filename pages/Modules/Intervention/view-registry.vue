@@ -626,27 +626,21 @@
                       >
                         {{ slt.section_value }}
                       </option>
-                                  <option value="others">
-                                    Other area (Please specify)
-                                  </option>
                                 </select>
                               </div>
                               <!-- SHOW_DIV -->
-                              <div
-                                class="col-sm-12 others selected-box mt-3"
-                                style="display: none"
-                              >
-                                <div class="mb-3">
-                                  <label class="form-label"
-                                    >Others (Please specify)</label
-                                  >
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Please Specify" v-model="place_other"
-                                  />
-                                </div>
-                              </div>
+                              <div class="col-sm-6" v-if="place_id=='OTHERS'">
+                        <div class="mb-3">
+                          <label class="form-label">Please Specify</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="place_other"
+                            placeholder="please specify"
+
+                          />
+                        </div>
+                        </div>
                             </div>
                           </div>
                         </div>
@@ -693,58 +687,19 @@
                                 <div
                                   class="
                                     col-sm-12
+                                    overdose-poisoning-div
                                     mt-3
-                                  " v-if="overdosevalue"
+                                    hide
+                                  "
                                 >
-                                  <div class="mb-3">
-                                    <select class="form-select" id="op-select" v-model="overdosevalue">
-                                      <option value="">Please select</option>
-                                      <option
-                        v-for="slt in overdoselist"
-                        v-bind:key="slt.section_value"
-                        v-bind:value="slt.section_value"
-                      >
-                        {{ slt.section_value }}
-                      </option>
-                                    </select>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 medication op-box">
+                                <div class="col-sm-12">
                                     <div class="mb-3">
                                       <label class="form-label"
                                         >Please Specify</label
                                       >
                                       <input
                                         type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div class="col-sm-12 chemicals op-box">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
-                                  </div>
-                                  <!-- SHOW_DIV -->
-                                  <div
-                                    class="col-sm-12 illicit-substance op-box"
-                                  >
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control"
+                                        class="form-control" v-model="Overdosespecify"
                                         placeholder="Please Specify"
                                       />
                                     </div>
@@ -829,19 +784,19 @@
                                   <input
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
-                                    value="Other"
+                                    value="Other" v-model="other_sh"
                                     id="8"
                                   />
                                   <label class="form-check-label" for="8">
-                                    Other
+                                    Others
                                   </label>
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div
-                                  class="col-sm-12 selfharm-other-div mt-3 hide"
+                                <div v-if="other_sh!=null"
+                                  class="col-sm-12 selfharm-other-div mt-3"
                                 >
-                                  <div class="mb-3">
+                                  <div class="mb-3" >
                                     <input
                                       type="text"
                                       class="form-control"
@@ -1261,10 +1216,10 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="20%">Risk Level</th>
+                            <th width="20%"><b>Risk Level</b></th>
                             <th scope="col">
-                              Based on Risk Factor/Protective Factor/Suicidal
-                              Intent
+                              <b>Based on Risk Factor/Protective Factor/Suicidal
+                              Intent</b>
                             </th>
                           </tr>
                         </thead>
@@ -1286,11 +1241,11 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Psychiatric diagnoses with severe symptoms or
                                 acute precipitating events; protective factors
                                 not relevant; high suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1310,10 +1265,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Multiple risk factors, few protective factors,
                                 moderate suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1333,10 +1288,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Modifiable risk factors, strong protective
                                 factors, no or low suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
@@ -1400,24 +1355,16 @@
                           >
                             {{ referal.section_value }}
                           </option>
-                          <option value="rcp">
-                            Other(Please Specfy)
-                          </option>
                         </select>
                       </div>
-                      <div
-                        class="
-                          col-sm-3
-                          contact-point-div
-                          rcp
-                        " v-show="referral_or_contact_other"
-                      >
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Please Specfy" v-model="referral_or_contact_other"
-                        />
-                      </div>
+                      <div class="col-sm-3" v-if="referral_or_contact=='Others' || referral_or_contact==194">
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="referral_or_contact_other"
+                            placeholder="Please Specify"
+                          />
+                        </div>
                     </div>
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
@@ -1440,23 +1387,16 @@
                           >
                             {{ mode.section_value }}
                           </option>
-                          <option value="am">
-                            Other(Please Specify)
-                          </option>
                         </select>
                       </div>
                       <div
                         class="
-                          col-sm-3
-                          mode-of-arrival-div am
-                          hide
-                        "
-                        style="display: none"
+                          col-sm-3" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
                       >
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Please Specfy" v-model="arrival_mode_other"
+                          placeholder="Please Specify" v-model="arrival_mode_other"
                         />
                       </div>
                     </div>
@@ -2429,6 +2369,7 @@ export default {
         this.Stime = response.data.result.selfharm[0].section_value.Time;
         this.place_id =
           response.data.result.selfharm[0].section_value.Place_of_Occurance;
+        this.place_other = response.data.result.selfharm[0].section_value.place_other;
         this.testresult = response.data.result.selfharm[4];
         this.overdose =
           response.data.result.selfharm[1].section_value.Overdose_Poisoning;
@@ -2445,8 +2386,12 @@ export default {
           response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
         this.jumpingfromheight =
           response.data.result.selfharm[1].section_value.Jumping_from_height;
-        this.selfharm_other =
-          response.data.result.selfharm[1].section_value.Other;
+          if(response.data.result.selfharm[1].section_value.Other_!=null) {
+              this.other_sh = true;
+            }
+            // this.other_sh = response.data.result.selfharm[1].section_value.Other_;
+            this.selfharm_other =
+            response.data.result.selfharm[1].section_value.selfharm_other;
 
           if(response.data.result.selfharm[3].section_value.intent=="no"||response.data.result.selfharm[3].section_value.intent=="Undetermined"){
             this.patient_intent =
