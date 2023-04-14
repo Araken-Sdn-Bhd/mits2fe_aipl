@@ -788,7 +788,7 @@
                                     id="8"
                                   />
                                   <label class="form-check-label" for="8">
-                                    Other
+                                    Others
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -1216,10 +1216,10 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="20%">Risk Level</th>
+                            <th width="20%"><b>Risk Level</b></th>
                             <th scope="col">
-                              Based on Risk Factor/Protective Factor/Suicidal
-                              Intent
+                              <b>Based on Risk Factor/Protective Factor/Suicidal
+                              Intent</b>
                             </th>
                           </tr>
                         </thead>
@@ -1241,11 +1241,11 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Psychiatric diagnoses with severe symptoms or
                                 acute precipitating events; protective factors
                                 not relevant; high suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1265,10 +1265,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Multiple risk factors, few protective factors,
                                 moderate suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -1288,10 +1288,10 @@
                               </div>
                             </td>
                             <td>
-                              <p>
+                              <div>
                                 Modifiable risk factors, strong protective
                                 factors, no or low suicidal intent
-                              </p>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
@@ -1357,13 +1357,12 @@
                           </option>
                         </select>
                       </div>
-                      <div class="col-sm-3" v-if="referral_or_contact=='OTHERS' || referral_or_contact==194">
-                          <label class="form-label">Please Specify</label>
+                      <div class="col-sm-3" v-if="referral_or_contact=='Others' || referral_or_contact==194">
                           <input
                             type="text"
                             class="form-control"
                             v-model="referral_or_contact_other"
-                            placeholder="please specify"
+                            placeholder="Please Specify"
                           />
                         </div>
                     </div>
@@ -1394,7 +1393,6 @@
                         class="
                           col-sm-3" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
                       >
-                      <label class="form-label">Please Specify</label>
                         <input
                           type="text"
                           class="form-control"
