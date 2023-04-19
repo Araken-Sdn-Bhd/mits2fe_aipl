@@ -52,21 +52,21 @@
                                 <table class="job-search-table" id="companydetail" v-if="!pid">
                                     <thead>
                                         <tr>
-                                            <th>Company Name </th>
-                                            <th>Job Applied </th>
-                                            <th>Application Date </th>
-                                            <th>Interview Date </th>
+                                            <th>Company Name <small style="color:red">*</small> </th>
+                                            <th>Job Applied <small style="color:red">*</small> </th>
+                                            <th>Application Date <small style="color:red">*</small> </th>
+                                            <th>Interview Date <small style="color:red">*</small> </th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="optionBox">
                                         <tr class="block">
-                                            <td><input type="text" class="form-control name" /></td>
-                                            <td><input type="text" class="form-control job" /></td>
+                                            <td><input type="text" required class="form-control name" /></td>
+                                            <td><input type="text" required class="form-control job" /></td>
                                             <td>
-                                                <input type="date" class="form-control appdate" />
+                                                <input type="date" required class="form-control appdate" />
                                             </td>
-                                            <td><input type="date" class="form-control intdate" /></td>
+                                            <td><input type="date" required class="form-control intdate" /></td>
                                             <td>
                                                 <a class="add-row"><i class="fa fa-plus"></i></a>
                                             </td>
