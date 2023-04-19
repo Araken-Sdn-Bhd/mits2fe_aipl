@@ -61,9 +61,9 @@
                                             <label class="form-label">Location:</label>
                                             <select class="form-select select-others" v-model="location">
                                                 <option value="">Please Select</option>
-                                                <option v-if="this.role=='System Admin'" value="All">All</option>
+                                                <option v-if="this.user_role=='System Admin'" value="All">All</option>
                                                 <option value="">None</option>
-                                                <option v-if="this.role=='System Admin'" value="mentari">Mentari</option>
+                                                <option v-if="this.user_role=='System Admin'" value="mentari">Mentari</option>
                                                 <option value="Others">Others</option>
                                             </select>
                                         </div>
