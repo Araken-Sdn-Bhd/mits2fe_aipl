@@ -47,7 +47,7 @@
                 </div>
                 <!-- <a @click="RemoveNotification(notifi)" href="">{{ notifi.message }}({{ getFormattedDate(notifi.created_at) }})</a>
                 <span><i class="fal fa-clock"></i> {{notifi.time}}</span> -->
-              </div>                      
+              </div>
             </div>
             <div class="notification-footer">
               <!-- <a href="/app/modules/notification">View All Notifications</a> -->
@@ -79,7 +79,7 @@
             <!-- <li><a class="dropdown-item" href="#!">Settings</a></li>
             <li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" @click="Logout()">Logout</a></li>
+            <li><a class="dropdown-item" style="cursor:pointer;" @click="Logout()">Logout</a></li>
             <li><a href="/app/modules/change-password" class="dropdown-item">Change Password</a></li>
           </ul>
         </li>
@@ -112,7 +112,7 @@ export default {
       this.role=this.userdetails.user.role;
       this.branch_id=this.userdetails.branch.branch_id;
     }
-    
+
   },
   mounted() {
     this.GetNotificationList();
@@ -132,7 +132,7 @@ export default {
       {added_by:this.id,role:this.role,branch_id:this.branch_id,email:this.email,user_id:this.id},
        { headers });
       if (response.data.code == 200 || response.data.code == "200") {
-        this.notificationlist = response.data.list.sort((a,b)=>b.time<a.time?1:-1);      
+        this.notificationlist = response.data.list.sort((a,b)=>b.time<a.time?1:-1);
         this.notification_count = response.data.notification_count;
         this.notifi_id= response.data.id;
          console.log('my notification',this.notification_count);
@@ -159,7 +159,7 @@ export default {
       }
     },
 
-    
+
     getFormattedDate(date) {
             return moment(date).format("DD-MM-YYYY")
         },
