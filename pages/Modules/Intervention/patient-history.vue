@@ -30,8 +30,8 @@
                     <td>{{ patint.Date }}</td>
                     <td>{{ patint.Time }}</td>
                     <td>
-                      <p v-if="patint.status=='1'">Completed</p>
-                      <p v-if="patint.status=='0'">Draft</p>
+                      <div v-if="patint.status=='1'">Completed</div>
+                      <div v-if="patint.status=='0'">Draft</div>
                     </td>
                     <td>{{ patint.hospital_name }}</td>
                     <td>{{ patint.name_registering_officer }}</td>
