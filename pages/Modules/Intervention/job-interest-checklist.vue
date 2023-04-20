@@ -377,157 +377,194 @@
                         </table>
 
                         <div class="accordion form-accordion mt-3" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        OCCASION OF SERVICES
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
-                                            <div class="col-sm-8">
-                                                <select class="form-select" v-model="location_services_id">
-                                                    <option value="0">
-                                                        Select location of services
-                                                    </option>
-                                                    <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
-                                                        {{ loc.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
-                                            <div class="col-sm-8">
-                                                <select class="form-select" v-model="type_diagnosis_id">
-                                                    <option value="0">Select Diagnosis</option>
-                                                    <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }} {{ catcode.icd_name }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <div class="row mb-3">
-                                            <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
-                                            </label>
-                                            <div class="col-lg-8 col-sm-12">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
-                                                    <label class="form-check-label" for="inlineRadio3">External</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                        <!-- hide-div -->
-                                        <div class="assisstance services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="services_id">
-                                                        <option value="0">Select Service</option>
-                                                        <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                            {{ slt.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 01 -->
-                                        <div class="clinical-work services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
-                                                        <option value="0">Select code</option>
-                                                        <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                            {{ type.icd_category_code }} {{ type.icd_category_name }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="sub_code_id">
-                                                        <option value="0">Select sub code</option>
-                                                        <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                            {{ catcode.icd_code }}{{ catcode.icd_name }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 02 -->
-                                        <div class="external services hide mb-3">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="serviceid">
-                                                        <option value="0">Select Service</option>
-                                                        <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                            {{ slt.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 03 -->
-                                        <!-- hide-div -->
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="complexity_services_id">
-                                                    <option value="0">
-                                                        Select Complexity Of Service
-                                                    </option>
-                                                    <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
-                                                        {{ cm.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                <select class="form-select" v-model="outcome_id">
-                                                    <option value="0">Select outcome</option>
-                                                    <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
-                                                        {{ out.section_value }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- close-row -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        MEDICATION
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Medication</label>
-                                            <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                        </div>
+                          <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      OCCASION OF SERVICES
+                                  </button>
+                              </h2>
+                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                      <div class="row mb-3">
+                                          <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
+                                          <div class="col-sm-8">
+                                              <select class="form-select" v-model="location_services_id">
+                                                  <option value="0">
+                                                      Select location of services
+                                                  </option>
+                                                  <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
+                                                      {{ loc.section_value }}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <!-- close-row -->
+                                      <div class="row mb-3">
+                                          <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
+                                          <div class="col-sm-8">
+                                              <select class="form-select" v-model="type_diagnosis_id">
+                                                  <option value="0">Select Diagnosis</option>
+                                                  <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                      {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3 align-items-flex-start">
+                                          <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
+                                          <div class="col-sm-8">
+                                              <select id="additionalboxdiagnosis" class="form-select multiselect" multiple="multiple" v-model="add_type_diagnosis_id">
+                                                  <option value="0">Please Select</option>
+                                                  <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                      {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <!-- close-row -->
+                                      <div class="row mb-3">
+                                          <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
+                                          </label>
+                                          <div class="col-sm-8">
+                                              <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                  <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
+                                              </div>
+                                              <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                  <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
+                                                  </label>
+                                              </div>
+                                              <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                  <label class="form-check-label" for="inlineRadio3">External</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- close-row -->
+                                      <!-- hide-div -->
+                                      <div id="assisstance" class="assisstance services hide mb-3">
+                                          <div class="row">
+                                              <div class="col-md-6 mb-3">
+                                                  <label class="form-label">Services<small style="color:red">*</small> </label>
+                                                  <select class="form-select" v-model="services_id">
+                                                      <option value="0">Select Service</option>
+                                                      <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                                          {{ slt.section_value }}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- 01 -->
+                                      <div id="clinical-work" class="clinical-work services hide mb-3">
+                                          <div class="row">
+                                              <div class="col-md-6 mb-3">
+                                                  <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
+                                                  <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                      <option value="0">Select code</option>
+                                                      <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                          {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                              <div class="col-md-6 mb-3">
+                                                  <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
+                                                  <div class="mt-2 align-items-flex-start">
+                                                      <select id="subcodeicd" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
+                                                          <option value="0">Select sub code</option>
+                                                          <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                              {{ catcode.icd_code }}
+                                                              {{catcode.icd_name}}
+                                                          </option>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6 mb-">
+                                                  <label class="form-label">Additional ICD 9 CODE</label>
+                                                  <select class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
+                                                      <option value="0">Select additional code</option>
+                                                      <option v-for="type in codelistadditional" v-bind:key="type.id" v-bind:value="type.id">
+                                                          {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                              <div class="col-md-6 mb-3">
+                                                  <label class="form-label">Additional ICD 9 SUB CODE</label>
+                                                  <div class="mt-2 align-items-flex-start">
+                                                      <select id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
+                                                          <option value="0">Select additional sub code</option>
+                                                          <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                              {{ catcode.icd_code }}
+                                                              {{catcode.icd_name}}
+                                                          </option>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- 02 -->
+                                      <div id="external" class="external services hide mb-3">
+                                          <div class="row">
+                                              <div class="col-md-6 mb-3">
+                                                  <label class="form-label">Services<small style="color:red">*</small> </label>
+                                                  <select class="form-select" v-model="serviceid">
+                                                      <option value="0">Select Service</option>
+                                                      <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                                          {{ slt.section_value }}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- 03 -->
+                                      <!-- hide-div -->
+                                      <div class="row">
+                                          <div class="col-md-6 mb-3">
+                                              <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
+                                              <select class="form-select" v-model="complexity_services_id">
+                                                  <option value="0">
+                                                      Select Complexity Of Service
+                                                  </option>
+                                                  <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
+                                                      {{ cm.section_value }}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                          <div class="col-md-6 mb-3">
+                                              <label class="form-label">Outcome<small style="color:red">*</small> </label>
+                                              <select class="form-select" v-model="outcome_id">
+                                                  <option value="0">Select outcome</option>
+                                                  <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
+                                                      {{ out.section_value }}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <!-- close-row -->
+                                  </div>
+                              </div>
+                          </div>
+                          <!--  -->
+                          <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                      MEDICATION
+                                  </button>
+                              </h2>
+                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                      <div class="col-md-12 mb-3">
+                                          <label class="form-label">Medication</label>
+                                          <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!--  -->
+                      </div>
 
                         <p v-if="errorList.length">
                             <ul>
@@ -562,6 +599,7 @@
 <script>
 import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
+import moment from 'moment';
 export default {
     components: {
         CommonSidebar,
@@ -577,6 +615,8 @@ export default {
             outcomelist: [],
             comlexcitylist: [],
             codelist: [],
+            codelistadditional: [],
+            icdcatcodelistadditional: [],
             icdcatcodelist: [],
             diagonisislist: [],
             locationlist: [],
@@ -608,12 +648,11 @@ export default {
             note: "",
             planning: "",
             patient_consent_interested: "",
-
             location_services_id: 0,
             type_diagnosis_id: 0,
             category_services: "",
             code_id: 0,
-            sub_code_id: 0,
+            sub_code_id: [],
             complexity_services_id: 0,
             outcome_id: 0,
             medication_des: "",
@@ -627,6 +666,8 @@ export default {
             type: "",
             SidebarAccess: null,
             appId: 0,
+            additional_code_id: 0,
+            add_type_diagnosis_id: [],
         };
     },
     beforeMount() {
@@ -672,8 +713,67 @@ export default {
             "/" +
             current.getFullYear();
     },
+    mounted() {
+        $(document).ready(function () {
+            $(".multiselect").select2({
+                placeholder: "Select Additional Diagnosis",
+            });
+        });
+
+        $(document).ready(function () {
+            $(".multiselectadditional").select2({
+                placeholder: "Select Sub Code",
+            });
+        });
+        $(document).ready(function () {
+            $(".multiselectadditionalsubcode").select2({
+                placeholder: "Select Additional Sub Code",
+            });
+        });
+    },
+
     methods: {
         async onCreateEvent() {
+          var jobSDESCRIPTION = [];
+            var Boxvalue1 = [];
+            var Boxvalue2 = [];
+            var Boxvalue3 = [];
+            var additionalboxdiagnosis = 0;
+            var subcodeicd = 0;
+            var additionalsubcodeicd = 0;
+            $("#additionalboxdiagnosis :selected").each(function () {
+                if (additionalboxdiagnosis) {
+                    additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                } else {
+                    additionalboxdiagnosis = this.value;
+                }
+            });
+            Boxvalue1.push({
+                additionalboxdiagnosis
+            });
+
+            $("#subcodeicd :selected").each(function () {
+                if (subcodeicd) {
+                    subcodeicd = subcodeicd + "," + this.value;
+                } else {
+                    subcodeicd = this.value;
+                }
+            });
+            Boxvalue2.push({
+                subcodeicd
+            });
+
+            $("#additionalsubcodeicd :selected").each(function () {
+                if (additionalsubcodeicd) {
+                    additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                } else {
+                    additionalsubcodeicd = this.value;
+                }
+            });
+            Boxvalue3.push({
+                additionalsubcodeicd
+            });
+
             this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -726,11 +826,11 @@ export default {
                                 planning: this.planning,
                                 patient_consent_interested: this.patient_consent_interested,
                                 location_services: this.location_services_id,
-                                type_diagnosis_id: this.type_diagnosis_id,
+                                type_diagnosis_id: this.type_diagnosis_id + this.Add_type_diagnosis_id,
                                 category_services: this.category_services,
                                 services_id: this.services_id,
-                                code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
+                                code_id: this.code_id + this.add_code_id,
+                                sub_code_id: this.sub_code_id + this.add_sub_code_id,
                                 complexity_of_services: this.complexity_services_id,
                                 outcome: this.outcome_id,
                                 medication_prescription: this.medication_des,
@@ -738,6 +838,9 @@ export default {
                                 status: "0",
                                 id: this.pid,
                                 appId: this.appId,
+                                additional_diagnosis: JSON.stringify(add_type_diagnosis_id),
+                                sub_code_id: JSON.stringify(subcodeicd),
+                                additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                             }, {
                                 headers
                             }
@@ -770,6 +873,46 @@ export default {
             })
         },
         async onPublishEvent() {
+            var jobSDESCRIPTION = [];
+            var Boxvalue1 = [];
+            var Boxvalue2 = [];
+            var Boxvalue3 = [];
+            var additionalboxdiagnosis = 0;
+            var subcodeicd = 0;
+            var additionalsubcodeicd = 0;
+            $("#additionalboxdiagnosis :selected").each(function () {
+                if (additionalboxdiagnosis) {
+                    additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                } else {
+                    additionalboxdiagnosis = this.value;
+                }
+            });
+            Boxvalue1.push({
+                additionalboxdiagnosis
+            });
+
+            $("#subcodeicd :selected").each(function () {
+                if (subcodeicd) {
+                    subcodeicd = subcodeicd + "," + this.value;
+                } else {
+                    subcodeicd = this.value;
+                }
+            });
+            Boxvalue2.push({
+                subcodeicd
+            });
+
+            $("#additionalsubcodeicd :selected").each(function () {
+                if (additionalsubcodeicd) {
+                    additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                } else {
+                    additionalsubcodeicd = this.value;
+                }
+            });
+            Boxvalue3.push({
+                additionalsubcodeicd
+            });
+
             this.$swal.fire({
                 title: 'Do you want to save the changes?',
                 showCancelButton: true,
@@ -874,7 +1017,7 @@ export default {
                                     category_services: this.category_services,
                                     services_id: this.services_id,
                                     code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
+                                    sub_code_id: this.subcodeicd,
                                     complexity_of_services: this.complexity_services_id,
                                     outcome: this.outcome_id,
                                     medication_prescription: this.medication_des,
@@ -882,6 +1025,8 @@ export default {
                                     status: "1",
                                     id: this.pid,
                                     appId: this.appId,
+                                    additional_diagnosis: JSON.stringify(add_type_diagnosis_id),
+                                    additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                                 }, {
                                     headers
                                 }
@@ -964,6 +1109,11 @@ export default {
             } else {
                 this.codelist = [];
             }
+            if (response3.data.code == 200 || response3.data.code == "200") {
+                this.codelistadditional = response3.data.list;
+            } else {
+                this.codelistadditional = [];
+            }
             const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
                 headers,
             });
@@ -1031,10 +1181,10 @@ export default {
                 console.log("my details", this.patientdetails);
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
@@ -1056,6 +1206,26 @@ export default {
                 this.icdcatcodelist = response.data.list;
             } else {
                 this.icdcatcodelist = [];
+            }
+        },
+        async onCategorycodebindAdditional(event) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            console.log("my id", event);
+            const response = await this.$axios.post(
+                "diagnosis/getIcd9subcodeList", {
+                    icd_category_code: event.target.value
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.icdcatcodelistadditional = response.data.list;
+            } else {
+                this.icdcatcodelistadditional = [];
             }
         },
         resetmodel() {
@@ -1085,7 +1255,7 @@ export default {
             this.services_id = 0;
         },
         GoBack() {
-          if (this.type == 'view') {
+            if (this.type == 'view') {
                 this.$router.go(-1);
             } else {
                 this.$router.push({
@@ -1231,13 +1401,19 @@ export default {
 
             } else {
                 this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
                 });
             }
         },
     },
 };
 </script>
+
+<style scoped>
+.hide {
+    display: none;
+}
+</style>
