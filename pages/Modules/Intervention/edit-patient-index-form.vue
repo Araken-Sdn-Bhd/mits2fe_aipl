@@ -765,7 +765,7 @@
                                           <!-- close row -->
                                           <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                               <div class="col-sm-8">
-                                                  <select id="additionalbox" class="form-select multiselect" multiple="multiple">
+                                                  <select id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
                                                       <option value="0">Please Select</option>
                                                       <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                           {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -783,12 +783,12 @@
                                                       <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                       </label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="external" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio3">External</label>
                                                   </div>
                                               </div>
@@ -824,7 +824,7 @@
                                                       <div><label class="form-label">ICD 9 SUB CODE</label></div>
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
-                                                              <select id='subcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                              <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -849,7 +849,7 @@
                                                       <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
-                                                              <select id='addsubcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                              <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -961,10 +961,10 @@
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                   </a >
                 <div class="ml-auto">
-                  <button v-if="!pid" class="btn btn-warning btn-text" @click="OnSaveDraft()"
+                  <button class="btn btn-warning btn-text" @click="OnSaveDraft()"
                     ><i class="fa fa-save"></i> Save as Draft</button
                   >
-                  <button v-if="!pid" @click="OnSubmit()" class="btn btn-success btn-text"
+                  <button @click="OnSubmit()" class="btn btn-success btn-text"
                     ><i class="fad fa-paper-plane"></i> Submit</button
                   >
                 </div>
@@ -1320,6 +1320,7 @@
                                   specialist: this.specialist,
                                   date: this.date,
                                   status: "0",
+                                  id:this.pid,
                                   appId: this.appId,
                                   additional_diagnosis: JSON.stringify(additionalbox),
                                   additional_subcode: JSON.stringify(addsubcode),
@@ -1631,6 +1632,7 @@
                                       specialist: this.specialist,
                                       date: this.date,
                                       status: "1",
+                                      id:this.pid,
                                       appId: this.appId,
                                       additional_diagnosis: JSON.stringify(additionalbox),
                                       additional_subcode: JSON.stringify(addsubcode),
@@ -1643,7 +1645,11 @@
                               if (response.data.code == 200) {
                                   this.loader = false;
                                   this.resetmodel();
-                                  this.$swal.fire('Succesfully save as draft!', '', 'success')
+                                  this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
                                   this.GoBack();
                               } else {
                                   this.loader = false;
@@ -1871,6 +1877,20 @@
                   } else {
                       this.add_icdcatcodelist = [];
                   }
+
+                  if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
               } else {
                   this.$swal.fire({
                       icon: 'error',
