@@ -15,14 +15,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label">Name<small style="color:red">*</small> </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="name" />
+                                    <input disabled type="text" class="form-control" v-model="name" />
                                 </div>
                             </div>
                             <!-- close-row -->
                             <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label">MRN<small style="color:red">*</small> </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="mrn" />
+                                    <input disabled type="text" class="form-control" v-model="mrn" />
                                 </div>
                             </div>
                             <!-- close-row -->
@@ -43,7 +43,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label">Staff Name<small style="color:red">*</small> </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="staff_name" />
+                                    <input disabled type="text" class="form-control" v-model="staff_name" />
                                 </div>
                             </div>
                             <!-- close-row -->
