@@ -196,7 +196,7 @@
                     <div class="mb-3">
                       <label class="form-label">Please Specify</label>
                       <input type="text" class="form-control" v-model="other_religion"
-                        placeholder="please specify other religion status" />
+                        placeholder="Please Specify Other Religion Status" />
                     </div>
                   </div>
                 </div>
@@ -217,7 +217,7 @@
                     <div class="mb-3">
                       <label class="form-label">Please Specify</label>
                       <input type="text" class="form-control" v-model="other_race"
-                        placeholder="please specify other race status" />
+                        placeholder="Please Specify Other Race Status" />
                     </div>
                   </div>
                 </div>
@@ -238,7 +238,7 @@
                     <div class="mb-3">
                       <label class="form-label">Please Specify</label>
                       <input type="text" class="form-control" v-model="other_maritalList"
-                        placeholder="please specify other marital status" />
+                        placeholder="Please Specify Other Marital Status" />
                     </div>
                   </div>
                 </div>
@@ -259,7 +259,7 @@
                     <div class="mb-3">
                       <label class="form-label">Please Specify</label>
                       <input type="text" class="form-control" v-model="other_education"
-                        placeholder="please specify other education status" />
+                        placeholder="Please Specify Other Education Status" />
                     </div>
                   </div>
                   </div>
