@@ -179,7 +179,6 @@
                   </div>
                 </div>
                 <!-- close-row -->
-
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -200,6 +199,8 @@
                         placeholder="please specify other religion status" />
                     </div>
                   </div>
+                </div>
+                <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Ethnic Group/Race</label>
@@ -240,9 +241,7 @@
                         placeholder="please specify other marital status" />
                     </div>
                   </div>
-
                 </div>
-
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -263,6 +262,8 @@
                         placeholder="please specify other education status" />
                     </div>
                   </div>
+                  </div>
+                  <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Household Income Status(monthly)</label>

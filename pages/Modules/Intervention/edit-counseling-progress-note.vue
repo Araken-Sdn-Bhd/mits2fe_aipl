@@ -425,12 +425,12 @@
                                                           <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                           </label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="external" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio3">External</label>
                                                       </div>
                                                   </div>
@@ -1374,6 +1374,20 @@
                   } else {
                       this.add_icdcatcodelist = [];
                   }
+
+                  if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
 
               } else {
                   this.$swal.fire({

@@ -80,7 +80,7 @@
                                   <tr>
                                       <th>Diagnosis<small style="color:red">*</small> :</th>
                                       <td>
-                                          <select class="form-select" v-model="diagnosis">
+                                          <select disabled class="form-select" v-model="diagnosis">
                                               <option value="">Select Diagnosis</option>
                                               <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                   {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -95,11 +95,11 @@
                                                   <tr>
                                                       <th>Date Onset<small style="color:red">*</small> :</th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="date_onset" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="date_onset" />
                                                       </td>
                                                       <th class="thl-10">Date of Diagnosis<small style="color:red">*</small> :</th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="date_of_diagnosis" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="date_of_diagnosis" />
                                                       </td>
                                                   </tr>
                                               </tbody>
@@ -113,13 +113,13 @@
                                                   <tr>
                                                       <th>Date Of Referral<small style="color:red">*</small> :</th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="date_of_referral" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="date_of_referral" />
                                                       </td>
                                                       <th class="thl-10">
                                                           Date of First Assessment/Visit<small style="color:red">*</small> :
                                                       </th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="date_of_first_assessment" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="date_of_first_assessment" />
                                                       </td>
                                                   </tr>
                                               </tbody>
@@ -134,7 +134,7 @@
                                   <tr>
                                       <th>Hospital<small style="color:red">*</small> :</th>
                                       <td>
-                                          <input type="text" class="form-control" name="" v-model="hospital" />
+                                          <input disabled type="text" class="form-control" name="" v-model="hospital" />
                                       </td>
                                   </tr>
                                   <tr>
@@ -144,11 +144,11 @@
                                                   <tr>
                                                       <th>Latest Admission Date<small style="color:red">*</small> :</th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="latest_admission_date" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="latest_admission_date" />
                                                       </td>
                                                       <th class="thl-10">Date of Discharge<small style="color:red">*</small> :</th>
                                                       <td>
-                                                          <input type="date" class="form-control" name="" v-model="date_of_discharge" />
+                                                          <input disabled type="date" class="form-control" name="" v-model="date_of_discharge" />
                                                       </td>
                                                   </tr>
                                               </tbody>
@@ -163,37 +163,37 @@
                                                   <tr>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="1" @click="OnReasonchange('Risk To Self')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="1" @click="OnReasonchange('Risk To Self')" />
                                                               <label class="form-check-label" for="1">
                                                                   Risk To Self
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="2" @click="OnReasonchange('Risk To Others')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="2" @click="OnReasonchange('Risk To Others')" />
                                                               <label class="form-check-label" for="2">
                                                                   Risk To Others
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="3" @click="OnReasonchange('Reinstatement Of Medications')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="3" @click="OnReasonchange('Reinstatement Of Medications')" />
                                                               <label class="form-check-label" for="3">
                                                                   Reinstatement Of Medications
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="4" @click="OnReasonchange('Assessment')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="4" @click="OnReasonchange('Assessment')" />
                                                               <label class="form-check-label" for="4">
                                                                   Assessment
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="5" @click="OnReasonchange('Observation')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="5" @click="OnReasonchange('Observation')" />
                                                               <label class="form-check-label" for="5">
                                                                   Observation
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="" id="6" @click="OnReasonchange('Medical Treatment')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="" id="6" @click="OnReasonchange('Medical Treatment')" />
                                                               <label class="form-check-label" for="6">
                                                                   Medical Treatment
                                                               </label>
@@ -201,43 +201,43 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="66" @click="OnReasonchange('Functional Psychosis')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="66" @click="OnReasonchange('Functional Psychosis')" />
                                                               <label class="form-check-label" for="66">
                                                                   Functional Psychosis
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="77" @click="OnReasonchange('Severe Mental Disorder')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="77" @click="OnReasonchange('Severe Mental Disorder')" />
                                                               <label class="form-check-label" for="77">
                                                                   Severe Mental Disorder
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="8" @click="OnReasonchange('Social Deprivation')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="8" @click="OnReasonchange('Social Deprivation')" />
                                                               <label class="form-check-label" for="8">
                                                                   Social Deprivation
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="9" @click="OnReasonchange('Self Care Deficits')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="9" @click="OnReasonchange('Self Care Deficits')" />
                                                               <label class="form-check-label" for="9">
                                                                   Self Care Deficits
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="10" @click="OnReasonchange('Respite For Relatives')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="10" @click="OnReasonchange('Respite For Relatives')" />
                                                               <label class="form-check-label" for="10">
                                                                   Respite For Relatives
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="11" @click="OnReasonchange('Respite For Patient')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="11" @click="OnReasonchange('Respite For Patient')" />
                                                               <label class="form-check-label" for="11">
                                                                   Respite For Patient
                                                               </label>
                                                           </div>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="checkbox" name="mode-Of-therapy" id="12" @click="OnReasonchange('Others, Please Specify')" />
+                                                              <input disabled class="form-check-input" type="checkbox" name="mode-Of-therapy" id="12" @click="OnReasonchange('Others, Please Specify')" />
                                                               <label class="form-check-label" for="12">
                                                                   Others, Please Specify
                                                               </label>
@@ -256,7 +256,7 @@
                                                   <tr>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="Poor" value="Poor" v-model="adherence_to_medication" />
+                                                              <input disabled class="form-check-input" type="radio" name="flexRadioDefault" id="Poor" value="Poor" v-model="adherence_to_medication" />
                                                               <label class="form-check-label" for="Poor">
                                                                   Poor
                                                               </label>
@@ -264,7 +264,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="Partial" value="Partial" v-model="adherence_to_medication" />
+                                                              <input disabled class="form-check-input" type="radio" name="flexRadioDefault" id="Partial" value="Partial" v-model="adherence_to_medication" />
                                                               <label class="form-check-label" for="Partial">
                                                                   Partial
                                                               </label>
@@ -272,7 +272,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="Good" value="Good" v-model="adherence_to_medication" />
+                                                              <input disabled class="form-check-input" type="radio" name="flexRadioDefault" id="Good" value="Good" v-model="adherence_to_medication" />
                                                               <label class="form-check-label" for="Good">
                                                                   Good
                                                               </label>
@@ -295,7 +295,7 @@
                                                       <th>Aggresion<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-none" value="None" v-model="aggresion" />
+                                                              <input disabled class="form-check-input" type="radio" name="Aggresion" id="aggresion-none" value="None" v-model="aggresion" />
                                                               <label class="form-check-label" for="aggresion-none">
                                                                   None
                                                               </label>
@@ -303,7 +303,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-low" value="Low" v-model="aggresion" />
+                                                              <input disabled class="form-check-input" type="radio" name="Aggresion" id="aggresion-low" value="Low" v-model="aggresion" />
                                                               <label class="form-check-label" for="aggresion-low">
                                                                   Low
                                                               </label>
@@ -311,7 +311,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-medium" value="Medium" v-model="aggresion" />
+                                                              <input disabled class="form-check-input" type="radio" name="Aggresion" id="aggresion-medium" value="Medium" v-model="aggresion" />
                                                               <label class="form-check-label" for="aggresion-medium">
                                                                   Medium
                                                               </label>
@@ -319,7 +319,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="Aggresion" id="aggresion-high" value="High" v-model="aggresion" />
+                                                              <input disabled class="form-check-input" type="radio" name="Aggresion" id="aggresion-high" value="High" v-model="aggresion" />
                                                               <label class="form-check-label" for="aggresion-high">
                                                                   High
                                                               </label>
@@ -338,7 +338,7 @@
                                                       <th>Suicidality<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="suicidality" id="suicidality-none" value="None" v-model="suicidality" />
+                                                              <input disabled class="form-check-input" type="radio" name="suicidality" id="suicidality-none" value="None" v-model="suicidality" />
                                                               <label class="form-check-label" for="suicidality-none">
                                                                   None
                                                               </label>
@@ -346,7 +346,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="suicidality" id="suicidality-low" value="Low" v-model="suicidality" />
+                                                              <input disabled class="form-check-input" type="radio" name="suicidality" id="suicidality-low" value="Low" v-model="suicidality" />
                                                               <label class="form-check-label" for="suicidality-low">
                                                                   Low
                                                               </label>
@@ -354,7 +354,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="suicidality" id="suicidality-medium" value="Medium" v-model="suicidality" />
+                                                              <input disabled class="form-check-input" type="radio" name="suicidality" id="suicidality-medium" value="Medium" v-model="suicidality" />
                                                               <label class="form-check-label" for="suicidality-medium">
                                                                   Medium
                                                               </label>
@@ -362,7 +362,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="suicidality" id="suicidality-high" value="High" v-model="suicidality" />
+                                                              <input disabled class="form-check-input" type="radio" name="suicidality" id="suicidality-high" value="High" v-model="suicidality" />
                                                               <label class="form-check-label" for="suicidality-high">
                                                                   High
                                                               </label>
@@ -381,7 +381,7 @@
                                                       <th>Criminality<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="criminality" id="criminality-none" value="None" v-model="criminality" />
+                                                              <input disabled class="form-check-input" type="radio" name="criminality" id="criminality-none" value="None" v-model="criminality" />
                                                               <label class="form-check-label" for="criminality-none">
                                                                   None
                                                               </label>
@@ -389,7 +389,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="criminality" id="criminality-low" value="Low" v-model="criminality" />
+                                                              <input disabled class="form-check-input" type="radio" name="criminality" id="criminality-low" value="Low" v-model="criminality" />
                                                               <label class="form-check-label" for="criminality-low">
                                                                   Low
                                                               </label>
@@ -397,7 +397,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="criminality" id="criminality-medium" value="Medium" v-model="criminality" />
+                                                              <input disabled class="form-check-input" type="radio" name="criminality" id="criminality-medium" value="Medium" v-model="criminality" />
                                                               <label class="form-check-label" for="criminality-medium">
                                                                   Medium
                                                               </label>
@@ -405,7 +405,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="criminality" id="criminality-high" value="High" v-model="criminality" />
+                                                              <input disabled class="form-check-input" type="radio" name="criminality" id="criminality-high" value="High" v-model="criminality" />
                                                               <label class="form-check-label" for="criminality-high">
                                                                   High
                                                               </label>
@@ -422,7 +422,7 @@
                                   <tr>
                                       <th>Age First Started<small style="color:red">*</small> :</th>
                                       <td>
-                                          <input type="text" class="form-control" name="" v-model="age_first_started" />
+                                          <input disabled type="text" class="form-control" name="" v-model="age_first_started" />
                                       </td>
                                   </tr>
                                   <tr>
@@ -433,7 +433,7 @@
                                                       <th>Heroin/Opiate<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-none" value="None" v-model="heroin" />
+                                                              <input disabled class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-none" value="None" v-model="heroin" />
                                                               <label class="form-check-label" for="heroin-opiate-none">
                                                                   None
                                                               </label>
@@ -441,7 +441,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-previous-history" value="Previous History" v-model="heroin" />
+                                                              <input disabled class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-previous-history" value="Previous History" v-model="heroin" />
                                                               <label class="form-check-label" for="heroin-opiate-previous-history">
                                                                   Previous History
                                                               </label>
@@ -449,7 +449,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-current-use" value="Current Use" v-model="heroin" />
+                                                              <input disabled class="form-check-input" type="radio" name="heroin-opiate" id="heroin-opiate-current-use" value="Current Use" v-model="heroin" />
                                                               <label class="form-check-label" for="heroin-opiate-current-use">
                                                                   Current Use
                                                               </label>
@@ -469,7 +469,7 @@
                                                       <th>Cannabis<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="cannabis" id="cannabis-none" value="None" v-model="cannabis" />
+                                                              <input disabled class="form-check-input" type="radio" name="cannabis" id="cannabis-none" value="None" v-model="cannabis" />
                                                               <label class="form-check-label" for="cannabis-none">
                                                                   None
                                                               </label>
@@ -477,7 +477,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="cannabis" id="cannabis-previous-history" value="Previous History" v-model="cannabis" />
+                                                              <input disabled class="form-check-input" type="radio" name="cannabis" id="cannabis-previous-history" value="Previous History" v-model="cannabis" />
                                                               <label class="form-check-label" for="cannabis-previous-history">
                                                                   Previous History
                                                               </label>
@@ -485,7 +485,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="cannabis" id="cannabis-current-use" value="Current Use" v-model="cannabis" />
+                                                              <input disabled class="form-check-input" type="radio" name="cannabis" id="cannabis-current-use" value="Current Use" v-model="cannabis" />
                                                               <label class="form-check-label" for="cannabis-current-use">
                                                                   Current Use
                                                               </label>
@@ -505,7 +505,7 @@
                                                       <th>ATS<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="ats" id="ats-none" value="None" v-model="ats" />
+                                                              <input disabled class="form-check-input" type="radio" name="ats" id="ats-none" value="None" v-model="ats" />
                                                               <label class="form-check-label" for="ats-none">
                                                                   None
                                                               </label>
@@ -513,7 +513,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="ats" id="ats-previous-history" value="Previous History" v-model="ats" />
+                                                              <input disabled class="form-check-input" type="radio" name="ats" id="ats-previous-history" value="Previous History" v-model="ats" />
                                                               <label class="form-check-label" for="ats-previous-history">
                                                                   Previous History
                                                               </label>
@@ -521,7 +521,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="ats" id="ats-current-use" value="Current Use" v-model="ats" />
+                                                              <input disabled class="form-check-input" type="radio" name="ats" id="ats-current-use" value="Current Use" v-model="ats" />
                                                               <label class="form-check-label" for="ats-current-use">
                                                                   Current Use
                                                               </label>
@@ -541,7 +541,7 @@
                                                       <th>Inhalant<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="inhalant" id="inhalant-none" value="None" v-model="inhalant" />
+                                                              <input disabled class="form-check-input" type="radio" name="inhalant" id="inhalant-none" value="None" v-model="inhalant" />
                                                               <label class="form-check-label" for="inhalant-none">
                                                                   None
                                                               </label>
@@ -549,7 +549,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="inhalant" id="inhalant-previous-history" value="Previous History" v-model="inhalant" />
+                                                              <input disabled class="form-check-input" type="radio" name="inhalant" id="inhalant-previous-history" value="Previous History" v-model="inhalant" />
                                                               <label class="form-check-label" for="inhalant-previous-history">
                                                                   Previous History
                                                               </label>
@@ -557,7 +557,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="inhalant" id="inhalant-current-use" value="Current Use" v-model="inhalant" />
+                                                              <input disabled class="form-check-input" type="radio" name="inhalant" id="inhalant-current-use" value="Current Use" v-model="inhalant" />
                                                               <label class="form-check-label" for="inhalant-current-use">
                                                                   Current Use
                                                               </label>
@@ -577,7 +577,7 @@
                                                       <th>Alcohol<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="alcohol" id="alcohol-none" value="None" v-model="alcohol" />
+                                                              <input disabled class="form-check-input" type="radio" name="alcohol" id="alcohol-none" value="None" v-model="alcohol" />
                                                               <label class="form-check-label" for="alcohol-none">
                                                                   None
                                                               </label>
@@ -585,7 +585,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="alcohol" id="alcohol-previous-history" value="Previous History" v-model="alcohol" />
+                                                              <input disabled class="form-check-input" type="radio" name="alcohol" id="alcohol-previous-history" value="Previous History" v-model="alcohol" />
                                                               <label class="form-check-label" for="alcohol-previous-history">
                                                                   Previous History
                                                               </label>
@@ -593,7 +593,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="alcohol" id="alcohol-current-use" value="Current Use" v-model="alcohol" />
+                                                              <input disabled class="form-check-input" type="radio" name="alcohol" id="alcohol-current-use" value="Current Use" v-model="alcohol" />
                                                               <label class="form-check-label" for="alcohol-current-use">
                                                                   Current Use
                                                               </label>
@@ -613,7 +613,7 @@
                                                       <th>Tobacco<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="tobacco" id="tobacco-none" value="None" v-model="tobacco" />
+                                                              <input disabled class="form-check-input" type="radio" name="tobacco" id="tobacco-none" value="None" v-model="tobacco" />
                                                               <label class="form-check-label" for="tobacco-none">
                                                                   None
                                                               </label>
@@ -621,7 +621,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="tobacco" id="tobacco-previous-history" value="Previous History" v-model="tobacco" />
+                                                              <input disabled class="form-check-input" type="radio" name="tobacco" id="tobacco-previous-history" value="Previous History" v-model="tobacco" />
                                                               <label class="form-check-label" for="tobacco-previous-history">
                                                                   Previous History
                                                               </label>
@@ -629,7 +629,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="tobacco" id="tobacco-current-use" value="Current Use" v-model="tobacco" />
+                                                              <input disabled class="form-check-input" type="radio" name="tobacco" id="tobacco-current-use" value="Current Use" v-model="tobacco" />
                                                               <label class="form-check-label" for="tobacco-current-use">
                                                                   Current Use
                                                               </label>
@@ -649,7 +649,7 @@
                                                       <th>Others<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="others" id="others-none" value="None" v-model="others" />
+                                                              <input disabled class="form-check-input" type="radio" name="others" id="others-none" value="None" v-model="others" />
                                                               <label class="form-check-label" for="others-none">
                                                                   None
                                                               </label>
@@ -657,7 +657,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="others" id="others-previous-history" value="Previous History" v-model="others" />
+                                                              <input disabled class="form-check-input" type="radio" name="others" id="others-previous-history" value="Previous History" v-model="others" />
                                                               <label class="form-check-label" for="others-previous-history">
                                                                   Previous History
                                                               </label>
@@ -665,7 +665,7 @@
                                                       </td>
                                                       <td>
                                                           <div class="form-check">
-                                                              <input class="form-check-input" type="radio" name="others" id="others-current-use" value="Current Use" v-model="others" />
+                                                              <input disabled class="form-check-input" type="radio" name="others" id="others-current-use" value="Current Use" v-model="others" />
                                                               <label class="form-check-label" for="others-current-use">
                                                                   Current Use
                                                               </label>
@@ -680,13 +680,13 @@
                                   <tr>
                                       <th>Past Medical/Surgical History<small style="color:red">*</small> :</th>
                                       <td>
-                                          <textarea class="form-control" placeholder="Please type here.." v-model="past_Medical"></textarea>
+                                          <textarea disabled class="form-control" placeholder="Please type here.." v-model="past_Medical"></textarea>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th>Background History (Family/Personal)<small style="color:red">*</small> :</th>
                                       <td>
-                                          <textarea class="form-control" rows="15" placeholder="Please type here.." v-model="background_history"></textarea>
+                                          <textarea disabled class="form-control" rows="15" placeholder="Please type here.." v-model="background_history"></textarea>
                                       </td>
                                   </tr>
                                   <tr>
@@ -696,13 +696,13 @@
                                               <tbody>
                                                   <tr>
                                                       <td>
-                                                          <input type="text" class="form-control" name="" v-model="who_das_assessment" />
+                                                          <input disabled type="text" class="form-control" name="" v-model="who_das_assessment" />
                                                       </td>
-                                                      <td>
+                                                      <!-- <td>
                                                           <button type="button" class="assessment-btn" @click="OnWhodassTest">
                                                               Assessment Test
                                                           </button>
-                                                      </td>
+                                                      </td> -->
                                                   </tr>
                                               </tbody>
                                           </table>
@@ -711,19 +711,19 @@
                                   <tr>
                                       <th>Mental State Examination<small style="color:red">*</small> :</th>
                                       <td>
-                                          <textarea class="form-control" rows="15" placeholder="Please type here.." v-model="mental_state_examination"></textarea>
+                                          <textarea disabled class="form-control" rows="15" placeholder="Please type here.." v-model="mental_state_examination"></textarea>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th>Summary Of Issues<small style="color:red">*</small> :</th>
                                       <td>
-                                          <textarea class="form-control" placeholder="Please type here.." v-model="summary_of_issues"></textarea>
+                                          <textarea disabled class="form-control" placeholder="Please type here.." v-model="summary_of_issues"></textarea>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th>Management Plan<small style="color:red">*</small> :</th>
                                       <td>
-                                          <textarea class="form-control" rows="15" placeholder="Please type here.." v-model="management_plan"></textarea>
+                                          <textarea disabled class="form-control" rows="15" placeholder="Please type here.." v-model="management_plan"></textarea>
                                       </td>
                                   </tr>
                               </tbody>
@@ -740,7 +740,7 @@
                                           <div class="row mb-3">
                                               <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                               <div class="col-sm-8">
-                                                  <select class="form-select" v-model="location_services_id">
+                                                  <select disabled class="form-select" v-model="location_services_id">
                                                       <option value="0">
                                                           Select location of services
                                                       </option>
@@ -754,7 +754,7 @@
                                           <div class="row mb-3">
                                               <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                               <div class="col-sm-8">
-                                                  <select class="form-select" v-model="type_diagnosis_id">
+                                                  <select disabled class="form-select" v-model="type_diagnosis_id">
                                                       <option value="0">Select Diagnosis</option>
                                                       <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                           {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -765,7 +765,7 @@
                                           <!-- close row -->
                                           <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                               <div class="col-sm-8">
-                                                  <select id="additionalbox" class="form-select multiselect" multiple="multiple">
+                                                  <select disabled id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
                                                       <option value="0">Please Select</option>
                                                       <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                           {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -779,27 +779,27 @@
                                               </label>
                                               <div class="col-sm-8">
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                      <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                      <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                       </label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                      <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio3">External</label>
                                                   </div>
                                               </div>
                                           </div>
                                           <!-- close-row -->
                                           <!-- hide-div -->
-                                          <div class="assisstance services hide mb-3">
+                                          <div id="assisstance" class="assisstance services hide mb-3">
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Services<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="services_id">
+                                                      <select disabled class="form-select" v-model="services_id">
                                                           <option value="0">Select Service</option>
                                                           <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                               {{ slt.section_value }}
@@ -809,11 +809,11 @@
                                               </div>
                                           </div>
                                           <!-- 01 -->
-                                          <div class="clinical-work services hide mb-3">
+                                          <div id="clinical-work" class="clinical-work services hide mb-3">
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                      <select disabled class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                           <option value="0">Select code</option>
                                                           <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                                               {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -824,7 +824,7 @@
                                                       <div><label class="form-label">ICD 9 SUB CODE</label></div>
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
-                                                              <select id='subcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                              <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -838,7 +838,7 @@
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Additional ICD 9 CODE</label>
-                                                      <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                      <select disabled class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
                                                           <option value="0">Select code</option>
                                                           <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                               {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -849,7 +849,7 @@
                                                       <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
-                                                              <select id='addsubcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                              <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                   <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
@@ -862,11 +862,11 @@
                                               </div>
                                           </div>
                                           <!-- 02 -->
-                                          <div class="external services hide mb-3">
+                                          <div id="external" class="external services hide mb-3">
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Services<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="serviceid">
+                                                      <select disabled class="form-select" v-model="serviceid">
                                                           <option value="0">Select Service</option>
                                                           <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                               {{ slt.section_value }}
@@ -880,7 +880,7 @@
                                           <div class="row">
                                               <div class="col-md-6 mb-3">
                                                   <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
-                                                  <select class="form-select" v-model="complexity_services_id">
+                                                  <select disabled class="form-select" v-model="complexity_services_id">
                                                       <option value="0">
                                                           Select Complexity Of Service
                                                       </option>
@@ -891,7 +891,7 @@
                                               </div>
                                               <div class="col-md-6 mb-3">
                                                   <label class="form-label">Outcome<small style="color:red">*</small></label>
-                                                  <select class="form-select" v-model="outcome_id">
+                                                  <select disabled class="form-select" v-model="outcome_id">
                                                       <option value="0">Select outcome</option>
                                                       <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                           {{ out.section_value }}
@@ -914,7 +914,7 @@
                                       <div class="accordion-body">
                                           <div class="col-md-12 mb-3">
                                               <label class="form-label">Medication</label>
-                                              <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                              <textarea disabled class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                           </div>
                                       </div>
                                   </div>
@@ -930,19 +930,19 @@
                               <tbody>
                                   <tr>
                                       <th>Zone<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="zone" /></td>
+                                      <td><input disabled type="text" class="form-control" name="" v-model="zone" /></td>
                                   </tr>
                                   <tr>
                                       <th>Case Manager<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="case_manager" /></td>
+                                      <td><input disabled type="text" class="form-control" name="" v-model="case_manager" /></td>
                                   </tr>
                                   <tr>
                                       <th>Specialist<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="specialist" /></td>
+                                      <td><input disabled type="text" class="form-control" name="" v-model="specialist" /></td>
                                   </tr>
                                   <tr>
                                       <th>Date<small style="color:red">*</small> :</th>
-                                      <td><input type="date" class="form-control" name="" v-model="date" /></td>
+                                      <td><input disabled type="date" class="form-control" name="" v-model="date" /></td>
                                   </tr>
                               </tbody>
                           </table>
@@ -960,14 +960,6 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                   </a >
-                <div class="ml-auto">
-                  <button v-if="!pid" class="btn btn-warning btn-text" @click="OnSaveDraft()"
-                    ><i class="fa fa-save"></i> Save as Draft</button
-                  >
-                  <button v-if="!pid" @click="OnSubmit()" class="btn btn-success btn-text"
-                    ><i class="fad fa-paper-plane"></i> Submit</button
-                  >
-                </div>
               </div>
                       </div>
                   </div>
@@ -1218,460 +1210,6 @@
                   this.additionalcodelist = [];
               }
           },
-          async OnSaveDraft() {
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-                      this.validate = true;
-                      this.errorList = [];
-
-                      var Boxvalue = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var additionalbox = 0;
-                      var subcode = 0;
-                      var addsubcode = 0;
-
-                      $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                              additionalbox = additionalbox + "," + this.value;
-                          } else {
-                              additionalbox = this.value;
-                          }
-                      });
-                      Boxvalue.push({
-                          additionalbox
-                      });
-
-                      $("#subcode :selected").each(function () {
-                          if (subcode) {
-                              subcode = subcode + "," + this.value;
-                          } else {
-                              subcode = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          subcode
-                      });
-
-                      $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                              addsubcode = addsubcode + "," + this.value;
-                          } else {
-                              addsubcode = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          addsubcode
-                      });
-                      try {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "patient-index/add", {
-                                  patient_mrn_id: this.Id,
-                                  diagnosis: this.diagnosis,
-                                  date_onset: this.date_onset,
-                                  date_of_diagnosis: this.date_of_diagnosis,
-                                  date_of_referral: this.date_of_referral,
-                                  date_of_first_assessment: this.date_of_first_assessment,
-                                  hospital: this.hospital,
-                                  latest_admission_date: this.latest_admission_date,
-                                  date_of_discharge: this.date_of_discharge,
-                                  reason: this.reason,
-                                  adherence_to_medication: this.adherence_to_medication,
-                                  aggresion: this.aggresion,
-                                  suicidality: this.suicidality,
-                                  criminality: this.criminality,
-                                  age_first_started: this.age_first_started,
-                                  heroin: this.heroin,
-                                  cannabis: this.cannabis,
-                                  ats: this.ats,
-                                  inhalant: this.inhalant,
-                                  alcohol: this.alcohol,
-                                  tobacco: this.tobacco,
-                                  others: this.others,
-                                  past_Medical: this.past_Medical,
-                                  background_history: this.background_history,
-                                  who_das_assessment: this.who_das_assessment,
-                                  mental_state_examination: this.mental_state_examination,
-                                  summary_of_issues: this.summary_of_issues,
-                                  management_plan: this.management_plan,
-                                  location_of_services: this.location_services_id,
-                                  type_of_diagnosis: this.type_diagnosis_id,
-                                  category_of_services: this.category_services,
-                                  services_id: this.services_id,
-                                  added_by: this.userdetails.user.id,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  complexity_of_service: this.complexity_services_id,
-                                  outcome: this.outcome_id,
-                                  medication: this.medication_des,
-                                  zone: this.zone,
-                                  case_manager: this.case_manager,
-                                  specialist: this.specialist,
-                                  date: this.date,
-                                  status: "0",
-                                  appId: this.appId,
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  additional_code_id: this.additional_code_id,
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong!',
-                                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                              })
-                              this.GoBack();
-                          }
-                      } catch (e) {
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
-          async OnSubmit() {
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-                      this.validate = true;
-                      this.errorList = [];
-
-                      var Boxvalue = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var additionalbox = 0;
-                      var subcode = 0;
-                      var addsubcode = 0;
-
-                      $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                              additionalbox = additionalbox + "," + this.value;
-                          } else {
-                              additionalbox = this.value;
-                          }
-                      });
-                      Boxvalue.push({
-                          additionalbox
-                      });
-
-                      $("#subcode :selected").each(function () {
-                          if (subcode) {
-                              subcode = subcode + "," + this.value;
-                          } else {
-                              subcode = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          subcode
-                      });
-
-                      $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                              addsubcode = addsubcode + "," + this.value;
-                          } else {
-                              addsubcode = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          addsubcode
-                      });
-                      try {
-                          if (!this.diagnosis) {
-                              this.errorList.push("Diagnosis is required");
-                          }
-                          if (!this.date_onset) {
-                              this.errorList.push("Date Onset is required");
-                          }
-                          if (!this.date_of_diagnosis) {
-                              this.errorList.push("Date of Diagnosis is required");
-                          }
-                          if (!this.date_of_referral) {
-                              this.errorList.push("Date Of Referral is required");
-                          }
-                          if (!this.date_of_first_assessment) {
-                              this.errorList.push("Date of First Assessment/Visit is required");
-                          }
-                          if (!this.hospital) {
-                              this.errorList.push("Hospital  is required");
-                          }
-                          if (!this.latest_admission_date) {
-                              this.errorList.push("Latest Admission Date  is required");
-                          }
-                          if (!this.date_of_discharge) {
-                              this.errorList.push("Date of Discharge is required");
-                          }
-                          if (!this.reason) {
-                              this.errorList.push("Reason is required");
-                          }
-                          if (!this.adherence_to_medication) {
-                              this.errorList.push("Adherence To Medication is required");
-                          }
-                          if (!this.aggresion) {
-                              this.errorList.push("Aggresion is required");
-                          }
-                          if (!this.suicidality) {
-                              this.errorList.push("Suicidality is required");
-                          }
-                          if (!this.criminality) {
-                              this.errorList.push("Criminality is required");
-                          }
-                          if (!this.age_first_started) {
-                              this.errorList.push("Age First Started is required");
-                          }
-                          if (!this.heroin) {
-                              this.errorList.push("Heroin/Opiate is required");
-                          }
-                          if (!this.cannabis) {
-                              this.errorList.push("Cannabis is required");
-                          }
-                          if (!this.ats) {
-                              this.errorList.push("ATS is required");
-                          }
-                          if (!this.inhalant) {
-                              this.errorList.push("Inhalant is required");
-                          }
-                          if (!this.alcohol) {
-                              this.errorList.push("Alcohol is required");
-                          }
-                          if (!this.tobacco) {
-                              this.errorList.push("Tobacco is required");
-                          }
-                          if (!this.others) {
-                              this.errorList.push("Others is required");
-                          }
-                          if (!this.past_Medical) {
-                              this.errorList.push("Past Medical/Surgical History is required");
-                          }
-                          if (!this.background_history) {
-                              this.errorList.push(
-                                  "Background History (Family/Personal) is required"
-                              );
-                          }
-                          if (!this.who_das_assessment) {
-                              this.errorList.push("WHO DAS Assessment is required");
-                          }
-                          if (!this.mental_state_examination) {
-                              this.errorList.push("Mental State Examination is required");
-                          }
-                          if (!this.summary_of_issues) {
-                              this.errorList.push("Summary Of Issues is required");
-                          }
-                          if (!this.management_plan) {
-                              this.errorList.push("Management Plan is required");
-                          }
-                          if (!this.location_services_id) {
-                              this.errorList.push("Location Of Services is required");
-                          }
-                          if (!this.type_diagnosis_id) {
-                              this.errorList.push("Type Of Diagnosis is required");
-                          }
-                          if (!this.category_services) {
-                              this.errorList.push("Category Of Services is required");
-                          }
-                          if (!this.complexity_services_id) {
-                              this.errorList.push("Complexity Of Service is required");
-                          }
-                          if (this.category_services) {
-                              if (this.category_services == "assisstance") {
-                                  if (!this.services_id) {
-                                      this.errorList.push("Service is required");
-                                      this.validate = false;
-                                  }
-                              } else if (this.category_services == "clinical-work") {
-                                  if (!this.code_id) {
-                                      this.errorList.push("ICD 9 CODE is required");
-                                      this.validate = false;
-                                  }
-                                  if (!this.sub_code_id) {
-                                      this.errorList.push("ICD 9 SUB CODE is required");
-                                      this.validate = false;
-                                  }
-                              } else {
-                                  if (!this.serviceid) {
-                                      this.errorList.push("Services is required");
-                                      this.validate = false;
-                                  } else {
-                                      this.services_id = this.serviceid;
-                                  }
-                              }
-                          }
-                          if (!this.outcome_id) {
-                              this.errorList.push("Outcome is required");
-                          }
-                          if (!this.zone) {
-                              this.errorList.push("Zone is required");
-                          }
-                          if (!this.case_manager) {
-                              this.errorList.push("Case Manager is required");
-                          }
-                          if (!this.specialist) {
-                              this.errorList.push("Specialist is required");
-                          }
-                          if (!this.date) {
-                              this.errorList.push("Date is required");
-                          }
-                          if (
-                              this.diagnosis &&
-                              this.date_onset &&
-                              this.date_of_diagnosis &&
-                              this.date_of_referral &&
-                              this.date_of_first_assessment &&
-                              this.hospital &&
-                              this.latest_admission_date &&
-                              this.date_of_discharge &&
-                              this.reason &&
-                              this.adherence_to_medication &&
-                              this.aggresion &&
-                              this.suicidality &&
-                              this.criminality &&
-                              this.age_first_started &&
-                              this.heroin &&
-                              this.cannabis &&
-                              this.ats &&
-                              this.inhalant &&
-                              this.alcohol &&
-                              this.tobacco &&
-                              this.others &&
-                              this.past_Medical &&
-                              this.background_history &&
-                              this.who_das_assessment &&
-                              this.mental_state_examination &&
-                              this.summary_of_issues &&
-                              this.management_plan &&
-                              this.location_services_id &&
-                              this.type_diagnosis_id &&
-                              this.category_services &&
-                              this.complexity_services_id &&
-                              this.outcome_id &&
-                              this.zone &&
-                              this.case_manager &&
-                              this.specialist &&
-                              this.date &&
-                              this.validate
-                          ) {
-                              this.loader = true;
-                              const headers = {
-                                  Authorization: "Bearer " + this.userdetails.access_token,
-                                  Accept: "application/json",
-                                  "Content-Type": "application/json",
-                              };
-                              const response = await this.$axios.post(
-                                  "patient-index/add", {
-                                      patient_mrn_id: this.Id,
-                                      diagnosis: this.diagnosis,
-                                      date_onset: this.date_onset,
-                                      date_of_diagnosis: this.date_of_diagnosis,
-                                      date_of_referral: this.date_of_referral,
-                                      date_of_first_assessment: this.date_of_first_assessment,
-                                      hospital: this.hospital,
-                                      latest_admission_date: this.latest_admission_date,
-                                      date_of_discharge: this.date_of_discharge,
-                                      reason: this.reason,
-                                      adherence_to_medication: this.adherence_to_medication,
-                                      aggresion: this.aggresion,
-                                      suicidality: this.suicidality,
-                                      criminality: this.criminality,
-                                      age_first_started: this.age_first_started,
-                                      heroin: this.heroin,
-                                      cannabis: this.cannabis,
-                                      ats: this.ats,
-                                      inhalant: this.inhalant,
-                                      alcohol: this.alcohol,
-                                      tobacco: this.tobacco,
-                                      others: this.others,
-                                      past_Medical: this.past_Medical,
-                                      background_history: this.background_history,
-                                      who_das_assessment: this.who_das_assessment,
-                                      mental_state_examination: this.mental_state_examination,
-                                      summary_of_issues: this.summary_of_issues,
-                                      management_plan: this.management_plan,
-                                      location_of_services: this.location_services_id,
-                                      type_of_diagnosis: this.type_diagnosis_id,
-                                      category_of_services: this.category_services,
-                                      services_id: this.services_id,
-                                      added_by: this.userdetails.user.id,
-                                      code_id: this.code_id,
-                                      sub_code_id: JSON.stringify(subcode),
-                                      complexity_of_service: this.complexity_services_id,
-                                      outcome: this.outcome_id,
-                                      medication: this.medication_des,
-                                      zone: this.zone,
-                                      case_manager: this.case_manager,
-                                      specialist: this.specialist,
-                                      date: this.date,
-                                      status: "1",
-                                      appId: this.appId,
-                                      additional_diagnosis: JSON.stringify(additionalbox),
-                                      additional_subcode: JSON.stringify(addsubcode),
-                                      additional_code_id: this.additional_code_id,
-                                  }, {
-                                      headers
-                                  }
-                              );
-                              console.log("response", response.data);
-                              if (response.data.code == 200) {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire('Succesfully save as draft!', '', 'success')
-                                  this.GoBack();
-                              } else {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire({
-                                      icon: 'error',
-                                      title: 'Oops... Something Went Wrong!',
-                                      text: 'the error is: ' + JSON.stringify(response.data.message),
-                                  })
-                                  this.GoBack();
-                              }
-                          }
-
-                      } catch (e) {
-                          this.loader = false;
-                          this.resetmodel();
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                          this.GoBack();
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
           async onCategorycodebind(event) {
               const headers = {
                   Authorization: "Bearer " + this.userdetails.access_token,
@@ -1843,6 +1381,20 @@
                       .val(this.additional_subcode)
                       .trigger("change");
                   this.additional_code_id = response.data.Data[0].additional_code_id;
+
+                  if(this.category_services=='assisstance'){
+                        $(document).ready(function(){
+                            $("#assisstance").removeClass("hide");
+                        });
+                    }else if(this.category_services=='clinical-work'){
+                        $(document).ready(function(){
+                            $("#clinical-work").removeClass("hide");
+                        });
+                    }else if(this.category_services=='external'){
+                        $(document).ready(function(){
+                            $("#external").removeClass("hide");
+                        });
+                    }
 
                   this.GetList();
                   this.GetPatientdetails();
