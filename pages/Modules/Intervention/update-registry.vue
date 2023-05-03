@@ -123,7 +123,7 @@
                         </div>
                          <div class="step-form-box1 box-01" v-show="first=='Yes'">
                           <select id="firstbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple">
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
@@ -220,8 +220,7 @@
                         </div>
                         <div class="step-form-box" v-show="fourth=='Yes'">
                           <select id="fourthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in typesofsubstance"
@@ -288,7 +287,7 @@
                         </div>
                         <div class="step-form-box" v-show="sixth=='Yes'">
                           <select id="sixthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple">
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
@@ -326,8 +325,7 @@
                         </div>
                         <div class="step-form-box" v-show="seventh=='Yes'">
                           <select id="seventhbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in typesofsubstance"
@@ -366,8 +364,7 @@
                         </div>
                         <div class="step-form-box" v-show="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in stresslist"
@@ -650,20 +647,20 @@
                       </option>
 
                                 </select>
+                                <!-- SHOW_DIV -->
+                              <div class="col-sm-120" v-if="place_id=='Other specified areas'">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control" v-model="place_other"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
                               </div>
-                              <!-- SHOW_DIV -->
-                        <div class="col-sm-6" v-if="place_id=='OTHERS'">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="place_other"
-                            placeholder="please specify"
-
-                          />
-                        </div>
-                        </div>
                             </div>
                           </div>
                         </div>
@@ -927,7 +924,7 @@
                                     class="form-check-input specify-other"
                                     type="checkbox"
                                     value="Specify patient actual words"
-                                    id="6.6" v-model="patientactualword" 
+                                    id="6.6" v-model="patientactualword"
                                   />
                                   <label class="form-check-label" for="6.6">
                                     Specify patient actual words
@@ -1118,7 +1115,7 @@
                                   <label
                                     class="form-check-label"
                                     for="learn-more"
-                                    >Learn more</label
+                                    >Efforts to learn more</label
                                   >
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -1130,7 +1127,7 @@
                                     v-model="Other"
                                   />
                                   <label class="form-check-label" for="Other"
-                                    >Other</label
+                                    >Others</label
                                   >
                                   <!-- SHOW_DIV -->
                                   <div v-if="Other!=null"
@@ -1387,7 +1384,7 @@
                           </option>
                         </select>
                       </div>
-                      <div class="col-sm-4" v-if="referral_or_contact=='OTHERS' || referral_or_contact==194">
+                      <div class="col-sm-4" v-if="referral_or_contact=='Others' || referral_or_contact==194">
                           <input
                             type="text"
                             class="form-control"
@@ -1422,8 +1419,7 @@
                       </div>
                       <div
                         class="
-                          col-sm-4" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
-                      >
+                          col-sm-4" v-if="arrival_mode=='Others' || arrival_mode==201">
                         <input
                           type="text"
                           class="form-control"
@@ -1928,10 +1924,12 @@ export default {
       placelist: [],
       list: [],
       Id: 0,
+      contactOther: false,
       referral_or_contact: 0,
       referral_or_contact_other: "",
       arrival_mode: 0,
       arrival_mode_other: "",
+      arrivalOther: false,
       date: "",
       time: "",
       physical_consequences: "",
@@ -2370,21 +2368,21 @@ export default {
       this.getdetails();
     },
     OnchangePlace(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Other specified areas"){
         this.placeOther = true;
       }else{
         this.placeOther = false;
       }
     },
     OnchangeContact(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Others"){
         this.contactOther = true;
       }else{
         this.contactOther = false;
       }
     },
     OnchangeArrival(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Others"){
         this.arrivalOther = true;
       }else{
         this.arrivalOther = false;
@@ -2603,7 +2601,7 @@ export default {
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
             // this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-            
+
             if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
               this.patientactualword = true;
             }
