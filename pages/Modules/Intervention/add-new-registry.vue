@@ -1622,16 +1622,12 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <div class="pafca-other-div hide" style="display:none;">
-                          <div class="mb-3">
-                            <label>If admitted, specify the first admitting ward</label>
                             <input
                               type="text"
-                              class="form-control"
-                              placeholder="Please Specify" v-model="patient_admitted_des"
+                              class="form-control pafca-other-div hide"
+                              placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
+                              id="AW"
                             />
-                          </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -1684,7 +1680,7 @@
                       </div>
                     </div>
                     <!-- close-row -->
-                    <div class="row mb-5 align-items-flex-start">
+                    <div class="row mb-3 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >Discharge Diagnosis(ICD-10)<small style="color:red">*</small></label
                       >
@@ -1707,6 +1703,31 @@
                           </option>
                         </select>
                       </div>
+                    </div>
+                    <!-- close row -->
+                    <div class="row mb-4 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                          <label class="form-label"
+                          >Additional psychiatric diagnosis</label
+                          >
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
                         <label class="form-label"
                           >External cause of injury<small style="color:red">*</small></label
@@ -1726,32 +1747,12 @@
                         </select>
                       </div>
                     </div>
-                    <!-- close row -->
                     <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
-                        >Additional psychiatric diagnosis</label
-                      >
+                      <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
-                          <select
-                          id="additionalbox"
-                          class="form-select multiselect" multiple="multiple"
-                        >
-                        <option value="0">Please Select</option>
-                           <option
-                            v-for="catcode in diagonisislist"
-                            v-bind:key="catcode.id"
-                            v-bind:value="catcode.id"
-                          >
-                          {{ catcode.icd_code }} {{catcode.icd_name}}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
+                      <label class="form-label"
                         >Additional external cause of injury</label
                       >
-                    <div class="col-sm-4">
                         <select
                         id="externalbox"
                           class="form-select multiselect" multiple="multiple"
@@ -1791,10 +1792,10 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d2"
-                            @change="OnMxdischarge('Given appt to psy clinical')"
+                            @change="OnMxdischarge('Given appt to psy clinic')"
                           />
                           <label class="form-check-label" for="psy-d2">
-                            Given appt to Psychiatry clinical
+                            Given appt to Psychiatry clinic
                           </label>
                         </div>
                         <div class="form-check">
@@ -3553,8 +3554,35 @@ export default {
     },
   },
 };
-</script>
 
+</script>
+<style>
+  input#AW{ /*AW - Admitting Ward */
+    height:50px;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    white-space:pre-line;  
+    position:relative;
+    top:-5px;
+    
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    white-space:pre-line;  
+    position:relative;
+    top:-5px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    white-space:pre-line;  
+    position:relative;
+    top:-10px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+      white-space:pre-line;  
+    position:relative;
+    top:-10px;
+  }
+</style>
 <!-- <style scoped>
 /* #myTab .nav-item a {
   pointer-events: none;
