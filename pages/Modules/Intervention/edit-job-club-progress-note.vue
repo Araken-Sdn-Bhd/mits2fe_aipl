@@ -148,9 +148,9 @@
                         </select>
                       </div>
                     </div>
-                    <div class="row mb-3 align-items-flex-start">
+                    <div class="row mb-3">
                       <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
-                      <div class="col-sm-8">
+                      <div class="col-sm-8 align-items-flex-start" >
                           <select
                           id="additionalbox" v-model="additional_diagnosis"
                           class="form-select multiselect" multiple="multiple">
@@ -175,7 +175,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions1"
+                              name="inlineRadioOptions"
                               id="inlineRadio1"
                               value="assisstance"
                               v-model="category_services"
@@ -188,7 +188,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions1"
+                              name="inlineRadioOptions2"
                               id="inlineRadio2"
                               value="clinical-work"
                               v-model="category_services"
@@ -201,7 +201,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions1"
+                              name="inlineRadioOptions3"
                               id="inlineRadio3"
                               value="external"
                               v-model="category_services"
@@ -300,7 +300,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="add_sub_code_id" v-model="additional_add_sub_code_id" style="width:100%">
+                              id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
 
                               <option value="0">Select code</option>
                               <option
@@ -493,8 +493,8 @@ export default {
       appId:0,
 
       additional_diagnosis: 0,
-      additional_sub_code: 0,
-      additional_add_sub_code_id: 0,
+      additional_sub_code_id:0,
+      additional_sub_code_id2:0,
     };
   },
   beforeMount() {
@@ -896,6 +896,7 @@ export default {
       );
       if (response.data.code == 200 || response.data.code == "200") {
         this.icdcatcodelist = response.data.list;
+        
       } else {
         this.icdcatcodelist = [];
       }
@@ -1004,10 +1005,11 @@ export default {
                      $("#sub_code_id")
                     .val( this.additional_sub_code_id)
                     .trigger("change");
-        this.add_code_id = response.data.Data[0].code_id;
-        this.additional_add_sub_code_id = response.data.Data[0].add_sub_code_id.split(",");
+                   
+        this.add_code_id = response.data.Data[0].add_code_id;
+        this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
                     $("#add_sub_code_id")
-                    .val(this.additional_add_sub_code_id)
+                    .val( this.additional_sub_code_id2)
                     .trigger("change");
         this.complexity_services_id = response.data.Data[0].complexity_service;
         this.outcome_id = response.data.Data[0].outcome;
@@ -1021,9 +1023,11 @@ export default {
         );
         if (response2.data.code == 200 || response2.data.code == "200") {
           this.icdcatcodelist = response2.data.list;
+          this.addicdcatcodelist = response2.data.list;
 
         } else {
           this.icdcatcodelist = [];
+          this.addicdcatcodelist = [];
         }
 
       } else {
@@ -1034,6 +1038,19 @@ export default {
                   footer: ''
                 });
       }
+      if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
     },
 
     GoBack(){
