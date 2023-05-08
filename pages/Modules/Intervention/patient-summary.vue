@@ -919,7 +919,7 @@ export default {
         });
       } else if (data.type == "ExternalRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/external-referral-form",
+          path: "/modules/Intervention/view-external-referral-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsRefferalForm") {
