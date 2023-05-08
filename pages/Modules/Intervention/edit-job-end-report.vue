@@ -7,18 +7,16 @@
             <div class="container-fluid px-4">
                 <div class="page-title">
                     <h1>JOB END REPORT</h1>
-                    <!-- <a href="#"><i class="fal fa-plus"></i> Add</a> -->
                 </div>
 
                 <div class="card mb-4">
                     <div class="card-body">
-                        <!--<form method="post" @submit.prevent="OnSubmit">-->
                         <div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="name" />
+                                        <input type="text" class="form-control" v-model="name" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +138,7 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Staff Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="staff_name" />
+                                        <input type="text" class="form-control" v-model="staff_name" disabled />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

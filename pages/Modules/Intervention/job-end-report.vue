@@ -16,7 +16,7 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="name" />
+                                        <input type="text" class="form-control" v-model="name" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Staff Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="staff_name" />
+                                        <input type="text" class="form-control" v-model="staff_name" disabled />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -173,21 +173,36 @@
                                                 </div>
                                             </div>
                                             <!-- close-row -->
-                                            <div class="row mb-3 align-items-flex-start">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
-                                                <div class="col-sm-8">
-                                                    <select
-                                                    id="type_diagnosis_id"
-                                                    class="form-select multiselect" multiple="multiple">
-                                                        <option value="0">Please Select</option><option
-                                                        v-for="catcode in diagonisislist"
-                                                        v-bind:key="catcode.id"
-                                                        v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                </div>
+                                            <div class="row mb-3">
+                      <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
+                      <div class="col-sm-8">
+                          <select
+                          v-model="type_diagnosis_id"
+                          class="form-select">
+                              <option value="0">Please Select</option><option
+                              v-for="catcode in diagonisislist"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id">
+                            {{ catcode.icd_code }} {{catcode.icd_name}}
+                            </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
+                      <div class="col-sm-8">
+                          <select
+                          id="add_type_diagnosis_id"
+                          class="form-select multiselect" multiple="multiple">
+                              <option value="0">Please Select</option><option
+                              v-for="catcode in diagonisislist"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id">
+                            {{ catcode.icd_code }} {{catcode.icd_name}}
+                            </option>
+                        </select>
+                      </div>
+                    </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
                                                 <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
@@ -394,12 +409,7 @@
                                         <i class="fa fa-paper-plane"></i> Submit
                                     </button>
                                 </div>
-                                <!-- <button
-                    type="submit"
-                    class="btn btn-warning btn-text ml-auto"
-                  >
-                    <i class="fa fa-save"></i> Save
-                  </button> -->
+                              
                             </div>
                         </div>
                     </div>
@@ -464,6 +474,8 @@ export default {
             pid: 0,
             type: "",
             SidebarAccess: null,
+            type_diagnosis_id:0,
+           
         };
     },
     beforeMount() {
@@ -501,15 +513,23 @@ export default {
   },
     methods: {
         async onCreateEvent() {
-            var type_diagnosis_id = 0;
-      $("#type_diagnosis_id :selected").each(function () {
-        if (type_diagnosis_id) {
-          type_diagnosis_id = type_diagnosis_id + "," + this.value;
+            var Boxvalue = [];
+      var Boxvalue1 = [];
+      var Boxvalue2 = [];
+      var add_type_diagnosis_id = 0;
+      var sub_code_id = 0;
+      var add_sub_code_id = 0;
+
+      $("#add_type_diagnosis_id :selected").each(function () {
+        if (add_type_diagnosis_id) {
+          add_type_diagnosis_id = add_type_diagnosis_id + "," + this.value;
         } else {
-          type_diagnosis_id = this.value;
+          add_type_diagnosis_id = this.value;
         }
       });
-      var sub_code_id = 0;
+      Boxvalue.push({ add_type_diagnosis_id });
+     
+
       $("#sub_code_id :selected").each(function () {
         if (sub_code_id) {
           sub_code_id = sub_code_id + "," + this.value;
@@ -517,7 +537,8 @@ export default {
           sub_code_id = this.value;
         }
       });
-      var add_sub_code_id = 0;
+      Boxvalue1.push({ sub_code_id });
+
       $("#add_sub_code_id :selected").each(function () {
         if (add_sub_code_id) {
           add_sub_code_id = add_sub_code_id + "," + this.value;
@@ -525,6 +546,7 @@ export default {
           add_sub_code_id = this.value;
         }
       });
+      Boxvalue2.push({ add_sub_code_id });
             this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -558,7 +580,8 @@ export default {
                                 clients_preferences: this.clients_preferences,
                                 staff_name: this.staff_name,
                                 date: this.date,
-                                type_of_diagnosis: JSON.stringify(type_diagnosis_id),
+                                type_of_diagnosis: this.type_diagnosis_id,
+                                add_type_of_diagnosis: JSON.stringify(add_type_diagnosis_id),
                                 category_of_services: this.category_services,
                                 location_services_id: this.location_services_id,
                                 services: this.services_id,
@@ -605,12 +628,12 @@ export default {
             })
         },
         async onPublishEvent() {
-            var type_diagnosis_id = 0;
-      $("#type_diagnosis_id :selected").each(function () {
-        if (type_diagnosis_id) {
-          type_diagnosis_id = type_diagnosis_id + "," + this.value;
+            var add_type_diagnosis_id = 0;
+      $("#add_type_diagnosis_id :selected").each(function () {
+        if (add_type_diagnosis_id) {
+          add_type_diagnosis_id = add_type_diagnosis_id + "," + this.value;
         } else {
-          type_diagnosis_id = this.value;
+          add_type_diagnosis_id = this.value;
         }
       });
       var sub_code_id = 0;
@@ -695,7 +718,7 @@ export default {
                         if (!this.location_services_id) {
                             this.errorList.push("Location Of Services is required");
                         }
-                        if (!type_diagnosis_id) {
+                        if (!this.type_diagnosis_id) {
                             this.errorList.push("Type Of Diagnosis is required");
                         }
                         if (!this.category_services) {
@@ -778,7 +801,8 @@ export default {
                                     clients_preferences: this.clients_preferences,
                                     staff_name: this.staff_name,
                                     date: this.date,
-                                    type_of_diagnosis: JSON.stringify(type_diagnosis_id),
+                                    type_of_diagnosis: this.type_diagnosis_id,
+                                add_type_of_diagnosis: JSON.stringify(add_type_diagnosis_id),
                                     category_of_services: this.category_services,
                                     location_services_id: this.location_services_id,
                                     services: this.services_id,
