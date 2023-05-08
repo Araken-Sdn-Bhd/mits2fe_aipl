@@ -10,7 +10,7 @@
     </button>
 
     <!-- Navbar Brand-->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" v-bind:href="route_alt">
       <img src="~/assets/images/logo.png" />
     </a>
     <!-- Navbar Brand-->
@@ -101,6 +101,7 @@ export default {
       notification_count:"",
       notifi_id:"",
       try:[],
+      route_alt: "",
     };
   },
    beforeMount() {
@@ -111,6 +112,7 @@ export default {
       this.email=this.userdetails.user.email;
       this.role=this.userdetails.user.role;
       this.branch_id=this.userdetails.branch.branch_id;
+      this.route_alt=this.userdetails.route;
     }
 
   },
