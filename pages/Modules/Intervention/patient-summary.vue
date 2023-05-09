@@ -792,7 +792,7 @@ export default {
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/consultation-discharge-note",
+          path: "/modules/Intervention/view-consultation-discharge-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "RehabDischargeNote") {
