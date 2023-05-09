@@ -326,12 +326,18 @@
   
     beforeMount() {
       this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-      this.Getrecord();
+      if(this.userdetails){
+        this.sharpmentari = this.userdetails.branch.branch_id;
+        this.sharprace = "Range of Age";
+      };
       this.GetYears();
       this.GetMentariList();
       this.GetMentariIncludingHospitalList();
       this.Getannouncement();
       this.GetStateList();
+      this.GetCurrentYears();
+      this.GetCurrentMonths();
+      this.Getrecord();
     },
     mounted() {},
   
@@ -735,7 +741,20 @@
                   });
         }
       },
-
+      async GetCurrentYears() {
+        function getCurrentYear(){
+          return new Date().getFullYear();
+        }
+        const currentYear = getCurrentYear();
+        this.sharpyear = currentYear;
+      },
+      async GetCurrentMonths() {
+        function getCurrentMonth(){
+          return new Date().getMonth();
+        }
+        const currentMonth = getCurrentMonth();
+        this.sharpmonth = currentMonth + 1;
+      },
       async GetYears() {
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
