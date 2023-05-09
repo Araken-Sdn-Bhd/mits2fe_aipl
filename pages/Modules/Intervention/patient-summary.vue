@@ -797,7 +797,7 @@ export default {
         });
       } else if (data.type == "RehabDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/rehab-discharge",
+          path: "/modules/Intervention/view-rehab-discharge",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsDischargeNote") {

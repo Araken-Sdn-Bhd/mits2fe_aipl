@@ -16,13 +16,13 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="name" />
+                      <input type="text" class="form-control" v-model="name" disabled />
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">MRN<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="mrn" />
+                      <input type="text" class="form-control" v-model="mrn"  disabled/>
                     </div>
                   </div>
                 </div>
@@ -46,21 +46,21 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Staff Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="staff_name" />
+                      <input type="text" class="form-control" v-model="staff_name" disabled />
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Diagnosis<small style="color:red">*</small> </label>
-                      <select class="form-select" v-model="diagnosis_id">
+                      <select class="form-select" v-model="type_diagnosis_id">
                        <option value="0">Select Diagnosis</option>
                                 <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                          v-for="catcode in diagonisislist"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -79,7 +79,7 @@
                           name="inlineRadioOptions" v-model="intervention"
                         />
                         <label class="form-check-label" for="inlineCheckbox1"
-                          >Supported Employment</label
+                          >Supported Employment<small style="color:red">*</small> </label
                         >
                       </div>
                       <div class="form-check form-check-inline">
@@ -201,6 +201,22 @@
                               </select>
                           </div>
                         </div>
+                        <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
+                      <div class="col-sm-8 align-items-flex-start" >
+                          <select
+                          id="additionalbox" v-model="additional_diagnosis"
+                          class="form-select multiselect" multiple="multiple">
+                              <option value="0">Please Select</option><option
+                              v-for="catcode in diagonisislist"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id">
+                            {{ catcode.icd_code }} {{catcode.icd_name}}
+                            </option>
+                        </select>
+                      </div>
+                    </div>
+                  
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label"
@@ -224,7 +240,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions1"
+                                name="inlineRadioOptions12"
                                 id="inlineRadio2"
                                 value="clinical-work"
                                 v-model="category_services"
@@ -237,7 +253,7 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="inlineRadioOptions1"
+                                name="inlineRadioOptions13"
                                 id="inlineRadio3"
                                 value="external"
                                 v-model="category_services"
@@ -269,32 +285,91 @@
                         </div>
                         <!-- 01 -->
                         <div class="clinical-work services hide mb-3">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="code_id"  @change="onCategorycodebind($event)">
-                                <option value="0">Select code</option>
-                                <option v-for="type in codelist"  v-bind:key="type.id" v-bind:value="type.id">
-             {{ type.icd_category_code }} {{type.icd_category_name}}
-            </option>
-                              </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                              <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="sub_code_id">
-                                <option value="0">Select sub code</option>
-                                <option
-              v-for="catcode in icdcatcodelist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-               {{ catcode.icd_code }}
- {{catcode.icd_name}}
-            </option>
-                              </select>
-                            </div>
+                        <div class="row mb-6 align-items-flex-start">
+                          <div class="col-md-4 mb-3">
+                            <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
+                            <select
+                              class="form-select"
+                              v-model="code_id"
+                              @change="onCategorycodebind($event)"
+                            >
+                              <option value="0">Select code</option>
+                              <option
+                                v-for="type in codelist"
+                                v-bind:key="type.id"
+                                v-bind:value="type.id">
+                               {{ type.icd_category_code }} {{type.icd_category_name}}
+                              </option>
+                            </select>
                           </div>
+
+                          <div class="col-md-8 mb-3">
+                          <div><label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label></div>
+                          <div>
+                          <div class="mt-2 align-items-flex-start">
+                            <select
+                              class="form-select multiselect" multiple="multiple"
+                              id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+
+                              <option value="0">Select code</option>
+                              <option
+                                v-for="catcode in icdcatcodelist"
+                                v-bind:key="catcode.id"
+                                v-bind:value="catcode.id">
+                                {{ catcode.icd_code }}{{catcode.icd_name}}
+                              </option>
+                            </select>
+                          </div>
+                          </div>
+                          </div>
+
+                         
+                          
                         </div>
+
+                        <!--additional code-->
+                        <div class="row mb-6 align-items-flex-start">
+                          <div class="col-md-4 mb-3">
+                            <label class="form-label">Additional ICD 9 CODE</label>
+                            <select
+                              class="form-select"
+                              v-model="add_code_id"
+                              @change="onCategoryaddcodebind($event)"
+                            >
+                              <option value="0">Select code</option>
+                              <option
+                                v-for="type in codelist"
+                                v-bind:key="type.id"
+                                v-bind:value="type.id">
+                               {{ type.icd_category_code }} {{type.icd_category_name}}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-8 mb-3">
+                          <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
+                          <div>
+                          <div class="mt-2 align-items-flex-start">
+                            <select
+                              class="form-select multiselect" multiple="multiple"
+                              id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+
+                              <option value="0">Select code</option>
+                              <option
+                                v-for="catcode in addicdcatcodelist"
+                                v-bind:key="catcode.id"
+                                v-bind:value="catcode.id">
+                                {{ catcode.icd_code }}{{catcode.icd_name}}
+                              </option>
+                            </select>
+                          </div>
+                          </div>
+                          </div>
+
+                         
+                          
+                        </div>
+                      </div>
                         <!-- 02 -->
                         <div class="external services hide mb-3">
                           <div class="row">
@@ -427,13 +502,15 @@
                         </ul>
                        </p>
                 <!-- close-row -->
+                <br>
+                <br>
                 <div class="d-flex">
                     <button
                       @click="GoBack"
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="this.type!='view'">
+                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''">
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -475,16 +552,26 @@ export default {
     this.Id = urlParams.get("id");
     this.appId = urlParams.get("appId");
     this.GetPatientdetails();
-    if (this.Id) {
-      this.staff_name=this.userdetails.user.name;
-      this.GetList();
-    }
+
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
+
+    this.GetList();
+    if (this.Id) {
+      this.staff_name=this.userdetails.user.name;
+    }
+
     if (this.pid) {
       this.getdetails();
     }
+  },
+  mounted(){
+    $(document).ready(function () {
+      $(".multiselect").select2({
+        placeholder: "Please Select",
+      });
+    });
   },
   data() {
     return {
@@ -500,40 +587,71 @@ export default {
       locationlist: [],
       dischargelist: [],
       Id: 0,
-      name: "",
-      mrn: "",
-      date: "",
-      time: "",
-      staff_name: "",
-      diagnosis_id: "",
-      intervention: "",
-      discharge_category: "",
-      comment: "",
+      name: null,
+      mrn: null,
+      date: null,
+      time: null,
+      staff_name: null,
+      diagnosis_id: null,
+      intervention: null,
+      discharge_category: null,
+      comment: null,
       location_services: 0,
       type_diagnosis_id: 0,
-      category_services: "",
+      category_services: null,
       code_id: 0,
       sub_code_id: 0,
       complexity_services: 0,
       outcome: 0,
       medication_des: "None.",
-      patient_mrn_id: "",
+      patient_mrn_id: null,
       services_id: 0,
       serviceid: 0,
       validate: true,
-      specialist_name: "",
-      case_manager: "",
-      verification_date_1: "",
-      verification_date_2: "",
+      specialist_name: null,
+      case_manager: null,
+      verification_date_1: null,
+      verification_date_2: null,
       assistancelist: [],
       externallist: [],
       pid:0,
       type:"",
       appId: 0,
+      SidebarAccess:null,
+
+      addicdcatcodelist: [],
+      add_code_id:0,
+      additional_diagnosis: [],
+      additional_sub_code_id:[],
+      additional_sub_code_id2:[],
     };
   },
   methods: {
     async onCreateEvent() {
+      var additionalbox = 0;
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+      var sub_code_id = 0;
+      $("#sub_code_id :selected").each(function () {
+        if (sub_code_id) {
+          sub_code_id = sub_code_id + "," + this.value;
+        } else {
+          sub_code_id = this.value;
+        }
+      });
+      var add_sub_code_id = 0;
+      $("#add_sub_code_id :selected").each(function () {
+        if (add_sub_code_id) {
+          add_sub_code_id = add_sub_code_id + "," + this.value;
+        } else {
+          add_sub_code_id = this.value;
+        }
+      });
       this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -557,16 +675,19 @@ export default {
                               date: this.date,
                               time: this.time,
                               staff_name: this.staff_name,
-                              diagnosis_id: this.diagnosis_id,
+                              diagnosis_id: this.type_diagnosis_id,
                               intervention: this.intervention,
                               discharge_category: this.discharge_category,
                               comment: this.comment,
                               location_services: this.location_services,
                               diagnosis_type: this.type_diagnosis_id,
+                              add_diagnosis_type: JSON.stringify(additionalbox),
                               service_category: this.category_services,
                               services_id: this.services_id,
                               code_id: this.code_id,
-                              sub_code_id: this.sub_code_id,
+                              sub_code_id: JSON.stringify(sub_code_id),
+                              add_code_id: this.add_code_id,
+                              add_sub_code_id: JSON.stringify(add_sub_code_id),
                               complexity_services: this.complexity_services,
                               outcome: this.outcome,
                               medication: this.medication_des,
@@ -608,6 +729,30 @@ export default {
           })
     },
     async onPublishEvent() {
+      var additionalbox = 0;
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+      var sub_code_id = 0;
+      $("#sub_code_id :selected").each(function () {
+        if (sub_code_id) {
+          sub_code_id = sub_code_id + "," + this.value;
+        } else {
+          sub_code_id = this.value;
+        }
+      });
+      var add_sub_code_id = 0;
+      $("#add_sub_code_id :selected").each(function () {
+        if (add_sub_code_id) {
+          add_sub_code_id = add_sub_code_id + "," + this.value;
+        } else {
+          add_sub_code_id = this.value;
+        }
+      });
       this.$swal.fire({
                 title: 'Do you want to save the changes?',
                 showCancelButton: true,
@@ -632,9 +777,7 @@ export default {
                     if (!this.staff_name) {
                       this.errorList.push("Staff Name is required");
                     }
-                    if (!this.diagnosis_id) {
-                      this.errorList.push("Diagnosis is required");
-                    }
+                  
                     if (!this.intervention) {
                       this.errorList.push("Intervention is required");
                     }
@@ -667,7 +810,7 @@ export default {
                           this.errorList.push("ICD 9 CODE is required");
                           this.validate = false;
                         }
-                        if (!this.sub_code_id) {
+                        if (!sub_code_id) {
                           this.errorList.push("ICD 9 SUB CODE is required");
                           this.validate = false;
                         }
@@ -701,7 +844,6 @@ export default {
                       this.date &&
                       this.time &&
                       this.staff_name &&
-                      this.diagnosis_id &&
                       this.intervention &&
                       this.discharge_category &&
                       this.comment &&
@@ -732,16 +874,19 @@ export default {
                           date: this.date ?? null,
                           time: this.time ?? null,
                           staff_name: this.staff_name ?? null,
-                          diagnosis_id: this.diagnosis_id ?? null,
+                          diagnosis_id: this.type_diagnosis_id ?? null,
                           intervention: this.intervention ?? null,
                           discharge_category: this.discharge_category ?? null,
                           comment: this.comment ?? null,
                           location_services: this.location_services ?? null,
                           diagnosis_type: this.type_diagnosis_id ?? null,
+                          add_diagnosis_type: JSON.stringify(additionalbox),
                           service_category: this.category_services ?? null,
                           services_id: this.services_id ?? null,
                           code_id: this.code_id ?? null,
-                          sub_code_id: this.sub_code_id ?? null,
+                          sub_code_id: JSON.stringify(sub_code_id),
+                          add_code_id: this.add_code_id,
+                          add_sub_code_id: JSON.stringify(add_sub_code_id),
                           complexity_services: this.complexity_services ?? null,
                           outcome: this.outcome ?? null,
                           medication: this.medication_des ?? null,
@@ -931,7 +1076,7 @@ export default {
                 });
       }
     },
-    resetmodel() {
+    async resetmodel() {
       this.name = "";
       this.mrn = "";
       this.date = "";
@@ -970,6 +1115,8 @@ export default {
         { headers }
       );
       if (response.data.code == 200 || response.data.code == "200") {
+        // window.alert(response.data.Data[0].patient_mrn_id);
+
 
         this.name = response.data.Data[0].name;
         this.time = response.data.Data[0].time;
@@ -977,8 +1124,8 @@ export default {
         this.mrn = response.data.Data[0].mrn;
         this.date = response.data.Data[0].date;
         this.staff_name = response.data.Data[0].staff_name;
-        this.diagnosis_id = response.data.Data[0].diagnosis_id;
-        if (response.data.Data[0].intervention == "SupportedEmployment"){
+        this.type_diagnosis_id = response.data.Data[0].diagnosis_id;
+        if (response.data.Data[0].intervention == "supportedEmployment"){
           this.intervention = "supportedEmployment"
         }else if (response.data.Data[0].intervention == "ETP"){
           this.intervention = "ETP"
@@ -988,11 +1135,23 @@ export default {
         this.discharge_category = response.data.Data[0].discharge_category;
         this.location_services = response.data.Data[0].location_services;
         this.type_diagnosis_id = response.data.Data[0].diagnosis_type;
+        this.additional_diagnosis = response.data.Data[0].add_diagnosis_type.split(",");
+                    $("#additionalbox")
+                    .val(this.additional_diagnosis)
+                    .trigger("change");
+
         this.category_services = response.data.Data[0].service_category;
         this.code_id = response.data.Data[0].code_id;
-        this.sub_code_id = response.data.Data[0].sub_code_id;
-        this.complexity_services =
-          response.data.Data[0].complexity_services;
+        this.additional_sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                     $("#sub_code_id")
+                    .val( this.additional_sub_code_id)
+                    .trigger("change");
+                    this.add_code_id = response.data.Data[0].add_code_id;
+        this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
+                    $("#add_sub_code_id")
+                    .val( this.additional_sub_code_id2)
+                    .trigger("change");
+        this.complexity_services = response.data.Data[0].complexity_services;
         this.outcome = response.data.Data[0].outcome;
         this.medication_des = response.data.Data[0].medication;
         this.services_id = response.data.Data[0].services_id;
@@ -1013,6 +1172,17 @@ export default {
         } else {
           this.icdcatcodelist = [];
         }
+        const response3 = await this.$axios.post(
+          "diagnosis/getIcd9subcodeList",
+          { icd_category_code: this.add_code_id },
+          { headers }
+        );
+        if (response3.data.code == 200 || response3.data.code == "200") {
+          this.addicdcatcodelist = response3.data.list;
+
+        } else {
+          this.addicdcatcodelist = [];
+        }
 
       } else {
         this.$swal.fire({
@@ -1022,14 +1192,54 @@ export default {
                   footer: ''
                 });
       }
+      if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions12"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions13"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                    });
+                }
     },
 
-    GoBack(){
-      this.$router.push({
+    async onCategoryaddcodebind(event) {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "diagnosis/getIcd9subcodeList",
+        { icd_category_code: event.target.value },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.addicdcatcodelist = response.data.list;
+      } else {
+        this.addicdcatcodelist = [];
+      }
+    },
+    async GoBack(){
+      if (this.type == 'view'){
+        this.$router.go(-1);
+      } else {
+        this.$router.push({
               path: "/modules/Intervention/patient-summary",
-              query: { id: this.Id,appId: this.appId },
+              query: { id: this.Id, appId: this.appId },
             });
+      }
     }
   },
 };
 </script>
+
+<style scoped>
+.hide {
+  display: none;
+}
+</style>
