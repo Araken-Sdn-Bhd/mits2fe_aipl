@@ -1037,7 +1037,7 @@ export default {
           this.addicdcatcodelist = response3.data.list;
 
         } else {
-          this.icdcatcodelist = [];
+          this.addicdcatcodelist = [];
         }
 
       } else {
