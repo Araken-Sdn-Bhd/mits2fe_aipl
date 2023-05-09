@@ -757,7 +757,7 @@ export default {
         });
       } else if (data.type == "PatientIndexForm") {
         this.$router.push({
-          path: "/modules/Intervention/patient-index-form",
+          path: "/modules/Intervention/view-patient-index-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "PsychiatricProgressNote") {
@@ -914,12 +914,12 @@ export default {
         });
       } else if (data.type == "InternalRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/internal-referral-form",
+          path: "/modules/Intervention/view-internal-referral-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ExternalRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/external-referral-form",
+          path: "/modules/Intervention/view-external-referral-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsRefferalForm") {
@@ -957,7 +957,7 @@ export default {
         });
       } else if (data.type == "PatientIndexForm") {
         this.$router.push({
-          path: "/modules/Intervention/patient-index-form",
+          path: "/modules/Intervention/edit-patient-index-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "PsychiatricProgressNote") {

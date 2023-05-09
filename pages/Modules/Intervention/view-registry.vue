@@ -103,12 +103,12 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box">
                         <input class="form-check-input" type="radio" id="no" value="No" name="Presence of psychiatric disorder"
-                         v-model="first"/>
+                         v-model="first" disabled/>
                         <label class="form-check-label" for="no">NO</label>
                         </div>
                         <div class="form-check form-check-inline yes-box">
                         <input class="form-check-input" type="radio" id="yes" name="Presence of psychiatric disorder"
-                         value="Yes" v-model="first"/>
+                         value="Yes" v-model="first" disabled/>
                         <label class="form-check-label" for="yes">YES</label>
                         </div>
                          <div class="step-form-box1 box-01" v-show="first=='Yes'">
@@ -134,6 +134,7 @@
                             type="radio"
                             id="no1"
                             name="Hopelessness or Despair" value="No" v-model="second"
+                            disabled
                           />
                           <label class="form-check-label" for="no1">NO</label>
                         </div>
@@ -143,6 +144,7 @@
                             type="radio"
                             id="yes1"
                             name="Hopelessness or Despair" value="Yes" v-model="second"
+                            disabled
                           />
                           <label class="form-check-label" for="yes1">YES</label>
                         </div>
@@ -160,6 +162,7 @@
                             type="radio"
                             id="no2"
                             name="Previous suicide attempts"  value="No" v-model="third"
+                            disabled
                           />
                           <label class="form-check-label" for="no2">NO</label>
                         </div>
@@ -169,14 +172,16 @@
                             type="radio"
                             id="yes2"
                             name="Previous suicide attempts"   value="Yes" v-model="third"
+                            disabled
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box box-02" v-show="third=='Yes'">
+                        <div class="step-form-box box-02" v-if="thirdbox">
                           <input
                             type="text"
                             class="form-control"
                             placeholder="Please Specify (times)" v-model="thirdbox"
+                            disabled
                           />
                         </div>
                       </div>
@@ -184,7 +189,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>4</span>Presence os substance use/abuse</label
+                        ><span>4</span>Presence of substance use/abuse</label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box2">
@@ -193,6 +198,7 @@
                             type="radio"
                             id="no3"
                             name="Prresence os substance use/abuse" value="No" v-model="fourth"
+                            disabled
                           />
                           <label class="form-check-label" for="no3">NO</label>
                         </div>
@@ -202,21 +208,21 @@
                             type="radio"
                             id="yes3"
                             name="Prresence os substance use/abuse" value="Yes" v-model="fourth"
+                            disabled
                           />
                           <label class="form-check-label" for="yes3">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="fourth=='Yes'">
+                        <div class="step-form-box" v-if="fourth=='Yes'">
                           <select id="fourthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" disabled
                           >
                            <option
-              v-for="catcode in typesofsubstance"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
+                              v-for="catcode in typesofsubstance"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id"
+                            >
+                              {{ catcode.section_value }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -234,6 +240,7 @@
                             type="radio"
                             id="no4"
                             name="family history of suicidal behavior" value="No" v-model="fifth"
+                            disabled
                           />
                           <label class="form-check-label" for="no4">NO</label>
                         </div>
@@ -243,6 +250,7 @@
                             type="radio"
                             id="yes4"
                             name="family history of suicidal behavior" value="Yes" v-model="fifth"
+                            disabled
                           />
                           <label class="form-check-label" for="yes4">YES</label>
                         </div>
@@ -260,7 +268,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no5"
-                            name="family history of psychiatric disorders"  value="No" v-model="sixth"
+                            name="family history of psychiatric disorders"  value="No" v-model="sixth" disabled
                           />
                           <label class="form-check-label" for="no5">NO</label>
                         </div>
@@ -269,20 +277,20 @@
                             class="form-check-input"
                             type="radio"
                             id="yes5"
-                            name="family history of psychiatric disorders" value="Yes" v-model="sixth"
+                            name="family history of psychiatric disorders" value="Yes" v-model="sixth" disabled
                           />
                           <label class="form-check-label" for="yes5">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="sixth=='Yes'">
+                        <div class="step-form-box" v-if="sixth=='Yes'">
                           <select id="sixthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple">
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" disabled>
                          <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                           </select>
                         </div>
                       </div>
@@ -298,7 +306,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no6"
-                            name="family history of substance abuse" value="No" v-model="seventh"
+                            name="family history of substance abuse" value="No" v-model="seventh" disabled
                           />
                           <label class="form-check-label" for="no6">NO</label>
                         </div>
@@ -307,22 +315,21 @@
                             class="form-check-input"
                             type="radio"
                             id="yes6"
-                            name="family history of substance abuse" value="Yes" v-model="seventh"
+                            name="family history of substance abuse" value="Yes" v-model="seventh" disabled
                           />
                           <label class="form-check-label" for="yes6">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="seventh=='Yes'">
+                        <div class="step-form-box" v-if="seventh=='Yes'">
                           <select id="seventhbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" disabled
                           >
                            <option
-              v-for="catcode in typesofsubstance"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
+                              v-for="catcode in typesofsubstance"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id"
+                            >
+                              {{ catcode.section_value }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -338,7 +345,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no7"
-                            name="stressful life events or loss" value="No" v-model="eight"
+                            name="stressful life events or loss" value="No" v-model="eight" disabled
                           />
                           <label class="form-check-label" for="no7">NO</label>
                         </div>
@@ -347,22 +354,22 @@
                             class="form-check-input"
                             type="radio"
                             id="yes7"
-                            name="stressful life events or loss"  value="Yes" v-model="eight"
+                            name="stressful life events or loss"  value="Yes" v-model="eight" disabled
                           />
                           <label class="form-check-label" for="yes7">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="eight=='Yes'">
+                        <div class="step-form-box" v-if="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" disabled
 
                           >
                            <option
-              v-for="catcode in stresslist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
+                              v-for="catcode in stresslist"
+                              v-bind:key="catcode.id"
+                              v-bind:value="catcode.id"
+                            >
+                              {{ catcode.section_value }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -379,7 +386,8 @@
                             class="form-check-input"
                             type="radio"
                             id="no8" value="No" v-model="nine"
-                            name="Isolation, rejection or feelings of shame"
+                            name="Isolation, rejection or feelings of shame" 
+                            disabled
                           />
                           <label class="form-check-label" for="no8">NO</label>
                         </div>
@@ -389,6 +397,7 @@
                             type="radio"
                             id="yes8" value="Yes" v-model="nine"
                             name="Isolation, rejection or feelings of shame"
+                            disabled
                           />
                           <label class="form-check-label" for="yes8">YES</label>
                         </div>
@@ -407,6 +416,7 @@
                             type="radio"
                             id="no9" value="No" v-model="tenth"
                             name="chronic physical illness or condition"
+                            disabled
                           />
                           <label class="form-check-label" for="no9">NO</label>
                         </div>
@@ -416,14 +426,16 @@
                             type="radio"
                             id="yes9" value="Yes" v-model="tenth"
                             name="chronic physical illness or condition"
+                            disabled
                           />
                           <label class="form-check-label" for="yes9">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="tenth=='Yes'">
+                        <div class="step-form-box" v-if="tenth=='Yes'">
                           <input
                             type="text"
                             class="form-control" v-model="tenthbox"
                             placeholder="Please Specify (times)"
+                            disabled
                           />
                         </div>
                       </div>
@@ -441,6 +453,7 @@
                             type="radio"
                             id="no10" value="No" v-model="eleven"
                             name="History of physical , sexual or emotional abuse"
+                            disabled
                           />
                           <label class="form-check-label" for="no10">NO</label>
                         </div>
@@ -450,6 +463,7 @@
                             type="radio"
                             id="yes10" value="Yes" v-model="eleven"
                             name="History of physical , sexual or emotional abuse"
+                            disabled
                           />
                           <label class="form-check-label" for="yes10"
                             >YES</label
@@ -469,6 +483,7 @@
                             type="radio"
                             id="no11" value="No" v-model="twelth"
                             name="access to lethal methods/weapons"
+                            disabled
                           />
                           <label class="form-check-label" for="no11">NO</label>
                         </div>
@@ -478,6 +493,7 @@
                             type="radio"
                             id="yes11" value="Yes" v-model="twelth"
                             name="access to lethal methods/weapons"
+                            disabled
                           />
                           <label class="form-check-label" for="yes11"
                             >YES</label
@@ -531,6 +547,7 @@
                             type="radio"
                             id="No" value="No"
                              v-bind:name="'pro' + index" v-model="pro.answer"
+                             disabled
 
                           />
                           <label class="form-check-label" for="no">{{
@@ -544,6 +561,7 @@
                             id="yes"
                              v-bind:name="'pro' + index"
                             value="Yes"  v-model="pro.answer"
+                            disabled
                           />
                           <label class="form-check-label" for="yes">{{
                             pro.Question_detail[0].Options2
@@ -553,11 +571,11 @@
                     </div>
                     <br><br>
                      <div class="d-flex">
-                                            <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
-                                            <div class="ml-auto">
-                                                <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
-                                           </div>
-                                        </div>
+                          <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
+                          <div class="ml-auto">
+                              <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
+                          </div>
+                      </div>
 
                 </div>
               </div>
@@ -607,17 +625,17 @@
                             <div class="row">
                               <div class="col-sm-4">
                                 <label class="form-label">Date</label>
-                                <input type="date" class="form-control" v-model="Sdate" />
+                                <input type="date" class="form-control" v-model="Sdate" disabled/>
                               </div>
                               <div class="col-sm-4">
                                 <label class="form-label">Time</label>
-                                <input type="time" class="form-control" v-model="Stime" />
+                                <input type="time" class="form-control" v-model="Stime" disabled/>
                               </div>
                               <div class="col-sm-4">
                                 <label class="form-label"
                                   >Place of Occurrence</label
                                 >
-                                <select class="form-select select-others" v-model="place_id">
+                                <select class="form-select select-others" v-model="place_id" disabled>
                                   <option value="0">Please Select</option>
                                  <option
                         v-for="slt in placelist"
@@ -677,6 +695,7 @@
                                     type="checkbox"
                                     value="Overdose/Poisoning"
                                     id="1" v-model="overdose"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="1">
                                     Overdose/Poisoning
@@ -689,8 +708,8 @@
                                     col-sm-12
                                     overdose-poisoning-div
                                     mt-3
-                                    hide
                                   "
+                                  v-if="Overdosespecify"
                                 >
                                 <div class="col-sm-12">
                                     <div class="mb-3">
@@ -711,6 +730,7 @@
                                     type="checkbox"
                                     value="Hanging/Suffocation"
                                     id="2" v-model="hanging"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="2">
                                     Hanging/Suffocation
@@ -723,6 +743,7 @@
                                     type="checkbox"
                                     value="Drowning"
                                     id="3" v-model="drowning"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="3">
                                     Drowning
@@ -735,6 +756,7 @@
                                     type="checkbox"
                                     value="Firearms or explosives"
                                     id="4" v-model="firearmsorexplosives"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="4">
                                     Firearms or explosives
@@ -749,6 +771,7 @@
                                     type="checkbox"
                                     value="Fire/flames"
                                     id="5"   v-model="fire_flames"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="5">
                                     Fire/flames
@@ -761,6 +784,7 @@
                                     type="checkbox"
                                     value="Cutting or Piercing"
                                     id="6"  v-model="cuttingorpiercing"
+                                    disabled
 
                                   />
                                   <label class="form-check-label" for="6">
@@ -774,6 +798,7 @@
                                     type="checkbox"
                                     value="Jumping from height"
                                     id="7"  v-model="jumpingfromheight"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="7">
                                     Jumping from height
@@ -786,6 +811,7 @@
                                     type="checkbox"
                                     value="Other" v-model="other_sh"
                                     id="8"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="8">
                                     Others
@@ -793,7 +819,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="other_sh!=null"
+                                <div v-if="selfharm_other"
                                   class="col-sm-12 selfharm-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -801,6 +827,7 @@
                                       type="text"
                                       class="form-control"
                                       placeholder="Please Specify" v-model="selfharm_other"
+                                      disabled
                                     />
                                   </div>
                                 </div>
@@ -841,6 +868,7 @@
                                     type="checkbox"
                                     value="Family, friends, peer group"
                                     id="1.1" v-model="family"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="1.1">
                                     Family, friends, peer group
@@ -853,6 +881,7 @@
                                     type="checkbox"
                                     value="Internet (website, social media platform,app, blogs, forum, video/photosharing)"
                                     id="2.2" v-model="internet"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="2.2">
                                     Internet (website, social media platform,
@@ -866,6 +895,7 @@
                                     type="checkbox"
                                     value="Printed media (newspaper, books, magazine, etc)"
                                     id="3.3" v-model="printed"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="3.3">
                                     Printed media (newspaper, books, magazine,
@@ -881,6 +911,7 @@
                                     type="checkbox"
                                     value="Broadcast media (television, radio)"
                                     id="5.5" v-model="broadcast"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="5.5">
                                     Broadcast media (television, radio)
@@ -893,6 +924,7 @@
                                     type="checkbox"
                                     value="Own ideas"
                                     id="4.4" v-model="ideas"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="4.4">
                                     Own ideas
@@ -905,6 +937,7 @@
                                     type="checkbox"
                                     value="Specify patient actual words"
                                     id="6.6" v-model="patientactualword"
+                                    disabled
                                   />
                                   <label class="form-check-label" for="6.6">
                                     Specify patient actual words
@@ -913,13 +946,15 @@
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-12 specify-other-div mt-3 hide"
+                                  v-if="patientactualword_other"
+                                  class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3">
                                     <input
                                       type="text"
                                       class="form-control"
                                       placeholder="Please Specify" v-model="patientactualword_other"
+                                      disabled
                                     />
                                   </div>
                                 </div>
@@ -964,6 +999,7 @@
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
                                     value="no" v-model="patient_intent"
+                                    disabled
                                   />
                                   <label
                                     class="form-check-label"
@@ -978,6 +1014,7 @@
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
                                     value="intent-yes" v-model="patient_intent"
+                                    disabled
                                   />
                                   <label
                                     class="form-check-label"
@@ -992,6 +1029,7 @@
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
                                     value="Undetermined" v-model="patient_intent"
+                                    disabled
                                   />
                                   <label
                                     class="form-check-label"
@@ -1206,7 +1244,6 @@
                 <div class="card-body steps-form-body">
                   <div class="text">
                     <h4>Suicide Risk</h4>
-                    <p>Instruction : Please Tick (/) In The Box Provided</p>
                   </div>
 
                     <div class="mb-3">
@@ -1234,6 +1271,7 @@
                                   id="High"
                                   value="High"
                                   v-model="result"
+                                  disabled
                                 />
                                 <label class="form-check-label" for="High">
                                   High
@@ -1258,6 +1296,7 @@
                                   id="moderate"
                                      value="Moderate"
                                   v-model="result"
+                                  disabled
                                 />
                                 <label class="form-check-label" for="moderate">
                                   Moderate
@@ -1281,6 +1320,7 @@
                                   id="low"
                                   value="Low"
                                   v-model="result"
+                                  disabled
                                 />
                                 <label class="form-check-label" for="low">
                                   Low
@@ -1344,6 +1384,7 @@
                           v-model="referral_or_contact"
                           class="form-select referral-contact-point"
                           aria-label="Default select example"
+                          disabled
                         >
                         <option value="0">
                            Please select
@@ -1363,6 +1404,7 @@
                             class="form-control"
                             v-model="referral_or_contact_other"
                             placeholder="Please Specify"
+                            disabled
                           />
                         </div>
                     </div>
@@ -1376,6 +1418,7 @@
                           v-model="arrival_mode"
                           class="form-select mode-of-arrival"
                           aria-label="Default select example"
+                          disabled
                         >
                          <option value="0">
                            Please select
@@ -1397,6 +1440,7 @@
                           type="text"
                           class="form-control"
                           placeholder="Please Specify" v-model="arrival_mode_other"
+                          disabled
                         />
                       </div>
                     </div>
@@ -1412,6 +1456,7 @@
                           type="date"
                           class="form-control"
                           placeholder="Please Specfy" v-model="date"
+                          disabled
                         />
                       </div>
                       <div class="col-sm-3">
@@ -1420,6 +1465,7 @@
                           type="time"
                           class="form-control"
                           placeholder="Please Specfy" v-model="time"
+                          disabled
                         />
                       </div>
                     </div>
@@ -1436,6 +1482,7 @@
                             name="physical consequence of current attempt"
                             id="pcoca1" value="No significant physical harm, No medical treatment required"
                              v-model="physical_consequences"
+                             disabled
                           />
                           <label class="form-check-label" for="pcoca1">
                             No significant physical harm, No medical treatment
@@ -1449,6 +1496,7 @@
                             name="physical consequence of current attempt"
                             id="pcoca2" value="Medical attention/Surgery required, but no danger to
                             life" v-model="physical_consequences"
+                            disabled
                           />
                           <label class="form-check-label" for="pcoca2">
                             Medical attention/Surgery required, but no danger to
@@ -1462,6 +1510,7 @@
                             name="physical consequence of current attempt"
                             id="pcoca3" value="Medical attention/Surgery required, had/has danger
                             to life" v-model="physical_consequences"
+                            disabled
                           />
                           <label class="form-check-label" for="pcoca3">
                             Medical attention/Surgery required, had/has danger
@@ -1474,6 +1523,7 @@
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca4" value="Lethal" v-model="physical_consequences"
+                            disabled
                           />
                           <label class="form-check-label" for="pcoca4">
                             Lethal
@@ -1485,6 +1535,7 @@
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca5" value="Aborted" v-model="physical_consequences"
+                            disabled
                           />
                           <label class="form-check-label" for="pcoca5">
                             Aborted
@@ -1496,6 +1547,7 @@
                             id="aborted"
                             placeholder="Please Specify"
                            v-model="physical_consequences_des"
+                           disabled
                           />
                         </div>
                       </div>
@@ -1512,6 +1564,7 @@
                             type="radio"
                             name="If patient admitted for current attempt"
                             id="pafca1" value="No" v-model="patient_admitted"
+                            disabled
                           />
                           <label class="form-check-label" for="pafca1">
                             No
@@ -1523,21 +1576,18 @@
                             type="radio"
                             name="If patient admitted for current attempt"
                             id="pafca2"  value="Yes" v-model="patient_admitted"
+                            disabled
                           />
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <!-- SHOW_input -->
-                          <div class="pafca-other-div hide" style="display:none;">
-                          <div class="mb-3">
-                            <label>If admitted, specify the first admitting ward</label>
-                            <input
+                          <input
+                              v-if="patient_admitted_des"
                               type="text"
-                              class="form-control"
+                              class="pafca-other-div"
                               placeholder="Please Specify" v-model="patient_admitted_des"
+                              disabled
                             />
-                          </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -1553,6 +1603,7 @@
                             type="radio"
                             name="Status on Discharge"
                             id="sond1" value="Dead" v-model="discharge_status"
+                            disabled
                           />
                           <label class="form-check-label" for="sond1">
                             Dead
@@ -1564,6 +1615,7 @@
                             type="radio"
                             name="Status on Discharge"
                             id="sond2" value="Alive" v-model="discharge_status"
+                            disabled
                           />
                           <label class="form-check-label" for="sond2">
                             Alive
@@ -1578,7 +1630,7 @@
                       >
                       <div class="col-sm-3">
                         <label class="form-label">Date</label>
-                        <input type="date" class="form-control" v-model="discharge_date"/>
+                        <input type="date" class="form-control" v-model="discharge_date" disabled/>
                       </div>
                       <div class="col-sm-3">
                         <label class="form-label">Number of days in ward</label>
@@ -1586,89 +1638,98 @@
                           type="text"
                           class="form-control"
                           placeholder="Days" v-model="discharge_number_days_in_ward"
+                          disabled
                         />
                       </div>
                     </div>
                     <!-- close-row -->
-                    <div class="row mb-5 align-items-flex-start">
+                    <div class="row mb-3 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Discharge Diagnosis(ICD-10)</label
+                        >Discharge Diagnosis(ICD-10)<small style="color:red">*</small></label
                       >
                       <div class="col-sm-4">
                         <label class="form-label"
-                          >Main psychiatric diagnosis</label
+                          >Main psychiatric diagnosis<small style="color:red">*</small></label
                         >
                           <select
                           v-model="main_psychiatric_diagnosis"
                           class="form-select"
                           aria-label="Default select example"
-                        >
-                        <option value="0">Please Select</option>
-                             <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                        </select>
-                      </div>
-                      <div class="col-sm-4">
-                        <label class="form-label"
-                          >External cause of injury</label
-                        >
-                        <select
-                          class="form-select"
-                          aria-label="Default select example" v-model="external_cause_inquiry"
-                        >
-                          <option value="0">Please Select</option>
-                        <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
-                        >Additional psychiatric diagnosis</label
-                      >
-                      <div class="col-sm-4">
-                          <select
-                          id="additionalbox"
-                          class="form-select multiselect" multiple="multiple"
+                          disabled
                         >
                         <option value="0">Please Select</option>
                            <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- close row -->
+                    <div class="row mb-4 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                          <label class="form-label"
+                          >Additional psychiatric diagnosis</label
+                          >
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple" disabled
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                        <label class="form-label"
+                          >External cause of injury<small style="color:red">*</small></label
+                        >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example" v-model="external_cause_inquiry" 
+                          disabled
+                        >
+                          <option value="0">Please Select</option>
+                         <option
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                     </div>
                     <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                      <label class="form-label"
                         >Additional external cause of injury</label
                       >
-                    <div class="col-sm-4">
                         <select
                         id="externalbox"
-                          class="form-select multiselect" multiple="multiple"
+                          class="form-select multiselect" multiple="multiple" disabled
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist_external"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                       </div>
@@ -1684,6 +1745,7 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1" checked
+                            disabled
                           />
                           <label class="form-check-label" for="psy-d1">
                             {{pb}}
@@ -1786,6 +1848,7 @@
                           v-model="psychiatristId"
                           class="form-select"
                           aria-label="Default select example"
+                          disabled
                         >
                         <option value="0">Select</option>
                           <option

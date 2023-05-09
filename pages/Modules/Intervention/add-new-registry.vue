@@ -123,7 +123,7 @@
                         </div>
                         <div class="step-form-box box-01">
                           <select id="firstbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple">
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
@@ -220,8 +220,7 @@
                         </div>
                         <div class="step-form-box box-03">
                           <select id="fourthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in typesofsubstance"
@@ -288,7 +287,7 @@
                         </div>
                         <div class="step-form-box box-04">
                           <select id="sixthbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple">
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
               v-for="catcode in diagonisislist"
               v-bind:key="catcode.id"
@@ -326,8 +325,7 @@
                         </div>
                         <div class="step-form-box box-05">
                           <select id="seventhbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
-
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in typesofsubstance"
@@ -366,7 +364,7 @@
                         </div>
                         <div class="step-form-box box-06">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple"
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
                             v-for="catcode in stresslist"
@@ -416,7 +414,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>10</span>chronic physical illness or
+                        ><span>10</span>Chronic physical illness or
                         condition<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
@@ -450,7 +448,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>11</span>History of physical , sexual or
+                        ><span>11</span>History of physical, sexual, or
                         emotional abuse<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
@@ -515,14 +513,14 @@
                       </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftriskfactor"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button
+                        <!-- <button
                           type="submit"
                           class="btn btn-text btn-warning"
                           @click="Onriskfactor"
                           title="Save"
                         >
                           <i class="fa fa-save"></i> Save
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                   <!-- </form> -->
@@ -590,7 +588,7 @@
                       <div class="ml-auto">
 
                         <button type="submit" class="btn btn-text btn-warning" title="Draft" @click="Onprotectivefactordraft"><i class="fad fa-save" ></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
+                        <!-- <button type="submit" class="btn btn-text btn-warning" title="Save" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button> -->
                        </div>
                       </div>
 
@@ -665,20 +663,20 @@
                         {{ slt.section_value }}
                       </option>
                                 </select>
+                                <!-- SHOW_DIV -->
+                              <div class="col-sm-120" v-if="placeOther">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control" v-model="place_other"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
                               </div>
-                              <!-- SHOW_DIV -->
-                              <div class="col-sm-6" v-if="placeOther">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="place_other"
-                            placeholder="please specify"
-
-                          />
-                        </div>
-                        </div>
                             </div>
                           </div>
                         </div>
@@ -1041,6 +1039,7 @@
                                 </div>
                               </div>
                               <!-- SHOW_DIV -->
+                              <div class="row mt-3">
                               <div class="col-sm-12 intent-div mt-4 hide">
                                 <div class="form-check form-check-inline">
                                   <input
@@ -1128,7 +1127,7 @@
                                   <label
                                     class="form-check-label"
                                     for="learn-more"
-                                    >Learn more</label
+                                    >Efforts to learn more</label
                                   >
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -1139,27 +1138,23 @@
                                     value="" @change="OnpatientIntent('Other',$event)"
                                   />
                                   <label class="form-check-label" for="Other"
-                                    >Other</label
+                                    >Others</label
                                   >
-                                  <!-- SHOW_DIV -->
-                                  <div class="intent-other-div hide" style="display:none;">
-                                  <div class="col-sm-12">
-                                    <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
-                                      <input
-                                        type="text"
-                                        class="form-control" v-model="intent_other"
-                                        placeholder="Please Specify"
-                                      />
-                                    </div>
+                                </div>
+                                <!-- SHOW_DIV -->
+                                <div
+                                  class="col-sm-120 intent-other-div mt-5 hide"
+                                >
+                                  <div class="mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Please Specify" v-model="intent_other"
+                                    />
                                   </div>
                                 </div>
-                                  <!-- SHOW_DIV -->
-                                </div>
                               </div>
-                              <!-- SHOW_DIV -->
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -1280,7 +1275,7 @@
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
 
-                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
+                        <!-- <button type="submit" class="btn btn-text btn-warning" title="Save" @click="SelfHarm"><i class="fad fa-save"></i> Save</button> -->
                       </div>
                     </div>
                   <!-- </form> -->
@@ -1412,9 +1407,9 @@
                       <div class="ml-auto">
 
                         <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftsuciderisk"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" title="Save" @click="Onsuciderisk" class="btn btn-text btn-warning">
+                        <!-- <button type="submit" title="Save" @click="Onsuciderisk" class="btn btn-text btn-warning">
                           <i class="fad fa-save"></i> Save
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                 </div>
@@ -1627,16 +1622,12 @@
                             Yes
                           </label>
                           <!-- SHOW_input -->
-                          <div class="pafca-other-div hide" style="display:none;">
-                          <div class="mb-3">
-                            <label>If admitted, specify the first admitting ward</label>
                             <input
                               type="text"
-                              class="form-control"
-                              placeholder="Please Specify" v-model="patient_admitted_des"
+                              class="form-control pafca-other-div hide"
+                              placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
+                              id="AW"
                             />
-                          </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -1689,7 +1680,7 @@
                       </div>
                     </div>
                     <!-- close-row -->
-                    <div class="row mb-5 align-items-flex-start">
+                    <div class="row mb-3 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
                         >Discharge Diagnosis(ICD-10)<small style="color:red">*</small></label
                       >
@@ -1712,6 +1703,31 @@
                           </option>
                         </select>
                       </div>
+                    </div>
+                    <!-- close row -->
+                    <div class="row mb-4 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                          <label class="form-label"
+                          >Additional psychiatric diagnosis</label
+                          >
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
                         <label class="form-label"
                           >External cause of injury<small style="color:red">*</small></label
@@ -1731,32 +1747,12 @@
                         </select>
                       </div>
                     </div>
-                    <!-- close row -->
                     <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
-                        >Additional psychiatric diagnosis</label
-                      >
+                      <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
-                          <select
-                          id="additionalbox"
-                          class="form-select multiselect" multiple="multiple"
-                        >
-                        <option value="0">Please Select</option>
-                           <option
-                            v-for="catcode in diagonisislist"
-                            v-bind:key="catcode.id"
-                            v-bind:value="catcode.id"
-                          >
-                          {{ catcode.icd_code }} {{catcode.icd_name}}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
+                      <label class="form-label"
                         >Additional external cause of injury</label
                       >
-                    <div class="col-sm-4">
                         <select
                         id="externalbox"
                           class="form-select multiselect" multiple="multiple"
@@ -1796,10 +1792,10 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d2"
-                            @change="OnMxdischarge('Given appt to psy clinical')"
+                            @change="OnMxdischarge('Given appt to psy clinic')"
                           />
                           <label class="form-check-label" for="psy-d2">
-                            Given appt to Psychiatry clinical
+                            Given appt to Psychiatry clinic
                           </label>
                         </div>
                         <div class="form-check">
@@ -1883,9 +1879,9 @@
                       </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftSavehospitalmanagement"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-text btn-warning" title="Save" @click="OnSavehospitalmanagement">
+                        <!-- <button type="submit" class="btn btn-text btn-warning" title="Save" @click="OnSavehospitalmanagement">
                           <i class="fad fa-save"></i> Save
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                 </div>
@@ -1996,9 +1992,9 @@
                       </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
-                        <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
+                        <!-- <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
                           <i class="fad fa-paper-plane"></i> Submit
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                 </div>
@@ -2503,7 +2499,7 @@ export default {
       }
     },
     OnchangePlace(event) {
-      if (event.target.options[event.target.options.selectedIndex].text == "OTHERS"){
+      if (event.target.options[event.target.options.selectedIndex].text == "Other specified areas"){
         this.placeOther = true;
       }else{
         this.placeOther = false;
@@ -3558,8 +3554,35 @@ export default {
     },
   },
 };
-</script>
 
+</script>
+<style>
+  input#AW{ /*AW - Admitting Ward */
+    height:50px;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    white-space:pre-line;  
+    position:relative;
+    top:-5px;
+    
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    white-space:pre-line;  
+    position:relative;
+    top:-5px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    white-space:pre-line;  
+    position:relative;
+    top:-10px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+      white-space:pre-line;  
+    position:relative;
+    top:-10px;
+  }
+</style>
 <!-- <style scoped>
 /* #myTab .nav-item a {
   pointer-events: none;
