@@ -787,7 +787,7 @@ export default {
         });
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/job-club-progress-note",
+          path: "/modules/Intervention/view-job-club-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
