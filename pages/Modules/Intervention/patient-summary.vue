@@ -852,7 +852,7 @@ export default {
         });
       } else if (data.type == "JobEndReport") {
         this.$router.push({
-          path: "/modules/Intervention/job-end-report",
+          path: "/modules/Intervention/view-job-end-report",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobTransitionReport") {
