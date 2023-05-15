@@ -125,12 +125,12 @@
                           <select id="firstbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                           </select>
                         </div>
                       </div>
@@ -223,12 +223,13 @@
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
-              v-for="catcode in typesofsubstance"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
+                            v-for="catcode in typesofsubstance"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                            {{ catcode.section_value }}
+                          </option>
+                          <option v-bind:key="Others">Others</option>
                           </select>
                         </div>
                       </div>
@@ -374,7 +375,7 @@
                             {{ catcode.section_value }}
                           </option>
                           </select>
-                          <div class="step-form-box box-07">
+                          <div class="step-form-box">
                           <input
                             type="text"
                             class="form-control" v-model="stress_other"
@@ -1140,10 +1141,9 @@
                                   <label class="form-check-label" for="Other"
                                     >Others</label
                                   >
-                                </div>
-                                <!-- SHOW_DIV -->
+                                  <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-120 intent-other-div mt-5 hide"
+                                  class="col-sm-20 intent-other-div hide" style="margin-top: 22px;"
                                 >
                                   <div class="mb-3">
                                     <input
@@ -1153,6 +1153,8 @@
                                     />
                                   </div>
                                 </div>
+                                </div>
+                                
                               </div>
                               </div>
                             </div>
@@ -2895,7 +2897,7 @@ export default {
               },
               {
                 "Suicidal Intent": {
-                  intent: this.patient_intent_value,
+                  intent: this.patient_intent_value +"," + this.intent_other,
                 },
               },
               { "Level of Suicidal Intent": this.SItestscore },
