@@ -386,7 +386,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no8" value="No" v-model="nine"
-                            name="Isolation, rejection or feelings of shame" 
+                            name="Isolation, rejection or feelings of shame"
                             disabled
                           />
                           <label class="form-check-label" for="no8">NO</label>
@@ -635,7 +635,7 @@
                                 <label class="form-label"
                                   >Place of Occurrence</label
                                 >
-                                <select class="form-select select-others" v-model="place_id" disabled>
+                                <select disabled class="form-select" @change="OnchangePlace($event)" v-model="place_id">
                                   <option value="0">Please Select</option>
                                  <option
                         v-for="slt in placelist"
@@ -644,21 +644,22 @@
                       >
                         {{ slt.section_value }}
                       </option>
-                                </select>
-                              </div>
-                              <!-- SHOW_DIV -->
-                              <div class="col-sm-6" v-if="place_id=='OTHERS'">
-                        <div class="mb-3">
-                          <label class="form-label">Please Specify</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="place_other"
-                            placeholder="please specify"
 
-                          />
-                        </div>
-                        </div>
+                                </select>
+                                <!-- SHOW_DIV -->
+                              <div class="col-sm-120" v-if="place_id=='Other specified areas'">
+                                    <div class="mb-3">
+                                      <label class="form-label"
+                                        >Please Specify</label
+                                      >
+                                      <input disabled
+                                        type="text"
+                                        class="form-control" v-model="place_other"
+                                        placeholder="Please Specify"
+                                      />
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -703,13 +704,12 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div
+                                <div v-if="overdose!=null"
                                   class="
                                     col-sm-12
                                     overdose-poisoning-div
                                     mt-3
                                   "
-                                  v-if="Overdosespecify"
                                 >
                                 <div class="col-sm-12">
                                     <div class="mb-3">
@@ -817,7 +817,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="selfharm_other"
+                                <div v-if="other_sh!=null"
                                   class="col-sm-12 selfharm-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -944,7 +944,7 @@
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div
-                                  v-if="patientactualword_other"
+                                v-if="patientactualword!=null"
                                   class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3">
@@ -1039,13 +1039,13 @@
                               <!-- SHOW_DIV -->
                               <div class="col-sm-12 intent-div mt-4 hide">
                                 <div class="form-check form-check-inline">
-                                  <input
+                                  <input disabled
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
                                     value="verbal"  @change="OnpatientIntent('verbal',$event)"
                                     v-model="verbal"
-                                    disabled
+
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1162,10 +1162,8 @@
                                       disabled
                                     />
                                   </div>
-                                  <!-- SHOW_DIV -->
                                 </div>
                               </div>
-                              <!-- SHOW_DIV -->
                             </div>
                           </div>
                         </div>
@@ -1205,7 +1203,7 @@
                         type="radio"
                         v-bind:name="'psp' + index"
                         value="0"
-                        @change="onchangetest(index, 0)"
+                        @change="onchangetest(index, 0)" disabled
                       />
                       <label class="form-check-label" for="level1">
                         {{ psp.Answer0 }}
@@ -1217,7 +1215,7 @@
                         type="radio"
                         v-bind:name="'psp' + index"
                         value="1"
-                        @change="onchangetest(index, 1)"
+                        @change="onchangetest(index, 1)" disabled
                       />
                       <label class="form-check-label" for="level2">
                         {{ psp.Answer1 }}
@@ -1229,7 +1227,7 @@
                         type="radio"
                         v-bind:name="'psp' + index"
                         value="2"
-                        @change="onchangetest(index, 2)"
+                        @change="onchangetest(index, 2)" disabled
                       />
                       <label class="form-check-label" for="level3">
                         {{ psp.Answer2 }}
@@ -1238,7 +1236,7 @@
                   </div>
                 </div>
                 <div class="col-sm-6">
-                
+
                 <table class="self-harm" v-if="testresult">
                   <tbody>
                     <tr>
@@ -1246,7 +1244,7 @@
                       <td>{{testresult.section_value}}</td>
                     </tr>
                     <tr>
-                      <th>Level of Suicidal Internt:</th>
+                      <th>Level of Suicidal Intent:</th>
                       <td>{{testresult.section}}</td>
                     </tr>
                   </tbody>
@@ -1485,7 +1483,7 @@
                       </div>
                       <div
                         class="
-                          col-sm-3" v-if="arrival_mode=='OTHERS' || arrival_mode==201"
+                          col-sm-3" v-if="arrival_mode=='Others' || arrival_mode==201"
                       >
                         <input
                           type="text"
@@ -1752,7 +1750,7 @@
                         >
                         <select
                           class="form-select"
-                          aria-label="Default select example" v-model="external_cause_inquiry" 
+                          aria-label="Default select example" v-model="external_cause_inquiry"
                           disabled
                         >
                           <option value="0">Please Select</option>
@@ -1806,7 +1804,7 @@
                           </label>
                         </div>
 
- 
+
                         <div class="col-sm-4 PSY-other-div mt-3" v-if="discharge_psy_mx_des">
                           <div class="mb-3">
                             <input
@@ -1826,6 +1824,7 @@
                             id="psy-d1"
                             v-model="psyd1"
                             value="Transferred to Psychiatry ward"
+                            @change="OnMxdischarge('Transferred to Psychiatry ward')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d1">
@@ -1840,6 +1839,7 @@
                             id="psy-d2"
                             v-model="psyd2"
                             value="Given appt to Psychiatry clinic"
+                            @change="OnMxdischarge('Given appt to Psychiatry clinic')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d2">
@@ -1854,6 +1854,7 @@
                             id="psy-d3"
                             v-model="psyd3"
                             value="Referred to counsellor"
+                            @change="OnMxdischarge('Referred to counsellor')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d3">
@@ -1868,6 +1869,7 @@
                             id="psy-d4"
                             v-model="psyd4"
                             value="Discharge without any Psychiatry follow-up"
+                            @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d4">
@@ -1882,6 +1884,7 @@
                             id="psy-d5"
                             v-model="psyd5"
                             value="Refer Community Psychiatry Services"
+                            @change="OnMxdischarge('Refer Community Psychiatry Services')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d6">
@@ -1896,6 +1899,7 @@
                             id="psy-d6"
                             v-model="psyd6"
                             value="Others"
+                            @change="OnMxdischarge('Others')"
                             disabled
                           />
                           <label class="form-check-label" for="psy-d5">
@@ -2452,7 +2456,11 @@ export default {
       } else {
         this.modelist = [];
       }
-      const response3 = await this.$axios.get("staff-management/getList", { headers });
+      this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+
+      const response3 = await this.$axios.get("staff-management/getPsychiatrist/" + this.userdetails.branch.branch_id,{
+        headers,
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.psychiatrist = response3.data.list;
       } else {
@@ -2596,7 +2604,7 @@ export default {
         this.testresult = response.data.result.selfharm[4];
         this.overdose =
           response.data.result.selfharm[1].section_value.Overdose_Poisoning;
-        this.Overdosespecify = 
+        this.Overdosespecify =
           response.data.result.selfharm[1].section_value.Overdosespecify;
           this.overdosevalue =
             response.data.result.selfharm[1].section_value.Overdose_Poisoning;
@@ -2666,8 +2674,10 @@ export default {
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
-            this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-            this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
+            if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
+              this.patientactualword = true;
+            }
+            this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
         this.result = response.data.result.suicideRisk[0].result;
         this.referral_or_contact =
           response.data.result.hospital[0].referral_or_contact;
@@ -2701,7 +2711,7 @@ export default {
           response.data.result.dataSource[0].name_registering_officer;
         this.designation =
           response.data.result.dataSource[0].designation;
-        this.hospitalname = 
+        this.hospitalname =
           response.data.result.dataSource[0].hospital_name;
         this.reportingdate =
           moment(response.data.result.dataSource[0].reporting_date, "YYYY-MM-DD").format("DD-MM-YYYY");
@@ -2737,6 +2747,13 @@ export default {
             }
           }
         this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
+      }
+    },
+    OnMxdischarge(val) {
+      if (this.discharge_psy_mx) {
+        this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
+      } else {
+        this.discharge_psy_mx = val;
       }
     },
   },
