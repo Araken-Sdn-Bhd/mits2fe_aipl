@@ -185,7 +185,7 @@
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box box-02" v-show="third=='Yes'">
+                        <div class="step-form-box2 box-02" v-if="thirdbox">
                           <input
                             type="text"
                             class="form-control"
@@ -218,7 +218,7 @@
                           />
                           <label class="form-check-label" for="yes3">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="fourth=='Yes'">
+                        <div class="step-form-box4 box-4" v-show="fourth=='Yes'">
                           <select id="fourthbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
@@ -285,7 +285,7 @@
                           />
                           <label class="form-check-label" for="yes5">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="sixth=='Yes'">
+                        <div class="step-form-box6 box-6" v-show="sixth=='Yes'">
                           <select id="sixthbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
@@ -323,7 +323,7 @@
                           />
                           <label class="form-check-label" for="yes6">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="seventh=='Yes'">
+                        <div class="step-form-box7 box-7" v-show="seventh=='Yes'">
                           <select id="seventhbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
@@ -362,7 +362,7 @@
                           />
                           <label class="form-check-label" for="yes7">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="eight=='Yes'">
+                        <div class="step-form-box8 box-8" v-show="eight=='Yes'">
                           <select id="eightbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
@@ -407,7 +407,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>10</span>chronic physical illness or
+                        ><span>10</span>Chronic physical illness or
                         condition</label
                       >
                       <div class="col-sm-7">
@@ -429,7 +429,7 @@
                           />
                           <label class="form-check-label" for="yes9">YES</label>
                         </div>
-                        <div class="step-form-box" v-show="tenth=='Yes'">
+                        <div class="step-form-box10 box10" v-if="tenth=='Yes'">
                           <input
                             type="text"
                             class="form-control" v-model="tenthbox"
@@ -650,9 +650,7 @@
                                 <!-- SHOW_DIV -->
                               <div class="col-sm-120" v-if="place_id=='Other specified areas'">
                                     <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
+                                      <br>
                                       <input
                                         type="text"
                                         class="form-control" v-model="place_other"
@@ -693,7 +691,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input overdose-poisoning"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
                                     id="1" v-model="overdose" @click="onSectionB('val')"
@@ -704,19 +702,15 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div
+                                <div v-if="overdose!=null"
                                   class="
                                     col-sm-12
                                     overdose-poisoning-div
                                     mt-3
-                                    hide
                                   "
                                 >
-                                <div v-if="overdose!=null" class="col-sm-12">
+                                <div class="col-sm-12">
                                     <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
                                       <input
                                         type="text"
                                         class="form-control" v-model="Overdosespecify"
@@ -857,7 +851,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input overdose-poisoning"
+                                    class="form-check-input"
                                     type="checkbox"
                                     value="Family, friends, peer group"
                                     id="1.1" v-model="family"  @click="onSectionC('val')"
@@ -933,7 +927,7 @@
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div v-if="patientactualword!=null"
-                                  class="col-sm-12 specify-other-div mt-3 hide"
+                                  class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3" >
                                     <input
@@ -974,7 +968,7 @@
                             </p>
                             <div class="mb-3 mt-3">
                               <label class="form-label"
-                                >Was there an intent?</label
+                                >Was there an intent?<small style="color:red">*</small></label
                               >
                               <div class="mt-2">
                                 <div class="form-check form-check-inline">
@@ -983,7 +977,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
-                                    value="no" v-model="patient_intent"
+                                    value="no" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -997,7 +991,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
-                                    value="intent-yes" v-model="patient_intent"
+                                    value="intent-yes" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1011,7 +1005,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
-                                    value="Undetermined" v-model="patient_intent"
+                                    value="Undetermined" v-model="patient_intent" @click="onSectionD('val')"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1021,14 +1015,14 @@
                                 </div>
                               </div>
                               <!-- SHOW_DIV -->
+                              <div class="row mt-3">
                               <div class="col-sm-12 intent-div mt-4 hide">
                                 <div class="form-check form-check-inline">
                                   <input
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
-                                    v-model="verbal"
+                                    value=""  @change="OnpatientIntent('verbal',$event)"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1039,8 +1033,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
-                                    v-model="Messaging"
+                                    value="" @change="OnpatientIntent('Messaging',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1130,21 +1123,18 @@
                                     >Others</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div v-if="Other!=null"
-                                  class="intent-other-div hide"
+                                <div
+                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="intent_other!=null"
                                 >
-                                  <div class="mb-3" >
                                     <input
                                       type="text"
                                       class="form-control"
                                       placeholder="Please Specify" v-model="intent_other"
                                     />
-                                  </div>
                                 </div>
-                                  <!-- SHOW_DIV -->
                                 </div>
                               </div>
-                              <!-- SHOW_DIV -->
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -1181,7 +1171,7 @@
                       <td>{{testresult.section_value}}</td>
                     </tr>
                     <tr>
-                      <th>Level of Suicidal Internt:</th>
+                      <th>Level of Suicidal Intent:</th>
                       <td>{{testresult.section}}</td>
                     </tr>
                   </tbody>
@@ -1461,7 +1451,7 @@
                             class="form-check-input aborted-no"
                             type="radio"
                             name="physical consequence of current attempt"
-                            id="pcoca1" value="No significant physical harm, No medical treatment required"
+                            id="pcoca1" value=" No significant physical harm, No medical treatment required"
                              v-model="physical_consequences"
                           />
                           <label class="form-check-label" for="pcoca1">
@@ -1517,13 +1507,12 @@
                             Aborted
                           </label>
                           <!-- SHOW_input -->
-                          <input v-show="physical_consequences_des"
-                            type="text"
-                            class="form-control aborted-div"
-                            id="aborted"
-                            placeholder="Please Specify"
-                           v-model="physical_consequences_des"
-                          />
+                          <input v-if="physical_consequences!=null" style="margin-left: 80px;"
+                              type="text"
+                              class="form-control aborted-div"
+                              placeholder="Please Specify" v-model="physical_consequences_des"
+                              id="aborted"
+                            />
                         </div>
                       </div>
                     </div>
@@ -1554,19 +1543,12 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <!-- SHOW_input -->
-
-                          <!-- <p style="display: none;font-size: 12px;margin-top: -20px; margin-left: 30px;"  class="pafca-other-div hide">If admitted, specify the first admitting ward</p> -->
-                          <div class="pafca-other-div hide" style="display:none;">
-                          <div class="mb-5">
-                            <label>If admitted, specify the first admitting ward</label>
-                            <input
+                          <input v-if="patient_admitted!=null"  style="margin-left: 20px;"
                               type="text"
-                              class="form-control"
-                              placeholder="Please Specify" v-model="patient_admitted_des"
+                              class="form-control pafca-other-div hide"
+                              placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
+                              id="AW"
                             />
-                          </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -1619,32 +1601,54 @@
                       </div>
                     </div>
                     <!-- close-row -->
-                    <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
-                        >Discharge Diagnosis(ICD-10)</label
-                      >
+                    <div class="row mb-4 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label">Discharge Diagnosis(ICD-10)</label>
                       <div class="col-sm-4">
-                        <label class="form-label"
+                          <label class="form-label"
                           >Main psychiatric diagnosis</label
-                        >
+                          >
                           <select
                           v-model="main_psychiatric_diagnosis"
                           class="form-select"
                           aria-label="Default select example"
                         >
                         <option value="0">Please Select</option>
-                            <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                           <option
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                         </select>
                       </div>
+                    </div>
+                    <div class="row mb-4 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                          <label class="form-label"
+                          >Additional psychiatric diagnosis</label
+                          >
+                          <select
+                          id="additionalbox"
+                          class="form-select multiselect" multiple="multiple"
+                        >
+                        <option value="0">Please Select</option>
+                           <option
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3 align-items-flex-start">
+                      <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
                         <label class="form-label"
-                          >External cause of injury</label
+                          >External cause of injury<small style="color:red">*</small></label
                         >
                         <select
                           class="form-select"
@@ -1652,53 +1656,33 @@
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- close row -->
-                    <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
-                        >Additional psychiatric diagnosis</label
-                      >
-                      <div class="col-sm-4">
-                          <select
-                          id="additionalbox"
-                          class="form-select multiselect" multiple="multiple"
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
                         >
-                        <option value="0">Please Select</option>
-                           <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                     </div>
                     <div class="row mb-5 align-items-flex-start">
-                      <label class="col-sm-3 col-form-label"
+                      <label class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-4">
+                      <label class="form-label"
                         >Additional external cause of injury</label
                       >
-                    <div class="col-sm-4">
                         <select
                         id="externalbox"
                           class="form-select multiselect" multiple="multiple"
                         >
                           <option value="0">Please Select</option>
                          <option
-              v-for="catcode in diagonisislist_external"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                          v-for="catcode in diagonisislist_external"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
                         </select>
                       </div>
                       </div>
@@ -1708,25 +1692,104 @@
                         >Psychiatry Management on Discharge</label
                       >
                       <div class="col-sm-9">
-                        <div class="form-check" v-for="(pb, index) in list1" :key="index">
+                        <div class="form-check">
                           <input
                             class="form-check-input"
                             type="checkbox"
                             name="PSY Mx on Discharge"
-                            id="psy-d1" checked
+                            id="psy-d1"
+                            v-model="psyd1"
+                            value="Transferred to Psychiatry ward"
+                            @change="OnMxdischarge('Transferred to Psychiatry ward')"
+
                           />
                           <label class="form-check-label" for="psy-d1">
-                            {{pb}}
+                            Transferred to Psychiatry ward
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d2"
+                            v-model="psyd2"
+                            value="Given appt to Psychiatry clinic"
+                            @change="OnMxdischarge('Given appt to Psychiatry clinic')"
 
+                          />
+                          <label class="form-check-label" for="psy-d2">
+                            Given appt to Psychiatry clinic
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d3"
+                            v-model="psyd3"
+                            value="Referred to counsellor"
+                            @change="OnMxdischarge('Referred to counsellor')"
+
+                          />
+                          <label class="form-check-label" for="psy-d3">
+                            Referred to counsellor
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d4"
+                            v-model="psyd4"
+                            value="Discharge without any Psychiatry follow-up"
+                            @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
+
+                          />
+                          <label class="form-check-label" for="psy-d4">
+                            Discharge without any Psychiatry follow-up
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d5"
+                            v-model="psyd5"
+                            value="Refer Community Psychiatry Services"
+                            @change="OnMxdischarge('Refer Community Psychiatry Services')"
+
+                          />
+                          <label class="form-check-label" for="psy-d6">
+                            Refer Community Psychiatry Services
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input PSY-other"
+                            type="checkbox"
+                            name="PSY Mx on Discharge"
+                            id="psy-d6"
+                            v-model="psyd6"
+                            value="Others"
+                            @change="OnMxdischarge('Others')"
+
+                          />
+                          <label class="form-check-label" for="psy-d5">
+                            Others
+                          </label>
+                        </div>
                         <!-- SHOW_DIV -->
-                        <div class="col-sm-4 PSY-other-div mt-3" v-show="discharge_psy_mx_des">
+                        <div class="col-sm-4 PSY-other-div mt-3" v-if="this.discharge_psy_mx_des">
                           <div class="mb-3">
                             <input
                               type="text"
                               class="form-control"
                               placeholder="Please Specify" v-model="discharge_psy_mx_des"
+
                             />
                           </div>
                         </div>
@@ -2006,7 +2069,13 @@ export default {
       stresslist: [],
       overdoselist: [],
       hospitallist: [],
-      patient_id:0
+      patient_id:0,
+      psyd1: "",
+      psyd2: "",
+      psyd3: "",
+      psyd4: "",
+      psyd5: "",
+      psyd6: "",
     };
   },
   beforeMount() {
@@ -2323,7 +2392,11 @@ export default {
       } else {
         this.modelist = [];
       }
-      const response3 = await this.$axios.get("staff-management/getList", { headers });
+      this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+
+      const response3 = await this.$axios.get("staff-management/getPsychiatrist/" + this.userdetails.branch.branch_id,{
+        headers,
+      });
       if (response3.data.code == 200 || response3.data.code == "200") {
         this.psychiatrist = response3.data.list;
       } else {
@@ -2532,8 +2605,7 @@ export default {
             response.data.result.selfharm[0].section_value.Place_of_Occurance;
           this.place_other = response.data.result.selfharm[0].section_value.place_other;
           this.testresult = response.data.result.selfharm[4];
-          // this.overdose =
-          //   response.data.result.selfharm[1].section_value.Overdose_Poisoning;
+
           if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
               this.overdose = true;
             }
@@ -2553,7 +2625,6 @@ export default {
             if(response.data.result.selfharm[1].section_value.Other_!=null) {
               this.other_sh = true;
             }
-            // this.other_sh = response.data.result.selfharm[1].section_value.Other_;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
 
@@ -2592,6 +2663,9 @@ export default {
                 if(element=="Other"){
                 this.Other=element;
                 }
+                else if(element!="intent-yes"){
+                  this.intent_other=element;
+                }
               });
             }
 
@@ -2605,7 +2679,7 @@ export default {
             if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
               this.patientactualword = true;
             }
-            this.patientactualword_other=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
+            this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
 
           this.result = response.data.result.suicideRisk[0].result;
           this.referral_or_contact =
@@ -2871,6 +2945,7 @@ export default {
                     Date: this.Sdate,
                     Time: this.Stime,
                     "Place of Occurance": this.place_id,
+                    place_other: this.place_other,
                   },
                 },
                 {
@@ -2883,7 +2958,8 @@ export default {
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    "Other": this.selfharm_other,
+                    "Other": this.other_sh,
+                    selfharm_other: this.selfharm_other,
                   },
                 },
                 {
@@ -2896,7 +2972,8 @@ export default {
                     "Broadcast media (television, radio)": this.broadcast,
                     "Own ideas":this.ideas,
                     "Specify patient actual words":
-                      this.patientactualword_other,
+                      this.patientactualword,
+                      patientactualword_other: this.patientactualword_other,
                   },
                 },
                 {
@@ -2978,6 +3055,13 @@ export default {
                   text: 'the error is: ' + JSON.stringify(response.data.message),
                   footer: ''
                 });
+      }
+    },
+    OnMxdischarge(val) {
+      if (this.discharge_psy_mx) {
+        this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
+      } else {
+        this.discharge_psy_mx = val;
       }
     },
     async OnSavehospitalmanagement() {
