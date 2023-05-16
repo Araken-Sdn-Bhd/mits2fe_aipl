@@ -125,12 +125,12 @@
                           <select id="firstbox"
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%">
                          <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                            v-for="catcode in diagonisislist"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                          </option>
                           </select>
                         </div>
                       </div>
@@ -223,12 +223,13 @@
                             class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
-              v-for="catcode in typesofsubstance"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-              {{ catcode.section_value }}
-            </option>
+                            v-for="catcode in typesofsubstance"
+                            v-bind:key="catcode.id"
+                            v-bind:value="catcode.id"
+                          >
+                            {{ catcode.section_value }}
+                          </option>
+                          <option v-bind:key="Others">Others</option>
                           </select>
                         </div>
                       </div>
@@ -374,7 +375,7 @@
                             {{ catcode.section_value }}
                           </option>
                           </select>
-                          <div class="step-form-box box-07">
+                          <div class="step-form-box">
                           <input
                             type="text"
                             class="form-control" v-model="stress_other"
@@ -822,7 +823,7 @@
                                     class="form-check-input selfharm-other"
                                     type="checkbox"
                                     value="Other"
-                                    id="8"  @click="onSectionB('val')"
+                                    id="8"  v-model="other_sh" @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="8">
                                     Others
@@ -875,7 +876,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input overdose-poisoning"
+                                    class="form-check-input"
                                     type="checkbox"
                                     value="Family, friends, peer group"
                                     id="1.1" v-model="family"  @click="onSectionC('val')"
@@ -1140,10 +1141,9 @@
                                   <label class="form-check-label" for="Other"
                                     >Others</label
                                   >
-                                </div>
-                                <!-- SHOW_DIV -->
+                                  <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-120 intent-other-div mt-5 hide"
+                                  class="col-sm-10 intent-other-div mt-4 hide" style="margin-top: 22px;"
                                 >
                                   <div class="mb-3">
                                     <input
@@ -1153,11 +1153,12 @@
                                     />
                                   </div>
                                 </div>
-                              </div>
+                                </div>
+                        </div>
+                      </div>
                               </div>
                             </div>
                           </div>
-                        </div>
                       </div>
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="heading5">
@@ -1585,12 +1586,11 @@
                           </label>
                           <!-- SHOW_input -->
                           <input
-                            type="text"
-                            class="form-control aborted-div hide"
-                            id="aborted"
-                            placeholder="Please Specify"
-                            style="display: none" v-model="physical_consequences_des"
-                          />
+                              type="text"
+                              class="form-control aborted-div hide"
+                              placeholder="Please Specify" v-model="physical_consequences_des"
+                              id="aborted"
+                            />
                         </div>
                       </div>
                     </div>
@@ -1780,7 +1780,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1"
+                            value="Transferred to Psychiatry ward"
                             @change="OnMxdischarge('Transferred to Psychiatry ward')"
+
                           />
                           <label class="form-check-label" for="psy-d1">
                             Transferred to Psychiatry ward
@@ -1792,7 +1794,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d2"
-                            @change="OnMxdischarge('Given appt to psy clinic')"
+                            value="Given appt to Psychiatry clinic"
+                            @change="OnMxdischarge('Given appt to Psychiatry clinic')"
+
                           />
                           <label class="form-check-label" for="psy-d2">
                             Given appt to Psychiatry clinic
@@ -1804,7 +1808,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d3"
+                            value="Referred to counsellor"
                             @change="OnMxdischarge('Referred to counsellor')"
+
                           />
                           <label class="form-check-label" for="psy-d3">
                             Referred to counsellor
@@ -1816,7 +1822,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d4"
+                            value="Discharge without any Psychiatry follow-up"
                             @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
+
                           />
                           <label class="form-check-label" for="psy-d4">
                             Discharge without any Psychiatry follow-up
@@ -1827,8 +1835,10 @@
                             class="form-check-input"
                             type="checkbox"
                             name="PSY Mx on Discharge"
-                            id="psy-d6"
+                            id="psy-d5"
+                            value="Refer Community Psychiatry Services"
                             @change="OnMxdischarge('Refer Community Psychiatry Services')"
+
                           />
                           <label class="form-check-label" for="psy-d6">
                             Refer Community Psychiatry Services
@@ -1839,20 +1849,23 @@
                             class="form-check-input PSY-other"
                             type="checkbox"
                             name="PSY Mx on Discharge"
-                            id="psy-d5"
+                            id="psy-d6"
+                            value="Others"
                             @change="OnMxdischarge('Others')"
+
                           />
                           <label class="form-check-label" for="psy-d5">
                             Others
                           </label>
                         </div>
                         <!-- SHOW_DIV -->
-                        <div class="col-sm-4 PSY-other-div mt-3 hide" style="display:none;">
+                        <div class="col-sm-4 PSY-other-div mt-3" v-if="this.discharge_psy_mx_des">
                           <div class="mb-3">
                             <input
                               type="text"
                               class="form-control"
                               placeholder="Please Specify" v-model="discharge_psy_mx_des"
+
                             />
                           </div>
                         </div>
@@ -2126,7 +2139,7 @@ export default {
       secD: "",
       Overdosespecify:"",
       branch:"",
-      screenIds:""
+      screenIds:"",
     };
   },
   mounted() {
@@ -2414,7 +2427,7 @@ export default {
       let body = new FormData();
       this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
 
-      const response3 = await this.$axios.get("staff-management/getListByBranchId/" + this.userdetails.branch.branch_id,{
+      const response3 = await this.$axios.get("staff-management/getPsychiatrist/" + this.userdetails.branch.branch_id,{
         headers,
       });
       if (response3.data.code == 200 || response3.data.code == "200") {
@@ -2876,7 +2889,7 @@ export default {
                   "Fire/flames": this.fire_flames,
                   "Cutting or Piercing": this.cuttingorpiercing,
                   "Jumping from height": this.jumpingfromheight,
-                  Other: this.other,
+                  "Other": this.other_sh,
                   selfharm_other: this.selfharm_other,
 
                 },
@@ -2890,12 +2903,13 @@ export default {
                     this.printed,
                   "Own ideas":this.ideas,
                   "Broadcast media (television, radio)": this.broadcast,
-                  "Specify patient actual words": this.patientactualword_other,
+                  "Specify patient actual words": this.patientactualword,
+                  patientactualword_other: this.patientactualword_other,
                 },
               },
               {
                 "Suicidal Intent": {
-                  intent: this.patient_intent_value,
+                  intent: this.patient_intent_value +"," + this.intent_other,
                 },
               },
               { "Level of Suicidal Intent": this.SItestscore },
@@ -3004,7 +3018,7 @@ export default {
                     "Fire/flames": this.fire_flames,
                     "Cutting or Piercing": this.cuttingorpiercing,
                     "Jumping from height": this.jumpingfromheight,
-                    Other: this.other,
+                    "Other": this.other_sh,
                     selfharm_other: this.selfharm_other
 
                   },
@@ -3019,7 +3033,8 @@ export default {
                     "Own ideas":this.ideas,
                     "Broadcast media (television, radio)": this.broadcast,
                     "Specify patient actual words":
-                      this.patientactualword_other,
+                      this.patientactualword,
+                      patientactualword_other: this.patientactualword_other,
                   },
                 },
                 {
@@ -3562,23 +3577,23 @@ export default {
   }
 
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    white-space:pre-line;  
+    white-space:pre-line;
     position:relative;
     top:-5px;
-    
+
   }
   ::-moz-placeholder { /* Firefox 19+ */
-    white-space:pre-line;  
+    white-space:pre-line;
     position:relative;
     top:-5px;
   }
   :-ms-input-placeholder { /* IE 10+ */
-    white-space:pre-line;  
+    white-space:pre-line;
     position:relative;
     top:-10px;
   }
   :-moz-placeholder { /* Firefox 18- */
-      white-space:pre-line;  
+      white-space:pre-line;
     position:relative;
     top:-10px;
   }

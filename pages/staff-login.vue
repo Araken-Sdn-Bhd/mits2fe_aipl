@@ -98,10 +98,19 @@ export default {
             type:""
           });
           this.userdetail = response.data;
+          const response2 = await this.$axios.get(
+              "system-settings/get-setting/idle-session-timeout"
+            );
+          this.idleTimeout = parseInt(response2.data.setting[0].variable_value);
+
           if (this.userdetail.code == 200) {
             localStorage.setItem(
               "userdetails",
               JSON.stringify(this.userdetail)
+            );
+            localStorage.setItem(
+              "idleTimeout",
+              JSON.stringify(this.idleTimeout)
             );
             this.loader = false;
             this.$router.push(this.userdetail.route_alt);

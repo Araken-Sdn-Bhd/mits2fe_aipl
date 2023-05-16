@@ -17,7 +17,7 @@
             <div class="card-body">
               <div class="search-table mt-2">
                 <div class="row">
-                  <div class="col-sm-3 mb-2 search-box">
+                  <div class="col-sm-4 mb-2 search-box">
                     <div class="input-group">
                       <span class="input-group-text" id="basic-addon1">
                         <i class="fa fa-search"></i>
@@ -34,7 +34,7 @@
 
                   <div class="col-sm-4 mb-3">
                     <div class="row align-items-center">
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <label class="form-label">Start Date</label>
                       </div>
                       <div class="col-sm-8">
@@ -49,7 +49,7 @@
                   </div>
                   <div class="col-sm-4 mb-3">
                     <div class="row align-items-center">
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <label class="form-label">End Date</label>
                       </div>
                       <div class="col-sm-8">
@@ -61,6 +61,22 @@
                         />
                       </div>
                     </div>
+                  </div>
+                  <div class="col-sm-4 mb-3">
+                    <select
+                      v-model="branch_id"
+                      class="form-select"
+                      aria-label="Default select example"
+                      @change="OnSearch"
+                    >
+                      <option
+                        v-for="slt in branchlist"
+                        v-bind:key="slt.id"
+                        v-bind:value="slt.id"
+                      >
+                        {{ slt.hospital_branch_name }}
+                      </option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -148,6 +164,12 @@ export default {
   },
   beforeMount() {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    if (!this.userdetails) {
+      this.$router.push("/");
+    } else {
+      this.branch_id = this.userdetails.branch.branch_id;
+    }
+    this.getList();
   },
   mounted() {
     if(localStorage.getItem("keyword")!=''){
@@ -157,6 +179,21 @@ export default {
     }
     },
   methods: {
+    async getList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.get("hospital/branch-list", {
+          headers,
+        });
+        if (response.data.code == 200 || response.data.code == "200") {
+          this.branchlist = response.data.list;
+        } else {
+          this.branchlist = [];
+        }
+    },
     getFormattedDate(date) {
             return moment(date).format("DD-MM-YYYY")
         },
@@ -182,6 +219,7 @@ export default {
           keyword: "no-keyword",
           fromDate: "dd-mm-yyyy",
           toDate: "dd-mm-yyyy",
+          branch_id: this.branch_id
         },
         { headers }
       )
@@ -257,6 +295,7 @@ export default {
             keyword: this.keyword,
             fromDate: this.fromDate,
             toDate: this.toDate,
+            branch_id: this.branch_id,
             added_by: this.userdetails.added_by,
           },
           { headers }

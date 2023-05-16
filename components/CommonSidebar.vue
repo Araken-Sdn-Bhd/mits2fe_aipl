@@ -192,7 +192,7 @@ export default {
       hasreportmodule: 0,
       message: null,
 
-      setTimer: 3,
+      setTimer: JSON.parse(localStorage.getItem("idleTimeout")),
 
       events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
 
