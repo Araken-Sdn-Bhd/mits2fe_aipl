@@ -667,8 +667,7 @@
                                 <!-- SHOW_DIV -->
                               <div class="col-sm-120" v-if="placeOther">
                                     <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
+                                      <label class="form-label"></label
                                       >
                                       <input
                                         type="text"
@@ -2870,6 +2869,7 @@ export default {
           {
             added_by: this.userdetails.user.id,
             patient_id: this.Id,
+            
             result: JSON.stringify([
               {
                 "CURRENT SELF HARM ACT": {
@@ -3096,6 +3096,7 @@ export default {
               test_section_name: "SI",
               result: JSON.stringify([{ SI: this.testcheckedList }]),
               user_ip_address: this.user_ip_address,
+              shharp_reg_id : this.sharp_register_id,
             },
             { headers }
           );
