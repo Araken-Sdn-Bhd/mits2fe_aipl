@@ -1161,18 +1161,647 @@
                         >
                           <div class="accordion-body">
                             <div class="row mt-3">
-
-                <div class="col-sm-6">
-
-                <table class="self-harm" v-if="testresult">
+                              <div class="col-sm-6"> 
+                                <!--SI-01 radio-group -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >01. Isolation</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si01"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Somebody present
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si01"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Somebody nearby, or in visual or vocal contact
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si01"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 No one nearby or in visual or vocal contact
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-09 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >09. Alleged purpose of attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si09"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 To manipulate environment, get attention, get revenge
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si09"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Components of above and below
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si09"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 To escape, surcease, solve problems
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-02 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >02. Timing</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si02"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Intervention is probable
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si02"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Intervention is not likely
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si02"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Intervention is highly unlikely
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-10 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >10. Expectations of fatality</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si10"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Thought that death was unlikely
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si10"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Thought that death was possible but not probable
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si10"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Thought that death was probable or certain
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-03 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >03. Precautions against discovery/intervention</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si03"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 No precautions
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si03"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Passive precautions (e.g.; alone in room with unlocked door)
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si03"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Active precautions (as locked door)
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-11 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >11. Conception of method's lethality</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si11"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Did less to self that s/he thought would be lethal
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si11"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Wasn't sure if what s/he did would be lethal
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si11"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Equaled or exceed what s/he thought would be lethal
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-04 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >04. Acting to get help during/after attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si04"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Notified potential helper regarding attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si04"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Contacted but did not specifically notify regarding attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si04"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Did not contact or notify potential helper
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-12 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >12. Seriousness of attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si12"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Did not seriously attempt to end life
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si12"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Uncertain about seriousness to end life
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si12"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Seriously attempted to end life
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-05 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >05. Final acts in anticipating of death (will, gifts, insurance)</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si05"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si05"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Thought about or made some arrangements
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si05"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Made definite plans or completed arrangements
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-13 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >13. Attitude towards living/dying</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si13"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Did not want to die
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si13"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Components of above and below
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si13"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Wanted to die
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-06 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >06. Active preparation for attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si06"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si06"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Minimal to moderate
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si06"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Extensive
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-14 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >14. Conception of medical rescuability</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si14"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Thought death would be unlikely if received medical attention
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si14"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Was uncertain if death could be averted by medical attention
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si14"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Was certain of death even if received medical attention
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-07 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >07. Suicide note</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si07"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 Absence of note
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si07"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Note written, but torn up; note thought about
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si07"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Presence of note
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-15 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >15. Degree of premeditation</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si15"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 None; impulsive
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si15"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Suicide contemplated for 3 hours or less prior to attempt
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si15"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Suicide contemplated for more than 3 hours prior to attempt
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"> 
+                                <!--SI-08 radio-group( arrangement-refer add registry) -->
+                                <div class="radio-group mb-3">
+                                  <label class="form-label"
+                                    >08. Overt communication of intent before the attempt</label
+                                  >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si08"
+                                      value="0"
+                                    />
+                                    <label class="form-check-label" for="level1">
+                                      0 None
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si08"
+                                      value="1"
+                                    />
+                                    <label class="form-check-label" for="level2">
+                                      1 Equivocal communication (ambiguous)
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      v-model="si08"
+                                      value="2"
+                                    />
+                                    <label class="form-check-label" for="level3">
+                                      2 Unequivocal communication (unambiguous)
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                <div class="col-sm-4">
+                  <Error :message="error" v-if="error" />
+                   <button
+                  type="button"
+                  class="btn btn-success btn-text"
+                  id="calculate" @click="OnsubmitTest('update')" v-if="this.update == true"
+                  >
+                  <i class="fad fa-calculator"></i> Recalculate
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success btn-text"
+                  id="calculate" @click="OnsubmitTest('add')" v-if="this.update == false"
+                  >
+                  <i class="fad fa-calculator"></i> Calculate
+                </button>
+                <table class="self-harm" v-if="this.testresult">
                   <tbody>
                     <tr>
                       <th>Score:</th>
-                      <td>{{testresult.section_value}}</td>
+                      <td v-if="testresult.section_value">{{testresult.section_value}}</td>
+                      <td>{{testresult.siScore}}</td>
                     </tr>
                     <tr>
                       <th>Level of Suicidal Intent:</th>
-                      <td>{{testresult.section}}</td>
+                      <td>{{this.levelintent}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -2020,13 +2649,15 @@ export default {
       testcheckedList: {},
       sharp_register_id: 0,
       selected: [],
-      testresult: "",
+      testresult: [],
+      update: false,
+      levelintent: "",
       Sdate: "",
       Stime: "",
       place_id: "",
       place_other: "",
       overdose: "",
-      overdosespecify: "",
+      Overdosespecify: "",
       hanging: "",
       drowning: "",
       firearmsorexplosives: "",
@@ -2065,6 +2696,7 @@ export default {
       eleven: "",
       twelth: "",
       diagonisislist: [],
+      diagonisislist_external:[],
       typesofsubstance: [],
       stresslist: [],
       overdoselist: [],
@@ -2076,6 +2708,21 @@ export default {
       psyd4: "",
       psyd5: "",
       psyd6: "",
+      si01: 0,
+      si02: 0,
+      si03: 0,
+      si04: 0,
+      si05: 0,
+      si06: 0,
+      si07: 0,
+      si08: 0,
+      si09: 0,
+      si10: 0,
+      si11: 0,
+      si12: 0,
+      si13: 0,
+      si14: 0,
+      si15: 0,
     };
   },
   beforeMount() {
@@ -2090,6 +2737,8 @@ export default {
     this.reportingdate = moment().format("YYYY-MM-DD");
 
     this.GetList();
+    this.getSIS()
+    this.GetUserIpAddress();
 
     $(document).ready(function () {
       $(".data-table").DataTable({
@@ -2461,6 +3110,201 @@ export default {
         this.arrivalOther = false;
       }
     },
+    async getSIS(){
+      try {
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "/patient/answered-si",
+          {
+            sharp_register_id: this.Id,
+          },
+          { headers }
+        );
+
+        if(response.data.code == 200){
+          if(response.data.attemptlist.length > 0){
+            this.si01 = response.data.attemptlist[0].answer_id;
+            this.si09 = response.data.attemptlist[1].answer_id;
+            this.si02 = response.data.attemptlist[2].answer_id;
+            this.si10 = response.data.attemptlist[3].answer_id;
+            this.si03 = response.data.attemptlist[4].answer_id;
+            this.si11 = response.data.attemptlist[5].answer_id;
+            this.si04 = response.data.attemptlist[6].answer_id;
+            this.si12 = response.data.attemptlist[7].answer_id;
+            this.si05 = response.data.attemptlist[8].answer_id;
+            this.si13 = response.data.attemptlist[9].answer_id;
+            this.si06 = response.data.attemptlist[10].answer_id;
+            this.si14 = response.data.attemptlist[11].answer_id;
+            this.si07 = response.data.attemptlist[12].answer_id;
+            this.si15 = response.data.attemptlist[13].answer_id;
+            this.si08 = response.data.attemptlist[14].answer_id;
+          }
+        }
+      
+      } catch (e) {
+        this.loader = false;
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + e,
+                  footer: ''
+                });
+      } 
+    },
+    async GetUserIpAddress() {
+      const {
+        data: { ip },
+      } = await this.$axios.get("https://www.cloudflare.com/cdn-cgi/trace", {
+        responseType: "text",
+        transformResponse: (data) =>
+          Object.fromEntries(
+            data
+              .trim()
+              .split("\n")
+              .map((line) => line.split("="))
+          ),
+      });
+      this.user_ip_address = ip;
+    },
+    async OnsubmitTest(status) {
+      this.error = null;
+      this.testcheckedList = {
+      "1":this.si01,
+      "2":this.si09,
+      "3":this.si02,
+      "4":this.si10,
+      "5":this.si03,
+      "6":this.si11,
+      "7":this.si04,
+      "8":this.si12,
+      "9":this.si05,
+      "10":this.si13,
+      "11":this.si06,
+      "12":this.si14,
+      "13":this.si07,
+      "14":this.si15,
+      "15":this.si08
+    };
+      try {
+        if (this.list.length == Object.values(this.testcheckedList).length) {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          if(status == "add"){
+            const response = await this.$axios.post(
+            "patient/online-test",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              test_name: "si",
+              test_section_name: "SI",
+              result: JSON.stringify([{ SI: this.testcheckedList }]),
+              user_ip_address: this.user_ip_address,
+              shharp_reg_id : this.Id,
+            },
+            { headers }
+          );
+          console.log("my reslut", response.data);
+          window.alert(response.data.result);
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.loader = false;
+            this.testresult = response.data.result;
+            this.SItestscore = response.data.result.siScore;
+            if(response.data.result != null){
+            if(this.testresult.siScore == "21+"){
+              this.levelintent = "High Intent"
+            };
+            if(this.testresult.siScore == "11-20"){
+              this.levelintent = "Medium Intent"
+            };
+            if(this.testresult.siScore == "0-10"){
+              this.levelintent = "Low Intent"
+            };
+          }
+
+          if(this.levelintent != ""){
+              this.update = true;
+            }else{
+              this.update = false;
+            }
+            this.$nextTick(() => {
+              $("#resultmodal").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+          }
+          }else{
+            const response = await this.$axios.post(
+            "patient/online-test",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              test_name: "si",
+              test_section_name: "SI",
+              result: JSON.stringify([{ SI: this.testcheckedList }]),
+              user_ip_address: this.user_ip_address,
+              shharp_reg_id : this.Id,
+              status: "update",
+            },
+            { headers }
+          );
+          console.log("my reslut", response.data);
+          window.alert(response.data.result);
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.loader = false;
+            this.testresult = response.data.result;
+            this.SItestscore = response.data.result.siScore;
+            if(response.data.result != null){
+            if(this.testresult.siScore == "21+"){
+              this.levelintent = "High Intent"
+            };
+            if(this.testresult.siScore == "11-20"){
+              this.levelintent = "Medium Intent"
+            };
+            if(this.testresult.siScore == "0-10"){
+              this.levelintent = "Low Intent"
+            };
+          }
+
+          if(this.levelintent != ""){
+              this.update = true;
+            }else{
+              this.update = false;
+            }
+            this.$nextTick(() => {
+              $("#resultmodal").modal("show");
+            });
+          } else {
+            this.loader = false;
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+          }
+          }
+        } else {
+          this.error = "Please attempt all question";
+        }
+      } catch (e) {
+        this.loader = false;
+        this.errors = e;
+      }
+    },
     async getdetails() {
       try {
         const headers = {
@@ -2605,6 +3449,24 @@ export default {
             response.data.result.selfharm[0].section_value.Place_of_Occurance;
           this.place_other = response.data.result.selfharm[0].section_value.place_other;
           this.testresult = response.data.result.selfharm[4];
+
+          if(response.data.result.selfharm.length > 0){
+            if(this.testresult.section_value == "21+"){
+              this.levelintent = "High Intent"
+            };
+            if(this.testresult.section_value == "11-20"){
+              this.levelintent = "Medium Intent"
+            };
+            if(this.testresult.section_value == "0-10"){
+              this.levelintent = "Low Intent"
+            };
+          }
+
+          if(this.levelintent != ""){
+              this.update = true;
+            }else{
+              this.update = false;
+            }
 
           if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
               this.overdose = true;
@@ -2978,7 +3840,7 @@ export default {
                 },
                 {
                   "Suicidal Intent": {
-                    intent: this.patient_intent_value,
+                    intent: this.patient_intent_value + "," + this.intent_other,
                   },
                 },
                 { "Level of Suicidal Intent": this.SItestscore },
