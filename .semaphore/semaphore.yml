@@ -1,0 +1,23 @@
+version: v1.0
+name: Test MyApp
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Install Dependencies
+    task:
+      jobs:
+        - name: install
+          commands:
+            - checkout
+            - sem-version node 16
+            - cache restore
+            - npm install
+            - cache store
+  - name: Run Build
+    task:
+      jobs:
+        - name: Run Build
+          commands:
+            - npm run build

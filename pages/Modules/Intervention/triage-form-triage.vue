@@ -8,234 +8,236 @@
                 <div class="page-title">
                     <h1>TRIAGE FORM</h1>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div>
-                            <section class="section-border">
 
-                                <div class="form-title mt-0">
-                                    <h5>Part A: Risk Evaluation</h5>
-                                </div>
+                <form method="post" @submit.prevent="OnSubmit">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div>
+                                <section class="section-border">
 
-                                <table class="form-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="black">Risk Assessment Descriptions</th>
-                                            <th class="black" width="40%">Yes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>History of aggressive and impulsive behavior</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>History of criminal case</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Deterioration of clinical condition</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_detereotation">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Neglect of self care</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-
-                                <table class="form-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="black">Criteria</th>
-                                            <th class="black" width="20%">Idea(Yes)</th>
-                                            <th class="black" width="20%">Attempt(Yes)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Suicidal Behaviour</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_idea">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_attempt">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Homicidal</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_idea">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_attempt">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Aggressive</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_idea">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_attempt">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-
-                                <div class="form-title mt-0">
-                                    <h5>Part B: Social Support</h5>
-                                </div>
-
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_social_has_no_family" id="1">
-                                    <label class="form-check-label" for="1">
-                                        Has no family, friends or guardian
-                                    </label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_homeless" id="2">
-                                    <label class="form-check-label" for="2">
-                                        Homeless
-                                    </label>
-                                </div>
-
-                                <div class="form-title mt-0">
-                                    <h5>Part C: Capacity to work together</h5>
-                                </div>
-
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" v-model="capacity_cannot_give_commitment" value="Yes" id="3">
-                                    <label class="form-check-label" for="3">
-                                        Cannot give commitment to work together
-                                    </label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" v-model="capacity_showed_no_interest" value="Yes" id="4">
-                                    <label class="form-check-label" for="4">
-                                        Showed no interest in treatment
-                                    </label>
-                                </div>
-
-                                <div class="form-title mt-0">
-                                    <h5>Outcome</h5>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <h6 class="mb-3 black">Treatment<small style="color:red">*</small> </h6>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" value="Checked Immediately" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios1" checked>
-                                            <label class="form-check-label" for="exampleRadios1">
-                                                Checked Immediately
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" value="Given an appointment(within 2 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios2">
-                                            <label class="form-check-label" for="exampleRadios2">
-                                                Given an appointment(within 2 weeks)
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" value="Given a regular appointment (within 2-6 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios3">
-                                            <label class="form-check-label" for="exampleRadios3">
-                                                Given a regular appointment (within 2-6 weeks)
-                                            </label>
-                                        </div>
+                                    <div class="form-title mt-0">
+                                        <h5>Part A: Risk Evaluation</h5>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <h6 class="mb-3 black">Placement</h6>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" value="Referred to the main hospital" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
-                                            <label class="form-check-label" for="exampleRadios4">
-                                                Referred to the main hospital
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" value="Discharge with treatment" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios5">
-                                            <label class="form-check-label" for="exampleRadios5">
-                                                Discharge with treatment
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </section>
-
-                            <section class="section-border">
-                                <div class="form-title mt-0">
-                                    <h5>Screening</h5>
-                                </div>
-
-                                <div class="new-form mb-3">
-                                    <table class="notes th-auto" id="screentable">
+                                    <table class="form-table">
                                         <thead>
                                             <tr>
-                                                <th>Type of Screening<small style="color:red">*</small> </th>
-                                                <th>Score<small style="color:red">*</small> </th>
-                                                <th></th>
+                                                <th class="black">Risk Assessment Descriptions</th>
+                                                <th class="black" width="40%">Yes</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="optionBox" id="replicatedList">
-                                            <tr class="block blocks">
-                                                <td id="cpyThis">
-                                                    <select class="form-select selects" v-model="screening_id">
-                                                        <option value="0">Please Select</option>
-                                                        <option v-for="spec in screenlist" v-bind:key="spec.id" v-bind:value="spec.id">
-                                                            {{ spec.name }}
-                                                        </option>
-                                                    </select>
-                                                </td>
+                                        <tbody>
+                                            <tr>
+                                                <td>History of aggressive and impulsive behavior</td>
                                                 <td>
-                                                    <input type="text" class="form-control scores" placeholder="" v-model="score">
-                                                </td>
-
-                                                <td @click="test">
-                                                    <span class="add-td"><i class="fa fa-plus"></i></span>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
+                                                    </div>
                                                 </td>
                                             </tr>
+
+                                            <tr>
+                                                <td>History of criminal case</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Deterioration of clinical condition</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_detereotation">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Neglect of self care</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
-                                </div>
 
-                                <!-- <div class="row">
+                                    <table class="form-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="black">Criteria</th>
+                                                <th class="black" width="20%">Idea(Yes)</th>
+                                                <th class="black" width="20%">Attempt(Yes)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Suicidal Behaviour</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_idea">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_attempt">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Homicidal</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_idea">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_attempt">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Aggressive</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_idea">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_attempt">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="form-title mt-0">
+                                        <h5>Part B: Social Support</h5>
+                                    </div>
+
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_social_has_no_family" id="1">
+                                        <label class="form-check-label" for="1">
+                                            Has no family, friends or guardian
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_homeless" id="2">
+                                        <label class="form-check-label" for="2">
+                                            Homeless
+                                        </label>
+                                    </div>
+
+                                    <div class="form-title mt-0">
+                                        <h5>Part C: Capacity to work together</h5>
+                                    </div>
+
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" v-model="capacity_cannot_give_commitment" value="Yes" id="3">
+                                        <label class="form-check-label" for="3">
+                                            Cannot give commitment to work together
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" v-model="capacity_showed_no_interest" value="Yes" id="4">
+                                        <label class="form-check-label" for="4">
+                                            Showed no interest in treatment
+                                        </label>
+                                    </div>
+
+                                    <div class="form-title mt-0">
+                                        <h5>Outcome</h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h6 class="mb-3 black">Treatment<small style="color:red">*</small> </h6>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="Checked Immediately" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios1" checked>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Checked Immediately
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="Given an appointment(within 2 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios2">
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Given an appointment(within 2 weeks)
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="Given a regular appointment (within 2-6 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios3">
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    Given a regular appointment (within 2-6 weeks)
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <h6 class="mb-3 black">Placement</h6>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="Referred to the main hospital" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
+                                                <label class="form-check-label" for="exampleRadios4">
+                                                    Referred to the main hospital
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="Discharge with treatment" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios5">
+                                                <label class="form-check-label" for="exampleRadios5">
+                                                    Discharge with treatment
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+                                <section class="section-border">
+                                    <div class="form-title mt-0">
+                                        <h5>Screening</h5>
+                                    </div>
+
+                                    <div class="new-form mb-3">
+                                        <table class="notes th-auto" id="screentable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Screening<small style="color:red">*</small> </th>
+                                                    <th>Score<small style="color:red">*</small> </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="optionBox" id="replicatedList">
+                                                <tr class="block blocks">
+                                                    <td id="cpyThis">
+                                                        <select class="form-select selects" v-model="screening_id">
+                                                            <option value="0">Please Select</option>
+                                                            <option v-for="spec in screenlist" v-bind:key="spec.id" v-bind:value="spec.id">
+                                                                {{ spec.name }}
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control scores" placeholder="" v-model="score">
+                                                    </td>
+
+                                                    <td @click="test">
+                                                        <span class="add-td"><i class="fa fa-plus"></i></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- <div class="row">
                                         <div class="col-sm-7">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Type of Screening</label>
@@ -258,194 +260,231 @@
                                                     <input type="text" class="form-control" placeholder=""
                                                         v-model="score">
                                                     <td> -->
-                                <!-- <span class="add-td"
+                                    <!-- <span class="add-td"
                                                       ><i class="fa fa-plus"></i
                                                     ></span> -->
-                                <!-- </td> -->
-                                <!-- </div>
+                                    <!-- </td> -->
+                                    <!-- </div>
                                             </div>
                                         </div> -->
-                                <!-- </div> -->
-                            </section>
+                                    <!-- </div> -->
+                                </section>
 
-                            <div class="accordion form-accordion mt-3" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            OCCASION OF SERVICES
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-select" v-model="location_services_id">
-                                                        <option value="0">
-                                                            Select location of services
-                                                        </option>
-                                                        <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
-                                                            {{ loc.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- close-row -->
-                                            <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-select" v-model="type_diagnosis_id">
-                                                        <option value="0">Select Diagnosis</option>
-                                                        <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                            {{ catcode.icd_code }} {{ catcode.icd_name }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- close-row -->
-                                            <div class="row mb-3">
-                                                <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
-                                                </label>
-                                                <div class="col-sm-8">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                        <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                        <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
-                                                        <label class="form-check-label" for="inlineRadio3">External</label>
+                                <div class="accordion form-accordion mt-3" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                OCCASION OF SERVICES
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-select" v-model="location_services_id">
+                                                            <option value="0">
+                                                                Select location of services
+                                                            </option>
+                                                            <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
+                                                                {{ loc.section_value }}
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- close-row -->
-                                            <!-- hide-div -->
-                                            <div v-if="category_services == 'assisstance'">
+                                                <!-- close-row -->
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-select" v-model="type_diagnosis_id">
+                                                            <option value="0">Select Diagnosis</option>
+                                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 align-items-flex-start">
+                                                    <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
+                                                    <div class="col-sm-8">
+                                                        <select id="additionalboxdiagnosis" class="form-select multiselect" multiple="multiple">
+                                                            <option value="0">Please Select</option>
+                                                            <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- close-row -->
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                            <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                            <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                            <label class="form-check-label" for="inlineRadio3">External</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- close-row -->
+                                                <!-- hide-div -->
+                                                <div id="assisstance" class="assisstance services hide mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label">Services<small style="color:red">*</small> </label>
+                                                            <select class="form-select" v-model="services_id">
+                                                                <option value="0">Select Service</option>
+                                                                <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                                                    {{ slt.section_value }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 01 -->
+                                                <div id="clinical-work" class="clinical-work services hide mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
+                                                            <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                                <option value="0">Select code</option>
+                                                                <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                                    {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
+                                                            <div class="mt-2 align-items-flex-start">
+                                                                <select id="subcodeicd" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
+                                                                    <option value="0">Select sub code</option>
+                                                                    <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                        {{ catcode.icd_code }}
+                                                                        {{catcode.icd_name}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-">
+                                                            <label class="form-label">Additional ICD 9 CODE</label>
+                                                            <select class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
+                                                                <option value="0">Select additional code</option>
+                                                                <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                                    {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label">Additional ICD 9 SUB CODE</label>
+                                                            <div class="mt-2 align-items-flex-start">
+                                                                <select id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
+                                                                    <option value="0">Select additional sub code</option>
+                                                                    <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                        {{ catcode.icd_code }}
+                                                                        {{catcode.icd_name}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 02 -->
+                                                <div id="external" class="external services hide mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label">Services<small style="color:red">*</small> </label>
+                                                            <select class="form-select" v-model="serviceid">
+                                                                <option value="0">Select Service</option>
+                                                                <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
+                                                                    {{ slt.section_value }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 03 -->
+                                                <!-- hide-div -->
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="services_id">
-                                                            <option value="0">Select Service</option>
-                                                            <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                                {{ slt.section_value }}
+                                                        <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="complexity_services_id">
+                                                            <option value="0">
+                                                                Select Complexity Of Service
                                                             </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 01 -->
-                                            <div v-if="category_services == 'clinical-work'">
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
-                                                            <option value="0">Select code</option>
-                                                            <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                                {{ type.icd_category_code }} {{ type.icd_category_name }}
+                                                            <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
+                                                                {{ cm.section_value }}
                                                             </option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="sub_code_id">
-                                                            <option value="0">Select sub code</option>
-                                                            <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                                {{ catcode.icd_code }}
-                                                                {{ catcode.icd_name }}
+                                                        <label class="form-label">Outcome<small style="color:red">*</small> </label>
+                                                        <select class="form-select" v-model="outcome_id">
+                                                            <option value="0">Select outcome</option>
+                                                            <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
+                                                                {{ out.section_value }}
                                                             </option>
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <!-- close-row -->
                                             </div>
-                                            <!-- 02 -->
-                                            <div v-if="category_services == 'external'">
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="serviceid">
-                                                            <option value="0">Select Service</option>
-                                                            <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
-                                                                {{ slt.section_value }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 03 -->
-                                            <!-- hide-div -->
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="complexity_services_id">
-                                                        <option value="0">
-                                                            Select Complexity Of Service
-                                                        </option>
-                                                        <option v-for="cm in comlexcitylist" v-bind:key="cm.id" v-bind:value="cm.id">
-                                                            {{ cm.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="outcome_id">
-                                                        <option value="0">Select outcome</option>
-                                                        <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
-                                                            {{ out.section_value }}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- close-row -->
                                         </div>
                                     </div>
-                                </div>
-                                <!--  -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            MEDICATION
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="col-md-12 mb-3">
-                                                <label class="form-label">Medication</label>
-                                                <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                    <!--  -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                MEDICATION
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Medication</label>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!--  -->
                                 </div>
-                                <!--  -->
-                            </div>
 
-                            <p v-if="errorList.length">
-                                <ul>
-                                    <li style="color:red" v-for='err in errorList' :key='err'>
-                                        {{ err }}
-                                    </li>
-                                </ul>
-                            </p>
-                            <br>
-                            <br>
-                            <div class="d-flex" >
-                                <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
-                                <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
-                                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                        <i class="fa fa-save"></i> Save as draft
-                                    </button>
+                                <p v-if="errorList.length">
+                                    <ul>
+                                        <li style="color:red" v-for='err in errorList' :key='err'>
+                                            {{ err }}
+                                        </li>
+                                    </ul>
+                                </p>
+                                <br>
+                                <br>
+                                <div class="d-flex">
+                                    <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+                                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
+                                        <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                                            <i class="fa fa-save"></i> Save as draft
+                                        </button>
 
-                                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                        <i class="fa fa-paper-plane"></i> Submit
-                                    </button>
+                                        <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                                            <i class="fa fa-paper-plane"></i> Submit
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </main>
     </div>
@@ -543,6 +582,24 @@ export default {
         if (this.pid) {
             this.getdetails();
         }
+    },
+    mounted() {
+        $(document).ready(function () {
+            $(".multiselect").select2({
+                placeholder: "Select Additional Diagnosis",
+            });
+        });
+
+        $(document).ready(function () {
+            $(".multiselectadditional").select2({
+                placeholder: "Select Sub Code",
+            });
+        });
+        $(document).ready(function () {
+            $(".multiselectadditionalsubcode").select2({
+                placeholder: "Select Additional Sub Code",
+            });
+        });
     },
 
     methods: {
@@ -716,6 +773,46 @@ export default {
         },
 
         async Ontriageform() {
+            var jobSDESCRIPTION = [];
+            var Boxvalue1 = [];
+            var Boxvalue2 = [];
+            var Boxvalue3 = [];
+            var additionalboxdiagnosis = 0;
+            var subcodeicd = 0;
+            var additionalsubcodeicd = 0;
+            $("#additionalboxdiagnosis :selected").each(function () {
+                if (additionalboxdiagnosis) {
+                    additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                } else {
+                    additionalboxdiagnosis = this.value;
+                }
+            });
+            Boxvalue1.push({
+                additionalboxdiagnosis
+            });
+
+            $("#subcodeicd :selected").each(function () {
+                if (subcodeicd) {
+                    subcodeicd = subcodeicd + "," + this.value;
+                } else {
+                    subcodeicd = this.value;
+                }
+            });
+            Boxvalue2.push({
+                subcodeicd
+            });
+
+            $("#additionalsubcodeicd :selected").each(function () {
+                if (additionalsubcodeicd) {
+                    additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                } else {
+                    additionalsubcodeicd = this.value;
+                }
+            });
+            Boxvalue3.push({
+                additionalsubcodeicd
+            });
+
             this.$swal.fire({
                 title: 'Do you want to save the changes?',
                 showCancelButton: true,
@@ -818,9 +915,11 @@ export default {
                                     score: this.score,
                                     location_services_id: this.location_services_id,
                                     type_diagnosis_id: this.type_diagnosis_id,
+                                    additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
                                     category_services: this.category_services,
                                     code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
+                                    sub_code_id: JSON.stringify(subcodeicd),
+                                    additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                                     complexity_services_id: this.complexity_services_id,
                                     outcome_id: this.outcome_id,
                                     medication_des: this.medication_des,
@@ -1077,7 +1176,7 @@ export default {
             }
         },
         GoBack() {
-          if (this.type == 'view') {
+            if (this.type == 'view') {
                 this.$router.go(-1);
             } else {
                 this.$router.push({

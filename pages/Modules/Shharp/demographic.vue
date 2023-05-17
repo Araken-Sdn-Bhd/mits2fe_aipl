@@ -32,6 +32,9 @@
                         v-model="hospital_mrn_no" />
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Employment Status</label>
@@ -110,6 +113,12 @@
                           v-model="nric_no" />
                         <Error :message="error" v-if="error" />
                       </div>
+                      <div class="col-sm-6 mb-3" v-if="nric_type_code == 'BC'">
+                        <label class="form-label">Birth of Certificate<small>*</small></label>
+                        <input type="tel" class="form-control toCapitalFirst" placeholder="xxxxxxxx"
+                          v-model="nric_no" />
+                        <Error :message="error" v-if="error" />
+                      </div>
                     </div>
                   </div>
 
@@ -117,7 +126,7 @@
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label class="form-label">NRIC No<small>*</small></label>
-                        <input type="number" class="form-control" placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
+                        <input type="tel" class="form-control" placeholder="xxxxxx-xx-xxxx" @keyup="OnnricNo1"
                           v-model="nric_no1" @change="validateIC" v-on:keypress="NumbersOnly" />
                         <Error :message="error" v-if="error" />
                       </div>
@@ -492,7 +501,7 @@ export default {
       }
 
       const response9 = await this.$axios.get(
-        "general-setting/list?section=" + "occupation-status",
+        "general-setting/shharpEmpList?section=" + "occupation-status",
         { headers }
       );
       if (response9.data.code == 200 || response9.data.code == "200") {

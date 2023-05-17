@@ -9,7 +9,7 @@
           <!-- card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h4>Shharp Registry History</h4>
+              <h4>SHHARP Registry History</h4>
             </div>
             <div class="card-body">
               <table class="table table-striped data-table display nowrap" style="width: 100%">
@@ -36,7 +36,7 @@
                     <td>{{ patint.hospital_name }}</td>
                     <td>{{ patint.name_registering_officer }}</td>
                     <td>
-                      <a
+                      <a v-if="patint.status=='1'"
                         style="cursor: pointer"
                         @click="onViewSharp(patint.id)"
                         class="view"

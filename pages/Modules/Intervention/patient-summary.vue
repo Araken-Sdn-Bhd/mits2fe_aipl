@@ -924,7 +924,7 @@ export default {
         });
       } else if (data.type == "CpsRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/cps-referral-form",
+          path: "/modules/Intervention/view-cps-referral-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "OcctRefferalForm") {

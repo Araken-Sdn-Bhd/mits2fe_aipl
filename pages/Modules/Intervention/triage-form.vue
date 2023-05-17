@@ -377,7 +377,7 @@
                                             <div class="row mb-3">
                                                 <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-select" v-model="type_diagnosis_id">
+                                                    <select class="form-select multiselect" multiple="multiple" v-model="type_diagnosis_id">
                                                         <option value="0">Select Diagnosis</option>
                                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }} {{ catcode.icd_name }}

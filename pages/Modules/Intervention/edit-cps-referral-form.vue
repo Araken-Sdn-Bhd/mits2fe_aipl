@@ -59,21 +59,21 @@
                                 <label class="col-sm-4 col-form-label">Individual</label>
                                 <div class="col-sm-8 ind-box">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Frequent Relapse" v-model="frequentrelapse" id="ind-1" />
+                                        <input class="form-check-input" type="checkbox" name="individual1" value="Frequent Relapse" v-model="frequentrelapse" id="ind-1" />
                                         <label class="form-check-label" for="ind-1">
-                                            Frequent Relapse
+                                           Frequent Relapse
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Risk(V/SU/SX/N)" v-model="risk" id="ind-2" />
+                                        <input class="form-check-input" type="checkbox" name="individual2" value="Risk(V/SU/SX/N)" v-model="risk" id="ind-2" />
                                         <label class="form-check-label" for="ind-2">
                                             Risk(V/SU/SX/N)
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Functionality" v-model="functionality" id="ind-3" />
+                                        <input class="form-check-input" type="checkbox" name="individual3" value="Functionality" v-model="functionality" id="ind-3" />
                                         <label class="form-check-label" for="ind-3">
                                             Functionality
                                         </label>
@@ -85,21 +85,21 @@
                                 <label class="col-sm-4 col-form-label">Medication</label>
                                 <div class="col-sm-8 med-box">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Adherence" v-model="adherence" id="med-4" />
+                                        <input class="form-check-input"  type="checkbox" name="medication1" value="Adherence" v-model="adherence" id="med-4"/>
                                         <label class="form-check-label" for="med-4">
                                             Adherence
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Side Effects" v-model="sideeffect" id="med-5" />
+                                        <input class="form-check-input" type="checkbox" name="medication2" value="Side Effects" v-model="sideeffect" id="med-5" />
                                         <label class="form-check-label" for="med-5">
                                             Side Effects
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Depot Monitoring" v-model="depotmonitoring" id="med-6" />
+                                        <input class="form-check-input" type="checkbox" name="medication3" value="Depot Monitoring" v-model="depotmonitoring" id="med-6" />
                                         <label class="form-check-label" for="med-6">
                                             Depot Monitoring
                                         </label>
@@ -111,21 +111,21 @@
                                 <label class="col-sm-4 col-form-label">Support</label>
                                 <div class="col-sm-8 spt-box">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Identification" v-model="identification" id="spt-7" />
+                                        <input class="form-check-input" type="checkbox" name="support1" value="Identification" v-model="identification" id="spt-7" />
                                         <label class="form-check-label" for="spt-7">
                                             Identification
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Psychoeducation" v-model="psychoeducation" id="spt-8" />
+                                        <input class="form-check-input" type="checkbox" name="support2" value="Psychoeducation" v-model="psychoeducation" id="spt-8" />
                                         <label class="form-check-label" for="spt-8">
                                             Psychoeducation
                                         </label>
                                     </div>
 
                                       <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" value="Practice" v-model="practice" id="spt-9" />
+                                          <input class="form-check-input" type="checkbox" name="support3" value="Practice" v-model="practice" id="spt-9" />
                                           <label class="form-check-label" for="spt-9">
                                               Practice
                                           </label>
@@ -167,6 +167,27 @@
                                                   </select>
                                               </div>
                                           </div>
+                                          <div class="row mb-3 align-items-flex-start">
+                                                <label class="col-sm-4 col-form-label"
+                                                    >Additional Diagnosis</label
+                                                >
+                                                <div class="col-sm-8">
+                                                    <select
+                                                        id="additionalboxdiagnosis"
+                                                        v-model="additional_diagnosis" 
+                                                        class="form-select multiselect" multiple="multiple"
+                                                        >
+                                                        <option value="0">Please Select</option>
+                                                        <option
+                                                        v-for="catcode in diagonisislist"
+                                                        v-bind:key="catcode.id"
+                                                        v-bind:value="catcode.id"
+                                                        >
+                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                           <!-- close-row -->
                                           <div class="row mb-3">
                                               <label class="col-lg-4 col-md-12 col-form-label">Category Of Services<small style="color:red">*</small>
@@ -177,12 +198,12 @@
                                                       <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                       </label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                      <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
                                                       <label class="form-check-label" for="inlineRadio3">External</label>
                                                   </div>
                                               </div>
@@ -216,7 +237,11 @@
                                                   </div>
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                      <select class="form-select" v-model="sub_code_id">
+                                                      <select id="subcodeicd" 
+                                                            style="width:100%" 
+                                                            class="form-select multiselectadditional" 
+                                                            v-model="sub_code_id" 
+                                                            multiple="multiple">
                                                           <option value="0">Select sub code</option>
                                                           <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }}
@@ -225,6 +250,29 @@
                                                       </select>
                                                   </div>
                                               </div>
+                                              <div class="row">
+                                                    <div class="col-md-6 mb-">
+                                                        <label class="form-label">Additional ICD 9 CODE</label>
+                                                        <select class="form-select" v-model="additional_code_id"  @change="onCategorycodebindAdditional($event)">
+                                                            <option value="0">Select additional code</option>
+                                                            <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                                {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                            </option>
+                                                        </select>              
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                            <label  class="form-label">Additional ICD 9 SUB CODE</label>
+                                                            <div class="mt-2 align-items-flex-start">
+                                                            <select id="additionalsubcodeicd" v-model="additional_sub_code_id" style="width:100%" class="form-select multiselectadditionalsubcode"  multiple="multiple">
+                                                                <option value="0">Select additional sub code</option>                                                           
+                                                                <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                    {{ catcode.icd_code }}
+                                                                    {{catcode.icd_name}}
+                                                                </option>
+                                                            </select>
+                                                            </div>
+                                                    </div>
+                                                </div>  
                                           </div>
                                           <!-- 02 -->
                                           <div class="external services hide mb-3">
@@ -378,40 +426,7 @@
                             </tbody>
                         </table>
 
-                        <table class="notes">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Treatment Needs</th>
-                                </tr>
-                            </thead>
-                            <div class="row mb-3">
-                                <label class="col-sm-4 col-form-label">Individual</label>
-                                <div class="col-sm-8 ind-box">
-                                    <div v-if="this.frequentrelapse == true">-Frequent Relapse</div>
-                                    <div v-if="this.risk == true">-Frequent Relapse</div>
-                                    <div v-if="this.functionality == true">-Frequent Relapse</div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-4 col-form-label">Medication</label>
-                                <div class="col-sm-8 med-box">
-                                    <div v-if="this.adherence == true">-Adherence</div>
-                                    <div v-if="this.sideeffect == true">-Frequent Relapse</div>
-                                    <div v-if="this.depotmonitoring == true">-Frequent Relapse</div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-4 col-form-label">Support</label>
-                                <div class="col-sm-8 spt-box">
-                                    <div v-if="this.identification == true">-Identification</div>
-                                    <div v-if="this.psychoeducation == true">-Psychoeducation</div>
-                                    <div v-if="this.practice == true">-Practice</div>
-                                </div>
-                            </div>
-                        </table>
-
+                        
                         <table class="notes">
                             <tbody>
                                 <tr>
@@ -519,6 +534,10 @@ export default {
             SidebarAccess: null,
             appId: 0,
             showStatus: 0,
+            icdcatcodelistadditional:[],
+            additional_code_id: 0,
+            additional_diagnosis: 0,
+            additional_sub_code_id:0,
         };
     },
     beforeMount() {
@@ -527,18 +546,16 @@ export default {
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
         this.appId = urlParams.get("appId");
-        if (this.Id) {
-            this.GetPatientdetails();
-            this.GetList();
-        }
+        this.GetPatientdetails();
+        this.GetList();
         let urlParams1 = new URLSearchParams(window.location.search);
         this.pid = urlParams1.get("pid");
         this.type = urlParams1.get("type");
-        if (this.pid) {
-            this.getdetails();
-        }
+        this.getdetails();
         this.referalname = this.userdetails.user.name;
-        this.designation = this.userdetails.user.role;
+        this.designation = this.userdetails.designation.section_value;
+        this.hospital = this.userdetails.branch.hospital_branch_name;
+
         $(document).ready(function () {
             $('.form-accordion input[type="radio"]').click(function () {
                 var inputValue = $(this).attr("value");
@@ -558,7 +575,28 @@ export default {
                 var inputValue = $(this).attr("value");
                 $("." + inputValue).toggle();
             });
+
         });
+        
+    },
+    mounted() {
+    
+    $(document).ready(function () {
+    $(".multiselect").select2({
+        placeholder: "Select Additional Diagnosis",
+    });
+    });
+
+    $(document).ready(function () {
+    $(".multiselectadditional").select2({
+        placeholder: "Select Sub Code",
+    });
+    });
+    $(document).ready(function () {
+    $(".multiselectadditionalsubcode").select2({
+        placeholder: "Select Additional Sub Code",
+    });
+    });
     },
     methods: {
         async GetPatientdetails() {
@@ -610,11 +648,33 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
+        async onCategorycodebindAdditional(event) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            console.log("my id", event);
+            const response = await this.$axios.post(
+                "diagnosis/getIcd9subcodeList", {
+                    icd_category_code: event.target.value,
+                    
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.icdcatcodelistadditional = response.data.list;
+                
+            } else {
+                this.icdcatcodelistadditional  = [];
+            }
+        },
         OnPrint() {
             var newstr = document.getElementsByClassName("reslt")[0].innerHTML;
             document.body.innerHTML = newstr;
             window.print();
-            window.location.reload();
+            history.go(-1);
         },
         async GetList() {
             const headers = {
@@ -698,229 +758,302 @@ export default {
             }
         },
         async onCreateEvent() {
-            this.$swal.fire({
-                title: 'Do you want to save as draft?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async (result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    try {
-                        this.loader = true;
-                        const headers = {
-                            Authorization: "Bearer " + this.userdetails.access_token,
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                        };
-                        const response = await this.$axios.post(
-                            "intervention/cps-form", {
-                                type: "add",
-                                added_by: this.userdetails.user.id,
-                                patient_id: this.Id,
-                                treatment_needs_individual: JSON.stringify([{
-                                    "Frequent Relapse": this.frequentrelapse,
-                                    "Risk(V/SU/SX/N)": this.risk,
-                                    "Functionality": this.functionality,
-                                }, ]),
-                                treatment_needs_medication: JSON.stringify([{
-                                    "Adherence": this.adherence,
-                                    "Side Effects": this.sideeffect,
-                                    "Depot Monitoring": this.depotmonitoring,
-                                }, ]),
-                                treatment_needs_support: JSON.stringify([{
-                                    "Identification": this.identification,
-                                    "Psychoeducation": this.psychoeducation,
-                                    "Practice": this.practice,
-                                }, ]),
-                                location_of_service: this.location_services_id,
-                                type_of_diagnosis: this.type_diagnosis_id,
-                                category_of_services: this.category_services,
-                                services: this.services_id,
-                                complexity_of_services: this.complexity_services_id,
-                                outcome: this.outcome_id,
-                                icd_9_code: this.code_id,
-                                icd_9_subcode: this.sub_code_id,
-                                medication_des: this.medication_des,
-                                medication_referrer_name: this.referalname,
-                                medication_referrer_designation: this.designation,
-                                id: this.pid,
-                                appId: this.appId,
-                                status: "0",
-                            }, {
-                                headers
-                            }
-                        );
-                        console.log("response", response.data);
-                        if (response.data.code == 200) {
-                            this.loader = false;
-                            this.$swal.fire('Succesfully save as draft!', '', 'success')
-                            this.GoBack();
-                        } else {
-                            this.loader = false;
-                            this.resetmodel();
-                            this.$swal.fire({
-                                icon: 'error',
-                                title: 'Oops... Something Went Wrong! dalam function api',
-                                text: 'the error is: ' + JSON.stringify(response.data.message),
-                            })
-                            this.GoBack();
-                        }
-                    } catch (e) {
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + e,
-                        })
-                    }
-                } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
-            })
-        },
-        async onPublishEvent() {
-            this.$swal.fire({
-                title: 'Do you want to save the changes?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    this.errorList = [];
-                    this.validate = true;
-                    try {
-                        if (!this.location_services_id) {
-                            this.errorList.push("Location Of Services is required");
-                        }
-                        if (!this.type_diagnosis_id) {
-                            this.errorList.push("Type Of Diagnosis is required");
-                        }
-                        if (!this.category_services) {
-                            this.errorList.push("Category Of Services is required");
-                        }
-                        if (!this.complexity_services_id) {
-                            this.errorList.push("Complexity Of Service is required");
-                        }
-                        if (this.category_services) {
-                            if (this.category_services == "assisstance") {
-                                if (!this.services_id) {
-                                    this.errorList.push("Service is required");
-                                    this.validate = false;
-                                }
-                            } else if (this.category_services == "clinical-work") {
-                                if (!this.code_id) {
-                                    this.errorList.push("ICD 9 CODE is required");
-                                    this.validate = false;
-                                }
-                                if (!this.sub_code_id) {
-                                    this.errorList.push("ICD 9 SUB CODE is required");
-                                    this.validate = false;
-                                }
+      this.$swal.fire({
+        title: 'Do you want to save as draft?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
                             } else {
-                                if (!this.serviceid) {
-                                    this.errorList.push("Services is required");
-                                    this.validate = false;
-                                } else {
-                                    this.services_id = this.serviceid;
-                                }
+                                additionalboxdiagnosis = this.value;
                             }
-                        }
-                        if (!this.outcome_id) {
-                            this.errorList.push("Outcome is required");
-                        }
-                        if (!this.referalname) {
-                            this.errorList.push("Referrer Name is required");
-                        }
-                        if (!this.designation) {
-                            this.errorList.push("Designation is required");
-                        }
-                        if (
-                            this.location_services_id &&
-                            this.type_diagnosis_id &&
-                            this.category_services &&
-                            this.complexity_services_id &&
-                            this.outcome_id &&
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
 
-                            this.validate &&
-                            this.referalname &&
-                            this.designation
-                        ) {
-
-                            this.loader = true;
-                            const headers = {
-                                Authorization: "Bearer " + this.userdetails.access_token,
-                                Accept: "application/json",
-                                "Content-Type": "application/json",
-                            };
-                            const response = await this.$axios.post(
-                                "intervention/cps-form", {
-                                    type: "add",
-                                    added_by: this.userdetails.user.id,
-                                    patient_id: this.Id,
-                                    treatment_needs_individual: JSON.stringify([{
-                                        "Frequent Relapse": this.frequentrelapse,
-                                        "Risk(V/SU/SX/N)": this.risk,
-                                        "Functionality": this.functionality,
-                                    }, ]),
-                                    treatment_needs_medication: JSON.stringify([{
-                                        "Adherence": this.adherence,
-                                        "Side Effects": this.sideeffect,
-                                        "Depot Monitoring": this.depotmonitoring,
-                                    }, ]),
-                                    treatment_needs_support: JSON.stringify([{
-                                        "Identification": this.identification,
-                                        "Psychoeducation": this.psychoeducation,
-                                        "Practice": this.practice,
-                                    }, ]),
-                                    location_of_service: this.location_services_id,
-                                    type_of_diagnosis: this.type_diagnosis_id,
-                                    category_of_services: this.category_services,
-                                    services: this.services_id,
-                                    complexity_of_services: this.complexity_services_id,
-                                    outcome: this.outcome_id,
-                                    icd_9_code: this.code_id,
-                                    icd_9_subcode: this.sub_code_id,
-                                    medication_des: this.medication_des,
-                                    medication_referrer_name: this.referalname,
-                                    medication_referrer_designation: this.designation,
-                                    id: this.pid,
-                                    appId: this.appId,
-                                    status: "1",
-                                }, {
-                                    headers
-                                }
-                            );
-                            console.log("response", response.data);
-                            if (response.data.code == 200) {
-                                this.loader = false;
-                                this.$swal.fire(
-                                    'Successfully Submitted.',
-                                    'Data is inserted.',
-                                    'success',
-                                );
-                                this.showStatus = 1;
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
                             } else {
-                                this.loader = false;
-                                this.$swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops... Something Went Wrong!',
-                                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                                })
-                                this.GoBack();
+                                subcodeicd = this.value;
                             }
-                        }
-                    } catch (e) {
-                        this.loader = false;
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + e,
-                        })
-                        this.GoBack();
-                    }
-                } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue3.push({ additionalsubcodeicd });
+          try {
+            this.loader = true;
+            const headers = {
+              Authorization: "Bearer " + this.userdetails.access_token,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+              "intervention/cps-form", {
+              type: "add",
+              added_by: this.userdetails.user.id,
+              patient_id: this.Id,
+              treatment_needs_individual: JSON.stringify([{
+                "Frequent Relapse": this.frequentrelapse,
+                "Risk(V/SU/SX/N)": this.risk,
+                "Functionality": this.functionality,
+              },]),
+              treatment_needs_medication: JSON.stringify([{
+                "Adherence": this.adherence,
+                "Side Effects": this.sideeffect,
+                "Depot Monitoring": this.depotmonitoring,
+              },]),
+              treatment_needs_support: JSON.stringify([{
+                "Identification": this.identification,
+                "Psychoeducation": this.psychoeducation,
+                "Practice": this.practice,
+              },]),
+              location_of_service: this.location_services_id,
+              type_of_diagnosis: this.type_diagnosis_id,
+              category_of_services: this.category_services,
+              services: this.services_id,
+              complexity_of_services: this.complexity_services_id,
+              outcome: this.outcome_id,
+              icd_9_code: this.code_id,
+              icd_9_subcode: this.sub_code_id,
+              medication_des: this.medication_des,
+              medication_referrer_name: this.referalname,
+              medication_referrer_designation: this.designation,
+              id: this.pid,
+              additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+              additional_code_id: this.additional_code_id, 
+              sub_code_id: JSON.stringify(subcodeicd),
+              additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
+              appId: this.appId,
+              status: "0",
+            }, {
+              headers
+            }
+            );
+            console.log("response", response.data);
+            if (response.data.code == 200) {
+              this.loader = false;
+              this.$swal.fire('Succesfully save as draft!', '', 'success')
+              this.GoBack();
+            } else {
+              this.loader = false;
+              this.resetmodel();
+              this.$swal.fire({
+                icon: 'error',
+                title: 'Oops... Something Went Wrong! dalam function api',
+                text: 'the error is: ' + JSON.stringify(response.data.message),
+              })
+              this.GoBack();
+            }
+          } catch (e) {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + e,
             })
-        },
+          }
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+    },
+    async onPublishEvent() {
+      this.$swal.fire({
+        title: 'Do you want to save the changes?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+      }).then(async (result) => {
+        var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                            } else {
+                                additionalboxdiagnosis = this.value;
+                            }
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
+
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
+                            } else {
+                                subcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue3.push({ additionalsubcodeicd });
+        if (result.isConfirmed) {
+          this.errorList = [];
+          this.validate = true;
+          try {
+            if (!this.location_services_id) {
+              this.errorList.push("Location Of Services is required");
+            }
+            if (!this.type_diagnosis_id) {
+              this.errorList.push("Type Of Diagnosis is required");
+            }
+            if (!this.category_services) {
+              this.errorList.push("Category Of Services is required");
+            }
+            if (!this.complexity_services_id) {
+              this.errorList.push("Complexity Of Service is required");
+            }
+            if (this.category_services) {
+              if (this.category_services == "assisstance") {
+                if (!this.services_id) {
+                  this.errorList.push("Service is required");
+                  this.validate = false;
+                }
+              } else if (this.category_services == "clinical-work") {
+                if (!this.code_id) {
+                  this.errorList.push("ICD 9 CODE is required");
+                  this.validate = false;
+                }
+                if (!this.sub_code_id) {
+                  this.errorList.push("ICD 9 SUB CODE is required");
+                  this.validate = false;
+                }
+              } else {
+                if (!this.serviceid) {
+                  this.errorList.push("Services is required");
+                  this.validate = false;
+                } else {
+                  this.services_id = this.serviceid;
+                }
+              }
+            }
+            if (!this.outcome_id) {
+              this.errorList.push("Outcome is required");
+            }
+            if (!this.referalname) {
+              this.errorList.push("Referrer Name is required");
+            }
+            if (!this.designation) {
+              this.errorList.push("Designation is required");
+            }
+            if (
+              this.location_services_id &&
+              this.type_diagnosis_id &&
+              this.category_services &&
+              this.complexity_services_id &&
+              this.outcome_id &&
+
+              this.validate &&
+              this.referalname &&
+              this.designation
+            ) {
+
+              this.loader = true;
+              const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              };
+              const response = await this.$axios.post(
+                "intervention/cps-form", {
+                type: "add",
+                added_by: this.userdetails.user.id,
+                patient_id: this.Id,
+                treatment_needs_individual: JSON.stringify([{
+                  "Frequent Relapse": this.frequentrelapse,
+                  "Risk(V/SU/SX/N)": this.risk,
+                  "Functionality": this.functionality,
+                },]),
+                treatment_needs_medication: JSON.stringify([{
+                  "Adherence": this.adherence,
+                  "Side Effects": this.sideeffect,
+                  "Depot Monitoring": this.depotmonitoring,
+                },]),
+                treatment_needs_support: JSON.stringify([{
+                  "Identification": this.identification,
+                  "Psychoeducation": this.psychoeducation,
+                  "Practice": this.practice,
+                },]),
+                location_of_service: this.location_services_id,
+                type_of_diagnosis: this.type_diagnosis_id,
+                category_of_services: this.category_services,
+                services: this.services_id,
+                complexity_of_services: this.complexity_services_id,
+                outcome: this.outcome_id,
+                icd_9_code: this.code_id,
+                icd_9_subcode: this.sub_code_id,
+                medication_des: this.medication_des,
+                medication_referrer_name: this.referalname,
+                medication_referrer_designation: this.designation,
+                id: this.pid,
+                additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                additional_code_id: this.additional_code_id, 
+                sub_code_id: JSON.stringify(subcodeicd),
+                additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
+                appId: this.appId,
+                status: "1",
+              }, {
+                headers
+              }
+              );
+              console.log("response", response.data);
+              if (response.data.code == 200) {
+                this.loader = false;
+                this.$swal.fire(
+                  'Successfully Submitted.',
+                  'Data is inserted.',
+                  'success',
+                );
+                this.showStatus = 1;
+
+              } else {
+                this.loader = false;
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                })
+                this.GoBack();
+              }
+            }
+          } catch (e) {
+            this.loader = false;
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops... Something Went Wrong!',
+              text: 'the error is: ' + e,
+            })
+            this.GoBack();
+          }
+        } else if (result.isDismissed) {
+          this.$swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+    },
         GoBack() {
             this.$router.push({
                 path: "/modules/Intervention/patient-summary",
@@ -954,52 +1087,82 @@ export default {
                     this.complexity_services_id = response.data.Data[0].complexity_of_services;
                     this.outcome_id = response.data.Data[0].outcome;
                     this.code_id = response.data.Data[0].icd_9_code;
-                    this.sub_code_id = response.data.Data[0].icd_9_subcode;
                     this.medication_des = response.data.Data[0].medication_des;
                     this.referalname = response.data.Data[0].medication_referrer_name;
                     this.designation = response.data.Data[0].medication_referrer_designation;
-
-                    //window.alert(response.data[0].treatment_needs_individual);
+                    this.additional_code_id= response.data.Data[0].add_code_id;
+                    if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                    }else if(this.category_services=='external'){
+                        $(document).ready(function () {
+                            $('input[name="inlineRadioOptions3"]').trigger('click');
+                        });
+                    }else{
+                        $(document).ready(function () {
+                            $('input[name="inlineRadioOptions"]').trigger('click');
+                        });
+                    }
 
                     var jdata1 = JSON.parse(response.data.Data[0].treatment_needs_individual);
                     jdata1.forEach((ele) => {
                         this.treatment_needs_individual = "val";
                         if (ele["Frequent Relapse"] == true) {
-                            this.frequentrelapse = "Frequent Relapse";
+                            this.frequentrelapse = true;
                         }
                         if (ele["Risk(V/SU/SX/N)"] == true) {
-                            this.risk = "Risk(V/SU/SX/N)";
+                            this.risk = true;
                         }
                         if (ele["Functionality"] == true) {
-                            this.functionality = "Functionality";
+                            this.functionality = true;
                         }
                     });
                     var jdata2 = JSON.parse(response.data.Data[0].treatment_needs_medication);
                     jdata2.forEach((ele) => {
                         this.treatment_needs_medication = "val";
+                         //alert(ele["Adherence"]); 
                         if (ele["Adherence"] == true) {
-                            this.adherence = "Adherence";
+                            // kena pakai condition lain. system bypass condition ni
+                            this.adherence = true;
                         }
                         if (ele["Side Effects"] == true) {
-                            this.sideeffect = "Side Effects";
+                            this.sideeffect = true;
                         }
                         if (ele["Depot Monitoring"] == true) {
-                            this.depotmonitoring = "Depot Monitoring";
+                            this.depotmonitoring = true;
                         }
                     });
                     var jdata3 = JSON.parse(response.data.Data[0].treatment_needs_support);
                     jdata3.forEach((ele) => {
                         this.treatment_needs_support = "val";
                         if (ele["Identification"] == true) {
-                            this.identification = "Identification";
+                            this.identification = true;
                         }
                         if (ele["Psychoeducation"] == true) {
-                            this.psychoeducation = "Psychoeducation";
+                            this.psychoeducation = true;
                         }
                         if (ele["Practice"] == true) {
-                            this.practice = "Practice";
+                            this.practice = true;
                         }
                     });
+                    this.additional_diagnosis = response.data.Data[0].add_type_diagnosis_id.split(",");
+                    $("#additionalboxdiagnosis")
+                    .val(this.additional_diagnosis)
+                    .trigger("change");
+    
+                    this.sub_code_id = response.data.Data[0].icd_9_subcode.split(",");
+                    $("#subcodeicd")
+                    .val(this.sub_code_id)
+                    .trigger("change");
+
+                    
+                    this.additional_sub_code_id = response.data.Data[0].add_sub_code_id.split(",");
+                    $("#additionalsubcodeicd")
+                    .val(this.additional_sub_code_id)
+                    .trigger("change");
+
+                    
 
                     this.GetList();
                     this.GetPatientdetails();
@@ -1015,6 +1178,19 @@ export default {
                     } else {
                         this.icdcatcodelist = [];
                     }
+
+                    const response5 = await this.$axios.post(
+                      "diagnosis/getIcd9subcodeList", {
+                          icd_category_code: this.additional_code_id
+                      }, {
+                          headers
+                      }
+                  );
+                  if (response5.data.code == 200 || response5.data.code == "200") {
+                      this.icdcatcodelistadditional = response5.data.list;
+                  } else {
+                      this.icdcatcodelistadditional = [];
+                  }
                 } else {
                     this.$swal.fire({
                         icon: 'error',
