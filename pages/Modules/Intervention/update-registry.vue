@@ -185,7 +185,7 @@
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box2 box-02" v-if="thirdbox">
+                        <div class="step-form-box2 box-02" v-show="third=='Yes'">
                           <input
                             type="text"
                             class="form-control"
@@ -197,7 +197,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>4</span>Presence os substance use/abuse</label
+                        ><span>4</span>Presence of substance use/abuse</label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box2">
@@ -229,6 +229,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskfourthother" selected>{{ this.riskfourthother }}</option>
                           </select>
                         </div>
                       </div>
@@ -334,6 +335,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskseventhother" selected>{{ this.riskseventhother }}</option>
                           </select>
                         </div>
                       </div>
@@ -364,7 +366,7 @@
                         </div>
                         <div class="step-form-box8 box-8" v-show="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%" 
                           >
                            <option
               v-for="catcode in stresslist"
@@ -373,6 +375,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskeightother" selected>{{ this.riskeightother }}</option>
                           </select>
                         </div>
                       </div>
@@ -1016,6 +1019,7 @@
                                     type="checkbox"
                                     id="verbal"
                                     value=""  @change="OnpatientIntent('verbal',$event)"
+                                    v-model="verbal"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1027,6 +1031,7 @@
                                     type="checkbox"
                                     id="messaging"
                                     value="" @change="OnpatientIntent('Messaging',$event)"
+                                    v-model="Messaging"
                                   />
                                   <label
                                     class="form-check-label"
@@ -2162,9 +2167,9 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <input v-if="patient_admitted!=null"  style="margin-left: 20px;"
+                          <input v-if="patient_admitted!=null"  style="margin-left: 50px;"
                               type="text"
-                              class="form-control pafca-other-div hide"
+                              class="form-control pafca-other-div"
                               placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
                               id="AW"
                             />
@@ -2712,6 +2717,9 @@ export default {
       si13: 0,
       si14: 0,
       si15: 0,
+      riskfourthother: "",
+      riskseventhother:"",
+      riskeightother: "",
     };
   },
   beforeMount() {
@@ -2726,7 +2734,7 @@ export default {
     this.reportingdate = moment().format("YYYY-MM-DD");
 
     this.GetList();
-    this.getSIS()
+    this.getSIS();
     this.GetUserIpAddress();
 
     $(document).ready(function () {
@@ -2737,6 +2745,21 @@ export default {
 
       $(".multiselect").select2({
         placeholder: "Please Select",
+      });
+
+      $("#fourthbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#seventhbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#eightbox").select2({
+        placeholder: "Please Select",
+        tags: true
       });
 
       $('.yes-box input[type="radio"]').click(function () {
@@ -3201,7 +3224,6 @@ export default {
             { headers }
           );
           console.log("my reslut", response.data);
-          window.alert(response.data.result);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.testresult = response.data.result;
@@ -3251,7 +3273,6 @@ export default {
             { headers }
           );
           console.log("my reslut", response.data);
-          window.alert(response.data.result);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.testresult = response.data.result;
@@ -3382,10 +3403,17 @@ export default {
               this.thirdbox = element.Val;
             }
             if (element.Index == 4) {
+              var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#fourthbox")
                 .val(arr)
                 .trigger("change");
+                for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskfourthother = arr[i];
+                }
+              }
             }
             if (element.Index == 6) {
               const arr = element.Val.split(',');
@@ -3395,15 +3423,29 @@ export default {
             }
             if (element.Index == 7) {
               const arr = element.Val.split(',');
+              var ints = /^[0-9]*$/;
               $("#seventhbox")
                 .val(arr)
                 .trigger("change");
+                for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskseventhother = arr[i];
+                }
+              }
             }
             if (element.Index == 8) {
+              var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#eightbox")
                 .val(arr)
                 .trigger("change");
+              for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskeightother = arr[i];
+                }
+              }
             }
             if (element.Index == 10) {
               this.tenthbox = element.Val;
@@ -3571,8 +3613,7 @@ export default {
             .trigger("change");
 
             this.list1 =
-            response.data.result.hospital[0].discharge_psy_mx;
-
+          response.data.result.hospital[0].discharge_psy_mx;
           if(this.list1){
             if(this.list1.search("ward") > 0){
               this.psyd1 = "Transferred to Psychiatry ward";
@@ -3593,6 +3634,7 @@ export default {
               this.psyd6 = "Others";
             }
           }
+          this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
         }
@@ -4472,7 +4514,7 @@ export default {
         if (!this.first) {
           this.errors.push("Q1-Presence of psychiatric disorder in tab Risk Factor is required.");
         }
-        if (!this.Specify_patient_actual_words) {
+        if (!this.second) {
           this.errors.push("Q2-Hopelessness or despair in tab Risk Factor is required.");
         }
         if (!this.third) {
@@ -4665,4 +4707,32 @@ export default {
 .step-form-box {
   display: block !important;
 }
+
+<style>
+  input#AW{ /*AW - Admitting Ward */
+    height:50px;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    white-space:pre-line;
+    position:relative;
+    top:-5px;
+
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    white-space:pre-line;
+    position:relative;
+    top:-5px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    white-space:pre-line;
+    position:relative;
+    top:-10px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+      white-space:pre-line;
+    position:relative;
+    top:-10px;
+  }
+</style>
 </style>

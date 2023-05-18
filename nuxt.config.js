@@ -100,7 +100,7 @@ export default {
   axios: {
     // baseURL: "http://122.176.47.222:85/mintari2/public/index.php/api/"
     //baseURL:"http://192.168.1.15:8080/api/"
-     baseURL:"http://localhost:8000/api/"
+     baseURL:"http://127.0.0.1:8000/api/"
     //baseURL: "http://araken.asuscomm.com:8000/api/"
     // baseURL: "https://mentari.moh.gov.my/point/api/"
 
