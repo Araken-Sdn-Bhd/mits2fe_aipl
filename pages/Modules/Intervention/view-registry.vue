@@ -649,9 +649,7 @@
                                 <!-- SHOW_DIV -->
                               <div class="col-sm-120" v-if="place_id=='Other specified areas'">
                                     <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
+                                      <br>
                                       <input disabled
                                         type="text"
                                         class="form-control" v-model="place_other"
@@ -862,7 +860,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input overdose-poisoning"
+                                    class="form-check-input"
                                     type="checkbox"
                                     value="Family, friends, peer group"
                                     id="1.1" v-model="family"
