@@ -107,6 +107,8 @@
                             class="form-check-input"
                             type="radio"
                             id="no"
+                            v-model="presence_psychiatric"
+                            value="No"
                             name="Presence of psychiatric disorder" @click="onchange(1,0)"
                           />
                           <label class="form-check-label" for="no">NO</label>
@@ -116,8 +118,9 @@
                             class="form-check-input"
                             type="radio"
                             id="yes"
-                            name="Presence of psychiatric disorder"
-                            value="permanent-resident" @click="onchange(1,1)"
+                            value="Yes"
+                            v-model="presence_psychiatric"
+                            name="Presence of psychiatric disorder" @click="onchange(1,1)"
                           />
                           <label class="form-check-label" for="yes">YES</label>
                         </div>
@@ -146,6 +149,8 @@
                             class="form-check-input"
                             type="radio"
                             id="no1"
+                            value="No"
+                            v-model="hopeless_despair"
                             name="Hopelessness or Despair" @click="onchange(2,0)"
                           />
                           <label class="form-check-label" for="no1">NO</label>
@@ -154,7 +159,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes1"
+                            id="yes1" value="Yes"
+                            v-model="hopeless_despair"
                             name="Hopelessness or Despair" @click="onchange(2,1)"
                           />
                           <label class="form-check-label" for="yes1">YES</label>
@@ -172,6 +178,7 @@
                             class="form-check-input"
                             type="radio"
                             id="no2"
+                            v-model="prev_suicide" value="No"
                             name="Previous suicide attempts" @click="onchange(3,0)"
                           />
                           <label class="form-check-label" for="no2">NO</label>
@@ -180,7 +187,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes2"
+                            id="yes2" value="Yes"
+                            v-model="prev_suicide"
                             name="Previous suicide attempts" @click="onchange(3,1)"
                           />
                           <label class="form-check-label" for="yes2">YES</label>
@@ -204,7 +212,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no3"
+                            id="no3" value="No"
+                            v-model="substance_abuse"
                             name="Prresence os substance use/abuse" @click="onchange(4,0)"
                           />
                           <label class="form-check-label" for="no3">NO</label>
@@ -213,7 +222,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes3"
+                            id="yes3" value="Yes"
+                            v-model="substance_abuse"
                             name="Prresence os substance use/abuse" @click="onchange(4,1)"
                           />
                           <label class="form-check-label" for="yes3">YES</label>
@@ -245,7 +255,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no4"
+                            id="no4" value="No"
+                            v-model="family_suicidal"
                             name="family history of suicidal behavior" @click="onchange(5,0)"
                           />
                           <label class="form-check-label" for="no4">NO</label>
@@ -254,7 +265,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes4"
+                            id="yes4" value="Yes"
+                            v-model="family_suicidal"
                             name="family history of suicidal behavior" @click="onchange(5,1)"
                           />
                           <label class="form-check-label" for="yes4">YES</label>
@@ -272,7 +284,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no5"
+                            id="no5" value="No"
+                            v-model="history_psych"
                             name="family history of psychiatric disorders" @click="onchange(6,0)"
                           />
                           <label class="form-check-label" for="no5">NO</label>
@@ -281,7 +294,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes5"
+                            id="yes5" value="Yes"
+                            v-model="history_psych"
                             name="family history of psychiatric disorders" @click="onchange(6,1)"
                           />
                           <label class="form-check-label" for="yes5">YES</label>
@@ -310,7 +324,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no6"
+                            id="no6" value="No"
+                            v-model="family_abuse"
                             name="family history of substance abuse" @click="onchange(7,0)"
                           />
                           <label class="form-check-label" for="no6">NO</label>
@@ -319,7 +334,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes6"
+                            id="yes6" value="Yes"
+                            v-model="family_abuse"
                             name="family history of substance abuse" @click="onchange(7,1)"
                           />
                           <label class="form-check-label" for="yes6">YES</label>
@@ -349,7 +365,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no7"
+                            id="no7" value="No"
+                            v-model="stressful"
                             name="stressful life events or loss" @click="onchange(8,0)"
                           />
                           <label class="form-check-label" for="no7">NO</label>
@@ -358,7 +375,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes7"
+                            id="yes7" value="Yes"
+                            v-model="stressful"
                             name="stressful life events or loss" @click="onchange(8,1)"
                           />
                           <label class="form-check-label" for="yes7">YES</label>
@@ -396,7 +414,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no8"
+                            id="no8" value="No"
+                            v-model="rejection"
                             name="Isolation, rejection or feelings of shame" @click="onchange(9,0)"
                           />
                           <label class="form-check-label" for="no8">NO</label>
@@ -405,7 +424,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes8"
+                            id="yes8" value="Yes"
+                            v-model="rejection"
                             name="Isolation, rejection or feelings of shame" @click="onchange(9,1)"
                           />
                           <label class="form-check-label" for="yes8">YES</label>
@@ -423,7 +443,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no9"
+                            id="no9" value="No"
+                            v-model="chronic_ill"
                             name="chronic physical illness or condition"  @click="onchange(10,0)"
                           />
                           <label class="form-check-label" for="no9">NO</label>
@@ -432,7 +453,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes9"
+                            id="yes9" value="Yes"
+                            v-model="chronic_ill"
                             name="chronic physical illness or condition" @click="onchange(10,1)"
                           />
                           <label class="form-check-label" for="yes9">YES</label>
@@ -457,7 +479,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no10"
+                            id="no10" value="No"
+                            v-model="emotional"
                             name="History of physical , sexual or emotional abuse" @click="onchange(11,0)"
                           />
                           <label class="form-check-label" for="no10">NO</label>
@@ -466,7 +489,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes10"
+                            id="yes10" value="Yes"
+                            v-model="emotional"
                             name="History of physical , sexual or emotional abuse" @click="onchange(11,1)"
                           />
                           <label class="form-check-label" for="yes10"
@@ -485,7 +509,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="no11"
+                            id="no11" value="No"
+                            v-model="lethal"
                             name="access to lethal methods/weapons" @click="onchange(12,0)"
                           />
                           <label class="form-check-label" for="no11">NO</label>
@@ -494,7 +519,8 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="yes11"
+                            id="yes11" value="Yes"
+                            v-model="lethal"
                             name="access to lethal methods/weapons"  @click="onchange(12,1)"
                           />
                           <label class="form-check-label" for="yes11"
@@ -570,8 +596,7 @@
                             class="form-check-input"
                             type="radio"
                             id="yes"
-                             v-bind:name="'pro' + index"
-                            value="permanent-resident" @click="onchangeprotect(pro.id,1)"
+                            v-bind:name="'pro' + index" @click="onchangeprotect(pro.id,1)"
                           />
                           <label class="form-check-label" for="yes">{{
                             pro.Options2
@@ -581,7 +606,7 @@
                     </div>
                       <Error :message="error" v-if="error" />
                       <br><br>
-                     <div class="d-flex btn-footer">
+                    <div class="d-flex btn-footer">
                       <div class=" mr-auto">
                         <button class="pre-1 btn btn-success" title="Back" ><i class="fad fa-arrow-to-left"></i> Back</button>
                         <button class="nex-1 btn btn-success next-btn" title="Next Page" >Next <i class="fad fa-arrow-alt-to-right"></i></button>
@@ -730,9 +755,6 @@
                                 >
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                      <label class="form-label"
-                                        >Please Specify</label
-                                      >
                                       <input
                                         type="text"
                                         class="form-control" v-model="Overdosespecify"
@@ -1779,9 +1801,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1"
+                            v-model="psyd1"
                             value="Transferred to Psychiatry ward"
                             @change="OnMxdischarge('Transferred to Psychiatry ward')"
-
                           />
                           <label class="form-check-label" for="psy-d1">
                             Transferred to Psychiatry ward
@@ -1793,9 +1815,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d2"
+                            v-model="psyd2"
                             value="Given appt to Psychiatry clinic"
                             @change="OnMxdischarge('Given appt to Psychiatry clinic')"
-
                           />
                           <label class="form-check-label" for="psy-d2">
                             Given appt to Psychiatry clinic
@@ -1807,9 +1829,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d3"
+                            v-model="psyd3"
                             value="Referred to counsellor"
                             @change="OnMxdischarge('Referred to counsellor')"
-
                           />
                           <label class="form-check-label" for="psy-d3">
                             Referred to counsellor
@@ -1821,9 +1843,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d4"
+                            v-model="psyd4"
                             value="Discharge without any Psychiatry follow-up"
                             @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
-
                           />
                           <label class="form-check-label" for="psy-d4">
                             Discharge without any Psychiatry follow-up
@@ -1835,9 +1857,9 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d5"
+                            v-model="psyd5"
                             value="Refer Community Psychiatry Services"
                             @change="OnMxdischarge('Refer Community Psychiatry Services')"
-
                           />
                           <label class="form-check-label" for="psy-d6">
                             Refer Community Psychiatry Services
@@ -1849,22 +1871,21 @@
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d6"
+                            v-model="psyd6"
                             value="Others"
                             @change="OnMxdischarge('Others')"
-
                           />
                           <label class="form-check-label" for="psy-d5">
                             Others
                           </label>
                         </div>
                         <!-- SHOW_DIV -->
-                        <div class="col-sm-4 PSY-other-div mt-3" v-if="this.discharge_psy_mx_des">
+                        <div class="col-sm-4 PSY-other-div mt-3 hide">
                           <div class="mb-3">
                             <input
                               type="text"
                               class="form-control"
                               placeholder="Please Specify" v-model="discharge_psy_mx_des"
-
                             />
                           </div>
                         </div>
@@ -2004,9 +2025,9 @@
                       </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
-                        <!-- <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
+                        <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
                           <i class="fad fa-paper-plane"></i> Submit
-                        </button> -->
+                        </button>
                       </div>
                     </div>
                 </div>
@@ -2121,6 +2142,7 @@ export default {
       fire_flames: "",
       cuttingorpiercing: "",
       jumpingfromheight: "",
+      other_sh: "",
       selfharm_other: "",
       family: "",
       internet: "",
@@ -2139,6 +2161,24 @@ export default {
       Overdosespecify:"",
       branch:"",
       screenIds:"",
+      psyd1: "",
+      psyd2: "",
+      psyd3: "",
+      psyd4: "",
+      psyd5: "",
+      psyd6: "",
+      presence_psychiatric: "",
+      hopeless_despair:"",
+      prev_suicide: "",
+      substance_abuse: "",
+      family_suicidal: "",
+      history_psych: "",
+      family_abuse: "",
+      stressful: "",
+      rejection: "",
+      chronic_ill: "",
+      emotional: "",
+      lethal: "",
     };
   },
   mounted() {
@@ -2869,7 +2909,7 @@ export default {
           {
             added_by: this.userdetails.user.id,
             patient_id: this.Id,
-            
+
             result: JSON.stringify([
               {
                 "CURRENT SELF HARM ACT": {
@@ -3039,7 +3079,7 @@ export default {
                 },
                 {
                   "Suicidal Intent": {
-                    intent: this.patient_intent_value,
+                    intent: this.patient_intent_value +"," + this.intent_other,
                   },
                 },
                 { "Level of Suicidal Intent": this.SItestscore },
@@ -3498,27 +3538,169 @@ export default {
       if (confirm("Are you sure you want to submit this entry")) {
       this.errors = [];
       try {
+        if (!this.presence_psychiatric) {
+          this.errors.push("Q1-Presence of psychiatric disorder in tab Risk Factor is required.");
+        }
+        if (!this.hopeless_despair) {
+          this.errors.push("Q2-Hopelessness or despair in tab Risk Factor is required.");
+        }
+        if (!this.prev_suicide) {
+          this.errors.push("Q3-Previous suicide attempts in tab Risk Factor is required.");
+        }
+        if (!this.substance_abuse) {
+          this.errors.push("Q4-Presence of substance use/abuse in tab Risk Factor is required.");
+        }
+        if (!this.family_suicidal) {
+          this.errors.push("Q5-Family history of suicidal behavior in tab Risk Factor is required.");
+        }
+        if (!this.history_psych) {
+          this.errors.push("Q6-Family history of psychiatric disorders in tab Risk Factor is required.");
+        }
+        if (!this.family_abuse) {
+          this.errors.push("Q7-Family history of substance abuse in tab Risk Factor is required.");
+        }
+        if (!this.stressful) {
+          this.errors.push("Q8-Stressful life events or loss in tab Risk Factor is required.");
+        }
+        if (!this.rejection) {
+          this.errors.push("Q9-Isolation, rejection or feelings of shame in tab Risk Factor is required.");
+        }
+        if (!this.chronic_ill) {
+          this.errors.push("Q10-Chronic physical illness or condition in tab Risk Factor is required.");
+        }
+        if (!this.emotional) {
+          this.errors.push("Q11-History of physical, sexual, or emotional abuse in tab Risk Factor is required.");
+        }
+        if (!this.lethal) {
+          this.errors.push("Q12-Access to lethal methods/weapons in tab Risk Factor is required.");
+        };
+        // alert(this.procheckedList);
+        if(!this.procheckedList){
+              this.errors.push("Protective Factor is required.");
+            }
+        // if(this.procheckedList){
+        //   alert(this.procheckedList.search("13"));
+        //     if(this.procheckedList.search("13") > 0){
+        //       this.errors.push("Q1 in tab Protective Factor is required.");
+        //     }
+        //     if(this.procheckedList.search("14") > 0){
+        //       this.errors.push("Q2 in tab Protective Factor is required.");
+        //     }
+        //     if(this.procheckedList.search("15") > 0){
+        //       this.errors.push("Q3 in tab Protective Factor is required.");
+        //     }
+        //     if(this.procheckedList.search("16") > 0){
+        //       this.errors.push("Q4 in tab Protective Factor is required.");
+        //     }
+        //     if(this.procheckedList.search("17") > 0){
+        //       this.errors.push("Q5 in tab Protective Factor is required.");
+        //     }
+        //     if(this.procheckedList.search("18") > 0){
+        //       this.errors.push("Q6 in tab Protective Factor is required.");
+        //     }
+        //   };
+
+        if (!this.Sdate) {
+          this.errors.push("Date in tab Self Harm is required .");
+        }
+        if (!this.Stime) {
+          this.errors.push("Time in tab Self Harm is required.");
+        }
+        if (!this.place_id) {
+          this.errors.push("Place of Occurrence in tab Self Harm is required.");
+        }
+        if (!this.secB) {
+          this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
+        }
+        if (!this.secC) {
+          this.errors.push(
+            "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
+          );
+        }
+        if (!this.secD) {
+          this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
+        }
+
+        if (!this.referral_or_contact) {
+          this.errors.push("Referral or Contact point in tab Hospital Management is required.");
+        }
+        if (!this.arrival_mode) {
+          this.errors.push("Mode of Arrival in tab Hospital Management is required.");
+        }
+        if (!this.date) {
+          this.errors.push("Date in tab Hospital Management is required.");
+        }
+        if (!this.time) {
+          this.errors.push("Time in tab Hospital Management is required.");
+        }
+        if (!this.physical_consequences) {
+          this.errors.push("Physical consequence in tab Hospital Management is required.");
+        }
+        if (!this.patient_admitted) {
+          this.errors.push("patient admitted for current in tab Hospital Management is required.");
+        }
+        if (!this.discharge_status) {
+          this.errors.push("Status on Discharge in tab Hospital Management is required.");
+        }
+        if (!this.discharge_date) {
+          this.errors.push("Discharge Date in tab Hospital Managementis required.");
+        }
+        if (!this.discharge_number_days_in_ward) {
+          this.errors.push("Number of days in ward in tab Hospital Management is required.");
+        }
+        if (!this.main_psychiatric_diagnosis) {
+          this.errors.push("Main psychiatric diagnosis in tab Hospital Management is required.");
+        }
+        if (!this.external_cause_inquiry) {
+          this.errors.push("External cause of injury in tab Hospital Management is required.");
+        }
+        if (!this.discharge_psy_mx) {
+          this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
+        }
+
+        if (!this.result) {
+          this.errors.push("Please select Risk Level in tab Suicide Risk.");
+        }
+
         if (!this.officername) {
-          this.errors.push("Name of registering officer is required.");
+          this.errors.push("Name of registering officer in tab Data Producer is required.");
         }
         if (!this.hospitalname) {
-          this.errors.push("Name of hospital is required.");
+          this.errors.push("Name of hospital in tab Data Producer is required.");
         }
         if (!this.designation) {
-          this.errors.push("Designation is required.");
+          this.errors.push("Designation in tab Data Producer is required.");
         }
         if (!this.psychiatristId) {
-          this.errors.push("Name of Psychiatrist is required.");
+          this.errors.push("Name of Psychiatrist in tab Data Producer is required.");
         }
         if (!this.reportingdate) {
-          this.errors.push("Date of Reporting is required.");
+          this.errors.push("Date of Reporting in tab Data Producer is required.");
         }
         if (
           this.officername &&
           this.hospitalname &&
           this.designation &&
           this.psychiatristId &&
-          this.reportingdate
+          this.reportingdate &&
+          this.Sdate &&
+          this.Stime &&
+          this.place_id &&
+          this.secB &&
+          this.secC &&
+          this.secD &&
+          this.referral_or_contact &&
+          this.arrival_mode &&
+          this.date &&
+          this.time &&
+          this.physical_consequences &&
+          this.patient_admitted &&
+          this.discharge_status &&
+          this.discharge_date &&
+          this.discharge_number_days_in_ward &&
+          this.main_psychiatric_diagnosis &&
+          this.external_cause_inquiry &&
+          this.discharge_psy_mx
         ) {
           this.loader = true;
           const headers = {

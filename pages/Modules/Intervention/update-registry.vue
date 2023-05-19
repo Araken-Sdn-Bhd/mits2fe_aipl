@@ -185,7 +185,7 @@
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box2 box-02" v-if="thirdbox">
+                        <div class="step-form-box2 box-02" v-show="third=='Yes'">
                           <input
                             type="text"
                             class="form-control"
@@ -197,7 +197,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>4</span>Presence os substance use/abuse</label
+                        ><span>4</span>Presence of substance use/abuse</label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box2">
@@ -229,6 +229,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskfourthother" selected>{{ this.riskfourthother }}</option>
                           </select>
                         </div>
                       </div>
@@ -334,6 +335,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskseventhother" selected>{{ this.riskseventhother }}</option>
                           </select>
                         </div>
                       </div>
@@ -364,7 +366,7 @@
                         </div>
                         <div class="step-form-box8 box-8" v-show="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%" 
                           >
                            <option
               v-for="catcode in stresslist"
@@ -373,6 +375,7 @@
             >
               {{ catcode.section_value }}
             </option>
+            <option v-if="this.riskeightother" selected>{{ this.riskeightother }}</option>
                           </select>
                         </div>
                       </div>
@@ -504,14 +507,8 @@
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
                       </div>
-                     <div class="ml-auto">
-                        <button
-                          type="submit"
-                          class="btn btn-text btn-warning"
-                          @click="Onriskfactor"
-                        >
-                          <i class="fad fa-save"></i> Save
-                        </button>
+                      <div class="ml-auto">
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftriskfactor"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
                     </div>
                   <!-- </form> -->
@@ -574,15 +571,14 @@
                                             <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
                                             <div class="ml-auto">
                                                 <button class="nex-1 btn btn-success next-btn">Next <i class="fad fa-arrow-alt-to-right"></i></button>
-                                                <button type="submit" class="btn btn-text btn-warning" @click="Onprotectivefactor"><i class="fad fa-save"></i> Save</button>
+                                                <button type="submit" class="btn btn-text btn-warning" title="Draft" @click="Onprotectivefactordraft"><i class="fad fa-save" ></i> Save as Draft</button>
                                             </div>
-                                        </div>
-
                 </div>
+              </div>
               </div>
             </div>
 
-           <!-- start self -->
+          <!-- start self -->
             <!-- tab-close -->
             <div
               class="tab-pane fade"
@@ -702,7 +698,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="overdose!=null"
+                                <div v-if="overdose==true"
                                   class="
                                     col-sm-12
                                     overdose-poisoning-div
@@ -807,7 +803,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="other_sh!=null"
+                                <div v-if="other_sh==true"
                                   class="col-sm-12 selfharm-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -1023,6 +1019,7 @@
                                     type="checkbox"
                                     id="verbal"
                                     value=""  @change="OnpatientIntent('verbal',$event)"
+                                    v-model="verbal"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1034,6 +1031,7 @@
                                     type="checkbox"
                                     id="messaging"
                                     value="" @change="OnpatientIntent('Messaging',$event)"
+                                    v-model="Messaging"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1161,7 +1159,7 @@
                         >
                           <div class="accordion-body">
                             <div class="row mt-3">
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-01 radio-group -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1202,7 +1200,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-09 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1243,7 +1241,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-02 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1284,7 +1282,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-10 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1325,7 +1323,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-03 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1366,7 +1364,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-11 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1407,7 +1405,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-04 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1448,7 +1446,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-12 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1489,7 +1487,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-05 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1530,7 +1528,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-13 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1571,7 +1569,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-06 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1612,7 +1610,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-14 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1653,7 +1651,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-07 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1694,7 +1692,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-15 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1735,7 +1733,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-6">
                                 <!--SI-08 radio-group( arrangement-refer add registry) -->
                                 <div class="radio-group mb-3">
                                   <label class="form-label"
@@ -1827,10 +1825,7 @@
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
                       <div class="ml-auto">
-                        <button class="nex-2 btn btn-success next-btn">
-                          Next <i class="fad fa-arrow-alt-to-right"></i>
-                        </button>
-                        <button type="submit" class="btn btn-text btn-warning" @click="SelfHarm"><i class="fad fa-save"></i> Save</button>
+                        <button class="btn btn-text btn-warning" title="Draft" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
                     </div>
                   <!-- </form> -->
@@ -1958,9 +1953,7 @@
                         <button class="nex-3 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <button type="submit" @click="Onsuciderisk" class="btn btn-text btn-warning">
-                          <i class="fad fa-save"></i> Save
-                        </button>
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftsuciderisk"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
                     </div>
                 </div>
@@ -2136,12 +2129,14 @@
                             Aborted
                           </label>
                           <!-- SHOW_input -->
-                          <input v-if="physical_consequences!=null" style="margin-left: 80px;"
-                              type="text"
-                              class="form-control aborted-div"
-                              placeholder="Please Specify" v-model="physical_consequences_des"
-                              id="aborted"
-                            />
+                          <input v-show="physical_consequences_des"
+                            style="margin-left: 80px;"
+                            type="text"
+                            class="form-control aborted-div"
+                            id="aborted"
+                            placeholder="Please Specify"
+                           v-model="physical_consequences_des"
+                          />
                         </div>
                       </div>
                     </div>
@@ -2172,9 +2167,9 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <input v-if="patient_admitted!=null"  style="margin-left: 20px;"
+                          <input v-if="patient_admitted!=null"  style="margin-left: 50px;"
                               type="text"
-                              class="form-control pafca-other-div hide"
+                              class="form-control pafca-other-div"
                               placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
                               id="AW"
                             />
@@ -2442,9 +2437,7 @@
                         <button class="nex-4 btn btn-success next-btn">
                           Next <i class="fad fa-arrow-alt-to-right"></i>
                         </button>
-                        <button type="submit" class="btn btn-text btn-warning" @click="OnSavehospitalmanagement">
-                          <i class="fad fa-save"></i> Save
-                        </button>
+                        <button class="btn btn-text btn-warning" title="Draft" @click="OnDraftSavehospitalmanagement"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
                     </div>
                 </div>
@@ -2553,7 +2546,8 @@
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
                       <div class="ml-auto">
-                        <button type="submit" class="btn btn-success ml-auto" @click="adddataproducer">
+                        <button class="btn btn-text btn-warning" title="Draft" @click="Draftadddataproducer"><i class="fad fa-save"></i> Save as Draft</button>
+                        <button type="submit" class="btn btn-success" title="Submit" @click="adddataproducer">
                           <i class="fad fa-paper-plane"></i> Submit
                         </button>
                       </div>
@@ -2723,6 +2717,9 @@ export default {
       si13: 0,
       si14: 0,
       si15: 0,
+      riskfourthother: "",
+      riskseventhother:"",
+      riskeightother: "",
     };
   },
   beforeMount() {
@@ -2737,7 +2734,7 @@ export default {
     this.reportingdate = moment().format("YYYY-MM-DD");
 
     this.GetList();
-    this.getSIS()
+    this.getSIS();
     this.GetUserIpAddress();
 
     $(document).ready(function () {
@@ -2748,6 +2745,21 @@ export default {
 
       $(".multiselect").select2({
         placeholder: "Please Select",
+      });
+
+      $("#fourthbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#seventhbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#eightbox").select2({
+        placeholder: "Please Select",
+        tags: true
       });
 
       $('.yes-box input[type="radio"]').click(function () {
@@ -3144,7 +3156,7 @@ export default {
             this.si08 = response.data.attemptlist[14].answer_id;
           }
         }
-      
+
       } catch (e) {
         this.loader = false;
         this.$swal.fire({
@@ -3153,7 +3165,7 @@ export default {
                   text: 'the error is: ' + e,
                   footer: ''
                 });
-      } 
+      }
     },
     async GetUserIpAddress() {
       const {
@@ -3212,7 +3224,6 @@ export default {
             { headers }
           );
           console.log("my reslut", response.data);
-          window.alert(response.data.result);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.testresult = response.data.result;
@@ -3262,7 +3273,6 @@ export default {
             { headers }
           );
           console.log("my reslut", response.data);
-          window.alert(response.data.result);
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.testresult = response.data.result;
@@ -3393,10 +3403,17 @@ export default {
               this.thirdbox = element.Val;
             }
             if (element.Index == 4) {
+              var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#fourthbox")
                 .val(arr)
                 .trigger("change");
+                for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskfourthother = arr[i];
+                }
+              }
             }
             if (element.Index == 6) {
               const arr = element.Val.split(',');
@@ -3406,15 +3423,29 @@ export default {
             }
             if (element.Index == 7) {
               const arr = element.Val.split(',');
+              var ints = /^[0-9]*$/;
               $("#seventhbox")
                 .val(arr)
                 .trigger("change");
+                for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskseventhother = arr[i];
+                }
+              }
             }
             if (element.Index == 8) {
+              var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#eightbox")
                 .val(arr)
                 .trigger("change");
+              for(let i = 0; i < arr.length; i++)
+              {
+                if(!(arr[i].match(ints) != null)){
+                  this.riskeightother = arr[i];
+                }
+              }
             }
             if (element.Index == 10) {
               this.tenthbox = element.Val;
@@ -3484,7 +3515,7 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
-            if(response.data.result.selfharm[1].section_value.Other_!=null) {
+            if(response.data.result.selfharm[1].section_value.Other!=null) {
               this.other_sh = true;
             }
             this.selfharm_other =
@@ -3581,8 +3612,29 @@ export default {
             .val(this.additional_external_cause_injury)
             .trigger("change");
 
-          this.list1 =
-            response.data.result.hospital[0].discharge_psy_mx.split(",");
+            this.list1 =
+          response.data.result.hospital[0].discharge_psy_mx;
+          if(this.list1){
+            if(this.list1.search("ward") > 0){
+              this.psyd1 = "Transferred to Psychiatry ward";
+            }
+            if(this.list1.search("clinic")> 0){
+              this.psyd2 = "Given appt to Psychiatry clinic";
+            }
+            if(this.list1.search("counsellor")> 0){
+              this.psyd3 = "Referred to counsellor";
+            }
+            if(this.list1.search("follow-up") > 0){
+              this.psyd4 = "Discharge without any Psychiatry follow-up";
+            }
+            if(this.list1.search("Community") > 0){
+              this.psyd5 = "Refer Community Psychiatry Services";
+            }
+            if(this.list1.search("ers") > 0){
+              this.psyd6 = "Others";
+            }
+          }
+          this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
         }
@@ -3615,6 +3667,85 @@ export default {
       delete checkedList.val;
       this.checkedList[val] = event.target.value;
       console.log("my pushed array", this.checkedList);
+    },
+    async OnDraftriskfactor() {
+      var Boxvalue = [];
+      var firstbox = "";
+      var fourthbox = "";
+      var sixthbox = "";
+      var seventhbox = "";
+      var eightbox = "";
+      $("#firstbox :selected").each(function () {
+        if (firstbox) {
+          firstbox = firstbox + "," + this.value;
+        } else {
+          firstbox = this.value;
+        }
+      });
+      Boxvalue.push({ Index: 1, Val: firstbox });
+      $("#fourthbox :selected").each(function () {
+        if (fourthbox) {
+          fourthbox = fourthbox + "," + this.value;
+        } else {
+          fourthbox = this.value;
+        }
+      });
+      Boxvalue.push({ Index: 4, Val: fourthbox });
+      $("#sixthbox :selected").each(function () {
+        if (sixthbox) {
+          sixthbox = sixthbox + "," + this.value;
+        } else {
+          sixthbox = this.value;
+        }
+      });
+      Boxvalue.push({ Index: 6, Val: sixthbox });
+      $("#seventhbox :selected").each(function () {
+        if (seventhbox) {
+          seventhbox = seventhbox + "," + this.value;
+        } else {
+          seventhbox = this.value;
+        }
+      });
+      Boxvalue.push({ Index: 7, Val: seventhbox });
+      $("#eightbox :selected").each(function () {
+        if (eightbox) {
+          eightbox = eightbox + "," + this.value;
+        } else {
+          eightbox = this.value;
+        }
+      });
+      Boxvalue.push({ Index: 8, Val: eightbox });
+      Boxvalue.push({ Index: 3, Val: this.thirdbox });
+      Boxvalue.push({ Index: 10, Val: this.tenthbox });
+      this.loader = true;
+      const headers = {
+        Authorization: "Bearer " + this.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "sharp-mgmt/store/risk-factor",
+        {
+          added_by: this.userdetails.user.id,
+          patient_id: this.patient_id,
+          sharp_register_id: this.Id,
+          result: JSON.stringify([this.checkedList]),
+          risk_factor_yes_value: JSON.stringify(Boxvalue),
+        },
+        { headers }
+      );
+      if (response.data.code == 201 || response.data.code == "201") {
+        this.loader = false;
+        this.sharp_register_id = response.data.id;
+        $('#myTab a[href="#protective"]').tab("show");
+      } else {
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+      }
     },
     async Onriskfactor() {
       console.log("my check list", this.checkedList);
@@ -3706,6 +3837,46 @@ export default {
         this.error = "Please attempt all question";
       }
     },
+    async Onprotectivefactordraft() {
+      console.log(this.procheckedList);
+
+        try {
+          this.loader = true;
+          const headers = {
+            Authorization: "Bearer " + this.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          const response = await this.$axios.post(
+            "sharp-mgmt/store/protective-factor",
+            {
+              added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              sharp_register_id: this.Id,
+              result: JSON.stringify([this.procheckedList]),
+              status: "0",
+            },
+            { headers }
+          );
+          if (response.data.code == 201 || response.data.code == "201") {
+            this.loader = false;
+            this.sharp_register_id = response.data.id;
+            $('#myTab a[href="#selfharm"]').tab("show");
+          } else {
+            this.loader = false;
+            this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+          }
+        } catch (e) {
+          this.loader = false;
+          this.errors = e;
+        }
+
+    },
     async Onprotectivefactor() {
       console.log(this.procheckedList);
       if (
@@ -3758,6 +3929,107 @@ export default {
     },
     onSectionD(val) {
       this.secD = val;
+    },
+    async DraftSelfHarm() {
+      this.errors = [];
+      try {
+        this.loader = true;
+        if (this.patient_intent == "intent-yes") {
+          this.selected.forEach((value, index) => {
+            if (!this.patient_intent_value) {
+              this.patient_intent_value = "intent-yes,"+value;
+            } else {
+              this.patient_intent_value = this.patient_intent_value + "," + value;
+            }
+          });
+        } else if (this.patient_intent == "no") {
+          this.patient_intent_value = "no";
+        } else {
+          this.patient_intent_value = "Undetermined";
+        }
+
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "sharp-mgmt/store/self-harm",
+          {
+            added_by: this.userdetails.user.id,
+            patient_id: this.patient_id,
+
+            result: JSON.stringify([
+              {
+                "CURRENT SELF HARM ACT": {
+                  Date: this.Sdate,
+                  Time: this.Stime,
+                  "Place of Occurance": this.place_id,
+                  place_other: this.place_other,
+                },
+              },
+              {
+                "Method of Self-Harm": {
+                  "Overdose/Poisoning": this.overdose,
+                  Overdosespecify:this.Overdosespecify,
+                  "Hanging/Suffocation": this.hanging,
+                  Drowning: this.drowning,
+                  "Firearms or explosives": this.firearmsorexplosives,
+                  "Fire/flames": this.fire_flames,
+                  "Cutting or Piercing": this.cuttingorpiercing,
+                  "Jumping from height": this.jumpingfromheight,
+                  "Other": this.other_sh,
+                  selfharm_other: this.selfharm_other,
+
+                },
+              },
+              {
+                "How did Patient Get Idea about Method": {
+                  "Family, friends, peer group": this.family,
+                  "Internet (website, social media platform, app, blogs, forum, video/photosharing)":
+                    this.internet,
+                  "Printed media (newspaper, books, magazine, etc)":
+                    this.printed,
+                  "Own ideas":this.ideas,
+                  "Broadcast media (television, radio)": this.broadcast,
+                  "Specify patient actual words": this.patientactualword,
+                  patientactualword_other: this.patientactualword_other,
+                },
+              },
+              {
+                "Suicidal Intent": {
+                  intent: this.patient_intent_value +"," + this.intent_other,
+                },
+              },
+              { "Level of Suicidal Intent": this.SItestscore },
+            ]),
+            sharp_register_id: this.Id,
+            status: "0",
+          },
+          { headers }
+        );
+        console.log("my reslut", response.data);
+        if (response.data.code == 201 || response.data.code == "201") {
+          this.loader = false;
+          this.sharp_register_id = response.data.id;
+          $('#myTab a[href="#suicide"]').tab("show");
+        } else {
+          this.loader = false;
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+        }
+      } catch (e) {
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+      }
     },
     async SelfHarm() {
       this.errors = [];
@@ -3872,6 +4144,48 @@ export default {
                 });
       }
     },
+    async OnDraftsuciderisk() {
+      this.errors = [];
+      try {
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "sharp-mgmt/store/suicide-risk",
+          {
+            added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              result: this.result,
+              sharp_register_id: this.Id,
+              status: "0",
+          },
+          { headers }
+        );
+        if (response.data.code == 201 || response.data.code == "201") {
+          this.sharp_register_id = response.data.id;
+          $('#myTab a[href="#hospital-management"]').tab("show");
+          this.loader = false;
+        } else {
+          this.loader = false;
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+        }
+      } catch (e) {
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+      }
+    },
     async Onsuciderisk() {
       this.errors = [];
       try {
@@ -3924,6 +4238,93 @@ export default {
         this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
       } else {
         this.discharge_psy_mx = val;
+      }
+    },
+    async OnDraftSavehospitalmanagement() {
+      var additionalbox = 0;
+      var externalbox = 0;
+
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
+        } else {
+          additionalbox = this.value;
+        }
+      });
+
+      $("#externalbox :selected").each(function () {
+        if (externalbox) {
+          externalbox = externalbox + "," + this.value;
+        } else {
+          externalbox = this.value;
+        }
+      });
+
+      this.errors = [];
+      try {
+        if (this.referral_or_contact == "rcp") {
+          this.referral_or_contact = 0;
+        }
+        if (this.arrival_mode == "am") {
+          this.arrival_mode = 0;
+        }
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "sharp-mgmt/store/hospital-mgmt",
+          {
+            added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              referral_or_contact: this.referral_or_contact,
+              referral_or_contact_other: this.referral_or_contact_other,
+              arrival_mode: this.arrival_mode,
+              arrival_mode_other: this.arrival_mode_other,
+              date: this.date,
+              time: this.time,
+              physical_consequences: this.physical_consequences,
+              physical_consequences_des: this.physical_consequences_des,
+              patient_admitted: this.patient_admitted,
+              patient_admitted_des: this.patient_admitted_des,
+              discharge_status: this.discharge_status,
+              discharge_date: this.discharge_date,
+              discharge_number_days_in_ward: this.discharge_number_days_in_ward,
+              main_psychiatric_diagnosis: this.main_psychiatric_diagnosis,
+              external_cause_inquiry: this.external_cause_inquiry,
+              additional_diagnosis: JSON.stringify(additionalbox),
+              additional_external_cause_injury: JSON.stringify(externalbox),
+              discharge_psy_mx: this.discharge_psy_mx,
+              discharge_psy_mx_des: this.discharge_psy_mx_des,
+              sharp_register_id: this.Id,
+              status: "0",
+          },
+          { headers }
+        );
+        console.log("my data", response.data);
+        if (response.data.code == 201 || response.data.code == "201") {
+          this.loader = false;
+
+          this.sharp_register_id = response.data.id;
+          $('#myTab a[href="#data-producer"]').tab("show");
+        } else {
+          this.loader = false;
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+        }
+      } catch (e) {
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
       }
     },
     async OnSavehospitalmanagement() {
@@ -4058,9 +4459,157 @@ export default {
                 });
       }
     },
+    async Draftadddataproducer() {
+      this.errors = [];
+      try {
+        this.loader = true;
+        const headers = {
+          Authorization: "Bearer " + this.userdetails.access_token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
+        const response = await this.$axios.post(
+          "shharp-registration-data-producer/add",
+          {
+              added_by: this.userdetails.user.id,
+              patient_id: this.patient_id,
+              name_registering_officer: this.officername,
+              hospital_name: this.hospitalname,
+              designation: this.designation,
+              psychiatrist_name: this.psychiatristId.toString(),
+              reporting_date: this.reportingdate,
+              sharp_register_id: this.sharp_register_id,
+              status: "0",
+          },
+          { headers }
+        );
+        if (response.data.code == 201 || response.data.code == "201") {
+          this.loader = false;
+
+          this.$router.push({
+            path: "/modules/Intervention/patient-history",
+            query: { id: this.patient_id },
+          });
+        } else {
+          this.loader = false;
+          this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+        }
+      } catch (e) {
+        this.loader = false;this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  footer: ''
+                });
+      }
+    },
     async adddataproducer() {
       this.errors = [];
       try {
+        if (!this.first) {
+          this.errors.push("Q1-Presence of psychiatric disorder in tab Risk Factor is required.");
+        }
+        if (!this.second) {
+          this.errors.push("Q2-Hopelessness or despair in tab Risk Factor is required.");
+        }
+        if (!this.third) {
+          this.errors.push("Q3-Previous suicide attempts in tab Risk Factor is required.");
+        }
+        if (!this.fourth) {
+          this.errors.push("Q4-Presence of substance use/abuse in tab Risk Factor is required.");
+        }
+        if (!this.fifth) {
+          this.errors.push("Q5-Family history of suicidal behavior in tab Risk Factor is required.");
+        }
+        if (!this.sixth) {
+          this.errors.push("Q6-Family history of psychiatric disorders in tab Risk Factor is required.");
+        }
+        if (!this.seventh) {
+          this.errors.push("Q7-Family history of substance abuse in tab Risk Factor is required.");
+        }
+        if (!this.eight) {
+          this.errors.push("Q8-Stressful life events or loss in tab Risk Factor is required.");
+        }
+        if (!this.nine) {
+          this.errors.push("Q9-Isolation, rejection or feelings of shame in tab Risk Factor is required.");
+        }
+        if (!this.tenth) {
+          this.errors.push("Q10-Chronic physical illness or condition in tab Risk Factor is required.");
+        }
+        if (!this.eleven) {
+          this.errors.push("Q11-History of physical, sexual, or emotional abuse in tab Risk Factor is required.");
+        }
+        if (!this.twelth) {
+          this.errors.push("Q12-Access to lethal methods/weapons in tab Risk Factor is required.");
+        };
+
+        if (!this.Sdate) {
+          this.errors.push("Date in tab Self Harm is required .");
+        }
+        if (!this.Stime) {
+          this.errors.push("Time in tab Self Harm is required.");
+        }
+        if (!this.place_id) {
+          this.errors.push("Place of Occurrence in tab Self Harm is required.");
+        }
+        if (!this.secB) {
+          this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
+        }
+        if (!this.secC) {
+          this.errors.push(
+            "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
+          );
+        }
+        if (!this.secD) {
+          this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
+        }
+
+        if (!this.referral_or_contact) {
+          this.errors.push("Referral or Contact point in tab Hospital Management is required.");
+        }
+        if (!this.arrival_mode) {
+          this.errors.push("Mode of Arrival in tab Hospital Management is required.");
+        }
+        if (!this.date) {
+          this.errors.push("Date in tab Hospital Management is required.");
+        }
+        if (!this.time) {
+          this.errors.push("Time in tab Hospital Management is required.");
+        }
+        if (!this.physical_consequences) {
+          this.errors.push("Physical consequence in tab Hospital Management is required.");
+        }
+        if (!this.patient_admitted) {
+          this.errors.push("patient admitted for current in tab Hospital Management is required.");
+        }
+        if (!this.discharge_status) {
+          this.errors.push("Status on Discharge in tab Hospital Management is required.");
+        }
+        if (!this.discharge_date) {
+          this.errors.push("Discharge Date in tab Hospital Managementis required.");
+        }
+        if (!this.discharge_number_days_in_ward) {
+          this.errors.push("Number of days in ward in tab Hospital Management is required.");
+        }
+        if (!this.main_psychiatric_diagnosis) {
+          this.errors.push("Main psychiatric diagnosis in tab Hospital Management is required.");
+        }
+        if (!this.external_cause_inquiry) {
+          this.errors.push("External cause of injury in tab Hospital Management is required.");
+        }
+        if (!this.discharge_psy_mx) {
+          this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
+        }
+
+        if (!this.result) {
+          this.errors.push("Please select Risk Level in tab Suicide Risk.");
+        }
+
         if (!this.officername) {
           this.errors.push("Name of registering officer is required.");
         }
@@ -4081,7 +4630,25 @@ export default {
           this.hospitalname &&
           this.designation &&
           this.psychiatristId &&
-          this.reportingdate
+          this.reportingdate &&
+          this.Sdate &&
+          this.Stime &&
+          this.place_id &&
+          this.secB &&
+          this.secC &&
+          this.secD &&
+          this.referral_or_contact &&
+          this.arrival_mode &&
+          this.date &&
+          this.time &&
+          this.physical_consequences &&
+          this.patient_admitted &&
+          this.discharge_status &&
+          this.discharge_date &&
+          this.discharge_number_days_in_ward &&
+          this.main_psychiatric_diagnosis &&
+          this.external_cause_inquiry &&
+          this.discharge_psy_mx
         ) {
           this.loader = true;
           const headers = {
@@ -4140,4 +4707,32 @@ export default {
 .step-form-box {
   display: block !important;
 }
+
+<style>
+  input#AW{ /*AW - Admitting Ward */
+    height:50px;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    white-space:pre-line;
+    position:relative;
+    top:-5px;
+
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    white-space:pre-line;
+    position:relative;
+    top:-5px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    white-space:pre-line;
+    position:relative;
+    top:-10px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+      white-space:pre-line;
+    position:relative;
+    top:-10px;
+  }
+</style>
 </style>
