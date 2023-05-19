@@ -192,12 +192,12 @@
                             <select class="form-select" v-model="type_diagnosis_id">
                                 <option value="0">Select Diagnosis</option>
                                 <option
-              v-for="catcode in diagonisislist"
-              v-bind:key="catcode.id"
-              v-bind:value="catcode.id"
-            >
-            {{ catcode.icd_code }} {{catcode.icd_name}}
-            </option>
+                                  v-for="catcode in diagonisislist"
+                                  v-bind:key="catcode.id"
+                                  v-bind:value="catcode.id"
+                                >
+                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                </option>
                               </select>
                           </div>
                         </div>
@@ -215,7 +215,7 @@
                             </option>
                         </select>
                       </div>
-                    </div>
+                        </div>
                   
                         <!-- close-row -->
                         <div class="row mb-3">
