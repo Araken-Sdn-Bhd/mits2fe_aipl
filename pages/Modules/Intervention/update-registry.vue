@@ -366,7 +366,7 @@
                         </div>
                         <div class="step-form-box8 box-8" v-show="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%" 
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in stresslist"
@@ -917,12 +917,12 @@
                                     id="6.6" v-model="patientactualword"
                                   />
                                   <label class="form-check-label" for="6.6">
-                                    Specify patient actual words
+                                    Others, specify patient's actual words
                                   </label>
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="patientactualword!=null"
+                                <div v-if="patientactualword==true"
                                   class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -1018,7 +1018,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""  @change="OnpatientIntent('verbal',$event)"
+                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
                                     v-model="verbal"
                                   />
                                   <label class="form-check-label" for="verbal"
@@ -1030,7 +1030,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="" @change="OnpatientIntent('Messaging',$event)"
+                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
                                     v-model="Messaging"
                                   />
                                   <label
@@ -1122,7 +1122,7 @@
                                   >
                                   <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="intent_other!=null"
+                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="Other==true"
                                 >
                                     <input
                                       type="text"
@@ -1821,9 +1821,14 @@
         </p>
         <br><br>
                     <div class="d-flex">
-                      <button class="pre-2 btn btn-success mr-auto">
+                      <div class=" mr-auto">
+                      <button class="pre-2 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
+                      <button class="nex-2 btn btn-success next-btn" title="Next Page">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                      </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
@@ -2167,7 +2172,7 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <input v-if="patient_admitted!=null"  style="margin-left: 50px;"
+                          <input v-show="patient_admitted_des"  style="margin-left: 50px;"
                               type="text"
                               class="form-control pafca-other-div"
                               placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
@@ -2407,16 +2412,14 @@
                           </label>
                         </div>
                         <!-- SHOW_DIV -->
-                        <div class="col-sm-4 PSY-other-div mt-3" v-if="this.discharge_psy_mx_des">
-                          <div class="mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Please Specify" v-model="discharge_psy_mx_des"
-
-                            />
-                          </div>
-                        </div>
+                        <input v-show="discharge_psy_mx_des"
+                            style="margin-left: 20px;"
+                            type="text"
+                            class="form-control PSY-other-div"
+                            id="discharge"
+                            placeholder="Please Specify"
+                            v-model="discharge_psy_mx_des"
+                          />
                       </div>
                     </div>
                         <p v-if="errors.length">
@@ -3499,9 +3502,11 @@ export default {
               this.update = false;
             }
 
-          if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
-              this.overdose = true;
-            }
+            this.overdose =
+          response.data.result.selfharm[1].section_value.Overdose_Poisoning;
+          // if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
+          //     this.overdose = true;
+          //   }
             this.Overdosespecify = response.data.result.selfharm[1].section_value.Overdosespecify;
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
@@ -3515,9 +3520,10 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
-            if(response.data.result.selfharm[1].section_value.Other!=null) {
-              this.other_sh = true;
-            }
+            // if(response.data.result.selfharm[1].section_value.Other!=null) {
+            //   this.other_sh = true;
+            // }
+            this.other_sh = response.data.result.selfharm[1].section_value.Other;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
 
@@ -3569,9 +3575,10 @@ export default {
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
             // this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
 
-            if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
-              this.patientactualword = true;
-            }
+            // if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
+            //   this.patientactualword = true;
+            // }
+            this.patientactualword = response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
 
           this.result = response.data.result.suicideRisk[0].result;
@@ -4158,9 +4165,9 @@ export default {
           {
             added_by: this.userdetails.user.id,
               patient_id: this.patient_id,
-              result: this.result,
               sharp_register_id: this.Id,
               status: "0",
+              result: this.result,
           },
           { headers }
         );
@@ -4473,13 +4480,13 @@ export default {
           {
               added_by: this.userdetails.user.id,
               patient_id: this.patient_id,
+              sharp_register_id: this.Id,
+              status: "0",
               name_registering_officer: this.officername,
               hospital_name: this.hospitalname,
               designation: this.designation,
               psychiatrist_name: this.psychiatristId.toString(),
               reporting_date: this.reportingdate,
-              sharp_register_id: this.sharp_register_id,
-              status: "0",
           },
           { headers }
         );
@@ -4708,7 +4715,6 @@ export default {
   display: block !important;
 }
 
-<style>
   input#AW{ /*AW - Admitting Ward */
     height:50px;
   }
@@ -4734,5 +4740,4 @@ export default {
     position:relative;
     top:-10px;
   }
-</style>
 </style>

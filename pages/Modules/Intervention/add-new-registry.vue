@@ -1068,7 +1068,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""  @change="OnpatientIntent('verbal',$event)"
+                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1079,7 +1079,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="" @change="OnpatientIntent('Messaging',$event)"
+                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1092,7 +1092,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="rehearsing"
-                                    value="" @change="OnpatientIntent('Rehearsing',$event)"
+                                    value="Rehearsing" @change="OnpatientIntent('Rehearsing',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1105,7 +1105,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="not-Expressed"
-                                    value="" @change="OnpatientIntent('Not Expressed',$event)"
+                                    value="Not Expressed" @change="OnpatientIntent('Not Expressed',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1118,7 +1118,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="handwritten"
-                                    value="" @change="OnpatientIntent('Handwritten',$event)"
+                                    value="Handwritten" @change="OnpatientIntent('Handwritten',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1131,7 +1131,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="social-media"
-                                    value="" @change="OnpatientIntent('Social Media',$event)"
+                                    value="Social Media" @change="OnpatientIntent('Social Media',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1144,7 +1144,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="learn-more"
-                                    value="" @change="OnpatientIntent('Learn more',$event)"
+                                    value="Learn more" @change="OnpatientIntent('Learn more',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1157,7 +1157,7 @@
                                     class="form-check-input intent-other"
                                     type="checkbox"
                                     id="Other"
-                                    value="" @change="OnpatientIntent('Other',$event)"
+                                    value="Other" @change="OnpatientIntent('Other',$event)"
                                   />
                                   <label class="form-check-label" for="Other"
                                     >Others</label
@@ -1884,7 +1884,7 @@
                           <div class="mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control" id="discharge"
                               placeholder="Please Specify" v-model="discharge_psy_mx_des"
                             />
                           </div>
