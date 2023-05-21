@@ -690,7 +690,7 @@
                                     class="form-check-input overdose-poisoning"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
-                                    id="1" v-model="overdose" @click="onSectionB('val')"
+                                    id="1" v-model="overdose"
                                   />
                                   <label class="form-check-label" for="1">
                                     Overdose/Poisoning
@@ -850,7 +850,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Family, friends, peer group"
-                                    id="1.1" v-model="family"  @click="onSectionC('val')"
+                                    id="1.1" v-model="family"
                                   />
                                   <label class="form-check-label" for="1.1">
                                     Family, friends, peer group
@@ -862,7 +862,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Internet (website, social media platform,app, blogs, forum, video/photosharing)"
-                                    id="2.2" v-model="internet" @click="onSectionC('val')"
+                                    id="2.2" v-model="internet"
                                   />
                                   <label class="form-check-label" for="2.2">
                                     Internet (website, social media platform,
@@ -875,7 +875,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Printed media (newspaper, books, magazine, etc)"
-                                    id="3.3" v-model="printed" @click="onSectionC('val')"
+                                    id="3.3" v-model="printed"
                                   />
                                   <label class="form-check-label" for="3.3">
                                     Printed media (newspaper, books, magazine,
@@ -890,7 +890,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Broadcast media (television, radio)"
-                                    id="5.5" v-model="broadcast" @click="onSectionC('val')"
+                                    id="5.5" v-model="broadcast"
                                   />
                                   <label class="form-check-label" for="5.5">
                                     Broadcast media (television, radio)
@@ -902,7 +902,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Own ideas"
-                                    id="4.4" v-model="ideas" @click="onSectionC('val')"
+                                    id="4.4" v-model="ideas"
                                   />
                                   <label class="form-check-label" for="4.4">
                                     Own ideas
@@ -973,7 +973,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
-                                    value="no" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="no" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -987,7 +987,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
-                                    value="intent-yes" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="intent-yes" v-model="patient_intent" 
                                   />
                                   <label
                                     class="form-check-label"
@@ -1001,7 +1001,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
-                                    value="Undetermined" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="Undetermined" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -3581,8 +3581,12 @@ export default {
             this.patientactualword = response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
 
-          this.result = response.data.result.suicideRisk[0].result;
-          this.referral_or_contact =
+          if(response.data.result.suicideRisk != null){
+            this.result = response.data.result.suicideRisk[0].result;
+
+          };
+          if(response.data.result.hospital != null){
+            this.referral_or_contact =
             response.data.result.hospital[0].referral_or_contact;
           this.referral_or_contact_other =
             response.data.result.hospital[0].referral_or_contact_other;
@@ -3644,6 +3648,8 @@ export default {
           this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
+          };
+
         }
       } catch (e) {
         this.loader = false;
@@ -3928,14 +3934,56 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    onSectionB(val) {
-      this.secB = val;
+    onSectionB() {
+      if(this.overdose){
+        this.secB = "val";
+      }
+      if(this.hanging){
+        this.secB = "val";
+      }
+      if(this.drowning){
+        this.secB = "val";
+      }
+      if(this.firearmsorexplosives){
+        this.secB = "val";
+      }
+      if(this.fire_flames){
+        this.secB = "val";
+      }
+      if(this.cuttingorpiercing){
+        this.secB = "val";
+      }
+      if(this.jumpingfromheight){
+        this.secB = "val";
+      }
+      if(this.other_sh){
+        this.secB = "val";
+      }
     },
-    onSectionC(val) {
-      this.secC = val;
+    onSectionC() {
+      if(this.overdose){
+        this.secC = "val";
+      }
+      if(this.hanging){
+        this.secC = "val";
+      }
+      if(this.drowning){
+        this.secC = "val";
+      }
+      if(this.firearmsorexplosives){
+        this.secC = "val";
+      }
+      if(this.fire_flames){
+        this.secC = "val";
+      }
+      if(this.cuttingorpiercing){
+        this.secC = "val";
+      }
     },
-    onSectionD(val) {
-      this.secD = val;
+    onSectionD() {
+      if(this.patient_intent){
+        this.secD = "val";
+      }
     },
     async DraftSelfHarm() {
       this.errors = [];
@@ -3944,7 +3992,7 @@ export default {
         if (this.patient_intent == "intent-yes") {
           this.selected.forEach((value, index) => {
             if (!this.patient_intent_value) {
-              this.patient_intent_value = "intent-yes,"+value;
+              this.patient_intent_value = "intent-yes,";
             } else {
               this.patient_intent_value = this.patient_intent_value + "," + value;
             }
@@ -3955,6 +4003,48 @@ export default {
           this.patient_intent_value = "Undetermined";
         }
 
+        if(this.verbal){
+              this.verbal = "verbal,"
+        }
+        else{
+          this.verbal = "";
+        }
+        if(this.Messaging){
+          this.Messaging = "Messaging,"
+        }else{
+          this.Messaging = "";
+        }
+        if(this.Rehearsing){
+          this.Rehearsing = "Rehearsing,"
+        }else{
+          this.Rehearsing = "";
+        }
+        if(this.Expressed){
+          this.Expressed = "Not Expressed,"
+        }else{
+          this.Expressed = "";
+        }
+        if(this.Handwritten){
+          this.Handwritten = "Handwritten,"
+        }else{
+          this.Handwritten = "";
+        }
+        if(this.SocialMedia){
+          this.SocialMedia = "Social Media,"
+        }else{
+          this.SocialMedia = "";
+        }
+        if(this.Learnmore){
+          this.Learnmore = "Learn more,"
+        }else{
+          this.Learnmore = "";
+        }
+        if(this.Other){
+          this.Other = "Other,"
+        }else{
+          this.Other = "";
+        }
+        
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -4005,7 +4095,7 @@ export default {
               },
               {
                 "Suicidal Intent": {
-                  intent: this.patient_intent_value +"," + this.intent_other,
+                  intent: this.patient_intent_value + ","+ this.verbal +this.Messaging + this.Rehearsing + this.Expressed + this.Handwritten +this.SocialMedia + this.Learnmore + this. Other + "," + this.intent_other,
                 },
               },
               { "Level of Suicidal Intent": this.SItestscore },
@@ -4564,9 +4654,15 @@ export default {
         if (!this.place_id) {
           this.errors.push("Place of Occurrence in tab Self Harm is required.");
         }
+
+        this.onSectionB();
+
         if (!this.secB) {
           this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
         }
+
+        this.onSectionC();
+        
         if (!this.secC) {
           this.errors.push(
             "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
