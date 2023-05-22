@@ -2329,7 +2329,6 @@
                             id="psy-d1"
                             v-model="psyd1"
                             value="Transferred to Psychiatry ward"
-                            @change="OnMxdischarge('Transferred to Psychiatry ward')"
 
                           />
                           <label class="form-check-label" for="psy-d1">
@@ -2344,7 +2343,6 @@
                             id="psy-d2"
                             v-model="psyd2"
                             value="Given appt to Psychiatry clinic"
-                            @change="OnMxdischarge('Given appt to Psychiatry clinic')"
 
                           />
                           <label class="form-check-label" for="psy-d2">
@@ -2359,7 +2357,6 @@
                             id="psy-d3"
                             v-model="psyd3"
                             value="Referred to counsellor"
-                            @change="OnMxdischarge('Referred to counsellor')"
 
                           />
                           <label class="form-check-label" for="psy-d3">
@@ -2374,7 +2371,6 @@
                             id="psy-d4"
                             v-model="psyd4"
                             value="Discharge without any Psychiatry follow-up"
-                            @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
 
                           />
                           <label class="form-check-label" for="psy-d4">
@@ -2389,7 +2385,6 @@
                             id="psy-d5"
                             v-model="psyd5"
                             value="Refer Community Psychiatry Services"
-                            @change="OnMxdischarge('Refer Community Psychiatry Services')"
 
                           />
                           <label class="form-check-label" for="psy-d6">
@@ -2404,7 +2399,6 @@
                             id="psy-d6"
                             v-model="psyd6"
                             value="Others"
-                            @change="OnMxdischarge('Others')"
 
                           />
                           <label class="form-check-label" for="psy-d5">
@@ -4326,16 +4320,53 @@ export default {
                 });
       }
     },
-    OnMxdischarge(val) {
-      if (this.discharge_psy_mx) {
-        this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
-      } else {
-        this.discharge_psy_mx = val;
+    // OnMxdischarge(val) {
+    //   if (this.discharge_psy_mx) {
+    //     this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
+    //   } else {
+    //     this.discharge_psy_mx = val;
+    //   }
+    // },
+    psychiatryOnDischarge(){
+      if(this.psyd1!=null){
+        this.psyd1 = this.psyd1 + ',';
+      }else{
+        this.psyd1 = '';
       }
+      if(this.psyd2!=null){
+        this.psyd2 = this.psyd2 + ',';
+      }else{
+        this.psyd2 = ''
+      }
+      if(this.psyd3!=null){
+        this.psyd3 = this.psyd3 + ',';
+      }else{
+        this.psyd3 = ''
+      }
+      if(this.psyd4!=null){
+        this.psyd4 = this.psyd4 + ',';
+      }else{
+        this.psyd4 = ''
+      }
+      if(this.psyd5!=null){
+        this.psyd5 = this.psyd5 + ',';
+      }else{
+        this.psyd5 = ''
+      }
+      if(this.psyd6!=null){
+        this.psyd6 = this.psyd6 + ',';
+      }
+      else{
+        this.psyd6 = ''
+      }
+      
+      this.discharge_psy_mx = this.psyd1 + this.psyd2 + this.psyd3 + this.psyd4 + this.psyd5 + this.psyd6;
     },
     async OnDraftSavehospitalmanagement() {
       var additionalbox = 0;
       var externalbox = 0;
+
+      this.psychiatryOnDischarge();
 
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
