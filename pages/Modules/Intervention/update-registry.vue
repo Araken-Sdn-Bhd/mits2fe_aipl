@@ -2172,7 +2172,7 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <input v-show="patient_admitted_des"  style="margin-left: 50px;"
+                          <input v-if="this.patient_admitted == 'Yes'"  style="margin-left: 50px;"
                               type="text"
                               class="form-control pafca-other-div"
                               placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
@@ -2412,7 +2412,7 @@
                           </label>
                         </div>
                         <!-- SHOW_DIV -->
-                        <input v-show="discharge_psy_mx_des"
+                        <input v-if="this.psyd6"
                             style="margin-left: 20px;"
                             type="text"
                             class="form-control PSY-other-div"
@@ -2723,6 +2723,7 @@ export default {
       riskfourthother: "",
       riskseventhother:"",
       riskeightother: "",
+      seHM: "",
     };
   },
   beforeMount() {
@@ -3573,11 +3574,6 @@ export default {
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
-            // this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-
-            // if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
-            //   this.patientactualword = true;
-            // }
             this.patientactualword = response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
 
@@ -3981,7 +3977,7 @@ export default {
       }
     },
     onSectionD() {
-      if(this.patient_intent){
+      if(this.patient_intent != null){
         this.secD = "val";
       }
     },
@@ -4657,18 +4653,21 @@ export default {
 
         this.onSectionB();
 
-        if (!this.secB) {
+        if (this.secB == null) {
           this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
         }
 
         this.onSectionC();
         
-        if (!this.secC) {
+        if (this.secC == null) {
           this.errors.push(
             "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
           );
         }
-        if (!this.secD) {
+
+        this.onSectionD();
+
+        if (this.secD == null) {
           this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
         }
 
@@ -4705,7 +4704,27 @@ export default {
         if (!this.external_cause_inquiry) {
           this.errors.push("External cause of injury in tab Hospital Management is required.");
         }
-        if (!this.discharge_psy_mx) {
+
+          if(this.psyd1){
+            this.seHM = 'val';
+          }
+          if(this.psyd2){
+            this.seHM = 'val';
+          }
+          if(this.psyd3){
+            this.seHM = 'val';
+          }
+          if(this.psyd4){
+            this.seHM = 'val';
+          }
+          if(this.psyd5){
+            this.seHM = 'val';
+          }
+          if(this.psyd6){
+            this.seHM = 'val';
+          }
+
+        if (this.seHM != 'val') {
           this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
         }
 
@@ -4728,6 +4747,12 @@ export default {
         if (!this.reportingdate) {
           this.errors.push("Date of Reporting is required.");
         }
+
+        this.OnDraftriskfactor();
+        this.Onprotectivefactordraft();
+        this.DraftSelfHarm();
+        this.OnDraftsuciderisk();
+        this.OnDraftSavehospitalmanagement();
         if (
           this.officername &&
           this.hospitalname &&
@@ -4737,9 +4762,6 @@ export default {
           this.Sdate &&
           this.Stime &&
           this.place_id &&
-          this.secB &&
-          this.secC &&
-          this.secD &&
           this.referral_or_contact &&
           this.arrival_mode &&
           this.date &&
@@ -4750,8 +4772,7 @@ export default {
           this.discharge_date &&
           this.discharge_number_days_in_ward &&
           this.main_psychiatric_diagnosis &&
-          this.external_cause_inquiry &&
-          this.discharge_psy_mx
+          this.external_cause_inquiry
         ) {
           this.loader = true;
           const headers = {
