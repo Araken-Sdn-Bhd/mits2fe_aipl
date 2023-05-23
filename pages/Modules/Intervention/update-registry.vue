@@ -366,7 +366,7 @@
                         </div>
                         <div class="step-form-box8 box-8" v-show="eight=='Yes'">
                           <select id="eightbox"
-                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%" 
+                            class="form-select multiselect select2-hidden-accessible" multiple="multiple" style="width:100%"
                           >
                            <option
               v-for="catcode in stresslist"
@@ -690,7 +690,7 @@
                                     class="form-check-input overdose-poisoning"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
-                                    id="1" v-model="overdose" @click="onSectionB('val')"
+                                    id="1" v-model="overdose"
                                   />
                                   <label class="form-check-label" for="1">
                                     Overdose/Poisoning
@@ -850,7 +850,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Family, friends, peer group"
-                                    id="1.1" v-model="family"  @click="onSectionC('val')"
+                                    id="1.1" v-model="family"
                                   />
                                   <label class="form-check-label" for="1.1">
                                     Family, friends, peer group
@@ -862,7 +862,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Internet (website, social media platform,app, blogs, forum, video/photosharing)"
-                                    id="2.2" v-model="internet" @click="onSectionC('val')"
+                                    id="2.2" v-model="internet"
                                   />
                                   <label class="form-check-label" for="2.2">
                                     Internet (website, social media platform,
@@ -875,7 +875,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Printed media (newspaper, books, magazine, etc)"
-                                    id="3.3" v-model="printed" @click="onSectionC('val')"
+                                    id="3.3" v-model="printed"
                                   />
                                   <label class="form-check-label" for="3.3">
                                     Printed media (newspaper, books, magazine,
@@ -890,7 +890,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Broadcast media (television, radio)"
-                                    id="5.5" v-model="broadcast" @click="onSectionC('val')"
+                                    id="5.5" v-model="broadcast"
                                   />
                                   <label class="form-check-label" for="5.5">
                                     Broadcast media (television, radio)
@@ -902,7 +902,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     value="Own ideas"
-                                    id="4.4" v-model="ideas" @click="onSectionC('val')"
+                                    id="4.4" v-model="ideas"
                                   />
                                   <label class="form-check-label" for="4.4">
                                     Own ideas
@@ -917,12 +917,12 @@
                                     id="6.6" v-model="patientactualword"
                                   />
                                   <label class="form-check-label" for="6.6">
-                                    Specify patient actual words
+                                    Others, specify patient's actual words
                                   </label>
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="patientactualword!=null"
+                                <div v-if="patientactualword==true"
                                   class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -973,7 +973,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
-                                    value="no" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="no" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -987,7 +987,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
-                                    value="intent-yes" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="intent-yes" v-model="patient_intent" 
                                   />
                                   <label
                                     class="form-check-label"
@@ -1001,7 +1001,7 @@
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
-                                    value="Undetermined" v-model="patient_intent" @click="onSectionD('val')"
+                                    value="Undetermined" v-model="patient_intent"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1018,7 +1018,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""  @change="OnpatientIntent('verbal',$event)"
+                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
                                     v-model="verbal"
                                   />
                                   <label class="form-check-label" for="verbal"
@@ -1030,7 +1030,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="" @change="OnpatientIntent('Messaging',$event)"
+                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
                                     v-model="Messaging"
                                   />
                                   <label
@@ -1122,7 +1122,7 @@
                                   >
                                   <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="intent_other!=null"
+                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="Other==true"
                                 >
                                     <input
                                       type="text"
@@ -1821,9 +1821,14 @@
         </p>
         <br><br>
                     <div class="d-flex">
-                      <button class="pre-2 btn btn-success mr-auto">
+                      <div class=" mr-auto">
+                      <button class="pre-2 btn btn-success" title="Back">
                         <i class="fad fa-arrow-to-left"></i> Back
                       </button>
+                      <button class="nex-2 btn btn-success next-btn" title="Next Page">
+                          Next <i class="fad fa-arrow-alt-to-right"></i>
+                        </button>
+                      </div>
                       <div class="ml-auto">
                         <button class="btn btn-text btn-warning" title="Draft" @click="DraftSelfHarm"><i class="fad fa-save"></i> Save as Draft</button>
                       </div>
@@ -2167,7 +2172,7 @@
                           <label class="form-check-label" for="pafca2">
                             Yes
                           </label>
-                          <input v-if="patient_admitted!=null"  style="margin-left: 50px;"
+                          <input v-if="this.patient_admitted == 'Yes'"  style="margin-left: 50px;"
                               type="text"
                               class="form-control pafca-other-div"
                               placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
@@ -2324,7 +2329,6 @@
                             id="psy-d1"
                             v-model="psyd1"
                             value="Transferred to Psychiatry ward"
-                            @change="OnMxdischarge('Transferred to Psychiatry ward')"
 
                           />
                           <label class="form-check-label" for="psy-d1">
@@ -2339,7 +2343,6 @@
                             id="psy-d2"
                             v-model="psyd2"
                             value="Given appt to Psychiatry clinic"
-                            @change="OnMxdischarge('Given appt to Psychiatry clinic')"
 
                           />
                           <label class="form-check-label" for="psy-d2">
@@ -2354,7 +2357,6 @@
                             id="psy-d3"
                             v-model="psyd3"
                             value="Referred to counsellor"
-                            @change="OnMxdischarge('Referred to counsellor')"
 
                           />
                           <label class="form-check-label" for="psy-d3">
@@ -2369,7 +2371,6 @@
                             id="psy-d4"
                             v-model="psyd4"
                             value="Discharge without any Psychiatry follow-up"
-                            @change="OnMxdischarge('Discharge without any Psychiatry follow-up')"
 
                           />
                           <label class="form-check-label" for="psy-d4">
@@ -2384,7 +2385,6 @@
                             id="psy-d5"
                             v-model="psyd5"
                             value="Refer Community Psychiatry Services"
-                            @change="OnMxdischarge('Refer Community Psychiatry Services')"
 
                           />
                           <label class="form-check-label" for="psy-d6">
@@ -2399,7 +2399,6 @@
                             id="psy-d6"
                             v-model="psyd6"
                             value="Others"
-                            @change="OnMxdischarge('Others')"
 
                           />
                           <label class="form-check-label" for="psy-d5">
@@ -2407,16 +2406,14 @@
                           </label>
                         </div>
                         <!-- SHOW_DIV -->
-                        <div class="col-sm-4 PSY-other-div mt-3" v-if="this.discharge_psy_mx_des">
-                          <div class="mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Please Specify" v-model="discharge_psy_mx_des"
-
-                            />
-                          </div>
-                        </div>
+                        <input v-if="this.psyd6"
+                            style="margin-left: 20px;"
+                            type="text"
+                            class="form-control PSY-other-div"
+                            id="discharge"
+                            placeholder="Please Specify"
+                            v-model="discharge_psy_mx_des"
+                          />
                       </div>
                     </div>
                         <p v-if="errors.length">
@@ -2720,6 +2717,7 @@ export default {
       riskfourthother: "",
       riskseventhother:"",
       riskeightother: "",
+      seHM: "",
     };
   },
   beforeMount() {
@@ -3499,9 +3497,11 @@ export default {
               this.update = false;
             }
 
-          if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
-              this.overdose = true;
-            }
+            this.overdose =
+          response.data.result.selfharm[1].section_value.Overdose_Poisoning;
+          // if(response.data.result.selfharm[1].section_value.Overdose_Poisoning!=null) {
+          //     this.overdose = true;
+          //   }
             this.Overdosespecify = response.data.result.selfharm[1].section_value.Overdosespecify;
           this.hanging =
             response.data.result.selfharm[1].section_value.Hanging_Suffocation;
@@ -3515,9 +3515,10 @@ export default {
             response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
           this.jumpingfromheight =
             response.data.result.selfharm[1].section_value.Jumping_from_height;
-            if(response.data.result.selfharm[1].section_value.Other!=null) {
-              this.other_sh = true;
-            }
+            // if(response.data.result.selfharm[1].section_value.Other!=null) {
+            //   this.other_sh = true;
+            // }
+            this.other_sh = response.data.result.selfharm[1].section_value.Other;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
 
@@ -3567,15 +3568,15 @@ export default {
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
-            // this.patientactualword=response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
-
-            if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
-              this.patientactualword = true;
-            }
+            this.patientactualword = response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
 
-          this.result = response.data.result.suicideRisk[0].result;
-          this.referral_or_contact =
+          if(response.data.result.suicideRisk != null){
+            this.result = response.data.result.suicideRisk[0].result;
+
+          };
+          if(response.data.result.hospital != null){
+            this.referral_or_contact =
             response.data.result.hospital[0].referral_or_contact;
           this.referral_or_contact_other =
             response.data.result.hospital[0].referral_or_contact_other;
@@ -3637,6 +3638,8 @@ export default {
           this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
           this.psychiatristId =
             response.data.result.dataSource[0].psychiatrist_name;
+          };
+
         }
       } catch (e) {
         this.loader = false;
@@ -3921,14 +3924,56 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    onSectionB(val) {
-      this.secB = val;
+    onSectionB() {
+      if(this.overdose){
+        this.secB = "val";
+      }
+      if(this.hanging){
+        this.secB = "val";
+      }
+      if(this.drowning){
+        this.secB = "val";
+      }
+      if(this.firearmsorexplosives){
+        this.secB = "val";
+      }
+      if(this.fire_flames){
+        this.secB = "val";
+      }
+      if(this.cuttingorpiercing){
+        this.secB = "val";
+      }
+      if(this.jumpingfromheight){
+        this.secB = "val";
+      }
+      if(this.other_sh){
+        this.secB = "val";
+      }
     },
-    onSectionC(val) {
-      this.secC = val;
+    onSectionC() {
+      if(this.overdose){
+        this.secC = "val";
+      }
+      if(this.hanging){
+        this.secC = "val";
+      }
+      if(this.drowning){
+        this.secC = "val";
+      }
+      if(this.firearmsorexplosives){
+        this.secC = "val";
+      }
+      if(this.fire_flames){
+        this.secC = "val";
+      }
+      if(this.cuttingorpiercing){
+        this.secC = "val";
+      }
     },
-    onSectionD(val) {
-      this.secD = val;
+    onSectionD() {
+      if(this.patient_intent != null){
+        this.secD = "val";
+      }
     },
     async DraftSelfHarm() {
       this.errors = [];
@@ -3937,7 +3982,7 @@ export default {
         if (this.patient_intent == "intent-yes") {
           this.selected.forEach((value, index) => {
             if (!this.patient_intent_value) {
-              this.patient_intent_value = "intent-yes,"+value;
+              this.patient_intent_value = "intent-yes,";
             } else {
               this.patient_intent_value = this.patient_intent_value + "," + value;
             }
@@ -3948,6 +3993,48 @@ export default {
           this.patient_intent_value = "Undetermined";
         }
 
+        if(this.verbal){
+              this.verbal = "verbal,"
+        }
+        else{
+          this.verbal = "";
+        }
+        if(this.Messaging){
+          this.Messaging = "Messaging,"
+        }else{
+          this.Messaging = "";
+        }
+        if(this.Rehearsing){
+          this.Rehearsing = "Rehearsing,"
+        }else{
+          this.Rehearsing = "";
+        }
+        if(this.Expressed){
+          this.Expressed = "Not Expressed,"
+        }else{
+          this.Expressed = "";
+        }
+        if(this.Handwritten){
+          this.Handwritten = "Handwritten,"
+        }else{
+          this.Handwritten = "";
+        }
+        if(this.SocialMedia){
+          this.SocialMedia = "Social Media,"
+        }else{
+          this.SocialMedia = "";
+        }
+        if(this.Learnmore){
+          this.Learnmore = "Learn more,"
+        }else{
+          this.Learnmore = "";
+        }
+        if(this.Other){
+          this.Other = "Other,"
+        }else{
+          this.Other = "";
+        }
+        
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -3998,7 +4085,7 @@ export default {
               },
               {
                 "Suicidal Intent": {
-                  intent: this.patient_intent_value +"," + this.intent_other,
+                  intent: this.patient_intent_value + ","+ this.verbal +this.Messaging + this.Rehearsing + this.Expressed + this.Handwritten +this.SocialMedia + this.Learnmore + this. Other + "," + this.intent_other,
                 },
               },
               { "Level of Suicidal Intent": this.SItestscore },
@@ -4158,9 +4245,9 @@ export default {
           {
             added_by: this.userdetails.user.id,
               patient_id: this.patient_id,
-              result: this.result,
               sharp_register_id: this.Id,
               status: "0",
+              result: this.result,
           },
           { headers }
         );
@@ -4233,16 +4320,53 @@ export default {
                 });
       }
     },
-    OnMxdischarge(val) {
-      if (this.discharge_psy_mx) {
-        this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
-      } else {
-        this.discharge_psy_mx = val;
+    // OnMxdischarge(val) {
+    //   if (this.discharge_psy_mx) {
+    //     this.discharge_psy_mx = this.discharge_psy_mx + "," + val;
+    //   } else {
+    //     this.discharge_psy_mx = val;
+    //   }
+    // },
+    psychiatryOnDischarge(){
+      if(this.psyd1!=null){
+        this.psyd1 = this.psyd1 + ',';
+      }else{
+        this.psyd1 = '';
       }
+      if(this.psyd2!=null){
+        this.psyd2 = this.psyd2 + ',';
+      }else{
+        this.psyd2 = ''
+      }
+      if(this.psyd3!=null){
+        this.psyd3 = this.psyd3 + ',';
+      }else{
+        this.psyd3 = ''
+      }
+      if(this.psyd4!=null){
+        this.psyd4 = this.psyd4 + ',';
+      }else{
+        this.psyd4 = ''
+      }
+      if(this.psyd5!=null){
+        this.psyd5 = this.psyd5 + ',';
+      }else{
+        this.psyd5 = ''
+      }
+      if(this.psyd6!=null){
+        this.psyd6 = this.psyd6 + ',';
+      }
+      else{
+        this.psyd6 = ''
+      }
+      
+      this.discharge_psy_mx = this.psyd1 + this.psyd2 + this.psyd3 + this.psyd4 + this.psyd5 + this.psyd6;
     },
     async OnDraftSavehospitalmanagement() {
       var additionalbox = 0;
       var externalbox = 0;
+
+      this.psychiatryOnDischarge();
 
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
@@ -4473,13 +4597,13 @@ export default {
           {
               added_by: this.userdetails.user.id,
               patient_id: this.patient_id,
+              sharp_register_id: this.Id,
+              status: "0",
               name_registering_officer: this.officername,
               hospital_name: this.hospitalname,
               designation: this.designation,
               psychiatrist_name: this.psychiatristId.toString(),
               reporting_date: this.reportingdate,
-              sharp_register_id: this.sharp_register_id,
-              status: "0",
           },
           { headers }
         );
@@ -4557,15 +4681,24 @@ export default {
         if (!this.place_id) {
           this.errors.push("Place of Occurrence in tab Self Harm is required.");
         }
-        if (!this.secB) {
+
+        this.onSectionB();
+
+        if (this.secB == null) {
           this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
         }
-        if (!this.secC) {
+
+        this.onSectionC();
+        
+        if (this.secC == null) {
           this.errors.push(
             "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
           );
         }
-        if (!this.secD) {
+
+        this.onSectionD();
+
+        if (this.secD == null) {
           this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
         }
 
@@ -4602,7 +4735,27 @@ export default {
         if (!this.external_cause_inquiry) {
           this.errors.push("External cause of injury in tab Hospital Management is required.");
         }
-        if (!this.discharge_psy_mx) {
+
+          if(this.psyd1){
+            this.seHM = 'val';
+          }
+          if(this.psyd2){
+            this.seHM = 'val';
+          }
+          if(this.psyd3){
+            this.seHM = 'val';
+          }
+          if(this.psyd4){
+            this.seHM = 'val';
+          }
+          if(this.psyd5){
+            this.seHM = 'val';
+          }
+          if(this.psyd6){
+            this.seHM = 'val';
+          }
+
+        if (this.seHM != 'val') {
           this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
         }
 
@@ -4625,6 +4778,12 @@ export default {
         if (!this.reportingdate) {
           this.errors.push("Date of Reporting is required.");
         }
+
+        this.OnDraftriskfactor();
+        this.Onprotectivefactordraft();
+        this.DraftSelfHarm();
+        this.OnDraftsuciderisk();
+        this.OnDraftSavehospitalmanagement();
         if (
           this.officername &&
           this.hospitalname &&
@@ -4634,9 +4793,6 @@ export default {
           this.Sdate &&
           this.Stime &&
           this.place_id &&
-          this.secB &&
-          this.secC &&
-          this.secD &&
           this.referral_or_contact &&
           this.arrival_mode &&
           this.date &&
@@ -4647,8 +4803,7 @@ export default {
           this.discharge_date &&
           this.discharge_number_days_in_ward &&
           this.main_psychiatric_diagnosis &&
-          this.external_cause_inquiry &&
-          this.discharge_psy_mx
+          this.external_cause_inquiry
         ) {
           this.loader = true;
           const headers = {
@@ -4708,7 +4863,6 @@ export default {
   display: block !important;
 }
 
-<style>
   input#AW{ /*AW - Admitting Ward */
     height:50px;
   }
@@ -4734,5 +4888,4 @@ export default {
     position:relative;
     top:-10px;
   }
-</style>
 </style>

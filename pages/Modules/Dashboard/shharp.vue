@@ -339,7 +339,9 @@
       this.GetCurrentMonths();
       this.Getrecord();
     },
-    mounted() {},
+    mounted() {
+      this.Getrecord();
+    },
   
     methods: {
       async Getrecord() {

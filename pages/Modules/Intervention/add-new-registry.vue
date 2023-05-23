@@ -585,7 +585,7 @@
                             type="radio"
                             id="no"
                              v-bind:name="'pro' + index"
-                              @click="onchangeprotect(pro.id,0)"
+                              @change="onchangeprotect(pro.id,0)"
                           />
                           <label class="form-check-label" for="no">{{
                             pro.Options1
@@ -596,7 +596,7 @@
                             class="form-check-input"
                             type="radio"
                             id="yes"
-                            v-bind:name="'pro' + index" @click="onchangeprotect(pro.id,1)"
+                            v-bind:name="'pro' + index" @change="onchangeprotect(pro.id,1)"
                           />
                           <label class="form-check-label" for="yes">{{
                             pro.Options2
@@ -1068,7 +1068,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="verbal"
-                                    value=""  @change="OnpatientIntent('verbal',$event)"
+                                    value="verbal"  @change="OnpatientIntent('verbal',$event)"
                                   />
                                   <label class="form-check-label" for="verbal"
                                     >Verbal</label
@@ -1079,7 +1079,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="messaging"
-                                    value="" @change="OnpatientIntent('Messaging',$event)"
+                                    value="Messaging" @change="OnpatientIntent('Messaging',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1092,7 +1092,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="rehearsing"
-                                    value="" @change="OnpatientIntent('Rehearsing',$event)"
+                                    value="Rehearsing" @change="OnpatientIntent('Rehearsing',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1105,7 +1105,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="not-Expressed"
-                                    value="" @change="OnpatientIntent('Not Expressed',$event)"
+                                    value="Not Expressed" @change="OnpatientIntent('Not Expressed',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1118,7 +1118,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="handwritten"
-                                    value="" @change="OnpatientIntent('Handwritten',$event)"
+                                    value="Handwritten" @change="OnpatientIntent('Handwritten',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1131,7 +1131,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="social-media"
-                                    value="" @change="OnpatientIntent('Social Media',$event)"
+                                    value="Social Media" @change="OnpatientIntent('Social Media',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1144,7 +1144,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="learn-more"
-                                    value="" @change="OnpatientIntent('Learn more',$event)"
+                                    value="Learn more" @change="OnpatientIntent('Learn more',$event)"
                                   />
                                   <label
                                     class="form-check-label"
@@ -1157,7 +1157,7 @@
                                     class="form-check-input intent-other"
                                     type="checkbox"
                                     id="Other"
-                                    value="" @change="OnpatientIntent('Other',$event)"
+                                    value="Other" @change="OnpatientIntent('Other',$event)"
                                   />
                                   <label class="form-check-label" for="Other"
                                     >Others</label
@@ -1884,7 +1884,7 @@
                           <div class="mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control" id="discharge"
                               placeholder="Please Specify" v-model="discharge_psy_mx_des"
                             />
                           </div>
@@ -2179,6 +2179,7 @@ export default {
       chronic_ill: "",
       emotional: "",
       lethal: "",
+      Others: "",
     };
   },
   mounted() {
@@ -2192,9 +2193,42 @@ export default {
     this.Id = urlParams.get("id");
     this.GetList();
     this.GetUserIpAddress();
+    this.checkedList[1] = 2;
+    this.checkedList[2] = 2;
+    this.checkedList[3] = 2;
+    this.checkedList[4] = 2;
+    this.checkedList[5] = 2;
+    this.checkedList[6] = 2;
+    this.checkedList[7] = 2;
+    this.checkedList[8] = 2;
+    this.checkedList[9] = 2;
+    this.checkedList[10] = 2;
+    this.checkedList[11] = 2;
+    this.checkedList[12] = 2;
+    this.procheckedList[13] = 2; 
+    this.procheckedList[14] = 2;
+    this.procheckedList[15] = 2;
+    this.procheckedList[16] = 2;
+    this.procheckedList[17] = 2;
+    this.procheckedList[18] = 2;
     $(document).ready(function () {
       $(".multiselect").select2({
         placeholder: "Please Select",
+      });
+
+      $("#fourthbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#seventhbox").select2({
+        placeholder: "Please Select",
+        tags: true
+      });
+
+      $("#eightbox").select2({
+        placeholder: "Please Select",
+        tags: true
       });
 
       $('.yes-box input[type="radio"]').click(function () {
@@ -3539,143 +3573,139 @@ export default {
       this.errors = [];
       try {
         if (!this.presence_psychiatric) {
-          this.errors.push("Q1-Presence of psychiatric disorder in tab Risk Factor is required.");
+          this.errors.push("Q1 - Presence of psychiatric disorder in Risk Factors' tab is required.");
         }
         if (!this.hopeless_despair) {
-          this.errors.push("Q2-Hopelessness or despair in tab Risk Factor is required.");
+          this.errors.push("Q2 - Hopelessness or despair in Risk Factors' tab is required.");
         }
         if (!this.prev_suicide) {
-          this.errors.push("Q3-Previous suicide attempts in tab Risk Factor is required.");
+          this.errors.push("Q3 - Previous suicide attempts in Risk Factors' tab is required.");
         }
         if (!this.substance_abuse) {
-          this.errors.push("Q4-Presence of substance use/abuse in tab Risk Factor is required.");
+          this.errors.push("Q4 - Presence of substance use/abuse in Risk Factors' tab is required.");
         }
         if (!this.family_suicidal) {
-          this.errors.push("Q5-Family history of suicidal behavior in tab Risk Factor is required.");
+          this.errors.push("Q5 - Family history of suicidal behavior in Risk Factors' tab is required.");
         }
         if (!this.history_psych) {
-          this.errors.push("Q6-Family history of psychiatric disorders in tab Risk Factor is required.");
+          this.errors.push("Q6 - Family history of psychiatric disorders in Risk Factors' tab is required.");
         }
         if (!this.family_abuse) {
-          this.errors.push("Q7-Family history of substance abuse in tab Risk Factor is required.");
+          this.errors.push("Q7 - Family history of substance abuse in Risk Factors' tab is required.");
         }
         if (!this.stressful) {
-          this.errors.push("Q8-Stressful life events or loss in tab Risk Factor is required.");
+          this.errors.push("Q8 - Stressful life events or loss in Risk Factors' tab is required.");
         }
         if (!this.rejection) {
-          this.errors.push("Q9-Isolation, rejection or feelings of shame in tab Risk Factor is required.");
+          this.errors.push("Q9 - Isolation, rejection or feelings of shame in Risk Factors' tab is required.");
         }
         if (!this.chronic_ill) {
-          this.errors.push("Q10-Chronic physical illness or condition in tab Risk Factor is required.");
+          this.errors.push("Q10 - Chronic physical illness or condition in Risk Factors' tab is required.");
         }
         if (!this.emotional) {
-          this.errors.push("Q11-History of physical, sexual, or emotional abuse in tab Risk Factor is required.");
+          this.errors.push("Q11 - History of physical, sexual, or emotional abuse in Risk Factors' tab is required.");
         }
         if (!this.lethal) {
-          this.errors.push("Q12-Access to lethal methods/weapons in tab Risk Factor is required.");
+          this.errors.push("Q12 - Access to lethal methods/weapons in Risk Factors' tab is required.");
         };
-        // alert(this.procheckedList);
-        if(!this.procheckedList){
-              this.errors.push("Protective Factor is required.");
+
+        if(this.procheckedList){
+            if(this.procheckedList[13] == '2'){
+              this.errors.push("Q1 in Protective Factors' tab is required.");
             }
-        // if(this.procheckedList){
-        //   alert(this.procheckedList.search("13"));
-        //     if(this.procheckedList.search("13") > 0){
-        //       this.errors.push("Q1 in tab Protective Factor is required.");
-        //     }
-        //     if(this.procheckedList.search("14") > 0){
-        //       this.errors.push("Q2 in tab Protective Factor is required.");
-        //     }
-        //     if(this.procheckedList.search("15") > 0){
-        //       this.errors.push("Q3 in tab Protective Factor is required.");
-        //     }
-        //     if(this.procheckedList.search("16") > 0){
-        //       this.errors.push("Q4 in tab Protective Factor is required.");
-        //     }
-        //     if(this.procheckedList.search("17") > 0){
-        //       this.errors.push("Q5 in tab Protective Factor is required.");
-        //     }
-        //     if(this.procheckedList.search("18") > 0){
-        //       this.errors.push("Q6 in tab Protective Factor is required.");
-        //     }
-        //   };
+            if(this.procheckedList[14] == '2'){
+              this.errors.push("Q2 in Protective Factors' tab is required.");
+            }
+            if(this.procheckedList[15] == '2'){
+              this.errors.push("Q3 in Protective Factors' tab is required.");
+            }
+            if(this.procheckedList[16] == '2'){
+              this.errors.push("Q4 in Protective Factors' tab is required.");
+            }
+            if(this.procheckedList[17] == '2'){
+              this.errors.push("Q5 in Protective Factors' tab is required.");
+            }
+            if(this.procheckedList[18] == '2'){
+              this.errors.push("Q6 in Protective Factors' tab is required.");
+            }
+          };
 
         if (!this.Sdate) {
-          this.errors.push("Date in tab Self Harm is required .");
+          this.errors.push("Date in Self Harm's tab is required .");
         }
         if (!this.Stime) {
-          this.errors.push("Time in tab Self Harm is required.");
+          this.errors.push("Time in Self Harm's tab is required.");
         }
         if (!this.place_id) {
-          this.errors.push("Place of Occurrence in tab Self Harm is required.");
+          this.errors.push("Place of Occurrence in Self Harm's tab is required.");
         }
         if (!this.secB) {
-          this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
+          this.errors.push("Please tick any box of Method of Self Harm in Self Harm's tab.");
         }
         if (!this.secC) {
           this.errors.push(
-            "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
+            "Please tick any box of How did Patient Get Idea about Method in Self Harm's tab."
           );
         }
         if (!this.secD) {
-          this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
+          this.errors.push("Please tick any box of Suicidal Intent in Self Harm's tab.");
         }
 
         if (!this.referral_or_contact) {
-          this.errors.push("Referral or Contact point in tab Hospital Management is required.");
+          this.errors.push("Referral or Contact point in Hospital Management's tab is required.");
         }
         if (!this.arrival_mode) {
-          this.errors.push("Mode of Arrival in tab Hospital Management is required.");
+          this.errors.push("Mode of Arrival in Hospital Management's tab is required.");
         }
         if (!this.date) {
-          this.errors.push("Date in tab Hospital Management is required.");
+          this.errors.push("Date in Hospital Management's tab is required.");
         }
         if (!this.time) {
-          this.errors.push("Time in tab Hospital Management is required.");
+          this.errors.push("Time in Hospital Management's tab is required.");
         }
         if (!this.physical_consequences) {
-          this.errors.push("Physical consequence in tab Hospital Management is required.");
+          this.errors.push("Physical consequence in Hospital Management's tab is required.");
         }
         if (!this.patient_admitted) {
-          this.errors.push("patient admitted for current in tab Hospital Management is required.");
+          this.errors.push("patient admitted for current in Hospital Management's tab is required.");
         }
         if (!this.discharge_status) {
-          this.errors.push("Status on Discharge in tab Hospital Management is required.");
+          this.errors.push("Status on Discharge in Hospital Management's tab is required.");
         }
         if (!this.discharge_date) {
-          this.errors.push("Discharge Date in tab Hospital Managementis required.");
+          this.errors.push("Discharge Date in Hospital Management's tab is required.");
         }
         if (!this.discharge_number_days_in_ward) {
-          this.errors.push("Number of days in ward in tab Hospital Management is required.");
+          this.errors.push("Number of days in ward in Hospital Management's tab is required.");
         }
         if (!this.main_psychiatric_diagnosis) {
-          this.errors.push("Main psychiatric diagnosis in tab Hospital Management is required.");
+          this.errors.push("Main psychiatric diagnosis in Hospital Management's tab is required.");
         }
         if (!this.external_cause_inquiry) {
-          this.errors.push("External cause of injury in tab Hospital Management is required.");
+          this.errors.push("External cause of injury in Hospital Management's tab is required.");
         }
         if (!this.discharge_psy_mx) {
-          this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
+          this.errors.push("Psychiatry Management on Discharge in Hospital Management's tab required.");
         }
 
         if (!this.result) {
-          this.errors.push("Please select Risk Level in tab Suicide Risk.");
+          this.errors.push("Please select Risk Level in Suicide Risk's tab.");
         }
 
         if (!this.officername) {
-          this.errors.push("Name of registering officer in tab Data Producer is required.");
+          this.errors.push("Name of registering officer in Data Producer's tab is required.");
         }
         if (!this.hospitalname) {
-          this.errors.push("Name of hospital in tab Data Producer is required.");
+          this.errors.push("Name of hospital in Data Producer's tab is required.");
         }
         if (!this.designation) {
-          this.errors.push("Designation in tab Data Producer is required.");
+          this.errors.push("Designation in Data Producer's tab is required.");
         }
         if (!this.psychiatristId) {
-          this.errors.push("Name of Psychiatrist in tab Data Producer is required.");
+          this.errors.push("Name of Psychiatrist in Data Producer's tab is required.");
         }
         if (!this.reportingdate) {
-          this.errors.push("Date of Reporting in tab Data Producer is required.");
+          this.errors.push("Date of Reporting in Data Producer's tab is required.");
         }
         if (
           this.officername &&
@@ -3702,6 +3732,11 @@ export default {
           this.external_cause_inquiry &&
           this.discharge_psy_mx
         ) {
+          this.OnDraftriskfactor();
+          this.Onprotectivefactordraft();
+          this.DraftSelfHarm();
+          this.OnDraftsuciderisk();
+          this.OnDraftSavehospitalmanagement();
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,

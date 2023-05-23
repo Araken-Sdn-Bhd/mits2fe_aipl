@@ -705,7 +705,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="overdose!=null"
+                                <div v-if="overdose==true"
                                   class="
                                     col-sm-12
                                     overdose-poisoning-div
@@ -818,7 +818,7 @@
                                 </div>
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
-                                <div v-if="other_sh!=null"
+                                <div v-if="other_sh==true"
                                   class="col-sm-12 selfharm-other-div mt-3"
                                 >
                                   <div class="mb-3" >
@@ -945,7 +945,7 @@
                                 <!-- checkbox -->
                                 <!-- SHOW_DIV -->
                                 <div
-                                v-if="patientactualword!=null"
+                                v-if="patientactualword==true"
                                   class="col-sm-12 specify-other-div mt-3"
                                 >
                                   <div class="mb-3">
@@ -1155,7 +1155,7 @@
                                     >Others</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div class="" style="margin-left: 20px;" v-if="intent_other">
+                                  <div class="" style="margin-left: 20px;" v-if="Other==true">
                                     <input
                                       type="text"
                                       class="form-control"
@@ -2251,7 +2251,7 @@
                             Yes
                           </label>
                           <input
-                              v-if="patient_admitted_des"
+                              v-show="patient_admitted_des"
                               type="text"
                               class="pafca-other-div"
                               placeholder="Please Specify" v-model="patient_admitted_des"
@@ -3335,10 +3335,10 @@ export default {
           response.data.result.selfharm[1].section_value.Cutting_or_Piercing;
         this.jumpingfromheight =
           response.data.result.selfharm[1].section_value.Jumping_from_height;
-          if(response.data.result.selfharm[1].section_value.Other_!=null) {
-              this.other_sh = true;
-            }
-            // this.other_sh = response.data.result.selfharm[1].section_value.Other_;
+          // if(response.data.result.selfharm[1].section_value.Other_!=null) {
+          //     this.other_sh = true;
+          //   }
+          this.other_sh = response.data.result.selfharm[1].section_value.Other;
             this.selfharm_other =
             response.data.result.selfharm[1].section_value.selfharm_other;
 
