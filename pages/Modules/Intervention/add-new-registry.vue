@@ -2204,7 +2204,7 @@ export default {
     this.checkedList[10] = 2;
     this.checkedList[11] = 2;
     this.checkedList[12] = 2;
-    this.procheckedList[13] = 2; 
+    this.procheckedList[13] = 2;
     this.procheckedList[14] = 2;
     this.procheckedList[15] = 2;
     this.procheckedList[16] = 2;
@@ -2874,7 +2874,7 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    async Onprotectivefactordraft() {
+    async Onprotectivefactordraft(dp) {
       console.log(this.procheckedList);
 
         try {
@@ -2918,7 +2918,7 @@ export default {
     },
 
 
-    async DraftSelfHarm() {
+    async DraftSelfHarm(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -3207,7 +3207,7 @@ export default {
       }
     },
 
-    async OnDraftsuciderisk() {
+    async OnDraftsuciderisk(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -3299,7 +3299,7 @@ export default {
       }
     },
 
-    async OnDraftSavehospitalmanagement() {
+    async OnDraftSavehospitalmanagement(dp) {
       var additionalbox = 0;
       var externalbox = 0;
 
