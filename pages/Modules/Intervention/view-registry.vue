@@ -2857,7 +2857,7 @@ export default {
       });
 
       $(".multiselect").select2({
-        placeholder: "Please Select",
+        placeholder: "None",
       });
 
       $(".select-others")
