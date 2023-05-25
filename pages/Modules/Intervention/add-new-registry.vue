@@ -239,7 +239,6 @@
                           >
                             {{ catcode.section_value }}
                           </option>
-                          <option v-bind:key="Others">Others</option>
                           </select>
                         </div>
                       </div>
@@ -2205,7 +2204,7 @@ export default {
     this.checkedList[10] = 2;
     this.checkedList[11] = 2;
     this.checkedList[12] = 2;
-    this.procheckedList[13] = 2; 
+    this.procheckedList[13] = 2;
     this.procheckedList[14] = 2;
     this.procheckedList[15] = 2;
     this.procheckedList[16] = 2;
@@ -2656,7 +2655,7 @@ export default {
           this.selected.splice(this.selected.indexOf(value), 1);
       }
     },
-    async OnDraftriskfactor() {
+    async OnDraftriskfactor(dp) {
       var Boxvalue = [];
       var firstbox = "";
       var fourthbox = "";
@@ -2726,7 +2725,9 @@ export default {
       if (response.data.code == 201 || response.data.code == "201") {
         this.loader = false;
         this.sharp_register_id = response.data.id;
+        if(dp != "dataProducer"){
         $('#myTab a[href="#protective"]').tab("show");
+        }
       } else {
         this.loader = false;this.$swal.fire({
                   icon: 'error',
@@ -2873,7 +2874,7 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    async Onprotectivefactordraft() {
+    async Onprotectivefactordraft(dp) {
       console.log(this.procheckedList);
 
         try {
@@ -2897,7 +2898,9 @@ export default {
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
             this.sharp_register_id = response.data.id;
+            if(dp != "dataProducer"){
             $('#myTab a[href="#selfharm"]').tab("show");
+            };
           } else {
             this.loader = false;
             this.$swal.fire({
@@ -2915,7 +2918,7 @@ export default {
     },
 
 
-    async DraftSelfHarm() {
+    async DraftSelfHarm(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -2929,8 +2932,10 @@ export default {
           });
         } else if (this.patient_intent == "no") {
           this.patient_intent_value = "no";
-        } else {
+        }else if (this.patient_intent == "Undetermined") {
           this.patient_intent_value = "Undetermined";
+        } else {
+          this.patient_intent_value = "";
         }
 
         const headers = {
@@ -2997,7 +3002,9 @@ export default {
         if (response.data.code == 201 || response.data.code == "201") {
           this.loader = false;
           this.sharp_register_id = response.data.id;
+          if(dp != "dataProducer"){
           $('#myTab a[href="#suicide"]').tab("show");
+          }
         } else {
           this.loader = false;
           this.$swal.fire({
@@ -3200,7 +3207,7 @@ export default {
       }
     },
 
-    async OnDraftsuciderisk() {
+    async OnDraftsuciderisk(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -3222,7 +3229,9 @@ export default {
         );
         if (response.data.code == 201 || response.data.code == "201") {
           this.sharp_register_id = response.data.id;
+          if(dp != "dataProducer"){
           $('#myTab a[href="#hospital-management"]').tab("show");
+          }
           this.loader = false;
         } else {
           this.loader = false;
@@ -3290,7 +3299,7 @@ export default {
       }
     },
 
-    async OnDraftSavehospitalmanagement() {
+    async OnDraftSavehospitalmanagement(dp) {
       var additionalbox = 0;
       var externalbox = 0;
 
@@ -3358,7 +3367,9 @@ export default {
           this.loader = false;
 
           this.sharp_register_id = response.data.id;
+          if(dp != "dataProducer"){
           $('#myTab a[href="#data-producer"]').tab("show");
+          };
         } else {
           this.loader = false;
           this.$swal.fire({
@@ -3520,6 +3531,11 @@ export default {
     },
     async Draftadddataproducer() {
       this.errors = [];
+      this.OnDraftriskfactor("dataProducer");
+      this.Onprotectivefactordraft("dataProducer");
+      this.DraftSelfHarm("dataProducer");
+      this.OnDraftsuciderisk("dataProducer");
+      this.OnDraftSavehospitalmanagement("dataProducer");
       try {
         this.loader = true;
         const headers = {
@@ -3553,9 +3569,9 @@ export default {
         } else {
           this.loader = false;
           this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
+                  icon: 'info',
+                  title: '',
+                  text: JSON.stringify(response.data.message),
                   footer: ''
                 });
         }
@@ -3732,11 +3748,11 @@ export default {
           this.external_cause_inquiry &&
           this.discharge_psy_mx
         ) {
-          this.OnDraftriskfactor();
-          this.Onprotectivefactordraft();
-          this.DraftSelfHarm();
-          this.OnDraftsuciderisk();
-          this.OnDraftSavehospitalmanagement();
+          this.OnDraftriskfactor("dataProducer");
+          this.Onprotectivefactordraft("dataProducer");
+          this.DraftSelfHarm("dataProducer");
+          this.OnDraftsuciderisk("dataProducer");
+          this.OnDraftSavehospitalmanagement("dataProducer");
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,

@@ -229,7 +229,11 @@
             >
               {{ catcode.section_value }}
             </option>
-            <option v-if="this.riskfourthother" selected>{{ this.riskfourthother }}</option>
+            <option v-for="other in riskfourthother" selected
+              v-bind:key="other"
+              v-bind:value="other"
+              >{{ other }}
+            </option>
                           </select>
                         </div>
                       </div>
@@ -335,7 +339,11 @@
             >
               {{ catcode.section_value }}
             </option>
-            <option v-if="this.riskseventhother" selected>{{ this.riskseventhother }}</option>
+            <option v-for="other in riskseventhother" selected
+              v-bind:key="other"
+              v-bind:value="other"
+              >{{ other }}
+            </option>
                           </select>
                         </div>
                       </div>
@@ -375,7 +383,11 @@
             >
               {{ catcode.section_value }}
             </option>
-            <option v-if="this.riskeightother" selected>{{ this.riskeightother }}</option>
+            <option v-for="other in riskeightother" selected
+              v-bind:key="other"
+              v-bind:value="other"
+              >{{ other }}
+            </option>
                           </select>
                         </div>
                       </div>
@@ -1122,7 +1134,7 @@
                                   >
                                   <!-- SHOW_DIV -->
                                 <div
-                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="Other==true"
+                                  class="col-sm-10 intent-other-div mt-4" style="margin-left: 20px;"  v-if="Other"
                                 >
                                     <input
                                       type="text"
@@ -2262,7 +2274,6 @@
                           id="additionalbox"
                           class="form-select multiselect" multiple="multiple"
                         >
-                        <option value="0">Please Select</option>
                            <option
                             v-for="catcode in diagonisislist"
                             v-bind:key="catcode.id"
@@ -2304,7 +2315,6 @@
                         id="externalbox"
                           class="form-select multiselect" multiple="multiple"
                         >
-                          <option value="0">Please Select</option>
                          <option
                           v-for="catcode in diagonisislist_external"
                           v-bind:key="catcode.id"
@@ -2699,24 +2709,24 @@ export default {
       psyd4: "",
       psyd5: "",
       psyd6: "",
-      si01: 0,
-      si02: 0,
-      si03: 0,
-      si04: 0,
-      si05: 0,
-      si06: 0,
-      si07: 0,
-      si08: 0,
-      si09: 0,
-      si10: 0,
-      si11: 0,
-      si12: 0,
-      si13: 0,
-      si14: 0,
-      si15: 0,
-      riskfourthother: "",
-      riskseventhother:"",
-      riskeightother: "",
+      si01: "",
+      si02: "",
+      si03: "",
+      si04: "",
+      si05: "",
+      si06: "",
+      si07: "",
+      si08: "",
+      si09: "",
+      si10: "",
+      si11: "",
+      si12: "",
+      si13: "",
+      si14: "",
+      si15: "",
+      riskfourthother: [],
+      riskseventhother:[],
+      riskeightother: [],
       seHM: "",
     };
   },
@@ -3401,17 +3411,20 @@ export default {
               this.thirdbox = element.Val;
             }
             if (element.Index == 4) {
+              var j = 0;
               var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#fourthbox")
                 .val(arr)
                 .trigger("change");
-                for(let i = 0; i < arr.length; i++)
+              for(let i = 0; i < arr.length; i++)
               {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskfourthother = arr[i];
+                  this.riskfourthother[j] = arr[i];
+                  j = j + 1;
                 }
               }
+
             }
             if (element.Index == 6) {
               const arr = element.Val.split(',');
@@ -3420,19 +3433,22 @@ export default {
                 .trigger("change");
             }
             if (element.Index == 7) {
+              var j = 0;
               const arr = element.Val.split(',');
               var ints = /^[0-9]*$/;
               $("#seventhbox")
                 .val(arr)
                 .trigger("change");
                 for(let i = 0; i < arr.length; i++)
-              {
+                {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskseventhother = arr[i];
+                  this.riskseventhother[j] = arr[i];
+                  j = j + 1;
                 }
-              }
+                }
             }
             if (element.Index == 8) {
+              var j = 0;
               var ints = /^[0-9]*$/;
               const arr = element.Val.split(',');
               $("#eightbox")
@@ -3441,7 +3457,8 @@ export default {
               for(let i = 0; i < arr.length; i++)
               {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskeightother = arr[i];
+                  this.riskeightother[j] = arr[i];
+                  j = j + 1;
                 }
               }
             }
@@ -3617,22 +3634,22 @@ export default {
           response.data.result.hospital[0].discharge_psy_mx;
           if(this.list1){
             if(this.list1.search("ward") > 0){
-              this.psyd1 = "Transferred to Psychiatry ward";
+              this.psyd1 = true;
             }
             if(this.list1.search("clinic")> 0){
-              this.psyd2 = "Given appt to Psychiatry clinic";
+              this.psyd2 = true;
             }
             if(this.list1.search("counsellor")> 0){
-              this.psyd3 = "Referred to counsellor";
+              this.psyd3 = true;
             }
             if(this.list1.search("follow-up") > 0){
-              this.psyd4 = "Discharge without any Psychiatry follow-up";
+              this.psyd4 = true;
             }
             if(this.list1.search("Community") > 0){
-              this.psyd5 = "Refer Community Psychiatry Services";
+              this.psyd5 = true;
             }
             if(this.list1.search("ers") > 0){
-              this.psyd6 = "Others";
+              this.psyd6 = true;
             }
           }
           this.discharge_psy_mx_des = response.data.result.hospital[0].discharge_psy_mx_des;
@@ -3671,7 +3688,7 @@ export default {
       this.checkedList[val] = event.target.value;
       console.log("my pushed array", this.checkedList);
     },
-    async OnDraftriskfactor() {
+    async OnDraftriskfactor(dp) {
       var Boxvalue = [];
       var firstbox = "";
       var fourthbox = "";
@@ -3740,7 +3757,9 @@ export default {
       if (response.data.code == 201 || response.data.code == "201") {
         this.loader = false;
         this.sharp_register_id = response.data.id;
-        $('#myTab a[href="#protective"]').tab("show");
+        if(dp != "dataProducer"){
+          $('#myTab a[href="#protective"]').tab("show");
+        }
       } else {
         this.loader = false;this.$swal.fire({
                   icon: 'error',
@@ -3840,7 +3859,7 @@ export default {
         this.error = "Please attempt all question";
       }
     },
-    async Onprotectivefactordraft() {
+    async Onprotectivefactordraft(dp) {
       console.log(this.procheckedList);
 
         try {
@@ -3864,7 +3883,9 @@ export default {
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
             this.sharp_register_id = response.data.id;
-            $('#myTab a[href="#selfharm"]').tab("show");
+            if(dp != "dataProducer"){
+              $('#myTab a[href="#selfharm"]').tab("show");
+            };
           } else {
             this.loader = false;
             this.$swal.fire({
@@ -3921,7 +3942,7 @@ export default {
           this.errors = e;
         }
       } else {
-        this.error = "Please attempt all question";
+        this.error = "Please attempt all questions";
       }
     },
     onSectionB() {
@@ -3975,7 +3996,7 @@ export default {
         this.secD = "val";
       }
     },
-    async DraftSelfHarm() {
+    async DraftSelfHarm(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -4035,6 +4056,9 @@ export default {
           this.Other = "";
         }
         
+        if(!this.SItestscore){
+          this.SItestscore = this.testresult.section_value;
+        }
         const headers = {
           Authorization: "Bearer " + this.userdetails.access_token,
           Accept: "application/json",
@@ -4085,7 +4109,7 @@ export default {
               },
               {
                 "Suicidal Intent": {
-                  intent: this.patient_intent_value + ","+ this.verbal +this.Messaging + this.Rehearsing + this.Expressed + this.Handwritten +this.SocialMedia + this.Learnmore + this. Other + "," + this.intent_other,
+                  intent: this.patient_intent + ","+ this.verbal +this.Messaging + this.Rehearsing + this.Expressed + this.Handwritten +this.SocialMedia + this.Learnmore + this. Other + "," + this.intent_other,
                 },
               },
               { "Level of Suicidal Intent": this.SItestscore },
@@ -4099,7 +4123,9 @@ export default {
         if (response.data.code == 201 || response.data.code == "201") {
           this.loader = false;
           this.sharp_register_id = response.data.id;
-          $('#myTab a[href="#suicide"]').tab("show");
+          if(dp != "dataProducer"){
+            $('#myTab a[href="#suicide"]').tab("show");
+          }
         } else {
           this.loader = false;
           this.$swal.fire({
@@ -4231,7 +4257,7 @@ export default {
                 });
       }
     },
-    async OnDraftsuciderisk() {
+    async OnDraftsuciderisk(dp) {
       this.errors = [];
       try {
         this.loader = true;
@@ -4253,7 +4279,9 @@ export default {
         );
         if (response.data.code == 201 || response.data.code == "201") {
           this.sharp_register_id = response.data.id;
-          $('#myTab a[href="#hospital-management"]').tab("show");
+          if(dp != "dataProducer"){
+            $('#myTab a[href="#hospital-management"]').tab("show");
+          };
           this.loader = false;
         } else {
           this.loader = false;
@@ -4328,33 +4356,33 @@ export default {
     //   }
     // },
     psychiatryOnDischarge(){
-      if(this.psyd1!=null){
-        this.psyd1 = this.psyd1 + ',';
+      if(this.psyd1 == true || this.psyd1 == "Transferred to Psychiatry ward,"){
+        this.psyd1 = "Transferred to Psychiatry ward" + ',';
       }else{
         this.psyd1 = '';
       }
-      if(this.psyd2!=null){
-        this.psyd2 = this.psyd2 + ',';
+      if(this.psyd2 == true || this.psyd2 == "Given appt to Psychiatry clinic,"){
+        this.psyd2 = "Given appt to Psychiatry clinic" + ',';
       }else{
         this.psyd2 = ''
       }
-      if(this.psyd3!=null){
-        this.psyd3 = this.psyd3 + ',';
+      if(this.psyd3 == true || this.psyd3 == "Referred to counsellor,"){
+        this.psyd3 = "Referred to counsellor" + ',';
       }else{
         this.psyd3 = ''
       }
-      if(this.psyd4!=null){
-        this.psyd4 = this.psyd4 + ',';
+      if(this.psyd4 == true || this.psyd4 == "Discharge without any Psychiatry follow-up,"){
+        this.psyd4 = "Discharge without any Psychiatry follow-up" + ',';
       }else{
         this.psyd4 = ''
       }
-      if(this.psyd5!=null){
-        this.psyd5 = this.psyd5 + ',';
+      if(this.psyd5 == true || this.psyd5 == "Refer Community Psychiatry Services,"){
+        this.psyd5 = "Refer Community Psychiatry Services" + ',';
       }else{
         this.psyd5 = ''
       }
-      if(this.psyd6!=null){
-        this.psyd6 = this.psyd6 + ',';
+      if(this.psyd6 == true || this.psyd6 == "Others,"){
+        this.psyd6 = "Others" + ',';
       }
       else{
         this.psyd6 = ''
@@ -4362,7 +4390,7 @@ export default {
       
       this.discharge_psy_mx = this.psyd1 + this.psyd2 + this.psyd3 + this.psyd4 + this.psyd5 + this.psyd6;
     },
-    async OnDraftSavehospitalmanagement() {
+    async OnDraftSavehospitalmanagement(dp) {
       var additionalbox = 0;
       var externalbox = 0;
 
@@ -4432,7 +4460,9 @@ export default {
           this.loader = false;
 
           this.sharp_register_id = response.data.id;
-          $('#myTab a[href="#data-producer"]').tab("show");
+          if(dp != "dataProducer"){
+            $('#myTab a[href="#data-producer"]').tab("show");
+          }
         } else {
           this.loader = false;
           this.$swal.fire({
@@ -4702,6 +4732,14 @@ export default {
           this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
         }
 
+        if(!this.SItestscore){
+          this.SItestscore = this.testresult.section_value;
+        }
+
+        if(!this.SItestscore){
+          this.errors.push("Suicidal Intent Test's answers in Self Harm's tab is required.");
+        }
+
         if (!this.referral_or_contact) {
           this.errors.push("Referral or Contact point in tab Hospital Management is required.");
         }
@@ -4779,11 +4817,6 @@ export default {
           this.errors.push("Date of Reporting is required.");
         }
 
-        this.OnDraftriskfactor();
-        this.Onprotectivefactordraft();
-        this.DraftSelfHarm();
-        this.OnDraftsuciderisk();
-        this.OnDraftSavehospitalmanagement();
         if (
           this.officername &&
           this.hospitalname &&
@@ -4805,6 +4838,11 @@ export default {
           this.main_psychiatric_diagnosis &&
           this.external_cause_inquiry
         ) {
+          this.OnDraftriskfactor("dataProducer");
+          this.Onprotectivefactordraft("dataProducer");
+          this.DraftSelfHarm("dataProducer");
+          this.OnDraftsuciderisk("dataProducer");
+          this.OnDraftSavehospitalmanagement("dataProducer");
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -4821,7 +4859,7 @@ export default {
               designation: this.designation,
               psychiatrist_name: this.psychiatristId.toString(),
               reporting_date: this.reportingdate,
-              sharp_register_id: this.sharp_register_id,
+              sharp_register_id: this.Id,
               status: "1",
             },
             { headers }

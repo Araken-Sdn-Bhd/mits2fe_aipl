@@ -223,7 +223,11 @@
                             >
                               {{ catcode.section_value }}
                             </option>
-                            <option v-if="this.riskfourthother" selected>{{ this.riskfourthother }}</option>
+                            <option v-for="other in riskfourthother" selected
+                              v-bind:key="other"
+                              v-bind:value="other"
+                              >{{ other }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -331,7 +335,11 @@
                             >
                               {{ catcode.section_value }}
                             </option>
-                            <option v-if="this.riskseventhother" selected>{{ this.riskseventhother }}</option>
+                            <option v-for="other in riskseventhother" selected
+                              v-bind:key="other"
+                              v-bind:value="other"
+                              >{{ other }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -372,7 +380,11 @@
                             >
                               {{ catcode.section_value }}
                             </option>
-                            <option v-if="this.riskeightother" selected>{{ this.riskeightother }}</option>
+                            <option v-for="other in riskeightother" selected
+                              v-bind:key="other"
+                              v-bind:value="other"
+                              >{{ other }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -1155,7 +1167,7 @@
                                     >Others</label
                                   >
                                   <!-- SHOW_DIV -->
-                                  <div class="" style="margin-left: 20px;" v-if="Other==true">
+                                  <div class="" style="margin-left: 20px;" v-if="Other">
                                     <input
                                       type="text"
                                       class="form-control"
@@ -2348,7 +2360,6 @@
                           id="additionalbox"
                           class="form-select multiselect" multiple="multiple" disabled
                         >
-                        <option value="0">Please Select</option>
                            <option
                             v-for="catcode in diagonisislist"
                             v-bind:key="catcode.id"
@@ -2391,7 +2402,6 @@
                         id="externalbox"
                           class="form-select multiselect" multiple="multiple" disabled
                         >
-                          <option value="0">Please Select</option>
                          <option
                           v-for="catcode in diagonisislist_external"
                           v-bind:key="catcode.id"
@@ -2824,9 +2834,9 @@ export default {
       si13: 0,
       si14: 0,
       si15: 0,
-      riskfourthother: "",
-      riskseventhother:"",
-      riskeightother: "",
+      riskfourthother: [],
+      riskseventhother:[],
+      riskeightother: [],
     };
   },
   beforeMount() {
@@ -2847,7 +2857,7 @@ export default {
       });
 
       $(".multiselect").select2({
-        placeholder: "Please Select",
+        placeholder: "None",
       });
 
       $(".select-others")
@@ -3258,39 +3268,45 @@ export default {
             this.thirdbox = element.Val;
           }
           if (element.Index == 4) {
+            var j = 0;
             var ints = /^[0-9]*$/;
             const arr = element.Val.split(',');
             $("#fourthbox").val(arr).trigger("change");
                 for(let i = 0; i < arr.length; i++)
-              {
+                {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskfourthother = arr[i];
+                  this.riskfourthother[j] = arr[i];
+                  j = j + 1;
                 }
-              }
+                }
           }
           if (element.Index == 6) {
             const arr = element.Val.split(',');
             $("#sixthbox").val(arr).trigger("change");
           }
           if (element.Index == 7) {
+            var j = 0;
             var ints = /^[0-9]*$/;
             const arr = element.Val.split(',');
             $("#seventhbox").val(arr).trigger("change");
             for(let i = 0; i < arr.length; i++)
               {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskseventhother = arr[i];
+                  this.riskseventhother[j] = arr[i];
+                  j = j + 1;
                 }
               }
           }
           if (element.Index == 8) {
+            var j = 0;
             var ints = /^[0-9]*$/;
             const arr = element.Val.split(',');
             $("#eightbox").val(arr).trigger("change");
             for(let i = 0; i < arr.length; i++)
               {
                 if(!(arr[i].match(ints) != null)){
-                  this.riskeightother = arr[i];
+                  this.riskeightother[j] = arr[i];
+                  j = j + 1;
                 }
               }
           }
