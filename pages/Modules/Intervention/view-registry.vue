@@ -176,7 +176,7 @@
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box2 box-02" v-if="thirdbox">
+                        <div class="step-form-box2 box-02" v-if="third == 'Yes'">
                           <input
                             type="text"
                             class="form-control"
