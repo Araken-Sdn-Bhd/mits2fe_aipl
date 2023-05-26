@@ -555,7 +555,7 @@ export default {
 
             this.Isvalidate = true;
             this.submitting = true;
-            this.errors = [];
+            this.errorList = [];
             try {
                 if (!this.name_asin_nric) {
                     this.errorList.push("Name (As In NRIC) is required.");
