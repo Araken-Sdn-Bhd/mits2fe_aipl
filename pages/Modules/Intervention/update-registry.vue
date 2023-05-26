@@ -448,7 +448,7 @@
                           <input
                             type="text"
                             class="form-control" v-model="tenthbox"
-                            placeholder="Please Specify (times)"
+                            placeholder="Please Specify"
                           />
                         </div>
                       </div>
@@ -511,8 +511,15 @@
                       </div>
                     </div>
                     <!-- row-close -->
-                     <Error :message="error" v-if="error" />
-                     <br><br>
+                    <p v-if="errors.length">
+                      <ul>
+                              <li style="color:red"  v-for='err in errors'
+                          :key='err' >
+                                {{ err }}
+                              </li>
+                            </ul>
+                      </p>
+                      <br><br>
                     <div class="d-flex">
                       <div class=" mr-auto">
                         <button class="nexttab btn btn-success next-btn">
@@ -578,6 +585,13 @@
                         </div>
                       </div>
                     </div>
+                    <p v-if="errors.length">
+                      <ul>
+                        <li style="color:red"  v-for='err in errors' :key='err' >
+                          {{ err }}
+                        </li>
+                      </ul>
+                    </p>
                     <br><br>
                     <div class="d-flex">
                                             <button class="pre-1 btn btn-success mr-auto"><i class="fad fa-arrow-to-left"></i> Back</button>
@@ -616,11 +630,13 @@
                             aria-expanded="true"
                             aria-controls="collapseOne"
                           >
-                            SECTION A : CURRENT SELF HARM ACT
-                            <small
-                              >(within past 2 weeks from time of
-                              presentation)</small
-                            >
+                            <div class="text-capitalize">
+                              Section A: Current Self-Harm Act
+                              <small
+                                >(within past 2 weeks from time of
+                                presentation)</small
+                              >
+                            </div>
                           </button>
                         </h2>
                         <div
@@ -681,7 +697,7 @@
                             aria-expanded="false"
                             aria-controls="collapseTwo"
                           >
-                            Section B: Method of Self-Harm
+                          <div class="text-capitalize">Section B: Method of Self-Harm</div>
                           </button>
                         </h2>
                         <div
@@ -841,7 +857,7 @@
                             aria-expanded="false"
                             aria-controls="collapseThree"
                           >
-                            Section C: How did Patient Get Idea about Method
+                          <div class="text-capitalize">Section C: How did Patient Get Idea about Method</div>
                           </button>
                         </h2>
                         <div
@@ -960,7 +976,7 @@
                             aria-expanded="false"
                             aria-controls="collapse4"
                           >
-                            Section D: Suicidal Intent
+                          <div class="text-capitalize">Section D: Suicidal Intent</div>
                           </button>
                         </h2>
                         <div
@@ -1159,7 +1175,7 @@
                             aria-expanded="false"
                             aria-controls="collapse5"
                           >
-                            Section E: Level of Suicidal Intent
+                          <div class="text-capitalize">Section E: Level of Suicidal Intent</div>
                           </button>
                         </h2>
                         <div
@@ -1802,6 +1818,7 @@
                   >
                   <i class="fad fa-calculator"></i> Calculate
                 </button>
+                      <br><br>
                 <table class="self-harm" v-if="this.testresult">
                   <tbody>
                     <tr>
@@ -2728,6 +2745,8 @@ export default {
       riskseventhother:[],
       riskeightother: [],
       seHM: "",
+      secDYes: "",
+      submitting: true,
     };
   },
   beforeMount() {
@@ -3192,23 +3211,27 @@ export default {
     },
     async OnsubmitTest(status) {
       this.error = null;
-      this.testcheckedList = {
-      "1":this.si01,
-      "2":this.si09,
-      "3":this.si02,
-      "4":this.si10,
-      "5":this.si03,
-      "6":this.si11,
-      "7":this.si04,
-      "8":this.si12,
-      "9":this.si05,
-      "10":this.si13,
-      "11":this.si06,
-      "12":this.si14,
-      "13":this.si07,
-      "14":this.si15,
-      "15":this.si08
+
+      if(this.si01 != "" && this.si09 != "" && this.si02 != "" && this.si10 != "" && this.si03 != "" && this.si011 != "" && this.si04 != ""
+      && this.si12 != "" && this.si05 != "" && this.si13 != "" && this.si06 != "" && this.si14 != "" && this.si07 != "" && this.si15 != "" && this.si08 != ""){
+        this.testcheckedList = {
+            "1":this.si01,
+            "2":this.si09,
+            "3":this.si02,
+            "4":this.si10,
+            "5":this.si03,
+            "6":this.si11,
+            "7":this.si04,
+            "8":this.si12,
+            "9":this.si05,
+            "10":this.si13,
+            "11":this.si06,
+            "12":this.si14,
+            "13":this.si07,
+            "14":this.si15,
+            "15":this.si08
     };
+      };
       try {
         if (this.list.length == Object.values(this.testcheckedList).length) {
           this.loader = true;
@@ -3316,7 +3339,7 @@ export default {
           }
           }
         } else {
-          this.error = "Please attempt all question";
+          this.error = "Please attempt all questions";
         }
       } catch (e) {
         this.loader = false;
@@ -3346,6 +3369,8 @@ export default {
             var status = "";
             if (element.answer == "Yes") {
               status = 1;
+            }else if(element.answer == ""){
+              status = 2;
             } else {
               status = 0;
             }
@@ -3473,6 +3498,8 @@ export default {
             var status = "";
             if (element.answer == "Yes") {
               status = 1;
+            }else if (element.answer == ""){
+              status = 2;
             } else {
               status = 0;
             }
@@ -3972,28 +3999,54 @@ export default {
       }
     },
     onSectionC() {
-      if(this.overdose){
+      if(this.family){
         this.secC = "val";
       }
-      if(this.hanging){
+      if(this.internet){
         this.secC = "val";
       }
-      if(this.drowning){
+      if(this.printed){
         this.secC = "val";
       }
-      if(this.firearmsorexplosives){
+      if(this.broadcast){
         this.secC = "val";
       }
-      if(this.fire_flames){
+      if(this.ideas){
         this.secC = "val";
       }
-      if(this.cuttingorpiercing){
+      if(this.patientactualword){
         this.secC = "val";
       }
     },
     onSectionD() {
       if(this.patient_intent != null){
         this.secD = "val";
+      }
+    },
+    intentYes(){
+      if($("#verbal").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#messaging").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#rehearsing").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#not-Expressed").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#handwritten").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#social-media").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#learn-more").is(":checked")){
+        this.secDYes = "val"
+      }
+      if($("#Other").is(":checked")){
+        this.secDYes = "val"
       }
     },
     async DraftSelfHarm(dp) {
@@ -4615,6 +4668,11 @@ export default {
     },
     async Draftadddataproducer() {
       this.errors = [];
+      this.OnDraftriskfactor("dataProducer");
+      this.Onprotectivefactordraft("dataProducer");
+      this.DraftSelfHarm("dataProducer");
+      this.OnDraftsuciderisk("dataProducer");
+      this.OnDraftSavehospitalmanagement("dataProducer");
       try {
         this.loader = true;
         const headers = {
@@ -4639,7 +4697,11 @@ export default {
         );
         if (response.data.code == 201 || response.data.code == "201") {
           this.loader = false;
-
+          await this.$swal.fire(
+                                'Successfully Saved as Draft!',
+                                'Data is inserted.',
+                                'success',
+                              );
           this.$router.push({
             path: "/modules/Intervention/patient-history",
             query: { id: this.patient_id },
@@ -4664,72 +4726,206 @@ export default {
     },
     async adddataproducer() {
       this.errors = [];
-      try {
+      this.$swal.fire({
+        title: 'Are you sure you want to submit?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'SUBMIT',
+        cancelButtonText: 'CANCEL',
+        reverseButtons: true
+      }
+      ).then(async (result) =>{
+        if (result.isConfirmed){
+          this.submitting = true;
         if (!this.first) {
-          this.errors.push("Q1-Presence of psychiatric disorder in tab Risk Factor is required.");
+          this.errors.push("Q1 - Presence of psychiatric disorder in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.first == "Yes"){
+          if(JSON.stringify($("#firstbox :selected").length) == 0 ){
+            this.errors.push("Q1 - Please specify the diagnosis in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.second) {
-          this.errors.push("Q2-Hopelessness or despair in tab Risk Factor is required.");
+          this.errors.push("Q2 - Hopelessness or despair in Risk Factors' tab is required.");
+          this.submitting = false;
         }
         if (!this.third) {
-          this.errors.push("Q3-Previous suicide attempts in tab Risk Factor is required.");
+          this.errors.push("Q3 - Previous suicide attempts in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.third == "Yes"){
+          if(!this.thirdbox){
+            this.errors.push("Q3 - Please specify the number of previous suicide attempt(s) in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.fourth) {
-          this.errors.push("Q4-Presence of substance use/abuse in tab Risk Factor is required.");
+          this.errors.push("Q4 - Presence of substance use/abuse in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.fourth == "Yes"){
+          if(JSON.stringify($("#fourthbox :selected").length) == 0 ){
+            this.errors.push("Q4 - Please specify type of substance use/abuse in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.fifth) {
-          this.errors.push("Q5-Family history of suicidal behavior in tab Risk Factor is required.");
+          this.errors.push("Q5 - Family history of suicidal behavior in Risk Factors' tab is required.");
+          this.submitting = false;
         }
         if (!this.sixth) {
-          this.errors.push("Q6-Family history of psychiatric disorders in tab Risk Factor is required.");
+          this.errors.push("Q6 - Family history of psychiatric disorders in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.sixth == "Yes"){
+          if(JSON.stringify($("#sixthbox :selected").length) == 0 ){
+            this.errors.push("Q6 - Please specify the family history of psychiatric disorder(s) diagnosis in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.seventh) {
-          this.errors.push("Q7-Family history of substance abuse in tab Risk Factor is required.");
+          this.errors.push("Q7 - Family history of substance abuse in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.seventh == "Yes"){
+          if(JSON.stringify($("#seventhbox :selected").length) == 0 ){
+            this.errors.push("Q7 - Please specify type of substance use/abuse in family history in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.eight) {
-          this.errors.push("Q8-Stressful life events or loss in tab Risk Factor is required.");
+          this.errors.push("Q8 - Stressful life events or loss in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.eight == "Yes"){
+          if(JSON.stringify($("#eightbox :selected").length) == 0 ){
+            this.errors.push("Q8 - Please specify stressful life events or loss in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.nine) {
-          this.errors.push("Q9-Isolation, rejection or feelings of shame in tab Risk Factor is required.");
+          this.errors.push("Q9 - Isolation, rejection or feelings of shame in Risk Factors' tab is required.");
+          this.submitting = false;
         }
         if (!this.tenth) {
-          this.errors.push("Q10-Chronic physical illness or condition in tab Risk Factor is required.");
+          this.errors.push("Q10 - Chronic physical illness or condition in Risk Factors' tab is required.");
+          this.submitting = false;
+        }
+        if(this.tenth == "Yes"){
+          if(!this.tenthbox){
+            this.errors.push("Q10 - Please specify chronic physical illness or condition in Risk Factors' tab.");
+            this.submitting = false;
+          }
         }
         if (!this.eleven) {
-          this.errors.push("Q11-History of physical, sexual, or emotional abuse in tab Risk Factor is required.");
+          this.errors.push("Q11 - History of physical, sexual, or emotional abuse in Risk Factors' tab is required.");
+          this.submitting = false;
         }
         if (!this.twelth) {
-          this.errors.push("Q12-Access to lethal methods/weapons in tab Risk Factor is required.");
+          this.errors.push("Q12 - Access to lethal methods/weapons in Risk Factors' tab is required.");
+          this.submitting = false;
         };
-
+        if(this.procheckedList){
+            if(this.procheckedList[13] == '2'){
+              this.errors.push("Q1 in Protective Factors' tab is required.");
+              this.submitting = false;
+            }
+            if(this.procheckedList[14] == '2'){
+              this.errors.push("Q2 in Protective Factors' tab is required.");
+              this.submitting = false;
+            }
+            if(this.procheckedList[15] == '2'){
+              this.errors.push("Q3 in Protective Factors' tab is required.");
+              this.submitting = false;
+            }
+            if(this.procheckedList[16] == '2'){
+              this.errors.push("Q4 in Protective Factors' tab is required.");
+              this.submitting = false;
+            }
+            if(this.procheckedList[17] == '2'){
+              this.errors.push("Q5 in Protective Factors' tab is required.");
+              this.submitting = false;
+            }
+            if(this.procheckedList[18] == '2'){
+              this.errors.push("Q6 in Protective Factors' tab is required.");
+              this.submitting - false;
+            }
+          };
         if (!this.Sdate) {
-          this.errors.push("Date in tab Self Harm is required .");
+          this.errors.push("Date in tab Self Harm is required.");
+          this.submitting = false;
         }
         if (!this.Stime) {
           this.errors.push("Time in tab Self Harm is required.");
+          this.submitting = false;
         }
         if (!this.place_id) {
           this.errors.push("Place of Occurrence in tab Self Harm is required.");
+          this.submitting = false;
         }
-
+        if(this.place_id=='Other specified areas'){
+          if(!this.place_other){
+            this.errors.push("Please specify the other specified area in Self Harm's tab.");
+            this.submitting = false;
+          }
+        }
         this.onSectionB();
 
-        if (this.secB == null) {
-          this.errors.push("Please tick any box of Method of Self Harm in tab Self Harm.");
+        if (!this.secB) {
+          this.errors.push("Please tick any box of Method of Self Harm in Self Harm's tab.");
+          this.submitting = false;
+        }
+        if(this.overdose){
+          if(!this.Overdosespecify){
+            this.errors.push("Please specify the overdose/poisoning in Self Harm's tab.");
+            this.submitting = false;
+          }
+        }
+        if(this.other_sh){
+          if(!this.selfharm_other){
+            this.errors.push("Please specify other method of self-harm in Self Harm's tab.");
+            this.submitting = false;
+          }
         }
 
         this.onSectionC();
         
-        if (this.secC == null) {
+        if (!this.secC) {
           this.errors.push(
-            "Please tick any box of How did Patient Get Idea about Method in tab Self Harm."
+            "Please tick any box of How did Patient Get Idea about Method in Self Harm's tab."
           );
+          this.submitting = false;
+        }
+        if(this.patientactualword){
+          if(!this.patientactualword_other){
+            this.errors.push("Please specify patient's actual words in Self Harm's tab.");
+            this.submitting = false;
+          }
         }
 
         this.onSectionD();
 
-        if (this.secD == null) {
-          this.errors.push("Please tick any box of Suicidal Intent in tab Self Harm.");
+        if (!this.secD) {
+          this.errors.push("Please answer was there an intent question in Self Harm's tab.");
+          this.submitting = false;
+        }
+        this.intentYes();
+        if(this.patient_intent == 'intent-yes'){
+          if(!this.secDYes){
+            this.errors.push("Please tick any box of Suicidal Intent in Self Harm's tab.");
+            this.submitting = false;
+          }
+        }
+        if(this.secDYes){
+          if($("#Other").is(":checked")){
+            if(!this.intent_other){
+              this.errors.push("Please specify Suicidal Intent in Self Harm's tab.");
+              this.submitting = false;
+            }
+          }
         }
 
         if(!this.SItestscore){
@@ -4738,40 +4934,79 @@ export default {
 
         if(!this.SItestscore){
           this.errors.push("Suicidal Intent Test's answers in Self Harm's tab is required.");
+          this.submitting = false;
         }
-
+        if (!this.result) {
+          this.errors.push("Please select Risk Level in Suicide Risk's tab.");
+          this.submitting = false;
+        }
         if (!this.referral_or_contact) {
-          this.errors.push("Referral or Contact point in tab Hospital Management is required.");
+          this.errors.push("Referral or Contact point in Hospital Management's tab is required.");
+          this.submitting = false;
         }
-        if (!this.arrival_mode) {
-          this.errors.push("Mode of Arrival in tab Hospital Management is required.");
+        if(this.referral_or_contact=='Others' || this.referral_or_contact==194){
+          if(!this.referral_or_contact_other){
+            this.errors.push("Please Specify the referral or contact point in Hospital Management's tab.");
+            this.submitting = false;
+          }
+        }
+        if (!this.arrival_mode || this.arrival_mode==0) {
+          this.errors.push("Mode of Arrival in Hospital Management's tab is required.");
+          this.submitting = false;
+        }
+        if(this.arrivalOther){
+          if(!this.arrival_mode_other){
+            this.errors.push("Please specify the mode of Arrival in Hospital Management's tab.");
+            this.submitting = false;
+          }
         }
         if (!this.date) {
-          this.errors.push("Date in tab Hospital Management is required.");
+          this.errors.push("Date in Hospital Management's tab is required.");
+          this.submitting = false;
         }
         if (!this.time) {
-          this.errors.push("Time in tab Hospital Management is required.");
+          this.errors.push("Time in Hospital Management's tab is required.");
+          this.submitting = false;
         }
         if (!this.physical_consequences) {
-          this.errors.push("Physical consequence in tab Hospital Management is required.");
+          this.errors.push("Physical consequence in Hospital Management's tab is required.");
+          this.submitting = false;
+        }
+        if(this.physical_consequences == "Aborted"){
+          if(!this.physical_consequences_des){
+          this.errors.push("Please specify the reason of aborted attempt in Hospital Management's tab.");
+          this.submitting = false;
+          }
         }
         if (!this.patient_admitted) {
-          this.errors.push("patient admitted for current in tab Hospital Management is required.");
+          this.errors.push("Patient admitted for current in Hospital Management's tab is required.");
+          this.submitting = false;
+        }
+        if(this.patient_admitted == "Yes"){
+          if(!this.patient_admitted_des){
+            this.errors.push("Please specify the first admitting ward in Hospital Management's tab.");
+            this.submitting = false;
+          }
         }
         if (!this.discharge_status) {
-          this.errors.push("Status on Discharge in tab Hospital Management is required.");
+          this.errors.push("Status on Discharge in Hospital Management's tab is required.");
+          this.submitting = false;
         }
         if (!this.discharge_date) {
-          this.errors.push("Discharge Date in tab Hospital Managementis required.");
+          this.errors.push("Discharge Date in Hospital Management's tab is required.");
+          this.submitting = false;
         }
-        if (!this.discharge_number_days_in_ward) {
-          this.errors.push("Number of days in ward in tab Hospital Management is required.");
+        if (!this.discharge_number_days_in_ward || this.discharge_number_days_in_ward == 0) {
+          this.errors.push("Number of days in ward in Hospital Management's tab is required.");
+          this.submitting = false;
         }
         if (!this.main_psychiatric_diagnosis) {
-          this.errors.push("Main psychiatric diagnosis in tab Hospital Management is required.");
+          this.errors.push("Main psychiatric diagnosis in Hospital Management's tab is required.");
+          this.submitting = false;
         }
         if (!this.external_cause_inquiry) {
-          this.errors.push("External cause of injury in tab Hospital Management is required.");
+          this.errors.push("External cause of injury in Hospital Management's tab is required.");
+          this.submitting = false;
         }
 
           if(this.psyd1){
@@ -4794,38 +5029,67 @@ export default {
           }
 
         if (this.seHM != 'val') {
-          this.errors.push("Psychiatry Management on Discharge in tab Hospital Management required.");
+          this.errors.push("Psychiatry Management on Discharge in Hospital Management's tab required.");
+          this.submitting = false;
         }
 
-        if (!this.result) {
-          this.errors.push("Please select Risk Level in tab Suicide Risk.");
+        if(this.psyd6){
+          if(!this.discharge_psy_mx_des || this.discharge_psy_mx_des == null || this.discharge_psy_mx_des =="null"){
+            this.errors.push("Please specify the psychiatry management on discharge in Hospital Management's tab.");
+            this.submitting = false;
+          }
         }
 
         if (!this.officername) {
-          this.errors.push("Name of registering officer is required.");
+          this.errors.push("Name of registering officer in Data Producer's tab is required.");
+          this.submitting = false;
         }
         if (!this.hospitalname) {
-          this.errors.push("Name of hospital is required.");
+          this.errors.push("Name of hospital in Data Producer's tab is required.");
+          this.submitting = false;
         }
         if (!this.designation) {
-          this.errors.push("Designation is required.");
+          this.errors.push("Designation in Data Producer's tab is required.");
+          this.submitting = false;
         }
-        if (!this.psychiatristId) {
-          this.errors.push("Name of Psychiatrist is required.");
+        if (!this.psychiatristId || this.psychiatristId == 0) {
+          this.errors.push("Name of Psychiatrist in Data Producer's tab is required.");
+          this.submitting = false;
         }
         if (!this.reportingdate) {
-          this.errors.push("Date of Reporting is required.");
+          this.errors.push("Date of Reporting in Data Producer's tab is required.");
+          this.submitting = false;
         }
-
+        if(this.submitting == false){
+          return;
+        }
         if (
-          this.officername &&
-          this.hospitalname &&
-          this.designation &&
-          this.psychiatristId &&
-          this.reportingdate &&
+          this.first &&
+          this.second &&
+          this.third &&
+          this.fourth &&
+          this.fifth &&
+          this.sixth &&
+          this.seventh &&
+          this.eight &&
+          this.nine &&
+          this.tenth &&
+          this.eleven &&
+          this.twelth &&
+          this.procheckedList[13] != '2' &&
+          this.procheckedList[14] != '2' &&
+          this.procheckedList[15] != '2' &&
+          this.procheckedList[16] != '2' &&
+          this.procheckedList[17] != '2' &&
+          this.procheckedList[18] != '2' &&
           this.Sdate &&
           this.Stime &&
           this.place_id &&
+          this.secB &&
+          this.secC &&
+          this.secD &&
+          this.SItestscore &&
+          this.result &&
           this.referral_or_contact &&
           this.arrival_mode &&
           this.date &&
@@ -4836,7 +5100,12 @@ export default {
           this.discharge_date &&
           this.discharge_number_days_in_ward &&
           this.main_psychiatric_diagnosis &&
-          this.external_cause_inquiry
+          this.external_cause_inquiry &&
+          this.seHM == 'val' &&
+          this.officername &&
+          this.hospitalname &&
+          this.psychiatristId &&
+          this.reportingdate
         ) {
           this.OnDraftriskfactor("dataProducer");
           this.Onprotectivefactordraft("dataProducer");
@@ -4866,6 +5135,11 @@ export default {
           );
           if (response.data.code == 201 || response.data.code == "201") {
             this.loader = false;
+            await this.$swal.fire(
+                                'Successfully Submitted!',
+                                'Data is inserted.',
+                                'success',
+                              );
             this.$router.push({
               path: "/modules/Intervention/patient-history",
               query: { id: this.patient_id },
@@ -4880,14 +5154,8 @@ export default {
                 });
           }
         }
-      } catch (e) {
-        this.loader = false;this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                  footer: ''
-                });
       }
+    })
     },
   },
 };
