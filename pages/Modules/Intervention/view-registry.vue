@@ -176,7 +176,7 @@
                           />
                           <label class="form-check-label" for="yes2">YES</label>
                         </div>
-                        <div class="step-form-box2 box-02" v-if="thirdbox">
+                        <div class="step-form-box2 box-02" v-if="third == 'Yes'">
                           <input
                             type="text"
                             class="form-control"
@@ -622,11 +622,13 @@
                             aria-expanded="true"
                             aria-controls="collapseOne"
                           >
-                            SECTION A : CURRENT SELF HARM ACT
-                            <small
-                              >(within past 2 weeks from time of
-                              presentation)</small
-                            >
+                            <div class="text-capitalize">
+                              Section A: Current Self-Harm Act
+                              <small
+                                >(within past 2 weeks from time of
+                                presentation)</small
+                              >
+                            </div>
                           </button>
                         </h2>
                         <div
@@ -687,7 +689,7 @@
                             aria-expanded="false"
                             aria-controls="collapseTwo"
                           >
-                            Section B: Method of Self-Harm
+                          <div class="text-capitalize">Section B: Method of Self-Harm</div>
                           </button>
                         </h2>
                         <div
@@ -857,7 +859,7 @@
                             aria-expanded="false"
                             aria-controls="collapseThree"
                           >
-                            Section C: How did Patient Get Idea about Method
+                          <div class="text-capitalize">Section C: How did Patient Get Idea about Method</div>
                           </button>
                         </h2>
                         <div
@@ -984,7 +986,7 @@
                             aria-expanded="false"
                             aria-controls="collapse4"
                           >
-                            Section D: Suicidal Intent
+                            <div class="text-capitalize">Section D: Suicidal Intent</div>
                           </button>
                         </h2>
                          <div
@@ -1191,7 +1193,7 @@
                             aria-expanded="false"
                             aria-controls="collapse5"
                           >
-                            Section E: Level of Suicidal Intent
+                            <div class="text-capitalize">Section E: Level of Suicidal Intent</div>
                           </button>
                         </h2>
                         <div
