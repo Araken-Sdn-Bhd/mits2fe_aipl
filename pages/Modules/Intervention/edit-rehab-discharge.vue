@@ -1146,7 +1146,7 @@ export default {
                      $("#sub_code_id")
                     .val( this.additional_sub_code_id)
                     .trigger("change");
-                    this.add_code_id = response.data.Data[0].add_code_id;
+        this.add_code_id = response.data.Data[0].add_code_id;
         this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
                     $("#add_sub_code_id")
                     .val( this.additional_sub_code_id2)

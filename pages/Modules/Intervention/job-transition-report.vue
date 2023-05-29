@@ -254,13 +254,13 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Patient Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="patient_name" />
+                                        <input type="text" class="form-control" v-model="patient_name" disabled />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Doctor Name<small style="color:red">*</small> </label>
-                                        <input type="text" class="form-control" v-model="doctor_name" />
+                                        <input type="text" class="form-control" v-model="doctor_name" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -653,12 +653,18 @@ export default {
         this.Id = urlParams.get("id");
         this.appId = urlParams.get("appId");
         this.GetList();
+        this.GetPatientdetails();
         let urlParams1 = new URLSearchParams(window.location.search);
         this.pid = urlParams1.get("pid");
         this.type = urlParams1.get("type");
+        if (this.Id) {
+          this.doctor_name =this.userdetails.user.name;
+         }
         if (this.pid) {
             this.getdetails();
         }
+       
+
     },
     mounted(){
     $(document).ready(function () {
@@ -1162,6 +1168,31 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
+        async GetPatientdetails() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response = await this.$axios.post(
+        "patient-registration/getPatientRegistrationById",
+        {
+          id: this.Id,
+        },
+        { headers }
+      );
+      if (response.data.code == 200 || response.data.code == "200") {
+        this.patient_name= response.data.list[0].name_asin_nric;
+        console.log("my details", this.patientdetails);
+      } else {
+        this.$swal.fire({
+                  icon: 'error',
+                  title: 'Oops... Something Went Wrong!',
+                  text: 'the error is: ' + this.error,
+                  footer: ''
+                });
+      }
+    },
         resetmodel() {
             this.future_plan = "";
             this.short_term_goal = "";
