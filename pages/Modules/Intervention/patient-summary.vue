@@ -857,7 +857,7 @@ export default {
         });
       } else if (data.type == "JobTransitionReport") {
         this.$router.push({
-          path: "/modules/Intervention/job-transition-report",
+          path: "/modules/Intervention/view-job-transition-report",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "LaserAssessment") {
