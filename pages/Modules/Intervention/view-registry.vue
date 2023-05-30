@@ -102,14 +102,14 @@
                       <label class="col-sm-5 col-form-label"><span>1</span>Presence of psychiatric disorder</label>
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box">
-                        <input class="form-check-input" type="radio" id="no" value="No" name="Presence of psychiatric disorder"
+                        <input class="form-check-input radio" type="radio" id="no" value="No" name="Presence of psychiatric disorder"
                          v-model="first" disabled/>
-                        <label class="form-check-label" for="no">NO</label>
+                        <label class="form-check-label label" for="no">NO</label>
                         </div>
                         <div class="form-check form-check-inline yes-box">
-                        <input class="form-check-input" type="radio" id="yes" name="Presence of psychiatric disorder"
+                        <input class="form-check-input radio" type="radio" id="yes" name="Presence of psychiatric disorder"
                          value="Yes" v-model="first" disabled/>
-                        <label class="form-check-label" for="yes">YES</label>
+                        <label class="form-check-label label" for="yes">YES</label>
                         </div>
                          <div class="step-form-box1 box-01" v-show="first=='Yes'">
                           <select id="firstbox"
@@ -130,7 +130,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no1"
                             name="Hopelessness or Despair" value="No" v-model="second"
@@ -140,7 +140,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes1"
                             name="Hopelessness or Despair" value="Yes" v-model="second"
@@ -158,7 +158,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box1">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no2"
                             name="Previous suicide attempts"  value="No" v-model="third"
@@ -168,7 +168,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box1">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes2"
                             name="Previous suicide attempts"   value="Yes" v-model="third"
@@ -194,7 +194,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box2">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no3"
                             name="Prresence os substance use/abuse" value="No" v-model="fourth"
@@ -204,7 +204,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box2">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes3"
                             name="Prresence os substance use/abuse" value="Yes" v-model="fourth"
@@ -241,7 +241,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no4"
                             name="family history of suicidal behavior" value="No" v-model="fifth"
@@ -251,7 +251,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes4"
                             name="family history of suicidal behavior" value="Yes" v-model="fifth"
@@ -270,7 +270,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box3">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no5"
                             name="family history of psychiatric disorders"  value="No" v-model="sixth" disabled
@@ -279,7 +279,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box3">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes5"
                             name="family history of psychiatric disorders" value="Yes" v-model="sixth" disabled
@@ -308,7 +308,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box4">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no6"
                             name="family history of substance abuse" value="No" v-model="seventh" disabled
@@ -317,7 +317,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box4">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes6"
                             name="family history of substance abuse" value="Yes" v-model="seventh" disabled
@@ -352,7 +352,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box5">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no7"
                             name="stressful life events or loss" value="No" v-model="eight" disabled
@@ -361,7 +361,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box5">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes7"
                             name="stressful life events or loss"  value="Yes" v-model="eight" disabled
@@ -398,7 +398,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no8" value="No" v-model="nine"
                             name="Isolation, rejection or feelings of shame"
@@ -408,7 +408,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes8" value="Yes" v-model="nine"
                             name="Isolation, rejection or feelings of shame"
@@ -427,7 +427,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box6">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no9" value="No" v-model="tenth"
                             name="chronic physical illness or condition"
@@ -437,7 +437,7 @@
                         </div>
                         <div class="form-check form-check-inline yes-box6">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes9" value="Yes" v-model="tenth"
                             name="chronic physical illness or condition"
@@ -464,7 +464,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no10" value="No" v-model="eleven"
                             name="History of physical , sexual or emotional abuse"
@@ -474,7 +474,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes10" value="Yes" v-model="eleven"
                             name="History of physical , sexual or emotional abuse"
@@ -494,7 +494,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="no11" value="No" v-model="twelth"
                             name="access to lethal methods/weapons"
@@ -504,7 +504,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes11" value="Yes" v-model="twelth"
                             name="access to lethal methods/weapons"
@@ -558,7 +558,7 @@
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="No" value="No"
                              v-bind:name="'pro' + index" v-model="pro.answer"
@@ -571,7 +571,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             id="yes"
                              v-bind:name="'pro' + index"
@@ -707,7 +707,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input overdose-poisoning"
+                                    class="form-check-input overdose-poisoning radio"
                                     type="checkbox"
                                     value="Overdose/Poisoning"
                                     id="1" v-model="overdose"
@@ -739,7 +739,7 @@
                                 </div>
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Hanging/Suffocation"
                                     id="2" v-model="hanging"
@@ -752,7 +752,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Drowning"
                                     id="3" v-model="drowning"
@@ -765,7 +765,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Firearms or explosives"
                                     id="4" v-model="firearmsorexplosives"
@@ -780,7 +780,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Fire/flames"
                                     id="5"   v-model="fire_flames"
@@ -793,7 +793,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Cutting or Piercing"
                                     id="6"  v-model="cuttingorpiercing"
@@ -807,7 +807,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Jumping from height"
                                     id="7"  v-model="jumpingfromheight"
@@ -820,7 +820,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input selfharm-other"
+                                    class="form-check-input selfharm-other radio"
                                     type="checkbox"
                                     value="Other" v-model="other_sh"
                                     id="8"
@@ -877,7 +877,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Family, friends, peer group"
                                     id="1.1" v-model="family"
@@ -890,7 +890,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Internet (website, social media platform,app, blogs, forum, video/photosharing)"
                                     id="2.2" v-model="internet"
@@ -904,7 +904,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Printed media (newspaper, books, magazine, etc)"
                                     id="3.3" v-model="printed"
@@ -920,7 +920,7 @@
                               <div class="col-sm-6">
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Broadcast media (television, radio)"
                                     id="5.5" v-model="broadcast"
@@ -933,7 +933,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     value="Own ideas"
                                     id="4.4" v-model="ideas"
@@ -946,7 +946,7 @@
                                 <!-- checkbox -->
                                 <div class="form-check mb-3">
                                   <input
-                                    class="form-check-input specify-other"
+                                    class="form-check-input specify-other radio"
                                     type="checkbox"
                                     value="Specify patient actual words"
                                     id="6.6" v-model="patientactualword"
@@ -1007,7 +1007,7 @@
                               <div class="mt-2">
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input intent"
+                                    class="form-check-input intent radio"
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio1"
@@ -1022,7 +1022,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input intent"
+                                    class="form-check-input intent radio"
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio2"
@@ -1037,7 +1037,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input intent"
+                                    class="form-check-input intent radio"
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="inlineRadio3"
@@ -1055,7 +1055,7 @@
                               <div class="col-sm-12 intent-div mt-4 hide">
                                 <div class="form-check form-check-inline">
                                   <input disabled
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="verbal"
                                     value="verbal"  @change="OnpatientIntent('verbal',$event)"
@@ -1068,7 +1068,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="messaging"
                                     value="Messaging" @change="OnpatientIntent('Messaging',$event)"
@@ -1083,7 +1083,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="rehearsing"
                                     value="Rehearsing" @change="OnpatientIntent('Rehearsing',$event)"
@@ -1098,7 +1098,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="not-Expressed"
                                     value="Not Expressed" @change="OnpatientIntent('Not Expressed',$event)"
@@ -1113,7 +1113,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="handwritten"
                                     value="Handwritten" @change="OnpatientIntent('Handwritten',$event)"
@@ -1128,7 +1128,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="social-media"
                                     value="Social Media" @change="OnpatientIntent('Social Media',$event)"
@@ -1143,7 +1143,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    class="form-check-input radio"
                                     type="checkbox"
                                     id="learn-more"
                                     value="Learn more" @change="OnpatientIntent('Learn more',$event)"
@@ -1158,7 +1158,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
-                                    class="form-check-input intent-other"
+                                    class="form-check-input intent-other radio"
                                     type="checkbox"
                                     id="Other"
                                     value="Other" @change="OnpatientIntent('Other',$event)"
@@ -1213,7 +1213,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si01"
                                       value="0"
@@ -1225,7 +1225,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si01"
                                       value="1"
@@ -1237,7 +1237,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si01"
                                       value="2"
@@ -1257,7 +1257,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si09"
                                       value="0"
@@ -1269,7 +1269,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si09"
                                       value="1"
@@ -1281,7 +1281,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si09"
                                       value="2"
@@ -1301,7 +1301,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si02"
                                       value="0"
@@ -1313,7 +1313,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si02"
                                       value="1"
@@ -1325,7 +1325,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si02"
                                       value="2"
@@ -1345,7 +1345,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si10"
                                       value="0"
@@ -1357,7 +1357,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si10"
                                       value="1"
@@ -1369,7 +1369,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si10"
                                       value="2"
@@ -1389,7 +1389,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si03"
                                       value="0"
@@ -1401,7 +1401,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si03"
                                       value="1"
@@ -1413,7 +1413,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si03"
                                       value="2"
@@ -1433,7 +1433,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si11"
                                       value="0"
@@ -1445,7 +1445,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si11"
                                       value="1"
@@ -1457,7 +1457,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si11"
                                       value="2"
@@ -1477,7 +1477,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si04"
                                       value="0"
@@ -1489,7 +1489,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si04"
                                       value="1"
@@ -1501,7 +1501,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si04"
                                       value="2"
@@ -1521,7 +1521,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si12"
                                       value="0"
@@ -1533,7 +1533,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si12"
                                       value="1"
@@ -1545,7 +1545,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si12"
                                       value="2"
@@ -1565,7 +1565,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si05"
                                       value="0"
@@ -1577,7 +1577,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si05"
                                       value="1"
@@ -1589,7 +1589,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si05"
                                       value="2"
@@ -1609,7 +1609,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si13"
                                       value="0"
@@ -1621,7 +1621,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si13"
                                       value="1"
@@ -1633,7 +1633,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si13"
                                       value="2"
@@ -1653,7 +1653,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si06"
                                       value="0"
@@ -1665,7 +1665,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si06"
                                       value="1"
@@ -1677,7 +1677,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si06"
                                       value="2"
@@ -1697,7 +1697,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si14"
                                       value="0"
@@ -1709,7 +1709,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si14"
                                       value="1"
@@ -1721,7 +1721,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si14"
                                       value="2"
@@ -1741,7 +1741,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si07"
                                       value="0"
@@ -1753,7 +1753,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si07"
                                       value="1"
@@ -1765,7 +1765,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si07"
                                       value="2"
@@ -1785,7 +1785,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si15"
                                       value="0"
@@ -1797,7 +1797,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si15"
                                       value="1"
@@ -1809,7 +1809,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si15"
                                       value="2"
@@ -1829,7 +1829,7 @@
                                   >
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si08"
                                       value="0"
@@ -1841,7 +1841,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si08"
                                       value="1"
@@ -1853,7 +1853,7 @@
                                   </div>
                                   <div class="form-check">
                                     <input
-                                      class="form-check-input"
+                                      class="form-check-input radio"
                                       type="radio"
                                       v-model="si08"
                                       value="2"
@@ -1945,7 +1945,7 @@
                             <td>
                               <div class="form-check">
                                 <input
-                                  class="form-check-input"
+                                  class="form-check-input radio"
                                   type="radio"
                                   name="risk-level"
                                   id="High"
@@ -1970,7 +1970,7 @@
                             <td>
                               <div class="form-check">
                                 <input
-                                  class="form-check-input"
+                                  class="form-check-input radio"
                                   type="radio"
                                   name="risk-level"
                                   id="moderate"
@@ -1994,7 +1994,7 @@
                             <td>
                               <div class="form-check">
                                 <input
-                                  class="form-check-input"
+                                  class="form-check-input radio"
                                   type="radio"
                                   name="risk-level"
                                   id="low"
@@ -2157,7 +2157,7 @@
                       <div class="col-sm-9">
                         <div class="form-check">
                           <input
-                            class="form-check-input aborted-no"
+                            class="form-check-input aborted-no radio"
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca1" value="No significant physical harm, No medical treatment required"
@@ -2171,7 +2171,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input aborted-no"
+                            class="form-check-input aborted-no radio"
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca2" value="Medical attention/Surgery required, but no danger to
@@ -2185,7 +2185,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input aborted-no"
+                            class="form-check-input aborted-no radio"
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca3" value="Medical attention/Surgery required, had/has danger
@@ -2199,7 +2199,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input aborted-no"
+                            class="form-check-input aborted-no radio"
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca4" value="Lethal" v-model="physical_consequences"
@@ -2211,7 +2211,7 @@
                         </div>
                         <div class="form-check other-show-div">
                           <input
-                            class="form-check-input aborted-yes"
+                            class="form-check-input aborted-yes radio"
                             type="radio"
                             name="physical consequence of current attempt"
                             id="pcoca5" value="Aborted" v-model="physical_consequences"
@@ -2243,7 +2243,7 @@
                       <div class="col-sm-9">
                         <div class="form-check">
                           <input
-                            class="form-check-input pafca-no"
+                            class="form-check-input pafca-no radio"
                             type="radio"
                             name="If patient admitted for current attempt"
                             id="pafca1" value="No" v-model="patient_admitted"
@@ -2255,7 +2255,7 @@
                         </div>
                         <div class="form-check other-show-div">
                           <input
-                            class="form-check-input pafca-yes"
+                            class="form-check-input pafca-yes radio"
                             type="radio"
                             name="If patient admitted for current attempt"
                             id="pafca2"  value="Yes" v-model="patient_admitted"
@@ -2282,7 +2282,7 @@
                       <div class="col-sm-9">
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             name="Status on Discharge"
                             id="sond1" value="Dead" v-model="discharge_status"
@@ -2294,7 +2294,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="radio"
                             name="Status on Discharge"
                             id="sond2" value="Alive" v-model="discharge_status"
@@ -2422,7 +2422,7 @@
                       <!-- <div class="col-sm-9">
                         <div class="form-check" v-for="(pb, index) in list1" :key="index">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1" checked
@@ -2447,7 +2447,7 @@
                       <div class="col-sm-9">
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d1"
@@ -2462,7 +2462,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d2"
@@ -2477,7 +2477,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d3"
@@ -2492,7 +2492,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d4"
@@ -2507,7 +2507,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input"
+                            class="form-check-input radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d5"
@@ -2522,7 +2522,7 @@
                         </div>
                         <div class="form-check">
                           <input
-                            class="form-check-input PSY-other"
+                            class="form-check-input PSY-other radio"
                             type="checkbox"
                             name="PSY Mx on Discharge"
                             id="psy-d6"
@@ -3501,5 +3501,12 @@ export default {
 }
 .step-form-box {
   display: block !important;
+}
+.radio[disabled] {
+  opacity: 1;
+}
+
+.label{
+  opacity: 1;
 }
 </style>

@@ -12,7 +12,7 @@
               <h4>SHHARP Registry History</h4>
             </div>
             <div class="card-body">
-              <table class="table table-striped data-table display nowrap" style="width: 100%">
+              <table class="table table-striped display nowrap" style="width: 100%">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -53,6 +53,8 @@
                   </tr>
                 </tbody>
               </table>
+              <br>
+              <button class="pre-1 btn btn-success mr-auto" @click="GoBack"><i class="fad fa-arrow-to-left"></i> Back</button>
             </div>
           </div>
           <!-- card -->
@@ -98,22 +100,19 @@ export default {
       .then((resp) => {
         this.list = resp.data.Data;
         console.log("list", this.list);
-        $(document).ready(function () {
-          $(".data-table").DataTable({
-            searching: false,
-            bLengthChange: false,
-            bInfo: false,
-            // autoWidth: false,
-            // responsive: true,
-            scrollX: true,
-            language: {
-              paginate: {
-                next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-              },
-            },
-          });
-        });
+        // $(document).ready(function () {
+        //   $(".data-table").DataTable({
+        //     searching: false,
+        //     bLengthChange: false,
+        //     bInfo: false,
+        //     // autoWidth: false,
+        //     // responsive: true,
+        //     scrollX: true,
+        //     language: {
+        //       paginate:
+        //     },
+        //   });
+        // });
       })
       .catch ((err) => {
         this.loader = false;
@@ -140,6 +139,12 @@ export default {
         query: { id: Id,patient_id:this.Id},
       });
     },
-  },
+    GoBack(){
+        this.$router.push({
+              path: "/modules/Shharp/patient-summary",
+              query: { id: this.Id},
+            });
+    }
+    },
 };
 </script>
