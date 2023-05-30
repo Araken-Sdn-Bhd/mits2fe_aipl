@@ -679,7 +679,7 @@
                             <div class="row">
                               <div class="col-sm-4">
                                 <label class="form-label">Date<small style="color:red">*</small> </label>
-                                <input type="date" class="form-control" v-model="Sdate" />
+                                <input type="date" :max="this.currentDate" class="form-control" v-model="Sdate" />
                               </div>
                               <div class="col-sm-4">
                                 <label class="form-label">Time<small style="color:red">*</small> </label>
@@ -1536,7 +1536,7 @@
                       <div class="col-sm-3">
                         <label class="form-label">Date<small style="color:red">*</small></label>
                         <input
-                          type="date"
+                          type="date" :max="this.currentDate"
                           class="form-control"
                           placeholder="Please Specify" v-model="date"
                         />
@@ -1700,14 +1700,14 @@
                       >
                       <div class="col-sm-3">
                         <label class="form-label">Date<small style="color:red">*</small></label>
-                        <input type="date" class="form-control" v-model="discharge_date"/>
+                        <input type="date" :max="this.currentDate" class="form-control" v-model="discharge_date"/>
                       </div>
                       <div class="col-sm-3">
                         <label class="form-label">Number of days in ward<small style="color:red">*</small></label>
                         <input
-                          type="text"
+                          type="number"
                           class="form-control"
-                          placeholder="Days" v-model="discharge_number_days_in_ward"
+                          placeholder="Please Specify" v-model="discharge_number_days_in_ward"
                         />
                       </div>
                     </div>
@@ -2119,7 +2119,7 @@ export default {
       patient_admitted_des: "",
       discharge_status: "",
       discharge_date: "",
-      discharge_number_days_in_ward: 0,
+      discharge_number_days_in_ward: "",
       main_psychiatric_diagnosis: 0,
       additional_diagnosis: 0,
       additional_external_cause_injury: 0,
@@ -2198,6 +2198,7 @@ export default {
       eightbox: [],
       secDYes: "",
       submitting: true,
+      currentDate: "",
     };
   },
   mounted() {
@@ -2205,6 +2206,7 @@ export default {
     this.officername = this.userdetails.user.name;
     this.designation = this.userdetails.user.role;
     this.reportingdate = moment().format("DD-MM-YYYY");
+    this.currentDate = moment().format("YYYY-MM-DD");
     this.hospitalname = this.userdetails.branch.hospital_name;
 
     let urlParams = new URLSearchParams(window.location.search);
@@ -3899,7 +3901,7 @@ export default {
           this.errors.push("Discharge Date in Hospital Management's tab is required.");
           this.submitting = false;
         }
-        if (!this.discharge_number_days_in_ward) {
+        if (this.discharge_number_days_in_ward == '') {
           this.errors.push("Number of days in ward in Hospital Management's tab is required.");
           this.submitting = false;
         }
@@ -4050,6 +4052,18 @@ export default {
     position:relative;
     top:-10px;
   }
+
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>
 <!-- <style scoped>
 /* #myTab .nav-item a {
