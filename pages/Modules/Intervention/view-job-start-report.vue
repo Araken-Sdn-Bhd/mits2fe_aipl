@@ -26,13 +26,13 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Employment Specialist<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="employment_specialist" />
+                                            <input type="text" class="form-control" v-model="employment_specialist" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Case Manager<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="case_manager">
+                                            <select class="form-select" v-model="case_manager" disabled>
                                                 <option value="0">
                                                     Select Case Manager
                                                 </option>
@@ -49,7 +49,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">First Date Of Work<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="first_date_of_work" />
+                                            <input type="date" class="form-control" v-model="first_date_of_work" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -59,13 +59,13 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Job Title<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="job_title" />
+                                            <input type="text" class="form-control" v-model="job_title" disabled/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Duties Field<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="duties_field" />
+                                            <input type="text" class="form-control" v-model="duties_field" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -75,20 +75,20 @@
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label">Rate Of Pay<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="rate_of_pay" />
+                                            <input type="text" class="form-control" v-model="rate_of_pay" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label">Benefits Field<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="benefits_field" />
+                                            <input type="text" class="form-control" v-model="benefits_field" disabled/>
                                         </div>
                                     </div>
     
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label">Work Schedule<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="work_schedule" />
+                                            <input type="text" class="form-control" v-model="work_schedule" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -99,63 +99,30 @@
                                         <div class="col-sm-6">
                                             <div class="form-check form-check-inline">
                                                 <b-form-group v-slot="{ ariaDescribedby }">
-                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="Yes"><span class="form-check-label" for="inlineRadio11">Yes - worker has agreed to employer contact and has
+                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="Yes" disabled><span class="form-check-label" for="inlineRadio11">Yes - worker has agreed to employer contact and has
                                                             signed a release</span></b-form-radio>
                                                 </b-form-group>
                                                 <b-form-group v-slot="{ ariaDescribedby }">
-                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="No"><span class="form-check-label" for="inlineRadio12">No - worker does not want employer contact</span></b-form-radio>
+                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="No" disabled><span class="form-check-label" for="inlineRadio12">No - worker does not want employer contact</span></b-form-radio>
                                                 </b-form-group>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row mb-3" v-if="this.type != 'view'">
-                      <label class="form-label">Disclosure</label>
-                      <div class="col-sm-6">
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio11"
-                            value="Yes"
-                            v-model="disclosure"
-                          />
-                          <label class="form-check-label" for="inlineRadio11"
-                            >Yes - worker has agreed to employer contact and has
-                            signed a release</label
-                          >
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio22"
-                            value="No"
-                            v-model="disclosure"
-                          />
-                          <label class="form-check-label" for="inlineRadio22"
-                            >No - worker does not want employer contact
-                          </label>
-                        </div>
-                      </div>
-                    </div> -->
+                     
                                 <!-- close-row -->
     
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Name of Employer<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="name_of_employer" />
+                                            <input type="text" class="form-control" v-model="name_of_employer" disabled/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Name of Supervisor<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="name_of_superviser" />
+                                            <input type="text" class="form-control" v-model="name_of_superviser" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +131,7 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Address<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="address"></textarea>
+                                            <textarea class="form-control textarea" v-model="address" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +149,7 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="location_services_id">
+                                                        <select class="form-select" v-model="location_services_id" disabled>
                                                             <option value="0">
                                                                 Select location of services
                                                             </option>
@@ -198,7 +165,7 @@
                                                             >Type Of Diagnosis<small style="color:red">*</small> </label
                                                         >
                                                         <div class="col-sm-8">
-                                                            <select class="form-select" v-model="type_diagnosis_id">
+                                                            <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                                 <option value="0">Select Diagnosis</option>
                                                                 <option
                                                                 v-for="catcode in diagonisislist"
@@ -215,7 +182,7 @@
                                                         <div class="col-sm-8 align-items-flex-start" >
                                                             <select
                                                             id="additionalbox" v-model="additional_diagnosis"
-                                                            class="form-select multiselect" multiple="multiple">
+                                                            class="form-select multiselect" multiple="multiple" disabled>
                                                                 <option value="0">Please Select</option><option
                                                                 v-for="catcode in diagonisislist"
                                                                 v-bind:key="catcode.id"
@@ -232,16 +199,16 @@
                                                     <div class="col-sm-8">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
+                                                            <label class="form-check-label" for="inlineRadio1" disabled>Assisstance / Supervision</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
+                                                            <label class="form-check-label" for="inlineRadio2" disabled>Clinical Work / Procedure
                                                             </label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio3">External</label>
+                                                            <label class="form-check-label" for="inlineRadio3" disabled>External</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,7 +218,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="services_id">
+                                                            <select class="form-select" v-model="services_id" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -267,7 +234,7 @@
                                                 <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                                 <select
                                                 class="form-select"
-                                                v-model="code_id"
+                                                v-model="code_id" disabled
                                                 @change="onCategorycodebind($event)"
                                                 >
                                                 <option value="0">Select code</option>
@@ -286,7 +253,7 @@
                                             <div class="mt-2 align-items-flex-start">
                                                 <select
                                                 class="form-select multiselect" multiple="multiple"
-                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
     
                                                 <option value="0">Select code</option>
                                                 <option
@@ -309,7 +276,7 @@
                                                     <select
                                                     class="form-select"
                                                     v-model="add_code_id"
-                                                    @change="onCategoryaddcodebind($event)"
+                                                    @change="onCategoryaddcodebind($event)" disabled
                                                     >
                                                     <option value="0">Select code</option>
                                                     <option
@@ -327,7 +294,7 @@
                                                 <div class="mt-2 align-items-flex-start">
                                                     <select
                                                     class="form-select multiselect" multiple="multiple"
-                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
     
                                                     <option value="0">Select code</option>
                                                     <option
@@ -350,7 +317,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="serviceid">
+                                                            <select class="form-select" v-model="serviceid" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -364,7 +331,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="complexity_services_id">
+                                                        <select class="form-select" v-model="complexity_services_id" disabled>
                                                             <option value="0">
                                                                 Select Complexity Of Service
                                                             </option>
@@ -375,7 +342,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="outcome_id">
+                                                        <select class="form-select" v-model="outcome_id" disabled>
                                                             <option value="0">Select outcome</option>
                                                             <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                                 {{ out.section_value }}
@@ -398,7 +365,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -419,15 +386,6 @@
                                     <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                     </button>
     
-                                    <div class="btn-right">
-                                        <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                            <i class="fa fa-save"></i> Save as draft
-                                        </button>
-    
-                                        <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                            <i class="fa fa-paper-plane"></i> Submit
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
