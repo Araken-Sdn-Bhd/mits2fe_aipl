@@ -101,8 +101,17 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Diagnosis<small style="color:red">*</small>  </label>
-                      <textarea class="form-control textarea" v-model="diagnosis"></textarea>
+                      <label class="form-label">Diagnosis<small style="color:red">*</small> </label>
+                      <select class="form-select" v-model="type_diagnosis_id">
+                       <option value="0">Select Diagnosis</option>
+                                <option
+                          v-for="catcode in diagonisislist"
+                          v-bind:key="catcode.id"
+                          v-bind:value="catcode.id"
+                        >
+                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                        </option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -279,11 +288,28 @@
                           </div>
                         </div>
                         <!-- close-row -->
+                        <div class="row mb-3">
+                          <label class="col-sm-4 col-form-label"
+                            >Type Of Diagnosis<small style="color:red">*</small> </label
+                          >
+                          <div class="col-sm-8">
+                            <select class="form-select" v-model="type_diagnosis_id">
+                                <option value="0">Select Diagnosis</option>
+                                <option
+                                  v-for="catcode in diagonisislist"
+                                  v-bind:key="catcode.id"
+                                  v-bind:value="catcode.id"
+                                >
+                                {{ catcode.icd_code }} {{catcode.icd_name}}
+                                </option>
+                              </select>
+                          </div>
+                        </div>
                         <div class="row mb-3 align-items-flex-start">
-                      <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
-                      <div class="col-sm-8">
+                      <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
+                      <div class="col-sm-8 align-items-flex-start" >
                           <select
-                          id="type_diagnosis_id"
+                          id="additionalbox" 
                           class="form-select multiselect" multiple="multiple">
                               <option value="0">Please Select</option><option
                               v-for="catcode in diagonisislist"
@@ -293,7 +319,8 @@
                             </option>
                         </select>
                       </div>
-                    </div>
+                        </div>
+                  
                         <!-- close-row -->
                         <div class="row mb-3">
                           <label class="col-lg-4 col-sm-12 col-form-label">Category Of Services<small style="color:red">*</small>
@@ -334,7 +361,7 @@
                         </div>
                         <!-- 01 -->
                         <div class="clinical-work services hide mb-3">
-                          <div class="row mb-6 align-items-flex-start">
+                        <div class="row mb-6 align-items-flex-start">
                           <div class="col-md-4 mb-3">
                             <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                             <select
@@ -418,7 +445,7 @@
                          
                           
                         </div>
-                        </div>
+                      </div>
                         <!-- 02 -->
                         <div class="external services hide mb-3">
                           <div class="row">
@@ -576,6 +603,13 @@ export default {
       type: "",
       jobsearchlist: [],
       appId: 0,
+
+      addicdcatcodelist: [],
+            type_diagnosis_id: 0,
+            add_code_id:0,
+            additional_diagnosis: [],
+            additional_sub_code_id:[],
+            additional_sub_code_id2:[],
     };
   },
   beforeMount() {
@@ -683,16 +717,17 @@ export default {
               case_manager_designation: this.case_manager_designation,
               specialist_incharge_date: this.specialist_incharge_date,
               specialist_incharge_name: this.specialist_incharge_name,
-              specialist_incharge_designation:
-                this.specialist_incharge_designation,
+              specialist_incharge_designation:this.specialist_incharge_designation,
               location_of_service: this.location_services_id,
-              type_of_diagnosis: JSON.stringify(type_diagnosis_id),
+              diagnosis_id: this.type_diagnosis_id,
+              diagnosis_type: this.type_diagnosis_id,
+              add_diagnosis_type: JSON.stringify(additionalbox),
               category_of_services: this.category_services,
               services: this.services_id,
               complexity_of_services: this.complexity_services_id,
               outcome: this.outcome_id,
-              icd_9_code: this.code_id,
-              icd_9_subcode: JSON.stringify(sub_code_id),
+              code_id: this.code_id,
+              sub_code_id: JSON.stringify(sub_code_id),
               add_code_id: this.add_code_id,
               add_sub_code_id: JSON.stringify(add_sub_code_id),
               medication_prescription: this.medication_prescription,
