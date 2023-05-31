@@ -355,6 +355,7 @@ export default {
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+        this.branch_id= this.userdetails.branch.branch_id;
         $(document).ready(function () {
             $(".data-table").DataTable({
                 searching: false,
