@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Employment Status</label>
+                                            <label class="form-label">Employment Status<small>*</small></label>
                                             <select class="form-select" aria-label="" v-model="employment_id" @change="OnchangeOccStatus($event)">
                                                 <option value="">Please Select</option>
                                                 <option v-for="emp in employstatuslist" v-bind:key="emp.id" v-bind:value="emp.id">
