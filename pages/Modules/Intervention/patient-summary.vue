@@ -842,7 +842,7 @@ export default {
         });
       } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
         this.$router.push({
-          path: "/modules/Intervention/patient-care-plan-and-case-review",
+          path: "/modules/Intervention/view-patient-care-plan-and-case-review",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobStartReport") {
