@@ -3,7 +3,7 @@
       <CommonSidebar />
       <div id="layoutSidenav_content">
           <CommonHeader />
-          <main id="reslt" ref="reslt">
+          <main id="result" ref="result">
               <div class="container-fluid px-4" >
                   <div class="page-title">
                       <h1>OCCT REFERRAL FORM</h1>
@@ -98,7 +98,7 @@
                                                           <td>
                                                             <div class="col-sm-8 cla-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Activities Living Assessment" v-model="livingassessment"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="livingassessment"
                                                                        id="cla-1">
                                                                   <label class="form-check-label" for="cla-1">
                                                                       Activities Living Assessment
@@ -106,7 +106,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Behavior Assessment" v-model="behaviorassessment"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="behaviorassessment"
                                                                        id="cla-2">
                                                                   <label class="form-check-label" for="cla-2">
                                                                       Behavior Assessment
@@ -114,35 +114,35 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Cognitive and Perceptual Assessment" v-model="cognitiveassessment"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="cognitiveassessment"
                                                                        id="cla-3">
                                                                   <label class="form-check-label" for="cla-3">
                                                                       Cognitive And Perceptual Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Child Development" v-model="childevelopment"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="childevelopment"
                                                                     id="cla-4">
                                                                   <label class="form-check-label" for="cla-4">
                                                                       Child Development
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Psychology Assessment" v-model="psychology"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="psychology"
                                                                     id="cla-5">
                                                                   <label class="form-check-label" for="cla-5">
                                                                       Psychological Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Seating and Wheelchair Assessment" v-model="seatwheelchair"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="seatwheelchair"
                                                                     id="cla-6">
                                                                   <label class="form-check-label" for="cla-6">
                                                                       Seating and Wheelchair Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Domestic Assessment" v-model="domestic"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="domestic"
                                                                     id="cla-7">
                                                                   <label class="form-check-label" for="cla-7">
                                                                       Domestic Assessment
@@ -150,7 +150,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Driving Assessment" v-model="driving"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="driving"
                                                                     id="cla-8">
                                                                   <label class="form-check-label" for="cla-8">
                                                                       Driving Assessment
@@ -162,7 +162,7 @@
                                                           <td>
                                                             <div class="col-sm-8 cla-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Hand Function and Upper Limb Assessment" v-model="handlimb"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="handlimb"
                                                                   id="cla-9">
                                                                   <label class="form-check-label" for="cla-9">
                                                                       Hand Function And Upper Limb Assessment
@@ -170,7 +170,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Work/Home/School Assessment" v-model="workhomeschool"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="workhomeschool"
                                                                     id="cla-10">
                                                                   <label class="form-check-label" for="cla-10">
                                                                       Work/home/school Assessment
@@ -178,21 +178,21 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Sensory Motor Assessment" v-model="sensorymotor"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="sensorymotor"
                                                                     id="cla-11">
                                                                   <label class="form-check-label" for="1cla-1">
                                                                       Sensory Motor Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Preschool/School Skill Assessment" v-model="preschool"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="preschool"
                                                                     id="cla-12">
                                                                   <label class="form-check-label" for="cla-12">
                                                                       Pre School/school Skill Assessment
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Play Leisure Assessment" v-model="leisure"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="leisure"
                                                                     id="cla-13">
                                                                   <label class="form-check-label" for="cla-13">
                                                                       Play Leisure Assessment
@@ -200,7 +200,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox"  value="Work Assessment" v-model="workassessmnt"
+                                                                  <input class="form-check-input" type="checkbox"  value="true" v-model="workassessmnt"
                                                                     id="cla-14">
                                                                   <label class="form-check-label" for="cla-14">
                                                                       Work Assessment
@@ -256,7 +256,7 @@
                                                           <td>
                                                             <div class="col-sm-8 inv-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Activity Of Daily Living Training" v-model="activitytraining"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="activitytraining"
                                                                     id="inv-1">
                                                                   <label class="form-check-label" for="inv-1">
                                                                       Activity Of Daily Living Training
@@ -264,7 +264,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="AIDS Adaptation/Assistive Devices" v-model="aids"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="aids"
                                                                     id="inv-2">
                                                                   <label class="form-check-label" for="inv-2">
                                                                       AIDS Adaptation/Assistive Devices
@@ -272,7 +272,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Behavioural Therapy" v-model="behavetherapy"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="behavetherapy"
                                                                     id="inv-3">
                                                                   <label class="form-check-label" for="inv-3">
                                                                       Behavioural Therapy
@@ -280,14 +280,14 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Cognitive And Perceptual Training" v-model="cognitivetraining"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="cognitivetraining"
                                                                     id="inv-4">
                                                                   <label class="form-check-label" for="inv-4">
                                                                       Cognitive And Perceptual Training
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Compression Therapy" v-model="compression"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="compression"
                                                                     id="inv-5">
                                                                   <label class="form-check-label" for="inv-5">
                                                                       Compression Therapy
@@ -295,7 +295,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Creative Therapy" v-model="creative"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="creative"
                                                                   id="inv-6">
                                                                   <label class="form-check-label" for="inv-6">
                                                                       Creative Therapy
@@ -303,21 +303,21 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Social Skill Training" v-model="socialtraining"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="socialtraining"
                                                                     id="inv-7">
                                                                   <label class="form-check-label" for="inv-7">
                                                                       Social Skill Training
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Relaxation Therapy/Stress Management" v-model="relaxtherapy"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="relaxtherapy"
                                                                     id="inv-8">
                                                                   <label class="form-check-label" for="inv-8">
                                                                       Relaxation Therapy/Stress Management
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Low Vision Rehabilitation" v-model="lowvision"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="lowvision"
                                                                     id="inv-9">
                                                                   <label class="form-check-label" for="inv-9">
                                                                       Low Vision Rehabilitation
@@ -325,7 +325,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Domestic Rehabilitation" v-model="domesticrehab"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="domesticrehab"
                                                                     id="inv-10">
                                                                   <label class="form-check-label" for="inv-10">
                                                                       Domestic Rehabilitation
@@ -337,7 +337,7 @@
                                                           <td>
                                                             <div class="col-sm-8 inv-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Fine Motor/Hand Function Training" v-model="motorhand"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="motorhand"
                                                                     id="inv-11">
                                                                   <label class="form-check-label" for="inv-11">
                                                                       Fine Motor/Hand Function Training
@@ -345,7 +345,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Gross Motor/Functional Mobility" v-model="grossmotor"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="grossmotor"
                                                                     id="inv-12">
                                                                   <label class="form-check-label" for="inv-12">
                                                                       Gross Motor/Functional Mobility
@@ -353,21 +353,21 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Patient's and Career's Education" v-model="ptcareereducate"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="ptcareereducate"
                                                                    id="inv-13">
                                                                   <label class="form-check-label" for="inv-13">
                                                                       Patient's And Carer's Education
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Play and Leisure (Explanation and Training)" v-model="playleisure"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="playleisure"
                                                                     id="inv-14">
                                                                   <label class="form-check-label" for="inv-14">
                                                                       Play And Leisure(Explanation And Training)
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Sensory Integration Training" v-model="sensoryintegrity"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="sensoryintegrity"
                                                                     id="inv-15">
                                                                   <label class="form-check-label" for="inv-15">
                                                                       Sensory Integration Training
@@ -375,7 +375,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Wheelchair Training" v-model="wheelchairtraining"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="wheelchairtraining"
                                                                     id="inv-16">
                                                                   <label class="form-check-label" for="inv-16">
                                                                       Wheelchair Training
@@ -383,7 +383,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Work Rehabilitation" v-model="workrehab"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="workrehab"
                                                                     id="inv-17">
                                                                   <label class="form-check-label" for="inv-18">
                                                                       Work Rehabilitation
@@ -391,7 +391,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Splint" v-model="splint"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="splint"
                                                                      id="inv-19">
                                                                   <label class="form-check-label" for="inv-19">
                                                                       Splint
@@ -448,7 +448,7 @@
                                                           <td>
                                                             <div class="col-sm-8 prp-box">
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Special Needs Children Program" v-model="specialneeds"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="specialneeds"
                                                                       name="" id="prp-1">
                                                                   <label class="form-check-label" for="prp-1">
                                                                       Special Needs Children Program
@@ -456,7 +456,7 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Mental Health Program" v-model="mentalhealth"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="mentalhealth"
                                                                       name="" id="prp-2">
                                                                   <label class="form-check-label" for="prp-2">
                                                                       Mental Health Program
@@ -464,56 +464,56 @@
                                                               </div>
 
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Senior Citizen Program" v-model="seniorcitizen"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="seniorcitizen"
                                                                       name="" id="prp-3">
                                                                   <label class="form-check-label" for="prp-3">
                                                                       Senior Citizen Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Community Program" v-model="communityprog"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="communityprog"
                                                                       name="" id="prp-4">
                                                                   <label class="form-check-label" for="prp-4">
                                                                       Community Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Out Patient Program" v-model="outpatient"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="outpatient"
                                                                       name="" id="prp-5">
                                                                   <label class="form-check-label" for="prp-5">
                                                                       Out Patient Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Teenager and School Program " v-model="teenschool"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="teenschool"
                                                                       name="" id="prp-6">
                                                                   <label class="form-check-label" for="prp-6">
                                                                       Teenagers And School Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Diabetes Program" v-model="diabetes"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="diabetes"
                                                                       name="" id="prp-7">
                                                                   <label class="form-check-label" for="prp-7">
                                                                       Diabetes Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Hypertension Program" v-model="hypertension"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="hypertension"
                                                                       name="" id="prp-8">
                                                                   <label class="form-check-label" for="prp-8">
                                                                       Hypertension Program
                                                                   </label>
                                                               </div>
                                                                <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Antenatal/Mother and Child Program" v-model="antenatalmotherchild"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="antenatalmotherchild"
                                                                       name="" id="prp-9">
                                                                   <label class="form-check-label" for="prp-9">
                                                                       Antenatal/Mother And Child Program
                                                                   </label>
                                                               </div>
                                                               <div class="form-check">
-                                                                  <input class="form-check-input" type="checkbox" value="Healthy Lifestyle Program" v-model="healthylife"
+                                                                  <input class="form-check-input" type="checkbox" value="true" v-model="healthylife"
                                                                       name="" id="prp-10">
                                                                   <label class="form-check-label" for="prp-10">
                                                                       Healthy Lifestyle Program
@@ -622,6 +622,26 @@
                             </select>
                         </div>
                       </div>
+                      <div class="row mb-3 align-items-flex-start">
+                                                <label class="col-sm-4 col-form-label"
+                                                    >Additional Diagnosis</label
+                                                >
+                                                <div class="col-sm-8">
+                                                    <select
+                                                        id="additionalboxdiagnosis" v-model="additional_diagnosis"
+                                                        class="form-select multiselect" multiple="multiple"
+                                                        >
+                                                        <option value="0">Please Select</option>
+                                                        <option
+                                                        v-for="catcode in diagonisislist"
+                                                        v-bind:key="catcode.id"
+                                                        v-bind:value="catcode.id"
+                                                        >
+                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                       <!-- close-row -->
                       <div class="row mb-3">
                         <label class="col-sm-4 col-form-label"
@@ -645,7 +665,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions"
+                              name="inlineRadioOptions2"
                               id="inlineRadio2"
                               value="clinical-work"
                               v-model="category_services"
@@ -658,7 +678,7 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="inlineRadioOptions"
+                              name="inlineRadioOptions3"
                               id="inlineRadio3"
                               value="external"
                               v-model="category_services"
@@ -702,7 +722,10 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                            <select class="form-select" v-model="sub_code_id">
+                            <select id="subcodeicd" 
+                             class="form-select multiselectadditional" 
+                             v-model="sub_code_id" 
+                             multiple="multiple">
                               <option value="0">Select sub code</option>
                               <option
             v-for="catcode in icdcatcodelist"
@@ -715,6 +738,29 @@
                             </select>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-">
+                            <label class="form-label">Additional ICD 9 CODE</label>
+                                <select class="form-select" v-model="additional_code_id"  @change="onCategorycodebindAdditional($event)">
+                                    <option value="0">Select additional code</option>
+                                        <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                            {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                 </option>
+                                                </select>              
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label  class="form-label">Additional ICD 9 SUB CODE</label>
+                                      <div class="mt-2 align-items-flex-start">
+                                        <select id="additionalsubcodeicd" v-model="additional_sub_code_id" style="width:100%" class="form-select multiselectadditionalsubcode"  multiple="multiple">
+                                        <option value="0">Select additional sub code</option>                                                           
+                                        <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                        {{ catcode.icd_code }}
+                                        {{catcode.icd_name}}
+                                        </option>
+                                        </select>
+                                        </div>
+                                      </div>
+                                  </div>   
                       </div>
                       <!-- 02 -->
                       <div class="external services hide mb-3">
@@ -886,19 +932,15 @@ beforeMount() {
   let urlParams = new URLSearchParams(window.location.search);
   this.Id = urlParams.get("id");
   this.appId = urlParams.get("appId");
-  if (this.Id) {
     this.GetList();
     this.GetPatientdetails();
-  }
-
   let urlParams1 = new URLSearchParams(window.location.search);
   this.pid = urlParams1.get("pid");
   this.type = urlParams1.get("type");
-  if (this.pid) {
     this.getdetails();
-  }
+  
   this.referral_name = this.userdetails.user.name;
-  this.referral_designation = this.userdetails.user.role;
+  this.referral_designation = this.userdetails.designation.section_value;
 },
 data() {
   return {
@@ -927,7 +969,6 @@ data() {
     type_diagnosis_id: 0,
     category_services: "",
     code_id: 0,
-    sub_code_id: 0,
     complexity_services: 0,
     outcome: 0,
     medication_des: "",
@@ -986,11 +1027,68 @@ data() {
     SidebarAccess:null,
     appId:0,
     showStatus:0,
+    icdcatcodelistadditional:[],
+    additional_code_id: 0,
+    additional_diagnosis: 0,
+    sub_code_id:0,
+    additional_sub_code_id:0,
   };
 },
+mounted() {
+    
+    $(document).ready(function () {
+    $(".multiselect").select2({
+        placeholder: "Select Additional Diagnosis",
+    });
+    });
+
+    $(document).ready(function () {
+    $(".multiselectadditional").select2({
+        placeholder: "Select Sub Code",
+    });
+    });
+    $(document).ready(function () {
+    $(".multiselectadditionalsubcode").select2({
+        placeholder: "Select Additional Sub Code",
+    });
+    });
+    },
+
 methods: {
   async onCreateEvent() {
     if (confirm("Are you sure you want to save as draft?")) {
+      var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                            } else {
+                                additionalboxdiagnosis = this.value;
+                            }
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
+
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
+                            } else {
+                                subcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue3.push({ additionalsubcodeicd });
     try {
         this.loader = true;
         const headers = {
@@ -1072,7 +1170,6 @@ methods: {
             location_services: this.location_services,
             services_id: this.services_id,
             code_id: this.code_id,
-            sub_code_id: this.sub_code_id,
             type_diagnosis_id: this.type_diagnosis_id,
             category_services: this.category_services,
             complexity_services: this.complexity_services,
@@ -1081,6 +1178,10 @@ methods: {
             id:this.pid,
             appId: this.appId,
             status: "0",
+            additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+            additional_code_id: this.additional_code_id, 
+            sub_code_id: JSON.stringify(subcodeicd),
+            additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
           },
           { headers }
         );
@@ -1104,6 +1205,7 @@ methods: {
                 'Your for has been submitted.',
                 'success'
               )
+
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -1144,6 +1246,38 @@ methods: {
       })
       this.validate = true;
       this.errorList = [];
+      var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                            } else {
+                                additionalboxdiagnosis = this.value;
+                            }
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
+
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
+                            } else {
+                                subcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue3.push({ additionalsubcodeicd });
       try {
         if (!this.referral_location) {
           this.errorList.push("Referral Location is required");
@@ -1292,7 +1426,6 @@ methods: {
               location_services: this.location_services,
               services_id: this.services_id,
               code_id: this.code_id,
-              sub_code_id: this.sub_code_id,
               type_diagnosis_id: this.type_diagnosis_id,
               category_services: this.category_services,
               complexity_services: this.complexity_services,
@@ -1301,6 +1434,10 @@ methods: {
               id:this.pid,
               appId: this.appId,
               status: "1",
+              additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+              additional_code_id: this.additional_code_id, 
+              sub_code_id: JSON.stringify(subcodeicd),
+              additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
             },
             { headers }
           );
@@ -1448,6 +1585,28 @@ methods: {
       this.icdcatcodelist = [];
     }
   },
+  async onCategorycodebindAdditional(event) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            console.log("my id", event);
+            const response = await this.$axios.post(
+                "diagnosis/getIcd9subcodeList", {
+                    icd_category_code: event.target.value,
+                    
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.icdcatcodelistadditional = response.data.list;
+                
+            } else {
+                this.icdcatcodelistadditional  = [];
+            }
+        },
   resetmodel() {
     this.referral_location = "";
     this.date = "";
@@ -1515,175 +1674,190 @@ methods: {
       this.date = response.data.Data[0].date;
       this.diagnosis_id = response.data.Data[0].diagnosis_id;
 
-
       var jdata1 = JSON.parse(response.data.Data[0].referral_clinical_assessment);
       jdata1.forEach((ele) => {
       this.referral_clinical_assessment="val";
       if (ele["Activities Living Assessment"]==true) {
-          this.livingassessment = "Activities Living Assessment";
+          this.livingassessment = true;
         }
         if (ele["Behavior Assessment"]==true) {
-          this.behaviorassessment = "Behavior Assessment";
+          this.behaviorassessment = true;
         }
         if (ele["Cognitive And Perceptual Assessment"]==true) {
-          this.cognitiveassessment = "Cognitive And Perceptual Assessment";
+          this.cognitiveassessment = true;
         }
+        
         if (ele["Child Development"]==true) {
-          this.childevelopment = "Child Development";
+          this.childevelopment = true;
         }
         if (ele["Psychological Assessment"]==true) {
-          this.psychology = "Psychological Assessment";
+          this.psychology = true;
         }
         if (ele["Seating and Wheelchair Assessment"]==true) {
-          this.seatwheelchair = "Seating and Wheelchair Assessment";
+          this.seatwheelchair = true;
         }
         if (ele["Domestic Assessment"]==true) {
-          this.domestic = "Domestic Assessment";
+          this.domestic = true;
         }
         if (ele["Driving Assessment"]==true) {
-          this.driving = "Driving Assessment";
+          this.driving = true;
         }
         if (ele["Hand Function And Upper Limb Assessment"]==true) {
-          this.handlimb = "Hand Function And Upper Limb Assessment";
+          this.handlimb = true;
         }
         if (ele["Work/home/school Assessment"]==true) {
-          this.workhomeschool = "Work/home/school Assessment";
+          this.workhomeschool = true;
         }
         if (ele["Sensory Motor Assessment"]==true) {
-          this.sensorymotor = "Sensory Motor Assessment";
+          this.sensorymotor = true;
         }
         if (ele["Pre School/school Skill Assessment"]==true) {
-          this.preschool = "Pre School/school Skill Assessment";
+          this.preschool = true;
         }
         if (ele["Play Leisure Assessment"]==true) {
-          this.leisure = "Play Leisure Assessment";
+          this.leisure = true;
         }
         if (ele["Work Assessment"]==true) {
-          this.cognitiveassessment = "Work Assessment";
+          this.cognitiveassessment = true;
         }
+
         if (ele["Others"]==true) {
-          this.others = "Others";
+          this.others = true;
+          this.referral_clinical_assessment_other =
+        response.data.Data[0].referral_clinical_assessment_other;
         }
       });
-      this.referral_clinical_assessment_other =
-        response.data.Data[0].referral_clinical_assessment_other;
-
-      //window.alert(response.data.Data[0].referral_clinical_intervention);
       var jdata2 = JSON.parse(response.data.Data[0].referral_clinical_intervention);
+
       jdata2.forEach((ele) => {
        this.referral_clinical_intervention="val";
        if (ele["Activity Of Daily Living Training"]==true) {
-          this.activitytraining = "Activity Of Daily Living Training";
+          this.activitytraining = true;
         }
         if (ele["AIDS Adaptation/Assistive Devices"]==true) {
-          this.aids = "AIDS Adaptation/Assistive Devices";
+          this.aids = true;
         }
         if (ele["Behavioural Therapy"]==true) {
-          this.behavetherapy = "Behavioural Therapy";
+          this.behavetherapy = true;
         }
         if (ele["Cognitive And Perceptual Training"]==true) {
-          this.cognitivetraining = "Cognitive And Perceptual Training";
+          this.cognitivetraining = true;
         }
         if (ele["Compression Therapy"]==true) {
-          this.compression = "Compression Therapy";
+          this.compression = true;
         }
         if (ele["Creative Therapy"]==true) {
-          this.creative = "Creative Therapy";
+          this.creative = true;
         }
         if (ele["Social Skill Training"]==true) {
-          this.socialtraining = "Social Skill Training";
+          this.socialtraining = true;
         }
         if (ele["Relaxation Therapy/Stress Management"]==true) {
-          this.relaxtherapy = "Relaxation Therapy/Stress Management";
+          this.relaxtherapy = true;
         }
         if (ele["Low Vision Rehabilitation"]==true) {
-          this.lowvision = "Low Vision Rehabilitation";
+          this.lowvision = true;
         }
         if (ele["Domestic Rehabilitation"]==true) {
-          this.domesticrehab = "Domestic Rehabilitation";
+          this.domesticrehab = true;
         }
         if (ele["Fine Motor/Hand Function Training"]==true) {
-          this.motorhand = "Fine Motor/Hand Function Training";
+          this.motorhand = true;
         }
         if (ele["Gross Motor/Functional Mobility"]==true) {
-          this.grossmotor = "Gross Motor/Functional Mobility";
+          this.grossmotor = true;
         }
         if (ele["Patient's And Carer's Education"]==true) {
-          this.ptcareereducate = "Patient's And Carer's Education";
+          this.ptcareereducate = true;
         }
         if (ele["Play And Leisure(Explanation And Training)"]==true) {
-          this.playleisure = "Play And Leisure(Explanation And Training)";
+          this.playleisure = true;
         }
         if (ele["Sensory Integration Training"]==true) {
-          this.sensoryintegrity = "Sensory Integration Training";
+          this.sensoryintegrity = true;
         }
         if (ele["Wheelchair Training"]==true) {
-          this.wheelchairtraining = "Wheelchair Training";
+          this.wheelchairtraining = true;
         }
         if (ele["Work Rehabilitation"]==true) {
-          this.workrehab = "Work Rehabilitation";
+          this.workrehab = true;
         }
         if (ele["Splint"]==true) {
-          this.splint = "Splint";
+          this.splint = true;
         }
         if (ele["Others"]==true) {
-          this.others2 = "Others";
+          this.others2 = true;
+          this.referral_clinical_intervention_other =
+        response.data.Data[0].referral_clinical_intervention_other;
         }
       });
-
-      this.referral_clinical_intervention_other =
-        response.data.Data[0].referral_clinical_intervention_other;
 
 
       var jdata3 = JSON.parse(response.data.Data[0].referral_clinical_promotive_program);
       jdata3.forEach((ele) => {
       this.referral_clinical_promotive_program="val";
       if (ele["Special Needs Children Program"]==true) {
-          this.specialneeds = "Special Needs Children Program";
+          this.specialneeds = true;
         }
         if (ele["Mental Health Program"]==true) {
-          this.mentalhealth = "Mental Health Program";
+          this.mentalhealth = true;
         }
         if (ele["Senior Citizen Program"]==true) {
-          this.seniorcitizen = "Senior Citizen Program";
+          this.seniorcitizen = true;
         }
         if (ele["Community Program"]==true) {
-          this.communityprog = "Community Program";
+          this.communityprog = true;
         }
         if (ele["Out Patient Program"]==true) {
-          this.outpatient = "Out Patient Program";
+          this.outpatient = true;
         }
         if (ele["Teenagers And School Program"]==true) {
-          this.teenschool = "Teenagers And School Program";
+          this.teenschool = true;
         }
         if (ele["Diabetes Program"]==true) {
-          this.diabetes = "Diabetes Program";
+          this.diabetes = true;
         }
         if (ele["Hypertension Program"]==true) {
-          this.hypertension = "Hypertension Program";
+          this.hypertension = true;
         }
         if (ele["Antenatal/Mother And Child Program"]==true) {
-          this.antenatalmotherchild = "Antenatal/Mother And Child Program";
+          this.antenatalmotherchild = true;
         }
         if (ele["Healthy Lifestyle Program"]==true) {
-          this.healthylife = "Healthy Lifestyle Program";
+          this.healthylife = true;
         }
       });
-
       this.referral_name = response.data.Data[0].referral_name;
       this.referral_designation = response.data.Data[0].referral_designation;
       this.location_services = response.data.Data[0].location_services;
       this.services_id = response.data.Data[0].services_id;
       this.code_id = response.data.Data[0].code_id;
-      this.sub_code_id = response.data.Data[0].sub_code_id;
       this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
       this.category_services = response.data.Data[0].category_services;
       this.complexity_services = response.data.Data[0].complexity_services;
       this.outcome = response.data.Data[0].outcome;
       this.medication_des = response.data.Data[0].medication_des;
+      this.additional_code_id= response.data.Data[0].add_code_id;
 
       this.GetList();
       this.GetPatientdetails();
+
+      this.additional_diagnosis = response.data.Data[0].add_type_diagnosis_id.split(",");
+      $("#additionalboxdiagnosis")
+      .val(this.additional_diagnosis)
+      .trigger("change");
+    
+      this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
+      $("#subcodeicd")
+      .val(this.sub_code_id)
+      .trigger("change");
+
+                    
+      this.additional_sub_code_id = response.data.Data[0].add_sub_code_id.split(",");
+      $("#additionalsubcodeicd")
+      .val(this.additional_sub_code_id)
+      .trigger("change");
+      
       const response2 = await this.$axios.post(
         "diagnosis/getIcd9subcodeList",
         { icd_category_code: this.code_id },
@@ -1694,6 +1868,31 @@ methods: {
       } else {
         this.icdcatcodelist = [];
       }
+      const response5 = await this.$axios.post(
+                      "diagnosis/getIcd9subcodeList", {
+                        icd_category_code: this.additional_code_id
+                      }, {
+                          headers
+                      }
+                  );
+        if (response5.data.code == 200 || response5.data.code == "200") {
+            this.icdcatcodelistadditional = response5.data.list;
+          } else {
+            this.icdcatcodelistadditional = [];
+          }
+      if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
     } else {
       this.$swal.fire({
                   icon: 'error',
@@ -1715,7 +1914,7 @@ methods: {
       pagesplit: true,
       background: "#FFF",
     };
-    pdf.addHTML($("#reslt"), options, function () {
+    pdf.addHTML($("#result"), options, function () {
       pdf.save("Occt_Referral.pdf");
       $('.btn-boxs').show();
     });
