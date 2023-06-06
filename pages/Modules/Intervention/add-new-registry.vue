@@ -2423,12 +2423,8 @@ export default {
       });
 
       $(".nexttab").click(function (e) {
-        if (this.sharp_register_id) {
           e.preventDefault();
           $('#myTab a[href="#protective"]').tab("show");
-        } else {
-          $("#Riskfactorpopup").modal("show");
-        }
       });
 
       $(".nex-1").click(function (e) {
@@ -3578,8 +3574,8 @@ export default {
     },
     async Draftadddataproducer() {
       this.errors = [];
-      this.OnDraftriskfactor("dataProducer");
-      this.Onprotectivefactordraft("dataProducer");
+      await this.OnDraftriskfactor("dataProducer");
+      await this.Onprotectivefactordraft("dataProducer");
       this.DraftSelfHarm("dataProducer");
       this.OnDraftsuciderisk("dataProducer");
       this.OnDraftSavehospitalmanagement("dataProducer");
@@ -3972,8 +3968,8 @@ export default {
           this.external_cause_inquiry &&
           this.discharge_psy_mx
         ) {
-          this.OnDraftriskfactor("dataProducer");
-          this.Onprotectivefactordraft("dataProducer");
+          await this.OnDraftriskfactor("dataProducer");
+          await this.Onprotectivefactordraft("dataProducer");
           this.DraftSelfHarm("dataProducer");
           this.OnDraftsuciderisk("dataProducer");
           this.OnDraftSavehospitalmanagement("dataProducer");

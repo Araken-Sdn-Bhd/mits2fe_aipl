@@ -4996,7 +4996,7 @@ export default {
           this.errors.push("Discharge Date in Hospital Management's tab is required.");
           this.submitting = false;
         }
-        if (!this.discharge_number_days_in_ward || this.discharge_number_days_in_ward == 0) {
+        if (!this.discharge_number_days_in_ward) {
           this.errors.push("Number of days in ward in Hospital Management's tab is required.");
           this.submitting = false;
         }

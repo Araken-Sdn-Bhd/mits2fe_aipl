@@ -126,7 +126,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="type_diagnosis_id">
+                                                      <select class="form-select" v-model="type_diagnosis_id" >
                                                           <option value="0">Select Diagnosis</option>
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -141,7 +141,6 @@
                                                       id="additionalbox" v-model="additional_diagnosis"
                                                       class="form-select multiselect" multiple="multiple"
                                                     >
-                                                    <option value="0">Please Select</option>
                                                       <option
                                           v-for="catcode in diagonisislist"
                                           v-bind:key="catcode.id"
@@ -204,7 +203,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -229,7 +227,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -614,6 +611,7 @@
                                   services_id: this.services_id,
                                   patient_id: this.Id,
                                   appId: this.appId,
+                                  id: this.pid,
                                   status: "0",
                               }, {
                                   headers
@@ -813,6 +811,7 @@
                                       services_id: this.services_id,
                                       patient_id: this.Id,
                                       appId: this.appId,
+                                      id: this.pid,
                                       status: "1",
                                   }, {
                                       headers
@@ -965,7 +964,7 @@
                   this.patient_mrn = response.data.Data[0].mrn;
                   this.activity_type = response.data.Data[0].activity_type;
                   this.employment_status = response.data.Data[0].employment_status;
-                  this.patient_mrn_id = response.data.Data[0].patient_mrn_id;
+                  this.patient_mrn_id = response.data.Data[0].mrn;
                   this.date = response.data.Data[0].date;
                   this.time = response.data.Data[0].time;
                   this.staff_name = response.data.Data[0].staff_name;
@@ -996,7 +995,7 @@
 
                   this.additional_code_id = response.data.Data[0].additional_code_id;
 
-                  this.GetList();
+                  // this.GetList();
 
                   const response2 = await this.$axios.post(
                       "diagnosis/getIcd9subcodeList", {

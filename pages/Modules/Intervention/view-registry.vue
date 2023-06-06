@@ -3408,9 +3408,10 @@ export default {
             this.printed=response.data.result.selfharm[2].section_value.Printed_media_newspaper_books_magazine_etc;
             this.broadcast=response.data.result.selfharm[2].section_value.Broadcast_media_television_radio;
             this.ideas=response.data.result.selfharm[2].section_value.Own_ideas;
-            if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
-              this.patientactualword = true;
-            }
+            // if(response.data.result.selfharm[2].section_value.Specify_patient_actual_words!=null) {
+            //   this.patientactualword = true;
+            // }
+            this.patientactualword = response.data.result.selfharm[2].section_value.Specify_patient_actual_words;
             this.patientactualword_other=response.data.result.selfharm[2].section_value.patientactualword_other;
         this.result = response.data.result.suicideRisk[0].result;
         this.referral_or_contact =

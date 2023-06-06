@@ -126,7 +126,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select disabled class="form-select" v-model="type_diagnosis_id">
+                                                      <select disabled class="form-select" v-model="type_diagnosis_id" >
                                                           <option value="0">Select Diagnosis</option>
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -141,7 +141,6 @@
                                                       id="additionalbox" v-model="additional_diagnosis"
                                                       class="form-select multiselect" multiple="multiple"
                                                     >
-                                                    <option value="0">Please Select</option>
                                                       <option
                                           v-for="catcode in diagonisislist"
                                           v-bind:key="catcode.id"
@@ -162,19 +161,19 @@
                                                           <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                           </label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio3" value="external" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio3">External</label>
                                                       </div>
                                                   </div>
                                               </div>
                                               <!-- close-row -->
                                               <!-- hide-div -->
-                                              <div id="assistance" class="assisstance services hide mb-3">
+                                              <div class="assisstance services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
@@ -188,7 +187,7 @@
                                                   </div>
                                               </div>
                                               <!-- 01 -->
-                                              <div id="clinical-work" class="clinical-work services hide mb-3">
+                                              <div class="clinical-work services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
@@ -204,7 +203,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -229,7 +227,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -241,7 +238,7 @@
                                                       </div>
                                               </div>
                                               <!-- 02 -->
-                                              <div id="external" class="external services hide mb-3">
+                                              <div class="external services hide mb-3">
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
@@ -637,7 +634,7 @@
                   this.patient_mrn = response.data.Data[0].mrn;
                   this.activity_type = response.data.Data[0].activity_type;
                   this.employment_status = response.data.Data[0].employment_status;
-                  this.patient_mrn_id = response.data.Data[0].patient_mrn_id;
+                  this.patient_mrn_id = response.data.Data[0].mrn;
                   this.date = response.data.Data[0].date;
                   this.time = response.data.Data[0].time;
                   this.staff_name = response.data.Data[0].staff_name;
@@ -668,21 +665,7 @@
 
                   this.additional_code_id = response.data.Data[0].additional_code_id;
 
-                  if(this.category_services=='assisstance'){
-                        $(document).ready(function(){
-                            $("#assisstance").removeClass("hide");
-                        });
-                    }else if(this.category_services=='clinical-work'){
-                        $(document).ready(function(){
-                            $("#clinical-work").removeClass("hide");
-                        });
-                    }else if(this.category_services=='external'){
-                        $(document).ready(function(){
-                            $("#external").removeClass("hide");
-                        });
-                    }
-
-                  this.GetList();
+                  // this.GetList();
 
                   const response2 = await this.$axios.post(
                       "diagnosis/getIcd9subcodeList", {
@@ -710,6 +693,20 @@
                       this.add_icdcatcodelist = [];
                   }
 
+                  if(this.category_services=='clinical-work'){
+                      $(document).ready(function () {
+                          $('input[name="inlineRadioOptions3"]').trigger('click');
+                      });
+                  }else if(this.category_services=='external'){
+                      $(document).ready(function () {
+                          $('input[name="inlineRadioOptions4"]').trigger('click');
+                      });
+                  }else{
+                      $(document).ready(function () {
+                          $('input[name="inlineRadioOptions"]').trigger('click');
+                      });
+                  }
+
               } else {
                   this.$swal.fire({
                       icon: 'error',
@@ -718,6 +715,7 @@
                       footer: ''
                   });
               }
+
           },
           GoBack() {
               if (this.type == 'view') {
