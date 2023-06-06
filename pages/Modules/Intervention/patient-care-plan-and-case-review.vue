@@ -689,7 +689,12 @@ export default {
           add_sub_code_id = this.value;
         }
       });
-      if (confirm("Are you sure you want to save this as draft ? ")) {
+      this.$swal.fire({
+                title: 'Do you want to save as draft?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async(result) => {
+              if (result.isConfirmed) {
         try {
           this.loader = true;
           const headers = {
@@ -761,7 +766,11 @@ export default {
                   footer: ''
                 });
         }
-      }
+      } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+          })
+      
     },
     async GetPatientdetails() {
       this.loader = true;
@@ -908,12 +917,12 @@ export default {
       }
     },
     async onPublishEvent() {
-      var type_diagnosis_id = 0;
-      $("#type_diagnosis_id :selected").each(function () {
-        if (type_diagnosis_id) {
-          type_diagnosis_id = type_diagnosis_id + "," + this.value;
+      var additionalbox = 0;
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
         } else {
-          type_diagnosis_id = this.value;
+          additionalbox = this.value;
         }
       });
       var sub_code_id = 0;
@@ -989,9 +998,9 @@ export default {
           if (!this.location_services_id) {
             this.errorList.push("Location Of Services is required");
           }
-          if (!type_diagnosis_id) {
-            this.errorList.push("Type Of Diagnosis is required");
-          }
+          if (!this.type_diagnosis_id) {
+                      this.errorList.push("Type Of Diagnosis is required");
+                    }
           if (!this.category_services) {
             this.errorList.push("Category Of Services is required");
           }
@@ -1054,7 +1063,7 @@ export default {
                 patient_id: this.Id,
                 plan_date: this.plan_date,
                 reason_of_review: this.reason_of_review,
-                diagnosis: this.diagnosis,
+                diagnosis_id: this.type_diagnosis_id,
                 medication_oral: this.medication_oral,
                 medication_depot: this.medication_depot,
                 medication_im: this.medication_im,
@@ -1068,15 +1077,16 @@ export default {
                 specialist_incharge_date: this.specialist_incharge_date,
                 specialist_incharge_name: this.specialist_incharge_name,
                 specialist_incharge_designation:
-                  this.specialist_incharge_designation,
+                this.specialist_incharge_designation,
                 location_of_service: this.location_services_id,
-                type_of_diagnosis: JSON.stringify(type_diagnosis_id),
+                diagnosis_type: this.type_diagnosis_id,
+                add_diagnosis_type: JSON.stringify(additionalbox),
                 category_of_services: this.category_services,
                 services: this.services_id,
                 complexity_of_services: this.complexity_services_id,
                 outcome: this.outcome_id,
-                icd_9_code: this.code_id,
-                icd_9_subcode: JSON.stringify(sub_code_id),
+                code_id: this.code_id ?? null,
+                sub_code_id: JSON.stringify(sub_code_id),
                 add_code_id: this.add_code_id,
                 add_sub_code_id: JSON.stringify(add_sub_code_id),
                 medication_prescription: this.medication_prescription,
