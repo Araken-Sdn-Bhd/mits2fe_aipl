@@ -665,12 +665,13 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-      var type_diagnosis_id = 0;
-      $("#type_diagnosis_id :selected").each(function () {
-        if (type_diagnosis_id) {
-          type_diagnosis_id = type_diagnosis_id + "," + this.value;
+     
+      var additionalbox = 0;
+      $("#additionalbox :selected").each(function () {
+        if (additionalbox) {
+          additionalbox = additionalbox + "," + this.value;
         } else {
-          type_diagnosis_id = this.value;
+          additionalbox = this.value;
         }
       });
       var sub_code_id = 0;
@@ -689,6 +690,7 @@ export default {
           add_sub_code_id = this.value;
         }
       });
+  
       this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -696,6 +698,7 @@ export default {
             }).then(async(result) => {
               if (result.isConfirmed) {
         try {
+
           this.loader = true;
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -709,7 +712,6 @@ export default {
               patient_id: this.Id,
               plan_date: this.plan_date,
               reason_of_review: this.reason_of_review,
-              diagnosis: this.diagnosis,
               medication_oral: this.medication_oral,
               medication_depot: this.medication_depot,
               medication_im: this.medication_im,
@@ -941,7 +943,12 @@ export default {
           add_sub_code_id = this.value;
         }
       });
-      if (confirm("Are you sure you want to save this entry ? ")) {
+      this.$swal.fire({
+                title: 'Do you want to save this record?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then(async(result) => {
+              if (result.isConfirmed) {
         this.errorList = [];
         this.validate = true;
         try {
@@ -951,10 +958,6 @@ export default {
           }
           if (!this.reason_of_review) {
             this.errorList.push("Reason for Review is required");
-            this.validate = false;
-          }
-          if (!this.diagnosis) {
-            this.errorList.push("Diagnosis is required");
             this.validate = false;
           }
           if (!this.background_history) {
@@ -1121,7 +1124,11 @@ export default {
                   footer: ''
                 });
       }
-      }
+    } else if (result.isDismissed) {
+                    this.$swal.fire('Changes are not saved', '', 'info')
+                }
+          })
+      
     },
     ResetModel() {
       this.plan_date = "";
