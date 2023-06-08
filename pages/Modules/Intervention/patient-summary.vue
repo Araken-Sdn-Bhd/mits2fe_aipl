@@ -934,7 +934,7 @@ export default {
         });
       } else if (data.type == "PsychologyRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/psychology-referral",
+          path: "/modules/Intervention/view-psychology-referral",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "RehabRefferalAndClinicalForm") {
