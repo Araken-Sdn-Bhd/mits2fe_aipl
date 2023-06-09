@@ -163,25 +163,27 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6 mb-">
+                                                  <div class="col-md-6 mb-3">
                                                         <label class="form-label">Additional ICD 9 CODE</label>
-                                                        <select class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
-                                                            <option value="0">Select additional code</option>
-                                                            <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                        <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                            <option value="0">Select code</option>
+                                                            <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                 {{ type.icd_category_code }} {{type.icd_category_name}}
                                                             </option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Additional ICD 9 SUB CODE</label>
-                                                        <div class="mt-2 align-items-flex-start">
-                                                            <select id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
-                                                                <option value="0">Select additional sub code</option>
-                                                                <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                                    {{ catcode.icd_code }}
-                                                                    {{catcode.icd_name}}
-                                                                </option>
-                                                            </select>
+                                                        <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
+                                                        <div>
+                                                          <div class="mt-2 align-items-flex-start">
+                                                            <select id='addsubcode' class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                            <option value="0">Select sub code</option>
+                                                            <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                {{ catcode.icd_code }}
+                                                                {{catcode.icd_name}}
+                                                            </option>
+                                                        </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -191,7 +193,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="serviceid">
+                                                        <select class="form-select" v-model="add_icdcatcodelist">
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                 {{ slt.section_value }}
@@ -295,6 +297,8 @@ export default {
             icdcatcodelist: [],
             diagonisislist: [],
             locationlist: [],
+            additionalcodelist: [],
+            add_icdcatcodelist: [],
             etplist: [],
             Id: 0,
             program: "",
@@ -314,6 +318,9 @@ export default {
             pid: 0,
             type: "",
             appId: 0,
+            additional_diagnosis: 0,
+            additional_subcode: 0,
+            additional_code_id: 0,
         };
     },
     beforeMount() {
@@ -430,10 +437,10 @@ export default {
                             this.errorList.push("ICD 9 CODE is required");
                             this.validate = false;
                         }
-                        if (!this.sub_code_id) {
-                            this.errorList.push("ICD 9 SUB CODE is required");
-                            this.validate = false;
-                        }
+                        // if (!this.sub_code_id) {
+                        //     this.errorList.push("ICD 9 SUB CODE is required");
+                        //     this.validate = false;
+                        // }
                     } else {
                         if (!this.serviceid) {
                             this.errorList.push("Services is required");
@@ -600,8 +607,10 @@ export default {
             });
             if (response3.data.code == 200 || response3.data.code == "200") {
                 this.codelist = response3.data.list;
+                this.additionalcodelist = response3.data.list;
             } else {
                 this.codelist = [];
+                this.additionalcodelist = [];
             }
             const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
                 headers,
@@ -662,12 +671,33 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
+        async onCategorycodebind2(event) {
+                const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                };
+                console.log("my id", event);
+                const response = await this.$axios.post(
+                    "diagnosis/getIcd9subcodeList", {
+                        icd_category_code: event.target.value
+                    }, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200 || response.data.code == "200") {
+                    this.add_icdcatcodelist = response.data.list;
+                } else {
+                    this.add_icdcatcodelist = [];
+                }
+            },
         resetmodel() {
             this.program = "";
             this.location_services_id = 0;
             this.type_diagnosis_id = 0;
             this.category_services = "";
             this.code_id = 0;
+            this.additional_code_id = 0;
             this.sub_code_id = 0;
             this.complexity_services_id = 0;
             this.outcome_id = 0;
@@ -698,6 +728,7 @@ export default {
                 this.services_id = response.data.Data[0].services_id;
                 this.code_id = response.data.Data[0].code_id;
                 this.sub_code_id = response.data.Data[0].sub_code_id;
+                // this.additional_code_id = response.
                 this.complexity_services_id =
                     response.data.Data[0].complexity_services;
                 this.outcome_id = response.data.Data[0].outcome;
