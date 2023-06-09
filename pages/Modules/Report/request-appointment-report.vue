@@ -62,23 +62,27 @@
             <thead>
                 <tr>
                     <th class="thhead">No</th>
-                    <th class="thhead">Name</th>
+                    <th class="thheadadd">Name</th>
                     <th class="thhead">NRIC/Passport</th>
-                    <th class="thhead">Address</th>
+                    <th class="thheadadd">Address</th>
                     <th class="thhead">Phone Number</th>
                     <th class="thhead">Email</th>
                     <th class="thhead">Request Date</th>
+                    <th class="thhead">Status</th>
+                    <th class="thheadadd">Remark</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(rp, index) in list" :key="index">
                     <td class="tdrow">{{ index + 1 }}</td>
-                    <td class="tdrow">{{ rp.name }}</td>
+                    <td class="tdrowadd">{{ rp.name }}</td>
                     <td class="tdrow">{{ rp.nric_or_passportno  }}</td>
-                    <td class="tdrow">{{ rp.address }}</td>
+                    <td class="tdrowadd ">{{ rp.address }}</td>
                     <td class="tdrow">{{ rp.contact_no }}</td>
                     <td class="tdrow">{{ rp.email  }}</td>
                     <td class="tdrow">{{ getFormattedDate(rp.created_at) }}</td>
+                    <td class="tdrow">{{ rp.status  }}</td>
+                    <td class="tdrowremark">{{ rp.remark  }}</td>
                 </tr>
             </tbody>
         </table>
@@ -122,6 +126,8 @@ export default {
                 'Phone Number': 'contact_number',
                 'Email': 'email',
                 'Request Date': 'created_at',
+                'Status' : 'status',
+                'Remark': 'remark'
             },
             excelname: "",
             sheetname: "Request Appointment Report",
@@ -268,7 +274,7 @@ export default {
 <style scoped>
 .tdrow {
     padding: 5px 10px;
-    border: 1px solid #000;
+    border: 2px solid #000;
     font-size: 13px;
     font-weight: 600;
 }
@@ -276,13 +282,37 @@ export default {
 .thhead {
     background: #bbf2eb;
     padding: 5px 10px;
-    border: 1px solid #000;
+    border: 2px solid #000;
     text-transform: uppercase;
     font-size: 13px;
 }
+.thheadadd {
+    background: #bbf2eb;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    font-size: 13px;
+    max-width:300px;
+}
+
+.tdrowadd {
+    padding: 5px 10px;
+    border: 2px solid #000;
+    font-size: 13px;
+    font-weight: 600;
+    word-wrap:break-word;
+    max-width:300px;
+}
+.tdrowremark {
+    padding: 5px 10px;
+    border: 2px solid #000;
+    font-size: 13px;
+    font-weight: 600;
+    word-wrap:break-word;
+}
 
 .table {
-    border: 1px solid rgb(0, 0, 0);
+    border: 1.5px solid rgb(0, 0, 0);
     width: 100%;
     margin-top: 50px;
 }
@@ -290,14 +320,14 @@ export default {
 .tabhead {
     background: #ddd;
     padding: 5px 10px;
-    border: 1px solid #000;
+    border: 2px solid #000;
     text-transform: uppercase;
     font-size: 13px;
 }
 
 .tabtd {
     padding: 5px 10px;
-    border: 1px solid #000;
+    border: 2px solid #000;
     font-size: 13px;
     font-weight: 600;
 }

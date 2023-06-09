@@ -59,7 +59,7 @@
                                 <tr>
                                     <th>Diagnosis: </th>
                                     <td>
-                                        <select class="form-select" v-model="diagnosis_id" @change="onSelect()">
+                                        <select class="form-select" v-model="type_diagnosis_id">
                                             <option value="0">Select Diagnosis</option>
                                             <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                 {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -215,13 +215,13 @@
                                 <tr>
                                     <th>Referring Doctor<small style="color:red">*</small> :</th>
                                     <td>
-                                        <input type="text" class="form-control" placeholder="Enter Description" v-model="referring_doctor">
+                                        <input type="text" class="form-control" placeholder="Enter Description" v-model="name" disabled>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Designation<small style="color:red">*</small> : </th>
                                     <td>
-                                        <input type="text" class="form-control" placeholder="Enter Designation" v-model="designation">
+                                        <input type="text" class="form-control" placeholder="Enter Designation" v-model="designation" disabled>
                                     </td>
                                 </tr>
                                 <tr>
@@ -264,6 +264,25 @@
                                                         {{ catcode.icd_code }} {{catcode.icd_name}}
                                                     </option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <!-- close-row -->
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
+                                            <div class="col-sm-8">
+                                                <select
+                                                        id="additionalboxdiagnosis" 
+                                                        class="form-select multiselect" multiple="multiple" style="width: 100%"
+                                                        >
+                                                        <option value="0">Please Select</option>
+                                                        <option
+                                                        v-for="catcode in diagonisislist"
+                                                        v-bind:key="catcode.id"
+                                                        v-bind:value="catcode.id"
+                                                        >
+                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                        </option>
+                                                    </select>
                                             </div>
                                         </div>
                                         <!-- close-row -->
@@ -315,8 +334,7 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="sub_code_id">
-                                                        <option value="0">Select sub code</option>
+                                                    <select id="subcodeicd" style="width:100%" class="form-select multiselectadditional" multiple="multiple">                                                        <option value="0">Select sub code</option>
                                                         <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }}
                                                             {{catcode.icd_name}}
@@ -324,6 +342,29 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                    <div class="col-md-6 mb-">
+                                                        <label class="form-label">Additional ICD 9 CODE</label>
+                                                        <select class="form-select" v-model="additional_code_id"  @change="onCategorycodebindAdditional($event)">
+                                                            <option value="0">Select additional code</option>
+                                                            <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                                {{ type.icd_category_code }} {{type.icd_category_name}}
+                                                            </option>
+                                                        </select>              
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                            <label  class="form-label">Additional ICD 9 SUB CODE</label>
+                                                            <div class="mt-2 align-items-flex-start">
+                                                            <select id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode"  multiple="multiple">
+                                                                <option value="0">Select additional sub code</option>                                                           
+                                                                <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                                    {{ catcode.icd_code }}
+                                                                    {{catcode.icd_name}}
+                                                                </option>
+                                                            </select>
+                                                            </div>
+                                                    </div>
+                                                </div> 
                                         </div>
                                         <!-- 02 -->
                                         <div class="external services hide mb-3">
@@ -667,6 +708,28 @@ export default {
         if (this.pid) {
             this.getdetails();
         }
+
+        this.name = this.userdetails.user.name;
+        this.designation = this.userdetails.designation.section_value;
+        this.hospital = this.userdetails.branch.hospital_branch_name;
+    },
+    mounted() {
+                $(document).ready(function () {
+            $(".multiselect").select2({
+                    placeholder: "Select Additional Diagnosis",
+                });
+                });
+
+                $(document).ready(function () {
+                $(".multiselectadditional").select2({
+                    placeholder: "Select Sub Code",
+                });
+                });
+                $(document).ready(function () {
+                $(".multiselectadditionalsubcode").select2({
+                    placeholder: "Select Additional Sub Code",
+                });
+                });
     },
     data() {
         return {
@@ -728,18 +791,53 @@ export default {
             showStatus: 0,
             diagnosisNameOutput: this.diagnosisName,
             diagnosisName: "",
+            name: "",
+            icdcatcodelistadditional: [],
+            additional_code_id: 0,
         };
     },
     methods: {
         async onCreateEvent() {
             //alert(this.patient_acknowledged);
             this.$swal.fire({
-                title: 'Do you want to save as draft?',
+                title: 'Are you sure you want to save this form as draft?',
                 showCancelButton: true,
                 confirmButtonText: 'Save',
             }).then(async (result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                    var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                            } else {
+                                additionalboxdiagnosis = this.value;
+                            }
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
+
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
+                            } else {
+                                subcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue3.push({ additionalsubcodeicd });
                     try {
                         this.loader = true;
                         const headers = {
@@ -775,14 +873,14 @@ export default {
                                 }, ]),
                                 reason_referral_intervention_other: this.reason_referral_intervention_other,
                                 case_formulation: this.case_formulation,
-                                referring_doctor: this.referring_doctor,
+                                referring_doctor: this.name,
                                 designation: this.designation,
                                 date: this.date,
                                 location_services: this.location_services_id,
                                 type_diagnosis_id: this.type_diagnosis_id,
                                 category_services: this.category_services,
                                 code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
+                                sub_code_id:  JSON.stringify(subcodeicd),
                                 complexity_services: this.complexity_services,
                                 outcome: this.outcome,
                                 medication_des: this.medication_des,
@@ -790,6 +888,9 @@ export default {
                                 services_id: this.services_id,
                                 id: this.pid,
                                 appId: this.appId,
+                                additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
+                                additional_code_id: this.additional_code_id, 
                                 status: "0",
                             }, {
                                 headers
@@ -799,7 +900,7 @@ export default {
                         if (response.data.code == 200) {
                             this.loader = false;
                             this.resetmodel();
-                            this.$swal.fire('Succesfully save as draft!', '', 'success')
+                            this.$swal.fire('Succesfully saved as draft!', '', 'success')
                             this.GoBack();
                         } else {
                             this.loader = false;
@@ -828,22 +929,55 @@ export default {
         },
         async onPublishEvent() {
             this.$swal.fire({
-                title: 'Do you want to save as draft?',
+                title: 'Are you sure you want to submit as this form?',
                 showCancelButton: true,
                 confirmButtonText: 'Save',
             }).then(async (result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                    var Boxvalue1=[];
+                    var Boxvalue2=[];
+                    var Boxvalue3=[];
+                    var additionalboxdiagnosis = 0;
+                        var subcodeicd = 0;
+                        var additionalsubcodeicd = 0;
+                        $("#additionalboxdiagnosis :selected").each(function () {
+                            if (additionalboxdiagnosis) {
+                                additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                            } else {
+                                additionalboxdiagnosis = this.value;
+                            }
+                        });
+                        Boxvalue1.push({ additionalboxdiagnosis });
+
+                        $("#subcodeicd :selected").each(function () {
+                            if (subcodeicd) {
+                                subcodeicd = subcodeicd + "," + this.value;
+                            } else {
+                                subcodeicd = this.value;
+                            }
+                        });
+                        Boxvalue2.push({ subcodeicd });
+
+                        $("#additionalsubcodeicd :selected").each(function () {
+                            if (additionalsubcodeicd) {
+                            additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                            } else {
+                            additionalsubcodeicd = this.value;
+                            }
+                        });
+                    Boxvalue3.push({ additionalsubcodeicd });
+
                     this.errorList = [];
                     this.validate = true;
                     try {
                         if (!this.patient_acknowledged) {
-                            this.errorList.push("acknowledged with the referral is required");
+                            this.errorList.push("Acknowledged with the referral is required");
                         }
                         if (!this.case_formulation) {
                             this.errorList.push("Case Formulation is required");
                         }
-                        if (!this.referring_doctor) {
+                        if (!this.name) {
                             this.errorList.push("Referring Doctor is required");
                         }
                         if (!this.designation) {
@@ -875,7 +1009,7 @@ export default {
                                     this.errorList.push("ICD 9 CODE is required");
                                     this.validate = false;
                                 }
-                                if (!this.sub_code_id) {
+                                if (!subcodeicd) {
                                     this.errorList.push("ICD 9 SUB CODE is required");
                                     this.validate = false;
                                 }
@@ -932,14 +1066,14 @@ export default {
                                     }, ]),
                                     reason_referral_intervention_other: this.reason_referral_intervention_other,
                                     case_formulation: this.case_formulation,
-                                    referring_doctor: this.referring_doctor,
+                                    referring_doctor: this.name,
                                     designation: this.designation,
                                     date: this.date,
                                     location_services: this.location_services_id,
                                     type_diagnosis_id: this.type_diagnosis_id,
                                     category_services: this.category_services,
                                     code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
+                                    sub_code_id: JSON.stringify(subcodeicd),
                                     complexity_services: this.complexity_services,
                                     outcome: this.outcome,
                                     medication_des: this.medication_des,
@@ -948,6 +1082,9 @@ export default {
                                     id: this.pid,
                                     appId: 0,
                                     status: "1",
+                                    additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                    additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
+                                    additional_code_id: this.additional_code_id, 
                                 }, {
                                     headers
                                 }
@@ -992,11 +1129,11 @@ export default {
             // Reload the page to refresh the data
             window.location.reload();
         },
-        onSelect(){
-            const dataDiagnosis = this.diagonisislist.find(element => element.id == this.diagnosis_id);
-            this.diagnosisName = dataDiagnosis.icd_code +' '+ dataDiagnosis.icd_name;
-            this.type_diagnosis_id = this.diagnosis_id;
-        },
+        // onSelect(){
+        //     const dataDiagnosis = this.diagonisislist.find(element => element.id == this.diagnosis_id);
+        //     this.diagnosisName = dataDiagnosis.icd_code +' '+ dataDiagnosis.icd_name;
+        //     this.type_diagnosis_id = this.diagnosis_id;
+        // },
         async GetList() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -1210,7 +1347,7 @@ export default {
                     });
                     this.reason_referral_intervention_other = response.data.Data[0].reason_referral_intervention_other;
                     this.case_formulation = response.data.Data[0].case_formulation;
-                    this.referring_doctor = response.data.Data[0].referring_doctor;
+                    this.name = response.data.Data[0].referring_doctor;
                     this.designation = response.data.Data[0].designation;
                     this.location_services_id = response.data.Data[0].location_services;
                     this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
@@ -1257,6 +1394,28 @@ export default {
                 },
             });
           }
+        },
+        async onCategorycodebindAdditional(event) {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            console.log("my id", event);
+            const response = await this.$axios.post(
+                "diagnosis/getIcd9subcodeList", {
+                    icd_category_code: event.target.value,
+                    
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200 || response.data.code == "200") {
+                this.icdcatcodelistadditional = response.data.list;
+                
+            } else {
+                this.icdcatcodelistadditional  = [];
+            }
         },
     },
 };
