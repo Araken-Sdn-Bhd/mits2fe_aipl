@@ -934,12 +934,12 @@ export default {
         });
       } else if (data.type == "PsychologyRefferalForm") {
         this.$router.push({
-          path: "/modules/Intervention/psychology-referral",
+          path: "/modules/Intervention/view-psychology-referral",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "RehabRefferalAndClinicalForm") {
         this.$router.push({
-          path: "/modules/Intervention/rehab-referral-and-clinical-summary",
+          path: "/modules/Intervention/view-rehab-referral-and-clinical-summary",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       }
