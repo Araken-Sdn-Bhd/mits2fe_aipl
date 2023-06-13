@@ -167,7 +167,7 @@
                                                       <label class="form-label">Additional ICD 9 CODE</label>
                                                       <select class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
                                                           <option value="0">Select additional code</option>
-                                                          <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                          <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                               {{ type.icd_category_code }} {{type.icd_category_name}}
                                                           </option>
                                                       </select>
@@ -294,6 +294,7 @@ export default {
             comlexcitylist: [],
             codelist: [],
             icdcatcodelist: [],
+            icdcatcodelistadditional: [],
             diagonisislist: [],
             locationlist: [],
             joblist: [],
@@ -315,6 +316,9 @@ export default {
             externallist: [],
             pid: 0,
             type: "",
+            additional_diagnosis: 0,
+            additional_subcode: 0,
+            additional_code_id: 0,
         };
     },
     beforeMount() {
@@ -657,6 +661,26 @@ export default {
                 this.icdcatcodelist = response.data.list;
             } else {
                 this.icdcatcodelist = [];
+            }
+        },
+        async onCategorycodebindAdditional(event) {
+          const headers = {
+            Authorization: "Bearer" + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          console.log("my id",event);
+          const response = await this.$axios.post(
+            "diagnosis/getIcd9subcodeList", {
+              icd_category_code: event.target.value
+            }, {
+              headers
+            }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.icdcatcodelistadditional = response.data.list;
+            } else {
+                this.icdcatcodelistadditional = [];
             }
         },
         resetmodel() {
