@@ -835,9 +835,9 @@ export default {
       }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        this.codelistadditional = response.data.list;
+        this.icdcatcodelistadditional = response.data.list;
       } else {
-        this.codelistadditional = [];
+        this.icdcatcodelistadditional = [];
       }
     },
 
