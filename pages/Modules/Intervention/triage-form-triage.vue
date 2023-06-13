@@ -835,9 +835,9 @@ export default {
       }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        this.codelistadditional = response.data.list;
+        this.icdcatcodelistadditional = response.data.list;
       } else {
-        this.codelistadditional = [];
+        this.icdcatcodelistadditional = [];
       }
     },
 
@@ -926,10 +926,10 @@ export default {
                   this.errorList.push("ICD 9 CODE is required");
                   this.validate = false;
                 }
-                if (!this.sub_code_id) {
-                  this.errorList.push("ICD 9 SUB CODE is required");
-                  this.validate = false;
-                }
+                // if (!this.sub_code_id) {
+                //   this.errorList.push("ICD 9 SUB CODE is required");
+                //   this.validate = false;
+                // }
               } else {
                 if (!this.serviceid) {
                   this.errorList.push("Services is required");
