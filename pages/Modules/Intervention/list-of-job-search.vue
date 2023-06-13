@@ -757,6 +757,19 @@ export default {
                 this.outcome_id = response.data.Data[0].outcome;
                 this.medication_des = response.data.Data[0].medication_des;
                 this.jobSDESCRIPTION = response.data.Data[0].jobs;
+                this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                    $("#subcode")
+                    .val(this.sub_code_id)
+                    .trigger("change");
+                this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
+                            $("#additionalbox")
+                            .val(this.additional_diagnosis)
+                            .trigger("change");
+
+                this.additional_subcode = response.data.Data[0].additional_subcode.split(",");
+                            $("#addsubcode")
+                            .val(this.additional_subcode)
+                            .trigger("change");
                 this.GetList();
                 this.GetPatientdetails();
                 const response2 = await this.$axios.post(
