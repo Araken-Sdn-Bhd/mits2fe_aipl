@@ -542,7 +542,7 @@ export default {
       comlexcitylist: [],
       codelist: [],
       codelistadditional: [],
-      icdcatcodelistadditional: []
+      icdcatcodelistadditional: [],
       icdcatcodelist: [],
       diagonisislist: [],
       locationlist: [],
