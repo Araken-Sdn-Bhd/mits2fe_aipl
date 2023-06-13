@@ -1194,10 +1194,10 @@ export default {
                   this.errorList.push("ICD 9 CODE is required");
                   this.validate = false;
                 }
-                if (!JSON.stringify(subcode)) {
-                  this.errorList.push("ICD 9 SUB CODE is required");
-                  this.validate = false;
-                }
+                // if (!JSON.stringify(subcode)) {
+                //   this.errorList.push("ICD 9 SUB CODE is required");
+                //   this.validate = false;
+                // }
               } else {
                 if (!this.serviceid) {
                   this.errorList.push("Services is required");
