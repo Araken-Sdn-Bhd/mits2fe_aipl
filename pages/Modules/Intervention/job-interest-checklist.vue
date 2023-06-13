@@ -830,7 +830,7 @@ export default {
                                 category_services: this.category_services,
                                 services_id: this.services_id,
                                 code_id: this.code_id + this.add_code_id,
-                                sub_code_id: this.sub_code_id + this.add_sub_code_id,
+                                // sub_code_id: this.sub_code_id + this.add_sub_code_id,
                                 complexity_of_services: this.complexity_services_id,
                                 outcome: this.outcome_id,
                                 medication_prescription: this.medication_des,
@@ -838,8 +838,9 @@ export default {
                                 status: "0",
                                 id: this.pid,
                                 appId: this.appId,
-                                additional_diagnosis: JSON.stringify(add_type_diagnosis_id),
                                 sub_code_id: JSON.stringify(subcodeicd),
+                                additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                additional_code_id: this.additional_code_id,
                                 additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                             }, {
                                 headers
@@ -1025,7 +1026,8 @@ export default {
                                     status: "1",
                                     id: this.pid,
                                     appId: this.appId,
-                                    additional_diagnosis: this.add_type_diagnosis_id,
+                                    additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                    additional_code_id: this.additional_code_id,
                                     additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                                 }, {
                                     headers

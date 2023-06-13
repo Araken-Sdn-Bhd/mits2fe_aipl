@@ -542,6 +542,7 @@ export default {
       comlexcitylist: [],
       codelist: [],
       codelistadditional: [],
+      icdcatcodelistadditional: []
       icdcatcodelist: [],
       diagonisislist: [],
       locationlist: [],
@@ -596,6 +597,9 @@ export default {
       patient_category: "",
       assign_team: "",
       SidebarAccess: null,
+      additional_diagnosis: 0,
+      additional_subcode: 0,
+      additional_code_id: 0,
     };
   },
 
@@ -831,9 +835,9 @@ export default {
       }
       );
       if (response.data.code == 200 || response.data.code == "200") {
-        this.additionalicdcatcodelist = response.data.list;
+        this.codelistadditional = response.data.list;
       } else {
-        this.icdcatcodelist = [];
+        this.codelistadditional = [];
       }
     },
 
@@ -984,6 +988,7 @@ export default {
                 category_services: this.category_services,
                 code_id: this.code_id,
                 sub_code_id: JSON.stringify(subcodeicd),
+                additional_code_id: this.additional_code_id,
                 additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                 complexity_services_id: this.complexity_services_id,
                 outcome_id: this.outcome_id,
@@ -1076,9 +1081,11 @@ export default {
               score: this.score,
               location_services_id: this.location_services_id,
               type_diagnosis_id: this.type_diagnosis_id,
+              additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
               category_services: this.category_services,
               code_id: this.code_id,
               sub_code_id: JSON.stringify(subcodeicd),
+              additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
               complexity_services_id: this.complexity_services_id,
               outcome_id: this.outcome_id,
               medication_des: this.medication_des,

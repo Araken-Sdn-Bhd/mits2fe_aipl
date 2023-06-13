@@ -478,11 +478,17 @@ export default {
                             category_services: this.category_services,
                             services_id: this.services_id,
                             code_id: this.code_id,
-                            sub_code_id: this.sub_code_id,
+                            // sub_code_id: this.sub_code_id,
                             complexity_services: this.complexity_services_id,
                             outcome: this.outcome_id,
                             medication_des: this.medication_des,
                             appId: this.appId,
+
+                            status: 1,
+                            sub_code_id: JSON.stringify(subcodeicd),
+                            additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                            additional_code_id: this.additional_code_id,
+                            additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                         }, {
                             headers
                         }
