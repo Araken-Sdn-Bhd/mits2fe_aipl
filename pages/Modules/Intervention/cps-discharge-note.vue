@@ -1086,16 +1086,25 @@ export default {
           sub_code_id = this.value;
         }
       });
+      var add_sub_code_id = 0;
+      $("#add_sub_code_id :selected").each(function () {
+        if (add_sub_code_id) {
+          add_sub_code_id = add_sub_code_id + "," + this.value;
+        } else {
+          add_sub_code_id = this.value;
+        }
+      });
       this.$swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'Do you want to save this record?',
                 showCancelButton: true,
                 confirmButtonText: 'Save',
-      }).then(async (result) => {
-          if (result.isConfirmed) {
+            }).then(async(result) => {
+              if (result.isConfirmed) {
               this.validate = true;
               this.errorList = [];
 
-              try {
+                try {
+                  
                 if (!this.name) {
                   this.errorList.push("Name is required");
                 }
@@ -1127,7 +1136,7 @@ export default {
                 if (!this.location_services) {
                   this.errorList.push("Location Of Services is required");
                 }
-                if (!type_diagnosis_id) {
+                if (!this.type_diagnosis_id) {
                   this.errorList.push("Type Of Diagnosis is required");
                 }
                 if (!this.category_services) {
@@ -1197,119 +1206,110 @@ export default {
                   this.date
                 ) {
                   this.loader = true;
-                  const headers = {
-                    Authorization: "Bearer " + this.userdetails.access_token,
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  };
-                  const response = await this.$axios.post(
-                    "cps-discharge-note/add",
-                    {
-                      added_by: this.userdetails.user.id,
-                      patient_mrn_id: this.Id,
-                      name: this.name,
-                      mrn: this.mrn,
-                      cps_discharge_date: this.cps_discharge_date,
-                      time: this.time,
-                      staff_name: this.staff_name,
-                      diagnosis: this.type_diagnosis_id,
-                      post_intervention: this.post_intervention,
-                      category_of_discharge: this.category_of_discharge,
-                      discharge_diagnosis: this.discharge_diagnosis,
-                      outcome_medication: this.outcome_medication,
-                      location_service: this.location_services,
-                      service_category: this.category_services,
-                      diagnosis_type: this.type_diagnosis_id,
-                      add_diagnosis_type: JSON.stringify(additionalbox),
-                      services_id: this.services_id,
-                      code_id: this.code_id,
-                      sub_code_id: JSON.stringify(sub_code_id),
+
+                    const headers = {
+                      Authorization: "Bearer " + this.userdetails.access_token,
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    };
+                    const response = await this.$axios.post(
+                      "cps-discharge-note/add",
+                      {
+                        added_by: this.userdetails.user.id,
+                        patient_mrn_id: this.Id,
+                        name: this.name,
+                        mrn: this.mrn,
+                        cps_discharge_date: this.cps_discharge_date,
+                        time: this.time,
+                        staff_name: this.staff_name,
+                        diagnosis: this.type_diagnosis_id,
+                        post_intervention: this.post_intervention,
+                        psychopathology: JSON.stringify([
+                          {
+                            "Symptoms (Delusion/hallucinnation) Controlled": this.symptoms,
+                            "No Persistent Aggressive/risk To Self Or Others": this.aggressive,
+                            "No Frequent Relapse Episode (>2 Admission Per Year)": this.relapse,
+                            "Compliance To Medication": this.compliance,
+                            "No Or Tolerable Side Effect Or Treatment": this.tolerable,
+                            "Insight Towards Illness And Treatment": this.insight,
+                          }
+                        ]),
+                        potential_risk: JSON.stringify([
+                          {
+                            "Aggression": this.aggression,
+                            "Suicidality": this.suicidality,
+                            "Criminality": this.criminality,
+                            "Comorbid Substance Abuse": this.comorbid,
+                            "Abuse Or Neglect": this.abuse,
+                          }
+                        ]),
+                        category_of_discharge: this.category_of_discharge,
+                        discharge_diagnosis: this.discharge_diagnosis,
+                        outcome_medication: this.outcome_medication,
+                        psychosocial: JSON.stringify([
+                          {
+                            "Accommodation":this.accommodation,
+                            "Financial Support": this.financial,
+                            "Occupational Functioning": this.occupational,
+                            "Living Skill": this.skill,
+                            "Social Activities": this.social,
+                            "Family Cooperation/involvement/support": this.family,
+                            "Regular Appointment With Doctor": this.regular,
+                          }
+                        ]),
+                        location_service: this.location_services,
+                        service_category: this.category_services,
+                        diagnosis_type: this.type_diagnosis_id,
+                        add_diagnosis_type: JSON.stringify(additionalbox),
+                        services_id: this.services_id,
+                        code_id: this.code_id,
+                        sub_code_id: JSON.stringify(sub_code_id),
                         add_code_id: this.add_code_id,
                         add_sub_code_id: JSON.stringify(add_sub_code_id),
-                      complexity_services: this.complexity_services,
-                      verification_date: this.verification_date,
-                      specialist_name: this.specialist_name,
-                      outcome: this.outcome,
-                      medication: this.medication_des,
-                      case_manager: this.case_manager,
-                      date: this.date,
-                      status: "1",
-                      id:this.pid,
-                      appId: this.appId,
-                      psychopathology: JSON.stringify([
-                        {
-                          "Symptoms (Delusion/hallucinnation) Controlled": this.symptoms,
-                          "No Persistent Aggressive/risk To Self Or Others": this.aggressive,
-                          "No Frequent Relapse Episode (>2 Admission Per Year)": this.relapse,
-                          "Compliance To Medication": this.compliance,
-                          "No Or Tolerable Side Effect Or Treatment": this.tolerable,
-                          "Insight Towards Illness And Treatment": this.insight,
-                        }
-                      ]),
-                      potential_risk: JSON.stringify([
-                        {
-                          "Aggression": this.aggression,
-                          "Suicidality": this.suicidality,
-                          "Criminality": this.criminality,
-                          "Comorbid Substance Abuse": this.comorbid,
-                          "Abuse Or Neglect": this.abuse,
-                        }
-                      ]),
-                      category_of_discharge: this.category_of_discharge,
-                      discharge_diagnosis: this.discharge_diagnosis,
-                      outcome_medication: this.outcome_medication,
-                      psychosocial: JSON.stringify([
-                        {
-                          "Accommodation":this.accommodation,
-                          "Financial Support": this.financial,
-                          "Occupational Functioning": this.occupational,
-                          "Living Skill": this.skill,
-                          "Social Activities": this.social,
-                          "Family Cooperation/involvement/support": this.family,
-                          "Regular Appointment With Doctor": this.regular,
-                        }
-                      ]),
-                    },
-                    { headers }
-                  );
-                  console.log("response", response.data);
-                  if (response.data.code == 200 || response.data.code == "200" ) {
-                    this.loader = false;
-                    this.resetmodel();
-                    this.$swal.fire(
-                        'Successfully Submitted.',
-                        'Data is inserted.',
-                        'success',
+                        complexity_services: this.complexity_services,
+                        verification_date: this.verification_date,
+                        specialist_name: this.specialist_name,
+                        outcome: this.outcome,
+                        medication: this.medication_des,
+                        case_manager: this.case_manager,
+                        date: this.date,
+                        status: "1",
+                        id:this.pid,
+                        appId: this.appId,
+                      },
+                      { headers }
                     );
-                    this.GoBack();
+                    console.log("response", response.data);
+                    if (response.data.code == 200) {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire('Succesfully save this record!', '', 'success')
+                      this.GoBack();
 
-                  } else {
-                    this.loader = false;
-                    this.resetmodel();
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: 'Oops... Something Went Wrong!',
-                        text: 'the error is: ' + JSON.stringify(response.data.message),
-                    })
-                    this.GoBack();
+                    } else {
+                      this.loader = false;
+                      this.resetmodel();
+                      this.$swal.fire({
+                          icon: 'error',
+                          title: 'Oops... Something Went Wrong!',
+                          text: 'the error is: ' + JSON.stringify(response.data.message),
+                      })
+                      this.GoBack();
+                    }
                   }
+                } catch (e) {
+                  this.$swal.fire({
+                            icon: 'error',
+                            title: 'Oops... Something Went Wrong!',
+                            text: 'the error is: ' + e,
+                  })
                 }
-              } catch (e) {
-                this.loader = false;
-                this.resetmodel();
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + e,
-                })
-
-                this.GoBack();
-              }
-            } else if (result.isDismissed) {
+              } else if (result.isDismissed) {
                     this.$swal.fire('Changes are not saved', '', 'info')
-            }
-      })
+              }
+            })
     },
+   
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

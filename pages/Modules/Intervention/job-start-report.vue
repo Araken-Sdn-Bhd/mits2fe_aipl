@@ -109,40 +109,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row mb-3" v-if="this.type != 'view'">
-                  <label class="form-label">Disclosure</label>
-                  <div class="col-sm-6">
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio11"
-                        value="Yes"
-                        v-model="disclosure"
-                      />
-                      <label class="form-check-label" for="inlineRadio11"
-                        >Yes - worker has agreed to employer contact and has
-                        signed a release</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio22"
-                        value="No"
-                        v-model="disclosure"
-                      />
-                      <label class="form-check-label" for="inlineRadio22"
-                        >No - worker does not want employer contact
-                      </label>
-                    </div>
-                  </div>
-                </div> -->
+                
                             <!-- close-row -->
 
                             <div class="row">
