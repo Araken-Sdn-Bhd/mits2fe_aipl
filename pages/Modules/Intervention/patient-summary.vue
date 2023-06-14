@@ -802,7 +802,7 @@ export default {
         });
       } else if (data.type == "CpsDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/cps-discharge-note",
+          path: "/modules/Intervention/view-cps-discharge-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitConsentForm") {

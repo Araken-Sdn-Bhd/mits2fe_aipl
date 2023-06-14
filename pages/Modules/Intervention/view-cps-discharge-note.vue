@@ -24,11 +24,11 @@
                   </tr>
                   <tr>
                     <th>Date<small style="color:red">*</small> :</th>
-                    <td><input type="date" class="form-control" name="" v-model="cps_discharge_date"/></td>
+                    <td><input type="date" class="form-control" name="" v-model="cps_discharge_date" disabled/></td>
                   </tr>
                   <tr>
                     <th>Time<small style="color:red">*</small> :</th>
-                    <td><input type="time" class="form-control" name="" v-model="time" /></td>
+                    <td><input type="time" class="form-control" name="" v-model="time" disabled/></td>
                   </tr>
                   <tr>
                     <th>Staff Name<small style="color:red">*</small> :</th>
@@ -37,7 +37,7 @@
                   <tr>
                     <th>Diagnosis<small style="color:red">*</small> :</th>
                     <td>
-                      <select class="form-select" v-model="type_diagnosis_id">
+                      <select class="form-select" v-model="type_diagnosis_id" disabled>
                         <option value="">Select Diagnosis</option>
                         <option
                           v-for="catcode in diagonisislist"
@@ -58,7 +58,7 @@
                           type="radio"
                           name="inlineRadioOptions"
                           id="inlineRadio11"
-                          value="Good" v-model="post_intervention"
+                          value="Good" v-model="post_intervention" disabled
                         />
                         <label class="form-check-label" for="inlineRadio11"
                           >Good
@@ -70,7 +70,7 @@
                           type="radio"
                           name="inlineRadioOptions"
                           id="inlineRadio21"
-                          value="Satisfactory" v-model="post_intervention"
+                          value="Satisfactory" v-model="post_intervention" disabled
                         />
                         <label class="form-check-label" for="inlineRadio21">Satisfactory
                         </label>
@@ -81,7 +81,7 @@
                           type="radio"
                           name="inlineRadioOptions"
                           id="inlineRadio31"
-                          value="Not Satisfactory" v-model="post_intervention"
+                          value="Not Satisfactory" v-model="post_intervention" disabled
                         />
                         <label class="form-check-label" for="inlineRadio31">Not Satisfactory</label
                         >
@@ -91,7 +91,7 @@
                           class="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
-                          id="inlineRadio32" v-model="post_intervention"
+                          id="inlineRadio32" v-model="post_intervention" disabled
                           value="Poor"
                         />
                         <label class="form-check-label" for="inlineRadio32">Poor
@@ -114,7 +114,7 @@
                           value="Symptoms (Delusion/hallucinnation) Controlled"
                           v-model="symptoms"
                           name=""
-                          id="pp-1"
+                          id="pp-1" disabled
                         />
                         <label class="form-check-label" for="1">
                           Symptoms (Delusion/hallucinnation) Controlled
@@ -128,7 +128,7 @@
                           value="No Persistent Aggressive/risk To Self Or Others"
                           v-model="aggressive"
                           name=""
-                          id="pp-2"
+                          id="pp-2" disabled
                         />
                         <label class="form-check-label" for="2">
                           No Persistent Aggressive/risk To Self Or Others
@@ -142,7 +142,7 @@
                           value="No Frequent Relapse Episode (>2 Admission Per Year)"
                           v-model="relapse"
                           name=""
-                          id="pp-3"
+                          id="pp-3" disabled
                         />
                         <label class="form-check-label" for="3">
                           No Frequent Relapse Episode (>2 Admission Per Year)
@@ -155,7 +155,7 @@
                           value="Compliance To Medication"
                           v-model="compliance"
                           name=""
-                          id="pp-4"
+                          id="pp-4" disabled
                         />
                         <label class="form-check-label" for="4">
                           Compliance To Medication
@@ -168,7 +168,7 @@
                           value="No Or Tolerable Side Effect Or Treatment"
                           v-model="tolerable"
                           name=""
-                          id="pp-5"
+                          id="pp-5" disabled
                         />
                         <label class="form-check-label" for="5">
                           No Or Tolerable Side Effect Or Treatment
@@ -181,7 +181,7 @@
                           value="Insight Towards Illness And Treatment"
                           v-model="insight"
                           name=""
-                          id="pp-6"
+                          id="pp-6" disabled
                         />
                         <label class="form-check-label" for="6">
                           Insight Towards Illness And Treatment
@@ -206,7 +206,7 @@
                                   value="Accommodation"
                                   v-model="accommodation"
                                   name=""
-                                  id="ps-1"
+                                  id="ps-1" disabled
                                 />
                                 <label class="form-check-label" for="11">
                                   Accommodation
@@ -220,7 +220,7 @@
                                   value="Financial Support"
                                   v-model="financial"
                                   name=""
-                                  id="ps-2"
+                                  id="ps-2" disabled
                                 />
                                 <label class="form-check-label" for="21">
                                   Financial Support
@@ -234,7 +234,7 @@
                                   value="Occupational Functioning"
                                   v-model="occupational"
                                   name=""
-                                  id="ps-3"
+                                  id="ps-3" disabled
                                 />
                                 <label class="form-check-label" for="31">
                                   Occupational Functioning
@@ -247,7 +247,7 @@
                                   value="Living Skill"
                                   v-model="skill"
                                   name=""
-                                  id="ps-4"
+                                  id="ps-4" disabled
                                 />
                                 <label class="form-check-label" for="41">
                                   Living Skill
@@ -263,7 +263,7 @@
                                   name="mode-Of-therapy"
                                   value="Social Activities"
                                   v-model="social"
-                                  id="ps-5"
+                                  id="ps-5" disabled
                                 />
                                 <label class="form-check-label" for="66">
                                   Social Activities
@@ -277,7 +277,7 @@
                                   name="mode-Of-therapy"
                                   value="Family Cooperation/involvement/support"
                                   v-model="family"
-                                  id="ps-6"
+                                  id="ps-6" disabled
                                 />
                                 <label class="form-check-label" for="77">
                                   Family Cooperation/involvement/support
@@ -291,7 +291,7 @@
                                   name="mode-Of-therapy"
                                   value="Regular Appointment With Doctor"
                                   v-model="regular"
-                                  id="ps-7"
+                                  id="ps-7" disabled
                                 />
                                 <label class="form-check-label" for="8">
                                   Regular Appointment With Doctor
@@ -316,7 +316,7 @@
                           name=""
                           value="Aggression"
                           v-model="aggression"
-                          id="pr-1"
+                          id="pr-1" disabled
                         />
                         <label class="form-check-label" for="3.1">
                           Aggression
@@ -330,7 +330,7 @@
                           name=""
                           value="Suicidality"
                           v-model="suicidality"
-                          id="pr-2"
+                          id="pr-2" disabled
                         />
                         <label class="form-check-label" for="3.2">
                           Suicidality
@@ -344,7 +344,7 @@
                           name=""
                           value="Criminality"
                           v-model="criminality"
-                          id="pr-3"
+                          id="pr-3" disabled
                         />
                         <label class="form-check-label" for="3.3">
                           Criminality
@@ -357,7 +357,7 @@
                           name=""
                           value="Comorbid Substance Abuse"
                           v-model="comorbid"
-                          id="pr-4"
+                          id="pr-4" disabled
                         />
                         <label class="form-check-label" for="3.4">
                           Comorbid Substance Abuse
@@ -370,7 +370,7 @@
                           name=""
                           value="Abuse Or Neglect"
                           v-model="abuse"
-                          id="pr-5"
+                          id="pr-5" disabled
                         />
                         <label class="form-check-label" for="3.5">
                           Abuse Or Neglect
@@ -383,7 +383,7 @@
                   <tr >
                     <th>Category Of Discharge<small style="color:red">*</small> :</th>
                     <td>
-                      <select class="form-select" v-model="category_of_discharge">
+                      <select class="form-select" v-model="category_of_discharge" disabled>
                       <option value="">Please Select</option>
                                                 <option
               v-for="dis in dischargelist"
@@ -403,7 +403,7 @@
                   <tr>
                     <th>Discharge Diagnosis<small style="color:red">*</small> :</th>
                     <td>
-                      <select class="form-select" v-model="discharge_diagnosis">
+                      <select class="form-select" v-model="discharge_diagnosis" disabled>
                        <option value="">Select Diagnosis</option>
                                 <option
               v-for="catcode in diagonisislist"
@@ -418,7 +418,7 @@
                   <tr>
                     <th>Medication<small style="color:red">*</small> :</th>
                     <td>
-                      <textarea class="form-control textarea" v-model="outcome_medication"></textarea>
+                      <textarea class="form-control textarea" v-model="outcome_medication" disabled></textarea>
                     </td>
                   </tr>
                 </tbody>
@@ -455,7 +455,7 @@
                           <div class="col-sm-8">
                             <select
                               class="form-select"
-                              v-model="location_services"
+                              v-model="location_services" disabled
                             >
                               <option value="0">
                                 Select location of services
@@ -476,7 +476,7 @@
                                                         >Type Of Diagnosis<small style="color:red">*</small> </label
                                                     >
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="type_diagnosis_id">
+                                                        <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                             <option value="0">Select Diagnosis</option>
                                                             <option
                                                             v-for="catcode in diagonisislist"
@@ -493,7 +493,7 @@
                                                     <div class="col-sm-8 align-items-flex-start" >
                                                         <select
                                                         id="additionalbox" v-model="additional_diagnosis"
-                                                        class="form-select multiselect" multiple="multiple">
+                                                        class="form-select multiselect" multiple="multiple" disabled>
                                                             <option value="0">Please Select</option><option
                                                             v-for="catcode in diagonisislist"
                                                             v-bind:key="catcode.id"
@@ -509,16 +509,16 @@
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions11" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions11" id="inlineRadio1" value="assisstance" v-model="category_services" disabled />
                                                         <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions12" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions12" id="inlineRadio2" value="clinical-work" v-model="category_services" disabled />
                                                         <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                         </label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions13" id="inlineRadio3" value="external" v-model="category_services" />
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions13" id="inlineRadio3" value="external" v-model="category_services" disabled/>
                                                         <label class="form-check-label" for="inlineRadio3">External</label>
                                                     </div>
                                                 </div>
@@ -529,7 +529,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="services_id">
+                              <select class="form-select" v-model="services_id" disabled>
                                  <option value="0">Select Service</option>
                       <option
                         v-for="slt in assistancelist"
@@ -550,7 +550,7 @@
                                             <select
                                             class="form-select"
                                             v-model="code_id"
-                                            @change="onCategorycodebind($event)"
+                                            @change="onCategorycodebind($event)" disabled
                                             >
                                             <option value="0">Select code</option>
                                             <option
@@ -568,7 +568,7 @@
                                         <div class="mt-2 align-items-flex-start">
                                             <select
                                             class="form-select multiselect" multiple="multiple"
-                                            id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                            id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
 
                                             <option value="0">Select code</option>
                                             <option
@@ -591,7 +591,7 @@
                                                 <select
                                                 class="form-select"
                                                 v-model="add_code_id"
-                                                @change="onCategoryaddcodebind($event)"
+                                                @change="onCategoryaddcodebind($event)" disabled
                                                 >
                                                 <option value="0">Select code</option>
                                                 <option
@@ -609,7 +609,7 @@
                                             <div class="mt-2 align-items-flex-start">
                                                 <select
                                                 class="form-select multiselect" multiple="multiple"
-                                                id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                                id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
 
                                                 <option value="0">Select code</option>
                                                 <option
@@ -632,7 +632,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="serviceid">
+                              <select class="form-select" v-model="serviceid" disabled>
                                 <option value="0">Select Service</option>
                       <option
                         v-for="slt in externallist"
@@ -654,7 +654,7 @@
                             >
                             <select
                               class="form-select"
-                              v-model="complexity_services"
+                              v-model="complexity_services" disabled
                             >
                               <option value="0">
                                 Select Complexity Of Service
@@ -670,7 +670,7 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                            <select class="form-select" v-model="outcome">
+                            <select class="form-select" v-model="outcome" disabled>
                               <option value="0">Select outcome</option>
                       <option
                         v-for="out in outcomelist"
@@ -712,7 +712,7 @@
                           <textarea
                             class="form-control textarea"
                             placeholder="Please Type Prescription Here"
-                            v-model="medication_des"></textarea>
+                            v-model="medication_des" disabled></textarea>
                         </div>
                       </div>
                     </div>
@@ -729,28 +729,28 @@
                   <tr>
                     <th>Specialist Name<small style="color:red">*</small> :</th>
                     <td>
-                      <input type="text" class="form-control" name="" v-model="specialist_name"/>
+                      <input type="text" class="form-control" name="" v-model="specialist_name" disabled/>
                     </td>
                   </tr>
 
                   <tr>
                     <th>Date<small style="color:red">*</small> :</th>
                     <td>
-                      <input type="date" class="form-control" v-model="verification_date" />
+                      <input type="date" class="form-control" v-model="verification_date" disabled />
                     </td>
                   </tr>
 
                   <tr>
                     <th>Case Manager/Staff Name<small style="color:red">*</small> :</th>
                     <td>
-                      <input type="text" class="form-control" v-model="case_manager" />
+                      <input type="text" class="form-control" v-model="case_manager" disabled/>
                     </td>
                   </tr>
 
                   <tr>
                     <th>Date<small style="color:red">*</small> :</th>
                     <td>
-                      <input type="date" class="form-control" v-model="date" />
+                      <input type="date" class="form-control" v-model="date" disabled/>
                     </td>
                   </tr>
                 </tbody>
@@ -758,22 +758,7 @@
               <p v-if="errorList.length"><ul><li style="color:red"  v-for='err in errorList' :key='err'>{{ err }}</li></ul></p>
                        <br>
                        <br>
-              <div class="d-flex">
-                    <button
-                      @click="GoBack"
-                      class="btn btn-primary btn-text"
-                      ><i class="fa fa-arrow-alt-to-left"></i> Back
-                    </button>
-                    <div  class="btn-right">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>
-
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Submit
-                    </button>
-                  </div>
-                </div>
+            
             </div>
           </div>
         </div>
