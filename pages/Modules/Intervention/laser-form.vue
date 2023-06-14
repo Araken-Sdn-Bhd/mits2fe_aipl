@@ -789,9 +789,9 @@
                     <i class="fa fa-arrow-alt-to-left"></i> Back
                   </button>
                   <div class="btn-right" v-if="!pid">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
+                    <!-- <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
-                    </button>
+                    </button> -->
                     <button type="submit" class="btn btn-success ml-auto" @click="OnSubmit()">
                       <i class="fa fa-paper-plane"></i> Submit
                     </button>
@@ -1194,10 +1194,10 @@ export default {
                   this.errorList.push("ICD 9 CODE is required");
                   this.validate = false;
                 }
-                if (!JSON.stringify(subcode)) {
-                  this.errorList.push("ICD 9 SUB CODE is required");
-                  this.validate = false;
-                }
+                // if (!JSON.stringify(subcode)) {
+                //   this.errorList.push("ICD 9 SUB CODE is required");
+                //   this.validate = false;
+                // }
               } else {
                 if (!this.serviceid) {
                   this.errorList.push("Services is required");

@@ -134,6 +134,17 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row mb-3 align-items-flex-start">
+                                              <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
+                                              <div class="col-sm-8">
+                                                  <select id="additionalboxdiagnosis" class="form-select multiselect" multiple="multiple">
+                                                      <option value="0">Please Select</option>
+                                                      <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                            </div>
                                             <!-- close-row -->
                                             <div class="row mb-3">
                                                 <label class="col-lg-4 col-md-12 col-form-label">Category Of Services<small style="color:red">*</small>
@@ -191,6 +202,32 @@
                                                             </option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-md-6 mb-">
+                                                    <label class="form-label">Additional ICD 9 CODE</label>
+                                                    <select class="form-select" v-model="additional_code_id"
+                                                      @change="onCategorycodebindAdditional($event)">
+                                                      <option value="0">Select additional code</option>
+                                                      <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
+                                                        {{ type.icd_category_code }} {{ type.icd_category_name }}
+                                                      </option>
+                                                    </select>
+                                                  </div>
+                                                  <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Additional ICD 9 SUB CODE</label>
+                                                    <div class="mt-2 align-items-flex-start">
+                                                      <select id="additionalsubcodeicd" style="width:100%"
+                                                        class="form-select multiselectadditionalsubcode" multiple="multiple">
+                                                        <option value="0">Select additional sub code</option>
+                                                        <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id"
+                                                          v-bind:value="catcode.id">
+                                                          {{ catcode.icd_code }}
+                                                          {{ catcode.icd_name }}
+                                                        </option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
                                                 </div>
                                             </div>
                                             <!-- 02 -->
@@ -302,6 +339,9 @@ export default {
             diagonisislist: [],
             locationlist: [],
             titlelist: [],
+
+            codelistadditional: [],
+            icdcatcodelistadditional: [],
             Id: 0,
             location_services_id: 0,
             type_diagnosis_id: 0,
@@ -321,6 +361,9 @@ export default {
             type: "",
             jobSDESCRIPTION: [],
             appId: 0,
+            additional_diagnosis: 0,
+            additional_subcode: 0,
+            additional_code_id: 0,
         };
     },
     beforeMount() {
@@ -356,6 +399,24 @@ export default {
             this.getdetails();
         }
     },
+    mounted() {
+        $(document).ready(function () {
+            $(".multiselect").select2({
+                placeholder: "Select Additional Diagnosis",
+            });
+        });
+
+        $(document).ready(function () {
+            $(".multiselectadditional").select2({
+                placeholder: "Select Sub Code",
+            });
+        });
+        $(document).ready(function () {
+            $(".multiselectadditionalsubcode").select2({
+                placeholder: "Select Additional Sub Code",
+            });
+        });
+    },
     methods: {
         async GetPatientdetails() {
             const headers = {
@@ -384,6 +445,12 @@ export default {
         },
         async OnSubmit() {
             var jobSDESCRIPTION = [];
+            var Boxvalue1 = [];
+            var Boxvalue2 = [];
+            var Boxvalue3 = [];
+            var additionalboxdiagnosis = 0;
+            var subcodeicd = 0;
+            var additionalsubcodeicd = 0;
 
             $("table#companydetail > tbody > tr").each(function () {
                 var obj = {};
@@ -397,6 +464,38 @@ export default {
             console.log("description array", jobSDESCRIPTION);
             this.validate = true;
             this.errorList = [];
+            $("#additionalboxdiagnosis :selected").each(function () {
+                if (additionalboxdiagnosis) {
+                    additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                } else {
+                    additionalboxdiagnosis = this.value;
+                }
+            });
+            Boxvalue1.push({
+                additionalboxdiagnosis
+            });
+            $("#subcodeicd :selected").each(function () {
+                if (subcodeicd) {
+                    subcodeicd = subcodeicd + "," + this.value;
+                } else {
+                    subcodeicd = this.value;
+                }
+            });
+            Boxvalue2.push({
+                subcodeicd
+            });
+
+            $("#additionalsubcodeicd :selected").each(function () {
+                if (additionalsubcodeicd) {
+                    additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                } else {
+                    additionalsubcodeicd = this.value;
+                }
+            });
+            Boxvalue3.push({
+                additionalsubcodeicd
+            });
+
             try {
                 if (!this.location_services_id) {
                     this.errorList.push("Location Of Services is required");
@@ -421,10 +520,10 @@ export default {
                             this.errorList.push("ICD 9 CODE is required");
                             this.validate = false;
                         }
-                        if (!this.sub_code_id) {
-                            this.errorList.push("ICD 9 SUB CODE is required");
-                            this.validate = false;
-                        }
+                        // if (!this.sub_code_id) {
+                        //     this.errorList.push("ICD 9 SUB CODE is required");
+                        //     this.validate = false;
+                        // }
                     } else {
                         if (!this.serviceid) {
                             this.errorList.push("Services is required");
@@ -461,11 +560,17 @@ export default {
                             category_services: this.category_services,
                             services_id: this.services_id,
                             code_id: this.code_id,
-                            sub_code_id: this.sub_code_id,
+                            // sub_code_id: this.sub_code_id,
                             complexity_services: this.complexity_services_id,
                             outcome: this.outcome_id,
                             medication_des: this.medication_des,
                             appId: this.appId,
+
+                            status:1,
+                            sub_code_id: JSON.stringify(subcodeicd),
+                            additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                            additional_code_id: this.additional_code_id,
+                            additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                         }, {
                             headers
                         }
@@ -605,6 +710,26 @@ export default {
                 this.icdcatcodelist = [];
             }
         },
+        async onCategorycodebindAdditional(event) {
+          const headers = {
+            Authorization: "Bearer " + this.userdetails.access_token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          };
+          console.log("my id", event);
+          const response = await this.$axios.post(
+            "diagnosis/getIcd9subcodeList", {
+            icd_category_code: event.target.value
+          }, {
+            headers
+          }
+          );
+          if (response.data.code == 200 || response.data.code == "200") {
+            this.codelistadditional = response.data.list;
+          } else {
+            this.codelistadditional = [];
+          }
+        },
         async getdetails() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -632,6 +757,19 @@ export default {
                 this.outcome_id = response.data.Data[0].outcome;
                 this.medication_des = response.data.Data[0].medication_des;
                 this.jobSDESCRIPTION = response.data.Data[0].jobs;
+                this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                    $("#subcode")
+                    .val(this.sub_code_id)
+                    .trigger("change");
+                this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
+                            $("#additionalbox")
+                            .val(this.additional_diagnosis)
+                            .trigger("change");
+
+                this.additional_subcode = response.data.Data[0].additional_subcode.split(",");
+                            $("#addsubcode")
+                            .val(this.additional_subcode)
+                            .trigger("change");
                 this.GetList();
                 this.GetPatientdetails();
                 const response2 = await this.$axios.post(

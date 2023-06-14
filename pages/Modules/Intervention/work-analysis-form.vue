@@ -1869,7 +1869,7 @@ export default {
                                 category_services: this.category_services,
                                 services_id: this.services_id,
                                 code_id: this.code_id,
-                                sub_code_id: this.sub_code_id,
+                                // sub_code_id: this.sub_code_id,
                                 complexity_services: this.complexity_services_id,
                                 outcome: this.outcome_id,
                                 medication_des: this.medication_des,
@@ -1878,6 +1878,11 @@ export default {
                                 appId: this.appId,
                                 status: "0",
                                 id: this.pid,
+
+                                sub_code_id: JSON.stringify(subcodeicd),
+                                additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                additional_code_id: this.additional_code_id,
+                                additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                             }, {
                                 headers
                             }
@@ -2263,10 +2268,10 @@ export default {
                                     this.errorList.push("ICD 9 CODE is required");
                                     this.validate = false;
                                 }
-                                if (!this.sub_code_id) {
-                                    this.errorList.push("ICD 9 SUB CODE is required");
-                                    this.validate = false;
-                                }
+                                // if (!this.sub_code_id) {
+                                //     this.errorList.push("ICD 9 SUB CODE is required");
+                                //     this.validate = false;
+                                // }
                             } else {
                                 if (!this.serviceid) {
                                     this.errorList.push("Services is required");
@@ -2353,7 +2358,7 @@ export default {
                                     category_services: this.category_services,
                                     services_id: this.services_id,
                                     code_id: this.code_id,
-                                    sub_code_id: this.sub_code_id,
+                                    // sub_code_id: this.sub_code_id,
                                     complexity_services: this.complexity_services_id,
                                     outcome: this.outcome_id,
                                     medication_des: this.medication_des,
@@ -2362,6 +2367,11 @@ export default {
                                     appId: this.appId,
                                     status: "1",
                                     id:this.pid,
+
+                                    sub_code_id: JSON.stringify(subcodeicd),
+                                    additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
+                                    additional_code_id: this.additional_code_id,
+                                    additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
                                 }, {
                                     headers
                                 }
@@ -2650,7 +2660,19 @@ export default {
                     response.data.Data[0].complexity_services;
                 this.outcome_id = response.data.Data[0].outcome;
                 this.medication_des = response.data.Data[0].medication_des;
+                this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                    $("#subcode")
+                    .val(this.sub_code_id)
+                    .trigger("change");
+                this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
+                            $("#additionalbox")
+                            .val(this.additional_diagnosis)
+                            .trigger("change");
 
+                this.additional_subcode = response.data.Data[0].additional_subcode.split(",");
+                            $("#addsubcode")
+                            .val(this.additional_subcode)
+                            .trigger("change");
 
 
                 if (response.data.Data[0].jobs) {
