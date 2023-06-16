@@ -854,18 +854,18 @@
                           );
                           if (response.data.code == 200) {
                               this.loader = false;
-                              // this.resetmodel();
+                              this.resetmodel();
                               this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              // this.GoBack();
+                              this.GoBack();
                           } else {
                               this.loader = false;
-                              // this.resetmodel();
+                              this.resetmodel();
                               this.$swal.fire({
                                   icon: 'error',
                                   title: 'Oops... Something Went Wrong! dalam function api',
                                   text: 'the error is: ' + JSON.stringify(response.data.message),
                               })
-                              // this.GoBack();
+                              this.GoBack();
                           }
                       } catch (e) {
                           this.$swal.fire({
@@ -1042,33 +1042,33 @@
                               console.log("response", response.data);
                               if (response.data.code == 200) {
                                   this.loader = false;
-                                  // this.resetmodel();
+                                  this.resetmodel();
                                   this.$swal.fire(
                                       'Successfully Submitted.',
                                       'Data is inserted.',
                                       'success',
                                   );
-                                  // this.GoBack();
+                                  this.GoBack();
                               } else {
                                   this.loader = false;
-                                  // this.resetmodel();
+                                  this.resetmodel();
                                   this.$swal.fire({
                                       icon: 'error',
                                       title: 'Oops... Something Went Wrong!',
                                       text: 'the error is: ' + JSON.stringify(response.data.message),
                                   })
-                                  // this.GoBack();
+                                  this.GoBack();
                               }
                           }
                       } catch (e) {
                           this.loader = false;
-                          // this.resetmodel();
+                          this.resetmodel();
                           this.$swal.fire({
                               icon: 'error',
                               title: 'Oops... Something Went Wrong!',
                               text: 'the error is: ' + e,
                           })
-                          // this.GoBack();
+                          this.GoBack();
                       }
                   } else if (result.isDismissed) {
                       this.$swal.fire('Changes are not saved', '', 'info')
