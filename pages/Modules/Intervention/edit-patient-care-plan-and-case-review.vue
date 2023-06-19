@@ -521,7 +521,7 @@
                 <div class="d-flex three-btn">
                   <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
 
-                  <div class="ml-auto" v-if="!pid">
+                  <div class="ml-auto">
                     <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                       <i class="fa fa-save"></i> Save as draft
                     </button>
@@ -690,7 +690,17 @@ export default {
           add_sub_code_id = this.value;
         }
       });
-  
+    
+      var treatmentplan = [];
+          $("table#treatmentplan > tbody > tr").each(function () {
+            var obj = {};
+            obj.Issues = $('td input[type="text"].issue', this).val();
+            obj.Goal = $('td input[type="text"].goal', this).val();
+            obj.Management = $('td input[type="text"].management', this).val();
+            obj.Who = $('td input[type="text"].who', this).val();
+            treatmentplan.push(obj);
+          });
+          alert(JSON.stringify(treatmentplan));
       this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -1040,7 +1050,7 @@ export default {
             this.errorList.push("Outcome is required");
           }
           var treatmentplan = [];
-          $("table#companydetail > tbody > tr").each(function () {
+          $("table#treatmentplan > tbody > tr").each(function () {
             var obj = {};
             obj.Issues = $('td input[type="text"].issue', this).val();
             obj.Goal = $('td input[type="text"].goal', this).val();

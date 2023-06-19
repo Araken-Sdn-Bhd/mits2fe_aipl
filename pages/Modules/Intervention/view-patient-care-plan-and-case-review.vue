@@ -86,7 +86,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="plan_date" />
+                      <input type="date" class="form-control" v-model="plan_date" disabled />
                     </div>
                   </div>
                 </div>
@@ -96,13 +96,13 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Reason for Review<small style="color:red">*</small>  </label>
-                      <textarea class="form-control textarea" v-model="reason_of_review"></textarea>
+                      <textarea class="form-control textarea" v-model="reason_of_review" disabled></textarea>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Diagnosis<small style="color:red">*</small> </label>
-                      <select class="form-select" v-model="type_diagnosis_id">
+                      <select class="form-select" v-model="type_diagnosis_id" disabled>
                        <option value="0">Select Diagnosis</option>
                                 <option
                           v-for="catcode in diagonisislist"
@@ -122,28 +122,28 @@
                   <div class="col-sm-4">
                     <div class="mb-4">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Oral" v-model="oral" />
+                        <input class="form-check-input" type="checkbox" value="" id="Oral" v-model="oral" disabled />
                         <label class="form-label" for="Oral">Oral</label>
                       </div>
-                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_oral" />
+                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_oral" disabled />
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Depot" v-model="depot" />
+                        <input class="form-check-input" type="checkbox" value="" id="Depot" v-model="depot" disabled/>
                         <label class="form-label" for="Depot">Depot</label>
                       </div>
-                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_depot" />
+                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_depot" disabled />
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="IM" v-model="im" />
+                        <input class="form-check-input" type="checkbox" value="" id="IM" v-model="im" disabled />
                         <label class="form-label" for="IM">IM</label>
                       </div>
-                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_im" />
+                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_im" disabled />
                     </div>
                   </div>
                 </div>
@@ -152,12 +152,12 @@
                 <div class="row">
                     <div class="mb-3">
                       <label class="form-label">Background History<small style="color:red">*</small>  </label>
-                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="background_history"></textarea>
+                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="background_history" disabled></textarea>
                     </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Doctor of Staff Incharge<small style="color:red">*</small> </label>
-                      <textarea class="form-control textarea" v-model="staff_incharge_dr"></textarea>
+                      <textarea class="form-control textarea" v-model="staff_incharge_dr" disabled></textarea>
                     </div>
                   </div>
                 </div>
@@ -176,15 +176,15 @@
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody class="optionBox">
+                    <tbody class="optionBox" >
                       <tr class="block">
                         <!-- <td>-</td> -->
-                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea>
+                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status" disabled></textarea>
                         </td>
-                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
+                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)" disabled></textarea></td>
                         <td><textarea class="management" v-model="Management"
-                            placeholder="Management Strategies"></textarea></td>
-                        <td><textarea class="who" v-model="Who" placeholder="Who,By When"></textarea></td>
+                            placeholder="Management Strategies" disabled></textarea></td>
+                        <td><textarea class="who" v-model="Who" placeholder="Who,By When" disabled></textarea></td>
                         <td>
                           <a class="add-row"><i class="fa fa-plus"></i></a>
                         </td>
@@ -207,13 +207,13 @@
                     <tbody>
                       <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
                         <!-- <td>-</td> -->
-                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status dewfrgtr" /></td>
+                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status" disabled /></td>
                         <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
-                        <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" />
+                        <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" disabled/>
                         </td>
-                        <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When" /></td>
+                        <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When" disabled /></td>
                         <td>
-                          <a href="#" class="add-row"><i class="fa fa-plus"></i></a>
+                          <a href="#" class="add-row"><i class="fa fa-plus" disabled></i></a>
                         </td>
                       </tr>
                     </tbody>
@@ -223,7 +223,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date of next Review<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" name="" v-model="next_review_date" />
+                      <input type="date" class="form-control" name="" v-model="next_review_date" disabled />
                     </div>
                   </div>
                 </div>
@@ -234,30 +234,30 @@
                     <label class="form-label">Case Manager</label>
                     <div class="mb-3">
                       <label class="form-label">Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="case_manager_name" />
+                      <input type="text" class="form-control" v-model="case_manager_name" disabled />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Designation<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="case_manager_designation" />
+                      <input type="text" class="form-control" v-model="case_manager_designation" disabled/>
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="case_manager_date" />
+                      <input type="date" class="form-control" v-model="case_manager_date" disabled />
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <label class="form-label">Specialist Incharge</label>
                     <div class="mb-3">
                       <label class="form-label">Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="specialist_incharge_name" />
+                      <input type="text" class="form-control" v-model="specialist_incharge_name" disabled />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Designation<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="specialist_incharge_designation" />
+                      <input type="text" class="form-control" v-model="specialist_incharge_designation" disabled />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="specialist_incharge_date" />
+                      <input type="date" class="form-control" v-model="specialist_incharge_date" disabled />
                     </div>
                   </div>
                 </div>
@@ -277,7 +277,7 @@
                         <div class="row mb-3">
                           <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="location_services_id">
+                            <select class="form-select" v-model="location_services_id" disabled>
                               <option value="0">
                                 Select location of services
                               </option>
@@ -293,7 +293,7 @@
                             >Type Of Diagnosis<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" disabled>
                                 <option value="0">Select Diagnosis</option>
                                 <option
                                   v-for="catcode in diagonisislist"
@@ -309,8 +309,8 @@
                       <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
                       <div class="col-sm-8 align-items-flex-start" >
                           <select
-                          id="additionalbox" v-model="additional_diagnosis"
-                          class="form-select multiselect" multiple="multiple">
+                          id="additionalbox" 
+                          class="form-select multiselect" multiple="multiple" disabled>
                               <option value="0">Please Select</option><option
                               v-for="catcode in diagonisislist"
                               v-bind:key="catcode.id"
@@ -328,18 +328,18 @@
                           <div class="col-lg-8 col-sm-12">
                             <div class="form-check form-check-inline">
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                value="assisstance" v-model="category_services" />
+                                value="assisstance" v-model="category_services" disabled />
                               <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2"
-                                value="clinical-work" v-model="category_services" />
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="clinical-work" v-model="category_services" disabled />
                               <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                               </label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOption3" id="inlineRadio3"
-                                value="external" v-model="category_services" />
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                value="external" v-model="category_services" disabled/>
                               <label class="form-check-label" for="inlineRadio3">External</label>
                             </div>
                           </div>
@@ -350,7 +350,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="services_id">
+                              <select class="form-select" v-model="services_id" disabled>
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                   {{ slt.section_value }}
@@ -367,7 +367,7 @@
                             <select
                               class="form-select"
                               v-model="code_id"
-                              @change="onCategorycodebind($event)"
+                              @change="onCategorycodebind($event)" disabled
                             >
                               <option value="0">Select code</option>
                               <option
@@ -385,7 +385,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                              id="sub_code_id" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -410,7 +410,7 @@
                             <select
                               class="form-select"
                               v-model="add_code_id"
-                              @change="onCategoryaddcodebind($event)"
+                              @change="onCategoryaddcodebind($event)" disabled
                             >
                               <option value="0">Select code</option>
                               <option
@@ -428,7 +428,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                              id="add_sub_code_id" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -451,7 +451,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="serviceid">
+                              <select class="form-select" v-model="serviceid" disabled>
                                 <option value="0">Select Service</option>
                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                   {{ slt.section_value }}
@@ -465,7 +465,7 @@
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                            <select class="form-select" v-model="complexity_services_id">
+                            <select class="form-select" v-model="complexity_services_id" disabled>
                               <option value="0">
                                 Select Complexity Of Service
                               </option>
@@ -476,7 +476,7 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                            <select class="form-select" v-model="outcome_id">
+                            <select class="form-select" v-model="outcome_id" disabled>
                               <option value="0">Select outcome</option>
                               <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                 {{ out.section_value }}
@@ -502,7 +502,7 @@
                         <div class="col-md-12 mb-3">
                           <label class="form-label">Medication</label>
                           <textarea class="form-control textarea" placeholder="Please Type Prescription Here"
-                            v-model="medication_prescription"></textarea>
+                            v-model="medication_prescription" disabled></textarea>
                         </div>
                       </div>
                     </div>
@@ -518,18 +518,7 @@
                 </p>
                 <br>
                 <br>
-                <div class="d-flex three-btn">
-                  <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
-
-                  <div class="ml-auto" v-if="!pid">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Submit
-                    </button>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -772,8 +761,6 @@ export default {
                     this.$swal.fire('Changes are not saved', '', 'info')
                 }
           })
-
-
       
     },
     async GetPatientdetails() {
@@ -1205,57 +1192,29 @@ export default {
         this.specialist_incharge_designation =
           response.data.Data[0].specialist_incharge_designation;
         this.location_services_id = response.data.Data[0].location_of_service;
-     
-        this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
-                    this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
-                    
-                    $("#additionalbox")
-                    .val(this.additional_diagnosis)
-                    .trigger("change");
+        type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
         this.category_services = response.data.Data[0].category_of_services;
         this.services_id = response.data.Data[0].services;
         this.complexity_services_id = response.data.Data[0].complexity_of_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.code_id = response.data.Data[0].icd_9_code;
-                    this.additional_sub_code_id = response.data.Data[0].icd_9_subcode.split(",");
-                     $("#sub_code_id")
-                    .val( this.additional_sub_code_id)
-                    .trigger("change");
-                   
-
-                    this.add_code_id = response.data.Data[0].add_code_id;
-                    this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
-                                $("#add_sub_code_id")
-                                .val( this.additional_sub_code_id2)
-                                .trigger("change");
+        this.icd_9_subcode = response.data.Data[0].icd_9_subcode;
         this.medication_prescription = response.data.Data[0].medication_prescription;
 
         this.GetList();
         this.GetPatientdetails();
         const response2 = await this.$axios.post(
-                        "diagnosis/getIcd9subcodeList", {
-                            icd_category_code: this.code_id
-                        }, {
-                            headers
-                        }
-                    );
-                    if (response2.data.code == 200 || response2.data.code == "200") {
-                        this.icdcatcodelist = response2.data.list;
-                    } else {
-                        this.icdcatcodelist = [];
-                    }
-                    const response3 = await this.$axios.post(
-                        "diagnosis/getIcd9subcodeList", {
-                            icd_category_code: this.add_code_id
-                        }, {
-                            headers
-                        }
-                    );
-                    if (response3.data.code == 200 || response3.data.code == "200") {
-                        this.addicdcatcodelist = response3.data.list;
-                    } else {
-                        this.addicdcatcodelist = [];
-                    }
+          "diagnosis/getIcd9subcodeList",
+          { icd_category_code: this.code_id },
+          { headers }
+        );
+        if (response2.data.code == 200 || response2.data.code == "200") {
+          this.icdcatcodelist = response2.data.list;
+          console.log('my icd9data', this.icdcatcodelist);
+
+        } else {
+          this.icdcatcodelist = [];
+        }
       } else {
         this.$swal.fire({
                   icon: 'error',
@@ -1264,19 +1223,6 @@ export default {
                   footer: ''
                 });
       }
-      if(this.category_services=='clinical-work'){
-                    $(document).ready(function () {
-                        $('input[name="inlineRadioOptions2"]').trigger('click');
-                    });
-                }else if(this.category_services=='external'){
-                    $(document).ready(function () {
-                        $('input[name="inlineRadioOptions3"]').trigger('click');
-                    });
-                }else{
-                    $(document).ready(function () {
-                        $('input[name="inlineRadioOptions"]').trigger('click');
-                    });
-                }
     },
     GoBack() {if(this.appId){
       if (this.type == 'view') {

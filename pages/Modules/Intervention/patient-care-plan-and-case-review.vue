@@ -1038,7 +1038,7 @@ export default {
             this.errorList.push("Outcome is required");
           }
           var treatmentplan = [];
-          $("table#companydetail > tbody > tr").each(function () {
+          $("table#treatmentplan > tbody > tr").each(function () {
             var obj = {};
             obj.Issues = $('td input[type="text"].issue', this).val();
             obj.Goal = $('td input[type="text"].goal', this).val();
@@ -1046,6 +1046,7 @@ export default {
             obj.Who = $('td input[type="text"].who', this).val();
             treatmentplan.push(obj);
           });
+          //alert(JSON.stringify(treatmentplan));
           if (
             this.location_services_id &&
             this.category_services &&
