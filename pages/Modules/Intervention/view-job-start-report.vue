@@ -6,213 +6,39 @@
             <main>
                 <div class="container-fluid px-4">
                     <div class="page-title">
-                        <h1>JOB TRANSITION REPORT</h1>
+                        <h1>Job Start Report</h1>
                     </div>
     
                     <div class="card mb-4">
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">What are your future plan?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="future_plan"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">What is your short-term goal?<small style="color:red">*</small></label>
-                                            <textarea class="form-control textarea" v-model="short_term_goal"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- close-row -->
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">What is your long-term goal?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="long_term_goal"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">If you had to make a big decision today who you call?
-                                                Who have you called in the past?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="who_have_you_called_past"></textarea>
+                                            <label class="form-label">Client<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="client" disabled/>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- close-row -->
     
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <label class="form-label">Who can help with your career goals?<small style="color:red">*</small></label>
-                                        <table class="with-full goals mb-3">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Yes or No</th>
-                                                    <th>Name Of Supports(s) Preferred</th>
-                                                    <th>Contact Information</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>My Case Manager</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_case_manager_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>My Therapist</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_therapist_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_therapist_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_therapist_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>My Family</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_family_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_family_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_family_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>My Friend</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_friend_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_friend_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_friend_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>My Significant Other</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_significant_other_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Clergy</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="clergy_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="clergy_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="clergy_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Benefit Planner</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="benefit_planner_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_contact" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Other</td>
-                                                    <td>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="other_yes_no" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="other_name" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="" v-model="other_contact" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- close-row -->
-    
-                                <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Should we schedule a meeting with any of your supports
-                                                to discuss the transition?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="schedule_meeting_discuss_for_transition"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">If you are employed, how often do you want someone to
-                                                check in with you about your job? Who should check in
-                                                with you?<small style="color:red">*</small>
-                                            </label>
-                                            <textarea class="form-control textarea" v-model="who_check_in_with_you"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- close-row -->
-    
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">If you are leaving IPS unemployed when would be a good
-                                                time to ask you about returning to IPS for Repeated IPS
-                                                for help with employment or education? Who should
-                                                contact you?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="who_contact_you"></textarea>
+                                            <label class="form-label">Employment Specialist<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="employment_specialist" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">How would you like to be contacted?<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="how_would_like_to_contacted">
-                                                <option value="">Please Select</option>
-                                                <option value="Call">Call</option>
-                                                <option value="Email">Email</option>
-                                                <option value="Letter">Letter</option>
+                                            <label class="form-label">Case Manager<small style="color:red">*</small> </label>
+                                            <select class="form-select" v-model="case_manager" disabled>
+                                                <option value="0">
+                                                    Select Case Manager
+                                                </option>
+                                                <option v-for="cm in casemanagerlist" v-bind:key="cm.id" v-bind:value="cm.id">
+                                                    {{ cm.name }}
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -220,31 +46,10 @@
                                 <!-- close-row -->
     
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">What are some tools/coping strategies you use or have
-                                                used in the past on the job to manage stress?<small style="color:red">*</small>
-                                            </label>
-                                            <textarea class="form-control textarea" v-model="coping_strategies"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">How would you know if you started to feel dissatisfied
-                                                with your job or that you were having other problems?<small style="color:red">*</small>
-                                            </label>
-                                            <textarea class="form-control textarea" v-model="dissatisfied_with_your_job"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">What are the reasons to re-connect to IPS in the
-                                                future? (Help leaving current job, help to find a new
-                                                job, help advocating for a promotion or raise,
-                                                assistance with training or education, benefits
-                                                planning, etc).<small style="color:red">*</small>
-                                            </label>
-                                            <textarea class="form-control textarea" v-model="reasons_to_re_connect_to_ips"></textarea>
+                                            <label class="form-label">First Date Of Work<small style="color:red">*</small> </label>
+                                            <input type="date" class="form-control" v-model="first_date_of_work" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -253,34 +58,85 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Patient Name<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="patient_name" disabled />
+                                            <label class="form-label">Job Title<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="job_title" disabled/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Doctor Name<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="doctor_name" disabled />
+                                            <label class="form-label">Duties Field<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="duties_field" disabled />
                                         </div>
                                     </div>
                                 </div>
                                 <!-- close-row -->
     
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="transition_report_date" />
+                                            <label class="form-label">Rate Of Pay<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="rate_of_pay" disabled />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="date" />
+                                            <label class="form-label">Benefits Field<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="benefits_field" disabled/>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-sm-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Work Schedule<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="work_schedule" disabled/>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- close-row -->
+                                <div>
+                                    <div class="row mb-3">
+                                        <label class="form-label">Disclosure<small style="color:red">*</small> </label>
+                                        <div class="col-sm-6">
+                                            <div class="form-check form-check-inline">
+                                                <b-form-group v-slot="{ ariaDescribedby }">
+                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="Yes" disabled><span class="form-check-label" for="inlineRadio11">Yes - worker has agreed to employer contact and has
+                                                            signed a release</span></b-form-radio>
+                                                </b-form-group>
+                                                <b-form-group v-slot="{ ariaDescribedby }">
+                                                    <b-form-radio v-model="disclosure" :aria-describedby="ariaDescribedby" name="some-radios" value="No" disabled><span class="form-check-label" for="inlineRadio12">No - worker does not want employer contact</span></b-form-radio>
+                                                </b-form-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                     
+                                <!-- close-row -->
+    
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name of Employer<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="name_of_employer" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name of Supervisor<small style="color:red">*</small> </label>
+                                            <input type="text" class="form-control" v-model="name_of_superviser" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- close-row -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Address<small style="color:red">*</small> </label>
+                                            <textarea class="form-control textarea" v-model="address" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- close-row -->
+    
                                 <div class="accordion form-accordion mt-3" id="accordionExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
@@ -293,7 +149,7 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="location_services_id">
+                                                        <select class="form-select" v-model="location_services_id" disabled>
                                                             <option value="0">
                                                                 Select location of services
                                                             </option>
@@ -302,14 +158,14 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                    </div>
-                                                    <!-- close-row -->
-                                                    <div class="row mb-3">
+                                                </div>
+                                                <!-- close-row -->
+                                                <div class="row mb-3">
                                                         <label class="col-sm-4 col-form-label"
                                                             >Type Of Diagnosis<small style="color:red">*</small> </label
                                                         >
                                                         <div class="col-sm-8">
-                                                            <select class="form-select" v-model="type_diagnosis_id">
+                                                            <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                                 <option value="0">Select Diagnosis</option>
                                                                 <option
                                                                 v-for="catcode in diagonisislist"
@@ -326,7 +182,7 @@
                                                         <div class="col-sm-8 align-items-flex-start" >
                                                             <select
                                                             id="additionalbox" v-model="additional_diagnosis"
-                                                            class="form-select multiselect" multiple="multiple">
+                                                            class="form-select multiselect" multiple="multiple" disabled>
                                                                 <option value="0">Please Select</option><option
                                                                 v-for="catcode in diagonisislist"
                                                                 v-bind:key="catcode.id"
@@ -342,17 +198,17 @@
                                                     </label>
                                                     <div class="col-sm-8">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                            <label class="form-check-label" for="inlineRadio1" disabled>Assisstance / Supervision</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
+                                                            <label class="form-check-label" for="inlineRadio2" disabled>Clinical Work / Procedure
                                                             </label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
-                                                            <label class="form-check-label" for="inlineRadio3">External</label>
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                            <label class="form-check-label" for="inlineRadio3" disabled>External</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -362,7 +218,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="services_id">
+                                                            <select class="form-select" v-model="services_id" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -378,7 +234,7 @@
                                                 <label class="form-label">ICD 9 CODE<small style="color:red">*</small> </label>
                                                 <select
                                                 class="form-select"
-                                                v-model="code_id"
+                                                v-model="code_id" disabled
                                                 @change="onCategorycodebind($event)"
                                                 >
                                                 <option value="0">Select code</option>
@@ -397,7 +253,7 @@
                                             <div class="mt-2 align-items-flex-start">
                                                 <select
                                                 class="form-select multiselect" multiple="multiple"
-                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
     
                                                 <option value="0">Select code</option>
                                                 <option
@@ -420,7 +276,7 @@
                                                     <select
                                                     class="form-select"
                                                     v-model="add_code_id"
-                                                    @change="onCategoryaddcodebind($event)"
+                                                    @change="onCategoryaddcodebind($event)" disabled
                                                     >
                                                     <option value="0">Select code</option>
                                                     <option
@@ -438,7 +294,7 @@
                                                 <div class="mt-2 align-items-flex-start">
                                                     <select
                                                     class="form-select multiselect" multiple="multiple"
-                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
     
                                                     <option value="0">Select code</option>
                                                     <option
@@ -461,7 +317,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="serviceid">
+                                                            <select class="form-select" v-model="serviceid" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -475,7 +331,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="complexity_services_id">
+                                                        <select class="form-select" v-model="complexity_services_id" disabled>
                                                             <option value="0">
                                                                 Select Complexity Of Service
                                                             </option>
@@ -486,7 +342,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="outcome_id">
+                                                        <select class="form-select" v-model="outcome_id" disabled>
                                                             <option value="0">Select outcome</option>
                                                             <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                                 {{ out.section_value }}
@@ -509,7 +365,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -527,19 +383,9 @@
                                 <br>
                                 <div class="d-flex">
     
-                                    <button @click="GoBack" class="btn btn-primary btn-text">
-                                        <i class="fa fa-arrow-alt-to-left"></i> Back
+                                    <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                     </button>
     
-                                    <div class="btn-right" v-if="!pid">
-                                        <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                            <i class="fa fa-save"></i> Save as draft
-                                        </button>
-                                        <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                            <i class="fa fa-paper-plane"></i> Submit
-                                        </button>
-                                    </div>
-                                  
                                 </div>
                             </div>
                         </div>
@@ -551,14 +397,14 @@
     </template>
     
     <script>
-    import CommonHeader from '../../../components/CommonHeader.vue';
-    import CommonSidebar from '../../../components/CommonSidebar.vue';
+    import CommonHeader from "../../../components/CommonHeader.vue";
+    import CommonSidebar from "../../../components/CommonSidebar.vue";
     export default {
         components: {
             CommonSidebar,
             CommonHeader
         },
-        name: "job-transition-report",
+        name: "job-start-report",
         data() {
             return {
                 userdetails: null,
@@ -568,54 +414,31 @@
                 comlexcitylist: [],
                 codelist: [],
                 icdcatcodelist: [],
-                addicdcatcodelist: [],
                 diagonisislist: [],
                 locationlist: [],
+                titlelist: [],
+                casemanagerlist: [],
+                employerlist: [],
                 Id: 0,
                 appId: 0,
-                future_plan: "",
-                short_term_goal: "",
-                long_term_goal: "",
-                who_have_you_called_past: "",
-                my_case_manager_yes_no: "",
-                my_therapist_yes_no: "",
-                my_family_yes_no: "",
-                my_friend_yes_no: "",
-                my_significant_other_yes_no: "",
-                clergy_yes_no: "",
-                benefit_planner_yes_no: "",
-                other_yes_no: "",
-                schedule_meeting_discuss_for_transition: "",
-                who_check_in_with_you: "",
-                who_contact_you: "",
-                how_would_like_to_contacted: "",
-                coping_strategies: "",
-                dissatisfied_with_your_job: "",
-                reasons_to_re_connect_to_ips: "",
-                patient_name: "",
-                doctor_name: "",
-                transition_report_date: "",
-                date: "",
-                my_case_manager_name: "",
-                my_case_manager_contact: "",
-                my_therapist_name: "",
-                my_therapist_contact: "",
-                my_family_name: "",
-                my_family_contact: "",
-                my_friend_name: "",
-                my_friend_contact: "",
-                my_significant_other_name: "",
-                my_significant_other_contact: "",
-                clergy_name: "",
-                clergy_contact: "",
-                benefit_planner_name: "",
-                benefit_planner_contact: "",
-                other_name: "",
-                other_contact: "",
+                pid: 0,
+                client: "",
+                employment_specialist: "",
+                case_manager: "",
+                first_date_of_work: "",
+                job_title: "",
+                duties_field: "",
+                rate_of_pay: "",
+                benefits_field: "",
+                work_schedule: "",
+                disclosure: "",
+                name_of_employer: "",
+                name_of_superviser: "",
+                address: "",
                 location_services_id: 0,
                 category_services: "",
                 code_id: 0,
-                add_code_id: 0,
+                add_code_id:0,
                 complexity_services_id: 0,
                 outcome_id: 0,
                 medication_des: "",
@@ -624,8 +447,6 @@
                 validate: true,
                 assistancelist: [],
                 externallist: [],
-                pid: 0,
-                type: "",
                 SidebarAccess: null,
     
                 addicdcatcodelist: [],
@@ -650,19 +471,19 @@
             let urlParams = new URLSearchParams(window.location.search);
             this.Id = urlParams.get("id");
             this.appId = urlParams.get("appId");
-            this.GetList();
             this.GetPatientdetails();
+            if (this.Id) {
+    
+                this.GetList();
+            }
+    
+    
             let urlParams1 = new URLSearchParams(window.location.search);
             this.pid = urlParams1.get("pid");
             this.type = urlParams1.get("type");
-            if (this.Id) {
-              this.doctor_name =this.userdetails.user.name;
-             }
             if (this.pid) {
                 this.getdetails();
             }
-           
-    
         },
         mounted(){
         $(document).ready(function () {
@@ -672,6 +493,53 @@
         });
       },
         methods: {
+            async GetPatientdetails() {
+                const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                };
+                const response = await this.$axios.post(
+                    "patient-registration/getPatientRegistrationById", {
+                        id: this.Id,
+                    }, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200) {
+                    this.client = response.data.list[0].name_asin_nric;
+                    console.log("my details", this.patientdetails);
+                } else {
+                    this.$swal.fire({
+                      icon: 'error',
+                      title: 'Oops... Something Went Wrong!',
+                      text: 'the error is: ' + this.error,
+                      footer: ''
+                    });
+                }
+            },
+            async getAddress(event) {
+                const headers = {
+                    Authorization: "Bearer " + this.userdetails.access_token,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                };
+                const response = await this.$axios.get(
+                    "job-companies/getListById?id=" + this.name_of_employer, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200 || response.data.code == "200") {
+                    this.address = JSON.stringify(response.data.list[0].company_address_1 + response.data.list[0].company_address_2 + response.data.list[0].company_address_3 + "," + response.data.list[0].postcode);
+                } else {
+                    this.$swal.fire({
+                      icon: 'error',
+                      title: 'Oops... Something Went Wrong!',
+                      text: 'the error is: ' + this.error,
+                      footer: ''
+                    });
+                }
+            },
             async onCreateEvent() {
                 var additionalbox = 0;
           $("#additionalbox :selected").each(function () {
@@ -712,48 +580,22 @@
                                 "Content-Type": "application/json",
                             };
                             const response = await this.$axios.post(
-                                "intervention/job-transition-report", {
+                                "intervention/job-start-form", {
                                     added_by: this.userdetails.user.id,
                                     patient_id: this.Id,
-                                    future_plan: this.future_plan,
-                                    short_term_goal: this.short_term_goal,
-                                    long_term_goal: this.long_term_goal,
-                                    who_have_you_called_past: this.who_have_you_called_past,
-                                    my_case_manager_yes_no: this.my_case_manager_yes_no,
-                                    my_therapist_yes_no: this.my_therapist_yes_no,
-                                    my_family_yes_no: this.my_family_yes_no,
-                                    my_friend_yes_no: this.my_friend_yes_no,
-                                    my_significant_other_yes_no: this.my_significant_other_yes_no,
-                                    clergy_yes_no: this.clergy_yes_no,
-                                    benefit_planner_yes_no: this.benefit_planner_yes_no,
-                                    other_yes_no: this.other_yes_no,
-                                    my_case_manager_name: this.my_case_manager_name,
-                                    my_case_manager_contact: this.my_case_manager_contact,
-                                    my_therapist_name: this.my_therapist_name,
-                                    my_therapist_contact: this.my_therapist_contact,
-                                    my_family_name: this.my_family_name,
-                                    my_family_contact: this.my_family_contact,
-                                    my_friend_name: this.my_friend_name,
-                                    my_friend_contact: this.my_friend_contact,
-                                    my_significant_other_name: this.my_significant_other_name,
-                                    my_significant_other_contact: this.my_significant_other_contact,
-                                    clergy_name: this.clergy_name,
-                                    clergy_contact: this.clergy_contact,
-                                    benefit_planner_name: this.benefit_planner_name,
-                                    benefit_planner_contact: this.benefit_planner_contact,
-                                    other_name: this.other_name,
-                                    other_contact: this.other_contact,
-                                    schedule_meeting_discuss_for_transition: this.schedule_meeting_discuss_for_transition,
-                                    who_check_in_with_you: this.who_check_in_with_you,
-                                    who_contact_you: this.who_contact_you,
-                                    how_would_like_to_contacted: this.how_would_like_to_contacted,
-                                    coping_strategies: this.coping_strategies,
-                                    dissatisfied_with_your_job: this.dissatisfied_with_your_job,
-                                    reasons_to_re_connect_to_ips: this.reasons_to_re_connect_to_ips,
-                                    patient_name: this.patient_name,
-                                    doctor_name: this.doctor_name,
-                                    transition_report_date: this.transition_report_date,
-                                    date: this.date,
+                                    client: this.client,
+                                    employment_specialist: this.employment_specialist,
+                                    case_manager: this.case_manager,
+                                    first_date_of_work: this.first_date_of_work,
+                                    job_title: this.job_title,
+                                    duties_field: this.duties_field,
+                                    rate_of_pay: this.rate_of_pay,
+                                    benefits_field: this.benefits_field,
+                                    work_schedule: this.work_schedule,
+                                    disclosure: this.disclosure,
+                                    name_of_employer: this.name_of_employer,
+                                    name_of_superviser: this.name_of_superviser,
+                                    address: this.address,
                                     location_of_service: this.location_services_id,
                                     diagnosis_type: this.type_diagnosis_id,
                                     add_diagnosis_type: JSON.stringify(additionalbox),
@@ -788,7 +630,6 @@
                                 })
                                 this.GoBack();
                             }
-    
                         } catch (e) {
                             this.$swal.fire({
                                 icon: 'error',
@@ -836,68 +677,45 @@
                         this.validate = true;
                         this.errorList = [];
                         try {
-                            if (!this.future_plan) {
-                                this.errorList.push("What are your future plan? is required");
+                            if (!this.client) {
+                                this.errorList.push("Client is required");
                             }
-                            if (!this.short_term_goal) {
-                                this.errorList.push("What is your short-term goal? is required");
+                            if (!this.employment_specialist) {
+                                this.errorList.push("Employment Specialist is required");
                             }
-                            if (!this.long_term_goal) {
-                                this.errorList.push("What is your long-term goal? is required");
+                            if (!this.case_manager) {
+                                this.errorList.push("Case Manager is required");
                             }
-                            if (!this.who_have_you_called_past) {
-                                this.errorList.push(
-                                    "If you had to make a big decision today who you call? Who have you called in the past? is required"
-                                );
+                            if (!this.first_date_of_work) {
+                                this.errorList.push("First Date Of Work is required");
                             }
-                            if (!this.schedule_meeting_discuss_for_transition) {
-                                this.errorList.push(
-                                    "Should we schedule a meeting with any of your supports to discuss the transition? is required"
-                                );
+                            if (!this.job_title) {
+                                this.errorList.push("Job Title is required");
                             }
-                            if (!this.who_check_in_with_you) {
-                                this.errorList.push(
-                                    "If you are employed, how often do you want someone to check in with you about your job? Who should check in with you? is required"
-                                );
+                            if (!this.duties_field) {
+                                this.errorList.push("Duties Field is required");
                             }
-                            if (!this.who_contact_you) {
-                                this.errorList.push(
-                                    "If you are leaving IPS unemployed when would be a good time to ask you about returning to IPS for Repeated IPS for help with employment or education? Who should contact you? is required"
-                                );
+                            if (!this.rate_of_pay) {
+                                this.errorList.push("Rate Of Pay is required");
                             }
-                            if (!this.how_would_like_to_contacted) {
-                                this.errorList.push(
-                                    "How would you like to be contacted? is required"
-                                );
+                            if (!this.benefits_field) {
+                                this.errorList.push("Benefits Field is required");
                             }
-                            if (!this.coping_strategies) {
-                                this.errorList.push(
-                                    "What are some tools/coping strategies you use or have used in the past on the job to manage stress? is required"
-                                );
+                            if (!this.work_schedule) {
+                                this.errorList.push("Work Schedule is required");
                             }
-                            if (!this.dissatisfied_with_your_job) {
-                                this.errorList.push(
-                                    "How would you know if you started to feel dissatisfied with your job or that you were having other problems? is required"
-                                );
+                            if (!this.disclosure) {
+                                this.errorList.push("Disclosure is required");
                             }
-                            if (!this.reasons_to_re_connect_to_ips) {
-                                this.errorList.push(
-                                    "What are the reasons to re-connect to IPS in the future? (Help leaving current job, help to find a new job, help advocating for a promotion or raise, assistance with training or education, benefits planning, etc). is required"
-                                );
+                            if (!this.name_of_employer) {
+                                this.errorList.push("Name of Employer is required");
                             }
-                            if (!this.patient_name) {
-                                this.errorList.push("Patient Name is required");
+                            if (!this.name_of_superviser) {
+                                this.errorList.push("Name of Superviser is required");
                             }
-                            if (!this.doctor_name) {
-                                this.errorList.push("Doctor Name is required");
+                            if (!this.address) {
+                                this.errorList.push("Address is required");
                             }
-                            if (!this.transition_report_date) {
-                                this.errorList.push("Date is required");
-                            }
-                            if (!this.date) {
-                                this.errorList.push("Date is required");
-                            }
-    
                             if (!this.location_services_id) {
                                 this.errorList.push("Location Of Services is required");
                             }
@@ -938,23 +756,21 @@
                                 this.errorList.push("Outcome is required");
                             }
                             if (
-                                this.future_plan &&
-                                this.short_term_goal &&
-                                this.long_term_goal &&
-                                this.who_have_you_called_past &&
-                                this.schedule_meeting_discuss_for_transition &&
-                                this.who_check_in_with_you &&
-                                this.who_contact_you &&
-                                this.how_would_like_to_contacted &&
-                                this.coping_strategies &&
-                                this.dissatisfied_with_your_job &&
-                                this.reasons_to_re_connect_to_ips &&
-                                this.patient_name &&
-                                this.doctor_name &&
-                                this.transition_report_date &&
-                                this.date &&
-                                this.location_services_id &&
+                                this.client &&
+                                this.employment_specialist &&
+                                this.case_manager &&
+                                this.first_date_of_work &&
+                                this.job_title &&
+                                this.duties_field &&
+                                this.rate_of_pay &&
+                                this.benefits_field &&
+                                this.work_schedule &&
+                                this.disclosure &&
+                                this.name_of_employer &&
+                                this.name_of_superviser &&
+                                this.address &&
                                 this.type_diagnosis_id &&
+                                this.location_services_id &&
                                 this.category_services &&
                                 this.complexity_services_id &&
                                 this.outcome_id &&
@@ -967,48 +783,22 @@
                                     "Content-Type": "application/json",
                                 };
                                 const response = await this.$axios.post(
-                                    "intervention/job-transition-report", {
+                                    "intervention/job-start-form", {
                                         added_by: this.userdetails.user.id,
                                         patient_id: this.Id,
-                                        future_plan: this.future_plan,
-                                        short_term_goal: this.short_term_goal,
-                                        long_term_goal: this.long_term_goal,
-                                        who_have_you_called_past: this.who_have_you_called_past,
-                                        my_case_manager_yes_no: this.my_case_manager_yes_no,
-                                        my_therapist_yes_no: this.my_therapist_yes_no,
-                                        my_family_yes_no: this.my_family_yes_no,
-                                        my_friend_yes_no: this.my_friend_yes_no,
-                                        my_significant_other_yes_no: this.my_significant_other_yes_no,
-                                        clergy_yes_no: this.clergy_yes_no,
-                                        benefit_planner_yes_no: this.benefit_planner_yes_no,
-                                        other_yes_no: this.other_yes_no,
-                                        my_case_manager_name: this.my_case_manager_name,
-                                        my_case_manager_contact: this.my_case_manager_contact,
-                                        my_therapist_name: this.my_therapist_name,
-                                        my_therapist_contact: this.my_therapist_contact,
-                                        my_family_name: this.my_family_name,
-                                        my_family_contact: this.my_family_contact,
-                                        my_friend_name: this.my_friend_name,
-                                        my_friend_contact: this.my_friend_contact,
-                                        my_significant_other_name: this.my_significant_other_name,
-                                        my_significant_other_contact: this.my_significant_other_contact,
-                                        clergy_name: this.clergy_name,
-                                        clergy_contact: this.clergy_contact,
-                                        benefit_planner_name: this.benefit_planner_name,
-                                        benefit_planner_contact: this.benefit_planner_contact,
-                                        other_name: this.other_name,
-                                        other_contact: this.other_contact,
-                                        schedule_meeting_discuss_for_transition: this.schedule_meeting_discuss_for_transition,
-                                        who_check_in_with_you: this.who_check_in_with_you,
-                                        who_contact_you: this.who_contact_you,
-                                        how_would_like_to_contacted: this.how_would_like_to_contacted,
-                                        coping_strategies: this.coping_strategies,
-                                        dissatisfied_with_your_job: this.dissatisfied_with_your_job,
-                                        reasons_to_re_connect_to_ips: this.reasons_to_re_connect_to_ips,
-                                        patient_name: this.patient_name,
-                                        doctor_name: this.doctor_name,
-                                        transition_report_date: this.transition_report_date,
-                                        date: this.date,
+                                        client: this.client,
+                                        employment_specialist: this.employment_specialist,
+                                        case_manager: this.case_manager,
+                                        first_date_of_work: this.first_date_of_work,
+                                        job_title: this.job_title,
+                                        duties_field: this.duties_field,
+                                        rate_of_pay: this.rate_of_pay,
+                                        benefits_field: this.benefits_field,
+                                        work_schedule: this.work_schedule,
+                                        disclosure: this.disclosure,
+                                        name_of_employer: this.name_of_employer,
+                                        name_of_superviser: this.name_of_superviser,
+                                        address: this.address,
                                         location_of_service: this.location_services_id,
                                         diagnosis_type: this.type_diagnosis_id,
                                         add_diagnosis_type: JSON.stringify(additionalbox),
@@ -1125,6 +915,16 @@
                 } else {
                     this.locationlist = [];
                 }
+                const response6 = await this.$axios.get(
+                    "intervention/job-start-form-list", {
+                        headers,
+                    }
+                );
+                if (response6.data.code == 200 || response6.data.code == "200") {
+                    this.titlelist = response6.data.list;
+                } else {
+                    this.titlelist = [];
+                }
                 const respons = await this.$axios.get(
                     "general-setting/list?section=" + "assistance-or-supervision", {
                         headers
@@ -1145,6 +945,16 @@
                 } else {
                     this.externallist = [];
                 }
+                const response7 = await this.$axios.get(
+                    "staff-management/getListByBranchId/" + this.userdetails.branch.branch_id, {
+                        headers,
+                    });
+                this.casemanagerlist = response7.data.list;
+                const response8 = await this.$axios.get(
+                    "job-companies/list", {
+                        headers,
+                    });
+                this.employerlist = response8.data.list;
             },
             async onCategorycodebind(event) {
                 const headers = {
@@ -1166,76 +976,42 @@
                     this.icdcatcodelist = [];
                 }
             },
-            async GetPatientdetails() {
+            async onCategoryaddcodebind(event) {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
             Accept: "application/json",
             "Content-Type": "application/json",
           };
           const response = await this.$axios.post(
-            "patient-registration/getPatientRegistrationById",
-            {
-              id: this.Id,
-            },
+            "diagnosis/getIcd9subcodeList",
+            { icd_category_code: event.target.value },
             { headers }
           );
           if (response.data.code == 200 || response.data.code == "200") {
-            this.patient_name= response.data.list[0].name_asin_nric;
-            console.log("my details", this.patientdetails);
+            this.addicdcatcodelist = response.data.list;
           } else {
-            this.$swal.fire({
-                      icon: 'error',
-                      title: 'Oops... Something Went Wrong!',
-                      text: 'the error is: ' + this.error,
-                      footer: ''
-                    });
+            this.addicdcatcodelist = [];
           }
         },
             resetmodel() {
-                this.future_plan = "";
-                this.short_term_goal = "";
-                this.long_term_goal = "";
-                this.who_have_you_called_past = "";
-                this.my_case_manager_yes_no = "";
-                this.my_therapist_yes_no = "";
-                this.my_family_yes_no = "";
-                this.my_friend_yes_no = "";
-                this.my_significant_other_yes_no = "";
-                this.clergy_yes_no = "";
-                this.benefit_planner_yes_no = "";
-                this.other_yes_no = "";
-                this.schedule_meeting_discuss_for_transition = "";
-                this.who_check_in_with_you = "";
-                this.who_contact_you = "";
-                this.how_would_like_to_contacted = "";
-                this.coping_strategies = "";
-                this.dissatisfied_with_your_job = "";
-                this.reasons_to_re_connect_to_ips = "";
-                this.patient_name = "";
-                this.doctor_name = "";
-                this.transition_report_date = "";
-                this.date = "";
-                this.my_case_manager_name = "";
-                this.my_case_manager_contact = "";
-                this.my_therapist_name = "";
-                this.my_therapist_contact = "";
-                this.my_family_name = "";
-                this.my_family_contact = "";
-                this.my_friend_name = "";
-                this.my_friend_contact = "";
-                this.my_significant_other_name = "";
-                this.my_significant_other_contact = "";
-                this.clergy_name = "";
-                this.clergy_contact = "";
-                this.benefit_planner_name = "";
-                this.benefit_planner_contact = "";
-                this.other_name = "";
-                this.other_contact = "";
+                this.added_by = "";
+                this.patient_id = "";
+                this.client = "";
+                this.employment_specialist = "";
+                this.case_manager = "";
+                this.first_date_of_work = "";
+                this.job_title = "";
+                this.duties_field = "";
+                this.rate_of_pay = "";
+                this.benefits_field = "";
+                this.work_schedule = "";
+                this.disclosure = "";
+                this.name_of_employer = "";
+                this.name_of_superviser = "";
+                this.address = "";
                 this.location_services_id = 0;
-                this.type_diagnosis_id = 0;
                 this.category_services = "";
                 this.code_id = 0;
-                this.sub_code_id = 0;
                 this.complexity_services_id = 0;
                 this.outcome_id = 0;
                 this.medication_des = "";
@@ -1250,87 +1026,29 @@
                 const response = await this.$axios.post(
                     "/patient-appointment-details/fetchViewHistoryListDetails", {
                         id: this.pid,
-                        type: "JobTransitionReport",
+                        type: "JobStartReport",
                     }, {
                         headers
                     }
                 );
                 if (response.data.code == 200) {
+    
                     this.Id = response.data.Data[0].patient_id;
     
-                    this.future_plan = response.data.Data[0].future_plan;
-                    this.short_term_goal = response.data.Data[0].short_term_goal;
-                    this.long_term_goal = response.data.Data[0].long_term_goal;
-                    this.who_have_you_called_past = response.data.Data[0].who_have_you_called_past;
-                    if (response.data.Data[0].my_case_manager_yes_no == 1) {
-                        this.my_case_manager_yes_no = response.data.Data[0].my_case_manager_yes_no;
-                    } else {
-                        this.my_case_manager_yes_no = 0;
-                    }
-                    if (response.data.Data[0].my_therapist_yes_no == 1) {
-                        this.my_therapist_yes_no = response.data.Data[0].my_therapist_yes_no;
-                    } else {
-                        this.my_therapist_yes_no = 0;
-                    }
-                    if (response.data.Data[0].my_family_yes_no == 1) {
-                        this.my_family_yes_no = response.data.Data[0].my_family_yes_no;
-                    } else {
-                        this.my_family_yes_no == 0;
-                    }
-                    if (response.data.Data[0].my_friend_yes_no == 1) {
-                        this.my_friend_yes_no = response.data.Data[0].my_friend_yes_no;
-                    } else {
-                        this.my_family_yes_no == 0;
-                    }
-                    if (response.data.Data[0].my_significant_other_yes_no == 1) {
-                        this.my_significant_other_yes_no =
-                            response.data.Data[0].my_significant_other_yes_no;
-                    } else {
-                        this.my_significant_other_yes_no == 0;
-                    }
-                    if (response.data.Data[0].clergy_yes_no == 1) {
-                        this.clergy_yes_no = response.data.Data[0].clergy_yes_no;
-                    } else {
-                        this.clergy_yes_no == 0;
-                    }
-                    if (response.data.Data[0].benefit_planner_yes_no == 1) {
-                        this.benefit_planner_yes_no = response.data.Data[0].benefit_planner_yes_no;
-                    } else {
-                        this.benefit_planner_yes_no == 0;
-                    }
-                    if (response.data.Data[0].other_yes_no == 1) {
-                        this.other_yes_no = response.data.Data[0].other_yes_no;
-                    } else {
-                        this.other_yes_no == 0;
-                    }
-               
-                    this.my_case_manager_name = response.data.Data[0].my_case_manager_name;
-                    this.my_case_manager_contact = response.data.Data[0].my_case_manager_contact;
-                    this.my_therapist_name = response.data.Data[0].my_therapist_name;
-                    this.my_therapist_contact = response.data.Data[0].my_therapist_contact;
-                    this.my_family_name = response.data.Data[0].my_family_name;
-                    this.my_family_contact = response.data.Data[0].my_family_contact;
-                    this.my_friend_name = response.data.Data[0].my_friend_name;
-                    this.my_friend_contact = response.data.Data[0].my_friend_contact;
-                    this.my_significant_other_name = response.data.Data[0].my_significant_other_name;
-                    this.my_significant_other_contact = response.data.Data[0].my_significant_other_contact;
-                    this.clergy_name = response.data.Data[0].clergy_name;
-                    this.clergy_contact = response.data.Data[0].clergy_contact;
-                    this.benefit_planner_name = response.data.Data[0].benefit_planner_name;
-                    this.benefit_planner_contact = response.data.Data[0].benefit_planner_contact;
-                    this.other_name = response.data.Data[0].other_name;
-                    this.other_contact = response.data.Data[0].other_contact;
-                    this.schedule_meeting_discuss_for_transition = response.data.Data[0].schedule_meeting_discuss_for_transition;
-                    this.who_check_in_with_you = response.data.Data[0].who_check_in_with_you;
-                    this.who_contact_you = response.data.Data[0].who_contact_you;
-                    this.how_would_like_to_contacted = response.data.Data[0].how_would_like_to_contacted;
-                    this.coping_strategies = response.data.Data[0].coping_strategies;
-                    this.dissatisfied_with_your_job = response.data.Data[0].dissatisfied_with_your_job;
-                    this.reasons_to_re_connect_to_ips = response.data.Data[0].reasons_to_re_connect_to_ips;
-                    this.patient_name = response.data.Data[0].patient_name;
-                    this.doctor_name = response.data.Data[0].doctor_name;
-                    this.transition_report_date = response.data.Data[0].transition_report_date;
-                    this.date = response.data.Data[0].date;
+                    this.client = response.data.Data[0].client;
+                    this.employment_specialist =
+                        response.data.Data[0].employment_specialist;
+                    this.case_manager = response.data.Data[0].case_manager;
+                    this.first_date_of_work = response.data.Data[0].first_date_of_work;
+                    this.job_title = response.data.Data[0].job_title;
+                    this.duties_field = response.data.Data[0].duties_field;
+                    this.rate_of_pay = response.data.Data[0].rate_of_pay;
+                    this.benefits_field = response.data.Data[0].benefits_field;
+                    this.work_schedule = response.data.Data[0].work_schedule;
+                    this.disclosure = response.data.Data[0].disclosure;
+                    this.name_of_employer = response.data.Data[0].name_of_employer;
+                    this.name_of_superviser = response.data.Data[0].name_of_superviser;
+                    this.address = response.data.Data[0].address;
                     this.location_services_id = response.data.Data[0].location_of_service;
                     this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
                     this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
@@ -1349,23 +1067,25 @@
                             $("#add_sub_code_id")
                             .val( this.additional_sub_code_id2)
                             .trigger("change");
-                    this.complexity_services_id = response.data.Data[0].complexity_of_services;
+                    this.complexity_services_id =
+                        response.data.Data[0].complexity_of_services;
                     this.outcome_id = response.data.Data[0].outcome;
                     this.medication_des = response.data.Data[0].medication_prescription;
                     this.GetList();
                     this.GetPatientdetails();
                     const response2 = await this.$axios.post(
-          "diagnosis/getIcd9subcodeList",
-          { icd_category_code: this.code_id },
-          { headers }
-        );
-        if (response2.data.code == 200 || response2.data.code == "200") {
-          this.icdcatcodelist = response2.data.list;
-
-        } else {
-          this.icdcatcodelist = [];
-        }
-        const response3 = await this.$axios.post(
+                        "diagnosis/getIcd9subcodeList", {
+                            icd_category_code: this.code_id
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response2.data.code == 200 || response2.data.code == "200") {
+                        this.icdcatcodelist = response2.data.list;
+                    } else {
+                        this.icdcatcodelist = [];
+                    }
+                    const response3 = await this.$axios.post(
           "diagnosis/getIcd9subcodeList",
           { icd_category_code: this.add_code_id },
           { headers }
@@ -1376,15 +1096,14 @@
         } else {
           this.addicdcatcodelist = [];
         }
-
-        } else {
-            this.$swal.fire({
-                icon: 'error',
-                title: 'Oops... Something Went Wrong!',
-                text: 'the error is: ' + this.error,
-                footer: ''
-            });
-        }
+                } else {
+                    this.$swal.fire({
+                      icon: 'error',
+                      title: 'Oops... Something Went Wrong!',
+                      text: 'the error is: ' + this.error,
+                      footer: ''
+                    });
+                }
                 if(this.category_services=='clinical-work'){
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions2"]').trigger('click');
@@ -1411,26 +1130,14 @@
                         },
                     });
                 }
-            },
-            async onCategoryaddcodebind(event) {
-          const headers = {
-            Authorization: "Bearer " + this.userdetails.access_token,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          };
-          const response = await this.$axios.post(
-            "diagnosis/getIcd9subcodeList",
-            { icd_category_code: event.target.value },
-            { headers }
-          );
-          if (response.data.code == 200 || response.data.code == "200") {
-            this.addicdcatcodelist = response.data.list;
-          } else {
-            this.addicdcatcodelist = [];
-          }
-        },
-       
+            }
         },
     };
     </script>
+    
+    <style scoped>
+    .hide {
+        display: none;
+    }
+    </style>
     

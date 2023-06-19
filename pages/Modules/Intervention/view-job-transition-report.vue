@@ -16,13 +16,13 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">What are your future plan?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="future_plan"></textarea>
+                                            <textarea class="form-control textarea" v-model="future_plan" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">What is your short-term goal?<small style="color:red">*</small></label>
-                                            <textarea class="form-control textarea" v-model="short_term_goal"></textarea>
+                                            <textarea class="form-control textarea" v-model="short_term_goal"disabled ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -31,14 +31,14 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">What is your long-term goal?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="long_term_goal"></textarea>
+                                            <textarea class="form-control textarea" v-model="long_term_goal" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">If you had to make a big decision today who you call?
                                                 Who have you called in the past?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="who_have_you_called_past"></textarea>
+                                            <textarea class="form-control textarea" v-model="who_have_you_called_past" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -61,112 +61,112 @@
                                                     <td>My Case Manager</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_case_manager_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="my_case_manager_yes_no" value="1" disabled />
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_name" />
+                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_name" disabled/>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="my_case_manager_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>My Therapist</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_therapist_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="my_therapist_yes_no" value="1" disabled/>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_therapist_name" />
+                                                        <input type="text" class="form-control" name="" v-model="my_therapist_name" disabled/>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_therapist_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="my_therapist_contact" disabled/>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>My Family</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_family_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="my_family_yes_no" value="1" disabled/>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_family_name" />
+                                                        <input type="text" class="form-control" name="" v-model="my_family_name" disabled />
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_family_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="my_family_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>My Friend</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_friend_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="my_friend_yes_no" value="1" disabled />
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_friend_name" />
+                                                        <input type="text" class="form-control" name="" v-model="my_friend_name" disabled />
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_friend_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="my_friend_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>My Significant Other</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="my_significant_other_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="my_significant_other_yes_no" value="1" disabled/>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_name" />
+                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_name" disabled />
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="my_significant_other_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Clergy</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="clergy_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="clergy_yes_no" value="1" disabled />
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="clergy_name" />
+                                                        <input type="text" class="form-control" name="" v-model="clergy_name" disabled/>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="clergy_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="clergy_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Benefit Planner</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="benefit_planner_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="benefit_planner_yes_no" value="1"  disabled/>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_name" />
+                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_name" disabled />
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="benefit_planner_contact" disabled />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Other</td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" v-model="other_yes_no" value="1" />
+                                                            <input class="form-check-input" type="checkbox" v-model="other_yes_no" value="1" disabled/>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="other_name" />
+                                                        <input type="text" class="form-control" name="" v-model="other_name" disabled/>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="" v-model="other_contact" />
+                                                        <input type="text" class="form-control" name="" v-model="other_contact" disabled />
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -180,7 +180,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Should we schedule a meeting with any of your supports
                                                 to discuss the transition?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="schedule_meeting_discuss_for_transition"></textarea>
+                                            <textarea class="form-control textarea" v-model="schedule_meeting_discuss_for_transition" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -189,7 +189,7 @@
                                                 check in with you about your job? Who should check in
                                                 with you?<small style="color:red">*</small>
                                             </label>
-                                            <textarea class="form-control textarea" v-model="who_check_in_with_you"></textarea>
+                                            <textarea class="form-control textarea" v-model="who_check_in_with_you" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -202,13 +202,13 @@
                                                 time to ask you about returning to IPS for Repeated IPS
                                                 for help with employment or education? Who should
                                                 contact you?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="who_contact_you"></textarea>
+                                            <textarea class="form-control textarea" v-model="who_contact_you" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label">How would you like to be contacted?<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="how_would_like_to_contacted">
+                                            <label class="form-label">How would you like to be contacted?<small style="color:red" >*</small> </label>
+                                            <select class="form-select" v-model="how_would_like_to_contacted" disabled>
                                                 <option value="">Please Select</option>
                                                 <option value="Call">Call</option>
                                                 <option value="Email">Email</option>
@@ -225,7 +225,7 @@
                                             <label class="form-label">What are some tools/coping strategies you use or have
                                                 used in the past on the job to manage stress?<small style="color:red">*</small>
                                             </label>
-                                            <textarea class="form-control textarea" v-model="coping_strategies"></textarea>
+                                            <textarea class="form-control textarea" v-model="coping_strategies" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -233,7 +233,7 @@
                                             <label class="form-label">How would you know if you started to feel dissatisfied
                                                 with your job or that you were having other problems?<small style="color:red">*</small>
                                             </label>
-                                            <textarea class="form-control textarea" v-model="dissatisfied_with_your_job"></textarea>
+                                            <textarea class="form-control textarea" v-model="dissatisfied_with_your_job" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -244,7 +244,7 @@
                                                 assistance with training or education, benefits
                                                 planning, etc).<small style="color:red">*</small>
                                             </label>
-                                            <textarea class="form-control textarea" v-model="reasons_to_re_connect_to_ips"></textarea>
+                                            <textarea class="form-control textarea" v-model="reasons_to_re_connect_to_ips" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -270,13 +270,13 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="transition_report_date" />
+                                            <input type="date" class="form-control" v-model="transition_report_date" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="date" />
+                                            <input type="date" class="form-control" v-model="date" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="location_services_id">
+                                                        <select class="form-select" v-model="location_services_id" disabled>
                                                             <option value="0">
                                                                 Select location of services
                                                             </option>
@@ -309,7 +309,7 @@
                                                             >Type Of Diagnosis<small style="color:red">*</small> </label
                                                         >
                                                         <div class="col-sm-8">
-                                                            <select class="form-select" v-model="type_diagnosis_id">
+                                                            <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                                 <option value="0">Select Diagnosis</option>
                                                                 <option
                                                                 v-for="catcode in diagonisislist"
@@ -325,7 +325,7 @@
                                                         <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
                                                         <div class="col-sm-8 align-items-flex-start" >
                                                             <select
-                                                            id="additionalbox" v-model="additional_diagnosis"
+                                                            id="additionalbox" v-model="additional_diagnosis" disabled
                                                             class="form-select multiselect" multiple="multiple">
                                                                 <option value="0">Please Select</option><option
                                                                 v-for="catcode in diagonisislist"
@@ -342,16 +342,16 @@
                                                     </label>
                                                     <div class="col-sm-8">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" disabled />
                                                             <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" disabled/>
                                                             <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                             </label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" disabled/>
                                                             <label class="form-check-label" for="inlineRadio3">External</label>
                                                         </div>
                                                     </div>
@@ -380,6 +380,7 @@
                                                 class="form-select"
                                                 v-model="code_id"
                                                 @change="onCategorycodebind($event)"
+                                                disabled
                                                 >
                                                 <option value="0">Select code</option>
                                                 <option
@@ -397,7 +398,7 @@
                                             <div class="mt-2 align-items-flex-start">
                                                 <select
                                                 class="form-select multiselect" multiple="multiple"
-                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                                id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
     
                                                 <option value="0">Select code</option>
                                                 <option
@@ -420,7 +421,7 @@
                                                     <select
                                                     class="form-select"
                                                     v-model="add_code_id"
-                                                    @change="onCategoryaddcodebind($event)"
+                                                    @change="onCategoryaddcodebind($event)" disabled
                                                     >
                                                     <option value="0">Select code</option>
                                                     <option
@@ -438,7 +439,7 @@
                                                 <div class="mt-2 align-items-flex-start">
                                                     <select
                                                     class="form-select multiselect" multiple="multiple"
-                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
     
                                                     <option value="0">Select code</option>
                                                     <option
@@ -461,7 +462,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="serviceid">
+                                                            <select class="form-select" v-model="serviceid" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -475,7 +476,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="complexity_services_id">
+                                                        <select class="form-select" v-model="complexity_services_id" disabled>
                                                             <option value="0">
                                                                 Select Complexity Of Service
                                                             </option>
@@ -486,7 +487,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="outcome_id">
+                                                        <select class="form-select" v-model="outcome_id" disabled>
                                                             <option value="0">Select outcome</option>
                                                             <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                                 {{ out.section_value }}
@@ -509,7 +510,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -654,7 +655,7 @@
             this.GetPatientdetails();
             let urlParams1 = new URLSearchParams(window.location.search);
             this.pid = urlParams1.get("pid");
-            this.type = urlParams1.get("type");
+            this.type = "view";
             if (this.Id) {
               this.doctor_name =this.userdetails.user.name;
              }

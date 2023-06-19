@@ -28,13 +28,13 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Job Title<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="job_title" />
+                                            <input type="text" class="form-control" v-model="job_title" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Employer Name<small style="color:red">*</small> </label>
-                                            <input type="text" class="form-control" v-model="employer_name" />
+                                            <input type="text" class="form-control" v-model="employer_name" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -44,13 +44,13 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Job Start Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="job_start_date" />
+                                            <input type="date" class="form-control" v-model="job_start_date" disabled />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Job End Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="job_end_date" />
+                                            <input type="date" class="form-control" v-model="job_end_date" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                             <label class="form-label">Changes in a job duties, work shedule, supervision, or
                                                 other changes since job start<small style="color:red">*</small> :
                                             </label>
-                                            <textarea class="form-control textarea" v-model="changes_in_job_duties"></textarea>
+                                            <textarea class="form-control textarea" v-model="changes_in_job_duties" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Reason for Job End<small style="color:red">*</small> </label>
-                                            <select class="form-select" v-model="reason_for_job_end">
+                                            <select class="form-select" v-model="reason_for_job_end" disabled>
                                                 <option value="">Please Select</option>
                                                 <option value="Quit for a better job">Quit for a better job</option>
                                                 <option value="Quit illness-related">Quit illness-related</option>
@@ -88,13 +88,13 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Client's perspective regarding job end<small style="color:red">*</small> :</label>
-                                            <textarea class="form-control textarea" v-model="clients_perspective"></textarea>
+                                            <textarea class="form-control textarea" v-model="clients_perspective" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Staff comments regarding job end<small style="color:red">*</small> :</label>
-                                            <textarea class="form-control textarea" v-model="staff_comments_regarding_job"></textarea>
+                                            <textarea class="form-control textarea" v-model="staff_comments_regarding_job" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -104,13 +104,13 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Employer comments<small style="color:red">*</small> :</label>
-                                            <textarea class="form-control textarea" v-model="employer_comments"></textarea>
+                                            <textarea class="form-control textarea" v-model="employer_comments" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Type of support provided<small style="color:red">*</small> :</label>
-                                            <textarea class="form-control textarea" v-model="type_of_support"></textarea>
+                                            <textarea class="form-control textarea" v-model="type_of_support" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -121,14 +121,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Does person wish to look for another job/what
                                                 kind?<small style="color:red">*</small> </label>
-                                            <textarea class="form-control textarea" v-model="person_wish_for_another_job"></textarea>
+                                            <textarea class="form-control textarea" v-model="person_wish_for_another_job" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Client's preferences regarding disclosure on next
                                                 job<small style="color:red">*</small> :</label>
-                                            <textarea class="form-control textarea" v-model="clients_preferences"></textarea>
+                                            <textarea class="form-control textarea" v-model="clients_preferences" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label">Date<small style="color:red">*</small> </label>
-                                            <input type="date" class="form-control" v-model="date" />
+                                            <input type="date" class="form-control" v-model="date" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -162,8 +162,8 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="location_services_id">
-                                                            <option value="0">
+                                                        <select class="form-select" v-model="location_services_id" disabled>
+                                                            <option value="0" >
                                                                 Select location of services
                                                             </option>
                                                             <option v-for="loc in locationlist" v-bind:key="loc.id" v-bind:value="loc.id">
@@ -177,7 +177,7 @@
                           <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                           <div class="col-sm-8">
                               <select
-                              v-model="type_diagnosis_id"
+                              v-model="type_diagnosis_id" disabled
                               class="form-select">
                                   <option value="0">Please Select</option><option
                                   v-for="catcode in diagonisislist"
@@ -193,7 +193,7 @@
                           <div class="col-sm-8">
                               <select
                               id="additionalbox" v-model="additional_diagnosis"
-                              class="form-select multiselect" multiple="multiple">
+                              class="form-select multiselect" multiple="multiple" disabled>
                                   <option value="0">Please Select</option><option
                                   v-for="catcode in diagonisislist"
                                   v-bind:key="catcode.id"
@@ -209,16 +209,16 @@
                                                     </label>
                                                     <div class="col-sm-8">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" disabled />
                                                             <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" disabled />
                                                             <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                             </label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" disabled />
                                                             <label class="form-check-label" for="inlineRadio3">External</label>
                                                         </div>
                                                     </div>
@@ -229,7 +229,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="services_id">
+                                                            <select class="form-select" v-model="services_id" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -246,7 +246,7 @@
                                 <select
                                   class="form-select"
                                   v-model="code_id"
-                                  @change="onCategorycodebind($event)"
+                                  @change="onCategorycodebind($event)" disabled
                                 >
                                   <option value="0">Select code</option>
                                   <option
@@ -264,7 +264,7 @@
                               <div class="mt-2 align-items-flex-start">
                                 <select
                                   class="form-select multiselect" multiple="multiple"
-                                  id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                  id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
     
                                   <option value="0">Select code</option>
                                   <option
@@ -289,7 +289,7 @@
                                 <select
                                   class="form-select"
                                   v-model="add_code_id"
-                                  @change="onCategoryaddcodebind($event)"
+                                  @change="onCategoryaddcodebind($event)" disabled
                                 >
                                   <option value="0">Select code</option>
                                   <option
@@ -307,7 +307,7 @@
                               <div class="mt-2 align-items-flex-start">
                                 <select
                                   class="form-select multiselect" multiple="multiple"
-                                  id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                  id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
     
                                   <option value="0">Select code</option>
                                   <option
@@ -330,7 +330,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                            <select class="form-select" v-model="serviceid">
+                                                            <select class="form-select" v-model="serviceid" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -344,7 +344,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="complexity_services_id">
+                                                        <select class="form-select" v-model="complexity_services_id" disabled>
                                                             <option value="0">
                                                                 Select Complexity Of Service
                                                             </option>
@@ -355,7 +355,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="outcome_id">
+                                                        <select class="form-select" v-model="outcome_id" disabled>
                                                             <option value="0">Select outcome</option>
                                                             <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                                 {{ out.section_value }}
@@ -378,7 +378,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,15 +400,7 @@
                                         <i class="fa fa-arrow-alt-to-left"></i> Back
                                     </button>
     
-                                    <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                        <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                            <i class="fa fa-save"></i> Save as draft
-                                        </button>
-    
-                                        <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                            <i class="fa fa-paper-plane"></i> Submit
-                                        </button>
-                                    </div>
+                                  
                                   
                                 </div>
                             </div>
@@ -517,342 +509,7 @@
         });
       },
         methods: {
-            async onCreateEvent() {
-                var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
-                this.$swal.fire({
-                    title: 'Do you want to save as draft?',
-                    showCancelButton: true,
-                    confirmButtonText: 'Save',
-                }).then(async (result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        try {
-                            this.loader = true;
-                            const headers = {
-                                Authorization: "Bearer " + this.userdetails.access_token,
-                                Accept: "application/json",
-                                "Content-Type": "application/json",
-                            };
-                            const response = await this.$axios.post(
-                                "intervention/job-report-end", {
-                                    added_by: this.userdetails.user.id,
-                                    patient_id: this.Id,
-                                    name: this.name,
-                                    job_title: this.job_title,
-                                    employer_name: this.employer_name,
-                                    job_start_date: this.job_start_date,
-                                    job_end_date: this.job_end_date,
-                                    changes_in_job_duties: this.changes_in_job_duties,
-                                    reason_for_job_end: this.reason_for_job_end,
-                                    clients_perspective: this.clients_perspective,
-                                    staff_comments_regarding_job: this.staff_comments_regarding_job,
-                                    employer_comments: this.employer_comments,
-                                    type_of_support: this.type_of_support,
-                                    person_wish_for_another_job: this.person_wish_for_another_job,
-                                    clients_preferences: this.clients_preferences,
-                                    staff_name: this.staff_name,
-                                    date: this.date,
-                                    type_of_diagnosis: this.type_diagnosis_id,
-                                    add_type_of_diagnosis: JSON.stringify(additionalbox),
-                                    category_of_services: this.category_services,
-                                    location_services_id: this.location_services_id,
-                                    services: this.services_id,
-                                    icd_9_code: this.code_id,
-                                    icd_9_subcode: JSON.stringify(sub_code_id),
-                                    add_code_id: this.add_code_id,
-                                    add_sub_code_id: JSON.stringify(add_sub_code_id),
-                                    complexity_of_services: this.complexity_services_id,
-                                    outcome: this.outcome_id,
-                                    medication_prescription: this.medication_des,
-                                    appId: this.appId,
-                                    status: "0",
-                                    id: this.pid,
-                                }, {
-                                    headers
-                                }
-                            );
-                            console.log("response", response.data);
-                            if (response.data.code == 200 || reponse.data.code == "200") {
-                                this.loader = false;
-                                this.resetmodel();
-                                this.$swal.fire('Succesfully save as draft!', '', 'success')
-                                this.GoBack();
-                            } else {
-                                this.loader = false;
-                                this.resetmodel();
-                                this.$swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops... Something Went Wrong!',
-                                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                                })
-                                this.GoBack();
-                            }
-                        } catch (e) {
-                            this.$swal.fire({
-                                icon: 'error',
-                                title: 'Oops... Something Went Wrong!',
-                                text: 'the error is: ' + e,
-                            })
-                        }
-                    } else if (result.isDismissed) {
-                        this.$swal.fire('Changes are not saved', '', 'info')
-                    }
-                })
-            },
-            async onPublishEvent() {
-                var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
-                this.$swal.fire({
-                    title: 'Do you want to save the changes?',
-                    showCancelButton: true,
-                    confirmButtonText: 'Save',
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        this.validate = true;
-                        this.errorList = [];
-                        try {
-                            if (!this.name) {
-                                this.errorList.push("Name is required");
-                            }
-                            if (!this.job_title) {
-                                this.errorList.push("Job Title is required");
-                            }
-                            if (!this.employer_name) {
-                                this.errorList.push("Employer Name is required");
-                            }
-                            if (!this.job_start_date) {
-                                this.errorList.push("Job Start Date is required");
-                            }
-                            if (!this.job_end_date) {
-                                this.errorList.push("Job End Date is required");
-                            }
-                            if (!this.changes_in_job_duties) {
-                                this.errorList.push(
-                                    "Changes in a job duties, work shedule, supervision, or other changes since job start is required"
-                                );
-                            }
-                            if (!this.reason_for_job_end) {
-                                this.errorList.push("Reason for Job End is required");
-                            }
-                            if (!this.clients_perspective) {
-                                this.errorList.push(
-                                    "Client's perspective regarding job end is required"
-                                );
-                            }
-                            if (!this.staff_comments_regarding_job) {
-                                this.errorList.push("Staff comments regarding job end is required");
-                            }
-                            if (!this.employer_comments) {
-                                this.errorList.push("Employer comments is required");
-                            }
-                            if (!this.type_of_support) {
-                                this.errorList.push("Type of support provided is required");
-                            }
-                            if (!this.person_wish_for_another_job) {
-                                this.errorList.push(
-                                    "Does person wish to look for another job/what kind? is required"
-                                );
-                            }
-                            if (!this.clients_preferences) {
-                                this.errorList.push(
-                                    "Client's preferences regarding disclosure on next job is required"
-                                );
-                            }
-                            if (!this.staff_name) {
-                                this.errorList.push("Staff Name is required");
-                            }
-                            if (!this.date) {
-                                this.errorList.push("Date is required");
-                            }
-    
-                            if (!this.location_services_id) {
-                                this.errorList.push("Location Of Services is required");
-                            }
-                            if (!this.type_diagnosis_id) {
-                                this.errorList.push("Type Of Diagnosis is required");
-                            }
-                            if (!this.category_services) {
-                                this.errorList.push("Category Of Services is required");
-                            }
-                            if (!this.complexity_services_id) {
-                                this.errorList.push("Complexity Of Service is required");
-                            }
-                            if (this.category_services) {
-                                if (this.category_services == "assisstance") {
-                                    if (!this.services_id) {
-                                        this.errorList.push("Service is required");
-                                        this.validate = false;
-                                    }
-                                } else if (this.category_services == "clinical-work") {
-                                    if (!this.code_id) {
-                                        this.errorList.push("ICD 9 CODE is required");
-                                        this.validate = false;
-                                    }
-                                    if (!sub_code_id) {
-                                        this.errorList.push("ICD 9 SUB CODE is required");
-                                        this.validate = false;
-                                    }
-                                } else {
-                                    if (!this.serviceid) {
-                                        this.errorList.push("Services is required");
-                                        this.validate = false;
-                                    } else {
-                                        this.services_id = this.serviceid;
-                                    }
-                                }
-                            }
-                            if (!this.outcome_id) {
-                                this.errorList.push("Outcome is required");
-                            }
-                            if (
-                                this.name &&
-                                this.job_title &&
-                                this.employer_name &&
-                                this.job_start_date &&
-                                this.job_end_date &&
-                                this.changes_in_job_duties &&
-                                this.reason_for_job_end &&
-                                this.clients_perspective &&
-                                this.staff_comments_regarding_job &&
-                                this.employer_comments &&
-                                this.type_of_support &&
-                                this.person_wish_for_another_job &&
-                                this.clients_preferences &&
-                                this.staff_name &&
-                                this.date &&
-                                this.location_services_id &&
-                                this.category_services &&
-                                this.complexity_services_id &&
-                                this.outcome_id &&
-                                this.validate
-                            ) {
-                                this.loader = true;
-                                const headers = {
-                                    Authorization: "Bearer " + this.userdetails.access_token,
-                                    Accept: "application/json",
-                                    "Content-Type": "application/json",
-                                };
-                                const response = await this.$axios.post(
-                                    "intervention/job-report-end", {
-                                        added_by: this.userdetails.user.id,
-                                        patient_id: this.Id,
-                                        name: this.name,
-                                        job_title: this.job_title,
-                                        employer_name: this.employer_name,
-                                        job_start_date: this.job_start_date,
-                                        job_end_date: this.job_end_date,
-                                        changes_in_job_duties: this.changes_in_job_duties,
-                                        reason_for_job_end: this.reason_for_job_end,
-                                        clients_perspective: this.clients_perspective,
-                                        staff_comments_regarding_job: this.staff_comments_regarding_job,
-                                        employer_comments: this.employer_comments,
-                                        type_of_support: this.type_of_support,
-                                        person_wish_for_another_job: this.person_wish_for_another_job,
-                                        clients_preferences: this.clients_preferences,
-                                        staff_name: this.staff_name,
-                                        date: this.date,
-                                        type_of_diagnosis: this.type_diagnosis_id,
-                                        add_type_of_diagnosis: JSON.stringify(additionalbox),
-                                        category_of_services: this.category_services,
-                                        location_services_id: this.location_services_id,
-                                        services: this.services_id,
-                                        icd_9_code: this.code_id,
-                                        icd_9_subcode: JSON.stringify(sub_code_id),
-                                        add_code_id: this.add_code_id,
-                                        add_sub_code_id: JSON.stringify(add_sub_code_id),
-                                        complexity_of_services: this.complexity_services_id,
-                                        outcome: this.outcome_id,
-                                        medication_prescription: this.medication_des,
-                                        appId: this.appId,
-                                        status: "1",
-                                        id: this.pid,
-                                    }, {
-                                        headers
-                                    }
-                                );
-                                console.log("response", response.data);
-                                if (response.data.code == 200) {
-                                    this.loader = false;
-                                    this.resetmodel();
-                                    this.$swal.fire(
-                                        'Successfully Submitted.',
-                                        'Data is inserted.',
-                                        'success',
-                                    );
-    
-                                    this.GoBack();
-                                } else {
-                                    this.loader = false;
-                                    this.resetmodel();
-                                    this.$swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops... Something Went Wrong!',
-                                        text: 'the error is: ' + JSON.stringify(response.data.message),
-                                    })
-                                    this.GoBack();
-                                }
-                            }
-                        } catch (e) {
-                            this.loader = false;
-                            this.resetmodel();
-                            this.$swal.fire({
-                                icon: 'error',
-                                title: 'Oops... Something Went Wrong!',
-                                text: 'the error is: ' + e,
-                            })
-    
-                            this.GoBack();
-                        }
-                    } else if (result.isDismissed) {
-                        this.$swal.fire('Changes are not saved', '', 'info')
-                    }
-                })
-            },
+         
             async GetList() {
                 const headers = {
                     Authorization: "Bearer " + this.userdetails.access_token,
@@ -989,30 +646,7 @@
                     });
                 }
             },
-            resetmodel() {
-                this.name = "";
-                this.job_title = "";
-                this.employer_name = "";
-                this.job_start_date = "";
-                this.job_end_date = "";
-                this.changes_in_job_duties = "";
-                this.reason_for_job_end = "";
-                this.clients_perspective = "";
-                this.staff_comments_regarding_job = "";
-                this.employer_comments = "";
-                this.type_of_support = "";
-                this.person_wish_for_another_job = "";
-                this.clients_preferences = "";
-                this.staff_name = "";
-                this.date = "";
-                this.location_services_id = 0;
-                this.category_services = "";
-                this.code_id = 0;
-                this.complexity_services_id = 0;
-                this.outcome_id = 0;
-                this.medication_des = "";
-                this.services_id = 0;
-            },
+           
             async getdetails() {
                 const headers = {
                     Authorization: "Bearer " + this.userdetails.access_token,

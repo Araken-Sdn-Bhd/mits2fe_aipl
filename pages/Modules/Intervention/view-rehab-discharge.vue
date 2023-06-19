@@ -31,13 +31,13 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="date" />
+                      <input type="date" class="form-control" v-model="date" disabled/>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Time<small style="color:red">*</small> </label>
-                      <input type="time" class="form-control" v-model="time" />
+                      <input type="time" class="form-control" v-model="time" disabled />
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Diagnosis<small style="color:red">*</small> </label>
-                      <select class="form-select" v-model="type_diagnosis_id">
+                      <select class="form-select" v-model="type_diagnosis_id" disabled>
                        <option value="0">Select Diagnosis</option>
                                 <option
                           v-for="catcode in diagonisislist"
@@ -70,13 +70,13 @@
                   <div class="col-sm-12">
                     <label class="form-label">Intervention<small style="color:red">*</small> </label>
                     <div class="mb-3">
-                      <div class="form-check form-check-inline">
+                      <div class="form-check form-check-inline" >
                         <input
                           class="form-check-input"
                           type="radio"
                           id="inlineCheckbox1"
                           value="supportedEmployment"
-                          name="inlineRadioOptions" v-model="intervention"
+                          name="inlineRadioOptions" v-model="intervention" disabled
                         />
                         <label class="form-check-label" for="inlineCheckbox1"
                           >Supported Employment<small style="color:red">*</small> </label
@@ -88,7 +88,7 @@
                           type="radio"
                           id="inlineCheckbox2"
                           value="ETP"
-                          name="inlineRadioOptions" v-model="intervention"
+                          name="inlineRadioOptions" v-model="intervention" disabled
                         />
                         <label class="form-check-label" for="inlineCheckbox2"
                           >ETP</label
@@ -100,7 +100,7 @@
                           type="radio"
                           id="inlineCheckbox3"
                           value="jobClub"
-                          name="inlineRadioOptions" v-model="intervention"
+                          name="inlineRadioOptions" v-model="intervention" disabled
                         />
                         <label class="form-check-label" for="inlineCheckbox3"
                           >Job Club</label
@@ -114,7 +114,7 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Category of Discharge<small style="color:red">*</small> </label>
-                      <select class="form-select" v-model="discharge_category">
+                      <select class="form-select" v-model="discharge_category" disabled>
                         <option value="0">Please Select</option>
                                                 <option
               v-for="dis in dischargelist"
@@ -132,7 +132,7 @@
                   <div class="col-sm-12">
                     <div class="mb-3">
                       <label class="form-label">Comment<small style="color:red">*</small> </label>
-                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="comment"></textarea>
+                      <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="comment" disabled></textarea>
                     </div>
                   </div>
                 </div>
@@ -168,18 +168,18 @@
                           <div class="col-sm-8">
                             <select
                               class="form-select"
-                              v-model="location_services"
+                              v-model="location_services" disabled
                             >
                               <option value="0">
                                 Select location of services
                               </option>
                              <option
-              v-for="loc in locationlist"
-              v-bind:key="loc.id"
-              v-bind:value="loc.id"
-            >
-              {{ loc.section_value }}
-            </option>
+                                  v-for="loc in locationlist"
+                                  v-bind:key="loc.id"
+                                  v-bind:value="loc.id"
+                                >
+                                  {{ loc.section_value }}
+                                </option>
                             </select>
                           </div>
                         </div>
@@ -189,15 +189,15 @@
                             >Type Of Diagnosis<small style="color:red">*</small> </label
                           >
                           <div class="col-sm-8">
-                            <select class="form-select" v-model="type_diagnosis_id">
+                            <select class="form-select" v-model="type_diagnosis_id" disabled>
                                 <option value="0">Select Diagnosis</option>
                                 <option
-                                  v-for="catcode in diagonisislist"
-                                  v-bind:key="catcode.id"
-                                  v-bind:value="catcode.id"
-                                >
-                                {{ catcode.icd_code }} {{catcode.icd_name}}
-                                </option>
+              v-for="catcode in diagonisislist"
+              v-bind:key="catcode.id"
+              v-bind:value="catcode.id"
+            >
+            {{ catcode.icd_code }} {{catcode.icd_name}}
+            </option>
                               </select>
                           </div>
                         </div>
@@ -206,7 +206,7 @@
                       <div class="col-sm-8 align-items-flex-start" >
                           <select
                           id="additionalbox" 
-                          class="form-select multiselect" multiple="multiple">
+                          class="form-select multiselect" multiple="multiple" disabled>
                               <option value="0">Please Select</option><option
                               v-for="catcode in diagonisislist"
                               v-bind:key="catcode.id"
@@ -215,7 +215,7 @@
                             </option>
                         </select>
                       </div>
-                        </div>
+                    </div>
                   
                         <!-- close-row -->
                         <div class="row mb-3">
@@ -223,15 +223,15 @@
                             >Category Of Services<small style="color:red">*</small>
                           </label>
                           <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline" >
                               <input
                                 class="form-check-input"
                                 type="radio"
                                 name="inlineRadioOptions1"
                                 id="inlineRadio1"
                                 value="assisstance"
-                                v-model="category_services"
-                              />
+                                v-model="category_services" disabled
+                              /> 
                               <label class="form-check-label" for="inlineRadio1"
                                 >Assisstance / Supervision</label
                               >
@@ -243,7 +243,7 @@
                                 name="inlineRadioOptions1"
                                 id="inlineRadio2"
                                 value="clinical-work"
-                                v-model="category_services"
+                                v-model="category_services" disabled
                               />
                               <label class="form-check-label" for="inlineRadio2"
                                 >Clinical Work / Procedure
@@ -256,7 +256,7 @@
                                 name="inlineRadioOptions1"
                                 id="inlineRadio3"
                                 value="external"
-                                v-model="category_services"
+                                v-model="category_services" disabled
                               />
                               <label class="form-check-label" for="inlineRadio3"
                                 >External</label
@@ -270,7 +270,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="services_id">
+                              <select class="form-select" v-model="services_id" disabled>
                                  <option value="0">Select Service</option>
                       <option
                         v-for="slt in assistancelist"
@@ -291,7 +291,7 @@
                             <select
                               class="form-select"
                               v-model="code_id"
-                              @change="onCategorycodebind($event)"
+                              disabled
                             >
                               <option value="0">Select code</option>
                               <option
@@ -309,7 +309,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="sub_code_id" style="width:100%">
+                              id="sub_code_id" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -334,7 +334,7 @@
                             <select
                               class="form-select"
                               v-model="add_code_id"
-                              @change="onCategoryaddcodebind($event)"
+                              disabled
                             >
                               <option value="0">Select code</option>
                               <option
@@ -352,7 +352,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="add_sub_code_id" style="width:100%">
+                              id="add_sub_code_id" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -375,7 +375,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label class="form-label">Services<small style="color:red">*</small> </label>
-                              <select class="form-select" v-model="serviceid">
+                              <select class="form-select" v-model="serviceid" disabled>
                                 <option value="0">Select Service</option>
                       <option
                         v-for="slt in externallist"
@@ -397,7 +397,7 @@
                             >
                             <select
                               class="form-select"
-                              v-model="complexity_services"
+                              v-model="complexity_services" disabled
                             >
                               <option value="0">
                                 Select Complexity Of Service
@@ -413,7 +413,7 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                            <select class="form-select" v-model="outcome">
+                            <select class="form-select" v-model="outcome" disabled>
                               <option value="0">Select outcome</option>
                       <option
                         v-for="out in outcomelist"
@@ -455,7 +455,7 @@
                           <textarea
                             class="form-control textarea"
                             placeholder="Please Type Prescription Here"
-                            v-model="medication_des"
+                            v-model="medication_des" disabled
                           ></textarea>
                         </div>
                       </div>
@@ -469,13 +469,13 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Specialist Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="specialist_name" />
+                      <input type="text" class="form-control" v-model="specialist_name"  disabled/>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Case Manager/Staff Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="case_manager" />
+                      <input type="text" class="form-control" v-model="case_manager" disabled />
                     </div>
                   </div>
                 </div>
@@ -484,13 +484,13 @@
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="verification_date_1" />
+                      <input type="date" class="form-control" v-model="verification_date_1" disabled />
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="verification_date_2" />
+                      <input type="date" class="form-control" v-model="verification_date_2" disabled />
                     </div>
                   </div>
                 </div>
@@ -510,15 +510,7 @@
                       class="btn btn-primary btn-text"
                       ><i class="fa fa-arrow-alt-to-left"></i> Back
                     </button>
-                    <div  class="btn-right" :class="SidebarAccess!=1?'hide':''" v-if="!pid">
-                    <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                      <i class="fa fa-save"></i> Save as draft
-                    </button>
-
-                    <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                      <i class="fa fa-paper-plane"></i> Submit
-                    </button>
-                  </div>
+                   
                 </div>
               </div>
             </div>
@@ -627,316 +619,7 @@ export default {
     };
   },
   methods: {
-    async onCreateEvent() {
-      var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
-      this.$swal.fire({
-                title: 'Do you want to save as draft?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async(result) => {
-              if (result.isConfirmed) {
-                try {
-                        this.loader = true;
-                          const headers = {
-                            Authorization: "Bearer " + this.userdetails.access_token,
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                            "rehab-discharge-note/add",
-                            {
-                              added_by: this.userdetails.user.id,
-                              name: this.name,
-                              mrn: this.mrn,
-                              patient_mrn_id: this.Id,
-                              date: this.date,
-                              time: this.time,
-                              staff_name: this.staff_name,
-                              diagnosis_id: this.type_diagnosis_id,
-                              intervention: this.intervention,
-                              discharge_category: this.discharge_category,
-                              comment: this.comment,
-                              location_services: this.location_services,
-                              diagnosis_type: this.type_diagnosis_id,
-                              add_diagnosis_type: JSON.stringify(additionalbox),
-                              service_category: this.category_services,
-                              services_id: this.services_id,
-                              code_id: this.code_id,
-                              sub_code_id: JSON.stringify(sub_code_id),
-                              add_code_id: this.add_code_id,
-                              add_sub_code_id: JSON.stringify(add_sub_code_id),
-                              complexity_services: this.complexity_services,
-                              outcome: this.outcome,
-                              medication: this.medication_des,
-                              specialist_name: this.specialist_name,
-                              case_manager: this.case_manager,
-                              verification_date_1: this.verification_date_1,
-                              verification_date_2: this.verification_date_2,
-                              status: "0",
-                              id:this.pid,
-                              appId:this.appId,
-                            },
-                            { headers }
-                          );
-                          if (response.data.code == 200) {
-                            this.loader = false;
-                            this.resetmodel();
-                            this.$swal.fire('Succesfully save as draft!', '', 'success')
-                            this.GoBack();
-                          } else {
-                            this.loader = false;
-                            this.resetmodel();
-                            this.$swal.fire({
-                                icon: 'error',
-                                title: 'Oops... Something Went Wrong!',
-                                text: 'the error is: ' + JSON.stringify(response.data.message),
-                            })
-                            this.GoBack();
-                          }
-                  }catch (e) {
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: 'Oops... Something Went Wrong!',
-                        text: 'the error is: ' + e,
-                    })
-                }
-            } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
-          })
-    },
-    async onPublishEvent() {
-      var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
-      this.$swal.fire({
-                title: 'Do you want to save the changes?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async (result) => {
-              if (result.isConfirmed) {
-                  this.errorList = [];
-                  this.validate = true;
-                  try {
-                    if (!this.name) {
-                      this.errorList.push("Name is required");
-                    }
-                    if (!this.mrn) {
-                      this.errorList.push("MRN Of Discharge is required");
-                    }
-                    if (!this.date) {
-                      this.errorList.push("Date is required");
-                    }
-                    if (!this.time) {
-                      this.errorList.push("Time is required");
-                    }
-                    if (!this.staff_name) {
-                      this.errorList.push("Staff Name is required");
-                    }
-                  
-                    if (!this.intervention) {
-                      this.errorList.push("Intervention is required");
-                    }
-                    if (!this.discharge_category) {
-                      this.errorList.push("Category of Discharge is required");
-                    }
-                    if (!this.comment) {
-                      this.errorList.push("Comment is required");
-                    }
-                    if (!this.location_services) {
-                      this.errorList.push("Location Of Services is required");
-                    }
-                    if (!this.type_diagnosis_id) {
-                      this.errorList.push("Type Of Diagnosis is required");
-                    }
-                    if (!this.category_services) {
-                      this.errorList.push("Category Of Services is required");
-                    }
-                    if (!this.complexity_services) {
-                      this.errorList.push("Complexity Of Service is required");
-                    }
-                    if (this.category_services) {
-                      if (this.category_services == "assisstance") {
-                        if (!this.services_id) {
-                          this.errorList.push("Service is required");
-                          this.validate = false;
-                        }
-                      } else if (this.category_services == "clinical-work") {
-                        if (!this.code_id) {
-                          this.errorList.push("ICD 9 CODE is required");
-                          this.validate = false;
-                        }
-                        if (!sub_code_id) {
-                          this.errorList.push("ICD 9 SUB CODE is required");
-                          this.validate = false;
-                        }
-                      } else {
-                        if (!this.serviceid) {
-                          this.errorList.push("Services is required");
-                          this.validate = false;
-                        } else {
-                          this.services_id = this.serviceid;
-                        }
-                      }
-                    }
-                    if (!this.outcome) {
-                      this.errorList.push("Outcome is required");
-                    }
-                    if (!this.specialist_name) {
-                      this.errorList.push("Specialist Name is required");
-                    }
-                    if (!this.case_manager) {
-                      this.errorList.push("Case Manager/Staff Name is required");
-                    }
-                    if (!this.verification_date_1) {
-                      this.errorList.push("Date is required");
-                    }
-                    if (!this.verification_date_2) {
-                      this.errorList.push("Date 2 is required");
-                    }
-                    if (
-                      this.name &&
-                      this.mrn &&
-                      this.date &&
-                      this.time &&
-                      this.staff_name &&
-                      this.intervention &&
-                      this.discharge_category &&
-                      this.comment &&
-                      this.location_services &&
-                      this.type_diagnosis_id &&
-                      this.category_services &&
-                      this.complexity_services &&
-                      this.outcome &&
-                      this.validate &&
-                      this.specialist_name &&
-                      this.case_manager &&
-                      this.verification_date_1 &&
-                      this.verification_date_2
-                    ) {
-                      this.loader = true;
-                      const headers = {
-                        Authorization: "Bearer " + this.userdetails.access_token,
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                      };
-                      const response = await this.$axios.post(
-                        "rehab-discharge-note/add",
-                        {
-                          added_by: this.userdetails.user.id,
-                          name: this.name ?? null,
-                          mrn: this.mrn ?? null,
-                          patient_mrn_id: this.Id ?? null,
-                          date: this.date ?? null,
-                          time: this.time ?? null,
-                          staff_name: this.staff_name ?? null,
-                          diagnosis_id: this.type_diagnosis_id ?? null,
-                          intervention: this.intervention ?? null,
-                          discharge_category: this.discharge_category ?? null,
-                          comment: this.comment ?? null,
-                          location_services: this.location_services ?? null,
-                          diagnosis_type: this.type_diagnosis_id ?? null,
-                          add_diagnosis_type: JSON.stringify(additionalbox),
-                          service_category: this.category_services ?? null,
-                          services_id: this.services_id ?? null,
-                          code_id: this.code_id ?? null,
-                          sub_code_id: JSON.stringify(sub_code_id),
-                          add_code_id: this.add_code_id,
-                          add_sub_code_id: JSON.stringify(add_sub_code_id),
-                          complexity_services: this.complexity_services ?? null,
-                          outcome: this.outcome ?? null,
-                          medication: this.medication_des ?? null,
-                          specialist_name: this.specialist_name  ?? null,
-                          case_manager: this.case_manager  ?? null,
-                          verification_date_1: this.verification_date_1  ?? null,
-                          verification_date_2: this.verification_date_2 ?? null,
-                          status: "1",
-                          id:this.pid,
-                          appId:this.appId,
-                        },
-                        { headers }
-                      );
-                      console.log("response", response.data);
-                      if (response.data.code == 200 || response.data.code == "200") {
-                        this.loader = false;
-                        this.resetmodel();
-                        this.$swal.fire(
-                            'Successfully Submitted.',
-                            'Data is inserted.',
-                            'success',
-                        );
-                        this.GoBack();
-                      } else {
-                        this.loader = false;
-                        this.resetmodel();
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + JSON.stringify(response.data.message),
-                        })
-                        this.GoBack();
-                      }
-                    }
-                  } catch (e) {
-                    this.loader = false;
-                        this.resetmodel();
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + e,
-                        })
-
-                        this.GoBack();
-                  }
-                } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
-              })
-    },
+   
     async GetList() {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,

@@ -787,22 +787,22 @@ export default {
         });
       } else if (data.type == "JobClubProgressNote") {
         this.$router.push({
-          path: "/modules/Intervention/job-club-progress-note",
+          path: "/modules/Intervention/view-job-club-progress-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ConsultationDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/consultation-discharge-note",
+          path: "/modules/Intervention/view-consultation-discharge-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "RehabDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/rehab-discharge",
+          path: "/modules/Intervention/view-rehab-discharge",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsDischargeNote") {
         this.$router.push({
-          path: "/modules/Intervention/cps-discharge-note",
+          path: "/modules/Intervention/view-cps-discharge-note",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "CpsHomeVisitConsentForm") {
@@ -842,22 +842,22 @@ export default {
         });
       } else if (data.type == "PatientCarePlanAndCaseReviewForm") {
         this.$router.push({
-          path: "/modules/Intervention/patient-care-plan-and-case-review",
+          path: "/modules/Intervention/view-patient-care-plan-and-case-review",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobStartReport") {
         this.$router.push({
-          path: "/modules/Intervention/job-start-report",
+          path: "/modules/Intervention/view-job-start-report",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobEndReport") {
         this.$router.push({
-          path: "/modules/Intervention/job-end-report",
+          path: "/modules/Intervention/view-job-end-report",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobTransitionReport") {
         this.$router.push({
-          path: "/modules/Intervention/job-transition-report",
+          path: "/modules/Intervention/view-job-transition-report",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "LaserAssessment") {
