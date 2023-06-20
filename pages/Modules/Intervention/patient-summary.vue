@@ -874,12 +874,12 @@ export default {
         });
       } else if (data.type == "JobInterestCheckList") {
         this.$router.push({
-          path: "/modules/Intervention/job-interest-checklist",
+          path: "/modules/Intervention/view-job-interest-checklist",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "WorkAnalysisForm") {
         this.$router.push({
-          path: "/modules/Intervention/work-analysis-form",
+          path: "/modules/Intervention/view-work-analysis-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ListofJobClub") {
