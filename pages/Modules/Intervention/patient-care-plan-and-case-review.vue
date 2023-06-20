@@ -164,62 +164,6 @@
                 <!-- close-row -->
 
                 <div class="form-heading mt-3">Treatment Plan</div>
-                <!--<div class="table-responsive">
-                  <table class="job-search-table" v-if="!pid" id="treatmentplan">
-                    <thead>
-                      <tr>
-                      
-                        <th>Issues/Current Status<small style="color:red">*</small> </th>
-                        <th>Goal(s)<small style="color:red">*</small> </th>
-                        <th>Management Strategies<small style="color:red">*</small> </th>
-                        <th>Who,By When<small style="color:red">*</small> </th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody class="optionBox">
-                      <tr class="block">
-                    
-                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea>
-                        </td>
-                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
-                        <td><textarea class="management" v-model="Management"
-                            placeholder="Management Strategies"></textarea></td>
-                        <td><textarea class="who" v-model="Who" placeholder="Who,By When"></textarea></td>
-                        <td>
-                          <a class="add-row"><i class="fa fa-plus"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>-->
-                <!--<div class="table-responsive">
-                  <table class="job-search-table" v-if="pid">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Issues/Current Status</th>
-                        <th>Goal(s)</th>
-                        <th>Management Strategies</th>
-                        <th>Who,By When</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
-                       <td>-</td> 
-                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status dewfrgtr" /></td>
-                        <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
-                        <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" />
-                        </td>
-                        <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When" /></td>
-                        <td>
-                          <a href="#" class="add-row"><i class="fa fa-plus"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>-->
-                
                 <div class="table-responsive">
                                 <table class="job-search-table" id="treatmentplan" v-if="!pid">
                                     <thead>
@@ -619,7 +563,7 @@ export default {
       serviceid: 0,
       validate: true,
       issues: "",
-      goal: "",
+      goals: "",
       management: "",
       who: "",
       oral: false,
@@ -785,7 +729,7 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.$swal.fire(
-                  'Data are saved successfully!',
+                  'Successfully save as draft!',
                 );
             this.GoBack();
           } else {
@@ -956,6 +900,7 @@ export default {
       }
     },
     async onPublishEvent() {
+      var jobSDESCRIPTION = [];
       var additionalbox = 0;
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
@@ -989,6 +934,7 @@ export default {
         this.errorList = [];
         this.validate = true;
         try {
+          
           if (!this.plan_date) {
             this.errorList.push("Date is required");
             this.validate = false;
@@ -1074,16 +1020,16 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-          var treatmentplan = [];
           $("table#treatmentplan > tbody > tr").each(function () {
-            var obj = {};
-            obj.Issues = $('td input[type="text"].issue', this).val();
-            obj.Goal = $('td input[type="text"].goal', this).val();
-            obj.Management = $('td input[type="text"].management', this).val();
-            obj.Who = $('td input[type="text"].who', this).val();
-            treatmentplan.push(obj);
-          });
-          //alert(JSON.stringify(treatmentplan));
+                var obj = {};
+                obj.issues = $('td textarea[type="text"].issues', this).val();
+                obj.goals = $('td textarea[type="text"].goals', this).val();
+                obj.management = $('td textarea[type="text"].management', this).val();
+                obj.who = $('td textarea[type="text"].who', this).val();
+                jobSDESCRIPTION.push(obj);
+
+            });
+            console.log("description array", jobSDESCRIPTION);
           if (
             this.location_services_id &&
             this.category_services &&
@@ -1110,7 +1056,6 @@ export default {
                 medication_im: this.medication_im,
                 background_history: this.background_history,
                 staff_incharge_dr: this.staff_incharge_dr,
-                treatment_plan: this.treatment_plan,
                 next_review_date: this.next_review_date,
                 case_manager_date: this.case_manager_date,
                 case_manager_name: this.case_manager_name,
@@ -1131,7 +1076,7 @@ export default {
                 add_code_id: this.add_code_id,
                 add_sub_code_id: JSON.stringify(add_sub_code_id),
                 medication_prescription: this.medication_prescription,
-                treatment_plan: JSON.stringify(treatmentplan),
+                treatment_plan: jobSDESCRIPTION,
                 appId: this.appId,
                 status: "1",
               },
@@ -1142,7 +1087,7 @@ export default {
               this.loader = false;
               this.ResetModel();
               this.GoBack();
-              this.$swal.fire('Successfully Update', '', 'success');
+              this.$swal.fire('Successfully Save', '', 'success');
             } else {
               this.loader = false;
               this.$swal.fire({

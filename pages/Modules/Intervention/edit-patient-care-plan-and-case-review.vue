@@ -165,60 +165,32 @@
 
                 <div class="form-heading mt-3">Treatment Plan</div>
                 <div class="table-responsive">
-                  <table class="job-search-table" v-if="!pid" id="treatmentplan">
-                    <thead>
-                      <tr>
-                        <!-- <th>No</th> -->
-                        <th>Issues/Current Status<small style="color:red">*</small> </th>
-                        <th>Goal(s)<small style="color:red">*</small> </th>
-                        <th>Management Strategies<small style="color:red">*</small> </th>
-                        <th>Who,By When<small style="color:red">*</small> </th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody class="optionBox">
-                      <tr class="block">
-                        <!-- <td>-</td> -->
-                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea>
-                        </td>
-                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
-                        <td><textarea class="management" v-model="Management"
-                            placeholder="Management Strategies"></textarea></td>
-                        <td><textarea class="who" v-model="Who" placeholder="Who,By When"></textarea></td>
-                        <td>
-                          <a class="add-row"><i class="fa fa-plus"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="table-responsive">
-                  <table class="job-search-table" v-if="pid">
-                    <thead>
-                      <tr>
-                        <!-- <th>No</th> -->
-                        <th>Issues/Current Status</th>
-                        <th>Goal(s)</th>
-                        <th>Management Strategies</th>
-                        <th>Who,By When</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
-                        <!-- <td>-</td> -->
-                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status dewfrgtr" /></td>
-                        <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
-                        <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" />
-                        </td>
-                        <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When" /></td>
-                        <td>
-                          <a href="#" class="add-row"><i class="fa fa-plus"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                                <table class="job-search-table" id="treatmentplan">
+                                    <thead>
+                                        <tr>
+                                            <th>Issues/Current Status <small style="color:red">*</small> </th>
+                                            <th>Goal(s) <small style="color:red">*</small> </th>
+                                            <th>Management Strategies <small style="color:red">*</small> </th>
+                                            <th>Who,By When<small style="color:red">*</small> </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="optionBox">
+                                        <tr class="block" v-for="(job, index) in jobSDESCRIPTION" :key="index">
+                                            <td><textarea type="text" required class="form-control issues" v-model="job.issues"></textarea></td>
+                                            <td><textarea type="text" required class="form-control goals" v-model="job.goals"></textarea></td>
+                                            <td><textarea type="text" required class="form-control management" v-model="job.management"></textarea></td>
+                                            <td><textarea type="text" required class="form-control who" v-model="job.who"></textarea></td>
+                                            <td>
+                                                <span class="add-row"><i class="fa fa-plus"></i></span>
+                                                
+                                                <span class="remove"><i class="fal fa-times"></i></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -549,6 +521,7 @@ export default {
   name: "cps-referral-form",
   data() {
     return {
+      jobSDESCRIPTION: [],
       loader: false,
       userdetails: null,
       Id: 0,
@@ -590,10 +563,10 @@ export default {
       services_id: 0,
       serviceid: 0,
       validate: true,
-      Issues: "",
-      Goal: "",
-      Management: "",
-      Who: "",
+      issues: "",
+      goals: "",
+      management: "",
+      who: "",
       oral: false,
       depot: false,
       im: false,
@@ -645,10 +618,9 @@ export default {
         $(targetBox).show();
       });
 
-
       $(".add-row").click(function (i) {
         $(".block:last").after(
-          '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+          '<tr class="block"> <td><textarea type="text" class="form-control issues"></textarea></td><td><textarea type="text" class="form-control goals"></textarea></td><td><textarea type="text" class="form-control management"></textarea></td><td><textarea type="text" class="form-control who"></textarea></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
         );
       });
       $(".optionBox").on("click", ".remove", function () {
@@ -700,7 +672,6 @@ export default {
             obj.Who = $('td input[type="text"].who', this).val();
             treatmentplan.push(obj);
           });
-          alert(JSON.stringify(treatmentplan));
       this.$swal.fire({
                 title: 'Do you want to save as draft?',
                 showCancelButton: true,
@@ -748,7 +719,6 @@ export default {
               add_code_id: this.add_code_id,
               add_sub_code_id: JSON.stringify(add_sub_code_id),
               medication_prescription: this.medication_prescription,
-              treatment_plan: JSON.stringify(treatmentplan),
               status: "0",
               appId: this.appId,
             },
@@ -1203,8 +1173,6 @@ export default {
         this.medication_im = response.data.Data[0].medication_im;
         this.background_history = response.data.Data[0].background_history;
         this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
-        this.treatment_plan = response.data.Data[0].treatment_plan;
-        this.jobsearchlist = JSON.parse(response.data.Data[0].treatment_plan);
 
         this.next_review_date = response.data.Data[0].next_review_date;
         this.case_manager_date = response.data.Data[0].case_manager_date;
@@ -1212,13 +1180,11 @@ export default {
         this.case_manager_designation = response.data.Data[0].case_manager_designation;
         this.specialist_incharge_date = response.data.Data[0].specialist_incharge_date;
         this.specialist_incharge_name = response.data.Data[0].specialist_incharge_name;
-        this.specialist_incharge_designation =
-          response.data.Data[0].specialist_incharge_designation;
+        this.specialist_incharge_designation = response.data.Data[0].specialist_incharge_designation;
         this.location_services_id = response.data.Data[0].location_of_service;
      
         this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
-                    this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
-                    
+        this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
                     $("#additionalbox")
                     .val(this.additional_diagnosis)
                     .trigger("change");
@@ -1227,18 +1193,18 @@ export default {
         this.complexity_services_id = response.data.Data[0].complexity_of_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.code_id = response.data.Data[0].icd_9_code;
-                    this.additional_sub_code_id = response.data.Data[0].icd_9_subcode.split(",");
-                     $("#sub_code_id")
-                    .val( this.additional_sub_code_id)
-                    .trigger("change");
-                   
-
-                    this.add_code_id = response.data.Data[0].add_code_id;
-                    this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
-                                $("#add_sub_code_id")
-                                .val( this.additional_sub_code_id2)
-                                .trigger("change");
+        //this.additional_sub_code_id = response.data.Data[0].icd_9_subcode.split(",");
+        //             $("#sub_code_id")
+        //            .val( this.additional_sub_code_id)
+        //            .trigger("change");
+        this.add_code_id = response.data.Data[0].add_code_id;
+        //this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
+        //          $("#add_sub_code_id")
+        //          .val( this.additional_sub_code_id2)
+        //          .trigger("change");
         this.medication_prescription = response.data.Data[0].medication_prescription;
+
+        this.jobSDESCRIPTION = response.data.Data[0].jobs;
 
         this.GetList();
         this.GetPatientdetails();
