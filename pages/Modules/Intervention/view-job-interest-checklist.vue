@@ -410,17 +410,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- <div class="row mb-3 align-items-flex-start">
-                                            <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
-                                            <div class="col-sm-8">
-                                                <select :disabled="disabled == 1" id="additionalboxdiagnosis" v-model="additional_diagnosis" class="form-select multiselectadditionalsubcode" multiple="multiple">
-                                                    <option value="0">Please Select</option>
-                                                    <option v-for="catcode in diagonisislistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div> -->
                                         <div class="row mb-3 align-items-flex-start">
                                             <label class="col-sm-4 col-form-label"
                                                 >Additional Diagnosis</label
@@ -428,6 +417,7 @@
                                             <div class="col-sm-8">
                                                 <select
                                                     :disabled="disabled == 1"
+                                                    v-model="additional_diagnosis"
                                                     id="additionalboxdiagnosis"
                                                     class="form-select multiselect" multiple="multiple"
                                                     >
@@ -489,7 +479,7 @@
                                                         </option>
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-md-6 mb-3">
+                                                <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                     <div class="mt-2 align-items-flex-start">
                                                         <select :disabled="disabled == 1" id="subcodeicd" v-model="sub_code_id" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
@@ -500,21 +490,9 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                </div> -->
-                                                <div class="col-md-6 mb-3">
-                                                  <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                  <div class="mt-2 align-items-flex-start">
-                                                      <select :disabled="disabled == 1" id="subcodeicd" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
-                                                          <option value="0">Select sub code</option>
-                                                          <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                              {{ catcode.icd_code }}
-                                                              {{catcode.icd_name}}
-                                                          </option>
-                                                      </select>
                                                   </div>
-                                              </div>
                                             </div>
-                                            <!-- <div class="row">
+                                            <div class="row">
                                                 <div class="col-md-6 mb-">
                                                     <label class="form-label">Additional ICD 9 CODE</label>
                                                     <select :disabled="disabled == 1" class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
@@ -537,30 +515,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> -->
-                                        <div class="row">
-                                          <div class="col-md-6 mb-">
-                                              <label class="form-label">Additional ICD 9 CODE</label>
-                                              <select :disabled="disabled == 1" class="form-select" v-model="additional_code_id"  @change="onCategorycodebindAdditional($event)">
-                                                  <option value="0">Select additional code</option>
-                                                  <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
-                                                      {{ type.icd_category_code }} {{type.icd_category_name}}
-                                                  </option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                                  <label  class="form-label">Additional ICD 9 SUB CODE</label>
-                                                  <div class="mt-2 align-items-flex-start">
-                                                  <select :disabled="disabled == 1" id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode"  multiple="multiple">
-                                                      <option value="0">Select additional sub code</option>
-                                                      <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                          {{ catcode.icd_code }}
-                                                          {{catcode.icd_name}}
-                                                      </option>
-                                                  </select>
-                                                  </div>
-                                          </div>
-                                      </div>
+                                        </div>
                                         <!-- 02 -->
                                         <div id="external" class="external services hide mb-3">
                                             <div class="row">
@@ -647,8 +602,7 @@
                       </div>
                   </div>
               </div>
-            </div>
-          </main>
+        </main>
       </div>
   </div>
   </template>
@@ -797,339 +751,6 @@
       },
 
       methods: {
-          async onCreateEvent() {
-            var jobSDESCRIPTION = [];
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-                      var jobs = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var Boxvalue3 = [];
-                      var additionalboxdiagnosis = 0;
-                      var subcodeicd = 0;
-                      var additionalsubcodeicd = 0;
-                      $("#additionalboxdiagnosis :selected").each(function () {
-                          if (additionalboxdiagnosis) {
-                              additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
-                          } else {
-                              additionalboxdiagnosis = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          additionalboxdiagnosis
-                      });
-
-                      $("#subcodeicd :selected").each(function () {
-                          if (subcodeicd) {
-                              subcodeicd = subcodeicd + "," + this.value;
-                          } else {
-                              subcodeicd = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          subcodeicd
-                      });
-
-                      $("#additionalsubcodeicd :selected").each(function () {
-                          if (additionalsubcodeicd) {
-                              additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
-                          } else {
-                              additionalsubcodeicd = this.value;
-                          }
-                      });
-                      Boxvalue3.push({
-                          additionalsubcodeicd
-                      });
-                      $("table#job > tbody > tr").each(function () {
-                          var obj = {};
-                          obj.job = $('td input[type="text"].job', this).val();
-                          obj.duration = $('td input[type="text"].duration', this).val();
-                          obj.reason = $('td input[type="text"].reason', this).val();
-                          jobs.push(obj);
-                      });
-                      try {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "job-interest-checklist/add", {
-                                  added_by: this.userdetails.user.id,
-                                  patient_id: this.Id,
-                                  interest_to_work: this.interest_to_work,
-                                  agree_if_mentari_find_job_for_you: this.agree_if_mentari_find_job_for_you,
-                                  clerk_job_interester: this.clerk_job_interester,
-                                  clerk_job_notes: this.clerk_job_notes.toString(),
-                                  factory_worker_job_interested: this.factory_worker_job_interested,
-                                  factory_worker_notes: this.factory_worker_notes,
-                                  cleaner_job_interested: this.cleaner_job_interested,
-                                  cleaner_job_notes: this.cleaner_job_notes,
-                                  security_guard_job_interested: this.security_guard_job_interested,
-                                  security_guard_notes: this.security_guard_notes,
-                                  laundry_worker_job_interested: this.laundry_worker_job_interested,
-                                  laundry_worker_notes: this.laundry_worker_notes,
-                                  car_wash_worker_job: this.car_wash_worker_job,
-                                  car_wash_worker_notes: this.car_wash_worker_notes,
-                                  kitchen_helper_job: this.kitchen_helper_job,
-                                  kitchen_helper_notes: this.kitchen_helper_notes,
-                                  waiter_job_interested: this.waiter_job_interested,
-                                  waiter_job_notes: this.waiter_job_notes,
-                                  chef_job_interested: this.chef_job_interested,
-                                  chef_job_notes: this.chef_job_notes,
-                                  others_job_specify: this.others_job_specify,
-                                  others_job_notes: this.others_job_notes,
-                                  note: this.note,
-                                  planning: this.planning,
-                                  patient_consent_interested: this.patient_consent_interested,
-                                  location_services: this.location_services_id,
-                                  type_diagnosis_id: this.type_diagnosis_id,
-                                  category_services: this.category_services,
-                                  services_id: this.services_id,
-                                  code_id: this.code_id + this.add_code_id,
-                                  complexity_of_services: this.complexity_services_id,
-                                  outcome: this.outcome_id,
-                                  medication_prescription: this.medication_des,
-                                  jobs: jobs,
-                                  status: "0",
-                                  id: this.pid,
-                                  appId: this.appId,
-                                  sub_code_id: JSON.stringify(subcodeicd),
-                                  additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
-                                  additional_code_id: this.additional_code_id,
-                                  additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
-                              }, {
-                                  headers
-                              }
-                          );
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong! dalam function api',
-                                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                              })
-                              this.GoBack();
-                          }
-                      } catch (e) {
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
-          async onPublishEvent() {
-              var jobSDESCRIPTION = [];
-              this.$swal.fire({
-                  title: 'Do you want to save the changes?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  if (result.isConfirmed) {
-                      var jobs = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var Boxvalue3 = [];
-                      var additionalboxdiagnosis = 0;
-                      var subcodeicd = 0;
-                      var additionalsubcodeicd = 0;
-                      $("#additionalboxdiagnosis :selected").each(function () {
-                          if (additionalboxdiagnosis) {
-                              additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
-                          } else {
-                              additionalboxdiagnosis = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          additionalboxdiagnosis
-                      });
-
-                      $("#subcodeicd :selected").each(function () {
-                          if (subcodeicd) {
-                              subcodeicd = subcodeicd + "," + this.value;
-                          } else {
-                              subcodeicd = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          subcodeicd
-                      });
-
-                      $("#additionalsubcodeicd :selected").each(function () {
-                          if (additionalsubcodeicd) {
-                              additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
-                          } else {
-                              additionalsubcodeicd = this.value;
-                          }
-                      });
-                      Boxvalue3.push({
-                          additionalsubcodeicd
-                      });
-                      $("table#job > tbody > tr").each(function () {
-                          var obj = {};
-                          obj.job = $('td input[type="text"].job', this).val();
-                          obj.duration = $('td input[type="text"].duration', this).val();
-                          obj.reason = $('td input[type="text"].reason', this).val();
-                          jobs.push(obj);
-                      });
-                      this.validate = true;
-                      this.errorList = [];
-                      try {
-                          if (!this.location_services_id) {
-                              this.errorList.push("Location Of Services is required");
-                          }
-                          if (!this.type_diagnosis_id) {
-                              this.errorList.push("Type Of Diagnosis is required");
-                          }
-                          if (!this.category_services) {
-                              this.errorList.push("Category Of Services is required");
-                          }
-                          if (!this.complexity_services_id) {
-                              this.errorList.push("Complexity Of Service is required");
-                          }
-                          if (this.category_services) {
-                              if (this.category_services == "assisstance") {
-                                  if (!this.services_id) {
-                                      this.errorList.push("Service is required");
-                                      this.validate = false;
-                                  }
-                              } else if (this.category_services == "clinical-work") {
-                                  if (!this.code_id) {
-                                      this.errorList.push("ICD 9 CODE is required");
-                                      this.validate = false;
-                                  }
-                                  if (!JSON.stringify(subcodeicd)) {
-                                    this.errorList.push("ICD 9 SUB CODE is required");
-                                    this.validate = false;
-                                }
-                              } else {
-                                  if (!this.serviceid) {
-                                      this.errorList.push("Services is required");
-                                      this.validate = false;
-                                  } else {
-                                      this.services_id = this.serviceid;
-                                  }
-                              }
-                          }
-                          if (!this.outcome_id) {
-                              this.errorList.push("Outcome is required");
-                          }
-                          if (
-                              this.location_services_id &&
-                              this.type_diagnosis_id &&
-                              this.category_services &&
-                              this.complexity_services_id &&
-                              this.outcome_id &&
-                              this.validate
-                          ) {
-                              this.loader = true;
-                              const headers = {
-                                  Authorization: "Bearer " + this.userdetails.access_token,
-                                  Accept: "application/json",
-                                  "Content-Type": "application/json",
-                              };
-                              const response = await this.$axios.post(
-                                  "job-interest-checklist/add", {
-                                      added_by: this.userdetails.user.id,
-                                      patient_id: this.Id,
-                                      interest_to_work: this.interest_to_work,
-                                      agree_if_mentari_find_job_for_you: this.agree_if_mentari_find_job_for_you,
-                                      clerk_job_interester: this.clerk_job_interester,
-                                      clerk_job_notes: this.clerk_job_notes.toString(),
-                                      factory_worker_job_interested: this.factory_worker_job_interested,
-                                      factory_worker_notes: this.factory_worker_notes,
-                                      cleaner_job_interested: this.cleaner_job_interested,
-                                      cleaner_job_notes: this.cleaner_job_notes,
-                                      security_guard_job_interested: this.security_guard_job_interested,
-                                      security_guard_notes: this.security_guard_notes,
-                                      laundry_worker_job_interested: this.laundry_worker_job_interested,
-                                      laundry_worker_notes: this.laundry_worker_notes,
-                                      car_wash_worker_job: this.car_wash_worker_job,
-                                      car_wash_worker_notes: this.car_wash_worker_notes,
-                                      kitchen_helper_job: this.kitchen_helper_job,
-                                      kitchen_helper_notes: this.kitchen_helper_notes,
-                                      waiter_job_interested: this.waiter_job_interested,
-                                      waiter_job_notes: this.waiter_job_notes,
-                                      chef_job_interested: this.chef_job_interested,
-                                      chef_job_notes: this.chef_job_notes,
-                                      others_job_specify: this.others_job_specify,
-                                      others_job_notes: this.others_job_notes,
-                                      note: this.note,
-                                      planning: this.planning,
-                                      patient_consent_interested: this.patient_consent_interested,
-                                      location_services: this.location_services_id,
-                                      type_diagnosis_id: this.type_diagnosis_id,
-                                      category_services: this.category_services,
-                                      services_id: this.services_id,
-                                      code_id: this.code_id,
-                                      complexity_of_services: this.complexity_services_id,
-                                      outcome: this.outcome_id,
-                                      medication_prescription: this.medication_des,
-                                      jobs: jobs,
-                                      status: "1",
-                                      id: this.pid,
-                                      appId: this.appId,
-                                      sub_code_id: JSON.stringify(subcodeicd),
-                                      additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
-                                      additional_code_id: this.additional_code_id,
-                                      additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
-                                  }, {
-                                      headers
-                                  }
-                              );
-                              console.log("response", response.data);
-                              if (response.data.code == 200) {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire(
-                                      'Successfully Submitted.',
-                                      'Data is inserted.',
-                                      'success',
-                                  );
-                                  this.GoBack();
-                              } else {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire({
-                                      icon: 'error',
-                                      title: 'Oops... Something Went Wrong!',
-                                      text: 'the error is: ' + JSON.stringify(response.data.message),
-                                  })
-                                  this.GoBack();
-                              }
-                          }
-                      } catch (e) {
-                          this.loader = false;
-                          this.resetmodel();
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                          this.GoBack();
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
           async GetList() {
               const headers = {
                   Authorization: "Bearer " + this.userdetails.access_token,
@@ -1292,32 +913,6 @@
               } else {
                   this.icdcatcodelistadditional = [];
               }
-          },
-          resetmodel() {
-              this.added_by = "";
-              this.patient_id = "";
-              this.client = "";
-              this.employment_specialist = "";
-              this.case_manager = "";
-              this.first_date_of_work = "";
-              this.job_title = "";
-              this.duties_field = "";
-              this.rate_of_pay = "";
-              this.benefits_field = "";
-              this.work_schedule = "";
-              this.disclosure = "";
-              this.name_of_employer = "";
-              this.name_of_superviser = "";
-              this.address = "";
-              this.location_services_id = 0;
-              this.type_diagnosis_id = 0;
-              this.category_services = "";
-              this.code_id = 0;
-              this.sub_code_id = 0;
-              this.complexity_services_id = 0;
-              this.outcome_id = 0;
-              this.medication_des = "";
-              this.services_id = 0;
           },
           GoBack() {
               if (this.type == 'view') {
