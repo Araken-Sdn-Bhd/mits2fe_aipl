@@ -164,11 +164,11 @@
                 <!-- close-row -->
 
                 <div class="form-heading mt-3">Treatment Plan</div>
-                <div class="table-responsive">
+                <!--<div class="table-responsive">
                   <table class="job-search-table" v-if="!pid" id="treatmentplan">
                     <thead>
                       <tr>
-                        <!-- <th>No</th> -->
+                      
                         <th>Issues/Current Status<small style="color:red">*</small> </th>
                         <th>Goal(s)<small style="color:red">*</small> </th>
                         <th>Management Strategies<small style="color:red">*</small> </th>
@@ -178,7 +178,7 @@
                     </thead>
                     <tbody class="optionBox">
                       <tr class="block">
-                        <!-- <td>-</td> -->
+                    
                         <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status"></textarea>
                         </td>
                         <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)"></textarea></td>
@@ -191,12 +191,12 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div class="table-responsive">
+                </div>-->
+                <!--<div class="table-responsive">
                   <table class="job-search-table" v-if="pid">
                     <thead>
                       <tr>
-                        <!-- <th>No</th> -->
+                        <th>No</th>
                         <th>Issues/Current Status</th>
                         <th>Goal(s)</th>
                         <th>Management Strategies</th>
@@ -206,7 +206,7 @@
                     </thead>
                     <tbody>
                       <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
-                        <!-- <td>-</td> -->
+                       <td>-</td> 
                         <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status dewfrgtr" /></td>
                         <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
                         <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" />
@@ -218,7 +218,34 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div>-->
+                
+                <div class="table-responsive">
+                                <table class="job-search-table" id="treatmentplan" v-if="!pid">
+                                    <thead>
+                                        <tr>
+                                            <th>Issues/Current Status <small style="color:red">*</small> </th>
+                                            <th>Goal(s) <small style="color:red">*</small> </th>
+                                            <th>Management Strategies <small style="color:red">*</small> </th>
+                                            <th>Who,By When<small style="color:red">*</small> </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="optionBox">
+                                        <tr class="block">
+                                            <td><textarea type="text" required class="form-control issues"></textarea></td>
+                                            <td><textarea type="text" required class="form-control goals"></textarea></td>
+                                            <td><textarea type="text" required class="form-control management"></textarea></td>
+                                            <td><textarea type="text" required class="form-control who"></textarea></td>
+                                            <td>
+                                                <a class="add-row"><i class="fa fa-plus"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                
+                
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
@@ -550,6 +577,7 @@ export default {
   data() {
     return {
       loader: false,
+      jobSDESCRIPTION: [],
       userdetails: null,
       Id: 0,
       errorList: [],
@@ -590,10 +618,10 @@ export default {
       services_id: 0,
       serviceid: 0,
       validate: true,
-      Issues: "",
-      Goal: "",
-      Management: "",
-      Who: "",
+      issues: "",
+      goal: "",
+      management: "",
+      who: "",
       oral: false,
       depot: false,
       im: false,
@@ -625,9 +653,9 @@ export default {
     let urlParams1 = new URLSearchParams(window.location.search);
     this.pid = urlParams1.get("pid");
     this.type = urlParams1.get("type");
-    if (this.pid) {
-      this.getdetails();
-    }
+    //if (this.pid) {
+    //  this.getdetails();
+    //}
     const current = new Date();
     this.currentdate =
       current.getDate() +
@@ -648,7 +676,7 @@ export default {
 
       $(".add-row").click(function (i) {
         $(".block:last").after(
-          '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+          '<tr class="block"> <td><textarea type="text" class="form-control issues"></textarea></td><td><textarea type="text" class="form-control goals"></textarea></td><td><textarea type="text" class="form-control management"></textarea></td><td><textarea type="text" class="form-control who"></textarea></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
         );
       });
       $(".optionBox").on("click", ".remove", function () {
@@ -665,7 +693,7 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-     
+      var jobSDESCRIPTION = [];
       var additionalbox = 0;
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
@@ -698,6 +726,16 @@ export default {
             }).then(async(result) => {
               if (result.isConfirmed) {
         try {
+          $("table#treatmentplan > tbody > tr").each(function () {
+                var obj = {};
+                obj.issues = $('td textarea[type="text"].issues', this).val();
+                obj.goals = $('td textarea[type="text"].goals', this).val();
+                obj.management = $('td textarea[type="text"].management', this).val();
+                obj.who = $('td textarea[type="text"].who', this).val();
+                jobSDESCRIPTION.push(obj);
+
+            });
+            console.log("description array", jobSDESCRIPTION);
 
           this.loader = true;
           const headers = {
@@ -717,7 +755,6 @@ export default {
               medication_im: this.medication_im,
               background_history: this.background_history,
               staff_incharge_dr: this.staff_incharge_dr,
-              treatment_plan: this.treatment_plan,
               next_review_date: this.next_review_date,
               case_manager_date: this.case_manager_date,
               case_manager_name: this.case_manager_name,
@@ -738,7 +775,7 @@ export default {
               add_code_id: this.add_code_id,
               add_sub_code_id: JSON.stringify(add_sub_code_id),
               medication_prescription: this.medication_prescription,
-              treatment_plan: JSON.stringify(treatmentplan),
+              treatment_plan: jobSDESCRIPTION,
               status: "0",
               appId: this.appId,
             },
@@ -1166,76 +1203,7 @@ export default {
       this.depot = false;
       this.im = false;
     },
-    async getdetails() {
-      const headers = {
-        Authorization: "Bearer " + this.userdetails.access_token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      const response = await this.$axios.post(
-        "/patient-appointment-details/fetchViewHistoryListDetails",
-        {
-          id: this.pid,
-          type: "PatientCarePlanAndCaseReviewForm",
-        },
-        { headers }
-      );
-      if (response.data.code == 200) {
-
-        this.Id = response.data.Data[0].patient_id;
-
-        this.plan_date = response.data.Data[0].plan_date;
-        this.reason_of_review = response.data.Data[0].reason_of_review;
-        this.diagnosis = response.data.Data[0].diagnosis;
-        this.medication_oral = response.data.Data[0].medication_oral;
-        this.medication_depot = response.data.Data[0].medication_depot;
-        this.medication_im = response.data.Data[0].medication_im;
-        this.background_history = response.data.Data[0].background_history;
-        this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
-        this.treatment_plan = response.data.Data[0].treatment_plan;
-        this.jobsearchlist = JSON.parse(response.data.Data[0].treatment_plan);
-
-        this.next_review_date = response.data.Data[0].next_review_date;
-        this.case_manager_date = response.data.Data[0].case_manager_date;
-        this.case_manager_name = response.data.Data[0].case_manager_name;
-        this.case_manager_designation = response.data.Data[0].case_manager_designation;
-        this.specialist_incharge_date = response.data.Data[0].specialist_incharge_date;
-        this.specialist_incharge_name = response.data.Data[0].specialist_incharge_name;
-        this.specialist_incharge_designation =
-          response.data.Data[0].specialist_incharge_designation;
-        this.location_services_id = response.data.Data[0].location_of_service;
-        type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
-        this.category_services = response.data.Data[0].category_of_services;
-        this.services_id = response.data.Data[0].services;
-        this.complexity_services_id = response.data.Data[0].complexity_of_services;
-        this.outcome_id = response.data.Data[0].outcome;
-        this.code_id = response.data.Data[0].icd_9_code;
-        this.icd_9_subcode = response.data.Data[0].icd_9_subcode;
-        this.medication_prescription = response.data.Data[0].medication_prescription;
-
-        this.GetList();
-        this.GetPatientdetails();
-        const response2 = await this.$axios.post(
-          "diagnosis/getIcd9subcodeList",
-          { icd_category_code: this.code_id },
-          { headers }
-        );
-        if (response2.data.code == 200 || response2.data.code == "200") {
-          this.icdcatcodelist = response2.data.list;
-          console.log('my icd9data', this.icdcatcodelist);
-
-        } else {
-          this.icdcatcodelist = [];
-        }
-      } else {
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + this.error,
-                  footer: ''
-                });
-      }
-    },
+    
     GoBack() {if(this.appId){
       if (this.type == 'view') {
                 this.$router.go(-1);
