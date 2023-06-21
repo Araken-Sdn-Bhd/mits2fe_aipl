@@ -547,6 +547,10 @@
                       </div>
                     </div>
                     <!--  -->
+                    <br>
+                            <div class="d-flex">
+                                <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+                            </div>
                   </div>
 
                 </div>
