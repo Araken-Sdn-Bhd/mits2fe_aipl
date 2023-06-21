@@ -125,22 +125,22 @@
                         <input class="form-check-input" type="checkbox" value="" id="Oral" v-model="oral" disabled />
                         <label class="form-label" for="Oral">Oral</label>
                       </div>
-                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_oral" disabled />
+                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_oral" disabled/>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Depot" v-model="depot" disabled/>
+                        <input class="form-check-input" type="checkbox" value="" id="Depot" v-model="depot" disabled />
                         <label class="form-label" for="Depot">Depot</label>
                       </div>
-                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_depot" disabled />
+                      <input type="text" class="form-control" placeholder="Please specify" v-model="medication_depot" disabled/>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="IM" v-model="im" disabled />
+                        <input class="form-check-input" type="checkbox" value="" id="IM" v-model="im" disabled/>
                         <label class="form-label" for="IM">IM</label>
                       </div>
                       <input type="text" class="form-control" placeholder="Please specify" v-model="medication_im" disabled />
@@ -165,65 +165,33 @@
 
                 <div class="form-heading mt-3">Treatment Plan</div>
                 <div class="table-responsive">
-                  <table class="job-search-table" v-if="!pid" id="treatmentplan">
-                    <thead>
-                      <tr>
-                        <!-- <th>No</th> -->
-                        <th>Issues/Current Status<small style="color:red">*</small> </th>
-                        <th>Goal(s)<small style="color:red">*</small> </th>
-                        <th>Management Strategies<small style="color:red">*</small> </th>
-                        <th>Who,By When<small style="color:red">*</small> </th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody class="optionBox" >
-                      <tr class="block">
-                        <!-- <td>-</td> -->
-                        <td><textarea class="issue" v-model="Issues" placeholder="Issues/Current Status" disabled></textarea>
-                        </td>
-                        <td><textarea class="goal" v-model="Goal" placeholder="Goal(s)" disabled></textarea></td>
-                        <td><textarea class="management" v-model="Management"
-                            placeholder="Management Strategies" disabled></textarea></td>
-                        <td><textarea class="who" v-model="Who" placeholder="Who,By When" disabled></textarea></td>
-                        <td>
-                          <a class="add-row"><i class="fa fa-plus"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="table-responsive">
-                  <table class="job-search-table" v-if="pid">
-                    <thead>
-                      <tr>
-                        <!-- <th>No</th> -->
-                        <th>Issues/Current Status</th>
-                        <th>Goal(s)</th>
-                        <th>Management Strategies</th>
-                        <th>Who,By When</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(jobsearch, index) in jobsearchlist" :key="index">
-                        <!-- <td>-</td> -->
-                        <td><input type="text" v-model="jobsearch.Issues" placeholder="Issues/Current Status" disabled /></td>
-                        <td><input type="text" v-model="jobsearch.Goal" placeholder="Goal(s)" /></td>
-                        <td><input type="text" v-model="jobsearch.Management" placeholder="Management Strategies" disabled/>
-                        </td>
-                        <td><input type="text" v-model="jobsearch.Who" placeholder="Who,By When" disabled /></td>
-                        <td>
-                          <a href="#" class="add-row"><i class="fa fa-plus" disabled></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                                <table class="job-search-table" id="treatmentplan">
+                                    <thead>
+                                        <tr>
+                                            <th>Issues/Current Status <small style="color:red">*</small> </th>
+                                            <th>Goal(s) <small style="color:red">*</small> </th>
+                                            <th>Management Strategies <small style="color:red">*</small> </th>
+                                            <th>Who,By When<small style="color:red">*</small> </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="optionBox">
+                                        <tr class="block" v-for="(job, index) in jobSDESCRIPTION" :key="index">
+                                          <td><textarea type="text" required class="form-control issues" v-model="job.issues" disabled></textarea></td>
+                                            <td><textarea type="text" required class="form-control goals" v-model="job.goals" disabled></textarea></td>
+                                            <td><textarea type="text" required class="form-control management" v-model="job.management" disabled></textarea></td>
+                                            <td><textarea type="text" required class="form-control who" v-model="job.who" disabled></textarea></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="mb-3">
                       <label class="form-label">Date of next Review<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" name="" v-model="next_review_date" disabled />
+                      <input type="date" class="form-control" name="" v-model="next_review_date" disabled/>
                     </div>
                   </div>
                 </div>
@@ -238,7 +206,7 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Designation<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="case_manager_designation" disabled/>
+                      <input type="text" class="form-control" v-model="case_manager_designation" disabled />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
@@ -249,7 +217,7 @@
                     <label class="form-label">Specialist Incharge</label>
                     <div class="mb-3">
                       <label class="form-label">Name<small style="color:red">*</small> </label>
-                      <input type="text" class="form-control" v-model="specialist_incharge_name" disabled />
+                      <input type="text" class="form-control" v-model="specialist_incharge_name" disabled/>
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Designation<small style="color:red">*</small> </label>
@@ -257,7 +225,7 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Date<small style="color:red">*</small> </label>
-                      <input type="date" class="form-control" v-model="specialist_incharge_date" disabled />
+                      <input type="date" class="form-control" v-model="specialist_incharge_date" disabled/>
                     </div>
                   </div>
                 </div>
@@ -309,7 +277,7 @@
                       <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
                       <div class="col-sm-8 align-items-flex-start" >
                           <select
-                          id="additionalbox" 
+                          id="additionalbox" v-model="additional_diagnosis"
                           class="form-select multiselect" multiple="multiple" disabled>
                               <option value="0">Please Select</option><option
                               v-for="catcode in diagonisislist"
@@ -332,14 +300,14 @@
                               <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                value="clinical-work" v-model="category_services" disabled />
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2"
+                                value="clinical-work" v-model="category_services" disabled/>
                               <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                               </label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                value="external" v-model="category_services" disabled/>
+                              <input class="form-check-input" type="radio" name="inlineRadioOption3" id="inlineRadio3" disabled
+                                value="external" v-model="category_services" />
                               <label class="form-check-label" for="inlineRadio3">External</label>
                             </div>
                           </div>
@@ -385,7 +353,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="sub_code_id" style="width:100%" disabled>
+                              id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -428,7 +396,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="add_sub_code_id" style="width:100%" disabled>
+                              id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -518,7 +486,10 @@
                 </p>
                 <br>
                 <br>
-                
+                <div class="d-flex three-btn">
+                  <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+
+                </div>
               </div>
             </div>
           </div>
@@ -538,6 +509,7 @@ export default {
   name: "cps-referral-form",
   data() {
     return {
+      jobSDESCRIPTION: [],
       loader: false,
       userdetails: null,
       Id: 0,
@@ -579,10 +551,10 @@ export default {
       services_id: 0,
       serviceid: 0,
       validate: true,
-      Issues: "",
-      Goal: "",
-      Management: "",
-      Who: "",
+      issues: "",
+      goals: "",
+      management: "",
+      who: "",
       oral: false,
       depot: false,
       im: false,
@@ -634,10 +606,9 @@ export default {
         $(targetBox).show();
       });
 
-
       $(".add-row").click(function (i) {
         $(".block:last").after(
-          '<tr class="block"> <td><input type="text" class="issue" placeholder="Issues/Current Status"/></td><td><input type="text" class="goal" placeholder="Goal(s)"/></td><td><input type="text" class="management" placeholder="Management Strategies"/></td><td><input type="text" class="who" placeholder="Who,By When"/></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
+          '<tr class="block"> <td><textarea type="text" class="form-control issues"></textarea></td><td><textarea type="text" class="form-control goals"></textarea></td><td><textarea type="text" class="form-control management"></textarea></td><td><textarea type="text" class="form-control who"></textarea></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
         );
       });
       $(".optionBox").on("click", ".remove", function () {
@@ -654,7 +625,7 @@ export default {
   },
   methods: {
     async onCreateEvent() {
-     
+      var jobSDESCRIPTION = [];
       var additionalbox = 0;
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
@@ -687,6 +658,16 @@ export default {
             }).then(async(result) => {
               if (result.isConfirmed) {
         try {
+          $("table#treatmentplan > tbody > tr").each(function () {
+                var obj = {};
+                obj.issues = $('td textarea[type="text"].issues', this).val();
+                obj.goals = $('td textarea[type="text"].goals', this).val();
+                obj.management = $('td textarea[type="text"].management', this).val();
+                obj.who = $('td textarea[type="text"].who', this).val();
+                jobSDESCRIPTION.push(obj);
+
+            });
+            console.log("description array", jobSDESCRIPTION);
 
           this.loader = true;
           const headers = {
@@ -706,7 +687,6 @@ export default {
               medication_im: this.medication_im,
               background_history: this.background_history,
               staff_incharge_dr: this.staff_incharge_dr,
-              treatment_plan: this.treatment_plan,
               next_review_date: this.next_review_date,
               case_manager_date: this.case_manager_date,
               case_manager_name: this.case_manager_name,
@@ -727,7 +707,7 @@ export default {
               add_code_id: this.add_code_id,
               add_sub_code_id: JSON.stringify(add_sub_code_id),
               medication_prescription: this.medication_prescription,
-              treatment_plan: JSON.stringify(treatmentplan),
+              treatment_plan: jobSDESCRIPTION,
               status: "0",
               appId: this.appId,
             },
@@ -737,7 +717,7 @@ export default {
           if (response.data.code == 200 || response.data.code == "200") {
             this.loader = false;
             this.$swal.fire(
-                  'Data are saved successfully!',
+                  'Successfully save as draft!',
                 );
             this.GoBack();
           } else {
@@ -908,6 +888,7 @@ export default {
       }
     },
     async onPublishEvent() {
+      var jobSDESCRIPTION = [];
       var additionalbox = 0;
       $("#additionalbox :selected").each(function () {
         if (additionalbox) {
@@ -941,6 +922,7 @@ export default {
         this.errorList = [];
         this.validate = true;
         try {
+          
           if (!this.plan_date) {
             this.errorList.push("Date is required");
             this.validate = false;
@@ -1026,15 +1008,16 @@ export default {
           if (!this.outcome_id) {
             this.errorList.push("Outcome is required");
           }
-          var treatmentplan = [];
-          $("table#companydetail > tbody > tr").each(function () {
-            var obj = {};
-            obj.Issues = $('td input[type="text"].issue', this).val();
-            obj.Goal = $('td input[type="text"].goal', this).val();
-            obj.Management = $('td input[type="text"].management', this).val();
-            obj.Who = $('td input[type="text"].who', this).val();
-            treatmentplan.push(obj);
-          });
+          $("table#treatmentplan > tbody > tr").each(function () {
+                var obj = {};
+                obj.issues = $('td textarea[type="text"].issues', this).val();
+                obj.goals = $('td textarea[type="text"].goals', this).val();
+                obj.management = $('td textarea[type="text"].management', this).val();
+                obj.who = $('td textarea[type="text"].who', this).val();
+                jobSDESCRIPTION.push(obj);
+
+            });
+            console.log("description array", jobSDESCRIPTION);
           if (
             this.location_services_id &&
             this.category_services &&
@@ -1061,7 +1044,6 @@ export default {
                 medication_im: this.medication_im,
                 background_history: this.background_history,
                 staff_incharge_dr: this.staff_incharge_dr,
-                treatment_plan: this.treatment_plan,
                 next_review_date: this.next_review_date,
                 case_manager_date: this.case_manager_date,
                 case_manager_name: this.case_manager_name,
@@ -1082,7 +1064,7 @@ export default {
                 add_code_id: this.add_code_id,
                 add_sub_code_id: JSON.stringify(add_sub_code_id),
                 medication_prescription: this.medication_prescription,
-                treatment_plan: JSON.stringify(treatmentplan),
+                treatment_plan: jobSDESCRIPTION,
                 appId: this.appId,
                 status: "1",
               },
@@ -1093,7 +1075,7 @@ export default {
               this.loader = false;
               this.ResetModel();
               this.GoBack();
-              this.$swal.fire('Successfully Update', '', 'success');
+              this.$swal.fire('Successfully Save', '', 'success');
             } else {
               this.loader = false;
               this.$swal.fire({
@@ -1180,8 +1162,6 @@ export default {
         this.medication_im = response.data.Data[0].medication_im;
         this.background_history = response.data.Data[0].background_history;
         this.staff_incharge_dr = response.data.Data[0].staff_incharge_dr;
-        this.treatment_plan = response.data.Data[0].treatment_plan;
-        this.jobsearchlist = JSON.parse(response.data.Data[0].treatment_plan);
 
         this.next_review_date = response.data.Data[0].next_review_date;
         this.case_manager_date = response.data.Data[0].case_manager_date;
@@ -1189,32 +1169,58 @@ export default {
         this.case_manager_designation = response.data.Data[0].case_manager_designation;
         this.specialist_incharge_date = response.data.Data[0].specialist_incharge_date;
         this.specialist_incharge_name = response.data.Data[0].specialist_incharge_name;
-        this.specialist_incharge_designation =
-          response.data.Data[0].specialist_incharge_designation;
+        this.specialist_incharge_designation = response.data.Data[0].specialist_incharge_designation;
         this.location_services_id = response.data.Data[0].location_of_service;
-        type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
+     
+        this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
+        this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
+                    $("#additionalbox")
+                    .val(this.additional_diagnosis)
+                    .trigger("change");
         this.category_services = response.data.Data[0].category_of_services;
         this.services_id = response.data.Data[0].services;
         this.complexity_services_id = response.data.Data[0].complexity_of_services;
         this.outcome_id = response.data.Data[0].outcome;
         this.code_id = response.data.Data[0].icd_9_code;
-        this.icd_9_subcode = response.data.Data[0].icd_9_subcode;
+        this.additional_sub_code_id = response.data.Data[0].icd_9_subcode.split(",");
+                     $("#sub_code_id")
+                    .val( this.additional_sub_code_id)
+                    .trigger("change");
+        this.add_code_id = response.data.Data[0].add_code_id;
+        this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
+                  $("#add_sub_code_id")
+                  .val( this.additional_sub_code_id2)
+                  .trigger("change");
         this.medication_prescription = response.data.Data[0].medication_prescription;
+
+        this.jobSDESCRIPTION = response.data.Data[0].jobs;
 
         this.GetList();
         this.GetPatientdetails();
         const response2 = await this.$axios.post(
-          "diagnosis/getIcd9subcodeList",
-          { icd_category_code: this.code_id },
-          { headers }
-        );
-        if (response2.data.code == 200 || response2.data.code == "200") {
-          this.icdcatcodelist = response2.data.list;
-          console.log('my icd9data', this.icdcatcodelist);
-
-        } else {
-          this.icdcatcodelist = [];
-        }
+                        "diagnosis/getIcd9subcodeList", {
+                            icd_category_code: this.code_id
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response2.data.code == 200 || response2.data.code == "200") {
+                        this.icdcatcodelist = response2.data.list;
+                    } else {
+                        this.icdcatcodelist = [];
+                    }
+                    const response3 = await this.$axios.post(
+                        "diagnosis/getIcd9subcodeList", {
+                            icd_category_code: this.add_code_id
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response3.data.code == 200 || response3.data.code == "200") {
+                        this.addicdcatcodelist = response3.data.list;
+                    } else {
+                        this.addicdcatcodelist = [];
+                    }
       } else {
         this.$swal.fire({
                   icon: 'error',
@@ -1223,6 +1229,19 @@ export default {
                   footer: ''
                 });
       }
+      if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
     },
     GoBack() {if(this.appId){
       if (this.type == 'view') {
