@@ -679,7 +679,7 @@
               type: "",
               SidebarAccess: null,
               appId: 0,
-              additional_code_id: [],
+              additional_code_id: 0,
               additional_sub_code_id: [],
               additional_diagnosis: [],
           };
