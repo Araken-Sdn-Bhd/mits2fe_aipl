@@ -1087,7 +1087,7 @@ export default {
               this.loader = false;
               this.ResetModel();
               this.GoBack();
-              this.$swal.fire('Successfully Save', '', 'success');
+              this.$swal.fire('Successfully Saved', '', 'success');
             } else {
               this.loader = false;
               this.$swal.fire({

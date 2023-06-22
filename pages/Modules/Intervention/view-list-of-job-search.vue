@@ -48,7 +48,7 @@
                         </div>
                         <form method="post" @submit.prevent="OnSubmit">
                             <div class="table-responsive">
-                                <table class="job-search-table" id="companydetail" v-if="!pid">
+                                <table class="job-search-table" id="companydetail">
                                     <thead>
                                         <tr>
                                             <th>Company Name <small style="color:red">*</small> </th>
@@ -59,15 +59,14 @@
                                         </tr>
                                     </thead>
                                     <tbody class="optionBox">
-                                        <tr class="block">
-                                            <td><input type="text" required class="form-control name" /></td>
-                                            <td><input type="text" required class="form-control job" /></td>
+                                        <tr class="block" v-for="(job, index) in jobSDESCRIPTION" :key="index">
+                                            <td><input type="text" required class="form-control name" v-model="job.company_name" disabled /></td>
+                                            <td><input type="text" required class="form-control job" v-model="job.job_applied" disabled /></td>
                                             <td>
-                                                <input type="date" required class="form-control appdate" />
+                                                <input type="date" required class="form-control appdate" v-model="job.application_date" disabled />
                                             </td>
-                                            <td><input type="date" required class="form-control intdate" /></td>
+                                            <td><input type="date" required class="form-control intdate" v-model="job.interview_date" disabled/></td>
                                             <td>
-                                                <a class="add-row"><i class="fa fa-plus"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -85,7 +84,7 @@
                                             <div class="row mb-3">
                                                 <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-select" v-model="location_services_id">
+                                                    <select class="form-select" v-model="location_services_id" disabled>
                                                         <option value="0">
                                                             Select location of services
                                                         </option>
@@ -99,7 +98,7 @@
                                             <div class="row mb-3">
                                                 <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-select" v-model="type_diagnosis_id">
+                                                    <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                         <option value="0">Select Diagnosis</option>
                                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }} {{ catcode.icd_name }}
@@ -111,8 +110,8 @@
                                                 <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
                                                 <div class="col-sm-8 align-items-flex-start" >
                                                     <select
-                                                    id="additionalbox" 
-                                                    class="form-select multiselect" multiple="multiple">
+                                                    id="additionalbox" v-model="additional_diagnosis"
+                                                    class="form-select multiselect" multiple="multiple" disabled>
                                                         <option value="0">Please Select</option><option
                                                         v-for="catcode in diagonisislist"
                                                         v-bind:key="catcode.id"
@@ -128,18 +127,18 @@
                                                 </label>
                                                 <div class="col-lg-8 col-sm-12">
                                                     <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" disabled
                                                         value="assisstance" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" disabled
                                                         value="clinical-work" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                     </label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" disabled
                                                         value="external" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio3">External</label>
                                                     </div>
@@ -151,7 +150,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="services_id">
+                                                        <select class="form-select" v-model="services_id" disabled>
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                 {{ slt.section_value }}
@@ -168,7 +167,7 @@
                             <select
                               class="form-select"
                               v-model="code_id"
-                              @change="onCategorycodebind($event)"
+                              @change="onCategorycodebind($event)" disabled
                             >
                               <option value="0">Select code</option>
                               <option
@@ -186,7 +185,7 @@
                           <div class="mt-2 align-items-flex-start">
                             <select
                               class="form-select multiselect" multiple="multiple"
-                              id="sub_code_id" style="width:100%">
+                              id="sub_code_id" v-model="additional_sub_code_id"  style="width:100%" disabled>
 
                               <option value="0">Select code</option>
                               <option
@@ -210,8 +209,8 @@
                                     <label class="form-label">Additional ICD 9 CODE</label>
                                     <select
                                     class="form-select"
-                                    v-model="add_code_id"
-                                    @change="onCategoryaddcodebind($event)"
+                                    v-model="add_code_id" 
+                                    @change="onCategoryaddcodebind($event)" disabled
                                     >
                                     <option value="0">Select code</option>
                                     <option
@@ -229,7 +228,7 @@
                                 <div class="mt-2 align-items-flex-start">
                                     <select
                                     class="form-select multiselect" multiple="multiple"
-                                    id="add_sub_code_id" style="width:100%">
+                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
 
                                     <option value="0">Select code</option>
                                     <option
@@ -252,7 +251,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="serviceid">
+                                                        <select class="form-select" v-model="serviceid" disabled>
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                 {{ slt.section_value }}
@@ -266,7 +265,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="complexity_services_id">
+                                                    <select class="form-select" v-model="complexity_services_id" disabled>
                                                         <option value="0">
                                                             Select Complexity Of Service
                                                         </option>
@@ -277,7 +276,7 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="outcome_id">
+                                                    <select class="form-select" v-model="outcome_id" disabled>
                                                         <option value="0">Select outcome</option>
                                                         <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                             {{ out.section_value }}
@@ -300,7 +299,7 @@
                                         <div class="accordion-body">
                                             <div class="col-md-12 mb-3">
                                                 <label class="form-label">Medication</label>
-                                                <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -319,11 +318,7 @@
                                 <button @click="GoBack" class="btn btn-primary btn-text">
                                     <i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
-                                <div class="btn-right" v-if="!pid">
-                                  <button type="submit" class="btn btn-warning btn-text ml-auto">
-                                    <i class="fa fa-save"></i> Save
-                                </button>
-                                  </div>
+                                
                             </div>
                         </form>
                     </div>
@@ -417,7 +412,7 @@ export default {
         this.pid = urlParams1.get("pid");
         this.type = urlParams1.get("type");
         this.appId = urlParams.get("appId");
-      
+        this.getdetails();
     },
     mounted() {
         $(document).ready(function () {
@@ -452,155 +447,7 @@ export default {
                 });
             }
         },
-        async OnSubmit() {
-
-            var jobSDESCRIPTION = [];
-      var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
-      this.$swal.fire({
-                title: 'Do you want to save this record?',
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-            }).then(async(result) => {
-              if (result.isConfirmed) {
-        this.errorList = [];
-        this.validate = true;
-            try {
-                if (!this.location_services_id) {
-                    this.errorList.push("Location Of Services is required");
-                }
-                if (!this.type_diagnosis_id) {
-                    this.errorList.push("Type Of Diagnosis is required");
-                }
-                if (!this.category_services) {
-                    this.errorList.push("Category Of Services is required");
-                }
-                if (!this.complexity_services_id) {
-                    this.errorList.push("Complexity Of Service is required");
-                }
-                if (this.category_services) {
-                    if (this.category_services == "assisstance") {
-                        if (!this.services_id) {
-                            this.errorList.push("Service is required");
-                            this.validate = false;
-                        }
-                    } else if (this.category_services == "clinical-work") {
-                        if (!this.code_id) {
-                            this.errorList.push("ICD 9 CODE is required");
-                            this.validate = false;
-                        }
-                      
-                    } else {
-                        if (!this.serviceid) {
-                            this.errorList.push("Services is required");
-                            this.validate = false;
-                        } else {
-                            this.services_id = this.serviceid;
-                        }
-                    }
-                }
-                if (!this.outcome_id) {
-                    this.errorList.push("Outcome is required");
-                }
-                if (
-                    this.location_services_id &&
-                    this.type_diagnosis_id &&
-                    this.category_services &&
-                    this.complexity_services_id &&
-                    this.outcome_id &&
-                    this.validate
-                ) {
-                    this.loader = true;
-                    $("table#companydetail > tbody > tr").each(function () {
-                        var obj = {};
-                        obj.company_name = $('td input[type="text"].name', this).val();
-                        obj.job_applied = $('td input[type="text"].job', this).val();
-                        obj.application_date = $('td input[type="date"].appdate', this).val();
-                        obj.interview_date = $('td input[type="date"].intdate', this).val();
-                        jobSDESCRIPTION.push(obj);
-
-                    });
-                    console.log("description array", jobSDESCRIPTION);
-                    const headers = {
-                        Authorization: "Bearer " + this.userdetails.access_token,
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    };
-                    const response = await this.$axios.post(
-                        "job-search-list/add", {
-                            added_by: this.userdetails.user.id,
-                            patient_id: this.Id,
-                            job_listed: jobSDESCRIPTION,
-                            location_services: this.location_services_id,
-                            type_diagnosis_id: this.type_diagnosis_id,
-                            add_type_of_diagnosis: JSON.stringify(additionalbox),
-                            category_services: this.category_services,
-                            services_id: this.services_id,
-                            code_id: this.code_id,
-                            complexity_services: this.complexity_services_id,
-                            outcome: this.outcome_id,
-                            medication_des: this.medication_des,
-                            appId: this.appId,
-                            status:1,
-                            code_id: this.code_id ?? null,
-                            sub_code_id: JSON.stringify(sub_code_id),
-                            add_code_id: this.add_code_id,
-                            add_sub_code_id: JSON.stringify(add_sub_code_id),
-                        }, {
-                            headers
-                        }
-                    );
-                    console.log("response", response.data);
-                    if (response.data.code == 200) {
-                        this.loader = false;
-                        this.GoBack();
-                        this.$swal.fire('Successfully Saved', '', 'success');
-                    } else {
-                        this.loader = false;
-                        this.$swal.fire({
-                            icon: 'error',
-                            title: 'Oops... Something Went Wrong!',
-                            text: 'the error is: ' + JSON.stringify(response.data.message),
-                            footer: ''
-                        });
-                    }
-                }
-            } catch (e) {
-                this.loader = false;
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + JSON.stringify(response.data.message),
-                    footer: ''
-                });
-            }
-        } else if (result.isDismissed) {
-                    this.$swal.fire('Changes are not saved', '', 'info')
-                }
-          })
-        },
+     
         async GetList() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -726,6 +573,98 @@ export default {
             } else {
                 this.addicdcatcodelist = [];
             }
+        },
+        async getdetails() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "/patient-appointment-details/fetchViewHistoryListDetails", {
+                    id: this.pid,
+                    type: "ListofJobSearch",
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+
+                this.Id = response.data.Data[0].patient_id;
+                this.location_services_id = response.data.Data[0].location_services;
+                this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
+                this.category_services = response.data.Data[0].category_services;
+                this.services_id = response.data.Data[0].services_id;
+                this.complexity_services_id = response.data.Data[0].complexity_services;
+                this.outcome_id = response.data.Data[0].outcome;
+                this.medication_des = response.data.Data[0].medication_des;
+
+                this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
+                    $("#additionalbox")
+                    .val(this.additional_diagnosis)
+                    .trigger("change");
+
+                    this.code_id = response.data.Data[0].code_id;
+                this.additional_sub_code_id = response.data.Data[0].sub_code_id.split(",");
+                            $("#sub_code_id")
+                            .val( this.additional_sub_code_id)
+                            .trigger("change");
+                this.add_code_id = response.data.Data[0].add_code_id;
+                this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
+                        $("#add_sub_code_id")
+                  .val( this.additional_sub_code_id2)
+                  .trigger("change");
+
+                this.jobSDESCRIPTION = response.data.Data[0].jobs;
+             
+                this.GetList();
+                this.GetPatientdetails();
+                const response2 = await this.$axios.post(
+                        "diagnosis/getIcd9subcodeList", {
+                            icd_category_code: this.code_id
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response2.data.code == 200 || response2.data.code == "200") {
+                        this.icdcatcodelist = response2.data.list;
+                    } else {
+                        this.icdcatcodelist = [];
+                    }
+                    const response3 = await this.$axios.post(
+                        "diagnosis/getIcd9subcodeList", {
+                            icd_category_code: this.add_code_id
+                        }, {
+                            headers
+                        }
+                    );
+                    if (response3.data.code == 200 || response3.data.code == "200") {
+                        this.addicdcatcodelist = response3.data.list;
+                    } else {
+                        this.addicdcatcodelist = [];
+                    }
+
+            } else {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
+                });
+            }
+            if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
         },
         GoBack() {
           if (this.type == 'view') {
