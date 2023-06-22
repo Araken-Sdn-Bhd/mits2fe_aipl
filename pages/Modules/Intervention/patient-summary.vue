@@ -892,16 +892,16 @@ export default {
           path: "/modules/Intervention/list-of-etp",
           query: { pid: this.Id, type: val, id: this.Id, appId: this.appId },
         });
-      } else if (data.type == "ListofJobSearch" && val != "edit") {
+      } else if (data.type == "ListofJobSearch") {
         this.$router.push({
-          path: "/modules/Intervention/list-of-job-search",
+          path: "/modules/Intervention/view-list-of-job-search",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
-      } else if (data.type == "ListofJobSearch" && val == "edit") {
-        this.$router.push({
-          path: "/modules/Intervention/update-list-of-job-search",
-          query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
-        });
+      //} else if (data.type == "ListofJobSearch" && val == "edit") {
+      //  this.$router.push({
+      //    path: "/modules/Intervention/update-list-of-job-search",
+      //    query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
+      //  });
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",
