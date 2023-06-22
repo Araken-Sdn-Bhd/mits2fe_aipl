@@ -489,18 +489,6 @@
                                                         </option>
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-md-6 mb-3">
-                                                    <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                                                    <div class="mt-2 align-items-flex-start">
-                                                        <select :disabled="disabled == 1" id="subcodeicd" v-model="sub_code_id" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
-                                                            <option value="0">Select sub code</option>
-                                                            <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                                {{ catcode.icd_code }}
-                                                                {{catcode.icd_name}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
                                                 <div class="col-md-6 mb-3">
                                                   <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                   <div class="mt-2 align-items-flex-start">
@@ -514,30 +502,6 @@
                                                   </div>
                                               </div>
                                             </div>
-                                            <!-- <div class="row">
-                                                <div class="col-md-6 mb-">
-                                                    <label class="form-label">Additional ICD 9 CODE</label>
-                                                    <select :disabled="disabled == 1" class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
-                                                        <option value="0">Select additional code</option>
-                                                        <option v-for="type in codelistadditional" v-bind:key="type.id" v-bind:value="type.id">
-                                                            {{ type.icd_category_code }} {{type.icd_category_name}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Additional ICD 9 SUB CODE</label>
-                                                    <div class="mt-2 align-items-flex-start">
-                                                        <select :disabled="disabled == 1" id="additionalsubcodeicd" v-model="additional_sub_code_id" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
-                                                            <option value="0">Select additional sub code</option>
-                                                            <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                                {{ catcode.icd_code }}
-                                                                {{catcode.icd_name}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="row">
                                           <div class="col-md-6 mb-">
                                               <label class="form-label">Additional ICD 9 CODE</label>
@@ -560,6 +524,9 @@
                                                   </select>
                                                   </div>
                                           </div>
+                                        </div>
+                                      </div>
+
                                       </div>
                                         <!-- 02 -->
                                         <div id="external" class="external services hide mb-3">
@@ -646,8 +613,6 @@
                           </div>
                       </div>
                   </div>
-              </div>
-            </div>
           </main>
       </div>
   </div>
