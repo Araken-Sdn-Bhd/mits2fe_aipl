@@ -725,7 +725,7 @@
               type: "",
               SidebarAccess: null,
               appId: 0,
-              additional_code_id: [],
+              additional_code_id: 0,
               additional_sub_code_id: [],
               additional_diagnosis: [],
           };
@@ -892,7 +892,7 @@
                                   type_diagnosis_id: this.type_diagnosis_id,
                                   category_services: this.category_services,
                                   services_id: this.services_id,
-                                  code_id: this.code_id + this.add_code_id,
+                                  code_id: this.code_id,
                                   complexity_of_services: this.complexity_services_id,
                                   outcome: this.outcome_id,
                                   medication_prescription: this.medication_des,
