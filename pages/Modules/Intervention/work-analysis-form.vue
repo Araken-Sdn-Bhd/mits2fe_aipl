@@ -20,7 +20,7 @@
                               <div class="col-md-6">
                                   <div class="mb-3">
                                       <label class="form-label">Company Name<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="company_name" />
+                                      <input  type="text" class="form-control" v-model="company_name" />
                                   </div>
                               </div>
                           </div>
@@ -30,20 +30,20 @@
                               <div class="col-md-6">
                                   <div class="mb-3">
                                       <label class="form-label">Company Address<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="company_address1" />
+                                      <input  type="text" class="form-control" v-model="company_address1" />
                                   </div>
                                   <div class="mb-3">
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="company_address2" />
+                                      <input  type="text" class="form-control" v-model="company_address2" />
                                   </div>
                                   <div class="mb-3">
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="company_address3" />
+                                      <input  type="text" class="form-control" v-model="company_address3" />
                                   </div>
                               </div>
 
                               <div class="col-md-6">
                                   <div class="mb-3">
                                       <label class="form-label">State<small style="color:red">*</small> </label>
-                                      <select :disabled="disabled == 1" class="form-select" @change="getCityList($event)" v-model="state_id">
+                                      <select  class="form-select" @change="getCityList($event)" v-model="state_id">
                                           <option value="0">Please Select</option>
                                           <option v-for="state in GStateList" v-bind:key="state.id" v-bind:value="state.id">
                                               {{ state.state_name }}
@@ -54,7 +54,7 @@
                                   <div class="row">
                                       <div class="col-md-6 mb-3">
                                           <label for="" class="form-label">City<small style="color:red">*</small> </label>
-                                          <select :disabled="disabled == 1" class="form-select" v-model="city_id" @change="getPostcodeList($event)">
+                                          <select  class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                                               <option value="0">Please Select</option>
                                               <option v-for="ctl in GCityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
                                                   {{ ctl.city_name }}
@@ -63,7 +63,7 @@
                                       </div>
                                       <div class="col-md-6 mb-3">
                                           <label for="" class="form-label">Postcode<small style="color:red">*</small> </label>
-                                          <select :disabled="disabled == 1" class="form-select" v-model="postcode_id">
+                                          <select  class="form-select" v-model="postcode_id">
                                               <option value="0">Please Select</option>
                                               <option v-for="pst in GPostCodeList" v-bind:key="pst.id" v-bind:value="pst.id">
                                                   {{ pst.postcode }}
@@ -79,21 +79,21 @@
                               <div class="col-md-4">
                                   <div class="mb-3">
                                       <label class="form-label">Supervisor Name<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="supervisor_name" />
+                                      <input  type="text" class="form-control" v-model="supervisor_name" />
                                   </div>
                               </div>
 
                               <div class="col-md-4">
                                   <div class="mb-3">
                                       <label class="form-label">Email<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="email" />
+                                      <input  type="text" class="form-control" v-model="email" />
                                   </div>
                               </div>
 
                               <div class="col-md-4">
                                   <div class="mb-3">
                                       <label class="form-label">Position<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="position" />
+                                      <input  type="text" class="form-control" v-model="position" />
                                   </div>
                               </div>
                           </div>
@@ -103,14 +103,14 @@
                               <div class="col-md-8">
                                   <div class="mb-3">
                                       <label class="form-label">Client Name<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="client_name" />
+                                      <input  type="text" class="form-control" v-model="client_name" />
                                   </div>
                               </div>
 
                               <div class="col-md-4">
                                   <div class="mb-3">
                                       <label class="form-label">Job Position<small style="color:red">*</small> </label>
-                                      <input :disabled="disabled == 1" type="text" class="form-control" v-model="job_position" />
+                                      <input  type="text" class="form-control" v-model="job_position" />
                                   </div>
                               </div>
                           </div>
@@ -120,7 +120,7 @@
                               <label class="form-label">Current Wage<small style="color:red">*</small> </label>
                               <div class="col-md-4">
                                   <div class="mb-3">
-                                      <select :disabled="disabled == 1" class="form-select" v-model="current_wage">
+                                      <select  class="form-select" v-model="current_wage">
                                           <option value="">Please Select</option>
                                           <option value="Per Hour">Per Hour</option>
                                           <option value="Per Day">Per Day</option>
@@ -131,7 +131,7 @@
 
                               <div class="col-md-4">
                                   <div class="mb-3">
-                                      <input :disabled="disabled == 1" type="text" name="" placeholder="Please specify wage" class="form-control" v-model="wage_specify" />
+                                      <input  type="text" name="" placeholder="Please specify wage" class="form-control" v-model="wage_specify" />
                                   </div>
                               </div>
                           </div>
@@ -141,12 +141,12 @@
                               <label class="form-label">Did a wage change occur for the last 3-6 months?</label>
                               <div class="col-sm-8">
                                   <div class="form-check form-check-inline">
-                                      <input :disabled="disabled == 1" class="form-check-input" type="radio" name="wage" id="wage1" value="yes" data-rel="wage" v-model="wage_change_occur" />
+                                      <input  class="form-check-input" type="radio" name="wage" id="wage1" value="yes" data-rel="wage" v-model="wage_change_occur" />
                                       <label class="form-check-label" for="wage1">Yes</label>
                                   </div>
 
                                   <div class="form-check form-check-inline">
-                                      <input :disabled="disabled == 1" class="form-check-input" type="radio" name="wage" id="wage2" value="no" data-rel="wage" v-model="wage_change_occur" />
+                                      <input  class="form-check-input" type="radio" name="wage" id="wage2" value="no" data-rel="wage" v-model="wage_change_occur" />
                                       <label class="form-check-label" for="wage2">No</label>
                                   </div>
                               </div>
@@ -158,7 +158,7 @@
                                   <div class="col-sm-3">
                                       <div class="mb-3">
                                           <label class="form-label">Changes In Rate</label>
-                                          <select :disabled="disabled == 1" class="form-select" v-model="change_in_rate">
+                                          <select  class="form-select" v-model="change_in_rate">
                                               <option value="">Please Select</option>
                                               <option value="Per Hour">Per Hour</option>
                                               <option value="Per Day">Per Day</option>
@@ -170,21 +170,21 @@
                                   <div class="col-sm-3">
                                       <div class="mb-3">
                                           <label class="form-label">From</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="from" />
+                                          <input  type="text" name="" class="form-control" v-model="from" />
                                       </div>
                                   </div>
 
                                   <div class="col-sm-3">
                                       <div class="mb-3">
                                           <label class="form-label">To</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="to" />
+                                          <input  type="text" name="" class="form-control" v-model="to" />
                                       </div>
                                   </div>
 
                                   <div class="col-sm-3">
                                       <div class="mb-3">
                                           <label class="form-label">On Date</label>
-                                          <input :disabled="disabled == 1" type="date" name="" class="form-control" v-model="on_date" />
+                                          <input  type="date" name="" class="form-control" v-model="on_date" />
                                       </div>
                                   </div>
                               </div>
@@ -194,14 +194,14 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Work Hours In A Week</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="works_hour_week" />
+                                          <input  type="text" name="" class="form-control" v-model="works_hour_week" />
                                       </div>
                                   </div>
 
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Work Schedule</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="work_schedule" />
+                                          <input  type="text" name="" class="form-control" v-model="work_schedule" />
                                       </div>
                                   </div>
                               </div>
@@ -211,14 +211,14 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">No Of Current Employee In Company</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="no_of_current_employee" />
+                                          <input  type="text" name="" class="form-control" v-model="no_of_current_employee" />
                                       </div>
                                   </div>
 
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">No Of Other Employees In This Position</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="no_of_other_employee" />
+                                          <input  type="text" name="" class="form-control" v-model="no_of_other_employee" />
                                       </div>
                                   </div>
                               </div>
@@ -228,7 +228,7 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">During Same Shift</label>
-                                          <input :disabled="disabled == 1" type="text" name="" class="form-control" v-model="during_same_shift" />
+                                          <input  type="text" name="" class="form-control" v-model="during_same_shift" />
                                       </div>
                                   </div>
                               </div>
@@ -241,12 +241,12 @@
                                   <div class="row">
                                       <div class="col-sm-4">
                                           <label class="form-label">Education Level<small style="color:red">*</small> </label>
-                                          <input :disabled="disabled == 1" type="text" class="form-control" v-model="education_level" />
+                                          <input  type="text" class="form-control" v-model="education_level" />
                                       </div>
 
                                       <div class="col-sm-4">
                                           <label class="form-label">Grade<small style="color:red">*</small> </label>
-                                          <input :disabled="disabled == 1" type="text" class="form-control" v-model="grade" />
+                                          <input  type="text" class="form-control" v-model="grade" />
                                       </div>
                                   </div>
                               </div>
@@ -262,12 +262,12 @@
                                   <div class="row">
                                       <div class="col-sm-4">
                                           <label class="form-label">Year<small style="color:red">*</small> </label>
-                                          <input :disabled="disabled == 1" type="text" class="form-control" v-model="job_experience_year" />
+                                          <input  type="text" class="form-control" v-model="job_experience_year" />
                                       </div>
 
                                       <div class="col-sm-4">
                                           <label class="form-label">Months<small style="color:red">*</small> </label>
-                                          <input :disabled="disabled == 1" type="text" class="form-control" v-model="job_experience_months" />
+                                          <input  type="text" class="form-control" v-model="job_experience_months" />
                                       </div>
                                   </div>
                               </div>
@@ -278,7 +278,7 @@
                               <div class="col-md-12">
                                   <div class="mb-3">
                                       <label class="form-label">Others<small style="color:red">*</small> </label>
-                                      <textarea :disabled="disabled == 1" class="form-control textarea" v-model="others"></textarea>
+                                      <textarea  class="form-control textarea" v-model="others"></textarea>
                                   </div>
                               </div>
                           </div>
@@ -385,25 +385,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_0" type="checkbox" value="A. Need to work on weekend" id="weekend" v-model="work_schedule_A" />
+                                              <input  class="form-check-input one_0" type="checkbox" value="A. Need to work on weekend" id="weekend" v-model="work_schedule_A" />
                                               <label class="form-check-label" for="weekend">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_0" type="checkbox" value="B. Night shift only?" id="shift" v-model="work_schedule_B" />
+                                              <input  class="form-check-input two_0" type="checkbox" value="B. Night shift only?" id="shift" v-model="work_schedule_B" />
                                               <label class="form-check-label" for="shift">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_0" type="checkbox" value="C. Part-time?" id="Parttime" v-model="work_schedule_C" />
+                                              <input  class="form-check-input three_0" type="checkbox" value="C. Part-time?" id="Parttime" v-model="work_schedule_C" />
                                               <label class="form-check-label" for="Parttime">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_0" type="checkbox" value="D. Full time?" id="Fulltime" v-model="work_schedule_D" />
+                                              <input  class="form-check-input four_0" type="checkbox" value="D. Full time?" id="Fulltime" v-model="work_schedule_D" />
                                               <label class="form-check-label" for="Fulltime">
                                                   Yes
                                               </label>
@@ -412,7 +412,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="work_schedule_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="work_schedule_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -429,19 +429,19 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_1" type="checkbox" value="A. Public transport" id="transport" v-model="transport_to_workplace_A" />
+                                              <input  class="form-check-input one_1" type="checkbox" value="A. Public transport" id="transport" v-model="transport_to_workplace_A" />
                                               <label class="form-check-label" for="transport">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_1" type="checkbox" value="B. Own transport if yes mention type?" id="own-transport" v-model="transport_to_workplace_B" />
+                                              <input  class="form-check-input two_1" type="checkbox" value="B. Own transport if yes mention type?" id="own-transport" v-model="transport_to_workplace_B" />
                                               <label class="form-check-label" for="own-transport">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_1" type="checkbox" value="C. Company Transport" id="Company-Transport" v-model="transport_to_workplace_C" />
+                                              <input  class="form-check-input three_1" type="checkbox" value="C. Company Transport" id="Company-Transport" v-model="transport_to_workplace_C" />
                                               <label class="form-check-label" for="Company-Transport">
                                                   Yes
                                               </label>
@@ -450,7 +450,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="transport_to_workplace_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="transport_to_workplace_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -468,25 +468,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_2" type="checkbox" value="A. Limited (5kg)" id="Limited" v-model="pgwa_A" />
+                                              <input  class="form-check-input one_2" type="checkbox" value="A. Limited (5kg)" id="Limited" v-model="pgwa_A" />
                                               <label class="form-check-label" for="Limited">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_2" type="checkbox" value="B. Light (5-10kg)" id="Light" v-model="pgwa_B" />
+                                              <input  class="form-check-input two_2" type="checkbox" value="B. Light (5-10kg)" id="Light" v-model="pgwa_B" />
                                               <label class="form-check-label" for="Light">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_2" type="checkbox" value="C. Moderate (10-20kg)" id="Moderate" v-model="pgwa_C" />
+                                              <input  class="form-check-input three_2" type="checkbox" value="C. Moderate (10-20kg)" id="Moderate" v-model="pgwa_C" />
                                               <label class="form-check-label" for="Moderate">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_2" type="checkbox" value="D. Heavy (>20kg)" id="Heavy" v-model="pgwa_D" />
+                                              <input  class="form-check-input four_2" type="checkbox" value="D. Heavy (>20kg)" id="Heavy" v-model="pgwa_D" />
                                               <label class="form-check-label" for="Heavy">
                                                   Yes
                                               </label>
@@ -495,7 +495,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="pgwa_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="pgwa_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -513,25 +513,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_3" type="checkbox" value="A. Less than 2 hours" id="hours1" v-model="work_tolerance_A" />
+                                              <input  class="form-check-input one_3" type="checkbox" value="A. Less than 2 hours" id="hours1" v-model="work_tolerance_A" />
                                               <label class="form-check-label" for="hours1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_3" type="checkbox" value="B. 2-3 hours" id="hours2" v-model="work_tolerance_B" />
+                                              <input  class="form-check-input two_3" type="checkbox" value="B. 2-3 hours" id="hours2" v-model="work_tolerance_B" />
                                               <label class="form-check-label" for="hours2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_3" type="checkbox" value="C. 3-4 hours" id="hours3" v-model="work_tolerance_C" />
+                                              <input  class="form-check-input three_3" type="checkbox" value="C. 3-4 hours" id="hours3" v-model="work_tolerance_C" />
                                               <label class="form-check-label" for="hours3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_3" type="checkbox" value="D. More than 4 hours" id="hours4" v-model="work_tolerance_D" />
+                                              <input  class="form-check-input four_3" type="checkbox" value="D. More than 4 hours" id="hours4" v-model="work_tolerance_D" />
                                               <label class="form-check-label" for="hours4">
                                                   Yes
                                               </label>
@@ -540,7 +540,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="work_tolerance_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="work_tolerance_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -559,31 +559,31 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_4" type="checkbox" value="A. Small place" id="work-area1" v-model="work_area_A" />
+                                              <input  class="form-check-input one_4" type="checkbox" value="A. Small place" id="work-area1" v-model="work_area_A" />
                                               <label class="form-check-label" for="work-area1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_4" type="checkbox" value="B. One room" id="work-area2" v-model="work_area_B" />
+                                              <input  class="form-check-input two_4" type="checkbox" value="B. One room" id="work-area2" v-model="work_area_B" />
                                               <label class="form-check-label" for="work-area2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1"  class="form-check-input three_4" type="checkbox" value="C. Few rooms" id="work-area3" v-model="work_area_C" />
+                                              <input   class="form-check-input three_4" type="checkbox" value="C. Few rooms" id="work-area3" v-model="work_area_C" />
                                               <label class="form-check-label" for="work-area3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_4" type="checkbox" value="D. Big building" id="work-area4" v-model="work_area_D" />
+                                              <input  class="form-check-input four_4" type="checkbox" value="D. Big building" id="work-area4" v-model="work_area_D" />
                                               <label class="form-check-label" for="work-area4">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input five_4" type="checkbox" value="E. Building and ground floor" id="work-area5" v-model="work_area_E" />
+                                              <input  class="form-check-input five_4" type="checkbox" value="E. Building and ground floor" id="work-area5" v-model="work_area_E" />
                                               <label class="form-check-label" for="work-area5">
                                                   Yes
                                               </label>
@@ -592,7 +592,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="work_area_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="work_area_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -610,25 +610,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_5" type="checkbox" value="A. Slow" id="work-speed1" v-model="work_speed_A" />
+                                              <input  class="form-check-input one_5" type="checkbox" value="A. Slow" id="work-speed1" v-model="work_speed_A" />
                                               <label class="form-check-label" for="work-speed1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_5" type="checkbox" value="B. Mild" id="work-speed2" v-model="work_speed_B" />
+                                              <input  class="form-check-input two_5" type="checkbox" value="B. Mild" id="work-speed2" v-model="work_speed_B" />
                                               <label class="form-check-label" for="work-speed2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_5" type="checkbox" value="C. Moderate" id="work-speed3" v-model="work_speed_C" />
+                                              <input  class="form-check-input three_5" type="checkbox" value="C. Moderate" id="work-speed3" v-model="work_speed_C" />
                                               <label class="form-check-label" for="work-speed3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_5" type="checkbox" value="D. Fast" id="work-speed4" v-model="work_speed_D" />
+                                              <input  class="form-check-input four_5" type="checkbox" value="D. Fast" id="work-speed4" v-model="work_speed_D" />
                                               <label class="form-check-label" for="work-speed4">
                                                   Yes
                                               </label>
@@ -637,7 +637,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="work_speed_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="work_speed_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -655,25 +655,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_6" type="checkbox" value="A. Casual" id="appearance1" v-model="appearance_A" />
+                                              <input  class="form-check-input one_6" type="checkbox" value="A. Casual" id="appearance1" v-model="appearance_A" />
                                               <label class="form-check-label" for="appearance1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_6" type="checkbox" value="B. Clean" id="appearance2" v-model="appearance_B" />
+                                              <input  class="form-check-input two_6" type="checkbox" value="B. Clean" id="appearance2" v-model="appearance_B" />
                                               <label class="form-check-label" for="appearance2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_6" type="checkbox" value="C. Clean and well kempt" id="appearance3" v-model="appearance_C" />
+                                              <input  class="form-check-input three_6" type="checkbox" value="C. Clean and well kempt" id="appearance3" v-model="appearance_C" />
                                               <label class="form-check-label" for="appearance3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_6" type="checkbox" value="D. Well kempt" id="appearance4" v-model="appearance_D" />
+                                              <input  class="form-check-input four_6" type="checkbox" value="D. Well kempt" id="appearance4" v-model="appearance_D" />
                                               <label class="form-check-label" for="appearance4">
                                                   Yes
                                               </label>
@@ -682,7 +682,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="appearance_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="appearance_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -700,25 +700,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_7" type="checkbox" value="A. Not required/minimal" id="communication-skill1" v-model="communication_skill_A" />
+                                              <input  class="form-check-input one_7" type="checkbox" value="A. Not required/minimal" id="communication-skill1" v-model="communication_skill_A" />
                                               <label class="form-check-label" for="communication-skill1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_7" type="checkbox" value="B. When needed" id="communication-skill2" v-model="communication_skill_B" />
+                                              <input  class="form-check-input two_7" type="checkbox" value="B. When needed" id="communication-skill2" v-model="communication_skill_B" />
                                               <label class="form-check-label" for="communication-skill2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_7" type="checkbox" value="C. Average" id="communication-skill3" v-model="communication_skill_C" />
+                                              <input  class="form-check-input three_7" type="checkbox" value="C. Average" id="communication-skill3" v-model="communication_skill_C" />
                                               <label class="form-check-label" for="communication-skill3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_7" type="checkbox" value="D. Good" id="communication-skill4" v-model="communication_skill_D" />
+                                              <input  class="form-check-input four_7" type="checkbox" value="D. Good" id="communication-skill4" v-model="communication_skill_D" />
                                               <label class="form-check-label" for="communication-skill4">
                                                   Yes
                                               </label>
@@ -727,7 +727,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="communication_skill_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="communication_skill_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -745,25 +745,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_8" type="checkbox" value="A. Not required/minimal" id="social-interaction1" v-model="social_interaction_A" />
+                                              <input  class="form-check-input one_8" type="checkbox" value="A. Not required/minimal" id="social-interaction1" v-model="social_interaction_A" />
                                               <label class="form-check-label" for="social-interaction1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_8" type="checkbox" value="B. When needed" id="social-interaction2" v-model="social_interaction_B" />
+                                              <input  class="form-check-input two_8" type="checkbox" value="B. When needed" id="social-interaction2" v-model="social_interaction_B" />
                                               <label class="form-check-label" for="social-interaction2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_8" type="checkbox" value="C. Average" id="social-interaction3" v-model="social_interaction_C" />
+                                              <input  class="form-check-input three_8" type="checkbox" value="C. Average" id="social-interaction3" v-model="social_interaction_C" />
                                               <label class="form-check-label" for="social-interaction3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_8" type="checkbox" value="D. Good" id="social-interaction4" v-model="social_interaction_D" />
+                                              <input  class="form-check-input four_8" type="checkbox" value="D. Good" id="social-interaction4" v-model="social_interaction_D" />
                                               <label class="form-check-label" for="social-interaction4">
                                                   Yes
                                               </label>
@@ -772,7 +772,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="social_interaction_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="social_interaction_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -790,25 +790,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_9" type="checkbox" value="A. Minimal" id="concentration1" v-model="concentration_A" />
+                                              <input  class="form-check-input one_9" type="checkbox" value="A. Minimal" id="concentration1" v-model="concentration_A" />
                                               <label class="form-check-label" for="concentration1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_9" type="checkbox" value="B. Fair" id="concentration2" v-model="concentration_B" />
+                                              <input  class="form-check-input two_9" type="checkbox" value="B. Fair" id="concentration2" v-model="concentration_B" />
                                               <label class="form-check-label" for="concentration2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_9" type="checkbox" value="C. Average" id="concentration3" v-model="concentration_C" />
+                                              <input  class="form-check-input three_9" type="checkbox" value="C. Average" id="concentration3" v-model="concentration_C" />
                                               <label class="form-check-label" for="concentration3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_9" type="checkbox" value="D. Good" id="concentration4" v-model="concentration_D" />
+                                              <input  class="form-check-input four_9" type="checkbox" value="D. Good" id="concentration4" v-model="concentration_D" />
                                               <label class="form-check-label" for="concentration4">
                                                   Yes
                                               </label>
@@ -817,7 +817,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="concentration_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="concentration_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -835,25 +835,25 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_10" type="checkbox" value="A. One task at a time" id="work-demand1" v-model="work_demand_A" />
+                                              <input  class="form-check-input one_10" type="checkbox" value="A. One task at a time" id="work-demand1" v-model="work_demand_A" />
                                               <label class="form-check-label" for="work-demand1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_10" type="checkbox" value="B. Few task (2-3)" id="work-demand2" v-model="work_demand_B" />
+                                              <input  class="form-check-input two_10" type="checkbox" value="B. Few task (2-3)" id="work-demand2" v-model="work_demand_B" />
                                               <label class="form-check-label" for="work-demand2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_10" type="checkbox" value="C. Average (4-6)" id="work-demand3" v-model="work_demand_C" />
+                                              <input  class="form-check-input three_10" type="checkbox" value="C. Average (4-6)" id="work-demand3" v-model="work_demand_C" />
                                               <label class="form-check-label" for="work-demand3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_10" type="checkbox" value="D. Many task (>7 )" id="work-demand4" v-model="work_demand_D" />
+                                              <input  class="form-check-input four_10" type="checkbox" value="D. Many task (>7 )" id="work-demand4" v-model="work_demand_D" />
                                               <label class="form-check-label" for="work-demand4">
                                                   Yes
                                               </label>
@@ -862,7 +862,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="work_demand_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="work_demand_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -879,19 +879,19 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_11" type="checkbox" value="A. Need encouragement" id="motivation1" v-model="motivation_A" />
+                                              <input  class="form-check-input one_11" type="checkbox" value="A. Need encouragement" id="motivation1" v-model="motivation_A" />
                                               <label class="form-check-label" for="motivation1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_11" type="checkbox" value="B. Proactive" id="motivation2" v-model="motivation_B" />
+                                              <input  class="form-check-input two_11" type="checkbox" value="B. Proactive" id="motivation2" v-model="motivation_B" />
                                               <label class="form-check-label" for="motivation2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_11" type="checkbox" value="C. Good support" id="motivation3" v-model="motivation_C" />
+                                              <input  class="form-check-input three_11" type="checkbox" value="C. Good support" id="motivation3" v-model="motivation_C" />
                                               <label class="form-check-label" for="motivation3">
                                                   Yes
                                               </label>
@@ -900,7 +900,7 @@
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="motivation_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="motivation_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -917,22 +917,22 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_12" type="checkbox" value="A. Frequent (>7)" id="fir1" v-model="flexibility_A" />
+                                              <input  class="form-check-input one_12" type="checkbox" value="A. Frequent (>7)" id="fir1" v-model="flexibility_A" />
                                               <label class="form-check-label" for="fir1"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_12" type="checkbox" value="B. Average (4-6)" id="fir2" v-model="flexibility_B" />
+                                              <input  class="form-check-input two_12" type="checkbox" value="B. Average (4-6)" id="fir2" v-model="flexibility_B" />
                                               <label class="form-check-label" for="fir2"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_12" type="checkbox" value="C. Minimal (2-3)" id="fir3" v-model="flexibility_C" />
+                                              <input  class="form-check-input three_12" type="checkbox" value="C. Minimal (2-3)" id="fir3" v-model="flexibility_C" />
                                               <label class="form-check-label" for="fir3"> Yes </label>
                                           </div>
                                       </td>
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="flexibility_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="flexibility_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -950,26 +950,26 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_13" type="checkbox" value="A. Not required" id="atr1" v-model="ability_A" />
+                                              <input  class="form-check-input one_13" type="checkbox" value="A. Not required" id="atr1" v-model="ability_A" />
                                               <label class="form-check-label" for="atr1"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_13" type="checkbox" value="B. Recognize symbol" id="atr2" v-model="ability_B" />
+                                              <input  class="form-check-input two_13" type="checkbox" value="B. Recognize symbol" id="atr2" v-model="ability_B" />
                                               <label class="form-check-label" for="atr2"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_13" type="checkbox" value="C. Simple word" id="atr3" v-model="ability_C" />
+                                              <input  class="form-check-input three_13" type="checkbox" value="C. Simple word" id="atr3" v-model="ability_C" />
                                               <label class="form-check-label" for="atr3"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_13" type="checkbox" value="D. Read fluently" id="atr4" v-model="ability_D" />
+                                              <input  class="form-check-input four_13" type="checkbox" value="D. Read fluently" id="atr4" v-model="ability_D" />
                                               <label class="form-check-label" for="atr4"> Yes </label>
                                           </div>
                                       </td>
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="ability_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="ability_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -987,26 +987,26 @@
                                       <td class="input-checkbox">
                                           <div class="title-div"></div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_14" type="checkbox" value="A. Not required" id="atc1" v-model="calculate_A" />
+                                              <input  class="form-check-input one_14" type="checkbox" value="A. Not required" id="atc1" v-model="calculate_A" />
                                               <label class="form-check-label" for="atc1"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_14" type="checkbox" value="B. Use calculator" id="atc2" v-model="calculate_B" />
+                                              <input  class="form-check-input two_14" type="checkbox" value="B. Use calculator" id="atc2" v-model="calculate_B" />
                                               <label class="form-check-label" for="atc2"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_14" type="checkbox" value="C. Simple maths without calculator" id="atc3" v-model="calculate_C" />
+                                              <input  class="form-check-input three_14" type="checkbox" value="C. Simple maths without calculator" id="atc3" v-model="calculate_C" />
                                               <label class="form-check-label" for="atc3"> Yes </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_14" type="checkbox" value="D. Difficult maths" id="atc4" v-model="calculate_D" />
+                                              <input  class="form-check-input four_14" type="checkbox" value="D. Difficult maths" id="atc4" v-model="calculate_D" />
                                               <label class="form-check-label" for="atc4"> Yes </label>
                                           </div>
                                       </td>
                                       <td>
                                           <div class="mb-3">
                                               <label class="form-label">Comments</label>
-                                              <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="calculate_comment"></textarea>
+                                              <textarea  class="form-control textarea comment" v-model="calculate_comment"></textarea>
                                           </div>
                                       </td>
                                   </tr>
@@ -1027,50 +1027,50 @@
                                       </td>
                                       <td class="input-checkbox">
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input one_15" type="checkbox" value="0 = Nil" id="benefits1" v-model="benefits_0" />
+                                              <input  class="form-check-input one_15" type="checkbox" value="0 = Nil" id="benefits1" v-model="benefits_0" />
                                               <label class="form-check-label" for="benefits1">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input two_15" type="checkbox" value="1 = Mc" id="benefits2" v-model="benefits_1" />
+                                              <input  class="form-check-input two_15" type="checkbox" value="1 = Mc" id="benefits2" v-model="benefits_1" />
                                               <label class="form-check-label" for="benefits2">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input three_15" type="checkbox" value="2 = Medical Benefit" id="benefits3" v-model="benefits_2" />
+                                              <input  class="form-check-input three_15" type="checkbox" value="2 = Medical Benefit" id="benefits3" v-model="benefits_2" />
                                               <label class="form-check-label" for="benefits3">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input four_15" type="checkbox" value="3 = Annual Leave" id="benefits4" v-model="benefits_3" />
+                                              <input  class="form-check-input four_15" type="checkbox" value="3 = Annual Leave" id="benefits4" v-model="benefits_3" />
                                               <label class="form-check-label" for="benefits4">
                                                   Yes
                                               </label>
                                           </div>
 
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input five_15" type="checkbox" value="4 = Dental Benefits" id="benefits5" v-model="benefits_4" />
+                                              <input  class="form-check-input five_15" type="checkbox" value="4 = Dental Benefits" id="benefits5" v-model="benefits_4" />
                                               <label class="form-check-label" for="benefits5">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input six_15" type="checkbox" value="5 = Discount For Employee" id="benefits6" v-model="benefits_5" />
+                                              <input  class="form-check-input six_15" type="checkbox" value="5 = Discount For Employee" id="benefits6" v-model="benefits_5" />
                                               <label class="form-check-label" for="benefits6">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input seven_15" type="checkbox" value="6 = Free Food" id="benefits7" v-model="benefits_6" />
+                                              <input  class="form-check-input seven_15" type="checkbox" value="6 = Free Food" id="benefits7" v-model="benefits_6" />
                                               <label class="form-check-label" for="benefits7">
                                                   Yes
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1" class="form-check-input eight_15" type="checkbox" value="7 = Others (To Specify)" id="benefits8" v-model="benefits_7" />
+                                              <input  class="form-check-input eight_15" type="checkbox" value="7 = Others (To Specify)" id="benefits8" v-model="benefits_7" />
                                               <label class="form-check-label" for="benefits8">
                                                   Yes
                                               </label>
@@ -1078,14 +1078,14 @@
                                       </td>
                                       <td>
                                           <div class="mb-3 input-boxs">
-                                              <input :disabled="disabled == 1" type="text" class="form-control onecomment" v-model="onecomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control twocomment" v-model="twocomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control threecomment" v-model="threecomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control fourcomment" v-model="fourcomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control fivecomment" v-model="fivecomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control sixcomment" v-model="sixcomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control sevencomment" v-model="sevencomment" />
-                                              <input :disabled="disabled == 1" type="text" class="form-control eightcomment" v-model="eightcomment" />
+                                              <input  type="text" class="form-control onecomment" v-model="onecomment" />
+                                              <input  type="text" class="form-control twocomment" v-model="twocomment" />
+                                              <input  type="text" class="form-control threecomment" v-model="threecomment" />
+                                              <input  type="text" class="form-control fourcomment" v-model="fourcomment" />
+                                              <input  type="text" class="form-control fivecomment" v-model="fivecomment" />
+                                              <input  type="text" class="form-control sixcomment" v-model="sixcomment" />
+                                              <input  type="text" class="form-control sevencomment" v-model="sevencomment" />
+                                              <input  type="text" class="form-control eightcomment" v-model="eightcomment" />
                                           </div>
                                       </td>
                                   </tr>
@@ -1105,7 +1105,7 @@
                                         <div class="row mb-3">
                                             <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small> </label>
                                             <div class="col-sm-8">
-                                                <select :disabled="disabled == 1" class="form-select" v-model="location_services_id">
+                                                <select  class="form-select" v-model="location_services_id">
                                                     <option value="0">
                                                         Select location of services
                                                     </option>
@@ -1119,7 +1119,7 @@
                                         <div class="row mb-3">
                                             <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small> </label>
                                             <div class="col-sm-8">
-                                                <select :disabled="disabled == 1" class="form-select" v-model="type_diagnosis_id">
+                                                <select  class="form-select" v-model="type_diagnosis_id">
                                                     <option value="0">Select Diagnosis</option>
                                                     <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                         {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -1128,16 +1128,25 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3 align-items-flex-start">
-                                            <label class="col-sm-4 col-form-label">Additional Diagnosis</label>
-                                            <div class="col-sm-8">
-                                                <select :disabled="disabled == 1" id="additionalboxdiagnosis" v-model="additional_diagnosis" class="form-select multiselectadditionalsubcode" multiple="multiple">
-                                                    <option value="0">Please Select</option>
-                                                    <option v-for="catcode in diagonisislistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                        {{ catcode.icd_code }} {{catcode.icd_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                          <label class="col-sm-4 col-form-label"
+                                              >Additional Diagnosis</label
+                                          >
+                                          <div class="col-sm-8">
+                                              <select
+                                                  id="additionalboxdiagnosis"
+                                                  class="form-select multiselect" multiple="multiple"
+                                                  >
+                                                  <option value="0">Please Select</option>
+                                                  <option
+                                                  v-for="catcode in diagonisislist"
+                                                  v-bind:key="catcode.id"
+                                                  v-bind:value="catcode.id"
+                                                  >
+                                                  {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
                                         <!-- close-row -->
                                         <div class="row mb-3">
                                             <label class="col-sm-4 col-form-label">Category Of Services<small style="color:red">*</small>
@@ -1148,12 +1157,12 @@
                                                     <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio3">External</label>
                                                 </div>
                                             </div>
@@ -1164,7 +1173,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select :disabled="disabled == 1" class="form-select" v-model="services_id">
+                                                    <select  class="form-select" v-model="services_id">
                                                         <option value="0">Select Service</option>
                                                         <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                             {{ slt.section_value }}
@@ -1178,7 +1187,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
-                                                    <select :disabled="disabled == 1" class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                    <select  class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                         <option value="0">Select code</option>
                                                         <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                                             {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -1188,7 +1197,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
                                                     <div class="mt-2 align-items-flex-start">
-                                                        <select :disabled="disabled == 1" id="subcodeicd" v-model="sub_code_id" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
+                                                        <select  id="subcodeicd" style="width:100%" class="form-select multiselectadditional" multiple="multiple">
                                                             <option value="0">Select sub code</option>
                                                             <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                 {{ catcode.icd_code }}
@@ -1201,7 +1210,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-">
                                                     <label class="form-label">Additional ICD 9 CODE</label>
-                                                    <select :disabled="disabled == 1" class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
+                                                    <select class="form-select" v-model="additional_code_id" @change="onCategorycodebindAdditional($event)">
                                                         <option value="0">Select additional code</option>
                                                         <option v-for="type in codelistadditional" v-bind:key="type.id" v-bind:value="type.id">
                                                             {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -1211,7 +1220,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Additional ICD 9 SUB CODE</label>
                                                     <div class="mt-2 align-items-flex-start">
-                                                        <select :disabled="disabled == 1" id="additionalsubcodeicd" v-model="additional_sub_code_id" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
+                                                        <select id="additionalsubcodeicd" style="width:100%" class="form-select multiselectadditionalsubcode" multiple="multiple">
                                                             <option value="0">Select additional sub code</option>
                                                             <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                 {{ catcode.icd_code }}
@@ -1241,7 +1250,7 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Complexity Of Service<small style="color:red">*</small> </label>
-                                                <select :disabled="disabled == 1" class="form-select" v-model="complexity_services_id">
+                                                <select  class="form-select" v-model="complexity_services_id">
                                                     <option value="0">
                                                         Select Complexity Of Service
                                                     </option>
@@ -1252,7 +1261,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                <select :disabled="disabled == 1"  class="form-select" v-model="outcome_id">
+                                                <select   class="form-select" v-model="outcome_id">
                                                     <option value="0">Select outcome</option>
                                                     <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                         {{ out.section_value }}
@@ -1275,7 +1284,7 @@
                                     <div class="accordion-body">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">Medication</label>
-                                            <textarea :disabled="disabled == 1"  class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                            <textarea   class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -1610,45 +1619,6 @@
 
           async onCreateEvent() {
             var jobSDESCRIPTION = [];
-              var Boxvalue1 = [];
-              var Boxvalue2 = [];
-              var Boxvalue3 = [];
-              var additionalboxdiagnosis = 0;
-              var subcodeicd = 0;
-              var additionalsubcodeicd = 0;
-              $("#additionalboxdiagnosis :selected").each(function () {
-                  if (additionalboxdiagnosis) {
-                      additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
-                  } else {
-                      additionalboxdiagnosis = this.value;
-                  }
-              });
-              Boxvalue1.push({
-                  additionalboxdiagnosis
-              });
-
-              $("#subcodeicd :selected").each(function () {
-                  if (subcodeicd) {
-                      subcodeicd = subcodeicd + "," + this.value;
-                  } else {
-                      subcodeicd = this.value;
-                  }
-              });
-              Boxvalue2.push({
-                  subcodeicd
-              });
-
-              $("#additionalsubcodeicd :selected").each(function () {
-                  if (additionalsubcodeicd) {
-                      additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
-                  } else {
-                      additionalsubcodeicd = this.value;
-                  }
-              });
-              Boxvalue3.push({
-                  additionalsubcodeicd
-              });
-
               this.$swal.fire({
                   title: 'Do you want to save as draft?',
                   showCancelButton: true,
@@ -1968,51 +1938,50 @@
 
           async onPublishEvent() {
             var jobSDESCRIPTION = [];
-            var Boxvalue1 = [];
-                var Boxvalue2 = [];
-                var Boxvalue3 = [];
-                var additionalboxdiagnosis = 0;
-                var subcodeicd = 0;
-                var additionalsubcodeicd = 0;
-                $("#additionalboxdiagnosis :selected").each(function () {
-                    if (additionalboxdiagnosis) {
-                        additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
-                    } else {
-                        additionalboxdiagnosis = this.value;
-                    }
-                });
-                Boxvalue1.push({
-                    additionalboxdiagnosis
-                });
-
-                $("#subcodeicd :selected").each(function () {
-                    if (subcodeicd) {
-                        subcodeicd = subcodeicd + "," + this.value;
-                    } else {
-                        subcodeicd = this.value;
-                    }
-                });
-                Boxvalue2.push({
-                    subcodeicd
-                });
-
-                $("#additionalsubcodeicd :selected").each(function () {
-                    if (additionalsubcodeicd) {
-                        additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
-                    } else {
-                        additionalsubcodeicd = this.value;
-                    }
-                });
-                Boxvalue3.push({
-                    additionalsubcodeicd
-                });
-
               this.$swal.fire({
                   title: 'Do you want to save the changes?',
                   showCancelButton: true,
                   confirmButtonText: 'Save',
               }).then(async (result) => {
                   if (result.isConfirmed) {
+                      var Boxvalue1 = [];
+                      var Boxvalue2 = [];
+                      var Boxvalue3 = [];
+                      var additionalboxdiagnosis = 0;
+                      var subcodeicd = 0;
+                      var additionalsubcodeicd = 0;
+                      $("#additionalboxdiagnosis :selected").each(function () {
+                          if (additionalboxdiagnosis) {
+                              additionalboxdiagnosis = additionalboxdiagnosis + "," + this.value;
+                          } else {
+                              additionalboxdiagnosis = this.value;
+                          }
+                      });
+                      Boxvalue1.push({
+                          additionalboxdiagnosis
+                      });
+
+                      $("#subcodeicd :selected").each(function () {
+                          if (subcodeicd) {
+                              subcodeicd = subcodeicd + "," + this.value;
+                          } else {
+                              subcodeicd = this.value;
+                          }
+                      });
+                      Boxvalue2.push({
+                          subcodeicd
+                      });
+
+                      $("#additionalsubcodeicd :selected").each(function () {
+                          if (additionalsubcodeicd) {
+                              additionalsubcodeicd = additionalsubcodeicd + "," + this.value;
+                          } else {
+                              additionalsubcodeicd = this.value;
+                          }
+                      });
+                      Boxvalue3.push({
+                          additionalsubcodeicd
+                      });
                       var jobSPECIFICATION = [];
                       var jobSDESCRIPTION = [];
                       $("table#jobspecification > tbody > tr").each(function (i) {
