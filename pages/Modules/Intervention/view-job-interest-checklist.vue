@@ -442,12 +442,12 @@
                                                     <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="external" v-model="category_services" />
                                                     <label class="form-check-label" for="inlineRadio3">External</label>
                                                 </div>
                                             </div>
