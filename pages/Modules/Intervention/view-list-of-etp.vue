@@ -42,7 +42,7 @@
                         </table>
                     </div>
                     <div class="card-body">
-                        <form>
+                       
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 mb-3">
                                     <div class="">
@@ -299,13 +299,11 @@
                                 </ul>
                             </p>
                             <br><br>
-                            <div class="d-flex">
-                                <button @click="GoBack" class="btn btn-primary btn-text">
-                                    <i class="fa fa-arrow-alt-to-left"></i> Back
-                                </button>
-    
+                            <div class="d-flex three-btn">
+                            <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
                 <!-- card -->
@@ -662,15 +660,26 @@ export default {
                 }
         },
 
-        GoBack() {
-           
+        GoBack() {if(this.appId){
+      if (this.type == 'view') {
+                this.$router.go(-1);
+            } else {
                 this.$router.push({
                     path: "/modules/Intervention/patient-summary",
                     query: {
                         id: this.Id,
                         appId: this.appId
                     },
-                });}
+                });
+            }
+    }else{
+      this.$router.push({
+        path: "/modules/Intervention/patient-list",
+      });
+    }
+
+
+    }
     },
 };
 </script>
