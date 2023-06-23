@@ -889,7 +889,7 @@ export default {
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
-          path: "/modules/Intervention/list-of-etp",
+          path: "/modules/Intervention/view-list-of-etp",
           query: { pid: this.Id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch") {
@@ -897,11 +897,7 @@ export default {
           path: "/modules/Intervention/view-list-of-job-search",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
-      //} else if (data.type == "ListofJobSearch" && val == "edit") {
-      //  this.$router.push({
-      //    path: "/modules/Intervention/update-list-of-job-search",
-      //    query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
-      //  });
+   
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/log-meeting-with-employer",

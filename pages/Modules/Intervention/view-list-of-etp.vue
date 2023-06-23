@@ -6,72 +6,57 @@
         <main>
             <div class="container-fluid px-4">
                 <div class="page-title">
-                    <h1>LIST OF JOB SEARCH</h1>
+                    <h1>LIST OF ETP</h1>
+                  
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body new-form">
-                        <div class="row" v-if="patientdetails">
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.name_asin_nric" readonly />
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label class="form-label">NRIC</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.nric_no" readonly />
-                                </div>
-                            </div>
-                        </div>
-                        <!-- close-row -->
 
-                        <div class="row" v-if="patientdetails">
-                            <div class="col-sm-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Age</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.age" readonly />
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Date Of Birth</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.birth_date" readonly />
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Gender</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.gender[0].section_value" readonly />
-                                </div>
-                            </div>
-                        </div>
+                <div class="card mb-4">
+                    <div class="patient-info">
+                        <table class="info-table" width="100%" v-if="patientdetails">
+                            <thead>
+                                <tr>
+                                    <th width="40%"></th>
+                                    <th width="60%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MRN</td>
+                                    <td>{{ patientdetails.patient_mrn }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient Name</td>
+                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>{{ patientdetails.gender[0].section_value }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Date Of Birth</td>
+                                    <td>{{ patientdetails.birth_date }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body">
                         <form>
-                            <div class="table-responsive">
-                                <table class="job-search-table" id="companydetail">
-                                    <thead>
-                                        <tr>
-                                            <th>Company Name <small style="color:red">*</small> </th>
-                                            <th>Job Applied <small style="color:red">*</small> </th>
-                                            <th>Application Date <small style="color:red">*</small> </th>
-                                            <th>Interview Date <small style="color:red">*</small> </th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="optionBox">
-                                        <tr class="block" v-for="(job, index) in jobSDESCRIPTION" :key="index">
-                                            <td><input type="text" required class="form-control name" v-model="job.company_name" disabled /></td>
-                                            <td><input type="text" required class="form-control job" v-model="job.job_applied" disabled /></td>
-                                            <td>
-                                                <input type="date" required class="form-control appdate" v-model="job.application_date" disabled />
-                                            </td>
-                                            <td><input type="date" required class="form-control intdate" v-model="job.interview_date" disabled/></td>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-6 mb-3">
+                                    <div class="">
+                                        <label class="form-label">Program<small style="color:red">*</small> </label>
+                                        <select class="form-select" v-model="program" disabled>
+                                            <option value="">Choose Program</option>
+                                            <option v-for="jb in etplist" v-bind:key="jb.id" v-bind:value="jb.id">
+                                                {{ jb.etp_name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="accordion form-accordion mt-3" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
@@ -101,7 +86,7 @@
                                                     <select class="form-select" v-model="type_diagnosis_id" disabled>
                                                         <option value="0">Select Diagnosis</option>
                                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                            {{ catcode.icd_code }} {{ catcode.icd_name }}
+                                                            {{ catcode.icd_code }} {{catcode.icd_name}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -110,7 +95,7 @@
                                                 <label class="col-sm-4 col-form-label">Additional Type Of Diagnosis</label>
                                                 <div class="col-sm-8 align-items-flex-start" >
                                                     <select
-                                                    id="additionalbox" v-model="additional_diagnosis"
+                                                    id="additionalbox" v-model="additional_diagnosis" 
                                                     class="form-select multiselect" multiple="multiple" disabled>
                                                         <option value="0">Please Select</option><option
                                                         v-for="catcode in diagonisislist"
@@ -146,7 +131,7 @@
                                                 </div>
                                             <!-- close-row -->
                                             <!-- hide-div -->
-                                            <div class="assisstance services hide mb-3">
+                                            <div id="assisstance" class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small> </label>
@@ -184,8 +169,8 @@
                           <div>
                           <div class="mt-2 align-items-flex-start">
                             <select
-                              class="form-select multiselect" multiple="multiple"
-                              id="sub_code_id" v-model="additional_sub_code_id"  style="width:100%" disabled>
+                              class="form-select multiselect" multiple="multiple" disabled
+                              id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
 
                               <option value="0">Select code</option>
                               <option
@@ -209,7 +194,7 @@
                                     <label class="form-label">Additional ICD 9 CODE</label>
                                     <select
                                     class="form-select"
-                                    v-model="add_code_id" 
+                                    v-model="add_code_id"
                                     @change="onCategoryaddcodebind($event)" disabled
                                     >
                                     <option value="0">Select code</option>
@@ -222,36 +207,36 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-8 mb-3">
-                                <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
-                                <div>
-                                <div class="mt-2 align-items-flex-start">
-                                    <select
-                                    class="form-select multiselect" multiple="multiple"
-                                    id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
+                                        <div class="col-md-8 mb-3">
+                                        <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
+                                        <div>
+                                        <div class="mt-2 align-items-flex-start">
+                                            <select
+                                            class="form-select multiselect" multiple="multiple"
+                                            id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
 
-                                    <option value="0">Select code</option>
-                                    <option
-                                        v-for="catcode in addicdcatcodelist"
-                                        v-bind:key="catcode.id"
-                                        v-bind:value="catcode.id">
-                                        {{ catcode.icd_code }}{{catcode.icd_name}}
-                                    </option>
-                                    </select>
-                                </div>
-                                </div>
-                                </div>
+                                            <option value="0">Select code</option>
+                                            <option
+                                                v-for="catcode in addicdcatcodelist"
+                                                v-bind:key="catcode.id"
+                                                v-bind:value="catcode.id">
+                                                {{ catcode.icd_code }}{{catcode.icd_name}}
+                                            </option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        </div>
 
-                                
-                                
-                                </div>
-                            </div>    
+                                        
+                                        
+                                        </div>
+                                            </div>  
                                             <!-- 02 -->
-                                            <div class="external services hide mb-3">
+                                            <div id="external" class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                        <select class="form-select" v-model="serviceid" disabled>
+                                                        <select class="form-select" v-model="add_icdcatcodelist" disabled>
                                                             <option value="0">Select Service</option>
                                                             <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                 {{ slt.section_value }}
@@ -318,11 +303,12 @@
                                 <button @click="GoBack" class="btn btn-primary btn-text">
                                     <i class="fa fa-arrow-alt-to-left"></i> Back
                                 </button>
-                                
+    
                             </div>
                         </form>
                     </div>
                 </div>
+                <!-- card -->
             </div>
         </main>
     </div>
@@ -337,9 +323,10 @@ export default {
         CommonSidebar,
         CommonHeader
     },
-    name: "list-of-previous-or-current-job",
+    name: "list-of-etp",
     data() {
         return {
+            add_icdcatcodelist:[],
             userdetails: null,
             patientdetails: null,
             errorList: [],
@@ -350,11 +337,9 @@ export default {
             icdcatcodelist: [],
             diagonisislist: [],
             locationlist: [],
-            titlelist: [],
-
-            codelistadditional: [],
-            icdcatcodelistadditional: [],
+            etplist: [],
             Id: 0,
+            program: "",
             location_services_id: 0,
             type_diagnosis_id: 0,
             category_services: "",
@@ -366,12 +351,10 @@ export default {
             services_id: 0,
             serviceid: 0,
             validate: true,
-            loader: false,
             assistancelist: [],
             externallist: [],
             pid: 0,
             type: "",
-            jobSDESCRIPTION: [],
             appId: 0,
 
             addicdcatcodelist: [],
@@ -380,7 +363,6 @@ export default {
             additional_diagnosis: [],
             additional_sub_code_id:[],
             additional_sub_code_id2:[],
-           
         };
     },
     beforeMount() {
@@ -394,25 +376,18 @@ export default {
                 $(".services").not(targetBox).hide();
                 $(targetBox).show();
             });
-
-            $(".add-row").click(function (i) {
-                $(".block:last").after(
-                    '<tr class="block"> <td><input type="text" class="form-control name" /></td><td><input type="text" class="form-control job" /></td><td><input type="date" class="form-control appdate" /></td><td><input type="date" class="form-control intdate" /></td> <td> <span class="remove"><i class="fal fa-times"></i></span></td></tr>'
-                );
-            });
-            $(".optionBox").on("click", ".remove", function () {
-                $(this).closest(".block").remove();
-            });
         });
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
         this.GetList();
-        this.GetPatientdetails();
         let urlParams1 = new URLSearchParams(window.location.search);
         this.pid = urlParams1.get("pid");
         this.type = urlParams1.get("type");
         this.appId = urlParams.get("appId");
-        this.getdetails();
+        this.GetPatientdetails();
+        if (this.pid) {
+            this.getdetails();
+        }
     },
     mounted() {
         $(document).ready(function () {
@@ -421,39 +396,71 @@ export default {
             });
         });
     },
+
     methods: {
+        
         async GetPatientdetails() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
-            const response = await this.$axios.post(
-                "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
-                }, {
-                    headers
+            if (this.Id) {
+                const response = await this.$axios.post(
+                    "patient-registration/getPatientRegistrationById", {
+                        id: this.Id,
+                    }, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200) {
+                    this.patientdetails = response.data.list[0];
+                    console.log("my details", this.patientdetails);
+                } else {
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: 'Oops... Something Went Wrong!',
+                        text: 'the error is: ' + this.error,
+                        footer: ''
+                    });
                 }
-            );
-            if (response.data.code == 200) {
-                this.patientdetails = response.data.list[0];
-                console.log("my details", this.patientdetails);
-            } else {
-                this.$swal.fire({
-                    icon: 'error',
-                    title: 'Oops... Something Went Wrong!',
-                    text: 'the error is: ' + this.error,
-                    footer: ''
-                });
+            } else if (this.pid) {
+                const response = await this.$axios.post(
+                    "patient-registration/getPatientRegistrationById", {
+                        id: this.pid,
+                    }, {
+                        headers
+                    }
+                );
+                if (response.data.code == 200) {
+                    this.patientdetails = response.data.list[0];
+                    console.log("my details", this.patientdetails);
+                } else {
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: 'Oops... Something Went Wrong!',
+                        text: 'the error is: ' + this.error,
+                        footer: ''
+                    });
+                }
             }
         },
-     
         async GetList() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
+            const response6 = await this.$axios.post("etp/division-list-branch", {
+                branch_id: this.userdetails.branch.branch_id,
+            }, {
+                headers,
+            });
+            if (response6.data.code == 200 || response6.data.code == "200") {
+                this.etplist = response6.data.etp;
+            } else {
+                this.etplist = [];
+            }
             const response = await this.$axios.get(
                 "general-setting/list?section=" + "complexity-of-service", {
                     headers
@@ -487,8 +494,10 @@ export default {
             });
             if (response3.data.code == 200 || response3.data.code == "200") {
                 this.codelist = response3.data.list;
+                this.additionalcodelist = response3.data.list;
             } else {
                 this.codelist = [];
+                this.additionalcodelist = [];
             }
             const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
                 headers,
@@ -507,16 +516,6 @@ export default {
                 this.locationlist = response5.data.list;
             } else {
                 this.locationlist = [];
-            }
-            const response6 = await this.$axios.get(
-                "intervention/job-start-form-list", {
-                    headers,
-                }
-            );
-            if (response6.data.code == 200 || response6.data.code == "200") {
-                this.titlelist = response6.data.list;
-            } else {
-                this.titlelist = [];
             }
             const respons = await this.$axios.get(
                 "general-setting/list?section=" + "assistance-or-supervision", {
@@ -574,6 +573,7 @@ export default {
                 this.addicdcatcodelist = [];
             }
         },
+       
         async getdetails() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -583,7 +583,7 @@ export default {
             const response = await this.$axios.post(
                 "/patient-appointment-details/fetchViewHistoryListDetails", {
                     id: this.pid,
-                    type: "ListofJobSearch",
+                    type: "ListofEtp",
                 }, {
                     headers
                 }
@@ -591,6 +591,7 @@ export default {
             if (response.data.code == 200) {
 
                 this.Id = response.data.Data[0].patient_id;
+                this.program = response.data.Data[0].program;
                 this.location_services_id = response.data.Data[0].location_services;
                 this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
                 this.category_services = response.data.Data[0].category_services;
@@ -598,12 +599,10 @@ export default {
                 this.complexity_services_id = response.data.Data[0].complexity_services;
                 this.outcome_id = response.data.Data[0].outcome;
                 this.medication_des = response.data.Data[0].medication_des;
-
                 this.additional_diagnosis = response.data.Data[0].add_type_of_diagnosis.split(",");
                     $("#additionalbox")
                     .val(this.additional_diagnosis)
                     .trigger("change");
-
                     this.code_id = response.data.Data[0].code_id;
                 this.additional_sub_code_id = response.data.Data[0].sub_code_id.split(",");
                             $("#sub_code_id")
@@ -614,11 +613,8 @@ export default {
                         $("#add_sub_code_id")
                   .val( this.additional_sub_code_id2)
                   .trigger("change");
-
-                this.jobSDESCRIPTION = response.data.Data[0].jobs;
-             
+               
                 this.GetList();
-                this.GetPatientdetails();
                 const response2 = await this.$axios.post(
                         "diagnosis/getIcd9subcodeList", {
                             icd_category_code: this.code_id
@@ -643,7 +639,6 @@ export default {
                     } else {
                         this.addicdcatcodelist = [];
                     }
-
             } else {
                 this.$swal.fire({
                     icon: 'error',
@@ -666,25 +661,16 @@ export default {
                     });
                 }
         },
+
         GoBack() {
-          if (this.type == 'view') {
-                this.$router.go(-1);
-            } else {
+           
                 this.$router.push({
                     path: "/modules/Intervention/patient-summary",
                     query: {
                         id: this.Id,
                         appId: this.appId
                     },
-                });
-            }
-        },
+                });}
     },
 };
 </script>
-
-<style scoped>
-.hide {
-    display: none;
-}
-</style>

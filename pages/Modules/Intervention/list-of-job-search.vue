@@ -246,7 +246,7 @@
                                 
                                 
                                 </div>
-                            </div>    
+                                            </div>    
                                             <!-- 02 -->
                                             <div class="external services hide mb-3">
                                                 <div class="row">
@@ -455,30 +455,30 @@ export default {
         async OnSubmit() {
 
             var jobSDESCRIPTION = [];
-      var additionalbox = 0;
-      $("#additionalbox :selected").each(function () {
-        if (additionalbox) {
-          additionalbox = additionalbox + "," + this.value;
-        } else {
-          additionalbox = this.value;
-        }
-      });
-      var sub_code_id = 0;
-      $("#sub_code_id :selected").each(function () {
-        if (sub_code_id) {
-          sub_code_id = sub_code_id + "," + this.value;
-        } else {
-          sub_code_id = this.value;
-        }
-      });
-      var add_sub_code_id = 0;
-      $("#add_sub_code_id :selected").each(function () {
-        if (add_sub_code_id) {
-          add_sub_code_id = add_sub_code_id + "," + this.value;
-        } else {
-          add_sub_code_id = this.value;
-        }
-      });
+            var additionalbox = 0;
+            $("#additionalbox :selected").each(function () {
+                if (additionalbox) {
+                additionalbox = additionalbox + "," + this.value;
+                } else {
+                additionalbox = this.value;
+                }
+            });
+            var sub_code_id = 0;
+            $("#sub_code_id :selected").each(function () {
+                if (sub_code_id) {
+                sub_code_id = sub_code_id + "," + this.value;
+                } else {
+                sub_code_id = this.value;
+                }
+            });
+            var add_sub_code_id = 0;
+            $("#add_sub_code_id :selected").each(function () {
+                if (add_sub_code_id) {
+                add_sub_code_id = add_sub_code_id + "," + this.value;
+                } else {
+                add_sub_code_id = this.value;
+                }
+            });
       this.$swal.fire({
                 title: 'Do you want to save this record?',
                 showCancelButton: true,
@@ -728,9 +728,6 @@ export default {
             }
         },
         GoBack() {
-          if (this.type == 'view') {
-                this.$router.go(-1);
-            } else {
                 this.$router.push({
                     path: "/modules/Intervention/patient-summary",
                     query: {
@@ -738,7 +735,7 @@ export default {
                         appId: this.appId
                     },
                 });
-            }
+            
         },
     },
 };
