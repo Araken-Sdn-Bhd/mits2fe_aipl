@@ -1089,11 +1089,11 @@
                               .trigger("change");
                   if(this.category_services=='clinical-work'){
                     $(document).ready(function () {
-                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
                     });
                 }else if(this.category_services=='external'){
                     $(document).ready(function () {
-                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
                     });
                 }else{
                     $(document).ready(function () {
