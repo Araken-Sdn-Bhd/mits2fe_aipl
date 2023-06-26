@@ -3196,6 +3196,7 @@
                                 .val(this.additional_sub_code_id)
                                 .trigger("change");
 
+
                     if(this.category_services=='clinical-work'){
                         $(document).ready(function () {
                             $('input[name="inlineRadioOptions2"]').trigger('click');
