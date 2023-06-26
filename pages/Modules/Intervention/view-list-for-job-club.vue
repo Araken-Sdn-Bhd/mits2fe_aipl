@@ -587,7 +587,6 @@ export default {
                 }
             );
             if (response.data.code == 200) {
-
                 this.Id = response.data.Data[0].patient_id;
                 this.job_club = response.data.Data[0].job_club;
                 this.location_services_id = response.data.Data[0].location_services;
