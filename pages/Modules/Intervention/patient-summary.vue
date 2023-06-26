@@ -884,7 +884,7 @@ export default {
         });
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
-          path: "/modules/Intervention/list-for-job-club",
+          path: "/modules/Intervention/view-list-for-job-club",
           query: { pid: this.Id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ListofEtp") {
