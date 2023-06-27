@@ -622,6 +622,8 @@
               diagonisislistadditional: [],
               locationlist: [],
               titlelist: [],
+              arraySet: [],
+              selectJobList: [],
               currentdate: "",
               Id: 0,
               interest_to_work: "",
@@ -670,6 +672,7 @@
               additional_code_id: 0,
               additional_sub_code_id: [],
               additional_diagnosis: [],
+              selectedServiceId: 0,
           };
       },
       beforeMount() {
@@ -798,6 +801,12 @@
                               Accept: "application/json",
                               "Content-Type": "application/json",
                           };
+
+                          if (this.category_services == 'assisstance'){
+                            this.selectedServiceId = this.services_id;
+                          }else if (this.category_services == 'external'){
+                            this.selectedServiceId = this.serviceid;
+                          };
                           const response = await this.$axios.post(
                               "job-interest-checklist/add", {
                                   added_by: this.userdetails.user.id,
@@ -830,7 +839,7 @@
                                   location_services: this.location_services_id,
                                   type_diagnosis_id: this.type_diagnosis_id,
                                   category_services: this.category_services,
-                                  services_id: this.services_id,
+                                  services_id: this.selectedServiceId,
                                   code_id: this.code_id,
                                   complexity_of_services: this.complexity_services_id,
                                   outcome: this.outcome_id,
@@ -971,12 +980,36 @@
                           if (!this.outcome_id) {
                               this.errorList.push("Outcome is required");
                           }
+                          if (!this.interest_to_work) {
+                              this.errorList.push("Please agree to '1. Do you have interest to work?'");
+                          }
+                          if (!this.agree_if_mentari_find_job_for_you) {
+                            this.errorList.push("Please agree to '2. Do you agree if MENTARI find a job for you?'")
+                          }
+                          this.selectJobList = [this.clerk_job_interester,this.factory_worker_job_interested,this.cleaner_job_interested,this.security_guard_job_interested,this.laundry_worker_job_interested,this.car_wash_worker_job,this.kitchen_helper_job,this.waiter_job_interested,this.chef_job_interested,this.others_job_specify];
+                          this.arraySet = this.selectJobList.filter(function(value){
+                            return value != 0;
+                          });
+                          if (!this.arraySet.length){
+                            this.errorList.push("Please tick which job is interested at least 1.")
+                          }
+                          if (!this.note){
+                            this.errorList.push("Note is required");
+                          }
+                          if (!this.planning){
+                            this.errorList.push("Planning is required");
+                          }
+                          if (!this.patient_consent_interested){
+                            this.errorList.push("Please agree to 'I am interested to join this supported employment program'")
+                          }
                           if (
                               this.location_services_id &&
                               this.type_diagnosis_id &&
                               this.category_services &&
                               this.complexity_services_id &&
-                              this.outcome_id &&
+                              this.outcome_id && this.interest_to_work &&
+                              this.agree_if_mentari_find_job_for_you && this.patient_consent_interested &&
+                              this.arraySet && this.note && this.planning &&
                               this.validate
                           ) {
                               this.loader = true;
@@ -984,6 +1017,12 @@
                                   Authorization: "Bearer " + this.userdetails.access_token,
                                   Accept: "application/json",
                                   "Content-Type": "application/json",
+                              };
+
+                              if (this.category_services == 'assisstance'){
+                                this.selectedServiceId = this.services_id;
+                              }else if (this.category_services == 'external'){
+                                this.selectedServiceId = this.serviceid;
                               };
                               const response = await this.$axios.post(
                                   "job-interest-checklist/add", {
@@ -1017,7 +1056,7 @@
                                       location_services: this.location_services_id,
                                       type_diagnosis_id: this.type_diagnosis_id,
                                       category_services: this.category_services,
-                                      services_id: this.services_id,
+                                      services_id: this.selectedServiceId,
                                       code_id: this.code_id,
                                       complexity_of_services: this.complexity_services_id,
                                       outcome: this.outcome_id,
@@ -1258,6 +1297,7 @@
               this.outcome_id = 0;
               this.medication_des = "";
               this.services_id = 0;
+              this.serviceid = 0;
           },
           GoBack() {
               if (this.type == 'view') {
@@ -1377,8 +1417,7 @@
                       response.data.Data[0].patient_consent_interested;
                   this.location_services_id = response.data.Data[0].location_services;
                   this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
-                  this.category_services = response.data.Data[0].category_services;
-                  this.services_id = response.data.Data[0].services_id;
+                  this.category_services = response.data.Data[0].category_services
                   this.code_id = response.data.Data[0].code_id;
                   this.additional_code_id = response.data.Data[0].additional_code_id;
                   this.complexity_services_id =
@@ -1440,10 +1479,14 @@
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions3"]').trigger('click');
                     });
+
+                    this.serviceid = response.data.Data[0].services_id;
                 }else{
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions"]').trigger('click');
                     });
+
+                    this.services_id = response.data.Data[0].services_id;
                 }
               } else {
                   this.$swal.fire({
