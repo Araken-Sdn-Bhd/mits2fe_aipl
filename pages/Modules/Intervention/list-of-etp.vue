@@ -300,9 +300,7 @@
                             </p>
                             <br><br>
                             <div class="d-flex">
-                                <button @click="GoBack" class="btn btn-primary btn-text">
-                                    <i class="fa fa-arrow-alt-to-left"></i> Back
-                                </button>
+                                <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
                                 <div class="btn-right" v-if="!pid">
                                     <button type="submit" class="btn btn-warning btn-text ml-auto">
                                         <i class="fa fa-save"></i> Save
