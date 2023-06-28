@@ -234,7 +234,6 @@
                           </div>
                           <p class="title-th">4. Previous job?<small style="color:red">*</small> </p>
                           <div class="notes table-responsive">
-
                               <table class="th-auto th-bg input-width" id="job" v-if="!pid">
                                   <thead>
                                       <tr>
@@ -264,7 +263,7 @@
                               </table>
                           </div>
                           <div class="notes table-responsive">
-                              <table class="th-auto th-bg input-width" id="job1" v-if="pid">
+                              <table class="th-auto th-bg input-width" id="job" v-if="pid">
                                   <thead>
                                       <tr>
                                           <th>No.</th>
@@ -273,9 +272,9 @@
                                           <th colspan="2">REASON FOR TERMINATION/RESIGN</th>
                                       </tr>
                                   </thead>
-                                  <tbody class="optionBox1">
-                                      <tr class="block1" v-for="(job1, index) in jobs" :key="index">
-                                          <td>1</td>
+                                  <tbody class="optionBox">
+                                      <tr class="block" v-for="(job1, index) in jobs" :key="index">
+                                          <td>1 <input type="text" class="id" v-show="false" v-model="job1.id"/></td>
                                           <td>
                                               <input type="text" class="form-control job" name="" v-model="job1.type_of_job" />
 
@@ -789,6 +788,7 @@
                       var jobs = [];
                       $("table#job > tbody > tr").each(function () {
                           var obj = {};
+                          obj.id = $('td input[type="text"].id',this).val();
                           obj.job = $('td input[type="text"].job', this).val();
                           obj.duration = $('td input[type="text"].duration', this).val();
                           obj.reason = $('td input[type="text"].reason', this).val();
@@ -933,6 +933,7 @@
                       var jobs = [];
                       $("table#job > tbody > tr").each(function () {
                           var obj = {};
+                          obj.id = $('td input[type="text"].id',this).val();
                           obj.job = $('td input[type="text"].job', this).val();
                           obj.duration = $('td input[type="text"].duration', this).val();
                           obj.reason = $('td input[type="text"].reason', this).val();
