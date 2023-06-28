@@ -1496,6 +1496,7 @@
               additional_sub_code_id: [],
               additional_diagnosis: [],
               codelistadditional: [],
+              selectedServiceId: 0,
           };
       },
       beforeMount() {
@@ -1850,6 +1851,12 @@
                               Accept: "application/json",
                               "Content-Type": "application/json",
                           };
+
+                          if (this.category_services == 'assisstance'){
+                            this.selectedServiceId = this.services_id;
+                          }else if (this.category_services == 'external'){
+                            this.selectedServiceId = this.serviceid;
+                          };
                           const response = await this.$axios.post(
                               "work-analysis/add", {
                                   added_by: this.userdetails.user.id,
@@ -1886,7 +1893,7 @@
                                   location_services: this.location_services_id,
                                   type_diagnosis_id: this.type_diagnosis_id,
                                   category_services: this.category_services,
-                                  services_id: this.services_id,
+                                  services_id: this.selectedServiceId,
                                   code_id: this.code_id,
                                   complexity_services: this.complexity_services_id,
                                   outcome: this.outcome_id,
@@ -2338,6 +2345,12 @@
                                   Accept: "application/json",
                                   "Content-Type": "application/json",
                               };
+
+                              if (this.category_services == 'assisstance'){
+                                this.selectedServiceId = this.services_id;
+                              }else if (this.category_services == 'external'){
+                                this.selectedServiceId = this.serviceid;
+                              };
                               const response = await this.$axios.post(
                                   "work-analysis/add", {
                                       added_by: this.userdetails.user.id,
@@ -2374,7 +2387,7 @@
                                       location_services: this.location_services_id,
                                       type_diagnosis_id: this.type_diagnosis_id,
                                       category_services: this.category_services,
-                                      services_id: this.services_id,
+                                      services_id: this.selectedServiceId,
                                       code_id: this.code_id,
                                       complexity_services: this.complexity_services_id,
                                       outcome: this.outcome_id,
