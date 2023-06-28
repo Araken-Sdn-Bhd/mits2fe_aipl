@@ -153,7 +153,7 @@
                           </div>
                           <!-- row -->
 
-                          <div class="wage hide">
+                          <div v-show="this.wage_change_occur == 'yes'" class="wage">
                               <div class="row">
                                   <div class="col-sm-3">
                                       <div class="mb-3">

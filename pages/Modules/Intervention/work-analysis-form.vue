@@ -1089,7 +1089,6 @@
                                           </div>
                                       </td>
                                   </tr>
-
                               </tbody>
                           </table>
 
@@ -1820,16 +1819,14 @@
                                   }
                               }
                               obj.comments =
-                                  $('td input[type="text"].onecomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].twocomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].threecomment', this).val(); +
-                              "," + $('td input[type="text"].fourcomment', this).val(); +
-                              "," + $('td input[type="text"].fivecomment', this).val(); +
-                              "," + $('td input[type="text"].sixcomment', this).val(); +
-                              "," + $('td input[type="text"].sevencomment', this).val(); +
-                              "," + $('td input[type="text"].eightcomment', this).val();
+                              $('td input[type="text"].onecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].twocomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].threecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].fourcomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].fivecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].sixcomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].sevencomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].eightcomment', this).val() ?? ""
                           }
                           jobSPECIFICATION.push(obj);
                       });

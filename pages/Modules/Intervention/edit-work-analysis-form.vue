@@ -153,7 +153,7 @@
                           </div>
                           <!-- row -->
 
-                          <div class="wage hide">
+                          <div v-show="this.wage_change_occur == 'yes'" class="wage">
                               <div class="row">
                                   <div class="col-sm-3">
                                       <div class="mb-3">
@@ -1488,6 +1488,8 @@
               additional_diagnosis: [],
               codelistadditional: [],
               selectedServiceId: 0,
+              array: [],
+              datacomment: "",
           };
       },
       beforeMount() {
@@ -1847,16 +1849,14 @@
                                   }
                               }
                               obj.comments =
-                                  $('td input[type="text"].onecomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].twocomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].threecomment', this).val(); +
-                              "," + $('td input[type="text"].fourcomment', this).val(); +
-                              "," + $('td input[type="text"].fivecomment', this).val(); +
-                              "," + $('td input[type="text"].sixcomment', this).val(); +
-                              "," + $('td input[type="text"].sevencomment', this).val(); +
-                              "," + $('td input[type="text"].eightcomment', this).val();
+                              $('td input[type="text"].onecomment', this).val() +
+                              "," + $('td input[type="text"].twocomment', this).val() +
+                              "," + $('td input[type="text"].threecomment', this).val() +
+                              "," + $('td input[type="text"].fourcomment', this).val() +
+                              "," + $('td input[type="text"].fivecomment', this).val() +
+                              "," + $('td input[type="text"].sixcomment', this).val() +
+                              "," + $('td input[type="text"].sevencomment', this).val() +
+                              "," + $('td input[type="text"].eightcomment', this).val()
                           }
                           jobSPECIFICATION.push(obj);
                       });
