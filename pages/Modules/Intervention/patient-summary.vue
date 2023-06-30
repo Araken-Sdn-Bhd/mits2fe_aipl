@@ -44,7 +44,7 @@
                             <td>{{ hst.time }}</td>
                             <td>{{ hst.name }}</td>
                             <td>
-                              <a v-if="hst.status != 0" style="cursor:pointer;" @click="OnHistoryview(hst, view)"
+                              <a v-if="hst.status != 0" style="cursor:pointer;" @click="OnHistoryview(hst, view, hst.id)"
                                 class="view"><i class="fas fa-eye"></i></a>
                               <a v-if="hst.status == 0" style="cursor:pointer;" @click="OnHistoryEdit(hst, edit)"
                                 class="edit"><i class="fas fa-edit"></i></a>
@@ -744,7 +744,8 @@ export default {
           console.error(err);
         });
     },
-    OnHistoryview(data, val) {
+    OnHistoryview(data, val,recID) //data.id is not detected in some of page so that why recID is added.
+    {
       if (data.type == "PsychiatryClerkingNote") {
         this.$router.push({
           path: "/modules/Intervention/view-psychiatry-clerking-note",
@@ -885,12 +886,12 @@ export default {
       } else if (data.type == "ListofJobClub") {
         this.$router.push({
           path: "/modules/Intervention/view-list-for-job-club",
-          query: { pid: this.Id, type: val, id: this.Id, appId: this.appId },
+          query: { pid: recID, type: data.Id, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ListofEtp") {
         this.$router.push({
           path: "/modules/Intervention/view-list-of-etp",
-          query: { pid: this.Id, type: val, id: this.Id, appId: this.appId },
+          query: { pid: recID, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "ListofJobSearch") {
         this.$router.push({

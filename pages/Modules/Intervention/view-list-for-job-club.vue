@@ -166,20 +166,20 @@
                           <div class="col-md-8 mb-3">
                           <div><label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label></div>
                           <div>
-                          <div class="mt-2 align-items-flex-start">
-                            <select
-                              class="form-select multiselect" multiple="multiple" disabled
-                              id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
-
-                              <option value="0">Select code</option>
-                              <option
-                                v-for="catcode in icdcatcodelist"
-                                v-bind:key="catcode.id"
-                                v-bind:value="catcode.id">
-                                {{ catcode.icd_code }}{{catcode.icd_name}}
-                              </option>
-                            </select>
-                          </div>
+                            <div class="mt-2 align-items-flex-start">
+                                <select
+                                  class="form-select multiselect" multiple="multiple"
+                                  id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
+    
+                                  <option value="0">Select code</option>
+                                  <option
+                                    v-for="catcode in icdcatcodelist"
+                                    v-bind:key="catcode.id"
+                                    v-bind:value="catcode.id">
+                                    {{ catcode.icd_code }}{{catcode.icd_name}}
+                                  </option>
+                                </select>
+                              </div>
                           </div>
                           </div>
 
@@ -369,15 +369,9 @@ export default {
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-        $(document).ready(function () {
-            $('.form-accordion input[type="radio"]').click(function () {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".services").not(targetBox).hide();
-                $(targetBox).show();
-            });
-        });
+        
         let urlParams = new URLSearchParams(window.location.search);
+       
         this.Id = urlParams.get("id");
         this.appId = urlParams.get("appId");
         this.GetList();
@@ -386,6 +380,15 @@ export default {
         this.type = urlParams1.get("type");
         this.GetPatientdetails();
         this.getdetails();
+
+        $(document).ready(function () {
+            $('.form-accordion input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".services").not(targetBox).hide();
+                $(targetBox).show();
+            });
+        });
       
     },
     mounted() {
@@ -587,6 +590,7 @@ export default {
                 }
             );
             if (response.data.code == 200) {
+                
                 this.Id = response.data.Data[0].patient_id;
                 this.job_club = response.data.Data[0].job_club;
                 this.location_services_id = response.data.Data[0].location_services;
@@ -602,15 +606,17 @@ export default {
                     .trigger("change");
                     this.code_id = response.data.Data[0].code_id;
                     this.additional_sub_code_id = response.data.Data[0].sub_code_id.split(",");
-                            $("#sub_code_id")
-                            .val( this.additional_sub_code_id)
-                            .trigger("change");
+                     $("#sub_code_id")
+                    .val( this.additional_sub_code_id)
+                    .trigger("change");
+                   
                 this.add_code_id = response.data.Data[0].add_code_id;
                 this.additional_sub_code_id2 = response.data.Data[0].add_sub_code_id.split(",");
                         $("#add_sub_code_id")
                   .val( this.additional_sub_code_id2)
                   .trigger("change");
-                   
+
+        
                
                 this.GetList();
                 const response2 = await this.$axios.post(
