@@ -739,9 +739,9 @@ export default {
                         if (!this.outcome_id) {
                             this.errorList.push("Outcome is required");
                         }
-                        if (!this.medication_des) {
-                            this.errorList.push("Medication is required");
-                        }
+                        // if (!this.medication_des) {
+                        //     this.errorList.push("Medication is required");
+                        // }
                         if (
                             this.name &&
                             this.mrn &&
@@ -756,9 +756,10 @@ export default {
                             this.category_services &&
                             this.complexity_services_id &&
                             this.outcome_id &&
-                            this.medication_des &&
                             this.validate
-                        ) {
+                            // this.medication_des
+                        )
+                        {
                             this.loader = true;
                             const headers = {
                                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -766,35 +767,35 @@ export default {
                                 "Content-Type": "application/json",
                             };
                             const response = await this.$axios.post(
-                                "etp-progress/add", {
-                                    patient_mrn_id: this.Id,
-                                    added_by: this.userdetails.user.id,
-                                    name: this.name,
-                                    mrn: this.mrn,
-                                    date: this.date,
-                                    time: this.time,
-                                    staff_name: this.staff_name,
-                                    work_readiness: this.work_readiness,
-                                    progress_note: this.progress_note,
-                                    management_plan: this.management_plan,
-                                    location_service: this.location_services_id,
-                                    diagnosis_type: this.type_diagnosis_id,
-                                    service_category: this.category_services,
-                                    services_id: this.services_id,
-                                    code_id: this.code_id,
-                                    sub_code_id: JSON.stringify(subcode),
-                                    additional_diagnosis: JSON.stringify(additionalbox),
-                                    additional_subcode: JSON.stringify(addsubcode),
-                                    additional_code_id: this.additional_code_id,
-                                    complexity_service: this.complexity_services_id,
-                                    outcome: this.outcome_id,
-                                    medication: this.medication_des,
-                                    status: "1",
-                                    appId: this.appId,
-                                }, {
-                                    headers
-                                }
-                            );
+                            "etp-progress/add", {
+                                patient_mrn_id: this.Id,
+                                added_by: this.userdetails.user.id,
+                                name: this.name,
+                                mrn: this.mrn,
+                                date: this.date,
+                                time: this.time,
+                                staff_name: this.staff_name,
+                                work_readiness: this.work_readiness,
+                                progress_note: this.progress_note,
+                                management_plan: this.management_plan,
+                                location_service: this.location_services_id,
+                                diagnosis_type: this.type_diagnosis_id,
+                                service_category: this.category_services,
+                                services_id: this.services_id,
+                                code_id: this.code_id,
+                                sub_code_id: JSON.stringify(subcode),
+                                additional_diagnosis: JSON.stringify(additionalbox),
+                                additional_subcode: JSON.stringify(addsubcode),
+                                additional_code_id: this.additional_code_id,
+                                complexity_service: this.complexity_services_id,
+                                outcome: this.outcome_id,
+                                medication: this.medication_des,
+                                status: "1",
+                                appId: this.appId,
+                            }, {
+                                headers
+                            }
+                        );
                             console.log("response", response.data);
                             if (response.data.code == 200) {
                                 this.loader = false;

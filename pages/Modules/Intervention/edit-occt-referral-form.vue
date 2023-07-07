@@ -645,7 +645,7 @@
                       <!-- close-row -->
                       <div class="row mb-3">
                         <label class="col-sm-4 col-form-label"
-                          >Category Of Services<small style="color:red">*</small> 
+                          >Category Of Services<small style="color:red">*</small>
                         </label>
                         <div class="col-sm-8">
                           <div class="form-check form-check-inline">
@@ -722,9 +722,10 @@
                           </div>
                           <div class="col-md-6 mb-3">
                             <label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label>
-                            <select id="subcodeicd" 
-                             class="form-select multiselectadditional" 
-                             v-model="sub_code_id" 
+                            <div class="mt-2 align-items-flex-start">
+                            <select id="subcodeicd"
+                             class="form-select multiselectadditional"
+                             v-model="sub_code_id"
                              multiple="multiple">
                               <option value="0">Select sub code</option>
                               <option
@@ -737,6 +738,7 @@
           </option>
                             </select>
                           </div>
+                          </div>
                         </div>
                         <div class="row">
                           <div class="col-md-6 mb-">
@@ -746,13 +748,13 @@
                                         <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                             {{ type.icd_category_code }} {{type.icd_category_name}}
                                                  </option>
-                                                </select>              
+                                                </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label  class="form-label">Additional ICD 9 SUB CODE</label>
                                       <div class="mt-2 align-items-flex-start">
                                         <select id="additionalsubcodeicd" v-model="additional_sub_code_id" style="width:100%" class="form-select multiselectadditionalsubcode"  multiple="multiple">
-                                        <option value="0">Select additional sub code</option>                                                           
+                                        <option value="0">Select additional sub code</option>
                                         <option v-for="catcode in icdcatcodelistadditional" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                         {{ catcode.icd_code }}
                                         {{catcode.icd_name}}
@@ -760,7 +762,7 @@
                                         </select>
                                         </div>
                                       </div>
-                                  </div>   
+                                  </div>
                       </div>
                       <!-- 02 -->
                       <div class="external services hide mb-3">
@@ -938,7 +940,7 @@ beforeMount() {
   this.pid = urlParams1.get("pid");
   this.type = urlParams1.get("type");
     this.getdetails();
-  
+
   this.referral_name = this.userdetails.user.name;
   this.referral_designation = this.userdetails.designation.section_value;
 },
@@ -1035,7 +1037,7 @@ data() {
   };
 },
 mounted() {
-    
+
     $(document).ready(function () {
     $(".multiselect").select2({
         placeholder: "Select Additional Diagnosis",
@@ -1179,7 +1181,7 @@ methods: {
             appId: this.appId,
             status: "0",
             additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
-            additional_code_id: this.additional_code_id, 
+            additional_code_id: this.additional_code_id,
             sub_code_id: JSON.stringify(subcodeicd),
             additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
           },
@@ -1435,7 +1437,7 @@ methods: {
               appId: this.appId,
               status: "1",
               additional_diagnosis: JSON.stringify(additionalboxdiagnosis),
-              additional_code_id: this.additional_code_id, 
+              additional_code_id: this.additional_code_id,
               sub_code_id: JSON.stringify(subcodeicd),
               additional_sub_code_id: JSON.stringify(additionalsubcodeicd),
             },
@@ -1595,14 +1597,14 @@ methods: {
             const response = await this.$axios.post(
                 "diagnosis/getIcd9subcodeList", {
                     icd_category_code: event.target.value,
-                    
+
                 }, {
                     headers
                 }
             );
             if (response.data.code == 200 || response.data.code == "200") {
                 this.icdcatcodelistadditional = response.data.list;
-                
+
             } else {
                 this.icdcatcodelistadditional  = [];
             }
@@ -1686,7 +1688,7 @@ methods: {
         if (ele["Cognitive And Perceptual Assessment"]==true) {
           this.cognitiveassessment = true;
         }
-        
+
         if (ele["Child Development"]==true) {
           this.childevelopment = true;
         }
@@ -1846,18 +1848,18 @@ methods: {
       $("#additionalboxdiagnosis")
       .val(this.additional_diagnosis)
       .trigger("change");
-    
+
       this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
       $("#subcodeicd")
       .val(this.sub_code_id)
       .trigger("change");
 
-                    
+
       this.additional_sub_code_id = response.data.Data[0].add_sub_code_id.split(",");
       $("#additionalsubcodeicd")
       .val(this.additional_sub_code_id)
       .trigger("change");
-      
+
       const response2 = await this.$axios.post(
         "diagnosis/getIcd9subcodeList",
         { icd_category_code: this.code_id },
