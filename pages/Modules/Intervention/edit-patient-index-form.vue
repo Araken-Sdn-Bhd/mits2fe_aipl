@@ -766,7 +766,6 @@
                                           <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                               <div class="col-sm-8">
                                                   <select id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
-                                                      <option value="0">Please Select</option>
                                                       <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                           {{ catcode.icd_code }} {{catcode.icd_name}}
                                                       </option>
@@ -825,7 +824,6 @@
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
                                                               <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -850,7 +848,6 @@
                                                       <div>
                                                           <div class="mt-2 align-items-flex-start">
                                                               <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -864,7 +861,7 @@
                                           <!-- 02 -->
                                           <div class="external services hide mb-3">
                                               <div class="row">
-                                                  <div class="col-md-6 mb-3">
+                                                <div class="col-md-6 mb-3">
                                                       <label class="form-label">Services<small style="color:red">*</small></label>
                                                       <select class="form-select" v-model="serviceid">
                                                           <option value="0">Select Service</option>
@@ -1309,6 +1306,7 @@
                                   type_of_diagnosis: this.type_diagnosis_id,
                                   category_of_services: this.category_services,
                                   services_id: this.services_id,
+                                  serviceid: this.services_id,
                                   added_by: this.userdetails.user.id,
                                   code_id: this.code_id,
                                   sub_code_id: JSON.stringify(subcode),
@@ -1621,6 +1619,7 @@
                                       type_of_diagnosis: this.type_diagnosis_id,
                                       category_of_services: this.category_services,
                                       services_id: this.services_id,
+                                      serviceid: this.services_id,
                                       added_by: this.userdetails.user.id,
                                       code_id: this.code_id,
                                       sub_code_id: JSON.stringify(subcode),
@@ -1826,6 +1825,7 @@
                   this.type_diagnosis_id = response.data.Data[0].type_of_diagnosis;
                   this.category_services = response.data.Data[0].category_of_services;
                   this.services_id = response.data.Data[0].services_id;
+                  this.serviceid = response.data.Data[0].serviceid;
                   this.code_id = response.data.Data[0].code_id;
                   this.sub_code_id = response.data.Data[0].sub_code_id.split(",");
                   $("#subcode")
@@ -1877,6 +1877,15 @@
                   } else {
                       this.add_icdcatcodelist = [];
                   }
+
+                  const response4 = await this.$axios.get("diagnosis/getIcd10codeList", {
+                  headers,
+              });
+              if (response4.data.code == 200 || response4.data.code == "200") {
+                  this.diagonisislist = response4.data.list;
+              } else {
+                  this.diagonisislist = [];
+              }
 
                   if(this.category_services=='clinical-work'){
                     $(document).ready(function () {
