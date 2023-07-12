@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="post" @submit.prevent="OnSubmit">
+                        <form>
                             <div class="table-responsive">
                                 <table class="job-search-table" id="companydetail">
                                     <thead>
@@ -314,11 +314,9 @@
                                 </ul>
                             </p>
                             <br><br>
-                            <div class="d-flex">
-                                <button @click="GoBack" class="btn btn-primary btn-text">
-                                    <i class="fa fa-arrow-alt-to-left"></i> Back
-                                </button>
-                                
+                            <div class="d-flex three-btn">
+                            <a @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back</a>
+
                             </div>
                         </form>
                     </div>
@@ -666,8 +664,8 @@ export default {
                     });
                 }
         },
-        GoBack() {
-          if (this.type == 'view') {
+        GoBack() {if(this.appId){
+      if (this.type == 'view') {
                 this.$router.go(-1);
             } else {
                 this.$router.push({
@@ -678,7 +676,14 @@ export default {
                     },
                 });
             }
-        },
+    }else{
+      this.$router.push({
+        path: "/modules/Intervention/patient-list",
+      });
+    }
+
+
+    }
     },
 };
 </script>

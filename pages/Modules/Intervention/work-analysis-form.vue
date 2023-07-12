@@ -1089,7 +1089,6 @@
                                           </div>
                                       </td>
                                   </tr>
-
                               </tbody>
                           </table>
 
@@ -1496,6 +1495,7 @@
               additional_sub_code_id: [],
               additional_diagnosis: [],
               codelistadditional: [],
+              selectedServiceId: 0,
           };
       },
       beforeMount() {
@@ -1819,16 +1819,14 @@
                                   }
                               }
                               obj.comments =
-                                  $('td input[type="text"].onecomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].twocomment', this).val() +
-                                  "," +
-                                  $('td input[type="text"].threecomment', this).val(); +
-                              "," + $('td input[type="text"].fourcomment', this).val(); +
-                              "," + $('td input[type="text"].fivecomment', this).val(); +
-                              "," + $('td input[type="text"].sixcomment', this).val(); +
-                              "," + $('td input[type="text"].sevencomment', this).val(); +
-                              "," + $('td input[type="text"].eightcomment', this).val();
+                              $('td input[type="text"].onecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].twocomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].threecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].fourcomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].fivecomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].sixcomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].sevencomment', this).val() ?? "" +
+                              "," + $('td input[type="text"].eightcomment', this).val() ?? ""
                           }
                           jobSPECIFICATION.push(obj);
                       });
@@ -1849,6 +1847,12 @@
                               Authorization: "Bearer " + this.userdetails.access_token,
                               Accept: "application/json",
                               "Content-Type": "application/json",
+                          };
+
+                          if (this.category_services == 'assisstance'){
+                            this.selectedServiceId = this.services_id;
+                          }else if (this.category_services == 'external'){
+                            this.selectedServiceId = this.serviceid;
                           };
                           const response = await this.$axios.post(
                               "work-analysis/add", {
@@ -1886,7 +1890,7 @@
                                   location_services: this.location_services_id,
                                   type_diagnosis_id: this.type_diagnosis_id,
                                   category_services: this.category_services,
-                                  services_id: this.services_id,
+                                  services_id: this.selectedServiceId,
                                   code_id: this.code_id,
                                   complexity_services: this.complexity_services_id,
                                   outcome: this.outcome_id,
@@ -2338,6 +2342,12 @@
                                   Accept: "application/json",
                                   "Content-Type": "application/json",
                               };
+
+                              if (this.category_services == 'assisstance'){
+                                this.selectedServiceId = this.services_id;
+                              }else if (this.category_services == 'external'){
+                                this.selectedServiceId = this.serviceid;
+                              };
                               const response = await this.$axios.post(
                                   "work-analysis/add", {
                                       added_by: this.userdetails.user.id,
@@ -2374,7 +2384,7 @@
                                       location_services: this.location_services_id,
                                       type_diagnosis_id: this.type_diagnosis_id,
                                       category_services: this.category_services,
-                                      services_id: this.services_id,
+                                      services_id: this.selectedServiceId,
                                       code_id: this.code_id,
                                       complexity_services: this.complexity_services_id,
                                       outcome: this.outcome_id,

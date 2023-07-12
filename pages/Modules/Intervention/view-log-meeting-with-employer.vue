@@ -15,13 +15,13 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Date<small style="color:red">*</small> </label>
-                                          <input type="date" class="form-control" v-model="date" />
+                                          <input type="date" class="form-control" v-model="date" disabled />
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Employer Name<small style="color:red">*</small> </label>
-                                          <input type="text" class="form-control" v-model="employee_name" />
+                                          <input type="text" class="form-control" v-model="employee_name" disabled />
                                       </div>
                                   </div>
                               </div>
@@ -31,13 +31,13 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Company name<small style="color:red">*</small> </label>
-                                          <input type="text" class="form-control" v-model="company_name" />
+                                          <input type="text" class="form-control" v-model="company_name" disabled />
                                       </div>
                                   </div>
                                   <div class="col-sm-12">
                                       <div class="mb-3">
                                           <label class="form-label">Purpose of Meeting<small style="color:red">*</small> </label>
-                                          <textarea class="form-control textarea" rows="5" v-model="purpose_of_meeting"></textarea>
+                                          <textarea class="form-control textarea" rows="5" v-model="purpose_of_meeting" disabled></textarea>
                                       </div>
                                   </div>
                               </div>
@@ -47,13 +47,13 @@
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">Start Time of Discussion<small style="color:red">*</small> </label>
-                                          <input type="time" class="form-control" v-model="discussion_start_time" />
+                                          <input type="time" class="form-control" v-model="discussion_start_time" disabled/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="mb-3">
                                           <label class="form-label">End Time of Discussion<small style="color:red">*</small> </label>
-                                          <input type="time" class="form-control" v-model="discussion_end_time" />
+                                          <input type="time" class="form-control" v-model="discussion_end_time" disabled/>
                                       </div>
                                   </div>
                               </div>
@@ -81,7 +81,7 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="location_services_id">
+                                                        <select class="form-select" v-model="location_services_id" disabled>
                                                             <option value="0">
                                                                 Select location of services
                                                             </option>
@@ -95,7 +95,7 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
+                                                        <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()" disabled>
                                                             <option value="0">Select Diagnosis</option>
                                                             <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                 {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -109,7 +109,7 @@
                                                       <div class="col-sm-8 align-items-flex-start" >
                                                           <select
                                                           id="additionalbox" v-model="additional_diagnosis"
-                                                          class="form-select multiselect" multiple="multiple">
+                                                          class="form-select multiselect" multiple="multiple" disabled>
                                                               <option value="0">Please Select</option><option
                                                               v-for="catcode in diagonisislist"
                                                               v-bind:key="catcode.id"
@@ -126,18 +126,18 @@
                                                     <div class="col-lg-8 col-sm-12">
                                                         <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                                            value="assisstance" v-model="category_services" />
+                                                            value="assisstance" v-model="category_services" disabled />
                                                         <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2"
-                                                            value="clinical-work" v-model="category_services" />
+                                                            value="clinical-work" v-model="category_services" disabled />
                                                         <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                         </label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3"
-                                                            value="external" v-model="category_services" />
+                                                            value="external" v-model="category_services" disabled />
                                                         <label class="form-check-label" for="inlineRadio3">External</label>
                                                         </div>
                                                     </div>
@@ -148,7 +148,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small></label>
-                                                            <select class="form-select" v-model="services_id">
+                                                            <select class="form-select" v-model="services_id" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -165,7 +165,7 @@
                                                             <select
                                                             class="form-select"
                                                             v-model="code_id"
-                                                            @change="onCategorycodebind($event)" >
+                                                            @change="onCategorycodebind($event)" disabled >
                                                             <option value="0">Select code</option>
                                                             <option
                                                                 v-for="type in codelist"
@@ -182,7 +182,7 @@
                                                         <div class="mt-2 align-items-flex-start">
                                                             <select
                                                             class="form-select multiselect" multiple="multiple"
-                                                            id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
+                                                            id="sub_code_id" v-model="additional_sub_code_id" style="width:100%" disabled>
 
                                                             <option value="0">Select code</option>
                                                             <option
@@ -207,7 +207,7 @@
                                                             <select
                                                             class="form-select"
                                                             v-model="add_code_id"
-                                                            @change="onCategoryaddcodebind($event)"
+                                                            @change="onCategoryaddcodebind($event)" disabled
                                                             >
                                                             <option value="0">Select code</option>
                                                             <option
@@ -225,7 +225,7 @@
                                                         <div class="mt-2 align-items-flex-start">
                                                             <select
                                                             class="form-select multiselect" multiple="multiple"
-                                                            id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
+                                                            id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%" disabled>
 
                                                             <option value="0">Select code</option>
                                                             <option
@@ -247,7 +247,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">Services<small style="color:red">*</small></label>
-                                                            <select class="form-select" v-model="serviceid">
+                                                            <select class="form-select" v-model="serviceid" disabled>
                                                                 <option value="0">Select Service</option>
                                                                 <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                     {{ slt.section_value }}
@@ -261,7 +261,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
-                                                        <select class="form-select" v-model="complexity_services_id">
+                                                        <select class="form-select" v-model="complexity_services_id" disabled>
                                                             <option value="0">
                                                                 Select Complexity Of Service
                                                             </option>
@@ -272,7 +272,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Outcome<small style="color:red">*</small></label>
-                                                        <select class="form-select" v-model="outcome_id">
+                                                        <select class="form-select" v-model="outcome_id" disabled>
                                                             <option value="0">Select outcome</option>
                                                             <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                                 {{ out.section_value }}
@@ -295,7 +295,7 @@
                                             <div class="accordion-body">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label">Medication</label>
-                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                    <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -316,15 +316,7 @@
                                   <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                   </button>
   
-                                  <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                      <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
-                                          <i class="fa fa-save"></i> Save as draft
-                                      </button>
-  
-                                      <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
-                                          <i class="fa fa-paper-plane"></i> Submit
-                                      </button>
-                                  </div>
+                                  
                                   </div>
                             </div>
                         </div>
@@ -420,7 +412,6 @@
   
             let urlParams1 = new URLSearchParams(window.location.search);
             this.pid = urlParams1.get("pid");
-           
             this.type = urlParams1.get("type");
         
             this.getdetails();
@@ -513,8 +504,8 @@
                                   outcome: this.outcome_id,
                                   medication_des: this.medication_des,
                                   patient_id: this.Id,
+                                  
                                   appId: this.appId,
-                                  id:this.pid,
                                   status: "0",
                               }, {
                                   headers
@@ -689,7 +680,7 @@
                                   outcome: this.outcome_id,
                                   medication_des: this.medication_des,
                                   patient_id: this.Id,
-                                  id:this.pid,
+                                  
                                   appId: this.appId,
                                       status: "1",
                                   }, {
