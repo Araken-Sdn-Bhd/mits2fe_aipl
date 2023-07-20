@@ -425,7 +425,7 @@ export default {
       }
     },
     async reload(){
-      
+
       this.GetActiveList();
     },
     async onAddserviceregistration() {
@@ -690,6 +690,7 @@ export default {
                   hospital_id: this.dhospitalName,
                   branch_id: this.dbranceName,
                   division_order: this.dservicedindex,
+                  status: this.status
                 },
                 { headers }
               );
