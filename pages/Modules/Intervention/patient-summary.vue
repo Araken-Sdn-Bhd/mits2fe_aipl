@@ -870,7 +870,7 @@ export default {
         });
       } else if (data.type == "TriageForm") {
         this.$router.push({
-          path: "/modules/Intervention/triage-form-triage",
+          path: "/modules/Intervention/view-triage-form",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
       } else if (data.type == "JobInterestCheckList") {
@@ -898,7 +898,7 @@ export default {
           path: "/modules/Intervention/view-list-of-job-search",
           query: { pid: data.id, type: val, id: this.Id, appId: this.appId },
         });
-   
+
       } else if (data.type == "LogMeetingWithEmployer") {
         this.$router.push({
           path: "/modules/Intervention/view-log-meeting-with-employer",
