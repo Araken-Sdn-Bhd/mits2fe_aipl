@@ -170,7 +170,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>3</span>Previous suicide attempts<small style="color:red">*</small> </label
+                        ><span>3</span>Previous suicide attempt<small style="color:red">*</small> </label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box1">
@@ -276,7 +276,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
                         ><span>6</span>Family history of psychiatric
-                        disorders<small style="color:red">*</small></label
+                        disorder<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box3">
@@ -357,7 +357,7 @@
                     <!-- row-close -->
                     <div class="row mb-3">
                       <label class="col-sm-5 col-form-label"
-                        ><span>8</span>Stressful life events or loss<small style="color:red">*</small></label
+                        ><span>8</span>Stressful life events<small style="color:red">*</small></label
                       >
                       <div class="col-sm-7">
                         <div class="form-check form-check-inline no-box5">
@@ -644,7 +644,7 @@
               <div class="card">
                 <div class="card-body steps-form-body">
                   <div class="text">
-                    <h4>The Self-Harm Act &amp; Suicidal Intent</h4>
+                    <h4>The Self-Harm Act &amp; Suicidal intent</h4>
                     <p>please fill the below form</p>
                   </div>
                   <!-- <form class="step-form accordion-form"> -->
@@ -660,7 +660,7 @@
                             aria-controls="collapseOne"
                           >
                           <div class="text-capitalize">
-                            Section A: Current Self-Harm Act
+                            Section A: Current <span class="text-lowercase">Self-Harm Act</span>
                             <small
                               >(within past 2 weeks from time of
                               presentation)</small
@@ -687,7 +687,7 @@
                               </div>
                               <div class="col-sm-4">
                                 <label class="form-label"
-                                  >Place of Occurrence<small style="color:red">*</small> </label
+                                  >Place of occurrence<small style="color:red">*</small> </label
                                 >
                                 <select class="form-select" @change="OnchangePlace($event)" v-model="place_id">
 
@@ -727,7 +727,7 @@
                             aria-expanded="false"
                             aria-controls="collapseTwo"
                           >
-                            <div class="text-capitalize">Section B: Method of Self-Harm</div>
+                            <div class="text-capitalize">Section B: Method <span class="text-lowercase">of Self-Harm</span></div>
                           </button>
                         </h2>
                         <div
@@ -752,7 +752,7 @@
                                     id="1" v-model="overdose" @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="1">
-                                    Overdose/Poisoning
+                                    Overdose/poisoning
                                   </label>
                                 </div>
                                 <!-- SHOW_DIV -->
@@ -783,7 +783,7 @@
                                     id="2" v-model="hanging"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="2">
-                                    Hanging/Strangulation/Suffocation
+                                    Hanging/suffocation/strangulation
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -795,7 +795,7 @@
                                     id="3" v-model="drowning"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="3">
-                                    Drowning/Submersion
+                                    Drowning/submersion
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -807,7 +807,7 @@
                                     id="4" v-model="firearmsorexplosives"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="4">
-                                    Firearms/Explosives
+                                    Firearms/explosives
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -821,7 +821,7 @@
                                     id="5"   v-model="fire_flames"  @click="onSectionB('val')"
                                   />
                                   <label class="form-check-label" for="5">
-                                    Smoke/Fire/Flames
+                                    Smoke/fire/flames
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -834,7 +834,7 @@
 
                                   />
                                   <label class="form-check-label" for="6">
-                                    Cutting/Piercing
+                                    Cutting/piercing
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -889,7 +889,7 @@
                             aria-expanded="false"
                             aria-controls="collapseThree"
                           >
-                            <div class="text-capitalize">Section C: How did Patient Get Idea about Method</div>
+                            <div class="text-capitalize">Section C: How <span class="text-lowercase">did patient get idea(s) about the method of self-harm?</span></div>
                           </button>
                         </h2>
                         <div
@@ -927,7 +927,7 @@
                                   />
                                   <label class="form-check-label" for="2.2">
                                     Internet (website, social media platform,
-                                    app, blogs, forum, video/photosharing)
+                                    app, blogs, forum, video/photosharing, etc.)
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -940,7 +940,7 @@
                                   />
                                   <label class="form-check-label" for="3.3">
                                     Printed media (newspaper, books, magazine,
-                                    etc)
+                                    etc.)
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -954,7 +954,7 @@
                                     id="5.5" v-model="broadcast" @click="onSectionC('val')"
                                   />
                                   <label class="form-check-label" for="5.5">
-                                    Broadcast media (television, radio)
+                                    Broadcast media (television, radio, etc.)
                                   </label>
                                 </div>
                                 <!-- checkbox -->
@@ -1009,7 +1009,7 @@
                             aria-expanded="false"
                             aria-controls="collapse4"
                           >
-                          <div class="text-capitalize">Section D: Suicidal Intent</div>
+                          <div class="text-capitalize">Section D: Suicidal <span class="text-lowercase">intent</span></div>
                           </button>
                         </h2>
                         <div
@@ -1202,7 +1202,7 @@
                             aria-expanded="false"
                             aria-controls="collapse5"
                           >
-                          <div class="text-capitalize">Section E: Level of Suicidal Intent</div>
+                          <div class="text-capitalize">Section E: Level <span class="text-lowercase">of Suicidal intent</span></div>
                           </button>
                         </h2>
                         <div
@@ -1333,15 +1333,14 @@
 
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
-                        >Level of Suicide Risk For Current Attempt<small style="color:red">*</small></label
+                        >Level of suicide risk for current attempt<small style="color:red">*</small></label
                       >
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="20%"><b>Risk Level</b></th>
-                            <th scope="col">
-                              <b>Based on Risk Factor/Protective Factor/Suicidal
-                              Intent</b>
+                            <th width="20%" class="text-capitalize"><b>Risk <span class="text-lowercase">level</span></b></th>
+                            <th scope="col" class="text-capitalize">
+                              <b>Based <span class="text-lowercase">on risk factors/protective factors/suicidal intent</span></b>
                             </th>
                           </tr>
                         </thead>
@@ -1464,7 +1463,7 @@
 
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Referral or Contact point<small style="color:red">*</small></label
+                        >Referral or contact point<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
                         <select
@@ -1497,7 +1496,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Mode of Arrival<small style="color:red">*</small></label
+                        >Mode of arrival<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
                         <select
@@ -1530,7 +1529,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >First psychiatry assessment after current
+                        >First psychiatric assessment after current
                         attempt<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
@@ -1565,7 +1564,7 @@
                              v-model="physical_consequences"
                           />
                           <label class="form-check-label" for="pcoca1">
-                            No significant physical harm, No medical treatment
+                            No significant physical harm, no medical treatment
                             required
                           </label>
                         </div>
@@ -1578,7 +1577,7 @@
                             life" v-model="physical_consequences"
                           />
                           <label class="form-check-label" for="pcoca2">
-                            Medical attention/Surgery required, but no danger to
+                            Medical attention/surgery required, but no danger to
                             life
                           </label>
                         </div>
@@ -1591,7 +1590,7 @@
                             to life" v-model="physical_consequences"
                           />
                           <label class="form-check-label" for="pcoca3">
-                            Medical attention/Surgery required, had/has danger
+                            Medical attention/surgery required, had/has danger
                             to life
                           </label>
                         </div>
@@ -1620,7 +1619,7 @@
                           <input
                               type="text"
                               class="form-control aborted-div hide"
-                              placeholder="Please Specify" v-model="physical_consequences_des"
+                              placeholder="Specify reason" v-model="physical_consequences_des"
                               id="aborted"
                             />
                         </div>
@@ -1629,7 +1628,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >If patient admitted for current attempt<small style="color:red">*</small></label
+                        >Is patient admitted for current attempt?<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1657,7 +1656,7 @@
                             <input
                               type="text"
                               class="form-control pafca-other-div hide"
-                              placeholder="Please Specify The First Admitting Ward" v-model="patient_admitted_des"
+                              placeholder="If admitted, please specify the initial admitting team" v-model="patient_admitted_des"
                               id="AW"
                             />
                         </div>
@@ -1666,7 +1665,7 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Status on Discharge<small style="color:red">*</small></label
+                        >Status on discharge<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1696,14 +1695,14 @@
                     <!-- close-row -->
                     <div class="row mb-5 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Discharge Details<small style="color:red">*</small></label
+                        >Discharge details<small style="color:red">*</small></label
                       >
                       <div class="col-sm-3">
                         <label class="form-label">Date<small style="color:red">*</small></label>
                         <input type="date" :max="this.currentDate" class="form-control" v-model="discharge_date"/>
                       </div>
                       <div class="col-sm-3">
-                        <label class="form-label">Number of days in ward<small style="color:red">*</small></label>
+                        <label class="form-label">Number of days of admission (enter 0 if not admitted)<small style="color:red">*</small></label>
                         <input
                           type="number"
                           class="form-control"
@@ -1714,11 +1713,11 @@
                     <!-- close-row -->
                     <div class="row mb-3 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Discharge Diagnosis(ICD-10)<small style="color:red">*</small></label
+                        >Discharge diagnoses(ICD-10)<small style="color:red">*</small></label
                       >
                       <div class="col-sm-4">
                         <label class="form-label"
-                          >Main psychiatric diagnosis<small style="color:red">*</small></label
+                          >Main psychiatric diagnoses<small style="color:red">*</small></label
                         >
                           <select
                           v-model="main_psychiatric_diagnosis"
@@ -1741,7 +1740,7 @@
                       <label class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-4">
                           <label class="form-label"
-                          >Additional psychiatric diagnosis</label
+                          >Additional psychiatric diagnoses</label
                           >
                           <select
                           id="additionalbox"
@@ -1803,7 +1802,7 @@
                     <!-- close-row -->
                     <div class="row mb-0 align-items-flex-start">
                       <label class="col-sm-3 col-form-label"
-                        >Psychiatry Management on Discharge<small style="color:red">*</small></label
+                        >Psychiatric management on discharge<small style="color:red">*</small></label
                       >
                       <div class="col-sm-9">
                         <div class="form-check">
@@ -1817,7 +1816,7 @@
                             @change="OnMxdischarge('Transferred to Psychiatry ward')"
                           />
                           <label class="form-check-label" for="psy-d1">
-                            Transferred to Psychiatry ward
+                            Transferred to another hospital for admission
                           </label>
                         </div>
                         <div class="form-check">
@@ -1831,7 +1830,7 @@
                             @change="OnMxdischarge('Given appt to Psychiatry clinic')"
                           />
                           <label class="form-check-label" for="psy-d2">
-                            Given appt to Psychiatry clinic
+                            Given appointment to Psychiatry clinic
                           </label>
                         </div>
                         <div class="form-check">
@@ -1873,7 +1872,7 @@
                             @change="OnMxdischarge('Refer Community Psychiatry Services')"
                           />
                           <label class="form-check-label" for="psy-d6">
-                            Refer Community Psychiatry Services
+                            Referred to Community Psychiatry Services
                           </label>
                         </div>
                         <div class="form-check">
@@ -1985,7 +1984,7 @@
                       <!-- col-sm-6 -->
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Name of Psychiatrist<small style="color:red">*</small></label
+                          >Name of psychiatrist<small style="color:red">*</small></label
                         >
                         <select
                           v-model="psychiatristId"
@@ -2008,7 +2007,7 @@
                     <div class="row">
                       <div class="col-sm-6 mb-3">
                         <label for="" class="form-label"
-                          >Date of Reporting<small style="color:red">*</small></label
+                          >Date of reporting<small style="color:red">*</small></label
                         >
                         <input
                           class="form-control"
@@ -3050,7 +3049,7 @@ export default {
           this.errors.push("Time is required.");
         }
         if (!this.place_id) {
-          this.errors.push("Place of Occurrence is required.");
+          this.errors.push("Place of occurrence is required.");
         }
         if (!this.secB) {
           this.errors.push("Please tick any box of Method of Self Harm.");
@@ -3660,7 +3659,7 @@ export default {
           this.submitting = false;
         }
         if (!this.prev_suicide) {
-          this.errors.push("Q3 - Previous suicide attempts in Risk Factors' tab is required.");
+          this.errors.push("Q3 - Previous suicide attempt in Risk Factors' tab is required.");
           this.submitting = false;
         }
         if(this.prev_suicide == "Yes"){
@@ -3684,7 +3683,7 @@ export default {
           this.submitting = false;
         }
         if (!this.history_psych) {
-          this.errors.push("Q6 - Family history of psychiatric disorders in Risk Factors' tab is required.");
+          this.errors.push("Q6 - Family history of psychiatric disorder in Risk Factors' tab is required.");
           this.submitting = false;
         }
         if(this.history_psych == "Yes"){
@@ -3709,7 +3708,7 @@ export default {
         }
         if(this.stressful == "Yes"){
           if(JSON.stringify($("#eightbox :selected").length) == 0 ){
-            this.errors.push("Q8 - Please specify stressful life events or loss in Risk Factors' tab.");
+            this.errors.push("Q8 - Please specify stressful life events in Risk Factors' tab.");
             this.submitting = false;
           }
         }
@@ -3772,7 +3771,7 @@ export default {
           this.submitting = false;
         }
         if (!this.place_id) {
-          this.errors.push("Place of Occurrence in Self Harm's tab is required.");
+          this.errors.push("Place of occurrence in Self Harm's tab is required.");
           this.submitting = false;
         }
         if(this.placeOther == true){
