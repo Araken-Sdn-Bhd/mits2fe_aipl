@@ -128,7 +128,6 @@
                                             <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                                 <div class="col-sm-8">
                                                     <select disabled id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
-                                                        <option value="0">Please Select</option>
                                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }} {{catcode.icd_name}}
                                                         </option>
@@ -145,19 +144,19 @@
                                                         <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                        <input disabled class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                         <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                         </label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="external" v-model="category_services" />
+                                                        <input disabled class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="external" v-model="category_services" />
                                                         <label class="form-check-label" for="inlineRadio3">External</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- close-row -->
                                             <!-- hide-div -->
-                                            <div id="assisstance" class="assisstance services hide mb-3">
+                                            <div class="assisstance services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small></label>
@@ -171,7 +170,7 @@
                                                 </div>
                                             </div>
                                             <!-- 01 -->
-                                            <div id="clinical-work" class="clinical-work services hide mb-3">
+                                            <div class="clinical-work services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
@@ -187,7 +186,6 @@
                                                         <div>
                                                             <div class="mt-2 align-items-flex-start">
                                                                 <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                    <option value="0">Select sub code</option>
                                                                     <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                         {{ catcode.icd_code }}
                                                                         {{catcode.icd_name}}
@@ -212,7 +210,6 @@
                                                         <div>
                                                             <div class="mt-2 align-items-flex-start">
                                                                 <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                    <option value="0">Select sub code</option>
                                                                     <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                         {{ catcode.icd_code }}
                                                                         {{catcode.icd_name}}
@@ -224,7 +221,7 @@
                                                 </div>
                                             </div>
                                             <!-- 02 -->
-                                            <div id="external" class="external services hide mb-3">
+                                            <div class="external services hide mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Services<small style="color:red">*</small></label>
@@ -328,7 +325,7 @@ export default {
                 $(targetBox).show();
             });
             $(".multiselect").select2({
-                placeholder: "Please Select",
+                placeholder: "None",
             });
         });
         let urlParams = new URLSearchParams(window.location.search);
@@ -594,21 +591,6 @@ export default {
                     .val(this.additional_subcode)
                     .trigger("change");
                 this.additional_code_id = response.data.Data[0].additional_code_id;
-
-                if (this.category_services == 'assisstance') {
-                    $(document).ready(function () {
-                        $("#assisstance").removeClass("hide");
-                    });
-                } else if (this.category_services == 'clinical-work') {
-                    $(document).ready(function () {
-                        $("#clinical-work").removeClass("hide");
-                    });
-                } else if (this.category_services == 'external') {
-                    $(document).ready(function () {
-                        $("#external").removeClass("hide");
-                    });
-                }
-
                 this.GetList();
 
                 const response2 = await this.$axios.post(
@@ -638,6 +620,21 @@ export default {
                 } else {
                     this.add_icdcatcodelist = [];
                 }
+
+                if(this.category_services=='clinical-work'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                    });
+                }else if(this.category_services=='external'){
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                    });
+                }else{
+                    $(document).ready(function () {
+                        $('input[name="inlineRadioOptions"]').trigger('click');
+                    });
+                }
+
 
             } else {
                 this.$swal.fire({
