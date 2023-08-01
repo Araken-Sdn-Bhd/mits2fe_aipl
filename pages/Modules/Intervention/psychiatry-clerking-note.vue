@@ -344,6 +344,9 @@ export default {
 
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
+        if(this.Id) {
+          this.discuss_psychiatrist_name = this.userdetails.user.name;
+        }
         this.appId = urlParams.get("appId");
 
         let urlParams1 = new URLSearchParams(window.location.search);
@@ -528,7 +531,7 @@ export default {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     this.validate = true;
-                    console.log("services", this.category_services);
+                    // console.log("services", this.category_services);
                     this.errorList = [];
                     var Boxvalue = [];
                     var Boxvalue1 = [];
