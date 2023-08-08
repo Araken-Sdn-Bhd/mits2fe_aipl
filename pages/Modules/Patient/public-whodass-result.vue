@@ -82,7 +82,7 @@
 
                     <div class="col-sm-6">
                       <div class="whodas-box">
-                        <h5>LIFE ACTIVMES - SCHOOL/WORK</h5>
+                        <h5>LIFE ACTIVITIES - SCHOOL/WORK</h5>
                         <div class="score-box">
                           <h4>{{ LASW }}</h4>
                           <span>Domain Score</span>
