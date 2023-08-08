@@ -38,7 +38,7 @@
                       {{
                         this.tab1 == 1
                           ? "Understanding & Communicating"
-                          : "U & C"
+                          : "Understanding & Communicating"
                       }}
                     </a>
                   </li>
@@ -1455,7 +1455,6 @@ export default {
       }
     },
     gototab7() {
-      if (this.list5.length == Object.values(this.checkedList5).length) {
         this.$refs.tab7.classList.add("active");
         this.$refs.tab6.classList.remove("active");
         this.$refs.navdiv6.classList.remove("active");
@@ -1463,9 +1462,7 @@ export default {
         this.$refs.navdiv7.classList.add("active");
         this.$refs.navdiv7.classList.add("show");
         this.ChangeTextofNav(7);
-      } else {
-        window.alert("Please attempt all question");
-      }
+      //The questions in tab 6 is unmandantory.
     },
     Backtab1() {
       this.ChangeTextofNav(1);
@@ -1562,7 +1559,7 @@ export default {
         this.list2.length == Object.values(this.checkedList2).length &&
         this.list3.length == Object.values(this.checkedList3).length &&
         this.list4.length == Object.values(this.checkedList4).length &&
-        this.list5.length == Object.values(this.checkedList5).length &&
+        // this.list5.length == Object.values(this.checkedList5).length &&
         this.list6.length == Object.values(this.checkedList6).length
       ) {
         try {
