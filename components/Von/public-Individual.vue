@@ -288,6 +288,7 @@
                     <div class="col-sm-6">
                         <select class="form-select" v-model="available_date">
                             <option value="">Select Day</option>
+                            <option value="Sunday">Sunday</option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
@@ -302,8 +303,10 @@
                             <option value="9:00 AM">9:00 AM</option>
                             <option value="10:00 AM">10:00 AM</option>
                             <option value="11:00 AM">11:00 AM</option>
-                            <option value="02:00 AM">02:00 PM</option>
-                            <option value="03:00 AM">03:00 PM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
                         </select>
                     </div>
                 </div>
