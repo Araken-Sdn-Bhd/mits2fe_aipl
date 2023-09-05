@@ -1477,6 +1477,13 @@ export default {
                 this.otherOccStatus = false;
             }
         },
+        OnchangeEducation(event) {
+            if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
+                this.otherEducation = true;
+            } else {
+                this.otherEducation = false;
+            }
+        },
         OnchangeReferral(event) {
             if (event.target.options[event.target.options.selectedIndex].text == "OTHERS") {
                 this.otherReferral = true;
