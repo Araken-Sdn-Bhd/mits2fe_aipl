@@ -49,11 +49,11 @@
                                       </tr>
                                       <tr>
                                           <th>Date:</th>
-                                          <td>{{ currentdate }}</td>
+                                          <td>{{ this.date }}</td>
                                       </tr>
                                       <tr>
                                           <th>Time:</th>
-                                          <td>{{ currenttime }}</td>
+                                          <td>{{ this.time }}</td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -78,11 +78,11 @@
                                       </tr> -->
                                       <tr>
                                           <th>Date:</th>
-                                          <td>{{ currentdate }}</td>
+                                          <td>{{ this.date }}</td>
                                       </tr>
                                       <tr>
                                           <th>Time: </th>
-                                          <td>{{ currenttime }}</td>
+                                          <td>{{ this.time }}</td>
                                       </tr>
                                       <tr>
                                           <th>Diagnosis<small style="color:red">*</small> :</th>
@@ -333,9 +333,9 @@
   </template>
 
   <script>
-  import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
   import CommonHeader from "../../../components/CommonHeader.vue";
   import CommonSidebar from "../../../components/CommonSidebar.vue";
+  import * as moment from "moment/moment";
 
   export default {
       components: {
@@ -372,8 +372,8 @@
               services_id: 0,
               serviceid: 0,
               validate: true,
-              currentdate: "",
-              currenttime: "",
+              date: "",
+              time: "",
               patientdetails: null,
               assistancelist: [],
               externallist: [],
@@ -411,15 +411,15 @@
           let urlParams1 = new URLSearchParams(window.location.search);
           this.pid = urlParams1.get("pid");
           this.type = urlParams1.get("type");
-          const current = new Date();
-          this.currentdate =
-              current.getDate() +
-              "-" +
-              (current.getMonth() + 1) +
-              "-" +
-              current.getFullYear();
+          // const current = new Date();
+          // this.currentdate =
+          //     getDate() +
+          //     "-" +
+          //     (getMonth() + 1) +
+          //     "-" +
+          //     getFullYear();
 
-          this.currenttime = current.getHours() + ":" + current.getMinutes();
+          // this.currenttime = getHours() + ":" + getMinutes();
       },
       mounted() {
           this.GetPatientdetails();
@@ -428,6 +428,14 @@
           }
       },
       methods: {
+        formatedate(date) {
+      const local = moment.utc(date).local().format("DD-MM-YYYY");
+      return local;
+    },
+    formatetime(time) {
+      const local = moment.utc(time).local().format("HH:mm");
+      return local;
+    },
           async onCreateEvent() {
               this.$swal.fire({
                   title: 'Do you want to save as draft?',
@@ -889,6 +897,8 @@
                   }
               );
               if (response.data.code == 200) {
+                  this.date = this.formatedate(response.data.Data[0].updated_at);
+                  this.time = this.formatetime(response.data.Data[0].updated_at);
                   this.staff_name = response.data.Data[0].name;
                   this.designation = response.data.Data[0].designation;
                   this.Id = response.data.Data[0].patient_mrn_id;
