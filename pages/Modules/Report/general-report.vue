@@ -355,8 +355,6 @@
                   <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
-                       :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
