@@ -2527,7 +2527,7 @@ export default{
                                     this.errorList.push("ICD 9 CODE is required");
                                     this.validate = false;
                                 }
-                                if (!!JSON.stringify(subcode)) {
+                                if (!JSON.stringify(subcode)) {
                                     this.errorList.push("ICD 9 SUB CODE is required");
                                     this.validate = false;
                                 }
