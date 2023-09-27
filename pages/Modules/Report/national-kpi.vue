@@ -294,8 +294,7 @@
                             </tr>
 
                             <tr class="tr-box" v-for="(rp, index) in averageResult" :key="index">
-                                <td colspan="3"></td>
-                                <td colspan="3" v-if="rp[1]!=NULL">Average(%)</td>
+                                <td colspan="7" v-if="rp[1]!=NULL">Average(%)</td>
                                 <td class="tdrow" v-if="rp[1]!=NULL">{{ rp[1] }}</td>
 
                                 <td colspan="3" v-if="rp[2]!=NULL">Average(%)</td>
