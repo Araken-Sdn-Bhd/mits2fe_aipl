@@ -460,6 +460,9 @@ import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Vue from "vue";
 import downloadexcel from "vue-json-excel";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import JsonExcel from "vue-json-excel";
 export default {
   components: { CommonSidebar, CommonHeader },
@@ -810,30 +813,103 @@ export default {
           console.log("my report", response.data);
           if (response.data.code == 200) {
             this.list = response.data.result;
+            this.header = response.data.header;
             console.log("my report", response.data);
             if (this.list.length > 0) {
-              setTimeout(() => {
 
-                this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "px",[ 929,  1920], "A4");
-                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
-                  pdf.internal.scaleFactor =1.0; //A3 or use 1.41
-                //pdf.internal.scaleFactor =30;
-                var options = {
-                pagesplit: true
+                let rows = [
+  [{text:'NO', bold: true },
+  {text:'REG DATE',bold: true },
+  {text:'REG TIME',bold: true },
+{text:'NRIC/ID',bold: true },
+{text:'NAME',bold: true },
+{text:'ADDRESS',bold: true },
+{text:'CITY',bold: true },
+{text:'STATE',bold: true },
+{text:'POSTCODE',bold: true },
+{text:'CITIZENSHIP',bold: true },
+{text:'PHONE NUMBER',bold: true },
+{text:'DOB',bold: true },
+{text:'AGE',bold: true },
+{text:'SEX',bold: true },
+{text:'RACE',bold: true },
+{text:'RELIGION',bold: true },
+{text:'MARITAL STATUS',bold: true },
+{text:'OCCU STATUS',bold: true },
+{text:'OCCU SECTOR',bold: true },
+{text:'ACCOM',bold: true },
+{text:'EDUCATION',bold: true },
+{text:'FEE EXEMPTION STATUS',bold: true },
+{text:'REFERRAL CATEGORY',bold: true },
+{text:'PATIENT CATEGORY',bold: true },
+{text:'VISIT CATEGORY',bold: true },
+{text:'APPOINTMENT',bold: true },
+{text:'OUTCOME',bold: true },
+{text:'DIAGNOSIS CODE',bold: true },
+{text:'DIAGNOSIS',bold: true },
+{text:'SERVICE',bold: true },
+{text:'STAFF',bold: true },
+]
+]
 
-            };
+for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+  rows.push([this.list[i].No,
+this.list[i].Registration_date, 
+this.list[i].Registration_Time ,
+this.list[i].nric_no ,
+this.list[i].Name ,
+this.list[i].ADDRESS ,
+this.list[i].CITY, 
+this.list[i].STATE ,
+this.list[i].POSTCODE ,
+this.list[i].citizenship ,
+this.list[i].PHONE_NUMBER ,
+this.list[i].DATE_OF_BIRTH ,
+this.list[i].AGE ,
+this.list[i].GENDER,
+this.list[i].race ,
+this.list[i].religion ,
+this.list[i].marital ,
+this.list[i].occupation_status ,
+this.list[i].occupation_sector ,
+this.list[i].accomodation ,
+this.list[i].education_level,
+this.list[i].fee_exemption_status ,
+this.list[i].TYPE_OF_Refferal ,
+this.list[i].CATEGORY_OF_PATIENTS ,
+this.list[i].TYPE_OF_Visit ,
+this.list[i].APPOINTMENT_TYPE, 
+this.list[i].outcome ,
+this.list[i].DIAGNOSIS_CODE ,
+this.list[i].DIAGNOSIS ,
+this.list[i].category_of_services ,
+this.list[i].Attending_staff
+]);
+}
 
-                pdf.addHTML($("#result")[0],options, function () {
-                  pdf.save("GeneralReport.pdf");
-                });
+        var dd = {
+          style: 'tableExample',
+          pageSize: 'A3',
+          pageOrientation: 'landscape',
+          defaultStyle: {
+                        fontSize: 4.7, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                      },
+        content: [
+        {text: response.data.header,
+			      style: 'header',fontSize:6,bold:true,},
+          {
+            table: {
+                  body: rows,
+                  headerRows:1,
+            }
+          },
+        ],
+	
+};
+//pdfMake.createPdf(dd).open('GeneralReport.pdf');
+ pdfMake.createPdf(dd).download('GeneralReport.pdf');
 
-              }, 100);
 
-              setTimeout(() => {
-
-                this.$refs.result.classList.add("hide");
-              }, 100);
             } else {
               this.error = "No Record Found";
             }
