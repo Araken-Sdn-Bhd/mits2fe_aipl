@@ -1033,7 +1033,6 @@
                   this.location_services_id = response.data.Data[0].location_services;
                   this.type_diagnosis_id = response.data.Data[0].type_diagnosis_id;
                   this.category_services = response.data.Data[0].category_services;
-                  this.services_id = response.data.Data[0].services_id;
                   this.code_id = response.data.Data[0].code_id;
                   this.additional_code_id = response.data.Data[0].additional_code_id;
                   this.complexity_services_id =
@@ -1089,16 +1088,20 @@
                               .trigger("change");
                   if(this.category_services=='clinical-work'){
                     $(document).ready(function () {
-                        $('input[name="inlineRadioOptions1"]').trigger('click');
+                        $('input[name="inlineRadioOptions2"]').trigger('click');
                     });
                 }else if(this.category_services=='external'){
                     $(document).ready(function () {
-                        $('input[name="inlineRadioOptions2"]').trigger('click');
+                        $('input[name="inlineRadioOptions3"]').trigger('click');
                     });
+
+                    this.serviceid = response.data.Data[0].services_id;
                 }else{
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions"]').trigger('click');
                     });
+
+                    this.services_id = response.data.Data[0].services_id;
                 }
               } else {
                   this.$swal.fire({

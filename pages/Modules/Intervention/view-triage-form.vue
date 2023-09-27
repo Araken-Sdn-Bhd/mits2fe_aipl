@@ -31,7 +31,7 @@
                                                   <td>History of aggressive and impulsive behavior</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_assressive">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -40,7 +40,7 @@
                                                   <td>History of criminal case</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_criminal">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -49,7 +49,7 @@
                                                   <td>Deterioration of clinical condition</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_detereotation">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_detereotation">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -58,7 +58,7 @@
                                                   <td>Neglect of self care</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_neglect">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -79,12 +79,12 @@
                                                   <td>Suicidal Behaviour</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_idea">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_idea">
                                                       </div>
                                                   </td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_attempt">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_suicidal_attempt">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -93,12 +93,12 @@
                                                   <td>Homicidal</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_idea">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_idea">
                                                       </div>
                                                   </td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_attempt">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_homicidal_attempt">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -107,12 +107,12 @@
                                                   <td>Aggressive</td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_idea">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_idea">
                                                       </div>
                                                   </td>
                                                   <td>
                                                       <div class="form-check">
-                                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_attempt">
+                                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_history_aggressive_attempt">
                                                       </div>
                                                   </td>
                                               </tr>
@@ -125,13 +125,13 @@
                                       </div>
 
                                       <div class="form-check mb-3">
-                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_social_has_no_family" id="1">
+                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_social_has_no_family" id="1">
                                           <label class="form-check-label" for="1">
                                               Has no family, friends or guardian
                                           </label>
                                       </div>
                                       <div class="form-check mb-3">
-                                          <input class="form-check-input" type="checkbox" value="Yes" v-model="risk_homeless" id="2">
+                                          <input disabled class="form-check-input" type="checkbox" value="Yes" v-model="risk_homeless" id="2">
                                           <label class="form-check-label" for="2">
                                               Homeless
                                           </label>
@@ -142,13 +142,13 @@
                                       </div>
 
                                       <div class="form-check mb-3">
-                                          <input class="form-check-input" type="checkbox" v-model="capacity_cannot_give_commitment" value="Yes" id="3">
+                                          <input disabled class="form-check-input" type="checkbox" v-model="capacity_cannot_give_commitment" value="Yes" id="3">
                                           <label class="form-check-label" for="3">
                                               Cannot give commitment to work together
                                           </label>
                                       </div>
                                       <div class="form-check mb-3">
-                                          <input class="form-check-input" type="checkbox" v-model="capacity_showed_no_interest" value="Yes" id="4">
+                                          <input disabled class="form-check-input" type="checkbox" v-model="capacity_showed_no_interest" value="Yes" id="4">
                                           <label class="form-check-label" for="4">
                                               Showed no interest in treatment
                                           </label>
@@ -162,19 +162,19 @@
                                           <div class="col-sm-6">
                                               <h6 class="mb-3 black">Treatment<small style="color:red">*</small> </h6>
                                               <div class="form-check mb-3">
-                                                  <input class="form-check-input" value="Checked Immediately" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios1" checked>
+                                                  <input disabled class="form-check-input" value="Checked Immediately" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios1" checked>
                                                   <label class="form-check-label" for="exampleRadios1">
                                                       Checked Immediately
                                                   </label>
                                               </div>
                                               <div class="form-check mb-3">
-                                                  <input class="form-check-input" value="Given an appointment(within 2 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios2">
+                                                  <input disabled class="form-check-input" value="Given an appointment(within 2 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios2">
                                                   <label class="form-check-label" for="exampleRadios2">
                                                       Given an appointment(within 2 weeks)
                                                   </label>
                                               </div>
                                               <div class="form-check mb-3">
-                                                  <input class="form-check-input" value="Given a regular appointment (within 2-6 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios3">
+                                                  <input disabled class="form-check-input" value="Given a regular appointment (within 2-6 weeks)" v-model="treatment_checked" type="radio" name="exampleRadios" id="exampleRadios3">
                                                   <label class="form-check-label" for="exampleRadios3">
                                                       Given a regular appointment (within 2-6 weeks)
                                                   </label>
@@ -184,13 +184,13 @@
                                           <div class="col-sm-6">
                                               <h6 class="mb-3 black">Placement</h6>
                                               <div class="form-check mb-3">
-                                                  <input class="form-check-input" value="Referred to the main hospital" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
+                                                  <input disabled class="form-check-input" value="Referred to the main hospital" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios4" checked>
                                                   <label class="form-check-label" for="exampleRadios4">
                                                       Referred to the main hospital
                                                   </label>
                                               </div>
                                               <div class="form-check mb-3">
-                                                  <input class="form-check-input" value="Discharge with treatment" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios5">
+                                                  <input disabled class="form-check-input" value="Discharge with treatment" v-model="placement_referred" type="radio" name="exampleRadios1" id="exampleRadios5">
                                                   <label class="form-check-label" for="exampleRadios5">
                                                       Discharge with treatment
                                                   </label>
@@ -218,7 +218,7 @@
                                               <tbody class="optionBox" id="replicatedList">
                                                   <tr class="block blocks">
                                                       <td id="cpyThis">
-                                                          <select class="form-select selects" v-model="screening_id">
+                                                          <select disabled class="form-select selects" v-model="screening_id">
                                                               <option value="0">Please Select</option>
                                                               <option v-for="spec in screenlist" v-bind:key="spec.id" v-bind:value="spec.id">
                                                                   {{ spec.name }}
@@ -226,48 +226,16 @@
                                                           </select>
                                                       </td>
                                                       <td>
-                                                          <input type="text" class="form-control scores" placeholder="" v-model="score">
+                                                          <input disabled type="text" class="form-control scores" placeholder="" v-model="score">
                                                       </td>
 
-                                                      <td @click="test">
-                                                          <span class="add-td"><i class="fa fa-plus"></i></span>
-                                                      </td>
+                                                      <!-- <td @click="test">
+                                                          <span disabled class="add-td"><i class="fa fa-plus"></i></span>
+                                                      </td> -->
                                                   </tr>
                                               </tbody>
                                           </table>
                                       </div>
-
-                                      <!-- <div class="row">
-                                          <div class="col-sm-7">
-                                              <div class="mb-3">
-                                                  <label for="" class="form-label">Type of Screening</label>
-                                                  <select class="form-select" v-model="screening_id">
-                                                      <option value="0">Please Select</option>
-                                                      <option
-                v-for="spec in screenlist"
-                v-bind:key="spec.id"
-                v-bind:value="spec.id"
-              >
-                {{ spec.name }}
-              </option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                          <div class="col-sm-3">
-                                              <div class="mb-3">
-                                                  <label for="" class="form-label">Score</label>
-                                                  <div class="add-box">
-                                                      <input type="text" class="form-control" placeholder=""
-                                                          v-model="score">
-                                                      <td> -->
-                                      <!-- <span class="add-td"
-                                                        ><i class="fa fa-plus"></i
-                                                      ></span> -->
-                                      <!-- </td> -->
-                                      <!-- </div>
-                                              </div>
-                                          </div> -->
-                                      <!-- </div> -->
                                   </section>
 
                                   <div class="accordion form-accordion mt-3" id="accordionExample">
@@ -282,7 +250,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Location Of Services<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="location_services_id">
+                                                      <select disabled class="form-select" v-model="location_services_id">
                                                           <option value="0">
                                                               Select location of services
                                                           </option>
@@ -296,7 +264,7 @@
                                               <div class="row mb-3">
                                                   <label class="col-sm-4 col-form-label">Type Of Diagnosis<small style="color:red">*</small></label>
                                                   <div class="col-sm-8">
-                                                      <select class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
+                                                      <select disabled class="form-select" v-model="type_diagnosis_id" @change="BindDiagnosis()">
                                                           <option value="0">Select Diagnosis</option>
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }} {{catcode.icd_name}}
@@ -307,7 +275,7 @@
                                               <!-- close row -->
                                               <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                                   <div class="col-sm-8">
-                                                      <select id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
+                                                      <select disabled id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
                                                           <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                               {{ catcode.icd_code }} {{catcode.icd_name}}
                                                           </option>
@@ -320,16 +288,16 @@
                                                   </label>
                                                   <div class="col-sm-8">
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="assisstance" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio1">Assisstance / Supervision</label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="clinical-work" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="clinical-work" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio2">Clinical Work / Procedure
                                                           </label>
                                                       </div>
                                                       <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="external" v-model="category_services" />
+                                                          <input disabled class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="external" v-model="category_services" />
                                                           <label class="form-check-label" for="inlineRadio3">External</label>
                                                       </div>
                                                   </div>
@@ -340,7 +308,7 @@
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="services_id">
+                                                          <select disabled class="form-select" v-model="services_id">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in assistancelist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -354,7 +322,7 @@
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">ICD 9 CODE<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
+                                                          <select disabled class="form-select" v-model="code_id" @change="onCategorycodebind($event)">
                                                               <option value="0">Select code</option>
                                                               <option v-for="type in codelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                   {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -365,7 +333,7 @@
                                                           <div><label class="form-label">ICD 9 SUB CODE</label></div>
                                                           <div>
                                                               <div class="mt-2 align-items-flex-start">
-                                                                  <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                       <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                           {{ catcode.icd_code }}
                                                                           {{catcode.icd_name}}
@@ -378,7 +346,7 @@
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Additional ICD 9 CODE</label>
-                                                          <select class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
+                                                          <select disabled class="form-select" v-model="additional_code_id" @change="onCategorycodebind2($event)">
                                                               <option value="0">Select code</option>
                                                               <option v-for="type in additionalcodelist" v-bind:key="type.id" v-bind:value="type.id">
                                                                   {{ type.icd_category_code }} {{type.icd_category_name}}
@@ -389,7 +357,7 @@
                                                           <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                           <div>
                                                               <div class="mt-2 align-items-flex-start">
-                                                                  <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
+                                                                  <select disabled id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
                                                                       <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                           {{ catcode.icd_code }}
                                                                           {{catcode.icd_name}}
@@ -405,7 +373,7 @@
                                                   <div class="row">
                                                       <div class="col-md-6 mb-3">
                                                           <label class="form-label">Services<small style="color:red">*</small></label>
-                                                          <select class="form-select" v-model="serviceid">
+                                                          <select disabled class="form-select" v-model="serviceid">
                                                               <option value="0">Select Service</option>
                                                               <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                                   {{ slt.section_value }}
@@ -419,7 +387,7 @@
                                               <div class="row">
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Complexity Of Service<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="complexity_services_id">
+                                                      <select disabled class="form-select" v-model="complexity_services_id">
                                                           <option value="0">
                                                               Select Complexity Of Service
                                                           </option>
@@ -430,7 +398,7 @@
                                                   </div>
                                                   <div class="col-md-6 mb-3">
                                                       <label class="form-label">Outcome<small style="color:red">*</small></label>
-                                                      <select class="form-select" v-model="outcome_id">
+                                                      <select disabled class="form-select" v-model="outcome_id">
                                                           <option value="0">Select outcome</option>
                                                           <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                               {{ out.section_value }}
@@ -453,7 +421,7 @@
                                           <div class="accordion-body">
                                               <div class="col-md-12 mb-3">
                                                   <label class="form-label">Medication</label>
-                                                  <textarea class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                                  <textarea disabled class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                               </div>
                                           </div>
                                       </div>
@@ -473,14 +441,6 @@
                                   <div class="d-flex">
                                       <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                       </button>
-                                      <div class="btn-right" :class="SidebarAccess!=1?'hide':''">
-                                          <button type="submit" @click="OnTriageDraft()" class="btn btn-warning btn-text">
-                                              <i class="fa fa-save"></i> Save as draft
-                                          </button>
-                                          <button type="submit" @click="Ontriageform()" class="btn btn-success btn-text">
-                                              <i class="fa fa-paper-plane"></i> Submit
-                                          </button>
-                                      </div>
                                   </div>
                               </div>
                           </div>
@@ -793,336 +753,6 @@
               } else {
                   this.add_icdcatcodelist = [];
               }
-          },
-
-          async Ontriageform() {
-              var jobSDESCRIPTION = [];
-              var Boxvalue = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var additionalbox = 0;
-                      var subcode = 0;
-                      var addsubcode = 0;
-
-                      $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                              additionalbox = additionalbox + "," + this.value;
-                          } else {
-                              additionalbox = this.value;
-                          }
-                      });
-                      Boxvalue.push({
-                          additionalbox
-                      });
-
-                      $("#subcode :selected").each(function () {
-                          if (subcode) {
-                              subcode = subcode + "," + this.value;
-                          } else {
-                              subcode = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          subcode
-                      });
-
-                      $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                              addsubcode = addsubcode + "," + this.value;
-                          } else {
-                              addsubcode = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          addsubcode
-                      });
-
-              this.$swal.fire({
-                  title: 'Do you want to save the changes?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  if (result.isConfirmed) {
-                      var screening_type = [];
-                      $("table#screentable > tbody > tr").each(function () {
-                          var obj = {};
-                          obj.duration = $('td select.selects', this).val();
-                          obj.scores = $('td input[type="text"].scores', this).val();
-                          screening_type.push(obj);
-                      });
-                      this.errorList = [];
-                      try {
-                          if (!this.screening_id) {
-                              this.errorList.push("Type of Screening is required");
-                          }
-                          if (!this.score) {
-                              this.errorList.push("Score is required");
-                          }
-                          if (!this.location_services_id) {
-                              this.errorList.push("Location Of Services is required");
-                          }
-                          if (!this.type_diagnosis_id) {
-                              this.errorList.push("Type Of Diagnosis is required");
-                          }
-                          if (!this.category_services) {
-                              this.errorList.push("Category Of Services is required");
-                          }
-                          if (!this.complexity_services_id) {
-                              this.errorList.push("Complexity Of Service is required");
-                          }
-                          if (this.category_services) {
-                              if (this.category_services == "assisstance") {
-                                  if (!this.services_id) {
-                                      this.errorList.push("Service is required");
-                                      this.validate = false;
-                                  }
-                              } else if (this.category_services == "clinical-work") {
-                                  if (!this.code_id) {
-                                      this.errorList.push("ICD 9 CODE is required");
-                                      this.validate = false;
-                                  }
-                                  if (!JSON.stringify(subcode)) {
-                                    this.errorList.push("ICD 9 SUB CODE is required");
-                                    this.validate = false;
-                                  }
-                              } else {
-                                  if (!this.serviceid) {
-                                      this.errorList.push("Services is required");
-                                      this.validate = false;
-                                  } else {
-                                      this.services_id = this.serviceid;
-                                  }
-                              }
-                          }
-                          if (!this.outcome_id) {
-                              this.errorList.push("Outcome is required");
-                          }
-                          if (
-                              this.screening_id &&
-                              this.score &&
-                              this.location_services_id &&
-                              this.type_diagnosis_id &&
-                              this.category_services &&
-                              this.complexity_services_id &&
-                              this.outcome_id &&
-                              this.validate
-                          ) {
-                              this.loader = true;
-                              const headers = {
-                                  Authorization: "Bearer " + this.userdetails.access_token,
-                                  Accept: "application/json",
-                                  "Content-Type": "application/json",
-                              };
-                              const response = await this.$axios.post(
-                                  "triage-form/add-without-appt", {
-                                      added_by: this.userdetails.user.id.toString(),
-                                      risk_history_assressive: this.risk_history_assressive,
-                                      risk_history_criminal: this.risk_history_criminal,
-                                      risk_history_detereotation: this.risk_history_detereotation,
-                                      risk_history_neglect: this.risk_history_neglect,
-                                      risk_history_suicidal_idea: this.risk_history_suicidal_idea,
-                                      risk_history_suicidal_attempt: this.risk_history_suicidal_attempt,
-                                      risk_history_homicidal_idea: this.risk_history_homicidal_idea,
-                                      risk_history_homicidal_attempt: this.risk_history_homicidal_attempt,
-                                      risk_history_aggressive_idea: this.risk_history_aggressive_idea,
-                                      risk_history_aggressive_attempt: this.risk_history_aggressive_attempt,
-                                      risk_social_has_no_family: this.risk_social_has_no_family,
-                                      risk_homeless: this.risk_homeless,
-                                      capacity_cannot_give_commitment: this.capacity_cannot_give_commitment,
-                                      capacity_showed_no_interest: this.capacity_showed_no_interest,
-                                      treatment_checked: this.treatment_checked,
-                                      treatment_given_appointment: this.treatment_given_appointment,
-                                      treatment_given_regular: this.treatment_given_regular,
-                                      placement_referred: this.placement_referred,
-                                      placement_discharge: this.placement_discharge,
-                                      screening_id: this.screening_id,
-                                      score: this.score,
-                                      location_services_id: this.location_services_id,
-                                      type_diagnosis_id: this.type_diagnosis_id,
-                                      additional_diagnosis: JSON.stringify(additionalbox),
-                                      category_services: this.category_services,
-                                      code_id: this.code_id,
-                                      sub_code_id: JSON.stringify(subcode),
-                                      additional_code_id: this.additional_code_id,
-                                      additional_subcode: JSON.stringify(addsubcode),
-                                      complexity_services_id: this.complexity_services_id,
-                                      outcome_id: this.outcome_id,
-                                      medication_des: this.medication_des,
-                                      patient_mrn_id: this.Id,
-                                      services_id: this.services_id,
-                                      screening_type: this.screening_type,
-                                      appId: this.appId,
-                                      status: "1",
-                                  }, {
-                                      headers
-                                  }
-                              );
-                              console.log("response", response.data);
-                              if (response.data.code == 200 || response.data.code == "200") {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire(
-                                      'Successfully Submitted.',
-                                      'Data is inserted.',
-                                      'success',
-                                  );
-                                  this.GoBack();
-
-                              } else {
-                                  this.loader = false;
-                                  this.resetmodel();
-                                  this.$swal.fire({
-                                      icon: 'error',
-                                      title: 'Oops... Something Went Wrong!',
-                                      text: 'the error is: ' + JSON.stringify(response.data.message),
-                                  })
-                                  this.GoBack();
-                              }
-                          }
-                      } catch (e) {
-                          this.loader = false;
-                          this.resetmodel();
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-
-                          this.GoBack();
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
-          },
-
-          async OnTriageDraft() {
-              this.$swal.fire({
-                  title: 'Do you want to save as draft?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Save',
-              }).then(async (result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isConfirmed) {
-
-                    var Boxvalue = [];
-                      var Boxvalue1 = [];
-                      var Boxvalue2 = [];
-                      var additionalbox = 0;
-                      var subcode = 0;
-                      var addsubcode = 0;
-
-                      $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                              additionalbox = additionalbox + "," + this.value;
-                          } else {
-                              additionalbox = this.value;
-                          }
-                      });
-                      Boxvalue.push({
-                          additionalbox
-                      });
-
-                      $("#subcode :selected").each(function () {
-                          if (subcode) {
-                              subcode = subcode + "," + this.value;
-                          } else {
-                              subcode = this.value;
-                          }
-                      });
-                      Boxvalue1.push({
-                          subcode
-                      });
-
-                      $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                              addsubcode = addsubcode + "," + this.value;
-                          } else {
-                              addsubcode = this.value;
-                          }
-                      });
-                      Boxvalue2.push({
-                          addsubcode
-                      });
-
-                      try {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "triage-form/add-without-appt", {
-                                  added_by: this.userdetails.user.id,
-                                  risk_history_assressive: this.risk_history_assressive,
-                                  risk_history_criminal: this.risk_history_criminal,
-                                  risk_history_detereotation: this.risk_history_detereotation,
-                                  risk_history_neglect: this.risk_history_neglect,
-                                  risk_history_suicidal_idea: this.risk_history_suicidal_idea,
-                                  risk_history_suicidal_attempt: this.risk_history_suicidal_attempt,
-                                  risk_history_homicidal_idea: this.risk_history_homicidal_idea,
-                                  risk_history_homicidal_attempt: this.risk_history_homicidal_attempt,
-                                  risk_history_aggressive_idea: this.risk_history_aggressive_idea,
-                                  risk_history_aggressive_attempt: this.risk_history_aggressive_attempt,
-                                  risk_social_has_no_family: this.risk_social_has_no_family,
-                                  risk_homeless: this.risk_homeless,
-                                  capacity_cannot_give_commitment: this.capacity_cannot_give_commitment,
-                                  capacity_showed_no_interest: this.capacity_showed_no_interest,
-                                  treatment_checked: this.treatment_checked,
-                                  treatment_given_appointment: this.treatment_given_appointment,
-                                  treatment_given_regular: this.treatment_given_regular,
-                                  placement_referred: this.placement_referred,
-                                  placement_discharge: this.placement_discharge,
-                                  screening_id: this.screening_id,
-                                  score: this.score,
-                                  location_services_id: this.location_services_id,
-                                  type_diagnosis_id: this.type_diagnosis_id,
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  category_services: this.category_services,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  additional_code_id: this.additional_code_id,
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  complexity_services_id: this.complexity_services_id,
-                                  outcome_id: this.outcome_id,
-                                  medication_des: this.medication_des,
-                                  patient_mrn_id: this.Id,
-                                  services_id: this.services_id,
-                                  screening_type: this.screening_type,
-                                  appId: this.appId,
-                                  status: "0",
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire('Succesfully save as draft!', '', 'success')
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.resetmodel();
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong! dalam function api',
-                                  text: 'the error is: ' + JSON.stringify(response.data.message),
-                              })
-                              this.GoBack();
-                          }
-                      } catch (e) {
-                          this.$swal.fire({
-                              icon: 'error',
-                              title: 'Oops... Something Went Wrong!',
-                              text: 'the error is: ' + e,
-                          })
-                      }
-                  } else if (result.isDismissed) {
-                      this.$swal.fire('Changes are not saved', '', 'info')
-                  }
-              })
           },
 
           resetmodel() {

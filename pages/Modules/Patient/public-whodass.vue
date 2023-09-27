@@ -14,6 +14,13 @@
               </h4>
             </div>
             <div class="card-body">
+              <p class="center-text-p">
+                The questionnare asked about difficulties due to health/mental conditions. Health conditions include diseases or illness,
+                other health problems that may be short or long lasting, injuries, mental or emotional problems, and problems with alcohol or
+                drugs. Think back over the past 30 days and answer these questions thinking how much difficulty you had the following
+                activities. For each question, please click only one response.
+              </p>
+            <div class="card-body">
               <nav>
                 <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                   <li class="nav-item">
@@ -31,7 +38,7 @@
                       {{
                         this.tab1 == 1
                           ? "Understanding & Communicating"
-                          : "U & C"
+                          : "Understanding & Communicating"
                       }}
                     </a>
                   </li>
@@ -46,7 +53,7 @@
                       aria-selected="false"
                       ref="tab2"
                     >
-                      2: {{ this.tab2 == 1 ? "Getting Around " : "GA" }}
+                      2: {{ this.tab2 == 1 ? "Getting Around " : "Getting Around" }}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -60,7 +67,7 @@
                       aria-selected="false"
                       ref="tab3"
                     >
-                      3: {{ this.tab3 == 1 ? "Self Care" : "SC" }}
+                      3: {{ this.tab3 == 1 ? "Self Care" : "Self Care" }}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -76,7 +83,7 @@
                     >
                       4:
                       {{
-                        this.tab4 == 1 ? "Getting Along With People" : "GAWP"
+                        this.tab4 == 1 ? "Getting Along With People" : "Getting Along with People"
                       }}
                     </a>
                   </li>
@@ -93,7 +100,7 @@
                     >
                       5:
                       {{
-                        this.tab5 == 1 ? "Life Activities - Household" : "LA-H"
+                        this.tab5 == 1 ? "Life Activities - Household" : "Life Activities - Household"
                       }}
                     </a>
                   </li>
@@ -112,7 +119,7 @@
                       {{
                         this.tab6 == 1
                           ? "Life Activities - School/Work"
-                          : "LA-S/W"
+                          : "Life Activities - School/Work"
                       }}
                     </a>
                   </li>
@@ -128,7 +135,7 @@
                       ref="tab7"
                     >
                       7:
-                      {{ this.tab7 == 1 ? " Participation In Society" : "PIS" }}
+                      {{ this.tab7 == 1 ? " Participation In Society" : "Participation In Society" }}
                     </a>
                   </li>
                 </ul>
@@ -144,6 +151,11 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>UNDERSTANDING AND COMMUNICATING</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                         <ul class="instruction">
                         <li>
                           <span class="no">1</span>
@@ -282,19 +294,26 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>GETTING AROUND</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                     <ul class="instruction">
                         <li>
                           <span class="no">1</span>
                           <span class="text">
-                            Always / Very High Degree
-                            <i> Sentiasa / Tahap yang Sangat Tinggi</i>
+                            Never / Almost Never / Very Low Degree
+
+                            <i> Tidak Pernah / Hampir Tidak Pernah / Tahap Sangat
+                              Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">2</span>
                           <span class="text">
-                            Often / High Degree
-                            <i>Kerap kali / Tahap tinggi</i>
+                            Seldom / Low Degree
+                            <i>Jarang / Tahap Rendah</i>
                           </span>
                         </li>
                         <li>
@@ -307,17 +326,16 @@
                         <li>
                           <span class="no">4</span>
                           <span class="text">
-                            Seldom / Low Degree
-                            <i> Jarang / Tahap Rendah</i>
+                            Often / High Degree
+                            <i>Kerap kali / Tahap tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">5</span>
                           <span class="text">
-                            Never / Almost Never / Very Low Degree
-                            <i>
-                              Tidak Pernah / Hampir Tidak Pernah / Tahap Sangat
-                              Rendah</i
+                            Always / Very High Degree
+                            <i>Sentiasa / Tahap yang Sangat Tinggi
+                              </i
                             >
                           </span>
                         </li>
@@ -432,6 +450,11 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>SELF CARE</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                        <ul class="instruction">
                         <li>
                           <span class="no">1</span>
@@ -582,6 +605,11 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>GETTING ALONG WITH PEOPLE</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                       <ul class="instruction">
                         <li>
                           <span class="no">1</span>
@@ -732,6 +760,11 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>LIFE ACTIVITIES - HOUSEHOLD</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                       <ul class="instruction">
                         <li>
                           <span class="no">1</span>
@@ -881,7 +914,12 @@
                 >
                   <div class="content-subtab">
                     <div class="form-title">
-                      <h5>LIFE ACTIVMES - SCHOOL/WORK</h5>
+                      <h5>LIFE ACTIVITIES - SCHOOL/WORK</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                       <ul class="instruction">
                         <li>
                           <span class="no">1</span>
@@ -924,8 +962,7 @@
                       </ul>
                       <h6>
                         Note: If you work (paid, non-paid, self-employed) or go
-                        to school complete Question 5.5 - 5.8. otherwise, skip
-                        to 6.1.
+                        to school, complete this section, otherwise skip to domain 7 (Participation in Society)
                       </h6>
                     </div>
 
@@ -1037,19 +1074,24 @@
                   <div class="content-subtab">
                     <div class="form-title">
                       <h5>PARTICIPATION IN SOCIETY</h5>
+                      <div class="form-title mt-2">
+                        <p class="center-text-p">
+                          In the past 30 days, how much difficulty did you have in:
+                        </p>
+                      </div>
                        <ul class="instruction">
                         <li>
                           <span class="no">1</span>
                           <span class="text">
                             None
-                            <i> tiada</i>
+                            <i> Tiada</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">2</span>
                           <span class="text">
-                            Mild
-                            <i>Ringan </i>
+                            Mild/Some
+                            <i>Ringan/Sedikit</i>
                           </span>
                         </li>
                         <li>
@@ -1062,8 +1104,8 @@
                         <li>
                           <span class="no">4</span>
                           <span class="text">
-                            Severe
-                            <i>Teruk </i>
+                            Severe/A lot
+                            <i>Teruk/Banyak</i>
                           </span>
                         </li>
                         <li>
@@ -1175,6 +1217,7 @@
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1412,7 +1455,6 @@ export default {
       }
     },
     gototab7() {
-      if (this.list5.length == Object.values(this.checkedList5).length) {
         this.$refs.tab7.classList.add("active");
         this.$refs.tab6.classList.remove("active");
         this.$refs.navdiv6.classList.remove("active");
@@ -1420,9 +1462,7 @@ export default {
         this.$refs.navdiv7.classList.add("active");
         this.$refs.navdiv7.classList.add("show");
         this.ChangeTextofNav(7);
-      } else {
-        window.alert("Please attempt all question");
-      }
+      //The questions in tab 6 is unmandantory.
     },
     Backtab1() {
       this.ChangeTextofNav(1);
@@ -1519,7 +1559,7 @@ export default {
         this.list2.length == Object.values(this.checkedList2).length &&
         this.list3.length == Object.values(this.checkedList3).length &&
         this.list4.length == Object.values(this.checkedList4).length &&
-        this.list5.length == Object.values(this.checkedList5).length &&
+        // this.list5.length == Object.values(this.checkedList5).length &&
         this.list6.length == Object.values(this.checkedList6).length
       ) {
         try {

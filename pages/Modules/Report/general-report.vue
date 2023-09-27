@@ -20,18 +20,19 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">Period Of Services<small style="color:red">*</small> :</label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      v-model="fromDate"
-                    />
+                    <label class="form-label">Year<small style="color:red">*</small>:</label>
+                      <select class="form-select" v-model="year">
+                        <option v-for="year in getCurrentYear()" v-if="year>=1970" :value="year">{{ year }}</option>
+                      </select>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">To<small style="color:red">*</small> :</label>
-                    <input type="date" class="form-control" v-model="toDate" />
+                    <label class="form-label">Month<small style="color:red">*</small> :</label>
+                    <select class="form-select" v-model="month">
+                    <option value="" selected="selected">Please Select</option>
+                    <option v-for="m in months.month">{{ m }}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -354,8 +355,6 @@
                   <downloadexcel
                        class="btn btn-success btn-text"
                        :header="header"
-                       :before-generate = "startDownload"
-                       :before-finish   = "finishDownload"
                        :json_data="ReportList"
                        :fetch = "Ongenerateexel"
                        :fields ="json_fields"
@@ -461,6 +460,9 @@ import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Vue from "vue";
 import downloadexcel from "vue-json-excel";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import JsonExcel from "vue-json-excel";
 export default {
   components: { CommonSidebar, CommonHeader },
@@ -580,6 +582,11 @@ export default {
       occupation_sector: "",
       citizenship: "",
       SidebarAccess:null,
+      year: new Date().getFullYear(),
+      months: {
+                month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            },
+      month:"",
     };
   },
   beforeMount() {
@@ -592,7 +599,18 @@ export default {
     return value.substr(0, 1); // just an example
   }
 },
+
   methods: {
+    currentDate() {
+            const current = new Date();
+            const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+            return date;
+        },
+
+        getCurrentYear() {
+            return new Date().getFullYear();
+        },
+
     async GetList() {
       try {
         this.loader = true;
@@ -726,9 +744,19 @@ export default {
           this.diagonisislist = [];
         }
         this.loader = false;
+
+        this.$swal.fire({
+                icon : 'warning',
+                title: 'Attention',
+                html: 'Please generate the report during <b>non-peak hours</b> to avoid potential disruptions, as the process is time-consuming!',
+                showConfirmButton: true,
+                })
+
       } catch (e) {
         console.log("my error", e);
       }
+
+
     },
 
     async isLetter(e){
@@ -740,13 +768,13 @@ export default {
     async Ongeneratepdf() {
       this.errorList = [];
       this.error = null;
-      if (!this.fromDate) {
-        this.errorList.push("From date is Required!");
+      if (!this.year) {
+        this.errorList.push("Year is Required!");
       }
-      if (!this.toDate) {
-        this.errorList.push("To date is Required!");
+      if (!this.month) {
+        this.errorList.push("Month is Required!");
       }
-      if (this.fromDate && this.toDate) {
+      if (this.year && this.month) {
         try {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -759,8 +787,8 @@ export default {
               email: this.userdetails.user.email,
               branch_id: this.userdetails.branch.branch_id,
               added_by: this.userdetails.user.id,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
+              year: this.year,
+              month: this.month,
               patient_category: this.patient_category,
               type_visit: this.type_visit,
               appointment_type: this.appointment_type,
@@ -785,30 +813,103 @@ export default {
           console.log("my report", response.data);
           if (response.data.code == 200) {
             this.list = response.data.result;
+            this.header = response.data.header;
             console.log("my report", response.data);
             if (this.list.length > 0) {
-              setTimeout(() => {
 
-                this.$refs.result.classList.remove("hide");
-                var pdf = new jsPDF("l", "px",[ 929,  1920], "A4");
-                 //pdf.internal.scaleFactor = 2.25;  // = 2.0; (working great with yellow page result before insert dummy data)
-                  pdf.internal.scaleFactor =1.0; //A3 or use 1.41
-                //pdf.internal.scaleFactor =30;
-                var options = {
-                pagesplit: true
+                let rows = [
+  [{text:'NO', bold: true },
+  {text:'REG DATE',bold: true },
+  {text:'REG TIME',bold: true },
+{text:'NRIC/ID',bold: true },
+{text:'NAME',bold: true },
+{text:'ADDRESS',bold: true },
+{text:'CITY',bold: true },
+{text:'STATE',bold: true },
+{text:'POSTCODE',bold: true },
+{text:'CITIZENSHIP',bold: true },
+{text:'PHONE NUMBER',bold: true },
+{text:'DOB',bold: true },
+{text:'AGE',bold: true },
+{text:'SEX',bold: true },
+{text:'RACE',bold: true },
+{text:'RELIGION',bold: true },
+{text:'MARITAL STATUS',bold: true },
+{text:'OCCU STATUS',bold: true },
+{text:'OCCU SECTOR',bold: true },
+{text:'ACCOM',bold: true },
+{text:'EDUCATION',bold: true },
+{text:'FEE EXEMPTION STATUS',bold: true },
+{text:'REFERRAL CATEGORY',bold: true },
+{text:'PATIENT CATEGORY',bold: true },
+{text:'VISIT CATEGORY',bold: true },
+{text:'APPOINTMENT',bold: true },
+{text:'OUTCOME',bold: true },
+{text:'DIAGNOSIS CODE',bold: true },
+{text:'DIAGNOSIS',bold: true },
+{text:'SERVICE',bold: true },
+{text:'STAFF',bold: true },
+]
+]
 
-            };
+for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+  rows.push([this.list[i].No,
+this.list[i].Registration_date, 
+this.list[i].Registration_Time ,
+this.list[i].nric_no ,
+this.list[i].Name ,
+this.list[i].ADDRESS ,
+this.list[i].CITY, 
+this.list[i].STATE ,
+this.list[i].POSTCODE ,
+this.list[i].citizenship ,
+this.list[i].PHONE_NUMBER ,
+this.list[i].DATE_OF_BIRTH ,
+this.list[i].AGE ,
+this.list[i].GENDER,
+this.list[i].race ,
+this.list[i].religion ,
+this.list[i].marital ,
+this.list[i].occupation_status ,
+this.list[i].occupation_sector ,
+this.list[i].accomodation ,
+this.list[i].education_level,
+this.list[i].fee_exemption_status ,
+this.list[i].TYPE_OF_Refferal ,
+this.list[i].CATEGORY_OF_PATIENTS ,
+this.list[i].TYPE_OF_Visit ,
+this.list[i].APPOINTMENT_TYPE, 
+this.list[i].outcome ,
+this.list[i].DIAGNOSIS_CODE ,
+this.list[i].DIAGNOSIS ,
+this.list[i].category_of_services ,
+this.list[i].Attending_staff
+]);
+}
 
-                pdf.addHTML($("#result")[0],options, function () {
-                  pdf.save("GeneralReport.pdf");
-                });
+        var dd = {
+          style: 'tableExample',
+          pageSize: 'A3',
+          pageOrientation: 'landscape',
+          defaultStyle: {
+                        fontSize: 4.7, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                      },
+        content: [
+        {text: response.data.header,
+			      style: 'header',fontSize:6,bold:true,},
+          {
+            table: {
+                  body: rows,
+                  headerRows:1,
+            }
+          },
+        ],
+	
+};
+//pdfMake.createPdf(dd).open('GeneralReport.pdf');
+ pdfMake.createPdf(dd).download('GeneralReport.pdf');
 
-              }, 100);
 
-              setTimeout(() => {
-
-                this.$refs.result.classList.add("hide");
-              }, 100);
             } else {
               this.error = "No Record Found";
             }
@@ -835,13 +936,13 @@ export default {
     async Ongenerateexel() {
       this.errorList = [];
       this.error = null;
-      if (!this.fromDate) {
-        this.errorList.push("From date is Required!");
+      if (!this.year) {
+        this.errorList.push("Year is Required!");
       }
-      if (!this.toDate) {
-        this.errorList.push("To date is Required!");
+      if (!this.month) {
+        this.errorList.push("Month is Required!");
       }
-      if (this.fromDate && this.toDate) {
+      if (this.year && this.month) {
         try {
           const headers = {
             Authorization: "Bearer " + this.userdetails.access_token,
@@ -854,8 +955,8 @@ export default {
               email: this.userdetails.user.email,
               branch_id: this.userdetails.branch.branch_id,
               added_by: this.userdetails.user.id,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
+              year: this.year,
+              month: this.month,
               patient_category: this.patient_category,
               type_visit: this.type_visit,
               appointment_type: this.appointment_type,

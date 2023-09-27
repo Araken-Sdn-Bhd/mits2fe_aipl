@@ -153,7 +153,7 @@
                           </div>
                           <!-- row -->
 
-                          <div class="wage hide">
+                          <div v-show="this.wage_change_occur == 'yes'" class="wage">
                               <div class="row">
                                   <div class="col-sm-3">
                                       <div class="mb-3">
@@ -310,14 +310,14 @@
                                                               <input :disabled="disabled == 1" type="text" class="form-control object" name="" />
                                                           </td>
                                                           <td>
-                                                              <input :disabled="disabled == 1" type="text" class="form-control width-fixed procedure" name="" />
+                                                              <input :disabled="disabled == 1"  type="text" class="form-control width-fixed procedure" name="" />
                                                           </td>
                                                           <td>
                                                               <input :disabled="disabled == 1" type="text" class="form-control width-fixed time" name="" />
                                                           </td>
-                                                          <td>
-                                                              <!-- <a class="add-td"><i class="fa fa-plus"></i></a> -->
-                                                          </td>
+                                                          <!-- <td>
+                                                              <a class="add-td"><i class="fa fa-plus"></i></a>
+                                                          </td> -->
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -349,14 +349,14 @@
                                                               <input :disabled="disabled == 1" type="text" class="form-control object" name="" v-model="job1.objectives" />
                                                           </td>
                                                           <td>
-                                                              <input :disabled="disabled == 1" type="text" class="form-control width-fixed procedure" name="" v-model="job1.procedure" />
+                                                              <input :disabled="disabled == 1"  type="text" class="form-control width-fixed procedure" name="" v-model="job1.procedure" />
                                                           </td>
                                                           <td>
                                                               <input :disabled="disabled == 1" type="text" class="form-control width-fixed time" name="" v-model="job1.rate_of_time" />
                                                           </td>
-                                                          <td>
-                                                              <!-- <a class="add-td"><i class="fa fa-plus"></i></a> -->
-                                                          </td>
+                                                          <!-- <td>
+                                                              <a class="add-td"><i class="fa fa-plus"></i></a>
+                                                          </td> -->
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -494,7 +494,7 @@
                                       </td>
                                       <td>
                                           <div class="mb-3">
-                                              <label class="form-label">Comments</label>
+                                              <label :disabled="disabled == 1" class="form-label">Comments</label>
                                               <textarea :disabled="disabled == 1" class="form-control textarea comment" v-model="pgwa_comment"></textarea>
                                           </div>
                                       </td>
@@ -571,7 +571,7 @@
                                               </label>
                                           </div>
                                           <div class="form-check">
-                                              <input :disabled="disabled == 1"  class="form-check-input three_4" type="checkbox" value="C. Few rooms" id="work-area3" v-model="work_area_C" />
+                                              <input :disabled="disabled == 1" class="form-check-input three_4" type="checkbox" value="C. Few rooms" id="work-area3" v-model="work_area_C" />
                                               <label class="form-check-label" for="work-area3">
                                                   Yes
                                               </label>
@@ -1227,7 +1227,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Services<small style="color:red">*</small> </label>
-                                                    <select class="form-select" v-model="serviceid">
+                                                    <select :disabled="disabled == 1" class="form-select" v-model="serviceid">
                                                         <option value="0">Select Service</option>
                                                         <option v-for="slt in externallist" v-bind:key="slt.id" v-bind:value="slt.id">
                                                             {{ slt.section_value }}
@@ -1252,7 +1252,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Outcome<small style="color:red">*</small> </label>
-                                                <select :disabled="disabled == 1"  class="form-select" v-model="outcome_id">
+                                                <select :disabled="disabled == 1" class="form-select" v-model="outcome_id">
                                                     <option value="0">Select outcome</option>
                                                     <option v-for="out in outcomelist" v-bind:key="out.id" v-bind:value="out.id">
                                                         {{ out.section_value }}
@@ -1275,7 +1275,7 @@
                                     <div class="accordion-body">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">Medication</label>
-                                            <textarea :disabled="disabled == 1"  class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
+                                            <textarea :disabled="disabled == 1" class="form-control textarea" placeholder="Please Type Prescription Here" v-model="medication_des"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -1294,7 +1294,14 @@
                           <div class="d-flex three-btn">
                               <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                               </button>
-
+                              <div v-if="type == 'edit' " class="ml-auto" :class="SidebarAccess != 1 ? 'hide' : ''">
+                                  <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text" title="Draft">
+                                      <i class="fa fa-save"></i> Save as draft
+                                  </button>
+                                  <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
+                                      <i class="fa fa-paper-plane"></i> Submit
+                                  </button>
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -1315,7 +1322,7 @@
       name: "work-analysis-form",
       data() {
           return {
-              disabled: 1,
+              disabled: 0,
               userdetails: null,
               patientdetails: null,
               errorList: [],
@@ -1524,6 +1531,9 @@
           this.type = urlParams1.get("type");
           if (this.pid) {
               this.getdetails();
+          }
+          if (this.type == 'view'){
+            this.disabled = 1;
           }
       },
       mounted() {
@@ -3189,6 +3199,7 @@
                                 .val(this.additional_sub_code_id)
                                 .trigger("change");
 
+
                     if(this.category_services=='clinical-work'){
                         $(document).ready(function () {
                             $('input[name="inlineRadioOptions2"]').trigger('click');
@@ -3197,10 +3208,12 @@
                         $(document).ready(function () {
                             $('input[name="inlineRadioOptions3"]').trigger('click');
                         });
+                        this.serviceid = response.data.Data[0].services_id;
                     }else{
                         $(document).ready(function () {
                             $('input[name="inlineRadioOptions"]').trigger('click');
                         });
+                        this.services_id = response.data.Data[0].services_id;
                     }
               } else {
                   this.$swal.fire({

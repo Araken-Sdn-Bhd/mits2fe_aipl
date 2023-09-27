@@ -350,11 +350,11 @@
 
                                     <tr>
                                         <th>Name<small style="color:red">*</small> :</th>
-                                        <td><input type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
+                                        <td><input disabled type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
                                     </tr>
                                     <tr>
                                         <th>Designation<small style="color:red">*</small> :</th>
-                                        <td><input type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
+                                        <td><input disabled type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
                                     </tr>
                                     <tr>
                                         <th>Date<small style="color:red">*</small> :</th>
@@ -607,6 +607,7 @@ export default {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
         this.therapy_date = moment.utc().local().format("YYYY-MM-DD");
+        this.date_session = moment.utc().local().format("YYYY-MM-DD");
         this.therapy_time = moment.utc().local().format("HH:mm");
         $(document).ready(function () {
             $('.other-input input[type="radio"]').click(function () {
@@ -649,6 +650,10 @@ export default {
         });
         let urlParams = new URLSearchParams(window.location.search);
         this.Id = urlParams.get("id");
+        if(this.Id) {
+        this.name = this.userdetails.user.name;
+        this.designation = this.userdetails.designation.section_value;
+        }
         this.appId = urlParams.get("appId");
         this.GetList();
         this.GetPatientdetails();
@@ -723,7 +728,13 @@ export default {
     },
     methods: {
         async onPublishEvent() {
-            if (confirm("Are you sure you want to save this entry ? ")) {
+          this.$swal.fire({
+            title: 'Do you want to save the changes?',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+              }).then(async (result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
                 this.errorList = [];
                 this.validate = true;
                 var Boxvalue = [];
@@ -956,8 +967,12 @@ export default {
                     this.loader = false;
 
                 }
-            }
-        },
+
+              } else if (result.isDismissed) {
+                      this.$swal.fire('Changes are not saved', '', 'info')
+                  }
+              })
+            },
 
         async onCreateEvent() {
             this.$swal.fire({

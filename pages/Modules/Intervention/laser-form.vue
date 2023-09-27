@@ -1270,6 +1270,10 @@ export default {
                   'Data is inserted.',
                   'success',
                 );
+                localStorage.setItem(
+                        "laserresult",
+                        JSON.stringify(response.data.result)
+                      );
                 this.$router.push({
                   path: "/modules/Intervention/laser-result",
                   query: {

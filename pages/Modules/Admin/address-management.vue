@@ -558,6 +558,7 @@ export default {
                 this.code = response.data.list[0].country_code;
                 this.index = response.data.list[0].country_order;
                 this.mycountryId = data.id;
+                this.loader = false;
             } else {
                 this.$swal.fire({
                     icon: 'error',

@@ -80,12 +80,12 @@
                                   <tr>
                                       <th>Diagnosis<small style="color:red">*</small> :</th>
                                       <td>
-                                          <select class="form-select" v-model="diagnosis">
-                                              <option value="">Select Diagnosis</option>
-                                              <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
-                                                  {{ catcode.icd_code }} {{catcode.icd_name}}
-                                              </option>
-                                          </select>
+                                        <select class="form-select" v-model="type_diagnosis_id">
+                                                      <option value="0">Select Diagnosis</option>
+                                                      <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
+                                                          {{ catcode.icd_code }} {{catcode.icd_name}}
+                                                      </option>
+                                                  </select>
                                       </td>
                                   </tr>
                                   <tr>
@@ -134,7 +134,7 @@
                                   <tr>
                                       <th>Hospital<small style="color:red">*</small> :</th>
                                       <td>
-                                          <input type="text" class="form-control" name="" v-model="hospital" />
+                                          <input type="text" class="form-control" name="" placeholder="Enter Hospital Name" v-model="hospital" />
                                       </td>
                                   </tr>
                                   <tr>
@@ -377,7 +377,7 @@
                                       <td colspan="2">
                                           <table class="sub-table-form td-width">
                                               <tbody>
-                                                  <tr>
+                                                <tr>
                                                       <th>Criminality<small style="color:red">*</small></th>
                                                       <td>
                                                           <div class="form-check">
@@ -422,7 +422,7 @@
                                   <tr>
                                       <th>Age First Started<small style="color:red">*</small> :</th>
                                       <td>
-                                          <input type="text" class="form-control" name="" v-model="age_first_started" />
+                                          <input type="text" class="form-control" name="" placeholder="Enter Age First Started" v-model="age_first_started" />
                                       </td>
                                   </tr>
                                   <tr>
@@ -930,15 +930,15 @@
                               <tbody>
                                   <tr>
                                       <th>Zone<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="zone" /></td>
+                                      <td><input type="text" class="form-control" name="" placeholder="Enter Zone" v-model="zone" /></td>
                                   </tr>
                                   <tr>
                                       <th>Case Manager<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="case_manager" /></td>
+                                      <td><input type="text" class="form-control" name="" placeholder="Enter Case Manager" v-model="case_manager" /></td>
                                   </tr>
                                   <tr>
                                       <th>Specialist<small style="color:red">*</small> :</th>
-                                      <td><input type="text" class="form-control" name="" v-model="specialist" /></td>
+                                      <td><input type="text" class="form-control" name="" placeholder="Enter Specialist" v-model="specialist" /></td>
                                   </tr>
                                   <tr>
                                       <th>Date<small style="color:red">*</small> :</th>
@@ -1278,7 +1278,7 @@
                           const response = await this.$axios.post(
                               "patient-index/add", {
                                   patient_mrn_id: this.Id,
-                                  diagnosis: this.diagnosis,
+                                  diagnosis: this.type_diagnosis_id,
                                   date_onset: this.date_onset,
                                   date_of_diagnosis: this.date_of_diagnosis,
                                   date_of_referral: this.date_of_referral,
@@ -1589,7 +1589,7 @@
                               const response = await this.$axios.post(
                                   "patient-index/add", {
                                       patient_mrn_id: this.Id,
-                                      diagnosis: this.diagnosis,
+                                      diagnosis: this.type_diagnosis_id,
                                       date_onset: this.date_onset,
                                       date_of_diagnosis: this.date_of_diagnosis,
                                       date_of_referral: this.date_of_referral,

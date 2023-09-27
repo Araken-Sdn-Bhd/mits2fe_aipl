@@ -137,7 +137,7 @@
                                         <tr class="two-td">
                                             <th>Visited By<small style="color:red">*</small></th>
                                             <td colspan="2">
-                                                <input type="text" class="form-control" v-model="visited_by" />
+                                                <input type="text" class="form-control" placeholder="Enter Visited by" v-model="visited_by" />
                                             </td>
                                             <td>
                                                 <!-- <a href="#" class="add"><i class="fa fa-plus"></i></a> -->
@@ -737,19 +737,13 @@
                                             </td>
                                         </tr>
 
-                                        <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="ipsychopathology_remarks"></textarea>
-                                        </div>
-                                    </div>
-                                        <!-- <tr class="two-td">
+                                        <tr class="two-td">
                                             <th>Remarks<small style="color:red">*</small></th>
                                             <td colspan="3">
-                                                <textarea class="form-control textarea"
+                                                <textarea class="form-control"
                                                     v-model="ipsychopathology_remarks"></textarea>
                                             </td>
-                                        </tr> -->
+                                        </tr>
 
                                         <tr>
                                             <td colspan="4">
@@ -1135,19 +1129,13 @@
                                             </td>
                                         </tr>
 
-                                        <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="side_effects_remarks"></textarea>
-                                        </div>
-                                    </div>
-                                        <!-- <tr class="two-td">
+                                        <tr class="two-td">
                                             <th>Remarks<small style="color:red">*</small> :</th>
                                             <td colspan="3">
-                                                <textarea class="form-control textarea"
+                                                <textarea class="form-control"
                                                     v-model="side_effects_remarks"></textarea>
                                             </td>
-                                        </tr> -->
+                                        </tr>
 
                                         <tr>
                                             <td colspan="4" class="black">
@@ -1285,18 +1273,12 @@
                                             </td>
                                         </tr>
 
-                                        <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Remarks<small style="color:red">*</small> </label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" placeholder="Enter Description" rows="15" v-model="remarks"></textarea>
-                                        </div>
-                                    </div>
-                                        <!-- <tr class="two-td">
+                                        <tr class="two-td">
                                             <th>Remarks<small style="color:red">*</small> :</th>
                                             <td colspan="3">
-                                                <textarea class="form-control textarea" v-model="remarks"></textarea>
+                                                <textarea class="form-control" v-model="remarks"></textarea>
                                             </td>
-                                        </tr> -->
+                                        </tr>
 
                                         <tr class="two-radio">
                                             <th>Employment the past 6 month<small style="color:red">*</small> :</th>
@@ -1363,7 +1345,7 @@
                                         <tr class="two-td">
                                             <th>Comments<small style="color:red">*</small></th>
                                             <td colspan="3">
-                                                <textarea class="form-control textarea" v-model="comments"></textarea>
+                                                <textarea class="form-control" v-model="comments"></textarea>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1414,7 +1396,6 @@
                                                 <div class="row mb-3"><label class="col-sm-4 col-form-label">Additional Diagnosis</label>
                                                 <div class="col-sm-8">
                                                     <select id="additionalbox" v-model="additional_diagnosis" class="form-select multiselect" multiple="multiple">
-                                                        <option value="0">Please Select</option>
                                                         <option v-for="catcode in diagonisislist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                             {{ catcode.icd_code }} {{catcode.icd_name}}
                                                         </option>
@@ -1490,7 +1471,6 @@
                                                         <div>
                                                             <div class="mt-2 align-items-flex-start">
                                                                 <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                    <option value="0">Select sub code</option>
                                                                     <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                         {{ catcode.icd_code }}
                                                                         {{ catcode.icd_name }}
@@ -1515,7 +1495,6 @@
                                                         <div>
                                                             <div class="mt-2 align-items-flex-start">
                                                                 <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                    <option value="0">Select sub code</option>
                                                                     <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                         {{ catcode.icd_code }}
                                                                         {{catcode.icd_name}}

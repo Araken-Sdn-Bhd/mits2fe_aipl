@@ -83,38 +83,38 @@
                         <li>
                           <span class="no">1</span>
                           <span class="text">
-                            Always / Very High Degree
-                            <i> Sentiasa / Tahap yang Sangat Tinggi</i>
+                            To a Very Low Degree
+                            <i>Tahap Sangat
+                              Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">2</span>
                           <span class="text">
-                            Often / High Degree
-                            <i>Kerap kali / Tahap tinggi</i>
+                            To a Low Degree
+                            <i>Tahap Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">3</span>
                           <span class="text">
-                            Sometimes / Somewhat High
-                            <i> Kadang / Tahap Agak Tinggi</i>
+                            Somewhat High
+                            <i>Kadang Tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">4</span>
                           <span class="text">
-                            Seldom / Low Degree
-                            <i> Jarang / Tahap Rendah</i>
+                            To a High Degree
+                            <i>Tahap tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">5</span>
                           <span class="text">
-                            Never / Almost Never / Very Low Degree
+                            To a Very High Degree
                             <i>
-                              Tidak Pernah / Hampir Tidak Pernah / Tahap Sangat
-                              Rendah</i
+                              Tahap yang Sangat Tinggi</i
                             >
                           </span>
                         </li>
@@ -224,38 +224,38 @@
                         <li>
                           <span class="no">1</span>
                           <span class="text">
-                            Always / Very High Degree
-                            <i> Sentiasa / Tahap yang Sangat Tinggi</i>
+                            To a Very Low Degree
+                            <i>Tahap Sangat
+                              Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">2</span>
                           <span class="text">
-                            Often / High Degree
-                            <i>Kerap kali / Tahap tinggi</i>
+                            To a Low Degree
+                            <i>Tahap Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">3</span>
                           <span class="text">
-                            Sometimes / Somewhat High
-                            <i> Kadang / Tahap Agak Tinggi</i>
+                            Somewhat High
+                            <i>Kadang Tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">4</span>
                           <span class="text">
-                            Seldom / Low Degree
-                            <i> Jarang / Tahap Rendah</i>
+                            To a High Degree
+                            <i>Tahap tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">5</span>
                           <span class="text">
-                            Never / Almost Never / Very Low Degree
+                            To a Very High Degree
                             <i>
-                              Tidak Pernah / Hampir Tidak Pernah / Tahap Sangat
-                              Rendah</i
+                              Tahap yang Sangat Tinggi</i
                             >
                           </span>
                         </li>
@@ -374,38 +374,38 @@
                         <li>
                           <span class="no">1</span>
                           <span class="text">
-                            Always / Very High Degree
-                            <i> Sentiasa / Tahap yang Sangat Tinggi</i>
+                            To a Very Low Degree
+                            <i>Tahap Sangat
+                              Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">2</span>
                           <span class="text">
-                            Often / High Degree
-                            <i>Kerap kali / Tahap tinggi</i>
+                            To a Low Degree
+                            <i>Tahap Rendah</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">3</span>
                           <span class="text">
-                            Sometimes / Somewhat High
-                            <i> Kadang / Tahap Agak Tinggi</i>
+                            Somewhat High
+                            <i>Kadang Tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">4</span>
                           <span class="text">
-                            Seldom / Low Degree
-                            <i> Jarang / Tahap Rendah</i>
+                            To a High Degree
+                            <i>Tahap tinggi</i>
                           </span>
                         </li>
                         <li>
                           <span class="no">5</span>
                           <span class="text">
-                            Never / Almost Never / Very Low Degree
+                            To a Very High Degree
                             <i>
-                              Tidak Pernah / Hampir Tidak Pernah / Tahap Sangat
-                              Rendah</i
+                              Tahap yang Sangat Tinggi</i
                             >
                           </span>
                         </li>

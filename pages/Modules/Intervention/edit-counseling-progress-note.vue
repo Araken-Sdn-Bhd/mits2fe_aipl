@@ -350,11 +350,11 @@
 
                                       <tr>
                                           <th>Name<small style="color:red">*</small> :</th>
-                                          <td><input type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
+                                          <td><input disabled type="text" placeholder="Enter Staff Name" class="form-control" v-model="name"></td>
                                       </tr>
                                       <tr>
                                           <th>Designation<small style="color:red">*</small> :</th>
-                                          <td><input type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
+                                          <td><input disabled type="text" placeholder="Enter Designation" class="form-control" v-model="designation"></td>
                                       </tr>
                                       <tr>
                                           <th>Date<small style="color:red">*</small> :</th>
@@ -404,7 +404,6 @@
                                                       id="additionalbox" v-model="additional_diagnosis"
                                                       class="form-select multiselect" multiple="multiple"
                                                     >
-                                                    <option value="0">Please Select</option>
                                                       <option
                                           v-for="catcode in diagonisislist"
                                           v-bind:key="catcode.id"
@@ -467,7 +466,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select id='subcode' v-model="sub_code_id" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -492,7 +490,6 @@
                                                               <div>
                                                                 <div class="mt-2 align-items-flex-start">
                                                                   <select id='addsubcode' v-model="additional_subcode" class="form-select multiselect" multiple="multiple" style="width:100%">
-                                                                  <option value="0">Select sub code</option>
                                                                   <option v-for="catcode in add_icdcatcodelist" v-bind:key="catcode.id" v-bind:value="catcode.id">
                                                                       {{ catcode.icd_code }}
                                                                       {{catcode.icd_name}}
@@ -607,6 +604,7 @@
           this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
           this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
           this.therapy_date = moment.utc().local().format("YYYY-MM-DD");
+          this.date_session = moment.utc().local().format("YYYY-MM-DD");
           this.therapy_time = moment.utc().local().format("HH:mm");
           $(document).ready(function () {
               $('.other-input input[type="radio"]').click(function () {
@@ -648,6 +646,8 @@
                 });
           });
           let urlParams = new URLSearchParams(window.location.search);
+          this.name = this.userdetails.user.name;
+          this.designation = this.userdetails.designation.section_value;
           this.Id = urlParams.get("id");
           this.appId = urlParams.get("appId");
           this.GetList();
@@ -657,6 +657,8 @@
           this.type = urlParams1.get("type");
           this.GetPatientdetails();
           if (this.pid) {
+            this.name = this.userdetails.user.name;
+            this.designation = this.userdetails.designation.section_value;
               this.getdetails();
           }
       },
@@ -722,243 +724,253 @@
           };
       },
       methods: {
-          async onPublishEvent() {
-              if (confirm("Are you sure you want to save this entry ? ")) {
-                  this.errorList = [];
-                  this.validate = true;
-                  var Boxvalue = [];
-                        var Boxvalue1 = [];
-                        var Boxvalue2 = [];
-                        var additionalbox = 0;
-                        var subcode = 0;
-                        var addsubcode = 0;
+        async onPublishEvent() {
+          this.$swal.fire({
+            title: 'Do you want to save the changes?',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+              }).then(async (result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                this.errorList = [];
+                this.validate = true;
+                var Boxvalue = [];
+                      var Boxvalue1 = [];
+                      var Boxvalue2 = [];
+                      var additionalbox = 0;
+                      var subcode = 0;
+                      var addsubcode = 0;
 
-                        $("#additionalbox :selected").each(function () {
-                          if (additionalbox) {
-                            additionalbox = additionalbox + "," + this.value;
-                          } else {
-                            additionalbox = this.value;
-                          }
-                        });
-                        Boxvalue.push({ additionalbox });
+                      $("#additionalbox :selected").each(function () {
+                        if (additionalbox) {
+                          additionalbox = additionalbox + "," + this.value;
+                        } else {
+                          additionalbox = this.value;
+                        }
+                      });
+                      Boxvalue.push({ additionalbox });
 
-                        $("#subcode :selected").each(function () {
-                          if (subcode) {
-                            subcode = subcode + "," + this.value;
-                          } else {
-                            subcode = this.value;
-                          }
-                        });
-                        Boxvalue1.push({ subcode });
+                      $("#subcode :selected").each(function () {
+                        if (subcode) {
+                          subcode = subcode + "," + this.value;
+                        } else {
+                          subcode = this.value;
+                        }
+                      });
+                      Boxvalue1.push({ subcode });
 
-                        $("#addsubcode :selected").each(function () {
-                          if (addsubcode) {
-                            addsubcode = addsubcode + "," + this.value;
-                          } else {
-                            addsubcode = this.value;
-                          }
-                        });
-                        Boxvalue2.push({ addsubcode });
+                      $("#addsubcode :selected").each(function () {
+                        if (addsubcode) {
+                          addsubcode = addsubcode + "," + this.value;
+                        } else {
+                          addsubcode = this.value;
+                        }
+                      });
+                      Boxvalue2.push({ addsubcode });
 
-                  try {
-                      if (!this.therapy_date) {
-                          this.errorList.push("Date Performed is required");
-                      }
-                      if (!this.therapy_time) {
-                          this.errorList.push("Time Performed is required");
-                      }
+                try {
+                    if (!this.therapy_date) {
+                        this.errorList.push("Date Performed is required");
+                    }
+                    if (!this.therapy_time) {
+                        this.errorList.push("Time Performed is required");
+                    }
 
-                      if (!this.frequency_session) {
-                          this.errorList.push("FREQUENCY OF SESSION is required");
-                      }
-                      if (!this.model_therapy) {
-                          this.errorList.push("	MODEL OF THERAPY is required");
-                      }
-                      if (!this.mode_therapy) {
-                          this.errorList.push("MODE OF THERAPY is required");
-                      }
-                      if (!this.comment_therapy_session) {
-                          this.errorList.push("Comments On Therapy Sessions is required");
-                      }
-                      if (!this.patent_condition) {
-                          this.errorList.push("Patent's Condition is required");
-                      }
-                      if (!this.comment_patent_condition) {
-                          this.errorList.push("Comments On Patent's Condition is required");
-                      }
+                    if (!this.frequency_session) {
+                        this.errorList.push("FREQUENCY OF SESSION is required");
+                    }
+                    if (!this.model_therapy) {
+                        this.errorList.push("	MODE OF THERAPY is required");
+                    }
+                    if (!this.mode_therapy) {
+                        this.errorList.push("MODE OF THERAPY is required");
+                    }
+                    if (!this.comment_therapy_session) {
+                        this.errorList.push("Comments On Therapy Sessions is required");
+                    }
+                    if (!this.patent_condition) {
+                        this.errorList.push("Patent's Condition is required");
+                    }
+                    if (!this.comment_patent_condition) {
+                        this.errorList.push("Comments On Patent's Condition is required");
+                    }
 
-                      if (!this.session_issues) {
-                          this.errorList.push("Issues/Problems  is required");
-                      }
-                      if (!this.conduct_session) {
-                          this.errorList.push("Conduct Of Session is required");
-                      }
-                      if (!this.outcome_session) {
-                          this.errorList.push("Outcome Of Session is required");
-                      }
-                      if (!this.transference_session) {
-                          this.errorList.push("Transference/countertransference is required");
-                      }
-                      if (!this.duration_session) {
-                          this.errorList.push("Duration Of Session is required");
-                      }
-                      if (!this.other_comment_session) {
-                          this.errorList.push("Other Comments is required");
-                      }
-                      if (!this.name) {
-                          this.errorList.push("Name is required");
-                      }
-                      if (!this.designation) {
-                          this.errorList.push("Designation is required");
-                      }
-                      if (!this.date_session) {
-                          this.errorList.push("Date is required");
-                      }
-                      if (!this.location_services_id) {
-                          this.errorList.push("Location Of Services is required");
-                      }
-                      if (!this.type_diagnosis_id) {
-                          this.errorList.push("Type Of Diagnosis is required");
-                      }
-                      if (!this.category_services) {
-                          this.errorList.push("Category Of Services is required");
-                      }
-                      if (!this.complexity_services_id) {
-                          this.errorList.push("Complexity Of Service is required");
-                      }
-                      if (this.category_services) {
-                          if (this.category_services == "assisstance") {
-                              if (!this.services_id) {
-                                  this.errorList.push("Service is required");
-                                  this.validate = false;
-                              }
-                          } else if (this.category_services == "clinical-work") {
-                              if (!this.code_id) {
-                                  this.errorList.push("ICD 9 CODE is required");
-                                  this.validate = false;
-                              }
-                              if (!JSON.stringify(subcode)) {
-                                  this.errorList.push("ICD 9 SUB CODE is required");
-                                  this.validate = false;
-                              }
-                          } else {
-                              if (!this.serviceid) {
-                                  this.errorList.push("Services is required");
-                                  this.validate = false;
-                              } else {
-                                  this.services_id = this.serviceid;
-                              }
-                          }
-                      }
-                      if (!this.outcome_id) {
-                          this.errorList.push("Outcome is required");
-                      }
+                    if (!this.session_issues) {
+                        this.errorList.push("Issues/Problems  is required");
+                    }
+                    if (!this.conduct_session) {
+                        this.errorList.push("Conduct Of Session is required");
+                    }
+                    if (!this.outcome_session) {
+                        this.errorList.push("Outcome Of Session is required");
+                    }
+                    if (!this.transference_session) {
+                        this.errorList.push("Transference/countertransference is required");
+                    }
+                    if (!this.duration_session) {
+                        this.errorList.push("Duration Of Session is required");
+                    }
+                    if (!this.other_comment_session) {
+                        this.errorList.push("Other Comments is required");
+                    }
+                    if (!this.name) {
+                        this.errorList.push("Name is required");
+                    }
+                    if (!this.designation) {
+                        this.errorList.push("Designation is required");
+                    }
+                    if (!this.date_session) {
+                        this.errorList.push("Date is required");
+                    }
+                    if (!this.location_services_id) {
+                        this.errorList.push("Location Of Services is required");
+                    }
+                    if (!this.type_diagnosis_id) {
+                        this.errorList.push("Type Of Diagnosis is required");
+                    }
+                    if (!this.category_services) {
+                        this.errorList.push("Category Of Services is required");
+                    }
+                    if (!this.complexity_services_id) {
+                        this.errorList.push("Complexity Of Service is required");
+                    }
+                    if (this.category_services) {
+                        if (this.category_services == "assisstance") {
+                            if (!this.services_id) {
+                                this.errorList.push("Service is required");
+                                this.validate = false;
+                            }
+                        } else if (this.category_services == "clinical-work") {
+                            if (!this.code_id) {
+                                this.errorList.push("ICD 9 CODE is required");
+                                this.validate = false;
+                            }
+                            if (!this.sub_code_id) {
+                                this.errorList.push("ICD 9 SUB CODE is required");
+                                this.validate = false;
+                            }
+                        } else {
+                            if (!this.serviceid) {
+                                this.errorList.push("Services is required");
+                                this.validate = false;
+                            } else {
+                                this.services_id = this.serviceid;
+                            }
+                        }
+                    }
+                    if (!this.outcome_id) {
+                        this.errorList.push("Outcome is required");
+                    }
 
-                      if (
-                          this.therapy_date &&
-                          this.therapy_time &&
+                    if (
+                        this.therapy_date &&
+                        this.therapy_time &&
 
-                          this.frequency_session &&
-                          this.model_therapy &&
-                          this.comment_therapy_session &&
-                          this.patent_condition &&
-                          this.comment_patent_condition &&
+                        this.frequency_session &&
+                        this.model_therapy &&
+                        this.comment_therapy_session &&
+                        this.patent_condition &&
+                        this.comment_patent_condition &&
 
-                          this.session_issues &&
-                          this.conduct_session &&
-                          this.outcome_session &&
-                          this.transference_session &&
-                          this.duration_session &&
-                          this.other_comment_session &&
-                          this.name &&
-                          this.designation &&
-                          this.date_session &&
-                          this.location_services_id &&
-                          this.type_diagnosis_id &&
-                          this.category_services &&
-                          this.complexity_services_id &&
-                          this.outcome_id &&
-                          // this.medication_des &&
-                          this.validate
-                      ) {
-                          this.loader = true;
-                          const headers = {
-                              Authorization: "Bearer " + this.userdetails.access_token,
-                              Accept: "application/json",
-                              "Content-Type": "application/json",
-                          };
-                          const response = await this.$axios.post(
-                              "counselling-progress-note/add", {
-                                  added_by: this.userdetails.user.id.toString(),
-                                  therapy_date: this.therapy_date,
-                                  therapy_time: this.therapy_time,
-                                  diagnosis_id: this.type_diagnosis_id, //diagnosis_id
-                                  frequency_session: this.frequency_session,
-                                  frequency_session_other: this.frequency_session_other,
-                                  model_therapy: this.model_therapy,
-                                  model_therapy_other: this.model_therapy_other,
-                                  mode_therapy: this.mode_therapy,
-                                  mode_therapy_other: this.mode_therapy_other,
-                                  comment_therapy_session: this.comment_therapy_session,
-                                  patent_condition: this.patent_condition,
-                                  patent_condition_other: this.patent_condition_other,
-                                  comment_patent_condition: this.comment_patent_condition,
-                                  session_details: this.session_details,
-                                  session_issues: this.session_issues,
-                                  conduct_session: this.conduct_session,
-                                  outcome_session: this.outcome_session,
-                                  transference_session: this.transference_session,
-                                  duration_session: this.duration_session,
-                                  other_comment_session: this.other_comment_session,
-                                  name: this.name,
-                                  designation: this.designation,
-                                  date_session: this.date_session,
-                                  location_services_id: this.location_services_id,
-                                  type_diagnosis_id: this.type_diagnosis_id,
-                                  category_services: this.category_services,
-                                  code_id: this.code_id,
-                                  sub_code_id: JSON.stringify(subcode),
-                                  additional_diagnosis: JSON.stringify(additionalbox),
-                                  additional_subcode: JSON.stringify(addsubcode),
-                                  additional_code_id: this.additional_code_id,
-                                  complexity_services_id: this.complexity_services_id,
-                                  outcome_id: this.outcome_id,
-                                  medication_des: this.medication_des,
-                                  patient_mrn_id: this.Id,
-                                  services_id: this.services_id,
-                                  status: "1",
-                                  appId: this.appId,
-                                  id: this.pid,
-                              }, {
-                                  headers
-                              }
-                          );
-                          console.log("response", response.data);
-                          if (response.data.code == 200) {
-                              this.loader = false;
-                              this.resetmodel();
+                        this.session_issues &&
+                        this.conduct_session &&
+                        this.outcome_session &&
+                        this.transference_session &&
+                        this.duration_session &&
+                        this.other_comment_session &&
+                        this.name &&
+                        this.designation &&
+                        this.date_session &&
+                        this.location_services_id &&
+                        this.type_diagnosis_id &&
+                        this.category_services &&
+                        this.complexity_services_id &&
+                        this.outcome_id &&
+                        // this.medication_des &&
+                        this.validate
+                    ) {
+                        this.loader = true;
+                        const headers = {
+                            Authorization: "Bearer " + this.userdetails.access_token,
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        };
+                        const response = await this.$axios.post(
+                            "counselling-progress-note/add", {
+                                added_by: this.userdetails.user.id.toString(),
+                                therapy_date: this.therapy_date,
+                                therapy_time: this.therapy_time,
+                                diagnosis_id: this.type_diagnosis_id, //diagnosis_id
+                                frequency_session: this.frequency_session,
+                                frequency_session_other: this.frequency_session_other,
+                                model_therapy: this.model_therapy,
+                                model_therapy_other: this.model_therapy_other,
+                                mode_therapy: this.mode_therapy,
+                                mode_therapy_other: this.mode_therapy_other,
+                                comment_therapy_session: this.comment_therapy_session,
+                                patent_condition: this.patent_condition,
+                                patent_condition_other: this.patent_condition_other,
+                                comment_patent_condition: this.comment_patent_condition,
+                                session_details: this.session_details,
+                                session_issues: this.session_issues,
+                                conduct_session: this.conduct_session,
+                                outcome_session: this.outcome_session,
+                                transference_session: this.transference_session,
+                                duration_session: this.duration_session,
+                                other_comment_session: this.other_comment_session,
+                                name: this.name,
+                                designation: this.designation,
+                                date_session: this.date_session,
+                                location_services_id: this.location_services_id,
+                                type_diagnosis_id: this.type_diagnosis_id,
+                                category_services: this.category_services,
+                                code_id: this.code_id,
+                                sub_code_id: JSON.stringify(subcode),
+                                additional_diagnosis: JSON.stringify(additionalbox),
+                                additional_subcode: JSON.stringify(addsubcode),
+                                additional_code_id: this.additional_code_id,
+                                complexity_services_id: this.complexity_services_id,
+                                outcome_id: this.outcome_id,
+                                medication_des: this.medication_des,
+                                patient_mrn_id: this.Id,
+                                services_id: this.services_id,
+                                status: "1",
+                                appId: this.appId,
+                                id: this.pid,
+                            }, {
+                                headers
+                            }
+                        );
+                        console.log("response", response.data);
+                        if (response.data.code == 200) {
+                            this.loader = false;
+                            this.resetmodel();
 
-                              this.$swal.fire(
-                                  'Succesfully Created',
-                              );
-                              this.GoBack();
-                          } else {
-                              this.loader = false;
-                              this.$swal.fire({
-                                  icon: 'error',
-                                  title: 'Oops... Something Went Wrong!',
-                                  text: 'the error is: ' + this.error,
-                                  footer: ''
-                              })
-                              this.GoBack();
-                          }
-                      }
-                  } catch (e) {
-                      this.loader = false;
+                            this.$swal.fire(
+                                'Succesfully Created',
+                            );
+                            this.GoBack();
+                        } else {
+                            this.loader = false;
+                            this.$swal.fire({
+                                icon: 'error',
+                                title: 'Oops... Something Went Wrong!',
+                                text: 'the error is: ' + this.error,
+                                footer: ''
+                            })
+                            this.GoBack();
+                        }
+                    }
+                } catch (e) {
+                    this.loader = false;
 
+                }
+
+              } else if (result.isDismissed) {
+                      this.$swal.fire('Changes are not saved', '', 'info')
                   }
-              }
-          },
+              })
+            },
 
           async onCreateEvent() {
               this.$swal.fire({
@@ -1333,7 +1345,7 @@
                   this.outcome_id = response.data.Data[0].outcome_id;
                   this.medication_des = response.data.Data[0].medication_des;
                   this.patient_mrn_id = response.data.Data[0].Id;
-                  this.services_id = response.data.Data[0].servicesid;
+                  this.services_id = response.data.Data[0].services_id;
                   this.additional_diagnosis = response.data.Data[0].additional_diagnosis.split(",");
                       $("#additionalbox")
                       .val(this.additional_diagnosis)
