@@ -15,7 +15,6 @@
               <div class="search-table mt-2">
                 <div class="row">
                   <div class="col-sm-3 mb-2">
-               <!-- add v-if="dataReady1" to use superadmin branch filter function, after the select tag -->
                     <select
                       v-model="branch_id"
                       class="form-select"
@@ -30,22 +29,7 @@
                         {{ slt.hospital_branch_name }}
                       </option>
                     </select>
-                    <!-- <select
-                      v-if="dataReady2"
-                      v-model="branch_id"
-                      class="form-select"
-                      aria-label="Default select example"
-                      @change="OnSearch"
-                    >
-                      <option value="0">All Branch</option>
-                      <option
-                        v-for="slt in branchlist"
-                        v-bind:key="slt.id"
-                        v-bind:value="slt.id"
-                      >
-                        {{ slt.hospital_branch_name }}
-                      </option>
-                    </select> -->
+                   
                   </div>
 
                   <div class="col-sm-3 mb-2">
@@ -81,35 +65,7 @@
                   </div>
                 </div>
               </div>
-              <!-- search-table -->
-              <!-- <div style="overflow-x:auto;">
-                <table
-                class="table table-striped data-table font-13 display nowrap"
-                style="width: 100%"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Test Name</th>
-                    <th>Section</th>
-                    <th>Score</th>
-                    <th>Time</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(result, index) in list" :key="index">
-                    <td>{{ index + 1 }}</td>
-                    <td>{{  }}</td>
-                    <td>{{  }}</td>
-                    <td>{{  }}</td>
-                    <td>{{  }}</td>
-                    <td>{{  }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div> -->
-
+             
               <div v-if="test_name=='dass'">
                 <table
                 class="table table-striped data-table font-13 display nowrap"
@@ -185,8 +141,6 @@ export default {
       loader: false,
       assistancelist: [],
       SidebarAccess:null,
-      // dataReady:false,
-      // dataReady2:false,
     };
   },
   beforeMount() {
@@ -196,11 +150,28 @@ export default {
 
   },
   mounted() {
-
+    this.GetBranchList();
     this.GetOnlineTest();
 
   },
   methods: {
+    async GetBranchList() {
+      const headers = {
+        Authorization: "Bearer " + this.userdetails.access_token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+      const response2 = await this.$axios.get("hospital/branch-list", {
+        headers,
+      });
+      if (response2.data.code == 200 || response2.data.code == "200") {
+        this.branchlist = response2.data.list;
+      } else {
+        this.branchlist = [];
+      }
+     
+    },
+
     getFormattedDate(date) {
             return moment(date).format("DD-MM-YYYY HH:mm:ss")
         },
@@ -219,13 +190,7 @@ export default {
         }
       );
       this.branch_id=this.userdetails.branch.branch_id;
-            // if (response.data.list.code =="superadmin"){
-            //   this.dataReady2= true;
-            //   this.dataReady= false;
-            // }else{
-            //   this.dataReady= true;
-            //   this.dataReady2= false;
-            // }
+          
 
     },
 
@@ -294,6 +259,8 @@ export default {
                 });
       }
     },
+
+  
   },
 };
 </script>
