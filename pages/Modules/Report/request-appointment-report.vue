@@ -96,6 +96,9 @@ import moment from 'moment';
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import downloadexcel from "vue-json-excel";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
 
     components: {
@@ -182,25 +185,58 @@ export default {
                 this.total = this.list.length;
                 console.log("my report", response.data);
                 if (this.total != 0) {
-                    setTimeout(() => {
-                        this.$refs.result.classList.remove("hide");
-                        var pdf = new jsPDF("l", "px", [929, 1920], "A4");
-                        pdf.internal.scaleFactor = 1.0; //A3 or use 1.41  // = 2.0; (working great with yellow page result before insert dummy data)
-                        //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
-                        //pdf.internal.scaleFactor =30;
-                        var options = {
-                            pagesplit: true
+            
+                    let rows = [
+                        [{text:'No', bold: true },
+                    {text:'Name', bold: true },
+                    {text:'NRIC/Passport', bold: true },
+                    {text:'Address', bold: true },
+                    {text:'Phone Number', bold: true },
+                    {text:'Email', bold: true },
+                    {text:'Request Date', bold: true },
+                    {text:'', bold: true },
+                    {text:'Remark', bold: true },
+                        ]
+                        ]
 
+                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                        rows.push([this.list[i].No,
+                        this.list[i].name,
+                        this.list[i].nric_or_passportno ,
+                        this.list[i].address,
+                        this.list[i].contact_no,
+                        this.list[i].email,
+                        this.list[i].created_at,
+                        this.list[i].status,
+                        this.list[i].remark,
+                        ]);
+                        }                       
+
+                                var dd = {
+                                style: 'tableExample',
+                                pageSize: 'A4',
+                                pageOrientation: 'landscape',
+                                defaultStyle: {
+                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                            },
+                                content: [
+                                {text: 'PERIOD OF SERVICES = ' + this.fromDate + ' TO ' + this.toDate ,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                {text: 'TOTAL REQUEST = ' + this.total,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                        
+                                {                                   
+                                    table: {
+                                        body: rows,
+                                        headerRows:1,
+                                    }
+                                },
+                                ],
+                            
                         };
+                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                        pdfMake.createPdf(dd).download('RequestAppointmentReport.pdf');
 
-                        pdf.addHTML($("#result")[0], options, function () {
-                            pdf.save("RequestAppointmentReport.pdf");
-                        });
-
-                    }, 100);
-                    setTimeout(() => {
-                        this.$refs.result.classList.add("hide");
-                    }, 100);
                 } else {
                     this.error = "No Record Found";
                 }

@@ -208,6 +208,9 @@
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import downloadexcel from "vue-json-excel";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
     components: {
         CommonSidebar,
@@ -233,6 +236,7 @@ export default {
                 "TELEPHONE NUMBER": "PHONE_NUMBER",
                 "DATE OF BIRTH": "DATE_OF_BIRTH",
                 "CATEGORIES OF PATIENT": "CATEGORY_OF_PATIENTS",
+                "TYPE OF VISIT": "TYPE_OF_Visit",
                 "TYPE OF REFERAL": "TYPE_OF_Refferal",
             },
             excelname: "",
@@ -354,24 +358,86 @@ export default {
                             this.Category_Patient = response.data.Category_Patient;
                             this.Total_Days = response.data.Total_Days;
                             this.Total_Patient = response.data.Total_Patient;
-                            setTimeout(() => {
-                                this.$refs.result.classList.remove("hide");
-                                var pdf = new jsPDF("l", "px", [929, 1920], "A4");
-                                pdf.internal.scaleFactor = 1.0; //A3 or use 1.41  // = 2.0; (working great with yellow page result before insert dummy data)
-                                //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
-                                //pdf.internal.scaleFactor =30;
-                                var options = {
-                                    pagesplit: true
+                            
+                        let rows = [
+                        [{text:'No', bold: true },
+                    {text:'Date', bold: true },
+                    {text:'Time', bold: true },
+                    {text:'NRIC/Passport', bold: true },
+                    {text:'Name', bold: true },
+                    {text:'Address', bold: true },
+                    {text:'City', bold: true },
+                    {text:'State', bold: true },
+                    {text:'PostCode', bold: true },
+                    {text:'Phone Number', bold: true },
+                    {text:'Date of Birth', bold: true },
+                    {text:'Categories of Patient', bold: true },
+                    {text:'Type of Referral', bold: true },
+                        ]
+                        ]
 
-                                };
+                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                        rows.push([this.list[i].No,
+                        this.list[i].DATE,
+                        this.list[i].TIME,
+                        this.list[i].NRIC_NO_PASSPORT_NO,
+                        this.list[i].Name,
+                        this.list[i].ADDRESS,
+                        this.list[i].CITY,
+                        this.list[i].STATE,
+                        this.list[i].POSTCODE,
+                        this.list[i].PHONE_NUMBER,
+                        this.list[i].DATE_OF_BIRTH,
+                        this.list[i].CATEGORY_OF_PATIENTS,
+                        this.list[i].TYPE_OF_Refferal,
+                        ]);
+                        }                       
 
-                                pdf.addHTML($("#result")[0], options, function () {
-                                    pdf.save("Report.pdf");
-                                });
-                            }, 100);
-                            setTimeout(() => {
-                                this.$refs.result.classList.add("hide");
-                            }, 100);
+                                var dd = {
+                                style: 'tableExample',
+                                pageSize: 'A4',
+                                pageOrientation: 'landscape',
+                                defaultStyle: {
+                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                            },
+                                content: [
+                                {text: 'NEW =' + this.Visit_Type.New,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                {text: 'FOLLOW UP =' + this.Visit_Type.Follow_Up,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                {text: 'WALK-IN =' + this.Referal_walk.Walk_In,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                {text: 'REFERRAL =' + this.Referal_walk.Referral,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                {text: 'DAYCARE =' + this.Category_Patient.Daycare,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                {text: 'OUTPATIENT =' + this.Category_Patient.Outpatient,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                {                                   
+                                    
+                                    table: {
+                                        body: rows,
+                                        headerRows:1,
+                                    }
+                                },
+                                ],
+                            
+                        };
+                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                        pdfMake.createPdf(dd).download('ReferralReport.pdf');
+
+
+
+
+
+
+
+
                         } else {
                             this.error = "No Record Found";
                         }

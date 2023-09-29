@@ -431,7 +431,9 @@ import CommonHeader from "../../../components/CommonHeader.vue";
 import CommonSidebar from "../../../components/CommonSidebar.vue";
 
 import downloadexcel from "vue-json-excel";
-
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
     components: {
         CommonSidebar,
@@ -736,25 +738,81 @@ export default {
                     this.periodofservices = response.data.periodofservices;
                     if (this.list.length > 0) {
 
-                        setTimeout(() => {
-                            this.$refs.result.classList.remove("hide");
-                            this.$refs.result.classList.remove("hide");
-                            var pdf = new jsPDF("l", "px", [929, 1920], "A4");
-                            pdf.internal.scaleFactor = 1.0; //A3 or use 1.41
-                            //pdf.internal.scaleFactor =1.30; //A3 or use 1.41
-                            //pdf.internal.scaleFactor =30;
-                            var options = {
-                                pagesplit: true
+                        let rows = [
+                        [{text:'No', bold: true },
+                        {text:'Hospital Name', bold: true },
+                        {text:'Harm Date', bold: true },
+                        {text:'Harm Time', bold: true },
+                        {text:'NRIC/Passport', bold: true },
+                        {text:'Name', bold: true },
+                        {text:'Address', bold: true },
+                        {text:'City', bold: true },
+                        {text:'State', bold: true },
+                        {text:'PostCode', bold: true },
+                        {text:'Phone Number', bold: true },
+                        {text:'Date of Birth', bold: true },
+                        {text:'Main Diagnosis', bold: true },
+                        {text:'Additional Diagnosis', bold: true },
+                        {text:'Risk Factor', bold: true },
+                        {text:'Protective Factor', bold: true },
+                        {text:'Method of Self Harm', bold: true },
+                        {text:'Idea Of Method', bold: true },
+                        {text:'Suicidal Intent', bold: true },
+                        ]
+                        ]
 
-                            };
+                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                        rows.push([this.list[i].NO,
+                        this.list[i].HOSPITAL,
+                        this.list[i].DATE,
+                        this.list[i].TIME,
+                        this.list[i].NRIC_NO_PASSPORT_NO,
+                        this.list[i].NAME,
+                        this.list[i].ADDRESS,
+                        this.list[i].CITY,
+                        this.list[i].STATE,
+                        this.list[i].POSTCODE,
+                        this.list[i].PHONE_NUMBER,
+                        this.list[i].DATE_OF_BIRTH,
+                        this.list[i].MAIN_DIAGNOSIS,
+                        this.list[i].ADDITIONAL_DIAGNOSIS,
+                        this.list[i].RISK_FACTORpdf,
+                        this.list[i].PROTECTIVE_FACTORpdf,
+                        this.list[i].METHOD_OF_SELF_HARMpdf,
+                        this.list[i].IDEA_OF_METHODpdf,
+                        this.list[i].SUCIDAL_INTENTpdf,
+                        ]);
+                        }                       
 
-                            pdf.addHTML($("#result")[0], options, function () {
-                                pdf.save("SHHARP_Report.pdf");
-                            });
-                        }, 100);
-                        setTimeout(() => {
-                            this.$refs.result.classList.add("hide");
-                        }, 100);
+                                var dd = {
+                                style: 'tableExample',
+                                pageSize: 'A3',
+                                pageOrientation: 'landscape',
+                                defaultStyle: {
+                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                            },
+                                content: [
+                                {text: 'PERIOD OF SERVICES =' + this.periodofservices,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                {text: 'TOTAL REPORT =' + this.totalResultlist,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+
+
+                                {                                   
+                                    
+                                    table: {
+                                        body: rows,
+                                        headerRows:1,
+                                    }
+                                },
+                                ],
+                            
+                        };
+                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                        pdfMake.createPdf(dd).download('SHHARPReport.pdf');
+
+
                     } else {
                         this.error = "No Record Found";
                     }

@@ -198,6 +198,9 @@
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
 import downloadexcel from "vue-json-excel";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
     components: {
         CommonSidebar,
@@ -330,20 +333,69 @@ export default {
                             this.Volunteer = response.data.toiArr.VOLUNTEER;
                             this.Outreach = response.data.toiArr.OUTREACH;
                             this.Networking = response.data.toiArr.NETWORKING;
-                            setTimeout(() => {
-                                this.$refs.result.classList.remove("hide");
-                                var pdf = new jsPDF("l", "px", [929, 1920], "A4");
-                                pdf.internal.scaleFactor = 1.0; //A3 or use 1.41
-                                var options = {
-                                    pagesplit: true
-                                };
-                                pdf.addHTML($("#result")[0], options, function () {
-                                    pdf.save("VONReport.pdf");
-                                });
-                            }, 100);
-                            setTimeout(() => {
-                                this.$refs.result.classList.add("hide");
-                            }, 100);
+                           
+
+                            
+                            let rows = [
+                        [{text:'No', bold: true },
+                    {text:'NAME/EVENT/PROGRAM', bold: true },
+                    {text:'Type Of Collaborator', bold: true },
+                    {text:'Area Of Involvement', bold: true },
+                    {text:'COST', bold: true },
+                    {text:'LOCATION', bold: true },
+                    {text:'MENTARI CENTRE', bold: true },
+                    {text:'OTHERS', bold: true },
+                    {text:'SCREENING DONE', bold: true },
+                    {text:'NO OF PARTICIPANTS', bold: true },
+                    {text:'CONTACT NO', bold: true },
+                        ]
+                        ]
+
+                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                        rows.push([this.list[i].No,
+                        this.list[i].Name,
+                        this.list[i].Type_of_Collaboration,
+                        this.list[i].Type_of_Involvement,
+                        this.list[i].Cost,
+                        this.list[i].Location,
+                        this.list[i].Mentari,
+                        this.list[i].Others,
+                        this.list[i].Screening_Done,
+                        this.list[i].No_of_Participants,
+                        this.list[i].Contact_Number,
+                        ]);
+                        }                       
+
+                                var dd = {
+                                style: 'tableExample',
+                                pageSize: 'A4',
+                                pageOrientation: 'landscape',
+                                defaultStyle: {
+                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                            },
+                                content: [
+                                {text: 'VOLUNTEER =' + this.Volunteer,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                {text: 'OUTREACH =' + this.Outreach,
+                                        style: 'header',fontSize:7.5,bold:true,},
+                                {text: 'NETWORKING =' + this.Networking,
+                                        style: 'header',fontSize:7.5,bold:true,},
+
+
+                                {                                   
+                                    
+                                    table: {
+                                        body: rows,
+                                        headerRows:1,
+                                    }
+                                },
+                                ],
+                            
+                        };
+                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                        pdfMake.createPdf(dd).download('VonActivityReport.pdf');
+
+                        
                         } else {
                             this.error = "No Record Found";
                         }

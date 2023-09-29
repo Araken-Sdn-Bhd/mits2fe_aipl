@@ -636,7 +636,9 @@ import CommonSidebar from '../../../components/CommonSidebar.vue';
 import Vue from "vue";
 import downloadexcel from "vue-json-excel";
 import JsonExcel from "vue-json-excel";
-
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 Vue.component("downloadExcel", JsonExcel);
 export default {
     components: {
@@ -968,21 +970,347 @@ export default {
                             this.Total_PatientsPDF = response.data.Total_PatientsPDF;
                             this.Attend = response.data.Attend;
                             this.No_Show = response.data.No_Show;
-                            setTimeout(() => {
-                                this.$refs.result.classList.remove("hide");
-                                var pdf = new jsPDF("l", "px", [929, 1920], "A4");
-                                pdf.internal.scaleFactor = 1.0; //A3 or use 1.41
-                                var options = {
-                                    pagesplit: true
-                                };
+                                if(this.appointment_type==1){
+                                                    let rows = [
+                                        [{text:'No', bold: true },
+                                        {text:'NAME', bold: true },
+                                        {text:'APPOINTMENT TYPE', bold: true },
+                                        {text:'TYPE OF VISIT', bold: true },
+                                        {text:'TYPE OF REFERRAL', bold: true },
+                                        {text:'IC NO', bold: true },
+                                        {text:'GENDER', bold: true },
+                                        {text:'AGE', bold: true },
+                                        {text:'DIAGNOSIS', bold: true },
+                                        {text:'MEDICATIONS', bold: true },
+                                        {text:'APPOINTMENT NO', bold: true },
+                                        {text:'PROCEDURE', bold: true },
+                                        {text:'NEXT VISIT', bold: true },
+                                        {text:'TIME REGISTERED', bold: true },
+                                        {text:'TIME SEEN', bold: true },
+                                        {text:'ATTENDANCE STATUS', bold: true },
+                                        {text:'ATTENDING DOCTOR/ STAFF', bold: true },
+                                        ]
+                                        ]
 
-                                pdf.addHTML($("#result")[0], options, function () {
-                                    pdf.save("Activities Report-Patient.pdf");
-                                });
-                            }, 100);
-                            setTimeout(() => {
-                                this.$refs.result.classList.add("hide");
-                            }, 100);
+                                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                                        rows.push([this.list[i].No,
+                                        this.list[i].Name,
+                                        this.list[i].APPOINTMENT_TYPE,
+                                        this.list[i].TYPE_OF_Visit,
+                                        this.list[i].TYPE_OF_Refferal,
+                                        this.list[i].IC_NO,
+                                        this.list[i].GENDER,
+                                        this.list[i].AGE,
+                                        this.list[i].DIAGNOSIS,
+                                        this.list[i].MEDICATIONS,
+                                        this.list[i].app_no,
+                                        this.list[i].Procedure,
+                                        this.list[i].Next_visit,
+                                        this.list[i].time_registered,
+                                        this.list[i].time_seen,
+                                        this.list[i].Attendance_status,
+                                        this.list[i].Attending_staff,
+                                        ]);
+                                        }                       
+
+                                                var dd = {
+                                                style: 'tableExample',
+                                                pageSize: 'A3',
+                                                pageOrientation: 'landscape',
+                                                defaultStyle: {
+                                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                                            },
+                                                content: [
+                                                {text: 'ATTEND=' + this.Attend,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'NO SHOW =' + this.No_Show,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {                                   
+                                                    
+                                                    table: {
+                                                        body: rows,
+                                                        headerRows:1,
+                                                    }
+                                                },
+                                                ],
+                                            
+                                        };
+                                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                                        pdfMake.createPdf(dd).download('PatientActivitiesReport.pdf');
+                                }if(this.appointment_type==3){
+                                    let rows = [
+                                        [{text:'No', bold: true },
+                                        {text:'NAME', bold: true },
+                                        {text:'APPOINTMENT TYPE', bold: true },
+                                        {text:'TYPE OF VISIT', bold: true },
+                                        {text:'TYPE OF REFERRAL', bold: true },
+                                        {text:'IC NO', bold: true },
+                                        {text:'GENDER', bold: true },
+                                        {text:'AGE', bold: true },
+                                        {text:'DIAGNOSIS', bold: true },
+                                        {text:'MEDICATIONS', bold: true },
+                                        {text:'RESTART', bold: true },
+                                        {text:'APPOINTMENT NO', bold: true },
+                                        {text:'NO. OF JOB SEARCH', bold: true },
+                                        {text:'NO. OF JOB VISIT', bold: true },
+                                        {text:'EMPLOYMENT STATUS', bold: true },
+                                        {text:'EMPLOYER', bold: true },
+                                        {text:'DATE OF EMPLOYMENT', bold: true },
+                                        {text:'EMPLOYER CONTACT', bold: true },
+                                        {text:'ATTENDANCE STATUS', bold: true },
+                                        {text:'ATTENDING DOCTOR/STAFF', bold: true },
+                                        ]
+                                        ]
+
+                                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                                        rows.push([this.list[i].No,
+                                        this.list[i].Name,
+                                        this.list[i].APPOINTMENT_TYPE,
+                                        this.list[i].TYPE_OF_Visit,
+                                        this.list[i].TYPE_OF_Refferal,
+                                        this.list[i].IC_NO,
+                                        this.list[i].GENDER,
+                                        this.list[i].AGE,
+                                        this.list[i].DIAGNOSIS,
+                                        this.list[i].MEDICATIONS,
+                                        this.list[i].RESTART,
+                                        this.list[i].app_no_se,
+                                        this.list[i].no_job_search,
+                                        this.list[i].no_job_visit,
+                                        this.list[i].EMPSTATUS,
+                                        this.list[i].EMPLOYER,
+                                        this.list[i].JOBSTARTDATE,
+                                        this.list[i].ADDRESS,
+                                        this.list[i].Attendance_status,
+                                        this.list[i].Attending_staff,
+                                        ]);
+                                        }                       
+
+                                                var dd = {
+                                                style: 'tableExample',
+                                                pageSize: 'A3',
+                                                pageOrientation: 'landscape',
+                                                defaultStyle: {
+                                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                                            },
+                                                content: [
+                                                {text: 'ATTEND=' + this.Attend,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'NO SHOW =' + this.No_Show,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {                                   
+                                                    
+                                                    table: {
+                                                        body: rows,
+                                                        headerRows:1,
+                                                    }
+                                                },
+                                                ],
+                                            
+                                        };
+                                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                                        pdfMake.createPdf(dd).download('PatientActivitiesReport.pdf');
+                                }if(this.appointment_type==4){
+                                    let rows = [
+                                        [{text:'No', bold: true },
+                                        {text:'NAME', bold: true },
+                                        {text:'APPOINTMENT TYPE', bold: true },
+                                        {text:'TYPE OF VISIT', bold: true },
+                                        {text:'TYPE OF REFERRAL', bold: true },
+                                        {text:'IC NO', bold: true },
+                                        {text:'GENDER', bold: true },
+                                        {text:'AGE', bold: true },
+                                        {text:'DIAGNOSIS', bold: true },
+                                        {text:'MEDICATIONS', bold: true },
+                                        {text:'APPOINTMENT NO', bold: true },
+                                        {text:'WORK READINESS', bold: true },
+                                        {text:'NEXT VISIT', bold: true },
+                                        {text:'ATTENDANCE STATUS', bold: true },
+                                        {text:'ATTENDING DOCTOR/ STAFF', bold: true },
+                                        ]
+                                        ]
+
+                                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                                        rows.push([this.list[i].No,
+                                        this.list[i].Name,
+                                        this.list[i].APPOINTMENT_TYPE,
+                                        this.list[i].TYPE_OF_Visit,
+                                        this.list[i].TYPE_OF_Refferal,
+                                        this.list[i].IC_NO,
+                                        this.list[i].GENDER,
+                                        this.list[i].AGE,
+                                        this.list[i].DIAGNOSIS,
+                                        this.list[i].MEDICATIONS,
+                                        this.list[i].app_no_etp,
+                                        this.list[i].WORKREADY,
+                                        this.list[i].Next_visit,
+                                        this.list[i].Attendance_status,
+                                        this.list[i].Attending_staff,
+                                        ]);
+                                        }                       
+
+                                                var dd = {
+                                                style: 'tableExample',
+                                                pageSize: 'A3',
+                                                pageOrientation: 'landscape',
+                                                defaultStyle: {
+                                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                                            },
+                                                content: [
+                                                {text: 'ATTEND=' + this.Attend,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'NO SHOW =' + this.No_Show,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {                                   
+                                                    
+                                                    table: {
+                                                        body: rows,
+                                                        headerRows:1,
+                                                    }
+                                                },
+                                                ],
+                                            
+                                        };
+                                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                                        pdfMake.createPdf(dd).download('PatientActivitiesReport.pdf');
+                                }if(this.appointment_type==5){
+                                    let rows = [
+                                        [{text:'No', bold: true },
+                                        {text:'NAME', bold: true },
+                                        {text:'APPOINTMENT TYPE', bold: true },
+                                        {text:'TYPE OF VISIT', bold: true },
+                                        {text:'TYPE OF REFERRAL', bold: true },
+                                        {text:'IC NO', bold: true },
+                                        {text:'GENDER', bold: true },
+                                        {text:'AGE', bold: true },
+                                        {text:'DIAGNOSIS', bold: true },
+                                        {text:'MEDICATIONS', bold: true },
+                                        {text:'APPOINTMENT NO', bold: true },
+                                        {text:'WORK READINESS', bold: true },
+                                        {text:'NEXT VISIT', bold: true },
+                                        {text:'ATTENDANCE STATUS', bold: true },
+                                        {text:'ATTENDING DOCTOR/ STAFF', bold: true },
+                                        ]
+                                        ]
+
+                                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                                        rows.push([this.list[i].No,
+                                        this.list[i].Name,
+                                        this.list[i].APPOINTMENT_TYPE,
+                                        this.list[i].TYPE_OF_Visit,
+                                        this.list[i].TYPE_OF_Refferal,
+                                        this.list[i].IC_NO,
+                                        this.list[i].GENDER,
+                                        this.list[i].AGE,
+                                        this.list[i].DIAGNOSIS,
+                                        this.list[i].MEDICATIONS,
+                                        this.list[i].app_no_jc,
+                                        this.list[i].WORKREADY,
+                                        this.list[i].Next_visit,
+                                        this.list[i].Attendance_status,
+                                        this.list[i].Attending_staff,
+                                        ]);
+                                        }                       
+
+                                                var dd = {
+                                                style: 'tableExample',
+                                                pageSize: 'A3',
+                                                pageOrientation: 'landscape',
+                                                defaultStyle: {
+                                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                                            },
+                                                content: [
+                                                {text: 'ATTEND=' + this.Attend,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'NO SHOW =' + this.No_Show,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {                                   
+                                                    
+                                                    table: {
+                                                        body: rows,
+                                                        headerRows:1,
+                                                    }
+                                                },
+                                                ],
+                                            
+                                        };
+                                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                                        pdfMake.createPdf(dd).download('PatientActivitiesReport.pdf');
+                                }if(this.appointment_type==6){
+                                    let rows = [
+                                        [{text:'No', bold: true },
+                                        {text:'NAME', bold: true },
+                                        {text:'APPOINTMENT TYPE', bold: true },
+                                        {text:'TYPE OF VISIT', bold: true },
+                                        {text:'TYPE OF REFERRAL', bold: true },
+                                        {text:'IC NO', bold: true },
+                                        {text:'GENDER', bold: true },
+                                        {text:'AGE', bold: true },
+                                        {text:'DIAGNOSIS', bold: true },
+                                        {text:'MEDICATIONS', bold: true },
+                                        {text:'APPOINTMENT NO', bold: true },
+                                        {text:'CURRENT INTERVENTION', bold: true },
+                                        {text:'NEXT VISIT', bold: true },
+                                        {text:'ATTENDANCE STATUS', bold: true },
+                                        {text:'ATTENDING DOCTOR/ STAFF', bold: true },
+                                        ]
+                                        ]
+
+                                        for (let i = 0; i < this.list.length; i++) { // i suggest a for-loop since you need both arrays at a time 
+                                        rows.push([this.list[i].No,
+                                        this.list[i].Name,
+                                        this.list[i].APPOINTMENT_TYPE,
+                                        this.list[i].TYPE_OF_Visit,
+                                        this.list[i].TYPE_OF_Refferal,
+                                        this.list[i].IC_NO,
+                                        this.list[i].GENDER,
+                                        this.list[i].AGE,
+                                        this.list[i].DIAGNOSIS,
+                                        this.list[i].MEDICATIONS,
+                                        this.list[i].app_no_cps,
+                                        this.list[i].CURRENTINTERV,
+                                        this.list[i].Next_visit,
+                                        this.list[i].Attendance_status,
+                                        this.list[i].Attending_staff,
+                                        ]);
+                                        }                       
+
+                                                var dd = {
+                                                style: 'tableExample',
+                                                pageSize: 'A3',
+                                                pageOrientation: 'landscape',
+                                                defaultStyle: {
+                                                                fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
+                                                            },
+                                                content: [
+                                                {text: 'TOTAL DAYS=' + this.Total_DaysPDF,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'TOTAL PATIENTS =' + this.Total_PatientsPDF,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {text: 'ATTEND=' + this.Attend,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+                                                {text: 'NO SHOW =' + this.No_Show,
+                                                        style: 'header',fontSize:7.5,bold:true,},
+
+                                                {                                   
+                                                    
+                                                    table: {
+                                                        body: rows,
+                                                        headerRows:1,
+                                                    }
+                                                },
+                                                ],
+                                            
+                                        };
+                                        //pdfMake.createPdf(dd).open('GeneralReport.pdf');
+                                        pdfMake.createPdf(dd).download('PatientActivitiesReport.pdf');
+                                }
+
                         } else {
                             this.error = "No Record Found";
                         }
