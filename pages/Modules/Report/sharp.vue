@@ -64,7 +64,6 @@
                                     <div class="mb-3">
                                         <label class="form-label">Age:</label>
                                         <select class="form-select" v-model="Age">
-                                            <option value="">Please Select</option>
                                             <option v-for="rfl in agelist" v-bind:key="rfl.id" v-bind:value="rfl.id">
                                                 {{ rfl.section_value }}
                                             </option>
@@ -341,8 +340,16 @@
                     <th class="thhead">Hospital Name</th>
                     <th class="thhead">Harm Date</th>
                     <th class="thhead">Harm Time</th>
+                    <th class="thhead">Hospital MRN No</th>
                     <th class="thhead">NRIC/Passport</th>
+                    <th class="thhead">Age</th>
                     <th class="thhead">Name</th>
+                    <th class="thhead">Gender</th>
+                    <th class="thhead">Citizenship</th>
+                    <th class="thhead">Race</th>
+                    <th class="thhead">Employment Status</th>
+                    <th class="thhead">Religion</th>
+                    <th class="thhead">Marital Status</th>
                     <th class="thhead">Address</th>
                     <th class="thhead">City</th>
                     <th class="thhead">State</th>
@@ -364,8 +371,16 @@
                     <td class="tdrow">{{ rp.HOSPITAL }}</td>
                     <td class="tdrow">{{ rp.DATE }}</td>
                     <td class="tdrow">{{ rp.TIME }}</td>
+                    <td class="tdrow">{{ rp.HOSPITAL_MRN_NO }}</td>
                     <td class="tdrow">{{ rp.NRIC_NO_PASSPORT_NO }}</td>
+                    <td class="tdrow">{{ rp.AGE }}</td>
                     <td class="tdrow">{{ rp.NAME }}</td>
+                    <td class="tdrow">{{ rp.GENDER }}</td>
+                    <td class="tdrow">{{ rp.CITIZENSHIP }}</td>
+                    <td class="tdrow">{{ rp.RACE }}</td>
+                    <td class="tdrow">{{ rp.EMPLOYMENT_STATUS }}</td>
+                    <td class="tdrow">{{ rp.RELIGION }}</td>
+                    <td class="tdrow">{{ rp.MARITAL }}</td>
                     <td class="tdrow">{{ rp.ADDRESS }}</td>
                     <td class="tdrow">{{ rp.CITY }}</td>
                     <td class="tdrow">{{ rp.STATE }}</td>
@@ -451,8 +466,16 @@ export default {
                 "Hospital Name": 'HOSPITAL',
                 "Harm Date": 'DATE',
                 "Harm Time": 'TIME',
+                "Hospital Mrn No": 'HOSPITAL_MRN_NO',
                 "NRIC No/PASSPORT No": 'NRIC_NO_PASSPORT_NO',
+                "AGE":'AGE',
                 "Name": 'NAME',
+                "Gender": 'GENDER',
+                "Citizenship": 'CITIZENSHIP',
+                "Race": 'RACE',
+                "Employment Status": 'EMPLOYMENT_STATUS',
+                "Religion": 'RELIGION',
+                "Marital": 'MARITAL',
                 "Address": 'ADDRESS',
                 "City": 'CITY',
                 "State": 'STATE',
@@ -517,16 +540,22 @@ export default {
             occupation_status: "",
             fee_exemption_status: "",
             occupation_sector: "",
-            age: "",
+            Age: "",
             count: 0,
             SidebarAccess: null,
             totalResultlist: 0,
+
+          
          };
     },
     beforeMount() {
         this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
         this.branch_id = this.userdetails.branch.branch_id;
+      
+    },
+    mounted() {
+        
         this.GetList();
     },
     methods: {
@@ -766,8 +795,16 @@ export default {
                         this.list[i].HOSPITAL,
                         this.list[i].DATE,
                         this.list[i].TIME,
+                        this.list[i].HOSPITAL_MRN_NO,
                         this.list[i].NRIC_NO_PASSPORT_NO,
+                        this.list[i].AGE,
                         this.list[i].NAME,
+                        this.list[i].GENDER,
+                        this.list[i].CITIZENSHIP,
+                        this.list[i].RACE,
+                        this.list[i].EMPLOYMENT_STATUS,
+                        this.list[i].RELIGION,
+                        this.list[i].MARITAL,
                         this.list[i].ADDRESS,
                         this.list[i].CITY,
                         this.list[i].STATE,
@@ -823,6 +860,7 @@ export default {
         },
 
         async Ongenerateexel() {
+            this.loader=true;
             this.errorList = [];
             this.error = null;
             if (!this.fromDate) {
@@ -853,7 +891,7 @@ export default {
                             name: this.name,
                             citizenship: this.citizenship,
                             gender: this.gender,
-                            Age: this.age,
+                            Age: this.Age,
                             race: this.race,
                             religion: this.religion,
                             marital_status: this.marital_status,
@@ -870,13 +908,14 @@ export default {
                     console.log("my report", response.data);
                     if (response.data.code == 200) {
                         if (response.data) {
-
+                            this.loader=false;
                             this.ReportList = response.data.result;
                             this.excelname = response.data.filename;
                             this.header = response.data.header;
                             return response.data.result;
 
                         } else {
+                            this.loader=false;
                             this.error = "No Record Found";
                         }
                     }
