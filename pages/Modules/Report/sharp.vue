@@ -350,6 +350,11 @@
                     <th class="thhead">Employment Status</th>
                     <th class="thhead">Religion</th>
                     <th class="thhead">Marital Status</th>
+                    <th class="thhead">Accomondation</th>
+                    <th class="thhead">Education Level</th>
+                    <th class="thhead">Occupation Status</th>
+                    <th class="thhead">Occupation Sector</th>
+                    <th class="thhead">Fee Exemption Status</th>
                     <th class="thhead">Address</th>
                     <th class="thhead">City</th>
                     <th class="thhead">State</th>
@@ -381,6 +386,11 @@
                     <td class="tdrow">{{ rp.EMPLOYMENT_STATUS }}</td>
                     <td class="tdrow">{{ rp.RELIGION }}</td>
                     <td class="tdrow">{{ rp.MARITAL }}</td>
+                    <td class="tdrow">{{ rp.ACCOMONDATION }}</td>
+                    <td class="tdrow">{{ rp.EDUCATION }}</td>
+                    <td class="tdrow">{{ rp.OCUPATION_STATUS }}</td>
+                    <td class="tdrow">{{ rp.OCCUPATION_SECTOR }}</td>
+                    <td class="tdrow">{{ rp.FEE_EXEMPTION }}</td>
                     <td class="tdrow">{{ rp.ADDRESS }}</td>
                     <td class="tdrow">{{ rp.CITY }}</td>
                     <td class="tdrow">{{ rp.STATE }}</td>
@@ -476,6 +486,11 @@ export default {
                 "Employment Status": 'EMPLOYMENT_STATUS',
                 "Religion": 'RELIGION',
                 "Marital": 'MARITAL',
+                "Accomondation": 'ACCOMONDATION',
+                "Education":'EDUCATION',
+                "Occupation Status":'OCCUPATION_STATUS',
+                "Occupation Sector":'OCCUPATION_SECTOR',
+                "Fee Exemption":'FEE_EXEMPTION',
                 "Address": 'ADDRESS',
                 "City": 'CITY',
                 "State": 'STATE',
@@ -805,6 +820,8 @@ export default {
                         this.list[i].EMPLOYMENT_STATUS,
                         this.list[i].RELIGION,
                         this.list[i].MARITAL,
+                        this.list[i].ACCOMONDATION,
+                        this.list[i].EDUCATION,
                         this.list[i].ADDRESS,
                         this.list[i].CITY,
                         this.list[i].STATE,
