@@ -574,6 +574,7 @@ export default {
         this.GetList();
     },
     methods: {
+        
         async GetList() {
             try {
                 this.loader = true;
@@ -731,6 +732,7 @@ export default {
         },
 
         async Ongeneratepdf() {
+            this.loader=true;
             this.errorList = [];
             this.error = null;
             if (!this.fromDate) {
@@ -787,8 +789,21 @@ export default {
                         {text:'Hospital Name', bold: true },
                         {text:'Harm Date', bold: true },
                         {text:'Harm Time', bold: true },
+                        {text:'Hospital MRN No', bold: true },
                         {text:'NRIC/Passport', bold: true },
+                        {text:'Age', bold: true },
                         {text:'Name', bold: true },
+                        {text:'Gender', bold: true },
+                        {text:'Citizenship', bold: true },
+                        {text:'Race', bold: true },
+                        {text:'Employment Status', bold: true },
+                        {text:'Religion', bold: true },
+                        {text:'Marital Status', bold: true },
+                        {text:'Accomondation', bold: true },
+                        {text:'Education Level', bold: true },
+                        {text:'Occupation Status', bold: true },
+                        {text:'Occupation Sector', bold: true },
+                        {text:'Fee Exemption Status', bold: true },
                         {text:'Address', bold: true },
                         {text:'City', bold: true },
                         {text:'State', bold: true },
@@ -822,6 +837,9 @@ export default {
                         this.list[i].MARITAL,
                         this.list[i].ACCOMONDATION,
                         this.list[i].EDUCATION,
+                        this.list[i].OCCUPATION_STATUS,
+                        this.list[i].OCCUPATION_SECTOR,
+                        this.list[i].FEE_EXEMPTION,
                         this.list[i].ADDRESS,
                         this.list[i].CITY,
                         this.list[i].STATE,
@@ -840,7 +858,7 @@ export default {
 
                                 var dd = {
                                 style: 'tableExample',
-                                pageSize: 'A3',
+                                pageSize: 'A2',
                                 pageOrientation: 'landscape',
                                 defaultStyle: {
                                                 fontSize: 7.5, //2.90(potrait) untuk A3 //maybe 4.5 untuk A2
@@ -865,12 +883,15 @@ export default {
                         };
                         //pdfMake.createPdf(dd).open('GeneralReport.pdf');
                         pdfMake.createPdf(dd).download('SHHARPReport.pdf');
-
+                    
+                        this.loader=false;
 
                     } else {
+                        this.loader=false;
                         this.error = "No Record Found";
                     }
                 } else {
+                    this.loader=false;
                     this.error = "No Record Found";
                 }
             }
