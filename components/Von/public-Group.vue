@@ -726,7 +726,7 @@
               </div>
             </div>
 
-            <div class="project-location-others profess-box " v-if="this.Gproject_loaction == 'project-location-othersG'">
+            <div class="project-location-others profess-box " v-if="this.Gproject_loaction == 'project-location-others'">
               <div class="mt-3">
                 <input
                   type="text"
