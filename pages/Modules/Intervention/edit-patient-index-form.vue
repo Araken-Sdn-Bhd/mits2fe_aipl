@@ -1357,7 +1357,7 @@
           },
           async OnSubmit() {
               this.$swal.fire({
-                  title: 'Do you want to save as draft?',
+                  title: 'Do you want to save the changes?',
                   showCancelButton: true,
                   confirmButtonText: 'Save',
               }).then(async (result) => {
@@ -1406,7 +1406,7 @@
                           addsubcode
                       });
                       try {
-                          if (!this.diagnosis) {
+                          if (!this.type_diagnosis_id) {
                               this.errorList.push("Diagnosis is required");
                           }
                           if (!this.date_onset) {
