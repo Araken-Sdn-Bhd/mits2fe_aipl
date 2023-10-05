@@ -1408,7 +1408,7 @@
                       });
                       try {
                           if (!this.type_diagnosis_id) {
-                              this.errorList.push("Diagnosis is required wertyj");
+                              this.errorList.push("Diagnosis is required");
                           }
                           if (!this.date_onset) {
                               this.errorList.push("Date Onset is required");
@@ -1542,7 +1542,7 @@
                               this.errorList.push("Date is required");
                           }
                           if (
-                              this.diagnosis &&
+                              // this.diagnosis &&
                               this.date_onset &&
                               this.date_of_diagnosis &&
                               this.date_of_referral &&
