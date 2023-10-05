@@ -55,7 +55,7 @@
               <select v-model="City" class="form-select" aria-label="Default select example"
                 @change="onPostbind($event)">
                 <option value="0">Please Select</option>
-                <option v-for="ctl in CityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
+                <option v-for="ctl in CityList" v-bind:key="ctl.id" v-bind:value="ctl.id">
                   {{ ctl.city_name }}
                 </option>
               </select>
@@ -347,6 +347,44 @@ export default {
     this.GethospitalList();
   },
   methods: {
+    async getCity() {
+              const headers = {
+                  Authorization: "Bearer " + this.userdetails.access_token,
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+              };
+              const response = await this.$axios.post(
+                  "address/" + this.state + "/getCityList", {
+                      headers
+                  }
+              );
+              if (response.data.code == 200 || response.data.code == "200") {
+                  this.CityList = response.data.list;
+                  this.PostCodeList = [];
+              } else {
+                  this.CityList = [];
+                  this.PostCodeList = [];
+              }
+          },
+
+          async getPostcode() {
+              const headers = {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+              };
+              const response = await this.$axios.post(
+                  "address/" + this.city + "/getPostcodeListById", {
+                      headers
+                  }
+              );
+              if (response.data.code == 200 || response.data.code == "200") {
+                  this.PostCodeList= response.data.list;
+              } else {
+                  this.PostCodeList = [];
+              }
+
+          },
+
     async onCitybind(event) {
       const headers = {
         Authorization: "Bearer " + this.userdetails.access_token,
@@ -509,7 +547,7 @@ export default {
                 branch_adrress_2: this.BranchAddress2,
                 branch_adrress_3: this.BranchAddress3,
                 branch_state: this.State,
-                branch_city: this.City,
+                branch_city: this.PostCode, //city share the same id with postcode
                 branch_postcode: this.PostCode,
                 branch_contact_number_office: JSON.stringify(Contactlist),
                 branch_contact_number_mobile:
@@ -661,7 +699,7 @@ export default {
       });
       if (response.data.code == 200) {
         console.log("my edit", response.data);
-
+     
         this.HospitalCode = {
           id: response.data.list.hospital_id,
           text: response.data.list.hospital_code,
@@ -684,18 +722,27 @@ export default {
         );
         this.FaxNo = response.data.list.branch_fax_no;
         this.Id = data.id;
-        const response1 = await this.$axios.post(
-          "address/" + this.State + "/stateWisePostcodeList",
-          { headers }
-        );
-        if (response1.data.code == 200 || response1.data.code == "200") {
-          this.CityList = response1.data.list;
-          this.PostCodeList = response1.data.list;
-          this.loader = false;
-        } else {
-          this.CityList = [];
-          this.PostCodeList = [];
+
+      
+        if(response.data.list.branch_state != null){
+                  this.state = response.data.list.branch_state;
+                  this.getCity();
         }
+
+                if (response.data.list.branch_city != "" || response.data.list.branch_city != null) {
+                 
+                      this.getCity();
+                      
+                      this.city = response.data.list.branch_city;
+                      this.getPostcode();
+
+                    }
+                if(response.data.list.hospital_postcode != null){
+                      this.postcode= response.data.list.hospital_postcode;
+                      this.getPostcode();
+                    }
+        this.loader = false;
+      
       } else {
         this.$swal.fire({
                   icon: 'error',
