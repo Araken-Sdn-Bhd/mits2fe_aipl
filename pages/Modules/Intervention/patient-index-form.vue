@@ -1358,7 +1358,7 @@
           },
           async OnSubmit() {
               this.$swal.fire({
-                  title: 'Do you want to save as draft?',
+                  title: 'Do you want to save the changes?',
                   showCancelButton: true,
                   confirmButtonText: 'Save',
               }).then(async (result) => {
@@ -1407,8 +1407,8 @@
                           addsubcode
                       });
                       try {
-                          if (!this.diagnosis) {
-                              this.errorList.push("Diagnosis is required");
+                          if (!this.type_diagnosis_id) {
+                              this.errorList.push("Diagnosis is required wertyj");
                           }
                           if (!this.date_onset) {
                               this.errorList.push("Date Onset is required");
@@ -1643,7 +1643,11 @@
                               if (response.data.code == 200) {
                                   this.loader = false;
                                   this.resetmodel();
-                                  this.$swal.fire('Succesfully save as draft!', '', 'success')
+                                  this.$swal.fire(
+                                    'Successfully Submitted.',
+                                    'Data is inserted.',
+                                    'success',
+                                );
                                   this.GoBack();
                               } else {
                                   this.loader = false;
