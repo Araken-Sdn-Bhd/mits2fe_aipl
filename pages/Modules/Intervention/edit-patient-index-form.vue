@@ -1275,7 +1275,7 @@
                           const response = await this.$axios.post(
                               "patient-index/add", {
                                   patient_mrn_id: this.Id,
-                                  diagnosis: this.diagnosis,
+                                  diagnosis: this.type_diagnosis_id,
                                   date_onset: this.date_onset,
                                   date_of_diagnosis: this.date_of_diagnosis,
                                   date_of_referral: this.date_of_referral,
@@ -1541,7 +1541,7 @@
                               this.errorList.push("Date is required");
                           }
                           if (
-                              this.diagnosis &&
+                              // this.diagnosis &&
                               this.date_onset &&
                               this.date_of_diagnosis &&
                               this.date_of_referral &&
@@ -1588,7 +1588,7 @@
                               const response = await this.$axios.post(
                                   "patient-index/add", {
                                       patient_mrn_id: this.Id,
-                                      diagnosis: this.diagnosis,
+                                      diagnosis: this.type_diagnosis_id,
                                       date_onset: this.date_onset,
                                       date_of_diagnosis: this.date_of_diagnosis,
                                       date_of_referral: this.date_of_referral,
