@@ -128,8 +128,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="ctl in OCityList"
-              v-bind:key="ctl.city_name"
-              v-bind:value="ctl.city_name"
+              v-bind:key="ctl.id"
+              v-bind:value="ctl.id"
             >
               {{ ctl.city_name }}
             </option>
