@@ -42,7 +42,7 @@
               >How many group members do you have?<span>*</span></label
             >
             <input
-              type="number"
+              type="text"
               class="form-control"
               placeholder="Please Specify"
               name=""
@@ -186,8 +186,8 @@
             <option value="0">Please Select</option>
             <option
               v-for="ctl in GCityList"
-              v-bind:key="ctl.city_name"
-              v-bind:value="ctl.city_name"
+              v-bind:key="ctl.id"
+              v-bind:value="ctl.id"
             >
               {{ ctl.city_name }}
             </option>
@@ -327,7 +327,7 @@
                 type="radio"
                 name="experience"
                 id="experience-no1"
-                value="0"
+                value="experience-no"
                 v-model="Gis_voluneering_exp"
               />
               <label class="form-check-label" for="experience-no1">No</label>

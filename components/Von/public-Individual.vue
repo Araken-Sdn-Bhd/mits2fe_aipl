@@ -56,7 +56,7 @@
             <label class="form-label">City<span>*</span></label>
             <select class="form-select" v-model="city_id" @change="getPostcodeList($event)">
                 <option value="0">Please Select</option>
-                <option v-for="ctl in CityList" v-bind:key="ctl.city_name" v-bind:value="ctl.city_name">
+                <option v-for="ctl in CityList" v-bind:key="ctl.id" v-bind:value="ctl.id">
                     {{ ctl.city_name }}
                 </option>
             </select>
@@ -141,7 +141,7 @@
                     <label class="form-check-label" for="experience-yes">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="experience" id="experience-no" value="0" v-model="is_voluneering_exp" />
+                    <input class="form-check-input" type="radio" name="experience" id="experience-no" value="experience-no" v-model="is_voluneering_exp" />
                     <label class="form-check-label" for="experience-no">No</label>
                 </div>
 
@@ -953,16 +953,16 @@ export default {
                         this.Isvalid = false;
                     }
                 }
-                // if (!this.mentari_services) {
-                //     this.errors.push("Relevant Mentari Service is required.");
-                //     this.Isvalid = false;
-                // }
-                // if (!this.available_date) {
-                //     this.errors.push("Available Day is required.");
-                // }
-                // if (!this.available_time) {
-                //     this.errors.push("Available Time is required.");
-                // }
+                if (!this.mentari_services) {
+                    this.errors.push("Relevant Mentari Service is required.");
+                    this.Isvalid = false;
+                }
+                if (!this.available_date) {
+                    this.errors.push("Available Day is required.");
+                }
+                if (!this.available_time) {
+                    this.errors.push("Available Time is required.");
+                }
                 if (
                     this.Isvalid &&
                     this.name &&
@@ -976,10 +976,9 @@ export default {
                     this.education_id &&
                     this.occupation_sector_id &&
                     this.branch_id &&
-                    this.area_of_involvement
-                    // &&
-                    // this.available_date &&
-                    // this.available_time
+                    this.area_of_involvement &&
+                    this.available_date &&
+                    this.available_time
                 ) {
                     if (this.mentari_services) {
                         this.mentari_services =
