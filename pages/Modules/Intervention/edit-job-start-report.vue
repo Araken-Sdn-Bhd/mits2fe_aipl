@@ -8,7 +8,7 @@
                     <div class="page-title">
                         <h1>Job Start Report</h1>
                     </div>
-    
+
                     <div class="card mb-4">
                         <div class="card-body">
                             <div>
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <!-- close-row -->
-    
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <!-- close-row -->
-    
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <!-- close-row -->
-    
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <!-- close-row -->
-    
+
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="mb-3">
@@ -84,7 +84,7 @@
                                             <input type="text" class="form-control" v-model="benefits_field" />
                                         </div>
                                     </div>
-    
+
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label">Work Schedule<small style="color:red">*</small> </label>
@@ -144,7 +144,7 @@
                       </div>
                     </div> -->
                                 <!-- close-row -->
-    
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <!-- close-row -->
-    
+
                                 <div class="accordion form-accordion mt-3" id="accordionExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
@@ -279,7 +279,7 @@
                                                 </option>
                                                 </select>
                                             </div>
-    
+
                                             <div class="col-md-8 mb-3">
                                             <div><label class="form-label">ICD 9 SUB CODE<small style="color:red">*</small> </label></div>
                                             <div>
@@ -287,7 +287,7 @@
                                                 <select
                                                 class="form-select multiselect" multiple="multiple"
                                                 id="sub_code_id" v-model="additional_sub_code_id" style="width:100%">
-    
+
                                                 <option value="0">Select code</option>
                                                 <option
                                                     v-for="catcode in icdcatcodelist"
@@ -299,9 +299,9 @@
                                             </div>
                                             </div>
                                             </div>
-                                            
+
                                             </div>
-    
+
                                                 <!--additional code-->
                                                 <div class="row mb-6 align-items-flex-start">
                                                 <div class="col-md-4 mb-3">
@@ -320,7 +320,7 @@
                                                     </option>
                                                     </select>
                                                 </div>
-    
+
                                                 <div class="col-md-8 mb-3">
                                                 <div><label class="form-label">Additional ICD 9 SUB CODE</label></div>
                                                 <div>
@@ -328,7 +328,7 @@
                                                     <select
                                                     class="form-select multiselect" multiple="multiple"
                                                     id="add_sub_code_id" v-model="additional_sub_code_id2" style="width:100%">
-    
+
                                                     <option value="0">Select code</option>
                                                     <option
                                                         v-for="catcode in addicdcatcodelist"
@@ -340,9 +340,9 @@
                                                 </div>
                                                 </div>
                                                 </div>
-    
-                                                
-                                                
+
+
+
                                                 </div>
                                             </div>
                                                 <!-- 02 -->
@@ -415,15 +415,15 @@
                                 <br>
                                 <br>
                                 <div class="d-flex">
-    
+
                                     <button @click="GoBack" class="btn btn-primary btn-text"><i class="fa fa-arrow-alt-to-left"></i> Back
                                     </button>
-    
+
                                     <div class="btn-right">
                                         <button type="submit" @click="onCreateEvent()" class="btn btn-warning btn-text">
                                             <i class="fa fa-save"></i> Save as draft
                                         </button>
-    
+
                                         <button type="submit" @click="onPublishEvent()" class="btn btn-success btn-text">
                                             <i class="fa fa-paper-plane"></i> Submit
                                         </button>
@@ -437,7 +437,7 @@
         </div>
     </div>
     </template>
-    
+
     <script>
     import CommonHeader from "../../../components/CommonHeader.vue";
     import CommonSidebar from "../../../components/CommonSidebar.vue";
@@ -490,7 +490,7 @@
                 assistancelist: [],
                 externallist: [],
                 SidebarAccess: null,
-    
+
                 addicdcatcodelist: [],
                 type_diagnosis_id: 0,
                 add_code_id:0,
@@ -515,11 +515,11 @@
             this.appId = urlParams.get("appId");
             this.GetPatientdetails();
             if (this.Id) {
-    
+
                 this.GetList();
             }
-    
-    
+
+
             let urlParams1 = new URLSearchParams(window.location.search);
             this.pid = urlParams1.get("pid");
             this.type = urlParams1.get("type");
@@ -684,7 +684,7 @@
                     }
                 })
             },
-    
+
             async onPublishEvent() {
                 var additionalbox = 0;
           $("#additionalbox :selected").each(function () {
@@ -827,6 +827,7 @@
                                 const response = await this.$axios.post(
                                     "intervention/job-start-form", {
                                         added_by: this.userdetails.user.id,
+                                        id: this.pid,
                                         patient_id: this.Id,
                                         client: this.client,
                                         employment_specialist: this.employment_specialist,
@@ -868,7 +869,7 @@
                                         'Data is inserted.',
                                         'success',
                                     );
-    
+
                                     this.GoBack();
                                 } else {
                                     this.loader = false;
@@ -889,7 +890,7 @@
                                 title: 'Oops... Something Went Wrong!',
                                 text: 'the error is: ' + e,
                             })
-    
+
                             this.GoBack();
                         }
                     } else if (result.isDismissed) {
@@ -1074,9 +1075,9 @@
                     }
                 );
                 if (response.data.code == 200) {
-    
+
                     this.Id = response.data.Data[0].patient_id;
-    
+
                     this.client = response.data.Data[0].client;
                     this.employment_specialist =
                         response.data.Data[0].employment_specialist;
@@ -1150,7 +1151,7 @@
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions2"]').trigger('click');
                     });
-                }else if(this.category_services=='external'){
+                }else if(this.category_services=='assisstance'){
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions3"]').trigger('click');
                     });
@@ -1176,10 +1177,9 @@
         },
     };
     </script>
-    
+
     <style scoped>
     .hide {
         display: none;
     }
     </style>
-    
