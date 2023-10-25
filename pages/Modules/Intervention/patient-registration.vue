@@ -1465,6 +1465,15 @@ export default {
     }
   },
 
+  watch: {
+        nric_no: function(val, oldVal) {
+            if(val.length!= 0){
+              this.OnnricNo();
+              this.validateIC();
+            }
+        }
+    },
+
   methods: {
     NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
