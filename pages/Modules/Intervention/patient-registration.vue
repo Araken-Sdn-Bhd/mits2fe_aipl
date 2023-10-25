@@ -524,8 +524,8 @@
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in citylist"
-                                v-bind:key="ct.city_name"
-                                v-bind:value="ct.city_name"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
                               >
                                 {{ ct.city_name }}
                               </option>
@@ -1006,8 +1006,8 @@
                               <option value="0">Select</option>
                               <option
                                 v-for="ct in kincitylist"
-                                v-bind:key="ct.city_name"
-                                v-bind:value="ct.city_name"
+                                v-bind:key="ct.id"
+                                v-bind:value="ct.id"
                               >
                                 {{ ct.city_name }}
                               </option>
