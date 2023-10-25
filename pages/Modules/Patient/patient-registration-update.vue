@@ -287,7 +287,7 @@
                                                     <select v-model="city_id" class="form-select"
                                                      @change="getPostcodeList($event)" aria-label="Default select example">
                                                         <option value="0">Select</option>
-                                                        <option v-for="ct in citylist" v-bind:key="ct.city_name" v-bind:value="ct.city_name">
+                                                        <option v-for="ct in citylist" v-bind:key="ct.id" v-bind:value="ct.id">
                                                             {{ ct.city_name }}
                                                         </option>
                                                     </select>
@@ -581,7 +581,7 @@
                                                     <label class="form-label">City</label>
                                                     <select v-model="kin_city_id" class="form-select" aria-label="Default select example" @change="getKinPostcodeList($event)">
                                                         <option value="0">Select</option>
-                                                        <option v-for="ct in kincitylist" v-bind:key="ct.city_name" v-bind:value="ct.city_name">
+                                                        <option v-for="ct in kincitylist" v-bind:key="ct.id" v-bind:value="ct.id">
                                                             {{ ct.city_name }}
                                                         </option>
                                                     </select>
@@ -1657,131 +1657,141 @@ export default {
             );
             console.log("my pt details", response.data);
             if (response.data.code == 200) {
-                //alert(JSON.stringify(response.data.list[0]));
-                if(response.data.list[0].salutation_id != null){ this.salutation_id = response.data.list[0].salutation_id;}
-                if(response.data.list[0].name_asin_nric){ this.name_asin_nric =  response.data.list[0].name_asin_nric;}
-                if(response.data.list[0].citizenship != null){ this.citizenship = response.data.list[0].citizenship;}
-                if(response.data.list[0].citizenships[0].section_value != null){this.citizentype = response.data.list[0].citizenships[0].section_value;}
+                if(response.data.list[0].salutation_id != null){ this.salutation_id = response.data.list[0].salutation_id;};
+                if(response.data.list[0].name_asin_nric){ this.name_asin_nric =  response.data.list[0].name_asin_nric;};
+                if(response.data.list[0].citizenship != null){ this.citizenship = response.data.list[0].citizenship;};
+                if(response.data.list[0].citizenships[0].section_value != null){this.citizentype = response.data.list[0].citizenships[0].section_value;};
                 if (response.data.list[0].nric_type != null){
                     this.nric_type = response.data.list[0].nric_type;
                     this.nric_type_code = response.data.list[0].typeic[0].code;
-                }
-                if(response.data.list[0].sex != null){this.sex = response.data.list[0].sex;}
-                if (response.data.list[0].branch_id != null){this.branchId = response.data.list[0].branch_id;}
+                };
+                if(response.data.list[0].sex != null){this.sex = response.data.list[0].sex;};
+                if (response.data.list[0].branch_id != null){this.branchId = response.data.list[0].branch_id;};
                 if(response.data.list[0].nric_no != null){
                     var str = response.data.list[0].nric_no;
                     this.nric_no = str.replace(/[^a-z0-9\s]/gi, '');
                     this.nric_no1 =str.replace(/[^a-z0-9\s]/gi, '');
-                }
-                if(response.data.list[0].passport_no != null){ this.passport_no = response.data.list[0].passport_no;}
-                if(response.data.list[0].expiry_date != null){ this.expiry_date = response.data.list[0].expiry_date;}
-                if(response.data.list[0].country_id != null){ this.country_id = response.data.list[0].country_id;}
-                if(response.data.list[0].birth_date != null){ this.birth_date = response.data.list[0].birth_date;}
+                };
+                if(response.data.list[0].passport_no != null){ this.passport_no = response.data.list[0].passport_no;};
+                if(response.data.list[0].expiry_date != null){ this.expiry_date = response.data.list[0].expiry_date;};
+                if(response.data.list[0].country_id != null){ this.country_id = response.data.list[0].country_id;};
+                if(response.data.list[0].birth_date != null){ this.birth_date = response.data.list[0].birth_date;};
 
-                if(response.data.list[0].age != null){this.age = response.data.list[0].age;}
-                if(response.data.list[0].mobile_no != null){ this.mobile_no = response.data.list[0].mobile_no;}
-                if(response.data.list[0].house_no != null){ this.house_no = response.data.list[0].house_no;}
-                if(response.data.list[0].hospital_mrn_no != null){ this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;}
-                if(response.data.list[0].mintari_mrn_no != null){ this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;}
+                if(response.data.list[0].age != null){this.age = response.data.list[0].age;};
+                if(response.data.list[0].mobile_no != null){ this.mobile_no = response.data.list[0].mobile_no;};
+                if(response.data.list[0].house_no != null){ this.house_no = response.data.list[0].house_no;};
+                if(response.data.list[0].hospital_mrn_no != null){ this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;};
+                if(response.data.list[0].mintari_mrn_no != null){ this.mintari_mrn_no = response.data.list[0].mintari_mrn_no;};
 
                 if( response.data.list[0].services_type != null){
                     this.services_type = {
                     id: response.data.list[0].services_type,
                     text: response.data.list[0].service['service_name']
                     };
-                }
-                if(response.data.list[0].referral_type != null){ this.referral_type = response.data.list[0].referral_type;}
+                };
+                if(response.data.list[0].referral_type != null){ this.referral_type = response.data.list[0].referral_type;};
                 this.other_referral = response.data.list[0].other_referral;
-                if(response.data.list[0].address1 != null){ this.address1 = response.data.list[0].address1;}
-                if(response.data.list[0].address2 != null){ this.address2 = response.data.list[0].address2;}
-                if(response.data.list[0].address3 != null){ this.address3 = response.data.list[0].address3;}
+                if(response.data.list[0].address1 != null){ this.address1 = response.data.list[0].address1;};
+                if(response.data.list[0].address2 != null){ this.address2 = response.data.list[0].address2;};
+                if(response.data.list[0].address3 != null){ this.address3 = response.data.list[0].address3;};
                 if(response.data.list[0].state_id != null){
                     this.state_id = response.data.list[0].state_id;
                     this.getCity();
-                }
-                //alert(response.data.list[0].city.length);
+                };
                 if(response.data.list[0].city.length != 0) {
                     if(response.data.list[0].city[0].city_id != null){ this.city_id = response.data.list[0].city[0].city_id;}
                     if (response.data.list[0].city[0].city_id != "") {
                     this.getCity();
-                    this.city_id = response.data.list[0].city[0].city_name
+                    this.city_id = response.data.list[0].city[0].id;
                     this.getPostcode();
                     }
-                }
-                if(response.data.list[0].postcode != null){ this.postcode = response.data.list[0].postcode; this.getPostcode();}
-                if(response.data.list[0].patient_mrn != null){ this.patient_mrn = response.data.list[0].patient_mrn;}
-                if(response.data.list[0].referral_letter != null){ this.referral_letter = response.data.list[0].referral_letter;}
-                if(response.data.list[0].race_id != null){this.race_id = response.data.list[0].race[0].id;}
-                if(response.data.list[0].religion_id != null){this.religion_id = response.data.list[0].religion[0].id;}
-                if(response.data.list[0].marital_id != null){ this.marital_id = response.data.list[0].marital_id;}
-                if(response.data.list[0].accomodation_id != null){ this.accomodation_id = response.data.list[0].accomodation_id;}
-                if(response.data.list[0].fee_exemption_status != null){ this.fee_exemption_status = response.data.list[0].fee_exemption_status;}
-                if(response.data.list[0].occupation_status != null){ this.occupation_status = response.data.list[0].occupation_status; }
-                if(response.data.list[0].occupation_sector != null){ this.occupation_sector = response.data.list[0].occupation_sector;}
-                if(response.data.list[0].education_level != null){ this.education_level = response.data.list[0].education_level;}
-                if(response.data.list[0].other_race != null){  this.other_race = response.data.list[0].other_race;}
-                if (response.data.list[0].race[0].section_value == "OTHERS") {
-                    this.otherRace = true;
-                } else {
-                    this.otherRace = false;
-                }
-                if(response.data.list[0].other_religion != null){ this.other_religion = response.data.list[0].other_religion;}
-                if (response.data.list[0].religion[0].section_value == "OTHERS") {
-                    this.otherReligion = true;
-                } else {
-                    this.otherReligion = false;
-                }
-                if(response.data.list[0].other_accommodation != null){ this.other_accommodation = response.data.list[0].other_accommodation;}
-                if (response.data.list[0].accomondation[0].section_value == "OTHERS") {
-                    this.otherAccommodation = true;
-                } else {
-                    this.otherAccommodation = false;
-                }
+                };
+                if(response.data.list[0].postcode != null || response.data.list[0].postcode != ''  ){ this.postcode = response.data.list[0].postcode; this.getPostcode();};
+                if(response.data.list[0].patient_mrn != null || response.data.list[0].patient_mrn != '' ){ this.patient_mrn = response.data.list[0].patient_mrn;};
+                if(response.data.list[0].referral_letter != null || response.data.list[0].referral_letter != ''){ this.referral_letter = response.data.list[0].referral_letter;};
+                if(response.data.list[0].race_id != null && response.data.list[0].race_id != 0){this.race_id = response.data.list[0].race[0].id;}
+                if(response.data.list[0].religion_id != null && response.data.list[0].religion_id != 0){this.religion_id = response.data.list[0].religion[0].id;}
+                if(response.data.list[0].marital_id != null){ this.marital_id = response.data.list[0].marital_id;};
+                if(response.data.list[0].accomodation_id != null){ this.accomodation_id = response.data.list[0].accomodation_id;};
+                if(response.data.list[0].fee_exemption_status != null){ this.fee_exemption_status = response.data.list[0].fee_exemption_status;};
+                if(response.data.list[0].occupation_status != null){ this.occupation_status = response.data.list[0].occupation_status; };
+                if(response.data.list[0].occupation_sector != null){ this.occupation_sector = response.data.list[0].occupation_sector;};
+                if(response.data.list[0].education_level != null){ this.education_level = response.data.list[0].education_level;};
+                if(response.data.list[0].other_race != null){  this.other_race = response.data.list[0].other_race;};
+                if(response.data.list[0].race.length != 0){
+                    if (response.data.list[0].race[0].section_value == "OTHERS") {
+                        this.otherRace = true;
+                    } else {
+                        this.otherRace = false;
+                    };
+                };
+                if(response.data.list[0].other_religion != null){ this.other_religion = response.data.list[0].other_religion;};
+                if(response.data.list[0].religion.length != 0){
+                    if (response.data.list[0].religion[0].section_value == "OTHERS") {
+                        this.otherReligion = true;
+                    } else {
+                        this.otherReligion = false;
+                    };
+                };
+                if(response.data.list[0].other_accommodation != null){ this.other_accommodation = response.data.list[0].other_accommodation;};
+                if(response.data.list[0].accomondation.length != 0){
+                    if (response.data.list[0].accomondation[0].section_value == "OTHERS") {
+                        this.otherAccommodation = true;
+                    } else {
+                        this.otherAccommodation = false;
+                    };
+                };
+                if(response.data.list[0].other_maritalList != null){  this.other_maritalList = response.data.list[0].other_maritalList;};
+                if(response.data.list[0].maritialstatus.length != 0){
+                    if (response.data.list[0].maritialstatus[0].section_value == "OTHERS") {
+                        this.otherMarital = true;
+                    } else {
+                        this.otherMarital = false;
+                    };
+                };
 
-                if(response.data.list[0].other_maritalList != null){  this.other_maritalList = response.data.list[0].other_maritalList;}
-                if (response.data.list[0].maritialstatus[0].section_value == "OTHERS") {
-                    this.otherMarital = true;
-                } else {
-                    this.otherMarital = false;
-                }
-                if(response.data.list[0].other_feeExemptionStatus != null){ this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;}
-                if(response.data.list[0].other_occupationStatus != null){ this.other_occupationStatus = response.data.list[0].other_occupationStatus;}
-                if (response.data.list[0].occupation[0].section_value == "OTHERS") {
-                    this.otherOccStatus = true;
-                } else {
-                    this.otherOccStatus = false;
-                }
+                if(response.data.list[0].other_feeExemptionStatus != null){ this.other_feeExemptionStatus = response.data.list[0].other_feeExemptionStatus;};
+                if(response.data.list[0].other_occupationStatus != null){ this.other_occupationStatus = response.data.list[0].other_occupationStatus;};
+                if(response.data.list[0].occupation.length != 0){
+                    if (response.data.list[0].occupation[0].section_value == "OTHERS") {
+                        this.otherOccStatus = true;
+                    } else {
+                        this.otherOccStatus = false;
+                    };
+                };
                 this.other_education = response.data.list[0].other_education;
-                if (response.data.list[0].education[0].section_value == "OTHERS") {
-                  this.otherEducation = true;
-                } else {
-                  this.otherEducation = false;
-                }
-                if(response.data.list[0].kin_name_asin_nric != null){ this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;}
-                if(response.data.list[0].kin_relationship_id != null){ this.kin_relationship_id = response.data.list[0].kin_relationship_id;}
-                if(response.data.list[0].kin_nric_no != null){ this.kin_nric_no = response.data.list[0].kin_nric_no;}
-                if(response.data.list[0].kin_mobile_no != null){ this.kin_mobile_no = response.data.list[0].kin_mobile_no;}
-                if(response.data.list[0].kin_house_no != null){ this.kin_house_no = response.data.list[0].kin_house_no;}
-                if(response.data.list[0].kin_address1 != null){ this.kin_address1 = response.data.list[0].kin_address1;}
-                if(response.data.list[0].kin_address2 != null){ this.kin_address2 = response.data.list[0].kin_address2;}
-                if(response.data.list[0].kin_address3 != null){ this.kin_address3 = response.data.list[0].kin_address3;}
+                if(response.data.list[0].education.length != 0){
+                    if (response.data.list[0].education[0].section_value == "OTHERS") {
+                    this.otherEducation = true;
+                    } else {
+                    this.otherEducation = false;
+                    };
+                };
+                if(response.data.list[0].kin_name_asin_nric != null){ this.kin_name_asin_nric = response.data.list[0].kin_name_asin_nric;};
+                if(response.data.list[0].kin_relationship_id != null){ this.kin_relationship_id = response.data.list[0].kin_relationship_id;};
+                if(response.data.list[0].kin_nric_no != null){ this.kin_nric_no = response.data.list[0].kin_nric_no;};
+                if(response.data.list[0].kin_mobile_no != null){ this.kin_mobile_no = response.data.list[0].kin_mobile_no;};
+                if(response.data.list[0].kin_house_no != null){ this.kin_house_no = response.data.list[0].kin_house_no;};
+                if(response.data.list[0].kin_address1 != null){ this.kin_address1 = response.data.list[0].kin_address1;};
+                if(response.data.list[0].kin_address2 != null){ this.kin_address2 = response.data.list[0].kin_address2;};
+                if(response.data.list[0].kin_address3 != null){ this.kin_address3 = response.data.list[0].kin_address3;};
                 if(response.data.list[0].kin_state_id != null){
                     this.kin_state_id = response.data.list[0].kin_state_id;
                     this.getkinCity();
-                }
-                if(response.data.list[0].kincity[0].city_id != null){ this.kin_city_id = response.data.list[0].kincity[0].city_id;}
+                };
+                if(response.data.list[0].kincity[0].city_id != null){ this.kin_city_id = response.data.list[0].kincity[0].id;};
                 if (response.data.list[0].kincity[0].city_id != "") {
                     this.getkinCity();
-                    this.kin_city_id = response.data.list[0].kincity[0].city_name
+                    this.kin_city_id = response.data.list[0].kincity[0].id;
                     this.getkinPostcode();
-                }
-                if(response.data.list[0].kin_postcode != null){ this.kin_postcode = response.data.list[0].kin_postcode;}
-                if(response.data.list[0].drug_allergy != null){ this.drug_allergy = response.data.list[0].drug_allergy;}
-                if(response.data.list[0].drug_allergy_description != null){ this.drug_allergy_description = response.data.list[0].drug_allergy_description;}
-                if(response.data.list[0].other_allergy != null){ this.other_allergy = response.data.list[0].other_allergy;}
-                if(response.data.list[0].other_description != null){ this.other_description = response.data.list[0].other_description;}
-                if(response.data.list[0].traditional_description != null){ this.traditional_description = response.data.list[0].traditional_description;}
-                if(response.data.list[0].traditional_medication != null){ this.traditional_medication = response.data.list[0].traditional_medication;}
+                };
+                if(response.data.list[0].kin_postcode != null){ this.kin_postcode = response.data.list[0].kin_postcode;};
+                if(response.data.list[0].drug_allergy != null){ this.drug_allergy = response.data.list[0].drug_allergy;};
+                if(response.data.list[0].drug_allergy_description != null){ this.drug_allergy_description = response.data.list[0].drug_allergy_description;};
+                if(response.data.list[0].other_allergy != null){ this.other_allergy = response.data.list[0].other_allergy;};
+                if(response.data.list[0].other_description != null){ this.other_description = response.data.list[0].other_description;};
+                if(response.data.list[0].traditional_description != null){ this.traditional_description = response.data.list[0].traditional_description;};
+                if(response.data.list[0].traditional_medication != null){ this.traditional_medication = response.data.list[0].traditional_medication;};
                 this.Id = response.data.list[0].id;
                 this.status = response.data.list[0].status;
                 if (response.data.list[0].service['service_name'] ==
@@ -1792,12 +1802,14 @@ export default {
                     this.uploaddoc = true;
                 } else {
                     this.uploaddoc = false;
-                }
-                if (response.data.list[0].fee[0].section_value == "OTHERS") {
-                    this.otherFeeExemStatus = true;
-                } else {
-                    this.otherFeeExemStatus = false;
-                }
+                };
+                if(response.data.list[0].fee.length != 0){
+                    if (response.data.list[0].fee[0].section_value == "OTHERS") {
+                        this.otherFeeExemStatus = true;
+                    } else {
+                        this.otherFeeExemStatus = false;
+                    };
+                };
 
                 this.loader = false;
             } else {
