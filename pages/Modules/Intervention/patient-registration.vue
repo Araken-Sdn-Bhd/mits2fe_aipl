@@ -329,18 +329,18 @@
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label class="form-label">Date of Birth</label>
+                            <label class="form-label">Date of Birth<small>*</small></label>
                             <input type="date" @change="OnAgeCalculation" class="form-control" name="" v-model="birth_date" />
                           </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" v-if="this.birth_date">
                           <div class="mb-3">
                             <label class="form-label">Age</label>
                             <input
                               type="text"
                               class="form-control"
                               placeholder="Age"
-                              name="" v-model="age"
+                              name="" v-model="age" disabled
                             />
                           </div>
                         </div>
@@ -2003,7 +2003,6 @@ export default {
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);
           body.append("birth_date", this.birth_date);
-          body.append("age", this.age);
           body.append("mobile_no", this.mobile_no);
           body.append("house_no", this.house_no);
           body.append("hospital_mrn_no", this.hospital_mrn_no);
@@ -2142,7 +2141,6 @@ export default {
           body.append("name_asin_nric", this.name_asin_nric);
           body.append("sex", this.sex);
           body.append("birth_date", this.birth_date);
-          body.append("age", this.age);
           body.append("mobile_no", this.mobile_no);
           body.append("house_no", this.house_no);
           body.append("hospital_mrn_no", this.hospital_mrn_no);
@@ -2284,7 +2282,6 @@ export default {
         this.address1 = response.data.list[0].address1;
         this.address2 = response.data.list[0].address2;
         this.address3 = response.data.list[0].address3;
-        this.age = response.data.list[0].age;
         this.birth_date = response.data.list[0].birth_date;
         this.citizenship = response.data.list[0].citizenship;
         this.city_id = response.data.list[0].city_id;

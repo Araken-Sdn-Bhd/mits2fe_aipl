@@ -171,14 +171,14 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Date of Birth</label>
+                                                    <label class="form-label">Date of Birth<small>*</small></label>
                                                     <input type="date" @change="OnAgeCalculation" class="form-control" name="" v-model="birth_date" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Age</label>
-                                                    <input type="text" class="form-control" placeholder="Age" name="" v-model="age" />
+                                                    <input type="text" class="form-control" placeholder="Age" name="" v-model="age" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -891,6 +891,14 @@ export default {
             });
         });
     },
+    watch: {
+        nric_no: function(val, oldVal) {
+            if(val.length!= 0){
+              this.OnnricNo();
+              this.validateIC();
+            }
+        }
+    },
     methods: {
         async GetBranchList() {
             const headers = {
@@ -1524,7 +1532,6 @@ export default {
                 body.append("name_asin_nric", this.name_asin_nric);
                 body.append("sex", this.sex);
                 body.append("birth_date", this.birth_date);
-                body.append("age", this.age);
                 body.append("mobile_no", this.mobile_no);
                 body.append("house_no", this.house_no);
                 body.append("hospital_mrn_no", this.hospital_mrn_no);
@@ -1677,7 +1684,6 @@ export default {
                 if(response.data.list[0].country_id != null){ this.country_id = response.data.list[0].country_id;};
                 if(response.data.list[0].birth_date != null){ this.birth_date = response.data.list[0].birth_date;};
 
-                if(response.data.list[0].age != null){this.age = response.data.list[0].age;};
                 if(response.data.list[0].mobile_no != null){ this.mobile_no = response.data.list[0].mobile_no;};
                 if(response.data.list[0].house_no != null){ this.house_no = response.data.list[0].house_no;};
                 if(response.data.list[0].hospital_mrn_no != null){ this.hospital_mrn_no = response.data.list[0].hospital_mrn_no;};
@@ -1779,11 +1785,13 @@ export default {
                     this.kin_state_id = response.data.list[0].kin_state_id;
                     this.getkinCity();
                 };
-                if(response.data.list[0].kincity[0].city_id != null){ this.kin_city_id = response.data.list[0].kincity[0].id;};
-                if (response.data.list[0].kincity[0].city_id != "") {
+                if(response.data.list[0].kincity.length != 0){
+                    if(response.data.list[0].kincity[0].city_id != null){ this.kin_city_id = response.data.list[0].kincity[0].id;};
+                    if (response.data.list[0].kincity[0].city_id != "") {
                     this.getkinCity();
                     this.kin_city_id = response.data.list[0].kincity[0].id;
                     this.getkinPostcode();
+                };
                 };
                 if(response.data.list[0].kin_postcode != null){ this.kin_postcode = response.data.list[0].kin_postcode;};
                 if(response.data.list[0].drug_allergy != null){ this.drug_allergy = response.data.list[0].drug_allergy;};
