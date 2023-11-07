@@ -162,10 +162,10 @@
                                             <input type="date" @change="OnAgeCalculation" class="form-control" name="" v-model="birth_date" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" v-if="this.birth_date">
                                         <div class="mb-3">
                                             <label class="form-label">Age<small>*</small></label>
-                                            <input type="text" class="form-control" placeholder="Age" name="" v-model="age" />
+                                            <input type="text" class="form-control" placeholder="Age" name="" v-model="age" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -389,6 +389,14 @@ export default {
             this.GetPatientdetails();
         }
         this.GetStaffBranchId();
+    },
+    watch: {
+        nric_no: function(val, oldVal) {
+            if(val.length!= 0){
+              this.OnnricNo();
+              this.validateIC();
+            }
+        }
     },
     methods: {
         back() {
@@ -688,7 +696,6 @@ export default {
                 body.append("name_asin_nric", this.name_asin_nric);
                 body.append("sex", this.sex);
                 body.append("birth_date", this.birth_date);
-                body.append("age", this.age);
 
                 body.append("employment_status", this.employment_id);
 
@@ -907,7 +914,6 @@ export default {
                     this.nric_type_code = response.data.list[0].typeic[0].code;
                 }
                 this.passport_no = response.data.list[0].passport_no;
-                this.age = response.data.list[0].age;
                 this.birth_date = response.data.list[0].birth_date;
                 this.education_level = response.data.list[0].education_level;
                 this.household_income = response.data.list[0].household_income;
