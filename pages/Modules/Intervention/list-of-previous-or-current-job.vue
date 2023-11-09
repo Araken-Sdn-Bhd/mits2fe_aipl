@@ -22,11 +22,11 @@
                                 <tbody>
                                     <tr>
                                         <td>Name</td>
-                                        <td>{{ patientdetails.name_asin_nric }}</td>
+                                        <td>{{ patientdetails.patient_name }}</td>
                                     </tr>
                                     <tr>
                                         <td>NRIC No.</td>
-                                        <td>{{ patientdetails.nric_no }}</td>
+                                        <td>{{ patientdetails.nric }}</td>
                                     </tr>
 
                                     <tr>
@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <td>Gender</td>
-                                        <td>{{ patientdetails.gender[0].section_value }}</td>
+                                        <td>{{ patientdetails.gender }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -403,14 +403,14 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
+                "patient/detail", {
+                    patient_id: this.Id,
                 }, {
                     headers
                 }
             );
             if (response.data.code == 200) {
-                this.patientdetails = response.data.list[0];
+                this.patientdetails = response.data.details;
                 console.log("my details", this.patientdetails);
             } else {
                 this.$swal.fire({
