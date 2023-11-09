@@ -24,11 +24,11 @@
                                 </tr>
                                 <tr>
                                     <th>Patient Name:</th>
-                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                    <td>{{ patientdetails.patient_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>NRIC NO:</th>
-                                    <td>{{ patientdetails.nric_no }}</td>
+                                    <td>{{ patientdetails.nric }}</td>
                                 </tr>
                                 <tr>
                                     <th>Age:</th>
@@ -36,11 +36,11 @@
                                 </tr>
                                 <tr>
                                     <th>Contact No:</th>
-                                    <td>{{ patientdetails.mobile_no }}</td>
+                                    <td>{{ patientdetails.contact_no }}</td>
                                 </tr>
                                 <tr>
                                     <th>Gender:</th>
-                                    <td>{{ patientdetails.gender[0].section_value }}</td>
+                                    <td>{{ patientdetails.gender }}</td>
                                 </tr>
                                 <tr>
                                     <th>Referred For<small style="color:red">*</small> :</th>
@@ -819,11 +819,11 @@
                                 </tr>
                                 <tr>
                                     <th>Patient Name:</th>
-                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                    <td>{{ patientdetails.patient_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>NRIC NO:</th>
-                                    <td>{{ patientdetails.nric_no }}</td>
+                                    <td>{{ patientdetails.nric }}</td>
                                 </tr>
                                 <tr>
                                     <th>Age:</th>
@@ -831,11 +831,11 @@
                                 </tr>
                                 <tr>
                                     <th>Contact No:</th>
-                                    <td>{{ patientdetails.mobile_no }}</td>
+                                    <td>{{ patientdetails.contact_no }}</td>
                                 </tr>
                                 <tr>
                                     <th>Gender:</th>
-                                    <td>{{ patientdetails.gender[0].section_value }}</td>
+                                    <td>{{ patientdetails.gender }}</td>
                                 </tr>
                                 <tr>
                                     <th>Referred For:</th>
@@ -1103,7 +1103,7 @@ export default {
     data() {
         return {
             userdetails: null,
-            patientdetails: null,
+            patientdetails: [],
             todaydate: "",
             errorList: [],
             servicelist: [],
@@ -1755,14 +1755,14 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
+                "patient/detail", {
+                    patient_id: this.Id,
                 }, {
                     headers
                 }
             );
             if (response.data.code == 200) {
-                this.patientdetails = response.data.list[0];
+                this.patientdetails = response.data.details;
             } else {
                 this.$swal.fire({
                     icon: 'error',
