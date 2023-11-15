@@ -20,11 +20,11 @@
                   <tbody v-if="patientdetails">
                                       <tr>
                                           <th>Patient Name:</th>
-                                         <td>{{ patientdetails.name_asin_nric }}</td>
+                                         <td>{{ patientdetails.patient_name }}</td>
                                       </tr>
                                       <tr>
                                           <th>NRIC No:</th>
-                                        <td>{{ patientdetails.nric_no }}</td>
+                                        <td>{{ patientdetails.nric }}</td>
                                       </tr>
                                       <tr>
                                           <th>Age:</th>
@@ -32,11 +32,11 @@
                                       </tr>
                                       <tr>
                                           <th>Contact No:</th>
-                                      <td>{{ patientdetails.mobile_no }}</td>
+                                      <td>{{ patientdetails.contact_no }}</td>
                                       </tr>
                                       <tr>
                                           <th>Address:</th>
-                                          <td>{{ patientdetails.address1 }}</td>
+                                          <td>{{ patientdetails.address1 }}, {{ patientdetails.address2 }}, {{ patientdetails.address3 }}</td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -132,7 +132,7 @@
                                     </label>
                                   </div>
                                   <div id="Others-1">
-                                    <input type="text" class="form-control" v-model="reason_referral_assessment_other" v-if="others"disabled
+                                    <input type="text" class="form-control" v-model="reason_referral_assessment_other" v-if="others" disabled
                                       name="" placeholder="Please Specify">
                                   </div>
                                 </div>
@@ -1155,14 +1155,14 @@
           "Content-Type": "application/json",
         };
         const response = await this.$axios.post(
-          "patient-registration/getPatientRegistrationById",
+          "patient/detail",
           {
-            id: this.Id,
+            patient_id: this.Id,
           },
           { headers }
         );
         if (response.data.code == 200) {
-          this.patientdetails = response.data.list[0];
+          this.patientdetails = response.data.details;
         } else {
           this.$swal.fire({
                     icon: 'error',
