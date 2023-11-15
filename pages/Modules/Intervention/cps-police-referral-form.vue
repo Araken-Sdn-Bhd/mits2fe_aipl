@@ -59,12 +59,12 @@
                                 </tr>
                                 <tr>
                                     <th>Patient Name:</th>
-                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                    <td>{{ patientdetails.patient_name }}</td>
                                 </tr>
 
                                 <tr>
                                     <th>NRIC No:</th>
-                                    <td>{{ patientdetails.nric_no }}</td>
+                                    <td>{{ patientdetails.nric }}</td>
                                 </tr>
 
                                 <tr>
@@ -74,7 +74,7 @@
 
                                 <tr>
                                     <th>Contact No:</th>
-                                    <td>{{ patientdetails.mobile_no }}</td>
+                                    <td>{{ patientdetails.contact_no }}</td>
                                 </tr>
 
                                 <tr>
@@ -190,12 +190,12 @@
                                 </tr>
                                 <tr>
                                     <th>Patient Name:</th>
-                                    <td>{{ patientdetails.name_asin_nric }}</td>
+                                    <td>{{ patientdetails.patient_name }}</td>
                                 </tr>
 
                                 <tr>
                                     <th>NRIC No:</th>
-                                    <td>{{ patientdetails.nric_no }}</td>
+                                    <td>{{ patientdetails.nric }}</td>
                                 </tr>
 
                                 <tr>
@@ -205,7 +205,7 @@
 
                                 <tr>
                                     <th>Contact No:</th>
-                                    <td>{{ patientdetails.mobile_no }}</td>
+                                    <td>{{ patientdetails.contact_no }}</td>
                                 </tr>
 
                                 <tr>
@@ -352,14 +352,14 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
+                "patient/detail", {
+                    patient_id: this.Id,
                 }, {
                     headers
                 }
             );
             if (response.data.code == 200) {
-                this.patientdetails = response.data.list[0];
+                this.patientdetails = response.data.details;
                 console.log("my details", this.patientdetails);
             } else {
                 this.$swal.fire({
