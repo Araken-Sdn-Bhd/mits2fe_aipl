@@ -24,11 +24,11 @@
                                               <tbody>
                                                   <tr>
                                                       <th>Name:</th>
-                                                      <td>{{ patientdetails.name_asin_nric }}</td>
+                                                      <td>{{ patientdetails.patient_name }}</td>
                                                   </tr>
                                                   <tr>
                                                       <th>NRIC:</th>
-                                                      <td>{{ patientdetails.nric_no }}</td>
+                                                      <td>{{ patientdetails.nric }}</td>
                                                   </tr>
                                                   <tr>
                                                       <th>Date Of Birth:</th>
@@ -41,7 +41,7 @@
                                                   <tr>
                                                       <th>Gender:</th>
                                                       <td>
-                                                          {{ patientdetails.gender[0].section_value }}
+                                                          {{ patientdetails.gender }}
                                                       </td>
                                                   </tr>
                                                   <tr>
@@ -64,7 +64,7 @@
                                                           <br />
                                                           {{ patientdetails.postcode }}
                                                           <br />
-                                                          {{ patientdetails.city.city_name }}
+                                                          {{ patientdetails.city_name }}
                                                           <!-- <br>
                                 {{ patientdetails. }} -->
                                                       </td>
@@ -72,12 +72,12 @@
 
                                                   <tr>
                                                       <th>Contact No.:</th>
-                                                      <td>{{ patientdetails.mobile_no }}</td>
+                                                      <td>{{ patientdetails.contact_no }}</td>
                                                   </tr>
 
                                                   <tr>
                                                       <th>Highest Education:</th>
-                                                      <td>Diploma</td>
+                                                      <td>{{patientdetails.education_level}}</td>
                                                   </tr>
 
                                               </tbody>
@@ -331,7 +331,7 @@
                                                   <tr>
                                                       <th>Patient Name:</th>
                                                       <td v-if="patientdetails">
-                                                          {{ patientdetails.name_asin_nric }}
+                                                          {{ patientdetails.patient_name }}
                                                       </td>
                                                   </tr>
                                               </tbody>
@@ -856,14 +856,14 @@
                   "Content-Type": "application/json",
               };
               const response = await this.$axios.post(
-                  "patient-registration/getPatientRegistrationById", {
-                      id: this.Id,
+                  "patient/detail", {
+                      patient_id: this.Id,
                   }, {
                       headers
                   }
               );
               if (response.data.code == 200) {
-                  this.patientdetails = response.data.list[0];
+                  this.patientdetails = response.data.details;
                   console.log("my details", this.patientdetails);
               } else {
                   this.$swal.fire({

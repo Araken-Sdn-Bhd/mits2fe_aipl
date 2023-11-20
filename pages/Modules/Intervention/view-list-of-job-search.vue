@@ -14,13 +14,13 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.name_asin_nric" readonly />
+                                    <input type="text" class="form-control" v-model="patientdetails.patient_name" readonly />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label class="form-label">NRIC</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.nric_no" readonly />
+                                    <input type="text" class="form-control" v-model="patientdetails.nric" readonly />
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label">Gender</label>
-                                    <input type="text" class="form-control" v-model="patientdetails.gender[0].section_value" readonly />
+                                    <input type="text" class="form-control" v-model="patientdetails.gender" readonly />
                                 </div>
                             </div>
                         </div>
@@ -427,14 +427,14 @@ export default {
                 "Content-Type": "application/json",
             };
             const response = await this.$axios.post(
-                "patient-registration/getPatientRegistrationById", {
-                    id: this.Id,
+                "patient/detail", {
+                    patient_id: this.Id,
                 }, {
                     headers
                 }
             );
             if (response.data.code == 200) {
-                this.patientdetails = response.data.list[0];
+                this.patientdetails = response.data.details;
                 console.log("my details", this.patientdetails);
             } else {
                 this.$swal.fire({
