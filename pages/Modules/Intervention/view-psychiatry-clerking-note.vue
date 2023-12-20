@@ -58,7 +58,7 @@
                                     </tr>
                                     <tr>
                                         <th>Age:</th>
-                                        <td>{{ patientdetails.age }}</td>
+                                        <td>{{ patientdetails.dob }}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact No:</th>
@@ -661,7 +661,6 @@ export default {
                 }
             );
             if (response.data.code == 200) {
-                alert(response.data.Data[0].name)
                 this.sdate = this.formatedate(response.data.Data[0].updated_at);
                 this.stime = this.formatetime(response.data.Data[0].updated_at);
                 this.staff_name = response.data.Data[0].name;
