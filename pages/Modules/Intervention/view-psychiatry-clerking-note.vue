@@ -12,7 +12,64 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div>
-                            <Interventionphysectristdetails />
+                            <table class="notes">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">STAFF DETAILS </th>
+                                    </tr>
+                                </thead>
+                                <tbody v-if="this.staff_name">
+                                    <tr>
+                                        <th>Staff Name / Seen By:</th>
+                                        <td>{{ staff_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Designation:</th>
+                                        <td>{{ this.designation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date:</th>
+                                        <td>{{ this.sdate }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Time: </th>
+                                        <td>{{ this.stime }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="notes">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Patient Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-if="patientdetails">
+                                    <tr>
+                                        <th>MRN:</th>
+                                        <td>{{ patientdetails.patient_mrn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Patient Name:</th>
+                                        <td>{{ patientdetails.name_asin_nric }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>NRIC NO:</th>
+                                        <td>{{ patientdetails.nric_no }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Age:</th>
+                                        <td>{{ patientdetails.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact No:</th>
+                                        <td>{{ patientdetails.mobile_no }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender:</th>
+                                        <td>{{ patientdetails.gender[0].section_value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
                             <table class="notes">
                                 <thead>
@@ -306,6 +363,7 @@
 import Interventionphysectristdetails from "../../../components/Intervention/Interventionphysectristdetails.vue";
 import CommonHeader from '../../../components/CommonHeader.vue';
 import CommonSidebar from '../../../components/CommonSidebar.vue';
+import * as moment from "moment/moment";
 
 export default {
     components: {
@@ -342,6 +400,7 @@ export default {
         if (this.pid) {
             this.getdetails();
         }
+        this.GetPatientdetails();
     },
     data() {
         return {
@@ -388,9 +447,44 @@ export default {
             additional_code_id: 0,
             additional_diagnosis: 0,
             additional_subcode: 0,
+            staff_name: "",
+            designation: "",
         };
     },
     methods: {
+        formatedate(date) {
+            const local = moment.utc(date).local().format("DD-MM-YYYY");
+            return local;
+        },
+        formatetime(time) {
+            const local = moment.utc(time).local().format("HH:mm");
+            return local;
+        },
+        async GetPatientdetails() {
+            const headers = {
+                Authorization: "Bearer " + this.userdetails.access_token,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            const response = await this.$axios.post(
+                "patient-registration/getPatientRegistrationById", {
+                    id: this.Id,
+                }, {
+                    headers
+                }
+            );
+            if (response.data.code == 200) {
+                this.patientdetails = response.data.list[0];
+                console.log("my details", this.patientdetails);
+            } else {
+                this.$swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Something Went Wrong!',
+                    text: 'the error is: ' + this.error,
+                    footer: ''
+                });
+            }
+        },
         async GetList() {
             const headers = {
                 Authorization: "Bearer " + this.userdetails.access_token,
@@ -521,6 +615,16 @@ export default {
                 this.add_icdcatcodelist = [];
             }
         },
+
+        //     formatedate(date) {
+        //   const local = moment.utc(date).local().format("DD-MM-YYYY");
+        //   return local;
+        // },
+        // formatetime(time) {
+        //   const local = moment.utc(time).local().format("HH:mm");
+        //   return local;
+        // },
+
         resetmodel() {
             this.chief_complain = "";
             this.presenting_illness = "";
@@ -557,6 +661,11 @@ export default {
                 }
             );
             if (response.data.code == 200) {
+                alert(response.data.Data[0].name)
+                this.sdate = this.formatedate(response.data.Data[0].updated_at);
+                this.stime = this.formatetime(response.data.Data[0].updated_at);
+                this.staff_name = response.data.Data[0].name;
+                this.designation = response.data.Data[0].designation;
                 this.patient_mrn_id = response.data.Data[0].patient_mrn_id,
                     this.chief_complain = response.data.Data[0].chief_complain;
                 this.presenting_illness = response.data.Data[0].presenting_illness;
@@ -621,20 +730,19 @@ export default {
                     this.add_icdcatcodelist = [];
                 }
 
-                if(this.category_services=='clinical-work'){
+                if (this.category_services == 'clinical-work') {
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions1"]').trigger('click');
                     });
-                }else if(this.category_services=='external'){
+                } else if (this.category_services == 'external') {
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions2"]').trigger('click');
                     });
-                }else{
+                } else {
                     $(document).ready(function () {
                         $('input[name="inlineRadioOptions"]').trigger('click');
                     });
                 }
-
 
             } else {
                 this.$swal.fire({
