@@ -139,6 +139,7 @@
               >
                 No Record Found
               </p>
+              
             </div>
           </div>
         </div>
@@ -175,55 +176,58 @@ export default {
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.getRole();
+    this.GetList();
 
   },
   mounted() {
+    
+    this.OnSearch();
+    
 
-    this.GetList();
-    const headers = {
-      Authorization: "Bearer " + this.userdetails.access_token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const axios = require("axios").default;
-    axios
-      .post(
-        `${this.$axios.defaults.baseURL}` +
-          "patient-registration/getPatientRegistrationListbyBranch",
-        { branch_id: this.userdetails.branch.branch_id},
-        { headers }
-      )
-      .then((resp) => {
-        this.list = resp.data.list;
-        // $(document).ready(function () {
-        //   $(".data-table").DataTable({
-        //     // searching: false,
-        //     // bLengthChange: false,
-        //     // bInfo: false,
-        //     // autoWidth: false,
-        //     // responsive: true,
-        //     //scrollX: true,
-        //     // language: {
-        //     //   paginate: {
-        //     //     next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-        //     //     previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-        //     //   },
-        //     // },
-        //   });
-        // });
-        this.loader = false;
-      })
-      .catch ((err) => {
-        this.loader = false;
-        this.$swal.fire({
-                  icon: 'error',
-                  title: 'Oops... Something Went Wrong!',
-                  text: 'the error is: ' + err,
-                  footer: ''
-                });
+    //const headers = {
+    //  Authorization: "Bearer " + this.userdetails.access_token,
+    //  Accept: "application/json",
+    //  "Content-Type": "application/json",
+    //};
+    //const axios = require("axios").default;
+    //axios
+    //  .post(
+    //    `${this.$axios.defaults.baseURL}` +
+    //      "patient-registration/getPatientRegistrationListbyBranch",
+    //    { branch_id: this.userdetails.branch.branch_id},
+    //    { headers }
+    //  )
+    //  .then((resp) => {
+    //    this.list = resp.data.list;
+    //    // $(document).ready(function () {
+    //    //   $(".data-table").DataTable({
+    //    //     // searching: false,
+    //    //     // bLengthChange: false,
+    //    //     // bInfo: false,
+    //    //     // autoWidth: false,
+    //    //     // responsive: true,
+    //    //     //scrollX: true,
+    //    //     // language: {
+    //    //     //   paginate: {
+    //    //     //     next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+    //    //     //     previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+    //    //     //   },
+    //    //     // },
+    //    //   });
+    //    // });
+    //    this.loader = false;
+    //  })
+    //  .catch ((err) => {
+    //    this.loader = false;
+    //    this.$swal.fire({
+    //              icon: 'error',
+    //              title: 'Oops... Something Went Wrong!',
+    //              text: 'the error is: ' + err,
+    //              footer: ''
+    //            });
 
-        console.error(err);
-      });
+    //    console.error(err);
+    //  });
   },
   methods: {
     async getRole() {
@@ -255,13 +259,6 @@ export default {
         Accept: "application/json",
         "Content-Type": "application/json",
       };
-      const response1 = await this.$axios.get(
-        "service/list", { headers });
-      if (response1.data.code == 200 || response1.data.code == "200") {
-        this.servicelist = response1.data.list;
-      } else {
-        this.servicelist = [];
-      }
       const response2 = await this.$axios.get("hospital/branch-list", {
         headers,
       });
@@ -270,6 +267,14 @@ export default {
       } else {
         this.branchlist = [];
       }
+      const response1 = await this.$axios.get(
+        "service/list", { headers });
+      if (response1.data.code == 200 || response1.data.code == "200") {
+        this.servicelist = response1.data.list;
+      } else {
+        this.servicelist = [];
+      }
+     
       const respons = await this.$axios.get(
         "service/activeList",
         { headers }
@@ -313,7 +318,29 @@ export default {
       console.log("my list", response.data);
       if (response.data.code == 200) {
         this.list = response.data.list;
-      } else {
+      
+        $(document).ready(function () {
+          if (!$.fn.DataTable.isDataTable('.data-table')) {
+            $(".data-table").DataTable({
+              searching: false,
+              bLengthChange: false,
+              bInfo: false,
+              autoWidth: false,
+              responsive: true,
+             scrollX: true,
+             pageLength: 100,
+              language: {
+                paginate: {
+                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+                },
+              },
+           });
+          }
+          
+         });
+        this.loader = false; 
+  } else {
         this.$swal.fire({
                   icon: 'error',
                   title: 'Oops... Something Went Wrong!',
