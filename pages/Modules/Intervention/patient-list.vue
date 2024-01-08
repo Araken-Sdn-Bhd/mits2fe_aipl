@@ -96,6 +96,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <!--<th>brnch</th>-->
                     <th>MRN</th>
                     <th>Salutation</th>
                     <th>Name</th>
@@ -109,6 +110,7 @@
                 <tbody>
                   <tr v-for="(patint, index) in list" :key="index">
                     <td>{{ index + 1 }}</td>
+                    <!--<td>{{ patint.branch_id }}</td>-->
                     <td>{{ patint.patient_mrn }}</td>
                     <td>{{ patint.salutation }}</td>
                     <td>
@@ -177,6 +179,7 @@ export default {
     this.SidebarAccess = JSON.parse(localStorage.getItem("SidebarAccess"));
     this.getRole();
     this.GetList();
+    this.branch_id= this.userdetails.branch.branch_id;
 
   },
   mounted() {
@@ -319,26 +322,26 @@ export default {
       if (response.data.code == 200) {
         this.list = response.data.list;
       
-        $(document).ready(function () {
-          if (!$.fn.DataTable.isDataTable('.data-table')) {
-            $(".data-table").DataTable({
-              searching: false,
-              bLengthChange: false,
-              bInfo: false,
-              autoWidth: false,
-              responsive: true,
-             scrollX: true,
-             pageLength: 100,
-              language: {
-                paginate: {
-                  next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
-                  previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
-                },
-              },
-           });
-          }
+        //$(document).ready(function () {
+        //  if (!$.fn.DataTable.isDataTable('.data-table')) {
+        //    $(".data-table").DataTable({
+        //      searching: false,
+        //      bLengthChange: false,
+        //      bInfo: false,
+        //      autoWidth: false,
+        //      responsive: true,
+        //     scrollX: true,
+        //     pageLength: 100,
+        //      language: {
+        //        paginate: {
+        //          next: '<i class="fad fa-arrow-to-right"></i>', // or '→'
+        //          previous: '<i class="fad fa-arrow-to-left"></i>', // or '←'
+        //        },
+        //      },
+        //   });
+        //  }
           
-         });
+        // });
         this.loader = false; 
   } else {
         this.$swal.fire({
