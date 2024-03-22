@@ -290,8 +290,8 @@
                         <option value="0">Please Select</option>
                         <option
                           v-for="ctl in citylist"
-                          v-bind:key="ctl.city_name"
-                          v-bind:value="ctl.city_name"
+                          v-bind:key="ctl.id"
+                          v-bind:value="ctl.id"
                         >
                           {{ ctl.city_name }}
                         </option>
@@ -480,6 +480,7 @@ export default {
       search: "",
       Id: 0,
       SidebarAccess: null,
+      selectedCityId: null,
     };
   },
   mounted() {
@@ -618,6 +619,7 @@ export default {
         "address/" + event.target.value + "/getPostcodeListById",
         { headers }
       );
+      // console.log("selectedCityId: ",event.target.value);
       if (response.data.code == 200 || response.data.code == "200") {
         this.postcodelist = response.data.list;
       } else {
@@ -747,7 +749,7 @@ export default {
               },
               { headers }
             );
-            console.log("my resp", response.data);
+            // console.log("my resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.$swal.fire(
               'Successfully Submitted.',
@@ -795,7 +797,7 @@ export default {
               },
               { headers }
             );
-            console.log("my resp", response.data);
+            // console.log("my resp", response.data);
             if (response.data.code == 200 || response.data.code == "200") {
               this.$swal.fire(
               'Successfully Submitted.',
@@ -911,7 +913,7 @@ export default {
               .indexOf(this.search.toString().toLowerCase()) > -1
           );
         });
-        console.log("my list", this.alllist);
+        // console.log("my list", this.alllist);
       } else {
         this.hospitallist = this.alllist;
       }
@@ -925,7 +927,7 @@ export default {
       const response = await this.$axios.get("/hospital/list/" + data.id, {
         headers,
       });
-      console.log("data", response.data);
+      // console.log("data", response.data);
       if (response.data.code == 200) {
         this.Id = data.id;
         this.salutation = response.data.list.psychiatrist.salutation_id;
